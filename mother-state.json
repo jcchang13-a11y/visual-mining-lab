@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-23 03:16 +08:00",
+  "updatedAt": "2026-08-23 07:24 +08:00",
   "engine": "Mother",
   "vessel": "Nostromo",
   "mode": "shared autominer",
@@ -9,7 +9,7 @@
       "name": "媒文化 / Uncultured",
       "source": "Google Drive：紅米手機照片",
       "status": "READY · NO NEW ORE",
-      "lastInspection": "2026-08-23 03:16",
+      "lastInspection": "2026-08-23 07:24",
       "pipeline": ["patrol", "ledger", "dedupe", "sample", "cluster", "refine"]
     },
     {
@@ -17,7 +17,7 @@
       "name": "端點星 / Terminus",
       "source": "Google Drive：論文、舊稿、研究材料",
       "status": "NEW ORE · 2 TEXTS",
-      "lastInspection": "2026-08-23 03:16",
+      "lastInspection": "2026-08-23 07:24",
       "pipeline": ["patrol", "visited", "leads", "blind-excavation", "cross-link", "refine"]
     }
   ],
@@ -31,7 +31,9 @@
       {"id":"1UmhRKyYEmp2G3WrXb3A0VAVY7HsgISR6","title":"20121005論文題目與架構.docx","bay":"terminus","seenAt":"2026-08-23 01:13 +08:00"},
       {"id":"1x-1IU02VttTwEffXsHAf_80Oru9osoyR","title":"网络社会都会治理的连结与切断.docx","bay":"terminus","seenAt":"2026-08-23 01:13 +08:00"},
       {"id":"0B6kekeEVEPHjRnduaVdtRm01OEk","title":"Chp 4_M20160309.docx","bay":"terminus","seenAt":"2026-08-23 03:16 +08:00"},
-      {"id":"0B6kekeEVEPHjTGFtRWNoSlNtalU","title":"new urban fronter (加長版).docx","bay":"terminus","seenAt":"2026-08-23 03:16 +08:00"}
+      {"id":"0B6kekeEVEPHjTGFtRWNoSlNtalU","title":"new urban fronter (加長版).docx","bay":"terminus","seenAt":"2026-08-23 03:16 +08:00"},
+      {"id":"1e_YzBzU3nSF3Qe8JIYd6mw5BjHQMFWeh","title":"Sex and City.docx","bay":"terminus","seenAt":"2026-08-23 07:24 +08:00"},
+      {"id":"0B6kekeEVEPHjNW56aG5kWDdsODQ","title":"Chp 3_M20160309.docx","bay":"terminus","seenAt":"2026-08-23 07:24 +08:00"}
     ],
     "leads": [
       {"id":"terminus-subject-ghost-remainder-2017","bay":"terminus","status":"open","sourceId":"0B6kekeEVEPHjYTN1Y3JnS09qSFU","summary":"2017〈陰不是陽的反面〉已出現一條比『主體』更早、更具象的結構線：鬼被寫成肉身死亡後仍未消失的『殘值』，它者既內在於我又無法完全被馴化；同文又把政治正確描述為把垂直權力重新包裝成水平關係。可追查此『殘值／野鬼／未馴化它者』是否是後來『系統裂縫—主體—位置』問題的前身。"},
@@ -43,7 +45,9 @@
       {"id":"terminus-modernity-discontents-symptom-2012","bay":"terminus","status":"open","sourceId":"1UmhRKyYEmp2G3WrXb3A0VAVY7HsgISR6","summary":"2012 論文架構已把『現代化及其不爽』、壓抑後回返的社會症頭、Ideology and its Lack、Suturing the City、裂縫／邊緣／前線、以及 Writing and the Other of the City 放在同一骨架內。這把目前看似 2017/2018 才成熟的『再現失敗—症頭—它者—裂縫』礦脈至少向前推到 2012；先保留為早期礦層，不急著定義成單一理論。"},
       {"id":"terminus-network-connection-disconnection-2021","bay":"terminus","status":"open","sourceId":"1x-1IU02VttTwEffXsHAf_80Oru9osoyR","summary":"2021〈网络社会都会治理的连结与切断〉把網絡都市化寫成『連結／切斷』的成對機制：流動、節點、資訊與價值的連結，同時生產壟斷、排除、脫鉤與斷裂。值得後續追查這是否代表研究語彙從早期『壓抑／症頭／裂縫』移向較操作性的『連結／切斷』，以及兩套語彙是否描述同一種結構問題。暫不下結論。"},
       {"id":"terminus-redlight-spatial-form-regulation-2016","bay":"terminus","status":"open","sourceId":"0B6kekeEVEPHjRnduaVdtRm01OEk","summary":"2016〈Red Light Urbanism〉章稿把性產業空間直接拆成 clustered／distributed／concealed／disguised／two-step relocation 五種型態，並把可見性、街道接觸、建築內外關係、網路媒介與都市更新反應納入同一空間分類。這是一條不同於純『主體／再現』語彙的操作性礦脈：制度規則如何經由空間形式重新配置可見／不可見與可追蹤／不可追蹤。"},
-      {"id":"terminus-desire-space-gentrification-2016","bay":"terminus","status":"open","sourceId":"0B6kekeEVEPHjTGFtRWNoSlNtalU","summary":"2016〈Taipei’s New Urban Frontier〉把容積率／容積移轉視為可交易的抽象空間權利，同時以『spaces for lust → lust for space』描述都市更新如何先刑事化／污名化性工作，再清除其空間痕跡與歷史幽靈。這一礦層把價值形式、排除、鬼與地景改造放在同一敘事中，值得後續與 2013、2017、2018 礦層比對，但目前只列候選。"}
+      {"id":"terminus-desire-space-gentrification-2016","bay":"terminus","status":"open","sourceId":"0B6kekeEVEPHjTGFtRWNoSlNtalU","summary":"2016〈Taipei’s New Urban Frontier〉把容積率／容積移轉視為可交易的抽象空間權利，同時以『spaces for lust → lust for space』描述都市更新如何先刑事化／污名化性工作，再清除其空間痕跡與歷史幽靈。這一礦層把價值形式、排除、鬼與地景改造放在同一敘事中，值得後續與 2013、2017、2018 礦層比對，但目前只列候選。"},
+      {"id":"terminus-homestead-border-financialization","bay":"terminus","status":"open","sourceId":"1e_YzBzU3nSF3Qe8JIYd6mw5BjHQMFWeh","summary":"〈Sex and City〉把『住宅金融化』寫得比單純地價上升更具體：當 homestead／genius loci 被轉成 surplus plot value，原本重疊的生活關係被產權邊界切開，鄰居從互相滲透轉成彼此猜疑與利益競逐。可追查『價值化是否同時是一種邊界生產／社會切斷技術』，暫不升格為結論。"},
+      {"id":"terminus-morphology-price-risk-amsterdam","bay":"terminus","status":"open","sourceId":"0B6kekeEVEPHjNW56aG5kWDdsODQ","summary":"〈Chp 3_M20160309〉顯示阿姆斯特丹紅燈區的微型空間幾何直接介入價格、欲望與風險：狹窄巷道強迫近距離接觸並提高窗口租金與服務價格；運河街較開放，讓工作者能遠距觀察、迴避可疑客人。候選礦脈因此不是『空間影響行為』這種泛論，而是『形態本身會對接觸、風險與價格進行編碼』。"}
     ],
     "deadEnds": [],
     "findings": [
@@ -63,7 +67,10 @@
       {"time":"2026-08-23 01:13 +08:00","bay":"terminus","type":"cross-link","summary":"speculative：2012 的『壓抑／症頭／裂縫』與 2021 的『連結／切斷／排除』可能顯示同一研究問題在不同理論語彙下遷移：系統如何靠連結與縫合成立，又如何必然生產被排除與回返之物。證據目前只足以列為待追礦脈。"},
       {"time":"2026-08-23 03:16 +08:00","bay":"uncultured","type":"patrol","summary":"巡查紅米手機照片資料夾共見 31 件影像；與 visual-mining.json 的 31 件材料一致，最新仍是已分析的 Messenger_creation… 孤立垂直地標，未發現新增或修改影像，因此不重複取樣。"},
       {"time":"2026-08-23 03:16 +08:00","bay":"terminus","type":"mining","summary":"新增讀取 2016 兩份舊稿：〈Red Light Urbanism〉形成『空間型態—可見性—制度規則—網路媒介—都市更新反應』的操作性分類；〈Taipei’s New Urban Frontier〉則把容積權利、地產投機、性工作空間排除與歷史幽靈連成一條敘事。先收礦，不升格為總框架。"},
-      {"time":"2026-08-23 03:16 +08:00","bay":"terminus","type":"cross-link","summary":"speculative：2016 的兩份材料可能提供一個中介層，把既有的『抽象權利→價值→地景』與『排除→鬼／症頭→回返』接到具體空間機制：可見／隱匿、街道接觸、建築內外與搬遷方式。此連結目前只保留為待追假說。"}
+      {"time":"2026-08-23 03:16 +08:00","bay":"terminus","type":"cross-link","summary":"speculative：2016 的兩份材料可能提供一個中介層，把既有的『抽象權利→價值→地景』與『排除→鬼／症頭→回返』接到具體空間機制：可見／隱匿、街道接觸、建築內外與搬遷方式。此連結目前只保留為待追假說。"},
+      {"time":"2026-08-23 07:24 +08:00","bay":"uncultured","type":"patrol","summary":"巡查紅米手機照片資料夾共見 31 件影像；最新建立／修改時間仍停在 2026-08-21 批次，與既有 visual-mining.json 數量一致，未發現新增或修改影像，因此不重複抽樣。"},
+      {"time":"2026-08-23 07:24 +08:00","bay":"terminus","type":"mining","summary":"新增讀取兩份未訪舊稿：〈Sex and City〉把住宅金融化寫成『homestead／genius loci → surplus plot value → 產權邊界 → 鄰里切斷』；〈Chp 3_M20160309〉則露出阿姆斯特丹紅燈區微型幾何如何改變接觸距離、窗口租金、服務價格與工作者避險能力。"},
+      {"time":"2026-08-23 07:24 +08:00","bay":"terminus","type":"cross-link","summary":"speculative：本輪兩份材料與既有『連結／切斷』、『可見／隱匿』礦脈交叉後，出現一條更操作性的候選線：空間並非只承載價值或再現，而會藉由邊界、距離、視線與接觸條件直接對社會關係、風險與價格進行編碼。先保留為待追假說，不作總結。"}
     ]
   }
 }
