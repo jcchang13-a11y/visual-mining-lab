@@ -1,0 +1,21 @@
+{
+  "updatedAt": "2026-08-23 02:18 +08:00",
+  "runLog": "mother-runs/2026-08-23-0218.json",
+  "uncultured": {
+    "status": "READY · NO NEW ORE",
+    "visibleImages": 31,
+    "newImages": 0
+  },
+  "terminus": {
+    "status": "NEW ORE · 2 TEXTS",
+    "newSourceIds": [
+      "17IG_t2uZyRxMMBCbMJ5-7has0IdQK0dH",
+      "0B6kekeEVEPHjNW56aG5kWDdsODQ"
+    ],
+    "newLeadIds": [
+      "terminus-photography-gaze-representation-2020",
+      "terminus-window-space-visibility-value-2016"
+    ]
+  },
+  "phase": "mining-first; speculative cross-links remain provisional"
+}
