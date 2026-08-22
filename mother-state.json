@@ -1,0 +1,30 @@
+{
+  "updatedAt": "2026-08-22 19:18 +08:00",
+  "engine": "Mother",
+  "vessel": "Nostromo",
+  "mode": "shared autominer",
+  "bays": [
+    {
+      "id": "uncultured",
+      "name": "媒文化 / Uncultured",
+      "source": "Google Drive：紅米手機照片",
+      "status": "READY",
+      "lastInspection": "2026-08-21 21:44",
+      "pipeline": ["patrol", "ledger", "dedupe", "sample", "cluster", "refine"]
+    },
+    {
+      "id": "terminus",
+      "name": "端點星 / Terminus",
+      "source": "Google Drive：論文、舊稿、研究材料",
+      "status": "READY",
+      "lastInspection": "v0.1",
+      "pipeline": ["patrol", "visited", "leads", "blind-excavation", "cross-link", "refine"]
+    }
+  ],
+  "sharedState": {
+    "visited": [],
+    "leads": [],
+    "deadEnds": [],
+    "findings": []
+  }
+}
