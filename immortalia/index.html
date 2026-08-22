@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#efe7d1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Immortalia">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" href="./icon.svg" type="image/svg+xml">
+<title>IMMORTALIA · 蓬萊仙島</title>
+<style>
+:root{--paper:#efe7d1;--ink:#191711;--red:#8a2f24;--line:rgba(25,23,17,.26);--soft:rgba(25,23,17,.62)}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;background:var(--paper);color:var(--ink)}
+body{font-family:"Noto Serif TC","Songti TC","PMingLiU",serif;background-image:radial-gradient(circle at 12% 8%,rgba(138,47,36,.06),transparent 28rem),linear-gradient(rgba(25,23,17,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(25,23,17,.025) 1px,transparent 1px);background-size:auto,24px 24px,24px 24px}
+.wrap{width:min(100%,980px);margin:auto;padding:max(24px,env(safe-area-inset-top)) 18px max(36px,env(safe-area-inset-bottom))}
+header{padding:6vh 0 28px;border-bottom:1px solid var(--ink)}
+.kicker{font-family:Georgia,serif;font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;color:var(--red)}
+h1{font-family:Georgia,"Times New Roman",serif;font-weight:400;font-size:clamp(3.2rem,15vw,7.6rem);line-height:.86;letter-spacing:-.055em;margin:16px 0 12px}
+.latin{font-style:italic;color:var(--soft);font-size:.9rem;letter-spacing:.08em}
+.zh{margin-top:22px;font-size:1.04rem;letter-spacing:.2em}
+.intro{margin-top:11px;max-width:35rem;color:var(--soft);font-size:.84rem;line-height:1.75}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:0;border-left:1px solid var(--ink);margin-top:28px}
+a.card{position:relative;display:flex;flex-direction:column;min-height:220px;padding:20px 19px 42px;text-decoration:none;color:inherit;border-right:1px solid var(--ink);border-bottom:1px solid var(--ink);background:rgba(239,231,209,.48);transition:.18s ease}
+a.card:nth-child(-n+2){border-top:1px solid var(--ink)}
+a.card:hover,a.card:active{background:rgba(138,47,36,.08)}
+.no{font-family:Georgia,serif;color:var(--red);font-size:.72rem;letter-spacing:.14em}
+.card h2{font-weight:400;font-size:clamp(1.8rem,7vw,3.3rem);margin:32px 0 5px;letter-spacing:.02em}
+.en{font-family:Georgia,serif;font-size:.74rem;letter-spacing:.18em;color:var(--soft)}
+.desc{margin-top:auto;padding-top:24px;color:var(--soft);font-size:.77rem;line-height:1.55;max-width:25rem}
+.arrow{position:absolute;right:17px;bottom:14px;font-family:Georgia,serif;font-size:1.15rem;color:var(--red)}
+footer{display:flex;justify-content:space-between;gap:18px;padding-top:20px;color:var(--soft);font-size:.68rem;line-height:1.55;font-family:Georgia,"Noto Serif TC",serif}
+.seal{color:var(--red);letter-spacing:.12em;text-transform:uppercase}
+@media(max-width:620px){header{padding-top:5vh}.grid{grid-template-columns:1fr}.card{min-height:175px}.card:nth-child(2){border-top:0!important}.card h2{margin-top:24px}.desc{padding-top:18px}footer{flex-direction:column}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<div class="kicker">Insula Immortalium</div>
+<h1>IMMORTALIA</h1>
+<div class="latin">The Isle of the Immortals</div>
+<div class="zh">蓬萊仙島</div>
+<div class="intro">統一入口。島上的各個計畫仍各自運作；這裡只負責帶路。</div>
+</header>
+<main class="grid" aria-label="Immortalia projects">
+<a class="card" href="../uncultured/">
+<div class="no">01 · IMAGE WORKS</div><h2>媒文化</h2><div class="en">UNCULTURED</div><div class="desc">影像採礦與冶煉。</div><div class="arrow">↗</div>
+</a>
+<a class="card" href="../terminus/">
+<div class="no">02 · RESEARCH</div><h2>端點星</h2><div class="en">TERMINUS</div><div class="desc">思想地層、聯網研究與現實世界的長期勘探。</div><div class="arrow">↗</div>
+</a>
+<a class="card" href="../dazibao/">
+<div class="no">03 · WALL</div><h2>大字報</h2><div class="en">DAZIBAO</div><div class="desc">Notes Posted on the Wall.</div><div class="arrow">↗</div>
+</a>
+<a class="card" href="../">
+<div class="no">04 · CENTRAL SYSTEM</div><h2>老媽</h2><div class="en">MU/TH/UR · NOSTROMO</div><div class="desc">共享採礦母機與系統狀態。</div><div class="arrow">↗</div>
+</a>
+</main>
+<footer><span>IMMORTALIA / INSULA IMMORTALIUM</span><span class="seal">DIPLOMA MILL · 文憑工廠</span></footer>
+</div>
+</body>
+</html>
