@@ -1,1 +1,1 @@
-Trigger GitHub Pages deployment after Pages source was enabled on 2026-08-21.
+Force GitHub Pages deployment after Immortalia/Mycelium update on 2026-08-22 20:36 Asia/Taipei.
