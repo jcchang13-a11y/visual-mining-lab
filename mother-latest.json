@@ -1,21 +1,24 @@
 {
-  "updatedAt": "2026-08-23 02:18 +08:00",
-  "runLog": "mother-runs/2026-08-23-0218.json",
+  "updatedAt": "2026-08-23 04:25 +08:00",
+  "runLog": "mother-runs/2026-08-23-0425.json",
   "uncultured": {
     "status": "READY · NO NEW ORE",
     "visibleImages": 31,
     "newImages": 0
   },
   "terminus": {
-    "status": "NEW ORE · 2 TEXTS",
+    "status": "NEW ORE · 2 DISTINCT TEXTS + 1 CONFIRMING LAYER",
     "newSourceIds": [
-      "17IG_t2uZyRxMMBCbMJ5-7has0IdQK0dH",
-      "0B6kekeEVEPHjNW56aG5kWDdsODQ"
+      "1qErSKplbWXL1ezwOeVAXHw2W26429gMcAao76x3tI1M",
+      "0B6kekeEVEPHjenJ1MmgtUlBlSWc"
+    ],
+    "confirmingSourceIds": [
+      "17gQ2FJxaybQeB_zMBiZgy9oGw3R9MTYp"
     ],
     "newLeadIds": [
-      "terminus-photography-gaze-representation-2020",
-      "terminus-window-space-visibility-value-2016"
+      "terminus-subject-lack-system-2001",
+      "terminus-colonial-property-measure-2016"
     ]
   },
-  "phase": "mining-first; speculative cross-links remain provisional"
+  "phase": "mining-first; refining deferred except dedupe/stratigraphic confirmation"
 }
