@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-22 22:20 +08:00",
+  "updatedAt": "2026-08-22 23:28 +08:00",
   "engine": "Mother",
   "vessel": "Nostromo",
   "mode": "shared autominer",
@@ -9,15 +9,15 @@
       "name": "媒文化 / Uncultured",
       "source": "Google Drive：紅米手機照片",
       "status": "READY · NO NEW ORE",
-      "lastInspection": "2026-08-22 22:20",
+      "lastInspection": "2026-08-22 23:28",
       "pipeline": ["patrol", "ledger", "dedupe", "sample", "cluster", "refine"]
     },
     {
       "id": "terminus",
       "name": "端點星 / Terminus",
       "source": "Google Drive：論文、舊稿、研究材料",
-      "status": "LEAD FOUND",
-      "lastInspection": "2026-08-22 22:20",
+      "status": "NEW ORE · 2 TEXTS",
+      "lastInspection": "2026-08-22 23:28",
       "pipeline": ["patrol", "visited", "leads", "blind-excavation", "cross-link", "refine"]
     }
   ],
@@ -34,6 +34,18 @@
         "title": "CH2 都市及其潛意識.docx",
         "bay": "terminus",
         "seenAt": "2026-08-22 22:20 +08:00"
+      },
+      {
+        "id": "1Pg1K3zwpd_DpXE-RY2fID2l-0svIB8ML",
+        "title": "台灣社會研究季刊投稿件_金融化_都市更新與雙向運動_台北版都市更新的衝突探析20130531.docx",
+        "bay": "terminus",
+        "seenAt": "2026-08-22 23:28 +08:00"
+      },
+      {
+        "id": "16hO9dupwS2-7bv_xHvEDgnm14hOi-IIS",
+        "title": "CH1 文萌樓的鬼.docx",
+        "bay": "terminus",
+        "seenAt": "2026-08-22 23:28 +08:00"
       }
     ],
     "leads": [
@@ -57,6 +69,20 @@
         "status": "open",
         "sourceId": "1S8OKBhJOiCpKULBU69kwxW_gmKiBeAXf",
         "summary": "〈都市及其潛意識〉把都市直接當作一種有瑕疵的『再現』，以壓縮、置換與『症頭』追查表面秩序無法完全封閉的深層結構；文本明確主張不要只分析『對都市的再現』，而要分析『都市作為再現』。這是一條值得後續採礦的舊礦脈，尤其可追查『症頭』一詞在後來影像／文字工作中是否再次回返。"
+      },
+      {
+        "id": "terminus-representation-subject-wenmenglou",
+        "bay": "terminus",
+        "status": "open",
+        "sourceId": "16hO9dupwS2-7bv_xHvEDgnm14hOi-IIS",
+        "summary": "〈文萌樓的鬼〉把文化資產、另類歷史論述、運動主體與 representation 明確接在一起：空間被當作被壓抑歷史的再現，而運動主體藉此建立 subjectivity。值得追查它與下一章『都市本身作為再現』之間是否存在一次概念位移：從誰代表什麼，轉向再現機制本身如何運作。"
+      },
+      {
+        "id": "terminus-plot-ratio-financialization-2013",
+        "bay": "terminus",
+        "status": "open",
+        "sourceId": "1Pg1K3zwpd_DpXE-RY2fID2l-0svIB8ML",
+        "summary": "2013 都市更新稿將容積獎勵寫成國家打造的虛擬商品／『空間型城市債權』：規劃許可中的抽象權利被轉化為金融房地產的利潤率並取得重塑地景的物質力量。這比 2018 CH3/4 更早地提供『抽象制度權利→可計價價值→空間實效』的完整鏈條，先列為價值形式礦脈的早期礦層。"
       }
     ],
     "deadEnds": [],
@@ -84,6 +110,30 @@
         "bay": "terminus",
         "type": "mining",
         "summary": "purposeful drilling／blind excavation 命中〈CH2 都市及其潛意識〉：發現『都市作為再現—壓縮／置換—症頭』舊礦脈。依目前第一階段策略先列為候選礦，不進一步冶煉。"
+      },
+      {
+        "time": "2026-08-22 23:28 +08:00",
+        "bay": "uncultured",
+        "type": "patrol",
+        "summary": "巡查紅米手機照片資料夾共見 31 件影像；最新 Drive 建立時間仍為 2026-08-21，未發現新影像。維持既有 unseen 池，不重複抽樣。"
+      },
+      {
+        "time": "2026-08-22 23:28 +08:00",
+        "bay": "terminus",
+        "type": "mining",
+        "summary": "新增讀取兩層舊礦：2013 都市更新／金融化稿，以及 2017/2018 章稿〈文萌樓的鬼〉。前者露出『規劃權利→虛擬商品→金融價值→地景重塑』鏈條；後者露出『空間再現→另類歷史論述→運動主體／主體性』鏈條。"
+      },
+      {
+        "time": "2026-08-22 23:28 +08:00",
+        "bay": "terminus",
+        "type": "cross-link",
+        "summary": "暫時交叉判讀：〈文萌樓的鬼〉與〈都市及其潛意識〉可能不是兩條分離礦脈，而是 representation 概念的一次位移——由『空間代表被壓抑歷史／主體』轉向『都市本身就是有瑕疵的再現機制』。先標記為 speculative，等待更多年代材料反證。"
+      },
+      {
+        "time": "2026-08-22 23:28 +08:00",
+        "bay": "terminus",
+        "type": "cross-link",
+        "summary": "暫時交叉判讀：2013 都更金融化稿與 2018 CH3/4 的虛擬資本線形成時間上的延續證據；核心候選不是單純『金融化』主題，而是抽象權利如何被計價後取得物質空間力量。標記為 speculative，尚未升格為結論。"
       }
     ]
   }
