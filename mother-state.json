@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-23 00:19 +08:00",
+  "updatedAt": "2026-08-23 01:13 +08:00",
   "engine": "Mother",
   "vessel": "Nostromo",
   "mode": "shared autominer",
@@ -9,15 +9,15 @@
       "name": "媒文化 / Uncultured",
       "source": "Google Drive：紅米手機照片",
       "status": "READY · NO NEW ORE",
-      "lastInspection": "2026-08-23 00:19",
+      "lastInspection": "2026-08-23 01:13",
       "pipeline": ["patrol", "ledger", "dedupe", "sample", "cluster", "refine"]
     },
     {
       "id": "terminus",
       "name": "端點星 / Terminus",
       "source": "Google Drive：論文、舊稿、研究材料",
-      "status": "NEW ORE · 1 TEXT",
-      "lastInspection": "2026-08-23 00:19",
+      "status": "NEW ORE · 2 TEXTS",
+      "lastInspection": "2026-08-23 01:13",
       "pipeline": ["patrol", "visited", "leads", "blind-excavation", "cross-link", "refine"]
     }
   ],
@@ -27,7 +27,9 @@
       {"id":"1S8OKBhJOiCpKULBU69kwxW_gmKiBeAXf","title":"CH2 都市及其潛意識.docx","bay":"terminus","seenAt":"2026-08-22 22:20 +08:00"},
       {"id":"1Pg1K3zwpd_DpXE-RY2fID2l-0svIB8ML","title":"台灣社會研究季刊投稿件_金融化_都市更新與雙向運動_台北版都市更新的衝突探析20130531.docx","bay":"terminus","seenAt":"2026-08-22 23:28 +08:00"},
       {"id":"16hO9dupwS2-7bv_xHvEDgnm14hOi-IIS","title":"CH1 文萌樓的鬼.docx","bay":"terminus","seenAt":"2026-08-22 23:28 +08:00"},
-      {"id":"1lGx1o78q9nb-2ecvoErTO4UcxIzYlP-2","title":"CH6 凡受壓抑的必然重返.docx","bay":"terminus","seenAt":"2026-08-23 00:19 +08:00"}
+      {"id":"1lGx1o78q9nb-2ecvoErTO4UcxIzYlP-2","title":"CH6 凡受壓抑的必然重返.docx","bay":"terminus","seenAt":"2026-08-23 00:19 +08:00"},
+      {"id":"1UmhRKyYEmp2G3WrXb3A0VAVY7HsgISR6","title":"20121005論文題目與架構.docx","bay":"terminus","seenAt":"2026-08-23 01:13 +08:00"},
+      {"id":"1x-1IU02VttTwEffXsHAf_80Oru9osoyR","title":"网络社会都会治理的连结与切断.docx","bay":"terminus","seenAt":"2026-08-23 01:13 +08:00"}
     ],
     "leads": [
       {"id":"terminus-subject-ghost-remainder-2017","bay":"terminus","status":"open","sourceId":"0B6kekeEVEPHjYTN1Y3JnS09qSFU","summary":"2017〈陰不是陽的反面〉已出現一條比『主體』更早、更具象的結構線：鬼被寫成肉身死亡後仍未消失的『殘值』，它者既內在於我又無法完全被馴化；同文又把政治正確描述為把垂直權力重新包裝成水平關係。可追查此『殘值／野鬼／未馴化它者』是否是後來『系統裂縫—主體—位置』問題的前身。"},
@@ -35,7 +37,9 @@
       {"id":"terminus-city-unconscious-symptom-representation","bay":"terminus","status":"open","sourceId":"1S8OKBhJOiCpKULBU69kwxW_gmKiBeAXf","summary":"〈都市及其潛意識〉把都市直接當作一種有瑕疵的『再現』，以壓縮、置換與『症頭』追查表面秩序無法完全封閉的深層結構；文本明確主張不要只分析『對都市的再現』，而要分析『都市作為再現』。這是一條值得後續採礦的舊礦脈，尤其可追查『症頭』一詞在後來影像／文字工作中是否再次回返。"},
       {"id":"terminus-representation-subject-wenmenglou","bay":"terminus","status":"open","sourceId":"16hO9dupwS2-7bv_xHvEDgnm14hOi-IIS","summary":"〈文萌樓的鬼〉把文化資產、另類歷史論述、運動主體與 representation 明確接在一起：空間被當作被壓抑歷史的再現，而運動主體藉此建立 subjectivity。值得追查它與下一章『都市本身作為再現』之間是否存在一次概念位移：從誰代表什麼，轉向再現機制本身如何運作。"},
       {"id":"terminus-plot-ratio-financialization-2013","bay":"terminus","status":"open","sourceId":"1Pg1K3zwpd_DpXE-RY2fID2l-0svIB8ML","summary":"2013 都市更新稿將容積獎勵寫成國家打造的虛擬商品／『空間型城市債權』：規劃許可中的抽象權利被轉化為金融房地產的利潤率並取得重塑地景的物質力量。這比 2018 CH3/4 更早地提供『抽象制度權利→可計價價值→空間實效』的完整鏈條，先列為價值形式礦脈的早期礦層。"},
-      {"id":"terminus-representation-exclusion-mirror-ch6","bay":"terminus","status":"open","sourceId":"1lGx1o78q9nb-2ecvoErTO4UcxIzYlP-2","summary":"〈CH6 凡受壓抑的必然重返〉把 representation 的不可能性、霸權／自然化、Included／Excluded、症頭與『鏡像』放在同一條論證鏈上：完美再現不可能，但再現仍組織社會關係；次系統靠自然化建立排除；文萌樓被稱為政治『症頭』；而反抗又可能成為被批判體制的鏡像。這提供一條比單純『主體／價值』更寬的候選礦脈：系統如何靠再現建立秩序，又如何在排除、症頭與鏡像中暴露其不封閉性。"}
+      {"id":"terminus-representation-exclusion-mirror-ch6","bay":"terminus","status":"open","sourceId":"1lGx1o78q9nb-2ecvoErTO4UcxIzYlP-2","summary":"〈CH6 凡受壓抑的必然重返〉把 representation 的不可能性、霸權／自然化、Included／Excluded、症頭與『鏡像』放在同一條論證鏈上：完美再現不可能，但再現仍組織社會關係；次系統靠自然化建立排除；文萌樓被稱為政治『症頭』；而反抗又可能成為被批判體制的鏡像。這提供一條比單純『主體／價值』更寬的候選礦脈：系統如何靠再現建立秩序，又如何在排除、症頭與鏡像中暴露其不封閉性。"},
+      {"id":"terminus-modernity-discontents-symptom-2012","bay":"terminus","status":"open","sourceId":"1UmhRKyYEmp2G3WrXb3A0VAVY7HsgISR6","summary":"2012 論文架構已把『現代化及其不爽』、壓抑後回返的社會症頭、Ideology and its Lack、Suturing the City、裂縫／邊緣／前線、以及 Writing and the Other of the City 放在同一骨架內。這把目前看似 2017/2018 才成熟的『再現失敗—症頭—它者—裂縫』礦脈至少向前推到 2012；先保留為早期礦層，不急著定義成單一理論。"},
+      {"id":"terminus-network-connection-disconnection-2021","bay":"terminus","status":"open","sourceId":"1x-1IU02VttTwEffXsHAf_80Oru9osoyR","summary":"2021〈网络社会都会治理的连结与切断〉把網絡都市化寫成『連結／切斷』的成對機制：流動、節點、資訊與價值的連結，同時生產壟斷、排除、脫鉤與斷裂。值得後續追查這是否代表研究語彙從早期『壓抑／症頭／裂縫』移向較操作性的『連結／切斷』，以及兩套語彙是否描述同一種結構問題。暫不下結論。"}
     ],
     "deadEnds": [],
     "findings": [
@@ -49,7 +53,10 @@
       {"time":"2026-08-22 23:28 +08:00","bay":"terminus","type":"cross-link","summary":"暫時交叉判讀：2013 都更金融化稿與 2018 CH3/4 的虛擬資本線形成時間上的延續證據；核心候選不是單純『金融化』主題，而是抽象權利如何被計價後取得物質空間力量。標記為 speculative，尚未升格為結論。"},
       {"time":"2026-08-23 00:19 +08:00","bay":"uncultured","type":"patrol","summary":"再次巡查紅米手機照片礦區；可見影像仍屬既有 2026-08-21 批次，未發現新的建立或修改時間，故不重複抽樣。"},
       {"time":"2026-08-23 00:19 +08:00","bay":"terminus","type":"mining","summary":"purposeful drilling 命中〈CH6 凡受壓抑的必然重返〉：新增『再現不可能性—自然化／霸權—排除—症頭—鏡像』候選鏈。先列入礦脈，不將其升格為總框架。"},
-      {"time":"2026-08-23 00:19 +08:00","bay":"terminus","type":"cross-link","summary":"speculative：CH6 與既有 CH1／CH2 顯示 representation 可能不是單一章節術語，而是從『誰被再現／誰被排除』逐步移向『再現機制本身如何失敗並留下症頭』的一條長線；但目前只有相鄰章稿證據，需後續跨年代材料反證。"}
+      {"time":"2026-08-23 00:19 +08:00","bay":"terminus","type":"cross-link","summary":"speculative：CH6 與既有 CH1／CH2 顯示 representation 可能不是單一章節術語，而是從『誰被再現／誰被排除』逐步移向『再現機制本身如何失敗並留下症頭』的一條長線；但目前只有相鄰章稿證據，需後續跨年代材料反證。"},
+      {"time":"2026-08-23 01:13 +08:00","bay":"uncultured","type":"patrol","summary":"巡查紅米手機照片資料夾；最新可見影像仍為 2026-08-21 上傳批次，未發現新增或修改影像，因此不重複抽樣。"},
+      {"time":"2026-08-23 01:13 +08:00","bay":"terminus","type":"mining","summary":"新增兩個不同年代礦層：2012〈論文題目與架構〉已直接出現『現代化及其不爽—症頭—意識形態殘念—縫合城市—裂縫／邊緣／前線—城市它者』；2021〈网络社会都会治理的连结与切断〉則以『節點—連結／切斷—流動／排除』描述網絡都市化。依第一階段策略先收礦，不急著統一。"},
+      {"time":"2026-08-23 01:13 +08:00","bay":"terminus","type":"cross-link","summary":"speculative：2012 的『壓抑／症頭／裂縫』與 2021 的『連結／切斷／排除』可能顯示同一研究問題在不同理論語彙下遷移：系統如何靠連結與縫合成立，又如何必然生產被排除與回返之物。證據目前只足以列為待追礦脈。"}
     ]
   }
 }
