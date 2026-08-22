@@ -1,0 +1,52 @@
+{
+  "runAt": "2026-08-23 02:18 +08:00",
+  "engine": "Mother",
+  "vessel": "Nostromo",
+  "phase": "mining-first with light speculative cross-linking",
+  "uncultured": {
+    "sourceFolderId": "104Dpvr-q8xD1t1Hlw3KVSSGcJDCbcOIF",
+    "visibleImages": 31,
+    "newOrModifiedSinceBaseline": 0,
+    "baseline": "2026-08-21 21:44 +08:00",
+    "action": "patrol only; no repeat sampling",
+    "finding": "No new image ore. Existing unseen pool remains available for later first-pass mining."
+  },
+  "terminus": {
+    "newVisited": [
+      {
+        "id": "17IG_t2uZyRxMMBCbMJ5-7has0IdQK0dH",
+        "title": "我们透过摄影机文字将我们看到的世界变成作品.docx",
+        "layer": "2020/2021",
+        "ore": "Photography is explicitly framed as representation, desire/projection, the collapse of objective safe viewing, and a reversal of gaze: the photographed world looks back."
+      },
+      {
+        "id": "0B6kekeEVEPHjNW56aG5kWDdsODQ",
+        "title": "Chp 3_M20160309.docx",
+        "layer": "2016",
+        "ore": "Amsterdam Red Light District material links micro-spatial form (alley/canal/window), visibility, intimacy, safety, rent, property value and redevelopment. Spatial configuration is treated as an active mechanism that redistributes economic value and power rather than as passive background."
+      }
+    ],
+    "leads": [
+      {
+        "id": "terminus-photography-gaze-representation-2020",
+        "status": "open",
+        "sourceId": "17IG_t2uZyRxMMBCbMJ5-7has0IdQK0dH",
+        "summary": "A later visual-text layer carries the older representation problem into photography: objective appearance is treated as a screen for desire, while the object of vision can return the gaze. Candidate bridge between urban representation research and later image work; do not yet unify them."
+      },
+      {
+        "id": "terminus-window-space-visibility-value-2016",
+        "status": "open",
+        "sourceId": "0B6kekeEVEPHjNW56aG5kWDdsODQ",
+        "summary": "The Amsterdam chapter exposes a concrete mechanism: tiny differences in spatial form and visibility change interaction, safety, rental prices, property value and redevelopment outcomes. Candidate ore for a recurring question about how spatial arrangements manufacture value and social relations."
+      }
+    ],
+    "speculative": [
+      "The 2020 photography text may be a media migration of the earlier representation/symptom problem: from 'city as imperfect representation' to 'photograph as non-objective representation that looks back'. This is only a mining lead, not a conclusion.",
+      "The 2016 Amsterdam window material may intersect the value-form seam without using the same theoretical language: geometry/visibility becomes rent and redevelopment value. Keep separate until more layers are mined."
+    ],
+    "deadEnds": []
+  },
+  "safety": {
+    "sensitivePersonalData": "skipped; none intentionally indexed or analyzed"
+  }
+}
