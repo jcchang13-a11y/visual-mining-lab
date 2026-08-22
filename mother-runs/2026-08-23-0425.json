@@ -1,0 +1,55 @@
+{
+  "updatedAt": "2026-08-23 04:25 +08:00",
+  "phase": "mining-first",
+  "uncultured": {
+    "status": "READY · NO NEW ORE",
+    "visibleImages": 31,
+    "newImages": 0,
+    "latestVisibleCreatedAt": "2026-08-21T12:45:37.216Z",
+    "note": "紅米手機照片資料夾仍為 31 件；沒有晚於既有基準的新影像或修改影像。本輪不強行產生影像語法。"
+  },
+  "terminus": {
+    "status": "NEW ORE · 2 DISTINCT TEXTS + 1 CONFIRMING LAYER",
+    "visitedThisRun": [
+      {
+        "id": "1qErSKplbWXL1ezwOeVAXHw2W26429gMcAao76x3tI1M",
+        "title": "Desperately Looking for the Taiwanese — OCR 重建可編輯文字稿",
+        "role": "distinct ore"
+      },
+      {
+        "id": "0B6kekeEVEPHjenJ1MmgtUlBlSWc",
+        "title": "Red-Light-District-Historic-Preservation-and-Anti-Gentrification-Movement-in-Taipei_Yo_20160915.docx",
+        "role": "distinct ore"
+      },
+      {
+        "id": "17gQ2FJxaybQeB_zMBiZgy9oGw3R9MTYp",
+        "title": "張榮哲、楊友仁_金融化、都市更新與文化襲產保存之空間衝突.docx",
+        "role": "confirming layer / conceptual overlap"
+      }
+    ],
+    "leads": [
+      {
+        "id": "terminus-subject-lack-system-2001",
+        "sourceId": "1qErSKplbWXL1ezwOeVAXHw2W26429gMcAao76x3tI1M",
+        "status": "open",
+        "summary": "2001 博論摘要已明確提出 subject as a lack in the system，並在導論以 exclusion、symptom、master signifier 與不完整系統處理台灣認同。這不是後期研究才出現的語彙，而是目前可見最早、最直接的主體／系統缺口礦層。先保留，不把後來所有研究倒推成同一理論。"
+      },
+      {
+        "id": "terminus-colonial-property-measure-2016",
+        "sourceId": "0B6kekeEVEPHjenJ1MmgtUlBlSWc",
+        "status": "open",
+        "summary": "2016 Sex and City 稿將文萌樓周邊百年土地史寫成反覆被 measured、assessed、valued、divided、sold、rendered as private property 的過程，並把殖民土地調查、產權市民、紅燈區規訓、跨國房地產與當代仕紳化接成一條長時段鏈。此處的『測量／估值／切割』值得作為獨立操作性礦脈保存。"
+      }
+    ],
+    "confirmingLayer": {
+      "sourceId": "17gQ2FJxaybQeB_zMBiZgy9oGw3R9MTYp",
+      "summary": "2018 金融化稿再次完整表述『規劃許可容積率 → 虛擬商品／虛擬資本 → 金融房地產利潤率 → 地景重塑』。與既有 2013/2018 價值形式礦脈高度重疊，因此本輪只作礦層確認，不另開同義 lead。"
+    }
+  },
+  "refining": {
+    "status": "DEFERRED",
+    "reason": "依目前第一階段策略，以採礦和建立礦層為主；除辨識重複與確認礦層外，不把候選材料強行熔成總理論。"
+  },
+  "deadEnds": [],
+  "sensitiveDataPolicy": "未讀取或索引金融帳號、登入憑證、密碼、驗證碼、身分證明、稅務等高度敏感個資。"
+}
