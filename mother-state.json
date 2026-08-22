@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-22 19:18 +08:00",
+  "updatedAt": "2026-08-22 19:30 +08:00",
   "engine": "Mother",
   "vessel": "Nostromo",
   "mode": "shared autominer",
@@ -8,23 +8,58 @@
       "id": "uncultured",
       "name": "媒文化 / Uncultured",
       "source": "Google Drive：紅米手機照片",
-      "status": "READY",
-      "lastInspection": "2026-08-21 21:44",
+      "status": "READY · NO NEW ORE",
+      "lastInspection": "2026-08-22 19:30",
       "pipeline": ["patrol", "ledger", "dedupe", "sample", "cluster", "refine"]
     },
     {
       "id": "terminus",
       "name": "端點星 / Terminus",
       "source": "Google Drive：論文、舊稿、研究材料",
-      "status": "READY",
-      "lastInspection": "v0.1",
+      "status": "LEAD FOUND",
+      "lastInspection": "2026-08-22 19:30",
       "pipeline": ["patrol", "visited", "leads", "blind-excavation", "cross-link", "refine"]
     }
   ],
   "sharedState": {
-    "visited": [],
-    "leads": [],
+    "visited": [
+      {
+        "id": "0B6kekeEVEPHjYTN1Y3JnS09qSFU",
+        "title": "張榮哲20170125-陰不是陽的反面修8. (1).docx",
+        "bay": "terminus",
+        "seenAt": "2026-08-22 19:30 +08:00"
+      }
+    ],
+    "leads": [
+      {
+        "id": "terminus-subject-ghost-remainder-2017",
+        "bay": "terminus",
+        "status": "open",
+        "sourceId": "0B6kekeEVEPHjYTN1Y3JnS09qSFU",
+        "summary": "2017〈陰不是陽的反面〉已出現一條比『主體』更早、更具象的結構線：鬼被寫成肉身死亡後仍未消失的『殘值』，它者既內在於我又無法完全被馴化；同文又把政治正確描述為把垂直權力重新包裝成水平關係。可追查此『殘值／野鬼／未馴化它者』是否是後來『系統裂縫—主體—位置』問題的前身。"
+      },
+      {
+        "id": "terminus-value-fictitious-capital-2018",
+        "bay": "terminus",
+        "status": "open",
+        "sourceId": "1dZW8BIo2kEVdz4UWFgkTdUd6vrQ-VlBl",
+        "summary": "2018 論文章節 CH3/4 可由『虛擬資本』命中，與金融化、都市更新及抽象價值取得空間物質力量的線索一致；下一輪應對照 2001 論文中的 measure/representation 類概念，檢查是否存在跨 17 年的同一價值形式問題。"
+      }
+    ],
     "deadEnds": [],
-    "findings": []
+    "findings": [
+      {
+        "time": "2026-08-22 19:30 +08:00",
+        "bay": "uncultured",
+        "type": "patrol",
+        "summary": "自 2026-08-21 21:44（台北時間）後，紅米手機照片礦區無新增或修改影像。"
+      },
+      {
+        "time": "2026-08-22 19:30 +08:00",
+        "bay": "terminus",
+        "type": "cross-link",
+        "summary": "2017〈陰不是陽的反面〉中的『鬼＝未死透的殘值／內在的它者／野鬼不回信』，很可能是端點星『主體形式』礦脈的早期版本；其核心不是身份，而是某種無法被系統完全收編、卻又由系統內部產生的剩餘位置。"
+      }
+    ]
   }
 }
