@@ -21,6 +21,9 @@ header{padding:6vh 0 28px;border-bottom:1px solid var(--text)}
 h1{font-weight:500;font-size:clamp(2.7rem,12vw,6.8rem);line-height:.92;letter-spacing:-.05em;margin:16px 0 12px;max-width:100%;overflow-wrap:anywhere}
 .zh{margin-top:18px;font-size:1.04rem;letter-spacing:.18em}
 .intro{margin-top:11px;max-width:35rem;color:var(--muted);font-size:.84rem;line-height:1.7}
+.archive-chart{margin-top:28px;border-bottom:1px solid var(--text);padding-bottom:28px}
+.archive-chart img{display:block;width:100%;height:auto;border:1px solid var(--line)}
+.archive-caption{display:flex;justify-content:space-between;gap:18px;margin-top:9px;color:var(--muted);font-size:.64rem;line-height:1.45;letter-spacing:.08em;text-transform:uppercase}
 .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:0;border-left:1px solid var(--text);margin-top:28px}
 .card{display:flex;flex-direction:column;min-height:220px;padding:20px 19px;text-decoration:none;color:inherit;border-right:1px solid var(--text);border-bottom:1px solid var(--text);background:var(--bg)}
 .card:nth-child(-n+2){border-top:1px solid var(--text)}
@@ -45,7 +48,7 @@ a.card:hover,a.card:active{background:var(--hover)}
 .wall-note{font-size:.72rem;color:var(--muted);margin-top:6px;line-height:1.5}
 footer{padding-top:20px;color:var(--muted);font-size:.68rem;line-height:1.55}
 .seal{letter-spacing:.1em;text-transform:uppercase}
-@media(max-width:620px){header{padding-top:5vh}h1{font-size:clamp(2.6rem,13.5vw,4.6rem);letter-spacing:-.055em}.grid{grid-template-columns:1fr}.card{min-height:180px}.card:nth-child(2){border-top:0!important}.muther{grid-column:auto;min-height:0;padding-bottom:18px}.card h2{margin-top:8px}.desc{padding-top:18px}.muther .desc{padding-top:16px}.subdoors{grid-template-columns:1fr}}
+@media(max-width:620px){header{padding-top:5vh}h1{font-size:clamp(2.6rem,13.5vw,4.6rem);letter-spacing:-.055em}.archive-caption{display:block}.archive-caption span{display:block;margin-top:3px}.grid{grid-template-columns:1fr}.card{min-height:180px}.card:nth-child(2){border-top:0!important}.muther{grid-column:auto;min-height:0;padding-bottom:18px}.card h2{margin-top:8px}.desc{padding-top:18px}.muther .desc{padding-top:16px}.subdoors{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -56,6 +59,10 @@ footer{padding-top:20px;color:var(--muted);font-size:.68rem;line-height:1.55}
 <div class="zh">蓬萊仙島</div>
 <div class="intro">統一入口。各個計畫仍各自運作；這裡只負責帶路。</div>
 </header>
+<section class="archive-chart" aria-label="Historical chart of Immortalia">
+<img src="./immortalia-map.jpg" alt="古航海圖中的蓬萊仙島 Insula Immortalium">
+<div class="archive-caption"><span>ARCHIVAL CHART · INSULA IMMORTALIUM</span><span>EARLY MODERN MARITIME RECORD</span></div>
+</section>
 <main class="grid" aria-label="Immortalia projects">
 <a class="card" href="https://gangchibao-universe.pages.dev/">
 <h2>剛吃飽</h2><div class="en">AFTER THE MEAL</div><div class="desc">《金剛經》的閱讀、寫作與出版工程。</div>
