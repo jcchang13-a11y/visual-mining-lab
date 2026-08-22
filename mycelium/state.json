@@ -1,0 +1,18 @@
+{
+  "updatedAt": null,
+  "day": null,
+  "counts": {
+    "historical": null,
+    "active": null,
+    "dormant": null,
+    "revivedToday": null
+  },
+  "hotspots": [],
+  "revived": [],
+  "patrols": [],
+  "operator": {
+    "label": "ChatGPT 操作室",
+    "url": "https://chatgpt.com/"
+  },
+  "status": "awaiting-sync"
+}
