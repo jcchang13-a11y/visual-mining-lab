@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-22 19:30 +08:00",
+  "updatedAt": "2026-08-22 22:20 +08:00",
   "engine": "Mother",
   "vessel": "Nostromo",
   "mode": "shared autominer",
@@ -9,7 +9,7 @@
       "name": "媒文化 / Uncultured",
       "source": "Google Drive：紅米手機照片",
       "status": "READY · NO NEW ORE",
-      "lastInspection": "2026-08-22 19:30",
+      "lastInspection": "2026-08-22 22:20",
       "pipeline": ["patrol", "ledger", "dedupe", "sample", "cluster", "refine"]
     },
     {
@@ -17,7 +17,7 @@
       "name": "端點星 / Terminus",
       "source": "Google Drive：論文、舊稿、研究材料",
       "status": "LEAD FOUND",
-      "lastInspection": "2026-08-22 19:30",
+      "lastInspection": "2026-08-22 22:20",
       "pipeline": ["patrol", "visited", "leads", "blind-excavation", "cross-link", "refine"]
     }
   ],
@@ -28,6 +28,12 @@
         "title": "張榮哲20170125-陰不是陽的反面修8. (1).docx",
         "bay": "terminus",
         "seenAt": "2026-08-22 19:30 +08:00"
+      },
+      {
+        "id": "1S8OKBhJOiCpKULBU69kwxW_gmKiBeAXf",
+        "title": "CH2 都市及其潛意識.docx",
+        "bay": "terminus",
+        "seenAt": "2026-08-22 22:20 +08:00"
       }
     ],
     "leads": [
@@ -44,6 +50,13 @@
         "status": "open",
         "sourceId": "1dZW8BIo2kEVdz4UWFgkTdUd6vrQ-VlBl",
         "summary": "2018 論文章節 CH3/4 可由『虛擬資本』命中，與金融化、都市更新及抽象價值取得空間物質力量的線索一致；下一輪應對照 2001 論文中的 measure/representation 類概念，檢查是否存在跨 17 年的同一價值形式問題。"
+      },
+      {
+        "id": "terminus-city-unconscious-symptom-representation",
+        "bay": "terminus",
+        "status": "open",
+        "sourceId": "1S8OKBhJOiCpKULBU69kwxW_gmKiBeAXf",
+        "summary": "〈都市及其潛意識〉把都市直接當作一種有瑕疵的『再現』，以壓縮、置換與『症頭』追查表面秩序無法完全封閉的深層結構；文本明確主張不要只分析『對都市的再現』，而要分析『都市作為再現』。這是一條值得後續採礦的舊礦脈，尤其可追查『症頭』一詞在後來影像／文字工作中是否再次回返。"
       }
     ],
     "deadEnds": [],
@@ -59,6 +72,18 @@
         "bay": "terminus",
         "type": "cross-link",
         "summary": "2017〈陰不是陽的反面〉中的『鬼＝未死透的殘值／內在的它者／野鬼不回信』，很可能是端點星『主體形式』礦脈的早期版本；其核心不是身份，而是某種無法被系統完全收編、卻又由系統內部產生的剩餘位置。"
+      },
+      {
+        "time": "2026-08-22 22:20 +08:00",
+        "bay": "uncultured",
+        "type": "patrol",
+        "summary": "再次巡查紅米手機照片資料夾；目前最新可見影像仍早於既有 2026-08-21 21:44 基準，未發現新增或修改影像。"
+      },
+      {
+        "time": "2026-08-22 22:20 +08:00",
+        "bay": "terminus",
+        "type": "mining",
+        "summary": "purposeful drilling／blind excavation 命中〈CH2 都市及其潛意識〉：發現『都市作為再現—壓縮／置換—症頭』舊礦脈。依目前第一階段策略先列為候選礦，不進一步冶煉。"
       }
     ]
   }
