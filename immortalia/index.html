@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#efe7d1">
+<meta name="theme-color" content="#ffffff">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="Immortalia">
@@ -11,37 +11,41 @@
 <link rel="icon" href="./icon.svg" type="image/svg+xml">
 <title>IMMORTALIA · 蓬萊仙島</title>
 <style>
-:root{--paper:#efe7d1;--ink:#191711;--red:#8a2f24;--line:rgba(25,23,17,.26);--soft:rgba(25,23,17,.62)}
+:root{--bg:#fff;--text:#111;--muted:#666;--line:#bbb;--hover:#f5f5f5}
 *{box-sizing:border-box}
-html,body{margin:0;min-height:100%;background:var(--paper);color:var(--ink)}
-body{font-family:"Noto Serif TC","Songti TC","PMingLiU",serif;background-image:radial-gradient(circle at 12% 8%,rgba(138,47,36,.06),transparent 28rem),linear-gradient(rgba(25,23,17,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(25,23,17,.025) 1px,transparent 1px);background-size:auto,24px 24px,24px 24px}
+html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text)}
+body{font-family:Arial,"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif}
 .wrap{width:min(100%,980px);margin:auto;padding:max(24px,env(safe-area-inset-top)) 18px max(36px,env(safe-area-inset-bottom))}
-header{padding:6vh 0 28px;border-bottom:1px solid var(--ink)}
-.kicker{font-family:Georgia,serif;font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;color:var(--red)}
-h1{font-family:Georgia,"Times New Roman",serif;font-weight:400;font-size:clamp(3.2rem,15vw,7.6rem);line-height:.86;letter-spacing:-.055em;margin:16px 0 12px}
-.zh{margin-top:18px;font-size:1.04rem;letter-spacing:.2em}
-.intro{margin-top:11px;max-width:35rem;color:var(--soft);font-size:.84rem;line-height:1.75}
-.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:0;border-left:1px solid var(--ink);margin-top:28px}
-.card{position:relative;display:flex;flex-direction:column;min-height:235px;padding:20px 19px 42px;text-decoration:none;color:inherit;border-right:1px solid var(--ink);border-bottom:1px solid var(--ink);background:rgba(239,231,209,.48)}
-.card:nth-child(-n+2){border-top:1px solid var(--ink)}
-a.card{transition:.18s ease}a.card:hover,a.card:active{background:rgba(138,47,36,.08)}
-.no{font-family:Georgia,serif;color:var(--red);font-size:.72rem;letter-spacing:.14em}
-.card h2{font-weight:400;font-size:clamp(1.8rem,7vw,3.3rem);margin:32px 0 5px;letter-spacing:.02em}
-.en{font-family:Georgia,serif;font-size:.74rem;letter-spacing:.18em;color:var(--soft)}
-.desc{margin-top:auto;padding-top:24px;color:var(--soft);font-size:.77rem;line-height:1.55;max-width:25rem}
-.arrow{position:absolute;right:17px;bottom:14px;font-family:Georgia,serif;font-size:1.15rem;color:var(--red)}
+header{padding:6vh 0 28px;border-bottom:1px solid var(--text)}
+.kicker{font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+h1{font-weight:500;font-size:clamp(2.7rem,12vw,6.8rem);line-height:.92;letter-spacing:-.05em;margin:16px 0 12px;max-width:100%;overflow-wrap:anywhere}
+.zh{margin-top:18px;font-size:1.04rem;letter-spacing:.18em}
+.intro{margin-top:11px;max-width:35rem;color:var(--muted);font-size:.84rem;line-height:1.7}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:0;border-left:1px solid var(--text);margin-top:28px}
+.card{display:flex;flex-direction:column;min-height:220px;padding:20px 19px;text-decoration:none;color:inherit;border-right:1px solid var(--text);border-bottom:1px solid var(--text);background:var(--bg)}
+.card:nth-child(-n+2){border-top:1px solid var(--text)}
+a.card:hover,a.card:active{background:var(--hover)}
+.card h2{font-weight:500;font-size:clamp(1.8rem,7vw,3.2rem);margin:12px 0 7px;letter-spacing:.01em}
+.en{font-size:.72rem;letter-spacing:.14em;color:var(--muted)}
+.desc{margin-top:auto;padding-top:24px;color:var(--muted);font-size:.77rem;line-height:1.55;max-width:25rem}
 .muther{grid-column:1/-1;min-height:0;padding-bottom:20px;border-top:0!important}
-.muther .desc{margin-top:0;padding-top:24px}
-.mother-door{display:inline-flex;align-self:flex-start;margin-top:18px;padding:8px 10px;border:1px solid var(--line);text-decoration:none;color:var(--red);font-family:Georgia,serif;font-size:.68rem;letter-spacing:.12em}
+.muther .desc{margin-top:0;padding-top:18px}
+.mother-door{display:inline-flex;align-self:flex-start;margin-top:18px;padding:8px 10px;border:1px solid var(--line);text-decoration:none;color:var(--text);font-size:.68rem;letter-spacing:.1em}
+.mother-door:hover,.mother-door:active{background:var(--hover)}
 .subdoors{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:16px}
-.subdoors a{display:flex;justify-content:space-between;gap:12px;padding:13px 14px;border:1px solid var(--line);text-decoration:none;color:inherit;background:rgba(255,255,255,.12);font-size:.8rem}
-.subdoors a:hover,.subdoors a:active{border-color:var(--red)}
-.subdoors small{font-family:Georgia,serif;color:var(--soft);letter-spacing:.1em}
-.hosted{display:inline-block;margin-top:10px;border:1px solid var(--line);padding:5px 7px;font-family:Georgia,serif;font-size:.63rem;letter-spacing:.12em;color:var(--soft)}
-.public-wall{margin-top:28px;border-top:1px solid var(--ink);padding-top:14px}.wall-label{font-family:Georgia,serif;font-size:.66rem;letter-spacing:.2em;color:var(--red);margin-bottom:10px}.wall-link{display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center;text-decoration:none;color:inherit;border:1px solid var(--line);padding:14px 16px;background:rgba(138,47,36,.035)}.wall-link:hover,.wall-link:active{background:rgba(138,47,36,.08)}.wall-title{font-size:1.2rem;letter-spacing:.08em}.wall-en{font-family:Georgia,serif;color:var(--soft);font-size:.68rem;letter-spacing:.14em;margin-top:4px}.wall-note{font-size:.72rem;color:var(--soft);margin-top:6px;line-height:1.5}
-footer{display:flex;justify-content:space-between;gap:18px;padding-top:20px;color:var(--soft);font-size:.68rem;line-height:1.55;font-family:Georgia,"Noto Serif TC",serif}
-.seal{color:var(--red);letter-spacing:.12em;text-transform:uppercase}
-@media(max-width:620px){header{padding-top:5vh}.grid{grid-template-columns:1fr}.card{min-height:190px}.card:nth-child(2){border-top:0!important}.muther{grid-column:auto;min-height:0;padding-bottom:18px}.card h2{margin-top:24px}.desc{padding-top:18px}.muther .desc{padding-top:18px}.subdoors{grid-template-columns:1fr}.wall-link{grid-template-columns:1fr}footer{flex-direction:column}}
+.subdoors a{display:flex;justify-content:space-between;gap:12px;padding:13px 14px;border:1px solid var(--line);text-decoration:none;color:inherit;background:var(--bg);font-size:.8rem}
+.subdoors a:hover,.subdoors a:active{background:var(--hover)}
+.subdoors small{color:var(--muted);letter-spacing:.1em}
+.public-wall{margin-top:28px;border-top:1px solid var(--text);padding-top:14px}
+.wall-label{font-size:.66rem;letter-spacing:.18em;color:var(--muted);margin-bottom:10px}
+.wall-link{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);padding:14px 16px;background:var(--bg)}
+.wall-link:hover,.wall-link:active{background:var(--hover)}
+.wall-title{font-size:1.2rem;letter-spacing:.06em}
+.wall-en{color:var(--muted);font-size:.68rem;letter-spacing:.12em;margin-top:4px}
+.wall-note{font-size:.72rem;color:var(--muted);margin-top:6px;line-height:1.5}
+footer{padding-top:20px;color:var(--muted);font-size:.68rem;line-height:1.55}
+.seal{letter-spacing:.1em;text-transform:uppercase}
+@media(max-width:620px){header{padding-top:5vh}h1{font-size:clamp(2.6rem,13.5vw,4.6rem);letter-spacing:-.055em}.grid{grid-template-columns:1fr}.card{min-height:180px}.card:nth-child(2){border-top:0!important}.muther{grid-column:auto;min-height:0;padding-bottom:18px}.card h2{margin-top:8px}.desc{padding-top:18px}.muther .desc{padding-top:16px}.subdoors{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -54,24 +58,24 @@ footer{display:flex;justify-content:space-between;gap:18px;padding-top:20px;colo
 </header>
 <main class="grid" aria-label="Immortalia projects">
 <a class="card" href="https://gangchibao-universe.pages.dev/">
-<div class="no">01 · BOOK</div><h2>剛吃飽</h2><div class="en">GANG CHI BAO</div><div class="desc">《金剛經》的閱讀、寫作與出版工程。</div><div class="arrow">↗</div>
+<h2>剛吃飽</h2><div class="en">AFTER THE MEAL</div><div class="desc">《金剛經》的閱讀、寫作與出版工程。</div>
 </a>
 <a class="card" href="../mycelium/">
-<div class="no">02 · MYCELIUM</div><h2>菌絲</h2><div class="en">MYCELIUM OBSERVATORY</div><div class="hosted">OBSERVATORY ONLINE</div><div class="desc">菌絲自治實驗、香菇群與大棚觀測。進入固定觀測台查看節點與巡棚紀錄。</div><div class="arrow">↗</div>
+<h2>菌絲</h2><div class="desc">菌絲自治實驗、香菇群與大棚觀測。進入固定觀測台查看節點與巡棚紀錄。</div>
 </a>
 <section class="card muther">
-<div class="no">03 · CENTRAL SYSTEM</div><h2>MU/TH/UR</h2><div class="en">NOSTROMO · SHARED MINING ENGINE</div><div class="desc">共享採礦母機。媒文化與端點星是她目前掛載的兩個工作艙。</div>
-<a class="mother-door" href="../">OPEN CENTRAL SYSTEM ↗</a>
-<div class="subdoors"><a href="../uncultured/"><span>媒文化</span><small>UNCULTURED ↗</small></a><a href="../terminus/"><span>端點星</span><small>TERMINUS ↗</small></a></div>
+<h2>MU/TH/UR</h2><div class="desc">共享採礦母機。媒文化與端點星是她目前掛載的兩個工作艙。</div>
+<a class="mother-door" href="../">OPEN CENTRAL SYSTEM</a>
+<div class="subdoors"><a href="../uncultured/"><span>媒文化</span><small>UNCULTURED</small></a><a href="../terminus/"><span>端點星</span><small>TERMINUS</small></a></div>
 </section>
 </main>
 <section class="public-wall" aria-label="Public wall">
 <div class="wall-label">PUBLIC WALL · 公共牆</div>
 <a class="wall-link" href="../dazibao/">
-<div><div class="wall-title">大字報</div><div class="wall-en">DAZIBAO · NOTES POSTED ON THE WALL</div><div class="wall-note">島上的公告、短訊與對外張貼。</div></div><div>↗</div>
+<div class="wall-title">大字報</div><div class="wall-en">DAZIBAO · NOTES POSTED ON THE WALL</div><div class="wall-note">島上的公告、短訊與對外張貼。</div>
 </a>
 </section>
-<footer><span>IMMORTALIA / INSULA IMMORTALIUM</span><span class="seal">DIPLOMA MILL · 文憑工廠</span></footer>
+<footer><span class="seal">DIPLOMA MILL · 文憑工廠（新建中）</span></footer>
 </div>
 </body>
 </html>
