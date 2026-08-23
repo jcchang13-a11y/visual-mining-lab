@@ -1,0 +1,74 @@
+{
+  "runAt": "2026-08-24 06:21 +08:00",
+  "engine": "Mother",
+  "vessel": "Nostromo",
+  "phase": "mining-only",
+  "rules": {
+    "refining": false,
+    "comparison": false,
+    "collision": false,
+    "infection": false,
+    "hybridization": false,
+    "useJudgment": false
+  },
+  "stateRead": {
+    "motherState": true,
+    "visualMining": true,
+    "latestPriorRun": "mother-runs/2026-08-24-0525.json"
+  },
+  "uncultured": {
+    "sourceFolderId": "104Dpvr-q8xD1t1Hlw3KVSSGcJDCbcOIF",
+    "folderScanCount": 31,
+    "newSincePriorInventory": 0,
+    "samples": [
+      {
+        "id": "1jb7wJcRSphzz1uST89E8x2QGlBGeTFyf",
+        "title": "wx_camera_1778831667332.jpg",
+        "status": "sampled-existing-unseen",
+        "ore": "直幅室內日常物件照：一把全黑電吉他直立靠在淺灰／米白布沙發上，琴身與琴頸形成強烈黑色垂直主體；右下方黑紅編織導線在坐墊上盤繞並接向畫面邊緣，右側只露出一部分橘色音箱與黑色踏板／電源物件。背景大面積淺色牆面留白，黑色吉他、纜線與橘色音箱形成少量高對比物件。只保存礦樣，不做作品、理論或用途判斷。"
+      }
+    ],
+    "possibleSeries": [
+      "居家空間中的樂器／器材（僅列候選系列）",
+      "單一深色物件占據淺色背景的大面積對比（僅列候選視覺特徵）",
+      "電線／纜線以鬆散曲線穿過日常家具表面（僅列候選視覺特徵）",
+      "大量留白加偏置主體（僅列候選構圖特徵）"
+    ],
+    "dedupeNote": "本輪先讀 mother-state.json、visual-mining.json 與最新 05:25 巡礦紀錄；Drive 影像資料夾仍為 31 件，未見新增或修改。1jb7wJcRSphzz1uST89E8x2QGlBGeTFyf 在 visual-mining 早期清冊中為待分析，且不在 05:25 新樣本中，因此抽為本輪單一既有未分析礦樣。"
+  },
+  "terminus": {
+    "purposefulDrilling": [
+      {
+        "id": "15IkHQbX6zACwWDP-5cFwwWhqejuAFtGt",
+        "title": "2026-05-16.md",
+        "status": "newly-visited-candidate-ore",
+        "candidateLayer": "diamond-sutra-intervention-origin-and-misreading",
+        "observations": [
+          "筆記把口傳轉文字、跨語言翻譯、分章、加標點、現代白話改寫都列為對經文的『介入』，並把每次轉寫描述成重新組裝。",
+          "同一材料反覆處理『原點／原典』迷思：越接近源頭越純、越真被視為一種需要拆解的衝動；文本甚至假設即使能回到佛陀現場，原點本身仍可能再被做成新的地板。",
+          "材料明確保留 misreading／歪讀／魔改／超譯之間邊界不清，以及詮釋本身帶有語言與知識暴力的自覺。",
+          "本輪只把『介入』『原點迷思』『重新組裝』『歪讀邊界』記為候選文字礦層，不判斷其在《剛吃飽》或其他計畫中的用途。"
+        ]
+      }
+    ],
+    "blindExcavation": [
+      {
+        "id": "0B6kekeEVEPHjTzF1TDBYOVdlbUU",
+        "title": "RLD_Amsterdam_Manuel Aalbers_211215_3000W.docx",
+        "status": "newly-opened-research-material-candidate-ore",
+        "candidateLayer": "red-light-visibility-regulation-tourism-investment",
+        "observations": [
+          "研究材料把阿姆斯特丹紅燈區的核心特徵首先寫成極高可見性、狹窄巷道造成的近距離觀看，以及性工作與周邊城市功能之間多孔的空間邊界。",
+          "法律化之後，部分性工作反而轉入家庭、escort 與較不可見的形式；材料因而把『可控制性』與『可見性』並置為制度實際效果的一部分。",
+          "Plan 1012 同時涉及關閉窗口、引入創意產業／餐飲、城市品牌、旅遊客群選擇與投資安全；文本多次指出政策改變的不只是性產業數量，而是其公共可見程度與空間位置。",
+          "只列為舊研究材料候選礦層：可見／不可見、規制、旅遊凝視、城市品牌、投資與空間清理；本輪不與既有都市、價值、症頭或網絡礦脈做比較。"
+        ]
+      }
+    ],
+    "sensitiveSkipped": [],
+    "note": "本輪只保存材料本身可見的概念、用語與特殊結構，不做跨年代統合、理論比較或用途判斷。"
+  },
+  "sensitiveData": "未分析、索引或保存銀行／金融帳號、登入憑證、密碼、驗證碼、身分證明、稅務資料或其他高度敏感個資。",
+  "refining": "deferred",
+  "note": "本輪嚴格停留於第一階段採礦；大型 state 檔僅作去重參考，本輪狀態保存於獨立 mother-runs JSON。"
+}
