@@ -1,0 +1,37 @@
+{
+  "time": "2026-08-24 03:28 +08:00",
+  "phase": "mining-only",
+  "uncultured": {
+    "patrol": "紅米手機照片資料夾本輪仍未發現建立或修改時間晚於 2026-08-21 的新增影像；Drive 可見批次維持 31 件。從尚未分析池抽取一件未命中 visual-mining 已取樣項、mother-state 明確 visited 與最近 mother-runs 樣本的影像作為新礦樣。",
+    "samples": [
+      {
+        "id": "1uuWnFNbpcZiJNFrqjJDFPnNf5_J3afck",
+        "title": "MVIMG_20260614_100955.jpg",
+        "status": "sampled",
+        "ore": "直幅室內紀錄照：數位長者圍在工作桌旁共同包粽子，桌面散布粽葉、綁繩、糯米與餡料，人物手部動作密集；口罩有的正確佩戴、有的拉到下巴，門外強光與室內藍牆形成明顯明暗差。暫記視覺特徵：多人協作手作、桌面作業流程、手部與材料佔據畫面中心、日常勞動中的半正式防疫狀態、室內群體活動與戶外強光並置。只保存礦樣，不做作品、理論或用途判斷。"
+      }
+    ],
+    "possibleSeries": [
+      "多人共同製作／手作流程（僅列候選系列，尚未分群）",
+      "桌面材料、手部動作與日常勞動密集入鏡（僅列候選視覺特徵）",
+      "口罩被不同方式佩戴的日常群體場景（僅列候選視覺特徵）"
+    ],
+    "dedupeNote": "本輪先讀 mother-state.json、visual-mining.json 與 mother-runs/ 最新 2026-08-24-0231.json；Drive ID 1uuWnFNbpcZiJNFrqjJDFPnNf5_J3afck 在 visual-mining 中原為待分析，且未出現在最近兩輪樣本，因此列為新取樣。"
+  },
+  "terminus": {
+    "visited": [
+      {
+        "id": "1qhVwIqGuQQiim7UFtGtsPb_TJxDeSgFh",
+        "title": "企劃書2019.10.30.docx",
+        "status": "mined-purposeful-research-material",
+        "ore": "2019 泉州城南新橋社區企劃草案把『活的城市博物館／歷史教室』具體拆成居民口述、老物件與老照片、兒童課堂、雙語小導遊、素食簡餐、老人泡茶講古、街道節點串聯、菜市場與五金行等在地經濟，以及『活故事館』等可日常使用的空間。候選礦層只記為：社區記憶不是單一展館收藏，而是把居民、日常服務、街道節點、地方產業、飲食與口述故事一起編入持續運作的展示／導覽系統；另保留『每個居民都是一本會走路的歷史課本』這個材料特徵。此階段不與其他研究線比較、不判定理論意義。"
+      }
+    ],
+    "purposefulDrilling": "本輪沿旅遊／社區營造／地方故事線向 2019 泉州城南材料鑽探，避開最近已採過的 2012 大稻埕導覽材料與既有 representation／症頭／金融化高頻舊礦詞。企劃書內容可讀，且 Drive ID 未命中 mother-state 明確 visited，因此抽取為新候選礦層。",
+    "blindExcavation": "另以『田野』與『寵物 旅遊』做少量盲挖；命中多為他人田野筆記、外部報告、訪談或舊剪報，其中部分可能含個資或屬外部資料，故不進一步分析或保存。未形成額外新礦。",
+    "duplicateNote": "Drive ID 1qhVwIqGuQQiim7UFtGtsPb_TJxDeSgFh 未命中 mother-state 目前可讀 visited 紀錄與最新 02:31 mother-run；本輪只保存材料自身的操作結構與用語，不做跨年代比較或統合。"
+  },
+  "sensitiveData": "巡查中遇到他人田野筆記、訪談、名冊等可能包含個人資訊的入口時直接跳過；未分析、索引或保存銀行／金融帳號、登入憑證、密碼、驗證碼、身分證明、稅務資料或其他高度敏感個資。",
+  "refining": "deferred",
+  "note": "本輪嚴格停留於第一階段採礦：不做冶煉、比較、對撞、感染、雜交、用途判斷或總理論統合。大型 mother-state.json 與 visual-mining.json 僅作去重參考，本輪狀態保存於獨立 mother-runs JSON。"
+}
