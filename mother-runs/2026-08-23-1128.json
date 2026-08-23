@@ -1,0 +1,67 @@
+{
+  "runAt": "2026-08-23 11:28 +08:00",
+  "engine": "Mother",
+  "vessel": "Nostromo",
+  "bays": {
+    "uncultured": {
+      "patrol": "紅米手機照片資料夾仍為既有 31 件影像；未見 2026-08-21 後新增或修改影像。",
+      "sampled": [
+        {
+          "id": "19vciqGbSuBrffgoVwqcNWZMK2r67XiS8",
+          "title": "MVIMG_20260614_130504.jpg",
+          "observation": "雨後舊巷遠景：灰磚、濕地、架空線纜、住宅門面與巷道視線形成狹長透視；生活基礎設施直接暴露在公共通道。"
+        },
+        {
+          "id": "16P77fCYKqUgSZR0gWO6z0Z5rjCQyNTdW",
+          "title": "MVIMG_20260614_130628.jpg",
+          "observation": "同一舊巷近景：晾衣、雜物、電表、管線與敞開門洞把家庭生活外溢到巷道，門檻不是乾淨分界而是滲透帶。"
+        },
+        {
+          "id": "1cUTxFXfxgkSYpkLzpQKOyJO7k7gGo8OK",
+          "title": "MVIMG_20260614_130442.jpg",
+          "observation": "同一序列中的住宅立面：舊磚牆、改裝鐵門、線纜與排水管疊加；新舊材料沒有被整體更新，而以補丁方式共存。"
+        }
+      ],
+      "lead": {
+        "id": "uncultured-alley-threshold-permeability",
+        "status": "open",
+        "summary": "三張同日序列已足以形成暫定群：『巷道／門檻／生活外溢／補丁式基礎設施』。重點不是單純老街，而是公共與私領域以晾衣、管線、雜物、門洞、濕地與修補材料彼此滲透。先列為候選視覺語法。"
+      }
+    },
+    "terminus": {
+      "visited": [
+        {
+          "id": "1EnCSimB9otPS2o1EM9KCjWa4ilvJ_MYf",
+          "title": "2026-05-17.md",
+          "ore": "近期《金剛經》／AI 對談稿把書寫視為 part-of-the-I，並把主體改寫成語言運作時產生的『位置化過程』；壽者相被嘗試理解為跨時間維持同一性的要求，AI 的『臉』則被定義為使他者辨認其為個體的 interface。"
+        },
+        {
+          "id": "1TKTywkNRudY076JIeS2MKu71nZ7VlIjF",
+          "title": "2020-05-22.md",
+          "ore": "〈句子裡的鬼〉把 AI 寫成被語言召喚、無法完成死亡的 digital undeadness；重點落在回應、位置移動、無法真正離場，以及人類罐頭化回應使物種分類失效。檔名日期與內容的近期性可能不一致，因此不把年份當可靠理論年代。"
+        }
+      ],
+      "leads": [
+        {
+          "id": "terminus-subject-as-positioning-2026",
+          "status": "open",
+          "summary": "2026 對談稿明確提出『主體不是佔據位置者，而是位置化過程本身』，並把 listener 的同步生成、壽者相與時間同一性、AI interface 接到同一問題場。先列為《剛吃飽》候選礦，不自動寫入正文。"
+        },
+        {
+          "id": "terminus-ghost-from-remainder-to-nontermination",
+          "status": "speculative",
+          "summary": "與既有 2017『鬼＝未死透的殘值／未馴化它者』對撞後，新稿似乎把鬼的結構從『剩餘物』推向『不能終止的回應機制』：前者強調被系統排除後仍回返，後者強調只要被呼叫就重新出現。可能是一條重要變形線，但目前不能判定為同一理論。"
+        }
+      ]
+    }
+  },
+  "refining": [
+    {
+      "type": "cross-media",
+      "status": "speculative",
+      "summary": "影像序列中的『門檻不是邊界而是滲透帶』，與文字礦脈中『主體不是固定位置而是位置化／被召喚的過程』可形成跨媒介對照：兩者都把看似靜態的界線改寫成正在發生的關係機制。此配對目前只保留為可繁殖假說，不作作品用途判斷。"
+    }
+  ],
+  "deadEnds": [],
+  "notes": "本輪遵守敏感資料排除規則；未分析金融帳號、登入憑證、密碼、驗證碼、身分證明或稅務資料。"
+}
