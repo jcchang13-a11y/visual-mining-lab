@@ -1,0 +1,62 @@
+name: Immortalia image drop
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'immortalia/inbox/**'
+
+permissions:
+  contents: write
+
+jobs:
+  publish-image:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install Pillow
+        run: python -m pip install --disable-pip-version-check pillow
+
+      - name: Promote newest inbox image
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from PIL import Image, ImageOps
+
+          inbox = Path('immortalia/inbox')
+          candidates = [p for p in inbox.rglob('*') if p.is_file() and p.suffix.lower() in {'.jpg','.jpeg','.png','.webp','.gif','.bmp','.tif','.tiff'}]
+          if not candidates:
+              raise SystemExit('No supported image found in immortalia/inbox')
+
+          src = max(candidates, key=lambda p: p.stat().st_mtime_ns)
+          dst = Path('immortalia/current-map.jpg')
+
+          with Image.open(src) as im:
+              im = ImageOps.exif_transpose(im).convert('RGB')
+              im.save(dst, 'JPEG', quality=92, optimize=True, progressive=True)
+
+          Path('immortalia/.last-image-drop').write_text(src.as_posix() + '\n', encoding='utf-8')
+          print(f'Promoted {src} -> {dst}')
+          PY
+
+      - name: Commit published image
+        shell: bash
+        run: |
+          if git diff --quiet -- immortalia/current-map.jpg immortalia/.last-image-drop; then
+            echo 'No published-image change.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add immortalia/current-map.jpg immortalia/.last-image-drop
+          git commit -m 'Publish latest Immortalia image'
+          git push
