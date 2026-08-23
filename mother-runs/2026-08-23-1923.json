@@ -1,0 +1,37 @@
+{
+  "time": "2026-08-23 19:23 +08:00",
+  "phase": "mining-only",
+  "uncultured": {
+    "patrol": "紅米手機照片資料夾仍為既有 31 件批次；本輪未發現建立或修改時間晚於 2026-08-21 的新增影像。",
+    "samples": [
+      {
+        "id": "1jb7wJcRSphzz1uST89E8x2QGlBGeTFyf",
+        "title": "wx_camera_1778831667332.jpg",
+        "status": "sampled",
+        "ore": "直幅室內靜物：一把全黑電吉他斜靠淺色布沙發，導線在坐墊上形成多個鬆散線圈，右緣露出橘色小音箱與黑色踏板／電源類物件。暫記視覺特徵：黑色器物對淺色背景／家居空間中的樂器／斜向長頸構圖／大量留白／電線纏繞／局部橘色高飽和色塊／器材未收整的使用中狀態。僅作視覺礦樣，不做作品、理論或用途判斷。"
+      }
+    ],
+    "dedupeNote": "本輪避開 mother-runs/2026-08-23-1719.json、1825.json 已取樣影像及 visual-mining.json 已標記的既往取樣材料；未見新增檔。"
+  },
+  "terminus": {
+    "visited": [
+      {
+        "id": "1GgzQw9Q1bW7fpsKOaoIVE6L92NPMGI8w",
+        "title": "30330我的超廣角跟顯微鏡.md",
+        "status": "mined",
+        "ore": "2026《剛吃飽》稿件中有一組明確以尺度／觀看位置為核心的材料：世界／微塵、總體／單位、放大／壓縮，以及『站在尺度之外觀看』的觀察者位置。先列候選礦層：尺度／總體與單位／觀看位置／放大與壓縮；此階段不與早期都市、再現或主體材料比較或統合。"
+      },
+      {
+        "id": "1baAIIRzqTYYeVKLmVJHQNH46RNHOBtYLCLMh-fKZhzM",
+        "title": "垃圾堆",
+        "status": "mined-blind",
+        "ore": "blind excavation 命中一個明確的『被刪材料暫存區』：目前保存從《剛吃飽》前導頁移除的 vanitas 說明，內容涉及盛宴／繁盛與腐敗／消逝並置，並記錄移除理由『太賣弄，不需要；照片保留，解說拿掉』。先列候選礦層：被刪材料／暫存而非永久刪除／vanitas／圖像保留而文字移除／編輯淘汰理由；不判斷未來用途。"
+      }
+    ],
+    "duplicateNote": "搜尋『尺度』時發現 30330我的超廣角跟顯微鏡.md 至少有兩個相同檔名、相同大小與相同修改時間的 Drive 副本（1GgzQw9Q1bW7fpsKOaoIVE6L92NPMGI8w；1Xa4GqZUUBvDN9FCJ9eXBOXpvfUvMdRFM），本輪只讀其中一份。搜尋 scale urban 另命中多個 Financializing Space through TDR 的投稿／修訂版本；因屬版本群且相關主題已在既有礦層出現，本輪不重複逐版採掘。",
+    "blindExcavation": "無關鍵字文件瀏覽命中『垃圾堆』，抽樣後確認為創作／編輯淘汰材料的暫存文件；其餘近期索引、OCR 重建檔與媒文化控制表未重複讀取。"
+  },
+  "sensitiveData": "巡查中未分析、未索引任何銀行／金融帳號、登入憑證、密碼、驗證碼、身分證明、稅務資料或其他高度敏感個資。",
+  "refining": "deferred",
+  "note": "本輪嚴格停留於第一階段採礦：不做冶煉、比較、對撞、感染、雜交、用途判斷或總理論統合。mother-state.json 與 visual-mining.json 已讀取作去重參考；mother-state.json 體積較大且輸出截斷，因此未直接改寫大型 state，以獨立 mother-runs JSON 保存本輪採礦狀態。"
+}
