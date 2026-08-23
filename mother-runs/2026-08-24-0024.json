@@ -1,0 +1,35 @@
+{
+  "time": "2026-08-24 00:24 +08:00",
+  "phase": "mining-only",
+  "uncultured": {
+    "patrol": "紅米手機照片資料夾本輪仍未發現建立或修改時間晚於 2026-08-21 的新增影像；現有批次中抽取一件未見於 mother-state 與既有 mother-runs 的影像作為新礦樣。",
+    "samples": [
+      {
+        "id": "1j5iK2PcAm71Kw51CW-9st_ympspggjVi",
+        "title": "Messenger_creation_0701C150-1817-4677-90FA-0D8006E17E93.jpeg",
+        "status": "sampled",
+        "ore": "黑白直幅建築影像：一座多層磚塔自近地面向上收束，塔身位於畫面偏左，天空佔據大部分背景，低處可見雜草、圍欄與電線。暫記視覺特徵：單體高塔、強烈仰視、垂直拉伸、黑白處理、大量留白天空、磚造細節、荒地／邊緣環境、人工構築物與野生植被並置。只作視覺礦樣記錄，不做作品、理論或用途判斷。"
+      }
+    ],
+    "possibleSeries": [
+      "孤立建築／塔體／強仰視／大面積天空（僅列候選系列，尚未分群）",
+      "建成物與荒地／雜草並置（僅列候選視覺特徵）"
+    ],
+    "dedupeNote": "本輪先讀 mother-state.json、visual-mining.json 與 mother-runs/ 最近紀錄；該 Drive ID 未命中既有 state 或 runs，因此列為新取樣。"
+  },
+  "terminus": {
+    "visited": [
+      {
+        "id": "1innm56gvAsUTHc2vPAKqv36blF0eEgRm",
+        "title": "PROPOSAL.docx",
+        "status": "mined-purposeful",
+        "ore": "2013 論文計劃書以『裂縫與症頭』為暫定核心，反覆出現現代化／壓抑／慾望回返、文萌樓作為不可消滅的裂縫／症頭、社會元素依相對位置取得意義、縫合／霸權、以及『反叛與革命如何可能』等問題。先列候選礦層：裂縫、症頭、壓抑與回返、相對位置、縫合／霸權、城市爭奪、都市造反。此階段只保存材料自身，不與後續文本比較或統合。"
+      }
+    ],
+    "duplicateNote": "搜尋 representation／症頭／裂縫 時同時命中多個 2018 合併稿與既有研究章節；本輪只抽取尚未見於 mother-state visited 的 2013 proposal 作樣本，不重複摘要已巡材料。",
+    "blindExcavation": "另以旅遊／演唱會／寵物等較後期研究詞做一次盲挖，未得到可用結果，因此未新增候選礦層。"
+  },
+  "sensitiveData": "本輪沒有分析、索引或保存銀行／金融帳號、登入憑證、密碼、驗證碼、身分證明、稅務資料或其他高度敏感個資；來源文件中若出現私人識別欄位，未納入礦樣內容。",
+  "refining": "deferred",
+  "note": "本輪嚴格停留於第一階段採礦：不做冶煉、比較、對撞、感染、雜交、用途判斷或總理論統合。大型 mother-state.json 與 visual-mining.json 僅作去重參考，本輪狀態保存於獨立 mother-runs JSON。"
+}
