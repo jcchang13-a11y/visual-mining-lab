@@ -54,7 +54,7 @@ a.card:hover,a.card:active{background:var(--hover)}
 </header>
 <p class="island-lore">《史記》說，渤海中有三座神山。蓬萊是其中一座——仙人與不死之藥，都在那裡。</p>
 <section class="archive-chart" aria-label="Historical chart of Immortalia">
-<img src="./immortalia-map.jpg" alt="古航海圖中的蓬萊仙島 Insula Immortalium">
+<img id="immortalia-map" src="./immortalia-map.jpg" alt="古航海圖中的蓬萊仙島 Insula Immortalium">
 <div class="archive-caption"><span>ARCHIVAL CHART · INSULA IMMORTALIUM</span><span>EARLY MODERN MARITIME RECORD</span></div>
 </section>
 <p class="island-now">現在書、礦場、大棚、檔案與工廠也都在這裡。</p>
@@ -83,5 +83,9 @@ a.card:hover,a.card:active{background:var(--hover)}
 </section>
 </main>
 </div>
+<script>
+const map = document.getElementById('immortalia-map');
+map.src = './immortalia-map.jpg?v=' + Date.now();
+</script>
 </body>
 </html>
