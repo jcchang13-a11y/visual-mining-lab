@@ -1,0 +1,67 @@
+{
+  "runAt": "2026-08-24 05:25 +08:00",
+  "engine": "Mother",
+  "vessel": "Nostromo",
+  "phase": "mining-only",
+  "rules": {
+    "refining": false,
+    "comparison": false,
+    "collision": false,
+    "infection": false,
+    "hybridization": false,
+    "useJudgment": false
+  },
+  "uncultured": {
+    "sourceFolderId": "104Dpvr-q8xD1t1Hlw3KVSSGcJDCbcOIF",
+    "folderScanCount": 31,
+    "newSincePriorInventory": 0,
+    "samples": [
+      {
+        "id": "12VmDFk8HbVhEwnigjh5iIsAEGKjxZdLX",
+        "title": "wx_camera_1779792627476.jpg",
+        "status": "sampled-existing-unseen",
+        "ore": "直幅近距離餐盤紀錄：灰色金屬／搪瓷感餐盤上殘留橘紅色米飯與一顆切面朝向鏡頭的粉紅色肉丸／加工肉塊；粉紅筷子橫跨上方，橘色桌面與遠處另一支模糊筷狀物形成高飽和背景。暫記視覺特徵：吃到一半／剩食、極近物件視角、加工肉切面、餐具橫切畫面、灰盤與橘粉色高反差。只保存礦樣，不做作品、理論或用途判斷。"
+      }
+    ],
+    "possibleSeries": [
+      "餐後／吃到一半的食物殘留（僅列候選系列）",
+      "極近距離日常物件與食物切面（僅列候選視覺特徵）",
+      "餐具橫向切入畫面、形成幾何分割（僅列候選視覺特徵）"
+    ],
+    "dedupeNote": "本輪先讀 mother-state.json、visual-mining.json 與 mother-runs/ 最新 2026-08-24-0423.json，並核對 03:28 樣本；Drive 仍為 31 件，未見新增或修改。12VmDFk8HbVhEwnigjh5iIsAEGKjxZdLX 在 visual-mining 中為待分析，且未命中已知樣本／visited，因此抽為本輪單一新礦樣。"
+  },
+  "terminus": {
+    "purposefulDrilling": [
+      {
+        "id": "18fYtPflmJcSx1ck5rtoUCRXMMH2ML3pp",
+        "title": "2026-05-24-1.md",
+        "status": "newly-visited-candidate-ore",
+        "candidateLayer": "diamond-sutra-image-regimes-and-stage-boundary",
+        "observations": [
+          "工作筆記把《金剛經》第一分、第十四分、第三十二分分別記成冷的遠景紀錄片、貼臉情緒連續劇、以及天／人／阿修羅與劇組觀眾一起湧入的喧鬧大謝幕；核心材料本身是觀看距離、文類與聲音密度的劇烈改變。",
+          "同一份材料另把第三十二分現場描述成廟會／演唱會式混合場：宗教、觀看、表演、群眾、賣花、直播、評論與經濟行為同時存在。",
+          "此輪只記錄『三種影像制度／觀看距離』與『謝幕場域角色混入』為候選文字礦層，不判斷它與其他研究或影像礦區的用途。"
+        ]
+      }
+    ],
+    "blindExcavation": [
+      {
+        "id": "1mrESI82JpJib6Cq4NmWv1stVx6BYhUf1kZ9egq7ftds",
+        "title": "20090518韓國",
+        "status": "newly-opened-candidate-ore",
+        "candidateLayer": "international-family-reframing-agency-and-public-private",
+        "observations": [
+          "2009 國際家庭稿拒絕把婚姻移民固定成受害者／掏金者、把台灣丈夫固定成失敗者，改以具有決策能力與共同追求未來的 agency 描述家庭成員。",
+          "語言課被重新描述成家庭之外的社會介面、移民彼此形成網絡與政治社會參與空間，而不只是同化／教化場所。",
+          "文本把『文化』擴張到個人歷史碎片，並明言 the other can speak for itself；又要求把家庭內矛盾重新放回社會歷史脈絡，恢復私人家庭的 public dimension。",
+          "只列為早期社會運動／移民研究候選礦層，不與後續它者、主體、網絡或再現詞彙做比較。"
+        ]
+      }
+    ],
+    "sensitiveSkipped": [],
+    "note": "本輪只保存材料本身的可見概念與特殊語彙，不做跨年代總理論統合、比較或用途判斷。"
+  },
+  "sensitiveData": "未分析、索引或保存銀行／金融帳號、登入憑證、密碼、驗證碼、身分證明、稅務資料或其他高度敏感個資。",
+  "refining": "deferred",
+  "note": "本輪嚴格停留於第一階段採礦；大型 mother-state.json 與 visual-mining.json 僅作去重參考，本輪狀態保存於獨立 mother-runs JSON。"
+}
