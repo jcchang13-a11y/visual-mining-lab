@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-23 08:28 +08:00",
+  "updatedAt": "2026-08-23 09:26 +08:00",
   "engine": "Mother",
   "vessel": "Nostromo",
   "mode": "shared autominer",
@@ -8,8 +8,8 @@
       "id": "uncultured",
       "name": "媒文化 / Uncultured",
       "source": "Google Drive：紅米手機照片",
-      "status": "SAMPLED · 2 UNSEEN",
-      "lastInspection": "2026-08-23 08:28",
+      "status": "SAMPLED · 2 MORE",
+      "lastInspection": "2026-08-23 09:26",
       "pipeline": ["patrol", "ledger", "dedupe", "sample", "cluster", "refine"]
     },
     {
@@ -17,7 +17,7 @@
       "name": "端點星 / Terminus",
       "source": "Google Drive：論文、舊稿、研究材料",
       "status": "NEW ORE · 2 TEXTS",
-      "lastInspection": "2026-08-23 08:28",
+      "lastInspection": "2026-08-23 09:26",
       "pipeline": ["patrol", "visited", "leads", "blind-excavation", "cross-link", "refine"]
     }
   ],
@@ -35,7 +35,9 @@
       {"id":"1e_YzBzU3nSF3Qe8JIYd6mw5BjHQMFWeh","title":"Sex and City.docx","bay":"terminus","seenAt":"2026-08-23 07:24 +08:00"},
       {"id":"0B6kekeEVEPHjNW56aG5kWDdsODQ","title":"Chp 3_M20160309.docx","bay":"terminus","seenAt":"2026-08-23 07:24 +08:00"},
       {"id":"0B6kekeEVEPHjdUk4dTdFa3JodE0","title":"Chp 1_M20160309.docx","bay":"terminus","seenAt":"2026-08-23 08:28 +08:00"},
-      {"id":"17gQ2FJxaybQeB_zMBiZgy9oGw3R9MTYp","title":"張榮哲、楊友仁_金融化、都市更新與文化襲產保存之空間衝突.docx","bay":"terminus","seenAt":"2026-08-23 08:28 +08:00"}
+      {"id":"17gQ2FJxaybQeB_zMBiZgy9oGw3R9MTYp","title":"張榮哲、楊友仁_金融化、都市更新與文化襲產保存之空間衝突.docx","bay":"terminus","seenAt":"2026-08-23 08:28 +08:00"},
+      {"id":"1X0YHzyEyK2z6QucUDpD3bbNQ_irWhxT8","title":"2026-05-31-1.md","bay":"terminus","seenAt":"2026-08-23 09:26 +08:00"},
+      {"id":"1qErSKplbWXL1ezwOeVAXHw2W26429gMcAao76x3tI1M","title":"Desperately Looking for the Taiwanese — OCR 重建可編輯文字稿","bay":"terminus","seenAt":"2026-08-23 09:26 +08:00"}
     ],
     "leads": [
       {"id":"terminus-subject-ghost-remainder-2017","bay":"terminus","status":"open","sourceId":"0B6kekeEVEPHjYTN1Y3JnS09qSFU","summary":"2017〈陰不是陽的反面〉已出現一條比『主體』更早、更具象的結構線：鬼被寫成肉身死亡後仍未消失的『殘值』，它者既內在於我又無法完全被馴化；同文又把政治正確描述為把垂直權力重新包裝成水平關係。可追查此『殘值／野鬼／未馴化它者』是否是後來『系統裂縫—主體—位置』問題的前身。"},
@@ -52,7 +54,11 @@
       {"id":"terminus-morphology-price-risk-amsterdam","bay":"terminus","status":"open","sourceId":"0B6kekeEVEPHjNW56aG5kWDdsODQ","summary":"〈Chp 3_M20160309〉顯示阿姆斯特丹紅燈區的微型空間幾何直接介入價格、欲望與風險：狹窄巷道強迫近距離接觸並提高窗口租金與服務價格；運河街較開放，讓工作者能遠距觀察、迴避可疑客人。候選礦脈因此不是『空間影響行為』這種泛論，而是『形態本身會對接觸、風險與價格進行編碼』。"},
       {"id":"terminus-city-branding-clearance-2016","bay":"terminus","status":"open","sourceId":"0B6kekeEVEPHjdUk4dTdFa3JodE0","summary":"〈Chp 1_M20160309〉把紅燈區更新與國際觀光、城市品牌、安全／人權正當化及清除『不適切』地區直接放在同一問題場；文本最後反而追問空間規劃如何讓不同現實共存。先列為候選礦，不判定其與後續研究線的關係。"},
       {"id":"uncultured-tech-altar-eye","bay":"uncultured","status":"open","sourceId":"1AVlijcbh2KJqnp3ztl0yMKckJs1BX-yL","summary":"未分析池抽樣：室內對稱拱門層層套疊，中央服務機器人置於發光圓形裝置下；暫記視覺特徵為『中心化／祭壇式陳列／機器與圓眼』，不做主題定論，等待同型影像。"},
-      {"id":"uncultured-alley-logistics-motion","bay":"uncultured","status":"open","sourceId":"11GdN1XWN4iiH9IXMBucUZWGI5TYf--34","summary":"未分析池抽樣：夜間狹窄人行／巷道空間被機車、外送箱、騎行者與行人壓縮，並帶強烈運動模糊；暫記視覺特徵為『狹道／物流／移動／擁塞』，等待更多影像確認是否成群。"}
+      {"id":"uncultured-alley-logistics-motion","bay":"uncultured","status":"open","sourceId":"11GdN1XWN4iiH9IXMBucUZWGI5TYf--34","summary":"未分析池抽樣：夜間狹窄人行／巷道空間被機車、外送箱、騎行者與行人壓縮，並帶強烈運動模糊；暫記視覺特徵為『狹道／物流／移動／擁塞』，等待更多影像確認是否成群。"},
+      {"id":"uncultured-civilized-toilet-sign","bay":"uncultured","status":"open","sourceId":"1FW5drD5xfhflHuk-bJOByf2kS_VV2a5v","summary":"未分析池抽樣：紅底白字公共標示『文明如厕／CiuilizedToilet』，中文規訓語彙與拼寫失準的英譯同框；暫記視覺特徵為『制度標示／雙語錯譯／規訓語言成為物件』，先不判斷用途。"},
+      {"id":"uncultured-electric-guitar-domestic","bay":"uncultured","status":"open","sourceId":"1jb7wJcRSphzz1uST89E8x2QGlBGeTFyf","summary":"未分析池抽樣：黑色電吉他直立於淺色沙發，導線盤繞並連向畫面右緣橘色音箱；高反差單一物件被置入中性的居家空間，暫記為『物件肖像／黑白反差／線纜延伸／家居中的器械』。"},
+      {"id":"terminus-system-lack-exclusion-2001","bay":"terminus","status":"open","sourceId":"1qErSKplbWXL1ezwOeVAXHw2W26429gMcAao76x3tI1M","summary":"2001 博論〈Desperately Looking for the Taiwanese〉在摘要即把研究核心寫成『subject as a lack in the system』，並把 Taiwanese 視為 exclusion 的 signifier；章名另有〈SYSTEM IS NOT A DIRTY WORD〉與〈MARX AS GHOSTBUSTER〉。這把目前已見的『系統—缺口／排除—鬼』語彙直接推回 2001，列為早期礦層。"},
+      {"id":"terminus-gangchibao-presence-representation-2026","bay":"terminus","status":"open","sourceId":"1X0YHzyEyK2z6QucUDpD3bbNQ_irWhxT8","summary":"2026《剛吃飽》第29分工作稿把『若有人言』讀成現場被語言重新標註，並區分 presentation／representation／presence：問題不是取消現前，而是 representation 不能佔有 presence。先把它記成近期寫作中 representation 語彙的明確回返，不判斷與早年研究是否同一理論。"}
     ],
     "deadEnds": [],
     "findings": [
@@ -78,7 +84,11 @@
       {"time":"2026-08-23 07:24 +08:00","bay":"terminus","type":"cross-link","summary":"speculative：本輪兩份材料與既有『連結／切斷』、『可見／隱匿』礦脈交叉後，出現一條更操作性的候選線：空間並非只承載價值或再現，而會藉由邊界、距離、視線與接觸條件直接對社會關係、風險與價格進行編碼。先保留為待追假說，不作總結。"},
       {"time":"2026-08-23 08:28 +08:00","bay":"uncultured","type":"patrol","summary":"紅米手機照片礦區仍為既有 31 件批次，未見 2026-08-21 後新增或修改影像；本輪改從 unseen 池抽樣兩張，不重複既有已注意樣本。"},
       {"time":"2026-08-23 08:28 +08:00","bay":"uncultured","type":"mining","summary":"抽樣 mmexport1748674267113.jpg：對稱拱門、中央服務機器人與背後發光圓形裝置形成強烈中心構圖；抽樣 IMG_20260409_204522.jpg：夜間狹道被機車、外送載具與行人壓縮，畫面有強運動模糊。兩者先記視覺語法，不做作品用途判斷。"},
-      {"time":"2026-08-23 08:28 +08:00","bay":"terminus","type":"mining","summary":"新增讀取〈Chp 1_M20160309〉與〈金融化、都市更新與文化襲產保存之空間衝突〉。前者顯示城市品牌／國際觀光／安全與人權論述如何伴隨紅燈區更新與清除問題，同時以『不同現實如何共存』作為規劃問題；後者再次確認『容積率→虛擬商品／空間型債券→金融房地產→文化襲產衝突』的完整論證。依第一階段策略先收礦，不再往總理論推。"}
+      {"time":"2026-08-23 08:28 +08:00","bay":"terminus","type":"mining","summary":"新增讀取〈Chp 1_M20160309〉與〈金融化、都市更新與文化襲產保存之空間衝突〉。前者顯示城市品牌／國際觀光／安全與人權論述如何伴隨紅燈區更新與清除問題，同時以『不同現實如何共存』作為規劃問題；後者再次確認『容積率→虛擬商品／空間型債券→金融房地產→文化襲產衝突』的完整論證。依第一階段策略先收礦，不再往總理論推。"},
+      {"time":"2026-08-23 09:26 +08:00","bay":"uncultured","type":"patrol","summary":"紅米手機照片礦區仍為既有 31 件，未見 2026-08-21 後新增或修改影像；本輪從待分析池再抽樣兩張。"},
+      {"time":"2026-08-23 09:26 +08:00","bay":"uncultured","type":"mining","summary":"抽樣 wx_camera_1777097231195.jpg：公共空間紅色標示『文明如厕／CiuilizedToilet』，制度規訓、雙語與錯譯同時成為畫面主體；抽樣 wx_camera_1778831667332.jpg：黑色電吉他直立於白色沙發，線纜連至右側音箱，形成高度乾淨的物件肖像。先收視覺特徵，不判斷作品用途。"},
+      {"time":"2026-08-23 09:26 +08:00","bay":"terminus","type":"mining","summary":"blind excavation 命中 2001 博論〈Desperately Looking for the Taiwanese〉：摘要已明言『subject as a lack in the system』，並以 exclusion／signifier 處理 Taiwanese；另命中 2026《剛吃飽》第29分工作稿，其中 representation／presence 再次成為明確操作語彙。兩者先列為不同年代礦層。"},
+      {"time":"2026-08-23 09:26 +08:00","bay":"terminus","type":"cross-link","summary":"speculative：2001 已有『system—lack—exclusion』骨架，2012 才看到的『症頭—裂縫—縫合』因此不應視為起點，而較像後來的語彙改寫。這只是時間上的延續線索；尚不能判定 2026《剛吃飽》的 representation／presence 與早年研究屬於同一理論。"}
     ]
   }
 }
