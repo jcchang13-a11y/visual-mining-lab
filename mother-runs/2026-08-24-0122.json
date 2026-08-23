@@ -1,0 +1,35 @@
+{
+  "time": "2026-08-24 01:22 +08:00",
+  "phase": "mining-only",
+  "uncultured": {
+    "patrol": "紅米手機照片資料夾本輪仍未發現建立或修改時間晚於 2026-08-21 的新增影像；從既有未分析池抽取一件尚未命中 mother-state 與最近 mother-runs 的影像作為新礦樣。",
+    "samples": [
+      {
+        "id": "12VmDFk8HbVhEwnigjh5iIsAEGKjxZdLX",
+        "title": "wx_camera_1779792627476.jpg",
+        "status": "sampled",
+        "ore": "直幅近距離餐桌殘食影像：灰色金屬盤佔滿畫面，中央偏右是一截粉紅色加工肉／肉丸切面，左下只剩少量拌有醬汁的米飯；粉紅色筷子斜跨盤面，上方另有一支橘白色筆狀物落在桌面背景。暫記視覺特徵：餐後殘餘、極近距離、局部切面、日常器物混入、暖色食物對冷灰金屬盤、畫面帶有未整理／吃到一半或吃完後的狀態。只保存礦樣，不做作品、理論或用途判斷。"
+      }
+    ],
+    "possibleSeries": [
+      "餐後／殘食／未整理桌面（僅列候選系列，尚未分群）",
+      "日常物件以極近距離切片方式入鏡（僅列候選視覺特徵）"
+    ],
+    "dedupeNote": "本輪先讀 mother-state.json、visual-mining.json 與 mother-runs/ 最新紀錄；Drive ID 12VmDFk8HbVhEwnigjh5iIsAEGKjxZdLX 未命中既有 state，亦不是上一輪 00:24 的樣本，因此列為新取樣。"
+  },
+  "terminus": {
+    "visited": [
+      {
+        "id": "18fYtPflmJcSx1ck5rtoUCRXMMH2ML3pp",
+        "title": "2026-05-24-1.md",
+        "status": "mined-blind",
+        "ore": "一批 2026 年《剛吃飽》工作筆記中反覆保存一個尚未壓平的素材：把《金剛經》第一分、第十四分、第三十二分分別記成冷靜遠景紀錄片、貼臉情緒連續劇、以及眾生喧嘩的大謝幕／神魔場面，並特別保留『三支本來不該剪在一起的影片』這個怪感。候選礦層只記為：文類突然換軌、觀看距離劇烈改變、遠景／特寫／擁擠中景、無旁白／情緒爆發／謝幕失控、觀看位置問題。此階段不判定其理論意義，也不與其他文本比較。"
+      }
+    ],
+    "blindExcavation": "本輪以『演唱會』作較後期研究詞進行一次盲挖，意外命中 2026-05-24-1.md；由於其中包含大量創作／研究工作筆記，抽取上述未見於 mother-state visited 的候選礦層。其他命中多為舊外部資料、活動材料或無直接礦值檔案，未逐份摘要。",
+    "duplicateNote": "Drive ID 18fYtPflmJcSx1ck5rtoUCRXMMH2ML3pp 未命中 mother-state visited；本輪僅保存材料自身特徵，不與既有 representation／症頭／位置等礦層進行比較或統合。"
+  },
+  "sensitiveData": "巡查中略過可能涉及個人名冊、學員資料、行程票券等非研究核心且可能含個資的檔案；未分析、索引或保存銀行／金融帳號、登入憑證、密碼、驗證碼、身分證明、稅務資料或其他高度敏感個資。",
+  "refining": "deferred",
+  "note": "本輪嚴格停留於第一階段採礦：不做冶煉、比較、對撞、感染、雜交、用途判斷或總理論統合。大型 mother-state.json 與 visual-mining.json 僅作去重參考，本輪狀態保存於獨立 mother-runs JSON。"
+}
