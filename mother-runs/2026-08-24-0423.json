@@ -1,0 +1,35 @@
+{
+  "runAt": "2026-08-24 04:23 +08:00",
+  "engine": "Mother",
+  "vessel": "Nostromo",
+  "phase": "mining-only",
+  "rules": {"refining": false, "comparison": false, "collision": false, "infection": false, "hybridization": false, "useJudgment": false},
+  "uncultured": {
+    "sourceFolderId": "104Dpvr-q8xD1t1Hlw3KVSSGcJDCbcOIF",
+    "folderScanCount": 31,
+    "newSincePriorInventory": 0,
+    "note": "Folder still contains the same 31 image files represented by visual-mining.json; no newly uploaded image detected. Existing unseen material was not re-theorized this run. The June 14 MVIMG burst remains a candidate series by filename/time adjacency only; this is an inventory observation, not a visual interpretation."
+  },
+  "terminus": {
+    "purposefulDrilling": [
+      {
+        "id": "13CLrwvwG0s1d6KFBF0IqxXZzFGONujWn",
+        "title": "uro都市再生架構.docx",
+        "status": "newly-visited-candidate-ore",
+        "candidateLayer": "urban-regeneration-operational-framework",
+        "observations": [
+          "Explicitly organizes urban regeneration around historical context, urban historic-resource inventory/recording, historical layering of everyday life, urban rituals and spatial planning.",
+          "Also contains community-network interaction/connection, resource-platform integration, cross-border spatial governance, spatial sharing and community incubation as operational vocabulary.",
+          "Contains '城市影像紀錄' alongside '歷史疊圖' and '城市百年再生紀錄'; retained only as a candidate textual stratum, with no cross-media use judgment in this phase."
+        ]
+      }
+    ],
+    "blindExcavation": [
+      {"id":"1gmQv4Rj5nLhUYx99bUHZiDpr4gRdBfus","title":"由公共利益探討都市更新法令調整機制-以台北市為例.pdf","status":"candidate-reference-layer-not-opened"},
+      {"id":"10duSS8IkCrcagehyxr6rete2s-FSExT8","title":"金門國家公園傳統建築活化利用委託民宿經營案成效評估.pdf","status":"candidate-tourism-heritage-layer-not-opened"},
+      {"id":"1mrESI82JpJib6Cq4NmWv1stVx6BYhUf1kZ9egq7ftds","title":"20090518韓國","status":"candidate-old-field-material-not-opened"}
+    ],
+    "sensitiveSkipped": [],
+    "note": "Only candidate strata recorded; no synthesis with prior representation/symptom/value/network leads was performed."
+  }
+}
