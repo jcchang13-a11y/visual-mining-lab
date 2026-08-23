@@ -1,0 +1,53 @@
+{
+  "time": "2026-08-23 20:27 +08:00",
+  "phase": "mining-only",
+  "uncultured": {
+    "patrol": "紅米手機照片資料夾目前仍為 31 件既有批次；本輪未發現建立或修改時間晚於 2026-08-21 的新增影像。",
+    "samples": [
+      {
+        "id": "12VmDFk8HbVhEwnigjh5iIsAEGKjxZdLX",
+        "title": "wx_camera_1779792627476.jpg",
+        "status": "sampled",
+        "ore": "直幅近距離餐桌殘食影像：灰色金屬盤佔滿畫面，右側是一段粉紅色加工肉／香腸類食物的切面，左下散落少量帶醬汁米飯，粉紅色筷子斜跨盤面，背景橘黃色桌面與另一支筆狀物失焦。暫記視覺特徵：吃到一半／剩餘物、極近距離切面、冷灰金屬與暖色食物強對比、斜向餐具切割構圖、食物碎屑與油水痕跡、日常飲食的未整理狀態。僅作視覺礦樣，不做作品、理論或用途判斷。"
+      },
+      {
+        "id": "1kZgk1hr0fFwgWdmgGkKax3XlJX4OLwHR",
+        "title": "wx_camera_1782266558865.jpg",
+        "status": "sampled",
+        "ore": "直幅移動中窗景：透過車窗拍攝大片綠色田地、低矮聚落與遠山，上方藍天白雲；玻璃上同時留下明顯車內燈具／窗框反射，前景道路與護欄因速度形成水平拖影。暫記視覺特徵：移動載具視角、內外景疊影、玻璃反射、水平速度模糊、田地／聚落／山脈分層、觀看者被窗面隔開。僅作視覺礦樣，不做作品、理論或用途判斷。"
+      }
+    ],
+    "possibleSeries": [
+      "餐桌／進食途中／剩餘物與未收拾狀態（僅列候選系列，尚未分群）",
+      "移動載具窗景／玻璃反射／速度拖影（僅列候選系列，尚未分群）"
+    ],
+    "dedupeNote": "本輪先讀 mother-state.json、visual-mining.json 與最近 mother-runs，並確認上述兩個影像 ID 未出現在 mother-state 的既有 visited 記錄中；未重讀 19:23 輪已取樣的 wx_camera_1778831667332.jpg。"
+  },
+  "terminus": {
+    "visited": [
+      {
+        "id": "1poqGYleyhoJcZBQD2mviD57TD-_g78nd",
+        "title": "剛吃飽_第五輪綱領.md",
+        "status": "mined-purposeful",
+        "ore": "2026《剛吃飽》第五輪綱領中反覆出現一組以『位置』為核心的工作語彙：讀者被放進位置、位置形成理解與權威、位置再被拆解；並以『場／運動／矛盾』描述文字、讀者與外部世界的配置。先列候選礦層：位置／權威／拆解／閱讀運動／場與尺度；此階段不與既有都市、主體或再現礦層比較或統合。"
+      },
+      {
+        "id": "1taOBsJlvA441227eVVq6O_Is7g4NSqWpRTrYQMp8P5Q",
+        "title": "菌絲工作節點｜髒的社會理論 Dirty Social Theory",
+        "status": "mined-blind",
+        "ore": "blind excavation 命中一個以『模型變髒』為核心的工作節點，明確保存 machine → structure → network → flow → rhizome → mycelium → mold 的私人模型序列，以及 infect／contaminate／branch／colonize／mutate／return／anastomose／mold 等動詞。先列候選礦層：乾淨／髒、污染／殘留／復發、模型美學、流動改造通道、分散不等於無權力；不判斷與其他研究線的關係或用途。"
+      },
+      {
+        "id": "196ZxH0Bd8gxzusOCU1DmDpjN7PChQVZh",
+        "title": "Final Talented Taipei_0910.docx",
+        "status": "mined-purposeful",
+        "ore": "較早期的臺北創意城市材料中，network／flow 並非抽象概念，而是直接出現在人才流入流出、brain drain／talent churn、circulators、overseas networks、clusters、milieus、place matters 與城市吸引／留住人才等操作語彙裡。先列候選礦層：人才流動／循環者／網絡／群聚／地點／城市吸引與流失；僅記錄材料自身，不與 2026 菌絲或其他網絡研究做跨年代統合。"
+      }
+    ],
+    "duplicateNote": "搜尋『位置』與『flow network』時，發現《剛吃飽》部分 markdown 檔有相同檔名副本，另有大量既有研究資料與參考文獻命中；本輪只抽取未在 mother-state visited 中出現且內容明顯屬於使用者研究／工作材料的少量文件，不逐份摘要。",
+    "blindExcavation": "無關鍵字文件瀏覽中避開已巡過的『垃圾堆』、OCR 重建檔與控制表，抽取『髒的社會理論 Dirty Social Theory』作為本輪 blind sample。"
+  },
+  "sensitiveData": "巡查中未分析、未索引任何銀行／金融帳號、登入憑證、密碼、驗證碼、身分證明、稅務資料或其他高度敏感個資。",
+  "refining": "deferred",
+  "note": "本輪嚴格停留於第一階段採礦：不做冶煉、比較、對撞、感染、雜交、用途判斷或總理論統合。mother-state.json 與 visual-mining.json 已讀取作去重參考；mother-state.json 體積較大且讀取輸出截斷，因此未直接改寫大型 state，以獨立 mother-runs JSON 保存本輪採礦狀態。"
+}
