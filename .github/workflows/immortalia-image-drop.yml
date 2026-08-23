@@ -34,10 +34,7 @@ jobs:
 
           inbox = Path('immortalia/inbox')
           candidates = [p for p in inbox.rglob('*') if p.is_file() and p.suffix.lower() in {'.jpg','.jpeg','.png','.webp','.gif','.bmp','.tif','.tiff'}]
-          if not candidates:
-              raise SystemExit('No supported image found in immortalia/inbox')
-
-          src = max(candidates, key=lambda p: p.stat().st_mtime_ns)
+          src = max(candidates, key=lambda p: p.stat().st_mtime_ns) if candidates else Path('immortalia/immortalia-map.jpg')
           dst = Path('immortalia/current-map.jpg')
 
           with Image.open(src) as im:
