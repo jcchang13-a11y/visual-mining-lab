@@ -31,13 +31,11 @@ a.card:hover,a.card:active{background:var(--hover)}
 .desc{margin-top:auto;padding-top:24px;color:var(--muted);font-size:.77rem;line-height:1.55;max-width:25rem}
 .muther{grid-column:1/-1;min-height:0;padding-bottom:20px;border-top:0!important}
 .muther .desc{margin-top:0;padding-top:18px}
-.mother-door{display:inline-flex;align-self:flex-start;margin-top:18px;padding:8px 10px;border:1px solid var(--line);text-decoration:none;color:var(--text);font-size:.68rem;letter-spacing:.1em}
-.mother-door:hover,.mother-door:active{background:var(--hover)}
-.subdoors{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:16px}
-.subdoors a{display:flex;justify-content:space-between;gap:12px;padding:13px 14px;border:1px solid var(--line);text-decoration:none;color:inherit;background:var(--bg);font-size:.8rem}
+.subdoors{margin-top:18px;border-top:1px solid var(--line)}
+.subdoors a{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:15px 0;border-bottom:1px solid var(--line);text-decoration:none;color:inherit;background:transparent;font-size:.8rem}
 .subdoors a:hover,.subdoors a:active{background:var(--hover)}
 .subdoors small{color:var(--muted);letter-spacing:.1em}
-@media(max-width:620px){header{padding-top:5vh}h1{font-size:clamp(2.6rem,13.5vw,4.6rem);letter-spacing:-.055em}.archive-caption{display:block}.archive-caption span{display:block;margin-top:3px}.grid{grid-template-columns:1fr}.card{min-height:180px}.card:nth-child(2){border-top:0!important}.muther{grid-column:auto;min-height:0;padding-bottom:18px}.card h2{margin-top:8px}.desc{padding-top:18px}.muther .desc{padding-top:16px}.subdoors{grid-template-columns:1fr}}
+@media(max-width:620px){header{padding-top:5vh}h1{font-size:clamp(2.6rem,13.5vw,4.6rem);letter-spacing:-.055em}.archive-caption{display:block}.archive-caption span{display:block;margin-top:3px}.grid{grid-template-columns:1fr}.card{min-height:180px}.card:nth-child(2){border-top:0!important}.muther{grid-column:auto;min-height:0;padding-bottom:18px}.card h2{margin-top:8px}.desc{padding-top:18px}.muther .desc{padding-top:16px}}
 </style>
 </head>
 <body>
@@ -60,7 +58,6 @@ a.card:hover,a.card:active{background:var(--hover)}
 </a>
 <section class="card muther">
 <h2>MU/TH/UR</h2><div class="desc">共享採礦母機。媒文化與端點星是她目前掛載的兩個工作艙。</div>
-<a class="mother-door" href="../">OPEN CENTRAL SYSTEM</a>
 <div class="subdoors"><a href="../uncultured/"><span>媒文化</span><small>UNCULTURED</small></a><a href="../terminus/"><span>端點星</span><small>TERMINUS</small></a></div>
 </section>
 <a class="card" href="../dazibao/">
