@@ -20,7 +20,6 @@ header{padding:6vh 0 28px;border-bottom:1px solid var(--text)}
 .kicker{font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
 h1{font-weight:500;font-size:clamp(2.7rem,12vw,6.8rem);line-height:.92;letter-spacing:-.05em;margin:16px 0 12px;max-width:100%;overflow-wrap:anywhere}
 .zh{margin-top:18px;font-size:1.04rem;letter-spacing:.18em}
-.intro{margin-top:11px;max-width:35rem;color:var(--muted);font-size:.84rem;line-height:1.7}
 .archive-chart{margin-top:28px;border-bottom:1px solid var(--text);padding-bottom:28px}
 .archive-chart img{display:block;width:100%;height:auto;border:1px solid var(--line)}
 .archive-caption{display:flex;justify-content:space-between;gap:18px;margin-top:9px;color:var(--muted);font-size:.64rem;line-height:1.45;letter-spacing:.08em;text-transform:uppercase}
@@ -38,15 +37,6 @@ a.card:hover,a.card:active{background:var(--hover)}
 .subdoors a{display:flex;justify-content:space-between;gap:12px;padding:13px 14px;border:1px solid var(--line);text-decoration:none;color:inherit;background:var(--bg);font-size:.8rem}
 .subdoors a:hover,.subdoors a:active{background:var(--hover)}
 .subdoors small{color:var(--muted);letter-spacing:.1em}
-.public-wall,.mystery-files{margin-top:28px;border-top:1px solid var(--text);padding-top:14px}
-.wall-label{font-size:.66rem;letter-spacing:.18em;color:var(--muted);margin-bottom:10px}
-.wall-link{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);padding:14px 16px;background:var(--bg)}
-.wall-link:hover,.wall-link:active{background:var(--hover)}
-.wall-title{font-size:1.2rem;letter-spacing:.06em}
-.wall-note{font-size:.72rem;color:var(--muted);margin-top:6px;line-height:1.5}
-.mystery-files .wall-link{padding:22px 20px}.mystery-files .wall-title{font-size:clamp(2rem,8vw,4rem);letter-spacing:.02em}.mystery-files .wall-note{max-width:34rem;margin-top:10px}
-footer{padding-top:20px;color:var(--muted);font-size:.68rem;line-height:1.55}
-.seal{letter-spacing:.1em;text-transform:uppercase}
 @media(max-width:620px){header{padding-top:5vh}h1{font-size:clamp(2.6rem,13.5vw,4.6rem);letter-spacing:-.055em}.archive-caption{display:block}.archive-caption span{display:block;margin-top:3px}.grid{grid-template-columns:1fr}.card{min-height:180px}.card:nth-child(2){border-top:0!important}.muther{grid-column:auto;min-height:0;padding-bottom:18px}.card h2{margin-top:8px}.desc{padding-top:18px}.muther .desc{padding-top:16px}.subdoors{grid-template-columns:1fr}}
 </style>
 </head>
@@ -73,20 +63,16 @@ footer{padding-top:20px;color:var(--muted);font-size:.68rem;line-height:1.55}
 <a class="mother-door" href="../">OPEN CENTRAL SYSTEM</a>
 <div class="subdoors"><a href="../uncultured/"><span>媒文化</span><small>UNCULTURED</small></a><a href="../terminus/"><span>端點星</span><small>TERMINUS</small></a></div>
 </section>
+<a class="card" href="../dazibao/">
+<h2>大字報</h2><div class="desc">島上的公告、短訊與對外張貼。</div>
+</a>
+<a class="card" href="./mystery-files/">
+<h2>蓬萊神秘檔案</h2><div class="desc">島上真假難辨、來源可疑、尚無法分類的事件與材料。進入檔案庫查看各集。</div>
+</a>
+<section class="card">
+<h2>文憑工廠</h2><div class="desc">新建中。</div>
+</section>
 </main>
-<section class="public-wall" aria-label="Public wall">
-<div class="wall-label">PUBLIC WALL · 公共牆</div>
-<a class="wall-link" href="../dazibao/">
-<div class="wall-title">大字報</div><div class="wall-note">島上的公告、短訊與對外張貼。</div>
-</a>
-</section>
-<section class="mystery-files" aria-label="Penglai Mystery Files">
-<div class="wall-label">PENGLAI MYSTERY FILES</div>
-<a class="wall-link" href="./mystery-files/">
-<div class="wall-title">蓬萊神秘檔案</div><div class="wall-note">島上真假難辨、來源可疑、尚無法分類的事件與材料。進入檔案庫查看各集。</div>
-</a>
-</section>
-<footer><span class="seal">DIPLOMA MILL · 文憑工廠（新建中）</span></footer>
 </div>
 </body>
 </html>
