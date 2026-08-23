@@ -1,0 +1,37 @@
+{
+  "time": "2026-08-23 16:24 +08:00",
+  "phase": "mining-only",
+  "uncultured": {
+    "patrol": "紅米手機照片資料夾仍為既有 31 件批次；本輪未發現建立或修改時間晚於 2026-08-21 的新增影像。",
+    "samples": [
+      {
+        "id": "1AVlijcbh2KJqnp3ztl0yMKckJs1BX-yL",
+        "title": "mmexport1748674267113.jpg",
+        "status": "sampled",
+        "ore": "直幅室內影像，以連續拱門形成強烈中軸透視；中央是一台白黑配色服務型機器人／導覽機，背後圓形黑色裝置被環形暖光包圍，形成近似『眼睛／日蝕』的視覺中心。地面為高對比幾何磁磚，機器人底部與兩側牆面出現綠色光。暫記視覺特徵：拱門套框／中央對稱／機器人／圓形背光／幾何地坪／暖色室內＋綠色機械光／儀式性軸線。僅作視覺礦樣，不做作品或理論判斷。"
+      }
+    ],
+    "dedupeNote": "visual-mining.json 顯示 31 件既有材料，其中至少 mmexport1777098203018.jpg、IMG_20260512_114608.jpg、MVIMG_20260614_101414.jpg 已有既往取樣標記；本輪避開這些既知取樣。"
+  },
+  "terminus": {
+    "visited": [
+      {
+        "id": "1gtHc6wFEuD-a489hjZMQp9hrRfxJ8n1z",
+        "title": "縉紳化的問題意識.docx",
+        "status": "mined",
+        "ore": "2018 工作筆記把 gentrification 的問題意識整理為迫遷、階級替代、都市先鋒／frontier、商品化欲望、rent gap、disinvestment 與『不搬家的權利』等一組概念。特別保留兩個候選線索：一是『urban pioneers/frontiers』作為開發者自我正當化的敘事；二是工人階級在文獻中退到後台後成為中產想像中的『鬼魅它者』。此輪只列為 2018 候選礦層，不與其他鬼／frontier／迫遷材料統合。"
+      },
+      {
+        "id": "0B6kekeEVEPHjenJ1MmgtUlBlSWc",
+        "title": "Red-Light-District-Historic-Preservation-and-Anti-Gentrification-Movement-in-Taipei_Yo_20160915.docx",
+        "status": "mined",
+        "ore": "2016 英文／中英混合工作稿把文萌樓與周邊土地的百年歷史追溯到殖民地房地產開發、土地測量與產權形成，並使用『disciplinary modernization』『landed property capitalism』『casino capitalism』等語彙；稿中多次記錄尚待查證的問題與田野線索，例如文萌樓起造年代、日資開發商與台灣銀行關係、土地由農地轉建地的制度過程。先列候選礦層：殖民測量／產權化／跨國房地產／性產業空間／文化資產／未解土地鏈條；此輪不與既有金融化或鬼的礦脈統合。"
+      }
+    ],
+    "duplicateNote": "搜尋命中兩份同名『縉紳化的問題意識.docx』（ids 1gtHc6wFEuD-a489hjZMQp9hrRfxJ8n1z 與 11rh5-3dUi0_7sZaQQkU48-R0ifl9BQM4），檔案大小同為 18798 bytes、建立時間相差約一天；本輪只讀其中一份，另一份暫列可能重複版本，避免重複採礦。",
+    "blindExcavation": "本輪 purposeful drilling 以 gentrification／都市更新相關舊稿為主，少量 blind excavation 轉入 2016 文萌樓反縉紳化工作稿。另搜尋到大量外部參考 PDF、政策資料與既有最終稿，未逐份讀取。"
+  },
+  "sensitiveData": "巡查中未分析、未索引任何銀行／金融帳號、登入憑證、密碼、驗證碼、身分證明、稅務資料或其他高度敏感個資。",
+  "refining": "deferred",
+  "note": "本輪嚴格停留於第一階段採礦：不做冶煉、比較、對撞、感染、雜交、用途判斷或總理論統合。mother-state.json 體積較大且讀取輸出截斷，因此未直接改寫大型 state；本輪以獨立 mother-runs JSON 保存，供後續去重與累積。"
+}
