@@ -1,0 +1,74 @@
+{
+  "runAt": "2026-08-24 07:17 +08:00",
+  "engine": "Mother",
+  "vessel": "Nostromo",
+  "phase": "mining-only",
+  "rules": {
+    "refining": false,
+    "comparison": false,
+    "collision": false,
+    "infection": false,
+    "hybridization": false,
+    "useJudgment": false
+  },
+  "stateRead": {
+    "motherState": true,
+    "visualMining": true,
+    "latestPriorRun": "mother-runs/2026-08-24-0621.json"
+  },
+  "uncultured": {
+    "sourceFolderId": "104Dpvr-q8xD1t1Hlw3KVSSGcJDCbcOIF",
+    "folderScanCount": 31,
+    "newSincePriorInventory": 0,
+    "samples": [
+      {
+        "id": "12VmDFk8HbVhEwnigjh5iIsAEGKjxZdLX",
+        "title": "wx_camera_1779792627476.jpg",
+        "status": "sampled-existing-unseen",
+        "ore": "直幅近距離餐桌殘食照：深灰色圓盤占據大部分畫面，右中為切開或咬開的粉紅色肉類／香腸狀食物，左下殘留少量橘色醬汁米飯；一雙粉紅色筷子斜跨盤面，上方橘色桌面另有一支模糊的紅白筆狀物。構圖非常靠近食物，餐盤邊緣形成大弧線，焦點集中於右中肉塊，背景與上方物件明顯失焦。只保存礦樣，不做作品、理論或用途判斷。"
+      }
+    ],
+    "possibleSeries": [
+      "吃到一半／餐後殘食的近距離記錄（僅列候選系列）",
+      "日常餐具與零散食物殘留（僅列候選視覺特徵）",
+      "大面積圓盤弧線加偏置食物主體（僅列候選構圖特徵）",
+      "前景清晰、桌面背景物件失焦的手機近拍（僅列候選視覺特徵）"
+    ],
+    "dedupeNote": "資料夾本輪仍為 31 件，未見較 06:21 巡礦新增或修改。12VmDFk8HbVhEwnigjh5iIsAEGKjxZdLX 在 visual-mining.json 中仍標為待分析，且 GitHub 累積紀錄中未命中其 ID，因此抽為本輪單一既有未分析礦樣。"
+  },
+  "terminus": {
+    "purposefulDrilling": [
+      {
+        "id": "1oupzbv-s7hg05M2cefda783pL5VHsneH",
+        "title": "30340懂經的我.md",
+        "status": "newly-visited-candidate-ore",
+        "candidateLayer": "diamond-sutra-recognition-authority-position",
+        "observations": [
+          "材料在第十三分三十二相段落中，把問題拆成法名／作品權威、說法者位置權威、可見形象／認證標誌三種不同層次，並強調不能靠可辨認的身相保證『見如來』。",
+          "文本明確區分『佛』與『如來』在語境中的位置：前者貼近具體說法現場，後者被處理為說法者、保證者或稱號位置；同時反覆出現『位置』『保證』『標誌』『辨認』等用語。",
+          "材料把第五分與第十三分視為非單純重複：前者處理身相能否成為安住處，後者在法名、說法位置之後再處理可見形象這條退路。",
+          "本輪只把『辨認／認證』『位置權威』『佛／如來稱呼切換』『重複但焦點位移』列為候選文字礦層，不判斷其與其他研究或影像材料的關係。"
+        ]
+      }
+    ],
+    "blindExcavation": [
+      {
+        "id": "1HQ4SP6bjNBM6bNxjhGu26jBdQGD7gZTw",
+        "title": "《24小時》演出時間與空間規劃.docx",
+        "status": "newly-opened-special-material-candidate-ore",
+        "candidateLayer": "twenty-four-hour-public-action-space-programming",
+        "observations": [
+          "這份舊企劃把一場公共行動完整編排成 24 小時時間表：吊車每小時更換一組人並報時、呈現 24 個進行中的社會議題，參與者可用大聲公或大字報表達訴求。",
+          "夜間 18:00–06:00 設計把事件文字與照片投影到富邦大樓牆面，文件把建築外牆直接當成與外界互動的公共顯示面。",
+          "活動把短講、音樂、劇場、舞蹈、紀錄片、部落表演、免費早餐與大量社運／倡議團體嵌入不同時段與空間區域，並明確處理 22:00 後降噪、插電／不插電與場地分區。",
+          "本輪只列為特殊舊材料礦層：24 小時節律、報時、吊掛人體、牆面投影、大字報、多團體併置、空間／音量／媒介分區；不與既有政治、都市、展演或網站工作做比較。"
+        ]
+      }
+    ],
+    "sensitiveSkipped": [],
+    "note": "本輪只保存材料本身可見的概念、用語、結構與特殊形式，不做跨年代統合、理論比較、冶煉或用途判斷。"
+  },
+  "sensitiveData": "未分析、索引或保存銀行／金融帳號、登入憑證、密碼、驗證碼、身分證明、稅務資料或其他高度敏感個資。",
+  "refining": "deferred",
+  "note": "本輪嚴格停留於第一階段採礦；大型 state 檔僅作去重參考，本輪狀態保存於獨立 mother-runs JSON。"
+}
