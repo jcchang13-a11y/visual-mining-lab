@@ -25,7 +25,7 @@ jobs:
         run: |
           git config user.name "immortalia-image-bot"
           git config user.email "actions@users.noreply.github.com"
-          git add immortalia/immortalia-map.jpg .image-upload || true
+          git add -A -- immortalia/immortalia-map.jpg .image-upload
           if git diff --cached --quiet; then
             echo "No changes"
             exit 0
