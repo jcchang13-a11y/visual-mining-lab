@@ -1,0 +1,31 @@
+name: Image pipeline test
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'image-pipeline-test/source.b64'
+
+permissions:
+  contents: write
+
+jobs:
+  decode:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Decode image
+        shell: bash
+        run: |
+          base64 --decode image-pipeline-test/source.b64 > image-pipeline-test/test.png
+          file image-pipeline-test/test.png
+          test "$(head -c 8 image-pipeline-test/test.png | xxd -p)" = "89504e470d0a1a0a"
+      - name: Commit decoded image
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add image-pipeline-test/test.png
+          git commit -m 'Decode image pipeline test'
+          git push
