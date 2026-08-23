@@ -23,9 +23,19 @@ h1{font-weight:500;font-size:clamp(2.7rem,12vw,6.8rem);line-height:.92;letter-sp
 .island-lore,.island-now{font-size:.92rem;line-height:1.7;max-width:42rem;color:#333}
 .island-lore{margin:24px 0 0}
 .island-now{margin:20px 0 0}
-.archive-chart{margin-top:28px;border-bottom:1px solid var(--text);padding-bottom:28px}
-.archive-chart img{display:block;width:100%;height:auto;border:1px solid var(--line)}
+.archive-chart,.satire-chart{margin-top:28px;border-bottom:1px solid var(--text);padding-bottom:28px}
+.archive-chart img,.satire-chart img{display:block;width:100%;height:auto;border:1px solid var(--line)}
 .archive-caption{display:flex;justify-content:space-between;gap:18px;margin-top:9px;color:var(--muted);font-size:.64rem;line-height:1.45;letter-spacing:.08em;text-transform:uppercase}
+.map-zoom-trigger{display:block;width:100%;padding:0;border:0;background:transparent;cursor:zoom-in}
+.zoom-viewer{position:fixed;inset:0;z-index:9999;display:none;background:rgba(0,0,0,.95);color:#fff}
+.zoom-viewer.open{display:block}
+.zoom-stage{position:absolute;inset:0;overflow:hidden;touch-action:none;cursor:grab}
+.zoom-stage.dragging{cursor:grabbing}
+.zoom-image{position:absolute;left:50%;top:50%;max-width:none;max-height:none;transform-origin:center center;user-select:none;-webkit-user-drag:none;will-change:transform}
+.zoom-controls{position:fixed;top:max(12px,env(safe-area-inset-top));right:12px;z-index:10001;display:flex;gap:7px}
+.zoom-controls button{width:42px;height:42px;border:1px solid rgba(255,255,255,.48);border-radius:50%;background:rgba(10,10,10,.72);color:#fff;font:500 1.25rem/1 Arial,sans-serif}
+.zoom-controls button:active{background:#222}
+.zoom-hint{position:fixed;left:50%;bottom:max(14px,env(safe-area-inset-bottom));z-index:10001;transform:translateX(-50%);padding:7px 10px;background:rgba(10,10,10,.68);font-size:.65rem;letter-spacing:.08em;white-space:nowrap}
 .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:0;border-left:1px solid var(--text);margin-top:28px}
 .card{display:flex;flex-direction:column;min-height:220px;padding:20px 19px;text-decoration:none;color:inherit;border-right:1px solid var(--text);border-bottom:1px solid var(--text);background:var(--bg)}
 .card:nth-child(-n+2){border-top:1px solid var(--text)}
@@ -42,7 +52,7 @@ a.card:hover,a.card:active{background:var(--hover)}
 .subdoor-title{display:block;font-size:.88rem;line-height:1.4}
 .subdoors small{display:block;margin-top:5px;color:var(--muted);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase}
 .subdoor-desc{display:block;margin-top:7px;color:var(--muted);font-size:.75rem;line-height:1.5}
-@media(max-width:620px){header{padding-top:5vh}h1{font-size:clamp(2.2rem,11.5vw,4.6rem);letter-spacing:-.065em;white-space:nowrap;overflow-wrap:normal;word-break:normal}.archive-caption{display:block}.archive-caption span{display:block;margin-top:3px}.grid{grid-template-columns:1fr}.card{min-height:180px}.card:nth-child(2){border-top:0!important}.muther{grid-column:auto;min-height:0;padding-bottom:18px}.card h2{margin-top:8px}.desc{padding-top:18px}.muther .desc{padding-top:16px}}
+@media(max-width:620px){header{padding-top:5vh}h1{font-size:clamp(2.2rem,11.5vw,4.6rem);letter-spacing:-.065em;white-space:nowrap;overflow-wrap:normal;word-break:normal}.archive-caption{display:block}.archive-caption span{display:block;margin-top:3px}.grid{grid-template-columns:1fr}.card{min-height:180px}.card:nth-child(2){border-top:0!important}.muther{grid-column:auto;min-height:0;padding-bottom:18px}.card h2{margin-top:8px}.desc{padding-top:18px}.muther .desc{padding-top:16px}.zoom-hint{font-size:.58rem}}
 </style>
 </head>
 <body>
@@ -56,6 +66,12 @@ a.card:hover,a.card:active{background:var(--hover)}
 <section class="archive-chart" aria-label="Historical chart of Immortalia">
 <img src="./immortalia-map.jpg" alt="古航海圖中的蓬萊仙島 Insula Immortalium">
 <div class="archive-caption"><span>ARCHIVAL CHART · INSULA IMMORTALIUM</span><span>EARLY MODERN MARITIME RECORD</span></div>
+</section>
+<section class="satire-chart" aria-label="Contemporary chart of the Strait of Hormuz">
+<button class="map-zoom-trigger" id="mapZoomTrigger" type="button" aria-label="放大荷姆茲海峽諷刺古地圖">
+<img src="./immortalia-hormuz.webp" alt="荷姆茲海峽諷刺古航海圖">
+</button>
+<div class="archive-caption"><span>CURRENT AFFAIRS SUPPLEMENT · FRETUM HORMUZ · 2026</span><span>TAP / CLICK TO ENLARGE</span></div>
 </section>
 <p class="island-now">現在書、礦場、大棚、檔案與工廠也都在這裡。</p>
 <main class="grid" aria-label="Immortalia projects">
@@ -83,5 +99,69 @@ a.card:hover,a.card:active{background:var(--hover)}
 </section>
 </main>
 </div>
+
+<div class="zoom-viewer" id="zoomViewer" role="dialog" aria-modal="true" aria-label="地圖放大檢視">
+<div class="zoom-stage" id="zoomStage">
+<img class="zoom-image" id="zoomImage" src="./immortalia-hormuz.webp" alt="放大的荷姆茲海峽諷刺古航海圖">
+</div>
+<div class="zoom-controls">
+<button type="button" id="zoomOut" aria-label="縮小">−</button>
+<button type="button" id="zoomReset" aria-label="重設大小">↺</button>
+<button type="button" id="zoomIn" aria-label="放大">＋</button>
+<button type="button" id="zoomClose" aria-label="關閉">×</button>
+</div>
+<div class="zoom-hint">雙指縮放 · 拖曳移動 · 滾輪縮放</div>
+</div>
+
+<script>
+(()=>{
+const trigger=document.getElementById('mapZoomTrigger');
+const viewer=document.getElementById('zoomViewer');
+const stage=document.getElementById('zoomStage');
+const img=document.getElementById('zoomImage');
+const closeBtn=document.getElementById('zoomClose');
+const plusBtn=document.getElementById('zoomIn');
+const minusBtn=document.getElementById('zoomOut');
+const resetBtn=document.getElementById('zoomReset');
+let scale=1,minScale=1,maxScale=8,x=0,y=0;
+const pointers=new Map();
+let dragStart=null,pinchStart=null;
+function clamp(v,a,b){return Math.min(b,Math.max(a,v))}
+function render(){img.style.transform=`translate(-50%,-50%) translate(${x}px,${y}px) scale(${scale})`}
+function fit(){
+if(!img.naturalWidth||!img.naturalHeight)return;
+minScale=Math.min((window.innerWidth-24)/img.naturalWidth,(window.innerHeight-24)/img.naturalHeight);
+maxScale=Math.max(minScale*8,2);
+scale=minScale;x=0;y=0;render();
+}
+function openViewer(){viewer.classList.add('open');document.body.style.overflow='hidden';requestAnimationFrame(fit)}
+function closeViewer(){viewer.classList.remove('open');document.body.style.overflow='';pointers.clear();dragStart=null;pinchStart=null}
+function zoomBy(factor){scale=clamp(scale*factor,minScale,maxScale);render()}
+trigger.addEventListener('click',openViewer);
+closeBtn.addEventListener('click',closeViewer);
+plusBtn.addEventListener('click',()=>zoomBy(1.35));
+minusBtn.addEventListener('click',()=>zoomBy(1/1.35));
+resetBtn.addEventListener('click',fit);
+window.addEventListener('resize',()=>{if(viewer.classList.contains('open'))fit()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&viewer.classList.contains('open'))closeViewer()});
+stage.addEventListener('wheel',e=>{e.preventDefault();zoomBy(Math.exp(-e.deltaY*.0015))},{passive:false});
+stage.addEventListener('dblclick',()=>{if(scale>minScale*1.4)fit();else zoomBy(2)});
+stage.addEventListener('pointerdown',e=>{
+stage.setPointerCapture(e.pointerId);pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});stage.classList.add('dragging');
+if(pointers.size===1){dragStart={px:e.clientX,py:e.clientY,x,y}}
+else if(pointers.size===2){const p=[...pointers.values()];pinchStart={dist:Math.hypot(p[1].x-p[0].x,p[1].y-p[0].y),mx:(p[0].x+p[1].x)/2,my:(p[0].y+p[1].y)/2,scale,x,y}}
+});
+stage.addEventListener('pointermove',e=>{
+if(!pointers.has(e.pointerId))return;
+pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});
+if(pointers.size===1&&dragStart){x=dragStart.x+(e.clientX-dragStart.px);y=dragStart.y+(e.clientY-dragStart.py);render()}
+else if(pointers.size>=2){const p=[...pointers.values()].slice(0,2);const dist=Math.hypot(p[1].x-p[0].x,p[1].y-p[0].y);const mx=(p[0].x+p[1].x)/2,my=(p[0].y+p[1].y)/2;if(!pinchStart)pinchStart={dist,mx,my,scale,x,y};scale=clamp(pinchStart.scale*(dist/pinchStart.dist),minScale,maxScale);x=pinchStart.x+(mx-pinchStart.mx);y=pinchStart.y+(my-pinchStart.my);render()}
+});
+function pointerEnd(e){pointers.delete(e.pointerId);if(pointers.size===0){dragStart=null;pinchStart=null;stage.classList.remove('dragging')}else if(pointers.size===1){const p=[...pointers.values()][0];dragStart={px:p.x,py:p.y,x,y};pinchStart=null}}
+stage.addEventListener('pointerup',pointerEnd);
+stage.addEventListener('pointercancel',pointerEnd);
+if(img.complete)fit();else img.addEventListener('load',fit);
+})();
+</script>
 </body>
 </html>
