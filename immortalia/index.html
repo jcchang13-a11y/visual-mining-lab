@@ -20,6 +20,9 @@ header{padding:6vh 0 28px;border-bottom:1px solid var(--text)}
 .kicker{font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
 h1{font-weight:500;font-size:clamp(2.7rem,12vw,6.8rem);line-height:.92;letter-spacing:-.05em;margin:16px 0 12px;max-width:100%;overflow-wrap:anywhere}
 .zh{margin-top:18px;font-size:1.04rem;letter-spacing:.18em}
+.island-lore,.island-now{font-size:.92rem;line-height:1.7;max-width:42rem;color:#333}
+.island-lore{margin:24px 0 0}
+.island-now{margin:20px 0 0}
 .archive-chart{margin-top:28px;border-bottom:1px solid var(--text);padding-bottom:28px}
 .archive-chart img{display:block;width:100%;height:auto;border:1px solid var(--line)}
 .archive-caption{display:flex;justify-content:space-between;gap:18px;margin-top:9px;color:var(--muted);font-size:.64rem;line-height:1.45;letter-spacing:.08em;text-transform:uppercase}
@@ -34,9 +37,11 @@ a.card:hover,a.card:active{background:var(--hover)}
 .muther .desc{margin-top:0;padding-top:18px}
 .muther-main{display:block;text-decoration:none;color:inherit}
 .subdoors{margin-top:18px;border-top:1px solid var(--line)}
-.subdoors a{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:15px 0;border-bottom:1px solid var(--line);text-decoration:none;color:inherit;background:transparent;font-size:.8rem}
+.subdoors a{display:block;padding:15px 0;border-bottom:1px solid var(--line);text-decoration:none;color:inherit;background:transparent}
 .subdoors a:hover,.subdoors a:active{background:var(--hover)}
-.subdoors small{color:var(--muted);letter-spacing:.1em}
+.subdoor-title{display:block;font-size:.88rem;line-height:1.4}
+.subdoors small{display:block;margin-top:5px;color:var(--muted);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase}
+.subdoor-desc{display:block;margin-top:7px;color:var(--muted);font-size:.75rem;line-height:1.5}
 @media(max-width:620px){header{padding-top:5vh}h1{font-size:clamp(2.6rem,13.5vw,4.6rem);letter-spacing:-.055em}.archive-caption{display:block}.archive-caption span{display:block;margin-top:3px}.grid{grid-template-columns:1fr}.card{min-height:180px}.card:nth-child(2){border-top:0!important}.muther{grid-column:auto;min-height:0;padding-bottom:18px}.card h2{margin-top:8px}.desc{padding-top:18px}.muther .desc{padding-top:16px}}
 </style>
 </head>
@@ -47,29 +52,34 @@ a.card:hover,a.card:active{background:var(--hover)}
 <h1>IMMORTALIA</h1>
 <div class="zh">蓬萊仙島</div>
 </header>
+<p class="island-lore">《史記》說，渤海中有三座神山。蓬萊是其中一座——仙人與不死之藥，都在那裡。</p>
 <section class="archive-chart" aria-label="Historical chart of Immortalia">
 <img src="./immortalia-map.jpg" alt="古航海圖中的蓬萊仙島 Insula Immortalium">
 <div class="archive-caption"><span>ARCHIVAL CHART · INSULA IMMORTALIUM</span><span>EARLY MODERN MARITIME RECORD</span></div>
 </section>
+<p class="island-now">現在書、礦場、大棚、檔案與工廠也都在這裡。</p>
 <main class="grid" aria-label="Immortalia projects">
 <a class="card" href="https://gangchibao-universe.pages.dev/">
-<h2>剛吃飽</h2><div class="en">THE AFTER</div><div class="desc">《金剛經》閱讀、寫作與出版。從佛陀剛吃飽那一刻開始失控。</div>
+<h2>剛吃飽</h2><div class="en">THE AFTER</div><div class="desc">一場《金剛經》閱讀事件。</div>
 </a>
 <a class="card" href="../mycelium/">
-<h2>香菇大棚</h2><div class="en">THE SHED</div><div class="desc">我們不訓練 AI，我們養菇。進棚看看香菇自己長成什麼。</div>
+<h2>香菇大棚</h2><div class="en">THE SHED</div><div class="desc">讓新智慧出菇成新社會。</div>
 </a>
 <section class="card muther">
-<a class="muther-main" href="../"><h2>你老母卡好大水餃</h2><div class="en">MU/TH/UR</div><div class="desc">全島共用的採礦母機。名字來自《異形》，中文則完全不是。</div></a>
-<div class="subdoors"><a href="../uncultured/"><span>媒文化</span><small>UNCULTURED · 影像採礦；順便沒文化</small></a><a href="../terminus/"><span>端點星</span><small>TERMINUS · 在宇宙盡頭挖概念</small></a></div>
+<a class="muther-main" href="../"><h2>你老母卡好大水餃</h2><div class="en">MU/TH/UR</div><div class="desc">全島共用的採礦母機。《異形》的太空船 AI 主機 MU/TH/UR，到了蓬萊諧音成老母。</div></a>
+<div class="subdoors">
+<a href="../uncultured/"><span class="subdoor-title">01　媒文化</span><small>UNCULTURED · IMAGE MINE</small><span class="subdoor-desc">挖視覺語法的根。</span></a>
+<a href="../terminus/"><span class="subdoor-title">02　端點星</span><small>TERMINUS · CONCEPT MINE</small><span class="subdoor-desc">《基地》裡的銀河邊陲。向一切思想慣性重拳出擊。</span></a>
+</div>
 </section>
 <a class="card" href="../dazibao/">
 <h2>我的一張大字報</h2><div class="en">DAZIBAO</div><div class="desc">有事就貼。至於炮打哪個司令部——SMASH ALL HQs。</div>
 </a>
 <a class="card" href="./mystery-files/">
-<h2>蓬萊神秘檔案</h2><div class="en">THE IMMORTALIA FILES</div><div class="desc">真假難辨的怪材料一律建檔。沒有 FBI，只有蓬萊仙島。</div>
+<h2>蓬萊神秘檔案</h2><div class="en">THE IMMORTALIA FILES</div><div class="desc">THE TRUTH IS OUT THERE</div>
 </a>
 <section class="card">
-<h2>文憑工廠</h2><div class="en">DIPLOMA MILL</div><div class="desc">島上的出版工廠。既然有人拿它罵野雞大學，我們就拿來出書。</div>
+<h2>文憑工廠</h2><div class="en">DIPLOMA MILL</div><div class="desc">文憑只能擦屎，我們只用知識掀翻桌子。</div>
 </section>
 </main>
 </div>
