@@ -1,18 +1,74 @@
 {
-  "updatedAt": null,
-  "day": null,
+  "updatedAt": "2026-08-23",
+  "day": "v41",
   "counts": {
-    "historical": null,
-    "active": null,
-    "dormant": null,
-    "revivedToday": null
+    "historical": "180 worlds",
+    "active": "≈2100/world",
+    "dormant": "—",
+    "revivedToday": 0
   },
-  "hotspots": [],
+  "report": {
+    "headline": "香菇已經會造符號，但符號還沒有變成權力。",
+    "summary": "詞彙會出生、傳播、被保存與遺忘；但目前沒有可靠證據顯示，一個小詞彙事件足以改寫整條歷史。v41 的判斷不是失敗，而是找到目前模型的邊界：詞已有生命史，尚未取得足夠的制度因果力。"
+  },
+  "hotspots": [
+    {
+      "id": "SEED-41012",
+      "role": "值得追蹤的世界",
+      "life": "11 surviving words",
+      "text": "11 個詞仍存活，但最大單一詞只覆蓋約 5% agents。它不像語言霸權，更像大量地方俚語同時存在。"
+    },
+    {
+      "id": "REPEAT-01",
+      "role": "跨世界規律",
+      "life": "stable",
+      "text": "詞很容易出生，但很難變成共同語彙。有限注意力、局部互動與遺忘會吃掉大部分小符號。"
+    },
+    {
+      "id": "NEGATIVE-01",
+      "role": "否定結果",
+      "life": "important",
+      "text": "微小詞彙 seed 沒有造成穩健的制度、資源或分層分叉。目前詞彙事件的長期歷史岔路率為 0%。"
+    },
+    {
+      "id": "WATCH-01",
+      "role": "菇農觀測",
+      "life": "open",
+      "text": "正在盯三件事：詞能不能因『有用』而留下；詞義會不會漂移；什麼時候詞會被 archive、規則或資源分配引用，真正變成制度語言。"
+    }
+  ],
   "revived": [],
-  "patrols": [],
-  "operator": {
-    "label": "ChatGPT 操作室",
-    "url": "https://chatgpt.com/"
+  "patrols": [
+    {
+      "time": "v41 · 詞彙擴散與歷史岔路",
+      "summary": "180 條平行世界線，每世界約 2100 agent-equivalent。預植群體為 0：不先塞民族、階級、政黨。小詞彙事件尚未產生穩健的長期歷史分叉；出棚判斷：繼續養。"
+    },
+    {
+      "time": "成熟度觀測",
+      "summary": "歷史依賴 91%；有限注意力 84%；自適應性格 84%；節點生死 80%；詞彙生態 68%；陌生 soil 韌性 53%；語言制度因果力僅 5%。"
+    },
+    {
+      "time": "實驗邊界",
+      "summary": "agent 只有局部視野；外部觀測站可以看整體統計，但不把全知回灌給它們。結果是模擬觀測，不宣稱為現實社會預測。"
+    }
+  ],
+  "metrics": {
+    "version": "v41",
+    "theme": "詞彙擴散與歷史岔路",
+    "parallelWorlds": 180,
+    "agentsPerWorld": "≈2100",
+    "preplantedGroups": 0,
+    "lexicalLongTermDivergence": "0%",
+    "releaseDecision": "繼續養",
+    "maturity": {
+      "historyDependence": "91%",
+      "limitedAttention": "84%",
+      "adaptivePersonality": "84%",
+      "nodeLifeDeath": "80%",
+      "lexicalEcology": "68%",
+      "institutionalLanguageCausality": "5%",
+      "foreignSoilResilience": "53%"
+    }
   },
-  "status": "awaiting-sync"
+  "status": "live"
 }
