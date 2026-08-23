@@ -13,7 +13,8 @@ header{border-bottom:6px solid #b51e23;padding-bottom:28px;margin-bottom:36px}
 .universe span{display:block;font-size:9px;letter-spacing:.22em;margin-top:2px}
 .cn{font-size:13px;color:#7c6d5d;letter-spacing:.12em;margin:0 0 15px 2px}
 .poster{display:grid;grid-template-columns:minmax(0,1fr) 15%;grid-template-rows:auto 1fr;width:100%;max-width:700px;background:#e9dfc7;border:1px solid #a89e87;box-shadow:0 2px 0 rgba(80,65,45,.18);overflow:hidden;transform:rotate(-.35deg)}
-.slogan{grid-column:1;grid-row:1;background:#df3027;color:#28342e;padding:12px 16px 10px;font-family:Impact,"Arial Black","Helvetica Neue",Arial,sans-serif;font-size:clamp(30px,8.2vw,58px);font-weight:900;line-height:.92;letter-spacing:.015em;white-space:nowrap;-webkit-text-stroke:1.4px #ece2c8;text-shadow:1px 1px 0 #ece2c8,-1px 1px 0 #ece2c8,1px -1px 0 #ece2c8,-1px -1px 0 #ece2c8}
+.slogan{grid-column:1;grid-row:1;position:relative;overflow:hidden;background:#df3027;color:#eee4c9;padding:12px 14px 11px 18px;font-family:"Arial Narrow",Impact,"Arial Black","Helvetica Neue",Arial,sans-serif;font-size:clamp(24px,6.2vw,44px);font-weight:900;line-height:.9;letter-spacing:-.015em;white-space:nowrap;text-transform:uppercase;text-shadow:3px 3px 0 #28342e;transform:skewX(-3deg);transform-origin:left center}
+.slogan::after{content:"";position:absolute;right:-22px;top:-26px;width:42px;height:110px;background:#28342e;transform:rotate(17deg)}
 .art{grid-column:1;grid-row:2;position:relative;background:#e9dfc7;overflow:hidden;min-height:120px}
 .art img{display:block;width:100%;height:auto;filter:saturate(.94) contrast(1.02)}
 .imprint{position:absolute;left:49%;top:18%;transform:translateX(-50%) rotate(-1deg);padding:3px 9px;background:rgba(235,225,199,.96);color:#4b4a40;font:600 clamp(7px,1.55vw,11px)/1 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;letter-spacing:.25em;white-space:nowrap}
@@ -25,7 +26,7 @@ header{border-bottom:6px solid #b51e23;padding-bottom:28px;margin-bottom:36px}
 .item a{display:block;color:#17130f;text-decoration:none;font-size:clamp(25px,7vw,38px);line-height:1.35;margin-top:8px}
 .item a:hover{color:#a3161b}
 footer{margin-top:44px;color:#756b5e;font-size:12px}
-@media(max-width:520px){.poster{grid-template-columns:minmax(0,1fr) 16%}.slogan{padding:9px 10px 8px;-webkit-text-stroke:.8px #ece2c8}.rail{padding:8px 3px}}
+@media(max-width:520px){.poster{grid-template-columns:minmax(0,1fr) 16%}.slogan{padding:10px 9px 9px 12px;font-size:clamp(22px,6vw,32px);text-shadow:2px 2px 0 #28342e}.rail{padding:8px 3px}}
 </style>
 </head>
 <body><main class="wrap"><header><div class="universe">蓬萊仙島<span>IMMORTALIA</span></div><div class="cn">我的一張大字報</div><div class="poster"><div class="slogan">SMASH ALL HQs</div><div class="art"><img id="poster-img" alt="革命宣傳畫風格插圖：紅旗、人物與兩個跌倒的小人"><div class="imprint">IMMORTALIA</div></div><div class="rail"><div class="rail-word" aria-label="DAZIBAO"><span>D</span><span>A</span><span>Z</span><span>I</span><span>B</span><span>A</span><span>O</span></div></div></div><div class="tagline">有事才貼，沒事空著。</div></header><section class="item"><div class="date">2026.08.21</div><a href="./2026-08-21-ai-world.html">我最近好像不小心造出了一個小宇宙</a></section><footer>沒有留言區。</footer></main><script>Promise.all([1,2,3,4,5].map(n=>fetch(`./assets/poster-${n}.txt`).then(r=>r.text()))).then(parts=>{document.getElementById('poster-img').src='data:image/webp;base64,'+parts.join('')});</script></body>
