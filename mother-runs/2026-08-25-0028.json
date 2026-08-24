@@ -1,0 +1,41 @@
+{
+  "runAt": "2026-08-25 00:28 +08:00",
+  "phase": "mining-only",
+  "rules": {"refining": false, "comparison": false, "useJudgment": false},
+  "uncultured": {
+    "sourceFolderId": "104Dpvr-q8xD1t1Hlw3KVSSGcJDCbcOIF",
+    "patrol": "completed metadata pass",
+    "newSinceLatestVisibleUpload": 0,
+    "latestVisibleUploadAt": "2026-08-21T12:45:37.216Z",
+    "note": "No newly uploaded images surfaced in the current folder page. Existing images remain candidate material; no theory or work formation performed."
+  },
+  "terminus": {
+    "patrol": "purposeful + blind metadata drilling",
+    "newCandidateLayers": [
+      {
+        "id": "1TZTAsXYtQ64uE0ygUqAXjBCUY5coBwx4",
+        "title": "寫在最後面.docx",
+        "status": "candidate-ore",
+        "marker": "failure / self-set success criteria / repeated failure language; retain only as a candidate return-problem"
+      },
+      {
+        "id": "1Kxpq9_BvChJfHs0Q6w6sZRf0ENRXRRlu",
+        "title": "寫在最後面 (NEW).docx",
+        "status": "candidate-ore-variant",
+        "marker": "possible version/duplicate family around the same closing text; requires later dedupe/content check"
+      },
+      {
+        "id": "1RoE0bXsMH_OZqh0PBF27hbV3_rd4FeYC",
+        "title": "合併版 (第一版).docx",
+        "status": "candidate-ore-container",
+        "marker": "large 2018 compilation surfaced adjacent to the 2017 Yin text; mark as possible source container, no synthesis"
+      }
+    ],
+    "blindExcavation": {
+      "query": "都市",
+      "result": "mostly secondary/reference PDFs rather than obvious user-authored ore; marked seen, not promoted"
+    }
+  },
+  "sensitiveData": "skipped by rule",
+  "stateWrite": "append-only mother-runs record; mother-state.json left untouched to avoid unsafe large-state replacement"
+}
