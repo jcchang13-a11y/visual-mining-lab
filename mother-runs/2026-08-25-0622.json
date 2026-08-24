@@ -1,0 +1,37 @@
+{
+  "runAt": "2026-08-25 06:22 +08:00",
+  "phase": "mining-only",
+  "rules": {"noRefining": true, "noUseJudgment": true, "sensitiveDataSkipped": true},
+  "uncultured": {
+    "sourceFolderId": "104Dpvr-q8xD1t1Hlw3KVSSGcJDCbcOIF",
+    "inventoryObservation": "Current folder browse returned the same 2026-08-21 upload cohort already represented in visual-mining.json; no post-2026-08-21 image creation/update surfaced in this patrol.",
+    "newImages": 0,
+    "candidateObservations": [
+      "Existing unseen pool remains substantial; no theory or artwork inference made.",
+      "Filename/time adjacency around MVIMG_20260614_* remains a candidate series marker only.",
+      "Messenger_creation_0701C150-1817-4677-90FA-0D8006E17E93.jpeg remains in folder inventory; treat as inventory item unless separately sampled."
+    ]
+  },
+  "terminus": {
+    "visitedThisRun": [
+      {"id":"1qKSrc5jk-3ODpTiyZftMepr0J6MK78Uf","title":"模式语言与泉州社造｜30 活动节点 ACTIVITY NODES.pdf","status":"candidate-ore"},
+      {"id":"1taOBsJlvA441227eVVq6O_Is7g4NSqWpRTrYQMp8P5Q","title":"菌絲工作節點｜髒的社會理論 Dirty Social Theory","status":"candidate-ore"},
+      {"id":"1poqGYleyhoJcZBQD2mviD57TD-_g78nd","title":"剛吃飽_第五輪綱領.md","status":"candidate-ore"},
+      {"id":"1i0NPQyy8C7Z0uHlnXtHcc9QpKCh70iWu","title":"剛吃飽_第五輪插畫總表.md","status":"candidate-ore"},
+      {"id":"1FeoHdtQ5vxLWXo8WH-mO7MwUUyaQ5EfW","title":"P_數學公式.md","status":"candidate-ore"}
+    ],
+    "candidateStrata": [
+      "pattern-language / activity-node material",
+      "dirty-social-theory working node",
+      "Diamond Sutra fifth-round structural outline",
+      "Diamond Sutra illustration inventory as a separate visual-textual material layer",
+      "mathematical-formula note surfaced by blind excavation around pattern-language search"
+    ],
+    "duplicateSignals": [
+      "30310B 我的經（如來）.md appears as two Drive IDs with identical displayed size and source-modified timestamp.",
+      "30260B 我在持經（眾生）.md appears as two Drive IDs with identical displayed size and source-modified timestamp.",
+      "30340懂經的我.md appears as two Drive IDs with identical displayed size and source-modified timestamp."
+    ],
+    "note": "Candidate strata only. No comparison, synthesis, cross-linking, theoretical integration, or use judgment performed. Broad '都市' search was dominated by third-party reference PDFs and was not promoted to ore without stronger evidence."
+  }
+}
