@@ -1,0 +1,41 @@
+{
+  "runAt": "2026-08-25 01:23 +08:00",
+  "phase": "mining-only",
+  "rules": {
+    "refining": false,
+    "crossComparison": false,
+    "useJudgment": false,
+    "sensitiveData": "skip"
+  },
+  "uncultured": {
+    "sourceFolderId": "104Dpvr-q8xD1t1Hlw3KVSSGcJDCbcOIF",
+    "newSincePriorLedger": [],
+    "observedInventory": "Current folder query returns the same established image population; newest visible upload remains Messenger_creation_0701C150-1817-4677-90FA-0D8006E17E93.jpeg created 2026-08-21T12:45:37Z, already represented in Mother state.",
+    "sampling": "No additional sample forced this round because no new image was detected.",
+    "dedupeNote": "No deletion performed. Filename/time clusters (especially MVIMG_20260614_*) remain candidate series only; content-level identity was not asserted from metadata alone."
+  },
+  "terminus": {
+    "purposefulDrilling": [
+      {
+        "id": "1dCJX17904OrpBVGgVjO1W783KC9CnSlI",
+        "title": "1022論文計劃書審查規定.docx",
+        "hit": "症頭",
+        "status": "candidate-ore",
+        "note": "Search surfaced an apparently unvisited document on the existing symptom vocabulary. Retain only as a candidate layer; no conceptual integration performed."
+      }
+    ],
+    "blindExcavation": [
+      {
+        "id": "1gmQv4Rj5nLhUYx99bUHZiDpr4gRdBfus",
+        "title": "由公共利益探討都市更新法令調整機制-以台北市為例.pdf",
+        "status": "candidate-context",
+        "note": "Urban-renewal search surfaced a contextual research item not present in the current visited ledger. Logged as context candidate only; not summarized."
+      }
+    ],
+    "duplicatesOrAdministrativeNoise": [
+      "Duplicate copies of 張榮哲-1062博士班申請學位考試.pdf surfaced under separate Drive IDs; treated as duplicate/administrative material and not promoted.",
+      "CV/résumé files surfaced in ghost keyword search and were skipped as non-ore administrative material."
+    ]
+  },
+  "statePolicy": "Large mother-state.json left untouched this round; append-only run file used to avoid unsafe overwrite and preserve mining history."
+}
