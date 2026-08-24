@@ -1,154 +1,192 @@
 {
-  "generated_at": "2026-08-24T10:03:37.691864+00:00",
-  "documents_scanned": 20,
+  "schema": 2,
+  "generated_at": "2026-08-24T10:16:05.891542+00:00",
+  "documents_scanned": 21,
   "relations": [
     {
-      "a": "index.html",
-      "b": "terminus/index.html",
-      "why": "共享概念／語彙：mother、nostromo、terminus、current、google、system",
-      "score": 70,
-      "kind": "關聯發現"
-    },
-    {
-      "a": "index.html",
-      "b": "immortalia/index.html",
-      "why": "共享概念／語彙：immortalia、uncultured、terminus、mine、蓬萊仙島、concept",
-      "score": 57,
-      "kind": "關聯發現"
-    },
-    {
-      "a": "index.html",
-      "b": "uncultured/index.html",
-      "why": "共享概念／語彙：mother、nostromo、uncultured、媒文化、抽樣、聚類",
-      "score": 51,
-      "kind": "關聯發現"
-    },
-    {
-      "a": "immortalia/index.html",
-      "b": "immortalia/notes/liezi-tangwen.html",
-      "why": "共享概念／語彙：immortalia、textual、其中有五山焉、實惟無底之谷、渤海之東不知、有大壑焉",
-      "score": 48,
-      "kind": "關聯發現"
-    },
-    {
-      "a": "uncultured/index.html",
-      "b": "terminus/index.html",
-      "why": "共享概念／語彙：mother、nostromo、自動巡礦",
-      "score": 40,
-      "kind": "關聯發現"
-    },
-    {
-      "a": "gangchibao/index.html",
-      "b": "immortalia/notes/liezi-tangwen.html",
-      "why": "共享概念／語彙：immortalia、剛吃飽、notes、text、金剛經、原文",
-      "score": 38,
-      "kind": "關聯發現"
-    },
-    {
-      "a": "gangchibao/index.html",
-      "b": "immortalia/index.html",
-      "why": "共享概念／語彙：immortalia、diploma、image、mill、金剛經、剛吃飽",
-      "score": 33,
-      "kind": "關聯發現"
-    },
-    {
-      "a": "immortalia/owner/index.html",
-      "b": "immortalia/owner/scans/index.html",
-      "why": "共享概念／語彙：immortalia、console、owner、關聯發現、能力配對、掃描紀錄",
-      "score": 32,
-      "kind": "關聯發現"
-    },
-    {
-      "a": "dazibao/index.html",
-      "b": "immortalia/index.html",
-      "why": "共享概念／語彙：immortalia、dazibao、我的一張大字、蓬萊仙島",
-      "score": 28,
-      "kind": "關聯發現"
-    },
-    {
-      "a": "mycelium/index.html",
-      "b": "immortalia/index.html",
-      "why": "共享概念／語彙：immortalia、shed、香菇大棚、蓬萊仙島",
-      "score": 24,
-      "kind": "關聯發現"
-    },
-    {
-      "a": "index.html",
-      "b": "mycelium/index.html",
-      "why": "共享概念／語彙：immortalia、system、蓬萊仙島",
-      "score": 22,
-      "kind": "關聯發現"
-    },
-    {
+      "id": "rel-024",
       "a": "dazibao/2026-08-21-ai-world.html",
       "b": "immortalia/notes/liezi-tangwen.html",
-      "why": "共享概念／語彙：剛吃飽、金剛經、在一起、來的、敘事",
-      "score": 19,
-      "kind": "關聯發現"
+      "why": "共享較具辨識度的概念／語彙：沒有、不是、可能、什麼、剛吃飽、所以",
+      "score": 130,
+      "confidence": "高",
+      "kind": "關聯發現",
+      "route": "review_link",
+      "next_step": "已自動記錄；高信心項目送交島主決定是否建立正式交叉連結。"
     },
     {
+      "id": "rel-004",
+      "a": "index.html",
+      "b": "immortalia/index.html",
+      "why": "共享較具辨識度的概念／語彙：mine、concept、蓬萊仙島、uncultured、terminus、視覺語法",
+      "score": 101,
+      "confidence": "高",
+      "kind": "關聯發現",
+      "route": "review_link",
+      "next_step": "已自動記錄；高信心項目送交島主決定是否建立正式交叉連結。"
+    },
+    {
+      "id": "rel-033",
       "a": "immortalia/index.html",
+      "b": "immortalia/notes/liezi-tangwen.html",
+      "why": "共享較具辨識度的概念／語彙：實惟無底之谷、其中有五山焉、textual、知幾億萬、渤海之東、海之東不",
+      "score": 90,
+      "confidence": "高",
+      "kind": "關聯發現",
+      "route": "review_link",
+      "next_step": "已自動記錄；高信心項目送交島主決定是否建立正式交叉連結。"
+    },
+    {
+      "id": "rel-039",
+      "a": "immortalia/mystery-files/001-benjiao.html",
+      "b": "immortalia/notes/liezi-tangwen.html",
+      "why": "共享較具辨識度的概念／語彙：剛吃飽、蓬萊、不是、name、可能、什麼",
+      "score": 83,
+      "confidence": "高",
+      "kind": "關聯發現",
+      "route": "review_link",
+      "next_step": "已自動記錄；高信心項目送交島主決定是否建立正式交叉連結。"
+    },
+    {
+      "id": "rel-005",
+      "a": "index.html",
       "b": "terminus/index.html",
-      "why": "共享概念／語彙：terminus、mine、金剛經、端點星、剛吃飽",
-      "score": 19,
-      "kind": "關聯發現"
+      "why": "共享較具辨識度的概念／語彙：terminus、leads、drive、研究材料、尚未解決、ends",
+      "score": 82,
+      "confidence": "高",
+      "kind": "關聯發現",
+      "route": "review_link",
+      "next_step": "已自動記錄；高信心項目送交島主決定是否建立正式交叉連結。"
     },
     {
-      "a": "immortalia/index.html",
-      "b": "immortalia/owner/index.html",
-      "why": "共享概念／語彙：immortalia、島主請進、媒文化",
-      "score": 19,
-      "kind": "關聯發現"
+      "id": "rel-023",
+      "a": "dazibao/2026-08-21-ai-world.html",
+      "b": "immortalia/mystery-files/001-benjiao.html",
+      "why": "共享較具辨識度的概念／語彙：剛吃飽、不是、形成、究竟、可能、什麼",
+      "score": 79,
+      "confidence": "高",
+      "kind": "關聯發現",
+      "route": "review_link",
+      "next_step": "已自動記錄；高信心項目送交島主決定是否建立正式交叉連結。"
     },
     {
+      "id": "rel-001",
+      "a": "index.html",
+      "b": "uncultured/index.html",
+      "why": "共享較具辨識度的概念／語彙：uncultured、把值得冶、得冶煉的、值得冶煉、的視覺、把值得",
+      "score": 70,
+      "confidence": "高",
+      "kind": "關聯發現",
+      "route": "review_link",
+      "next_step": "已自動記錄；高信心項目送交島主決定是否建立正式交叉連結。"
+    },
+    {
+      "id": "rel-018",
+      "a": "dazibao/index.html",
+      "b": "immortalia/index.html",
+      "why": "共享較具辨識度的概念／語彙：dazibao、的一張大、我的一張、張大字報、一張大字、蓬萊仙島",
+      "score": 70,
+      "confidence": "高",
+      "kind": "關聯發現",
+      "route": "review_link",
+      "next_step": "已自動記錄；高信心項目送交島主決定是否建立正式交叉連結。"
+    },
+    {
+      "id": "rel-041",
+      "a": "immortalia/owner/index.html",
+      "b": "immortalia/owner/feedback/index.html",
+      "why": "共享較具辨識度的概念／語彙：修改後再試、繼續實驗、批准量產、島主回饋、掃描紀錄、掃描",
+      "score": 68,
+      "confidence": "高",
+      "kind": "關聯發現",
+      "route": "review_link",
+      "next_step": "已自動記錄；高信心項目送交島主決定是否建立正式交叉連結。"
+    },
+    {
+      "id": "rel-006",
+      "a": "index.html",
+      "b": "immortalia/mystery-files/001-benjiao.html",
+      "why": "共享較具辨識度的概念／語彙：蓬萊仙島、材料、新材料、出現的、現的、新材",
+      "score": 61,
+      "confidence": "高",
+      "kind": "關聯發現",
+      "route": "review_link",
+      "next_step": "已自動記錄；高信心項目送交島主決定是否建立正式交叉連結。"
+    },
+    {
+      "id": "rel-020",
+      "a": "dazibao/2026-08-21-ai-world.html",
+      "b": "immortalia/index.html",
+      "why": "共享較具辨識度的概念／語彙：的一張大、我的一張、張大字報、一張大字、的一張、我的一",
+      "score": 60,
+      "confidence": "高",
+      "kind": "關聯發現",
+      "route": "review_link",
+      "next_step": "已自動記錄；高信心項目送交島主決定是否建立正式交叉連結。"
+    },
+    {
+      "id": "rel-031",
       "a": "immortalia/index.html",
       "b": "immortalia/mystery-files/001-benjiao.html",
-      "why": "共享概念／語彙：蓬萊神秘檔案、files、蓬萊仙島、剛吃飽",
-      "score": 18,
-      "kind": "關聯發現"
+      "why": "共享較具辨識度的概念／語彙：蓬萊仙島、蓬萊神秘檔案、剛吃飽、社會、所有、一切",
+      "score": 58,
+      "confidence": "高",
+      "kind": "關聯發現",
+      "route": "review_link",
+      "next_step": "已自動記錄；高信心項目送交島主決定是否建立正式交叉連結。"
     },
     {
-      "a": "index.html",
-      "b": "gangchibao/index.html",
-      "why": "共享概念／語彙：immortalia、image",
-      "score": 17,
-      "kind": "關聯發現"
+      "id": "rel-029",
+      "a": "gangchibao/index.html",
+      "b": "immortalia/notes/liezi-tangwen.html",
+      "why": "共享較具辨識度的概念／語彙：剛吃飽、固定、之後、這裡先、金剛經、閱讀",
+      "score": 57,
+      "confidence": "高",
+      "kind": "關聯發現",
+      "route": "review_link",
+      "next_step": "已自動記錄；高信心項目送交島主決定是否建立正式交叉連結。"
     },
     {
-      "a": "immortalia/index.html",
-      "b": "immortalia/mystery-files/index.html",
-      "why": "共享概念／語彙：immortalia、蓬萊神秘檔案、files",
-      "score": 17,
-      "kind": "關聯發現"
+      "id": "rel-034",
+      "a": "terminus/index.html",
+      "b": "immortalia/mystery-files/001-benjiao.html",
+      "why": "共享較具辨識度的概念／語彙：material、研究、剛吃飽、主要、長期、寫作",
+      "score": 57,
+      "confidence": "高",
+      "kind": "關聯發現",
+      "route": "review_link",
+      "next_step": "已自動記錄；高信心項目送交島主決定是否建立正式交叉連結。"
     },
     {
-      "a": "index.html",
-      "b": "dazibao/index.html",
-      "why": "共享概念／語彙：immortalia、蓬萊仙島",
-      "score": 16,
-      "kind": "關聯發現"
-    },
-    {
+      "id": "rel-012",
       "a": "mycelium/index.html",
-      "b": "dazibao/index.html",
-      "why": "共享概念／語彙：immortalia、蓬萊仙島",
-      "score": 16,
-      "kind": "關聯發現"
+      "b": "dazibao/2026-08-21-ai-world.html",
+      "why": "共享較具辨識度的概念／語彙：chatgpt、活動、人工、下來的、看的、的是",
+      "score": 56,
+      "confidence": "高",
+      "kind": "關聯發現",
+      "route": "review_link",
+      "next_step": "已自動記錄；高信心項目送交島主決定是否建立正式交叉連結。"
     },
     {
-      "a": "index.html",
-      "b": "immortalia/owner/index.html",
-      "why": "共享概念／語彙：immortalia、媒文化",
-      "score": 15,
-      "kind": "關聯發現"
+      "id": "rel-026",
+      "a": "gangchibao/index.html",
+      "b": "immortalia/index.html",
+      "why": "共享較具辨識度的概念／語彙：diploma、文憑工廠、mill、金剛經、剛吃飽",
+      "score": 55,
+      "confidence": "高",
+      "kind": "關聯發現",
+      "route": "review_link",
+      "next_step": "已自動記錄；高信心項目送交島主決定是否建立正式交叉連結。"
     }
   ],
   "capabilities": [
     {
+      "id": "cap-001",
       "system": "mycelium",
-      "source": "mycelium/index.html",
+      "source": "dazibao/2026-08-21-ai-world.html",
       "target": "《剛吃飽》／《金剛經》",
-      "target_example": "dazibao/2026-08-21-ai-world.html",
+      "target_example": "terminus/index.html",
       "can": [
         "閱讀代理",
         "比較閱讀",
@@ -156,13 +194,18 @@
         "異質解讀",
         "影片閱讀"
       ],
-      "kind": "能力配對"
+      "kind": "能力配對",
+      "confidence": "中",
+      "route": "experiment_candidate",
+      "next_step": "先做一輪小型閱讀／模擬實驗，不改正文、不公開發布。",
+      "status": "可跑一輪小實驗"
     },
     {
+      "id": "cap-002",
       "system": "mycelium",
-      "source": "mycelium/index.html",
+      "source": "dazibao/2026-08-21-ai-world.html",
       "target": "蓬萊文本與神秘檔案",
-      "target_example": "index.html",
+      "target_example": "immortalia/index.html",
       "can": [
         "閱讀代理",
         "比較閱讀",
@@ -170,13 +213,18 @@
         "異質解讀",
         "影片閱讀"
       ],
-      "kind": "能力配對"
+      "kind": "能力配對",
+      "confidence": "中",
+      "route": "experiment_candidate",
+      "next_step": "先做一輪小型閱讀／模擬實驗，不改正文、不公開發布。",
+      "status": "可跑一輪小實驗"
     },
     {
+      "id": "cap-003",
       "system": "mycelium",
-      "source": "mycelium/index.html",
+      "source": "dazibao/2026-08-21-ai-world.html",
       "target": "網站公開輸出",
-      "target_example": "dazibao/2026-08-21-ai-world.html",
+      "target_example": "mycelium/index.html",
       "can": [
         "閱讀代理",
         "比較閱讀",
@@ -184,164 +232,235 @@
         "異質解讀",
         "影片閱讀"
       ],
-      "kind": "能力配對"
+      "kind": "能力配對",
+      "confidence": "中",
+      "route": "approval_required",
+      "next_step": "先做一輪小型閱讀／模擬實驗，不改正文、不公開發布。",
+      "status": "待島主批准"
     },
     {
+      "id": "cap-004",
       "system": "uncultured",
       "source": "index.html",
       "target": "《剛吃飽》／《金剛經》",
-      "target_example": "dazibao/2026-08-21-ai-world.html",
+      "target_example": "terminus/index.html",
       "can": [
         "視覺轉譯",
         "插圖候選",
         "素材採礦",
         "視覺語法生成"
       ],
-      "kind": "能力配對"
+      "kind": "能力配對",
+      "confidence": "中",
+      "route": "experiment_candidate",
+      "next_step": "先產生一小組視覺方向或候選，不直接全量製作。",
+      "status": "可跑一輪小實驗"
     },
     {
+      "id": "cap-005",
       "system": "uncultured",
       "source": "index.html",
       "target": "蓬萊文本與神秘檔案",
-      "target_example": "index.html",
+      "target_example": "immortalia/index.html",
       "can": [
         "視覺轉譯",
         "插圖候選",
         "素材採礦",
         "視覺語法生成"
       ],
-      "kind": "能力配對"
+      "kind": "能力配對",
+      "confidence": "中",
+      "route": "experiment_candidate",
+      "next_step": "先產生一小組視覺方向或候選，不直接全量製作。",
+      "status": "可跑一輪小實驗"
     },
     {
+      "id": "cap-006",
       "system": "uncultured",
       "source": "index.html",
       "target": "網站公開輸出",
-      "target_example": "dazibao/2026-08-21-ai-world.html",
+      "target_example": "mycelium/index.html",
       "can": [
         "視覺轉譯",
         "插圖候選",
         "素材採礦",
         "視覺語法生成"
       ],
-      "kind": "能力配對"
+      "kind": "能力配對",
+      "confidence": "中",
+      "route": "approval_required",
+      "next_step": "先產生一小組視覺方向或候選，不直接全量製作。",
+      "status": "待島主批准"
     },
     {
+      "id": "cap-007",
       "system": "terminus",
       "source": "index.html",
       "target": "《剛吃飽》／《金剛經》",
-      "target_example": "dazibao/2026-08-21-ai-world.html",
+      "target_example": "terminus/index.html",
       "can": [
         "概念抽象",
         "理論對照",
         "問題重構",
         "概念壓力測試"
       ],
-      "kind": "能力配對"
+      "kind": "能力配對",
+      "confidence": "中",
+      "route": "experiment_candidate",
+      "next_step": "先對一個明確問題做一輪概念壓力測試。",
+      "status": "可跑一輪小實驗"
     },
     {
+      "id": "cap-008",
       "system": "terminus",
       "source": "index.html",
       "target": "蓬萊文本與神秘檔案",
-      "target_example": "index.html",
+      "target_example": "immortalia/index.html",
       "can": [
         "概念抽象",
         "理論對照",
         "問題重構",
         "概念壓力測試"
       ],
-      "kind": "能力配對"
+      "kind": "能力配對",
+      "confidence": "中",
+      "route": "experiment_candidate",
+      "next_step": "先對一個明確問題做一輪概念壓力測試。",
+      "status": "可跑一輪小實驗"
     },
     {
+      "id": "cap-009",
       "system": "terminus",
       "source": "index.html",
       "target": "網站公開輸出",
-      "target_example": "dazibao/2026-08-21-ai-world.html",
+      "target_example": "mycelium/index.html",
       "can": [
         "概念抽象",
         "理論對照",
         "問題重構",
         "概念壓力測試"
       ],
-      "kind": "能力配對"
+      "kind": "能力配對",
+      "confidence": "中",
+      "route": "approval_required",
+      "next_step": "先對一個明確問題做一輪概念壓力測試。",
+      "status": "待島主批准"
     },
     {
+      "id": "cap-010",
       "system": "dazibao",
-      "source": "dazibao/index.html",
+      "source": "immortalia/index.html",
       "target": "《剛吃飽》／《金剛經》",
-      "target_example": "dazibao/2026-08-21-ai-world.html",
+      "target_example": "terminus/index.html",
       "can": [
         "對外摘要",
         "短文輸出",
         "議題發布",
         "宣傳轉譯"
       ],
-      "kind": "能力配對"
+      "kind": "能力配對",
+      "confidence": "中",
+      "route": "approval_required",
+      "next_step": "可先生成草稿；任何公開發布仍需島主批准。",
+      "status": "待島主批准"
     },
     {
+      "id": "cap-011",
       "system": "dazibao",
-      "source": "dazibao/index.html",
-      "target": "蓬萊文本與神秘檔案",
-      "target_example": "index.html",
-      "can": [
-        "對外摘要",
-        "短文輸出",
-        "議題發布",
-        "宣傳轉譯"
-      ],
-      "kind": "能力配對"
-    },
-    {
-      "system": "dazibao",
-      "source": "dazibao/index.html",
+      "source": "immortalia/index.html",
       "target": "網站公開輸出",
-      "target_example": "dazibao/2026-08-21-ai-world.html",
+      "target_example": "mycelium/index.html",
       "can": [
         "對外摘要",
         "短文輸出",
         "議題發布",
         "宣傳轉譯"
       ],
-      "kind": "能力配對"
+      "kind": "能力配對",
+      "confidence": "中",
+      "route": "approval_required",
+      "next_step": "可先生成草稿；任何公開發布仍需島主批准。",
+      "status": "待島主批准"
     },
     {
+      "id": "cap-012",
       "system": "immortalia",
-      "source": "index.html",
+      "source": "immortalia/index.html",
       "target": "《剛吃飽》／《金剛經》",
-      "target_example": "dazibao/2026-08-21-ai-world.html",
+      "target_example": "terminus/index.html",
       "can": [
         "世界觀容器",
         "跨文本索引",
         "材料歸檔",
         "敘事化包裝"
       ],
-      "kind": "能力配對"
+      "kind": "能力配對",
+      "confidence": "中",
+      "route": "experiment_candidate",
+      "next_step": "可先建立候選索引與交叉連結建議；不自動改正文。",
+      "status": "可跑一輪小實驗"
     },
     {
+      "id": "cap-013",
       "system": "immortalia",
-      "source": "index.html",
-      "target": "蓬萊文本與神秘檔案",
-      "target_example": "index.html",
-      "can": [
-        "世界觀容器",
-        "跨文本索引",
-        "材料歸檔",
-        "敘事化包裝"
-      ],
-      "kind": "能力配對"
-    },
-    {
-      "system": "immortalia",
-      "source": "index.html",
+      "source": "immortalia/index.html",
       "target": "網站公開輸出",
-      "target_example": "dazibao/2026-08-21-ai-world.html",
+      "target_example": "mycelium/index.html",
       "can": [
         "世界觀容器",
         "跨文本索引",
         "材料歸檔",
         "敘事化包裝"
       ],
-      "kind": "能力配對"
+      "kind": "能力配對",
+      "confidence": "中",
+      "route": "approval_required",
+      "next_step": "可先建立候選索引與交叉連結建議；不自動改正文。",
+      "status": "待島主批准"
     }
   ],
-  "note": "v1 為站內啟發式掃描器：先把管線接通；高階語義判斷之後可再接 LLM。"
+  "actions": {
+    "auto_logged": [],
+    "review_links": [
+      "rel-024",
+      "rel-004",
+      "rel-033",
+      "rel-039",
+      "rel-005",
+      "rel-023",
+      "rel-001",
+      "rel-018",
+      "rel-041",
+      "rel-006",
+      "rel-020",
+      "rel-031",
+      "rel-029",
+      "rel-034",
+      "rel-012",
+      "rel-026"
+    ],
+    "experiment_candidates": [
+      "cap-001",
+      "cap-002",
+      "cap-004",
+      "cap-005",
+      "cap-007",
+      "cap-008",
+      "cap-012"
+    ],
+    "approval_required": [
+      "cap-003",
+      "cap-006",
+      "cap-009",
+      "cap-010",
+      "cap-011",
+      "cap-013"
+    ],
+    "policy": {
+      "auto": "只自動做低風險、可逆的記錄與排隊，不自動改正文、不自動公開發布。",
+      "experiment": "能力配對先跑最小實驗；實際需要外部素材或尚未接上的子系統時，標記為候選，不假裝已執行。",
+      "approval": "公開發布、批量生產、正文修改、刪除與任何有成本的行為，一律等島主批准。"
+    }
+  },
+  "note": "v2 啟發式掃描器：降低共通詞雜訊，加入信心分級與執行路由。高階語義與真正跨系統執行仍需後續服務。"
 }
