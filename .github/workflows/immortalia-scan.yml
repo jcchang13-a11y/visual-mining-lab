@@ -4,6 +4,10 @@ on:
   workflow_dispatch:
   schedule:
     - cron: "0 0 * * 1"
+  push:
+    paths:
+      - "immortalia/owner/scans/scan.py"
+      - ".github/workflows/immortalia-scan.yml"
 
 permissions:
   contents: write
@@ -15,8 +19,25 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Syntax check
+        run: python -m py_compile immortalia/owner/scans/scan.py
+
       - name: Run scanner
         run: python immortalia/owner/scans/scan.py
+
+      - name: Validate result schema
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('immortalia/owner/scans/latest.json')
+          data=json.loads(p.read_text(encoding='utf-8'))
+          assert data.get('schema') == 2
+          assert isinstance(data.get('relations'), list)
+          assert isinstance(data.get('capabilities'), list)
+          assert isinstance(data.get('actions'), dict)
+          print('scan schema ok:', data['documents_scanned'], len(data['relations']), len(data['capabilities']))
+          PY
 
       - name: Commit scan result
         run: |
