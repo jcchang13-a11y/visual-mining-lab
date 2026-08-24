@@ -1,0 +1,73 @@
+{
+  "runAt": "2026-08-24 13:26 +08:00",
+  "engine": "Mother",
+  "vessel": "Nostromo",
+  "phase": "mining-only",
+  "rules": {
+    "refining": false,
+    "comparison": false,
+    "collision": false,
+    "infection": false,
+    "hybridization": false,
+    "useJudgment": false
+  },
+  "stateRead": {
+    "motherState": true,
+    "visualMining": true,
+    "latestPriorRun": "mother-runs/2026-08-24-1222.json"
+  },
+  "uncultured": {
+    "sourceFolderId": "104Dpvr-q8xD1t1Hlw3KVSSGcJDCbcOIF",
+    "folderScanCount": 31,
+    "newSincePriorInventory": 0,
+    "samples": [
+      {
+        "id": "1HmlqCgY8ckDUcyfQFU0CMpOZNRsNdMMH",
+        "title": "MVIMG_20260614_130622.jpg",
+        "status": "sampled-existing-unseen",
+        "ore": "近距離橫幅拍攝一處老式住宅門窗上緣。畫面由深色舊木梁、金屬防盜欄、鋁框窗與花紋窗簾構成；木梁上並置手寫白色門牌樣記號「345」、舊有刮刻字跡，以及一塊紅色有線電視編號／維修牌。整體是住宅構件、私人標記與基礎通訊設施同時留在單一表面的日常痕跡。只保存礦樣，不做作品、理論或用途判斷。"
+      }
+    ],
+    "possibleSeries": [
+      "老住宅門窗、樑柱與表面細節的近距離記錄（僅列候選系列）",
+      "手寫門牌、刮刻字、設備編號等不同年代標記疊在同一建築表面（僅列候選視覺特徵）",
+      "舊木構與後加金屬防盜欄、鋁窗、通訊設備並置（僅列候選視覺特徵）"
+    ],
+    "dedupeNote": "本輪資料夾仍為 31 件，未見較 12:22 巡礦新增或修改。1HmlqCgY8ckDUcyfQFU0CMpOZNRsNdMMH 為 visual-mining.json 既有待分析項，且未出現在上一輪 12:22 抽樣，因此抽為既有未分析礦樣。"
+  },
+  "terminus": {
+    "purposefulDrilling": [
+      {
+        "id": "1EKxaHD-PComehIIUTq6hlntApqevyW6B",
+        "title": "從環境品質面探討都市更新公益性及規劃設計容積獎勵妥適性之研究 -以台北市中山區為例-.pdf",
+        "status": "newly-opened-research-material-candidate-ore",
+        "candidateLayer": "urban-renewal-zoning-bonus-environmental-quality",
+        "observations": [
+          "2009 碩論把都市更新的『公益性』操作成可由環境品質、公共設施與居民需求檢驗的實證問題，而不是只停在法規目標。",
+          "材料直接記錄一種制度落差：更新案件與硬體設施增加，但地區環境品質未必提升；研究因此把容積獎勵項目、地方需求、街廓尺度與分期分區開發列為檢驗與調整項目。",
+          "章節結構另把容積獎勵的學理、法理、實務、評估指標，以及都市公共空間與環境品質標準分開處理。此輪只保存材料語彙與結構，不與既有公共利益、金融化或價值形式礦層比較。"
+        ]
+      }
+    ],
+    "blindExcavation": [
+      {
+        "id": "1cUI1nY9GmGwupO26-GwMPp-rpeq1LmNm",
+        "title": "4-1大稻埕地方產業與故事旅遊(水瓶子).pdf",
+        "status": "newly-opened-special-material-candidate-ore",
+        "candidateLayer": "walking-tour-storytelling-local-industry-practice",
+        "observations": [
+          "2012 簡報把地方導覽拆成一套非常具體的操作流程：設計規劃、查資料、實地勘查、聯繫、宣傳報名、現場器材與簽到、攝影錄影、回收問卷、整理後再貼回網路。",
+          "材料把導覽角色分工、路線圖、現存建築與物件、歷史人物基本資料、室內備案、交通干擾與鄰里安寧等細節都列成實務問題，並穿插二手書店、白色恐怖、男女平權、街道再生等不同主題範例。",
+          "簡報中反覆出現『從生活中發想』『實地勘查挖掘資料』『多利用現存建築、物件引言』等工作語彙。本輪只列為特殊實務材料，不做跨文本統合或用途判斷。"
+        ]
+      }
+    ],
+    "sensitiveSkipped": [
+      "搜尋結果中出現基本背景資料、學經歷參考表、工作坊報名統整、學員資料、電子票等可能含個資的文件，均未打開、未分析、未索引。"
+    ],
+    "note": "本輪只保存材料本身可見的概念、用語、結構與特殊形式，不做跨年代統合、理論比較、冶煉或用途判斷。"
+  },
+  "sensitiveData": "未分析、索引或保存銀行／金融帳號、登入憑證、密碼、驗證碼、身分證明、稅務資料或其他高度敏感個資。",
+  "refining": "deferred",
+  "note": "本輪嚴格停留於第一階段採礦；大型 state 檔僅作去重參考，本輪狀態保存於獨立 mother-runs JSON。"
+}
