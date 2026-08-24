@@ -1,0 +1,74 @@
+{
+  "runAt": "2026-08-24 17:28 +08:00",
+  "engine": "Mother",
+  "vessel": "Nostromo",
+  "phase": "mining-only",
+  "rules": {
+    "refining": false,
+    "comparison": false,
+    "collision": false,
+    "infection": false,
+    "hybridization": false,
+    "useJudgment": false
+  },
+  "stateRead": {
+    "motherState": true,
+    "visualMining": true,
+    "latestPriorRun": "mother-runs/2026-08-24-1621.json"
+  },
+  "uncultured": {
+    "sourceFolderId": "104Dpvr-q8xD1t1Hlw3KVSSGcJDCbcOIF",
+    "inventoryCount": 31,
+    "newSincePriorInventory": 0,
+    "folderStatus": "no newly added or modified image detected after prior patrol",
+    "samples": [
+      {
+        "id": "1cUTxFXfxgkSYpkLzpQKOyJO7k7gGo8OK",
+        "title": "MVIMG_20260614_130442.jpg",
+        "status": "sampled-existing-unseen",
+        "ore": "直幅老住宅巷道影像。主體是一段深灰／黑色磚牆的單層舊宅，木門、石質門框、舊窗、金屬折門與局部青磚貼面並存；屋瓦、後加樓層、白磚新建物與空調設備疊在同一街廓表面。大量電線沿立面水平穿越，牆腳可見排水管、苔痕與潮濕地面。只保存可見材料，不做理論、作品或用途判斷。"
+      }
+    ],
+    "possibleSeries": [
+      "老住宅巷道與連續街屋立面（僅列候選系列）",
+      "舊磚牆／木門／石框與後加磁磚、金屬門、空調並存（僅列候選視覺特徵）",
+      "電線、排水管、潮濕地面與苔痕附著在老建築表面（僅列候選視覺特徵）"
+    ],
+    "dedupeNote": "資料夾 31 張影像均未見較上一輪新增或修改；本輪從 visual-mining.json 的既有待分析項中抽一張，避開上一輪已抽樣的 13fejGl4O9dsrew_XQHF9p6g7RmnzvuRU。"
+  },
+  "terminus": {
+    "purposefulDrilling": [
+      {
+        "id": "1H3lTzv6hK9VRh4CctDOjSYoaL9WvPc0q",
+        "title": "01第一章_緒論.pdf",
+        "status": "newly-opened-research-material-candidate-ore",
+        "candidateLayer": "cultural-heritage-management-preservation-to-management",
+        "observations": [
+          "文本從『保存／保護文化資產』不足以回應時代需求出發，連續追問為何保存、為誰保存、誰負擔保存，以及保存後的資產屬於誰。",
+          "材料把 cultural property 與 cultural heritage 區分，並把文化遺產管理寫成跨考古、建築、歷史、文化經濟、觀光、文化地理、社會學與 GIS 的整合工作。",
+          "研究把古蹟委外經營的『績效』問題放進組織、經營目標、策略與回饋機制，並把是否只追求經濟效益與是否延續文化意義並列為待處理問題。此輪只列候選礦層。"
+        ]
+      }
+    ],
+    "blindExcavation": [
+      {
+        "id": "1GQ4zJGyELIIzujmNfL-O_REx-T0Q6ags",
+        "title": "05第五章 文化遺產管理的動態與變化.pdf",
+        "status": "newly-opened-special-material-candidate-ore",
+        "candidateLayer": "heritage-dynamic-management-change-governance",
+        "observations": [
+          "章節把文化遺產管理的動態因子整理為治理、遺產詮釋與觀光、遺產監控，並指出『價值變化』貫穿多個管理功能。",
+          "文本把變化視為不可停止、只能管理的條件，並把時間變化、場域變化與價值變化一起納入遺產管理。",
+          "治理部分把公部門、利害關係人、非官方組織與傳統社群區分為不同管理類型，並強調合作、委外、監測與實務經驗累積。此輪只保存其材料結構與用語。"
+        ]
+      }
+    ],
+    "sensitiveSkipped": [
+      "搜尋結果中若出現可能含個人名冊、帳務、登入、票券、身份證明、金融或其他高度敏感資訊的檔案，直接跳過，不開啟、不分析、不索引。"
+    ],
+    "note": "本輪只把新讀到的概念、用語、結構與特殊材料列為候選礦層，不做跨年代統合、比較、冶煉或用途判斷。"
+  },
+  "sensitiveData": "未分析、索引或保存銀行／金融帳號、登入憑證、密碼、驗證碼、身分證明、稅務資料或其他高度敏感個資。",
+  "refining": "deferred",
+  "note": "本輪嚴格停留於第一階段採礦；大型 state 檔僅作去重參考，本輪狀態保存於獨立 mother-runs JSON。"
+}
