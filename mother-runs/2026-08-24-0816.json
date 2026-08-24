@@ -1,0 +1,74 @@
+{
+  "runAt": "2026-08-24 08:16 +08:00",
+  "engine": "Mother",
+  "vessel": "Nostromo",
+  "phase": "mining-only",
+  "rules": {
+    "refining": false,
+    "comparison": false,
+    "collision": false,
+    "infection": false,
+    "hybridization": false,
+    "useJudgment": false
+  },
+  "stateRead": {
+    "motherState": true,
+    "visualMining": true,
+    "latestPriorRun": "mother-runs/2026-08-24-0717.json"
+  },
+  "uncultured": {
+    "sourceFolderId": "104Dpvr-q8xD1t1Hlw3KVSSGcJDCbcOIF",
+    "folderScanCount": 31,
+    "newSincePriorInventory": 0,
+    "samples": [
+      {
+        "id": "12Q0mZJR3oFo3MNip6UXCiBL5LoOcIAUx",
+        "title": "MVIMG_20260529_103708.jpg",
+        "status": "sampled-existing-unseen",
+        "ore": "白天人行道旁的大樹近拍；樹幹中央掛著紅框白底警示牌，黃底圖示為蛇，文字為『有蛇出沒 注意安全』。樹上垂落的黑色塑膠條／帶狀物正好壓住蛇圖示上方，與大量氣根、樹皮紋理交纏。背景可見藍色停車標誌、汽車、機車與綠化帶。畫面把人工警示牌、真實樹木與懸垂雜物疊在同一垂直中心。只保存礦樣，不做作品、理論或用途判斷。"
+      }
+    ],
+    "possibleSeries": [
+      "公共警示牌／規訓標示作為畫面主體（僅列候選系列）",
+      "自然物與人工標誌直接疊合（僅列候選視覺特徵）",
+      "文字標示被周遭真實物件遮擋或干擾（僅列候選視覺特徵）",
+      "街道日常中的意外符號組合（僅列候選系列）"
+    ],
+    "dedupeNote": "資料夾本輪仍為 31 件，未見較 07:17 巡礦新增。12Q0mZJR3oFo3MNip6UXCiBL5LoOcIAUx 在 visual-mining.json 中標為待分析，且 mother-state 中未命中其 ID，因此抽為本輪既有未分析礦樣。"
+  },
+  "terminus": {
+    "purposefulDrilling": [
+      {
+        "id": "1poqGYleyhoJcZBQD2mviD57TD-_g78nd",
+        "title": "剛吃飽_第五輪綱領.md",
+        "status": "newly-visited-candidate-ore",
+        "candidateLayer": "gangchibao-work-method-field-movement-contradiction",
+        "observations": [
+          "文件把工作方法從逐行修改改成『全書鋼架控制細節』，並明確分配作者與協作者的工作位置；這本身是一個可獨立保存的方法論材料。",
+          "文本把全書總運動寫成建立位置、拆開位置、阻止讀者躲入新位置，並用慢慢生成／不斷膨脹／快速連打／突然清場描述非對稱速度曲線。",
+          "『矛盾、場、運動』被明確定義成三個操作詞：矛盾不是一般張力；場處理位置與尺度；運動處理轉移、擴大、變形與回返。",
+          "文件另保存『理論與實踐故意錯接』『實踐產生理論、理論改造實踐、實踐再使理論發生矛盾』等方法句。此輪只列為候選礦層，不與其他舊研究統合。"
+        ]
+      }
+    ],
+    "blindExcavation": [
+      {
+        "id": "1lwcJUAFhrMO9DnES5_iNPI7pNvtOfE--",
+        "title": "心願景2.0中萬華.pdf",
+        "status": "newly-opened-special-material-candidate-ore",
+        "candidateLayer": "wanhua-share-vision-micro-public-space-actions",
+        "observations": [
+          "2014 大同萬華『心願景』材料不是單一總體藍圖，而是密集列出微型行動：生活巷弄取新名、大樹下說書館、社區公共廚房、銀髮智庫、夜歸人的新所在、騎樓實驗室／巷弄小客廳、橋下新天地等。",
+          "文件大量把既有城市縫隙轉成具體行動單元，包括學校、廟宇、騎樓、河濱、橋下、傳統市場、產業街區與老人聚集地點。",
+          "材料同時反覆使用導覽、故事、說書、大聲公、工作坊、牆面／街區式資訊傳播等公共表達形式，但本輪只記為特殊形式與用語。",
+          "此輪僅保存『微型公共空間行動』『既有縫隙再命名』『社區敘事／說書』『夜間工作者據點』等候選礦點，不判斷其後續用途。"
+        ]
+      }
+    ],
+    "sensitiveSkipped": [],
+    "note": "本輪只保存材料本身可見的概念、用語、結構與特殊形式，不做跨年代統合、理論比較、冶煉或用途判斷。"
+  },
+  "sensitiveData": "未分析、索引或保存銀行／金融帳號、登入憑證、密碼、驗證碼、身分證明、稅務資料或其他高度敏感個資。",
+  "refining": "deferred",
+  "note": "本輪嚴格停留於第一階段採礦；大型 state 檔僅作去重參考，本輪狀態保存於獨立 mother-runs JSON。"
+}
