@@ -1,0 +1,25 @@
+{
+  "runAt": "2026-08-25 04:29 +08:00",
+  "phase": "mining-only",
+  "rules": {"refine": false, "compare": false, "useJudgment": false},
+  "uncultured": {
+    "sourceFolderId": "104Dpvr-q8xD1t1Hlw3KVSSGcJDCbcOIF",
+    "patrol": "completed",
+    "newSincePriorInventory": 0,
+    "note": "Folder metadata patrol found no images newer than the existing 2026-08-21 inventory. Existing unseen pool remains available for later sparse sampling; no theory or artwork inference performed."
+  },
+  "terminus": {
+    "patrol": "completed",
+    "newModifiedDocumentsSinceState": [
+      {"id":"1OF0GYOjSOLxy-C0M1YG9O8iUfUqmf6YYp57xaP8hDJg","title":"不可抵達之地：蓬萊、桃花源與世界各地的異境想像","status":"candidate-ore-only"}
+    ],
+    "blindExcavationCandidates": [
+      {"id":"1gmQv4Rj5nLhUYx99bUHZiDpr4gRdBfus","title":"由公共利益探討都市更新法令調整機制-以台北市為例.pdf","status":"candidate-unvisited-reference"},
+      {"id":"144mOBmNmluRhd_R-exQ3BcCcWk-IVXZQ","title":"張剛維 以容積移轉進行都市保存之制度與執行－財產權觀點分析.pdf","status":"candidate-unvisited-reference"},
+      {"id":"11sLGBTcefCJEN10vnDd00nBDA01JJ_ba","title":"日治時代之臺北市近代都市計畫（一）—都市計畫之萌芽與展開.pdf","status":"candidate-unvisited-reference"}
+    ],
+    "note": "Candidates recorded only. No cross-linking, comparison, synthesis, or usefulness judgment performed."
+  },
+  "privacy": "Sensitive financial/account/credential/identity/tax materials excluded by rule.",
+  "stateWrite": "append-only mother-runs record; mother-state.json not rewritten"
+}
