@@ -16,7 +16,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Run scanner
-        run: python immor​​talia/owner/scans/scan.py
+        run: python immortalia/owner/scans/scan.py
 
       - name: Commit scan result
         run: |
