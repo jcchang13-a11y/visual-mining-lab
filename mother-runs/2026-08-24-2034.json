@@ -1,0 +1,35 @@
+{
+  "runAt": "2026-08-24 20:34 +08:00",
+  "phase": "mining-only",
+  "vessel": "Nostromo",
+  "rules": {"refine": false, "compare": false, "crossLink": false, "useJudgment": false},
+  "uncultured": {
+    "sourceFolderId": "104Dpvr-q8xD1t1Hlw3KVSSGcJDCbcOIF",
+    "patrol": "completed",
+    "newSincePriorLedger": 0,
+    "note": "Folder metadata patrol found the same 2026-08-21 upload cohort represented in visual-mining.json; no later-created image surfaced in the first provider page. Existing unseen pool remains available for later sampling. No theory/work formation performed."
+  },
+  "terminus": {
+    "patrol": "completed",
+    "candidateLayers": [
+      {"id":"17IG_t2uZyRxMMBCbMJ5-7has0IdQK0dH","title":"我们透过摄影机文字将我们看到的世界变成作品.docx","status":"candidate-ore","reason":"blind excavation hit on 慾望; title itself marks a camera/text/world-to-work formulation; preserve for later mining without synthesis"},
+      {"id":"14gnm84OR2HeGmRh47Kr9GfXo9CHHxIZv","title":"我们透过摄影机文字将我们看到的世界变成作品2.pdf","status":"candidate-ore","reason":"paired/variant artifact surfaced in the same blind excavation; retain as possible version stratum, not yet compared"},
+      {"id":"1r6HOBu4Wk5DXitvwtRRynHq_j6ET7mvL","title":"2026-05-21-1.md","status":"candidate-ore","reason":"recent markdown surfaced on 慾望 search; retain as a contemporary layer for later inspection"}
+    ],
+    "referenceOnly": [
+      "1gmQv4Rj5nLhUYx99bUHZiDpr4gRdBfus",
+      "1EKxaHD-PComehIIUTq6hlntApqevyW6B",
+      "1LQHusDgpaJZqSVwljl31ZVjXBy48FVKb",
+      "1OnnuIlILDHxOVTW3LnXbM5KVkNeOLGun",
+      "1PkPVWCkj9JcymTEUwDgwchS62HAcKq2M",
+      "1x9A6Bkw-rNJNlEWQG9SDT-JtOvvHUJvj",
+      "14t_RFcpKGoWmsHorThGs2ztyfPyh66_p",
+      "144mOBmNmluRhd_R-exQ3BcCcWk-IVXZQ",
+      "1ouE-BSr_WhxGg_ffZWtEbjwpT9Ih67iY",
+      "11sLGBTcefCJEN10vnDd00nBDA01JJ_ba"
+    ],
+    "note": "Urban-renewal search mostly surfaced external/reference PDFs; recorded only as seen/reference material, not promoted to findings. No synthesis performed."
+  },
+  "sensitiveSkip": "No sensitive financial/login/identity/tax material was analyzed or indexed in this run.",
+  "stateWrite": "append-only mother-runs record; mother-state.json intentionally not rewritten"
+}
