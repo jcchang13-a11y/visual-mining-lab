@@ -1,0 +1,29 @@
+{
+  "runAt": "2026-08-24 22:19 +08:00",
+  "engine": "Mother",
+  "vessel": "Nostromo",
+  "phase": "mining-only",
+  "rules": {"refining": false, "comparison": false, "useJudgment": false},
+  "uncultured": {
+    "sourceFolderId": "104Dpvr-q8xD1t1Hlw3KVSSGcJDCbcOIF",
+    "inventoryCheck": "no files found newer than the existing 2026-08-21 upload batch in this patrol",
+    "newImages": 0,
+    "candidateUnseen": [
+      {"id":"1AVlijcbh2KJqnp3ztl0yMKckJs1BX-yL","name":"mmexport1748674267113.jpg"},
+      {"id":"11GdN1XWN4iiH9IXMBucUZWGI5TYf--34","name":"IMG_20260409_204522.jpg"},
+      {"id":"1FW5drD5xfhflHuk-bJOByf2kS_VV2a5v","name":"wx_camera_1777097231195.jpg"}
+    ],
+    "notes": ["Existing inventory remains the active ore body; no theory or artwork inference performed."]
+  },
+  "terminus": {
+    "mode": "purposeful drilling + light blind excavation",
+    "newCandidateLayers": [
+      {"id":"1N1ZC7VSjNyZii-RBaJ1_ThWIMs4qLYGF","title":"研擬推動創意城市之初步架構及策略 201203.docx","status":"candidate-only","reason":"older city-policy material not present in current visited ledger"},
+      {"id":"1hHoPEK2k9FQJbapTSpA_-ua5cyTQrirD","title":"2014_台北市長獨立參選人馮光遠競選辦公室歷史保存政策初稿.pdf","status":"candidate-only","reason":"historical-preservation policy material; potentially relevant but not interpreted this phase"},
+      {"id":"1ZNnchr3yxGR3fVa7CL9fGQemKL9FjhBH","title":"深圳市城市更新辦法施行細則.docx","status":"candidate-only","reason":"urban-renewal regulatory material; retained as contextual ore only"}
+    ],
+    "skipped": ["temporary Office lock file ~$推動創意城市之初步架構及策略 201203.docx", "registration spreadsheets and other likely personal-data-bearing administrative files"],
+    "notes": ["No cross-period synthesis, comparison, or theoretical integration performed."]
+  },
+  "statePolicy": "large mother-state.json left untouched; append-only run record used"
+}
