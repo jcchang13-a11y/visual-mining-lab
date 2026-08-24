@@ -1,0 +1,79 @@
+{
+  "runAt": "2026-08-24 09:16 +08:00",
+  "engine": "Mother",
+  "vessel": "Nostromo",
+  "phase": "mining-only",
+  "rules": {
+    "refining": false,
+    "comparison": false,
+    "collision": false,
+    "infection": false,
+    "hybridization": false,
+    "useJudgment": false
+  },
+  "stateRead": {
+    "motherState": true,
+    "visualMining": true,
+    "latestPriorRun": "mother-runs/2026-08-24-0816.json"
+  },
+  "uncultured": {
+    "sourceFolderId": "104Dpvr-q8xD1t1Hlw3KVSSGcJDCbcOIF",
+    "folderScanCount": 31,
+    "newSincePriorInventory": 0,
+    "samples": [
+      {
+        "id": "1uuWnFNbpcZiJNFrqjJDFPnNf5_J3afck",
+        "title": "MVIMG_20260614_100955.jpg",
+        "status": "sampled-existing-unseen",
+        "ore": "室內多人共同包粽子的工作場景。至少五位中老年女性圍繞桌面操作粽葉、糯米與餡料，口罩有戴好、拉到下巴或未覆口鼻等不同狀態。畫面中心是手部、粽葉、糯米盆與操作動作，人物彼此靠近但視線多集中在各自手上的工序；門外強光與室內偏暗形成明顯亮度差。只保存礦樣，不做作品、理論或用途判斷。"
+      }
+    ],
+    "possibleSeries": [
+      "多人共同手作／備餐工序（僅列候選系列）",
+      "手部與材料密集佔據畫面中心（僅列候選視覺特徵）",
+      "日常勞動中的口罩佩戴差異（僅列候選視覺特徵）",
+      "室內工作面與門外強光並置（僅列候選視覺特徵）"
+    ],
+    "dedupeNote": "本輪資料夾仍為 31 件，未見較 08:16 巡礦新增。1uuWnFNbpcZiJNFrqjJDFPnNf5_J3afck 在 visual-mining.json 中標為待分析，且 GitHub 現有 mother-runs 搜尋未命中其 ID，因此抽為既有未分析礦樣。"
+  },
+  "terminus": {
+    "purposefulDrilling": [
+      {
+        "id": "1Cpx6hI8NySQz1agOqv4zaUTzp4xdfstD",
+        "title": "0520文萌樓.docx",
+        "status": "newly-visited-candidate-ore",
+        "candidateLayer": "wenmenglou-field-writing-sex-work-video-interface",
+        "observations": [
+          "文本從文萌樓、華西街、警察在巷口觀望、老建築灰塵與牆面紀錄等具體現場感受出發，把『說故事的人迫使我真正看到理解的不安』列成明顯的場域經驗。",
+          "材料把實體公娼館中的鐵窗、言語、眼神與身體接觸，和視訊介面的視窗排列、滑鼠選擇、付費表演、匿名／不露臉及影像遭盜錄風險放在同一份田野式文字中。",
+          "文中反覆出現『不可說／噤聲』『他人的眼光』『身體／影像』『實體接觸／視訊介面』等詞組與對照，但本輪只列為候選礦點，不做跨文本統合。"
+        ]
+      }
+    ],
+    "blindExcavation": [
+      {
+        "id": "1taOBsJlvA441227eVVq6O_Is7g4NSqWpRTrYQMp8P5Q",
+        "title": "菌絲工作節點｜髒的社會理論 Dirty Social Theory",
+        "status": "newly-opened-special-material-candidate-ore",
+        "candidateLayer": "dirty-social-theory-model-vocabulary",
+        "observations": [
+          "文件自行建立 machine → structure → network → flow → rhizome → mycelium → mold 的模型序列，並明確說不是線性進步史，而是『模型如何變髒』的私人理論路徑。",
+          "材料保存一組高度操作化的動詞：infect、contaminate、branch、colonize、mutate、return、anastomose、mold，並把污染定義為破壞內容維持純潔的可能。",
+          "文本另把 network／flow 的限制、階級／剝削、distributed trust、貨幣關係、殘留／復發以及網站美學放在同一工作節點內；此輪只把它視為特殊詞彙與模型材料，不判斷是否與其他礦層相連。"
+        ]
+      }
+    ],
+    "duplicateRejected": [
+      {
+        "id": "0B6kekeEVEPHjUUN4Rm9NTzZxWEE",
+        "title": "86p56-60林文強張榮哲.pdf",
+        "reason": "抽樣後確認核心內容與已巡過的〈陰不是陽的反面〉版本高度重疊，故不另立候選礦層。"
+      }
+    ],
+    "sensitiveSkipped": [],
+    "note": "本輪只保存材料本身可見的概念、用語、結構與特殊形式，不做跨年代統合、理論比較、冶煉或用途判斷。"
+  },
+  "sensitiveData": "未分析、索引或保存銀行／金融帳號、登入憑證、密碼、驗證碼、身分證明、稅務資料或其他高度敏感個資。",
+  "refining": "deferred",
+  "note": "本輪嚴格停留於第一階段採礦；大型 state 檔僅作去重參考，本輪狀態保存於獨立 mother-runs JSON。"
+}
