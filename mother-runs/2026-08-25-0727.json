@@ -1,0 +1,32 @@
+{
+  "runAt": "2026-08-25 07:27 +08:00",
+  "phase": "mining-only",
+  "policy": "No refining, comparison, collision, infection, hybridization, or use judgment.",
+  "uncultured": {
+    "sourceFolderId": "104Dpvr-q8xD1t1Hlw3KVSSGcJDCbcOIF",
+    "inventoryCheck": "No files newer than the existing 2026-08-21 upload batch were observed in this patrol.",
+    "sample": [],
+    "candidateLayers": [],
+    "note": "Existing inventory remains the active ore body; no new-image event recorded. No theory or artwork inference performed."
+  },
+  "terminus": {
+    "drilling": [
+      {
+        "id": "144mOBmNmluRhd_R-exQ3BcCcWk-IVXZQ",
+        "title": "張剛維 以容積移轉進行都市保存之制度與執行－財產權觀點分析.pdf",
+        "kind": "blind excavation / contextual research material",
+        "candidateLayer": "容積移轉作為財產權重新界定與都市保存制度；制度成功同時衍生新的都市管理問題。",
+        "status": "candidate-only"
+      }
+    ],
+    "skippedSensitive": [],
+    "note": "Recorded as candidate ore only; not compared with prior financialization/value-form leads in this phase."
+  },
+  "stateHandling": {
+    "motherStateRead": true,
+    "visualMiningRead": true,
+    "recentRunsDirectoryRead": true,
+    "largeStateUpdated": false,
+    "runLedgerCreated": true
+  }
+}
