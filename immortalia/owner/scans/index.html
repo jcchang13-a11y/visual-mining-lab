@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>掃描紀錄 · 島主室</title>
 <style>
-:root{--bg:#f4eedf;--ink:#17130f;--muted:#6c5e4d;--line:rgba(23,19,15,.25);--red:#7a2f2a;--paper:rgba(255,252,244,.84)}*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--ink)}body{font-family:Arial,"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif}.wrap{width:min(100%,860px);margin:auto;padding:28px 18px 48px}.eyebrow{font-size:.68rem;letter-spacing:.16em;color:var(--muted)}h1{font-size:clamp(2rem,9vw,4.8rem);font-weight:500;margin:8px 0 24px}.panel{background:var(--paper);border:1px solid var(--line);padding:18px;margin-bottom:16px}.panel h2{font-size:1.25rem;font-weight:500;margin:0 0 12px}.empty{font-size:.86rem;line-height:1.75;color:var(--muted)}.legend{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}.legend div{padding:12px;border-top:1px solid var(--line);font-size:.78rem;line-height:1.6}.legend strong{display:block;font-size:.7rem;letter-spacing:.1em;color:var(--red);margin-bottom:4px}.archive{margin-top:20px;border-top:1px solid var(--line)}.row{display:flex;justify-content:space-between;gap:16px;padding:13px 0;border-bottom:1px solid var(--line);font-size:.8rem;color:var(--muted)}.back{display:inline-block;margin-top:22px;color:var(--ink);text-decoration:none;border-bottom:1px solid var(--line);font-size:.78rem;padding-bottom:2px}.locked{display:none}@media(max-width:620px){.legend{grid-template-columns:1fr}}
+:root{--bg:#f4eedf;--ink:#17130f;--muted:#6c5e4d;--line:rgba(23,19,15,.25);--red:#7a2f2a;--paper:rgba(255,252,244,.84)}*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--ink)}body{font-family:Arial,"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif}.wrap{width:min(100%,860px);margin:auto;padding:28px 18px 48px}.eyebrow{font-size:.68rem;letter-spacing:.16em;color:var(--muted)}h1{font-size:clamp(2rem,9vw,4.8rem);font-weight:500;margin:8px 0 24px}.panel{background:var(--paper);border:1px solid var(--line);padding:18px;margin-bottom:16px}.panel h2{font-size:1.25rem;font-weight:500;margin:0 0 12px}.empty{font-size:.86rem;line-height:1.75;color:var(--muted)}.legend{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}.legend div{padding:12px;border-top:1px solid var(--line);font-size:.78rem;line-height:1.6}.legend strong{display:block;font-size:.7rem;letter-spacing:.1em;color:var(--red);margin-bottom:4px}.list{margin-top:12px;border-top:1px solid var(--line)}.item{padding:14px 0;border-bottom:1px solid var(--line)}.item strong{display:block;font-size:.8rem;margin-bottom:6px}.item p{margin:0;color:var(--muted);font-size:.8rem;line-height:1.7}.item code{font-size:.68rem;color:#4f4438}.meta{font-size:.72rem;color:var(--muted);line-height:1.6;margin-bottom:10px}.back{display:inline-block;margin-top:22px;color:var(--ink);text-decoration:none;border-bottom:1px solid var(--line);font-size:.78rem;padding-bottom:2px}@media(max-width:620px){.legend{grid-template-columns:1fr}}
 </style>
 </head>
 <body><main class="wrap" id="content">
@@ -13,16 +13,26 @@
 <h1>掃描紀錄</h1>
 <section class="panel">
 <h2>最新一次</h2>
-<div class="empty">掃描器尚未正式接線。接線完成後，這裡會固定顯示最近一次「關聯發現＋能力配對」的結果。</div>
+<div class="meta" id="meta">讀取中……</div>
+<div id="relations" class="list"></div>
+<div id="capabilities" class="list"></div>
 <div class="legend"><div><strong>關聯發現</strong>A 跟 B 為什麼有關：文本、概念、敘事、圖像、結構、對照或矛盾。</div><div><strong>能力配對</strong>A 可以拿去幫 B 做什麼：閱讀、分析、生成、出版、調度或新的實驗流程。</div></div>
-</section>
-<section class="panel">
-<h2>歷史巡檢</h2>
-<div class="archive"><div class="row"><span>尚無正式掃描紀錄</span><span>—</span></div></div>
 </section>
 <a class="back" href="../">← 返回島主室</a>
 </main>
 <script>
 if(sessionStorage.getItem('immortalia-owner-auth')!=='ok'){document.documentElement.innerHTML='';location.replace('../');}
+const meta=document.getElementById('meta');
+const relations=document.getElementById('relations');
+const capabilities=document.getElementById('capabilities');
+function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+fetch('./latest.json?ts='+Date.now(),{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error('no data');return r.json()}).then(data=>{
+  const when=data.generated_at?new Date(data.generated_at).toLocaleString('zh-TW'):'—';
+  meta.textContent=`時間：${when}　｜　掃描文件：${data.documents_scanned ?? '—'}　｜　${data.note ?? ''}`;
+  const rs=(data.relations||[]).slice(0,12);
+  relations.innerHTML='<strong style="display:block;margin-top:12px">關聯發現</strong>'+ (rs.length?rs.map(x=>`<div class="item"><strong>${esc(x.a)} ↔ ${esc(x.b)}</strong><p>${esc(x.why)}</p></div>`).join(''):'<div class="empty">本次沒有新關聯。</div>');
+  const cs=(data.capabilities||[]).slice(0,12);
+  capabilities.innerHTML='<strong style="display:block;margin-top:18px">能力配對</strong>'+ (cs.length?cs.map(x=>`<div class="item"><strong>${esc(x.system)} → ${esc(x.target)}</strong><p>${esc((x.can||[]).join('、'))}</p><code>${esc(x.source)} → ${esc(x.target_example)}</code></div>`).join(''):'<div class="empty">本次沒有新能力配對。</div>');
+}).catch(()=>{meta.textContent='目前沒有可讀取的掃描結果。';relations.innerHTML='<div class="empty">掃描器可能尚未完成第一次執行。</div>';});
 </script>
 </body></html>
