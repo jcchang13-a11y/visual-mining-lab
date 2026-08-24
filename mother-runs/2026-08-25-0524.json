@@ -1,0 +1,24 @@
+{
+  "runAt": "2026-08-25 05:24 +08:00",
+  "phase": "mining-only",
+  "rules": {"noRefining": true, "noUseJudgment": true, "sensitiveDataSkipped": true},
+  "uncultured": {
+    "sourceFolderId": "104Dpvr-q8xD1t1Hlw3KVSSGcJDCbcOIF",
+    "newSincePriorKnownUpload": 0,
+    "observation": "Folder metadata patrol found no images created after 2026-08-21. Existing pool remains the current ore body; no new-image mining was forced this round.",
+    "dedupeNote": "No deletion performed. Existing filename/time clusters remain candidates for later inspection only."
+  },
+  "terminus": {
+    "visitedThisRun": [
+      {"id":"1OF0GYOjSOLxy-C0M1YG9O8iUfUqmf6YYp57xaP8hDJg","title":"不可抵達之地：蓬萊、桃花源與世界各地的異境想像","status":"candidate-ore","note":"New 2026 note explicitly collects inaccessible/otherworld places: islands, valleys, mountains, underground worlds, overseas realms and lost cities; retain as an unintegrated candidate layer around reachability, elsewhere and spatial imagination."},
+      {"id":"1xCL9VsaieSUSmMR1e__yyyoW2OW6SRnH","title":"國有土地經營管理策略變革對都市發展影響之研究－以臺中市干城市地重劃區為例.pdf","status":"candidate-ore","note":"Blind-excavation hit in older urban-development archive; retain for later inspection of state land management / urban development, without theoretical integration."},
+      {"id":"1GJXQviukzPmCyNoKDBRa9kBYfop8invr","title":"邊金靜_文化資產的活化利用與經營管理－金門後浦城區為例.pdf","status":"candidate-ore","note":"Blind-excavation hit around heritage activation/management and Kinmen urban district; candidate material only."},
+      {"id":"1nwgkU9zGW7NnT3wvrr9zkcOFFBwJo4od","title":"吳宗奇 容積移轉(TDR)作為歷史保存手段的神話(Myth)建構 －大稻埕歷史風貌街區為借鏡.pdf","status":"candidate-ore","note":"Blind-excavation hit explicitly joining TDR, preservation and myth construction; retain as a candidate seam, no comparison yet."}
+    ],
+    "skipped": [
+      {"id":"1e-tSgXjE_ezFG2o-ulTNTkBMeDEKX12R","title":"學員資料.xls","reason":"personal-data risk; not inspected or indexed as ore"},
+      {"title":"張榮哲倫敦-140614電子票.pdf","reason":"travel/identity-adjacent personal record; excluded from mining"}
+    ]
+  },
+  "stateAction": "Appended run file rather than replacing large mother-state.json."
+}
