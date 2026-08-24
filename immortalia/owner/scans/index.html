@@ -1,38 +1,20 @@
 <!doctype html>
-<html lang="zh-Hant">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>掃描紀錄 · 島主室</title>
-<style>
-:root{--bg:#f4eedf;--ink:#17130f;--muted:#6c5e4d;--line:rgba(23,19,15,.25);--red:#7a2f2a;--paper:rgba(255,252,244,.84)}*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--ink)}body{font-family:Arial,"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif}.wrap{width:min(100%,860px);margin:auto;padding:28px 18px 48px}.eyebrow{font-size:.68rem;letter-spacing:.16em;color:var(--muted)}h1{font-size:clamp(2rem,9vw,4.8rem);font-weight:500;margin:8px 0 24px}.panel{background:var(--paper);border:1px solid var(--line);padding:18px;margin-bottom:16px}.panel h2{font-size:1.25rem;font-weight:500;margin:0 0 12px}.empty{font-size:.86rem;line-height:1.75;color:var(--muted)}.legend{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}.legend div{padding:12px;border-top:1px solid var(--line);font-size:.78rem;line-height:1.6}.legend strong{display:block;font-size:.7rem;letter-spacing:.1em;color:var(--red);margin-bottom:4px}.list{margin-top:12px;border-top:1px solid var(--line)}.item{padding:14px 0;border-bottom:1px solid var(--line)}.item strong{display:block;font-size:.8rem;margin-bottom:6px}.item p{margin:0;color:var(--muted);font-size:.8rem;line-height:1.7}.item code{font-size:.68rem;color:#4f4438}.meta{font-size:.72rem;color:var(--muted);line-height:1.6;margin-bottom:10px}.back{display:inline-block;margin-top:22px;color:var(--ink);text-decoration:none;border-bottom:1px solid var(--line);font-size:.78rem;padding-bottom:2px}@media(max-width:620px){.legend{grid-template-columns:1fr}}
-</style>
-</head>
-<body><main class="wrap" id="content">
-<div class="eyebrow">IMMORTALIA · OWNER CONSOLE</div>
-<h1>掃描紀錄</h1>
-<section class="panel">
-<h2>最新一次</h2>
-<div class="meta" id="meta">讀取中……</div>
-<div id="relations" class="list"></div>
-<div id="capabilities" class="list"></div>
-<div class="legend"><div><strong>關聯發現</strong>A 跟 B 為什麼有關：文本、概念、敘事、圖像、結構、對照或矛盾。</div><div><strong>能力配對</strong>A 可以拿去幫 B 做什麼：閱讀、分析、生成、出版、調度或新的實驗流程。</div></div>
-</section>
-<a class="back" href="../">← 返回島主室</a>
-</main>
-<script>
+<html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>掃描紀錄 · 島主室</title><style>
+:root{--bg:#f4eedf;--ink:#17130f;--muted:#6c5e4d;--line:rgba(23,19,15,.25);--red:#7a2f2a;--paper:rgba(255,252,244,.84)}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Arial,"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif}.wrap{width:min(100%,880px);margin:auto;padding:28px 18px 48px}.eyebrow{font-size:.68rem;letter-spacing:.16em;color:var(--muted)}h1{font-size:clamp(2rem,9vw,4.8rem);font-weight:500;margin:8px 0 24px}.panel{background:var(--paper);border:1px solid var(--line);padding:18px;margin-bottom:16px}.panel h2{font-size:1.25rem;font-weight:500;margin:0 0 12px}.meta,.empty{font-size:.8rem;line-height:1.65;color:var(--muted)}.item{padding:14px 0;border-top:1px solid var(--line)}.item strong{display:block;font-size:.86rem;margin-bottom:6px}.item p{margin:4px 0;color:var(--muted);font-size:.8rem;line-height:1.65}.tag{display:inline-block;margin:6px 6px 0 0;padding:3px 7px;border:1px solid var(--line);font-size:.66rem;color:var(--red)}.actions{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px}.actions button,.actions a{border:1px solid var(--line);background:transparent;color:var(--ink);padding:7px 9px;font-size:.7rem;text-decoration:none}.summary{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px}.summary div{border-top:1px solid var(--line);padding:10px 0;font-size:.72rem;color:var(--muted)}.summary b{display:block;font-size:1.35rem;color:var(--ink);font-weight:500}.back{display:inline-block;margin-top:8px;color:var(--ink);text-decoration:none;border-bottom:1px solid var(--line);font-size:.78rem}@media(max-width:620px){.summary{grid-template-columns:1fr 1fr}}</style></head>
+<body><main class="wrap"><div class="eyebrow">IMMORTALIA · OWNER CONSOLE</div><h1>掃描紀錄</h1>
+<section class="panel"><h2>最新一次</h2><div class="meta" id="meta">讀取中……</div><div class="summary" id="summary"></div></section>
+<section class="panel"><h2>關聯發現</h2><div id="relations"></div></section>
+<section class="panel"><h2>能力配對</h2><div id="capabilities"></div></section>
+<section class="panel"><h2>執行規則</h2><div class="meta" id="policy">讀取中……</div></section>
+<a class="back" href="../">← 返回島主室</a></main><script>
 if(sessionStorage.getItem('immortalia-owner-auth')!=='ok'){document.documentElement.innerHTML='';location.replace('../');}
-const meta=document.getElementById('meta');
-const relations=document.getElementById('relations');
-const capabilities=document.getElementById('capabilities');
-function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-fetch('./latest.json?ts='+Date.now(),{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error('no data');return r.json()}).then(data=>{
-  const when=data.generated_at?new Date(data.generated_at).toLocaleString('zh-TW'):'—';
-  meta.textContent=`時間：${when}　｜　掃描文件：${data.documents_scanned ?? '—'}　｜　${data.note ?? ''}`;
-  const rs=(data.relations||[]).slice(0,12);
-  relations.innerHTML='<strong style="display:block;margin-top:12px">關聯發現</strong>'+ (rs.length?rs.map(x=>`<div class="item"><strong>${esc(x.a)} ↔ ${esc(x.b)}</strong><p>${esc(x.why)}</p></div>`).join(''):'<div class="empty">本次沒有新關聯。</div>');
-  const cs=(data.capabilities||[]).slice(0,12);
-  capabilities.innerHTML='<strong style="display:block;margin-top:18px">能力配對</strong>'+ (cs.length?cs.map(x=>`<div class="item"><strong>${esc(x.system)} → ${esc(x.target)}</strong><p>${esc((x.can||[]).join('、'))}</p><code>${esc(x.source)} → ${esc(x.target_example)}</code></div>`).join(''):'<div class="empty">本次沒有新能力配對。</div>');
-}).catch(()=>{meta.textContent='目前沒有可讀取的掃描結果。';relations.innerHTML='<div class="empty">掃描器可能尚未完成第一次執行。</div>';});
-</script>
-</body></html>
+const $=id=>document.getElementById(id);const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const feedbackHref=(x,action)=>`../feedback/?action=${encodeURIComponent(action)}&target=${encodeURIComponent((x.system?x.system+' → '+x.target:x.a+' ↔ '+x.b))}`;
+fetch('./latest.json?ts='+Date.now(),{cache:'no-store'}).then(r=>{if(!r.ok)throw Error();return r.json()}).then(data=>{
+ const when=data.generated_at?new Date(data.generated_at).toLocaleString('zh-TW'):'—';$('meta').textContent=`時間：${when}｜掃描文件：${data.documents_scanned??'—'}｜${data.note??''}`;
+ const act=data.actions||{};$('summary').innerHTML=`<div><b>${(act.auto_logged||[]).length}</b>已自動記錄</div><div><b>${(act.review_links||[]).length}</b>高信心待看</div><div><b>${(act.experiment_candidates||[]).length}</b>小實驗候選</div><div><b>${(act.approval_required||[]).length}</b>待批准</div>`;
+ const rs=data.relations||[];$('relations').innerHTML=rs.length?rs.map(x=>`<div class="item"><strong>${esc(x.a)} ↔ ${esc(x.b)}</strong><p>${esc(x.why)}</p><span class="tag">信心 ${esc(x.confidence)}</span><span class="tag">${x.route==='review_link'?'建議人工確認':'已自動記錄'}</span><p>${esc(x.next_step)}</p><div class="actions"><a href="${feedbackHref(x,'修改後再試')}">給回饋</a></div></div>`).join(''):'<div class="empty">本次沒有保留下來的實質關聯。</div>';
+ const cs=data.capabilities||[];$('capabilities').innerHTML=cs.length?cs.map(x=>`<div class="item"><strong>${esc(x.system)} → ${esc(x.target)}</strong><p>${esc((x.can||[]).join('、'))}</p><span class="tag">${esc(x.status)}</span><p>${esc(x.next_step)}</p><div class="actions"><a href="${feedbackHref(x,'繼續實驗')}">繼續實驗</a><a href="${feedbackHref(x,'批准量產')}">批准量產</a><a href="${feedbackHref(x,'修改後再試')}">修改後再試</a><a href="${feedbackHref(x,'停止')}">停止</a></div></div>`).join(''):'<div class="empty">本次沒有能力配對。</div>';
+ const p=act.policy||{};$('policy').innerHTML=`${esc(p.auto||'')}<br>${esc(p.experiment||'')}<br>${esc(p.approval||'')}`;
+}).catch(()=>{$('meta').textContent='目前沒有可讀取的掃描結果。';$('relations').innerHTML='<div class="empty">請先跑一次掃描。</div>';});
+</script></body></html>
