@@ -1,0 +1,74 @@
+{
+  "runAt": "2026-08-24 11:31 +08:00",
+  "engine": "Mother",
+  "vessel": "Nostromo",
+  "phase": "mining-only",
+  "rules": {
+    "refining": false,
+    "comparison": false,
+    "collision": false,
+    "infection": false,
+    "hybridization": false,
+    "useJudgment": false
+  },
+  "stateRead": {
+    "motherState": true,
+    "visualMining": true,
+    "latestPriorRun": "mother-runs/2026-08-24-1017.json"
+  },
+  "uncultured": {
+    "sourceFolderId": "104Dpvr-q8xD1t1Hlw3KVSSGcJDCbcOIF",
+    "folderScanCount": 31,
+    "newSincePriorInventory": 0,
+    "samples": [
+      {
+        "id": "1kwfM84TU556c5tF_lm1__xlTM8-uZus9",
+        "title": "MVIMG_20260614_130751.jpg",
+        "status": "sampled-existing-unseen",
+        "ore": "直幅近距離老建築立面。畫面由灰磚、卵石／碎石砌體與多次修補的白灰層組成；中央是一扇深棕木框四格窗，外圍被較新的白色抹灰框住，上方另保留一個被封死的半圓拱形構件。右上方牆面有不規則花形／星形通風孔，右側可見藍色 71 號門牌與紅色裝飾邊角。多束黑色電纜橫向穿過舊牆與拱形構件，另有淺色管線垂直下行。只保存礦樣，不做作品、理論或用途判斷。"
+      }
+    ],
+    "possibleSeries": [
+      "老建築立面／牆體修補痕跡的近距離記錄（僅列候選系列）",
+      "磚、卵石、抹灰等不同材料層同時外露（僅列候選視覺特徵）",
+      "封閉舊開口／半圓拱構件與後加新窗並置（僅列候選視覺特徵）",
+      "現代電纜與管線直接跨越歷史牆面（僅列候選視覺特徵）"
+    ],
+    "dedupeNote": "本輪資料夾仍為 31 件，未見較 10:17 巡礦新增或修改。1kwfM84TU556c5tF_lm1__xlTM8-uZus9 在 visual-mining.json 中標為待分析；已核對最近 06:21、07:17、08:16、09:16、10:17 巡礦紀錄，未見此 ID，因此抽為既有未分析礦樣。"
+  },
+  "terminus": {
+    "purposefulDrilling": [
+      {
+        "id": "14t_RFcpKGoWmsHorThGs2ztyfPyh66_p",
+        "title": "都市更新容積獎勵下之投資可行性-以華固雙橡園為例.pdf",
+        "status": "newly-opened-research-material-candidate-ore",
+        "candidateLayer": "urban-renewal-volume-reward-investment-calculation",
+        "observations": [
+          "2008 研究材料把容積獎勵直接放進都市更新投資可行性計算，個案華固雙橡園取得約 1.5 倍容積獎勵，文件同時記錄一般更新案約 1.2 至 1.25 倍的比較基準。",
+          "論文把更新前後土地／建物面積、計畫變更、獎勵後總容積、成本、銷售總額與財務指標拆成一套可計算表格，並提出以造價與售價評估更新優先順序的模型。",
+          "材料明確保存一種制度獎勵被轉譯成投資判斷與更新排序的操作語彙。本輪只列為候選礦層，不與既有都市更新、金融化或價值形式材料做比較。"
+        ]
+      }
+    ],
+    "blindExcavation": [
+      {
+        "id": "1cUI1nY9GmGwupO26-GwMPp-rpeq1LmNm",
+        "title": "4-1大稻埕地方產業與故事旅遊(水瓶子).pdf",
+        "status": "newly-opened-special-material-candidate-ore",
+        "candidateLayer": "walking-tour-storytelling-route-and-urban-reuse",
+        "observations": [
+          "2012 簡報把地方導覽拆成一套非常細的操作循環：設計規劃、查資料、實地勘查、聯繫、宣傳報名、現場器材、攝影錄影、問卷與事後網路整理。",
+          "材料保存『路線圖＋現存建築／物件＋故事』的導覽組合，並以二手書店、白色恐怖、男女平權、地方古蹟等不同主題反覆示範如何把散落地點串成行走路徑。",
+          "簡報另收錄波士頓自由之路、黑人權利之路等街道再生案例，並反覆使用『從生活中發想』『利用現存建築、物件引言』等工作語彙。此輪只列為特殊研究材料，不做跨文本統合或用途判斷。"
+        ]
+      }
+    ],
+    "sensitiveSkipped": [
+      "巡查搜尋結果中出現個人學經歷、工作坊報名／學員資料與電子票等類型文件；本輪未打開、未分析、未索引。"
+    ],
+    "note": "本輪只保存材料本身可見的概念、用語、結構與特殊形式，不做跨年代統合、理論比較、冶煉或用途判斷。"
+  },
+  "sensitiveData": "未分析、索引或保存銀行／金融帳號、登入憑證、密碼、驗證碼、身分證明、稅務資料或其他高度敏感個資。",
+  "refining": "deferred",
+  "note": "本輪嚴格停留於第一階段採礦；大型 state 檔僅作去重參考，本輪狀態保存於獨立 mother-runs JSON。"
+}
