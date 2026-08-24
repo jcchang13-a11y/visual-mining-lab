@@ -1,0 +1,73 @@
+{
+  "runAt": "2026-08-24 16:21 +08:00",
+  "engine": "Mother",
+  "vessel": "Nostromo",
+  "phase": "mining-only",
+  "rules": {
+    "refining": false,
+    "comparison": false,
+    "collision": false,
+    "infection": false,
+    "hybridization": false,
+    "useJudgment": false
+  },
+  "stateRead": {
+    "motherState": true,
+    "visualMining": true,
+    "latestPriorRun": "mother-runs/2026-08-24-1326.json"
+  },
+  "uncultured": {
+    "sourceFolderId": "104Dpvr-q8xD1t1Hlw3KVSSGcJDCbcOIF",
+    "newSincePriorInventory": 0,
+    "folderStatus": "no newly added or modified image detected after prior patrol",
+    "samples": [
+      {
+        "id": "13fejGl4O9dsrew_XQHF9p6g7RmnzvuRU",
+        "title": "MVIMG_20260614_130335.jpg",
+        "status": "sampled-existing-unseen",
+        "ore": "直幅記錄一條老街／住宅巷道。左側是裸露磚石、灰泥剝落與舊式拱形門窗，右側是白色小磁磚外牆、鐵窗、防盜籠、晾衣與春聯；中段由跨巷建築形成門洞般的穿越空間，地面潮濕，機車停放在巷內，電纜沿兩側牆面密集延伸。只保存可見材料，不做作品、理論或用途判斷。"
+      }
+    ],
+    "possibleSeries": [
+      "老住宅巷道、門洞、跨巷建築與狹窄通行空間（僅列候選系列）",
+      "裸露磚石／灰泥與後加磁磚、鐵窗、防盜籠並存（僅列候選視覺特徵）",
+      "電纜、機車、晾衣、春聯等日常附著物進入老建築表面（僅列候選視覺特徵）"
+    ],
+    "dedupeNote": "資料夾未見 2026-08-23 09:26 後新增或修改影像；本輪改抽 visual-mining.json 中既有待分析項，且避開上一輪 13:26 已抽樣的 1HmlqCgY8ckDUcyfQFU0CMpOZNRsNdMMH。"
+  },
+  "terminus": {
+    "purposefulDrilling": [
+      {
+        "id": "1gmQv4Rj5nLhUYx99bUHZiDpr4gRdBfus",
+        "title": "由公共利益探討都市更新法令調整機制-以台北市為例.pdf",
+        "status": "newly-opened-research-material-candidate-ore",
+        "candidateLayer": "urban-renewal-public-interest-law-adjustment",
+        "observations": [
+          "2008 碩論直接把『公共利益』設為都市更新法令與政策操作的檢驗標準，追問容積獎勵、稅賦減免等社會資源是否產生相應公共利益。",
+          "材料把都市更新的私人報酬、公共利益、公正、法令調整與公辦更新放在同一研究框架中，並提出弱勢住宅、分期分區獎勵、區段徵收、公共設施取得與公辦更新財源等制度性建議。",
+          "章節另獨立處理公共利益概念演變與公正，顯示研究不只把公共利益當政策口號，而是當成需要定義與操作的規劃概念。此輪只保存材料本身。"
+        ]
+      }
+    ],
+    "blindExcavation": [
+      {
+        "id": "1LLpd4ugOzTDAOhTJ5N1TsdRSjr10_XoD",
+        "title": "總結報告書.pdf",
+        "status": "newly-opened-special-material-candidate-ore",
+        "candidateLayer": "dadaocheng-urban-regeneration-community-program-practice",
+        "observations": [
+          "一份大稻埕／江山樓周邊都市再生實務總結報告，把文史講座、地方導覽、志工工作坊、願景凝聚、構想徵件、社區活動、主題影展、庶民歌謠與成果展覽放在同一個五個月執行架構內。",
+          "材料把『都市再生前進基地 U.R.S.』寫成整合、再結構、前進地方的工作場域，工作內容包括文化再生育成、人才培訓、空間研究、建築修復再利用與宣傳輔導。",
+          "目錄與圖照清單保留大量現場性材料：文萌樓剖面、江山樓舊照、藝旦、地方產業、歷史地標修復前後、工作坊、導覽、影展、禁歌故事與活動紀錄。此輪只列為特殊實務材料，不做跨文本統合。"
+        ]
+      }
+    ],
+    "sensitiveSkipped": [
+      "廣泛搜尋時對可能包含個人身份、報名名冊、票券、帳務、憑證、金融、登入或其他高度敏感資訊的結果不開啟、不分析、不索引。"
+    ],
+    "note": "本輪只保存材料本身可見的概念、用語、結構與特殊形式，不做跨年代統合、理論比較、冶煉或用途判斷。"
+  },
+  "sensitiveData": "未分析、索引或保存銀行／金融帳號、登入憑證、密碼、驗證碼、身分證明、稅務資料或其他高度敏感個資。",
+  "refining": "deferred",
+  "note": "本輪嚴格停留於第一階段採礦；大型 state 檔僅作去重參考，本輪狀態保存於獨立 mother-runs JSON。"
+}
