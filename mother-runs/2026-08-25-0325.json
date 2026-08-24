@@ -1,0 +1,29 @@
+{
+  "runAt": "2026-08-25 03:25 +08:00",
+  "phase": "mining-only",
+  "rules": {"refine": false, "compare": false, "crossLink": false, "useJudgment": false},
+  "uncultured": {
+    "sourceFolderId": "104Dpvr-q8xD1t1Hlw3KVSSGcJDCbcOIF",
+    "baseline": {"visualMiningGeneratedAt": "2026-08-21T21:44:32+08:00", "knownMaterials": 31},
+    "patrol": "folder metadata scan completed",
+    "newSinceBaseline": 0,
+    "candidateUnseen": "existing backlog remains; no new upload detected",
+    "dedupe": "no deletion; metadata-only patrol cannot prove byte-identical duplicates",
+    "notes": ["Newest folder item remains Messenger_creation_0701C150-1817-4677-90FA-0D8006E17E93.jpeg, created 2026-08-21 20:45 +08:00; no later image appeared in this patrol."]
+  },
+  "terminus": {
+    "patrol": "purposeful drilling plus small blind excavation",
+    "newCandidates": [
+      {"id":"1i0NPQyy8C7Z0uHlnXtHcc9QpKCh70iWu","title":"剛吃飽_第五輪插畫總表.md","kind":"candidate layer","note":"Previously unvisited in mother-state; retained as a visual/text planning stratum only, without use judgment."},
+      {"id":"1Ktx37keSE_jS_KXR4Z285CQyA-CQKLsv","title":"雞湯與反雞湯.md","kind":"candidate layer","note":"Previously unvisited in mother-state; current Drive index identifies it as a high-energy material pool around therapeutic reading/self-diagnosis/author-AI recoil. Recorded only as ore."},
+      {"id":"1pCzOZ0nu8PGdJNeU94BmocdSrZfjxwMH","title":"W009.md","kind":"blind candidate","note":"Surfaced during broad search around the current manuscript materials; retained for later inspection, no interpretation this round."}
+    ],
+    "duplicateSignal": [
+      {"titles":"剛吃飽_第五輪綱領.md","ids":["1poqGYleyhoJcZBQD2mviD57TD-_g78nd","1SNuYoCz43vdhUD0Awz5SXBcehmR0vHb-"],"status":"possible duplicate/copy; do not delete without content-level proof"},
+      {"titles":"雞湯與反雞湯.md","ids":["1Ktx37keSE_jS_KXR4Z285CQyA-CQKLsv","1YDmlwkRf-nfKqf7s5H-GF7DjzASUQOp3"],"status":"possible duplicate/copy; do not delete without content-level proof"}
+    ],
+    "sensitiveSkip": "No sensitive financial/login/identity/tax material was analyzed or indexed."
+  },
+  "stateWrite": "run ledger only; mother-state.json left untouched to avoid large-state conflict",
+  "notification": "none"
+}
