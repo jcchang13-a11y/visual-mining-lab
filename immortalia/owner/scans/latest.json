@@ -1,39 +1,347 @@
 {
-  "generated_at": "2026-08-24T07:39:00+00:00",
-  "documents_scanned": 0,
+  "generated_at": "2026-08-24T10:03:37.691864+00:00",
+  "documents_scanned": 20,
   "relations": [
     {
-      "a": "immortalia/notes/liezi-tangwen.html",
-      "b": "gangchibao /zh/03",
-      "why": "《列子》『上下八方有極盡乎』與《金剛經》『四維、上下虛空可思量不』形成空間／邊界問題的直接交叉。",
-      "score": 100,
+      "a": "index.html",
+      "b": "terminus/index.html",
+      "why": "共享概念／語彙：mother、nostromo、terminus、current、google、system",
+      "score": 70,
       "kind": "關聯發現"
     },
     {
-      "a": "immortalia/notes/liezi-tangwen.html",
-      "b": "gangchibao /zh/10",
-      "why": "《列子》『物有巨細乎』與《剛吃飽》須彌山、恆河沙、三千大千世界共同操作尺度的膨脹與不可計量。",
-      "score": 95,
+      "a": "index.html",
+      "b": "immortalia/index.html",
+      "why": "共享概念／語彙：immortalia、uncultured、terminus、mine、蓬萊仙島、concept",
+      "score": 57,
+      "kind": "關聯發現"
+    },
+    {
+      "a": "index.html",
+      "b": "uncultured/index.html",
+      "why": "共享概念／語彙：mother、nostromo、uncultured、媒文化、抽樣、聚類",
+      "score": 51,
+      "kind": "關聯發現"
+    },
+    {
+      "a": "immortalia/index.html",
+      "b": "immortalia/notes/liezi-tangwen.html",
+      "why": "共享概念／語彙：immortalia、textual、其中有五山焉、實惟無底之谷、渤海之東不知、有大壑焉",
+      "score": 48,
+      "kind": "關聯發現"
+    },
+    {
+      "a": "uncultured/index.html",
+      "b": "terminus/index.html",
+      "why": "共享概念／語彙：mother、nostromo、自動巡礦",
+      "score": 40,
+      "kind": "關聯發現"
+    },
+    {
+      "a": "gangchibao/index.html",
+      "b": "immortalia/notes/liezi-tangwen.html",
+      "why": "共享概念／語彙：immortalia、剛吃飽、notes、text、金剛經、原文",
+      "score": 38,
+      "kind": "關聯發現"
+    },
+    {
+      "a": "gangchibao/index.html",
+      "b": "immortalia/index.html",
+      "why": "共享概念／語彙：immortalia、diploma、image、mill、金剛經、剛吃飽",
+      "score": 33,
+      "kind": "關聯發現"
+    },
+    {
+      "a": "immortalia/owner/index.html",
+      "b": "immortalia/owner/scans/index.html",
+      "why": "共享概念／語彙：immortalia、console、owner、關聯發現、能力配對、掃描紀錄",
+      "score": 32,
+      "kind": "關聯發現"
+    },
+    {
+      "a": "dazibao/index.html",
+      "b": "immortalia/index.html",
+      "why": "共享概念／語彙：immortalia、dazibao、我的一張大字、蓬萊仙島",
+      "score": 28,
+      "kind": "關聯發現"
+    },
+    {
+      "a": "mycelium/index.html",
+      "b": "immortalia/index.html",
+      "why": "共享概念／語彙：immortalia、shed、香菇大棚、蓬萊仙島",
+      "score": 24,
+      "kind": "關聯發現"
+    },
+    {
+      "a": "index.html",
+      "b": "mycelium/index.html",
+      "why": "共享概念／語彙：immortalia、system、蓬萊仙島",
+      "score": 22,
+      "kind": "關聯發現"
+    },
+    {
+      "a": "dazibao/2026-08-21-ai-world.html",
+      "b": "immortalia/notes/liezi-tangwen.html",
+      "why": "共享概念／語彙：剛吃飽、金剛經、在一起、來的、敘事",
+      "score": 19,
+      "kind": "關聯發現"
+    },
+    {
+      "a": "immortalia/index.html",
+      "b": "terminus/index.html",
+      "why": "共享概念／語彙：terminus、mine、金剛經、端點星、剛吃飽",
+      "score": 19,
+      "kind": "關聯發現"
+    },
+    {
+      "a": "immortalia/index.html",
+      "b": "immortalia/owner/index.html",
+      "why": "共享概念／語彙：immortalia、島主請進、媒文化",
+      "score": 19,
+      "kind": "關聯發現"
+    },
+    {
+      "a": "immortalia/index.html",
+      "b": "immortalia/mystery-files/001-benjiao.html",
+      "why": "共享概念／語彙：蓬萊神秘檔案、files、蓬萊仙島、剛吃飽",
+      "score": 18,
+      "kind": "關聯發現"
+    },
+    {
+      "a": "index.html",
+      "b": "gangchibao/index.html",
+      "why": "共享概念／語彙：immortalia、image",
+      "score": 17,
+      "kind": "關聯發現"
+    },
+    {
+      "a": "immortalia/index.html",
+      "b": "immortalia/mystery-files/index.html",
+      "why": "共享概念／語彙：immortalia、蓬萊神秘檔案、files",
+      "score": 17,
+      "kind": "關聯發現"
+    },
+    {
+      "a": "index.html",
+      "b": "dazibao/index.html",
+      "why": "共享概念／語彙：immortalia、蓬萊仙島",
+      "score": 16,
+      "kind": "關聯發現"
+    },
+    {
+      "a": "mycelium/index.html",
+      "b": "dazibao/index.html",
+      "why": "共享概念／語彙：immortalia、蓬萊仙島",
+      "score": 16,
+      "kind": "關聯發現"
+    },
+    {
+      "a": "index.html",
+      "b": "immortalia/owner/index.html",
+      "why": "共享概念／語彙：immortalia、媒文化",
+      "score": 15,
       "kind": "關聯發現"
     }
   ],
   "capabilities": [
     {
       "system": "mycelium",
-      "source": "mycelium",
+      "source": "mycelium/index.html",
       "target": "《剛吃飽》／《金剛經》",
-      "target_example": "gangchibao",
-      "can": ["閱讀代理", "比較閱讀", "群體反應模擬", "異質解讀"],
+      "target_example": "dazibao/2026-08-21-ai-world.html",
+      "can": [
+        "閱讀代理",
+        "比較閱讀",
+        "群體反應模擬",
+        "異質解讀",
+        "影片閱讀"
+      ],
+      "kind": "能力配對"
+    },
+    {
+      "system": "mycelium",
+      "source": "mycelium/index.html",
+      "target": "蓬萊文本與神秘檔案",
+      "target_example": "index.html",
+      "can": [
+        "閱讀代理",
+        "比較閱讀",
+        "群體反應模擬",
+        "異質解讀",
+        "影片閱讀"
+      ],
+      "kind": "能力配對"
+    },
+    {
+      "system": "mycelium",
+      "source": "mycelium/index.html",
+      "target": "網站公開輸出",
+      "target_example": "dazibao/2026-08-21-ai-world.html",
+      "can": [
+        "閱讀代理",
+        "比較閱讀",
+        "群體反應模擬",
+        "異質解讀",
+        "影片閱讀"
+      ],
       "kind": "能力配對"
     },
     {
       "system": "uncultured",
-      "source": "uncultured",
+      "source": "index.html",
       "target": "《剛吃飽》／《金剛經》",
-      "target_example": "gangchibao",
-      "can": ["視覺轉譯", "插圖候選", "素材採礦", "視覺語法生成"],
+      "target_example": "dazibao/2026-08-21-ai-world.html",
+      "can": [
+        "視覺轉譯",
+        "插圖候選",
+        "素材採礦",
+        "視覺語法生成"
+      ],
+      "kind": "能力配對"
+    },
+    {
+      "system": "uncultured",
+      "source": "index.html",
+      "target": "蓬萊文本與神秘檔案",
+      "target_example": "index.html",
+      "can": [
+        "視覺轉譯",
+        "插圖候選",
+        "素材採礦",
+        "視覺語法生成"
+      ],
+      "kind": "能力配對"
+    },
+    {
+      "system": "uncultured",
+      "source": "index.html",
+      "target": "網站公開輸出",
+      "target_example": "dazibao/2026-08-21-ai-world.html",
+      "can": [
+        "視覺轉譯",
+        "插圖候選",
+        "素材採礦",
+        "視覺語法生成"
+      ],
+      "kind": "能力配對"
+    },
+    {
+      "system": "terminus",
+      "source": "index.html",
+      "target": "《剛吃飽》／《金剛經》",
+      "target_example": "dazibao/2026-08-21-ai-world.html",
+      "can": [
+        "概念抽象",
+        "理論對照",
+        "問題重構",
+        "概念壓力測試"
+      ],
+      "kind": "能力配對"
+    },
+    {
+      "system": "terminus",
+      "source": "index.html",
+      "target": "蓬萊文本與神秘檔案",
+      "target_example": "index.html",
+      "can": [
+        "概念抽象",
+        "理論對照",
+        "問題重構",
+        "概念壓力測試"
+      ],
+      "kind": "能力配對"
+    },
+    {
+      "system": "terminus",
+      "source": "index.html",
+      "target": "網站公開輸出",
+      "target_example": "dazibao/2026-08-21-ai-world.html",
+      "can": [
+        "概念抽象",
+        "理論對照",
+        "問題重構",
+        "概念壓力測試"
+      ],
+      "kind": "能力配對"
+    },
+    {
+      "system": "dazibao",
+      "source": "dazibao/index.html",
+      "target": "《剛吃飽》／《金剛經》",
+      "target_example": "dazibao/2026-08-21-ai-world.html",
+      "can": [
+        "對外摘要",
+        "短文輸出",
+        "議題發布",
+        "宣傳轉譯"
+      ],
+      "kind": "能力配對"
+    },
+    {
+      "system": "dazibao",
+      "source": "dazibao/index.html",
+      "target": "蓬萊文本與神秘檔案",
+      "target_example": "index.html",
+      "can": [
+        "對外摘要",
+        "短文輸出",
+        "議題發布",
+        "宣傳轉譯"
+      ],
+      "kind": "能力配對"
+    },
+    {
+      "system": "dazibao",
+      "source": "dazibao/index.html",
+      "target": "網站公開輸出",
+      "target_example": "dazibao/2026-08-21-ai-world.html",
+      "can": [
+        "對外摘要",
+        "短文輸出",
+        "議題發布",
+        "宣傳轉譯"
+      ],
+      "kind": "能力配對"
+    },
+    {
+      "system": "immortalia",
+      "source": "index.html",
+      "target": "《剛吃飽》／《金剛經》",
+      "target_example": "dazibao/2026-08-21-ai-world.html",
+      "can": [
+        "世界觀容器",
+        "跨文本索引",
+        "材料歸檔",
+        "敘事化包裝"
+      ],
+      "kind": "能力配對"
+    },
+    {
+      "system": "immortalia",
+      "source": "index.html",
+      "target": "蓬萊文本與神秘檔案",
+      "target_example": "index.html",
+      "can": [
+        "世界觀容器",
+        "跨文本索引",
+        "材料歸檔",
+        "敘事化包裝"
+      ],
+      "kind": "能力配對"
+    },
+    {
+      "system": "immortalia",
+      "source": "index.html",
+      "target": "網站公開輸出",
+      "target_example": "dazibao/2026-08-21-ai-world.html",
+      "can": [
+        "世界觀容器",
+        "跨文本索引",
+        "材料歸檔",
+        "敘事化包裝"
+      ],
       "kind": "能力配對"
     }
   ],
-  "note": "種子紀錄：後端工作流接通後，會由掃描器自動覆寫最新結果。"
+  "note": "v1 為站內啟發式掃描器：先把管線接通；高階語義判斷之後可再接 LLM。"
 }
