@@ -1,0 +1,74 @@
+{
+  "runAt": "2026-08-24 12:22 +08:00",
+  "engine": "Mother",
+  "vessel": "Nostromo",
+  "phase": "mining-only",
+  "rules": {
+    "refining": false,
+    "comparison": false,
+    "collision": false,
+    "infection": false,
+    "hybridization": false,
+    "useJudgment": false
+  },
+  "stateRead": {
+    "motherState": true,
+    "visualMining": true,
+    "latestPriorRun": "mother-runs/2026-08-24-1131.json"
+  },
+  "uncultured": {
+    "sourceFolderId": "104Dpvr-q8xD1t1Hlw3KVSSGcJDCbcOIF",
+    "folderScanCount": 31,
+    "newSincePriorInventory": 0,
+    "samples": [
+      {
+        "id": "16P77fCYKqUgSZR0gWO6z0Z5rjCQyNTdW",
+        "title": "MVIMG_20260614_130628.jpg",
+        "status": "sampled-existing-unseen",
+        "ore": "老磚屋內院／巷弄入口的近距離直幅記錄。灰黑磚牆與較舊木構屋簷構成主要背景，門口貼有紅色春聯；牆面裝有兩只電表、白色管線，屋簷下與畫面上方有多束現代電纜橫向穿過。門前晾掛日常衣物，牆角堆放木料、磚塊、布袋、塑膠桶與雜物，地面有潮濕／苔痕。只保存礦樣，不做作品、理論或用途判斷。"
+      }
+    ],
+    "possibleSeries": [
+      "老磚屋／傳統住宅日常使用狀態的近距離記錄（僅列候選系列）",
+      "現代電表、管線、電纜直接疊加在舊磚木建築上（僅列候選視覺特徵）",
+      "晾衣、堆物、修補材料與居住痕跡共同進入建築畫面（僅列候選視覺特徵）",
+      "潮濕地面、牆腳老化與持續使用中的生活空間並置（僅列候選視覺特徵）"
+    ],
+    "dedupeNote": "本輪資料夾仍為 31 件，未見較 11:31 巡礦新增或修改。16P77fCYKqUgSZR0gWO6z0Z5rjCQyNTdW 在 visual-mining.json 中為既有待分析項，且未出現在上一輪 11:31 抽樣，因此抽為既有未分析礦樣。"
+  },
+  "terminus": {
+    "purposefulDrilling": [
+      {
+        "id": "1gmQv4Rj5nLhUYx99bUHZiDpr4gRdBfus",
+        "title": "由公共利益探討都市更新法令調整機制-以台北市為例.pdf",
+        "status": "newly-opened-research-material-candidate-ore",
+        "candidateLayer": "urban-renewal-public-interest-reward-and-regulation",
+        "observations": [
+          "2008 碩論把都市更新中的容積獎勵、稅賦減免明確視為投入更新的社會資源，研究核心問題是這些資源是否換回相稱的公共利益。",
+          "材料把公共利益拆進法令調整與實際操作：弱勢住宅供給、獎勵內容與額度分區分期、公辦更新、公益設施／用地取得與財源安排等均被列成可調整制度項目。",
+          "章節結構另把『公共利益』『公正』『都市更新容積獎勵』分開處理，保存了一套制度正當性與操作機制並列的研究語彙。本輪只列候選礦層，不與既有金融化或價值形式材料比較。"
+        ]
+      }
+    ],
+    "blindExcavation": [
+      {
+        "id": "10duSS8IkCrcagehyxr6rete2s-FSExT8",
+        "title": "金門國家公園傳統建築活化利用委託民宿經營案成效評估.pdf",
+        "status": "newly-opened-special-material-candidate-ore",
+        "candidateLayer": "heritage-reuse-homestay-evaluation-and-lived-space",
+        "observations": [
+          "2006 成效評估把傳統建築保存、民宿經營、觀光遊憩、地方就業與政府財政支出放在同一個政策操作框架內，但本輪只記錄材料本身的並列方式。",
+          "研究把建築空間評估拆得很細：樓層、室內外與中介空間、設備毀損、空間特色、維護、資源分配、使用行為，同時另做經營者與遊客滿意度、社區互動與營運收入評估。",
+          "材料保存一套『修復後傳統建築如何被持續使用』的實務評估語彙，兼有空間、經營、旅遊與社區層次。本輪只列特殊材料，不做跨文本統合或用途判斷。"
+        ]
+      }
+    ],
+    "sensitiveSkipped": [
+      "搜尋結果中出現可能含個人履歷、報名、票券或其他個人資料類文件時未打開、未分析、未索引。"
+    ],
+    "note": "本輪只保存材料本身可見的概念、用語、結構與特殊形式，不做跨年代統合、理論比較、冶煉或用途判斷。"
+  },
+  "sensitiveData": "未分析、索引或保存銀行／金融帳號、登入憑證、密碼、驗證碼、身分證明、稅務資料或其他高度敏感個資。",
+  "refining": "deferred",
+  "note": "本輪嚴格停留於第一階段採礦；大型 state 檔僅作去重參考，本輪狀態保存於獨立 mother-runs JSON。"
+}
