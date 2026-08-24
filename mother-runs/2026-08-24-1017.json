@@ -1,0 +1,72 @@
+{
+  "runAt": "2026-08-24 10:17 +08:00",
+  "engine": "Mother",
+  "vessel": "Nostromo",
+  "phase": "mining-only",
+  "rules": {
+    "refining": false,
+    "comparison": false,
+    "collision": false,
+    "infection": false,
+    "hybridization": false,
+    "useJudgment": false
+  },
+  "stateRead": {
+    "motherState": true,
+    "visualMining": true,
+    "latestPriorRun": "mother-runs/2026-08-24-0916.json"
+  },
+  "uncultured": {
+    "sourceFolderId": "104Dpvr-q8xD1t1Hlw3KVSSGcJDCbcOIF",
+    "folderScanCount": 31,
+    "newSincePriorInventory": 0,
+    "samples": [
+      {
+        "id": "19vciqGbSuBrffgoVwqcNWZMK2r67XiS8",
+        "title": "MVIMG_20260614_130504.jpg",
+        "status": "sampled-existing-unseen",
+        "ore": "雨後或潮濕狀態的窄巷直幅街景。左右兩側同時存在較新的粉刷／磁磚立面與較舊的灰磚牆、瓦屋頂，密集電線沿牆與巷道縱深延伸。巷底可見機車、遮棚與較高樓房，前景幾乎無人，濕亮地面形成明顯向內收束的透視軸。只保存礦樣，不做作品、理論或用途判斷。"
+      }
+    ],
+    "possibleSeries": [
+      "老城窄巷／住宅後巷的縱深記錄（僅列候選系列）",
+      "新舊立面、灰磚與磁磚並置（僅列候選視覺特徵）",
+      "沿牆密集電線／管線成為畫面線性結構（僅列候選視覺特徵）",
+      "濕地面反光與無人前景形成安靜空巷（僅列候選視覺特徵）"
+    ],
+    "dedupeNote": "本輪資料夾仍為 31 件，未見較 09:16 巡礦新增。19vciqGbSuBrffgoVwqcNWZMK2r67XiS8 在 visual-mining.json 中標為待分析；最新 mother-state 與近兩輪 mother-runs 未命中其 ID，因此抽為既有未分析礦樣。"
+  },
+  "terminus": {
+    "purposefulDrilling": [
+      {
+        "id": "1qhVwIqGuQQiim7UFtGtsPb_TJxDeSgFh",
+        "title": "企劃書2019.10.30.docx",
+        "status": "newly-visited-candidate-ore",
+        "candidateLayer": "quanzhou-community-memory-living-museum-action-node",
+        "observations": [
+          "2019 城南海絲記憶館企劃把新橋社區直接稱為『活的城市博物館』與『真正的歷史教室』，並把居民描述成『一本活生生的口述歷史／會走路的歷史課本』。",
+          "文件不是只做硬體改造，而是把海關口、童心社、大榕樹、街道、菜市場、五金行、社區老人與小朋友串成可活動的節點；同時反覆使用導覽、講古、老照片、老物件、家庭史與社區記憶館等具體媒介。",
+          "材料中保存『先讓居民日常使用，再吸引外來訪客』的操作語彙：老人聊天泡茶、四點半課堂、素食斋、週末課、社區小導遊、故事館等都被列成空間日常功能。本輪僅列為候選礦層，不與其他都市／社造材料做比較。"
+        ]
+      }
+    ],
+    "blindExcavation": [
+      {
+        "id": "1qKSrc5jk-3ODpTiyZftMepr0J6MK78Uf",
+        "title": "模式语言与泉州社造｜30 活动节点 ACTIVITY NODES.pdf",
+        "status": "newly-opened-special-material-candidate-ore",
+        "candidateLayer": "activity-nodes-pattern-language-community-making",
+        "observations": [
+          "這份 2019 共讀／社造材料把『活動節點』定義為場所營造的支點，並反覆強調『先指認既有節點，再以節點－網絡概念優化路網』，而不是先畫完整路網。",
+          "文件保存大量極具體的微型公共空間詞彙：大樹下、街頭綠地、籃球場、臨渠運動場、銀行／超市／藥店周邊、小聚集點、五分鐘便民圈等；也記錄由空間改造轉向『空間創造』的說法。",
+          "材料本身是多人共讀與在地案例混合體，不是單一作者論文；本輪只把『節點－網絡』『先辨識再連線』『日常聚集點』『小而精公共空間』列為特殊候選礦點。"
+        ]
+      }
+    ],
+    "sensitiveSkipped": [],
+    "note": "本輪只保存材料本身可見的概念、用語、結構與特殊形式，不做跨年代統合、理論比較、冶煉或用途判斷。"
+  },
+  "sensitiveData": "未分析、索引或保存銀行／金融帳號、登入憑證、密碼、驗證碼、身分證明、稅務資料或其他高度敏感個資。",
+  "refining": "deferred",
+  "note": "本輪嚴格停留於第一階段採礦；大型 state 檔僅作去重參考，本輪狀態保存於獨立 mother-runs JSON。"
+}
