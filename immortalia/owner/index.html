@@ -13,13 +13,13 @@
 <main class="wrap">
 <div class="eyebrow">IMMORTALIA · OWNER CONSOLE</div>
 <h1>島主室</h1>
-<div class="sub">蓬萊仙島的後臺操作台。所有維護、掃描與內部工具往這裡集中。</div>
-<div class="status">第一版掃描後端已接上 GitHub Actions：可手動啟動，也會每週自動跑。現在手動啟動仍要進 GitHub Actions 再按一次 <code>Run workflow</code>；之後若接 serverless relay，才能做到網站內真正單擊直接觸發。</div>
+<div class="sub">蓬萊仙島的後臺操作台。所有維護、掃描、回饋與內部工具往這裡集中。</div>
+<div class="status">掃描器已升級成 v2：會降低共通詞雜訊，替結果分成「自動記錄／小實驗候選／待島主批准」。手動即時掃描目前仍是兩步：進 GitHub Actions 後再按一次 <code>Run workflow</code>。</div>
 <section class="grid" aria-label="島主工具">
-<a class="tool" href="https://github.com/jcchang13-a11y/visual-mining-lab/actions/workflows/immortalia-scan.yml" target="_blank" rel="noopener"><h2>立即掃描</h2><p>執行一次站內「關聯發現＋能力配對」。目前會開啟 GitHub Actions；再按一次 Run workflow 即可真正啟動。</p><div class="meta">後端已接通 · 兩步啟動</div></a>
-<a class="tool" href="./scans/"><h2>掃描紀錄</h2><p>查看最新一次掃描、每週巡檢歷史，以及已採用／待處理的交叉關聯與能力配對。</p><div class="meta">可進入</div></a>
-<div class="tool disabled" aria-disabled="true"><h2>網站維護</h2><p>未來放失效連結、圖片替換、文件索引、部署檢查等工具。</p><div class="meta">預留模組</div></div>
-<div class="tool disabled" aria-disabled="true"><h2>系統調度</h2><p>未來整合香菇、媒文化、端點星與其他子系統的跨專案任務。</p><div class="meta">預留模組</div></div>
+<a class="tool" href="https://github.com/jcchang13-a11y/visual-mining-lab/actions/workflows/immortalia-scan.yml" target="_blank" rel="noopener"><h2>立即掃描</h2><p>執行一次站內「關聯發現＋能力配對」，並替結果做信心分級與後續路由。</p><div class="meta">兩步啟動</div></a>
+<a class="tool" href="./scans/"><h2>掃描紀錄</h2><p>查看最新結果、哪些已自動記錄、哪些適合先跑一輪，以及哪些必須等你批准。</p><div class="meta">可進入</div></a>
+<a class="tool" href="./feedback/"><h2>島主回饋</h2><p>輸入「繼續實驗／批准量產／修改後再試／停止」或全局工作偏好。</p><div class="meta">本機回饋匣</div></a>
+<div class="tool disabled" aria-disabled="true"><h2>系統調度</h2><p>下一階段整合香菇、媒文化、端點星與其他子系統的跨專案任務。</p><div class="meta">接線中</div></div>
 </section>
 <a class="back" href="../">← 返回蓬萊仙島</a>
 </main>
