@@ -1,0 +1,74 @@
+{
+  "runAt": "2026-08-24 18:15 +08:00",
+  "engine": "Mother",
+  "vessel": "Nostromo",
+  "phase": "mining-only",
+  "rules": {
+    "refining": false,
+    "comparison": false,
+    "collision": false,
+    "infection": false,
+    "hybridization": false,
+    "useJudgment": false
+  },
+  "stateRead": {
+    "motherState": true,
+    "visualMining": true,
+    "latestPriorRun": "mother-runs/2026-08-24-1728.json"
+  },
+  "uncultured": {
+    "sourceFolderId": "104Dpvr-q8xD1t1Hlw3KVSSGcJDCbcOIF",
+    "inventoryCount": 31,
+    "newSincePriorInventory": 0,
+    "folderStatus": "no newly added or modified image detected after prior patrol",
+    "samples": [
+      {
+        "id": "1rnJUpWPk4-xHKeJ7665NXFy-RUmntykG",
+        "title": "MVIMG_20260614_110929.jpg",
+        "status": "sampled-existing-unseen",
+        "ore": "直幅近距離影像：一隻淺色捲毛小型犬坐在灰色地面中央，正面看向鏡頭、張口；背景只截到幾名穿亮綠色衣褲與白鞋者的下半身，前景上方有一條橫向木質長凳或桌板切過畫面。人物服裝形成大面積綠色背景，犬隻被框在桌板下與人腿之間。只保存可見材料，不做作品、理論或用途判斷。"
+      }
+    ],
+    "possibleSeries": [
+      "動物在公共／工作場域中的偶遇式近距離記錄（僅列候選系列）",
+      "人物只留下局部身體與一致服裝色塊，主體落在其間的構圖（僅列候選視覺特徵）",
+      "桌板、腿部與地面形成框景式前後層次（僅列候選視覺特徵）"
+    ],
+    "dedupeNote": "資料夾仍為 31 張，未見較 17:28 巡礦新增或修改；本輪從 visual-mining.json 既有待分析影像中抽取 1rnJUpWPk4-xHKeJ7665NXFy-RUmntykG，並避開近期已抽樣的 1HmlqCgY8ckDUcyfQFU0CMpOZNRsNdMMH、13fejGl4O9dsrew_XQHF9p6g7RmnzvuRU、1cUTxFXfxgkSYpkLzpQKOyJO7k7gGo8OK。"
+  },
+  "terminus": {
+    "purposefulDrilling": [
+      {
+        "id": "17_T8wxnGzXtllnoVDSObgV89U3_5syR0",
+        "title": "04第四章_文化遺產管理組織的層級與實踐.pdf",
+        "status": "newly-opened-research-material-candidate-ore",
+        "candidateLayer": "heritage-governance-organizational-levels-practice",
+        "observations": [
+          "章節把文化遺產管理中的 governance 與 institutional arrangements 明確列為核心因子，並區分治理與管理為不同層級的運作關係。",
+          "文本把遺產組織按治理位置區分為民間第一線、政府治理與更高層級組織，並強調組織角色、權責、監督與協調。",
+          "材料同時記錄小政府、使用者付費、觀光收入、公私夥伴與政府預算受限等外部壓力，作為遺產管理實務背景。此輪只保存其概念、用語與章節結構。"
+        ]
+      }
+    ],
+    "blindExcavation": [
+      {
+        "id": "1eD0J2lhLNrwiQ228jHgIXwtlXk_LVE9o",
+        "title": "翻牌遊戲：都更大富翁.docx",
+        "status": "newly-opened-special-material-candidate-ore",
+        "candidateLayer": "urban-renewal-protest-game-performance-script",
+        "observations": [
+          "短稿以電視益智／大富翁遊戲形式安排主持人、文化局角色、倒數、選項翻牌與情境劇，作為一齣戲的 ending。",
+          "核心機制是把『置之不理／徵收文萌樓』做成 A／B 選項，翻牌後出現 1.2 億與 330 萬兩個數字，再由擬人化文萌樓進行獨白。",
+          "文本把遊行訴求、文化資產管理、投資客、建商與保存問題轉成可演出的遊戲節目腳本，並保留音樂、倒數、手勢、字幕、定格與角色語氣等舞台指示。此輪只列為特殊材料。"
+        ]
+      }
+    ],
+    "sensitiveSkipped": [
+      "廣泛搜尋結果中出現可能涉及健康量表、個人資料、帳務、登入、票券、身份證明、金融或其他高度敏感資訊的檔案時直接跳過，不開啟、不分析、不索引。"
+    ],
+    "note": "本輪只把新讀到的概念、用語、形式與特殊材料列為候選礦層，不做跨年代統合、比較、冶煉或用途判斷。"
+  },
+  "sensitiveData": "未分析、索引或保存銀行／金融帳號、登入憑證、密碼、驗證碼、身分證明、稅務資料或其他高度敏感個資。",
+  "refining": "deferred",
+  "note": "本輪嚴格停留於第一階段採礦；大型 state 檔僅作去重參考，本輪狀態保存於獨立 mother-runs JSON。"
+}
