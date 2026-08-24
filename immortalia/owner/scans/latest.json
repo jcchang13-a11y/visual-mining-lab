@@ -1,0 +1,39 @@
+{
+  "generated_at": "2026-08-24T07:39:00+00:00",
+  "documents_scanned": 0,
+  "relations": [
+    {
+      "a": "immortalia/notes/liezi-tangwen.html",
+      "b": "gangchibao /zh/03",
+      "why": "《列子》『上下八方有極盡乎』與《金剛經》『四維、上下虛空可思量不』形成空間／邊界問題的直接交叉。",
+      "score": 100,
+      "kind": "關聯發現"
+    },
+    {
+      "a": "immortalia/notes/liezi-tangwen.html",
+      "b": "gangchibao /zh/10",
+      "why": "《列子》『物有巨細乎』與《剛吃飽》須彌山、恆河沙、三千大千世界共同操作尺度的膨脹與不可計量。",
+      "score": 95,
+      "kind": "關聯發現"
+    }
+  ],
+  "capabilities": [
+    {
+      "system": "mycelium",
+      "source": "mycelium",
+      "target": "《剛吃飽》／《金剛經》",
+      "target_example": "gangchibao",
+      "can": ["閱讀代理", "比較閱讀", "群體反應模擬", "異質解讀"],
+      "kind": "能力配對"
+    },
+    {
+      "system": "uncultured",
+      "source": "uncultured",
+      "target": "《剛吃飽》／《金剛經》",
+      "target_example": "gangchibao",
+      "can": ["視覺轉譯", "插圖候選", "素材採礦", "視覺語法生成"],
+      "kind": "能力配對"
+    }
+  ],
+  "note": "種子紀錄：後端工作流接通後，會由掃描器自動覆寫最新結果。"
+}
