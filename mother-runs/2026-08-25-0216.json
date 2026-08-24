@@ -1,0 +1,30 @@
+{
+  "runAt": "2026-08-25 02:16 +08:00",
+  "phase": "mining-only",
+  "rules": {"noRefining": true, "noUseJudgment": true},
+  "uncultured": {
+    "folderId": "104Dpvr-q8xD1t1Hlw3KVSSGcJDCbcOIF",
+    "inventoryCount": 32,
+    "newSincePriorInventory": 0,
+    "note": "Folder inventory unchanged since prior patrol; no new image extraction needed this run. Existing unseen pool remains available for later sampling."
+  },
+  "terminus": {
+    "visitedThisRun": [
+      {"id":"13eTHUcuH1iZhCpqMb6Vt_lvjoUCR_m1m","title":"博士論文.pdf","status":"candidate-ore"}
+    ],
+    "candidateLayers": [
+      {"id":"terminus-dissertation-visual-archive-2018","sourceId":"13eTHUcuH1iZhCpqMb6Vt_lvjoUCR_m1m","status":"candidate","observation":"2018 doctoral dissertation contains an unusually dense internal visual archive: 53 listed figures spanning maps, cadastral/property records, alley/building details, protest documentation, conceptual diagrams, financial/property relationship diagrams, value-form diagrams and bubble/scale diagrams. Record only as a candidate material layer; no interpretation or use judgment at this phase."},
+      {"id":"terminus-dissertation-position-vocabulary-2018","sourceId":"13eTHUcuH1iZhCpqMb6Vt_lvjoUCR_m1m","status":"candidate","observation":"Table of contents exposes recurring vocabulary in one source: other/social symptom, metaphor/metonymy, two battle positions, city/unconscious, fictitious capital, spatial money, return of the repressed, and a subject that should remain haunting. Record as a vocabulary-bearing ore layer only; do not unify theoretically."}
+    ],
+    "blindExcavation": {
+      "query":"ghost",
+      "duplicatesObserved":[
+        {"title":"張榮哲-1062博士班申請學位考試.pdf","ids":["1TvuLp5GCcyzWWAYudC1LMjrd3tHtmrs6","1cJ1u08uNkg4xvgvCXY-XkoGaKVYNxk0L"]},
+        {"title":"博士論文.pdf / 副本","ids":["13eTHUcuH1iZhCpqMb6Vt_lvjoUCR_m1m","1T63WLEw8DMTKPYiV8Rmr-r-1mv-s03Ns"]}
+      ],
+      "note":"Duplicate candidates recorded only; no deletion performed."
+    }
+  },
+  "sensitiveSkip": "No sensitive personal/financial/credential material analyzed or indexed.",
+  "stateWrite": "run-log-only"
+}
