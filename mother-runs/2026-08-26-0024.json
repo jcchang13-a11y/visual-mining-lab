@@ -1,0 +1,31 @@
+{
+  "runAt": "2026-08-26 00:24 +08:00",
+  "phase": "mining-only",
+  "vessel": "Nostromo",
+  "rules": {"refining": false, "comparison": false, "useJudgment": false},
+  "uncultured": {
+    "sourceFolderId": "104Dpvr-q8xD1t1Hlw3KVSSGcJDCbcOIF",
+    "newSincePriorLedger": 0,
+    "observation": "Folder metadata patrol found no image created/updated after the existing 2026-08-21 ingestion batch. Existing unseen material remains available for later sampling; no theory or work formation attempted.",
+    "duplicateCandidates": [
+      {"basis":"metadata-only","note":"No new duplicate candidate established this run."}
+    ]
+  },
+  "terminus": {
+    "mode": "purposeful drilling + small blind excavation",
+    "visitedThisRun": [
+      {"id":"1N1ZC7VSjNyZii-RBaJ1_ThWIMs4qLYGF","title":"研擬推動創意城市之初步架構及策略 201203.docx","status":"candidate-material"},
+      {"id":"1e3ZYtnjqbskmOp1TADveHMqv4thEhuRa","title":"2012臺北創意街區展0426.pdf","status":"candidate-material"},
+      {"id":"1OpKGcUO9JugdTCjbBGejnjIepjrItw1w","title":"2012年臺北創意街區展活動計畫大綱.pdf","status":"candidate-material"},
+      {"id":"1Ck2G64vyYByEhaqo4Qn2ZuLl8dvMlmJ4","title":"康青龍創意街區.pdf","status":"candidate-material"},
+      {"id":"1hHoPEK2k9FQJbapTSpA_-ua5cyTQrirD","title":"2014_台北市長獨立參選人馮光遠競選辦公室歷史保存政策初稿.pdf","status":"candidate-material"}
+    ],
+    "candidateStrata": [
+      {"id":"creative-city-creative-district-2012","status":"candidate","note":"A compact 2012 cluster around creative-city / creative-district planning and exhibition material is present. Recorded only as a candidate stratum; no interpretation or linkage performed."},
+      {"id":"heritage-policy-2014","status":"candidate","note":"A 2014 historical-preservation policy draft surfaced in the same broad urban-material field. Recorded as a separate candidate lead only."}
+    ],
+    "sensitiveSkipped": "Any obvious financial/account credential, password, verification, identity, tax, or other highly sensitive personal material encountered by broad search is excluded from findings."
+  },
+  "stateHandling": "Large mother-state.json was not rewritten; this append-only run file preserves the patrol safely.",
+  "notification": "none"
+}
