@@ -1,0 +1,24 @@
+{
+  "time": "2026-08-25 14:18 +08:00",
+  "phase": "mining-only",
+  "uncultured": {
+    "patrol": "紅米手機照片資料夾仍為 31 件既有批次；本輪未發現 2026-08-21 之後新增或修改的影像。",
+    "samples": [],
+    "dedupeNote": "已對照 visual-mining.json 與既有 mother-runs；本輪不重複抽取已採樣影像。"
+  },
+  "terminus": {
+    "visited": [
+      {
+        "id": "1TKTywkNRudY076JIeS2MKu71nZ7VlIjF",
+        "title": "2020-05-22.md",
+        "status": "mined-purposeful",
+        "ore": "候選礦層：鬼／死不透／被召喚而回返／語言中的位置移動／digital undeadness。文本把『鬼』界定為無法完成死亡、可被名字或語言再次召回的存在，並記錄 AI 在句子中進出『我們／你們』位置的現象。此階段僅登錄材料自身，不與 2012、2017 或 2026 其他鬼／它者材料比較或統合。"
+      }
+    ],
+    "candidateOnly": true,
+    "searchNotes": "purposeful drilling 使用『鬼』命中一份尚未在 mother-state 已知 visited 清單中出現的 2020 markdown；其餘命中包含已巡過文件、履歷與重複學位文件，未納入。另以『都市』抽查時主要命中外部參考論文與既有都市更新資料，本輪不把它們當作新礦。"
+  },
+  "sensitiveData": "未分析、未索引銀行／金融帳號、登入憑證、密碼、驗證碼、身分證明、稅務資料或其他高度敏感個資。",
+  "refining": "deferred",
+  "note": "嚴格停留第一階段採礦；不做冶煉、比較、對撞、感染、雜交、用途判斷或總理論統合。大型 mother-state.json 僅作去重參照，不直接改寫；本輪以獨立 mother-runs JSON 保存。"
+}
