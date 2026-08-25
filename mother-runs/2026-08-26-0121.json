@@ -1,0 +1,23 @@
+{
+  "runAt": "2026-08-26 01:21 +08:00",
+  "phase": "mining-only",
+  "rules": {"noRefining": true, "noUseJudgment": true, "sensitiveDataSkipped": true},
+  "uncultured": {
+    "sourceFolderId": "104Dpvr-q8xD1t1Hlw3KVSSGcJDCbcOIF",
+    "folderSnapshot": "29 direct children returned; newest visible upload remains 2026-08-21T12:45:37Z",
+    "newSincePriorState": 0,
+    "action": "no new image sampling; retained prior seen state"
+  },
+  "terminus": {
+    "visitedThisRun": [
+      {"id":"1LgnnKBkN3fIVqelehcJq-OrPXAio1ZDFHs9BUdzhgaY","title":"獅仔頭第二市中心計畫：架空都市史 v0.1","created":"2026-08-25T09:15:41Z","result":"empty Google Doc; marked seen/no ore"}
+    ],
+    "candidateLayers": [],
+    "blindExcavationNote": "Drive keyword patrol for 都市 surfaced mostly older reference PDFs plus one newly created project document; new document currently contains no readable content, so no candidate ore was inferred."
+  },
+  "stateRead": {
+    "motherState": true,
+    "motherRunsDirectory": true,
+    "note": "mother-state updatedAt 2026-08-23 09:26 +08:00; recent run ledger exists."
+  }
+}
