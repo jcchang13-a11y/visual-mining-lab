@@ -1,0 +1,55 @@
+{
+  "runAt": "2026-08-25 12:31 +08:00",
+  "phase": "mining-only",
+  "vessel": "Nostromo",
+  "rules": ["no-refining", "no-cross-comparison", "no-use-judgment"],
+  "uncultured": {
+    "sourceFolderId": "104Dpvr-q8xD1t1Hlw3KVSSGcJDCbcOIF",
+    "newSincePriorUploadBatch": 0,
+    "observed": "Current folder metadata still shows the existing 2026-08-21 upload batch; no later-created image surfaced in this patrol.",
+    "duplicateCandidate": {
+      "id": "1j5iK2PcAm71Kw51CW-9st_ympspggjVi",
+      "title": "Messenger_creation_0701C150-1817-4677-90FA-0D8006E17E93.jpeg",
+      "status": "candidate-only; do not delete without content verification"
+    },
+    "sampleAction": "No new-image sampling performed because no later upload was detected. Existing unseen pool remains available for future drift samples."
+  },
+  "terminus": {
+    "purposefulDrilling": [
+      {
+        "id": "1cOVb6_90jSm-XlGDdMtRCy7uxbSpPmQx",
+        "title": "10027_5.Sex and City（張榮哲書章節）.pdf",
+        "status": "candidate ore layer",
+        "note": "Publication/PDF variant surfaced separately from the previously visited editable Sex and City manuscript; retain as a version/provenance candidate, not a new conceptual finding yet."
+      },
+      {
+        "id": "1poqGYleyhoJcZBQD2mviD57TD-_g78nd",
+        "title": "剛吃飽_第五輪綱領.md",
+        "status": "candidate ore layer",
+        "note": "Recent writing-method corpus surfaced during purposeful drilling. Mark for later mining of recurring structural vocabulary; no comparison or integration performed in phase 1."
+      },
+      {
+        "id": "1i0NPQyy8C7Z0uHlnXtHcc9QpKCh70iWu",
+        "title": "剛吃飽_第五輪插畫總表.md",
+        "status": "candidate ore layer",
+        "note": "Recent image-planning text surfaced as a distinct material class linking prose workflow and visual planning; record only as candidate material, with no use judgment."
+      }
+    ],
+    "blindExcavation": [
+      {
+        "id": "1qKSrc5jk-3ODpTiyZftMepr0J6MK78Uf",
+        "title": "模式语言与泉州社造｜30 活动节点 ACTIVITY NODES.pdf",
+        "status": "candidate ore layer",
+        "note": "Unexpected planning/pattern-language material surfaced in a broad search. Preserve as a blind-excavation lead; not interpreted this round."
+      }
+    ],
+    "skipped": "CVs, degree/exam paperwork, recommendation material, and other personal-administrative results were not mined. Sensitive financial/authentication/identity/tax materials remain excluded by rule."
+  },
+  "stateHandling": {
+    "motherStateRead": true,
+    "visualMiningRead": true,
+    "recentRunsRead": true,
+    "largeStateUpdated": false,
+    "reason": "Append-only run ledger used to avoid unsafe replacement of large state files."
+  }
+}
