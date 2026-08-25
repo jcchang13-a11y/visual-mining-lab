@@ -1,0 +1,38 @@
+{
+  "runAt": "2026-08-25 21:24 +08:00",
+  "phase": "mining-only",
+  "rules": {"noRefining": true, "sensitiveDataSkipped": true},
+  "uncultured": {
+    "folderId": "104Dpvr-q8xD1t1Hlw3KVSSGcJDCbcOIF",
+    "patrol": "metadata scan",
+    "newSincePriorRun": 0,
+    "note": "Folder listing remains the same 31-item set observed in the preceding run; the Messenger_creation image remains the sole candidate-unseen item already recorded at 20:26. No additional image interpretation performed.",
+    "duplicates": "No new exact metadata duplicate established in this pass."
+  },
+  "terminus": {
+    "patrol": "purposeful drilling + blind excavation",
+    "candidates": [
+      {
+        "id": "1ulC42MCuowLVGOmKVKqSdCG0auFHEs0t",
+        "title": "(脫宗華局長)社區深度觀光與觀光國際化的接軌理念與策略.pptx",
+        "status": "candidate-ore-layer",
+        "marker": "社區深度觀光／觀光國際化",
+        "note": "Previously unlisted in the older mother-state visited ledger; retained as an early tourism-policy/practice stratum. No synthesis."
+      },
+      {
+        "id": "10duSS8IkCrcagehyxr6rete2s-FSExT8",
+        "title": "金門國家公園傳統建築活化利用委託民宿經營案成效評估.pdf",
+        "status": "candidate-ore-layer",
+        "marker": "傳統建築活化／民宿經營／觀光利用",
+        "note": "Blind excavation hit outside the currently dominant representation/financialization vein; retained as a candidate heritage-tourism stratum only."
+      }
+    ],
+    "noiseOrDuplicate": {
+      "id": "1OC_jmjOz429ZkX8fOQ5TuSBD3irbUtJe",
+      "title": "~$推動創意城市之初步架構及策略 201203.docx",
+      "status": "office-temporary-file",
+      "action": "marked seen/no-ore; not promoted"
+    }
+  },
+  "stateAction": "Large mother-state.json left untouched; run ledger appended instead."
+}
