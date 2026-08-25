@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>IMMORTALIA · ARCHIVE 001</title>
+<style>
+:root{--bg:#05080b;--panel:#091017;--line:#25323c;--text:#d9e3e9;--muted:#768894;--accent:#8da8b9;--bad:#b88383}*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text)}body{font-family:Arial,"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif}.wrap{width:min(100%,900px);margin:auto;padding:28px 18px 64px}.back{display:inline-block;margin:8px 0 22px;color:var(--muted);text-decoration:none;font-size:.72rem;letter-spacing:.12em}.gate{margin-top:7vh;border:1px solid var(--line);background:var(--panel);padding:24px}.eyebrow{font-size:.66rem;letter-spacing:.22em;color:var(--muted)}h1{font-size:clamp(2rem,8vw,4.7rem);font-weight:400;margin:14px 0 8px}.gate p,.note{font-size:.8rem;line-height:1.7;color:var(--muted)}label{display:block;margin-top:24px;font-size:.68rem;letter-spacing:.14em;color:var(--accent)}textarea{width:100%;min-height:112px;margin-top:9px;padding:14px;background:#05080b;border:1px solid var(--line);color:var(--text);font:inherit;line-height:1.55;resize:vertical;outline:none}textarea:focus{border-color:var(--accent)}button{margin-top:12px;padding:11px 17px;border:1px solid var(--accent);background:transparent;color:var(--text);font:inherit;font-size:.72rem;letter-spacing:.12em;cursor:pointer}button:hover{background:#101a22}.msg{min-height:1.4em;margin-top:10px;font-size:.72rem;color:var(--bad)}#archive{display:none}.top{padding:6vh 0 24px;border-bottom:1px solid var(--line)}.meta{display:flex;gap:18px;flex-wrap:wrap;margin-top:12px;font-size:.67rem;letter-spacing:.1em;color:var(--muted)}.timeline{margin-top:28px;border-top:1px solid var(--line)}.entry{display:grid;grid-template-columns:120px 1fr;gap:20px;padding:18px 0;border-bottom:1px solid var(--line)}.year{font-size:.67rem;letter-spacing:.12em;color:var(--accent)}.entry h2{font-size:1.1rem;font-weight:400;margin:0 0 6px}.entry p{font-size:.77rem;line-height:1.65;color:var(--muted);margin:0}.sources{margin-top:30px}.sources h2{font-size:.76rem;font-weight:400;letter-spacing:.14em;color:var(--muted)}.source{padding:12px 0;border-bottom:1px solid var(--line);font-size:.76rem;color:var(--text)}@media(max-width:620px){.entry{grid-template-columns:1fr;gap:6px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="../">← LIBRARY</a>
+<section class="gate" id="gate">
+<div class="eyebrow">ACCESS GATE 02 · ARCHIVE 001</div>
+<h1>IDENTITY BY HISTORY</h1>
+<p>這不是密碼題，也不是猜謎。門禁只比對歷史檔案本身。請依時間順序輸入張榮哲學術／任職歷程中的主要機構名稱；標點、箭頭與空格不影響判定。</p>
+<label for="record">請輸入正確的歷史檔案資料</label>
+<textarea id="record" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="依時間順序輸入歷史資料"></textarea>
+<button id="enter" type="button">VERIFY RECORD</button>
+<div class="msg" id="msg" aria-live="polite"></div>
+</section>
+<section id="archive">
+<header class="top">
+<div class="eyebrow">IMMORTALIA · ARCHIVE 001 · VERIFIED</div>
+<h1>張榮哲歷史檔案資料</h1>
+<div class="meta"><span>CLASS: PERSONNEL HISTORY</span><span>STATUS: ACTIVE ARCHIVE</span><span>PRIVACY: PUBLIC PROFESSIONAL RECORDS ONLY</span></div>
+</header>
+<div class="timeline">
+<div class="entry"><div class="year">EARLY STUDY</div><div><h2>輔仁大學</h2><p>大眾傳播相關學士階段。</p></div></div>
+<div class="entry"><div class="year">POSTGRADUATE</div><div><h2>University of Essex</h2><p>Government 領域碩士與博士研究階段。</p></div></div>
+<div class="entry"><div class="year">2018</div><div><h2>國立臺灣大學</h2><p>城鄉／建築與城鄉研究領域博士學位完成。</p></div></div>
+<div class="entry"><div class="year">2018–2019</div><div><h2>臺北醫學大學</h2><p>博士後研究階段。</p></div></div>
+<div class="entry"><div class="year">2019–2022</div><div><h2>閩南師範大學</h2><p>大學教職階段。</p></div></div>
+<div class="entry"><div class="year">2022–2026</div><div><h2>韶關學院</h2><p>副教授；教學與研究涵蓋旅遊、城市／區域、數位經濟與文化相關議題。</p></div></div>
+</div>
+<section class="sources">
+<h2>INDEXED SOURCE FAMILY</h2>
+<div class="source">張榮哲學經歷／履歷文件系列（Google Drive，歷年版本）</div>
+<div class="source">本頁不收錄電話、住址、證件號碼、出生資料等私人欄位。</div>
+</section>
+</section>
+</div>
+<script>
+(function(){
+  const input=document.getElementById('record');
+  const enter=document.getElementById('enter');
+  const msg=document.getElementById('msg');
+  const gate=document.getElementById('gate');
+  const archive=document.getElementById('archive');
+  const groups=[
+    ['輔仁','fujen','fu jen'],
+    ['essex'],
+    ['臺灣大學','台灣大學','臺大','台大','nationaltaiwanuniversity','ntu'],
+    ['臺北醫學大學','台北醫學大學','北醫','taipeimedicaluniversity','tmu'],
+    ['閩南師範大學','闽南师范大学','閩南師大','闽南师大','minnannormaluniversity'],
+    ['韶關學院','韶关学院','shaoguanuniversity']
+  ];
+  function norm(s){return s.toLowerCase().replace(/[\s\-–—→>，,。.;；:：／/()（）·_]/g,'');}
+  function verify(){
+    const s=norm(input.value);
+    let pos=-1;
+    for(const variants of groups){
+      let hit=-1;
+      for(const v of variants){const i=s.indexOf(norm(v),pos+1);if(i!==-1&&(hit===-1||i<hit))hit=i;}
+      if(hit===-1){msg.textContent='RECORD MISMATCH · 歷史資料不完整或順序不符';return;}
+      pos=hit;
+    }
+    sessionStorage.setItem('immortalia_gate02','verified');
+    gate.style.display='none';archive.style.display='block';window.scrollTo(0,0);
+  }
+  enter.addEventListener('click',verify);
+  input.addEventListener('keydown',e=>{if(e.key==='Enter'&&(e.ctrlKey||e.metaKey))verify();});
+  if(sessionStorage.getItem('immortalia_gate02')==='verified'){gate.style.display='none';archive.style.display='block';}
+})();
+</script>
+</body>
+</html>
