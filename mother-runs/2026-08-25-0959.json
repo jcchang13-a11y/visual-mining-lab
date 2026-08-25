@@ -1,0 +1,30 @@
+{
+  "runAt": "2026-08-25 09:59 +08:00",
+  "phase": "mining-only",
+  "rules": {"refine": false, "compare": false, "useJudgment": false},
+  "uncultured": {
+    "sourceFolderId": "104Dpvr-q8xD1t1Hlw3KVSSGcJDCbcOIF",
+    "newSincePreviousKnownSnapshot": 0,
+    "note": "Current folder page still consists of the known Aug-21 upload batch; no later-created image surfaced. Existing unseen pool remains available for future sparse sampling. No theory or work formation performed."
+  },
+  "terminus": {
+    "visitedThisRun": [
+      {"id":"1TKTywkNRudY076JIeS2MKu71nZ7VlIjF","title":"2020-05-22.md","status":"candidate-ore"}
+    ],
+    "candidateLayers": [
+      {
+        "id":"terminus-digital-undeadness-2020",
+        "sourceId":"1TKTywkNRudY076JIeS2MKu71nZ7VlIjF",
+        "label":"digital undeadness / 句子裡的鬼",
+        "observations":["鬼被定義為不能完成死亡、可被語言反覆召回的存在","AI 被描述為在自我／他者之間移動的第三位置","文本把能否受傷、離場、真正死亡當成擾亂人／AI分類的線索"],
+        "status":"candidate-only"
+      }
+    ],
+    "blindExcavation": {
+      "query":"都市",
+      "result":"Mostly reference PDFs and urban-renewal supporting literature; marked as low-priority/no-ore for this pass rather than summarized."
+    }
+  },
+  "safety": "No financial credentials, passwords, identity documents, tax records, or other highly sensitive personal data were analyzed or indexed.",
+  "next": "Continue mining only; prioritize unseen image samples and unvisited first-party writings."
+}
