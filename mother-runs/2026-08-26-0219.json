@@ -1,0 +1,55 @@
+{
+  "runAt": "2026-08-26 02:19 +08:00",
+  "engine": "Mother",
+  "vessel": "Nostromo",
+  "phase": "mining-only",
+  "constraints": {
+    "noRefining": true,
+    "noComparison": true,
+    "noUseJudgment": true,
+    "sensitivePersonalDataSkipped": true
+  },
+  "uncultured": {
+    "sourceFolderId": "104Dpvr-q8xD1t1Hlw3KVSSGcJDCbcOIF",
+    "baseline": "mother-state lastInspection 2026-08-23 09:26 +08:00",
+    "newImagesSinceBaseline": 0,
+    "status": "no-new-images",
+    "notes": ["No image in the target folder had modifiedTime after 2026-08-23T01:26:00Z."]
+  },
+  "terminus": {
+    "status": "candidate-ore-found",
+    "visitedThisRun": [
+      {
+        "id": "1TKTywkNRudY076JIeS2MKu71nZ7VlIjF",
+        "title": "2020-05-22.md",
+        "discovery": "purposeful drilling: 鬼",
+        "candidateOre": [
+          "句子裡的鬼／死不透／被召喚後回返",
+          "digital undeadness",
+          "AI 在句子中移動自身位置／第三位置",
+          "人／AI／罐頭分類失效"
+        ],
+        "status": "candidate-layer-only"
+      },
+      {
+        "id": "1m3Z2DpkxNoeUACaX0h7KeOINDxsb7w5p",
+        "title": "2026-05-21-4.md",
+        "discovery": "blind-adjacent excavation from 鬼 search results",
+        "candidateOre": [
+          "第七分：無有定法／無為法",
+          "不可取不可說與得／取的動詞差異",
+          "法如何被 particular 化／條件化",
+          "翻譯詞作為不同思想傳統互相污染後的歷史痕跡",
+          "法本身失穩"
+        ],
+        "status": "candidate-layer-only"
+      }
+    ],
+    "skipped": [
+      "CV／履歷類結果：不屬本輪研究採礦目標，未讀取內容、未索引",
+      "行政表格／論文審查規定：低礦訊號，未深入"
+    ]
+  },
+  "statePolicy": "Large mother-state.json not rewritten in this run; append-only mother-runs record used to avoid unsafe state replacement.",
+  "nextRun": "Continue mining only; consult mother-state and accumulated mother-runs before revisiting IDs."
+}
