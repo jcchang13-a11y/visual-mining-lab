@@ -1,0 +1,27 @@
+{
+  "runAt": "2026-08-25 11:20 +08:00",
+  "phase": "mining-only",
+  "vessel": "Nostromo",
+  "bays": {
+    "uncultured": {
+      "source": "Google Drive folder 104Dpvr-q8xD1t1Hlw3KVSSGcJDCbcOIF",
+      "result": "no newly uploaded images detected in sampled top page",
+      "latestObservedCreatedAt": "2026-08-21T12:45:37.216Z",
+      "sampledIds": ["1j5iK2PcAm71Kw51CW-9st_ympspggjVi","1AVlijcbh2KJqnp3ztl0yMKckJs1BX-yL","11GdN1XWN4iiH9IXMBucUZWGI5TYf--34","1FW5drD5xfhflHuk-bJOByf2kS_VV2a5v","1CEdI_zlEDPQ4K5R_AOl5t0uVv-jthX9J"],
+      "note": "Mining only; no theory, work formation, or use judgment. Existing corpus remains available for later unseen sampling."
+    },
+    "terminus": {
+      "result": "blind excavation opened an unvisited reference-material stratum around urban renewal / floor-area transfer / public interest",
+      "candidateOre": [
+        {"id":"1gmQv4Rj5nLhUYx99bUHZiDpr4gRdBfus","title":"由公共利益探討都市更新法令調整機制-以台北市為例.pdf","status":"candidate-only"},
+        {"id":"1EKxaHD-PComehIIUTq6hlntApqevyW6B","title":"從環境品質面探討都市更新公益性及規劃設計容積獎勵妥適性之研究 -以台北市中山區為例-.pdf","status":"candidate-only"},
+        {"id":"144mOBmNmluRhd_R-exQ3BcCcWk-IVXZQ","title":"張剛維 以容積移轉進行都市保存之制度與執行－財產權觀點分析.pdf","status":"candidate-only"},
+        {"id":"1ouE-BSr_WhxGg_ffZWtEbjwpT9Ih67iY","title":"臺北市都市計畫容積移轉解釋函彙編.pdf","status":"candidate-only"}
+      ],
+      "note": "These are only candidate strata discovered by blind drilling. No comparison with prior leads and no theoretical integration performed."
+    }
+  },
+  "sensitiveDataPolicy": "banking, credentials, passwords, verification codes, identity documents, tax and other highly sensitive personal data skipped",
+  "stateRead": ["mother-state.json", "mother-runs/ directory"],
+  "stateWrite": "run file only"
+}
