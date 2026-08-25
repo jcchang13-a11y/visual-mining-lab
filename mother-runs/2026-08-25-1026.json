@@ -1,0 +1,47 @@
+{
+  "runAt": "2026-08-25 10:26 +08:00",
+  "engine": "Mother",
+  "vessel": "Nostromo",
+  "phase": "mining-only",
+  "constraints": ["no-refining", "no-comparison", "no-cross-linking", "no-use-judgment"],
+  "uncultured": {
+    "sourceFolderId": "104Dpvr-q8xD1t1Hlw3KVSSGcJDCbcOIF",
+    "inventoryCheck": "completed",
+    "newSinceLastKnownInventory": 0,
+    "note": "Folder inventory still consists of the previously indexed upload cohort; no files with creation/update timestamps after the last mining-state period were found in this patrol. Existing unseen images remain available for later sampling; no theory or artwork inference performed."
+  },
+  "terminus": {
+    "patrol": "purposeful + blind metadata drilling",
+    "newCandidateLayers": [
+      {
+        "id": "1gmQv4Rj5nLhUYx99bUHZiDpr4gRdBfus",
+        "title": "由公共利益探討都市更新法令調整機制-以台北市為例.pdf",
+        "status": "candidate-only",
+        "reason": "external/reference stratum around urban-renewal public-interest/legal adjustment; not previously present in visited ledger"
+      },
+      {
+        "id": "144mOBmNmluRhd_R-exQ3BcCcWk-IVXZQ",
+        "title": "張剛維 以容積移轉進行都市保存之制度與執行－財產權觀點分析.pdf",
+        "status": "candidate-only",
+        "reason": "external/reference stratum around transferable development rights, preservation and property rights; retained only as a possible ore layer"
+      },
+      {
+        "id": "11sLGBTcefCJEN10vnDd00nBDA01JJ_ba",
+        "title": "日治時代之臺北市近代都市計畫（一）—都市計畫之萌芽與展開.pdf",
+        "status": "candidate-only",
+        "reason": "historical planning stratum surfaced by blind excavation; retained without integration"
+      }
+    ],
+    "recentModifiedDocuments": {
+      "count": 1,
+      "title": "不可抵達之地：蓬萊、桃花源與世界各地的異境想像",
+      "action": "skipped for Terminus mining in this patrol because it is a current Immortalia/worldbuilding document rather than an old research stratum"
+    }
+  },
+  "safety": {
+    "sensitivePersonalData": "excluded by rule",
+    "sensitiveFindingsAdded": 0
+  },
+  "stateWrite": "run-file-only",
+  "motherStateLargeFileUpdated": false
+}
