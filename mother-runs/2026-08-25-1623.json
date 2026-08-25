@@ -1,0 +1,36 @@
+{
+  "runAt": "2026-08-25 16:23 +08:00",
+  "phase": "mining-only",
+  "vessel": "Nostromo",
+  "constraints": ["no-refining", "no-comparison", "no-use-judgment"],
+  "uncultured": {
+    "sourceFolderId": "104Dpvr-q8xD1t1Hlw3KVSSGcJDCbcOIF",
+    "status": "patrolled",
+    "observedCountThisPage": 100,
+    "folderResultSetCount": 100,
+    "newSincePriorUploadBatch": 0,
+    "note": "Current metadata page is still the 2026-08-21 upload batch; no later-created image surfaced. No visual-theory inference made. Continue paginated ledger/dedupe on later patrols."
+  },
+  "terminus": {
+    "status": "purposeful-drill",
+    "candidateOre": [
+      {"id":"1gmQv4Rj5nLhUYx99bUHZiDpr4gRdBfus","title":"由公共利益探討都市更新法令調整機制-以台北市為例.pdf","tag":"urban-renewal/public-interest"},
+      {"id":"1LQHusDgpaJZqSVwljl31ZVjXBy48FVKb","title":"李素馨 古蹟保存與都市更新經濟議題之研究[全文] .pdf","tag":"heritage/urban-renewal/economy"},
+      {"id":"14t_RFcpKGoWmsHorThGs2ztyfPyh66_p","title":"都市更新容積獎勵下之投資可行性-以華固雙橡園為例.pdf","tag":"floor-area-bonus/investment"},
+      {"id":"144mOBmNmluRhd_R-exQ3BcCcWk-IVXZQ","title":"張剛維 以容積移轉進行都市保存之制度與執行－財產權觀點分析.pdf","tag":"TDR/property-rights/preservation"},
+      {"id":"1ouE-BSr_WhxGg_ffZWtEbjwpT9Ih67iY","title":"臺北市都市計畫容積移轉解釋函彙編.pdf","tag":"TDR/regulatory-material"},
+      {"id":"11sLGBTcefCJEN10vnDd00nBDA01JJ_ba","title":"日治時代之臺北市近代都市計畫（一）—都市計畫之萌芽與展開.pdf","tag":"historical-urban-planning"}
+    ],
+    "note": "Candidates only. No synthesis or cross-document comparison performed."
+  },
+  "safety": {
+    "sensitivePersonalData": "skip",
+    "indexedSensitiveItems": 0
+  },
+  "state": {
+    "motherStateRead": true,
+    "recentRunsRead": true,
+    "largeStateUpdated": false,
+    "runFileWritten": true
+  }
+}
