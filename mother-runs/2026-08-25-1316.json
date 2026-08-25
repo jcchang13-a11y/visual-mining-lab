@@ -1,0 +1,31 @@
+{
+  "time": "2026-08-25 13:16 +08:00",
+  "phase": "mining-only",
+  "uncultured": {
+    "patrol": "紅米手機照片資料夾本輪仍見既有批次；目前讀到的檔案建立／修改時間均不晚於 2026-08-21，未發現自上一輪後新增影像。",
+    "samples": [],
+    "possibleSeries": [],
+    "dedupeNote": "已讀 mother-state.json 與 mother-runs 最近紀錄；本輪沒有新增影像，因此不重複抽取已採樣材料。"
+  },
+  "terminus": {
+    "visited": [
+      {
+        "id": "1DYUvg3Wyc3WReFVl8iV8FZcglIuGXPqf",
+        "title": "論文發表.pdf",
+        "status": "mined-blind",
+        "ore": "2025 旅遊資訊課程研究材料：以產業專家協同教學、學習認知、學習態度為核心，並明確出現 theory-practice gap、workplace needs、labor rights、team teaching、knowledge explosion、information flow、educational technology、employability 等語彙。先列候選礦層：理論／實務落差、協同教學、勞動權利、資訊流、知識更新、就業能力；僅記錄材料自身，不與既有網絡、教育或其他礦層統合。"
+      }
+    ],
+    "duplicateCandidates": [
+      {
+        "ids": ["1OnnuIlILDHxOVTW3LnXbM5KVkNeOLGun", "1PkPVWCkj9JcymTEUwDgwchS62HAcKq2M"],
+        "titles": ["金家禾_促進公有土地參與都市更新之功能及問題研究－以臺北市為例.pdf", "張莉旻_促進公有土地參與都市更新之功能及問題研究－以臺北市為例.pdf"],
+        "note": "兩檔搜尋結果顯示完全相同檔案大小 2,670,783 bytes 且題名主體相同但前綴姓名不同；暫列 metadata-level duplicate candidate，未刪除、未判定內容完全相同。"
+      }
+    ],
+    "blindExcavation": "以 tourism 作少量盲挖，避開已在 mother-state visited 的 2016 章稿，抽取 2025 教學研究論文作新礦樣。"
+  },
+  "sensitiveData": "本輪未分析、未索引銀行／金融帳號、登入憑證、密碼、驗證碼、身分證明、稅務資料或其他高度敏感個資。",
+  "refining": "deferred",
+  "note": "嚴格停留第一階段採礦；不做冶煉、比較、對撞、感染、雜交、用途判斷或總理論統合。大型 mother-state 不直接改寫，以獨立 mother-runs JSON 保存本輪狀態。"
+}
