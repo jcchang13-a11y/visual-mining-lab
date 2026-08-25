@@ -1,0 +1,27 @@
+{
+  "runAt": "2026-08-25 17:21 +08:00",
+  "phase": "mining-only",
+  "rules": {"refining": false, "comparison": false, "useJudgment": false},
+  "uncultured": {
+    "sourceFolderId": "104Dpvr-q8xD1t1Hlw3KVSSGcJDCbcOIF",
+    "newSincePreviousKnownUpload": 0,
+    "patrol": "Top folder page checked. Latest visible image remains Messenger_creation_0701C150-1817-4677-90FA-0D8006E17E93.jpeg, created 2026-08-21 12:45:37Z; subsequent visible items are the previously indexed 2026-08-21 batch.",
+    "sampling": "No new-image sample taken this round; avoid re-mining known batch.",
+    "candidateVisualLayers": []
+  },
+  "terminus": {
+    "purposefulDrilling": [
+      {"id":"1LgnnKBkN3fIVqelehcJq-OrPXAio1ZDFHs9BUdzhgaY","title":"獅仔頭第二市中心計畫：架空都市史 v0.1","status":"candidate-layer","note":"Recent urban-history/worldbuilding material surfaced by 都市 drilling; retain as an unintegrated candidate layer."}
+    ],
+    "blindExcavation": [
+      {"id":"1taOBsJlvA441227eVVq6O_Is7g4NSqWpRTrYQMp8P5Q","title":"菌絲工作節點｜髒的社會理論 Dirty Social Theory","status":"candidate-layer","note":"Unexpected hit in 網絡 excavation; retain as a recent candidate layer without linking it to older network/urban theory yet."},
+      {"id":"1d4FiM8O-WKglBDtJWNg4kn91tgTalZps","title":"2026-05-21-3.md","status":"candidate-layer","note":"Unlabeled note surfaced in 網絡 excavation; candidate for later inspection, not interpreted this round."}
+    ],
+    "alreadyKnownSkipped": ["1x-1IU02VttTwEffXsHAf_80Oru9osoyR"],
+    "externalReferenceMaterialSkipped": ["1gmQv4Rj5nLhUYx99bUHZiDpr4gRdBfus","1EKxaHD-PComehIIUTq6hlntApqevyW6B","1LQHusDgpaJZqSVwljl31ZVjXBy48FVKb","1OnnuIlILDHxOVTW3LnXbM5KVkNeOLGun","1PkPVWCkj9JcymTEUwDgwchS62HAcKq2M","1x9A6Bkw-rNJNlEWQG9SDT-JtOvvHUJvj","14t_RFcpKGoWmsHorThGs2ztyfPyh66_p"],
+    "candidateConcepts": ["架空都市史", "髒的社會理論"],
+    "integration": "none"
+  },
+  "sensitiveData": {"policy":"skip without analysis or indexing","encountered":0},
+  "stateWrite": "append-only mother-run; mother-state.json intentionally not rewritten"
+}
