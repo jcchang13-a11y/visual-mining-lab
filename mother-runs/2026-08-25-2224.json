@@ -1,0 +1,46 @@
+{
+  "runAt": "2026-08-25 22:24 +08:00",
+  "phase": "mining-only",
+  "rules": {"noRefining": true, "sensitiveDataSkipped": true},
+  "uncultured": {
+    "folderId": "104Dpvr-q8xD1t1Hlw3KVSSGcJDCbcOIF",
+    "patrol": "metadata scan",
+    "newSincePriorRun": 0,
+    "note": "Folder listing remains the same 31-item set observed in the preceding run. Messenger_creation_0701C150-1817-4677-90FA-0D8006E17E93.jpeg remains the sole candidate-unseen item already recorded previously; no additional image interpretation performed.",
+    "duplicates": "No new exact metadata duplicate established in this pass."
+  },
+  "terminus": {
+    "patrol": "purposeful drilling + blind excavation",
+    "candidates": [
+      {
+        "id": "1xbJaSvet3boPFv84xPLltlS5HC_PiKJw",
+        "title": "20100329 台北市政府 觀光傳播局 局長脫宗華 _ 旅奇旅遊行銷資訊網-大中華旅遊同業資訊平台.pdf",
+        "status": "candidate-ore-layer",
+        "marker": "都市觀光治理／觀光行銷／政策人物材料",
+        "note": "Adjacent to the community-tourism policy stratum found in the prior run; retained only as a candidate archival layer, without comparison or synthesis."
+      },
+      {
+        "id": "1GJXQviukzPmCyNoKDBRa9kBYfop8invr",
+        "title": "邊金靜_文化資產的活化利用與經營管理－金門後浦城區為例.pdf",
+        "status": "candidate-ore-layer",
+        "marker": "文化資產活化／經營管理／金門地方空間",
+        "note": "Blind excavation hit in the heritage-tourism neighborhood. Retained as a candidate layer only; no use judgment or theoretical integration."
+      }
+    ],
+    "noiseOrDuplicate": [
+      {
+        "ids": ["13FiCAuIFnlXevEa85UKIMKu-QLzJkEuj", "1j_foB4RpQkfqwhhpeYu0OqPKRId9bSkD"],
+        "title": "立院質詢96_10丁守中質詢台銀未維護古蹟.pdf",
+        "status": "possible duplicate-by-title",
+        "action": "flagged only; no deletion and no content inference"
+      },
+      {
+        "ids": ["1yTCETY92niGV9P308txwMLLxwJf_5Vzo", "13bCFSJWIVuN0rNiQpBZrGIGUjqb7_1uO"],
+        "title": "手冊.docx",
+        "status": "possible exact duplicate-by-title-and-size",
+        "action": "flagged only; no deletion"
+      }
+    ]
+  },
+  "stateAction": "Large mother-state.json left untouched; run ledger appended instead."
+}
