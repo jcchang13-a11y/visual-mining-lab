@@ -1,0 +1,78 @@
+{
+  "runAt": "2026-08-26 06:12 +08:00",
+  "engine": "Mother",
+  "vessel": "Nostromo",
+  "phase": "mining-only",
+  "rules": {
+    "refining": false,
+    "comparison": false,
+    "cross-linking": false,
+    "useJudgment": false,
+    "sensitiveMaterialPolicy": "skip-without-indexing"
+  },
+  "sourcesChecked": {
+    "github": ["mother-state.json", "visual-mining.json", "mother-runs/"],
+    "imageBay": "Google Drive folder 104Dpvr-q8xD1t1Hlw3KVSSGcJDCbcOIF",
+    "textBay": "Google Drive research/writing corpus"
+  },
+  "uncultured": {
+    "folderCountObserved": 31,
+    "newSinceLedger": 0,
+    "sampledThisRun": [
+      {
+        "id": "1uuWnFNbpcZiJNFrqjJDFPnNf5_J3afck",
+        "fileName": "MVIMG_20260614_100955.jpg",
+        "status": "sampled",
+        "candidateObservations": [
+          "室內多人共同包製食物；手部操作、葉片、餡料與工作桌同時佔據畫面",
+          "人物年齡偏高，多人戴口罩；畫面是近距離日常紀錄而非正式合照",
+          "可暫列為『共同勞作／食物製作／室內日常』候選系列，不做用途判斷"
+        ]
+      },
+      {
+        "id": "19vciqGbSuBrffgoVwqcNWZMK2r67XiS8",
+        "fileName": "MVIMG_20260614_130504.jpg",
+        "status": "sampled",
+        "candidateObservations": [
+          "狹窄舊街巷，灰磚與較新的貼面、雨後濕地、密集外露線纜同時出現",
+          "視線沿巷道向內收束，近景幾乎無人，遠端有機車與生活痕跡",
+          "可暫列為『舊街巷／建築表皮／生活基礎設施』候選系列，不做理論化"
+        ]
+      }
+    ],
+    "dedupe": {
+      "exactDuplicatesRemoved": 0,
+      "note": "本輪未進行破壞性刪除；僅依現有 ledger 與 Drive 列表確認未見新增檔案。"
+    }
+  },
+  "terminus": {
+    "purposefulDrilling": [
+      {
+        "id": "1cUI1nY9GmGwupO26-GwMPp-rpeq1LmNm",
+        "title": "4-1大稻埕地方產業與故事旅遊(水瓶子).pdf",
+        "status": "candidate-ore",
+        "candidateLayers": [
+          "導覽被拆成設計、查資料、實勘、宣傳、報名、現場與記錄等完整操作鏈",
+          "反覆強調利用現存建築與物件引言，以及把歷史故事串成街道路線",
+          "材料同時保存二手書店、古蹟、地方產業、街道再生與生活觀察的細碎例子"
+        ],
+        "note": "僅列候選礦層；不判定其與既有理論或作品的關係。"
+      }
+    ],
+    "blindExcavation": {
+      "queriesTried": ["旅游", "夜间经济"],
+      "candidateSignals": [
+        "舊觀光／地方導覽材料集中保留大量『路線—物件—故事—現場操作』型資料",
+        "搜尋過程出現學經歷、學員資料等可能含個資的文件，已直接略過，不分析、不索引"
+      ]
+    }
+  },
+  "sensitiveSkips": [
+    "學經歷參考表.docx",
+    "學員資料.xls"
+  ],
+  "notes": [
+    "本輪只做第一階段採礦；沒有執行冶煉、比較、對撞、感染、雜交或用途判斷。",
+    "未更新大型 mother-state.json，以避免覆蓋較舊但仍有用的累積狀態；本輪獨立保存於 mother-runs。"
+  ]
+}
