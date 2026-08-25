@@ -1,0 +1,65 @@
+{
+  "runAt": "2026-08-26 04:26 +08:00",
+  "phase": "mining-only",
+  "policy": "No refining, comparison, collision, infection, hybridization, or use-case judgment.",
+  "uncultured": {
+    "sourceFolderId": "104Dpvr-q8xD1t1Hlw3KVSSGcJDCbcOIF",
+    "folderConfirmed": true,
+    "inventoryProbe": "50-image metadata page inspected",
+    "newSinceKnownSnapshot": 0,
+    "note": "Current image metadata page is still dominated by the 2026-08-21 upload batch already represented in visual-mining.json. No later-created image was detected in this patrol page. Existing unseen images remain ore inventory; no new theory or artwork inference made.",
+    "duplicateSignals": [
+      "MVIMG_20260614_* forms a dense same-day filename series; retained as a possible series marker only, not declared duplicates."
+    ]
+  },
+  "terminus": {
+    "purposefulDrilling": {
+      "query": "都市",
+      "candidateOre": [
+        {
+          "id": "1LgnnKBkN3fIVqelehcJq-OrPXAio1ZDFHs9BUdzhgaY",
+          "title": "獅仔頭第二市中心計畫：架空都市史 v0.1",
+          "createdAt": "2026-08-25T09:15:41.182Z",
+          "status": "candidate-new-ore",
+          "note": "Recent document surfaced by a broad urban query. Recorded only as candidate ore; not integrated with older urban/representation threads."
+        }
+      ],
+      "olderReferenceMaterial": "Multiple 2018 urban-renewal / floor-area-transfer PDFs surfaced; treated as reference holdings rather than user-authored ore until provenance/relevance is established."
+    },
+    "blindExcavation": {
+      "query": "陰不是陽",
+      "candidateOre": [
+        {
+          "id": "1TZTAsXYtQ64uE0ygUqAXjBCUY5coBwx4",
+          "title": "寫在最後面.docx",
+          "status": "candidate-unvisited",
+          "note": "Surfaced adjacent to a known 2017 text. Candidate only; content not interpreted in this run."
+        },
+        {
+          "id": "1Kxpq9_BvChJfHs0Q6w6sZRf0ENRXRRlu",
+          "title": "寫在最後面 (NEW).docx",
+          "status": "candidate-unvisited",
+          "note": "Variant surfaced adjacent to the same known 2017 text. Candidate only; possible version relation left unresolved."
+        },
+        {
+          "id": "1RoE0bXsMH_OZqh0PBF27hbV3_rd4FeYC",
+          "title": "合併版 (第一版).docx",
+          "status": "candidate-unvisited",
+          "note": "Large 2018 document surfaced in blind excavation. Candidate only; no summary or theoretical integration performed."
+        }
+      ]
+    }
+  },
+  "sensitiveData": {
+    "policyApplied": true,
+    "indexed": false,
+    "note": "No sensitive financial/account/credential/identity/tax material intentionally inspected or added."
+  },
+  "state": {
+    "motherStateRead": true,
+    "visualMiningRead": true,
+    "motherRunsRead": true,
+    "largeStateUpdated": false,
+    "reason": "Used append-only run ledger to avoid risky replacement of large/truncated state files."
+  }
+}
