@@ -1,0 +1,39 @@
+{
+  "runAt": "2026-08-25 08:31 +08:00",
+  "phase": "mining-only",
+  "policy": "No refining, comparison, collision, infection, hybridization, or use judgment.",
+  "uncultured": {
+    "sourceFolderId": "104Dpvr-q8xD1t1Hlw3KVSSGcJDCbcOIF",
+    "inventoryCheck": "No image newer than the existing 2026-08-21 upload batch was observed in this patrol.",
+    "sample": [],
+    "candidateLayers": [],
+    "note": "Existing image ore body remains active; no new-image event. No theory/artwork inference performed."
+  },
+  "terminus": {
+    "drilling": [
+      {
+        "id": "1gmQv4Rj5nLhUYx99bUHZiDpr4gRdBfus",
+        "title": "由公共利益探討都市更新法令調整機制-以台北市為例.pdf",
+        "kind": "blind excavation / contextual research material",
+        "candidateLayer": "都市更新法令調整與公共利益之制度材料；先列候選礦層。",
+        "status": "candidate-only"
+      },
+      {
+        "id": "1JGCAPnPpPS5wKOwXR2wx_G_0sPFF7xFI",
+        "title": "公共，是文林苑事件的核心.htm",
+        "kind": "purposeful drilling / event commentary material",
+        "candidateLayer": "文林苑事件中『公共』概念的爭議材料；先列候選礦層，不與既有都市更新礦脈統合。",
+        "status": "candidate-only"
+      }
+    ],
+    "skippedSensitive": [],
+    "note": "Only candidate ore recorded; no cross-period comparison or theoretical synthesis performed."
+  },
+  "stateHandling": {
+    "motherStateRead": true,
+    "visualMiningRead": true,
+    "recentRunsDirectoryRead": true,
+    "largeStateUpdated": false,
+    "runLedgerCreated": true
+  }
+}
