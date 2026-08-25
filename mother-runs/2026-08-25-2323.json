@@ -1,0 +1,36 @@
+{
+  "time": "2026-08-25 23:23 +08:00",
+  "phase": "mining-only",
+  "uncultured": {
+    "patrol": "巡查紅米手機照片資料夾；目前可見批次的建立／修改時間仍集中於 2026-08-21，未發現晚於上一輪紀錄的新增影像。",
+    "samples": [],
+    "possibleSeries": [],
+    "dedupeNote": "已參照 mother-state.json 與最近 mother-runs；本輪無新增影像，因此不重複取樣既有照片。"
+  },
+  "terminus": {
+    "visited": [
+      {
+        "id": "1LgnnKBkN3fIVqelehcJq-OrPXAio1ZDFHs9BUdzhgaY",
+        "title": "獅仔頭第二市中心計畫：架空都市史 v0.1",
+        "status": "seen-empty",
+        "ore": "2026-08-25 新建 Google Doc；目前文件內容為空，只保留為已看過的新材料標記，不建立候選礦層。"
+      }
+    ],
+    "candidateLayers": [
+      {
+        "label": "觀光／文化資產／活化利用舊資料群",
+        "status": "candidate-unmined",
+        "note": "purposeful drilling 搜尋『觀光』命中一批 2018 年以前收存的觀光傳播、社區深度觀光、文化資產活化、金門傳統建築與都市更新材料。此輪僅記為候選資料群，尚未逐份讀取或做跨年代統合。"
+      },
+      {
+        "label": "都市更新／容積移轉／公共利益舊資料群",
+        "status": "candidate-unmined",
+        "note": "搜尋『都市』命中多份都市更新、容積獎勵、容積移轉、古蹟保存與都市再生研究資料。此輪僅標候選礦層，不與既有金融化／價值形式 leads 比較。"
+      }
+    ],
+    "blindExcavation": "本輪少量盲挖首先命中新建但內容為空的『獅仔頭第二市中心計畫：架空都市史 v0.1』，依規則只標記已看過；未對空檔作推測。"
+  },
+  "sensitiveData": "未分析、未索引銀行／金融帳號、登入憑證、密碼、驗證碼、身分證明、稅務資料或其他高度敏感個資。",
+  "refining": "deferred",
+  "note": "嚴格停留於第一階段採礦；不做冶煉、比較、對撞、感染、雜交、用途判斷或總理論統合。大型 mother-state 未改寫，以獨立 mother-runs JSON 保存本輪狀態。"
+}
