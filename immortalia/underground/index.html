@@ -6,7 +6,7 @@
 <meta name="robots" content="noindex,nofollow,noarchive">
 <title>IMMORTALIA · UNDERGROUND GATE</title>
 <style>
-:root{--bg:#030608;--panel:#080d12;--line:#26323a;--text:#d9e3e9;--muted:#758590;--accent:#8da8b9}*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text)}body{font-family:Arial,"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif}.wrap{width:min(100%,980px);margin:auto;padding:28px 18px 64px}.top{padding:13vh 0 30px;border-bottom:1px solid var(--line)}.eyebrow{font-size:.64rem;letter-spacing:.28em;color:var(--muted)}h1{font-size:clamp(3rem,12vw,7rem);font-weight:400;line-height:.92;letter-spacing:.01em;margin:18px 0 12px}.sub{font-size:.82rem;line-height:1.7;color:var(--muted);max-width:42rem}.gate-status{margin-top:22px;padding:11px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);font-size:.66rem;letter-spacing:.14em;color:var(--accent)}.grid{display:grid;grid-template-columns:repeat(2,1fr);border-left:1px solid var(--line);margin-top:28px}.zone{display:flex;flex-direction:column;min-height:205px;padding:20px;text-decoration:none;color:inherit;border-right:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--panel)}.zone:nth-child(-n+2){border-top:1px solid var(--line)}.zone:hover,.zone:active{background:#0d141a}.zone h2{font-size:1.6rem;font-weight:400;margin:8px 0}.code{font-size:.62rem;letter-spacing:.18em;color:var(--accent)}.desc{margin-top:auto;padding-top:24px;font-size:.76rem;line-height:1.58;color:var(--muted)}.sealed{opacity:.42;pointer-events:none}.warning{margin-top:30px;font-size:.7rem;line-height:1.6;color:var(--muted)}@media(max-width:620px){.grid{grid-template-columns:1fr}.zone:nth-child(2){border-top:0}.top{padding-top:9vh}}
+:root{--bg:#030608;--panel:#080d12;--line:#26323a;--text:#d9e3e9;--muted:#758590;--accent:#8da8b9}*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text)}body{font-family:Arial,"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif}.wrap{width:min(100%,900px);margin:auto;padding:28px 18px 64px}.top{padding:15vh 0 30px}.eyebrow{font-size:.64rem;letter-spacing:.28em;color:var(--muted)}h1{font-size:clamp(3.2rem,13vw,7.5rem);font-weight:400;line-height:.9;margin:18px 0 14px}.sub{font-size:.82rem;line-height:1.75;color:var(--muted);max-width:42rem}.gate{margin-top:30px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:18px 0}.enter{display:grid;grid-template-columns:1fr auto;gap:20px;align-items:center;padding:22px 18px;text-decoration:none;color:inherit;background:var(--panel);border:1px solid var(--line)}.enter:hover{background:#0d141a}.code{font-size:.62rem;letter-spacing:.18em;color:var(--accent)}.enter h2{font-size:1.6rem;font-weight:400;margin:8px 0 0}.arrow{font-size:1.5rem;color:var(--accent)}.security{margin-top:22px;font-size:.69rem;line-height:1.65;color:var(--muted)}@media(max-width:620px){.top{padding-top:10vh}}
 </style>
 </head>
 <body>
@@ -14,16 +14,12 @@
 <header class="top">
 <div class="eyebrow">IMMORTALIA · SUBTERRANEAN SYSTEM</div>
 <h1>UNDERGROUND</h1>
-<div class="sub">蓬萊仙島地下城總入口。這裡只負責分流：工作平台、館藏、封存區與之後新增的地下設施各自向下延伸。舊控制層不拆、不重做，只移到自己的區域入口。</div>
-<div class="gate-status">OUTER GATE · PUBLIC SHELL / SECURE GATE PENDING</div>
+<div class="sub">蓬萊仙島地下城總入口。這一頁只是一道門，不承擔館藏、工作台或其他功能；所有地下設施進入後再由 Platform 分流。</div>
 </header>
-<main class="grid">
-<a class="zone" href="./workbench/"><div class="code">ZONE A</div><h2>Work Platform</h2><div class="desc">原地下工作平台。保留既有 Library、Version Forge、Agent Room、Release Control 的控制結構。</div></a>
-<a class="zone" href="./library/"><div class="code">ZONE B</div><h2>Library</h2><div class="desc">地下館藏與人物／專案檔案索引。真正的私人資料將移入身分驗證後的安全區，不直接放在公開 GitHub Pages。</div></a>
-<div class="zone sealed"><div class="code">ZONE C · SEALED</div><h2>Private Vault</h2><div class="desc">高敏感資料區。待 Cloudflare Access 身分驗證完成後啟用。</div></div>
-<div class="zone sealed"><div class="code">ZONE D · UNBUILT</div><h2>Deep Levels</h2><div class="desc">地下城後續樓層預留。需要時再往下挖，不提前堆功能。</div></div>
-</main>
-<div class="warning">SECURITY NOTE · 目前 github.io 是公開殼層，不能當作真正保密邊界。私人內容只會在伺服器端身分驗證完成後放入安全入口。</div>
+<div class="gate">
+<a class="enter" href="./platform/"><div><div class="code">MAIN DESCENT · PLATFORM</div><h2>進入地下平台</h2></div><div class="arrow">↓</div></a>
+</div>
+<div class="security">SECURITY · 現階段仍是公開外殼。正式身分登入完成後，保密閘門會設在這一道入口之前；真正私人資料不放在公開 GitHub Pages。</div>
 </div>
 </body>
 </html>
