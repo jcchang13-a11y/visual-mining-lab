@@ -1,0 +1,24 @@
+{
+  "time": "2026-08-25 15:30 +08:00",
+  "phase": "mining-only",
+  "uncultured": {
+    "patrol": "紅米手機照片資料夾可見批次仍為 2026-08-21 建立／修改的既有影像；本輪未發現晚於既有批次的新上傳影像。",
+    "sampling": "本輪不重複讀取最近 mother-runs 已取樣影像；保留尚未分析影像供後續輪次少量抽樣。",
+    "dedupeNote": "已讀 mother-state.json、visual-mining.json 與最近巡礦紀錄作去重參考；未進行刪檔。"
+  },
+  "terminus": {
+    "visited": [
+      {
+        "id": "1qKSrc5jk-3ODpTiyZftMepr0J6MK78Uf",
+        "title": "模式语言与泉州社造｜30 活动节点 ACTIVITY NODES.pdf",
+        "status": "mined-blind",
+        "ore": "2019 泉州社造材料反覆強調『先指認既有活動節點，再以節點—網絡概念優化路網』，並區分節點與幾何中心；材料內另有恒星／行星式大小聚集點、步行可達、設施共生、從居民實際路徑反推網絡等操作語彙。先列候選礦層：既有節點／節點—網絡／聚集／路徑／步行可達／共生設施／先觀察後規劃。此階段不與其他 network、flow 或菌絲材料比較統合。"
+      }
+    ],
+    "duplicateNote": "搜尋中再次出現大量 2018 年集中保存的都市更新、觀光與文化資產參考資料，其中有同名同尺寸 PDF 副本；本輪不把外部參考文獻逐份納入 findings，也不刪除可能有資料夾脈絡意義的副本。",
+    "blindExcavation": "本輪從非既有核心論文線索中抽取一份 2019 泉州社造／模式語言材料作 blind sample。"
+  },
+  "sensitiveData": "本輪未分析、未索引銀行／金融帳號、登入憑證、密碼、驗證碼、身分證明、稅務資料或其他高度敏感個資。",
+  "refining": "deferred",
+  "note": "嚴格停留於第一階段採礦；不做冶煉、比較、對撞、感染、雜交、用途判斷或總理論統合。大型 mother-state 未改寫，以獨立 mother-runs JSON 保存本輪狀態。"
+}
