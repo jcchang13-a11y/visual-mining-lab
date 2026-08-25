@@ -1,0 +1,45 @@
+{
+  "runAt": "2026-08-25 20:26 +08:00",
+  "phase": "mining-only",
+  "rules": {"noRefining": true, "sensitiveDataSkipped": true},
+  "uncultured": {
+    "folderId": "104Dpvr-q8xD1t1Hlw3KVSSGcJDCbcOIF",
+    "patrol": "metadata scan",
+    "newSincePriorLedger": 1,
+    "candidate": {
+      "id": "1j5iK2PcAm71Kw51CW-9st_ympspggjVi",
+      "title": "Messenger_creation_0701C150-1817-4677-90FA-0D8006E17E93.jpeg",
+      "createdAt": "2026-08-21T12:45:37.216Z",
+      "status": "candidate-unseen",
+      "note": "Present in current folder scan but absent from the older 31-item visual-mining snapshot; retain for later visual sampling. No interpretation performed."
+    },
+    "duplicates": "No new exact metadata duplicate established in this pass."
+  },
+  "terminus": {
+    "patrol": "purposeful drilling + blind excavation",
+    "candidates": [
+      {
+        "id": "1N1ZC7VSjNyZii-RBaJ1_ThWIMs4qLYGF",
+        "title": "研擬推動創意城市之初步架構及策略 201203.docx",
+        "status": "candidate-ore-layer",
+        "marker": "創意城市／創意生態／創意人的棲息地",
+        "note": "Previously unlisted in mother-state visited set; retain as a 2012 planning/policy stratum. No synthesis."
+      },
+      {
+        "id": "1e3ZYtnjqbskmOp1TADveHMqv4thEhuRa",
+        "title": "2012臺北創意街區展0426.pdf",
+        "status": "candidate-ore-layer",
+        "marker": "創意生態、持續耕耘、安身立命的棲息地",
+        "note": "Search hit contains explicit ecology/habitat vocabulary around creative-city practice; retain only as candidate material."
+      }
+    ],
+    "duplicateObservation": {
+      "titles": "國有土地經營管理策略變革對都市發展影響之研究－以臺中市干城市地重劃區為例.pdf",
+      "ids": ["1xCL9VsaieSUSmMR1e__yyyoW2OW6SRnH", "1F1XDIdoJtRE1UCwKJ3RXx2U627c8GlsQ"],
+      "sizes": [1258327, 1258327],
+      "status": "possible-exact-duplicate",
+      "action": "record-only; no deletion"
+    }
+  },
+  "stateAction": "Large mother-state.json left untouched; run ledger appended instead."
+}
