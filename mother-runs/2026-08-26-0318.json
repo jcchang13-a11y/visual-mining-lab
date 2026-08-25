@@ -1,0 +1,25 @@
+{
+  "runAt": "2026-08-26 03:18 +08:00",
+  "phase": "mining-only",
+  "rules": {"refining": false, "comparison": false, "useJudgment": false},
+  "uncultured": {
+    "sourceFolderId": "104Dpvr-q8xD1t1Hlw3KVSSGcJDCbcOIF",
+    "patrol": "completed",
+    "newSinceLastKnownUpload": 0,
+    "note": "Folder metadata patrol found no images created/updated after the established 2026-08-21 upload batch. Existing pool remains available for later unseen sampling; no theory or artwork inference performed this run."
+  },
+  "terminus": {
+    "patrol": "completed",
+    "candidateOre": [
+      {"id":"1N1ZC7VSjNyZii-RBaJ1_ThWIMs4qLYGF","title":"研擬推動創意城市之初步架構及策略 201203.docx","status":"candidate-only","note":"2012 creative-city / creative-district material surfaced in blind excavation; retain as a possible early urban-policy/creative-space stratum without interpretation."},
+      {"id":"1rRprmI_2gNWaWv7MAIcXyKvEUee52iwC","title":"第二階段討論意見彙整.docx","status":"candidate-only","note":"Associated discussion material surfaced beside the 2012 creative-city cluster; retain as contextual ore only."}
+    ],
+    "duplicatesOrNoise": [
+      {"id":"1OC_jmjOz429ZkX8fOQ5TuSBD3irbUtJe","title":"~$推動創意城市之初步架構及策略 201203.docx","reason":"162-byte temporary Office lock file; mark seen/no ore."},
+      {"ids":["1xCL9VsaieSUSmMR1e__yyyoW2OW6SRnH","1F1XDIdoJtRE1UCwKJ3RXx2U627c8GlsQ"],"title":"國有土地經營管理策略變革對都市發展影響之研究－以臺中市干城市地重劃區為例.pdf","reason":"same title and identical byte size surfaced twice; possible duplicate, record only, do not delete."}
+    ],
+    "sensitiveSkipped": "No sensitive-content candidates were opened or indexed."
+  },
+  "stateWrite": "run-file-only",
+  "motherStateUpdated": false
+}
