@@ -14,157 +14,35 @@
 *{box-sizing:border-box}html,body{margin:0;min-height:100%;background:#d7d6d1;color:var(--ink)}
 body{font-family:Arial,"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;overflow-x:hidden}
 button{font:inherit}.stage{min-height:100svh}.frame{display:none;min-height:100svh}.frame.on{display:flex}
-
-/* 01 — station identification */
-#station{align-items:center;justify-content:center;background:#e7e6e1;padding:24px}
-.station-column{width:min(92vw,560px);background:#f4f3ee;border:1px solid #a9aaa6;box-shadow:0 8px 24px rgba(0,0,0,.10)}
-.station-band{height:16px;background:var(--orange)}
-.station-body{padding:28px 26px 30px;text-align:center}
-.station-code{display:inline-flex;align-items:center;justify-content:center;width:58px;height:58px;border:7px solid var(--orange);border-radius:50%;font-weight:700;font-size:1.05rem;margin-bottom:14px}
-.station-name{font-size:clamp(3rem,13vw,6.4rem);line-height:1;font-weight:700;letter-spacing:.03em}
-.station-en{margin-top:10px;font-size:1.05rem;letter-spacing:.16em;color:#3e403e}
-.station-rule{margin:24px auto 0;width:76%;height:1px;background:#b9bab6}
-.station-line{margin-top:14px;font-size:.76rem;color:#555;letter-spacing:.08em}
-
-/* 02 — MRT wayfinding */
-#wayfinding{align-items:center;justify-content:center;background:#ecebe7;padding:18px}
-.guide{width:min(96vw,760px);background:#111;color:white;border:1px solid #333;box-shadow:0 5px 18px rgba(0,0,0,.16)}
-.guide-top{height:9px;background:var(--orange)}
-.guide-row{display:grid;grid-template-columns:1fr auto;gap:22px;align-items:center;padding:22px 24px}
-.guide-label{font-size:clamp(1.55rem,6vw,2.9rem);font-weight:600;line-height:1.15}
-.guide-en{display:block;font-size:.78rem;letter-spacing:.13em;font-weight:400;margin-top:7px;color:#ddd}
-.guide-arrow{font-size:3.1rem;line-height:1;color:#ffd300}
-.guide-sub{border-top:1px solid #555;padding:12px 24px 15px;font-size:.72rem;letter-spacing:.08em;color:#d6d6d6}
-
-/* 03 — elevator */
-#elevator{align-items:flex-start;justify-content:center;background:#b5b7b3;padding:18px 12px 42px}
-.lift-shell{width:min(100%,760px)}
-.building-strip{display:flex;justify-content:space-between;gap:12px;padding:8px 3px 12px;color:#303230;font-size:.67rem;letter-spacing:.08em}
-.building-strip b{font-size:.95rem;letter-spacing:.03em}
-.lift{border:1px solid #555;background:linear-gradient(90deg,var(--steel1),var(--steel2) 14%,#b8bbb7 48%,var(--steel2) 84%,var(--steel1));padding:16px;box-shadow:inset 0 0 0 3px rgba(255,255,255,.14)}
-.lift-head{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;margin-bottom:15px}
-.group-name{font-size:.68rem;letter-spacing:.14em;color:#3e423f}.group-name b{display:block;font-size:1.2rem;letter-spacing:.02em;color:#171817;margin-top:5px;font-weight:500}
-.floor-display{min-width:105px;background:var(--display);border:3px inset #777;padding:8px 12px;text-align:center;color:var(--displaytext);font-family:ui-monospace,monospace;font-size:1.55rem;letter-spacing:.12em}
-.panel{background:#919490;border:1px solid #555;padding:14px}
-.buttons{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-.floorbtn{position:relative;min-height:66px;border:1px solid #4c4e4c;border-radius:5px;background:linear-gradient(#e1e2de,#a4a6a2);box-shadow:inset 0 0 0 2px #c9cac6;color:#171817;font-weight:600;cursor:pointer}
-.floorbtn small{display:block;font-size:.55rem;font-weight:400;color:#555;margin-top:3px}.floorbtn:active{transform:translateY(1px)}.floorbtn.lit{background:#dfd6a9}.floorbtn.disabled{opacity:.45;cursor:not-allowed}.floorbtn.hidden7a{visibility:hidden}
-.panel-status{margin-top:11px;background:var(--display);color:var(--displaytext);padding:9px 11px;min-height:38px;font-family:ui-monospace,monospace;font-size:.72rem;letter-spacing:.04em}
-.controls{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.smallbtn{border:1px solid #555;background:#deded9;padding:9px 11px;font-size:.68rem;cursor:pointer}.smallbtn.staff{margin-left:auto}
-.directory{display:none;margin-top:12px;background:#eeece4;border:1px solid #777;padding:12px}.directory.show{display:block}.directory h3{margin:0 0 10px;font-size:.82rem}.dir-grid{display:grid;grid-template-columns:76px 1fr;gap:0;border-top:1px solid #aaa}.dir-grid div{padding:7px 5px;border-bottom:1px solid #c2c0b8;font-size:.68rem}.dir-grid .f{font-weight:700}
-.arrival{display:none;margin-top:12px;background:#efeee8;border:1px solid #777;padding:14px}.arrival.show{display:block}.arrival h2{margin:0 0 6px;font-size:1.35rem;font-weight:500}.arrival p{margin:0;font-size:.73rem;line-height:1.65;color:#484b48}.arrival-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.arrival-actions a,.arrival-actions button{border:1px solid #6e706d;background:#deddd7;padding:9px 11px;color:#222;text-decoration:none;font-size:.68rem;cursor:pointer}
-.glitch{animation:jolt .14s linear 2}@keyframes jolt{0%{transform:translateX(0)}50%{transform:translateX(2px)}100%{transform:translateX(0)}}
-.seven-a-flash{background:#d7cf9b!important}
-
-@media(max-width:560px){.buttons{grid-template-columns:repeat(3,1fr)}.building-strip{font-size:.6rem}.guide-row{padding:18px}.guide-sub{padding-left:18px}.floorbtn{min-height:62px}}
-@media(prefers-reduced-motion:reduce){.glitch{animation:none}}
+#station{align-items:center;justify-content:center;background:#e7e6e1;padding:24px}.station-column{width:min(92vw,560px);background:#f4f3ee;border:1px solid #a9aaa6;box-shadow:0 8px 24px rgba(0,0,0,.10)}.station-band{height:16px;background:var(--orange)}.station-body{padding:28px 26px 30px;text-align:center}.station-code{display:inline-flex;align-items:center;justify-content:center;width:58px;height:58px;border:7px solid var(--orange);border-radius:50%;font-weight:700;font-size:1.05rem;margin-bottom:14px}.station-name{font-size:clamp(3rem,13vw,6.4rem);line-height:1;font-weight:700;letter-spacing:.03em}.station-en{margin-top:10px;font-size:1.05rem;letter-spacing:.16em;color:#3e403e}.station-rule{margin:24px auto 0;width:76%;height:1px;background:#b9bab6}.station-line{margin-top:14px;font-size:.76rem;color:#555;letter-spacing:.08em}
+#wayfinding{align-items:center;justify-content:center;background:#ecebe7;padding:18px}.guide{width:min(96vw,760px);background:#111;color:white;border:1px solid #333;box-shadow:0 5px 18px rgba(0,0,0,.16)}.guide-top{height:9px;background:var(--orange)}.guide-row{display:grid;grid-template-columns:1fr auto;gap:22px;align-items:center;padding:22px 24px}.guide-label{font-size:clamp(1.55rem,6vw,2.9rem);font-weight:600;line-height:1.15}.guide-en{display:block;font-size:.78rem;letter-spacing:.13em;font-weight:400;margin-top:7px;color:#ddd}.guide-arrow{font-size:3.1rem;line-height:1;color:#ffd300}.guide-sub{border-top:1px solid #555;padding:12px 24px 15px;font-size:.72rem;letter-spacing:.08em;color:#d6d6d6}
+#elevator{align-items:flex-start;justify-content:center;background:#b5b7b3;padding:18px 12px 42px}.lift-shell{width:min(100%,760px)}.building-strip{display:flex;justify-content:space-between;gap:12px;padding:8px 3px 12px;color:#303230;font-size:.67rem;letter-spacing:.08em}.building-strip b{font-size:.95rem;letter-spacing:.03em}.lift{border:1px solid #555;background:linear-gradient(90deg,var(--steel1),var(--steel2) 14%,#b8bbb7 48%,var(--steel2) 84%,var(--steel1));padding:16px;box-shadow:inset 0 0 0 3px rgba(255,255,255,.14)}.lift-head{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;margin-bottom:15px}.group-name{font-size:.68rem;letter-spacing:.14em;color:#3e423f}.group-name b{display:block;font-size:1.2rem;letter-spacing:.02em;color:#171817;margin-top:5px;font-weight:500}.floor-display{min-width:105px;background:var(--display);border:3px inset #777;padding:8px 12px;text-align:center;color:var(--displaytext);font-family:ui-monospace,monospace;font-size:1.55rem;letter-spacing:.12em}.panel{background:#919490;border:1px solid #555;padding:14px}.buttons{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.floorbtn{position:relative;min-height:66px;border:1px solid #4c4e4c;border-radius:5px;background:linear-gradient(#e1e2de,#a4a6a2);box-shadow:inset 0 0 0 2px #c9cac6;color:#171817;font-weight:600;cursor:pointer}.floorbtn small{display:block;font-size:.55rem;font-weight:400;color:#555;margin-top:3px}.floorbtn:active{transform:translateY(1px)}.floorbtn.lit{background:#dfd6a9}.floorbtn.disabled{opacity:.45;cursor:not-allowed}.panel-status{margin-top:11px;background:var(--display);color:var(--displaytext);padding:9px 11px;min-height:38px;font-family:ui-monospace,monospace;font-size:.72rem;letter-spacing:.04em}.controls{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.smallbtn{border:1px solid #555;background:#deded9;padding:9px 11px;font-size:.68rem;cursor:pointer}.smallbtn.staff{margin-left:auto}.directory{display:none;margin-top:12px;background:#eeece4;border:1px solid #777;padding:12px}.directory.show{display:block}.directory h3{margin:0 0 10px;font-size:.82rem}.dir-grid{display:grid;grid-template-columns:76px 1fr;gap:0;border-top:1px solid #aaa}.dir-grid div{padding:7px 5px;border-bottom:1px solid #c2c0b8;font-size:.68rem}.dir-grid .f{font-weight:700}.arrival{display:none;margin-top:12px;background:#efeee8;border:1px solid #777;padding:14px}.arrival.show{display:block}.arrival h2{margin:0 0 6px;font-size:1.35rem;font-weight:500}.arrival p{margin:0;font-size:.73rem;line-height:1.65;color:#484b48}.arrival-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.arrival-actions a,.arrival-actions button{border:1px solid #6e706d;background:#deddd7;padding:9px 11px;color:#222;text-decoration:none;font-size:.68rem;cursor:pointer}.glitch{animation:jolt .14s linear 2}@keyframes jolt{0%{transform:translateX(0)}50%{transform:translateX(2px)}100%{transform:translateX(0)}}
+@media(max-width:560px){.buttons{grid-template-columns:repeat(3,1fr)}.building-strip{font-size:.6rem}.guide-row{padding:18px}.guide-sub{padding-left:18px}.floorbtn{min-height:62px}}@media(prefers-reduced-motion:reduce){.glitch{animation:none}}
 </style>
 </head>
 <body>
 <main class="stage" id="app">
-  <section class="frame on" id="station" aria-label="獅仔頭站站名">
-    <div class="station-column">
-      <div class="station-band"></div>
-      <div class="station-body">
-        <div class="station-code">O55</div>
-        <div class="station-name">獅仔頭</div>
-        <div class="station-en">SHIZAITOU</div>
-        <div class="station-rule"></div>
-        <div class="station-line">中和新蘆線 · 蘆洲延伸</div>
-      </div>
-    </div>
-  </section>
-
-  <section class="frame" id="wayfinding" aria-label="出口與商場導引">
-    <div class="guide">
-      <div class="guide-top"></div>
-      <div class="guide-row">
-        <div class="guide-label">出口・金鑽廣場<span class="guide-en">EXIT · GOLDEN DIAMOND PLAZA</span></div>
-        <div class="guide-arrow">↗</div>
-      </div>
-      <div class="guide-sub">唯一出口 · 直接連通帝景天下 B1</div>
-    </div>
-  </section>
-
-  <section class="frame" id="elevator" aria-label="帝景天下電梯">
-    <div class="lift-shell">
-      <div class="building-strip"><div><b>帝景天下</b><br>住商捷運共構</div><div>金鑽廣場 · B1 連通獅仔頭站</div></div>
-      <div class="lift" id="liftBox">
-        <div class="lift-head">
-          <div class="group-name">ELEVATOR GROUP A<b id="groupTitle">商場公共梯</b></div>
-          <div class="floor-display" id="display">B1</div>
-        </div>
-        <div class="panel">
-          <div class="buttons" id="buttons"></div>
-          <div class="panel-status" id="status">B1 · DOORS OPEN</div>
-        </div>
-        <div class="controls">
-          <button class="smallbtn" id="directoryBtn" type="button">樓層案內</button>
-          <button class="smallbtn" id="switchBtn" type="button">其他電梯</button>
-          <button class="smallbtn staff" id="staffBtn" type="button">後勤</button>
-        </div>
-        <section class="directory" id="directory">
-          <h3>帝景天下／金鑽廣場　樓層案內</h3>
-          <div class="dir-grid">
-            <div class="f">16F–22F</div><div>住宅</div>
-            <div class="f">6F–15F</div><div>商辦</div>
-            <div class="f">5F</div><div>服務型商業</div>
-            <div class="f">2F–4F</div><div>金鑽廣場</div>
-            <div class="f">1F</div><div>街面店舖・商場主入口・商辦／住宅獨立入口</div>
-            <div class="f">B1</div><div>獅仔頭站連通・超市・便利零售</div>
-            <div class="f">B2</div><div>美食街</div>
-            <div class="f">B3–B5</div><div>停車場</div>
-            <div class="f">B6–B7</div><div>後勤・機電設備</div>
-          </div>
-        </section>
-        <section class="arrival" id="arrival"></section>
-      </div>
-    </div>
-  </section>
+<section class="frame on" id="station"><div class="station-column"><div class="station-band"></div><div class="station-body"><div class="station-code">O55</div><div class="station-name">獅仔頭</div><div class="station-en">SHIZAITOU</div><div class="station-rule"></div><div class="station-line">中和新蘆線 · 蘆洲延伸</div></div></div></section>
+<section class="frame" id="wayfinding"><div class="guide"><div class="guide-top"></div><div class="guide-row"><div class="guide-label">出口・金鑽廣場<span class="guide-en">EXIT · GOLDEN DIAMOND PLAZA</span></div><div class="guide-arrow">↗</div></div><div class="guide-sub">唯一出口 · 直接連通帝景天下 B1</div></div></section>
+<section class="frame" id="elevator"><div class="lift-shell"><div class="building-strip"><div><b>帝景天下</b><br>住商捷運共構</div><div>金鑽廣場 · B1 連通獅仔頭站</div></div><div class="lift" id="liftBox"><div class="lift-head"><div class="group-name">ELEVATOR GROUP A<b id="groupTitle">商場公共梯</b></div><div class="floor-display" id="display">B1</div></div><div class="panel"><div class="buttons" id="buttons"></div><div class="panel-status" id="status">B1 · DOORS OPEN</div></div><div class="controls"><button class="smallbtn" id="directoryBtn">樓層案內</button><button class="smallbtn" id="switchBtn">其他電梯</button><button class="smallbtn staff" id="staffBtn">後勤</button></div><section class="directory" id="directory"><h3>帝景天下／金鑽廣場　樓層案內</h3><div class="dir-grid"><div class="f">16F–22F</div><div>住宅</div><div class="f">6F–15F</div><div>商辦</div><div class="f">5F</div><div>服務型商業</div><div class="f">2F–4F</div><div>金鑽廣場</div><div class="f">1F</div><div>街面店舖・商場主入口・商辦／住宅獨立入口</div><div class="f">B1</div><div>獅仔頭站連通・超市・便利零售</div><div class="f">B2</div><div>美食街</div><div class="f">B3–B5</div><div>停車場</div><div class="f">B6–B7</div><div>後勤・機電設備</div></div></section><section class="arrival" id="arrival"></section></div></div></section>
 </main>
 <script>
 (()=>{
 const frames=[document.querySelector('#station'),document.querySelector('#wayfinding'),document.querySelector('#elevator')];
 const buttons=document.querySelector('#buttons'),display=document.querySelector('#display'),status=document.querySelector('#status'),groupTitle=document.querySelector('#groupTitle'),directory=document.querySelector('#directory'),arrival=document.querySelector('#arrival'),liftBox=document.querySelector('#liftBox');
-const intro=()=>{setTimeout(()=>{frames[0].classList.remove('on');frames[1].classList.add('on')},1200);setTimeout(()=>{frames[1].classList.remove('on');frames[2].classList.add('on')},2250)};intro();
-
-const groups={
- A:{title:'商場公共梯',floors:['5','4','3','2','1','B1','B2']},
- B:{title:'商辦梯',floors:['15','14','13','12','11','10','9','8','7','6','1','B3','B4','B5']},
- C:{title:'住宅專用梯',floors:['22','21','20','19','18','17','16','1','B1','B3','B4','B5']},
- D:{title:'貨梯／後勤梯',floors:['15','14','13','12','11','10','9','8','7A','7','6','5','4','3','2','1','B1','B2','B3','B4','B5','B6','B7']}
-};
+setTimeout(()=>{frames[0].classList.remove('on');frames[1].classList.add('on')},1200);setTimeout(()=>{frames[1].classList.remove('on');frames[2].classList.add('on')},2250);
+const groups={A:{title:'商場公共梯',floors:['5','4','3','2','1','B1','B2']},B:{title:'商辦梯',floors:['15','14','13','12','11','10','9','8','7','6','1','B3','B4','B5']},C:{title:'住宅專用梯',floors:['22','21','20','19','18','17','16','1','B1','B3','B4','B5']},D:{title:'貨梯／後勤梯',floors:['15','14','13','12','11','10','9','8','7A','7','6','5','4','3','2','1','B1','B2','B3','B4','B5','B6','B7']}};
 let group='A',tripCount=0,lastFloor='B1';
 const labels={B2:'美食街',B1:'捷運／超市',1:'地面層',2:'商場',3:'商場',4:'商場',5:'服務商業',8:'剛吃飽'};
-function renderPanel(){groupTitle.textContent=groups[group].title;buttons.innerHTML='';groups[group].floors.forEach(f=>{const b=document.createElement('button');b.type='button';b.className='floorbtn';b.dataset.floor=f;b.innerHTML=`${f}${labels[f]?`<small>${labels[f]}</small>`:''}`;if(group==='C'&&!localStorage.getItem('guixu_resident')) b.classList.add('disabled');buttons.appendChild(b)});status.textContent=`${lastFloor} · ${groups[group].title}`;arrival.classList.remove('show');}
+function renderPanel(){groupTitle.textContent=groups[group].title;buttons.innerHTML='';groups[group].floors.forEach(f=>{const b=document.createElement('button');b.type='button';b.className='floorbtn';b.dataset.floor=f;b.innerHTML=`${f}${labels[f]?`<small>${labels[f]}</small>`:''}`;if(group==='C'&&!localStorage.getItem('guixu_resident'))b.classList.add('disabled');buttons.appendChild(b)});status.textContent=`${lastFloor} · ${groups[group].title}`;arrival.classList.remove('show')}
 function goFloor(f){if(group==='C'&&!localStorage.getItem('guixu_resident')){status.textContent='RESIDENT ACCESS REQUIRED';return}tripCount++;arrival.classList.remove('show');liftBox.classList.add('glitch');setTimeout(()=>liftBox.classList.remove('glitch'),350);
- // 7A hook: office elevator occasionally leaks the hidden intermediate floor.
- if(group==='B' && ((lastFloor==='7'&&f==='8')||(lastFloor==='8'&&f==='7')) && tripCount%2===0){
-   display.textContent='7A';status.textContent='…';setTimeout(()=>{status.textContent='DOORS OPEN';showArrival('7A','門只開了兩秒。外面有燈，但沒有樓層牌。');},520);setTimeout(()=>{arrival.classList.remove('show');display.textContent=f;status.textContent=`${f} · DOORS OPEN`;showFloor(f);lastFloor=f},2300);return;
- }
- setTimeout(()=>{display.textContent=f;status.textContent=`${f} · DOORS OPEN`;showFloor(f);lastFloor=f},420);
-}
+if(group==='D'&&f==='7A'){display.textContent='7A';status.textContent='7A · DOORS OPEN';setTimeout(()=>{window.location.href='./7a/'},500);return}
+if(group==='B'&&((lastFloor==='7'&&f==='8')||(lastFloor==='8'&&f==='7'))&&tripCount%2===0){display.textContent='7A';status.textContent='…';setTimeout(()=>{status.textContent='DOORS OPEN';showArrival('7A','門只開了兩秒。外面有燈，但沒有樓層牌。')},520);setTimeout(()=>{arrival.classList.remove('show');display.textContent=f;status.textContent=`${f} · DOORS OPEN`;showFloor(f);lastFloor=f},2300);return}
+setTimeout(()=>{display.textContent=f;status.textContent=`${f} · DOORS OPEN`;showFloor(f);lastFloor=f},420)}
 function showArrival(f,text){arrival.innerHTML=`<h2>${f}</h2><p>${text}</p>`;arrival.classList.add('show')}
-function showFloor(f){
- let desc='本層尚未開放。';let actions='';
- if(f==='B2')desc='金鑽廣場美食街。';
- if(f==='B1')desc='獅仔頭站連通層、超市與便利零售。';
- if(f==='1')desc='地面店舖、商場主入口；商辦與住宅電梯在不同門禁區。';
- if(['2','3','4'].includes(f))desc='金鑽廣場一般商業樓層。';
- if(f==='5')desc='服務型商業樓層。';
- if(f==='8') {desc='「剛吃飽」。';actions='<a href="../../gangchibao/">進入</a>';}
- if(Number(f)>=6&&Number(f)<=15&&f!=='8')desc='商辦樓層。';
- if(Number(f)>=16&&Number(f)<=22)desc='帝景天下住宅區。';
- if(['B3','B4','B5'].includes(f))desc='地下停車場。';
- if(['B6','B7'].includes(f))desc='後勤／機電設備區。';
- if(f==='7A'){desc='禪宗文化研究中心。';actions='<a href="./platform/">內部平台</a><a href="./library/">Library</a><a href="./workbench/">Work Platform</a>';}
- arrival.innerHTML=`<h2>${f}${labels[f]?' · '+labels[f]:''}</h2><p>${desc}</p>${actions?`<div class="arrival-actions">${actions}</div>`:''}`;arrival.classList.add('show');
-}
+function showFloor(f){let desc='本層尚未開放。',actions='';if(f==='B2')desc='金鑽廣場美食街。';if(f==='B1')desc='獅仔頭站連通層、超市與便利零售。';if(f==='1')desc='地面店舖、商場主入口；商辦與住宅電梯在不同門禁區。';if(['2','3','4'].includes(f))desc='金鑽廣場一般商業樓層。';if(f==='5')desc='服務型商業樓層。';if(f==='8'){desc='「剛吃飽」。';actions='<a href="../../gangchibao/">進入</a>'}if(Number(f)>=6&&Number(f)<=15&&f!=='8')desc='商辦樓層。';if(Number(f)>=16&&Number(f)<=22)desc='帝景天下住宅區。';if(['B3','B4','B5'].includes(f))desc='地下停車場。';if(['B6','B7'].includes(f))desc='後勤／機電設備區。';arrival.innerHTML=`<h2>${f}${labels[f]?' · '+labels[f]:''}</h2><p>${desc}</p>${actions?`<div class="arrival-actions">${actions}</div>`:''}`;arrival.classList.add('show')}
 buttons.addEventListener('click',e=>{const b=e.target.closest('[data-floor]');if(!b||b.classList.contains('disabled')){if(b)status.textContent='ACCESS DENIED';return}goFloor(b.dataset.floor)});
-document.querySelector('#directoryBtn').addEventListener('click',()=>directory.classList.toggle('show'));
-document.querySelector('#switchBtn').addEventListener('click',()=>{const order=['A','B','C'];group=order[(order.indexOf(group)+1)%order.length];renderPanel()});
-document.querySelector('#staffBtn').addEventListener('click',()=>{group='D';renderPanel();status.textContent='SERVICE MODE';});
-renderPanel();
+document.querySelector('#directoryBtn').addEventListener('click',()=>directory.classList.toggle('show'));document.querySelector('#switchBtn').addEventListener('click',()=>{const order=['A','B','C'];group=order[(order.indexOf(group)+1)%order.length];renderPanel()});document.querySelector('#staffBtn').addEventListener('click',()=>{group='D';renderPanel();status.textContent='SERVICE MODE'});renderPanel();
 })();
 </script>
 </body>
