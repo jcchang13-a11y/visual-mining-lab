@@ -1,0 +1,45 @@
+{
+  "runAt": "2026-08-27 07:21 +08:00",
+  "phase": "mining-only",
+  "constraints": ["no-refining", "no-comparison", "no-cross-linking", "no-infection", "no-hybridization", "no-use-judgment"],
+  "baseline": {
+    "previousRun": "mother-runs/2026-08-27-0613.json",
+    "motherStateUpdatedAt": "2026-08-23 09:26 +08:00",
+    "visualMiningGeneratedAt": "2026-08-21T21:44:32+08:00"
+  },
+  "uncultured": {
+    "sourceFolderId": "104Dpvr-q8xD1t1Hlw3KVSSGcJDCbcOIF",
+    "patrol": "completed",
+    "newSincePreviousRun": 0,
+    "inventoryObservation": "Current folder metadata still shows the same Aug 21 ingestion cohort; no image file found with a created/updated timestamp later than that cohort.",
+    "sampling": "no additional image opened this round; unseen pool preserved",
+    "note": "No visual theory, artwork inference, clustering synthesis, or use judgment performed."
+  },
+  "terminus": {
+    "patrol": "completed",
+    "purposefulDrilling": [
+      {
+        "id": "14t_RFcpKGoWmsHorThGs2ztyfPyh66_p",
+        "title": "都市更新容積獎勵下之投資可行性-以華固雙橡園為例.pdf",
+        "status": "candidate-economic-layer",
+        "reason": "surfaced in targeted urban-renewal drilling; title points to investment feasibility under floor-area-ratio incentives; retained only as candidate ore"
+      },
+      {
+        "id": "1IZvUOTXpdGlbyKDnDsy6CLh2bVD3WshT",
+        "title": "都市更新權利變換估價準則及作業手冊之研究.pdf",
+        "status": "candidate-valuation-institution-layer",
+        "reason": "surfaced in targeted drilling around urban renewal; retained as a candidate layer on valuation / rights transformation without synthesis"
+      }
+    ],
+    "blindExcavation": [
+      {
+        "id": "1qKSrc5jk-3ODpTiyZftMepr0J6MK78Uf",
+        "title": "模式语言与泉州社造｜30 活动节点 ACTIVITY NODES.pdf",
+        "status": "candidate-pattern-language-community-layer",
+        "reason": "unexpectedly surfaced during a broad query outside its apparent title domain; logged for later inspection only"
+      }
+    ],
+    "note": "All entries are candidate ore only. No comparison with earlier findings, no theoretical integration, no judgment of future use. Sensitive-data categories remained excluded by rule."
+  },
+  "stateWrite": "mother-runs fallback used; mother-state.json and visual-mining.json not rewritten"
+}
