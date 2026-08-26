@@ -1,0 +1,63 @@
+{
+  "runAt": "2026-08-26 21:20 +08:00",
+  "phase": "mining-only",
+  "engine": "Mother",
+  "vessel": "Nostromo",
+  "rules": {
+    "noRefining": true,
+    "noComparison": true,
+    "noUseJudgment": true,
+    "sensitiveDataSkipped": true
+  },
+  "uncultured": {
+    "sourceFolderId": "104Dpvr-q8xD1t1Hlw3KVSSGcJDCbcOIF",
+    "newSinceLastKnownSnapshot": 0,
+    "note": "Drive folder scan found no files created or modified after the existing 2026-08-21 image batch. Continued first-pass sampling of previously unseen material only.",
+    "sampled": [
+      {
+        "id": "1HMrK-zQYhYOWVrjBrdEhZ7YeL4WuGRkn",
+        "fileName": "IMG_20250531_164739.jpg",
+        "status": "sampled-first-pass",
+        "candidateVisualFeatures": [
+          "rain/wet pavement",
+          "foreground vehicle or canopy occluding much of frame",
+          "pedestrian umbrella fragments at right edge",
+          "dense street signage/building facade",
+          "strong accidental green field dominating composition"
+        ]
+      },
+      {
+        "id": "1c8dFT9_uoQr4C7bKL9YqWh4ColAHj5Uo",
+        "fileName": "IMG_20250608_191746.jpg",
+        "status": "sampled-first-pass",
+        "candidateVisualFeatures": [
+          "close crop of commercial sign",
+          "handwritten black marker over printed typography",
+          "telephone-number-like digits as visual element",
+          "high-saturation yellow/red field",
+          "partial/fragmentary text caused by framing"
+        ]
+      }
+    ],
+    "duplicateAction": "none; no deletion performed"
+  },
+  "terminus": {
+    "mode": ["purposeful drilling", "limited blind excavation"],
+    "visitedThisRun": [
+      {
+        "id": "11kPEgrmtbaGx98OMA_CTke_dkAZEygBB",
+        "title": "B1-2_岑學敏_全文.pdf",
+        "status": "candidate-ore-layer",
+        "candidateSignals": [
+          "heritage conservation framed as possible urban re-colonization",
+          "dispossession of access, ownership and cultural memory",
+          "public-space privatization and gentrification",
+          "official versus vernacular historical narratives"
+        ],
+        "note": "Recorded as research-material ore only; no theoretical integration or comparison performed."
+      }
+    ],
+    "noOreMarkedSeen": []
+  },
+  "statePolicy": "Large mother-state.json left untouched this run; incremental run record written instead to avoid unsafe overwrite and preserve mining history."
+}
