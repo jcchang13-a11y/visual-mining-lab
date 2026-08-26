@@ -1,0 +1,28 @@
+{
+  "runAt": "2026-08-26 17:23 +08:00",
+  "phase": "mining-only",
+  "rules": {"noSmelting": true, "sensitiveDataSkipped": true},
+  "uncultured": {
+    "sourceFolderId": "104Dpvr-q8xD1t1Hlw3KVSSGcJDCbcOIF",
+    "baseline": "visual-mining.json generated 2026-08-21; mother-state updated 2026-08-23",
+    "patrol": "metadata page sampled",
+    "newSinceBaseline": 0,
+    "notes": [
+      "No file in the sampled folder page has created/updated time later than the existing 2026-08-23 Mother state.",
+      "Existing image pool remains the active ore body; no theory or use judgment performed.",
+      "No duplicate deletion attempted in this run because metadata alone is insufficient for safe identity confirmation."
+    ]
+  },
+  "terminus": {
+    "patrolMode": ["purposeful", "blind-small"],
+    "candidateLayers": [
+      {"id":"1LgnnKBkN3fIVqelehcJq-OrPXAio1ZDFHs9BUdzhgaY","title":"獅仔頭第二市中心計畫：架空都市史 v0.1","status":"candidate-only","note":"Recent urban-history material surfaced in a broad urban search; retain as a candidate layer without linking it to older urban research yet."},
+      {"id":"1TvuLp5GCcyzWWAYudC1LMjrd3tHtmrs6","title":"張榮哲-1062博士班申請學位考試.pdf","status":"candidate-only","note":"Ghost keyword surfaced a dissertation-era document not explicitly listed in the visible visited ledger; candidate for later extraction only."},
+      {"id":"1_Rg7MM6JMWdpV_JH2QsHHiEhducSsEgLKC8YbBo_SHY","title":"組合 1","status":"candidate-only","note":"Ghost keyword surfaced a generic-titled document; retain as a blind-excavation lead pending content verification."}
+    ],
+    "skipped": ["CV files and unrelated external-reference PDFs were not treated as ore in this pass."],
+    "interpretation": "none"
+  },
+  "stateWrite": "run-file-only",
+  "motherStateUpdated": false
+}
