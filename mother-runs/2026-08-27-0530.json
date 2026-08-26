@@ -1,0 +1,34 @@
+{
+  "runAt": "2026-08-27 05:30 +08:00",
+  "phase": "mining-only",
+  "constraints": ["no-refining", "no-comparison", "no-cross-linking", "no-use-judgment"],
+  "baseline": {
+    "motherStateUpdatedAt": "2026-08-23 09:26 +08:00",
+    "visualMiningGeneratedAt": "2026-08-21T21:44:32+08:00"
+  },
+  "uncultured": {
+    "sourceFolderId": "104Dpvr-q8xD1t1Hlw3KVSSGcJDCbcOIF",
+    "patrol": "completed",
+    "newSinceBaseline": 0,
+    "note": "Folder metadata patrol found no images created/updated after the existing Aug 21 ingestion set. No theory or artwork inference performed. Existing unseen pool remains available for later sampling."
+  },
+  "terminus": {
+    "patrol": "completed",
+    "purposefulDrilling": [
+      {
+        "id": "1LgnnKBkN3fIVqelehcJq-OrPXAio1ZDFHs9BUdzhgaY",
+        "title": "獅仔頭第二市中心計畫：架空都市史 v0.1",
+        "createdAt": "2026-08-25T09:15:41.182Z",
+        "status": "candidate-ore",
+        "reason": "new user-created urban-history material; retained as a candidate layer only"
+      }
+    ],
+    "blindExcavation": [
+      {"id":"1gmQv4Rj5nLhUYx99bUHZiDpr4gRdBfus","title":"由公共利益探討都市更新法令調整機制-以台北市為例.pdf","status":"candidate-background-layer"},
+      {"id":"1EKxaHD-PComehIIUTq6hlntApqevyW6B","title":"從環境品質面探討都市更新公益性及規劃設計容積獎勵妥適性之研究 -以台北市中山區為例-.pdf","status":"candidate-background-layer"},
+      {"id":"144mOBmNmluRhd_R-exQ3BcCcWk-IVXZQ","title":"張剛維 以容積移轉進行都市保存之制度與執行－財產權觀點分析.pdf","status":"candidate-background-layer"}
+    ],
+    "note": "Candidates logged without synthesis, comparison, cross-linking, or theoretical integration. Sensitive-data categories were excluded by rule."
+  },
+  "stateWrite": "mother-runs fallback used; mother-state.json not rewritten"
+}
