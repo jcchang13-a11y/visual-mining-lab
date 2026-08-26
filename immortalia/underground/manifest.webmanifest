@@ -1,0 +1,17 @@
+{
+  "name": "歸墟 · 獅仔頭 O55",
+  "short_name": "歸墟",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#d7d6d1",
+  "theme_color": "#171817",
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
