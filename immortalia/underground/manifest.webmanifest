@@ -1,15 +1,22 @@
 {
+  "id": "/visual-mining-lab/immortalia/underground/",
   "name": "歸墟 · 獅仔頭 O55",
   "short_name": "歸墟",
-  "start_url": "./",
-  "scope": "./",
+  "start_url": "/visual-mining-lab/immortalia/underground/",
+  "scope": "/visual-mining-lab/immortalia/underground/",
   "display": "standalone",
   "background_color": "#d7d6d1",
   "theme_color": "#171817",
   "icons": [
     {
-      "src": "./icon.svg",
-      "sizes": "any",
+      "src": "./icon-192.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./icon-512.svg",
+      "sizes": "512x512",
       "type": "image/svg+xml",
       "purpose": "any maskable"
     }
