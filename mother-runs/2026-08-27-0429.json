@@ -1,0 +1,42 @@
+{
+  "runAt": "2026-08-27 04:29 +08:00",
+  "phase": "mining-only",
+  "vessel": "Nostromo",
+  "constraints": ["no-refining", "no-cross-comparison", "no-infection", "no-hybridization", "no-use-judgment"],
+  "stateRead": {
+    "motherState": "read",
+    "visualMining": "read",
+    "previousRun": "mother-runs/2026-08-27-0314.json"
+  },
+  "uncultured": {
+    "sourceFolderId": "104Dpvr-q8xD1t1Hlw3KVSSGcJDCbcOIF",
+    "patrol": "completed",
+    "newSincePreviousRun": 0,
+    "dedupeAction": "none",
+    "samplingAction": "none",
+    "note": "No image in the source folder had a modified time later than the previous patrol. Existing visual-mining snapshot remains the reference ledger; no forced resampling or visual interpretation was performed."
+  },
+  "terminus": {
+    "patrol": "completed",
+    "newVisited": [
+      {
+        "id": "1veJYcqLSWuSxRhmdq6GXp4zxJGMZz2E1",
+        "title": "20140929台灣人權學刊的文萌樓期刊論文（縮減文字版）.docx",
+        "status": "candidate-ore",
+        "markers": ["文萌樓", "性工作運動", "古蹟保存", "都市更新", "仕紳化", "社會排除", "容積", "投機"],
+        "reason": "Purposeful drilling surfaced an older shortened journal-version text with explicit heritage, sex-work movement, urban-renewal, gentrification, exclusion and development-right markers. Recorded only as a candidate layer."
+      },
+      {
+        "id": "1HQ4SP6bjNBM6bNxjhGu26jBdQGD7gZTw",
+        "title": "《24小時》演出時間與空間規劃.docx",
+        "status": "candidate-ore",
+        "markers": ["24小時", "時間編排", "空間配置", "行動藝術", "投影", "大字報", "社會議題", "多團體發聲", "公共展演"],
+        "reason": "A previous blind-excavation candidate was successfully opened. It contains a 24-hour event architecture organized through hourly rotation, crane action, facade projection, text/image display, talks, performances and many social-movement groups. Recorded as candidate material only."
+      }
+    ],
+    "blindExcavationCandidates": [],
+    "note": "No synthesis, cross-period comparison, theory integration or use judgment was performed."
+  },
+  "sensitiveDataPolicy": "Financial accounts, credentials, passwords, verification codes, identity/tax and other highly sensitive personal data excluded from analysis and indexing.",
+  "stateWrite": "append-only mother-runs record; mother-state.json and visual-mining.json left untouched"
+}
