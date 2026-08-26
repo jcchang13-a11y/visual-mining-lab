@@ -1,6 +1,7 @@
 package tw.guixu.underground;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import androidx.browser.customtabs.CustomTabColorSchemeParams;
@@ -13,16 +14,26 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        CustomTabColorSchemeParams params = new CustomTabColorSchemeParams.Builder()
-                .setToolbarColor(0xFF171817)
-                .setNavigationBarColor(0xFF171817)
-                .build();
+        Uri uri = Uri.parse(START_URL);
+        try {
+            CustomTabColorSchemeParams params = new CustomTabColorSchemeParams.Builder()
+                    .setToolbarColor(0xFF171817)
+                    .setNavigationBarColor(0xFF171817)
+                    .build();
 
-        CustomTabsIntent customTabsIntent = new CustomTabsIntent.Builder()
-                .setDefaultColorSchemeParams(params)
-                .setShowTitle(false)
-                .build();
+            CustomTabsIntent customTabsIntent = new CustomTabsIntent.Builder()
+                    .setDefaultColorSchemeParams(params)
+                    .setShowTitle(false)
+                    .build();
 
-        customTabsIntent.launchUrl(this, Uri.parse(START_URL));
+            customTabsIntent.launchUrl(this, uri);
+        } catch (Exception e) {
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, uri);
+            startActivity(browserIntent);
+        }
+
+        // This activity is only a launcher. Do not leave an empty screen behind
+        // after Chrome/Custom Tabs opens or when the user returns from it.
+        finish();
     }
 }
