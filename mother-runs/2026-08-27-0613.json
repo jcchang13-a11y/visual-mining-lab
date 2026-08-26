@@ -1,0 +1,60 @@
+{
+  "runAt": "2026-08-27 06:13 +08:00",
+  "phase": "mining-only",
+  "constraints": ["no-refining", "no-comparison", "no-cross-linking", "no-use-judgment"],
+  "baseline": {
+    "previousRun": "mother-runs/2026-08-27-0530.json",
+    "motherStateUpdatedAt": "2026-08-23 09:26 +08:00",
+    "visualMiningGeneratedAt": "2026-08-21T21:44:32+08:00"
+  },
+  "uncultured": {
+    "sourceFolderId": "104Dpvr-q8xD1t1Hlw3KVSSGcJDCbcOIF",
+    "patrol": "completed",
+    "newSincePreviousRun": 0,
+    "note": "Image-folder metadata patrol again found no files created or updated after the Aug 21 ingestion set. No visual theory, artwork inference, or use judgment performed. Existing unseen pool remains untouched except for inventory verification."
+  },
+  "terminus": {
+    "patrol": "completed",
+    "purposefulDrilling": [
+      {
+        "id": "1LQHusDgpaJZqSVwljl31ZVjXBy48FVKb",
+        "title": "李素馨 古蹟保存與都市更新經濟議題之研究[全文] .pdf",
+        "status": "candidate-background-layer",
+        "reason": "heritage preservation / urban renewal economic material surfaced in targeted urban search; logged only as a candidate layer"
+      },
+      {
+        "id": "1OnnuIlILDHxOVTW3LnXbM5KVkNeOLGun",
+        "title": "金家禾_促進公有土地參與都市更新之功能及問題研究－以臺北市為例.pdf",
+        "status": "candidate-background-layer",
+        "reason": "public-land / urban-renewal institutional material surfaced; retained without synthesis"
+      }
+    ],
+    "blindExcavation": [
+      {
+        "id": "11sLGBTcefCJEN10vnDd00nBDA01JJ_ba",
+        "title": "日治時代之臺北市近代都市計畫（一）—都市計畫之萌芽與展開.pdf",
+        "status": "candidate-historical-layer"
+      },
+      {
+        "id": "10duSS8IkCrcagehyxr6rete2s-FSExT8",
+        "title": "金門國家公園傳統建築活化利用委託民宿經營案成效評估.pdf",
+        "status": "candidate-tourism-heritage-layer"
+      },
+      {
+        "id": "1GJXQviukzPmCyNoKDBRa9kBYfop8invr",
+        "title": "邊金靜_文化資產的活化利用與經營管理－金門後浦城區為例.pdf",
+        "status": "candidate-tourism-heritage-layer"
+      }
+    ],
+    "inventoryAnomaly": {
+      "type": "possible-duplicate-metadata",
+      "items": [
+        {"id":"1OnnuIlILDHxOVTW3LnXbM5KVkNeOLGun","title":"金家禾_促進公有土地參與都市更新之功能及問題研究－以臺北市為例.pdf","size":2670783},
+        {"id":"1PkPVWCkj9JcymTEUwDgwchS62HAcKq2M","title":"張莉旻_促進公有土地參與都市更新之功能及問題研究－以臺北市為例.pdf","size":2670783}
+      ],
+      "note": "Same research title and identical byte size under different filenames. Logged as a dedupe candidate only; no deletion or equivalence judgment made."
+    },
+    "note": "All entries remain candidate ore only. No synthesis, comparison, theoretical integration, or use judgment performed. Sensitive-data categories were excluded by rule."
+  },
+  "stateWrite": "mother-runs fallback used; mother-state.json and visual-mining.json not rewritten"
+}
