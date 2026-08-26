@@ -1,0 +1,31 @@
+{
+  "time": "2026-08-26 19:24 +08:00",
+  "phase": "mining-only",
+  "uncultured": {
+    "patrol": "Checked the Redmi phone photo folder for images created after the latest stored patrol (2026-08-23 20:27 +08:00). No new images were found in that interval.",
+    "samples": [],
+    "possibleSeries": [],
+    "dedupeNote": "No new image batch, so no additional sampling or duplicate action was performed. Existing state and recent mother-runs were used as the dedupe baseline."
+  },
+  "terminus": {
+    "visited": [
+      {
+        "id": "1CuxOGF9vDpJiXwpd8uuxHi37FLNqnNbkRvI1GSvmfSM",
+        "title": "PAPER.docx",
+        "status": "mined-purposeful",
+        "ore": "An English paper on Wen Meng Lou frames the material around an abrupt 1997 Taipei policy decision, a long local history of sex work, heritage preservation, anti-gentrification struggle, and the recasting of government at local levels as pro-growth regimes. Candidate ore only: policy rupture / long local memory / preservation struggle / growth regime / gentrification."
+      },
+      {
+        "id": "0B6kekeEVEPHjdlVEZVpkbi1ENWc",
+        "title": "HK paper abstact.docx",
+        "status": "candidate-blind",
+        "ore": "A previously unvisited Hong Kong paper abstract surfaced during a broad paper search. Its metadata places it in the 2016 research layer. It is retained as an unopened candidate ore item for a later patrol rather than inferred from filename alone."
+      }
+    ],
+    "duplicateNote": "Search surfaced multiple byte-identical or same-title copies of Jung Che PAPER / PAPER and several red light city PDFs. These were treated as duplicate signals and not repeatedly mined in this run.",
+    "blindExcavation": "A broad search around research-paper material surfaced the unvisited HK paper abstract as a candidate for later inspection; no theoretical integration was attempted."
+  },
+  "sensitiveData": "No banking, credential, password, verification-code, identity-document, tax, or other highly sensitive personal material was analyzed or indexed.",
+  "refining": "deferred",
+  "note": "Strict first-stage mining only. No refining, comparison, collision, infection, hybridization, use-case judgment, or grand-theory integration. Large mother-state.json was read as a dedupe reference but not rewritten; this run is stored independently under mother-runs/."
+}
