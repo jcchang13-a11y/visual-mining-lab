@@ -1,0 +1,41 @@
+{
+  "runAt": "2026-08-27 03:14 +08:00",
+  "phase": "mining-only",
+  "vessel": "Nostromo",
+  "constraints": ["no-refining", "no-cross-comparison", "no-use-judgment"],
+  "uncultured": {
+    "sourceFolderId": "104Dpvr-q8xD1t1Hlw3KVSSGcJDCbcOIF",
+    "patrol": "completed",
+    "newSincePreviousLedger": 0,
+    "note": "Image-folder metadata patrol still shows the latest uploads in the existing 2026-08-21 batch; no newly uploaded image was found. No forced resampling or visual interpretation was performed."
+  },
+  "terminus": {
+    "patrol": "completed",
+    "newVisited": [
+      {
+        "id": "1ZG0EgT-7Frd6E5IM74NPuYkcGM0CYOIt",
+        "title": "20141002古蹟文萌樓與日日春運動（芳萍投稿人權學刊）.docx",
+        "status": "candidate-ore",
+        "markers": ["文萌樓", "都市更新", "容積移轉", "公有地", "文化資產", "空間修補", "房地產金融化"],
+        "reason": "Purposeful drilling surfaced a 2014 text containing an explicit cluster of heritage, urban renewal, floor-area transfer, public land, spatial fix and financialization terms. Recorded as a candidate layer only; no comparison or synthesis performed."
+      }
+    ],
+    "blindExcavationCandidates": [
+      {
+        "id": "1HQ4SP6bjNBM6bNxjhGu26jBdQGD7gZTw",
+        "title": "《24小時》演出時間與空間規劃.docx",
+        "status": "candidate-unread",
+        "reason": "Blind excavation surfaced an older performance/time-space planning document outside the dominant research-paper cluster; retained unread for possible later mining."
+      },
+      {
+        "id": "1FGP3s0Gq1wGefYAdtcH073yhi3L2evyk",
+        "title": "文萌樓空間工作坊緣起.htm",
+        "status": "candidate-unread",
+        "reason": "Metadata/title surfaced in spatial drilling. Text decode failed in the connector, so it remains an unread candidate rather than an interpreted finding."
+      }
+    ],
+    "note": "Candidates only. No comparison with existing representation/symptom/value-form leads and no use judgment was performed."
+  },
+  "sensitiveDataPolicy": "Financial accounts, credentials, passwords, verification codes, identity/tax and other highly sensitive personal data excluded from analysis and indexing.",
+  "stateWrite": "append-only mother-runs record; mother-state.json and visual-mining.json left untouched to avoid unsafe large-state replacement"
+}
