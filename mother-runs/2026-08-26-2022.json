@@ -1,0 +1,35 @@
+{
+  "runAt": "2026-08-26 20:22 +08:00",
+  "phase": "mining-only",
+  "vessel": "Nostromo",
+  "constraints": ["no-refining", "no-comparison", "no-cross-linking", "no-use-judgment"],
+  "uncultured": {
+    "sourceFolderId": "104Dpvr-q8xD1t1Hlw3KVSSGcJDCbcOIF",
+    "newSincePriorLedger": 0,
+    "note": "Folder metadata patrol found no files created after the existing 2026-08-21 ingestion batch. Existing visual-mining ledger remains the sampling queue; no theory or artwork inference performed."
+  },
+  "terminus": {
+    "drilling": [
+      {
+        "id": "1LgnnKBkN3fIVqelehcJq-OrPXAio1ZDFHs9BUdzhgaY",
+        "title": "獅仔頭第二市中心計畫：架空都市史 v0.1",
+        "status": "candidate-ore",
+        "reason": "Recent urban-history material surfaced in purposeful drilling; record only for later inspection."
+      },
+      {
+        "id": "1yhin2ieew3Xb6pUYTCF0-BDlzysRBSvu",
+        "title": "20141016_拚捷運_求生存_拆樂生_以誰之名進行的劃界.pptx",
+        "status": "candidate-ore",
+        "reason": "Older boundary/demarcation material surfaced in blind excavation; record only, no conceptual integration."
+      },
+      {
+        "id": "1OF0GYOjSOLxy-C0M1YG9O8iUfUqmf6YYp57xaP8hDJg",
+        "title": "不可抵達之地：蓬萊、桃花源與世界各地的異境想像",
+        "status": "candidate-ore",
+        "reason": "Recent boundary/elsewhere material surfaced; record only for later inspection."
+      }
+    ],
+    "sensitiveMaterial": "skipped-by-policy",
+    "note": "Candidates are intentionally not compared with existing leads and are not assigned to any theory or project use."
+  }
+}
