@@ -3,6 +3,8 @@
     <application
         android:allowBackup="true"
         android:label="歸墟"
+        android:icon="@drawable/ic_o55"
+        android:roundIcon="@drawable/ic_o55"
         android:usesCleartextTraffic="false"
         android:theme="@style/AppTheme">
         <activity
