@@ -1,0 +1,26 @@
+{
+  "runAt": "2026-08-26 11:28 +08:00",
+  "phase": "mining-only",
+  "vessel": "Nostromo",
+  "engine": "Mother",
+  "rules": {"refine": false, "compare": false, "crossLink": false, "useJudgment": false},
+  "uncultured": {
+    "sourceFolderId": "104Dpvr-q8xD1t1Hlw3KVSSGcJDCbcOIF",
+    "patrol": "metadata page sampled",
+    "newSincePriorUploadBatch": 0,
+    "note": "Current returned image page remains the 2026-08-21 upload batch; no image on this sampled page has a Drive created_at later than the existing Mother baseline. No visual theory or use judgment performed.",
+    "sampledIds": ["1j5iK2PcAm71Kw51CW-9st_ympspggjVi","1AVlijcbh2KJqnp3ztl0yMKckJs1BX-yL","1HMrK-zQYhYOWVrjBrdEhZ7YeL4WuGRkn","1c8dFT9_uoQr4C7bKL9YqWh4ColAHj5Uo","10uGzyRRa4Riw3Y3XpwpKzo1-xOPmXxS9","1oV_at23U8x6VYVwIEN4yvdXFGoiQifun","11GdN1XWN4iiH9IXMBucUZWGI5TYf--34"]
+  },
+  "terminus": {
+    "patrol": "purposeful + blind metadata drilling",
+    "newCandidateLayers": [
+      {"id":"1LgnnKBkN3fIVqelehcJq-OrPXAio1ZDFHs9BUdzhgaY","title":"獅仔頭第二市中心計畫：架空都市史 v0.1","marker":"new 2026-08-25 document surfaced under 都市; retain as candidate layer only"},
+      {"id":"1TKTywkNRudY076JIeS2MKu71nZ7VlIjF","title":"2020-05-22.md","marker":"older markdown surfaced under 鬼; retain for later mining, no interpretation"}
+    ],
+    "duplicateSignals": [
+      {"title":"張榮哲-1062博士班申請學位考試.pdf","ids":["1TvuLp5GCcyzWWAYudC1LMjrd3tHtmrs6","1cJ1u08uNkg4xvgvCXY-XkoGaKVYNxk0L"],"marker":"same title and size; duplicate candidate only, not deleted"},
+      {"title":"促進公有土地參與都市更新之功能及問題研究－以臺北市為例.pdf","ids":["1OnnuIlILDHxOVTW3LnXbM5KVkNeOLGun","1PkPVWCkj9JcymTEUwDgwchS62HAcKq2M"],"marker":"same size with differing filename author prefix; duplicate candidate only"}
+    ],
+    "sensitiveSkipped": true
+  }
+}
