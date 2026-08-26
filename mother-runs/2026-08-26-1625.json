@@ -1,0 +1,31 @@
+{
+  "runAt": "2026-08-26 16:25 +08:00",
+  "phase": "mining-only",
+  "vessel": "Nostromo",
+  "constraints": ["no-refining", "no-cross-comparison", "no-use-judgment"],
+  "uncultured": {
+    "sourceFolderId": "104Dpvr-q8xD1t1Hlw3KVSSGcJDCbcOIF",
+    "status": "patrolled",
+    "newSincePreviousInventory": 0,
+    "inventoryObservation": "Folder metadata scan still shows the existing image batch; no files with creation/update timestamps later than the prior 2026-08-21 ingestion were surfaced in this patrol.",
+    "duplicateCandidates": [],
+    "sampling": "No new-image sample required this run; existing unseen inventory left untouched for later mining-only sampling."
+  },
+  "terminus": {
+    "status": "patrolled",
+    "visitedThisRun": [
+      {"id":"1LgnnKBkN3fIVqelehcJq-OrPXAio1ZDFHs9BUdzhgaY","title":"獅仔頭第二市中心計畫：架空都市史 v0.1","classification":"candidate-ore","note":"Newly created 2026-08-25 urban-history material; recorded as a candidate layer only, not interpreted or linked."},
+      {"id":"1-iohpDmAldlcy-W_uTm2-QIP5r3EH9yO","title":"如來與佛.md","classification":"candidate-ore","note":"Keyword hit around subject-related material; candidate layer only."},
+      {"id":"1poqGYleyhoJcZBQD2mviD57TD-_g78nd","title":"剛吃飽_第五輪綱領.md","classification":"candidate-ore","note":"Recent writing/research material; candidate layer only."},
+      {"id":"1WDzoJi9Rma0yEayokB0z5vCYUiNmJxMN","title":"2026-05-29-1.md","classification":"candidate-ore","note":"Older note surfaced by subject drilling; candidate layer only."},
+      {"id":"1r6HOBu4Wk5DXitvwtRRynHq_j6ET7mvL","title":"2026-05-21-1.md","classification":"candidate-ore","note":"Older note surfaced by subject drilling; candidate layer only."}
+    ],
+    "blindExcavation": {
+      "query": "都市 / 主體",
+      "observation": "Search surfaced a mix of user-authored/recent materials and older reference PDFs. Reference PDFs were not summarized; sensitive-data categories were not inspected."
+    }
+  },
+  "statePolicy": "Large mother-state.json not rewritten in this run; append-only mother-runs record used to avoid unsafe state replacement.",
+  "sensitiveDataPolicy": "Banking, credentials, passwords, verification codes, identity, tax and other highly sensitive personal-data materials excluded from analysis/indexing.",
+  "notification": "none"
+}
