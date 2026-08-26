@@ -1,0 +1,98 @@
+{
+  "runAt": "2026-08-26 18:13 +08:00",
+  "phase": "mining-only",
+  "mode": "Mother/Nostromo shared patrol",
+  "constraints": {
+    "noRefining": true,
+    "noComparison": true,
+    "noCollision": true,
+    "noInfection": true,
+    "noHybridization": true,
+    "noUseJudgment": true,
+    "sensitiveDataRule": "skip banking/financial accounts, credentials, passwords, verification codes, identity documents, tax records, and other clearly high-sensitivity personal data"
+  },
+  "baseline": {
+    "motherStateUpdatedAt": "2026-08-23 09:26 +08:00",
+    "visualMiningGeneratedAt": "2026-08-21T21:44:32+08:00",
+    "recentRunLedgerRead": true
+  },
+  "uncultured": {
+    "sourceFolderId": "104Dpvr-q8xD1t1Hlw3KVSSGcJDCbcOIF",
+    "newImagesSinceBaseline": 0,
+    "existingUnseenPool": "present",
+    "sampledThisRun": [
+      {
+        "id": "1oV_at23U8x6VYVwIEN4yvdXFGoiQifun",
+        "fileName": "IMG_20260409_204423.jpg",
+        "status": "sampled",
+        "observedFeatures": [
+          "nighttime narrow commercial alley",
+          "dense mixed signage and exposed building services",
+          "pedestrians, scooters, produce/food retail sharing a compressed passage",
+          "strong vertical depth from lit street level into dark upper building void"
+        ]
+      },
+      {
+        "id": "11GdN1XWN4iiH9IXMBucUZWGI5TYf--34",
+        "fileName": "IMG_20260409_204522.jpg",
+        "status": "sampled",
+        "observedFeatures": [
+          "same-date nighttime alley/street sequence",
+          "scooters and delivery box occupying pedestrian circulation",
+          "motion blur and close-range obstruction",
+          "compressed passage with people, vehicles and storefront edges overlapping"
+        ]
+      }
+    ],
+    "candidateSeries": [
+      {
+        "label": "2026-04-09 night alley sequence",
+        "status": "candidate-only",
+        "basis": "two same-date frames share a narrow nocturnal commercial passage, dense circulation and overlapping pedestrian/scooter/storefront space"
+      }
+    ],
+    "dedupe": {
+      "exactDuplicatesDetectedThisRun": 0,
+      "note": "No deletions performed."
+    }
+  },
+  "terminus": {
+    "purposefulDrilling": [
+      {
+        "id": "1Vf1j0rmqAOhVoBkXCM4rGamL6Ig3tlyO",
+        "title": "PROPOSAL.docx",
+        "datedContent": "2013-05-08 draft",
+        "status": "candidate-ore-layer",
+        "observedSignals": [
+          "裂縫 / interstice and 症頭 / symptom already appear as explicit organizing terms",
+          "urban modernization is described together with repression, return and resistance",
+          "draft structure links red-light district, urban renewal, historic preservation, political economy and urban revolt",
+          "social meaning is discussed in terms of provisional fixing, suture, hegemony and positional relations"
+        ],
+        "interpretationDeferred": true
+      }
+    ],
+    "blindExcavation": [
+      {
+        "id": "1iZ5vszdZhr3xa_I09BX2VrzZapeT67_J",
+        "title": "20120812田調紀錄.docx.docx",
+        "status": "candidate-ore-layer",
+        "observedSignals": [
+          "raw urban-renewal field material records mismatches between formal land/property arrangements and lived occupation",
+          "residents describe desired dwelling form and everyday spatial preferences alongside redevelopment negotiations",
+          "institutional delay, public land, incentives and informal/long-term occupancy appear together in concrete cases"
+        ],
+        "privacyHandling": "personal contact details and other unnecessary identifying particulars were not retained in findings",
+        "interpretationDeferred": true
+      }
+    ],
+    "noOreHandling": "Other search hits not selected for mining were left unindexed rather than summarized."
+  },
+  "result": {
+    "newCandidateOreLayers": 2,
+    "newCandidateImageSeries": 1,
+    "newImageUploads": 0,
+    "refiningPerformed": false,
+    "userNotificationRequired": false
+  }
+}
