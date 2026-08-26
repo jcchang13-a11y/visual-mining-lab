@@ -22,11 +22,17 @@ public class MainActivity extends Activity {
         WebSettings settings = webView.getSettings();
         settings.setJavaScriptEnabled(true);
         settings.setDomStorageEnabled(true);
-        settings.setLoadWithOverviewMode(true);
+
+        // The website already defines width=device-width. Do not let WebView
+        // apply a second overview-fit zoom pass, which distorts responsive UI.
+        settings.setLoadWithOverviewMode(false);
         settings.setUseWideViewPort(true);
+        settings.setSupportZoom(false);
         settings.setBuiltInZoomControls(false);
         settings.setDisplayZoomControls(false);
+        settings.setTextZoom(100);
 
+        webView.setInitialScale(0);
         webView.setWebChromeClient(new WebChromeClient());
         webView.setWebViewClient(new WebViewClient() {
             @Override
