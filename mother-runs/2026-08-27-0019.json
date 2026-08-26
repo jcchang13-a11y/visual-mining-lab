@@ -1,0 +1,82 @@
+{
+  "runAt": "2026-08-27 00:19 +08:00",
+  "engine": "Mother",
+  "vessel": "Nostromo",
+  "phase": "mining-only",
+  "constraints": {
+    "noRefining": true,
+    "noComparison": true,
+    "noCollision": true,
+    "noHybridization": true,
+    "noUseJudgment": true,
+    "skipSensitivePersonalData": true
+  },
+  "baseline": {
+    "motherStateUpdatedAt": "2026-08-23 09:26 +08:00",
+    "visualMiningGeneratedAt": "2026-08-21T21:44:32+08:00",
+    "visualMiningTotal": 31
+  },
+  "uncultured": {
+    "sourceFolderId": "104Dpvr-q8xD1t1Hlw3KVSSGcJDCbcOIF",
+    "newImagesSinceBaseline": 0,
+    "folderObservation": "Folder metadata shows no uploads later than 2026-08-21 in the inspected page; no duplicate deletion performed.",
+    "sampled": [
+      {
+        "id": "1HMrK-zQYhYOWVrjBrdEhZ7YeL4WuGRkn",
+        "title": "IMG_20250531_164739.jpg",
+        "status": "sampled",
+        "candidateFeatures": [
+          "rainy street surface and umbrellas",
+          "very close moving green three-wheeled/covered vehicle occupying most of frame",
+          "partial human bodies cut by frame edge",
+          "street signage and building facade compressed into background",
+          "motion blur and accidental obstruction"
+        ]
+      },
+      {
+        "id": "1c8dFT9_uoQr4C7bKL9YqWh4ColAHj5Uo",
+        "title": "IMG_20250608_191746.jpg",
+        "status": "sampled",
+        "candidateFeatures": [
+          "extreme close-up of commercial sign",
+          "handwritten black marker text over printed high-saturation typography",
+          "cropped characters extending beyond frame",
+          "arrow/signage fragment at edge",
+          "found graphic surface rather than composed scene"
+        ]
+      }
+    ],
+    "candidateSeries": [
+      "street surfaces / mobile obstructions / partial bodies",
+      "found signs / over-writing / cropped commercial typography"
+    ]
+  },
+  "terminus": {
+    "purposefulDrilling": [
+      {
+        "id": "1LgnnKBkN3fIVqelehcJq-OrPXAio1ZDFHs9BUdzhgaY",
+        "title": "獅仔頭第二市中心計畫：架空都市史 v0.1",
+        "status": "seen-no-ore",
+        "note": "Current native Google Doc returned no paragraphs; marked seen only."
+      }
+    ],
+    "blindExcavation": [
+      {
+        "id": "1HQ4SP6bjNBM6bNxjhGu26jBdQGD7gZTw",
+        "title": "《24小時》演出時間與空間規劃.docx",
+        "status": "candidate-ore-layer",
+        "candidateFeatures": [
+          "24-hour event organized as a spatial-temporal grid",
+          "crane used as repeated hourly public-action device",
+          "building facade used as projection surface for event text and images",
+          "multiple social-movement groups, performances, talks and media distributed across zones and time slots",
+          "explicit coupling of visibility, public expression, urban surfaces and scheduling"
+        ],
+        "note": "Candidate ore only; no theoretical integration or use judgment performed."
+      }
+    ]
+  },
+  "safety": {
+    "sensitiveFinancialIdentityCredentialMaterials": "skipped by rule; none entered into findings"
+  }
+}
