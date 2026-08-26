@@ -1,0 +1,28 @@
+{
+  "runAt": "2026-08-26 12:16 +08:00",
+  "phase": "mining-only",
+  "vessel": "Nostromo",
+  "rules": {"noRefining": true, "noUseJudgment": true},
+  "uncultured": {
+    "sourceFolderId": "104Dpvr-q8xD1t1Hlw3KVSSGcJDCbcOIF",
+    "inventoryCheck": "no files newer than existing 2026-08-21 upload cohort observed in current folder page",
+    "sampledThisRun": [],
+    "notes": ["Current image inventory remains the existing cohort; no new upload event detected in this patrol.", "No clustering/theory/use judgment performed."],
+    "dedupe": "metadata-only check; no deletion performed"
+  },
+  "terminus": {
+    "visitedThisRun": [
+      {"id":"144mOBmNmluRhd_R-exQ3BcCcWk-IVXZQ","title":"張剛維 以容積移轉進行都市保存之制度與執行－財產權觀點分析.pdf","status":"candidate-ore"}
+    ],
+    "candidateLayers": [
+      {"id":"terminus-tdr-property-rights-2008","sourceId":"144mOBmNmluRhd_R-exQ3BcCcWk-IVXZQ","status":"candidate","note":"2008 literature layer: transferable development rights framed as redefinition/protection of property rights enabling conservation while generating secondary institutional/urban-management problems. Keep as a candidate layer only; no comparison or synthesis in phase 1."}
+    ],
+    "blindExcavation": [
+      {"id":"1LgnnKBkN3fIVqelehcJq-OrPXAio1ZDFHs9BUdzhgaY","title":"獅仔頭第二市中心計畫：架空都市史 v0.1","status":"recent-material-seen-no-mining-this-run"},
+      {"id":"1OF0GYOjSOLxy-C0M1YG9O8iUfUqmf6YYp57xaP8hDJg","title":"不可抵達之地：蓬萊、桃花源與世界各地的異境想像","status":"recent-material-seen-no-mining-this-run"}
+    ]
+  },
+  "sensitiveSkip": "active",
+  "stateWrite": "append-only mother-runs file; mother-state.json not replaced",
+  "notification": "none"
+}
