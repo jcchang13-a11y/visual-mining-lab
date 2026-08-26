@@ -1,0 +1,55 @@
+{
+  "runAt": "2026-08-26 09:21 +08:00",
+  "phase": "mining-only",
+  "vessel": "Nostromo",
+  "bays": {
+    "uncultured": {
+      "source": "Google Drive: 紅米手機照片",
+      "folderId": "104Dpvr-q8xD1t1Hlw3KVSSGcJDCbcOIF",
+      "newImagesObserved": 0,
+      "inventoryObservation": "Direct-child folder patrol still shows the established image cohort. No file with created_time later than the known 2026-08-21 uploads was observed in the accessible listing.",
+      "candidateSeries": [
+        "MVIMG_20260614_* remains a dense same-day sequence and is kept only as a series candidate."
+      ],
+      "dedupeNotes": "No deletion performed. Metadata-only patrol remains insufficient for safe visual duplicate deletion.",
+      "action": "inventory patrol only; no theory, artwork formation, or use judgment"
+    },
+    "terminus": {
+      "mode": "purposeful drilling + small blind excavation",
+      "visitedThisRun": [
+        {
+          "id": "1cUI1nY9GmGwupO26-GwMPp-rpeq1LmNm",
+          "title": "4-1大稻埕地方產業與故事旅遊(水瓶子).pdf",
+          "status": "candidate ore",
+          "notes": [
+            "2012 material treats guided-tour practice as a repeatable field cycle: planning, archival lookup, site reconnaissance, route design, public communication, on-site execution and documentation.",
+            "It repeatedly uses existing buildings, objects, streets and local stories as anchors for interpretation, and includes examples of linking scattered historical sites into walking routes.",
+            "Keep only as a candidate layer around field interpretation, route-making, local narrative and reuse of existing urban objects. No comparison or synthesis attempted."
+          ]
+        },
+        {
+          "id": "1qhVwIqGuQQiim7UFtGtsPb_TJxDeSgFh",
+          "title": "企劃書2019.10.30.docx",
+          "status": "candidate ore",
+          "notes": [
+            "2019 Quanzhou/New Bridge community proposal defines the neighborhood as a living city museum and residents as living oral-history carriers rather than treating heritage as only fixed monuments.",
+            "The draft organizes intervention through linked nodes, walking routes, resident participation, everyday services, oral-history collection, small classes and a 'living story museum' where local elders tell stories in place.",
+            "Keep as a candidate layer around living museum, resident memory, node-and-route organization, community participation and everyday-use heritage. No theory unification or use judgment attempted."
+          ]
+        }
+      ],
+      "blindExcavationObservations": [
+        "A tourism/heritage search surfaced a broader archive cluster around Dadaocheng guided-tour practice, Kinmen adaptive reuse, cultural heritage management and community-based interpretation. Recorded only as a candidate archive cluster.",
+        "Search also surfaced duplicate-looking travel-ticket files with identical titles; these were treated as non-research administrative material and not analyzed or indexed as findings."
+      ],
+      "sensitiveSkipPolicy": "financial accounts, credentials, passwords, verification codes, identity documents, tax records and other highly sensitive personal data excluded from analysis/indexing/findings"
+    }
+  },
+  "stateRead": {
+    "mother-state.json": "read",
+    "visual-mining.json": "read",
+    "mother-runs/latest": "2026-08-26-0818.json read",
+    "note": "Large mother-state and visual-mining snapshots were not replaced; this run is stored separately for safe accumulation."
+  },
+  "phaseGuard": "No refining, comparison, collision, infection, hybridization, theory unification, artwork formation, or use judgment performed."
+}
