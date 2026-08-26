@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="108" fill="#171817"/>
+  <circle cx="256" cy="256" r="166" fill="none" stroke="#f28c00" stroke-width="34"/>
+  <circle cx="256" cy="256" r="118" fill="#ece8dc"/>
+  <text x="256" y="300" text-anchor="middle" font-family="Noto Sans TC, PingFang TC, Microsoft JhengHei, sans-serif" font-size="170" font-weight="800" fill="#171817">歸</text>
+  <rect x="183" y="390" width="146" height="34" rx="17" fill="#f28c00"/>
+  <text x="256" y="415" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="800" letter-spacing="4" fill="#171817">O55</text>
+</svg>
