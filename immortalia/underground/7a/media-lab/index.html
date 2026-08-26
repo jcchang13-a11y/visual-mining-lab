@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>多媒體實驗區 · 7A</title>
+<style>
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:#c9c9c4;color:#171817}body{font-family:Arial,"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif}.wrap{max-width:820px;margin:auto;padding:20px 14px 60px}.plate{background:#efeee8;border:1px solid #777;padding:15px 17px;margin-bottom:14px}.kicker{font-size:.65rem;letter-spacing:.14em;color:#62655f}.title{font-size:2rem;font-weight:700;margin-top:8px}.sub{margin-top:8px;font-size:.72rem;color:#565954;line-height:1.6}.lab{background:#d8d7d1;border:1px solid #777;padding:16px}.notice{font-size:.72rem;line-height:1.7;color:#4b4e4b;margin-bottom:16px}.block{border-top:1px solid #8d8e89;padding-top:14px;margin-top:14px}.block:first-of-type{border-top:0;margin-top:0;padding-top:0}.block h2{font-size:.82rem;letter-spacing:.1em;margin:0 0 10px}.files{display:grid;grid-template-columns:1fr 1fr;gap:10px}.filebox,.controlbox{background:#e3e2dc;border:1px solid #777;padding:12px}.filebox label,.controlbox label{display:block;font-size:.68rem;color:#555;margin-bottom:8px}.filebox input{width:100%}.controls{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.row{display:grid;grid-template-columns:140px 1fr 72px;gap:10px;align-items:center;margin:9px 0}.row input[type=range]{width:100%}.value{font:700 .72rem ui-monospace,SFMono-Regular,Menlo,monospace;text-align:right}.buttons{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px}.buttons button{min-height:48px;border:1px solid #555;background:linear-gradient(#efeee8,#b9bab5);font-weight:700;cursor:pointer}.buttons button:disabled{opacity:.4;cursor:not-allowed}.status{margin-top:14px;background:#1b1d1b;color:#d7ddd7;padding:12px;font:12px/1.6 ui-monospace,SFMono-Regular,Menlo,monospace;min-height:94px;white-space:pre-wrap}.hypothesis{font-size:.7rem;line-height:1.7;color:#484b48}.back{display:inline-block;margin-top:16px;font-size:.68rem;color:#444}.small{margin-top:22px;font-size:.6rem;color:#686b68}@media(max-width:620px){.files,.controls,.buttons{grid-template-columns:1fr}.row{grid-template-columns:1fr}.value{text-align:left}}
+</style>
+</head>
+<body>
+<main class="wrap">
+<section class="plate"><div class="kicker">7A · MULTIMEDIA RESEARCH</div><div class="title">多媒體實驗區</div><div class="sub">第一個研究題目：聲音銜接。比較硬切、留白、重疊與 crossfade，找出「接得不順」到底來自載入延遲、時間空洞、音量跳變，還是段落本身的節奏。</div></section>
+<section class="lab">
+<div class="notice">選兩段本機音訊即可測試。檔案只在你的瀏覽器裡解碼，不會上傳到網站。這一頁目前專門研究 A → B 的銜接行為。</div>
+<section class="block">
+<h2>01　測試材料</h2>
+<div class="files">
+<div class="filebox"><label for="fileA">A 段</label><input id="fileA" type="file" accept="audio/*"></div>
+<div class="filebox"><label for="fileB">B 段</label><input id="fileB" type="file" accept="audio/*"></div>
+</div>
+</section>
+<section class="block">
+<h2>02　銜接參數</h2>
+<div class="controlbox">
+<div class="row"><label for="tail">A 取尾段</label><input id="tail" type="range" min="1" max="8" step="0.1" value="3"><div class="value" id="tailV">3.0 s</div></div>
+<div class="row"><label for="head">B 取前段</label><input id="head" type="range" min="1" max="8" step="0.1" value="4"><div class="value" id="headV">4.0 s</div></div>
+<div class="row"><label for="gap">留白／重疊</label><input id="gap" type="range" min="-2" max="2" step="0.05" value="0"><div class="value" id="gapV">0.00 s</div></div>
+<div class="row"><label for="fade">Crossfade</label><input id="fade" type="range" min="0" max="2" step="0.05" value="0.35"><div class="value" id="fadeV">0.35 s</div></div>
+</div>
+<div class="buttons">
+<button id="hard" disabled>硬切</button>
+<button id="gapBtn" disabled>依參數銜接</button>
+<button id="fadeBtn" disabled>Crossfade</button>
+<button id="stopBtn" disabled>停止</button>
+</div>
+<div class="status" id="status">等待兩段音訊。</div>
+</section>
+<section class="block">
+<h2>03　目前假設</h2>
+<div class="hypothesis">H1：如果問題只在網頁載入，預先 decode 後的硬切應該會明顯改善。<br>H2：如果仍然不順，問題多半是波形／音量／語句節奏不連續，需要短重疊或 crossfade。<br>H3：語音尤其不能只看技術上的「無縫」；句尾呼吸、停頓長度、下一句起音位置，可能比零毫秒 gap 更重要。<br>H4：後續要把影像、字幕、環境音一起放進同一條 timeline，研究多媒體不是「加素材」，而是各媒介如何共同控制時間。</div>
+</section>
+<a class="back" href="../">← 返回 7A</a>
+</section>
+<div class="small">MULTIMEDIA LAB · EXPERIMENT 001 · AUDIO TRANSITION</div>
+</main>
+<script>
+let ctx=null,A=null,B=null,sources=[];
+const $=id=>document.getElementById(id), status=$('status');
+function log(s){status.textContent=s}
+function enable(){const ok=!!(A&&B);['hard','gapBtn','fadeBtn'].forEach(id=>$(id).disabled=!ok)}
+async function loadFile(file,slot){if(!file)return;ctx=ctx||new (window.AudioContext||window.webkitAudioContext)();log('解碼 '+file.name+' …');const buf=await file.arrayBuffer();const audio=await ctx.decodeAudioData(buf);if(slot==='A')A=audio;else B=audio;enable();log(`已載入\nA: ${A?A.duration.toFixed(2)+' s':'—'}\nB: ${B?B.duration.toFixed(2)+' s':'—'}`)}
+$('fileA').onchange=e=>loadFile(e.target.files[0],'A').catch(err=>log('A 解碼失敗：'+err.message));
+$('fileB').onchange=e=>loadFile(e.target.files[0],'B').catch(err=>log('B 解碼失敗：'+err.message));
+[['tail','tailV',1],['head','headV',1],['gap','gapV',2],['fade','fadeV',2]].forEach(([id,out,d])=>{const el=$(id);const draw=()=>$(out).textContent=Number(el.value).toFixed(d)+' s';el.oninput=draw;draw()});
+function stop(){sources.forEach(s=>{try{s.stop()}catch{}});sources=[];$('stopBtn').disabled=true}
+$('stopBtn').onclick=stop;
+function src(buffer,startAt,offset,duration,gainPlan){const s=ctx.createBufferSource(),g=ctx.createGain();s.buffer=buffer;s.connect(g).connect(ctx.destination);g.gain.setValueAtTime(gainPlan.start,startAt);if(gainPlan.ramps)gainPlan.ramps.forEach(r=>g.gain.linearRampToValueAtTime(r.value,r.time));s.start(startAt,offset,duration);sources.push(s);return s}
+async function play(mode){stop();ctx=ctx||new (window.AudioContext||window.webkitAudioContext)();await ctx.resume();const now=ctx.currentTime+.12,ta=Math.min(Number($('tail').value),A.duration),hb=Math.min(Number($('head').value),B.duration),aOff=Math.max(0,A.duration-ta);let gap=mode==='hard'?0:Number($('gap').value),fade=mode==='fade'?Math.min(Number($('fade').value),ta,hb):0;let bAt=now+ta+gap-fade;if(bAt<now)bAt=now; if(mode==='fade'&&fade>0){const aEnd=now+ta,bFadeStart=aEnd-fade;src(A,now,aOff,ta,{start:1,ramps:[{value:1,time:bFadeStart},{value:0,time:aEnd}]});src(B,bFadeStart,0,hb,{start:0,ramps:[{value:1,time:aEnd}]});log(`CROSSFADE\nA 尾段 ${ta.toFixed(2)} s\nB 前段 ${hb.toFixed(2)} s\n交疊 ${fade.toFixed(2)} s\n已預先解碼，排除網路載入等待。`)}else{src(A,now,aOff,ta,{start:1});src(B,bAt,0,hb,{start:1});log(`${mode==='hard'?'HARD CUT':'PARAMETER JOIN'}\nA 尾段 ${ta.toFixed(2)} s\nB 前段 ${hb.toFixed(2)} s\n${gap>=0?'留白':'重疊'} ${Math.abs(gap).toFixed(2)} s\n已預先解碼，排除網路載入等待。`)}$('stopBtn').disabled=false}
+$('hard').onclick=()=>play('hard');$('gapBtn').onclick=()=>play('gap');$('fadeBtn').onclick=()=>play('fade');
+</script>
+</body>
+</html>
