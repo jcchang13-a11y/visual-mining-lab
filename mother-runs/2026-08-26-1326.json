@@ -1,0 +1,24 @@
+{
+  "runAt": "2026-08-26 13:26 +08:00",
+  "phase": "mining-only",
+  "rules": {"refine": false, "compare": false, "useJudgment": false},
+  "uncultured": {
+    "sourceFolderId": "104Dpvr-q8xD1t1Hlw3KVSSGcJDCbcOIF",
+    "patrol": "completed",
+    "newSincePriorInventory": 0,
+    "note": "Current folder metadata sample remains within the 2026-08-21 upload batch already represented by visual-mining.json/mother state. No new image ore registered this patrol; no theory or artwork inference performed."
+  },
+  "terminus": {
+    "patrol": "completed",
+    "mode": ["purposeful-drilling", "light-blind-excavation"],
+    "candidateOre": [
+      {"id":"0B6kekeEVEPHjN2FrNlh4WWxsWVE","title":"new urban fronter (20151023).docx","status":"candidate-older-version","note":"Older 2015 version surfaced through desire drilling; later/longer New Urban Frontier material is already visited, so retain only as a possible version-history layer, not a new conceptual finding."},
+      {"id":"1cOVb6_90jSm-XlGDdMtRCy7uxbSpPmQx","title":"10027_5.Sex and City（張榮哲書章節）.pdf","status":"candidate-published-version","note":"Published/PDF form surfaced separately from the previously visited editable Sex and City manuscript; retain as a possible textual-version layer only."},
+      {"id":"1AY2P-DFHnYLuPS9d4wFhIMuwbpgSeDk11kGZsIyFYco","title":"Jung Che PAPER (Chin Review 1)","status":"candidate-unvisited","note":"Surfaced in desire drilling and not present in current visited ledger; candidate for a later mining pass."},
+      {"id":"1ve9-Rsfda82-llsf7jAAFMOD3jvbwym7","title":"Jung Che PAPER (Chin Review 1).docx","status":"candidate-version-pair","note":"Likely alternate/exported version of the same candidate document; keep paired for dedupe/version check before reading."},
+      {"id":"1LgnnKBkN3fIVqelehcJq-OrPXAio1ZDFHs9BUdzhgaY","title":"獅仔頭第二市中心計畫：架空都市史 v0.1","status":"candidate-recent-side-vein","note":"Recent document surfaced in broad urban drilling; record as a side-vein candidate without interpreting its relation to older research."}
+    ],
+    "sensitiveSkipped": true,
+    "note": "No cross-document synthesis, comparison, theory integration, or use judgment performed."
+  }
+}
