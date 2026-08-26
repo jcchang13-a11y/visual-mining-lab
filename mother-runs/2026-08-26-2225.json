@@ -1,0 +1,88 @@
+{
+  "runAt": "2026-08-26 22:25 +08:00",
+  "phase": "mining-only",
+  "engine": "Mother",
+  "vessel": "Nostromo",
+  "rules": {
+    "noRefining": true,
+    "noComparison": true,
+    "noCollision": true,
+    "noInfection": true,
+    "noHybridization": true,
+    "noUseJudgment": true,
+    "sensitiveDataSkipped": true
+  },
+  "stateRead": {
+    "motherState": true,
+    "visualMining": true,
+    "recentRun": "mother-runs/2026-08-26-2120.json"
+  },
+  "uncultured": {
+    "sourceFolderId": "104Dpvr-q8xD1t1Hlw3KVSSGcJDCbcOIF",
+    "newSincePriorPatrol": 0,
+    "note": "No later-created image batch was present; this run sampled previously unseen material only.",
+    "sampled": [
+      {
+        "id": "10uGzyRRa4Riw3Y3XpwpKzo1-xOPmXxS9",
+        "fileName": "IMG_20260321_152825.jpg",
+        "status": "sampled-first-pass",
+        "candidateVisualFeatures": [
+          "low-angle self-portrait framing",
+          "large amount of empty architectural background above head",
+          "dark wraparound glasses and over-ear headphones",
+          "strong foreground face against soft geometric glass-and-wall planes",
+          "muted grey/green palette",
+          "casual seated or reclining posture"
+        ]
+      },
+      {
+        "id": "1oV_at23U8x6VYVwIEN4yvdXFGoiQifun",
+        "fileName": "IMG_20260409_204423.jpg",
+        "status": "sampled-first-pass",
+        "candidateVisualFeatures": [
+          "narrow night-market or alley corridor",
+          "dense vertical layering of pipes, cables, signs and balconies",
+          "mixed fluorescent, neon and shop lighting",
+          "pedestrians and scooters compressed into a deep central passage",
+          "upper-frame darkness contrasted with saturated lower storefronts",
+          "everyday commercial clutter occupying most of the frame"
+        ]
+      }
+    ],
+    "duplicateAction": "none; no deletion performed"
+  },
+  "terminus": {
+    "mode": ["purposeful drilling", "limited blind excavation"],
+    "visitedThisRun": [
+      {
+        "id": "18fYtPflmJcSx1ck5rtoUCRXMMH2ML3pp",
+        "title": "2026-05-24-1.md",
+        "drillType": "purposeful",
+        "status": "candidate-ore-layer",
+        "candidateSignals": [
+          "Diamond Sutra read through three sharply different cinematic registers",
+          "first section described as distant observational action with minimal imposed meaning",
+          "fourteenth section described as extreme emotional close-up around Subhuti crying",
+          "thirty-second section described as crowded festival-like curtain call with humans, devas and asuras",
+          "repeated concern with viewing distance, framing, genre shift and who occupies the viewing position",
+          "explicit instruction inside the note not to explain away the strangeness too quickly"
+        ],
+        "note": "Recorded only as a candidate textual ore layer; no synthesis or use decision performed."
+      },
+      {
+        "id": "1baAIIRzqTYYeVKLmVJHQNH46RNHOBtYLCLMh-fKZhzM",
+        "title": "垃圾堆",
+        "drillType": "blind",
+        "status": "candidate-ore-layer",
+        "candidateSignals": [
+          "explicit repository for removed but not permanently discarded material",
+          "vanitas note linking abundance with decay, ending and temporality",
+          "material was removed because the explanation felt over-explicit while the image itself was retained"
+        ],
+        "note": "Blind excavation only; retained as candidate ore without comparison or reintegration."
+      }
+    ],
+    "noOreMarkedSeen": []
+  },
+  "statePolicy": "Large state files left untouched; this incremental run record preserves first-stage mining history without overwriting prior findings."
+}
