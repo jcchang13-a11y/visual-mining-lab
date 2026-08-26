@@ -4,53 +4,167 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="robots" content="noindex,nofollow,noarchive">
-<title>獅仔頭站 · 蓬萊仙島地下城</title>
+<title>歸墟 · 獅仔頭 O55</title>
 <style>
-:root{--wall:#d8d6cf;--metal:#9b9d9b;--dark:#262827;--ink:#171817;--muted:#656963;--line:#777b76;--paper:#ece9df;--lit:#f5f1df;--red:#8b2f26;--green:#58705b}*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:#c9c7c0;color:var(--ink)}body{font-family:Arial,"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif}.shell{max-width:980px;margin:auto;padding:18px 14px 70px}.mast{display:flex;justify-content:space-between;gap:14px;align-items:flex-start;border-bottom:2px solid var(--dark);padding:8px 2px 15px}.mrt{font-size:.72rem;letter-spacing:.12em}.mrt b{font-size:1.3rem;letter-spacing:.03em}.tiny{font-size:.66rem;line-height:1.55;color:var(--muted);text-align:right}.scene{margin-top:18px;border:1px solid #666;background:var(--wall);box-shadow:inset 0 0 0 5px rgba(255,255,255,.12)}.sign{padding:13px 16px;background:#f0eee7;border-bottom:1px solid #777;display:flex;justify-content:space-between;gap:15px;align-items:end}.sign .floor{font-size:clamp(2.6rem,10vw,5.8rem);line-height:.9;font-weight:700}.sign .name{font-size:.82rem;line-height:1.6;color:#555;text-align:right}.space{padding:18px}.notice{background:#f2f0e7;border:1px solid #9a978d;padding:11px 13px;font-size:.72rem;line-height:1.55;margin-bottom:18px}.notice strong{font-weight:600}.routes{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.door{appearance:none;width:100%;min-height:145px;border:1px solid #737672;background:linear-gradient(90deg,#aaa 0,#d0d1ce 10%,#b4b6b3 48%,#d6d7d4 90%,#aaa 100%);color:#111;text-align:left;padding:15px;cursor:pointer;position:relative}.door:hover{filter:brightness(1.04)}.door .code{font-size:.6rem;letter-spacing:.16em;color:#4d514e}.door h2{font-size:1.35rem;margin:28px 0 4px;font-weight:500}.door p{font-size:.7rem;line-height:1.55;color:#454945;margin:0}.door::after{content:"";position:absolute;right:12px;top:12px;width:9px;height:9px;border-radius:50%;background:#8f948e;border:1px solid #555}.door.public::after{background:#7d987d}.door.restricted::after{background:#a87970}.panel{margin-top:18px;background:#777a77;border:1px solid #555;padding:15px}.panel-title{font-size:.64rem;letter-spacing:.18em;color:#eee;margin-bottom:12px}.buttons{display:grid;grid-template-columns:repeat(5,1fr);gap:9px}.liftbtn{min-height:54px;border:1px solid #3e403e;background:linear-gradient(#d7d8d5,#9fa19e);box-shadow:inset 0 0 0 2px #c5c6c3;font-size:.86rem;cursor:pointer}.liftbtn:active,.liftbtn.active{background:#ddd4a7}.liftbtn.lock{color:#5d5d5d}.status{margin-top:10px;background:#242624;color:#d7d1b2;padding:9px 10px;font-family:monospace;font-size:.7rem;min-height:34px}.footer{margin-top:20px;font-size:.64rem;line-height:1.6;color:#5d625e}.ghost{display:none;margin-top:14px;padding:16px;border:1px solid #74736d;background:#d1cec2}.ghost.show{display:block}.ghost h3{margin:0 0 8px;font-size:1rem;font-weight:500}.ghost p{font-size:.72rem;line-height:1.65;color:#4d504d}.legacy{display:inline-block;margin-top:9px;color:#393b39;font-size:.7rem;text-decoration:none;border-bottom:1px dotted #555}.keyrow{display:flex;gap:8px;margin-top:14px}.keyrow input{min-width:0;flex:1;padding:11px 10px;border:1px solid #656865;background:#eee;font-size:16px}.keyrow button{padding:10px 13px;border:1px solid #555;background:#a9aaa7;cursor:pointer}.stafflinks{display:none;margin-top:12px;grid-template-columns:repeat(3,1fr);gap:8px}.stafflinks.show{display:grid}.stafflinks a{padding:11px;background:#eee;border:1px solid #777;text-decoration:none;color:#222;font-size:.7rem;text-align:center}.crumb{display:flex;gap:10px;flex-wrap:wrap;margin:15px 0 0}.crumb button{border:0;background:transparent;padding:0;color:#555;text-decoration:underline;font-size:.68rem;cursor:pointer}@media(max-width:650px){.routes{grid-template-columns:1fr}.buttons{grid-template-columns:repeat(4,1fr)}.stafflinks{grid-template-columns:1fr}.sign{align-items:flex-start}.sign .name{max-width:55%}}
+:root{
+  --orange:#f28c00;--black:#111;--white:#f7f7f4;--mrtgray:#d9d9d5;
+  --steel1:#8f928f;--steel2:#d5d6d2;--steel3:#a7aaa6;--ink:#151615;
+  --display:#171a16;--displaytext:#d8d49d;--line:#656864;
+}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:#d7d6d1;color:var(--ink)}
+body{font-family:Arial,"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;overflow-x:hidden}
+button{font:inherit}.stage{min-height:100svh}.frame{display:none;min-height:100svh}.frame.on{display:flex}
+
+/* 01 — station identification */
+#station{align-items:center;justify-content:center;background:#e7e6e1;padding:24px}
+.station-column{width:min(92vw,560px);background:#f4f3ee;border:1px solid #a9aaa6;box-shadow:0 8px 24px rgba(0,0,0,.10)}
+.station-band{height:16px;background:var(--orange)}
+.station-body{padding:28px 26px 30px;text-align:center}
+.station-code{display:inline-flex;align-items:center;justify-content:center;width:58px;height:58px;border:7px solid var(--orange);border-radius:50%;font-weight:700;font-size:1.05rem;margin-bottom:14px}
+.station-name{font-size:clamp(3rem,13vw,6.4rem);line-height:1;font-weight:700;letter-spacing:.03em}
+.station-en{margin-top:10px;font-size:1.05rem;letter-spacing:.16em;color:#3e403e}
+.station-rule{margin:24px auto 0;width:76%;height:1px;background:#b9bab6}
+.station-line{margin-top:14px;font-size:.76rem;color:#555;letter-spacing:.08em}
+
+/* 02 — MRT wayfinding */
+#wayfinding{align-items:center;justify-content:center;background:#ecebe7;padding:18px}
+.guide{width:min(96vw,760px);background:#111;color:white;border:1px solid #333;box-shadow:0 5px 18px rgba(0,0,0,.16)}
+.guide-top{height:9px;background:var(--orange)}
+.guide-row{display:grid;grid-template-columns:1fr auto;gap:22px;align-items:center;padding:22px 24px}
+.guide-label{font-size:clamp(1.55rem,6vw,2.9rem);font-weight:600;line-height:1.15}
+.guide-en{display:block;font-size:.78rem;letter-spacing:.13em;font-weight:400;margin-top:7px;color:#ddd}
+.guide-arrow{font-size:3.1rem;line-height:1;color:#ffd300}
+.guide-sub{border-top:1px solid #555;padding:12px 24px 15px;font-size:.72rem;letter-spacing:.08em;color:#d6d6d6}
+
+/* 03 — elevator */
+#elevator{align-items:flex-start;justify-content:center;background:#b5b7b3;padding:18px 12px 42px}
+.lift-shell{width:min(100%,760px)}
+.building-strip{display:flex;justify-content:space-between;gap:12px;padding:8px 3px 12px;color:#303230;font-size:.67rem;letter-spacing:.08em}
+.building-strip b{font-size:.95rem;letter-spacing:.03em}
+.lift{border:1px solid #555;background:linear-gradient(90deg,var(--steel1),var(--steel2) 14%,#b8bbb7 48%,var(--steel2) 84%,var(--steel1));padding:16px;box-shadow:inset 0 0 0 3px rgba(255,255,255,.14)}
+.lift-head{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;margin-bottom:15px}
+.group-name{font-size:.68rem;letter-spacing:.14em;color:#3e423f}.group-name b{display:block;font-size:1.2rem;letter-spacing:.02em;color:#171817;margin-top:5px;font-weight:500}
+.floor-display{min-width:105px;background:var(--display);border:3px inset #777;padding:8px 12px;text-align:center;color:var(--displaytext);font-family:ui-monospace,monospace;font-size:1.55rem;letter-spacing:.12em}
+.panel{background:#919490;border:1px solid #555;padding:14px}
+.buttons{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.floorbtn{position:relative;min-height:66px;border:1px solid #4c4e4c;border-radius:5px;background:linear-gradient(#e1e2de,#a4a6a2);box-shadow:inset 0 0 0 2px #c9cac6;color:#171817;font-weight:600;cursor:pointer}
+.floorbtn small{display:block;font-size:.55rem;font-weight:400;color:#555;margin-top:3px}.floorbtn:active{transform:translateY(1px)}.floorbtn.lit{background:#dfd6a9}.floorbtn.disabled{opacity:.45;cursor:not-allowed}.floorbtn.hidden7a{visibility:hidden}
+.panel-status{margin-top:11px;background:var(--display);color:var(--displaytext);padding:9px 11px;min-height:38px;font-family:ui-monospace,monospace;font-size:.72rem;letter-spacing:.04em}
+.controls{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.smallbtn{border:1px solid #555;background:#deded9;padding:9px 11px;font-size:.68rem;cursor:pointer}.smallbtn.staff{margin-left:auto}
+.directory{display:none;margin-top:12px;background:#eeece4;border:1px solid #777;padding:12px}.directory.show{display:block}.directory h3{margin:0 0 10px;font-size:.82rem}.dir-grid{display:grid;grid-template-columns:76px 1fr;gap:0;border-top:1px solid #aaa}.dir-grid div{padding:7px 5px;border-bottom:1px solid #c2c0b8;font-size:.68rem}.dir-grid .f{font-weight:700}
+.arrival{display:none;margin-top:12px;background:#efeee8;border:1px solid #777;padding:14px}.arrival.show{display:block}.arrival h2{margin:0 0 6px;font-size:1.35rem;font-weight:500}.arrival p{margin:0;font-size:.73rem;line-height:1.65;color:#484b48}.arrival-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.arrival-actions a,.arrival-actions button{border:1px solid #6e706d;background:#deddd7;padding:9px 11px;color:#222;text-decoration:none;font-size:.68rem;cursor:pointer}
+.glitch{animation:jolt .14s linear 2}@keyframes jolt{0%{transform:translateX(0)}50%{transform:translateX(2px)}100%{transform:translateX(0)}}
+.seven-a-flash{background:#d7cf9b!important}
+
+@media(max-width:560px){.buttons{grid-template-columns:repeat(3,1fr)}.building-strip{font-size:.6rem}.guide-row{padding:18px}.guide-sub{padding-left:18px}.floorbtn{min-height:62px}}
+@media(prefers-reduced-motion:reduce){.glitch{animation:none}}
 </style>
 </head>
 <body>
-<div class="shell" id="app">
-<header class="mast"><div class="mrt">臺北捷運 · 蘆洲線延伸<br><b>獅仔頭</b> <span>SHIZAITOU</span></div><div class="tiny">PUBLIC CIRCULATION<br>BUILDING LINK · OPEN</div></header>
-<section class="scene">
-<div class="sign"><div><div class="floor" id="floorLabel">B1</div></div><div class="name" id="floorName">獅仔頭站連通層<br>商業大樓地下入口</div></div>
-<div class="space" id="space">
-<div class="notice" id="notice"><strong>目前位置：</strong>捷運連通口已直接接入本棟 B1。公共商業區自由通行；部分樓層另有門禁。</div>
-<div class="routes" id="routes">
-<button class="door public" data-go="1F"><div class="code">PUBLIC · ESCALATOR / LIFT</div><h2>上樓</h2><p>前往 1F 商業大廳與地面正門。</p></button>
-<button class="door public" data-go="ELEVATOR"><div class="code">PUBLIC · VERTICAL CIRCULATION</div><h2>電梯廳</h2><p>公共樓層不需門禁；特殊樓層依目的地判定權限。</p></button>
-</div>
-<div class="ghost" id="ghostBox"></div>
-<div class="crumb"><button data-go="B1">回 B1</button><button data-go="1F">1F 正門</button><button data-go="ELEVATOR">電梯</button></div>
-</div>
-</section>
-<div class="footer">本頁是蓬萊仙島地下城的第一版空間骨架。它模擬公共／半公開／特殊樓層的路徑，不把真正私人資料放在公開 GitHub Pages；正式身分驗證日後另接安全層。</div>
-</div>
+<main class="stage" id="app">
+  <section class="frame on" id="station" aria-label="獅仔頭站站名">
+    <div class="station-column">
+      <div class="station-band"></div>
+      <div class="station-body">
+        <div class="station-code">O55</div>
+        <div class="station-name">獅仔頭</div>
+        <div class="station-en">SHIZAITOU</div>
+        <div class="station-rule"></div>
+        <div class="station-line">中和新蘆線 · 蘆洲延伸</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="frame" id="wayfinding" aria-label="出口與商場導引">
+    <div class="guide">
+      <div class="guide-top"></div>
+      <div class="guide-row">
+        <div class="guide-label">出口・金鑽廣場<span class="guide-en">EXIT · GOLDEN DIAMOND PLAZA</span></div>
+        <div class="guide-arrow">↗</div>
+      </div>
+      <div class="guide-sub">唯一出口 · 直接連通帝景天下 B1</div>
+    </div>
+  </section>
+
+  <section class="frame" id="elevator" aria-label="帝景天下電梯">
+    <div class="lift-shell">
+      <div class="building-strip"><div><b>帝景天下</b><br>住商捷運共構</div><div>金鑽廣場 · B1 連通獅仔頭站</div></div>
+      <div class="lift" id="liftBox">
+        <div class="lift-head">
+          <div class="group-name">ELEVATOR GROUP A<b id="groupTitle">商場公共梯</b></div>
+          <div class="floor-display" id="display">B1</div>
+        </div>
+        <div class="panel">
+          <div class="buttons" id="buttons"></div>
+          <div class="panel-status" id="status">B1 · DOORS OPEN</div>
+        </div>
+        <div class="controls">
+          <button class="smallbtn" id="directoryBtn" type="button">樓層案內</button>
+          <button class="smallbtn" id="switchBtn" type="button">其他電梯</button>
+          <button class="smallbtn staff" id="staffBtn" type="button">後勤</button>
+        </div>
+        <section class="directory" id="directory">
+          <h3>帝景天下／金鑽廣場　樓層案內</h3>
+          <div class="dir-grid">
+            <div class="f">16F–22F</div><div>住宅</div>
+            <div class="f">6F–15F</div><div>商辦</div>
+            <div class="f">5F</div><div>服務型商業</div>
+            <div class="f">2F–4F</div><div>金鑽廣場</div>
+            <div class="f">1F</div><div>街面店舖・商場主入口・商辦／住宅獨立入口</div>
+            <div class="f">B1</div><div>獅仔頭站連通・超市・便利零售</div>
+            <div class="f">B2</div><div>美食街</div>
+            <div class="f">B3–B5</div><div>停車場</div>
+            <div class="f">B6–B7</div><div>後勤・機電設備</div>
+          </div>
+        </section>
+        <section class="arrival" id="arrival"></section>
+      </div>
+    </div>
+  </section>
+</main>
 <script>
 (()=>{
-const app=document.querySelector('#app');
-const floorLabel=document.querySelector('#floorLabel');
-const floorName=document.querySelector('#floorName');
-const routes=document.querySelector('#routes');
-const notice=document.querySelector('#notice');
-const ghost=document.querySelector('#ghostBox');
-const KEY='IMMORTALIA-13';
-const hasKey=()=>localStorage.getItem('immortalia_staff_key')==='yes';
-const layouts={
-B1:{label:'B1',name:'獅仔頭站連通層<br>商業大樓地下入口',notice:'<strong>目前位置：</strong>捷運連通口已直接接入本棟 B1。公共商業區自由通行；部分樓層另有門禁。',doors:[['1F','PUBLIC · ESCALATOR / LIFT','上樓','前往 1F 商業大廳與地面正門。','public'],['ELEVATOR','PUBLIC · VERTICAL CIRCULATION','電梯廳','公共樓層不需門禁；特殊樓層依目的地判定權限。','public']]},
-'1F':{label:'1F',name:'商業大廳<br>地面公共正門',notice:'<strong>1F：</strong>純商業公共層。從街道可直接進入；辦公電梯入口設門禁，商場本身不設總保安。',doors:[['B1','PUBLIC · DOWN','捷運連通層','下至 B1，可直接接回獅仔頭站。','public'],['OFFICE','ACCESS CONTROL','辦公電梯','由 1F 進入辦公樓層前需門禁。','restricted']]},
-OFFICE:{label:'1F',name:'辦公電梯前室<br>ACCESS CONTROL',notice:'<strong>門禁點：</strong>這裡只控制辦公電梯，不控制商場。內部人員與登記訪客可通行。',doors:[['KEY','STAFF / VISITOR','出示鑰匙','開啟內部垂直動線。','restricted'],['1F','PUBLIC','返回商場','回到 1F 公共商業大廳。','public']]}
+const frames=[document.querySelector('#station'),document.querySelector('#wayfinding'),document.querySelector('#elevator')];
+const buttons=document.querySelector('#buttons'),display=document.querySelector('#display'),status=document.querySelector('#status'),groupTitle=document.querySelector('#groupTitle'),directory=document.querySelector('#directory'),arrival=document.querySelector('#arrival'),liftBox=document.querySelector('#liftBox');
+const intro=()=>{setTimeout(()=>{frames[0].classList.remove('on');frames[1].classList.add('on')},1200);setTimeout(()=>{frames[1].classList.remove('on');frames[2].classList.add('on')},2250)};intro();
+
+const groups={
+ A:{title:'商場公共梯',floors:['5','4','3','2','1','B1','B2']},
+ B:{title:'商辦梯',floors:['15','14','13','12','11','10','9','8','7','6','1','B3','B4','B5']},
+ C:{title:'住宅專用梯',floors:['22','21','20','19','18','17','16','1','B1','B3','B4','B5']},
+ D:{title:'貨梯／後勤梯',floors:['15','14','13','12','11','10','9','8','7A','7','6','5','4','3','2','1','B1','B2','B3','B4','B5','B6','B7']}
 };
-function buttonHTML(d){return `<button class="door ${d[4]}" data-go="${d[0]}"><div class="code">${d[1]}</div><h2>${d[2]}</h2><p>${d[3]}</p></button>`}
-function render(loc){ghost.className='ghost';ghost.innerHTML='';if(layouts[loc]){const x=layouts[loc];floorLabel.textContent=x.label;floorName.innerHTML=x.name;notice.innerHTML=x.notice;routes.innerHTML=x.doors.map(buttonHTML).join('');return}if(loc==='ELEVATOR')renderElevator();if(loc==='KEY')renderKey();if(loc==='B2OLD')renderOld();if(loc==='B3X')renderGhost();}
-function renderElevator(){floorLabel.textContent='↕';floorName.innerHTML='B1 電梯廳<br>PUBLIC / CONTROLLED';notice.innerHTML='<strong>使用方式：</strong>公共樓層直接選擇；特殊樓層會在到達前判定權限。樓層表並不保證完整。';routes.innerHTML='';ghost.className='ghost show';ghost.innerHTML=`<div class="panel"><div class="panel-title">ELEVATOR · CAR 03</div><div class="buttons"><button class="liftbtn" data-go="1F">1F</button><button class="liftbtn" data-go="B1">B1</button><button class="liftbtn" data-go="B2OLD">B2</button><button class="liftbtn lock" data-go="B3X">B3</button><button class="liftbtn">4</button><button class="liftbtn">5</button><button class="liftbtn lock" data-go="KEY">7A</button><button class="liftbtn">8</button><button class="liftbtn">9</button><button class="liftbtn">10</button></div><div class="status" id="liftStatus">CAR 03 · B1 · DOORS OPEN</div></div>`;}
-function renderKey(){floorLabel.textContent='■';floorName.innerHTML='ACCESS<br>STAFF KEY';notice.innerHTML='<strong>內部通行：</strong>這是目前的世界觀鑰匙，不是真正的網路安全機制。正式安全層之後再接。';routes.innerHTML='';ghost.className='ghost show';ghost.innerHTML=`<h3>內部鑰匙</h3><p>輸入內部通行碼後，本機瀏覽器會記住你的員工身分。</p><div class="keyrow"><input id="keyInput" autocomplete="off" placeholder="ACCESS KEY"><button id="keySubmit">確認</button></div><div class="status" id="keyStatus">${hasKey()?'INTERNAL ACCESS · ACTIVE':'WAITING FOR KEY'}</div><div class="stafflinks ${hasKey()?'show':''}" id="staffLinks"><a href="./platform/">地下平台</a><a href="./library/">Library</a><a href="./workbench/">Work Platform</a></div>`;setTimeout(()=>{const btn=document.querySelector('#keySubmit');if(btn)btn.addEventListener('click',unlock)},0)}
-function unlock(){const input=document.querySelector('#keyInput');const st=document.querySelector('#keyStatus');const links=document.querySelector('#staffLinks');if(input&&input.value.trim()===KEY){localStorage.setItem('immortalia_staff_key','yes');st.textContent='INTERNAL ACCESS · ACTIVE';links.classList.add('show')}else st.textContent='ACCESS DENIED';}
-function renderOld(){floorLabel.textContent='B2';floorName.innerHTML='舊商業層<br>部分區域停用';notice.innerHTML='<strong>樓層公告：</strong>本層部分設施已停止服務。請依現場新指示返回公共動線。';routes.innerHTML=`${buttonHTML(['ELEVATOR','RETURN','返回電梯','回到目前使用中的垂直動線。','public'])}${buttonHTML(['OLDPORTAL','OUT OF SERVICE','舊導覽入口','舊系統已停止更新。請勿使用。','restricted'])}`;}
-function renderGhost(){floorLabel.textContent='B3';floorName.innerHTML='設備／備用空間<br>NO PUBLIC SERVICE';notice.innerHTML='<strong>非公共樓層：</strong>此處沒有商業服務。電梯可能因設備調度短暫停靠。';routes.innerHTML=`${buttonHTML(['ELEVATOR','CAR 03','不要下車','返回正常電梯動線。','public'])}${buttonHTML(['OLDPORTAL','UNMARKED','門沒有關緊','走廊後方仍有照明。','restricted'])}`;}
-function oldPortal(){floorLabel.textContent='?';floorName.innerHTML='舊版入口<br>LEGACY IMMORTALIA';notice.innerHTML='<strong>系統訊息：</strong>此入口不在現行樓層導覽中。';routes.innerHTML='';ghost.className='ghost show';ghost.innerHTML='<h3>舊蓬萊仙島</h3><p>這個入口理論上已經停用，但連線仍然存在。</p><a class="legacy" href="../">繼續進入舊版入口 →</a>';}
-app.addEventListener('click',e=>{const t=e.target.closest('[data-go]');if(!t)return;const go=t.dataset.go;if(go==='OLDPORTAL')oldPortal();else render(go)});
-render('B1');
+let group='A',tripCount=0,lastFloor='B1';
+const labels={B2:'美食街',B1:'捷運／超市',1:'地面層',2:'商場',3:'商場',4:'商場',5:'服務商業',8:'剛吃飽'};
+function renderPanel(){groupTitle.textContent=groups[group].title;buttons.innerHTML='';groups[group].floors.forEach(f=>{const b=document.createElement('button');b.type='button';b.className='floorbtn';b.dataset.floor=f;b.innerHTML=`${f}${labels[f]?`<small>${labels[f]}</small>`:''}`;if(group==='C'&&!localStorage.getItem('guixu_resident')) b.classList.add('disabled');buttons.appendChild(b)});status.textContent=`${lastFloor} · ${groups[group].title}`;arrival.classList.remove('show');}
+function goFloor(f){if(group==='C'&&!localStorage.getItem('guixu_resident')){status.textContent='RESIDENT ACCESS REQUIRED';return}tripCount++;arrival.classList.remove('show');liftBox.classList.add('glitch');setTimeout(()=>liftBox.classList.remove('glitch'),350);
+ // 7A hook: office elevator occasionally leaks the hidden intermediate floor.
+ if(group==='B' && ((lastFloor==='7'&&f==='8')||(lastFloor==='8'&&f==='7')) && tripCount%2===0){
+   display.textContent='7A';status.textContent='…';setTimeout(()=>{status.textContent='DOORS OPEN';showArrival('7A','門只開了兩秒。外面有燈，但沒有樓層牌。');},520);setTimeout(()=>{arrival.classList.remove('show');display.textContent=f;status.textContent=`${f} · DOORS OPEN`;showFloor(f);lastFloor=f},2300);return;
+ }
+ setTimeout(()=>{display.textContent=f;status.textContent=`${f} · DOORS OPEN`;showFloor(f);lastFloor=f},420);
+}
+function showArrival(f,text){arrival.innerHTML=`<h2>${f}</h2><p>${text}</p>`;arrival.classList.add('show')}
+function showFloor(f){
+ let desc='本層尚未開放。';let actions='';
+ if(f==='B2')desc='金鑽廣場美食街。';
+ if(f==='B1')desc='獅仔頭站連通層、超市與便利零售。';
+ if(f==='1')desc='地面店舖、商場主入口；商辦與住宅電梯在不同門禁區。';
+ if(['2','3','4'].includes(f))desc='金鑽廣場一般商業樓層。';
+ if(f==='5')desc='服務型商業樓層。';
+ if(f==='8') {desc='「剛吃飽」。';actions='<a href="../../gangchibao/">進入</a>';}
+ if(Number(f)>=6&&Number(f)<=15&&f!=='8')desc='商辦樓層。';
+ if(Number(f)>=16&&Number(f)<=22)desc='帝景天下住宅區。';
+ if(['B3','B4','B5'].includes(f))desc='地下停車場。';
+ if(['B6','B7'].includes(f))desc='後勤／機電設備區。';
+ if(f==='7A'){desc='禪宗文化研究中心。';actions='<a href="./platform/">內部平台</a><a href="./library/">Library</a><a href="./workbench/">Work Platform</a>';}
+ arrival.innerHTML=`<h2>${f}${labels[f]?' · '+labels[f]:''}</h2><p>${desc}</p>${actions?`<div class="arrival-actions">${actions}</div>`:''}`;arrival.classList.add('show');
+}
+buttons.addEventListener('click',e=>{const b=e.target.closest('[data-floor]');if(!b||b.classList.contains('disabled')){if(b)status.textContent='ACCESS DENIED';return}goFloor(b.dataset.floor)});
+document.querySelector('#directoryBtn').addEventListener('click',()=>directory.classList.toggle('show'));
+document.querySelector('#switchBtn').addEventListener('click',()=>{const order=['A','B','C'];group=order[(order.indexOf(group)+1)%order.length];renderPanel()});
+document.querySelector('#staffBtn').addEventListener('click',()=>{group='D';renderPanel();status.textContent='SERVICE MODE';});
+renderPanel();
 })();
 </script>
 </body>
