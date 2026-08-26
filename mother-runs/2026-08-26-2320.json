@@ -1,0 +1,25 @@
+{
+  "runAt": "2026-08-26 23:20 +08:00",
+  "phase": "mining-only",
+  "rules": {"refining": false, "comparison": false, "useJudgment": false},
+  "uncultured": {
+    "sourceFolderId": "104Dpvr-q8xD1t1Hlw3KVSSGcJDCbcOIF",
+    "inventoryObservation": "Current folder browse still returns the established Aug-21 upload cohort; no later-created image was surfaced in the inspected provider page.",
+    "newImagesObserved": 0,
+    "sampling": "No additional image content sample this pass; preserve existing unseen queue rather than re-mine known IDs.",
+    "duplicateCandidate": "Two same-title/same-size PDF duplicates were seen outside the image bay during text browse, not acted on."
+  },
+  "terminus": {
+    "purposefulDrilling": [
+      {"id":"1N1ZC7VSjNyZii-RBaJ1_ThWIMs4qLYGF","title":"研擬推動創意城市之初步架構及策略 201203.docx","status":"candidate-ore","note":"Unvisited candidate surfaced under city/creative-city drilling; hold for later content inspection."}
+    ],
+    "blindExcavation": [
+      {"id":"1rRprmI_2gNWaWv7MAIcXyKvEUee52iwC","title":"第二階段討論意見彙整.docx","status":"candidate-ore","note":"Adjacent project discussion material surfaced; retain as possible contextual layer without interpretation."},
+      {"id":"1e3ZYtnjqbskmOp1TADveHMqv4thEhuRa","title":"2012臺北創意街區展0426.pdf","status":"candidate-ore","note":"2012 creative-district material surfaced; retain only as candidate layer."}
+    ],
+    "skipped": ["temporary Office lock file ~$推動創意城市之初步架構及策略 201203.docx", "registration spreadsheet 12.8_12.9報名資料.xls (potential personal-data content; not inspected)"],
+    "interpretation": "none"
+  },
+  "statePolicy": "Large mother-state.json left untouched; this append-only run file records the patrol.",
+  "notification": "none"
+}
