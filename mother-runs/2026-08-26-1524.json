@@ -1,0 +1,32 @@
+{
+  "runAt": "2026-08-26 15:24 +08:00",
+  "phase": "mining-only",
+  "rules": {"noRefining": true, "noUseJudgment": true},
+  "uncultured": {
+    "folderId": "104Dpvr-q8xD1t1Hlw3KVSSGcJDCbcOIF",
+    "itemsSeen": 40,
+    "newSincePriorLedger": 0,
+    "notes": [
+      "Folder inventory remains 40 images; latest Drive creation is 2026-08-21, so no newly uploaded image was found in this patrol.",
+      "Existing ledger visual-mining.json is older (31 materials), but mother-state already records later sampling; no image was re-sampled solely to reconcile the stale public ledger."
+    ]
+  },
+  "terminus": {
+    "mode": "purposeful drilling + limited blind excavation",
+    "visitedThisRun": [
+      {"id":"1veJYcqLSWuSxRhmdq6GXp4zxJGMZz2E1","title":"20140929台灣人權學刊的文萌樓期刊論文（縮減文字版）.docx","status":"candidate ore"},
+      {"id":"1ZG0EgT-7Frd6E5IM74NPuYkcGM0CYOIt","title":"20141002古蹟文萌樓與日日春運動（芳萍投稿人權學刊）.docx","status":"candidate ore"}
+    ],
+    "candidateStrata": [
+      {"id":"terminus-wenmenglou-engine-portal-2014","sourceId":"1veJYcqLSWuSxRhmdq6GXp4zxJGMZz2E1","note":"2014 text repeatedly treats 文萌樓 not merely as a preserved object but as an active spatial device: an anti-abolition movement '發動機', later an '入口網站' for livelihood, then a social-learning space. Record only as a candidate stratum around place-as-operating-interface; no theoretical integration yet."},
+      {"id":"terminus-history-public-good-property-2014","sourceId":"1ZG0EgT-7Frd6E5IM74NPuYkcGM0CYOIt","note":"2014 journal draft explicitly separates private ownership from public history ('文萌樓雖然是私人財產，但是歷史卻是公共財') while tracking how heritage status and development rights become monetizable. Record as candidate material concerning ownership/history/value without comparing it to later value-form work."},
+      {"id":"terminus-negative-history-erasure-2014","sourceId":"1veJYcqLSWuSxRhmdq6GXp4zxJGMZz2E1","note":"The same 2014 layer describes urban renewal as selectively preserving approved traditional industries while erasing the sex-industry past as a 'negative' element, including the phrase '紅燈區變都更區'. Candidate stratum: selective historical visibility / erasure. No synthesis yet."}
+    ],
+    "duplicatesOrNoOre": [
+      "Drive search surfaced duplicate copies/formats of the 2018 金融化、都市更新與文化襲產保存之空間衝突 paper; these were not re-mined.",
+      "A 162-byte ~$ temporary Word lock file was ignored as non-material."
+    ]
+  },
+  "sensitiveSkipPolicy": "Banking/financial-account credentials, passwords, verification codes, identity documents, tax records and other highly sensitive personal data are skipped without analysis or indexing.",
+  "stateWrite": "run-file-only"
+}
