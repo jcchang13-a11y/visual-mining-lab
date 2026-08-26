@@ -1,0 +1,45 @@
+{
+  "runAt": "2026-08-26 08:18 +08:00",
+  "phase": "mining-only",
+  "vessel": "Nostromo",
+  "bays": {
+    "uncultured": {
+      "source": "Google Drive: 紅米手機照片",
+      "folderId": "104Dpvr-q8xD1t1Hlw3KVSSGcJDCbcOIF",
+      "inventoryObservation": "Folder fetch exposes the same established image cohort; no file with a created_time later than the known 2026-08-21 uploads was observed in the accessible direct-child listing.",
+      "newImagesObserved": 0,
+      "candidateSeries": [
+        "MVIMG_20260614_* remains a dense same-day sequence and should continue to be treated as a series candidate rather than independent isolated finds."
+      ],
+      "dedupeNotes": "No deletion performed. Metadata-only patrol is insufficient for safe visual duplicate deletion.",
+      "action": "inventory patrol only; no refining or use judgment"
+    },
+    "terminus": {
+      "mode": "purposeful drilling + small blind excavation",
+      "visitedThisRun": [
+        {
+          "id": "1N1ZC7VSjNyZii-RBaJ1_ThWIMs4qLYGF",
+          "title": "研擬推動創意城市之初步架構及策略 201203.docx",
+          "status": "candidate ore",
+          "notes": [
+            "2012 material explicitly frames design as an exploratory process that turns ideas into practicable plans, and expands design from objects toward services, policy, social design and city-making.",
+            "The document repeatedly treats short/cheap/simple catalytic actions, stakeholder participation, institutional learning and new measurements of urban success as mechanisms for changing city-making practice.",
+            "Keep as a candidate layer for later mining around design-as-method, city-making, catalytic intervention, measurement and institutional self-activation. No synthesis attempted."
+          ]
+        }
+      ],
+      "blindExcavationObservations": [
+        "Drive search surfaced an older Creative City cluster including 2012 Taipei creative-district exhibition material, creative-park research, Kang-Qing-Long creative district material and World Design Capital planning documents. This is recorded as a candidate archive cluster, not interpreted further.",
+        "Search also surfaced two files with identical title and identical byte size for a Taichung public-land/urban-development study (IDs 1xCL9VsaieSUSmMR1e__yyyoW2OW6SRnH and 1F1XDIdoJtRE1UCwKJ3RXx2U627c8GlsQ). Mark as probable duplicate metadata pair; no deletion or content analysis performed."
+      ],
+      "sensitiveSkipPolicy": "financial accounts, credentials, passwords, verification codes, identity documents, tax records and other highly sensitive personal data excluded from analysis/indexing/findings"
+    }
+  },
+  "stateRead": {
+    "mother-state.json": "read",
+    "visual-mining.json": "read",
+    "mother-runs/": "read",
+    "note": "mother-state last embedded update is 2026-08-23 09:26 +08:00; visual-mining snapshot is older (2026-08-21). This run is stored separately to avoid unsafe large-state replacement."
+  },
+  "phaseGuard": "No refining, comparison, collision, infection, hybridization, theory unification, artwork formation, or use judgment performed."
+}
