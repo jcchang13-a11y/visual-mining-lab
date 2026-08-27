@@ -1,0 +1,14 @@
+{
+  "experiment":"gangchibao-third-round",
+  "rule":"All layers share history. New actions must read and be conditioned by prior world state; no layer resets at unit boundaries.",
+  "currentUnit":null,
+  "activeQuestions":[],
+  "sharedBeliefs":[],
+  "sharedConflicts":[],
+  "mutherFindings":[],
+  "webFindings":[],
+  "mediaFindings":[],
+  "crossLayerInfluences":[],
+  "unresolved":[],
+  "lastUpdated":null
+}
