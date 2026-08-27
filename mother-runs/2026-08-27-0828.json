@@ -1,0 +1,55 @@
+{
+  "runAt": "2026-08-27 08:28 +08:00",
+  "phase": "mining-only",
+  "constraints": ["no-refining", "no-comparison", "no-cross-linking", "no-infection", "no-hybridization", "no-use-judgment"],
+  "baseline": {
+    "previousRun": "mother-runs/2026-08-27-0721.json",
+    "motherStateUpdatedAt": "2026-08-23 09:26 +08:00",
+    "visualMiningGeneratedAt": "2026-08-21T21:44:32+08:00"
+  },
+  "uncultured": {
+    "sourceFolderId": "104Dpvr-q8xD1t1Hlw3KVSSGcJDCbcOIF",
+    "patrol": "completed",
+    "newSincePreviousRun": 0,
+    "inventoryObservation": "Folder metadata patrol again found no image created or updated after the Aug 21 ingestion cohort. Existing unseen pool remains available for future sampling.",
+    "sampling": "no additional image opened this round",
+    "note": "No visual theory, artwork inference, synthesis, or use judgment performed."
+  },
+  "terminus": {
+    "patrol": "completed",
+    "purposefulDrilling": [
+      {
+        "id": "1xCL9VsaieSUSmMR1e__yyyoW2OW6SRnH",
+        "title": "國有土地經營管理策略變革對都市發展影響之研究－以臺中市干城市地重劃區為例.pdf",
+        "status": "candidate-public-land-urban-development-layer",
+        "reason": "surfaced in targeted urban-development drilling; retained as candidate ore only"
+      }
+    ],
+    "blindExcavation": [
+      {
+        "id": "0B6kekeEVEPHjTzF1TDBYOVdlbUU",
+        "title": "RLD_Amsterdam_Manuel Aalbers_211215_3000W.docx",
+        "status": "candidate-international-red-light-urban-layer",
+        "reason": "surfaced unexpectedly in a broad tourism-domain search; logged for later inspection only"
+      }
+    ],
+    "inventoryAnomaly": {
+      "type": "possible-duplicate-metadata",
+      "items": [
+        {
+          "id": "1xCL9VsaieSUSmMR1e__yyyoW2OW6SRnH",
+          "title": "國有土地經營管理策略變革對都市發展影響之研究－以臺中市干城市地重劃區為例.pdf",
+          "size": 1258327
+        },
+        {
+          "id": "1F1XDIdoJtRE1UCwKJ3RXx2U627c8GlsQ",
+          "title": "國有土地經營管理策略變革對都市發展影響之研究－以臺中市干城市地重劃區為例.pdf",
+          "size": 1258327
+        }
+      ],
+      "note": "Same title and byte size under two Drive IDs. Logged as a dedupe candidate only; no deletion or equivalence judgment made."
+    },
+    "note": "All entries are candidate ore only. No comparison with earlier findings, no theoretical integration, no cross-linking, and no future-use judgment. Sensitive-data categories remained excluded by rule."
+  },
+  "stateWrite": "mother-runs fallback used; mother-state.json and visual-mining.json not rewritten"
+}
