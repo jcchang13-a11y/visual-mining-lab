@@ -2,10 +2,10 @@
   "experiment":"gangchibao-third-round",
   "memoryRule":"Agents never reset at chapter boundaries. Every new reading must be conditioned by prior working memory, long-term memory, unresolved questions, beliefs, misreadings, relations and cursor.",
   "agents":[
-    {"id":"m01","name":"M-01","role":"拆句","state":"awake","cursor":null,"workingMemory":[],"longTerm":[],"unresolved":[],"beliefs":[],"misreadings":[],"relations":{},"note":"對斷句、命名與語法邊界異常敏感。"},
-    {"id":"m02","name":"M-02","role":"誤讀","state":"awake","cursor":null,"workingMemory":[],"longTerm":[],"unresolved":[],"beliefs":[],"misreadings":[],"relations":{},"note":"容易把文本讀歪；錯誤會被記住並可能一路延續、修正或加深。"},
-    {"id":"m03","name":"M-03","role":"反作者","state":"awake","cursor":null,"workingMemory":[],"longTerm":[],"unresolved":[],"beliefs":[],"misreadings":[],"relations":{},"note":"優先懷疑作者與 EVA 已達成的共識。"},
-    {"id":"m04","name":"M-04","role":"傳染","state":"awake","cursor":null,"workingMemory":[],"longTerm":[],"unresolved":[],"beliefs":[],"misreadings":[],"relations":{},"note":"必須閱讀其他香菇留下的痕跡與關係變化，不只讀正文。"},
-    {"id":"m05","name":"M-05","role":"沉默","state":"dormant","cursor":null,"workingMemory":[],"longTerm":[],"unresolved":[],"beliefs":[],"misreadings":[],"relations":{},"note":"可以長期沉默，但沉默期間仍持續累積閱讀狀態。"}
+    {"id":"m01","name":"M-01","role":"拆句","state":"awake","cursor":"30000/30100A:標點不是無辜的","workingMemory":["第一分先給日常動作：乞食、吃飯、收衣鉢、洗足、坐下。","讀者面對的不是可逐字回溯的佛陀原聲，而是鳩摩羅什漢譯留下的句子與節奏。","分章、句讀、標點本身會介入理解。"],"longTerm":[],"unresolved":["如果標點與分段本身是閱讀，那香菇後續應把不同句讀視為不同事件，而非同一文本的表面格式。"],"beliefs":["文本邊界不是中性容器。"],"misreadings":[],"relations":{},"note":"對斷句、命名與語法邊界異常敏感。"},
+    {"id":"m02","name":"M-02","role":"誤讀","state":"awake","cursor":"30000/30100A:譯本不是原版","workingMemory":["把『沒有原版可回去』讀成：現在這個版本反而因此成為唯一現實。","第一分的普通動作可能不是背景，而是故意拒絕提供神聖事件。"],"longTerm":[],"unresolved":["『讀的就是這個譯本』是否會被我錯讀成『歷史來源不重要』？後面要檢查。"],"beliefs":["缺少原聲不必然是缺陷。"],"misreadings":["暫時傾向把『不追原典』推得過頭，讀成來源問題完全無關；保留此誤讀等待後續修正。"],"relations":{},"note":"容易把文本讀歪；錯誤會被記住並可能一路延續、修正或加深。"},
+    {"id":"m03","name":"M-03","role":"反作者","state":"awake","cursor":"30000/30100A:我們讀的就是這個譯本","workingMemory":["作者宣告不把失去底本視為缺憾。","作者把鳩摩羅什譯本指定成閱讀事件的對象。"],"longTerm":[],"unresolved":["作者說不追原版，是否只是把權威從『佛陀原聲』搬到『鳩摩羅什漢譯』？","書中對三十二分與現代標點的歷史敘述本身需要外部證據反查。"],"beliefs":["任何宣告『真正閱讀對象很清楚』都值得懷疑它建立了新的中心。"],"misreadings":[],"relations":{},"note":"優先懷疑作者與 EVA 已達成的共識。"},
+    {"id":"m04","name":"M-04","role":"傳染","state":"awake","cursor":"30000/30100A:共享問題形成","workingMemory":["M-01 把標點視為事件。","M-02 正在把不追原典誤讀成來源不重要。","M-03 懷疑作者只是把權威搬家。"],"longTerm":[],"unresolved":["三個讀法會不會在後續互相感染：形式介入、來源失效、權威搬家？"],"beliefs":["菌落目前已出現第一個共享張力：無法回到原聲，不等於來源歷史消失。"],"misreadings":[],"relations":{"m01":"關注其形式判斷","m02":"監看其誤讀是否擴散","m03":"採納其權威搬家疑問作共享衝突"},"note":"必須閱讀其他香菇留下的痕跡與關係變化，不只讀正文。"},
+    {"id":"m05","name":"M-05","role":"沉默","state":"dormant","cursor":"30000/30100A:已讀未發言","workingMemory":["第一分與譯本／傳承說明已讀。"],"longTerm":[],"unresolved":[],"beliefs":[],"misreadings":[],"relations":{},"note":"可以長期沉默，但沉默期間仍持續累積閱讀狀態。"}
   ]
 }
