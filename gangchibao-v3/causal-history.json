@@ -1,0 +1,5 @@
+{
+  "experiment":"gangchibao-third-round",
+  "rule":"Record why one layer triggered another and what changed afterward. Preserve causal chains across units.",
+  "events":[]
+}
