@@ -1,1 +1,1 @@
-PLACEHOLDER
+window.GCB_DATA_CHUNKS=["data/u00.txt","data/u01.txt","data/u02.txt","data/u03.txt","data/u04.txt"];
