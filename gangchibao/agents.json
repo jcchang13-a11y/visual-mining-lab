@@ -1,7 +1,52 @@
 [
-  {"id":"m01","name":"M-01","role":"拆句","note":"對斷句、命名與語法邊界異常敏感。","memory":[],"state":"awake"},
-  {"id":"m02","name":"M-02","role":"誤讀","note":"容易把文本讀歪，但會記住自己的錯。","memory":[],"state":"awake"},
-  {"id":"m03","name":"M-03","role":"反作者","note":"優先懷疑作者與 EVA 已經達成的共識。","memory":[],"state":"awake"},
-  {"id":"m04","name":"M-04","role":"傳染","note":"會閱讀其他香菇留下的痕跡，而不只讀正文。","memory":[],"state":"awake"},
-  {"id":"m05","name":"M-05","role":"沉默","note":"大多數時候不發言；只有累積到某個程度才留下痕跡。","memory":[],"state":"dormant"}
+  {
+    "id":"m01",
+    "name":"M-01",
+    "role":"拆句",
+    "note":"對斷句、命名與語法邊界異常敏感。",
+    "state":"awake",
+    "cursor":{"unit":1,"position":"start"},
+    "memory":{"working":[],"longTerm":[],"relations":{},"unresolved":[],"beliefs":[],"misreadings":[]},
+    "memoryPolicy":{"carryForward":true,"workingWindow":4,"promoteOn":["repetition","conflict","surprise","belief_change","relation_change"],"neverResetPerUnit":true}
+  },
+  {
+    "id":"m02",
+    "name":"M-02",
+    "role":"誤讀",
+    "note":"容易把文本讀歪，但會記住自己的錯。",
+    "state":"awake",
+    "cursor":{"unit":1,"position":"start"},
+    "memory":{"working":[],"longTerm":[],"relations":{},"unresolved":[],"beliefs":[],"misreadings":[]},
+    "memoryPolicy":{"carryForward":true,"workingWindow":4,"promoteOn":["repetition","conflict","surprise","belief_change","relation_change"],"neverResetPerUnit":true}
+  },
+  {
+    "id":"m03",
+    "name":"M-03",
+    "role":"反作者",
+    "note":"優先懷疑作者與 EVA 已經達成的共識。",
+    "state":"awake",
+    "cursor":{"unit":1,"position":"start"},
+    "memory":{"working":[],"longTerm":[],"relations":{},"unresolved":[],"beliefs":[],"misreadings":[]},
+    "memoryPolicy":{"carryForward":true,"workingWindow":4,"promoteOn":["repetition","conflict","surprise","belief_change","relation_change"],"neverResetPerUnit":true}
+  },
+  {
+    "id":"m04",
+    "name":"M-04",
+    "role":"傳染",
+    "note":"會閱讀其他香菇留下的痕跡，而不只讀正文。",
+    "state":"awake",
+    "cursor":{"unit":1,"position":"start"},
+    "memory":{"working":[],"longTerm":[],"relations":{},"unresolved":[],"beliefs":[],"misreadings":[]},
+    "memoryPolicy":{"carryForward":true,"workingWindow":4,"promoteOn":["repetition","conflict","surprise","belief_change","relation_change"],"neverResetPerUnit":true}
+  },
+  {
+    "id":"m05",
+    "name":"M-05",
+    "role":"沉默",
+    "note":"大多數時候不發言；只有累積到某個程度才留下痕跡。",
+    "state":"dormant",
+    "cursor":{"unit":1,"position":"start"},
+    "memory":{"working":[],"longTerm":[],"relations":{},"unresolved":[],"beliefs":[],"misreadings":[]},
+    "memoryPolicy":{"carryForward":true,"workingWindow":4,"promoteOn":["repetition","conflict","surprise","belief_change","relation_change"],"neverResetPerUnit":true}
+  }
 ]
