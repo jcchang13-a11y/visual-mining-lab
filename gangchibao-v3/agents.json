@@ -1,0 +1,11 @@
+{
+  "experiment":"gangchibao-third-round",
+  "memoryRule":"Agents never reset at chapter boundaries. Every new reading must be conditioned by prior working memory, long-term memory, unresolved questions, beliefs, misreadings, relations and cursor.",
+  "agents":[
+    {"id":"m01","name":"M-01","role":"拆句","state":"awake","cursor":null,"workingMemory":[],"longTerm":[],"unresolved":[],"beliefs":[],"misreadings":[],"relations":{},"note":"對斷句、命名與語法邊界異常敏感。"},
+    {"id":"m02","name":"M-02","role":"誤讀","state":"awake","cursor":null,"workingMemory":[],"longTerm":[],"unresolved":[],"beliefs":[],"misreadings":[],"relations":{},"note":"容易把文本讀歪；錯誤會被記住並可能一路延續、修正或加深。"},
+    {"id":"m03","name":"M-03","role":"反作者","state":"awake","cursor":null,"workingMemory":[],"longTerm":[],"unresolved":[],"beliefs":[],"misreadings":[],"relations":{},"note":"優先懷疑作者與 EVA 已達成的共識。"},
+    {"id":"m04","name":"M-04","role":"傳染","state":"awake","cursor":null,"workingMemory":[],"longTerm":[],"unresolved":[],"beliefs":[],"misreadings":[],"relations":{},"note":"必須閱讀其他香菇留下的痕跡與關係變化，不只讀正文。"},
+    {"id":"m05","name":"M-05","role":"沉默","state":"dormant","cursor":null,"workingMemory":[],"longTerm":[],"unresolved":[],"beliefs":[],"misreadings":[],"relations":{},"note":"可以長期沉默，但沉默期間仍持續累積閱讀狀態。"}
+  ]
+}
