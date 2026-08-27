@@ -1,5 +1,11 @@
 {
   "experiment":"gangchibao-third-round",
   "rule":"Record why one layer triggered another and what changed afterward. Preserve causal chains across units.",
-  "events":[]
+  "events":[
+    {"id":"c001","fromLayer":"text","trigger":"30100A 強調譯本不是原版、標點不是無辜","toLayer":"colony","effect":"M-01 把句讀視為文本事件；M-02 形成『來源或許不重要』的暫時誤讀；M-03 提出『權威搬家』反駁。","affectedAgents":["m01","m02","m03","m04","m05"],"unit":"30000/30100A","timestamp":"2026-08-27T13:11:00+08:00"},
+    {"id":"c002","fromLayer":"colony","trigger":"M-03 質疑作者只是把權威從原聲搬到鳩摩羅什漢譯","toLayer":"MUTHER","effect":"內挖同一第三輪地層的 30070『我寫佛新聞』，找到『經文把大事寫小／新聞把小事寫大』的媒介框架反轉。","affectedAgents":["m03","m04"],"unit":"30000","timestamp":"2026-08-27T13:11:00+08:00"},
+    {"id":"c003","fromLayer":"MUTHER","trigger":"內部材料顯示新聞框架能把同一組日常動作製造成另一種事件","toLayer":"web","effect":"外探轉向尋找《金剛經》的可觀察媒介鏈與文本物質史，而非只找一般佛學解釋。","affectedAgents":["m01","m02","m03","m04"],"unit":"30000","timestamp":"2026-08-27T13:11:00+08:00"},
+    {"id":"c004","fromLayer":"web","trigger":"IDP 的 868 年鳩摩羅什漢譯印本與梵文殘片／紅外研究","toLayer":"world-memory","effect":"共享問題被修正：無法取得鳩摩羅什所據底本，不代表來源歷史失效；其他傳本、印刷物與物質痕跡仍可反過來干擾當前閱讀。","affectedAgents":["m02","m03","m04"],"unit":"30000/30100A","timestamp":"2026-08-27T13:11:00+08:00"},
+    {"id":"c005","fromLayer":"web","trigger":"IDP Or.8210/P.2 公開館藏頁可載入","toLayer":"media","effect":"建立第一個外部館藏連接 PASS-LINK；直接圖片 hotlink 尚未驗證，因此不升級為完整媒體 PASS。","affectedAgents":[],"unit":"30000/30100A","timestamp":"2026-08-27T13:11:00+08:00"}
+  ]
 }
