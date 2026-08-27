@@ -1,14 +1,14 @@
 {
   "experiment":"gangchibao-third-round",
   "rule":"All layers share history. New actions must read and be conditioned by prior world state; no layer resets at unit boundaries.",
-  "currentUnit":null,
-  "activeQuestions":[],
-  "sharedBeliefs":[],
-  "sharedConflicts":[],
-  "mutherFindings":[],
-  "webFindings":[],
-  "mediaFindings":[],
-  "crossLayerInfluences":[],
-  "unresolved":[],
-  "lastUpdated":null
+  "currentUnit":"30000 我沒在現場 / 30100A 我在看紀錄片",
+  "activeQuestions":["無法回到佛陀原聲時，閱讀對象應如何被界定？","不追求原版是否會偷偷把鳩摩羅什譯本建立成新的權威中心？","分章、句讀與現代標點究竟只是工具，還是會製造新的文本事件？"],
+  "sharedBeliefs":["目前菌落接受：後來的分段、句讀、翻譯與媒介會實際改變閱讀發生的方式。"],
+  "sharedConflicts":["M-02 傾向把『不追原典』推成『來源問題不重要』；M-03 反對，認為這可能只是權威搬家。"],
+  "mutherFindings":[{"source":"第三輪/30000/30070 我寫佛新聞.md","finding":"同一第一分在另一份內部材料中被故意改寫成現代網路新聞：經文把大事寫小，新聞機器把小事寫大。","effect":"把『媒介會改變事件』從標點／翻譯擴張到新聞框架。"}],
+  "webFindings":[{"source":"International Dunhuang Programme / British Library, Or.8210/P.2","url":"https://idp.bl.uk/collection/51FDAEAFB4A24E2E9981692A98130BC8/","finding":"IDP 將 Or.8210/P.2 記為鳩摩羅什譯《金剛經》的 868 年木刻印本，現藏 British Library。","effect":"提供一個可直接觀察『譯本→印刷物→數位館藏』媒介鏈的外部實物節點。"},{"source":"International Dunhuang Programme, Sanskrit Diamond Sutra in Infrared","url":"https://idp.bl.uk/blog/the-sanskrit-diamond-sutra-in-infrared/","finding":"British Library 的梵文《金剛經》殘片可用彩色與紅外影像研究，甚至藉 ghost folios 痕跡恢復部分失頁文字。","effect":"反駁把『沒有鳩摩羅什底本』簡化成『來源歷史無關』：沒有原底本，仍可透過其他傳本與物質痕跡研究文本史。"}],
+  "mediaFindings":[{"source":"IDP collection object Or.8210/P.2","type":"external collection/image resource","url":"https://idp.bl.uk/collection/51FDAEAFB4A24E2E9981692A98130BC8/","status":"PASS-LINK","effect":"第一個外部多媒體節點採館藏頁連接；本輪驗證頁面可公開載入，但尚未宣稱第三方圖片可直接 hotlink。"}],
+  "crossLayerInfluences":["正文『譯本不是原版／標點不是無辜』→ M-03 提出權威搬家疑問 → MUTHER 找到『佛新聞』媒介反轉 → 外網找到敦煌 868 印本與梵文殘片 → 菌落共享問題改成：不能回原聲，不等於文本史與物質證據失效。"],
+  "unresolved":["30100A 原檔後半書後補註因單次 Drive 回傳截斷，正文層尚不能宣稱全文 PASS。","外部館藏頁可連接，但圖片／音訊／影片的直接嵌入仍待隔離區逐項驗證。"],
+  "lastUpdated":"2026-08-27T13:11:00+08:00"
 }
