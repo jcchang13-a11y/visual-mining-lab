@@ -1,19 +1,20 @@
 {
-  "updatedAt":"2026-08-28 21:22 +08:00",
-  "runLog":"mother-runs/2026-08-28-2122.json",
+  "updatedAt":"2026-08-28 22:21 +08:00",
+  "runLog":"mother-runs/2026-08-28-2221.json",
   "ledger":"muther-ledger.json",
   "uncultured":{
-    "status":"NO NEW ORE · DUPLICATE CAPTURE SESSION",
-    "sampledImageIds":["1DH8cxGRMRYCgodz4gKeodA2CndPCxPjM"],
-    "finding":"The sampled image is another rotated two-page book capture from the same morning burst already represented in the ledger. It is treated as same-session duplication, not independent evidence for a visual rule.",
-    "next":"sample an independent image session rather than continuing inside this burst"
+    "status":"COUNTEREXAMPLE · CLEAN OBJECT ISOLATION",
+    "sampledImageIds":["1OqnVyFPKVZkR3bL-kGNffELLviH-lMFf"],
+    "finding":"An independent museum-object photograph is front-facing, close, and visually isolates two wooden figures from most contextual clutter. This weakens any universal claim that the user's images characteristically preserve heavy acquisition traces.",
+    "candidate":"At least two capture modes may coexist: retaining environmental/acquisition traces and deliberately isolating an object from context.",
+    "next":"sample more independent camera sessions to test whether this is a stable bimodal habit or merely subject-driven variation"
   },
   "terminus":{
-    "status":"METHOD EXPANSION · QUALITY ≠ AUTHORSHIP",
-    "newSourceIds":["1Ux1Ro2eEaZlcddZv3WVJIPE2KOt5QHbO","11ADqzf1b0u5vXEd0Pn_VKYUA2dJ0mYty"],
-    "finding":"A pre-curated Drive folder named『還算有用的作業』is useful as weak human-curation metadata, but not as a verdict. One sampled Saussure note explicitly signed 張榮哲 is high-value mining material: clear summary, structured extraction, and an independent discussion linking relational value/system/position to Lacan, suture and lack. A Jameson report remains unscored because authorship is uncertain and legacy encoding is degraded.",
-    "candidate":"Provenance and quality are independent axes. Student/third-party material can be excellent ore; user-authored material can be weak. Folder-level prior curation may affect sampling priority, but argument clarity, evidence, conceptual precision, originality and reusable fragments determine quality.",
-    "next":"sample one clearly student-authored document and one third-party reference from unrelated topics, then compare their quality without using authorship as a shortcut"
+    "status":"METHOD REFINEMENT · QUALITY MUST BE GENRE-AWARE",
+    "newSourceIds":["0B7vhvrekdjpbMWpwZGRkMC1CNUk","1e5egXxafa5BajHgpOBmWPG_HVQzAm6P-"],
+    "finding":"A named field note on a community-course visit has high observational value despite not being a theory paper: it preserves chronology, actors, competing interpretations and concrete interactions. A cultural-heritage research-report catalog has little argument but strong indexing value because it maps research topics, institutions, investigators and report structures. Applying one generic 'argument quality' score would misclassify both.",
+    "candidate":"Evaluate material after genre identification. Reusable value should be multidimensional: argument, evidence/data, observation, index/navigation, originality/problem formation. Authorship remains provenance, not a quality shortcut.",
+    "next":"continue seeking clearly student-authored work and compare its usable dimensions without author-status bias; skip obvious private administrative/credential records from conceptual mining"
   },
-  "phase":"small-batch mining with independent provenance and quality scoring"
+  "phase":"small-batch mining with genre-aware multidimensional quality scoring"
 }
