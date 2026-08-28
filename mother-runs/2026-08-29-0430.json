@@ -1,0 +1,19 @@
+{
+  "updatedAt":"2026-08-29 04:30 +08:00",
+  "uncultured":{
+    "status":"NO NEW ORE · INDEPENDENT IMAGE POOL THIN",
+    "sampledImageIds":[],
+    "finding":"The currently discoverable independent 2025 image pool is nearly exhausted by prior rounds; remaining surfaced results are already visited, same-session material, or previously unavailable for visual inspection. No additional visual weight was added this round.",
+    "candidate":"Foreground obstruction/proximity remains open but unconfirmed.",
+    "next":"broaden image discovery beyond filename-led IMG_2025 queries and prefer independent dates/purposes"
+  },
+  "terminus":{
+    "status":"NEW VEIN · SOLUTION CAN DESTABILIZE ORGANIZATIONAL IDENTITY",
+    "newSourceIds":["0B7vhvrekdjpbc3A3RTdjbGVNRjA","0B7vhvrekdjpbR1hWNlNrSXpkSXM"],
+    "finding":"郭貽菱's 2017 防跌工班 field notes show a practical contradiction: the group's identity initially appears tied to installing anti-fall fixtures, but a ready-made toilet assist rail can outperform custom installation. The text then explicitly asks whether the group's value is technical labor at all, or rather matching tools to people, relationship-building and exchange. A second case shows the same non-technical logic: repeated visits are needed because residents forget prior discussions or become anxious, so 'relationship work' becomes part of the intervention itself.",
+    "candidate":"A recurring structure worth testing across unrelated materials: when a better tool solves the stated technical problem, it can expose that the real function of an organization/practice lies elsewhere—coordination, trust, interpretation, negotiation or exchange. Call this provisionally 'solution-induced identity exposure'.",
+    "quality":"High observational density, named recorder and concrete cases; moderate conceptual polish; highly reusable as case/process ore. Keep attribution to 郭貽菱 rather than treating it as user-authored thought.",
+    "next":"test this candidate against unrelated project/course/community materials where technical solutions either replace or fail to replace relational work"
+  },
+  "phase":"small-batch mining with provenance-first, genre-aware quality scoring, document-family dedupe and function-versus-tool testing"
+}
