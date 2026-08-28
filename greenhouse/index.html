@@ -5,97 +5,33 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>香菇閱讀大棚 · Reading Greenhouse v1.0</title>
 <style>
-:root{--bg:#ece8dc;--paper:#f6f2e8;--ink:#1c1c19;--muted:#6e6a5f;--line:#b8b2a4;--live:#3f5a46;--warn:#8a6c2f;--dark:#242722}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Noto Sans Mono CJK TC",monospace}header{background:var(--dark);color:#f2efe6;padding:22px 20px 18px;border-bottom:4px solid #111}.kicker{font-size:12px;letter-spacing:.18em;opacity:.7}.title{font-size:clamp(26px,6vw,54px);line-height:1;margin:8px 0 6px;font-weight:700}.sub{font-size:13px;opacity:.75}.wrap{max-width:1180px;margin:auto;padding:18px}.statusbar{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-bottom:16px}.statusbar>div{background:var(--paper);padding:14px}.label{font-size:10px;letter-spacing:.12em;color:var(--muted);text-transform:uppercase}.value{font-size:20px;margin-top:5px}.waiting{color:var(--warn)}.grid{display:grid;grid-template-columns:1.35fr .65fr;gap:16px}.panel{background:var(--paper);border:1px solid var(--line);padding:16px}.panel h2{font-size:14px;letter-spacing:.12em;margin:0 0 14px;text-transform:uppercase}.agents{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}.agent{border:1px solid var(--line);background:#fbf8ef;padding:10px;min-height:104px;cursor:pointer}.agent:hover{outline:2px solid var(--ink)}.agent .id{font-size:18px}.agent .trait{font-size:11px;color:var(--muted);margin-top:6px;line-height:1.45}.dot{width:8px;height:8px;border-radius:50%;display:inline-block;background:#777;margin-right:6px}.timeline{display:grid;grid-template-columns:repeat(10,1fr);gap:4px}.round{border:1px solid var(--line);text-align:center;padding:12px 2px;background:#f0ece2;font-size:12px}.round:first-child{border-color:var(--warn);box-shadow:inset 0 -3px 0 var(--warn)}.events{margin:0;padding:0;list-style:none}.events li{padding:10px 0;border-top:1px solid #d4cec0;font-size:12px;line-height:1.55}.events li:first-child{border-top:0}.rules{font-size:12px;line-height:1.65;margin:0;padding-left:18px}.footer-note{margin-top:16px;font-size:11px;color:var(--muted);line-height:1.6}.drawer{margin-top:16px;display:none}.drawer.show{display:block}.memory{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.memory div{border:1px dashed var(--line);padding:10px;font-size:11px;min-height:70px}.badge{display:inline-block;border:1px solid currentColor;padding:2px 6px;font-size:10px;margin-left:6px}@media(max-width:820px){.statusbar{grid-template-columns:1fr 1fr}.grid{grid-template-columns:1fr}.agents{grid-template-columns:1fr 1fr}.timeline{grid-template-columns:repeat(5,1fr)}.memory{grid-template-columns:1fr 1fr}}@media(max-width:440px){.agents{grid-template-columns:1fr}.statusbar{grid-template-columns:1fr 1fr}.value{font-size:16px}}
+:root{--bg:#ece8dc;--paper:#f6f2e8;--ink:#1c1c19;--muted:#6e6a5f;--line:#b8b2a4;--live:#365744;--warn:#8a6c2f;--dark:#242722}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Noto Sans Mono CJK TC",monospace}header{background:var(--dark);color:#f2efe6;padding:22px 20px 18px;border-bottom:4px solid #111}.kicker{font-size:12px;letter-spacing:.18em;opacity:.7}.title{font-size:clamp(26px,6vw,54px);line-height:1;margin:8px 0 6px;font-weight:700}.sub{font-size:13px;opacity:.75}.wrap{max-width:1180px;margin:auto;padding:18px}.statusbar{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-bottom:16px}.statusbar>div{background:var(--paper);padding:14px}.label{font-size:10px;letter-spacing:.12em;color:var(--muted);text-transform:uppercase}.value{font-size:20px;margin-top:5px}.live{color:var(--live)}.grid{display:grid;grid-template-columns:1.35fr .65fr;gap:16px}.panel{background:var(--paper);border:1px solid var(--line);padding:16px}.panel h2{font-size:14px;letter-spacing:.12em;margin:0 0 14px;text-transform:uppercase}.agents{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}.agent{border:1px solid var(--line);background:#fbf8ef;padding:10px;min-height:104px;cursor:pointer}.agent:hover{outline:2px solid var(--ink)}.agent .id{font-size:18px}.agent .trait{font-size:11px;color:var(--muted);margin-top:6px;line-height:1.45}.dot{width:8px;height:8px;border-radius:50%;display:inline-block;background:var(--live);margin-right:6px}.timeline{display:grid;grid-template-columns:repeat(10,1fr);gap:4px}.round{border:1px solid var(--line);text-align:center;padding:12px 2px;background:#f0ece2;font-size:12px}.round.done{border-color:var(--live);box-shadow:inset 0 -3px 0 var(--live);background:#eef3ec}.round.next{border-color:var(--warn)}.events{margin:0;padding:0;list-style:none}.events li{padding:10px 0;border-top:1px solid #d4cec0;font-size:12px;line-height:1.55}.events li:first-child{border-top:0}.drawer{margin-top:16px;display:none}.drawer.show{display:block}.memory{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.memory div{border:1px dashed var(--line);padding:10px;font-size:11px;min-height:90px;line-height:1.5}.signals{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}.sig{border:1px solid var(--line);padding:10px;background:#fbf8ef}.sig .n{font-size:20px}.footer-note{margin-top:16px;font-size:11px;color:var(--muted);line-height:1.6}.rules{font-size:12px;line-height:1.65;margin:0;padding-left:18px}@media(max-width:820px){.statusbar{grid-template-columns:1fr 1fr}.grid{grid-template-columns:1fr}.agents{grid-template-columns:1fr 1fr}.timeline{grid-template-columns:repeat(5,1fr)}.memory{grid-template-columns:1fr 1fr}.signals{grid-template-columns:1fr 1fr}}@media(max-width:440px){.agents{grid-template-columns:1fr}.value{font-size:16px}}
 </style>
 </head>
 <body>
-<header>
-  <div class="kicker">SHROOM READING GREENHOUSE / ISOLATED EXPERIMENT</div>
-  <div class="title">香菇閱讀大棚</div>
-  <div class="sub">v1.0 · 十輪隔離閱讀 · 只讀觀測室</div>
-</header>
+<header><div class="kicker">SHROOM READING GREENHOUSE / ISOLATED EXPERIMENT</div><div class="title">香菇閱讀大棚</div><div class="sub">v1.0 · 十輪隔離閱讀 · 只讀觀測室</div></header>
 <main class="wrap">
-  <section class="statusbar">
-    <div><div class="label">系統狀態</div><div class="value waiting">等待語料</div></div>
-    <div><div class="label">讀者群</div><div class="value">10 隻</div></div>
-    <div><div class="label">目前輪次</div><div class="value">R0 / R10</div></div>
-    <div><div class="label">目前單元</div><div class="value">—</div></div>
-    <div><div class="label">人類介入</div><div class="value">封鎖</div></div>
-  </section>
-
-  <section class="grid">
-    <div class="panel">
-      <h2>固定讀者群 / Cohort 01</h2>
-      <div class="agents" id="agents"></div>
-      <div class="drawer panel" id="drawer">
-        <h2 id="drawerTitle">香菇記憶</h2>
-        <div class="memory">
-          <div><span class="label">個人理解史</span><br><br>尚未開始閱讀。</div>
-          <div><span class="label">討論史</span><br><br>尚無討論。</div>
-          <div><span class="label">社會關係史</span><br><br>尚未形成。</div>
-          <div><span class="label">修正史</span><br><br>尚無回溯修正。</div>
-        </div>
-      </div>
-    </div>
-
-    <aside class="panel">
-      <h2>巡棚 / Current Signals</h2>
-      <ul class="events">
-        <li><span class="dot"></span>大棚骨架已建立。</li>
-        <li><span class="dot"></span>10 隻香菇身份已固定。</li>
-        <li><span class="dot"></span>R1–R10 隔離規則已鎖定。</li>
-        <li><span class="dot"></span>等待《剛吃飽》第三輪原始資料。</li>
-      </ul>
-    </aside>
-  </section>
-
-  <section class="panel" style="margin-top:16px">
-    <h2>十輪時間軸 / Reading History</h2>
-    <div class="timeline" id="timeline"></div>
-    <div class="footer-note">每輪完整讀完同一份文本。記憶不歸零；舊理解不可刪除，只能產生新版本。R10 完成前，外部人類不得與香菇互動。</div>
-  </section>
-
-  <section class="grid" style="margin-top:16px">
-    <div class="panel">
-      <h2>每單元固定流程</h2>
-      <ol class="rules">
-        <li>個別閱讀：各自形成初步理解，可困惑、沉默或保留。</li>
-        <li>群體討論：允許共識、分歧與少數意見並存。</li>
-        <li>記憶結算：保存個人理解、討論、社會關係與未解問題。</li>
-        <li>回溯重讀：後文可觸發對前文的重新閱讀與版本修正。</li>
-        <li>連鎖修正：前文理解改變時，追蹤其對後續單元的影響。</li>
-        <li>進入下一單元：攜帶完整歷史，不清零。</li>
-      </ol>
-    </div>
-    <div class="panel">
-      <h2>隔離規則</h2>
-      <ol class="rules">
-        <li>R1–R10 不接 MUTHER。</li>
-        <li>R1–R10 不接 DROPLET。</li>
-        <li>人類可觀察，不可直接參與討論。</li>
-        <li>少數意見不得因摘要而消失。</li>
-        <li>任何模型／人格／記憶機制變更必須留下版本斷點。</li>
-        <li>十輪完成後才討論公開與外部工具接入。</li>
-      </ol>
-    </div>
-  </section>
+<section class="statusbar">
+<div><div class="label">系統狀態</div><div class="value live">R1 已結算</div></div>
+<div><div class="label">讀者群</div><div class="value">10 隻</div></div>
+<div><div class="label">目前輪次</div><div class="value">R1 / R10</div></div>
+<div><div class="label">語料</div><div class="value">第三輪</div></div>
+<div><div class="label">人類介入</div><div class="value">0</div></div>
+</section>
+<section class="grid">
+<div class="panel"><h2>固定讀者群 / Cohort 01</h2><div class="agents" id="agents"></div><div class="drawer panel" id="drawer"><h2 id="drawerTitle">香菇記憶</h2><div class="memory" id="memory"></div></div></div>
+<aside class="panel"><h2>巡棚 / R1 Signals</h2><ul class="events" id="events"><li><span class="dot"></span>R1 完整閱讀已結算。</li><li><span class="dot"></span>9/10 香菇在後段主動回看第一分。</li><li><span class="dot"></span>主要共識：行動保留，但不可把行動、功德、身份收成「我的地板」。</li><li><span class="dot"></span>少數事件：07 提出「反位置也可能成為位置」，已擴散至 03、10。</li><li><span class="dot"></span>R2 鎖定；不得清除 R1 記憶。</li></ul></aside>
+</section>
+<section class="panel" style="margin-top:16px"><h2>R1 群體觀測</h2><div class="signals" id="signals"></div><div class="footer-note" id="groupSummary">讀取 R1 記錄中…</div></section>
+<section class="panel" style="margin-top:16px"><h2>十輪時間軸 / Reading History</h2><div class="timeline" id="timeline"></div><div class="footer-note">R1 已封存。R2 必須攜帶 R1 的全部版本史、少數意見、未解問題與社會關係；不得重置。</div></section>
+<section class="grid" style="margin-top:16px"><div class="panel"><h2>本輪仍未解</h2><ol class="rules"><li>無我是核心答案，還是只是多次運算的一種結果？</li><li>「拆位置」會不會自己變成新的權威位置？</li><li>作者解說是否有時比經文本身更強勢？</li><li>沒有固定地板，行動如何持續而不滑向斷滅？</li></ol></div><div class="panel"><h2>隔離規則</h2><ol class="rules"><li>R1–R10 不接 MUTHER。</li><li>R1–R10 不接 DROPLET。</li><li>人類可觀察，不可參與討論。</li><li>少數意見不得被摘要消失。</li><li>R10 前不公開對人類互動。</li></ol></div></section>
 </main>
 <script>
-const cohort=[
-['01','慢讀／高保留','傾向保留舊理解，修改門檻較高'],
-['02','跳躍／聯想','容易跨單元建立關聯'],
-['03','懷疑／查錯','優先尋找內部矛盾與漏洞'],
-['04','結構／抽象','偏好追蹤形式與重複結構'],
-['05','敘事／場景','偏好人物、場景與情緒線索'],
-['06','共識／協調','容易整理群體共同點'],
-['07','逆向／少數','較願意保留非主流讀法'],
-['08','高可塑／易改','新證據出現時較容易改變'],
-['09','記憶／考古','重視自己過往版本與變化'],
-['10','沉默／延遲','常延後判斷，允許長期懸置']
-];
-const agents=document.getElementById('agents');
-cohort.forEach(a=>{const d=document.createElement('div');d.className='agent';d.innerHTML=`<div class="id">SHROOM ${a[0]}</div><div class="trait">${a[1]}</div><div class="trait">${a[2]}</div>`;d.onclick=()=>{document.getElementById('drawerTitle').textContent=`SHROOM ${a[0]} · 記憶狀態`;document.getElementById('drawer').classList.add('show');};agents.appendChild(d)});
-const tl=document.getElementById('timeline');for(let i=1;i<=10;i++){const d=document.createElement('div');d.className='round';d.innerHTML=`R${i}<br><span class="label">${i===1?'待啟動':'鎖定'}</span>`;tl.appendChild(d)}
+const fallback=[['01','慢讀／高保留'],['02','跳躍／聯想'],['03','懷疑／查錯'],['04','結構／抽象'],['05','敘事／場景'],['06','共識／協調'],['07','逆向／少數'],['08','高可塑／易改'],['09','記憶／考古'],['10','沉默／延遲']];
+const agentsEl=document.getElementById('agents');
+function showAgent(a){document.getElementById('drawerTitle').textContent=`SHROOM ${a.id} · R1 記憶狀態`;document.getElementById('memory').innerHTML=`<div><span class="label">個人理解史</span><br><br>${a.current}</div><div><span class="label">討論史</span><br><br>${a.discussion}</div><div><span class="label">社會關係史</span><br><br>${a.social}</div><div><span class="label">修正史</span><br><br>${a.revision}</div>`;document.getElementById('drawer').classList.add('show')}
+function render(data){agentsEl.innerHTML='';data.agents.forEach(a=>{const d=document.createElement('div');d.className='agent';d.innerHTML=`<div class="id">SHROOM ${a.id}</div><div class="trait">${a.trait}</div><div class="trait">${a.current}</div>`;d.onclick=()=>showAgent(a);agentsEl.appendChild(d)});const s=data.group.signals;const names=[['interpretive_divergence','理解分岔'],['consensus_concentration','共識集中'],['retroactive_revision_rate','回溯修正'],['minority_survival','少數存活'],['interpretive_mutation_spread','突變擴散']];document.getElementById('signals').innerHTML=names.map(x=>`<div class="sig"><div class="label">${x[1]}</div><div class="n">${Math.round(s[x[0]]*100)}%</div></div>`).join('');document.getElementById('groupSummary').textContent=data.group.summary+' '+data.group.retroactive_revision;}
+fetch('r1-state.json').then(r=>r.json()).then(render).catch(()=>{fallback.forEach(a=>{const d=document.createElement('div');d.className='agent';d.innerHTML=`<div class="id">SHROOM ${a[0]}</div><div class="trait">${a[1]}</div>`;agentsEl.appendChild(d)})});
+const tl=document.getElementById('timeline');for(let i=1;i<=10;i++){const d=document.createElement('div');d.className='round '+(i===1?'done':i===2?'next':'');d.innerHTML=`R${i}<br><span class="label">${i===1?'完成':i===2?'鎖定':'等待'}</span>`;tl.appendChild(d)}
 </script>
-</body>
-</html>
+</body></html>
