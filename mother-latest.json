@@ -1,20 +1,20 @@
 {
-  "updatedAt":"2026-08-29 04:30 +08:00",
-  "runLog":"mother-runs/2026-08-29-0430.json",
+  "updatedAt":"2026-08-29 05:25 +08:00",
+  "runLog":"mother-runs/2026-08-29-0525.json",
   "ledger":"muther-ledger.json",
   "uncultured":{
-    "status":"NO NEW ORE · INDEPENDENT IMAGE POOL THIN",
+    "status":"NO NEW ORE · SAME-BURST RESULTS",
     "sampledImageIds":[],
-    "finding":"The currently discoverable independent 2025 image pool is nearly exhausted by prior rounds; remaining surfaced results are already visited, same-session material, or previously unavailable for visual inspection. No additional visual weight was added this round.",
+    "finding":"A broad image patrol still surfaced the same dense 2026-08-28 09:47–09:59 capture burst already represented in the ledger. No independent visual sample was promoted and no new visual evidence was added.",
     "candidate":"Foreground obstruction/proximity remains open but unconfirmed.",
-    "next":"broaden image discovery beyond filename-led IMG_2025 queries and prefer independent dates/purposes"
+    "next":"broaden discovery through non-IMG naming, older folders and independent capture contexts rather than re-reading the same burst"
   },
   "terminus":{
-    "status":"NEW VEIN · SOLUTION CAN DESTABILIZE ORGANIZATIONAL IDENTITY",
-    "newSourceIds":["0B7vhvrekdjpbc3A3RTdjbGVNRjA","0B7vhvrekdjpbR1hWNlNrSXpkSXM"],
-    "finding":"郭貽菱's 2017 防跌工班 field notes show that a ready-made assistive product can outperform custom installation, forcing the project to ask whether its real value is technical labor or matching tools to people, relationship-building and exchange. Repeated visits also show that relational work is part of the intervention itself.",
-    "candidate":"Provisional vein: solution-induced identity exposure — when a better tool solves the stated technical problem, it can reveal that the actual function of an organization/practice lies in coordination, trust, interpretation, negotiation or exchange.",
-    "next":"test this candidate against unrelated project/course/community materials"
+    "status":"TESTED · NO NEW VEIN",
+    "newSourceIds":["0B6kekeEVEPHjVU04SlFaT3kzNmM"],
+    "finding":"A 2015 C-group learning record by 蔡舒翔 was inspected as an unrelated test case. It is mostly a partially filled course template containing orientation, expectations, preliminary 南機場 discussion and a generic reflection about ideology. It neither supports nor refutes the prior solution-induced identity exposure vein.",
+    "candidate":"The prior vein remains provisional. This sample is low in conceptual density but retains modest process/context value and illustrates that student materials should be scored for reusable parts rather than globally accepted or rejected.",
+    "next":"continue testing the vein against unrelated materials with enough observational or argumentative density"
   },
   "phase":"small-batch mining with provenance-first, genre-aware quality scoring, document-family dedupe and function-versus-tool testing"
 }
