@@ -1,0 +1,11 @@
+{
+  "engine": "VAJRA ENGINE v0.1",
+  "status": "PROTOTYPE TESTING",
+  "testedAt": "2026-08-28",
+  "runs": 500,
+  "roundsPerRun": 6,
+  "completedToDepthBound": 500,
+  "crashes": 0,
+  "knownFailure": "Earlier naive reformulation collapsed into a repeated generic sentence after two rounds. v0.1 now rotates six attack lenses and enforces a depth bound, but this only proves the state machine runs; it does not yet prove semantic dismantling.",
+  "next": "Test semantic quality on real propositions; connect DROPLET only when evidence/counterexample lookup is required."
+}
