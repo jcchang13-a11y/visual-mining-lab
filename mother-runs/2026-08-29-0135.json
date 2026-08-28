@@ -1,0 +1,20 @@
+{
+  "updatedAt":"2026-08-29 01:35 +08:00",
+  "mode":"scheduled small-batch patrol",
+  "uncultured":{
+    "status":"NO NEW ORE",
+    "sampledImageIds":[],
+    "finding":"No unvisited independent image from a new date/purpose was promoted in this round; searches for additional 2024/2025-06 image candidates either returned none or already-visited items.",
+    "candidate":"Do not lower independence standards merely to produce a visual finding.",
+    "deadEnds":["IMG_2024 search returned no candidates","IMG_202506 candidates were already in ledger"]
+  },
+  "terminus":{
+    "status":"QUALITY MODEL CONFIRMATION · 1 STUDENT GROUP RECORD",
+    "newSourceIds":["0B6kekeEVEPHjVU04SlFaT3kzNmM"],
+    "finding":"《150306-C.docx》 is a C-group weekly learning record, recorded by 蔡舒翔. As formal argument it is very weak: much of the document is template repetition and thin conclusions. However it preserves useful provenance and classroom/fieldwork context, including a 南機場 field visit, group expectations, and an early remark about noticing ideology.",
+    "quality":{"formalArgument":"low","evidence":"low","observationalDensity":"low-to-medium","provenanceValue":"high","reusability":"medium as teaching/fieldwork trace"},
+    "candidate":"The multidimensional quality model survives a deliberately weak student/course sample: low argument quality can coexist with high provenance value. Student records should not be promoted as conceptual ore merely because they contain theory words; their best use may be as traces of pedagogy, fieldwork chronology, and how concepts first entered a learning environment.",
+    "next":"sample another student/course record with denser original observation and compare whether it contributes concept ore or only provenance/context"
+  },
+  "phase":"small-batch mining with provenance-first, genre-aware multidimensional quality scoring"
+}
