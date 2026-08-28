@@ -1,0 +1,17 @@
+{
+  "runAt":"2026-08-28 23:34 +08:00",
+  "scope":"small-batch Drive mining",
+  "uncultured":{
+    "sampled":[{"id":"1vvgtkObN9x6zf07ftM34OjQqaWmwGJnS","title":"IMG_20260828_094830.jpg","sourceType":"raw camera photo"}],
+    "result":"Another image from the same 2026-08-28 book-capture session. The spread is photographed upside down with page edges and surrounding surface visible. It adds no independent evidence and is treated as same-session redundancy rather than a new visual pattern.",
+    "candidate":"No promotion. Keep the current two-mode hypothesis open: context/acquisition-trace retention versus deliberate object isolation.",
+    "confidence":"unchanged"
+  },
+  "terminus":{
+    "sampled":[{"id":"1QK4SVA1GYg2OevfSDPaBHQ2MAJvQtCG0","title":"期末報告.pdf","provenance":"third-party/commissioned heritage-planning material; exact authorship not established in this pass","quality":"high case/data value; moderate conceptual value"}],
+    "result":"The report on Wenmeng Building and the former licensed-prostitution district is useful mainly as case ore: it reconstructs policy decisions, spatial boundaries, industry history and the politics of preserving stigmatized urban memory. It strongly overlaps existing representation/exclusion/heritage veins, so it is logged as confirming material rather than a new vein.",
+    "methodCheck":"Genre-aware quality rule survived: this document is more useful for chronology, policy detail, spatial evidence and case reconstruction than for original theory. Provenance remains explicit because authorship was not established here.",
+    "deadEnds":[]
+  },
+  "boundaries":"No Drive source files modified, moved or deleted. No external web search. No agent simulation. No Gangchibao third-round integration."
+}
