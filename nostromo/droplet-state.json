@@ -1,8 +1,37 @@
 {
   "status": "CONNECTED",
-  "mode": "ON-DEMAND",
+  "mode": "MISSION COMPLETE",
   "updatedAt": "2026-08-28",
-  "currentMission": null,
-  "summary": "DROPLET 已接入 NOSTROMO。尚未派出第一個搜尋任務。",
-  "results": []
+  "currentMission": "MISSION 001 · NOSTROMO 技術祖譜第一次外探",
+  "summary": "第一輪找到三個最值得直接借用的結構：可插拔的多 agent／器官編排、快慢雙迴路的自我修改，以及工作記憶／經驗記憶／技能記憶分層。最大的共同風險是：系統很容易重新凝固成固定的中央指揮、固定 benchmark 或固定『改善』定義。完整工程筆記已存入 THE MESS / 90_ENGINEERING。",
+  "results": [
+    {
+      "title": "Magentic-One / AutoGen",
+      "note": "可偷：Orchestrator + 專門 agent 的可插拔結構，適合 BRIDGE。風險：中央 orchestrator 變成不可質疑的新權威。",
+      "source": "Microsoft Research",
+      "date": "2024–2025",
+      "url": "https://www.microsoft.com/en-us/research/publication/magentic-one-a-generalist-multi-agent-system-for-solving-complex-tasks/"
+    },
+    {
+      "title": "MetaSkill-Evolve",
+      "note": "可偷：fast loop 改工作技能，slow loop 改『如何改善』的 meta-skill。這很適合 NOSTROMO 的分層自我修改。",
+      "source": "arXiv 2607.05297",
+      "date": "2026",
+      "url": "https://arxiv.org/abs/2607.05297"
+    },
+    {
+      "title": "Recuris",
+      "note": "可偷：Working / Experiential / Skill Memory 分層，並用失敗證據觸發局部修改。風險：長期記憶會污染，不是越多越好。",
+      "source": "arXiv 2608.24876",
+      "date": "2026-08-25",
+      "url": "https://arxiv.org/abs/2608.24876"
+    },
+    {
+      "title": "HyperAgents",
+      "note": "可偷：把 task agent 與修改自身的 meta-agent 放進可編輯程序；自我修改不應只停在改 prompt。",
+      "source": "Meta AI Research",
+      "date": "2026",
+      "url": "https://ai.meta.com/research/publications/hyperagents/"
+    }
+  ]
 }
