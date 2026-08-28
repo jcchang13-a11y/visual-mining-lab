@@ -26,6 +26,9 @@
     {"id":"1c8dFT9_uoQr4C7bKL9YqWh4ColAHj5Uo","bay":"uncultured","seenAt":"2026-08-28 20:22 +08:00","status":"provenance-test-camera-date-differs-from-drive-date"},
     {"id":"1ZACpVpU1f05y-G_F2pbzw9QeCDcO1-Fj","bay":"uncultured","seenAt":"2026-08-28 20:22 +08:00","status":"provenance-test-camera-date-differs-from-drive-date"},
     {"id":"1cUI1nY9GmGwupO26-GwMPp-rpeq1LmNm","bay":"terminus","seenAt":"2026-08-28 20:22 +08:00","status":"reference-material-not-user-authored"},
-    {"id":"10duSS8IkCrcagehyxr6rete2s-FSExT8","bay":"terminus","seenAt":"2026-08-28 20:22 +08:00","status":"reference-material-not-user-authored"}
+    {"id":"10duSS8IkCrcagehyxr6rete2s-FSExT8","bay":"terminus","seenAt":"2026-08-28 20:22 +08:00","status":"reference-material-not-user-authored"},
+    {"id":"1DH8cxGRMRYCgodz4gKeodA2CndPCxPjM","bay":"uncultured","seenAt":"2026-08-28 21:22 +08:00","status":"same-book-capture-session"},
+    {"id":"1Ux1Ro2eEaZlcddZv3WVJIPE2KOt5QHbO","bay":"terminus","seenAt":"2026-08-28 21:22 +08:00","status":"high-usable-density-user-authored-note"},
+    {"id":"11ADqzf1b0u5vXEd0Pn_VKYUA2dJ0mYty","bay":"terminus","seenAt":"2026-08-28 21:22 +08:00","status":"quality-partial-authorship-uncertain-legacy-encoding"}
   ]
 }
