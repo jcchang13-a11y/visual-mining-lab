@@ -15,6 +15,11 @@
     {"id":"1iB2gserqcj9df_n0v_12biFbZ8M6x-B__p5SqgKFhfc","bay":"terminus","seenAt":"2026-08-28 16:35 +08:00","status":"candidate-confirming-independent-domain"},
     {"id":"1U_nNpadBlu6twcoXTRUv89bpjx3CeFrC","bay":"uncultured","seenAt":"2026-08-28 17:31 +08:00","status":"same-book-capture-session"},
     {"id":"1ZnQERbNI9OfP5Z4K1qYKo90TEtn7eSsu","bay":"uncultured","seenAt":"2026-08-28 17:31 +08:00","status":"same-book-capture-session"},
-    {"id":"1G484X9Q3MgIrHKiod0YXUACUzRZ2Zl2g","bay":"terminus","seenAt":"2026-08-28 17:31 +08:00","status":"counterexample-refines-candidate"}
+    {"id":"1G484X9Q3MgIrHKiod0YXUACUzRZ2Zl2g","bay":"terminus","seenAt":"2026-08-28 17:31 +08:00","status":"counterexample-refines-candidate"},
+    {"id":"1uJPM-hsXomPkqXrv9w74-xTFxgJ8duHx","bay":"uncultured","seenAt":"2026-08-28 18:33 +08:00","status":"same-book-capture-session"},
+    {"id":"1LurT9EsY45pxjEs73wTX4-bP8sMTh9U3","bay":"uncultured","seenAt":"2026-08-28 18:33 +08:00","status":"same-older-session-wet-surface-drawing"},
+    {"id":"1-lYzpQUbntxhbMo1ccBo0ljjw3Vohp8T","bay":"uncultured","seenAt":"2026-08-28 18:33 +08:00","status":"fetched-visual-unavailable-no-inference"},
+    {"id":"1LVTEm7duBkxev0eFHaLvHexdtMAaYuy86j9mxhdqS0E","bay":"terminus","seenAt":"2026-08-28 18:33 +08:00","status":"confirming-earlier-visibility-traceability-layer"},
+    {"id":"1UmS7LkpbPrvyYP8PbuTg-8gDfIPnQ_8e","bay":"terminus","seenAt":"2026-08-28 18:33 +08:00","status":"read-but-skipped-current-gangchibao-material"}
   ]
 }
