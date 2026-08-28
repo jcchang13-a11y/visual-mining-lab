@@ -1,0 +1,42 @@
+{
+  "runAt":"2026-08-28 17:31 +08:00",
+  "mode":"small-batch validation",
+  "preflight":{
+    "observerUpdatedAt":"2026-08-28 16:35 +08:00",
+    "latestRun":"mother-runs/2026-08-28-1635.json",
+    "ledgerChecked":true,
+    "legacyMotherStateChecked":true
+  },
+  "uncultured":{
+    "sampled":[
+      {
+        "id":"1U_nNpadBlu6twcoXTRUv89bpjx3CeFrC",
+        "title":"IMG_20260828_095115.jpg",
+        "result":"same-book-capture-session"
+      },
+      {
+        "id":"1ZnQERbNI9OfP5Z4K1qYKo90TEtn7eSsu",
+        "title":"IMG_20260828_095939.jpg",
+        "result":"same-book-capture-session"
+      }
+    ],
+    "finding":"Both new samples belong to the same page-by-page book capture burst already encountered earlier in the day. This is not visual ore; it validates session-level suppression: once a dense document-capture burst is identified, later frames from that burst should be downweighted rather than repeatedly treated as independent visual specimens.",
+    "ore":"none",
+    "methodChange":"add capture-session/burst suppression on top of per-file dedupe",
+    "next":"skip the remaining 09:47-09:59 book burst and continue cross-date non-document sampling"
+  },
+  "terminus":{
+    "sampled":[
+      {
+        "id":"1G484X9Q3MgIrHKiod0YXUACUzRZ2Zl2g",
+        "title":"台中市都市土地使用強度「區位特性」之研究－以容積移轉制度為例.pdf",
+        "result":"counterexample-refines-candidate"
+      }
+    ],
+    "finding":"The paper gives a useful partial counterexample to the current access-regime candidate. It treats location, carrying capacity, transport, land-use intensity and spatial concentration as causally consequential, not merely as labels assigned by rules. Yet the same paper also argues that TDR design and the absence of location-guidance rules shape where those pressures accumulate. The earlier candidate was therefore too one-sided.",
+    "candidateRevision":"Do not frame the recurring structure as 'rules determine what you can do more than position does'. A narrower candidate is that effects are co-produced by access/regulatory regimes and the material-spatial capacities of locations; changing either side changes the outcome.",
+    "status":"candidate narrowed; not promoted",
+    "next":"seek a cleaner case where distance/physical position remains decisive even when formal access rules are held constant"
+  },
+  "notification":"none-normal-run"
+}
