@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>BRIDGE · OBSERVATORY</title>
+<style>
+:root{--bg:#e8e4d9;--panel:#f4f1e9;--ink:#161616;--line:#7b7a72;--muted:#67665f;--active:#2f4d3c;--warn:#6d4d2e}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;letter-spacing:.01em}
+main{max-width:1120px;margin:0 auto;padding:28px 18px 60px}.head{display:flex;justify-content:space-between;gap:20px;align-items:flex-end;border-bottom:2px solid var(--ink);padding-bottom:14px;margin-bottom:18px}.title{font-size:clamp(34px,8vw,78px);line-height:.85;font-weight:700;letter-spacing:-.07em}.sub{font-size:12px;text-align:right;line-height:1.5;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:18px 0}.card{border:1px solid var(--line);background:var(--panel);padding:14px;min-height:110px}.label{font-size:11px;color:var(--muted);margin-bottom:18px}.num{font-size:32px;font-weight:700}.small{font-size:12px;line-height:1.45;color:var(--muted)}
+.flow{border:1px solid var(--line);background:var(--panel);padding:14px;margin:10px 0 18px}.flowline{display:grid;grid-template-columns:1fr auto 1fr auto 1fr auto 1fr;align-items:center;gap:8px;font-size:13px}.node{border:1px solid var(--ink);padding:10px;text-align:center;background:#faf8f2}.arrow{color:var(--muted)}
+.table{border:1px solid var(--line);background:var(--panel);overflow:auto}table{width:100%;border-collapse:collapse;min-width:820px}th,td{padding:11px 10px;border-bottom:1px solid #bbb8ae;text-align:left;font-size:12px;vertical-align:top}th{font-weight:700;background:#ded9cd}.status{display:inline-block;border:1px solid currentColor;padding:2px 6px;font-size:10px}.active{color:var(--active)}.warn{color:var(--warn)}
+.note{margin-top:14px;font-size:11px;line-height:1.55;color:var(--muted)}.footer{margin-top:26px;padding-top:12px;border-top:1px solid var(--line);font-size:11px;color:var(--muted);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+@media(max-width:760px){.grid{grid-template-columns:1fr 1fr}.flowline{grid-template-columns:1fr;}.arrow{transform:rotate(90deg);text-align:center}.head{align-items:flex-start;flex-direction:column}.sub{text-align:left}}
+</style>
+</head>
+<body><main>
+<div class="head"><div><div class="title">BRIDGE</div><div style="margin-top:8px;font-size:13px">OBSERVATORY · 任務交換與回流觀測窗</div></div><div class="sub">BACKEND: GOOGLE DRIVE / BRIDGE<br>PUBLIC VIEW: SAFE SNAPSHOT ONLY<br>v0.1 · 2026-08-28</div></div>
+<div class="grid">
+<div class="card"><div class="label">OPEN REQUESTS</div><div class="num">1</div><div class="small">目前一張正式任務卡</div></div>
+<div class="card"><div class="label">DROPLET / EXTERNAL</div><div class="num">1</div><div class="small">Probe 001 已完成第一輪外部偵察</div></div>
+<div class="card"><div class="label">MUTHER / INTERNAL</div><div class="num">0</div><div class="small">等待第一輪 Google Drive 內部採礦</div></div>
+<div class="card"><div class="label">SHROOMING / RETURN</div><div class="num">0</div><div class="small">尚未餵回大棚</div></div>
+</div>
+<div class="flow"><div class="label">LIVE ROUTE MODEL</div><div class="flowline"><div class="node">《剛吃飽》 / SHROOMING<br><span class="small">提出問題</span></div><div class="arrow">→</div><div class="node">BRIDGE<br><span class="small">分派／記錄</span></div><div class="arrow">→</div><div class="node">DROPLET + MUTHER<br><span class="small">向外探／向內挖</span></div><div class="arrow">→</div><div class="node">SHROOMING / 《剛吃飽》<br><span class="small">回流再讀</span></div></div></div>
+<div class="table"><table><thead><tr><th>ID</th><th>來源</th><th>問題</th><th>去向</th><th>狀態</th><th>下一站</th></tr></thead><tbody>
+<tr><td>BR-001</td><td>《剛吃飽》 / DROPLET TEST</td><td>《金剛經》拆掉的究竟只是實體自我，還是更深的「主體位置」？</td><td>DROPLET<br>MUTHER</td><td><span class="status active">EXTERNAL RETURNED</span><br><span class="status warn" style="margin-top:5px">INTERNAL PENDING</span></td><td>先做 MUTHER 內部採礦；之後將外部／內部材料一起餵回 SHROOMING</td></tr>
+</tbody></table></div>
+<div class="note">這個頁面目前是「安全快照」，只顯示任務狀態與非敏感摘要；完整任務內容、來源材料與歷史紀錄保存在私人 Google Drive 的 BRIDGE 後台。下一版會加入自動同步與關係圖。</div>
+<div class="footer"><span>BRIDGE IS NOT A RESEARCH UNIT. IT IS THE TRAFFIC LAYER.</span><span>INTERNAL ↔ EXTERNAL ↔ READING ↔ WRITING</span></div>
+</main></body></html>
