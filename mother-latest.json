@@ -1,8 +1,20 @@
 {
-  "updatedAt":"2026-08-29 01:35 +08:00",
-  "runLog":"mother-runs/2026-08-29-0135.json",
+  "updatedAt":"2026-08-29 02:17 +08:00",
+  "runLog":"mother-runs/2026-08-29-0217.json",
   "ledger":"muther-ledger.json",
-  "uncultured":{"status":"NO NEW ORE","sampledImageIds":[],"finding":"No new independent image was promoted.","candidate":"Keep the independence threshold.","next":"sample a different date and purpose"},
-  "terminus":{"status":"METHOD CONFIRMED · 1 COURSE RECORD","newSourceIds":["0B6kekeEVEPHjVU04SlFaT3kzNmM"],"finding":"A weekly course record was more useful as contextual evidence than as a source of new concepts.","candidate":"Material quality should remain multidimensional; context and provenance can be valuable even when conceptual contribution is small.","next":"sample another course record with denser original observation"},
+  "uncultured":{
+    "status":"NO NEW ORE · SAME SESSION DOWNWEIGHTED",
+    "sampledImageIds":["12VbrS79V4AK-yu_PAnjO7W7QhOWg1G7X"],
+    "finding":"IMG_20250531_191717.jpg is from the same wet-surface drawing session as an already visited image only 24 seconds later, so it was not counted as independent visual evidence.",
+    "candidate":"Keep the independence threshold; same-session images may describe variation within an event but should not multiply support for a visual rule.",
+    "next":"sample a different capture date and purpose"
+  },
+  "terminus":{
+    "status":"PROCESS ORE · NO NEW VEIN",
+    "newSourceIds":["0B6kekeEVEPHjSFZPeF9aaFFHNW8"],
+    "finding":"A C-group weekly course record preserves the process of narrowing a broad urban-renewal problem into a more actionable target: actors able to influence planning and implementation. Its value is procedural/contextual rather than theoretical.",
+    "candidate":"Course and student materials can be mined for decision-process traces even when their conceptual claims are ordinary; quality remains multidimensional.",
+    "next":"sample another student/course record with denser field observation; do not promote routine classroom conclusions into concept veins"
+  },
   "phase":"small-batch mining with provenance-first, genre-aware multidimensional quality scoring"
 }
