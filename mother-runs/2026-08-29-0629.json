@@ -1,0 +1,18 @@
+{
+  "updatedAt":"2026-08-29 06:29 +08:00",
+  "mode":"small-batch patrol",
+  "uncultured":{
+    "sourceIds":["1kaapXyeISo_W5Ghe3yEo98Bz8F_4C1H4","0B6kekeEVEPHjM2x6VUlxSlZOSHM","1RxMZk5MGqBfAgPGFT_BzXWf351GI6CZi"],
+    "finding":"Three archival screenshots from 2016-2017 preserve Facebook interface, names, timestamps, reply order, likes and navigation chrome rather than cropping only the quoted text. One screenshot even contains an embedded screenshot inside a reply, creating nested mediation. This is independent of the recent camera-photo burst and refines the acquisition-trace hypothesis: in screenshot material, interface residue can be evidentiary context rather than visual noise.",
+    "status":"CANDIDATE REFINEMENT · NOT YET VISUAL GRAMMAR",
+    "next":"sample screenshots from other apps and purposes to test whether context-preserving capture is a durable personal visual habit or just a Facebook-era archive pattern"
+  },
+  "terminus":{
+    "sourceIds":["1rRprmI_2gNWaWv7MAIcXyKvEUee52iwC"],
+    "finding":"A 2015 collective workshop synthesis on creative-city policy repeatedly distinguishes direct provision from enabling conditions: loosen regulation, release space, build interfaces/platforms, coordinate actors and let professional groups operate. It offers an independent policy-domain analogue of the prior function-versus-tool vein: when the visible service shifts or is delegated, the deeper function may be coordination and condition-building. Because this is a normative synthesis rather than an observed before/after case, it is only low-weight confirmation, not a new vein.",
+    "quality":"high reuse density as policy synthesis; mixed authorship/collective provenance; moderate conceptual value; low evidentiary weight for causal claims",
+    "status":"CONFIRMING ANALOGUE · NO NEW VEIN",
+    "next":"seek empirical cases outside elder-care where a tool or delivery mechanism changed and the persistent institutional function became visible"
+  },
+  "phase":"small-batch mining with provenance-first, genre-aware scoring, screenshot/media-class separation and function-versus-tool falsification"
+}
