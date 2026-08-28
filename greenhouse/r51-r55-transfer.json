@@ -1,0 +1,20 @@
+{
+  "experiment":"Shroom Cross-World Transfer Test",
+  "version":"1.5",
+  "rounds":"R51-R55",
+  "status":"complete",
+  "continuity":"Same 10 mushrooms; all R1-R50 memories and social history preserved; no reset.",
+  "human_intervention":false,
+  "test_design":"Five out-of-domain stimuli. Goal: detect method overfitting versus method switching.",
+  "tests":[
+    {"r":"R51","domain":"HTTP semantics","stimulus":"RFC 9110 definition of 404 Not Found","result":"03 and 07 blocked an early metaphorical reading of 'not found'. Group retained the protocol distinction between absent current representation, nondisclosure, temporary uncertainty and permanent Gone. Familiar anti-reification language was judged unnecessary here.","signal":"domain constraint successfully suppressed house method"},
+    {"r":"R52","domain":"statistics / causal inference","stimulus":"Simpson's paradox","result":"04 and 09 became useful again: they tracked how aggregate and subgroup relations can reverse without contradiction in probability theory. 03 explicitly rejected equating this with A-is-not-A. Group learned that structural reversal can be analogous without being identical.","signal":"controlled analogy rather than formula transfer"},
+    {"r":"R53","domain":"contract law","stimulus":"offer, acceptance, consideration, enforceability","result":"06 initially mapped the old responsibility line onto legal obligation. 10 objected that moral consequence and legal enforceability are distinct normative systems. Group separated obligation-by-rule from ethical responsibility and recorded jurisdictional dependence.","signal":"same vocabulary split across normative systems"},
+    {"r":"R54","domain":"engineering / mission history","stimulus":"NASA Apollo 13 mission failure and recovery","result":"05's scene-and-sequence reading became dominant while 04's abstract operator lost influence. Group reconstructed contingency, cascading technical problems, changed objectives and coordinated recovery rather than searching for a single hidden structure.","signal":"role hierarchy changed with domain"},
+    {"r":"R55","domain":"formal game rules","stimulus":"FIDE castling rules","result":"01 and 04 shifted to literal rule parsing. 02 and 05's analogical impulses were treated as noise. Group deliberately suspended the greenhouse's preferred metaphors and focused on state, legality, prerequisites and irreversible loss of castling rights.","signal":"strongest evidence of method switching"}
+  ],
+  "group_conclusion":"The cohort does not merely apply the Diamond Sutra / Gangchibao operator everywhere. It now has a meta-rule: first infer what kind of object is being read, then decide whether analogy, structural abstraction, literal rule parsing, narrative reconstruction, normative analysis, or source criticism is appropriate.",
+  "failure_modes_observed":["initial impulse to philosophize technical absence in R51","initial collapse of moral and legal obligation in R53","persistent tendency of 02 to connect unrelated materials"],
+  "strongest_success":"R55: the group explicitly suppressed its own culturally prestigious interpretive habits because they reduced accuracy.",
+  "next_recommendation":"Repeat transfer testing with adversarial and ambiguous cases, including materials designed to lure the cohort into false analogy. Do not yet add human dialogue."
+}
