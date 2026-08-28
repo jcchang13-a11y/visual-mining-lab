@@ -1,0 +1,23 @@
+{
+  "runAt":"2026-08-28 18:33 +08:00",
+  "phase":"small-batch validation",
+  "uncultured":{
+    "sampled":[
+      {"id":"1uJPM-hsXomPkqXrv9w74-xTFxgJ8duHx","title":"IMG_20260828_094942.jpg","result":"same-book-capture-session"},
+      {"id":"1LurT9EsY45pxjEs73wTX4-bP8sMTh9U3","title":"IMG_20250531_134654.jpg","result":"wet-transparent-surface-over-drawing; same older outing/session as prior surface-drawing sample"},
+      {"id":"1-lYzpQUbntxhbMo1ccBo0ljjw3Vohp8T","title":"IMG_20250531_192952.jpg","result":"fetched but visual inspection unavailable in this runtime; no inference made"}
+    ],
+    "finding":"No promoted visual ore. The 2026 book-capture burst remains suppressed. A second 2025 image confirms a batch-level motif in which raindrops on a transparent surface remain visibly layered over drawings/text rather than being optically removed. Because the confirming frames belong to the same outing/session, treat this only as a session motif, not a corpus-wide visual grammar.",
+    "next":"seek the same intervening-surface motif on another date and a non-graffiti subject; otherwise downgrade it as outing-specific"
+  },
+  "terminus":{
+    "sampled":[
+      {"id":"1LVTEm7duBkxev0eFHaLvHexdtMAaYuy86j9mxhdqS0E","title":"20090625南方都市報","result":"confirming-earlier-layer"},
+      {"id":"1UmS7LkpbPrvyYP8PbuTg-8gDfIPnQ_8e","title":"W004.md","result":"read but excluded from this run's mining because it belongs to current Gangchibao material; no cross-system integration performed"}
+    ],
+    "finding":"The 2009 sex-work rights text supplies an earlier, concrete mechanism for the existing visibility/traceability vein: formal prohibition coexists with widespread tolerated activity, while enforcement pressure falls disproportionately on street-based and weakly protected operators who are easier to see and catch. This pushes the operational line 'visibility/traceability distributes institutional risk' back before the 2016 spatial-form materials. It is a confirming stratum rather than a wholly new vein.",
+    "next":"look for a non-sex-work domain where the same rule appears: identical formal rules but differential exposure because some actors/places are easier to see, count, inspect or sanction"
+  },
+  "boundaryChecks":["no Drive files modified, moved or deleted","no external web search","no agent simulation","no integration into Gangchibao third-round site"],
+  "notification":"none; useful confirmation but no new high-confidence ore"
+}
