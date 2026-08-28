@@ -1,0 +1,7 @@
+{
+  "runAt":"2026-08-28 20:22 +08:00",
+  "mode":"small-batch validation",
+  "uncultured":{"sampled":[{"id":"1c8dFT9_uoQr4C7bKL9YqWh4ColAHj5Uo","title":"IMG_20250608_191746.jpg","driveCreated":"2026-08-21"},{"id":"1ZACpVpU1f05y-G_F2pbzw9QeCDcO1-Fj","title":"IMG_20251018_155634.jpg","driveCreated":"2026-08-21"}],"finding":"Filename/capture chronology and Drive upload chronology diverge by many months. Drive timestamps are repository events, not capture dates.","methodChange":"Store capture-date evidence separately from upload-date evidence."},
+  "terminus":{"sampled":[{"id":"1cUI1nY9GmGwupO26-GwMPp-rpeq1LmNm","title":"4-1大稻埕地方產業與故事旅遊(水瓶子).pdf","provenance":"third-party presentation credited to 水瓶子"},{"id":"10duSS8IkCrcagehyxr6rete2s-FSExT8","title":"金門國家公園傳統建築活化利用委託民宿經營案成效評估.pdf","provenance":"third-party commissioned report"}],"finding":"Drive membership is not authorship. Reference materials cannot count as evidence of the user's conceptual lineage without authorship provenance.","methodChange":"Classify text provenance before concept-linking: user-authored, coauthored, notes/excerpts, third-party reference, generated/reconstructed."},
+  "notificationReason":"method-level correction prevents false chronology and false attribution across the whole-Drive mine"
+}
