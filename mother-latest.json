@@ -1,19 +1,19 @@
 {
-  "updatedAt":"2026-08-28 19:21 +08:00",
-  "runLog":"mother-runs/2026-08-28-1921.json",
+  "updatedAt":"2026-08-28 20:22 +08:00",
+  "runLog":"mother-runs/2026-08-28-2022.json",
   "ledger":"muther-ledger.json",
   "uncultured":{
-    "status":"NO NEW ORE · DUPLICATE SESSION SUPPRESSED",
-    "sampledImageIds":["1UIQpw0CD61ip4fa_6KW3D5td3A_pRz_5"],
-    "finding":"Another photographed-book page from the same capture session. It is recorded but not counted as independent visual evidence.",
-    "next":"continue seeking a different-date, different-subject example of the intervening-surface motif"
+    "status":"METHOD CORRECTION · CAPTURE DATE ≠ DRIVE DATE",
+    "sampledImageIds":["1c8dFT9_uoQr4C7bKL9YqWh4ColAHj5Uo","1ZACpVpU1f05y-G_F2pbzw9QeCDcO1-Fj"],
+    "finding":"Two raw camera images carry filename dates in 2025 while Drive metadata records them as created/uploaded in August 2026. Drive creation time cannot be treated as capture time. Visual chronology must prefer camera/filename/EXIF evidence where available and keep upload time separate.",
+    "next":"continue testing whether the apparent recurring interest in surfaces/mediation survives after chronology is corrected"
   },
   "terminus":{
-    "status":"CANDIDATE REFINED BY COUNTEREXAMPLE",
-    "newSourceIds":["1xEn3edawJHMavZZIIKsRKPePeG2mYjCu"],
-    "candidate":"Institutional risk is not produced by visibility alone; it is more plausibly produced when visibility/traceability is coupled to punitive enforcement, performance pressure or sanction mechanisms.",
-    "counterexample":"A Lewin research-center account describes students as highly visible through small seminars, research participation and qualification exams, but also emphasizes low hierarchy, strong support and unusually little test anxiety. Visibility there supports learning rather than punishment.",
-    "next":"test monitoring/accountability cases with different sanction intensity in another domain"
+    "status":"METHOD CORRECTION · AUTHORSHIP/PROVENANCE REQUIRED",
+    "newSourceIds":["1cUI1nY9GmGwupO26-GwMPp-rpeq1LmNm","10duSS8IkCrcagehyxr6rete2s-FSExT8"],
+    "finding":"The sampled Drive documents are clearly third-party/reference materials: a 2012 Dadaocheng/story-tourism presentation credited to 水瓶子 and a Kinmen National Park commissioned evaluation executed by National Kinmen Institute of Technology. Their concepts may be mined as sources, but must not be counted as evidence of the user's own conceptual lineage.",
+    "candidate":"Terminus needs provenance stratification before concept-linking: authored-by-user / coauthored / notes-or-excerpts / third-party reference / generated-or-reconstructed. Cross-document patterns must carry the provenance class.",
+    "next":"sample older documents with mixed provenance and test whether previously identified long-term concept lines remain valid when only user-authored/coauthored strata are counted"
   },
-  "phase":"small-batch validation; duplicate sessions suppressed; counterexamples used to narrow candidate mechanisms"
+  "phase":"small-batch validation; provenance and chronology now treated as first-class mining constraints"
 }
