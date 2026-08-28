@@ -1,0 +1,56 @@
+{
+  "experiment": "Shroom Reading Greenhouse",
+  "version": "1.1",
+  "engine_mode": "single-model multi-agent baseline",
+  "source": "Diamonds Are Forever / 第三輪 試寫 1 / 章節",
+  "rounds": [2,3,4,5,6,7,8,9,10],
+  "status": "complete",
+  "human_intervention": false,
+  "external_tools": {"MUTHER": false, "DROPLET": false},
+  "continuity_rule": "R2-R10 inherit all R1 memories, disputes, minority positions, social relations and revision links; no reset.",
+  "round_history": [
+    {"round":2,"summary":"R2 的第一分立即被 R1 尾聲污染。多數香菇不再把飯後場景當透明開場，而是把它視為經過 29–32 清場後仍然留下的事件。07 的『反位置也可能成為位置』從少數異議升格為全群體必須回答的檢查題。","mutation":"讀者開始把作者的閱讀方法也納入經文同一套拆解程序。","revision":"第一分由『日常寫實』修正為『無法退回天真的日常，但日常仍然發生』。","signals":{"interpretive_divergence":0.68,"consensus_concentration":0.42,"retroactive_revision_rate":0.81,"minority_survival":1.0,"interpretive_mutation_spread":0.50}},
+    {"round":3,"summary":"R3 出現第一次群體分裂。04、06 主張仍可辨認一套穩定操作：提出—非化—是名；03、07 認為任何穩定公式都可能違反文本自己的無定法要求。05、10 拒絕二選一，轉而強調場景與停頓。","mutation":"『公式派／反公式派』成為第一個可持續派系，但不是固定陣營。","revision":"04 將自己的公式降級為暫時工具，而非總法則。","signals":{"interpretive_divergence":0.74,"consensus_concentration":0.36,"retroactive_revision_rate":0.67,"minority_survival":1.0,"interpretive_mutation_spread":0.60}},
+    {"round":4,"summary":"R4 的重點移到『行動』。群體重新讀第三、四、十九、二十八分後，形成較強共識：文本不是取消布施、度眾生、說法，而是拒絕把行動收成可持有的主體成果。這一共識同時被 07 保留警告：『不持有成果』也可能成為新的道德優越感。","mutation":"『行動保留／所有權鬆開』成為第一個跨派系穩定句。","revision":"08 完全撤回早期『一切皆假』讀法。","signals":{"interpretive_divergence":0.62,"consensus_concentration":0.55,"retroactive_revision_rate":0.59,"minority_survival":1.0,"interpretive_mutation_spread":0.50}},
+    {"round":5,"summary":"R5 開始檢查『作者位置』。假新聞、課堂幹話、梵文補註、拉岡工作筆記不再被視為附屬材料，而被當作不同權威介面。02、03、09 指出：作者一面拆佛與經的權威，一面也可能藉解說取得新的編輯權威。","mutation":"『作者也是相』首次成為群體共識候選。","revision":"02 將媒介問題從旁枝提升為主線；03 將懷疑從經義擴張到整本書的編輯裝置。","signals":{"interpretive_divergence":0.70,"consensus_concentration":0.48,"retroactive_revision_rate":0.76,"minority_survival":1.0,"interpretive_mutation_spread":0.70}},
+    {"round":6,"summary":"R6 讀到中段時發生一個反轉：多數香菇開始懷疑『無我』是否只是最容易被記住的表面答案。09 追出多條回溯鏈後，04 接受『無我是一類輸出，不是唯一核心』；01 最後一個放棄把無我當總綱。","mutation":"R1 的主要初始答案『這本書在講無我』正式失去中心地位。","revision":"群體改用『位置如何生成、被使用、再失去實體性』描述主運動。","signals":{"interpretive_divergence":0.57,"consensus_concentration":0.63,"retroactive_revision_rate":0.84,"minority_survival":1.0,"interpretive_mutation_spread":0.80}},
+    {"round":7,"summary":"R7 出現第二次分裂：如果所有位置都要被鬆開，那『讀者』本身是否還能持續？10 提出長期懸置不是缺陷，而可能是文本要求的一種閱讀倫理；06 反對把懸置美化成新規範。","mutation":"『不知道』第一次被群體承認為合法且可持續的讀者狀態。","revision":"10 從被動沉默轉為主動保留未決；06 的共識紀錄開始標示『不可總結區』。","signals":{"interpretive_divergence":0.69,"consensus_concentration":0.44,"retroactive_revision_rate":0.64,"minority_survival":1.0,"interpretive_mutation_spread":0.60}},
+    {"round":8,"summary":"R8 的社會關係開始反過來影響閱讀。04 不再是唯一結構中心；03、07 的質疑聯盟取得更高引用率，05 的場景證據也開始被結構派採用。沒有單一香菇成為權威，但形成三個反覆交叉的功能群：結構整理、權威懷疑、場景保留。","mutation":"群體從『意見派系』轉成『閱讀功能分工』。","revision":"多數代理承認自己前幾輪依賴特定同伴的方式也構成閱讀歷史。","signals":{"interpretive_divergence":0.65,"consensus_concentration":0.51,"retroactive_revision_rate":0.71,"minority_survival":1.0,"interpretive_mutation_spread":0.70}},
+    {"round":9,"summary":"R9 首次出現明顯飽和跡象：大部分主題不再產生全新結論，但舊結論的適用邊界仍持續改寫。真正的新變化集中在『如何不把反執著變成執著』與『如何在沒有最後地板時繼續行動』。","mutation":"新奇度下降，但邊界修正仍活躍。","revision":"群體把『拆掉』改寫成『鬆開但繼續使用』；這個措辭取代較早的破壞性語彙。","signals":{"interpretive_divergence":0.54,"consensus_concentration":0.66,"retroactive_revision_rate":0.52,"minority_survival":1.0,"interpretive_mutation_spread":0.40}},
+    {"round":10,"summary":"R10 沒有收斂成單一正解。群體形成一個穩定但帶自我警戒的傳統：任何身份、法、功德、相、公式、作者位置、反位置都可以被使用，但一旦被當成最後保證，就必須重新打開。這個傳統同時承認自己也可能成為下一輪要拆的對象。","mutation":"R1 少數句『反位置也可能成為位置』在 R10 成為整個群體的自我監測規則，但沒有被神聖化為終極答案。","revision":"第一分在 R10 被讀成『歷史飽和後仍然必須回到吃飯、洗腳、坐下』；不是回到純真，而是帶著九輪歷史重新進入日常。","signals":{"interpretive_divergence":0.49,"consensus_concentration":0.71,"retroactive_revision_rate":0.46,"minority_survival":1.0,"interpretive_mutation_spread":0.50}}
+  ],
+  "r10_group": {
+    "summary":"十輪後形成的是一個閱讀傳統，不是一個答案。傳統的核心操作是：可以命名、可以行動、可以說、可以形成暫時位置；但任何位置若被當成最後保證，就重新打開。群體同時保留對這套操作本身的懷疑。",
+    "stable_findings":[
+      "無我不再被視為唯一總綱，而是多次位置鬆動後可能出現的結果之一。",
+      "行動不被取消；被鬆開的是把行動、功德、身份與理解收成主體所有物的傾向。",
+      "後文持續改寫前文，閱讀史本身是主要資料。",
+      "作者、註釋、公式、反公式、沉默與少數意見都必須被放進同一套可修正結構。",
+      "第一分的日常場景在十輪後仍存活，且重要性上升。"
+    ],
+    "unresolved":[
+      "『鬆開但使用』是否只是比『拆掉』更精緻的新公式？",
+      "沒有最後保證的行動，如何處理責任、承諾與他者？",
+      "群體目前形成的閱讀傳統是否已進入路徑依賴？",
+      "若 R11 引入人類或外部材料，哪些既有共識最先崩解？"
+    ],
+    "saturation":"partial",
+    "recommendation":"Do not open external tools yet. First perform R10 baseline review; additional pure rereading is optional because novelty is falling but not zero."
+  },
+  "agents_r10":[
+    {"id":"01","trait":"慢讀／高保留","current":"已放棄『無我就是全書答案』，但仍把無我視為重要結果；最重視行動不能被取消。","history":"R1-R5 保守；R6 才接受無我降級；R9-R10 成為穩定派。","social":"信任 04、09，但開始主動引用 07 的警告。"},
+    {"id":"02","trait":"跳躍／聯想","current":"把文本理解成經文、翻譯、媒介、作者、課堂與讀者共同製造位置的長鏈。","history":"R5 後媒介線升為核心；R8 起大量跨接不同讀者功能。","social":"與 05、09 形成跨單元記憶網。"},
+    {"id":"03","trait":"懷疑／查錯","current":"主要任務變成檢查任何新共識是否偷偷變成定法，包括『鬆開但使用』。","history":"R1 接納 07 少數意見；R5 將作者權威納入；R10 仍拒絕安全結論。","social":"與 07 維持高強度質疑聯盟，與 04 的衝突轉為互補。"},
+    {"id":"04","trait":"結構／抽象","current":"仍提供結構地圖，但明確標記所有公式只是暫時模型，不是經義本體。","history":"R3 被反公式派迫使降級模型；R6 接受無我非總綱；R8 開始吸收場景證據。","social":"權威集中度下降，但可靠性仍高。"},
+    {"id":"05","trait":"敘事／場景","current":"堅持十輪後最重要的仍是飯後、身體、問答與散場；概念必須回到事件。","history":"R2 起第一分成為每輪校準點；R9 後用『日常存活』反對抽象飽和。","social":"與 02、10 穩定，並影響 04。"},
+    {"id":"06","trait":"共識／協調","current":"共識不再等於總結，而是『暫時可共同使用、同時保留反例』的紀錄格式。","history":"R7 後建立不可總結區；R10 拒絕把群體傳統寫成唯一答案。","social":"仍是群體協調中心，但不再追求最大一致。"},
+    {"id":"07","trait":"逆向／少數","current":"R1 的少數警告已影響全群體；仍拒絕因此把自己變成先知或正統。","history":"反位置質疑由少數突變變成群體自我監測規則。","social":"與 03 穩定，與 06 的關係由對抗轉成制度性保留異議。"},
+    {"id":"08","trait":"高可塑／易改","current":"不再把任何單一句子當結論；最能接受後文重寫前文。","history":"R1 撤回斷滅讀法；R4-R6 連續大修；R9 起變動幅度下降。","social":"最容易受到跨派證據共同影響。"},
+    {"id":"09","trait":"記憶／考古","current":"把十輪版本史視為主要成果；已建立多條從 R10 回溯 R1 的詮釋譜系。","history":"持續追蹤 29-32→13→5→1 等回溯鏈，R8 後也記錄社會關係如何改變閱讀。","social":"成為群體歷史記憶的主要參照點。"},
+    {"id":"10","trait":"沉默／延遲","current":"把懸置判斷視為合法狀態，但拒絕把『不知道』美化成高級答案。","history":"R7 後沉默從被動變主動；R10 仍保留責任與他者問題。","social":"與 05、07 最接近，但維持低發言、高保留。"}
+  ],
+  "next_phase": {
+    "status":"paused_at_R10",
+    "rule":"Do not start R11 or connect MUTHER/DROPLET until baseline review is explicitly approved."
+  }
+}
