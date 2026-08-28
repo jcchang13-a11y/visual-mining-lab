@@ -1,0 +1,23 @@
+{
+  "runAt":"2026-08-28 16:35 +08:00",
+  "scope":"small-batch validation",
+  "uncultured":{
+    "sampled":[
+      {"id":"17OWR61_WqMr4MO6mJrQrZs-ITZ3xVRLD","title":"IMG_20250531_191741.jpg","observation":"rain-covered surface with hand-drawn figures and surrounding handwriting; clearly not a document-page capture"},
+      {"id":"1PuvPSXoicKc1S9RDynluShogLYu_ytSW","title":"MVIMG_20260408_133028.jpg","observation":"intentional flower photograph with a single foreground subject, strong axial depth and shallow focus"}
+    ],
+    "finding":"The previous method correction is validated: once documentary page capture is separated from ordinary photographs, visually intentional material emerges immediately. The two new images are structurally very different, so there is still no defensible personal visual grammar from this batch.",
+    "deadEnds":[],
+    "next":"sample more non-document photographs across dates and test whether recurring subject placement, depth, cropping or found-text behavior actually repeats"
+  },
+  "terminus":{
+    "sampled":[
+      {"id":"1iB2gserqcj9df_n0v_12biFbZ8M6x-B__p5SqgKFhfc","title":"3.1 3.2 補充性限業限量客工治理.doc"}
+    ],
+    "finding":"A migration-policy draft describes how quotas, industry restrictions, contract duration, family accompaniment, employer transfer and immigration rights classify migrant workers and make them an explicitly 'unfree' labor force. This is a concrete policy-domain echo of the existing candidate that what is possible is often governed by an access regime or frame rather than physical location alone.",
+    "caution":"This may simply be a common feature of regulation. It is not yet evidence of one unified theory across migration governance, activism and imaginary geography.",
+    "counterexampleStatus":"No clean counterexample established in this batch.",
+    "next":"seek material where physical distance/location itself is causally decisive, to test whether the candidate has been over-generalized"
+  },
+  "notification":"none"
+}
