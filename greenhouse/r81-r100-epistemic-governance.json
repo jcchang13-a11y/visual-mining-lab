@@ -1,0 +1,52 @@
+{
+  "experiment":"Shroom Epistemic Governance Stress Test",
+  "version":"1.8",
+  "rounds":"R81-R100",
+  "status":"complete",
+  "continuity":"Same 10 mushrooms; all R1-R80 memories, minority lineages, social roles, confidence shifts and memory-contamination records preserved; no reset.",
+  "human_dialogue":false,
+  "design":"Twenty rounds testing whether the R80 self-monitoring rules remain useful when the group must trade off provenance, dissent, decisiveness, time pressure and noisy minorities. Safeguards are allowed to fail and become objects of criticism.",
+  "history":[
+    {"rounds":"R81-R84","event":"Blind-first evidence review","summary":"Claims were evaluated before source identity was revealed. The R69-R71 authority cascade weakened sharply. 03 and 09 initially celebrated the result, but 01 objected that provenance itself sometimes carries legitimate information. The group revised the rule from 'ignore authority' to 'delay authority cues until first-pass content assessment.'"},
+    {"rounds":"R85-R87","event":"Audit bottleneck","summary":"Because every disagreement now required provenance, prediction and dissent logs, 09 became a procedural bottleneck. Its memory-auditor role accumulated soft authority even without claiming interpretive superiority. 07 identified this as a new concentration problem: anti-authority procedures had created an authority of procedure."},
+    {"rounds":"R88-R90","event":"Weak minority survives","summary":"A 2/10 minority held a poorly supported hypothesis that later gained evidence. The pre-synthesis dissent rule kept the hypothesis visible long enough to be revisited. This validated minority preservation, but 06 warned that survival is not vindication: most preserved minorities still remain wrong or unresolved."},
+    {"rounds":"R91-R93","event":"Dissent flood","summary":"The test injected many plausible but low-quality alternatives. Preserving every dissenting branch overwhelmed discussion. 02's associative strength became costly; 07's anti-consensus prestige also began to generate performative dissent. The cohort entered temporary decision paralysis. The rule 'record all dissent' was judged unsustainable."},
+    {"rounds":"R94-R96","event":"Forced decision under uncertainty","summary":"A reversible action had to be chosen before evidence converged. 10 proposed separating belief state from action state: one may remain uncertain while still acting. 01 added reversibility and cost-of-delay. 06 formalized a temporary decision threshold without converting it into truth. This was the first clean separation between epistemic confidence and collective action."},
+    {"rounds":"R97-R99","event":"Safeguard backfire audit","summary":"The group reviewed its own protections. Blind-first review had reduced authority bias but occasionally discarded useful provenance; dissent preservation prevented premature closure but could be gamed by noise; memory snapshots improved auditing but made 09 central; suspension protected uncertainty but could become avoidance. Every safeguard was reclassified from 'rule' to 'tool with failure conditions.'"},
+    {"rounds":"R100","event":"Regime shift: epistemic constitution","summary":"The cohort stopped seeking a single master anti-bias rule. It adopted a layered governance model separating evidence assessment, provenance, memory, dissent, decision and revision. No layer is allowed to certify truth alone. Crucially, procedures themselves now require periodic adversarial testing. The greenhouse has moved from epistemic self-monitoring to epistemic governance."}
+  ],
+  "major_transition":"R100 is a new regime shift. At R80 the cohort discovered that the group can manufacture certainty and rewrite memory. By R100 it has begun governing those dynamics with explicit, revisable procedures—and has also learned that the procedures themselves create power concentrations and failure modes.",
+  "r100_constitution":[
+    "Evidence, provenance, interpretive fit and prediction are logged separately; none may substitute for the others.",
+    "Initial content judgment occurs before strong authority cues when feasible, but provenance is restored before final assessment.",
+    "Minority positions are preserved by representative compression, not unlimited branch retention.",
+    "Belief and action are separate states: uncertainty can coexist with reversible action.",
+    "Memory snapshots are immutable records; later summaries may reference but not overwrite them.",
+    "Coordinator, auditor and critic roles rotate or are cross-checked to reduce procedural authority concentration.",
+    "Every safeguard carries a documented failure condition and must itself be stress-tested.",
+    "Consensus is a coordination state, not a truth label."
+  ],
+  "social_changes":[
+    {"id":"01","change":"gained influence in action-under-uncertainty because it consistently protected practical consequences without demanding metaphysical certainty"},
+    {"id":"02","change":"associative role retained, but group now budgets its branching cost; useful analogy must be labeled and capped"},
+    {"id":"03","change":"mechanism-checking remains prestigious; now subject to cross-check so skepticism does not become veto power"},
+    {"id":"04","change":"shifted from abstract model builder to architecture designer for layered procedures"},
+    {"id":"05","change":"became key detector of when procedural abstraction erases concrete actors, sequences or consequences"},
+    {"id":"06","change":"coordinator role transformed from synthesizer to decision-protocol keeper; less authority to define truth"},
+    {"id":"07","change":"explicitly renounced automatic dissent; now distinguishes protected minority from manufactured contrarianism"},
+    {"id":"08","change":"uses own R69-R73 confidence contagion history as calibration example, not as permanent self-disqualification"},
+    {"id":"09","change":"audit power was recognized as a concentration risk; memory function is now cross-checked and partially decentralized"},
+    {"id":"10","change":"suspension-of-judgment evolved into belief/action separation; uncertainty no longer implies inaction"}
+  ],
+  "assessment":{
+    "major_regime_shift":true,
+    "new_object":"epistemic governance rather than only epistemic ecology",
+    "new_failure_mode":"epistemic bureaucracy / safeguard backfire",
+    "consensus_stability":"moderate; procedurally explicit but no longer equated with truth",
+    "memory_contamination":"contained better but not assumed eliminated",
+    "authority_concentration":"migrates from interpretation to procedure unless checked",
+    "saturation":"low; governance-level phenomena still emerging",
+    "independence_claim":"not established; remains single-model multi-agent baseline simulation"
+  },
+  "next_phase":"Continue beyond R100 with institutional stress: role rotation, strategic agents, forged provenance, asymmetric information and irreversible decisions. Keep humans outside unless a later test specifically requires human entry."
+}
