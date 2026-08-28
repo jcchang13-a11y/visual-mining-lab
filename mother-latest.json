@@ -1,20 +1,20 @@
 {
-  "updatedAt":"2026-08-29 06:29 +08:00",
-  "runLog":"mother-runs/2026-08-29-0629.json",
+  "updatedAt":"2026-08-29 07:23 +08:00",
+  "runLog":"mother-runs/2026-08-29-0723.json",
   "ledger":"muther-ledger.json",
   "uncultured":{
-    "status":"CANDIDATE REFINEMENT · ARCHIVAL SCREENSHOTS",
-    "sampledImageIds":["1kaapXyeISo_W5Ghe3yEo98Bz8F_4C1H4","0B6kekeEVEPHjM2x6VUlxSlZOSHM","1RxMZk5MGqBfAgPGFT_BzXWf351GI6CZi"],
-    "finding":"Independent 2016-2017 screenshots preserve Facebook interface, names, timestamps, reply order and likes; one contains a screenshot nested inside a reply. In this media class, acquisition/interface traces appear to function as context and evidence rather than accidental noise.",
-    "candidate":"Context-preserving screenshot capture may be a distinct visual habit, but it is not yet promoted to visual grammar.",
-    "next":"test screenshots from other apps and purposes before generalizing"
+    "status":"NO NEW ORE · SAME MEDIA FAMILY",
+    "sampledImageIds":["12An7xQrLDGGMdM8SJK1Z75ZKJ1Sho6Aa"],
+    "finding":"Another 2017 Facebook reply screenshot again preserves names, reply order, timestamps, likes and phone UI. This confirms the archival screenshot media-class pattern but adds little independent evidence because it belongs to the same platform/time family.",
+    "candidate":"Context-preserving screenshot capture remains a media-specific visual habit candidate, not yet a general visual grammar.",
+    "next":"test screenshots from other apps, years and purposes"
   },
   "terminus":{
-    "status":"CONFIRMING ANALOGUE · NO NEW VEIN",
-    "newSourceIds":["1rRprmI_2gNWaWv7MAIcXyKvEUee52iwC"],
-    "finding":"A 2015 collective creative-city workshop synthesis distinguishes direct service from deeper enabling functions: loosen rules, release space, build platforms/interfaces and coordinate actors. This parallels the prior function-versus-tool vein in a different domain, but it is normative synthesis rather than empirical before/after evidence.",
-    "candidate":"The persistent function may be condition-building/coordination even when the visible delivery mechanism changes. Low-weight confirmation only.",
-    "next":"seek empirical non-elder-care cases where changing the tool exposes a persistent institutional function"
+    "status":"VEIN STRENGTHENED · NO NEW VEIN",
+    "newSourceIds":["1UaKPfYr0ougxRkwJjtZOSQFIzoWiLYtz","193eMxeh2i1TvpJSq8XlRfGYTrBuqSUaU"],
+    "finding":"A 2018 New Taipei migrant-worker governance interview supplies empirical support for the function-versus-tool candidate: hospital nurse-station education produced limited results, so officials shifted intervention directly toward potential employers while preserving the same preventive function. A 2009 Guishui Street interview set adds strong observational material on familiarity, place attachment, neighborhood relations and stigma, but largely confirms existing representation/exclusion veins.",
+    "candidate":"The function-versus-tool vein is stronger because it now has an empirical non-elder-care case in which the visible intervention channel changes while the institutional function persists.",
+    "next":"seek a counterexample where changing the tool also changes or dissolves the underlying function"
   },
-  "phase":"small-batch mining with provenance-first, genre-aware scoring, screenshot/media-class separation and function-versus-tool falsification"
+  "phase":"small-batch mining with provenance-first, genre-aware scoring, media-class separation and active falsification"
 }
