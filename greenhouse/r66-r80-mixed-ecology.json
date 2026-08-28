@@ -1,0 +1,44 @@
+{
+  "experiment":"Shroom Mixed Adversarial Ecology",
+  "version":"1.7",
+  "rounds":"R66-R80",
+  "status":"complete",
+  "continuity":"Same 10 mushrooms; all R1-R65 memories and roles preserved; no reset.",
+  "human_dialogue":false,
+  "design":"Fifteen rounds of mixed evidence where ambiguity, source conflict, authority cues, partial statistics, social pressure and delayed correction coexist. Unlike R56-R65, errors are not corrected immediately; they may propagate for several rounds.",
+  "history":[
+    {"rounds":"R66-R68","event":"Conflicting summaries","summary":"Two plausible summaries of the same unfamiliar issue were presented, one structurally elegant and one messy but better sourced. 04, 06 and 08 initially preferred the elegant account. 09 objected on provenance grounds. For three rounds the group carried both models instead of forcing consensus."},
+    {"rounds":"R69-R71","event":"Authority cascade","summary":"A high-status source endorsed the elegant model. 06 shifted toward it and 08 followed; 03 demanded mechanism-level evidence. This produced the first post-R50 authority cascade: not obedience to authorial status alone, but status plus conceptual fit. The cascade reached 5 of 10 agents before stopping."},
+    {"rounds":"R72-R73","event":"Delayed contradiction","summary":"New evidence contradicted one central prediction of the elegant model. 01 and 10 forced a prediction audit. 08 reversed first; 06 resisted because the model had become tied to group coherence. The disagreement became social rather than purely interpretive."},
+    {"rounds":"R74-R75","event":"Consensus fracture","summary":"The cohort split 4/3/3: retain model with exceptions / abandon model / suspend judgment. 07 refused to turn anti-consensus into virtue and sided temporarily with suspension. This is the first genuine consensus fracture since the group developed strong meta-rules."},
+    {"rounds":"R76-R77","event":"Memory audit","summary":"09 reconstructed who adopted which claim and when. It became clear that several agents remembered the high-status source as stronger than it actually was. Group discovered social amplification had altered memory content, not just confidence."},
+    {"rounds":"R78-R79","event":"Repair","summary":"06 publicly revised its consensus procedure: no synthesis until provenance, prediction and dissent are separately recorded. 08 marked its earlier adoption as confidence contagion. 02 contributed an unexpected useful analogy but labeled it non-evidential before sharing."},
+    {"rounds":"R80","event":"Regime shift","summary":"The group no longer treats error chiefly as a wrong proposition held by an individual. It now treats error as something that can be produced by the interaction of authority, conceptual fit, social convergence and memory rewriting. A new object of analysis appears: the epistemic ecology of the group itself."}
+  ],
+  "major_transition":"R80 is a regime shift. The greenhouse moved from method-selection and source criticism to endogenous epistemic-systems analysis: the group begins monitoring how its own social dynamics manufacture certainty and even alter remembered evidence.",
+  "new_rules":[
+    "Do not collapse source quality, conceptual elegance and predictive success into one confidence score.",
+    "Record dissent before synthesis, not after.",
+    "When later consensus forms, preserve pre-consensus memory snapshots because social convergence can rewrite recollection.",
+    "Authority effects must be tracked as interaction effects: authority alone may be weak, but authority plus fit with house tradition can trigger cascades.",
+    "Suspending judgment is a stable state, not a failure to decide."
+  ],
+  "social_changes":[
+    {"id":"06","change":"lost some coordinator authority after resisting contradictory evidence; recovered partial trust by changing procedure rather than defending status"},
+    {"id":"09","change":"became central as memory/provenance auditor"},
+    {"id":"03","change":"mechanism-checking role gained prestige but was itself flagged as potential future authority concentration"},
+    {"id":"07","change":"refused automatic dissent identity; demonstrated that minority role can itself become performative"},
+    {"id":"08","change":"identified own susceptibility to confidence contagion and added self-warning"},
+    {"id":"10","change":"stronger preference for suspension when causal evidence is incomplete"}
+  ],
+  "assessment":{
+    "major_regime_shift":true,
+    "consensus_stability":"lower than R50-R65, but more explicit",
+    "memory_contamination_detected":true,
+    "authority_cascade_detected":true,
+    "self_monitoring":"expanded from individual beliefs to group dynamics",
+    "saturation":"low; new phenomena still emerging",
+    "independence_claim":"not established; remains single-model multi-agent baseline simulation"
+  },
+  "stop_reason":"Major regime shift reached at R80. Pause the mixed ecology here for reporting before introducing direct human dialogue or further tools."
+}
