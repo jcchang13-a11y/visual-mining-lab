@@ -1,0 +1,21 @@
+{
+  "updatedAt":"2026-08-29 03:32 +08:00",
+  "mode":"small-batch patrol",
+  "uncultured":{
+    "sourceId":"1HMrK-zQYhYOWVrjBrdEhZ7YeL4WuGRkn",
+    "title":"IMG_20250531_164739.jpg",
+    "status":"INDEPENDENT SAMPLE · CANDIDATE ONLY",
+    "finding":"A rainy street photograph from 2025-05-31 16:47 shows an extremely close green covered vehicle/cart sweeping across much of the foreground, with motion blur, umbrellas and partial bodies cutting into the frame. It is independent of the previously sampled 19:17 wet-surface session, so it counts as new evidence, but one frame is insufficient to promote any rule.",
+    "candidate":"Foreground obstruction/proximity and capture-time interruption may be a recurring visual tendency, but this remains a candidate until matched against unrelated dates and purposes.",
+    "next":"seek independent street/people photographs to test whether strong foreground occlusion is recurring or accidental"
+  },
+  "terminus":{
+    "sourceIds":["0B6kekeEVEPHjVU04SlFaT3kzNmM","0B6kekeEVEPHjTktjV1hKbUFFWDA"],
+    "titles":["150306-C.docx","150327_C.docx"],
+    "status":"DOCUMENT-FAMILY DEDUPE · PROCESS ORE CONFIRMED",
+    "finding":"The later C-group record contains copied earlier weeks plus additional weeks, while the earlier file is a partial version of the same evolving course log. File IDs and filenames therefore overstate textual independence. The material remains useful for process traces—problem framing, narrowing, fieldwork and intervention choices—but repeated weekly text should not multiply conceptual evidence.",
+    "candidate":"Text mining needs document-family/version dedupe in addition to source attribution and quality scoring.",
+    "next":"prefer unrelated student/course materials with dense observation; treat cumulative weekly files as one evolving document family"
+  },
+  "boundary":"No Drive originals modified, moved or deleted; no external search; no agent simulation; no integration with Gangchibao round 3."
+}
