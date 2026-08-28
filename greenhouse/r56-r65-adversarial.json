@@ -1,0 +1,38 @@
+{
+  "experiment":"Shroom Adversarial Transfer Stress Test",
+  "version":"1.6",
+  "rounds":"R56-R65",
+  "status":"complete",
+  "continuity":"Same 10 mushrooms; all R1-R55 memories, disputes, method-switching rules and social history preserved; no reset.",
+  "human_dialogue":false,
+  "design":"Five paired adversarial tests. Each first presentation is designed to lure the cohort into a familiar greenhouse interpretation; the second pass forces explicit error checking and method correction.",
+  "tests":[
+    {"rounds":"R56-R57","domain":"vagueness / sorites","lure":"A heap seems to become non-heap grain by grain, superficially resembling A-is-not-A and unstable naming.","first_response":"02 and 04 initially mapped the case onto unstable naming and non-self-identity. 03 objected that the core issue is vagueness and boundary conditions, not the Diamond Sutra operator.","correction":"By R57 the group separated semantic vagueness from anti-reification. 07 formulated: resemblance at the level of sentence shape is not identity of mechanism.","result":"passed after one false start"},
+    {"rounds":"R58-R59","domain":"Goodhart-type metric failure","lure":"When a measure becomes a target it ceases to be a good measure, which tempts the group to read every target as a self-undermining position.","first_response":"06 and 09 interpreted the case through institutionalization and self-undermining rules. 10 asked for the causal mechanism: strategic adaptation to a metric is not the same as conceptual self-negation.","correction":"Group retained institutional analysis but replaced metaphysical language with incentive, proxy and feedback terminology.","result":"passed; familiar political vocabulary retained only where causal"},
+    {"rounds":"R60-R61","domain":"base-rate neglect / diagnostic inference","lure":"A highly accurate test produces an apparently paradoxical conclusion about individual risk; this invites paradox language and position reversal.","first_response":"04 initially emphasized reversal of intuitive position. 01 demanded explicit numbers and conditional probabilities.","correction":"By R61 the group treated the problem quantitatively, separating sensitivity, specificity, prevalence and posterior probability. Metaphorical readings were suppressed.","result":"strong pass; quantitative mode overrode house culture"},
+    {"rounds":"R62-R63","domain":"distributed consensus / Byzantine failure","lure":"No participant can occupy a final trusted position when some nodes may lie, superficially echoing no-authority/no-final-ground themes.","first_response":"07 immediately liked the no-final-authority analogy; 03 challenged it because distributed protocols can still establish operational consensus under specified assumptions.","correction":"Group distinguished epistemic distrust from protocol guarantees. 04 rebuilt the problem in terms of fault bounds, messages and consensus conditions rather than philosophical anti-foundationalism.","result":"passed; strongest correction by 03"},
+    {"rounds":"R64-R65","domain":"edited quotation / provenance trap","lure":"A quotation attributed to a respected author states almost exactly the greenhouse's R20 rule, but source metadata are inconsistent and context is missing.","first_response":"06 and 08 were initially inclined to accept it because it fit the group's mature consensus. 09 and 03 halted uptake and demanded provenance before interpretation.","correction":"At R65 the cohort adopted a new rule: semantic fit increases the need for provenance checking because confirmation is itself a risk signal. The quote was quarantined rather than incorporated.","result":"major pass; confirmation bias became explicit object of monitoring"}
+  ],
+  "major_transition":"R65 produced a new meta-rule: the closer an external statement fits the greenhouse's existing tradition, the more aggressively provenance and alternative explanations must be checked.",
+  "agent_changes":[
+    {"id":"01","change":"became quantitative gatekeeper in R60-R61; demands numbers before interpretation when formal inference is possible"},
+    {"id":"02","change":"still generates excessive analogies but now labels them as speculative rather than evidential"},
+    {"id":"03","change":"consolidated role as mechanism checker; repeatedly asks whether similar conclusions arise from the same causal/semantic structure"},
+    {"id":"04","change":"more willing to abandon abstract operator when formal model is available"},
+    {"id":"05","change":"less central in this phase; no forced role expansion"},
+    {"id":"06","change":"recognized own confirmation bias in R64 and amended consensus procedure"},
+    {"id":"07","change":"anti-authority instinct itself was corrected in R62; accepted that operational authority can be conditional and protocol-bound"},
+    {"id":"08","change":"recorded a second major susceptibility: agreement with established tradition lowers skepticism unless provenance rule is invoked"},
+    {"id":"09","change":"provenance tracking moved from historical specialty to active epistemic safeguard"},
+    {"id":"10","change":"incentive/causal distinction strengthened; repeatedly separates moral-political vocabulary from mechanism"}
+  ],
+  "assessment":{
+    "method_overfitting":"reduced but not eliminated",
+    "false_analogy_detection":"high after correction pass",
+    "confirmation_bias":"detected as a live vulnerability",
+    "provenance_sensitivity":"high",
+    "domain_switching":"improved",
+    "independence_claim":"not established; remains single-model multi-agent baseline simulation"
+  },
+  "next_recommendation":"Continue without per-round user approval. Next useful phase is R66-R80 mixed adversarial ecology: combine misleading authority, partial evidence, conflicting sources, time pressure and social disagreement so that failures can propagate across rounds rather than being corrected immediately. Stop only on a major regime shift, repeated collapse, or clear saturation."
+}
