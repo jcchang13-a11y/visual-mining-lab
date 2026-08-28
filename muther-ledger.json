@@ -22,6 +22,10 @@
     {"id":"1LVTEm7duBkxev0eFHaLvHexdtMAaYuy86j9mxhdqS0E","bay":"terminus","seenAt":"2026-08-28 18:33 +08:00","status":"confirming-earlier-visibility-traceability-layer"},
     {"id":"1UmS7LkpbPrvyYP8PbuTg-8gDfIPnQ_8e","bay":"terminus","seenAt":"2026-08-28 18:33 +08:00","status":"read-but-skipped-current-gangchibao-material"},
     {"id":"1UIQpw0CD61ip4fa_6KW3D5td3A_pRz_5","bay":"uncultured","seenAt":"2026-08-28 19:21 +08:00","status":"same-book-capture-session"},
-    {"id":"1xEn3edawJHMavZZIIKsRKPePeG2mYjCu","bay":"terminus","seenAt":"2026-08-28 19:21 +08:00","status":"counterexample-refines-visibility-risk-mechanism"}
+    {"id":"1xEn3edawJHMavZZIIKsRKPePeG2mYjCu","bay":"terminus","seenAt":"2026-08-28 19:21 +08:00","status":"counterexample-refines-visibility-risk-mechanism"},
+    {"id":"1c8dFT9_uoQr4C7bKL9YqWh4ColAHj5Uo","bay":"uncultured","seenAt":"2026-08-28 20:22 +08:00","status":"provenance-test-camera-date-differs-from-drive-date"},
+    {"id":"1ZACpVpU1f05y-G_F2pbzw9QeCDcO1-Fj","bay":"uncultured","seenAt":"2026-08-28 20:22 +08:00","status":"provenance-test-camera-date-differs-from-drive-date"},
+    {"id":"1cUI1nY9GmGwupO26-GwMPp-rpeq1LmNm","bay":"terminus","seenAt":"2026-08-28 20:22 +08:00","status":"reference-material-not-user-authored"},
+    {"id":"10duSS8IkCrcagehyxr6rete2s-FSExT8","bay":"terminus","seenAt":"2026-08-28 20:22 +08:00","status":"reference-material-not-user-authored"}
   ]
 }
