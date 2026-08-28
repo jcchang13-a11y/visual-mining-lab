@@ -1,0 +1,17 @@
+{
+  "updatedAt":"2026-08-29 05:25 +08:00",
+  "uncultured":{
+    "sampledImageIds":[],
+    "status":"NO NEW ORE · SAME-BURST RESULTS",
+    "finding":"A broad metadata-only image patrol still surfaced the same dense 2026-08-28 09:47–09:59 capture burst already represented in the ledger. No independent visual sample was promoted, so no visual evidence was added.",
+    "next":"broaden discovery through non-IMG naming, older folders and independent capture contexts rather than re-reading the same burst"
+  },
+  "terminus":{
+    "newSourceIds":["0B6kekeEVEPHjVU04SlFaT3kzNmM"],
+    "status":"TESTED · NO NEW VEIN",
+    "finding":"A 2015 C-group course learning record by 蔡舒翔 was inspected as an unrelated test case. It records course orientation, expectations, preliminary knowledge of 南機場 and a generic reflection about ideology; the document is mostly a partially filled template. It does not meaningfully support or refute the previous 'solution-induced identity exposure' vein.",
+    "quality":"low conceptual density; modest process/context value; named student authorship preserved; useful mainly as evidence of course design and participation format rather than as conceptual ore",
+    "next":"continue testing the new vein against substantively unrelated materials with enough observational or argumentative density"
+  },
+  "phase":"small-batch mining with provenance-first, genre-aware quality scoring, document-family dedupe and function-versus-tool testing"
+}
