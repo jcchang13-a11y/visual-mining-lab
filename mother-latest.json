@@ -1,20 +1,8 @@
 {
-  "updatedAt":"2026-08-29 00:50 +08:00",
-  "runLog":"mother-runs/2026-08-29-0050.json",
+  "updatedAt":"2026-08-29 01:35 +08:00",
+  "runLog":"mother-runs/2026-08-29-0135.json",
   "ledger":"muther-ledger.json",
-  "uncultured":{
-    "status":"NO NEW ORE",
-    "sampledImageIds":[],
-    "finding":"No genuinely new independent image was promoted this round; previously visited images were not reused as fresh evidence.",
-    "candidate":"The acquisition-trace/object-isolation question remains open.",
-    "next":"sample an unvisited image from a different date and purpose"
-  },
-  "terminus":{
-    "status":"NEW QUALITY ORE · 1 TEXT",
-    "newSourceIds":["1pFrlY6u7XbFOMI-ineR_dL72CoPk5c_a"],
-    "finding":"《讀書會心得0813_盈蓁.docx》 is weak-to-medium as formal academic argument but high-value as situated observation. It preserves concrete contradictions around normal/abnormal classification, welfare versus rights, and the writer's discomfort using charity language in fundraising.",
-    "candidate":"Do not collapse material quality into one good/bad score. Separate formal argument, evidence, observational density, originality and reusability. A poorly polished text may still contain excellent ore.",
-    "next":"continue sampling participant/student/course materials and test whether this multidimensional quality model improves selection"
-  },
+  "uncultured":{"status":"NO NEW ORE","sampledImageIds":[],"finding":"No new independent image was promoted.","candidate":"Keep the independence threshold.","next":"sample a different date and purpose"},
+  "terminus":{"status":"METHOD CONFIRMED · 1 COURSE RECORD","newSourceIds":["0B6kekeEVEPHjVU04SlFaT3kzNmM"],"finding":"A weekly course record was more useful as contextual evidence than as a source of new concepts.","candidate":"Material quality should remain multidimensional; context and provenance can be valuable even when conceptual contribution is small.","next":"sample another course record with denser original observation"},
   "phase":"small-batch mining with provenance-first, genre-aware multidimensional quality scoring"
 }
