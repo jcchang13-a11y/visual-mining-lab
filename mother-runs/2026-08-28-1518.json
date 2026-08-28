@@ -1,0 +1,18 @@
+{
+  "runAt":"2026-08-28 15:18 +08:00",
+  "mode":"small-batch validation",
+  "uncultured":{
+    "newVisited":["12OoX7N-m_zBwMJsG01rIM9qNZxvnd-4l"],
+    "observation":"The newly inspected image is another page-spread photograph from the same book-capture session already detected in the previous round.",
+    "methodCorrection":"Add capture-purpose/source-role before visual comparison: documentary page capture should not be pooled with ordinary camera photographs when searching for a personal visual grammar.",
+    "ore":null
+  },
+  "terminus":{
+    "newVisited":["1HyteMNRTob2okVE7Xb6K3m3W0YMgMYeI"],
+    "observation":"A 2014 Wenmenglou action-plan note explicitly warns not to enter the opponent's 'management and maintenance plan' logic because entering that frame would constrain the movement's possible actions. This is an older, cross-domain confirmation of the current candidate that practical reachability is partly governed by rules/frames rather than physical location alone.",
+    "leadUpdate":"terminus-access-regime-coordinate-system-2026 strengthened but not promoted; the 2014 material concerns political/argumentative framing, while the 2026 Immortalia note concerns geographic/imaginal access. Similar structure is plausible, identity is not established.",
+    "counterexampleStatus":"still required"
+  },
+  "notification":"none",
+  "reason":"No finding is mature enough to announce as a new ore; observatory updated only."
+}
