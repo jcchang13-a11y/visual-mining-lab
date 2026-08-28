@@ -1,19 +1,20 @@
 {
-  "updatedAt":"2026-08-28 14:33 +08:00",
-  "runLog":"mother-runs/2026-08-28-1433.json",
+  "updatedAt":"2026-08-28 15:18 +08:00",
+  "runLog":"mother-runs/2026-08-28-1518.json",
   "ledger":"muther-ledger.json",
   "uncultured":{
     "status":"METHOD CORRECTION · NO VISUAL ORE",
-    "sampledImageIds":["1dxJw1ra3IcgiGO4uMKRQ_xRFYtWILafY","1u0CmJ7lzHtbid9oCJZkumRqq4qagFqS3","1x7CS6sEMIqCHzbM_1ydl5uVMHWwlV9lT"],
-    "finding":"Adjacent files can belong to one capture session; treat session/burst as a sampling layer before individual images.",
-    "next":"sample across distinct capture sessions"
+    "sampledImageIds":["12OoX7N-m_zBwMJsG01rIM9qNZxvnd-4l"],
+    "finding":"The inspected image belongs to the same serial book-documentation session already detected. Add capture-purpose/source-role before visual comparison so documentary page capture is not mixed with ordinary photographs when searching for visual grammar.",
+    "next":"sample a genuinely different capture session and subject type"
   },
   "terminus":{
-    "status":"1 CANDIDATE LEAD · 1 CONFIRMING LAYER · 1 DEAD END",
-    "newSourceIds":["1OF0GYOjSOLxy-C0M1YG9O8iUfUqmf6YYp57xaP8hDJg","1baAIIRzqTYYeVKLmVJHQNH46RNHOBtYLCLMh-fKZhzM","1LgnnKBkN3fIVqelehcJq-OrPXAio1ZDFHs9BUdzhgaY"],
+    "status":"CANDIDATE LEAD STRENGTHENED · NOT PROMOTED",
+    "newSourceIds":["1HyteMNRTob2okVE7Xb6K3m3W0YMgMYeI"],
     "newLeadIds":["terminus-access-regime-coordinate-system-2026"],
-    "candidate":"Reachability may be governed by conditions/access regimes rather than ordinary location; not yet promoted to ore.",
-    "next":"seek older cross-domain confirmations and counterexamples"
+    "candidate":"A 2014 Wenmenglou action note says entering the opponent's management/maintenance-plan logic would constrain the movement's possible action space. This is an older cross-domain echo of the 2026 candidate that reachability/possibility can be governed by rules or frames rather than physical position alone.",
+    "caution":"Political framing and geographic/imaginal access are not the same thing; treat as structural analogy only until counterexamples and more independent layers are found.",
+    "next":"seek older independent examples plus explicit counterexamples"
   },
   "phase":"small-batch validation; provenance and counterexample testing required before promotion"
 }
