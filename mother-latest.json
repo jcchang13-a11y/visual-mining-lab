@@ -1,24 +1,19 @@
 {
-  "updatedAt": "2026-08-23 04:25 +08:00",
-  "runLog": "mother-runs/2026-08-23-0425.json",
-  "uncultured": {
-    "status": "READY · NO NEW ORE",
-    "visibleImages": 31,
-    "newImages": 0
+  "updatedAt":"2026-08-28 14:33 +08:00",
+  "runLog":"mother-runs/2026-08-28-1433.json",
+  "ledger":"muther-ledger.json",
+  "uncultured":{
+    "status":"METHOD CORRECTION · NO VISUAL ORE",
+    "sampledImageIds":["1dxJw1ra3IcgiGO4uMKRQ_xRFYtWILafY","1u0CmJ7lzHtbid9oCJZkumRqq4qagFqS3","1x7CS6sEMIqCHzbM_1ydl5uVMHWwlV9lT"],
+    "finding":"Adjacent files can belong to one capture session; treat session/burst as a sampling layer before individual images.",
+    "next":"sample across distinct capture sessions"
   },
-  "terminus": {
-    "status": "NEW ORE · 2 DISTINCT TEXTS + 1 CONFIRMING LAYER",
-    "newSourceIds": [
-      "1qErSKplbWXL1ezwOeVAXHw2W26429gMcAao76x3tI1M",
-      "0B6kekeEVEPHjenJ1MmgtUlBlSWc"
-    ],
-    "confirmingSourceIds": [
-      "17gQ2FJxaybQeB_zMBiZgy9oGw3R9MTYp"
-    ],
-    "newLeadIds": [
-      "terminus-subject-lack-system-2001",
-      "terminus-colonial-property-measure-2016"
-    ]
+  "terminus":{
+    "status":"1 CANDIDATE LEAD · 1 CONFIRMING LAYER · 1 DEAD END",
+    "newSourceIds":["1OF0GYOjSOLxy-C0M1YG9O8iUfUqmf6YYp57xaP8hDJg","1baAIIRzqTYYeVKLmVJHQNH46RNHOBtYLCLMh-fKZhzM","1LgnnKBkN3fIVqelehcJq-OrPXAio1ZDFHs9BUdzhgaY"],
+    "newLeadIds":["terminus-access-regime-coordinate-system-2026"],
+    "candidate":"Reachability may be governed by conditions/access regimes rather than ordinary location; not yet promoted to ore.",
+    "next":"seek older cross-domain confirmations and counterexamples"
   },
-  "phase": "mining-first; refining deferred except dedupe/stratigraphic confirmation"
+  "phase":"small-batch validation; provenance and counterexample testing required before promotion"
 }
