@@ -9,6 +9,9 @@
     {"id":"1baAIIRzqTYYeVKLmVJHQNH46RNHOBtYLCLMh-fKZhzM","bay":"terminus","seenAt":"2026-08-28 14:33 +08:00"},
     {"id":"1LgnnKBkN3fIVqelehcJq-OrPXAio1ZDFHs9BUdzhgaY","bay":"terminus","seenAt":"2026-08-28 14:33 +08:00","status":"dead-end-no-paragraphs"},
     {"id":"12OoX7N-m_zBwMJsG01rIM9qNZxvnd-4l","bay":"uncultured","seenAt":"2026-08-28 15:18 +08:00","status":"same-book-capture-session"},
-    {"id":"1HyteMNRTob2okVE7Xb6K3m3W0YMgMYeI","bay":"terminus","seenAt":"2026-08-28 15:18 +08:00","status":"candidate-confirming-layer"}
+    {"id":"1HyteMNRTob2okVE7Xb6K3m3W0YMgMYeI","bay":"terminus","seenAt":"2026-08-28 15:18 +08:00","status":"candidate-confirming-layer"},
+    {"id":"17OWR61_WqMr4MO6mJrQrZs-ITZ3xVRLD","bay":"uncultured","seenAt":"2026-08-28 16:35 +08:00","status":"different-session-found-surface-drawing"},
+    {"id":"1PuvPSXoicKc1S9RDynluShogLYu_ytSW","bay":"uncultured","seenAt":"2026-08-28 16:35 +08:00","status":"different-session-intentional-flower-photo"},
+    {"id":"1iB2gserqcj9df_n0v_12biFbZ8M6x-B__p5SqgKFhfc","bay":"terminus","seenAt":"2026-08-28 16:35 +08:00","status":"candidate-confirming-independent-domain"}
   ]
 }
