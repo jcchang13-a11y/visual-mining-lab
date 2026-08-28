@@ -1,0 +1,16 @@
+{
+  "runAt":"2026-08-28 19:21 +08:00",
+  "uncultured":{
+    "newSourceIds":["1UIQpw0CD61ip4fa_6KW3D5td3A_pRz_5"],
+    "finding":"No new ore. The sampled image is another page from the same photographed-book capture session, so it is suppressed as non-independent evidence.",
+    "deadEnds":["same-book-capture-session"]
+  },
+  "terminus":{
+    "newSourceIds":["1xEn3edawJHMavZZIIKsRKPePeG2mYjCu"],
+    "finding":"A non-sex-work counterexample refines the current visibility-risk vein. In the Lewin research-center account, students were highly visible to teachers and peers through small seminars, research participation and qualification exams, yet the text emphasizes low hierarchy, support and surprisingly little test anxiety. Visibility alone therefore does not generate institutional risk.",
+    "refinedCandidate":"Institutional risk is better modeled as visibility/traceability combined with a punitive or performance-enforcement mechanism. Visibility can also support learning and mutual recognition when the surrounding mechanism is non-punitive.",
+    "status":"candidate refined by counterexample",
+    "next":"test the refined mechanism in another domain with explicit monitoring or accountability but different sanction intensity"
+  },
+  "notes":["Previously visited Drive sources were detected and skipped rather than counted as new evidence."]
+}
