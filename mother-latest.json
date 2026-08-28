@@ -1,19 +1,19 @@
 {
-  "updatedAt":"2026-08-28 20:22 +08:00",
-  "runLog":"mother-runs/2026-08-28-2022.json",
+  "updatedAt":"2026-08-28 21:22 +08:00",
+  "runLog":"mother-runs/2026-08-28-2122.json",
   "ledger":"muther-ledger.json",
   "uncultured":{
-    "status":"METHOD CORRECTION · CAPTURE DATE ≠ DRIVE DATE",
-    "sampledImageIds":["1c8dFT9_uoQr4C7bKL9YqWh4ColAHj5Uo","1ZACpVpU1f05y-G_F2pbzw9QeCDcO1-Fj"],
-    "finding":"Two raw camera images carry filename dates in 2025 while Drive metadata records them as created/uploaded in August 2026. Drive creation time cannot be treated as capture time. Visual chronology must prefer camera/filename/EXIF evidence where available and keep upload time separate.",
-    "next":"continue testing whether the apparent recurring interest in surfaces/mediation survives after chronology is corrected"
+    "status":"NO NEW ORE · DUPLICATE CAPTURE SESSION",
+    "sampledImageIds":["1DH8cxGRMRYCgodz4gKeodA2CndPCxPjM"],
+    "finding":"The sampled image is another rotated two-page book capture from the same morning burst already represented in the ledger. It is treated as same-session duplication, not independent evidence for a visual rule.",
+    "next":"sample an independent image session rather than continuing inside this burst"
   },
   "terminus":{
-    "status":"METHOD CORRECTION · AUTHORSHIP/PROVENANCE REQUIRED",
-    "newSourceIds":["1cUI1nY9GmGwupO26-GwMPp-rpeq1LmNm","10duSS8IkCrcagehyxr6rete2s-FSExT8"],
-    "finding":"The sampled Drive documents are clearly third-party/reference materials: a 2012 Dadaocheng/story-tourism presentation credited to 水瓶子 and a Kinmen National Park commissioned evaluation executed by National Kinmen Institute of Technology. Their concepts may be mined as sources, but must not be counted as evidence of the user's own conceptual lineage.",
-    "candidate":"Terminus needs provenance stratification before concept-linking: authored-by-user / coauthored / notes-or-excerpts / third-party reference / generated-or-reconstructed. Cross-document patterns must carry the provenance class.",
-    "next":"sample older documents with mixed provenance and test whether previously identified long-term concept lines remain valid when only user-authored/coauthored strata are counted"
+    "status":"METHOD EXPANSION · QUALITY ≠ AUTHORSHIP",
+    "newSourceIds":["1Ux1Ro2eEaZlcddZv3WVJIPE2KOt5QHbO","11ADqzf1b0u5vXEd0Pn_VKYUA2dJ0mYty"],
+    "finding":"A pre-curated Drive folder named『還算有用的作業』is useful as weak human-curation metadata, but not as a verdict. One sampled Saussure note explicitly signed 張榮哲 is high-value mining material: clear summary, structured extraction, and an independent discussion linking relational value/system/position to Lacan, suture and lack. A Jameson report remains unscored because authorship is uncertain and legacy encoding is degraded.",
+    "candidate":"Provenance and quality are independent axes. Student/third-party material can be excellent ore; user-authored material can be weak. Folder-level prior curation may affect sampling priority, but argument clarity, evidence, conceptual precision, originality and reusable fragments determine quality.",
+    "next":"sample one clearly student-authored document and one third-party reference from unrelated topics, then compare their quality without using authorship as a shortcut"
   },
-  "phase":"small-batch validation; provenance and chronology now treated as first-class mining constraints"
+  "phase":"small-batch mining with independent provenance and quality scoring"
 }
