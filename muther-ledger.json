@@ -12,6 +12,9 @@
     {"id":"1HyteMNRTob2okVE7Xb6K3m3W0YMgMYeI","bay":"terminus","seenAt":"2026-08-28 15:18 +08:00","status":"candidate-confirming-layer"},
     {"id":"17OWR61_WqMr4MO6mJrQrZs-ITZ3xVRLD","bay":"uncultured","seenAt":"2026-08-28 16:35 +08:00","status":"different-session-found-surface-drawing"},
     {"id":"1PuvPSXoicKc1S9RDynluShogLYu_ytSW","bay":"uncultured","seenAt":"2026-08-28 16:35 +08:00","status":"different-session-intentional-flower-photo"},
-    {"id":"1iB2gserqcj9df_n0v_12biFbZ8M6x-B__p5SqgKFhfc","bay":"terminus","seenAt":"2026-08-28 16:35 +08:00","status":"candidate-confirming-independent-domain"}
+    {"id":"1iB2gserqcj9df_n0v_12biFbZ8M6x-B__p5SqgKFhfc","bay":"terminus","seenAt":"2026-08-28 16:35 +08:00","status":"candidate-confirming-independent-domain"},
+    {"id":"1U_nNpadBlu6twcoXTRUv89bpjx3CeFrC","bay":"uncultured","seenAt":"2026-08-28 17:31 +08:00","status":"same-book-capture-session"},
+    {"id":"1ZnQERbNI9OfP5Z4K1qYKo90TEtn7eSsu","bay":"uncultured","seenAt":"2026-08-28 17:31 +08:00","status":"same-book-capture-session"},
+    {"id":"1G484X9Q3MgIrHKiod0YXUACUzRZ2Zl2g","bay":"terminus","seenAt":"2026-08-28 17:31 +08:00","status":"counterexample-refines-candidate"}
   ]
 }
