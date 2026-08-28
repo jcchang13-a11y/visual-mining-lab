@@ -1,20 +1,20 @@
 {
-  "updatedAt":"2026-08-29 00:35 +08:00",
-  "runLog":"mother-runs/2026-08-29-0035.json",
+  "updatedAt":"2026-08-29 00:50 +08:00",
+  "runLog":"mother-runs/2026-08-29-0050.json",
   "ledger":"muther-ledger.json",
   "uncultured":{
-    "status":"NO NEW ORE · BURST SKIPPED",
+    "status":"NO NEW ORE",
     "sampledImageIds":[],
-    "finding":"The newest browsed image candidates continue the 2026-08-28 09:47–09:50 filename burst already heavily represented in the ledger. They were downweighted at metadata stage rather than treated as independent visual evidence.",
-    "candidate":"The current acquisition-trace versus object-isolation hypothesis remains open; no additional weight added from same-session material.",
-    "next":"prefer images from independent dates and purposes; do not spend inspection budget on dense same-session bursts"
+    "finding":"No genuinely new independent image was promoted this round; previously visited images were not reused as fresh evidence.",
+    "candidate":"The acquisition-trace/object-isolation question remains open.",
+    "next":"sample an unvisited image from a different date and purpose"
   },
   "terminus":{
-    "status":"METHOD REFINEMENT · NO NEW VEIN",
-    "newSourceIds":["1aGoC92jHobQIZ3_RkYdghjjJ0gn98T4U"],
-    "finding":"A file titled 台大中正史坦威_100-1-1書面報告.pdf looked superficially like a possible student report, but content inspection identifies it as a formal National Taiwan University expenditure-audit report dated 2011-09-22, with named audit committee members, procedure, evidence and findings. Filename semantics alone are therefore unreliable for authorship, genre and quality classification.",
-    "candidate":"Quality judgment must follow provenance/genre identification from internal evidence, not title heuristics. Administrative and institutional reports can be high-value factual ore even when they offer little conceptual originality.",
-    "next":"continue sampling likely student/course materials, but classify author and genre from internal evidence before scoring argument, evidence, originality and reusable parts"
+    "status":"NEW QUALITY ORE · 1 TEXT",
+    "newSourceIds":["1pFrlY6u7XbFOMI-ineR_dL72CoPk5c_a"],
+    "finding":"《讀書會心得0813_盈蓁.docx》 is weak-to-medium as formal academic argument but high-value as situated observation. It preserves concrete contradictions around normal/abnormal classification, welfare versus rights, and the writer's discomfort using charity language in fundraising.",
+    "candidate":"Do not collapse material quality into one good/bad score. Separate formal argument, evidence, observational density, originality and reusability. A poorly polished text may still contain excellent ore.",
+    "next":"continue sampling participant/student/course materials and test whether this multidimensional quality model improves selection"
   },
-  "phase":"small-batch mining with provenance-first, genre-aware quality scoring"
+  "phase":"small-batch mining with provenance-first, genre-aware multidimensional quality scoring"
 }
