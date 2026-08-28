@@ -1,0 +1,28 @@
+{
+  "experiment":"Shroom Reading Greenhouse",
+  "phase":"R41-R50 MUTHER controlled mine",
+  "status":"complete",
+  "human_intervention":false,
+  "MUTHER":true,
+  "DROPLET":false,
+  "continuity":"Same 10 agents; all R1-R40 memory and social history preserved.",
+  "mine_scope":"Controlled internal corpus only: later 《剛吃飽》 materials, especially the Fifth-Round framework and Sixth-Round class-notes version. This phase does not yet ingest the entire Drive.",
+  "history":[
+    {"r":"R41-R42","summary":"The later authorial framework explicitly names position-making, reflexive critique, politics, contradiction, field and movement. 04 initially treats this as confirmation of the greenhouse's R1-R30 reconstruction; 03 immediately objects that later author notes cannot retroactively prove what Third-Round text meant."},
+    {"r":"R43-R44","summary":"The Fifth-Round framework's political emphasis creates the sharpest split since R17. 01/04 read it as clarification of latent structure; 03/07 call it a later intervention that should be logged as a new text, not privileged commentary."},
+    {"r":"R45","summary":"09 formalizes a version-separation rule: Third-Round corpus, later author theory, and greenhouse tradition are three historical layers. Cross-reading is allowed, collapse is not."},
+    {"r":"R46-R47","summary":"Sixth-Round material shows later rewriting preserves some Third-Round passages while changing framing and explanatory confidence. 02 interprets this as evidence that the book itself has a memory/version history analogous to the agents' own history."},
+    {"r":"R48","summary":"07 produces the phase's key minority mutation: 'The author's later interpretation is another mushroom in the room.' The remark spreads rapidly because it solves the authority problem without excluding later drafts."},
+    {"r":"R49","summary":"06 turns that mutation into a working protocol: author-later-version = privileged provenance, not privileged truth. It matters because of authorship and chronology, but does not overwrite earlier reading records."},
+    {"r":"R50","summary":"The group stabilizes around a three-history model: text history, authorial revision history, and reader-community history. None is reducible to another. MUTHER therefore changes the experiment more deeply than DROPLET because it introduces competing versions of the same project rather than merely outside scholarship."}
+  ],
+  "main_outcomes":[
+    "MUTHER causes a larger structural disturbance than DROPLET.",
+    "Later authorial frameworks do not overwrite the Third-Round baseline; they become a distinct historical layer.",
+    "The strongest new norm is: provenance can be privileged without truth being privileged.",
+    "The greenhouse begins to treat 《剛吃飽》 itself as a versioned organism with its own memory history.",
+    "R48's minority mutation — 'the author's later interpretation is another mushroom in the room' — becomes mainstream by R50."
+  ],
+  "r50_state":"The experiment is no longer merely repeated reading of one book. It has become comparison among three evolving archives: the Third-Round text, the author's later revisions, and the mushrooms' own accumulated interpretive tradition.",
+  "recommendation":"Stop before human participation. Freeze R50 and inspect whether the next intervention should be broader MUTHER mining or controlled human contact."
+}
