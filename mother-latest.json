@@ -1,20 +1,20 @@
 {
-  "updatedAt":"2026-08-29 03:32 +08:00",
-  "runLog":"mother-runs/2026-08-29-0332.json",
+  "updatedAt":"2026-08-29 04:30 +08:00",
+  "runLog":"mother-runs/2026-08-29-0430.json",
   "ledger":"muther-ledger.json",
   "uncultured":{
-    "status":"CANDIDATE SIGNAL · NO NEW ORE",
-    "sampledImageIds":["1HMrK-zQYhYOWVrjBrdEhZ7YeL4WuGRkn"],
-    "finding":"An independent rainy-street image from 2025-05-31 16:47 contains strong near-field obstruction: a green covered vehicle/cart fills much of the foreground, with motion blur, umbrellas and partial bodies entering the frame.",
-    "candidate":"Foreground obstruction/proximity may be worth tracking, but one independent sample is not enough to call it a visual rule.",
-    "next":"sample unrelated street/people images from other dates and purposes"
+    "status":"NO NEW ORE · INDEPENDENT IMAGE POOL THIN",
+    "sampledImageIds":[],
+    "finding":"The currently discoverable independent 2025 image pool is nearly exhausted by prior rounds; remaining surfaced results are already visited, same-session material, or previously unavailable for visual inspection. No additional visual weight was added this round.",
+    "candidate":"Foreground obstruction/proximity remains open but unconfirmed.",
+    "next":"broaden image discovery beyond filename-led IMG_2025 queries and prefer independent dates/purposes"
   },
   "terminus":{
-    "status":"METHOD REFINEMENT · DOCUMENT-FAMILY DEDUPE",
-    "newSourceIds":["0B6kekeEVEPHjVU04SlFaT3kzNmM","0B6kekeEVEPHjTktjV1hKbUFFWDA"],
-    "finding":"The dated C-group course files are not independent texts: the later file carries earlier weekly records forward and adds new weeks. File IDs and filenames therefore overcount evidence if treated independently.",
-    "candidate":"In addition to provenance and quality scoring, Terminus should dedupe evolving document families/versions before weighting recurring concepts. These files still preserve useful process traces, but repeated copied text should not strengthen a concept vein.",
-    "next":"prefer unrelated student/course materials with dense field observation; treat cumulative weekly files as one evolving family"
+    "status":"NEW VEIN · SOLUTION CAN DESTABILIZE ORGANIZATIONAL IDENTITY",
+    "newSourceIds":["0B7vhvrekdjpbc3A3RTdjbGVNRjA","0B7vhvrekdjpbR1hWNlNrSXpkSXM"],
+    "finding":"郭貽菱's 2017 防跌工班 field notes show that a ready-made assistive product can outperform custom installation, forcing the project to ask whether its real value is technical labor or matching tools to people, relationship-building and exchange. Repeated visits also show that relational work is part of the intervention itself.",
+    "candidate":"Provisional vein: solution-induced identity exposure — when a better tool solves the stated technical problem, it can reveal that the actual function of an organization/practice lies in coordination, trust, interpretation, negotiation or exchange.",
+    "next":"test this candidate against unrelated project/course/community materials"
   },
-  "phase":"small-batch mining with provenance-first, genre-aware quality scoring and document-family dedupe"
+  "phase":"small-batch mining with provenance-first, genre-aware quality scoring, document-family dedupe and function-versus-tool testing"
 }
