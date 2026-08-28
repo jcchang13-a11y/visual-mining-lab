@@ -7,6 +7,8 @@
     {"id":"1x7CS6sEMIqCHzbM_1ydl5uVMHWwlV9lT","bay":"uncultured","seenAt":"2026-08-28 14:33 +08:00"},
     {"id":"1OF0GYOjSOLxy-C0M1YG9O8iUfUqmf6YYp57xaP8hDJg","bay":"terminus","seenAt":"2026-08-28 14:33 +08:00"},
     {"id":"1baAIIRzqTYYeVKLmVJHQNH46RNHOBtYLCLMh-fKZhzM","bay":"terminus","seenAt":"2026-08-28 14:33 +08:00"},
-    {"id":"1LgnnKBkN3fIVqelehcJq-OrPXAio1ZDFHs9BUdzhgaY","bay":"terminus","seenAt":"2026-08-28 14:33 +08:00","status":"dead-end-no-paragraphs"}
+    {"id":"1LgnnKBkN3fIVqelehcJq-OrPXAio1ZDFHs9BUdzhgaY","bay":"terminus","seenAt":"2026-08-28 14:33 +08:00","status":"dead-end-no-paragraphs"},
+    {"id":"12OoX7N-m_zBwMJsG01rIM9qNZxvnd-4l","bay":"uncultured","seenAt":"2026-08-28 15:18 +08:00","status":"same-book-capture-session"},
+    {"id":"1HyteMNRTob2okVE7Xb6K3m3W0YMgMYeI","bay":"terminus","seenAt":"2026-08-28 15:18 +08:00","status":"candidate-confirming-layer"}
   ]
 }
