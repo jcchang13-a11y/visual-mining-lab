@@ -1,0 +1,33 @@
+{
+  "runAt": "2026-08-28 14:33 +08:00",
+  "mode": "small-batch validation",
+  "boundaries": ["no Drive mutation", "no web search", "no agent simulation", "no Gangchibao v3 integration"],
+  "uncultured": {
+    "sampled": [
+      {"id":"1dxJw1ra3IcgiGO4uMKRQ_xRFYtWILafY","title":"IMG_20260828_094746.jpg","sourceCheck":"raw camera photo of book spread"},
+      {"id":"1u0CmJ7lzHtbid9oCJZkumRqq4qagFqS3","title":"IMG_20260828_094800.jpg","sourceCheck":"raw camera photo of adjacent book spread"},
+      {"id":"1x7CS6sEMIqCHzbM_1ydl5uVMHWwlV9lT","title":"IMG_20260828_094925.jpg","sourceCheck":"raw camera photo of book page, rotated orientation"}
+    ],
+    "finding": "The current image pool contains capture-series behavior: multiple images from the same book-documentation session are adjacent and highly related. Sampling individual files as if independent observations can overweight one session.",
+    "methodChange": "Before random sampling, group obvious burst/session sequences; sample across sessions first, then within-session. Keep acquisition-trace as a candidate only, not a visual grammar.",
+    "oreStatus": "METHOD CORRECTION · NO VISUAL ORE"
+  },
+  "terminus": {
+    "sampled": [
+      {"id":"1OF0GYOjSOLxy-C0M1YG9O8iUfUqmf6YYp57xaP8hDJg","title":"不可抵達之地：蓬萊、桃花源與世界各地的異境想像","result":"candidate"},
+      {"id":"1baAIIRzqTYYeVKLmVJHQNH46RNHOBtYLCLMh-fKZhzM","title":"垃圾堆","result":"confirming layer"},
+      {"id":"1LgnnKBkN3fIVqelehcJq-OrPXAio1ZDFHs9BUdzhgaY","title":"獅仔頭第二市中心計畫：架空都市史 v0.1","result":"dead end in this run: connector returned no paragraphs"}
+    ],
+    "candidateLead": {
+      "id":"terminus-access-regime-coordinate-system-2026",
+      "status":"candidate",
+      "summary":"The Immortalia note shifts the problem from where a place is to what conditions make it reachable, ending with the possibility that people searched using the wrong coordinate system. This may connect to older connection/disconnection and visibility/exclusion work, but one new text is insufficient to claim continuity."
+    },
+    "confirmation": "垃圾堆 distinguishes present validity from archival value: material can be removed from the active work while retained for later reuse. This supports the existing rule that preservation of provenance does not imply preservation of current validity.",
+    "oreStatus": "1 CANDIDATE LEAD · 1 CONFIRMING LAYER · 1 DEAD END"
+  },
+  "next": {
+    "uncultured":"sample across different capture sessions instead of adjacent image files",
+    "terminus":"seek older non-Immortalia texts where reachability/visibility depends on rules, access, connection, exclusion or measurement; actively seek counterexamples"
+  }
+}
