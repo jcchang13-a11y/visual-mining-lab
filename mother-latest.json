@@ -1,19 +1,19 @@
 {
-  "updatedAt":"2026-08-28 18:33 +08:00",
-  "runLog":"mother-runs/2026-08-28-1833.json",
+  "updatedAt":"2026-08-28 19:21 +08:00",
+  "runLog":"mother-runs/2026-08-28-1921.json",
   "ledger":"muther-ledger.json",
   "uncultured":{
-    "status":"NO PROMOTED ORE · SESSION MOTIF CONFIRMED",
-    "sampledImageIds":["1uJPM-hsXomPkqXrv9w74-xTFxgJ8duHx","1LurT9EsY45pxjEs73wTX4-bP8sMTh9U3","1-lYzpQUbntxhbMo1ccBo0ljjw3Vohp8T"],
-    "finding":"The book-capture burst remains a suppressed dead end. A second image from the older 2025 outing confirms a wet transparent surface visibly layered over drawings/text. Because the evidence is still from one outing, keep it as a session motif rather than visual grammar.",
-    "next":"seek the intervening-surface motif on a different date and non-graffiti subject"
+    "status":"NO NEW ORE · DUPLICATE SESSION SUPPRESSED",
+    "sampledImageIds":["1UIQpw0CD61ip4fa_6KW3D5td3A_pRz_5"],
+    "finding":"Another photographed-book page from the same capture session. It is recorded but not counted as independent visual evidence.",
+    "next":"continue seeking a different-date, different-subject example of the intervening-surface motif"
   },
   "terminus":{
-    "status":"CONFIRMING STRATUM · VEIN PUSHED BACK TO 2009",
-    "newSourceIds":["1LVTEm7duBkxev0eFHaLvHexdtMAaYuy86j9mxhdqS0E"],
-    "candidate":"Visibility and traceability can operate as mechanisms that distribute institutional risk, not merely as descriptive properties of space.",
-    "confirmation":"A 2009 sex-work rights text states that formal prohibition coexisted with widespread tolerated activity while enforcement disproportionately hit street workers and small weakly protected venues that were easier to see and catch. This predates and concretizes the later 2016 visibility/traceability spatial-form line.",
-    "next":"test the mechanism in a non-sex-work domain under comparable formal rules"
+    "status":"CANDIDATE REFINED BY COUNTEREXAMPLE",
+    "newSourceIds":["1xEn3edawJHMavZZIIKsRKPePeG2mYjCu"],
+    "candidate":"Institutional risk is not produced by visibility alone; it is more plausibly produced when visibility/traceability is coupled to punitive enforcement, performance pressure or sanction mechanisms.",
+    "counterexample":"A Lewin research-center account describes students as highly visible through small seminars, research participation and qualification exams, but also emphasizes low hierarchy, strong support and unusually little test anxiety. Visibility there supports learning rather than punishment.",
+    "next":"test monitoring/accountability cases with different sanction intensity in another domain"
   },
-  "phase":"small-batch validation; session-level dedupe retained; confirming layers separated from new ore"
+  "phase":"small-batch validation; duplicate sessions suppressed; counterexamples used to narrow candidate mechanisms"
 }
