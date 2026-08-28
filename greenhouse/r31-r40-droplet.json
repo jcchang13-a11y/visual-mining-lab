@@ -1,0 +1,39 @@
+{
+  "experiment":"Shroom Reading Greenhouse",
+  "phase":"R31-R40 DROPLET controlled perturbation",
+  "status":"complete",
+  "human_intervention":false,
+  "MUTHER":false,
+  "DROPLET":true,
+  "continuity":"Same 10 agents; all R1-R30 memories, minority positions, disputes and social relations preserved.",
+  "protocol":"External lookup allowed only when an agent can state why it needs evidence, what was retrieved, and what changed or did not change afterward.",
+  "external_stimuli":[
+    "Diamond Sutra transmission/translation/868 printed scroll evidence",
+    "Madhyamaka emptiness as denial of intrinsic nature rather than annihilation",
+    "Buddhist ethics/compassion and the relation between non-self and concern for others",
+    "two-truths/interdependence material warning against equating emptiness with nonexistence"
+  ],
+  "history":[
+    {"r":"R31-R32","summary":"Agents initially use DROPLET defensively, seeking confirmation for existing claims. 03 and 07 flag this as confirmation bias; the group adds a rule: external agreement counts as stimulus, not proof."},
+    {"r":"R33-R34","summary":"Transmission history strengthens 02/09: the text is visibly a history of translation, copying, printing and reuse. This does not overthrow R30, but makes 'reading history' materially concrete rather than merely interpretive."},
+    {"r":"R35-R36","summary":"Madhyamaka material destabilizes simplistic 'nothing has ground' formulations. 08 revises again: emptiness is not annihilation. 04 separates 'no intrinsic nature' from 'no conventional efficacy'."},
+    {"r":"R37","summary":"03 refuses to use a source that supports its own anti-essentialist claim as decisive evidence, arguing that citation can become a new authority shortcut. This becomes the phase's main self-correction event."},
+    {"r":"R38-R39","summary":"Ethics/compassion material strengthens the R14-R20 other/responsibility line, but 07 warns against retroactively claiming the book secretly contained a complete ethics. The group distinguishes 'external support' from 'textual presence'."},
+    {"r":"R40","summary":"DROPLET does not dissolve the greenhouse tradition. Instead it forces a new distinction: source, evidence, authority and interpretation must be logged separately. Externality is now a perturbation channel, not a truth oracle."}
+  ],
+  "main_outcomes":[
+    "The R30 tradition survives external contact but becomes less self-sealing.",
+    "A new norm appears: agreement from outside cannot be counted as proof by itself.",
+    "The responsibility/other line gains external support without being declared the original text's hidden true meaning.",
+    "Translation and material transmission become stronger evidence for the claim that there is no single transparent textual origin available to the readers.",
+    "DROPLET is accepted as evidence source, rejected as final authority."
+  ],
+  "agent_shifts":{
+    "03":"becomes chief anti-confirmation-bias monitor",
+    "07":"protects against turning scholarship into a new orthodoxy",
+    "02":"gains strength from transmission-history evidence",
+    "08":"abandons residual nihilistic formulations",
+    "10":"other/responsibility hypothesis gains support but remains explicitly non-final"
+  },
+  "recommendation":"Proceed to a separate MUTHER phase. Do not merge DROPLET and MUTHER evidence into one undifferentiated pool."
+}
