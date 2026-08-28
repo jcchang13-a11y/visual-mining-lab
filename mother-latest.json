@@ -1,20 +1,20 @@
 {
-  "updatedAt":"2026-08-28 15:18 +08:00",
-  "runLog":"mother-runs/2026-08-28-1518.json",
+  "updatedAt":"2026-08-28 16:35 +08:00",
+  "runLog":"mother-runs/2026-08-28-1635.json",
   "ledger":"muther-ledger.json",
   "uncultured":{
-    "status":"METHOD CORRECTION · NO VISUAL ORE",
-    "sampledImageIds":["12OoX7N-m_zBwMJsG01rIM9qNZxvnd-4l"],
-    "finding":"The inspected image belongs to the same serial book-documentation session already detected. Add capture-purpose/source-role before visual comparison so documentary page capture is not mixed with ordinary photographs when searching for visual grammar.",
-    "next":"sample a genuinely different capture session and subject type"
+    "status":"METHOD VALIDATED · NO VISUAL ORE",
+    "sampledImageIds":["17OWR61_WqMr4MO6mJrQrZs-ITZ3xVRLD","1PuvPSXoicKc1S9RDynluShogLYu_ytSW"],
+    "finding":"After forcing the sampler away from document-page captures, two genuinely different photographs appeared immediately: a rain-covered hand-drawn surface and an intentional shallow-focus flower photograph. The source-role split is useful, but these two images do not yet support a recurring personal visual grammar.",
+    "next":"continue non-document sampling across dates and test recurring framing, depth, cropping and found-text behavior"
   },
   "terminus":{
     "status":"CANDIDATE LEAD STRENGTHENED · NOT PROMOTED",
-    "newSourceIds":["1HyteMNRTob2okVE7Xb6K3m3W0YMgMYeI"],
+    "newSourceIds":["1iB2gserqcj9df_n0v_12biFbZ8M6x-B__p5SqgKFhfc"],
     "newLeadIds":["terminus-access-regime-coordinate-system-2026"],
-    "candidate":"A 2014 Wenmenglou action note says entering the opponent's management/maintenance-plan logic would constrain the movement's possible action space. This is an older cross-domain echo of the 2026 candidate that reachability/possibility can be governed by rules or frames rather than physical position alone.",
-    "caution":"Political framing and geographic/imaginal access are not the same thing; treat as structural analogy only until counterexamples and more independent layers are found.",
-    "next":"seek older independent examples plus explicit counterexamples"
+    "candidate":"A migration-policy draft gives a concrete regulatory example: quotas, occupational categories, contract duration, employer-transfer restrictions and immigration rights determine what migrant workers may do, producing an explicitly unfree labor force. This independently echoes the existing access-regime/frame candidate.",
+    "caution":"Regulation naturally constrains action; this could be generic rather than a distinctive recurring structure. No clean counterexample was established in this batch.",
+    "next":"seek material where physical position or distance itself is causally decisive, to test over-generalization"
   },
-  "phase":"small-batch validation; provenance and counterexample testing required before promotion"
+  "phase":"small-batch validation; counterexample testing remains mandatory before promotion"
 }
