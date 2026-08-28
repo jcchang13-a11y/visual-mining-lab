@@ -1,20 +1,20 @@
 {
-  "updatedAt":"2026-08-28 22:21 +08:00",
-  "runLog":"mother-runs/2026-08-28-2221.json",
+  "updatedAt":"2026-08-28 23:34 +08:00",
+  "runLog":"mother-runs/2026-08-28-2334.json",
   "ledger":"muther-ledger.json",
   "uncultured":{
-    "status":"COUNTEREXAMPLE · CLEAN OBJECT ISOLATION",
-    "sampledImageIds":["1OqnVyFPKVZkR3bL-kGNffELLviH-lMFf"],
-    "finding":"An independent museum-object photograph is front-facing, close, and visually isolates two wooden figures from most contextual clutter. This weakens any universal claim that the user's images characteristically preserve heavy acquisition traces.",
-    "candidate":"At least two capture modes may coexist: retaining environmental/acquisition traces and deliberately isolating an object from context.",
-    "next":"sample more independent camera sessions to test whether this is a stable bimodal habit or merely subject-driven variation"
+    "status":"NO NEW ORE · SAME CAPTURE SESSION",
+    "sampledImageIds":["1vvgtkObN9x6zf07ftM34OjQqaWmwGJnS"],
+    "finding":"Another book-spread image from the same 2026-08-28 capture session was inspected. It is upside down and preserves page edges/surrounding surface, but because it is same-session evidence it does not strengthen a general visual grammar claim.",
+    "candidate":"Keep the current two-mode hypothesis open: acquisition/context traces versus deliberate object isolation.",
+    "next":"prefer independent dates, subjects and shooting purposes; downweight same-session bursts"
   },
   "terminus":{
-    "status":"METHOD REFINEMENT · QUALITY MUST BE GENRE-AWARE",
-    "newSourceIds":["0B7vhvrekdjpbMWpwZGRkMC1CNUk","1e5egXxafa5BajHgpOBmWPG_HVQzAm6P-"],
-    "finding":"A named field note on a community-course visit has high observational value despite not being a theory paper: it preserves chronology, actors, competing interpretations and concrete interactions. A cultural-heritage research-report catalog has little argument but strong indexing value because it maps research topics, institutions, investigators and report structures. Applying one generic 'argument quality' score would misclassify both.",
-    "candidate":"Evaluate material after genre identification. Reusable value should be multidimensional: argument, evidence/data, observation, index/navigation, originality/problem formation. Authorship remains provenance, not a quality shortcut.",
-    "next":"continue seeking clearly student-authored work and compare its usable dimensions without author-status bias; skip obvious private administrative/credential records from conceptual mining"
+    "status":"CONFIRMING CASE ORE · NO NEW VEIN",
+    "newSourceIds":["1QK4SVA1GYg2OevfSDPaBHQ2MAJvQtCG0"],
+    "finding":"A heritage-planning final report on Wenmeng Building and the former licensed-prostitution district contains strong chronology, policy, spatial-boundary and historical case material. Its conceptual framing overlaps existing representation/exclusion/heritage veins, so it is confirming ore rather than a new vein.",
+    "candidate":"Genre-aware quality scoring survives another test: commissioned/report material can be strong in chronology, policy detail, spatial evidence and case reconstruction without being theoretically original.",
+    "next":"continue cross-domain sampling, especially student-authored and non-heritage material, to avoid overfitting the current conceptual map"
   },
-  "phase":"small-batch mining with genre-aware multidimensional quality scoring"
+  "phase":"small-batch mining with same-session dedupe and genre-aware quality scoring"
 }
