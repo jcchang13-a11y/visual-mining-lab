@@ -1,0 +1,22 @@
+{
+  "updatedAt":"2026-08-28 21:22 +08:00",
+  "scope":"small-batch Drive mining; no external search; no source modification",
+  "uncultured":{
+    "sampled":[
+      {"id":"1DH8cxGRMRYCgodz4gKeodA2CndPCxPjM","title":"IMG_20260828_094954.jpg","result":"same-book-capture-session"}
+    ],
+    "finding":"The new image is another rotated two-page book capture from the same morning burst already represented in the ledger. It adds no independent evidence for a visual grammar and is treated as batch duplication rather than a new ore hit.",
+    "next":"move away from this capture burst and sample a visually independent session before strengthening any image-level pattern"
+  },
+  "terminus":{
+    "sampled":[
+      {"id":"1Ux1Ro2eEaZlcddZv3WVJIPE2KOt5QHbO","title":"Course in General Linguistics.docx","provenance":"explicitly signed 張榮哲","quality":"high-usable-density","use":"concept ore"},
+      {"id":"11ADqzf1b0u5vXEd0Pn_VKYUA2dJ0mYty","title":"報告(jameson).doc","provenance":"uncertain; legacy file metadata names zhouxian","quality":"partial-assessment-only","use":"hold"}
+    ],
+    "finding":"A Drive folder named『還算有用的作業』contains prior human curation that is itself useful metadata, but it should only act as a weak prior, not a verdict. The Saussure note is strong mining material because it cleanly separates summary from discussion and then independently connects sign/value/system/relative position to Lacan, suture and lack. The Jameson report cannot yet receive a confident quality score because legacy text encoding is degraded and authorship is not secure.",
+    "methodCorrection":"Provenance and quality are now independent axes. Third-party or student material is not excluded; it can be high-value ore. Likewise, user-authored material is not automatically high quality. Existing folder-level human curation can raise sampling priority but machine judgment still evaluates argument clarity, evidence, conceptual precision, originality, and reusable fragments.",
+    "candidate":"The Saussure note strengthens a long-running system/position/value thread without relying on third-party material: value is relational within a system, and the later discussion asks how an arbitrary sign system becomes temporarily sutured. This is compatible with older representation/lack lines but is not yet promoted to a single master theory.",
+    "next":"sample one clearly student-authored document and one third-party reference from different topics, then compare quality independent of authorship"
+  },
+  "status":"normal"
+}
