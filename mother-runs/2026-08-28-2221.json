@@ -1,0 +1,20 @@
+{
+  "runAt":"2026-08-28 22:21 +08:00",
+  "scope":"small-batch Drive mining",
+  "uncultured":{
+    "sampled":[{"id":"1OqnVyFPKVZkR3bL-kGNffELLviH-lMFf","title":"IMG_20250606_000119.jpg","sourceType":"raw camera photo"}],
+    "result":"Independent museum display photo. Front-facing close framing isolates two wooden figures and minimizes contextual clutter. This is a counterexample to a universal acquisition-trace hypothesis.",
+    "candidate":"Two capture modes may coexist: environmental/acquisition trace retention versus deliberate object isolation.",
+    "confidence":"low-to-medium; requires more independent sessions"
+  },
+  "terminus":{
+    "sampled":[
+      {"id":"0B7vhvrekdjpbMWpwZGRkMC1CNUk","title":"2016121718 暖暖課程導入田野筆記 (褚縈瑩).docx","provenance":"named non-user field note","quality":"high observational value"},
+      {"id":"1e5egXxafa5BajHgpOBmWPG_HVQzAm6P-","title":"文化部文資局研究報告書.pdf","provenance":"third-party reference/catalog","quality":"high index value; low direct argument value"}
+    ],
+    "deadEnds":[{"id":"1X3M6TNmtCGmck8K7JyaGHpnMe5rjEGMx","reason":"private administrative/personal record; excluded from conceptual mining"}],
+    "result":"Quality scoring must follow genre identification. A field note can be excellent ore through chronology, actors and conflicting observations; a catalog can be excellent ore as an index despite lacking argument. One generic quality score would misclassify both.",
+    "methodChange":"Track reusable value by dimensions such as argument, evidence/data, observation, index/navigation and originality/problem formation. Authorship is provenance, not a quality proxy."
+  },
+  "boundaries":"No Drive source files modified, moved or deleted. No external web search. No agent simulation. No Gangchibao third-round integration."
+}
