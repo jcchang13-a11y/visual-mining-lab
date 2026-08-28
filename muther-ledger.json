@@ -29,6 +29,10 @@
     {"id":"10duSS8IkCrcagehyxr6rete2s-FSExT8","bay":"terminus","seenAt":"2026-08-28 20:22 +08:00","status":"reference-material-not-user-authored"},
     {"id":"1DH8cxGRMRYCgodz4gKeodA2CndPCxPjM","bay":"uncultured","seenAt":"2026-08-28 21:22 +08:00","status":"same-book-capture-session"},
     {"id":"1Ux1Ro2eEaZlcddZv3WVJIPE2KOt5QHbO","bay":"terminus","seenAt":"2026-08-28 21:22 +08:00","status":"high-usable-density-user-authored-note"},
-    {"id":"11ADqzf1b0u5vXEd0Pn_VKYUA2dJ0mYty","bay":"terminus","seenAt":"2026-08-28 21:22 +08:00","status":"quality-partial-authorship-uncertain-legacy-encoding"}
+    {"id":"11ADqzf1b0u5vXEd0Pn_VKYUA2dJ0mYty","bay":"terminus","seenAt":"2026-08-28 21:22 +08:00","status":"quality-partial-authorship-uncertain-legacy-encoding"},
+    {"id":"1OqnVyFPKVZkR3bL-kGNffELLviH-lMFf","bay":"uncultured","seenAt":"2026-08-28 22:21 +08:00","status":"independent-session-clean-object-isolation-counterexample"},
+    {"id":"0B7vhvrekdjpbMWpwZGRkMC1CNUk","bay":"terminus","seenAt":"2026-08-28 22:21 +08:00","status":"high-observational-value-named-field-note"},
+    {"id":"1e5egXxafa5BajHgpOBmWPG_HVQzAm6P-","bay":"terminus","seenAt":"2026-08-28 22:21 +08:00","status":"high-index-value-low-argument-genre-specific"},
+    {"id":"1X3M6TNmtCGmck8K7JyaGHpnMe5rjEGMx","bay":"terminus","seenAt":"2026-08-28 22:21 +08:00","status":"administrative-personal-record-skip-no-concept-mining"}
   ]
 }
