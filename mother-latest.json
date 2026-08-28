@@ -1,19 +1,19 @@
 {
-  "updatedAt":"2026-08-28 17:31 +08:00",
-  "runLog":"mother-runs/2026-08-28-1731.json",
+  "updatedAt":"2026-08-28 18:33 +08:00",
+  "runLog":"mother-runs/2026-08-28-1833.json",
   "ledger":"muther-ledger.json",
   "uncultured":{
-    "status":"NO VISUAL ORE · BURST FILTER ADDED",
-    "sampledImageIds":["1U_nNpadBlu6twcoXTRUv89bpjx3CeFrC","1ZnQERbNI9OfP5Z4K1qYKo90TEtn7eSsu"],
-    "finding":"Both samples belong to the same page-by-page book capture burst already encountered earlier. This is a dead end for visual grammar but validates a useful suppression rule: once a dense document-capture session is identified, later frames from that burst should be downweighted instead of repeatedly treated as independent specimens.",
-    "next":"skip the remaining 09:47-09:59 book burst and continue cross-date non-document sampling"
+    "status":"NO PROMOTED ORE · SESSION MOTIF CONFIRMED",
+    "sampledImageIds":["1uJPM-hsXomPkqXrv9w74-xTFxgJ8duHx","1LurT9EsY45pxjEs73wTX4-bP8sMTh9U3","1-lYzpQUbntxhbMo1ccBo0ljjw3Vohp8T"],
+    "finding":"The book-capture burst remains a suppressed dead end. A second image from the older 2025 outing confirms a wet transparent surface visibly layered over drawings/text. Because the evidence is still from one outing, keep it as a session motif rather than visual grammar.",
+    "next":"seek the intervening-surface motif on a different date and non-graffiti subject"
   },
   "terminus":{
-    "status":"COUNTEREXAMPLE FOUND · CANDIDATE NARROWED",
-    "newSourceIds":["1G484X9Q3MgIrHKiod0YXUACUzRZ2Zl2g"],
-    "candidate":"The prior access-regime line was too one-sided. A Taichung TDR study treats location, carrying capacity, transport and spatial concentration as causally consequential, while also showing that regulatory design shapes where pressure accumulates.",
-    "revision":"Use a narrower working hypothesis: outcomes are co-produced by access/regulatory regimes and the material-spatial capacities of locations; neither side should be treated as universally prior.",
-    "next":"seek a cleaner case where physical distance or position remains decisive while formal access rules are held constant"
+    "status":"CONFIRMING STRATUM · VEIN PUSHED BACK TO 2009",
+    "newSourceIds":["1LVTEm7duBkxev0eFHaLvHexdtMAaYuy86j9mxhdqS0E"],
+    "candidate":"Visibility and traceability can operate as mechanisms that distribute institutional risk, not merely as descriptive properties of space.",
+    "confirmation":"A 2009 sex-work rights text states that formal prohibition coexisted with widespread tolerated activity while enforcement disproportionately hit street workers and small weakly protected venues that were easier to see and catch. This predates and concretizes the later 2016 visibility/traceability spatial-form line.",
+    "next":"test the mechanism in a non-sex-work domain under comparable formal rules"
   },
-  "phase":"small-batch validation; session-level image suppression added; counterexample testing remains mandatory before promotion"
+  "phase":"small-batch validation; session-level dedupe retained; confirming layers separated from new ore"
 }
