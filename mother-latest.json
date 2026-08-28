@@ -1,20 +1,20 @@
 {
-  "updatedAt":"2026-08-29 05:25 +08:00",
-  "runLog":"mother-runs/2026-08-29-0525.json",
+  "updatedAt":"2026-08-29 06:29 +08:00",
+  "runLog":"mother-runs/2026-08-29-0629.json",
   "ledger":"muther-ledger.json",
   "uncultured":{
-    "status":"NO NEW ORE · SAME-BURST RESULTS",
-    "sampledImageIds":[],
-    "finding":"A broad image patrol still surfaced the same dense 2026-08-28 09:47–09:59 capture burst already represented in the ledger. No independent visual sample was promoted and no new visual evidence was added.",
-    "candidate":"Foreground obstruction/proximity remains open but unconfirmed.",
-    "next":"broaden discovery through non-IMG naming, older folders and independent capture contexts rather than re-reading the same burst"
+    "status":"CANDIDATE REFINEMENT · ARCHIVAL SCREENSHOTS",
+    "sampledImageIds":["1kaapXyeISo_W5Ghe3yEo98Bz8F_4C1H4","0B6kekeEVEPHjM2x6VUlxSlZOSHM","1RxMZk5MGqBfAgPGFT_BzXWf351GI6CZi"],
+    "finding":"Independent 2016-2017 screenshots preserve Facebook interface, names, timestamps, reply order and likes; one contains a screenshot nested inside a reply. In this media class, acquisition/interface traces appear to function as context and evidence rather than accidental noise.",
+    "candidate":"Context-preserving screenshot capture may be a distinct visual habit, but it is not yet promoted to visual grammar.",
+    "next":"test screenshots from other apps and purposes before generalizing"
   },
   "terminus":{
-    "status":"TESTED · NO NEW VEIN",
-    "newSourceIds":["0B6kekeEVEPHjVU04SlFaT3kzNmM"],
-    "finding":"A 2015 C-group learning record by 蔡舒翔 was inspected as an unrelated test case. It is mostly a partially filled course template containing orientation, expectations, preliminary 南機場 discussion and a generic reflection about ideology. It neither supports nor refutes the prior solution-induced identity exposure vein.",
-    "candidate":"The prior vein remains provisional. This sample is low in conceptual density but retains modest process/context value and illustrates that student materials should be scored for reusable parts rather than globally accepted or rejected.",
-    "next":"continue testing the vein against unrelated materials with enough observational or argumentative density"
+    "status":"CONFIRMING ANALOGUE · NO NEW VEIN",
+    "newSourceIds":["1rRprmI_2gNWaWv7MAIcXyKvEUee52iwC"],
+    "finding":"A 2015 collective creative-city workshop synthesis distinguishes direct service from deeper enabling functions: loosen rules, release space, build platforms/interfaces and coordinate actors. This parallels the prior function-versus-tool vein in a different domain, but it is normative synthesis rather than empirical before/after evidence.",
+    "candidate":"The persistent function may be condition-building/coordination even when the visible delivery mechanism changes. Low-weight confirmation only.",
+    "next":"seek empirical non-elder-care cases where changing the tool exposes a persistent institutional function"
   },
-  "phase":"small-batch mining with provenance-first, genre-aware quality scoring, document-family dedupe and function-versus-tool testing"
+  "phase":"small-batch mining with provenance-first, genre-aware scoring, screenshot/media-class separation and function-versus-tool falsification"
 }
