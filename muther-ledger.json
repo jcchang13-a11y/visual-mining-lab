@@ -1,0 +1,12 @@
+{
+  "createdAt":"2026-08-28 14:33 +08:00",
+  "note":"Supplemental ledger for post-restart MUTHER runs. Legacy visited sources remain in mother-state.json.",
+  "visited":[
+    {"id":"1dxJw1ra3IcgiGO4uMKRQ_xRFYtWILafY","bay":"uncultured","seenAt":"2026-08-28 14:33 +08:00"},
+    {"id":"1u0CmJ7lzHtbid9oCJZkumRqq4qagFqS3","bay":"uncultured","seenAt":"2026-08-28 14:33 +08:00"},
+    {"id":"1x7CS6sEMIqCHzbM_1ydl5uVMHWwlV9lT","bay":"uncultured","seenAt":"2026-08-28 14:33 +08:00"},
+    {"id":"1OF0GYOjSOLxy-C0M1YG9O8iUfUqmf6YYp57xaP8hDJg","bay":"terminus","seenAt":"2026-08-28 14:33 +08:00"},
+    {"id":"1baAIIRzqTYYeVKLmVJHQNH46RNHOBtYLCLMh-fKZhzM","bay":"terminus","seenAt":"2026-08-28 14:33 +08:00"},
+    {"id":"1LgnnKBkN3fIVqelehcJq-OrPXAio1ZDFHs9BUdzhgaY","bay":"terminus","seenAt":"2026-08-28 14:33 +08:00","status":"dead-end-no-paragraphs"}
+  ]
+}
