@@ -1,0 +1,41 @@
+{
+  "updatedAt":"2026-08-29 02:17 +08:00",
+  "phase":"small-batch mining with provenance-first, genre-aware multidimensional quality scoring",
+  "uncultured":{
+    "sampled":[
+      {
+        "id":"12VbrS79V4AK-yu_PAnjO7W7QhOWg1G7X",
+        "title":"IMG_20250531_191717.jpg",
+        "status":"same-session-near-duplicate-context",
+        "finding":"Wet transparent surface carrying hand-drawn marks and text; captured only 24 seconds before the already visited IMG_20250531_191741.jpg. Same date, same subject family and same acquisition conditions, so it is not independent evidence."
+      }
+    ],
+    "ore":[],
+    "counterexamples":[],
+    "deadEnds":["same-session image correctly downweighted"],
+    "next":"prefer a different capture date and purpose before adding weight to any visual hypothesis"
+  },
+  "terminus":{
+    "sampled":[
+      {
+        "id":"0B6kekeEVEPHjSFZPeF9aaFFHNW8",
+        "title":"150320-C.docx",
+        "provenance":"C組 weekly learning record; named recorders include 蔡舒翔 and 康曉薇",
+        "quality":{
+          "argument":"low-to-moderate",
+          "evidence":"contextual",
+          "observation":"moderate",
+          "originality":"low-to-moderate",
+          "reuse":"high as process/context ore"
+        },
+        "finding":"The record preserves a learning process rather than a polished argument: the group moves from broad ideological framing and preliminary knowledge of 南機場 to fieldwork, recognizes that the urban-renewal problem is too complex to solve wholesale, and narrows its intervention toward actors who can influence actual planning and implementation. This is useful as process ore, not a new theory vein."
+      }
+    ],
+    "ore":[],
+    "candidate":"Student/course materials can preserve decision-process traces—how a broad problem is narrowed into an actionable target—even when their final conceptual claims are ordinary.",
+    "counterexamples":[],
+    "deadEnds":[],
+    "next":"continue sampling course/student records with denser field observation; do not promote ordinary classroom conclusions into concept veins"
+  },
+  "notification":"none"
+}
