@@ -1,20 +1,20 @@
 {
-  "updatedAt":"2026-08-28 23:34 +08:00",
-  "runLog":"mother-runs/2026-08-28-2334.json",
+  "updatedAt":"2026-08-29 00:35 +08:00",
+  "runLog":"mother-runs/2026-08-29-0035.json",
   "ledger":"muther-ledger.json",
   "uncultured":{
-    "status":"NO NEW ORE · SAME CAPTURE SESSION",
-    "sampledImageIds":["1vvgtkObN9x6zf07ftM34OjQqaWmwGJnS"],
-    "finding":"Another book-spread image from the same 2026-08-28 capture session was inspected. It is upside down and preserves page edges/surrounding surface, but because it is same-session evidence it does not strengthen a general visual grammar claim.",
-    "candidate":"Keep the current two-mode hypothesis open: acquisition/context traces versus deliberate object isolation.",
-    "next":"prefer independent dates, subjects and shooting purposes; downweight same-session bursts"
+    "status":"NO NEW ORE · BURST SKIPPED",
+    "sampledImageIds":[],
+    "finding":"The newest browsed image candidates continue the 2026-08-28 09:47–09:50 filename burst already heavily represented in the ledger. They were downweighted at metadata stage rather than treated as independent visual evidence.",
+    "candidate":"The current acquisition-trace versus object-isolation hypothesis remains open; no additional weight added from same-session material.",
+    "next":"prefer images from independent dates and purposes; do not spend inspection budget on dense same-session bursts"
   },
   "terminus":{
-    "status":"CONFIRMING CASE ORE · NO NEW VEIN",
-    "newSourceIds":["1QK4SVA1GYg2OevfSDPaBHQ2MAJvQtCG0"],
-    "finding":"A heritage-planning final report on Wenmeng Building and the former licensed-prostitution district contains strong chronology, policy, spatial-boundary and historical case material. Its conceptual framing overlaps existing representation/exclusion/heritage veins, so it is confirming ore rather than a new vein.",
-    "candidate":"Genre-aware quality scoring survives another test: commissioned/report material can be strong in chronology, policy detail, spatial evidence and case reconstruction without being theoretically original.",
-    "next":"continue cross-domain sampling, especially student-authored and non-heritage material, to avoid overfitting the current conceptual map"
+    "status":"METHOD REFINEMENT · NO NEW VEIN",
+    "newSourceIds":["1aGoC92jHobQIZ3_RkYdghjjJ0gn98T4U"],
+    "finding":"A file titled 台大中正史坦威_100-1-1書面報告.pdf looked superficially like a possible student report, but content inspection identifies it as a formal National Taiwan University expenditure-audit report dated 2011-09-22, with named audit committee members, procedure, evidence and findings. Filename semantics alone are therefore unreliable for authorship, genre and quality classification.",
+    "candidate":"Quality judgment must follow provenance/genre identification from internal evidence, not title heuristics. Administrative and institutional reports can be high-value factual ore even when they offer little conceptual originality.",
+    "next":"continue sampling likely student/course materials, but classify author and genre from internal evidence before scoring argument, evidence, originality and reusable parts"
   },
-  "phase":"small-batch mining with same-session dedupe and genre-aware quality scoring"
+  "phase":"small-batch mining with provenance-first, genre-aware quality scoring"
 }
