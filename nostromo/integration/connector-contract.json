@@ -1,0 +1,27 @@
+{
+  "schema": "nostromo-connector-contract/v0.1",
+  "truthRule": "DISPLAYED STATE MUST FOLLOW EVIDENCE",
+  "executor": "AUTHORIZED CONNECTOR RUNTIME",
+  "transport": "repository request/result queue serviced by the connected automation runtime",
+  "privacy": {
+    "privateSources": "raw private connector content must not be committed to the public repository",
+    "persistAllowed": ["status", "counts", "mime/type aggregates", "timestamps", "non-reversible fingerprints", "public-web URLs and titles"],
+    "persistForbidden": ["private Drive URLs", "private Drive file IDs", "private document excerpts", "credentials", "tokens"]
+  },
+  "actions": {
+    "MUTHER.MINE_DRIVE_QUERY": {
+      "mode": "CONNECTOR_EXEC",
+      "connector": "Google Drive",
+      "input": {"query": "string", "topn": "integer<=20"},
+      "output": "redacted aggregate result + fingerprints",
+      "boundary": "query-scoped Drive mining; not whole-Drive exhaustive mining"
+    },
+    "DROPLET.SEARCH_EXTERNAL": {
+      "mode": "CONNECTOR_EXEC",
+      "connector": "public web search",
+      "input": {"query": "string"},
+      "output": "public source metadata and evidence summary",
+      "boundary": "search execution is external to GitHub Actions and is evidenced by connector result records"
+    }
+  }
+}
