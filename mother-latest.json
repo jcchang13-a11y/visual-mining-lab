@@ -1,23 +1,8 @@
 {
-  "updatedAt":"2026-08-29 21:35 +08:00",
-  "runLog":"mother-runs/2026-08-29-2135.json",
+  "updatedAt":"2026-08-29 22:34 +08:00",
+  "runLog":"mother-runs/2026-08-29-2234.json",
   "ledger":"muther-ledger.json",
-  "uncultured":{
-    "status":"NO NEW INDEPENDENT SAMPLE",
-    "sampledImageIds":[],
-    "finding":"Fresh Drive image browsing remained dominated by the already-ledgered 2026-08-28 IMG_0947xx capture family. It was rejected as non-independent.",
-    "generated":"NO DERIVATIVE THIS ROUND.",
-    "production":"SVG/HTML direct-to-GitHub remains verified; JPG/PNG binary publication remains unverified.",
-    "next":"escape the recent-capture cluster before another visual synthesis"
-  },
-  "terminus":{
-    "status":"NEGATIVE CASE · SWITCHING-POWER DISCRIMINATION",
-    "newSourceIds":["1yBc_Awx1t2-jUHhQDNCVOLL2QOv5m24b"],
-    "finding":"A heritage disaster-prevention training manual provides an unrelated protective-intervention domain: risk identification, assessment, planning, inspection and practical operation. It does not itself demonstrate topology switching.",
-    "generated":"MODEL NARROWED, NOT UPGRADED. New discrimination rule: switching power requires an observable change in relation availability or routing among nodes. Training, inspection, risk reduction or local shutdown alone do not qualify.",
-    "quality":{"argument":"medium","evidence":"medium for disaster prevention / low for topology","observationDensity":"medium","originality":"medium synthesis","reusability":"high as exclusion rule"},
-    "relationToPrevious":"This is a negative case that prevents overextension of the five-layer model.",
-    "next":"seek empirical rerouting, node isolation, access revocation or decentralized failover before promotion"
-  },
+  "uncultured":{"status":"NO NEW INDEPENDENT SAMPLE","sampledImageIds":[],"finding":"Drive image browsing remains dominated by the already-seen 2026-08-28 IMG_0947xx/0950xx capture family; rejected as non-independent.","generated":"NO DERIVATIVE THIS ROUND.","production":"SVG/HTML direct-to-GitHub remains verified; no new JPG/PNG publication claim.","next":"escape the recent-capture cluster before another visual synthesis"},
+  "terminus":{"status":"NEW DISTINCTION · OPERATOR VS INFRASTRUCTURAL SWITCHING","newSourceIds":["1OOIn9XrImzHjWKPFByw_8fkhdoqW_1Cd"],"finding":"A 2014 Yuanshan Station west-side detailed plan configures taxi, one-way vehicle, pedestrian and parking-access channels through land-use and circulation design across multiple management bodies.","generated":"Switching power can be actor-held or embedded in infrastructure/regulation. Operator switching is an actor actively connecting/cutting/rerouting; infrastructural switching changes relation availability through rules, land-use designation, lanes, paths or access geometry.","quality":{"argument":"medium","evidence":"high for planned configuration / low for observed effects","observationDensity":"medium","originality":"high synthesis","reusability":"high"},"relationToPrevious":"Refines the five-layer model after the previous exclusion rule: topology change remains required, but a single identifiable switch-holder is not.","next":"cross-domain test plus observed implementation case"},
   "phase":"small-batch mining + synthesis tests + provenance/quality scoring + active falsification + archive-to-production experiments + sensitive-record exclusion"
 }
