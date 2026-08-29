@@ -1,20 +1,20 @@
 {
-  "updatedAt":"2026-08-29 07:23 +08:00",
-  "runLog":"mother-runs/2026-08-29-0723.json",
+  "updatedAt":"2026-08-29 08:23 +08:00",
+  "runLog":"mother-runs/2026-08-29-0823.json",
   "ledger":"muther-ledger.json",
   "uncultured":{
-    "status":"NO NEW ORE · SAME MEDIA FAMILY",
-    "sampledImageIds":["12An7xQrLDGGMdM8SJK1Z75ZKJ1Sho6Aa"],
-    "finding":"Another 2017 Facebook reply screenshot again preserves names, reply order, timestamps, likes and phone UI. This confirms the archival screenshot media-class pattern but adds little independent evidence because it belongs to the same platform/time family.",
-    "candidate":"Context-preserving screenshot capture remains a media-specific visual habit candidate, not yet a general visual grammar.",
-    "next":"test screenshots from other apps, years and purposes"
+    "status":"VEIN CONFIRMED WITHIN MEDIA CLASS · NOT GENERALIZED",
+    "sampledImageIds":["0B6kekeEVEPHjYkItQ1hDakVubW8"],
+    "finding":"A 2016 Facebook screenshot preserves full thread context, reactions, timestamps, nested replies and phone UI instead of isolating a single sentence. This pushes the context-preserving capture habit back at least one year within the same platform family.",
+    "candidate":"Context-preserving screenshot capture is a stable Facebook-era archival habit candidate, but still media-specific rather than a general visual grammar.",
+    "next":"seek screenshots from non-Facebook apps, years and purposes"
   },
   "terminus":{
-    "status":"VEIN STRENGTHENED · NO NEW VEIN",
-    "newSourceIds":["1UaKPfYr0ougxRkwJjtZOSQFIzoWiLYtz","193eMxeh2i1TvpJSq8XlRfGYTrBuqSUaU"],
-    "finding":"A 2018 New Taipei migrant-worker governance interview supplies empirical support for the function-versus-tool candidate: hospital nurse-station education produced limited results, so officials shifted intervention directly toward potential employers while preserving the same preventive function. A 2009 Guishui Street interview set adds strong observational material on familiarity, place attachment, neighborhood relations and stigma, but largely confirms existing representation/exclusion veins.",
-    "candidate":"The function-versus-tool vein is stronger because it now has an empirical non-elder-care case in which the visible intervention channel changes while the institutional function persists.",
-    "next":"seek a counterexample where changing the tool also changes or dissolves the underlying function"
+    "status":"VEIN REFINED BY COUNTEREXAMPLE",
+    "newSourceIds":["1sGdBKX9NNYDPpcqMMSbHi-qZ5mZeykOc"],
+    "finding":"A 2008 heritage-management paper by Fang-Chieh Jung and Chao-Ching Fu argues that ROT/OT outsourcing mechanisms, because they were not designed specifically for heritage preservation, can lead to different management outcomes. This is a useful counterexample to the simple claim that tools can change while functions remain unchanged.",
+    "candidate":"Refined vein: some tools are merely replaceable channels, but some institutional instruments carry their own logic and therefore reshape the function they are supposed to serve.",
+    "next":"distinguish channel substitution from institutional redesign across unrelated cases"
   },
   "phase":"small-batch mining with provenance-first, genre-aware scoring, media-class separation and active falsification"
 }
