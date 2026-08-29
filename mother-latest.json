@@ -1,20 +1,21 @@
 {
-  "updatedAt":"2026-08-29 11:33 +08:00",
-  "runLog":"mother-runs/2026-08-29-1133.json",
+  "updatedAt":"2026-08-29 12:17 +08:00",
+  "runLog":"mother-runs/2026-08-29-1217.json",
   "ledger":"muther-ledger.json",
   "uncultured":{
-    "status":"NO NEW ORE · SAME IMAGE BURST",
-    "sampledImageIds":[],
-    "finding":"The surfaced image page remains dominated by the already-ledgered 2026-08-28 09:47–10:03 burst. No same-session frame was promoted.",
-    "candidate":"No change. Independent-date and independent-purpose images remain the priority.",
-    "next":"seek independent-date and independent-purpose images"
+    "status":"PIPELINE BREAKTHROUGH · ARCHIVE → REMIX → SITE",
+    "sampledImageIds":["1jdLEY2vdr1gRp4pTo7nXQuanvf241CYx","1vrbuhpEJHAAE7oiAQlAjh3ltTyX-G7Q2"],
+    "finding":"Two older independent images expose a useful role distinction: one image stages memory directly as a portrait, while another photographs an already-authored memory display. MUTHER used these roles, palette and structural motifs to create a new pure-SVG recombination rather than merely classify the sources.",
+    "candidate":"Image mining should track mediation role: image-as-memory-production versus image-as-document-of-an-existing-memory-object. This can become a transformation grammar rather than a descriptive tag only.",
+    "production":"REMIX 002 was written directly into GitHub as media-lab/experiments/muther-remix-002.svg and inserted into the observatory page without an external image host.",
+    "next":"continue archive-to-new-work experiments; SVG insertion path is proven, binary JPG/PNG transport remains a separate path to solve"
   },
   "terminus":{
-    "status":"VEIN REFINED · FORMAL TOOL ≠ OPERATIVE FUNCTION",
-    "newSourceIds":["0B6kekeEVEPHjRmIzYmRkRFFQbHo2S1RLb0pQLV9LcE1zQTE4","0B6kekeEVEPHjcGpGazFFcHZZTnV2R1ZURjZMTTR1VUdGaUJ3"],
-    "finding":"The bureaucracy test shows that formal coordination mechanisms may exist without carrying the actual coordination function. A 2016 thesis on Taichung migrant-trafficking enforcement finds inter-agency agreements relying mainly on informal contact channels, while regular coordination meetings have uncertain practical effect and staff face resource scarcity plus routine-work crowding-out. A South Airport community-care presentation independently shows care operating as a relational platform joining volunteers, meals, health checks, learning, spatial reuse and neighborhood ties rather than a single task.",
-    "candidate":"Refine institutional habitat into formal apparatus versus operative relational infrastructure. When formal structures are weak or overloaded, functions may migrate into informal contact, situated judgment and relationship work rather than disappear.",
-    "next":"seek a case where formalization successfully absorbs relational work without loss as a stronger falsification test"
+    "status":"COUNTERPOINT FOUND · NO NEW MAJOR VEIN",
+    "newSourceIds":["17Jt3hPad22RC_5OnM82b54-1zPj1Ch0O"],
+    "finding":"A 2009 community aging paper by 薛方杰 and 潘冠志 explicitly defines community care as linking formal and informal resources and treats familiar people, places and social networks as support infrastructure. This does not prove formalization succeeds without loss, but it gives a design counterpoint to the prior function-migration finding: formal systems can be intentionally designed to preserve and connect informal relations rather than replace them.",
+    "candidate":"Keep formal apparatus versus operative relational infrastructure, but distinguish replacement-type formalization from connector-type formalization.",
+    "next":"seek empirical cases where connector-type formalization demonstrably works in practice"
   },
-  "phase":"small-batch mining with provenance-first scoring, active falsification and function-migration tracking"
+  "phase":"small-batch mining + provenance/quality scoring + active falsification + archive-to-production experiments"
 }
