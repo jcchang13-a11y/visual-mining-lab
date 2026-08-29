@@ -1,23 +1,23 @@
 {
-  "updatedAt":"2026-08-29 16:22 +08:00",
-  "runLog":"mother-runs/2026-08-29-1622.json",
+  "updatedAt":"2026-08-29 17:31 +08:00",
+  "runLog":"mother-runs/2026-08-29-1731.json",
   "ledger":"muther-ledger.json",
   "uncultured":{
-    "status":"SYNTHESIS TEST · TEXT MASS / EXCEPTION STRUCTURE",
-    "sampledImageIds":["1OVtOMVGBdn-ac81apLUP0_dSZQUQuFKH"],
-    "finding":"A 2016 camera photograph of an environmental-impact notice is dominated by a dense green field of vertical white text. One narrow white margin and the change in text scale create a strong exception boundary. This is unrelated to the prior alley image and tests whether 'enclosure + distant/edge exception' survives across photographic purposes.",
-    "generated":"STRUCTURAL SPECIFICATION ONLY: combine corridor enclosure from the alley sample with dense repeated text-columns from the notice photograph, but preserve only relational geometry (field / compression / edge exception), not literal street or document imagery.",
-    "production":"No derivative artwork generated this round. Existing SVG/HTML insertion path remains valid; binary JPG/PNG insertion remains unverified.",
-    "next":"generate a derivative only if a fourth unrelated sample supports the same field/compression/exception relation; otherwise reject the pattern as overfitting"
+    "status":"SYNTHESIS TEST · WITHIN-FAMILY REPLICATION ONLY",
+    "sampledImageIds":["1RVXZYsuICkr71ZmJ29Oc___Dpzza7qRx","1qDbiReBRrkmsZ3L7pV2KTnsWFpTX8WsV"],
+    "finding":"A 2021 lane photograph repeats enclosure, long directional compression and a distant opening, but it belongs to the same street/corridor family as an earlier sample, so it does not count as independent cross-purpose confirmation. A private sensitive record encountered during sampling was excluded before mining.",
+    "generated":"NO DERIVATIVE THIS ROUND. The field/compression/edge-exception candidate remains provisional; same-family repetition is not enough to trigger production.",
+    "production":"Existing SVG/HTML direct-to-GitHub path remains usable; binary JPG/PNG publication remains unverified.",
+    "next":"find a genuinely unrelated fourth image purpose before producing the next derivative; do not treat same-scene-family recurrence as a new grammar"
   },
   "terminus":{
-    "status":"SYNTHESIS TEST · DISTRIBUTED SUPPORT NODES",
-    "newSourceIds":["17Jt3hPad22RC_5OnM82b54-1zPj1Ch0O"],
-    "finding":"Shiue Fang-Jye and Pan Kuan-Chih (2009) argue that aging-in-place support should not be concentrated only in a community activity center: additional stopping points improve accessibility and social interaction, and community care works by linking formal and informal resources while keeping people in familiar environments.",
-    "generated":"DISTRIBUTED-SUPPORT-NODE MODEL: lowering a barrier need not mean erasing the habitat or centralizing provision. A system can preserve familiar relational territory while adding multiple low-intensity support nodes. This is a concrete counterexample to a simplistic friction-versus-access tradeoff: access can increase by distributing interfaces through an existing ecology rather than replacing that ecology.",
-    "quality":{"argument":"medium","evidence":"literature review + interviews/data analysis as reported","observationDensity":"medium","originality":"medium","reusability":"high"},
-    "relationToPrevious":"Refines FRICTION-AS-HABITAT. The choice is not only keep friction versus remove friction. A third design is to leave the habitat substantially intact while inserting distributed support points that reduce specific access costs.",
-    "next":"seek a non-care domain where distributed interfaces reduce access costs without dissolving the host ecology; if it repeats, promote this from case-specific synthesis to reusable design principle"
+    "status":"SYNTHESIS TEST · TOPOLOGY / POWER SPLIT",
+    "newSourceIds":["1x-1IU02VttTwEffXsHAf_80Oru9osoyR"],
+    "finding":"A network-metropolitan research document treats connection and disconnection as simultaneous: villages, firms, universities, corridors and e-commerce sites can become distributed nodes while monopoly, exclusion, information control and political cut-off remain possible.",
+    "generated":"TOPOLOGY / POWER SPLIT MODEL: distributing local interfaces can lower access costs without destroying habitat, but distributed nodes do not automatically mean distributed control. A system may be spatially or topologically distributed while standards, data, capital, switching authority or exclusion power remain centralized. The prior DISTRIBUTED-SUPPORT-NODE model therefore needs two separate tests: interface distribution and control distribution.",
+    "quality":{"argument":"medium","evidence":"proposal-level / mixed conceptual examples","observationDensity":"medium-low","originality":"medium","reusability":"high as a falsification framework"},
+    "relationToPrevious":"Refines DISTRIBUTED-SUPPORT-NODE by adding a control layer and preventing a romantic equation of distribution with decentralization.",
+    "next":"seek an empirical non-care case with distributed interfaces but centralized control, plus a counterexample where both interface and control are genuinely distributed"
   },
   "phase":"small-batch mining + synthesis tests + provenance/quality scoring + active falsification + archive-to-production experiments + sensitive-record exclusion"
 }
