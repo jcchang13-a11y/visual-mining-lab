@@ -1,6 +1,6 @@
 {
-  "schema": "nostromo-integration-ci/v0.3.3",
-  "completedAt": "2026-08-29T18:04:50.578Z",
+  "schema": "nostromo-integration-ci/v0.4",
+  "completedAt": "2026-08-29T18:05:03.367Z",
   "status": "PASS",
   "rounds": 50,
   "expectedPerRound": {
@@ -10,6 +10,23 @@
   "totals": {
     "executedStateActions": 150,
     "blockedRemoteActions": 150
+  },
+  "repositoryNativeExecutors": {
+    "shrooming": {
+      "status": "EXECUTED",
+      "count": 10,
+      "boundary": "LOCAL DETERMINISTIC SANDBOX; DOES NOT MODIFY OR CLAIM TO BE THE LIVE SHROOMING POPULATION"
+    },
+    "muther": {
+      "status": "EXECUTED",
+      "hitCount": 3,
+      "boundary": "MINES THIS GITHUB REPOSITORY ONLY; DOES NOT CLAIM GOOGLE DRIVE COVERAGE"
+    },
+    "droplet": {
+      "status": "EXECUTED",
+      "statusCode": 200,
+      "boundary": "VERIFIES AN EXPLICIT URL ONLY; DOES NOT CLAIM SEARCH-ENGINE DISCOVERY"
+    }
   },
   "sources": {
     "shroomingUpdated": "2026-08-23",
@@ -22,5 +39,5 @@
     "droplet": "../droplet-state.json"
   },
   "failures": [],
-  "boundary": "PASS certifies published-state executors + GUT + VAJRA dataflow only. It does not certify remote SHROOMING rounds, new MU/TH/UR mining, or new DROPLET web search."
+  "boundary": "PASS certifies published-state executors + GUT + VAJRA + repository-native SHROOMING sandbox + repository corpus MUTHER mining + explicit-URL DROPLET verification. It still does not certify the live SHROOMING population, Google Drive mining, or search-engine discovery."
 }
