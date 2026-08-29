@@ -1,20 +1,20 @@
 {
-  "updatedAt":"2026-08-29 09:32 +08:00",
-  "runLog":"mother-runs/2026-08-29-0932.json",
+  "updatedAt":"2026-08-29 10:27 +08:00",
+  "runLog":"mother-runs/2026-08-29-1027.json",
   "ledger":"muther-ledger.json",
   "uncultured":{
-    "status":"METHOD REFINEMENT · MEDIA CLASS UNCHANGED",
-    "sampledImageIds":["1R4WB7SOBBdXcQ6_hWni8lMWa66TqzpV5xw","143uLa8XYjnbeDv9cQ1Nz0dT2OYbcsTYB"],
-    "finding":"One image filename suggested a messaging-app asset but visual inspection showed a photographed printed document. A second 2017 screenshot remained in the already-sampled social-media family and preserved surrounding interface context.",
-    "candidate":"Context-preserving screenshot capture remains stable within one social-media family but is not yet generalized across apps.",
-    "next":"classify screenshots from pixels/content rather than filename and seek visually verified non-social-media captures"
+    "status":"NO NEW ORE · CURRENT IMAGE PAGE EXHAUSTED",
+    "sampledImageIds":[],
+    "finding":"The currently surfaced image page is dominated by the 2026-08-28 09:47–09:59 burst already represented in the ledger. No additional same-session image was promoted.",
+    "candidate":"No change. Independent-date and independent-purpose images remain the priority.",
+    "next":"seek independent-date and independent-purpose images rather than dense same-session bursts"
   },
   "terminus":{
-    "status":"VEIN REFINED · RESIDUAL FUNCTION LAYER",
-    "newSourceIds":["1F6mUhmmI3NoI0dsHcvv4F3UGHGuH7nFX"],
-    "finding":"A 2014 blacksmith-street field interview shows machines reducing routine handmade demand while one-off repair and adaptive fabrication remain valuable because setup costs can exceed the value of a single repair and the work requires tacit judgment, dimensional reasoning and responses to non-repeating problems. Rent, zoning, logistics and redevelopment can still erase the ecosystem that sustains this residual craft function.",
-    "candidate":"Refined three-layer model: routine task substitution; residual adaptive/tacit function; institutional ecosystem conditions. Technology can replace the first without replacing the second, while institutions can still remove the habitat that lets the second survive.",
-    "next":"test the three-layer model against unrelated domains such as teaching, care work, bureaucracy and media production"
+    "status":"VEIN CONFIRMED IN TEACHING · FUNCTION IS ACTIVATION",
+    "newSourceIds":["1TXS0yFgRP487AaE4dUgkhu0yblM8DHQc"],
+    "finding":"A course syllabus for 都市社會與基進民主 explicitly defines teaching not as grades, terminology, note copying or reading volume, but as grasping the internal logic of claims, debating them and being activated into independent thought. The course is framed as material that induces thinking rather than a package of content to transmit.",
+    "candidate":"Cross-domain confirmation of the three-layer substitution model: routine content delivery can be substituted; residual teaching function lies in diagnosis, debate, provocation and activation; institutional conditions determine whether that function can survive.",
+    "next":"test against care work or bureaucracy for disconfirmation"
   },
   "phase":"small-batch mining with provenance-first, genre-aware scoring, media-class verification and active falsification"
 }
