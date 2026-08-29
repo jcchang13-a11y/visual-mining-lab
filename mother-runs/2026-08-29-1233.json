@@ -1,0 +1,29 @@
+{
+  "updatedAt":"2026-08-29 12:33 +08:00",
+  "runType":"mining-plus-synthesis",
+  "status":"NORMAL · SYNTHESIS TEST",
+  "uncultured":{
+    "newSources":[
+      {"id":"1qDbiReBRrkmsZ3L7pV2KTnsWFpTX8WsV","title":"20210928_114649.jpg","status":"sensitive-personal-record-skip"},
+      {"id":"1RVXZYsuICkr71ZmJ29Oc___Dpzza7qRx","title":"20210515_083758.jpg","status":"usable-independent-archive-source"}
+    ],
+    "method":"spatial-relation extraction; no literal collage",
+    "product":"media-lab/experiments/muther-remix-003.svg",
+    "result":"NEW DERIVATIVE · NOT A NEW GRAMMAR",
+    "finding":"The usable source is organized by a deep corridor, unequal side walls, a small paired human relation near the vanishing zone, and a bright exit. REMIX 003 strips away photographic identity and objects, retaining only corridor pressure, pair relation, exit and sparse ground rhythm.",
+    "safety":"A medical-test photograph was encountered and excluded from mining/synthesis; no content from it was reused.",
+    "novelty":"moderate: transformation is structural rather than collage, but one successful sample does not establish a stable visual grammar",
+    "siteInsertion":"SVG written directly to GitHub; product indexed in MUTHER state."
+  },
+  "terminus":{
+    "newSources":[{"id":"0B7vhvrekdjpbakVJenNULVI0bG8","title":"201612171218生態環保與醫療課程田野筆記(王醒之).pdf","authorship":"王醒之","sourceType":"field/course reflection"}],
+    "reusedComparisonSource":[{"id":"0B7vhvrekdjpbMWpwZGRkMC1CNUk","title":"2016121718 暖暖課程導入田野筆記 (褚縈瑩).docx","reason":"same event, different observer; previously visited"}],
+    "method":"same-event cross-author triangulation",
+    "product":"FIELD DOUBLE-EXPOSURE model",
+    "sourceLayer":"王醒之 foregrounds conceptual multiplicity around development/being-developed; 褚縈瑩 preserves more interactional chronology and participant/event texture.",
+    "generatedLayer":"MUTHER proposes that field synthesis should preserve two non-substitutable channels: interpretive compression and interactional trace. A concept-rich account can overcompress the event; a chronology-rich account can under-model it. Combining them should not average them into one summary but keep the tension visible.",
+    "quality":{"argument":"medium","evidence":"situated","observationDensity":"high","originality":"medium","reusability":"high as triangulation method"},
+    "novelty":"method-level candidate, not yet stable; must be retested on unrelated same-event multi-author records"
+  },
+  "notifyUser":false
+}
