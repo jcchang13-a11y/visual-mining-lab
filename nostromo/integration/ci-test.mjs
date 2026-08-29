@@ -1,4 +1,4 @@
-// NOSTROMO repository-native integration CI v0.7
+// NOSTROMO repository-native integration CI v0.9
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import vm from 'node:vm';
@@ -9,6 +9,7 @@ import {loadConnectorEvidence} from './connector-evidence.mjs';
 const root=process.cwd();
 const integrationBase=path.join(root,'nostromo','integration');
 const resultPath=path.join(integrationBase,'ci-last-result.json');
+const formalResultPath=path.join(integrationBase,'formal-round-last-result.json');
 function resolveRequest(input){const s=String(input);if(/^https?:/i.test(s))throw new Error('NETWORK_FORBIDDEN_IN_CORE_CI_FETCH');return path.resolve(integrationBase,s);}
 globalThis.fetch=async function(input){const p=resolveRequest(input);try{const text=await fs.readFile(p,'utf8');return {ok:true,status:200,json:async()=>JSON.parse(text),text:async()=>text};}catch(error){if(error?.code==='ENOENT')return {ok:false,status:404,json:async()=>{throw error},text:async()=>''};throw error;}};
 async function loadScript(rel){const code=await fs.readFile(path.join(root,rel),'utf8');vm.runInThisContext(code,{filename:rel});}
@@ -30,6 +31,10 @@ try{
     if(!r.sources?.mutherUpdated)failures.push({round:r.round,type:'MUTHER_SOURCE_MISSING'});
     if(!r.sources?.dropletUpdated)failures.push({round:r.round,type:'DROPLET_SOURCE_MISSING'});
   }
+
+  const formal=JSON.parse(await fs.readFile(formalResultPath,'utf8'));
+  if(formal.status!=='PASS')failures.push({type:'FORMAL_CHAIN_REJECTED',detail:formal.failures||[]});
+  if(JSON.stringify(formal.chain)!==JSON.stringify(['R111','R112']))failures.push({type:'FORMAL_CHAIN_UNEXPECTED',chain:formal.chain});
 
   const sandbox=await shroomSandboxReadingRound({text:'若見諸相非相，即見如來。',agents:10,round:1});
   const greenhouseProbe=await shroomGreenhousePoseQuestion({question:'「我們」在這裡指的是誰？'});
@@ -57,14 +62,15 @@ try{
   }
 
   const result={
-    schema:'nostromo-integration-ci/v0.7',completedAt:new Date().toISOString(),status:out.status==='PASS'&&active.status==='PASS'&&connector.status==='ACCEPTED'&&failures.length===0?'PASS':'FAIL',rounds:out.rounds,
+    schema:'nostromo-integration-ci/v0.9',completedAt:new Date().toISOString(),status:out.status==='PASS'&&active.status==='PASS'&&connector.status==='ACCEPTED'&&formal.status==='PASS'&&failures.length===0?'PASS':'FAIL',rounds:out.rounds,
     expectedPerRound:{executedStateActions:3,blockedRemoteActions:3},
     totals:{executedStateActions:out.trace.reduce((n,r)=>n+(r.actions?.summary?.EXECUTED||0),0),blockedRemoteActions:out.trace.reduce((n,r)=>n+(r.actions?.summary?.QUEUED_UNEXECUTABLE||0),0)},
+    formalRoundChain:{status:formal.status,chain:formal.chain,rounds:formal.rounds?.map(r=>({round:r.round,previousRound:r.previousRound,parentBlobSha:r.parentBlobSha,provenanceFingerprint:r.provenanceFingerprint,executorCompatibility:r.executorCompatibility,status:r.status}))||[],boundary:formal.boundary},
     repositoryNativeExecutors:{shrooming:{status:sandbox.status,count:sandbox.count,boundary:sandbox.boundary},greenhouseProbe:{status:greenhouseProbe.status,count:greenhouseProbe.count,sourceRounds:greenhouseProbe.sourceRounds,boundary:greenhouseProbe.boundary},muther:{status:mine.status,hitCount:mine.hitCount,boundary:mine.boundary},droplet:{status:verify.status,statusCode:verify.statusCode||null,boundary:verify.boundary||null}},
     connectorExecutors:{status:connector.status,completedAt:connector.completedAt,mutherDrive:{status:connector.actions?.muther?.status,returnedCount:connector.actions?.muther?.returnedCount,boundary:connector.actions?.muther?.boundary},dropletWeb:{status:connector.actions?.droplet?.status,evidenceCount:connector.actions?.droplet?.evidenceCount,boundary:connector.actions?.droplet?.boundary},boundary:connector.boundary},
     activeExecutorLoop:{status:active.status,requestedRounds:active.requestedRounds,completedRounds:active.completedRounds,roundsWithAllFourRepoExecutors:active.trace.filter(r=>r.executors.shrooming.status==='EXECUTED'&&r.executors.greenhouseProbe.status==='EXECUTED'&&r.executors.muther.status==='EXECUTED'&&r.executors.droplet.status==='EXECUTED').length,gutAbsorbedTotal:active.trace.reduce((n,r)=>n+(r.gut?.absorbed||0),0),connectorHandoff:active.connectorHandoff,lastCarry:active.trace.at(-1)?.carryOut||null,boundary:active.boundary},
     sources:out.trace[0]?.sources||null,paths:globalThis.NostromoOrchestrator.paths,failures,
-    boundary:'PASS certifies 50-round published-state integration, a 10-round closed loop of repository-native executors including a SHROOMING question probe grounded in the latest published greenhouse history, and successful handoff into GUT of persisted evidence from query-scoped Google Drive mining and public web search. It does not certify formal SHROOMING round advancement, ten independent live LLM processes, exhaustive whole-Drive mining, or that GitHub Actions itself can invoke private connectors.'
+    boundary:'PASS certifies 50-round published-state integration, deterministic reproducibility and parent-blob continuity for the declared R111→R112 formal SHROOMING chain, a 10-round closed loop of repository-native executors, and successful handoff into GUT of persisted evidence from query-scoped Google Drive mining and public web search. It does not certify ten independent live LLM processes, exhaustive whole-Drive mining, or that GitHub Actions itself can invoke private connectors.'
   };
   await writeResult(result); if(result.status!=='PASS')process.exitCode=1;
-}catch(error){const result={schema:'nostromo-integration-ci/v0.7',completedAt:new Date().toISOString(),status:'FAIL',rounds:0,failures:[{type:'UNCAUGHT_EXECUTION_ERROR',message:String(error?.message||error),stack:String(error?.stack||'').slice(0,4000)}],boundary:'Failure evidence was persisted before exiting. No uncompleted execution is counted as PASS.'};await writeResult(result);process.exitCode=1;}
+}catch(error){const result={schema:'nostromo-integration-ci/v0.9',completedAt:new Date().toISOString(),status:'FAIL',rounds:0,failures:[{type:'UNCAUGHT_EXECUTION_ERROR',message:String(error?.message||error),stack:String(error?.stack||'').slice(0,4000)}],boundary:'Failure evidence was persisted before exiting. No uncompleted execution is counted as PASS.'};await writeResult(result);process.exitCode=1;}
