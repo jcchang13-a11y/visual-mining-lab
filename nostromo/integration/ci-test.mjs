@@ -1,4 +1,4 @@
-// NOSTROMO repository-native integration CI v0.3.2
+// NOSTROMO repository-native integration CI v0.3.3
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import vm from 'node:vm';
@@ -54,7 +54,7 @@ try{
   }
 
   const result={
-    schema:'nostromo-integration-ci/v0.3.2',
+    schema:'nostromo-integration-ci/v0.3.3',
     completedAt:new Date().toISOString(),
     status:out.status==='PASS'&&failures.length===0?'PASS':'FAIL',
     rounds:out.rounds,
@@ -69,7 +69,7 @@ try{
   if(result.status!=='PASS')process.exitCode=1;
 }catch(error){
   const result={
-    schema:'nostromo-integration-ci/v0.3.2',
+    schema:'nostromo-integration-ci/v0.3.3',
     completedAt:new Date().toISOString(),
     status:'FAIL',
     rounds:0,
