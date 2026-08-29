@@ -1,6 +1,6 @@
 {
   "schema": "nostromo-integration-ci/v0.5",
-  "completedAt": "2026-08-29T20:05:28.801Z",
+  "completedAt": "2026-08-29T20:05:55.954Z",
   "status": "PASS",
   "rounds": 50,
   "expectedPerRound": {
@@ -33,9 +33,9 @@
     "requestedRounds": 10,
     "completedRounds": 10,
     "roundsWithAllThreeExecutors": 10,
-    "gutAbsorbedTotal": 830,
+    "gutAbsorbedTotal": 903,
     "lastCarry": "SHROOMING_SANDBOX_READING · EXECUTED · LOCAL DETERMINISTIC SANDBOX; DOES NOT MODIFY OR CLAIM TO BE THE LIVE SHROOMING POPULATION · 73d94f064c23977c · sandbox-1 · structure · 以 structure 位置重讀：SHROOMING_SANDBOX_READING · EXECUTED · LOCAL DETERMINISTIC SANDBOX; DOES NOT MODIFY OR CLAIM TO BE THE LIVE SHROOMING POPULATION · 51301838b7647e25 · sandbox-1 · structure · 以 stru · c519a2315cb2adb5 · sandbox-2 · counterexample · 以 counterexample 位置重讀：SHROOMING_SANDBOX_READING · EXECUTED · LOCAL DETERMINISTIC SANDBOX; DOES NOT MODIFY OR CLAIM TO BE THE LIVE SHROOMING POPULATION · 51301838b7647e25 · sandbox-1 · structure · 以 stru · 8554a5f20cb5f814",
-    "boundary": "Certifies closed-loop routing only for SHROOMING local deterministic sandbox, MU/TH/UR repository mining, DROPLET explicit-URL verification, VAJRA and GUT. It does not certify live SHROOMING, Google Drive mining, or search-engine discovery."
+    "boundary": "Certifies closed-loop routing for SHROOMING local deterministic sandbox, MU/TH/UR repository mining, DROPLET explicit-URL verification, VAJRA and GUT, plus acceptance and digestion of evidence produced by externally executed Google Drive query mining and public web search. It does not certify live SHROOMING, exhaustive whole-Drive mining, or that GitHub Actions itself can call those connectors."
   },
   "sources": {
     "shroomingUpdated": "2026-08-23",
