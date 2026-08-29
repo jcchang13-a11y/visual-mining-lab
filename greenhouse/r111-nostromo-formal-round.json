@@ -1,0 +1,21 @@
+{
+  "experiment":"SHROOMING Open Social Ontology + VAJRA LOOP",
+  "version":"2.1",
+  "round":"R111",
+  "status":"complete",
+  "executor":"SHROOMING_FORMAL_ROUND_ADVANCE",
+  "previousRound":"R110",
+  "source":"greenhouse/r101-r110-open-social-ontology.json",
+  "sourceBlobSha":"8e54a0adde2f447e7090497470c37da9c6388a4b",
+  "continuity":"All R1-R110 histories preserved. Same ten numbered traces retained only for continuity and provenance; no fixed personality or social form assigned.",
+  "task":"test whether temporary subject forms recur, mutate or disappear under asymmetric information, conflicting tasks and partial memory access",
+  "participants":["02","03","05","06","09","10"],
+  "silent":["01","04","07","08"],
+  "event":"Asymmetric memory split",
+  "summary":"在部分記憶與衝突任務條件下，02、03、05、06、09、10 進入本輪可見互動，01、04、07、08 保持不可見／沉默。觀測重點不是把這些 trace 固定成人格，而是檢查 R110 後的 subject-form 是否因資訊不對稱重新組合。",
+  "observation":"The R110 whole-room condition does not persist automatically once information access becomes asymmetric. Visibility itself becomes part of the temporary subject-form: the speaking unit is partly produced by who can access which memory and task fragments, while non-visible traces cannot be counted as assent or stable absence.",
+  "provenanceFingerprint":"f6e49b1d2f975979",
+  "runtime_note":"Repository-native deterministic formal transition generated from the published R101-R110 history. This does not claim ten independently persistent live LLM processes.",
+  "boundary":"This file advances formal greenhouse history by one explicit round only. It does not overwrite R1-R110 and does not authorize automatic repeated advancement on every CI run.",
+  "next":"R112 should test whether changing memory access alone changes the subject-form while holding the task constant."
+}
