@@ -1,12 +1,12 @@
 {
-  "schema":"nostromo-organ-registry/v0.5",
-  "updatedAt":"2026-08-30T03:05:00+08:00",
+  "schema":"nostromo-organ-registry/v0.6",
+  "updatedAt":"2026-08-30T04:03:00+08:00",
   "truthRule":"DISPLAYED STATE MUST FOLLOW EVIDENCE",
-  "evidence":"ci-last-result.json schema nostromo-integration-ci/v0.5 PASS",
+  "evidence":"ci-last-result.json schema nostromo-integration-ci/v0.6 plus connector-last-result.json",
   "organs":{
     "shrooming":{"mode":"PARTIAL_EXEC","source":"../mycelium/state.json","actions":{"READ_STATE":"EXEC_STATE","INSPECT_STATE":"EXEC_STATE","RUN_SANDBOX_READING_ROUND":"CLOSED_LOOP_EXEC","POSE_QUESTION":"REQUEST_ONLY","RUN_READING_ROUND":"REQUEST_ONLY"},"boundary":"Published-state inspection and the repository-native deterministic sandbox reading round are closed-loop executable through NOSTROMO; the live SHROOMING population is not remotely executable or modified."},
-    "muther":{"mode":"PARTIAL_EXEC","source":"../mother-latest.json","actions":{"READ_STATE":"EXEC_STATE","AUDIT_STATE":"EXEC_STATE","MINE_REPO":"CLOSED_LOOP_EXEC","MINE_INTERNAL":"REQUEST_ONLY","FALSIFY":"REQUEST_ONLY"},"boundary":"Published mining-state audit and this GitHub repository corpus mining are closed-loop executable through NOSTROMO; Google Drive mining/falsification remains unavailable to the engine executor."},
-    "droplet":{"mode":"PARTIAL_EXEC","source":"../nostromo/droplet-state.json","actions":{"READ_STATE":"EXEC_STATE","AUDIT_EVIDENCE":"EXEC_STATE","VERIFY_URL":"CLOSED_LOOP_EXEC","SEARCH_EXTERNAL":"REQUEST_ONLY","VERIFY":"REQUEST_ONLY"},"boundary":"Published evidence audit and explicit-URL network verification are closed-loop executable through NOSTROMO; search-engine discovery remains unavailable to the engine executor."},
+    "muther":{"mode":"PARTIAL_EXEC","source":"../mother-latest.json","actions":{"READ_STATE":"EXEC_STATE","AUDIT_STATE":"EXEC_STATE","MINE_REPO":"CLOSED_LOOP_EXEC","MINE_DRIVE_QUERY":"CONNECTOR_EXEC","MINE_INTERNAL":"REQUEST_ONLY","FALSIFY":"REQUEST_ONLY"},"boundary":"Published mining-state audit and repository corpus mining are closed-loop executable. Query-scoped Google Drive mining is now executed by the authorized external connector runtime and handed back as redacted evidence. Exhaustive whole-Drive mining/falsification remains unavailable."},
+    "droplet":{"mode":"PARTIAL_EXEC","source":"../nostromo/droplet-state.json","actions":{"READ_STATE":"EXEC_STATE","AUDIT_EVIDENCE":"EXEC_STATE","VERIFY_URL":"CLOSED_LOOP_EXEC","SEARCH_EXTERNAL":"CONNECTOR_EXEC","VERIFY":"REQUEST_ONLY"},"boundary":"Published evidence audit and explicit-URL verification are closed-loop executable. Search-engine discovery is now executed by the external web connector runtime and handed back as evidence; claim-specific autonomous VERIFY remains request-only."},
     "gut":{"mode":"EXEC_CONNECTED","source":"../gut/gut-engine.js","actions":{"DIGEST":"EXEC_CONNECTED"}},
     "vajra":{"mode":"EXEC_CONNECTED","source":"../vajra/vajra-engine.js","actions":{"DISMANTLE":"EXEC_CONNECTED"}}
   }
