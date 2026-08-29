@@ -1,6 +1,6 @@
-/* VAJRA ENGINE v0.1 — bounded recursive position-dismantling prototype */
+/* VAJRA ENGINE v0.1.1 — bounded recursive position-dismantling prototype */
 const VAJRA_LENSES=['scope','evidence','counterexample','criterion','excluded alternative','self-reference'];
 function detectPosition(text){return {position:String(text||'').trim(),strong:/唯一|所有|一定|永遠|完全|必然/.test(text)};}
 function extractAssumptions(p){const a=['命題成立條件需要顯式化'];if(p.strong)a.push('包含強普遍化／排他性前提');if(/真理/.test(p.position))a.push('可能把特定判準等同於真理');if(/最終目的/.test(p.position))a.push('可能把暫定目的固定為終點');return a;}
 function runVajra(text,maxRounds=6){const base=detectPosition(text),trace=[],seen=new Set();let current=base.position;for(let i=0;i<Math.max(1,Math.min(12,maxRounds));i++){const lens=VAJRA_LENSES[i%VAJRA_LENSES.length],p=detectPosition(current),assumptions=extractAssumptions(p),signature=base.position+'|'+lens;if(seen.has(signature))return {status:'LOOP_DETECTED',trace};seen.add(signature);const next=`對「${base.position}」暫不定案；下一輪檢查 ${lens}。`;trace.push({round:i+1,position:current,assumptions,lens,action:'尋找反例、邊界條件與被排除的替代解釋',next});current=next;}return {status:'DEPTH_BOUND',trace};}
-if(typeof window!=='undefined')window.VajraEngine={run:runVajra};
+(typeof window!=='undefined'?window:globalThis).VajraEngine={run:runVajra};
