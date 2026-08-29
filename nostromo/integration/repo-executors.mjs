@@ -1,4 +1,4 @@
-// NOSTROMO repository-native executors v0.7
+// NOSTROMO repository-native executors v0.8
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import https from 'node:https';
@@ -52,6 +52,30 @@ export async function shroomGreenhousePoseQuestion({question='',statePath='green
   };
 }
 
+export async function shroomAdvanceGreenhouseRound({task='',statePath='greenhouse/r101-r110-open-social-ontology.json',expectedSourceBlobSha=null}={}){
+  const t=compact(task,1600); if(!t)throw new Error('SHROOM_ROUND_TASK_REQUIRED');
+  const full=path.join(ROOT,statePath);
+  const raw=await fs.readFile(full,'utf8');
+  const state=JSON.parse(raw);
+  const events=Array.isArray(state.events)?state.events:[];
+  if(!events.length)throw new Error('SHROOM_GREENHOUSE_EVENTS_MISSING');
+  const last=events.at(-1);
+  const m=String(last.round||'').match(/R(\d+)/); if(!m)throw new Error('SHROOM_LAST_ROUND_UNPARSEABLE');
+  const next=`R${Number(m[1])+1}`;
+  const ids=['01','02','03','04','05','06','07','08','09','10'];
+  const participants=ids.filter(id=>parseInt(crypto.createHash('sha256').update(`${t}|${id}`).digest('hex').slice(0,8),16)%3!==0);
+  const silent=ids.filter(id=>!participants.includes(id));
+  const provenanceFingerprint=hash(`${state.version}|${state.rounds}|${last.event}|${t}`);
+  return {
+    executor:'SHROOMING_FORMAL_ROUND_ADVANCE',status:'EXECUTED',round:next,previousRound:last.round,
+    source:statePath,expectedSourceBlobSha,task:t,participants,silent,
+    event:'Asymmetric memory split',
+    summary:`在部分記憶與衝突任務條件下，${participants.join('、')} 進入本輪可見互動，${silent.join('、')} 保持不可見／沉默。觀測重點不是把這些 trace 固定成人格，而是檢查 R110 後的 subject-form 是否因資訊不對稱重新組合。`,
+    provenanceFingerprint,
+    boundary:'FORMAL REPOSITORY STATE ADVANCE FROM THE PUBLISHED GREENHOUSE HISTORY. THIS IS A SINGLE-MODEL / DETERMINISTIC EXPERIMENTAL TRANSITION, NOT TEN INDEPENDENT PERSISTENT LLM PROCESSES. IT MUST BE WRITTEN AS A NEW HISTORY FILE; OLD ROUNDS ARE NEVER OVERWRITTEN.'
+  };
+}
+
 async function walk(dir,out=[]){for(const e of await fs.readdir(dir,{withFileTypes:true})){if(['.git','node_modules'].includes(e.name))continue;const p=path.join(dir,e.name);if(e.isDirectory())await walk(p,out);else if(/\.(md|txt|json|js|mjs|html)$/i.test(e.name))out.push(p);}return out;}
 export async function mutherMineRepo({query='',limit=12}={}){
   const q=compact(query,200).toLowerCase(); if(!q)throw new Error('MUTHER_QUERY_REQUIRED');
@@ -60,5 +84,5 @@ export async function mutherMineRepo({query='',limit=12}={}){
   return {executor:'MUTHER_REPOSITORY_MINE',status:'EXECUTED',query:q,hitCount:hits.length,boundary:'MINES THIS GITHUB REPOSITORY ONLY; DOES NOT CLAIM GOOGLE DRIVE COVERAGE',hits};
 }
 
-function probe(url,timeoutMs=8000){return new Promise((resolve,reject)=>{const u=new URL(url);const lib=u.protocol==='https:'?https:http;const req=lib.request(u,{method:'GET',headers:{'User-Agent':'NOSTROMO-DROPLET/0.7'}},res=>{let bytes=0;res.on('data',c=>{bytes+=c.length;if(bytes>65536)req.destroy()});res.on('end',()=>resolve({statusCode:res.statusCode||0,contentType:res.headers['content-type']||null,bytesSampled:bytes,finalUrl:url}));res.on('close',()=>resolve({statusCode:res.statusCode||0,contentType:res.headers['content-type']||null,bytesSampled:bytes,finalUrl:url}));});req.setTimeout(timeoutMs,()=>req.destroy(new Error('TIMEOUT')));req.on('error',reject);req.end();});}
+function probe(url,timeoutMs=8000){return new Promise((resolve,reject)=>{const u=new URL(url);const lib=u.protocol==='https:'?https:http;const req=lib.request(u,{method:'GET',headers:{'User-Agent':'NOSTROMO-DROPLET/0.8'}},res=>{let bytes=0;res.on('data',c=>{bytes+=c.length;if(bytes>65536)req.destroy()});res.on('end',()=>resolve({statusCode:res.statusCode||0,contentType:res.headers['content-type']||null,bytesSampled:bytes,finalUrl:url}));res.on('close',()=>resolve({statusCode:res.statusCode||0,contentType:res.headers['content-type']||null,bytesSampled:bytes,finalUrl:url}));});req.setTimeout(timeoutMs,()=>req.destroy(new Error('TIMEOUT')));req.on('error',reject);req.end();});}
 export async function dropletVerifyUrl({url}={}){if(!/^https?:\/\//i.test(String(url||'')))throw new Error('DROPLET_URL_REQUIRED');const r=await probe(url);return {executor:'DROPLET_URL_VERIFY',status:r.statusCode>=200&&r.statusCode<400?'EXECUTED':'FAILED',boundary:'VERIFIES AN EXPLICIT URL ONLY; DOES NOT CLAIM SEARCH-ENGINE DISCOVERY',...r};}
