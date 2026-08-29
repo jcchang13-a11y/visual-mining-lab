@@ -1,3 +1,4 @@
+// NOSTROMO repository-native integration CI v0.3.1
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import vm from 'node:vm';
