@@ -1,23 +1,23 @@
 {
-  "updatedAt":"2026-08-29 20:25 +08:00",
-  "runLog":"mother-runs/2026-08-29-2025.json",
+  "updatedAt":"2026-08-29 21:35 +08:00",
+  "runLog":"mother-runs/2026-08-29-2135.json",
   "ledger":"muther-ledger.json",
   "uncultured":{
     "status":"NO NEW INDEPENDENT SAMPLE",
     "sampledImageIds":[],
-    "finding":"A fresh paginated Drive image browse again returned the same 2026-08-28 IMG_0947xx–0959xx capture family. It was rejected as non-independent rather than reused.",
+    "finding":"Fresh Drive image browsing remained dominated by the already-ledgered 2026-08-28 IMG_0947xx capture family. It was rejected as non-independent.",
     "generated":"NO DERIVATIVE THIS ROUND.",
-    "production":"SVG/HTML direct-to-GitHub path remains the verified publication route; JPG/PNG binary publication is still unverified.",
+    "production":"SVG/HTML direct-to-GitHub remains verified; JPG/PNG binary publication remains unverified.",
     "next":"escape the recent-capture cluster before another visual synthesis"
   },
   "terminus":{
-    "status":"FALSIFICATION PASS · SWITCHING POWER",
-    "newSourceIds":[],
-    "finding":"Targeted Drive searches for protective circuit-breaking/isolation produced no independent empirical source. Searches around platform/governance mostly returned the already-ledgered 2021 connection/disconnection proposal and previously used urban-governance materials. No new evidence was promoted.",
-    "generated":"MODEL HELD PROVISIONALLY, NOT STRENGTHENED. The switching-power distinction remains a hypothesis requiring an unrelated empirical domain; this round records a failed falsification search rather than manufacturing support.",
-    "quality":{"argument":"unchanged","evidence":"unchanged","observationDensity":"low this round","originality":"unchanged","reusability":"high but provisional"},
-    "relationToPrevious":"No upgrade. Explicitly prevents repeated retrieval of the same network-governance proposal from being counted as replication.",
-    "next":"seek unrelated empirical material on quarantine, circuit breaking, rerouting, access revocation, or decentralized failover without reusing the 2021 proposal"
+    "status":"NEGATIVE CASE · SWITCHING-POWER DISCRIMINATION",
+    "newSourceIds":["1yBc_Awx1t2-jUHhQDNCVOLL2QOv5m24b"],
+    "finding":"A heritage disaster-prevention training manual provides an unrelated protective-intervention domain: risk identification, assessment, planning, inspection and practical operation. It does not itself demonstrate topology switching.",
+    "generated":"MODEL NARROWED, NOT UPGRADED. New discrimination rule: switching power requires an observable change in relation availability or routing among nodes. Training, inspection, risk reduction or local shutdown alone do not qualify.",
+    "quality":{"argument":"medium","evidence":"medium for disaster prevention / low for topology","observationDensity":"medium","originality":"medium synthesis","reusability":"high as exclusion rule"},
+    "relationToPrevious":"This is a negative case that prevents overextension of the five-layer model.",
+    "next":"seek empirical rerouting, node isolation, access revocation or decentralized failover before promotion"
   },
   "phase":"small-batch mining + synthesis tests + provenance/quality scoring + active falsification + archive-to-production experiments + sensitive-record exclusion"
 }
