@@ -10,6 +10,7 @@ on:
       - 'nostromo/droplet-state.json'
       - 'mycelium/state.json'
       - 'mother-latest.json'
+      - 'greenhouse/**'
   workflow_dispatch:
 
 permissions:
@@ -26,6 +27,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - name: Verify formal greenhouse continuity
+        run: node nostromo/integration/formal-round-test.mjs
       - name: Run 50-round integration test
         id: integration
         continue-on-error: true
