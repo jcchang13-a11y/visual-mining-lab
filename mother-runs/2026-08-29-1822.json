@@ -1,0 +1,10 @@
+{
+  "updatedAt":"2026-08-29 18:22 +08:00",
+  "runType":"automated-mining-and-synthesis",
+  "status":"NORMAL · SYNTHESIS ADVANCED",
+  "uncultured":{"newSources":[],"result":"NO NEW ORE / NO DERIVATIVE","reason":"independent cross-purpose evidence threshold not met"},
+  "terminus":{"newSources":[{"id":"17_T8wxnGzXtllnoVDSObgV89U3_5syR0","title":"04第四章_文化遺產管理組織的層級與實踐.pdf","sourceType":"research / dissertation chapter","authorship":"other author"},{"id":"17gQ2FJxaybQeB_zMBiZgy9oGw3R9MTYp","title":"張榮哲、楊友仁_金融化、都市更新與文化襲產保存之空間衝突.docx","sourceType":"coauthored research paper","authorship":"user + coauthor"}],"method":"cross-author conceptual collision + model decomposition","generated":"LAYERED DISTRIBUTION MODEL","novelty":"The synthesis separates operational contact, rule-setting, resource allocation and veto/switching power. This four-layer decomposition is MUTHER-generated and is not attributed to either source.","isSummaryOnly":false,"counterexampleStatus":"not yet; next run must seek all-four-layers-distributed case","reproducibility":"candidate; requires non-urban/non-heritage retest"},
+  "websiteInsertion":"SUCCESS · observer/latest/run log updated via text JSON path",
+  "notifyUser":true,
+  "notificationReason":"new synthesis materially improves the previous topology/power model"
+}
