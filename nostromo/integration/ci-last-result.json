@@ -1,0 +1,26 @@
+{
+  "schema": "nostromo-integration-ci/v0.3.3",
+  "completedAt": "2026-08-29T17:12:24.136Z",
+  "status": "PASS",
+  "rounds": 50,
+  "expectedPerRound": {
+    "executedStateActions": 3,
+    "blockedRemoteActions": 3
+  },
+  "totals": {
+    "executedStateActions": 150,
+    "blockedRemoteActions": 150
+  },
+  "sources": {
+    "shroomingUpdated": "2026-08-23",
+    "mutherUpdated": "2026-08-30 00:19 +08:00",
+    "dropletUpdated": "2026-08-28"
+  },
+  "paths": {
+    "shrooming": "../../mycelium/state.json",
+    "muther": "../../mother-latest.json",
+    "droplet": "../droplet-state.json"
+  },
+  "failures": [],
+  "boundary": "PASS certifies published-state executors + GUT + VAJRA dataflow only. It does not certify remote SHROOMING rounds, new MU/TH/UR mining, or new DROPLET web search."
+}
