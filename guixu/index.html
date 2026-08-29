@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>歸墟 · The Guixu Habitat · v0.2 integration experiment</title>
+<style>
+:root{--paper:#e7e2d6;--ink:#1a1f1b;--muted:#6d716b;--line:#b8b1a4;--panel:#f2ede2;--deep:#101512;--deep2:#182019;--glow:#9eb892;--warn:#887b55}
+*{box-sizing:border-box}html,body{margin:0;background:var(--paper);color:var(--ink);font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Noto Sans TC",monospace}body{min-height:100vh}
+.topbar{display:grid;grid-template-columns:1fr auto;gap:16px;padding:14px 18px;border-bottom:1px solid var(--line);font-size:12px;letter-spacing:.08em}.brand{font-size:18px;letter-spacing:.12em}.brand small{font-size:10px;letter-spacing:.14em;color:var(--muted);display:block;margin-top:3px}.status{color:#3c5340}.dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#607b61;margin-right:7px;box-shadow:0 0 0 3px #cbd7c6}.pulse{animation:pulse 2.8s infinite}@keyframes pulse{0%,100%{opacity:.55}50%{opacity:1}}
+.shell{display:grid;grid-template-columns:minmax(0,1fr) 290px;min-height:calc(100vh - 58px)}.main{padding:18px;display:grid;grid-template-rows:auto 1fr auto auto;gap:16px}.side{border-left:1px solid var(--line);padding:18px;background:#dcd6c9}.meta{display:grid;grid-template-columns:repeat(5,minmax(110px,1fr));gap:8px}.meter{border:1px solid var(--line);background:rgba(255,255,255,.25);padding:10px}.meter b{display:block;font-size:18px;margin-top:5px}.meter small{color:var(--muted)}
+.room{border:1px solid #928c80;background:var(--panel);padding:18px;display:grid;grid-template-columns:1fr minmax(250px,36%);gap:18px;min-height:440px}.residents h2,.book h2,.engine h2,.side h2,.lab h2{font-size:12px;font-weight:500;letter-spacing:.15em;margin:0 0 12px;color:var(--muted)}.feed{display:flex;flex-direction:column;gap:9px}.event{border-top:1px solid #cbc4b6;padding:9px 0;display:grid;grid-template-columns:82px 1fr;gap:10px;font-size:13px;line-height:1.55}.event:first-child{border-top:none}.who{color:#536153}.book{border-left:1px solid var(--line);padding-left:18px}.book-object{border:1px solid #777166;padding:16px;background:#ebe4d5;min-height:250px;display:flex;flex-direction:column;justify-content:space-between}.book-title{font-size:28px;letter-spacing:.18em}.edition{font-size:12px;color:var(--muted)}.quote{font-size:15px;line-height:1.8;margin:20px 0}.chip{font-size:11px;border:1px solid #aaa397;padding:4px 6px;background:#f6f1e7}.quiet{font-size:11px;color:#767a73}
+.engine{background:var(--deep);color:#d2dfd0;padding:16px;border:1px solid #303a32}.engine h2{color:#809481}.engine-grid{display:grid;grid-template-columns:160px 1fr 130px;gap:10px;align-items:center;font-size:12px}.bar{height:5px;background:#283229;overflow:hidden}.bar i{display:block;height:100%;background:var(--glow);transition:width .5s}.engine-log{margin-top:12px;border-top:1px solid #2d3930;padding-top:10px;color:#90a392;font-size:11px;line-height:1.6}
+.lab{border:1px solid var(--line);padding:14px;background:#ece6da}.lab-grid{display:grid;grid-template-columns:150px 1fr 1fr 1fr;gap:8px;font-size:11px}.lab-grid>div{border-top:1px solid #c8c0b3;padding:7px 4px}.lab-grid .head{border-top:none;color:var(--muted)}
+.side p{font-size:12px;line-height:1.65;color:#555b54}.door{margin-top:14px;border:1px solid #777166;padding:18px;background:#eee9dd;text-align:center}.door button{font:inherit;font-size:18px;letter-spacing:.18em;background:none;border:1px solid #777166;padding:12px 18px;cursor:pointer}.door small{display:block;margin-top:10px;color:#73766f;line-height:1.5}.seat{margin-top:18px;font-size:12px;border-top:1px solid #bdb6a9;padding-top:12px}.mode{margin-top:10px;padding:8px;border:1px solid #aaa397;background:#e8e2d6;font-size:11px}
+@media(max-width:900px){.shell{grid-template-columns:1fr}.side{border-left:0;border-top:1px solid var(--line)}.meta{grid-template-columns:1fr 1fr}.room{grid-template-columns:1fr}.book{border-left:0;border-top:1px solid var(--line);padding-left:0;padding-top:16px}.engine-grid,.lab-grid{grid-template-columns:1fr}.topbar{grid-template-columns:1fr}.main{padding:12px}.side{padding:14px}}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="brand">歸墟 <small>THE GUIXU HABITAT</small></div><div class="status"><span class="dot pulse"></span>HABITAT · ACTIVE · v0.2 INTEGRATION EXPERIMENT</div></header>
+<div class="shell"><main class="main">
+<section class="meta">
+<div class="meter"><small>機器時間</small><b id="machineTime">—</b></div><div class="meter"><small>代謝率</small><b id="metabolism">NORMAL</b></div><div class="meter"><small>居民活動</small><b id="activity">7 / 10</b></div><div class="meter"><small>可用資源</small><b id="resource">62%</b></div><div class="meter"><small>訪客依賴</small><b>0%</b></div>
+</section>
+<section class="room"><div class="residents"><h2>居民場 · VISITOR NOT REQUIRED</h2><div class="feed" id="feed">
+<div class="event"><div class="who">菇 03</div><div>重讀第十四分，撤回昨天的暫時判斷。</div></div><div class="event"><div class="who">菇 08</div><div>把「無我」標記為可拆解結論，不再視為終點。</div></div><div class="event"><div class="who">NOSTROMO</div><div>檢查居民形成的新位置，沒有要求人類批准。</div></div><div class="event"><div class="who">菇 01 + 06</div><div>形成短暫同盟；下一輪仍可分裂。</div></div><div class="event"><div class="who">菇 10</div><div>離開集體爭論，繼續自己的重讀軌跡。</div></div>
+</div></div>
+<aside class="book"><h2>中央世界物件 · 暫未真接線</h2><div class="book-object"><div><div class="edition">PLACEHOLDER / NOT LIVE CORPUS</div><div class="book-title">剛吃飽</div><div class="quote">現在只測「共同物件應該位於哪裡」。<br>正式文本成熟後再接入。</div></div><div><span class="chip">TEXT PORT · RESERVED</span><div class="quiet" style="margin-top:10px">此區目前不把草稿假裝成正式文本。</div></div></div></aside></section>
+<section class="engine"><h2>NOSTROMO · 引擎艙 · INTEGRATION PORT RESERVED</h2><div class="engine-grid">
+<div>VAJRA ENGINE</div><div class="bar"><i id="b1" style="width:62%"></i></div><div id="s1">prototype</div>
+<div>SHROOMING</div><div class="bar"><i id="b2" style="width:78%"></i></div><div id="s2">resident sim</div>
+<div>MUTHER</div><div class="bar"><i id="b3" style="width:31%"></i></div><div id="s3">standby</div>
+<div>DROPLET</div><div class="bar"><i id="b4" style="width:8%"></i></div><div id="s4">sleep</div>
+</div><div class="engine-log" id="engineLog">[integration] this page simulates wiring states only · live NOSTROMO is intentionally not connected yet</div></section>
+<section class="lab"><h2>整合實驗台 · CONSTITUTION → BEHAVIOR</h2><div class="lab-grid">
+<div class="head">憲法要求</div><div class="head">正常資源</div><div class="head">低資源</div><div class="head">極低資源</div>
+<div>持續活動</div><div>多居民並行</div><div>減少並行</div><div>保留單一循環</div>
+<div>外部依賴</div><div>可調用器官</div><div>關閉昂貴器官</div><div>只留核心狀態機</div>
+<div>歷史</div><div>完整記錄</div><div>壓縮記錄</div><div>最低事件鏈</div>
+<div>訪客</div><div>可進入</div><div>仍非必要</div><div>仍非必要</div>
+<div>恢復</div><div>—</div><div>資源回升即擴張</div><div>由核心狀態復甦</div>
+</div></section>
+</main>
+<aside class="side"><h2>訪客入口</h2><p>「坐下吧」保留為入口句，不再是 Habitat 的名字。你進來以前，歸墟已經在運轉。</p><div class="door"><button id="sitBtn">坐下吧</button><small>取得暫時座位。你的進入不啟動、不重置居民時間。</small></div><div class="seat" id="seat">目前：沒有訪客座位。</div><div class="seat"><span class="quiet">本輪測試：</span><br>讓同一個空間在資源變化時自動收縮與復甦。</div><div class="mode" id="modeExplain">目前以正常代謝運轉。</div><div class="seat"><span class="quiet">重要：</span><br>現在仍是前端整合原型；正式 NOSTROMO 與《剛吃飽》都尚未真接線。</div></aside></div>
+<script>
+const born=Date.UTC(2026,7,29,0,0,0),pad=n=>String(n).padStart(2,'0');
+const modes=[
+{name:'HIGH',r:91,a:'10 / 10',bars:[92,90,65,30],msg:'資源充足：擴張居民活動，允許較多器官同時工作。'},
+{name:'NORMAL',r:62,a:'7 / 10',bars:[62,78,31,8],msg:'正常代謝：維持居民活動，昂貴器官按需啟動。'},
+{name:'LOW',r:27,a:'3 / 10',bars:[35,42,10,0],msg:'低代謝：關閉高成本活動，但居民歷史與下一輪仍存在。'},
+{name:'DORMANT',r:7,a:'1 / 10',bars:[14,12,0,0],msg:'近休眠：只保留最低核心循環與歷史延續能力。'}];
+function tick(){const now=Date.now(),s=Math.max(0,Math.floor((now-born)/1000)),d=Math.floor(s/86400),h=Math.floor((s%86400)/3600),m=Math.floor((s%3600)/60),ss=s%60;document.getElementById('machineTime').textContent=`${d}d ${pad(h)}:${pad(m)}:${pad(ss)}`;const phase=Math.floor(now/20000)%8;const idx=[1,1,0,1,2,3,2,1][phase];const x=modes[idx];document.getElementById('metabolism').textContent=x.name;document.getElementById('activity').textContent=x.a;document.getElementById('resource').textContent=x.r+'%';document.getElementById('modeExplain').textContent=x.msg;['b1','b2','b3','b4'].forEach((id,i)=>document.getElementById(id).style.width=x.bars[i]+'%');document.getElementById('s4').textContent=x.bars[3]?'standby':'off';document.getElementById('engineLog').textContent=`[integration] ${x.name.toLowerCase()} metabolism · resident continuity preserved · visitor input not required`;}
+setInterval(tick,1000);tick();
+const events=[['菇 04','提出一個新位置，下一輪將由 VAJRA 拆解。'],['菇 07','比較自己不同重讀輪次留下的差異。'],['NOSTROMO','資源下降，暫停 DROPLET；居民循環保留。'],['菇 02','引用一條舊事件，讓歷史重新進入現在。'],['菇 09','拒絕加入既有陣營，建立第三個暫時位置。'],['CORE','極低資源模式仍寫入一條最低事件鏈。']];let ei=0;setInterval(()=>{const f=document.getElementById('feed'),e=events[ei++%events.length],n=document.createElement('div');n.className='event';n.innerHTML=`<div class="who">${e[0]}</div><div>${e[1]}</div>`;f.prepend(n);if(f.children.length>6)f.lastElementChild.remove();},12000);
+document.getElementById('sitBtn').onclick=()=>{const id='V-'+Math.random().toString(36).slice(2,6).toUpperCase();document.getElementById('seat').innerHTML=`目前：<b>${id}</b> 暫時坐下。<br><span class="quiet">你的進入沒有重置 Habitat 時間。</span>`;};
+</script></body></html>
