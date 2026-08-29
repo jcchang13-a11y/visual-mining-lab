@@ -28,31 +28,35 @@ jobs:
         with:
           node-version: '22'
       - name: Verify formal greenhouse continuity
+        id: formal
         run: node nostromo/integration/formal-round-test.mjs
       - name: Run 50-round integration test
         id: integration
         continue-on-error: true
         run: node nostromo/integration/ci-test.mjs
-      - name: Commit test result
+      - name: Commit test results
         if: always()
         run: |
           git config user.name "nostromo-bot"
           git config user.email "actions@users.noreply.github.com"
-          if [ -f nostromo/integration/ci-last-result.json ]; then
-            cp nostromo/integration/ci-last-result.json /tmp/nostromo-ci-last-result.json
-            git fetch origin main
-            git reset --hard origin/main
+          test -f nostromo/integration/formal-round-last-result.json && cp nostromo/integration/formal-round-last-result.json /tmp/nostromo-formal-round-last-result.json || true
+          test -f nostromo/integration/ci-last-result.json && cp nostromo/integration/ci-last-result.json /tmp/nostromo-ci-last-result.json || true
+          git fetch origin main
+          git reset --hard origin/main
+          if [ -f /tmp/nostromo-formal-round-last-result.json ]; then
+            cp /tmp/nostromo-formal-round-last-result.json nostromo/integration/formal-round-last-result.json
+            git add nostromo/integration/formal-round-last-result.json
+          fi
+          if [ -f /tmp/nostromo-ci-last-result.json ]; then
             cp /tmp/nostromo-ci-last-result.json nostromo/integration/ci-last-result.json
             git add nostromo/integration/ci-last-result.json
-            if git diff --cached --quiet; then
-              echo "No result change"
-            else
-              git commit -m "[nostromo-test] record integration CI result"
-              git push origin HEAD:main
-            fi
-          else
-            echo "ci-last-result.json was not produced"
           fi
-      - name: Enforce test conclusion
+          if git diff --cached --quiet; then
+            echo "No result change"
+          else
+            git commit -m "[nostromo-test] record integration and formal-chain results"
+            git push origin HEAD:main
+          fi
+      - name: Enforce integration conclusion
         if: steps.integration.outcome != 'success'
         run: exit 1
