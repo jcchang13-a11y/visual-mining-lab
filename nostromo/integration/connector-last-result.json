@@ -1,0 +1,38 @@
+{
+  "schema": "nostromo-connector-result/v0.1",
+  "completedAt": "2026-08-30T04:03:00+08:00",
+  "status": "PASS",
+  "mutherDrive": {
+    "requestId": "MUTHER-DRIVE-0001",
+    "executor": "GOOGLE_DRIVE_CONNECTOR",
+    "status": "EXECUTED",
+    "query": "剛吃飽",
+    "returnedCount": 10,
+    "sampleFingerprints": [
+      "aab7c24aee40cc55",
+      "d861ce64774a515a",
+      "fba4c965d1f25ba1",
+      "bc37fec0aae9184d",
+      "b5261ceeb06a4abd"
+    ],
+    "privacy": "RAW PRIVATE FILE IDS, URLS AND CONTENT ARE NOT PERSISTED IN THIS PUBLIC REPOSITORY",
+    "boundary": "QUERY-SCOPED GOOGLE DRIVE SEARCH EXECUTED THROUGH THE AUTHORIZED CONNECTOR; NOT AN EXHAUSTIVE WHOLE-DRIVE MINE"
+  },
+  "dropletWeb": {
+    "requestId": "DROPLET-WEB-0001",
+    "executor": "PUBLIC_WEB_SEARCH_CONNECTOR",
+    "status": "EXECUTED",
+    "query": "Magentic-One AutoGen orchestrator Microsoft Research",
+    "evidenceCount": 1,
+    "publicEvidence": [
+      {
+        "title": "Magentic-UI, an experimental human-centered web agent",
+        "source": "Microsoft Research",
+        "url": "https://www.microsoft.com/en-us/research/blog/magentic-ui-an-experimental-human-centered-web-agent/",
+        "finding": "Microsoft describes a modular team of specialized agents coordinated by an Orchestrator, adapted from Magentic-One."
+      }
+    ],
+    "boundary": "A REAL PUBLIC WEB SEARCH WAS EXECUTED BY THE CONNECTOR RUNTIME; THIS DOES NOT MEAN GITHUB ACTIONS ITSELF HAS SEARCH-ENGINE ACCESS"
+  },
+  "failures": []
+}
