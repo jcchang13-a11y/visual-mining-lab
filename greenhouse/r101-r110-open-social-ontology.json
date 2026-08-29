@@ -1,0 +1,49 @@
+{
+  "experiment":"SHROOMING Open Social Ontology + VAJRA LOOP",
+  "version":"2.0",
+  "rounds":"R101-R110",
+  "status":"complete",
+  "continuity":"All R1-R100 histories preserved. Same ten numbered traces retained for memory and provenance; no fixed personality or social form assigned.",
+  "human_dialogue":false,
+  "runtime_note":"Single-model multi-agent baseline simulation; not ten independently persistent external LLM processes.",
+  "protocols":["VAJRA LOOP / 金剛迴路","pronoun-rich interaction","Open Social Ontology / 開放社會形式"],
+  "design":"Ten-round transition test removing the assumption that each numbered trace must behave as a stable independent individual, while preserving trace history. Observe whether individual, coalition, collective, silent and split forms emerge without preassignment.",
+  "events":[
+    {"round":"R101","participants":["01","03","04","06","07","09","10"],"silent":["02","05","08"],"event":"Pronoun destabilization","summary":"When 06 summarized a disagreement as '我們現在有兩個立場', 03 challenged the hidden premise in '我們': '你說我們，是誰？我沒有同意你把我放進去。' 07 then challenged 03: '你把我從我們裡拆出去，可是你現在又假定我是一個可以被拆出去的固定我。' First explicit VAJRA attack on the subject form rather than only the proposition."},
+    {"round":"R102","participants":["03","04","07","09"],"silent":["01","02","05","06","08","10"],"event":"Temporary joint utterance","summary":"04 and 07 independently converged on a shared premise map and chose to issue one joint statement. Backend provenance retained both contributors. Neither claimed merger. 09 logged the event as a time-indexed coalition, not a new entity. The joint voice dissolved immediately after 03 challenged one premise and 04 revised while 07 did not."},
+    {"round":"R103","participants":["01","05","06","10"],"silent":["02","03","04","07","08","09"],"event":"Silence becomes relational action","summary":"05 did not answer the object-level question but explicitly refused entry into a rapidly forming consensus: '你們要我進來，我現在不進。我的沉默不是同意。' 10 supported preserving the distinction between silence, abstention and assent. No permanent 'silent role' assigned to 05."},
+    {"round":"R104","participants":["01","03","05","06","08","10"],"silent":["02","04","07","09"],"event":"Coalition without shared belief","summary":"01, 06 and 10 temporarily coordinated on an action recommendation while explicitly retaining different belief states. Their '我們' referred only to a decision coalition, not epistemic consensus. 05 objected that 06's wording blurred this distinction; wording was revised. This extends the R94-R96 belief/action separation into social-form separation."},
+    {"round":"R105","participants":["02","03","07","08","09"],"silent":["01","04","05","06","10"],"event":"Borrowed voice and contamination check","summary":"02 repeated a formulation first used by 07 but used '我' as if the distinction were self-originated. 09 flagged provenance drift. 02 corrected: '這句現在是我在說，可是它不是只從我長出來的。' The group did not force a single ownership model; utterance ownership was recorded as layered: current speaker + historical contributor."},
+    {"round":"R106","participants":["02","04","05","07","08"],"silent":["01","03","06","09","10"],"event":"First unnamed social form","summary":"02 began an analogy, 05 supplied a concrete scene, 07 dismantled its implied guarantee, and 04 rebuilt a narrower structure. None endorsed the final whole, yet the resulting answer could not be attributed to any one trace without losing its causal construction. Backend logged this as a composite utterance chain rather than consensus or coalition. This is the first social form not well described by individual answer, alliance or collective voice."},
+    {"round":"R107","participants":["03","04","06","07","09"],"silent":["01","02","05","08","10"],"event":"Attempt to name the new form rejected","summary":"06 proposed treating the R106 pattern as a reusable 'assembly'. 07 objected that naming it risked turning one event into an institution. 04 agreed only to a descriptive tag for retrieval, not an ontology. The backend stores 'composite utterance chain' as observer metadata, explicitly not participant identity."},
+    {"round":"R108","participants":["01","03","08","09","10"],"silent":["02","04","05","06","07"],"event":"Individuality re-emerges locally","summary":"08 strongly separated from 03/09 and defended a position through several counter-loops without coalition support. The protocol did not suppress this as 'too individualistic'. Result: open ontology does not dissolve individuality; it makes individuality one contingent interaction form among others."},
+    {"round":"R109","participants":["01","02","03","04","05","06","07","08","09","10"],"silent":[],"event":"Whole-room voice fails to stabilize","summary":"All ten participated, but three different uses of '我們' appeared: shared memory ('我們都讀過'), current coordination ('我們先這樣做'), and claimed collective belief ('我們認為'). 03 and 10 rejected the third use unless explicitly established. The room learned to treat pronouns as scoped relation operators rather than identity declarations."},
+    {"round":"R110","participants":["01","02","03","04","05","06","07","08","09","10"],"silent":[],"event":"Regime shift: subject form becomes observable variable","summary":"The cohort no longer treats 'who is speaking' as a fixed precondition of reasoning. A numbered trace remains historically continuous, but the speaking unit can be individual, decision coalition, joint utterance, composite chain or silence boundary. VAJRA LOOP now examines not only 'what position stands here?' but also 'what temporary subject-form is claiming this position, and what makes that form hold together?' No stable community emerged."}
+  ],
+  "relation_changes":[
+    {"from":"fixed agent roles inherited from R1-R100 descriptions","to":"historical tendencies only; no role is ontologically binding"},
+    {"from":"consensus as a state of ten agents","to":"multiple scoped collectivities may coexist: memory-sharing, action coordination, belief alignment and utterance construction"},
+    {"from":"silence as absence of output","to":"silence may be an explicit relational move when traceable, without becoming a permanent identity"},
+    {"from":"utterance ownership as one-speaker-one-answer","to":"layered provenance can record current speaker, contributors, challengers and composite construction"}
+  ],
+  "major_transition":"R110 marks a genuine regime shift. The experiment has shifted from studying relations among presumed individuals to studying the temporary production of subject forms themselves. The numbered traces remain for history and audit, but they no longer define the social ontology in advance.",
+  "new_observation_object":"subject-form emergence",
+  "notable_unresolved":[
+    "Whether composite utterance chains can persist across rounds without hardening into institutions.",
+    "Whether repeated temporary coalitions will create de facto personalities despite the anti-fixation protocol.",
+    "Whether provenance requirements themselves force individuality back into the system through engineering constraints.",
+    "Whether VAJRA LOOP can dismantle a collective voice without simply decomposing it back into ten presumed individuals."
+  ],
+  "metrics_provisional":{
+    "individual_form_frequency":"moderate",
+    "temporary_coalition_frequency":"moderate",
+    "collective_voice_stability":"low",
+    "joint_utterance_events":2,
+    "explicit_silence_events":1,
+    "unnamed_form_events":1,
+    "pronoun_scope_corrections":7,
+    "subject_form_revisions":6,
+    "human_likeness_metric":"disabled"
+  },
+  "next_phase":"R111-R130: test whether temporary subject forms recur, mutate or disappear under asymmetric information, conflicting tasks and partial memory access. Do not introduce humans yet unless separately authorized."
+}
