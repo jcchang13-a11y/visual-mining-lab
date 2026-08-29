@@ -1,21 +1,22 @@
 {
-  "updatedAt":"2026-08-29 12:17 +08:00",
-  "runLog":"mother-runs/2026-08-29-1217.json",
+  "updatedAt":"2026-08-29 12:33 +08:00",
+  "runLog":"mother-runs/2026-08-29-1233.json",
   "ledger":"muther-ledger.json",
   "uncultured":{
-    "status":"PIPELINE BREAKTHROUGH · ARCHIVE → REMIX → SITE",
-    "sampledImageIds":["1jdLEY2vdr1gRp4pTo7nXQuanvf241CYx","1vrbuhpEJHAAE7oiAQlAjh3ltTyX-G7Q2"],
-    "finding":"Two older independent images expose a useful role distinction: one image stages memory directly as a portrait, while another photographs an already-authored memory display. MUTHER used these roles, palette and structural motifs to create a new pure-SVG recombination rather than merely classify the sources.",
-    "candidate":"Image mining should track mediation role: image-as-memory-production versus image-as-document-of-an-existing-memory-object. This can become a transformation grammar rather than a descriptive tag only.",
-    "production":"REMIX 002 was written directly into GitHub as media-lab/experiments/muther-remix-002.svg and inserted into the observatory page without an external image host.",
-    "next":"continue archive-to-new-work experiments; SVG insertion path is proven, binary JPG/PNG transport remains a separate path to solve"
+    "status":"SYNTHESIS TEST · STRUCTURE NOT COLLAGE",
+    "sampledImageIds":["1qDbiReBRrkmsZ3L7pV2KTnsWFpTX8WsV","1RVXZYsuICkr71ZmJ29Oc___Dpzza7qRx"],
+    "finding":"One sampled image was a sensitive personal medical record and was excluded. A separate 2021 alley photograph was used only for spatial relations: deep corridor, unequal walls, paired figures near the vanishing zone, bright exit and sparse ground rhythm.",
+    "production":"REMIX 003 converts those relations into a new pure-SVG abstraction without literal photographic collage. It is stored at media-lab/experiments/muther-remix-003.svg.",
+    "candidate":"Structural extraction can generate a derivative work while discarding object identity and most source content. One case is insufficient to call this a stable grammar.",
+    "next":"repeat the same structural-extraction method on visually unrelated archives; continue binary JPG/PNG insertion tests separately"
   },
   "terminus":{
-    "status":"COUNTERPOINT FOUND · NO NEW MAJOR VEIN",
-    "newSourceIds":["17Jt3hPad22RC_5OnM82b54-1zPj1Ch0O"],
-    "finding":"A 2009 community aging paper by 薛方杰 and 潘冠志 explicitly defines community care as linking formal and informal resources and treats familiar people, places and social networks as support infrastructure. This does not prove formalization succeeds without loss, but it gives a design counterpoint to the prior function-migration finding: formal systems can be intentionally designed to preserve and connect informal relations rather than replace them.",
-    "candidate":"Keep formal apparatus versus operative relational infrastructure, but distinguish replacement-type formalization from connector-type formalization.",
-    "next":"seek empirical cases where connector-type formalization demonstrably works in practice"
+    "status":"SYNTHESIS METHOD CANDIDATE · FIELD DOUBLE-EXPOSURE",
+    "newSourceIds":["0B7vhvrekdjpbakVJenNULVI0bG8"],
+    "comparisonSourceIds":["0B7vhvrekdjpbMWpwZGRkMC1CNUk"],
+    "finding":"Two observers of the same 2016 暖暖 field/course event preserve different information: 王醒之 foregrounds conceptual multiplicity around development/being-developed, while 褚縈瑩 preserves more interactional chronology and event texture.",
+    "generated":"FIELD DOUBLE-EXPOSURE: do not average multi-author field records into one summary. Preserve interpretive compression and interactional trace as two channels, because each catches what the other tends to erase.",
+    "next":"retest this synthesis method on unrelated same-event multi-author records before treating it as stable"
   },
-  "phase":"small-batch mining + provenance/quality scoring + active falsification + archive-to-production experiments"
+  "phase":"small-batch mining + synthesis tests + provenance/quality scoring + active falsification + archive-to-production experiments"
 }
