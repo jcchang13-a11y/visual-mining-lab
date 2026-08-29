@@ -1,6 +1,6 @@
 {
-  "schema": "nostromo-integration-ci/v0.7",
-  "completedAt": "2026-08-29T23:08:42.871Z",
+  "schema": "nostromo-integration-ci/v0.9",
+  "completedAt": "2026-08-29T23:09:06.242Z",
   "status": "PASS",
   "rounds": 50,
   "expectedPerRound": {
@@ -10,6 +10,32 @@
   "totals": {
     "executedStateActions": 150,
     "blockedRemoteActions": 150
+  },
+  "formalRoundChain": {
+    "status": "PASS",
+    "chain": [
+      "R111",
+      "R112"
+    ],
+    "rounds": [
+      {
+        "round": "R111",
+        "previousRound": "R110",
+        "parentBlobSha": "8e54a0adde2f447e7090497470c37da9c6388a4b",
+        "provenanceFingerprint": "f6e49b1d2f975979",
+        "executorCompatibility": "LEGACY_V0_8_REPRODUCIBLE",
+        "status": "PASS"
+      },
+      {
+        "round": "R112",
+        "previousRound": "R111",
+        "parentBlobSha": "1ec138bd3bce0158e661254225c2c84ccc35d02b",
+        "provenanceFingerprint": "642c83b7ac6c748d",
+        "executorCompatibility": "CHAIN_V0_9",
+        "status": "PASS"
+      }
+    ],
+    "boundary": "Certifies repository history continuity, parent Git blob identity, deterministic executor reproducibility and provenance for the declared formal-round chain. It does not certify ten independently persistent live LLM processes."
   },
   "repositoryNativeExecutors": {
     "shrooming": {
@@ -75,5 +101,5 @@
     "droplet": "../droplet-state.json"
   },
   "failures": [],
-  "boundary": "PASS certifies 50-round published-state integration, a 10-round closed loop of repository-native executors including a SHROOMING question probe grounded in the latest published greenhouse history, and successful handoff into GUT of persisted evidence from query-scoped Google Drive mining and public web search. It does not certify formal SHROOMING round advancement, ten independent live LLM processes, exhaustive whole-Drive mining, or that GitHub Actions itself can invoke private connectors."
+  "boundary": "PASS certifies 50-round published-state integration, deterministic reproducibility and parent-blob continuity for the declared R111→R112 formal SHROOMING chain, a 10-round closed loop of repository-native executors, and successful handoff into GUT of persisted evidence from query-scoped Google Drive mining and public web search. It does not certify ten independent live LLM processes, exhaustive whole-Drive mining, or that GitHub Actions itself can invoke private connectors."
 }
