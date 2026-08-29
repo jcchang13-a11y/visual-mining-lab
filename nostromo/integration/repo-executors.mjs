@@ -56,10 +56,10 @@ export async function shroomGreenhousePoseQuestion({question='',statePath='green
 function parentFromState(state){
   if(Array.isArray(state.events)&&state.events.length){
     const last=state.events.at(-1);
-    return {round:last.round,event:last.event||null,summary:last.summary||'',version:state.version||null,continuity:state.rounds||null};
+    return {round:last.round,event:last.event||null,summary:last.summary||'',version:state.version||null,continuity:state.rounds||null,legacyBundle:true};
   }
   if(state&&state.round){
-    return {round:state.round,event:state.event||null,summary:state.summary||'',version:state.version||null,continuity:state.continuity||state.round};
+    return {round:state.round,event:state.event||null,summary:state.summary||'',version:state.version||null,continuity:state.continuity||state.round,legacyBundle:false};
   }
   throw new Error('SHROOM_PARENT_ROUND_MISSING');
 }
@@ -74,18 +74,27 @@ export async function shroomAdvanceGreenhouseRound({task='',statePath='greenhous
   const next=`R${Number(m[1])+1}`;
   const iv=intervention&&typeof intervention==='object'?intervention:{};
   const ivSig=stableJSON(iv);
+  const hasIntervention=Object.keys(iv).length>0;
   const ids=['01','02','03','04','05','06','07','08','09','10'];
-  const participants=ids.filter(id=>parseInt(crypto.createHash('sha256').update(`${t}|${ivSig}|${id}`).digest('hex').slice(0,8),16)%3!==0);
+  const legacyMode=parent.legacyBundle&&!hasIntervention;
+  const participants=ids.filter(id=>{
+    const input=legacyMode?`${t}|${id}`:`${t}|${ivSig}|${id}`;
+    return parseInt(crypto.createHash('sha256').update(input).digest('hex').slice(0,8),16)%3!==0;
+  });
   const silent=ids.filter(id=>!participants.includes(id));
-  const provenanceFingerprint=hash(`${parent.round}|${parent.version}|${parent.event}|${expectedSourceBlobSha||''}|${t}|${ivSig}`);
+  const provenanceFingerprint=legacyMode
+    ? hash(`${state.version}|${state.rounds}|${parent.event}|${t}`)
+    : hash(`${parent.round}|${parent.version}|${parent.event}|${expectedSourceBlobSha||''}|${t}|${ivSig}`);
   const eventName=compact(event,160)||((iv.memoryAccess||iv.memory_access)?'Memory-access rotation':'Asymmetric memory split');
+  const summary=legacyMode
+    ? `在部分記憶與衝突任務條件下，${participants.join('、')} 進入本輪可見互動，${silent.join('、')} 保持不可見／沉默。觀測重點不是把這些 trace 固定成人格，而是檢查 R110 後的 subject-form 是否因資訊不對稱重新組合。`
+    : `承接 ${parent.round}，在保持任務條件可追溯的前提下施加 ${iv.memoryAccess||iv.memory_access||'asymmetric access'}；${participants.join('、')} 進入本輪可見互動，${silent.join('、')} 保持不可見／沉默。觀測重點仍是 subject-form 是否因可見資訊配置而重新組合，而不是把 trace 固定成人格。`;
   return {
     executor:'SHROOMING_FORMAL_ROUND_ADVANCE',status:'EXECUTED',round:next,previousRound:parent.round,
     source:statePath,expectedSourceBlobSha,task:t,intervention:iv,participants,silent,
-    event:eventName,
-    summary:`承接 ${parent.round}，在保持任務條件可追溯的前提下施加 ${iv.memoryAccess||iv.memory_access||'asymmetric access'}；${participants.join('、')} 進入本輪可見互動，${silent.join('、')} 保持不可見／沉默。觀測重點仍是 subject-form 是否因可見資訊配置而重新組合，而不是把 trace 固定成人格。`,
-    provenanceFingerprint,
-    boundary:'CHAINABLE FORMAL REPOSITORY STATE ADVANCE FROM THE DECLARED PARENT ROUND. THIS IS A SINGLE-MODEL / DETERMINISTIC EXPERIMENTAL TRANSITION, NOT TEN INDEPENDENT PERSISTENT LLM PROCESSES. IT MUST BE WRITTEN AS A NEW HISTORY FILE; OLD ROUNDS ARE NEVER OVERWRITTEN.'
+    event:eventName,summary,provenanceFingerprint,
+    compatibility:legacyMode?'LEGACY_V0_8_REPRODUCIBLE':'CHAIN_V0_9',
+    boundary:'CHAINABLE FORMAL REPOSITORY STATE ADVANCE FROM THE DECLARED PARENT ROUND. LEGACY V0.8 BUNDLE INPUT REMAINS REPRODUCIBLE. THIS IS A SINGLE-MODEL / DETERMINISTIC EXPERIMENTAL TRANSITION, NOT TEN INDEPENDENT PERSISTENT LLM PROCESSES. IT MUST BE WRITTEN AS A NEW HISTORY FILE; OLD ROUNDS ARE NEVER OVERWRITTEN.'
   };
 }
 
