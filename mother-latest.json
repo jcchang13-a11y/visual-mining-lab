@@ -1,20 +1,20 @@
 {
-  "updatedAt":"2026-08-29 10:27 +08:00",
-  "runLog":"mother-runs/2026-08-29-1027.json",
+  "updatedAt":"2026-08-29 11:33 +08:00",
+  "runLog":"mother-runs/2026-08-29-1133.json",
   "ledger":"muther-ledger.json",
   "uncultured":{
-    "status":"NO NEW ORE · CURRENT IMAGE PAGE EXHAUSTED",
+    "status":"NO NEW ORE · SAME IMAGE BURST",
     "sampledImageIds":[],
-    "finding":"The currently surfaced image page is dominated by the 2026-08-28 09:47–09:59 burst already represented in the ledger. No additional same-session image was promoted.",
+    "finding":"The surfaced image page remains dominated by the already-ledgered 2026-08-28 09:47–10:03 burst. No same-session frame was promoted.",
     "candidate":"No change. Independent-date and independent-purpose images remain the priority.",
-    "next":"seek independent-date and independent-purpose images rather than dense same-session bursts"
+    "next":"seek independent-date and independent-purpose images"
   },
   "terminus":{
-    "status":"VEIN CONFIRMED IN TEACHING · FUNCTION IS ACTIVATION",
-    "newSourceIds":["1TXS0yFgRP487AaE4dUgkhu0yblM8DHQc"],
-    "finding":"A course syllabus for 都市社會與基進民主 explicitly defines teaching not as grades, terminology, note copying or reading volume, but as grasping the internal logic of claims, debating them and being activated into independent thought. The course is framed as material that induces thinking rather than a package of content to transmit.",
-    "candidate":"Cross-domain confirmation of the three-layer substitution model: routine content delivery can be substituted; residual teaching function lies in diagnosis, debate, provocation and activation; institutional conditions determine whether that function can survive.",
-    "next":"test against care work or bureaucracy for disconfirmation"
+    "status":"VEIN REFINED · FORMAL TOOL ≠ OPERATIVE FUNCTION",
+    "newSourceIds":["0B6kekeEVEPHjRmIzYmRkRFFQbHo2S1RLb0pQLV9LcE1zQTE4","0B6kekeEVEPHjcGpGazFFcHZZTnV2R1ZURjZMTTR1VUdGaUJ3"],
+    "finding":"The bureaucracy test shows that formal coordination mechanisms may exist without carrying the actual coordination function. A 2016 thesis on Taichung migrant-trafficking enforcement finds inter-agency agreements relying mainly on informal contact channels, while regular coordination meetings have uncertain practical effect and staff face resource scarcity plus routine-work crowding-out. A South Airport community-care presentation independently shows care operating as a relational platform joining volunteers, meals, health checks, learning, spatial reuse and neighborhood ties rather than a single task.",
+    "candidate":"Refine institutional habitat into formal apparatus versus operative relational infrastructure. When formal structures are weak or overloaded, functions may migrate into informal contact, situated judgment and relationship work rather than disappear.",
+    "next":"seek a case where formalization successfully absorbs relational work without loss as a stronger falsification test"
   },
-  "phase":"small-batch mining with provenance-first, genre-aware scoring, media-class verification and active falsification"
+  "phase":"small-batch mining with provenance-first scoring, active falsification and function-migration tracking"
 }
