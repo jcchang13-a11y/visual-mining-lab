@@ -1,12 +1,12 @@
 {
-  "schema":"nostromo-organ-registry/v0.1",
-  "updatedAt":"2026-08-29T11:30:00+08:00",
+  "schema":"nostromo-organ-registry/v0.2",
+  "updatedAt":"2026-08-30T00:01:00+08:00",
   "truthRule":"DISPLAYED STATE MUST FOLLOW EVIDENCE",
   "organs":{
-    "shrooming":{"mode":"READ_CONNECTED","source":"../mycelium/state.json","capability":"read current published simulation state; cannot trigger new simulation rounds from static Pages"},
-    "muther":{"mode":"READ_CONNECTED","source":"../mother-latest.json","capability":"read current published mining state; cannot trigger new mining run from static Pages"},
-    "droplet":{"mode":"READ_CONNECTED","source":"./droplet-state.json","capability":"read current external-search evidence state"},
-    "gut":{"mode":"EXEC_CONNECTED","source":"./gut/gut-engine.js","capability":"deterministic decomposition, absorption, redistribution payload preparation and waste separation"},
-    "vajra":{"mode":"EXEC_CONNECTED","source":"./vajra/vajra-engine.js","capability":"bounded recursive position dismantling"}
+    "shrooming":{"mode":"READ_CONNECTED+REQUEST_ONLY","source":"../mycelium/state.json","actions":["READ_STATE","POSE_QUESTION","RUN_READING_ROUND"],"executor":null,"capability":"published state can be read; action envelopes can be generated, but no remote simulation executor is connected"},
+    "muther":{"mode":"READ_CONNECTED+REQUEST_ONLY","source":"../mother-latest.json","actions":["READ_STATE","MINE_INTERNAL","FALSIFY"],"executor":null,"capability":"published mining state can be read; mining/falsification requests can be generated, but no remote mining executor is connected"},
+    "droplet":{"mode":"READ_CONNECTED+REQUEST_ONLY","source":"./droplet-state.json","actions":["READ_STATE","SEARCH_EXTERNAL","VERIFY"],"executor":null,"capability":"published evidence state can be read; search/verification requests can be generated, but no remote search executor is connected"},
+    "gut":{"mode":"EXEC_CONNECTED","source":"./gut/gut-engine.js","actions":["DIGEST"],"executor":"GutEngine","capability":"deterministic decomposition, absorption, redistribution payload preparation and waste separation"},
+    "vajra":{"mode":"EXEC_CONNECTED","source":"./vajra/vajra-engine.js","actions":["DISMANTLE"],"executor":"VajraEngine","capability":"bounded recursive position dismantling"}
   }
 }
