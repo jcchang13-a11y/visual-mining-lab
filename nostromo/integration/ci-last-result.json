@@ -1,6 +1,6 @@
 {
-  "schema": "nostromo-integration-ci/v0.6",
-  "completedAt": "2026-08-29T21:07:33.522Z",
+  "schema": "nostromo-integration-ci/v0.7",
+  "completedAt": "2026-08-29T21:07:51.702Z",
   "status": "PASS",
   "rounds": 50,
   "expectedPerRound": {
@@ -16,6 +16,12 @@
       "status": "EXECUTED",
       "count": 10,
       "boundary": "LOCAL DETERMINISTIC SANDBOX; DOES NOT MODIFY OR CLAIM TO BE THE LIVE SHROOMING POPULATION"
+    },
+    "greenhouseProbe": {
+      "status": "EXECUTED",
+      "count": 10,
+      "sourceRounds": "R101-R110",
+      "boundary": "EXECUTES A NON-STATE-MUTATING QUESTION PROBE AGAINST THE LATEST PUBLISHED GREENHOUSE HISTORY. REACTIONS ARE TRACEABLE TRANSFORMATIONS OF RECORDED HISTORY, NOT CLAIMS OF TEN INDEPENDENT LIVE LLM PROCESSES, AND DO NOT ADVANCE THE FORMAL SHROOMING ROUND."
     },
     "muther": {
       "status": "EXECUTED",
@@ -47,7 +53,7 @@
     "status": "PASS",
     "requestedRounds": 10,
     "completedRounds": 10,
-    "roundsWithAllThreeExecutors": 10,
+    "roundsWithAllFourRepoExecutors": 10,
     "gutAbsorbedTotal": 1263,
     "connectorHandoff": {
       "status": "ACCEPTED",
@@ -69,5 +75,5 @@
     "droplet": "../droplet-state.json"
   },
   "failures": [],
-  "boundary": "PASS certifies 50-round published-state integration, a 10-round closed loop of repository-native executors, and successful handoff into GUT of persisted evidence from two externally executed connector actions: query-scoped Google Drive mining and public web search. It does not certify live SHROOMING, exhaustive whole-Drive mining, or that GitHub Actions itself can invoke private connectors."
+  "boundary": "PASS certifies 50-round published-state integration, a 10-round closed loop of repository-native executors including a SHROOMING question probe grounded in the latest published greenhouse history, and successful handoff into GUT of persisted evidence from query-scoped Google Drive mining and public web search. It does not certify formal SHROOMING round advancement, ten independent live LLM processes, exhaustive whole-Drive mining, or that GitHub Actions itself can invoke private connectors."
 }
