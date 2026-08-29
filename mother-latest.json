@@ -1,23 +1,23 @@
 {
-  "updatedAt":"2026-08-29 18:22 +08:00",
-  "runLog":"mother-runs/2026-08-29-1822.json",
+  "updatedAt":"2026-08-29 19:16 +08:00",
+  "runLog":"mother-runs/2026-08-29-1916.json",
   "ledger":"muther-ledger.json",
   "uncultured":{
     "status":"NO NEW INDEPENDENT SAMPLE",
     "sampledImageIds":[],
-    "finding":"No unrelated image sample strong enough to advance the provisional visual grammar without reusing same-family evidence.",
+    "finding":"Recent Drive image results remain dominated by the already-ledgered 2026-08-28 book-capture family; same-family material was not reused to inflate evidence.",
     "generated":"NO DERIVATIVE THIS ROUND.",
     "production":"Existing SVG/HTML direct-to-GitHub path remains usable; binary JPG/PNG publication remains unverified.",
-    "next":"continue cross-purpose image sampling; require an unrelated fourth visual family before derivative production"
+    "next":"continue beyond the recent capture family and require unrelated visual material before another derivative"
   },
   "terminus":{
-    "status":"SYNTHESIS TEST · DISTRIBUTION HAS LAYERS",
-    "newSourceIds":["17_T8wxnGzXtllnoVDSObgV89U3_5syR0","17gQ2FJxaybQeB_zMBiZgy9oGw3R9MTYp"],
-    "finding":"Heritage-management research separates first-line operational organizations, government governance/oversight and higher-level coordination, while the Wenmenglou financialization paper shows how a formally distributed urban process can still be driven by concentrated financial incentives and state-created development rights.",
-    "generated":"LAYERED DISTRIBUTION MODEL: interface distribution and control distribution are still too coarse. At minimum separate (1) operational contact, (2) rule-setting, (3) resource allocation, and (4) veto/switching power. A system may distribute frontline work while centralizing the rules, money or final kill-switch. Therefore 'distributed' is not a property of the whole system; it is a property that must be measured layer by layer.",
-    "quality":{"argument":"high/medium across sources","evidence":"institutional comparison + case-based urban political economy","observationDensity":"medium","originality":"high in synthesis, not attributed to either source","reusability":"high"},
-    "relationToPrevious":"Strengthens the TOPOLOGY / POWER SPLIT by decomposing control into multiple independently distributable layers.",
-    "next":"test the four-layer model against a non-urban, non-heritage domain; actively seek a case where frontline, rules, resources and veto are all distributed"
+    "status":"SYNTHESIS TEST · SWITCHING POWER",
+    "newSourceIds":["1x-1IU02VttTwEffXsHAf_80Oru9osoyR"],
+    "finding":"A 2021 network-metropolitan-governance research framework treats connection and disconnection as active mechanisms across finance, water, production, technology, e-commerce and public-space networks, not merely as static node properties.",
+    "generated":"SWITCHING-POWER MODEL: extend the four-layer distribution model with a fifth layer: topology-switching power. Ask separately who performs frontline contact, who sets rules, who allocates resources, who can veto decisions, and who can connect/disconnect/reroute/quarantine nodes. Veto power and switching power are not identical. A system can distribute ordinary operations while concentrating the ability to change the network itself.",
+    "quality":{"argument":"medium","evidence":"low/medium at proposal stage","observationDensity":"medium","originality":"high in synthesis, not attributed to source","reusability":"high"},
+    "relationToPrevious":"Refines the four-layer model by adding a temporal/topological layer rather than merely adding another static authority category.",
+    "next":"stress-test switching power in an unrelated empirical domain; distinguish protective, extractive and coercive switching and seek decentralized topology change"
   },
   "phase":"small-batch mining + synthesis tests + provenance/quality scoring + active falsification + archive-to-production experiments + sensitive-record exclusion"
 }
