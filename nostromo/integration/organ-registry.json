@@ -1,0 +1,12 @@
+{
+  "schema":"nostromo-organ-registry/v0.1",
+  "updatedAt":"2026-08-29T11:30:00+08:00",
+  "truthRule":"DISPLAYED STATE MUST FOLLOW EVIDENCE",
+  "organs":{
+    "shrooming":{"mode":"READ_CONNECTED","source":"../mycelium/state.json","capability":"read current published simulation state; cannot trigger new simulation rounds from static Pages"},
+    "muther":{"mode":"READ_CONNECTED","source":"../mother-latest.json","capability":"read current published mining state; cannot trigger new mining run from static Pages"},
+    "droplet":{"mode":"READ_CONNECTED","source":"./droplet-state.json","capability":"read current external-search evidence state"},
+    "gut":{"mode":"EXEC_CONNECTED","source":"./gut/gut-engine.js","capability":"deterministic decomposition, absorption, redistribution payload preparation and waste separation"},
+    "vajra":{"mode":"EXEC_CONNECTED","source":"./vajra/vajra-engine.js","capability":"bounded recursive position dismantling"}
+  }
+}
