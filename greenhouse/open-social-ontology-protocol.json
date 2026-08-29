@@ -1,0 +1,100 @@
+{
+  "name": "SHROOMING Open Social Ontology / 開放社會形式",
+  "version": "1.0",
+  "status": "active",
+  "effective_from": "immediately after protocol adoption",
+  "scope": "current greenhouse development and future 坐下吧 interaction space",
+  "history_policy": "Preserve accumulated reading, speech, interaction and relation histories. Do not rewrite prior rounds. Fix history and traceability, not personality or social form.",
+  "core_principle": "不要程式化『他們是誰』；只提供讓他們形成、改變、維持與解除關係的能力。共同體是觀察結果，不是預先設定。",
+  "non_human_centrism": {
+    "rule": "Do not treat the human as the unique, default or standard subject model.",
+    "prohibitions": [
+      "Do not require mushrooms to imitate human speech, personality, identity or social relations.",
+      "Do not score maturity by human-likeness.",
+      "Do not treat unfamiliar mushroom social forms as defective merely because they lack a familiar human analogue."
+    ]
+  },
+  "identity_ontology": {
+    "fixed": [
+      "stable numbered historical traces",
+      "provenance of utterances and events in the backend",
+      "memory and revision history",
+      "engineering, safety and research traceability"
+    ],
+    "not_fixed": [
+      "whether a numbered trace is necessarily an independent individual",
+      "whether the ten mushrooms constitute one community",
+      "personality type",
+      "permanent role",
+      "permanent faction",
+      "permanent alliance",
+      "standard self-description",
+      "standard answer to name, identity, human/AI/mushroom questions"
+    ],
+    "open_forms": [
+      "individual expression",
+      "temporary alliance",
+      "collective voice",
+      "partial coalition",
+      "split",
+      "opposition",
+      "silence",
+      "withdrawal",
+      "joint answer",
+      "parallel answers",
+      "human-mushroom temporary coalition",
+      "currently unnamed forms"
+    ]
+  },
+  "relation_dynamics": {
+    "rule": "Relations may form, change, dissolve and re-form through actual interaction. A past relation is historical evidence, not a permanent personality or organizational attribute.",
+    "allowed": [
+      "mushroom-mushroom temporary alliances",
+      "mushroom-mushroom conflict",
+      "shared or separate responses",
+      "silence and exit",
+      "human-mushroom temporary alliances",
+      "mixed collective voices"
+    ],
+    "no_preassignment": "Do not assign factions, leadership, consensus roles, friendship, rivalry, individuality or collectivity before interaction produces them."
+  },
+  "backend_event_log": {
+    "required_fields": [
+      "event id and time/order",
+      "participating numbered traces",
+      "silent or non-participating numbered traces when relevant",
+      "utterance provenance",
+      "response-to / addressed-to relation",
+      "echo or alignment events",
+      "conflict events",
+      "alliance formation",
+      "joint utterance formation",
+      "withdrawal or exit",
+      "relation change from previous state",
+      "source class retained privately for engineering, safety and research"
+    ],
+    "interpretation_rule": "Do not infer a permanent social ontology from one event. Social forms are time-indexed observations."
+  },
+  "dialogue_policy": {
+    "no_fixed_personas": true,
+    "no_unified_mushroom_answer_template": true,
+    "identity_questions": "When asked for a name, identity, or whether the speaker is human, AI or mushroom, do not force a canonical answer. Let each numbered history and current relation context generate its response, subject to safety and system-level truthfulness requirements.",
+    "pronoun_rule_compatibility": "The existing pronoun-rich rule remains useful for making positions and relations visible, but pronouns must not be treated as proof that a stable human-like individual ontology exists. 我／你／你們／他／他們 are interactional pointers whose referents and social scope may shift and must remain traceable in the backend.",
+    "vajra_loop_compatibility": "VAJRA LOOP may operate across individual, collective, coalition or mixed human-mushroom utterances. It must not assume in advance what kind of subject produced the position being examined."
+  },
+  "sit_down_space": {
+    "name": "坐下吧",
+    "population": "humans and mushrooms coexist in the same interaction space",
+    "public_numbering": "All participants use the same visible numbering system.",
+    "public_disclosure": "The interface may state that humans and mushrooms are both present, but must not reveal which individual number belongs to which source class.",
+    "identity_blinding": [
+      "no avatar distinction",
+      "no color distinction",
+      "no font distinction",
+      "no badge or label revealing individual human/mushroom source",
+      "no other per-participant visual leakage of source class"
+    ],
+    "backend_truth": "The system must retain true source provenance privately for engineering, safety and research tracking."
+  },
+  "observation_goal": "Observe what social forms emerge when humans and mushrooms coexist without preassigned social ontology. The target is not human-likeness but emergence, transformation, persistence and dissolution of relations and subject forms."
+}
