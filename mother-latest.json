@@ -1,22 +1,21 @@
 {
-  "updatedAt":"2026-08-29 12:33 +08:00",
-  "runLog":"mother-runs/2026-08-29-1233.json",
+  "updatedAt":"2026-08-29 13:17 +08:00",
+  "runLog":"mother-runs/2026-08-29-1317.json",
   "ledger":"muther-ledger.json",
   "uncultured":{
-    "status":"SYNTHESIS TEST · STRUCTURE NOT COLLAGE",
-    "sampledImageIds":["1qDbiReBRrkmsZ3L7pV2KTnsWFpTX8WsV","1RVXZYsuICkr71ZmJ29Oc___Dpzza7qRx"],
-    "finding":"One sampled image was a sensitive personal medical record and was excluded. A separate 2021 alley photograph was used only for spatial relations: deep corridor, unequal walls, paired figures near the vanishing zone, bright exit and sparse ground rhythm.",
-    "production":"REMIX 003 converts those relations into a new pure-SVG abstraction without literal photographic collage. It is stored at media-lab/experiments/muther-remix-003.svg.",
-    "candidate":"Structural extraction can generate a derivative work while discarding object identity and most source content. One case is insufficient to call this a stable grammar.",
-    "next":"repeat the same structural-extraction method on visually unrelated archives; continue binary JPG/PNG insertion tests separately"
+    "status":"SYNTHESIS TEST · CROSS-INTERFACE STRUCTURE",
+    "sampledImageIds":["148f0nufL45TpeJlNID70m2o2hnQ5uuDw","0B6kekeEVEPHjU0R4UE9FUVRfX0k"],
+    "finding":"A dress-up game screenshot and a social-media conversation screenshot were reduced to interface relations rather than copied as images: category selection, nested response, hierarchy and directional flow.",
+    "production":"REMIX 004 combines those relations into a new pure-SVG CHOICE/REPLY MACHINE at media-lab/experiments/muther-remix-004.svg.",
+    "candidate":"Structural extraction appears able to cross from photographic archives into interface screenshots without literal collage. More unrelated cases are required before treating this as a stable method.",
+    "next":"retest structural extraction on non-interface, non-photographic material; continue binary JPG/PNG insertion tests separately"
   },
   "terminus":{
-    "status":"SYNTHESIS METHOD CANDIDATE · FIELD DOUBLE-EXPOSURE",
-    "newSourceIds":["0B7vhvrekdjpbakVJenNULVI0bG8"],
-    "comparisonSourceIds":["0B7vhvrekdjpbMWpwZGRkMC1CNUk"],
-    "finding":"Two observers of the same 2016 暖暖 field/course event preserve different information: 王醒之 foregrounds conceptual multiplicity around development/being-developed, while 褚縈瑩 preserves more interactional chronology and event texture.",
-    "generated":"FIELD DOUBLE-EXPOSURE: do not average multi-author field records into one summary. Preserve interpretive compression and interactional trace as two channels, because each catches what the other tends to erase.",
-    "next":"retest this synthesis method on unrelated same-event multi-author records before treating it as stable"
+    "status":"NEW MODEL CANDIDATE · PARTICIPATION THRESHOLD",
+    "newSourceIds":["1ueHn_sCkhPlC-YjZalzzZmq9gmBoPByZ","0B6kekeEVEPHjV0g4ZFp5NGNGRGs"],
+    "finding":"A 2012 workshop record shows participation rising after professional-looking submission requirements were relaxed; a 2015 student group record shows progress after an impossibly broad problem was narrowed to a tractable target.",
+    "generated":"PARTICIPATION THRESHOLD: participation can be blocked by at least two distinct thresholds—entry-format threshold and action-scope threshold. Lowering the first and narrowing the second may convert concern into action without assuming motivation itself changed.",
+    "next":"actively seek counterexamples where relaxed formats or narrowed scope still fail because trust, motivation, time or resources dominate"
   },
   "phase":"small-batch mining + synthesis tests + provenance/quality scoring + active falsification + archive-to-production experiments"
 }
