@@ -1,21 +1,22 @@
 {
-  "updatedAt":"2026-08-29 13:17 +08:00",
-  "runLog":"mother-runs/2026-08-29-1317.json",
+  "updatedAt":"2026-08-29 14:22 +08:00",
+  "runLog":"mother-runs/2026-08-29-1422.json",
   "ledger":"muther-ledger.json",
   "uncultured":{
-    "status":"SYNTHESIS TEST · CROSS-INTERFACE STRUCTURE",
-    "sampledImageIds":["148f0nufL45TpeJlNID70m2o2hnQ5uuDw","0B6kekeEVEPHjU0R4UE9FUVRfX0k"],
-    "finding":"A dress-up game screenshot and a social-media conversation screenshot were reduced to interface relations rather than copied as images: category selection, nested response, hierarchy and directional flow.",
-    "production":"REMIX 004 combines those relations into a new pure-SVG CHOICE/REPLY MACHINE at media-lab/experiments/muther-remix-004.svg.",
-    "candidate":"Structural extraction appears able to cross from photographic archives into interface screenshots without literal collage. More unrelated cases are required before treating this as a stable method.",
-    "next":"retest structural extraction on non-interface, non-photographic material; continue binary JPG/PNG insertion tests separately"
+    "status":"SYNTHESIS TEST · RITUAL REPETITION / VISIBILITY",
+    "sampledImageIds":["1MjfSK1f2JH_roT8l4h85DpixqktS1QJc"],
+    "finding":"An archival protest-series photograph was inspected as structure rather than illustration: one uncovered frontal face is embedded in a field of repeated covered faces, while incense creates a strong vertical axis. The useful relation is visibility versus repeated concealment, not the literal identities of participants.",
+    "candidate":"A future remix can test whether repetition + one exposed exception + vertical ritual axis transfers to unrelated imagery without turning the source into decorative collage.",
+    "production":"No new artwork this round; source was deliberately held at structural-extraction stage to avoid premature remixing.",
+    "next":"pair this structure with an unrelated non-protest image and test whether the relation survives; continue JPG/PNG insertion separately"
   },
   "terminus":{
-    "status":"NEW MODEL CANDIDATE · PARTICIPATION THRESHOLD",
-    "newSourceIds":["1ueHn_sCkhPlC-YjZalzzZmq9gmBoPByZ","0B6kekeEVEPHjV0g4ZFp5NGNGRGs"],
-    "finding":"A 2012 workshop record shows participation rising after professional-looking submission requirements were relaxed; a 2015 student group record shows progress after an impossibly broad problem was narrowed to a tractable target.",
-    "generated":"PARTICIPATION THRESHOLD: participation can be blocked by at least two distinct thresholds—entry-format threshold and action-scope threshold. Lowering the first and narrowing the second may convert concern into action without assuming motivation itself changed.",
-    "next":"actively seek counterexamples where relaxed formats or narrowed scope still fail because trust, motivation, time or resources dominate"
+    "status":"COUNTERMODEL · PARTICIPATION THRESHOLD REFINED",
+    "newSourceIds":["1FKGQdkVMjC0JTfrSe3955NHEnj38gbIT"],
+    "finding":"A comparative labor-migration interview report shows that lowering one formal barrier does not settle participation or attachment: longer permitted stays reduce training costs and can stabilize trust, yet interviewees still describe exploitation, brokerage, cultural conflict, sector exit after residency, and divergent migrant preferences.",
+    "generated":"THRESHOLD STACK: entry-format and action-scope thresholds are only the visible front gates. After entry, participation can still be constrained by dependency, intermediary power, rights, trust, exit options and whether actors actually want durable attachment. Lowering a threshold changes the feasible action set; it does not by itself create commitment.",
+    "quality":{"argument":"medium-high","evidence":"20 stakeholder interviews, heterogeneous positions","observationDensity":"high","originality":"medium","reusability":"high as countermodel material"},
+    "next":"seek a case where lowering entry barriers does produce durable participation, to distinguish threshold effects from downstream institutional conditions"
   },
   "phase":"small-batch mining + synthesis tests + provenance/quality scoring + active falsification + archive-to-production experiments"
 }
