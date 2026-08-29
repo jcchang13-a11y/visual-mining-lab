@@ -1,0 +1,8 @@
+{
+  "updatedAt":"2026-08-29 14:22 +08:00",
+  "runType":"automated-mining-plus-synthesis",
+  "status":"NORMAL · COUNTERMODEL REFINEMENT",
+  "uncultured":{"sources":[{"id":"1MjfSK1f2JH_roT8l4h85DpixqktS1QJc","title":"公娼抗爭系列好照片_245.jpg","sourceType":"archival photograph"}],"method":"structural extraction before remix","result":"candidate relation: repeated concealment + one visible exception + vertical ritual axis","production":"none; intentionally deferred","websiteInsertion":"not applicable this round"},
+  "terminus":{"sources":[{"id":"1FKGQdkVMjC0JTfrSe3955NHEnj38gbIT","title":"SMC Report V.7 (revised).docx","sourceType":"comparative research report / stakeholder interviews"}],"method":"counterexample-driven revision of participation-threshold model","sourceSays":"longer stays can stabilize labor, reduce training costs and build trust, while interviewees also report exploitation, brokerage problems, cultural conflict, automation concerns, sector exit after residency and heterogeneous preferences about permanent residence","mutherGenerated":"THRESHOLD STACK: lowering an entry barrier expands feasible participation but does not create durable commitment; downstream constraints include dependency, intermediary power, rights, trust, exit options and actor preference.","quality":{"argument":"medium-high","evidence":"20 stakeholder interviews","observationDensity":"high","originality":"medium","reusability":"high"},"isMerelySummary":false,"counterexampleValue":"high"},
+  "notifyUser":false
+}
