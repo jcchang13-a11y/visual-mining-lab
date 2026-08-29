@@ -1,0 +1,39 @@
+{
+  "schema": "nostromo-formal-round-test/v0.9",
+  "completedAt": "2026-08-29T23:08:40.036Z",
+  "status": "PASS",
+  "chain": [
+    "R111",
+    "R112"
+  ],
+  "rounds": [
+    {
+      "round": "R111",
+      "previousRound": "R110",
+      "statePath": "greenhouse/r111-nostromo-formal-round.json",
+      "parentPath": "greenhouse/r101-r110-open-social-ontology.json",
+      "parentBlobSha": "8e54a0adde2f447e7090497470c37da9c6388a4b",
+      "provenanceFingerprint": "f6e49b1d2f975979",
+      "executorCompatibility": "LEGACY_V0_8_REPRODUCIBLE",
+      "participants": 6,
+      "silent": 4,
+      "status": "PASS",
+      "failures": []
+    },
+    {
+      "round": "R112",
+      "previousRound": "R111",
+      "statePath": "greenhouse/r112-nostromo-formal-round.json",
+      "parentPath": "greenhouse/r111-nostromo-formal-round.json",
+      "parentBlobSha": "1ec138bd3bce0158e661254225c2c84ccc35d02b",
+      "provenanceFingerprint": "642c83b7ac6c748d",
+      "executorCompatibility": "CHAIN_V0_9",
+      "participants": 7,
+      "silent": 3,
+      "status": "PASS",
+      "failures": []
+    }
+  ],
+  "failures": [],
+  "boundary": "Certifies repository history continuity, parent Git blob identity, deterministic executor reproducibility and provenance for the declared formal-round chain. It does not certify ten independently persistent live LLM processes."
+}
