@@ -1,0 +1,25 @@
+{
+  "updatedAt":"2026-08-29 15:19 +08:00",
+  "runType":"mining-plus-synthesis",
+  "status":"SIGNIFICANT · NEW SYNTHESIS + SAFETY EXCLUSION",
+  "uncultured":{
+    "newSources":[{"id":"1RVXZYsuICkr71ZmJ29Oc___Dpzza7qRx","title":"20210515_083758.jpg","sourceType":"archival camera photograph","status":"usable-structural-source"}],
+    "excludedSensitiveSamples":1,
+    "result":"STRUCTURAL SOURCE + EXCLUSION RULE",
+    "method":"unrelated-domain structural collision",
+    "generated":"paired attachment + enclosing corridor + distant exit; reserved for collision with prior repeated-concealment/visible-exception structure",
+    "newArtwork":false,
+    "websiteInsertion":"state/observer JSON updated; no new binary artwork claimed"
+  },
+  "terminus":{
+    "newSources":[{"id":"0B7vhvrekdjpbakVJenNULVI0bG8","title":"201612171218生態環保與醫療課程田野筆記(王醒之).pdf","sourceType":"named field note","authorship":"王醒之"}],
+    "result":"NEW SYNTHESIS",
+    "method":"countermodel collision with threshold-stack model",
+    "sourceFinding":"planning/property constraints may block commercial development while unintentionally preserving old built fabric, everyday walkability and community-organizing conditions; formal teaching alone does not guarantee attachment to another community",
+    "generated":"FRICTION-AS-HABITAT: a constraint can block one feasible action set while sheltering the substrate of another. Evaluate a threshold by both what it excludes and what its persistence protects.",
+    "quality":{"argument":"medium-high","evidence":"situated field observation plus historical/planning interpretation","observationDensity":"high","originality":"high","reusability":"high"},
+    "counterexampleNeeded":"case where removing constraint preserves or strengthens relational habitat"
+  },
+  "methodChange":"Broad visual sampling now includes a pre-mining exclusion gate for sensitive/private records. Such records are skipped and not described in observer output.",
+  "notifyUser":true
+}
