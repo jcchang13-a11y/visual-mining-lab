@@ -25,15 +25,25 @@ jobs:
         with:
           node-version: '22'
       - name: Run 50-round integration test
+        id: integration
+        continue-on-error: true
         run: node nostromo/integration/ci-test.mjs
       - name: Commit test result
+        if: always()
         run: |
           git config user.name "nostromo-bot"
           git config user.email "actions@users.noreply.github.com"
-          git add nostromo/integration/ci-last-result.json
-          if git diff --cached --quiet; then
-            echo "No result change"
+          if [ -f nostromo/integration/ci-last-result.json ]; then
+            git add nostromo/integration/ci-last-result.json
+            if git diff --cached --quiet; then
+              echo "No result change"
+            else
+              git commit -m "[nostromo-test] record integration CI result"
+              git push
+            fi
           else
-            git commit -m "[nostromo-test] record integration CI result"
-            git push
+            echo "ci-last-result.json was not produced"
           fi
+      - name: Enforce test conclusion
+        if: steps.integration.outcome != 'success'
+        run: exit 1
