@@ -1,0 +1,17 @@
+{
+  "runAt":"2026-08-29 08:23 +08:00",
+  "uncultured":{
+    "sampledImageIds":["0B6kekeEVEPHjYkItQ1hDakVubW8"],
+    "finding":"A 2016 Facebook screenshot preserves full thread context, reactions, timestamps, nested replies and phone chrome rather than cropping to the target sentence. It is an earlier same-platform instance of context-preserving evidentiary capture.",
+    "assessment":"useful longitudinal confirmation, but still the same platform family; not promoted to general visual grammar",
+    "next":"seek non-Facebook screenshots from other years and purposes"
+  },
+  "terminus":{
+    "newSourceIds":["1sGdBKX9NNYDPpcqMMSbHi-qZ5mZeykOc"],
+    "finding":"The 2008 heritage-management paper by Fang-Chieh Jung and Chao-Ching Fu provides a counterweight to the current function-versus-tool hypothesis. It argues that importing ROT/OT outsourcing mechanisms not designed specifically for heritage preservation can produce different management outcomes; the institutional instrument can reshape the management function itself rather than merely serve as a replaceable channel.",
+    "quality":"formal peer-reviewed article; clear problem, explicit analytical framework, empirical cases; high conceptual and evidentiary utility for falsification",
+    "candidate":"refine the vein from 'tools change while function persists' to 'sometimes a function survives tool replacement, but some tools reconfigure the function because the instrument carries its own institutional logic'",
+    "next":"continue searching for cases that distinguish channel substitution from institutional redesign"
+  },
+  "notification":"worthwhile-method-refinement"
+}
