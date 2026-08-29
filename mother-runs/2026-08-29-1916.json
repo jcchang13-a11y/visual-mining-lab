@@ -1,0 +1,21 @@
+{
+  "runAt":"2026-08-29 19:16 +08:00",
+  "mode":"small-batch mining + synthesis + falsification",
+  "boundaries":{"externalWeb":false,"driveMutation":false,"agentSimulation":false,"gangchibaoV3":false},
+  "uncultured":{
+    "sampleSearch":"recent Drive images checked against supplemental ledger",
+    "result":"NO NEW INDEPENDENT SAMPLE",
+    "note":"The recent-image page is dominated by the already-ledgered 2026-08-28 book-capture session. No same-family image was reused merely to inflate evidence. No derivative produced this round.",
+    "production":"SVG/HTML direct-to-GitHub remains the verified path; binary JPG/PNG publication remains unverified."
+  },
+  "terminus":{
+    "newSource":{"id":"1x-1IU02VttTwEffXsHAf_80Oru9osoyR","title":"网络社会都会治理的连结与切断.docx","date":"2021","genre":"multi-author research proposal / planning research framework"},
+    "sourceFinding":"The document treats metropolitan networks through connection/disconnection across multiple scales. Capital, technology and production networks create connectivity, while monopoly, exclusion, political conflict, ecological crisis and epidemic response can produce disconnection. It proposes heterogeneous cases spanning finance, water governance, high-tech corridors, cross-strait production networks, e-commerce and public space.",
+    "method":"non-heritage-domain stress test of previous layered-distribution model; derive a dynamic rather than static control model",
+    "generated":"SWITCHING-POWER MODEL: the previous four-layer model (frontline contact / rule-setting / resource allocation / veto) is still too static. Network governance requires a fifth question: who can change the connection state itself? Distinguish veto over a decision from switching power over a relation. An actor may lack day-to-day rule-setting power yet still be able to connect, disconnect, reroute or quarantine nodes. Therefore distribution should be measured not only by where work, rules, resources and veto sit, but by who can alter topology over time.",
+    "novelty":"The source discusses connection/disconnection but does not formulate the five-layer distribution model or distinguish veto power from topology-switching power; that distinction is MUTHER synthesis.",
+    "quality":{"argument":"medium","evidence":"low/medium at proposal stage","observationDensity":"medium","originality":"medium source / high synthesis","reusability":"high"},
+    "counterRisk":"Do not assume all disconnection is domination: quarantine, circuit breakers and protective isolation may be legitimate switching. Next test must separate protective, extractive and coercive switching."
+  },
+  "next":"Find an unrelated empirical domain where switching power is observable; seek a counterexample in which topology changes without concentrated switching authority. Continue image sampling beyond the recent book-capture family."
+}
