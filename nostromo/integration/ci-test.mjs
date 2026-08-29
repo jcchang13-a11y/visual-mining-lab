@@ -1,39 +1,16 @@
-// NOSTROMO repository-native integration CI v0.3.3
+// NOSTROMO repository-native integration CI v0.4
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import vm from 'node:vm';
+import {shroomSandboxReadingRound,mutherMineRepo,dropletVerifyUrl} from './repo-executors.mjs';
 
 const root=process.cwd();
 const integrationBase=path.join(root,'nostromo','integration');
 const resultPath=path.join(integrationBase,'ci-last-result.json');
-
-function resolveRequest(input){
-  const s=String(input);
-  if(/^https?:/i.test(s))throw new Error('NETWORK_FORBIDDEN_IN_CI_TEST');
-  return path.resolve(integrationBase,s);
-}
-
-globalThis.fetch=async function(input){
-  const p=resolveRequest(input);
-  try{
-    const text=await fs.readFile(p,'utf8');
-    return {ok:true,status:200,json:async()=>JSON.parse(text),text:async()=>text};
-  }catch(error){
-    if(error?.code==='ENOENT')return {ok:false,status:404,json:async()=>{throw error},text:async()=>''};
-    throw error;
-  }
-};
-
-async function loadScript(rel){
-  const file=path.join(root,rel);
-  const code=await fs.readFile(file,'utf8');
-  vm.runInThisContext(code,{filename:rel});
-}
-
-async function writeResult(result){
-  await fs.writeFile(resultPath,JSON.stringify(result,null,2)+'\n','utf8');
-  console.log(JSON.stringify(result,null,2));
-}
+function resolveRequest(input){const s=String(input);if(/^https?:/i.test(s))throw new Error('NETWORK_FORBIDDEN_IN_CORE_CI_FETCH');return path.resolve(integrationBase,s);}
+globalThis.fetch=async function(input){const p=resolveRequest(input);try{const text=await fs.readFile(p,'utf8');return {ok:true,status:200,json:async()=>JSON.parse(text),text:async()=>text};}catch(error){if(error?.code==='ENOENT')return {ok:false,status:404,json:async()=>{throw error},text:async()=>''};throw error;}};
+async function loadScript(rel){const code=await fs.readFile(path.join(root,rel),'utf8');vm.runInThisContext(code,{filename:rel});}
+async function writeResult(result){await fs.writeFile(resultPath,JSON.stringify(result,null,2)+'\n','utf8');console.log(JSON.stringify(result,null,2));}
 
 try{
   await loadScript('nostromo/gut/gut-engine.js');
@@ -41,7 +18,6 @@ try{
   await loadScript('nostromo/integration/state-executors.js');
   await loadScript('nostromo/integration/action-adapters.js');
   await loadScript('nostromo/integration/orchestrator.js');
-
   const out=await globalThis.NostromoOrchestrator.run(50,'NOSTROMO CI organ integration');
   const failures=[];
   for(const r of out.trace){
@@ -53,29 +29,20 @@ try{
     if(!r.sources?.dropletUpdated)failures.push({round:r.round,type:'DROPLET_SOURCE_MISSING'});
   }
 
+  const sandbox=await shroomSandboxReadingRound({text:'若見諸相非相，即見如來。',agents:10,round:1});
+  const mine=await mutherMineRepo({query:'DISPLAYED STATE MUST FOLLOW EVIDENCE',limit:8});
+  let verify=null; try{verify=await dropletVerifyUrl({url:'https://github.com/jcchang13-a11y/visual-mining-lab'});}catch(error){verify={status:'FAILED',error:String(error?.message||error)};}
+  if(sandbox.status!=='EXECUTED'||sandbox.count!==10)failures.push({type:'SHROOM_SANDBOX_EXECUTOR_FAIL'});
+  if(mine.status!=='EXECUTED'||mine.hitCount<1)failures.push({type:'MUTHER_REPO_EXECUTOR_FAIL',hitCount:mine.hitCount});
+  if(verify.status!=='EXECUTED')failures.push({type:'DROPLET_URL_EXECUTOR_FAIL',detail:verify});
+
   const result={
-    schema:'nostromo-integration-ci/v0.3.3',
-    completedAt:new Date().toISOString(),
-    status:out.status==='PASS'&&failures.length===0?'PASS':'FAIL',
-    rounds:out.rounds,
+    schema:'nostromo-integration-ci/v0.4',completedAt:new Date().toISOString(),status:out.status==='PASS'&&failures.length===0?'PASS':'FAIL',rounds:out.rounds,
     expectedPerRound:{executedStateActions:3,blockedRemoteActions:3},
     totals:{executedStateActions:out.trace.reduce((n,r)=>n+(r.actions?.summary?.EXECUTED||0),0),blockedRemoteActions:out.trace.reduce((n,r)=>n+(r.actions?.summary?.QUEUED_UNEXECUTABLE||0),0)},
-    sources:out.trace[0]?.sources||null,
-    paths:globalThis.NostromoOrchestrator.paths,
-    failures,
-    boundary:'PASS certifies published-state executors + GUT + VAJRA dataflow only. It does not certify remote SHROOMING rounds, new MU/TH/UR mining, or new DROPLET web search.'
+    repositoryNativeExecutors:{shrooming:{status:sandbox.status,count:sandbox.count,boundary:sandbox.boundary},muther:{status:mine.status,hitCount:mine.hitCount,boundary:mine.boundary},droplet:{status:verify.status,statusCode:verify.statusCode||null,boundary:verify.boundary||null}},
+    sources:out.trace[0]?.sources||null,paths:globalThis.NostromoOrchestrator.paths,failures,
+    boundary:'PASS certifies published-state executors + GUT + VAJRA + repository-native SHROOMING sandbox + repository corpus MUTHER mining + explicit-URL DROPLET verification. It still does not certify the live SHROOMING population, Google Drive mining, or search-engine discovery.'
   };
-  await writeResult(result);
-  if(result.status!=='PASS')process.exitCode=1;
-}catch(error){
-  const result={
-    schema:'nostromo-integration-ci/v0.3.3',
-    completedAt:new Date().toISOString(),
-    status:'FAIL',
-    rounds:0,
-    failures:[{type:'UNCAUGHT_EXECUTION_ERROR',message:String(error?.message||error),stack:String(error?.stack||'').slice(0,4000)}],
-    boundary:'Failure evidence was persisted before exiting. No uncompleted execution is counted as PASS.'
-  };
-  await writeResult(result);
-  process.exitCode=1;
-}
+  await writeResult(result); if(result.status!=='PASS')process.exitCode=1;
+}catch(error){const result={schema:'nostromo-integration-ci/v0.4',completedAt:new Date().toISOString(),status:'FAIL',rounds:0,failures:[{type:'UNCAUGHT_EXECUTION_ERROR',message:String(error?.message||error),stack:String(error?.stack||'').slice(0,4000)}],boundary:'Failure evidence was persisted before exiting. No uncompleted execution is counted as PASS.'};await writeResult(result);process.exitCode=1;}
