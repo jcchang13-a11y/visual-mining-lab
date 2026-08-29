@@ -1,0 +1,11 @@
+{
+  "test":"NOSTROMO MINIMUM FIVE-ORGAN LOOP · BENCH 001",
+  "date":"2026-08-29",
+  "rounds":50,
+  "result":"PASS",
+  "route":["SHROOMING","MU/TH/UR","DROPLET","GUT","VAJRA","GUT"],
+  "method":"Exact GUT v0.1 and VAJRA v0.1 logic executed for 50 sequential rounds against representative structures from the three published read-connected organ states.",
+  "observed":{"completedRounds":50,"vajraTracePerRound":6,"vajraTerminalStatus":"DEPTH_BOUND","carryPayloadMaxChars":1200,"routingBreaks":0},
+  "notCertified":["GitHub Pages browser fetch path was not independently executed by this bench","SHROOMING cannot yet be remotely commanded to generate a new simulation round","MU/TH/UR cannot yet be remotely commanded to launch a new mining run","DROPLET connection currently consumes published evidence state rather than launching a new live web mission from static Pages"],
+  "interpretation":"The minimum NOSTROMO data loop is executable and stable for 50 sequential routing rounds. This certifies continuity of the integration layer, not autonomous execution of every external organ."
+}
