@@ -1,9 +1,9 @@
-/* NOSTROMO published-state executors v0.3 — real computation, explicitly not remote organ execution */
+/* NOSTROMO published-state executors v0.3.1 — real computation, explicitly not remote organ execution */
 (function(root){
   const PATHS={
-    shrooming:'../mycelium/state.json',
-    muther:'../mother-latest.json',
-    droplet:'../nostromo/droplet-state.json'
+    shrooming:'../../mycelium/state.json',
+    muther:'../../mother-latest.json',
+    droplet:'../droplet-state.json'
   };
   const cache=new Map();
   async function load(organ){
@@ -64,5 +64,5 @@
     if(action==='READ_STATE')return {executor:'PUBLISHED_STATE_READ',boundary:'READ_ONLY',organ,updatedAt:state.updatedAt||null,state};
     throw new Error('UNSUPPORTED_STATE_EXECUTION');
   }
-  root.NostromoStateExecutors={execute,load,cache};
+  root.NostromoStateExecutors={execute,load,cache,paths:PATHS};
 })(typeof window!=='undefined'?window:globalThis);
