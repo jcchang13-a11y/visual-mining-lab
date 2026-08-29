@@ -1,0 +1,19 @@
+{
+  "runAt":"2026-08-29 12:17 +08:00",
+  "boundaries":{"driveMutated":false,"externalWeb":false,"agents":false,"gangchibaoRound3":false},
+  "uncultured":{
+    "sampled":[
+      {"id":"1jdLEY2vdr1gRp4pTo7nXQuanvf241CYx","title":"_DSC3983_preview.jpeg","role":"staged family portrait / memory production"},
+      {"id":"1vrbuhpEJHAAE7oiAQlAjh3ltTyX-G7Q2","title":"DSC_0044.JPG","role":"photographed narrative display / documentation of authored memory"}
+    ],
+    "finding":"A new role distinction is visible across older independent image material: some images stage memory directly, while others document an already-authored memory artifact. This supports mining image role and mediation layer, not only subject matter or composition.",
+    "productionExperiment":{"id":"muther-remix-002","type":"pure SVG vector recombination","sources":["1jdLEY2vdr1gRp4pTo7nXQuanvf241CYx","1vrbuhpEJHAAE7oiAQlAjh3ltTyX-G7Q2"],"method":"extract palette, vertical composition, clock/wallpaper rhythm, group arrangement and document field; recombine without reproducing source photographs","repoPath":"media-lab/experiments/muther-remix-002.svg","siteInserted":true,"externalImageHost":false},
+    "next":"continue testing archive-to-new-work transformations; SVG path is now proven, while arbitrary binary JPG/PNG direct repo insertion remains a separate transport problem"
+  },
+  "terminus":{
+    "sampled":[{"id":"17Jt3hPad22RC_5OnM82b54-1zPj1Ch0O","title":"-4-社區支應老人在地老化之研究.pdf","authors":"薛方杰、潘冠志","genre":"conference research paper"}],
+    "finding":"The paper explicitly defines community care as linking formal and informal resources and stresses familiar people, places and social networks as part of aging-in-place support. It is not a decisive empirical falsification, but it supplies a design counterpoint: formal systems can be intentionally built to connect rather than erase informal relational infrastructure.",
+    "quality":"moderate conceptual utility; conventional argument, useful definitional and design evidence; not promoted as a major independent vein",
+    "next":"seek empirical cases where such formal-informal integration demonstrably works in practice"
+  }
+}
