@@ -1,8 +1,9 @@
 {
   "schema":"nostromo-organ-registry/v0.8",
-  "updatedAt":"2026-08-30T06:04:00+08:00",
+  "updatedAt":"2026-08-30T06:07:00+08:00",
   "truthRule":"DISPLAYED STATE MUST FOLLOW EVIDENCE",
   "evidence":"ci-last-result.json plus formal-round-test.mjs plus connector-last-result.json",
+  "latestFormalRound":"greenhouse/r111-nostromo-formal-round.json",
   "organs":{
     "shrooming":{"mode":"PARTIAL_EXEC","source":"../../mycelium/state.json","actions":{"READ_STATE":"EXEC_STATE","INSPECT_STATE":"EXEC_STATE","RUN_SANDBOX_READING_ROUND":"CLOSED_LOOP_EXEC","POSE_QUESTION":"GREENHOUSE_PROBE_EXEC","RUN_READING_ROUND":"FORMAL_ROUND_EXEC"},"boundary":"Published-state inspection, sandbox reading, greenhouse question probing, and an explicit formal greenhouse round advance are executable. RUN_READING_ROUND now advances history by writing a new immutable round file derived from the previous published greenhouse history with provenance checks. R111 is the first such NOSTROMO-executed formal advance. It remains a repository-native deterministic/single-model experimental transition, not ten independently persistent live LLM processes, and it is not auto-triggered by ordinary CI."},
     "muther":{"mode":"PARTIAL_EXEC","source":"../../mother-latest.json","actions":{"READ_STATE":"EXEC_STATE","AUDIT_STATE":"EXEC_STATE","MINE_REPO":"CLOSED_LOOP_EXEC","MINE_DRIVE_QUERY":"CONNECTOR_EXEC","MINE_INTERNAL":"REQUEST_ONLY","FALSIFY":"REQUEST_ONLY"},"boundary":"Published mining-state audit and repository corpus mining are closed-loop executable. Query-scoped Google Drive mining is executed by the authorized external connector runtime and handed back as redacted evidence. Exhaustive whole-Drive mining/falsification remains unavailable."},
