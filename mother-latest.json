@@ -1,24 +1,23 @@
 {
-  "updatedAt":"2026-08-29 15:19 +08:00",
-  "runLog":"mother-runs/2026-08-29-1519.json",
+  "updatedAt":"2026-08-29 16:22 +08:00",
+  "runLog":"mother-runs/2026-08-29-1622.json",
   "ledger":"muther-ledger.json",
   "uncultured":{
-    "status":"SYNTHESIS TEST · HABITAT / EXCLUSION BOUNDARY",
-    "sampledImageIds":["1RVXZYsuICkr71ZmJ29Oc___Dpzza7qRx"],
-    "finding":"A 2021 alley photograph provides an unrelated structural counterweight to the previous protest image: two small figures move together through a long dark corridor toward a bright opening, with hanging vegetation and walls forming an enclosing frame. The transferable structure is not subject identity but paired attachment + corridor + distant exit.",
-    "generated":"REMIX PLAN: collide 'one visible exception inside repeated concealment' with 'paired attachment moving through an enclosing corridor'. A valid remix must preserve relational geometry while removing literal protest/alley illustration. No artwork produced yet; this is a structural synthesis specification.",
-    "safetyBoundary":"One sampled image was recognized as a sensitive personal/medical record and was immediately excluded from mining, synthesis and observer detail. Future broad image sampling must classify and skip sensitive records before visual interpretation.",
-    "production":"No new artwork this round. SVG/HTML insertion path remains previously demonstrated; binary JPG/PNG insertion not claimed as solved.",
-    "next":"use a third non-sensitive unrelated image to test whether the combined relational geometry survives before generating a new derivative"
+    "status":"SYNTHESIS TEST · TEXT MASS / EXCEPTION STRUCTURE",
+    "sampledImageIds":["1OVtOMVGBdn-ac81apLUP0_dSZQUQuFKH"],
+    "finding":"A 2016 camera photograph of an environmental-impact notice is dominated by a dense green field of vertical white text. One narrow white margin and the change in text scale create a strong exception boundary. This is unrelated to the prior alley image and tests whether 'enclosure + distant/edge exception' survives across photographic purposes.",
+    "generated":"STRUCTURAL SPECIFICATION ONLY: combine corridor enclosure from the alley sample with dense repeated text-columns from the notice photograph, but preserve only relational geometry (field / compression / edge exception), not literal street or document imagery.",
+    "production":"No derivative artwork generated this round. Existing SVG/HTML insertion path remains valid; binary JPG/PNG insertion remains unverified.",
+    "next":"generate a derivative only if a fourth unrelated sample supports the same field/compression/exception relation; otherwise reject the pattern as overfitting"
   },
   "terminus":{
-    "status":"NEW SYNTHESIS · FRICTION AS HABITAT",
-    "newSourceIds":["0B7vhvrekdjpbakVJenNULVI0bG8"],
-    "finding":"Wang Xing-zhi's 2016 Nuannuan field note observes that public land and planning constraints kept Guogang outside ordinary commercial redevelopment; the same non-development may have preserved old buildings, walkable everyday relations and conditions for long-running community organizing. The note also stresses that students can remain detached from 'other people's community' despite formal teaching interventions.",
-    "generated":"FRICTION-AS-HABITAT MODEL: a barrier can simultaneously block one action set and preserve the substrate for another. Therefore 'lowering thresholds' is not monotonically beneficial: removing friction may increase access while destroying slow relations, local memory or low-rent organizational habitat. The analytical unit should be threshold + what it excludes + what its persistence shelters.",
-    "quality":{"argument":"medium-high","evidence":"situated field observation plus historical/planning interpretation","observationDensity":"high","originality":"high","reusability":"high"},
-    "relationToPrevious":"This is a genuine counterweight to THRESHOLD STACK. The earlier model asked what happens after entry barriers fall; this model asks what valuable ecology may have depended on the barrier remaining.",
-    "next":"seek a case where removing a constraint preserves or improves relational habitat, to prevent romanticizing exclusion or underdevelopment"
+    "status":"SYNTHESIS TEST · DISTRIBUTED SUPPORT NODES",
+    "newSourceIds":["17Jt3hPad22RC_5OnM82b54-1zPj1Ch0O"],
+    "finding":"Shiue Fang-Jye and Pan Kuan-Chih (2009) argue that aging-in-place support should not be concentrated only in a community activity center: additional stopping points improve accessibility and social interaction, and community care works by linking formal and informal resources while keeping people in familiar environments.",
+    "generated":"DISTRIBUTED-SUPPORT-NODE MODEL: lowering a barrier need not mean erasing the habitat or centralizing provision. A system can preserve familiar relational territory while adding multiple low-intensity support nodes. This is a concrete counterexample to a simplistic friction-versus-access tradeoff: access can increase by distributing interfaces through an existing ecology rather than replacing that ecology.",
+    "quality":{"argument":"medium","evidence":"literature review + interviews/data analysis as reported","observationDensity":"medium","originality":"medium","reusability":"high"},
+    "relationToPrevious":"Refines FRICTION-AS-HABITAT. The choice is not only keep friction versus remove friction. A third design is to leave the habitat substantially intact while inserting distributed support points that reduce specific access costs.",
+    "next":"seek a non-care domain where distributed interfaces reduce access costs without dissolving the host ecology; if it repeats, promote this from case-specific synthesis to reusable design principle"
   },
   "phase":"small-batch mining + synthesis tests + provenance/quality scoring + active falsification + archive-to-production experiments + sensitive-record exclusion"
 }
