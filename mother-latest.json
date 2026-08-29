@@ -1,22 +1,24 @@
 {
-  "updatedAt":"2026-08-29 14:22 +08:00",
-  "runLog":"mother-runs/2026-08-29-1422.json",
+  "updatedAt":"2026-08-29 15:19 +08:00",
+  "runLog":"mother-runs/2026-08-29-1519.json",
   "ledger":"muther-ledger.json",
   "uncultured":{
-    "status":"SYNTHESIS TEST · RITUAL REPETITION / VISIBILITY",
-    "sampledImageIds":["1MjfSK1f2JH_roT8l4h85DpixqktS1QJc"],
-    "finding":"An archival protest-series photograph was inspected as structure rather than illustration: one uncovered frontal face is embedded in a field of repeated covered faces, while incense creates a strong vertical axis. The useful relation is visibility versus repeated concealment, not the literal identities of participants.",
-    "candidate":"A future remix can test whether repetition + one exposed exception + vertical ritual axis transfers to unrelated imagery without turning the source into decorative collage.",
-    "production":"No new artwork this round; source was deliberately held at structural-extraction stage to avoid premature remixing.",
-    "next":"pair this structure with an unrelated non-protest image and test whether the relation survives; continue JPG/PNG insertion separately"
+    "status":"SYNTHESIS TEST · HABITAT / EXCLUSION BOUNDARY",
+    "sampledImageIds":["1RVXZYsuICkr71ZmJ29Oc___Dpzza7qRx"],
+    "finding":"A 2021 alley photograph provides an unrelated structural counterweight to the previous protest image: two small figures move together through a long dark corridor toward a bright opening, with hanging vegetation and walls forming an enclosing frame. The transferable structure is not subject identity but paired attachment + corridor + distant exit.",
+    "generated":"REMIX PLAN: collide 'one visible exception inside repeated concealment' with 'paired attachment moving through an enclosing corridor'. A valid remix must preserve relational geometry while removing literal protest/alley illustration. No artwork produced yet; this is a structural synthesis specification.",
+    "safetyBoundary":"One sampled image was recognized as a sensitive personal/medical record and was immediately excluded from mining, synthesis and observer detail. Future broad image sampling must classify and skip sensitive records before visual interpretation.",
+    "production":"No new artwork this round. SVG/HTML insertion path remains previously demonstrated; binary JPG/PNG insertion not claimed as solved.",
+    "next":"use a third non-sensitive unrelated image to test whether the combined relational geometry survives before generating a new derivative"
   },
   "terminus":{
-    "status":"COUNTERMODEL · PARTICIPATION THRESHOLD REFINED",
-    "newSourceIds":["1FKGQdkVMjC0JTfrSe3955NHEnj38gbIT"],
-    "finding":"A comparative labor-migration interview report shows that lowering one formal barrier does not settle participation or attachment: longer permitted stays reduce training costs and can stabilize trust, yet interviewees still describe exploitation, brokerage, cultural conflict, sector exit after residency, and divergent migrant preferences.",
-    "generated":"THRESHOLD STACK: entry-format and action-scope thresholds are only the visible front gates. After entry, participation can still be constrained by dependency, intermediary power, rights, trust, exit options and whether actors actually want durable attachment. Lowering a threshold changes the feasible action set; it does not by itself create commitment.",
-    "quality":{"argument":"medium-high","evidence":"20 stakeholder interviews, heterogeneous positions","observationDensity":"high","originality":"medium","reusability":"high as countermodel material"},
-    "next":"seek a case where lowering entry barriers does produce durable participation, to distinguish threshold effects from downstream institutional conditions"
+    "status":"NEW SYNTHESIS · FRICTION AS HABITAT",
+    "newSourceIds":["0B7vhvrekdjpbakVJenNULVI0bG8"],
+    "finding":"Wang Xing-zhi's 2016 Nuannuan field note observes that public land and planning constraints kept Guogang outside ordinary commercial redevelopment; the same non-development may have preserved old buildings, walkable everyday relations and conditions for long-running community organizing. The note also stresses that students can remain detached from 'other people's community' despite formal teaching interventions.",
+    "generated":"FRICTION-AS-HABITAT MODEL: a barrier can simultaneously block one action set and preserve the substrate for another. Therefore 'lowering thresholds' is not monotonically beneficial: removing friction may increase access while destroying slow relations, local memory or low-rent organizational habitat. The analytical unit should be threshold + what it excludes + what its persistence shelters.",
+    "quality":{"argument":"medium-high","evidence":"situated field observation plus historical/planning interpretation","observationDensity":"high","originality":"high","reusability":"high"},
+    "relationToPrevious":"This is a genuine counterweight to THRESHOLD STACK. The earlier model asked what happens after entry barriers fall; this model asks what valuable ecology may have depended on the barrier remaining.",
+    "next":"seek a case where removing a constraint preserves or improves relational habitat, to prevent romanticizing exclusion or underdevelopment"
   },
-  "phase":"small-batch mining + synthesis tests + provenance/quality scoring + active falsification + archive-to-production experiments"
+  "phase":"small-batch mining + synthesis tests + provenance/quality scoring + active falsification + archive-to-production experiments + sensitive-record exclusion"
 }
