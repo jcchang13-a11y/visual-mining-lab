@@ -1,11 +1,11 @@
 {
-  "schema":"nostromo-organ-registry/v0.3",
-  "updatedAt":"2026-08-30T01:05:00+08:00",
+  "schema":"nostromo-organ-registry/v0.4",
+  "updatedAt":"2026-08-30T02:03:00+08:00",
   "truthRule":"DISPLAYED STATE MUST FOLLOW EVIDENCE",
   "organs":{
-    "shrooming":{"mode":"PARTIAL_EXEC","source":"../mycelium/state.json","actions":{"READ_STATE":"EXEC_STATE","INSPECT_STATE":"EXEC_STATE","POSE_QUESTION":"REQUEST_ONLY","RUN_READING_ROUND":"REQUEST_ONLY"},"boundary":"Published-state inspection is executable; new agent reading rounds are not remotely executable."},
-    "muther":{"mode":"PARTIAL_EXEC","source":"../mother-latest.json","actions":{"READ_STATE":"EXEC_STATE","AUDIT_STATE":"EXEC_STATE","MINE_INTERNAL":"REQUEST_ONLY","FALSIFY":"REQUEST_ONLY"},"boundary":"Published mining-state audit is executable; new Drive mining/falsification runs are not remotely executable."},
-    "droplet":{"mode":"PARTIAL_EXEC","source":"../nostromo/droplet-state.json","actions":{"READ_STATE":"EXEC_STATE","AUDIT_EVIDENCE":"EXEC_STATE","SEARCH_EXTERNAL":"REQUEST_ONLY","VERIFY":"REQUEST_ONLY"},"boundary":"Published evidence audit is executable; new web search/verification is not remotely executable."},
+    "shrooming":{"mode":"PARTIAL_EXEC","source":"../mycelium/state.json","actions":{"READ_STATE":"EXEC_STATE","INSPECT_STATE":"EXEC_STATE","RUN_SANDBOX_READING_ROUND":"CI_EXECUTOR","POSE_QUESTION":"REQUEST_ONLY","RUN_READING_ROUND":"REQUEST_ONLY"},"boundary":"Published-state inspection and a repository-native deterministic sandbox reading round are executable; the live SHROOMING population is not remotely executable or modified."},
+    "muther":{"mode":"PARTIAL_EXEC","source":"../mother-latest.json","actions":{"READ_STATE":"EXEC_STATE","AUDIT_STATE":"EXEC_STATE","MINE_REPO":"CI_EXECUTOR","MINE_INTERNAL":"REQUEST_ONLY","FALSIFY":"REQUEST_ONLY"},"boundary":"Published mining-state audit and this GitHub repository corpus mining are executable; Google Drive mining/falsification remains unavailable to NOSTROMO."},
+    "droplet":{"mode":"PARTIAL_EXEC","source":"../nostromo/droplet-state.json","actions":{"READ_STATE":"EXEC_STATE","AUDIT_EVIDENCE":"EXEC_STATE","VERIFY_URL":"CI_EXECUTOR","SEARCH_EXTERNAL":"REQUEST_ONLY","VERIFY":"REQUEST_ONLY"},"boundary":"Published evidence audit and explicit-URL network verification are executable in the repository runner; search-engine discovery remains unavailable."},
     "gut":{"mode":"EXEC_CONNECTED","source":"../gut/gut-engine.js","actions":{"DIGEST":"EXEC_CONNECTED"}},
     "vajra":{"mode":"EXEC_CONNECTED","source":"../vajra/vajra-engine.js","actions":{"DISMANTLE":"EXEC_CONNECTED"}}
   }
