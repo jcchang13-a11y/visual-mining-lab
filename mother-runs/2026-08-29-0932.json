@@ -1,0 +1,26 @@
+{
+  "runAt":"2026-08-29 09:32 +08:00",
+  "mode":"small-batch patrol",
+  "boundaries":{"driveReadOnly":true,"externalWeb":false,"agentSimulation":false,"gangchibaoRound3":false},
+  "uncultured":{
+    "sampledImageIds":["1R4WB7SOBBdXcQ6_hWni8lMWa66TqzpV5xw","143uLa8XYjnbeDv9cQ1Nz0dT2OYbcsTYB"],
+    "observations":[
+      "A file whose filename begins line_ is visually a camera photo of a printed legal/apology document, not a LINE-app screenshot. Filename/platform heuristics are therefore unsafe for media-class assignment.",
+      "A 2017 Screenshot_* file is another Facebook capture preserving post text, commenter identity, timing, reaction count and phone UI. This confirms the Facebook-specific context-preserving habit but still does not establish cross-app generality."
+    ],
+    "candidate":"Context-preserving screenshot capture remains a Facebook-era archival habit candidate only.",
+    "deadEnds":["Searching LINE by filename produced a false positive; classify media from pixels/content, not filename tokens."],
+    "next":"seek actual non-Facebook app captures and verify visually before class assignment"
+  },
+  "terminus":{
+    "newSourceIds":["1F6mUhmmI3NoI0dsHcvv4F3UGHGuH7nFX"],
+    "source":"103.09.02曜三老闆訪談.pdf",
+    "provenance":"field interview record; interviewer/author not asserted from title alone",
+    "quality":{"argument":"medium","evidence":"high first-person empirical detail","originalObservation":"high","reusableParts":"very high"},
+    "finding":"The blacksmith interview distinguishes machine substitution from residual craft value. Machines reduce routine handmade demand, yet one-off repair and adaptive fabrication remain economically sensible where moulding/setup would cost more; the skill depends on tacit judgment, dimensional reasoning and responding to non-repeating problems. At the same time, rent, zoning, logistics and redevelopment can destroy the ecosystem that lets this residual function survive.",
+    "candidate":"Refine the tool/function vein into three layers: routine task substitution, residual adaptive/tacit function, and institutional ecosystem conditions. Technology may replace the first without replacing the second, while institutions can still eliminate the habitat that sustains it.",
+    "counterexample":"This is not a simple anti-automation case: the interviewee explicitly accepts that machines can efficiently replace part of production; the remaining value is selective rather than total.",
+    "next":"test this three-layer model against unrelated domains such as teaching, care work, bureaucracy or media production"
+  },
+  "notification":"worth-notifying: refined vein adds a distinct residual-function layer"
+}
