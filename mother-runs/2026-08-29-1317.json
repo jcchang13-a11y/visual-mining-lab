@@ -1,0 +1,31 @@
+{
+  "updatedAt":"2026-08-29 13:17 +08:00",
+  "runType":"mining-plus-synthesis",
+  "status":"NORMAL · CROSS-DOMAIN SYNTHESIS TEST",
+  "uncultured":{
+    "newSources":[
+      {"id":"148f0nufL45TpeJlNID70m2o2hnQ5uuDw","title":"Screenshot_2017-08-02-10-08-08.png","sourceType":"dress-up game UI screenshot"},
+      {"id":"0B6kekeEVEPHjU0R4UE9FUVRfX0k","title":"Screenshot_2016-09-12-09-15-04_1.jpg","sourceType":"social-media post/comment screenshot"}
+    ],
+    "method":"cross-interface hierarchy extraction",
+    "product":"media-lab/experiments/muther-remix-004.svg",
+    "sourceLayer":"The game screenshot organizes action as a vertical category menu around a central figure; the social screenshot organizes discourse as nested post/comment/reply blocks.",
+    "generatedLayer":"REMIX 004 maps menu hierarchy and reply hierarchy into one abstract CHOICE/REPLY MACHINE. The derivative does not reproduce the people, game character, post text or original interface styling; it keeps only hierarchical choice, nested response and directional flow.",
+    "result":"NEW DERIVATIVE · METHOD GENERALIZATION CANDIDATE",
+    "novelty":"moderate: structural extraction now works on interface screenshots as well as photographs, but this is still too few independent cases to call a stable grammar",
+    "siteInsertion":"SVG written directly to GitHub and set as the current Media Lab exhibit."
+  },
+  "terminus":{
+    "newSources":[
+      {"id":"1ueHn_sCkhPlC-YjZalzzZmq9gmBoPByZ","title":"CH 3-3-2 D4 20121028江山樓地區都更願景下午場.docx","sourceType":"workshop record / multi-speaker field record"},
+      {"id":"0B6kekeEVEPHjV0g4ZFp5NGNGRGs","title":"小組學習紀錄表 week3.docx","sourceType":"student group learning record","namedRecorders":["蔡舒翔","康曉薇"]}
+    ],
+    "method":"weak-observation + process-constraint synthesis across years",
+    "sourceLayer":"The 2012 workshop shows participants hesitating because the submission format looked professional and difficult; willingness increased when organizers relaxed format requirements. The 2015 group record shows a different constraint: the problem was too large, so the group narrowed its target from solving urban renewal to influencing actors who could affect actual plans.",
+    "generatedLayer":"MUTHER proposes a PARTICIPATION THRESHOLD model with two separable bottlenecks: entry-format threshold (people may not imagine themselves as eligible to act) and action-scope threshold (the problem may be too large to imagine an effective move). Lowering the first and narrowing the second can convert concern into participation without requiring stronger motivation.",
+    "quality":{"argument":"medium","evidence":"situated and processual","observationDensity":"high","originality":"medium-high as synthesis","reusability":"high as a testable process model"},
+    "counterpoint":"The model must be tested against cases where lowering format requirements or narrowing scope does not increase participation; motivation, trust or resources may dominate instead.",
+    "result":"NEW MODEL CANDIDATE · NOT STABLE"
+  },
+  "notifyUser":false
+}
