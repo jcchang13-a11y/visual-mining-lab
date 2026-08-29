@@ -1,0 +1,29 @@
+// NOSTROMO repository-native executors v0.4
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import https from 'node:https';
+import http from 'node:http';
+import crypto from 'node:crypto';
+
+const ROOT=process.cwd();
+const compact=(s,n=600)=>String(s??'').replace(/\s+/g,' ').trim().slice(0,n);
+const hash=s=>crypto.createHash('sha256').update(String(s)).digest('hex').slice(0,16);
+
+export async function shroomSandboxReadingRound({text='',agents=10,round=1}={}){
+  const source=compact(text,4000); if(!source) throw new Error('SHROOM_TEXT_REQUIRED');
+  const lenses=['structure','counterexample','position','otherness','evidence','language','boundary','memory','use','anomaly'];
+  const count=Math.max(1,Math.min(20,Number(agents)||10));
+  const reactions=Array.from({length:count},(_,i)=>({agent:`sandbox-${i+1}`,lens:lenses[i%lenses.length],observation:`以 ${lenses[i%lenses.length]} 位置重讀：${compact(source,180)}`,fingerprint:hash(`${round}|${i}|${source}`)}));
+  return {executor:'SHROOMING_SANDBOX_READING',status:'EXECUTED',round,count,boundary:'LOCAL DETERMINISTIC SANDBOX; DOES NOT MODIFY OR CLAIM TO BE THE LIVE SHROOMING POPULATION',sourceFingerprint:hash(source),reactions};
+}
+
+async function walk(dir,out=[]){for(const e of await fs.readdir(dir,{withFileTypes:true})){if(['.git','node_modules'].includes(e.name))continue;const p=path.join(dir,e.name);if(e.isDirectory())await walk(p,out);else if(/\.(md|txt|json|js|mjs|html)$/i.test(e.name))out.push(p);}return out;}
+export async function mutherMineRepo({query='',limit=12}={}){
+  const q=compact(query,200).toLowerCase(); if(!q)throw new Error('MUTHER_QUERY_REQUIRED');
+  const files=await walk(ROOT); const hits=[];
+  for(const file of files){let text;try{text=await fs.readFile(file,'utf8')}catch{continue}const idx=text.toLowerCase().indexOf(q);if(idx<0)continue;hits.push({path:path.relative(ROOT,file),snippet:compact(text.slice(Math.max(0,idx-180),idx+q.length+420),600)});if(hits.length>=Math.max(1,Math.min(50,Number(limit)||12)))break;}
+  return {executor:'MUTHER_REPOSITORY_MINE',status:'EXECUTED',query:q,hitCount:hits.length,boundary:'MINES THIS GITHUB REPOSITORY ONLY; DOES NOT CLAIM GOOGLE DRIVE COVERAGE',hits};
+}
+
+function probe(url,timeoutMs=8000){return new Promise((resolve,reject)=>{const u=new URL(url);const lib=u.protocol==='https:'?https:http;const req=lib.request(u,{method:'GET',headers:{'User-Agent':'NOSTROMO-DROPLET/0.4'}},res=>{let bytes=0;res.on('data',c=>{bytes+=c.length;if(bytes>65536)req.destroy()});res.on('end',()=>resolve({statusCode:res.statusCode||0,contentType:res.headers['content-type']||null,bytesSampled:bytes,finalUrl:url}));res.on('close',()=>resolve({statusCode:res.statusCode||0,contentType:res.headers['content-type']||null,bytesSampled:bytes,finalUrl:url}));});req.setTimeout(timeoutMs,()=>req.destroy(new Error('TIMEOUT')));req.on('error',reject);req.end();});}
+export async function dropletVerifyUrl({url}={}){if(!/^https?:\/\//i.test(String(url||'')))throw new Error('DROPLET_URL_REQUIRED');const r=await probe(url);return {executor:'DROPLET_URL_VERIFY',status:r.statusCode>=200&&r.statusCode<400?'EXECUTED':'FAILED',boundary:'VERIFIES AN EXPLICIT URL ONLY; DOES NOT CLAIM SEARCH-ENGINE DISCOVERY',...r};}
