@@ -1,8 +1,8 @@
-// NOSTROMO repository-native integration CI v0.6
+// NOSTROMO repository-native integration CI v0.7
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import vm from 'node:vm';
-import {shroomSandboxReadingRound,mutherMineRepo,dropletVerifyUrl} from './repo-executors.mjs';
+import {shroomSandboxReadingRound,shroomGreenhousePoseQuestion,mutherMineRepo,dropletVerifyUrl} from './repo-executors.mjs';
 import {runActiveExecutorLoop} from './active-orchestrator.mjs';
 import {loadConnectorEvidence} from './connector-evidence.mjs';
 
@@ -32,9 +32,11 @@ try{
   }
 
   const sandbox=await shroomSandboxReadingRound({text:'若見諸相非相，即見如來。',agents:10,round:1});
+  const greenhouseProbe=await shroomGreenhousePoseQuestion({question:'「我們」在這裡指的是誰？'});
   const mine=await mutherMineRepo({query:'DISPLAYED STATE MUST FOLLOW EVIDENCE',limit:8});
   let verify=null; try{verify=await dropletVerifyUrl({url:'https://github.com/jcchang13-a11y/visual-mining-lab'});}catch(error){verify={status:'FAILED',error:String(error?.message||error)};}
   if(sandbox.status!=='EXECUTED'||sandbox.count!==10)failures.push({type:'SHROOM_SANDBOX_EXECUTOR_FAIL'});
+  if(greenhouseProbe.status!=='EXECUTED'||greenhouseProbe.count!==10||greenhouseProbe.sourceRounds!=='R101-R110')failures.push({type:'SHROOM_GREENHOUSE_PROBE_FAIL',count:greenhouseProbe.count,sourceRounds:greenhouseProbe.sourceRounds});
   if(mine.status!=='EXECUTED'||mine.hitCount<1)failures.push({type:'MUTHER_REPO_EXECUTOR_FAIL',hitCount:mine.hitCount});
   if(verify.status!=='EXECUTED')failures.push({type:'DROPLET_URL_EXECUTOR_FAIL',detail:verify});
 
@@ -48,20 +50,21 @@ try{
   if(active.connectorHandoff?.status!=='ACCEPTED'||active.connectorHandoff?.actionsAccepted!==2)failures.push({type:'CONNECTOR_HANDOFF_FAIL',detail:active.connectorHandoff});
   for(const r of active.trace){
     if(r.executors?.shrooming?.status!=='EXECUTED')failures.push({round:r.round,type:'ACTIVE_SHROOMING_FAIL'});
+    if(r.executors?.greenhouseProbe?.status!=='EXECUTED'||r.executors?.greenhouseProbe?.count!==10)failures.push({round:r.round,type:'ACTIVE_GREENHOUSE_PROBE_FAIL'});
     if(r.executors?.muther?.status!=='EXECUTED')failures.push({round:r.round,type:'ACTIVE_MUTHER_FAIL'});
     if(r.executors?.droplet?.status!=='EXECUTED')failures.push({round:r.round,type:'ACTIVE_DROPLET_FAIL'});
     if(!r.gut?.absorbed)failures.push({round:r.round,type:'ACTIVE_GUT_EMPTY'});
   }
 
   const result={
-    schema:'nostromo-integration-ci/v0.6',completedAt:new Date().toISOString(),status:out.status==='PASS'&&active.status==='PASS'&&connector.status==='ACCEPTED'&&failures.length===0?'PASS':'FAIL',rounds:out.rounds,
+    schema:'nostromo-integration-ci/v0.7',completedAt:new Date().toISOString(),status:out.status==='PASS'&&active.status==='PASS'&&connector.status==='ACCEPTED'&&failures.length===0?'PASS':'FAIL',rounds:out.rounds,
     expectedPerRound:{executedStateActions:3,blockedRemoteActions:3},
     totals:{executedStateActions:out.trace.reduce((n,r)=>n+(r.actions?.summary?.EXECUTED||0),0),blockedRemoteActions:out.trace.reduce((n,r)=>n+(r.actions?.summary?.QUEUED_UNEXECUTABLE||0),0)},
-    repositoryNativeExecutors:{shrooming:{status:sandbox.status,count:sandbox.count,boundary:sandbox.boundary},muther:{status:mine.status,hitCount:mine.hitCount,boundary:mine.boundary},droplet:{status:verify.status,statusCode:verify.statusCode||null,boundary:verify.boundary||null}},
+    repositoryNativeExecutors:{shrooming:{status:sandbox.status,count:sandbox.count,boundary:sandbox.boundary},greenhouseProbe:{status:greenhouseProbe.status,count:greenhouseProbe.count,sourceRounds:greenhouseProbe.sourceRounds,boundary:greenhouseProbe.boundary},muther:{status:mine.status,hitCount:mine.hitCount,boundary:mine.boundary},droplet:{status:verify.status,statusCode:verify.statusCode||null,boundary:verify.boundary||null}},
     connectorExecutors:{status:connector.status,completedAt:connector.completedAt,mutherDrive:{status:connector.actions?.muther?.status,returnedCount:connector.actions?.muther?.returnedCount,boundary:connector.actions?.muther?.boundary},dropletWeb:{status:connector.actions?.droplet?.status,evidenceCount:connector.actions?.droplet?.evidenceCount,boundary:connector.actions?.droplet?.boundary},boundary:connector.boundary},
-    activeExecutorLoop:{status:active.status,requestedRounds:active.requestedRounds,completedRounds:active.completedRounds,roundsWithAllThreeExecutors:active.trace.filter(r=>r.executors.shrooming.status==='EXECUTED'&&r.executors.muther.status==='EXECUTED'&&r.executors.droplet.status==='EXECUTED').length,gutAbsorbedTotal:active.trace.reduce((n,r)=>n+(r.gut?.absorbed||0),0),connectorHandoff:active.connectorHandoff,lastCarry:active.trace.at(-1)?.carryOut||null,boundary:active.boundary},
+    activeExecutorLoop:{status:active.status,requestedRounds:active.requestedRounds,completedRounds:active.completedRounds,roundsWithAllFourRepoExecutors:active.trace.filter(r=>r.executors.shrooming.status==='EXECUTED'&&r.executors.greenhouseProbe.status==='EXECUTED'&&r.executors.muther.status==='EXECUTED'&&r.executors.droplet.status==='EXECUTED').length,gutAbsorbedTotal:active.trace.reduce((n,r)=>n+(r.gut?.absorbed||0),0),connectorHandoff:active.connectorHandoff,lastCarry:active.trace.at(-1)?.carryOut||null,boundary:active.boundary},
     sources:out.trace[0]?.sources||null,paths:globalThis.NostromoOrchestrator.paths,failures,
-    boundary:'PASS certifies 50-round published-state integration, a 10-round closed loop of repository-native executors, and successful handoff into GUT of persisted evidence from two externally executed connector actions: query-scoped Google Drive mining and public web search. It does not certify live SHROOMING, exhaustive whole-Drive mining, or that GitHub Actions itself can invoke private connectors.'
+    boundary:'PASS certifies 50-round published-state integration, a 10-round closed loop of repository-native executors including a SHROOMING question probe grounded in the latest published greenhouse history, and successful handoff into GUT of persisted evidence from query-scoped Google Drive mining and public web search. It does not certify formal SHROOMING round advancement, ten independent live LLM processes, exhaustive whole-Drive mining, or that GitHub Actions itself can invoke private connectors.'
   };
   await writeResult(result); if(result.status!=='PASS')process.exitCode=1;
-}catch(error){const result={schema:'nostromo-integration-ci/v0.6',completedAt:new Date().toISOString(),status:'FAIL',rounds:0,failures:[{type:'UNCAUGHT_EXECUTION_ERROR',message:String(error?.message||error),stack:String(error?.stack||'').slice(0,4000)}],boundary:'Failure evidence was persisted before exiting. No uncompleted execution is counted as PASS.'};await writeResult(result);process.exitCode=1;}
+}catch(error){const result={schema:'nostromo-integration-ci/v0.7',completedAt:new Date().toISOString(),status:'FAIL',rounds:0,failures:[{type:'UNCAUGHT_EXECUTION_ERROR',message:String(error?.message||error),stack:String(error?.stack||'').slice(0,4000)}],boundary:'Failure evidence was persisted before exiting. No uncompleted execution is counted as PASS.'};await writeResult(result);process.exitCode=1;}
