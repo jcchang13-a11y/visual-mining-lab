@@ -1,0 +1,22 @@
+{
+  "schema": "nostromo-connector-queue/v0.1",
+  "updatedAt": "2026-08-30T04:03:00+08:00",
+  "requests": [
+    {
+      "id": "MUTHER-DRIVE-0001",
+      "organ": "MU/TH/UR",
+      "action": "MINE_DRIVE_QUERY",
+      "input": {"query": "剛吃飽", "topn": 10},
+      "status": "EXECUTED",
+      "resultRef": "connector-last-result.json#mutherDrive"
+    },
+    {
+      "id": "DROPLET-WEB-0001",
+      "organ": "DROPLET",
+      "action": "SEARCH_EXTERNAL",
+      "input": {"query": "Magentic-One AutoGen orchestrator Microsoft Research"},
+      "status": "EXECUTED",
+      "resultRef": "connector-last-result.json#dropletWeb"
+    }
+  ]
+}
