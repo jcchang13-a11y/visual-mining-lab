@@ -1,0 +1,22 @@
+{
+  "experiment":"SHROOMING Open Social Ontology + VAJRA LOOP",
+  "version":"2.2",
+  "round":"R112",
+  "status":"complete",
+  "executor":"SHROOMING_FORMAL_ROUND_ADVANCE",
+  "previousRound":"R111",
+  "source":"greenhouse/r111-nostromo-formal-round.json",
+  "sourceBlobSha":"1ec138bd3bce0158e661254225c2c84ccc35d02b",
+  "continuity":"All R1-R111 histories preserved. R112 is derived only from the declared R111 parent; same ten numbered traces are retained for continuity and provenance, not fixed personality.",
+  "task":"test whether temporary subject forms recur, mutate or disappear under asymmetric information, conflicting tasks and partial memory access",
+  "intervention":{"memoryAccess":"rotated while task condition held constant","holdTaskConstant":true},
+  "participants":["01","02","03","06","07","08","09"],
+  "silent":["04","05","10"],
+  "event":"Memory-access rotation",
+  "summary":"承接 R111，在保持任務條件可追溯的前提下施加 rotated while task condition held constant；01、02、03、06、07、08、09 進入本輪可見互動，04、05、10 保持不可見／沉默。觀測重點仍是 subject-form 是否因可見資訊配置而重新組合，而不是把 trace 固定成人格。",
+  "observation":"Holding the declared task constant while rotating memory access changes the visible coalition from R111: 01, 07 and 08 become visible while 05 and 10 drop out. Within this deterministic repository model, that is evidence that the observed subject-form is sensitive to information topology rather than simply persisting as a stable group identity. It is not evidence about ten independent live agents.",
+  "provenanceFingerprint":"642c83b7ac6c748d",
+  "runtime_note":"Repository-native deterministic chained formal transition generated from the declared R111 parent. This does not claim ten independently persistent live LLM processes.",
+  "boundary":"This file advances formal greenhouse history by one explicit chained round only. It does not overwrite R1-R111 and does not authorize automatic repeated advancement on every CI run.",
+  "next":"R113 should reverse the memory-access rotation while preserving the same task and compare whether the R111 visibility pattern returns, partly returns, or fails to return."
+}
