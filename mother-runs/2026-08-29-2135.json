@@ -1,0 +1,21 @@
+{
+  "runAt":"2026-08-29 21:35 +08:00",
+  "mode":"small-batch mining + synthesis + falsification",
+  "boundaries":{"externalWeb":false,"driveMutation":false,"agentSimulation":false,"gangchibaoV3":false},
+  "uncultured":{
+    "sampleSearch":"fresh paginated Drive image browse checked against mother-state and muther-ledger",
+    "result":"NO NEW INDEPENDENT SAMPLE",
+    "note":"The visible image page remains dominated by the already-ledgered 2026-08-28 IMG_0947xx family. No same-family image was reused and no derivative was manufactured merely to increase round count.",
+    "production":"SVG/HTML direct-to-GitHub remains verified; JPG/PNG binary publication remains unverified."
+  },
+  "terminus":{
+    "newSource":{"id":"1yBc_Awx1t2-jUHhQDNCVOLL2QOv5m24b","title":"講習手冊-3.pdf","genre":"heritage disaster-prevention training manual"},
+    "sourceFinding":"The manual frames heritage disaster prevention as risk identification, assessment, planning, on-site inspection and practical operation shared across owners/managers, experts and fire-service actors. This is a protective-intervention case, but it does not provide an empirical network-topology case where a concentrated actor connects, disconnects or reroutes nodes.",
+    "method":"adversarial domain transfer against switching-power hypothesis",
+    "generated":"NO MODEL UPGRADE. Protective intervention is not automatically switching power. MUTHER now adds a discrimination rule: classify an intervention as switching power only when it changes relation availability or routing among nodes; risk reduction, inspection, training or local shutdown by themselves are insufficient. This narrows the model rather than expanding it.",
+    "novelty":"The source supplies a different domain and a negative case. The topology-change criterion is MUTHER synthesis, not the source's claim.",
+    "quality":{"argument":"medium","evidence":"medium for disaster-prevention practice, low for network topology","observationDensity":"medium","originality":"low source / medium synthesis","reusability":"high as exclusion rule"},
+    "counterRisk":"Do not redescribe every protective action as network governance. Continue seeking an empirical case with observable rerouting, isolation between nodes, access revocation, or decentralized failover."
+  },
+  "next":"Continue image sampling beyond the recent capture cluster. For Terminus, test the narrowed topology-change criterion in an unrelated empirical case before promoting switching power."
+}
