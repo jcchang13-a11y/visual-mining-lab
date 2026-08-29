@@ -1,6 +1,6 @@
 {
-  "schema": "nostromo-integration-ci/v0.5",
-  "completedAt": "2026-08-29T20:05:55.954Z",
+  "schema": "nostromo-integration-ci/v0.6",
+  "completedAt": "2026-08-29T20:06:16.194Z",
   "status": "PASS",
   "rounds": 50,
   "expectedPerRound": {
@@ -28,12 +28,33 @@
       "boundary": "VERIFIES AN EXPLICIT URL ONLY; DOES NOT CLAIM SEARCH-ENGINE DISCOVERY"
     }
   },
+  "connectorExecutors": {
+    "status": "ACCEPTED",
+    "completedAt": "2026-08-30T04:03:00+08:00",
+    "mutherDrive": {
+      "status": "EXECUTED",
+      "returnedCount": 10,
+      "boundary": "QUERY-SCOPED GOOGLE DRIVE SEARCH EXECUTED THROUGH THE AUTHORIZED CONNECTOR; NOT AN EXHAUSTIVE WHOLE-DRIVE MINE"
+    },
+    "dropletWeb": {
+      "status": "EXECUTED",
+      "evidenceCount": 1,
+      "boundary": "A REAL PUBLIC WEB SEARCH WAS EXECUTED BY THE CONNECTOR RUNTIME; THIS DOES NOT MEAN GITHUB ACTIONS ITSELF HAS SEARCH-ENGINE ACCESS"
+    },
+    "boundary": "This module validates and hands off persisted evidence from an authorized external connector runtime. It does not itself call Google Drive or a search engine, and it must not treat private raw Drive content as repository data."
+  },
   "activeExecutorLoop": {
     "status": "PASS",
     "requestedRounds": 10,
     "completedRounds": 10,
     "roundsWithAllThreeExecutors": 10,
     "gutAbsorbedTotal": 903,
+    "connectorHandoff": {
+      "status": "ACCEPTED",
+      "completedAt": "2026-08-30T04:03:00+08:00",
+      "actionsAccepted": 2,
+      "failures": []
+    },
     "lastCarry": "SHROOMING_SANDBOX_READING · EXECUTED · LOCAL DETERMINISTIC SANDBOX; DOES NOT MODIFY OR CLAIM TO BE THE LIVE SHROOMING POPULATION · 73d94f064c23977c · sandbox-1 · structure · 以 structure 位置重讀：SHROOMING_SANDBOX_READING · EXECUTED · LOCAL DETERMINISTIC SANDBOX; DOES NOT MODIFY OR CLAIM TO BE THE LIVE SHROOMING POPULATION · 51301838b7647e25 · sandbox-1 · structure · 以 stru · c519a2315cb2adb5 · sandbox-2 · counterexample · 以 counterexample 位置重讀：SHROOMING_SANDBOX_READING · EXECUTED · LOCAL DETERMINISTIC SANDBOX; DOES NOT MODIFY OR CLAIM TO BE THE LIVE SHROOMING POPULATION · 51301838b7647e25 · sandbox-1 · structure · 以 stru · 8554a5f20cb5f814",
     "boundary": "Certifies closed-loop routing for SHROOMING local deterministic sandbox, MU/TH/UR repository mining, DROPLET explicit-URL verification, VAJRA and GUT, plus acceptance and digestion of evidence produced by externally executed Google Drive query mining and public web search. It does not certify live SHROOMING, exhaustive whole-Drive mining, or that GitHub Actions itself can call those connectors."
   },
@@ -48,5 +69,5 @@
     "droplet": "../droplet-state.json"
   },
   "failures": [],
-  "boundary": "PASS certifies 50-round published-state integration plus a 10-round closed loop in which repository-native SHROOMING sandbox, repository MUTHER mining and explicit-URL DROPLET verification execute every round and their outputs are digested by GUT. It still does not certify the live SHROOMING population, Google Drive mining, or search-engine discovery."
+  "boundary": "PASS certifies 50-round published-state integration, a 10-round closed loop of repository-native executors, and successful handoff into GUT of persisted evidence from two externally executed connector actions: query-scoped Google Drive mining and public web search. It does not certify live SHROOMING, exhaustive whole-Drive mining, or that GitHub Actions itself can invoke private connectors."
 }
