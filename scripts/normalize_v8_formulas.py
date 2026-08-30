@@ -4,6 +4,7 @@ import re
 ROOT = Path("gangchibao-v8")
 
 # Exact legacy forms that appeared during the V3→V8 construction process.
+# These replacements only standardize notation; they do not decide contested interpretation.
 EXACT = {
     "X = NOT X": "X = ～X",
     "入流 = 入̸流̸": "入流 = ～入流",
@@ -26,6 +27,16 @@ EXACT = {
     '「心」／心 = 心 barred': "{{心}}",
     r'\frac{「S」}{S \neq S}': "{{S}}",
     r'\frac{「大身」}{大身 \neq 大身}': "{{大身}}",
+
+    # Remaining V8 source formulas written in prose-like legacy syntax.
+    "P：S，即非 S，是名 S，在第十四分後半轉譯成「無 S」；": "P：基本式 S = ～S；名稱層次 {{S}}。第十四分後半再轉譯成「無 S」；",
+    "S，即非 S，是名 S。": "S = ～S；名稱層次寫作 {{S}}。",
+    "「S」／S = 非 S。": "{{S}}。",
+    "四相，即非四相，是名四相。": "四相 = ～四相；名稱層次寫作 {{四相}}。",
+    "諸相，即非諸相，是名諸相。": "諸相 = ～諸相；名稱層次寫作 {{諸相}}。",
+    "眾生，即非眾生，是名眾生。": "眾生 = ～眾生；名稱層次寫作 {{眾生}}。",
+    "F：S即非S，是名S。": "F：S = ～S；名稱層次 {{S}}。",
+
     "毛胚房版": "毛坯房版",
     "毛胚房": "毛坯房",
 }
