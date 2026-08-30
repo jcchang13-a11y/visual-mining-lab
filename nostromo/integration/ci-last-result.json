@@ -1,6 +1,6 @@
 {
   "schema": "nostromo-integration-ci/v1.3",
-  "completedAt": "2026-08-30T06:08:13.789Z",
+  "completedAt": "2026-08-30T06:08:54.301Z",
   "status": "PASS",
   "rounds": 50,
   "expectedPerRound": {
@@ -127,7 +127,7 @@
     },
     "muther": {
       "status": "EXECUTED",
-      "hitCount": 6,
+      "hitCount": 7,
       "boundary": "MINES THIS GITHUB REPOSITORY ONLY; DOES NOT CLAIM GOOGLE DRIVE COVERAGE"
     },
     "droplet": {
