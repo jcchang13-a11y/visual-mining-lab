@@ -1,0 +1,82 @@
+{
+  "schema": "nostromo-vajra-dynamic-test/v0.2.0",
+  "completedAt": "2026-08-30T08:05:46.899Z",
+  "status": "PASS",
+  "guards": {
+    "falseCertainty": true,
+    "unresolvedBranches": true,
+    "dynamicLensSelection": true
+  },
+  "cases": {
+    "universal": {
+      "type": "UNIVERSAL",
+      "lenses": [
+        "scope",
+        "counterexample",
+        "excluded_alternative",
+        "evidence",
+        "criterion"
+      ]
+    },
+    "causal": {
+      "type": "CAUSAL",
+      "lenses": [
+        "causal_mechanism",
+        "alternative_cause",
+        "counterfactual",
+        "evidence",
+        "scope"
+      ]
+    },
+    "normative": {
+      "type": "NORMATIVE",
+      "lenses": [
+        "criterion",
+        "affected_parties",
+        "tradeoff",
+        "excluded_alternative",
+        "scope"
+      ]
+    },
+    "definition": {
+      "type": "DEFINITION",
+      "lenses": [
+        "definition_boundary",
+        "category_error",
+        "counterexample",
+        "criterion",
+        "scope"
+      ]
+    },
+    "empirical": {
+      "type": "EMPIRICAL",
+      "lenses": [
+        "evidence",
+        "measurement",
+        "source_quality",
+        "counterexample",
+        "scope"
+      ]
+    },
+    "selfReference": {
+      "type": "SELF_REFERENTIAL",
+      "lenses": [
+        "self_reference",
+        "criterion",
+        "scope",
+        "counterexample"
+      ]
+    },
+    "vague": {
+      "type": "VAGUE",
+      "lenses": [
+        "definition_boundary",
+        "criterion",
+        "scope",
+        "evidence"
+      ]
+    }
+  },
+  "failures": [],
+  "boundary": "PASS proves that VAJRA selects different auditable dismantling lenses for different proposition classes, preserves unresolved branches, and does not emit a settled-truth status in these adversarial cases. It does not prove semantic classification correctness, factual truth, or autonomous resolution of those branches."
+}
