@@ -14,7 +14,7 @@ const sample={claim:'Claim: all five organs are already semantically mature.',qu
 const gut=globalThis.GutEngine.digest(sample,{source:'NOSTROMO/gut-metabolism-test'});
 const failures=[];
 function check(condition,type,detail){if(!condition)failures.push({type,detail});}
-check(gut.version==='0.2.9','GUT_VERSION',gut.version);
+check(gut.version==='0.2.10','GUT_VERSION',gut.version);
 check(gut.mode==='DETERMINISTIC_HEURISTIC_ROUTER','GUT_MODE',gut.mode);
 check(gut.routes?.DROPLET?.count>=1,'CLAIM_NOT_ROUTED_TO_DROPLET',gut.routes?.DROPLET);
 check(gut.routes?.SHROOMING?.count>=1,'QUESTION_NOT_ROUTED_TO_SHROOMING',gut.routes?.SHROOMING);
@@ -62,6 +62,13 @@ check(inheritedGut.antiEcho?.inheritedSubstrateStrippedCount>=1,'INHERITED_SUBST
 check(!inheritedGut.summary.includes(inherited),'INHERITED_SUBSTRATE_SURVIVED_SUMMARY',inheritedGut.summary);
 check(inheritedGut.summary.includes('new observation before')&&inheritedGut.summary.includes('new observation after'),'INHERITED_SUBSTRATE_REMOVED_NOVEL_WRAPPER',inheritedGut.summary);
 
+const longInherited='CLAIM SEARCH-ENGINE DISCOVERY connector evidence payload '.repeat(8).trim();
+const partialInherited=longInherited.slice(0,180);
+const partialGut=globalThis.GutEngine.digest({reaction:`novel-prefix ${partialInherited} novel-suffix`},{source:'NOSTROMO/gut-partial-inherited-test',inheritedSubstrates:[longInherited]});
+check(partialGut.antiEcho?.inheritedSubstrateStrippedCount===0,'TRUNCATED_SUBSTRATE_SHOULD_NOT_BE_STRIPPED',partialGut.antiEcho);
+check(partialGut.summary.includes('CLAIM SEARCH-ENGINE DISCOVERY'),'TRUNCATED_SUBSTRATE_CORRUPTED_PREFIX',partialGut.summary);
+check(partialGut.summary.includes('novel-prefix')&&partialGut.summary.includes('novel-suffix'),'TRUNCATED_SUBSTRATE_CORRUPTED_WRAPPER',partialGut.summary);
+
 const structured='{"version":"2.3","round":"R113","task":"conflicting tasks and partial memory","continuity":"history preserved"}';
 const structuredGut=globalThis.GutEngine.digest({snippet:structured},{source:'NOSTROMO/gut-structured-snippet-test'});
 check(structuredGut.typeCounts?.RAW_STRUCTURED_SNIPPET===1,'STRUCTURED_SNIPPET_NOT_CLASSIFIED',structuredGut.typeCounts);
@@ -71,7 +78,7 @@ check(structuredGut.summary.includes('"version":"2.3"'),'STRUCTURED_SNIPPET_DELI
 
 let active=null;
 try{
-  active=await runActiveExecutorLoop({rounds:3,seed:'GUT v0.2.9 feedback validation',mineQuery:'NOSTROMO',verifyUrl:'https://github.com/jcchang13-a11y/visual-mining-lab'});
+  active=await runActiveExecutorLoop({rounds:3,seed:'GUT v0.2.10 feedback validation',mineQuery:'NOSTROMO',verifyUrl:'https://github.com/jcchang13-a11y/visual-mining-lab'});
   check(active.status==='PASS','ACTIVE_LOOP_FAIL',{status:active.status,completedRounds:active.completedRounds});
   check(active.feedback?.appliedRounds===2,'FEEDBACK_APPLIED_ROUNDS',active.feedback);
   check(active.feedback?.firstAppliedRound===2,'FEEDBACK_FIRST_ROUND',active.feedback);
@@ -81,7 +88,7 @@ try{
   check(active.trace?.slice(1).every(x=>(x.gut?.antiEcho?.inheritedSubstrateStrippedCount||0)>0),'ACTIVE_INHERITED_SUBSTRATE_NOT_STRIPPED',active.trace?.map(x=>x.gut?.antiEcho));
 }catch(error){failures.push({type:'ACTIVE_LOOP_EXCEPTION',message:String(error?.message||error)});}
 
-const result={schema:'nostromo-gut-metabolism-test/v0.2.9',completedAt:new Date().toISOString(),status:failures.length===0?'PASS':'FAIL',gut:{version:gut.version,mode:gut.mode,ingested:gut.ingested,absorbed:gut.absorbed,excreted:gut.excreted,quarantined:gut.quarantined,held:gut.held,typeCounts:gut.typeCounts,routeCounts:Object.fromEntries(Object.entries(gut.routes).map(([k,v])=>[k,v.count])),antiEcho:echoGut.antiEcho,nestedAntiEcho:nestedGut.antiEcho,repeatedTagNovelty:{summary:repeatedTagNovelGut.summary,antiEcho:repeatedTagNovelGut.antiEcho},segmentAntiEcho:segmentGut.antiEcho,delimitedAntiEcho:delimitedGut.antiEcho,inheritedAntiEcho:inheritedGut.antiEcho,structuredSnippet:{typeCounts:structuredGut.typeCounts,routeCounts:Object.fromEntries(Object.entries(structuredGut.routes).map(([k,v])=>[k,v.count])),summary:structuredGut.summary},boundary:gut.boundary},feedback:active?{status:active.status,completedRounds:active.completedRounds,feedback:active.feedback,lastCarry:active.trace?.at(-1)?.carryOut||null,roundAntiEcho:active.trace?.map(x=>x.gut?.antiEcho),boundary:active.boundary}:null,failures,boundary:'PASS proves deterministic heuristic metabolism plus contextual inherited-substrate de-echoing, exact repeated tagged-payload suppression without deleting novel same-tag payloads, repeated long-segment suppression within one atom across explicit separators, and protection against JSON-like engineering snippets being falsely promoted to high-priority semantic contradictions. It does not prove semantic novelty, semantic correctness, source truth, or live connector re-execution inside GitHub Actions.'};
+const result={schema:'nostromo-gut-metabolism-test/v0.2.10',completedAt:new Date().toISOString(),status:failures.length===0?'PASS':'FAIL',gut:{version:gut.version,mode:gut.mode,ingested:gut.ingested,absorbed:gut.absorbed,excreted:gut.excreted,quarantined:gut.quarantined,held:gut.held,typeCounts:gut.typeCounts,routeCounts:Object.fromEntries(Object.entries(gut.routes).map(([k,v])=>[k,v.count])),antiEcho:echoGut.antiEcho,nestedAntiEcho:nestedGut.antiEcho,repeatedTagNovelty:{summary:repeatedTagNovelGut.summary,antiEcho:repeatedTagNovelGut.antiEcho},segmentAntiEcho:segmentGut.antiEcho,delimitedAntiEcho:delimitedGut.antiEcho,inheritedAntiEcho:inheritedGut.antiEcho,partialInheritedSafety:{summary:partialGut.summary,antiEcho:partialGut.antiEcho},structuredSnippet:{typeCounts:structuredGut.typeCounts,routeCounts:Object.fromEntries(Object.entries(structuredGut.routes).map(([k,v])=>[k,v.count])),summary:structuredGut.summary},boundary:gut.boundary},feedback:active?{status:active.status,completedRounds:active.completedRounds,feedback:active.feedback,lastCarry:active.trace?.at(-1)?.carryOut||null,roundAntiEcho:active.trace?.map(x=>x.gut?.antiEcho),boundary:active.boundary}:null,failures,boundary:'PASS proves deterministic heuristic metabolism plus exact full inherited-substrate de-echoing without truncated-prefix deletion, exact repeated tagged-payload suppression without deleting novel same-tag payloads, repeated long-segment suppression within one atom across explicit separators, and protection against JSON-like engineering snippets being falsely promoted to high-priority semantic contradictions. It does not prove semantic novelty, semantic correctness, source truth, or live connector re-execution inside GitHub Actions.'};
 await fs.writeFile(path.join(root,'nostromo/integration/gut-metabolism-last-result.json'),JSON.stringify(result,null,2)+'\n','utf8');
 console.log(JSON.stringify(result,null,2));
 assert(result.status==='PASS','GUT_METABOLISM_TEST_FAILED',failures);
