@@ -1,11 +1,21 @@
 {
-  "schema": "nostromo-vajra-dynamic-test/v0.2.0",
-  "completedAt": "2026-08-30T08:06:43.458Z",
+  "schema": "nostromo-vajra-dynamic-test/v0.2.1",
+  "completedAt": "2026-08-30T08:07:05.602Z",
   "status": "FAIL",
   "guards": {
     "falseCertainty": true,
     "unresolvedBranches": true,
-    "dynamicLensSelection": true
+    "dynamicLensSelection": true,
+    "gutReferentialContinuity": true,
+    "inheritedTargetAntiEcho": true
+  },
+  "crossOrgan": {
+    "vajraGut": {
+      "targetRef": "0f5f7163",
+      "hollowTarget": false,
+      "rawTargetEcho": false,
+      "summarySample": "[CONTRADICTION->VAJRA] 暫不定案；保留 causal_mechanism 分支待證據或反例回填。 · [CONTRADICTION->VAJRA] 暫不定案；保留 alternative_cause 分支待證據或反例回填。 · [CONTRADICTION->VAJRA] 暫不定案；保留 counterfactual 分支待證據或反例回填。 · [CONTRADICTION->VAJRA] 暫不定案；保留 evidence 分支待證據或反例回填。 · [CONTRADICTION->VAJRA] 暫不定案；保留 scope 分支待證據或反例回填。 · [QUESTION->SHROOMING] Deterministic proposition-aware dismantling only"
+    }
   },
   "cases": {
     "universal": {
@@ -79,33 +89,11 @@
   },
   "failures": [
     {
-      "type": "UNIVERSAL_VERSION",
-      "detail": "0.2.1"
-    },
-    {
-      "type": "CAUSAL_VERSION",
-      "detail": "0.2.1"
-    },
-    {
-      "type": "NORMATIVE_VERSION",
-      "detail": "0.2.1"
-    },
-    {
-      "type": "DEFINITION_VERSION",
-      "detail": "0.2.1"
-    },
-    {
-      "type": "EMPIRICAL_VERSION",
-      "detail": "0.2.1"
-    },
-    {
-      "type": "SELF_REFERENCE_VERSION",
-      "detail": "0.2.1"
-    },
-    {
-      "type": "VAGUE_VERSION",
-      "detail": "0.2.1"
+      "type": "VAJRA_GUT_INHERITED_TARGET_ECHO",
+      "detail": {
+        "summary": "[CONTRADICTION->VAJRA] 暫不定案；保留 causal_mechanism 分支待證據或反例回填。 · [CONTRADICTION->VAJRA] 暫不定案；保留 alternative_cause 分支待證據或反例回填。 · [CONTRADICTION->VAJRA] 暫不定案；保留 counterfactual 分支待證據或反例回填。 · [CONTRADICTION->VAJRA] 暫不定案；保留 evidence 分支待證據或反例回填。 · [CONTRADICTION->VAJRA] 暫不定案；保留 scope 分支待證據或反例回填。 · [QUESTION->SHROOMING] Deterministic proposition-aware dismantling only. Classification and lens choice are auditable heuristics, not semantic truth; unresolved branches must be supplied with evidence or counterexamples by other organs. targetRef preserves referential continuity without copying the full inherited substrate into every generated question. · [CLAIM->DROPLET] CAUSAL · [CLAIM->DROPLET] 命題成立條件需要顯式化 · [CLAIM->DROPLET] 因為外部證據增加，所以香菇的理解一定改變。 · [QUESTION->SHROOMING] 要求中介機制，不接受只靠時間順序或共變：針對本輪 CAUSAL 命題（ref:0f5f7163），哪個前提最可能先失效？ · [CLAIM->DROPLET] ref:0f5f7163 · [QUESTION->SHROOMING] 尋找共同原因、反向因果與競爭機制：針對本輪 CAUSAL 命題（ref:0f5f7163），哪個前提最可能先失效？"
+      }
     }
   ],
-  "boundary": "PASS proves that VAJRA selects different auditable dismantling lenses for different proposition classes, preserves unresolved branches, and does not emit a settled-truth status in these adversarial cases. It does not prove semantic classification correctness, factual truth, or autonomous resolution of those branches."
+  "boundary": "PASS proves that VAJRA selects different auditable dismantling lenses for different proposition classes, preserves unresolved branches, does not emit a settled-truth status in these adversarial cases, and survives GUT inherited-substrate anti-echo without leaving a hollow target or losing its compact targetRef. It does not prove semantic classification correctness, factual truth, or autonomous resolution of those branches."
 }
