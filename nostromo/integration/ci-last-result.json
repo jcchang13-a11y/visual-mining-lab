@@ -1,6 +1,6 @@
 {
-  "schema": "nostromo-integration-ci/v1.0",
-  "completedAt": "2026-08-30T01:07:34.162Z",
+  "schema": "nostromo-integration-ci/v1.1",
+  "completedAt": "2026-08-30T01:08:09.866Z",
   "status": "PASS",
   "rounds": 50,
   "expectedPerRound": {
@@ -40,6 +40,50 @@
       "unionCount": 8,
       "jaccard": 0.5,
       "exactReturn": false
+    },
+    "parentControl": {
+      "taskFingerprint": "same-as-R113",
+      "intervention": {
+        "memoryAccess": "reversed memory-access rotation while task condition held constant",
+        "holdTaskConstant": true
+      },
+      "parentA": {
+        "path": "greenhouse/r111-nostromo-formal-round.json",
+        "blobSha": "1ec138bd3bce0158e661254225c2c84ccc35d02b",
+        "round": "R111",
+        "generatedRound": "R112",
+        "participants": [
+          "01",
+          "03",
+          "06",
+          "07",
+          "09",
+          "10"
+        ],
+        "provenanceFingerprint": "0a8ed88de7d7f8a1"
+      },
+      "parentB": {
+        "path": "greenhouse/r112-nostromo-formal-round.json",
+        "blobSha": "d2763d4fc518ef53042deea75c9501a7f16d3c13",
+        "round": "R112",
+        "generatedRound": "R113",
+        "participants": [
+          "01",
+          "03",
+          "06",
+          "07",
+          "09",
+          "10"
+        ],
+        "provenanceFingerprint": "16a87d445012f2b8"
+      },
+      "sameParticipants": true,
+      "sameSilent": true,
+      "provenanceDiffers": true,
+      "classification": "PARENT_INVARIANT_UNDER_CURRENT_VISIBILITY_RULE",
+      "interpretation": "Under repo-executors v0.9 the visibility selection is a function of task + intervention + trace id; parent identity affects provenance but not participant selection. Therefore R113 PARTIAL_RETURN cannot be cited as evidence of visibility path dependence in the current deterministic rule.",
+      "status": "PASS",
+      "failures": []
     },
     "rounds": [
       {
@@ -133,5 +177,5 @@
     "droplet": "../droplet-state.json"
   },
   "failures": [],
-  "boundary": "PASS certifies 50-round published-state integration, deterministic reproducibility and parent-blob continuity for the declared R111→R112→R113 formal SHROOMING chain including the R111↔R113 PARTIAL_RETURN visibility classification, a 10-round closed loop of repository-native executors, and successful handoff into GUT of persisted evidence from query-scoped Google Drive mining and public web search. It does not certify ten independent live LLM processes, causal reversibility outside this deterministic model, exhaustive whole-Drive mining, or that GitHub Actions itself can invoke private connectors."
+  "boundary": "PASS certifies 50-round published-state integration, deterministic reproducibility and parent-blob continuity for R111→R112→R113, the R111↔R113 PARTIAL_RETURN measurement, a matched-parent audit showing that repo-executors v0.9 participant selection is parent-invariant when task and intervention are held constant, a 10-round closed loop of repository-native executors, and successful handoff into GUT of persisted Google Drive/public-web connector evidence. PARTIAL_RETURN must therefore not be presented as evidence of visibility path dependence under the current rule. It does not certify ten independent live LLM processes, causal reversibility outside this deterministic model, exhaustive whole-Drive mining, or that GitHub Actions itself can invoke private connectors."
 }
