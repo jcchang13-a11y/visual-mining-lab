@@ -1,11 +1,14 @@
 {
-  "schema": "nostromo-vajra-dynamic-test/v0.2.7",
-  "completedAt": "2026-08-30T23:08:20.776Z",
-  "status": "FAIL",
+  "schema": "nostromo-vajra-dynamic-test/v0.2.8",
+  "completedAt": "2026-08-30T23:08:48.138Z",
+  "status": "PASS",
   "guards": {
     "falseCertainty": true,
     "dynamicLensSelection": true,
     "compoundTypeDetection": true,
+    "heuristicClauseDecomposition": true,
+    "clauseScopedHandoffContracts": true,
+    "crossClauseReceiptRejected": true,
     "branchHandoffContracts": true,
     "gutReferentialContinuity": true,
     "inheritedTargetAntiEcho": true,
@@ -26,71 +29,88 @@
       "summarySample": "[CONTRADICTION->VAJRA] 主動尋找最小反例與破壞條件 · [CONTRADICTION->VAJRA] 主動尋找最小反例與破壞條件：針對本輪 CAUSAL+UNIVERSAL 命題（ref:0f5f7163; clause:07b06bbd），哪個前提最可能先失效？ · [CLAIM->DROPLET] Deterministic proposition-aware dismantling only. Compound proposition types and clause boundaries are detected by auditable syntactic heuristics without claiming semantic understanding. Classifica"
     },
     "receiptResolution": {
-      "received": 3,
-      "resolved": 0,
-      "open": 5,
+      "received": 4,
+      "resolved": 1,
+      "open": 4,
       "rejected": 3,
-      "resolvedBranches": [],
+      "resolvedBranches": [
+        {
+          "targetRef": "20708907",
+          "clauseRef": "bf2b3177",
+          "lens": "evidence",
+          "preferredOrgan": "DROPLET",
+          "status": "RESOLVED_BY_RECEIPT",
+          "receiptFingerprint": "1cf1db47",
+          "evidenceKey": "f1156f6a",
+          "provenance": "prov-verified-001",
+          "relation": "One supports the target claim and one limits its scope.",
+          "boundary": "Resolution means the handoff contract received a matching clause-scoped, executed, provenance-bearing return. One provenance+material evidence payload may resolve only one branch across the accumulated VAJRA result history, preventing replay amplification across branches and repeated applications. It does not mean VAJRA semantically verified the returned material or proved the target claim."
+        }
+      ],
       "rejectedReceipts": [
         {
           "targetRef": "20708907",
-          "clauseRef": "",
-          "lens": "evidence",
-          "organ": "DROPLET",
-          "status": "EXECUTED",
-          "provenance": "prov-verified-001",
-          "material": "Two traceable evidence items were returned within the searched scope.",
-          "relation": "One supports the target claim and one limits its scope.",
-          "receiptFingerprint": "578487ef",
-          "reasons": [
-            "CLAUSE_MISMATCH"
-          ]
-        },
-        {
-          "targetRef": "20708907",
-          "clauseRef": "",
+          "clauseRef": "bf2b3177",
           "lens": "evidence",
           "organ": "MUTHER",
           "status": "EXECUTED",
           "provenance": "prov-verified-001",
           "material": "Two traceable evidence items were returned within the searched scope.",
           "relation": "One supports the target claim and one limits its scope.",
-          "receiptFingerprint": "e931a2c2",
+          "receiptFingerprint": "7ee12fca",
           "reasons": [
-            "CLAUSE_MISMATCH",
             "ORGAN_MISMATCH"
           ]
         },
         {
           "targetRef": "20708907",
-          "clauseRef": "",
+          "clauseRef": "bf2b3177",
           "lens": "evidence",
           "organ": "DROPLET",
           "status": "EXECUTED",
           "provenance": "",
           "material": "Two traceable evidence items were returned within the searched scope.",
           "relation": "One supports the target claim and one limits its scope.",
-          "receiptFingerprint": "b4fd3475",
+          "receiptFingerprint": "8910548d",
           "reasons": [
-            "CLAUSE_MISMATCH",
             "MISSING_PROVENANCE"
+          ]
+        },
+        {
+          "targetRef": "20708907",
+          "clauseRef": "deadbeef",
+          "lens": "evidence",
+          "organ": "DROPLET",
+          "status": "EXECUTED",
+          "provenance": "prov-verified-001",
+          "material": "Two traceable evidence items were returned within the searched scope.",
+          "relation": "One supports the target claim and one limits its scope.",
+          "receiptFingerprint": "c8953ad5",
+          "reasons": [
+            "CLAUSE_MISMATCH"
           ]
         }
       ],
       "historicalEvidenceKeys": 0
     },
+    "crossClauseAdversarial": {
+      "targetRef": "c42d19f5",
+      "resolved": 0,
+      "rejected": 1,
+      "clauseMismatchVisible": true
+    },
     "replayAdversarial": {
       "targetRef": "b5aeee1e",
-      "resolved": 0,
-      "open": 5,
-      "rejected": 2,
-      "replayRejected": false
+      "resolved": 1,
+      "open": 4,
+      "rejected": 1,
+      "replayRejected": true
     },
     "crossApplicationReplay": {
       "resolved": 0,
-      "open": 5,
+      "open": 4,
       "rejected": 1,
-      "replayRejected": false
+      "replayRejected": true
     }
   },
   "cases": {
@@ -113,6 +133,28 @@
         "evidence",
         "scope",
         "counterexample"
+      ],
+      "clauses": [
+        {
+          "index": 0,
+          "role": "CAUSE",
+          "text": "外部證據增加",
+          "types": [
+            "VAGUE"
+          ],
+          "clauseRef": "9ec8f00b",
+          "targetRef": "0f5f7163"
+        },
+        {
+          "index": 1,
+          "role": "EFFECT",
+          "text": "香菇的理解一定改變",
+          "types": [
+            "UNIVERSAL"
+          ],
+          "clauseRef": "07b06bbd",
+          "targetRef": "0f5f7163"
+        }
       ]
     },
     "normative": {
@@ -176,402 +218,31 @@
         "evidence",
         "scope",
         "counterexample"
+      ],
+      "clauses": [
+        {
+          "index": 0,
+          "role": "CAUSE",
+          "text": "所有外部證據都一致",
+          "types": [
+            "UNIVERSAL"
+          ],
+          "clauseRef": "f2c74f71",
+          "targetRef": "c42d19f5"
+        },
+        {
+          "index": 1,
+          "role": "EFFECT",
+          "text": "NOSTROMO 一定正確",
+          "types": [
+            "UNIVERSAL"
+          ],
+          "clauseRef": "35476d01",
+          "targetRef": "c42d19f5"
+        }
       ]
     }
   },
-  "failures": [
-    {
-      "type": "UNIVERSAL_VERSION",
-      "detail": "0.2.8"
-    },
-    {
-      "type": "CAUSAL_VERSION",
-      "detail": "0.2.8"
-    },
-    {
-      "type": "EMPIRICAL_VERSION",
-      "detail": "0.2.8"
-    },
-    {
-      "type": "NORMATIVE_VERSION",
-      "detail": "0.2.8"
-    },
-    {
-      "type": "DEFINITION_VERSION",
-      "detail": "0.2.8"
-    },
-    {
-      "type": "SELF_REFERENCE_VERSION",
-      "detail": "0.2.8"
-    },
-    {
-      "type": "VAGUE_VERSION",
-      "detail": "0.2.8"
-    },
-    {
-      "type": "COMPOUND_VERSION",
-      "detail": "0.2.8"
-    },
-    {
-      "type": "RECEIPT_VERSION",
-      "detail": "0.2.8"
-    },
-    {
-      "type": "VALID_RECEIPT_NOT_RESOLVED",
-      "detail": {
-        "received": 3,
-        "resolved": 0,
-        "open": 5,
-        "rejected": 3,
-        "resolvedBranches": [],
-        "rejectedReceipts": [
-          {
-            "targetRef": "20708907",
-            "clauseRef": "",
-            "lens": "evidence",
-            "organ": "DROPLET",
-            "status": "EXECUTED",
-            "provenance": "prov-verified-001",
-            "material": "Two traceable evidence items were returned within the searched scope.",
-            "relation": "One supports the target claim and one limits its scope.",
-            "receiptFingerprint": "578487ef",
-            "reasons": [
-              "CLAUSE_MISMATCH"
-            ]
-          },
-          {
-            "targetRef": "20708907",
-            "clauseRef": "",
-            "lens": "evidence",
-            "organ": "MUTHER",
-            "status": "EXECUTED",
-            "provenance": "prov-verified-001",
-            "material": "Two traceable evidence items were returned within the searched scope.",
-            "relation": "One supports the target claim and one limits its scope.",
-            "receiptFingerprint": "e931a2c2",
-            "reasons": [
-              "CLAUSE_MISMATCH",
-              "ORGAN_MISMATCH"
-            ]
-          },
-          {
-            "targetRef": "20708907",
-            "clauseRef": "",
-            "lens": "evidence",
-            "organ": "DROPLET",
-            "status": "EXECUTED",
-            "provenance": "",
-            "material": "Two traceable evidence items were returned within the searched scope.",
-            "relation": "One supports the target claim and one limits its scope.",
-            "receiptFingerprint": "b4fd3475",
-            "reasons": [
-              "CLAUSE_MISMATCH",
-              "MISSING_PROVENANCE"
-            ]
-          }
-        ],
-        "historicalEvidenceKeys": 0
-      }
-    },
-    {
-      "type": "REPLAY_RESOLVED_MULTIPLE_BRANCHES",
-      "detail": {
-        "received": 2,
-        "resolved": 0,
-        "open": 5,
-        "rejected": 2,
-        "resolvedBranches": [],
-        "rejectedReceipts": [
-          {
-            "targetRef": "b5aeee1e",
-            "clauseRef": "",
-            "lens": "scope",
-            "organ": "SHROOMING",
-            "status": "EXECUTED",
-            "provenance": "prov-replay-777",
-            "material": "A single returned payload that is intentionally replayed under two different branch labels.",
-            "relation": "Purports to narrow scope.",
-            "receiptFingerprint": "a4d3d0e5",
-            "reasons": [
-              "CLAUSE_MISMATCH"
-            ]
-          },
-          {
-            "targetRef": "b5aeee1e",
-            "clauseRef": "",
-            "lens": "counterexample",
-            "organ": "DROPLET",
-            "status": "EXECUTED",
-            "provenance": "prov-replay-777",
-            "material": "A single returned payload that is intentionally replayed under two different branch labels.",
-            "relation": "Purports to provide a counterexample.",
-            "receiptFingerprint": "3e71c96a",
-            "reasons": [
-              "CLAUSE_MISMATCH"
-            ]
-          }
-        ],
-        "historicalEvidenceKeys": 0
-      }
-    },
-    {
-      "type": "FIRST_RECEIPT_NOT_CONSUMED",
-      "detail": [
-        {
-          "lens": "scope",
-          "targetRef": "b5aeee1e",
-          "clauseRef": "3aabaca0",
-          "clauseRole": "CLAUSE",
-          "question": "界定適用範圍、例外與邊界條件：針對本輪 UNIVERSAL 命題（ref:b5aeee1e; clause:3aabaca0），哪個前提最可能先失效？",
-          "status": "UNRESOLVED",
-          "handoff": {
-            "lens": "scope",
-            "targetRef": "b5aeee1e",
-            "clauseRef": "3aabaca0",
-            "preferredOrgan": "SHROOMING",
-            "need": "boundary cases and competing readings",
-            "resolutionCriterion": "at least one explicit boundary/exception is supplied or the scope is narrowed",
-            "status": "OPEN",
-            "boundary": "Preferred organ is a routing request, not proof that the organ executed it. clauseRef scopes the return to the inspected clause when heuristic decomposition is available."
-          }
-        },
-        {
-          "lens": "counterexample",
-          "targetRef": "b5aeee1e",
-          "clauseRef": "3aabaca0",
-          "clauseRole": "CLAUSE",
-          "question": "主動尋找最小反例與破壞條件：針對本輪 UNIVERSAL 命題（ref:b5aeee1e; clause:3aabaca0），哪個前提最可能先失效？",
-          "status": "UNRESOLVED",
-          "handoff": {
-            "lens": "counterexample",
-            "targetRef": "b5aeee1e",
-            "clauseRef": "3aabaca0",
-            "preferredOrgan": "DROPLET",
-            "need": "a minimal counterexample or a bounded report that none was found in the searched scope",
-            "resolutionCriterion": "a concrete counterexample is supplied or search scope/coverage is made explicit",
-            "status": "OPEN",
-            "boundary": "Preferred organ is a routing request, not proof that the organ executed it. clauseRef scopes the return to the inspected clause when heuristic decomposition is available."
-          }
-        },
-        {
-          "lens": "excluded_alternative",
-          "targetRef": "b5aeee1e",
-          "clauseRef": "3aabaca0",
-          "clauseRole": "CLAUSE",
-          "question": "列出被排除但仍可解釋資料的替代方案：針對本輪 UNIVERSAL 命題（ref:b5aeee1e; clause:3aabaca0），哪個前提最可能先失效？",
-          "status": "UNRESOLVED",
-          "handoff": {
-            "lens": "excluded_alternative",
-            "targetRef": "b5aeee1e",
-            "clauseRef": "3aabaca0",
-            "preferredOrgan": "MUTHER",
-            "need": "alternative explanations or formulations already present in available materials",
-            "resolutionCriterion": "at least one non-equivalent alternative is surfaced with provenance",
-            "status": "OPEN",
-            "boundary": "Preferred organ is a routing request, not proof that the organ executed it. clauseRef scopes the return to the inspected clause when heuristic decomposition is available."
-          }
-        },
-        {
-          "lens": "evidence",
-          "targetRef": "b5aeee1e",
-          "clauseRef": "3aabaca0",
-          "clauseRole": "CLAUSE",
-          "question": "要求可追溯證據並區分支持與缺席證據：針對本輪 UNIVERSAL 命題（ref:b5aeee1e; clause:3aabaca0），哪個前提最可能先失效？",
-          "status": "UNRESOLVED",
-          "handoff": {
-            "lens": "evidence",
-            "targetRef": "b5aeee1e",
-            "clauseRef": "3aabaca0",
-            "preferredOrgan": "DROPLET",
-            "need": "claim-specific supporting and opposing evidence with provenance",
-            "resolutionCriterion": "evidence is traceable and relation to the target claim is stated",
-            "status": "OPEN",
-            "boundary": "Preferred organ is a routing request, not proof that the organ executed it. clauseRef scopes the return to the inspected clause when heuristic decomposition is available."
-          }
-        },
-        {
-          "lens": "criterion",
-          "targetRef": "b5aeee1e",
-          "clauseRef": "3aabaca0",
-          "clauseRole": "CLAUSE",
-          "question": "顯式化判準並測試判準是否偷換：針對本輪 UNIVERSAL 命題（ref:b5aeee1e; clause:3aabaca0），哪個前提最可能先失效？",
-          "status": "UNRESOLVED",
-          "handoff": {
-            "lens": "criterion",
-            "targetRef": "b5aeee1e",
-            "clauseRef": "3aabaca0",
-            "preferredOrgan": "SHROOMING",
-            "need": "competing criteria and a statement of who/what each criterion excludes",
-            "resolutionCriterion": "criterion is operational enough to distinguish at least one boundary case",
-            "status": "OPEN",
-            "boundary": "Preferred organ is a routing request, not proof that the organ executed it. clauseRef scopes the return to the inspected clause when heuristic decomposition is available."
-          }
-        }
-      ]
-    },
-    {
-      "type": "REPLAY_NOT_AUDITED",
-      "detail": {
-        "received": 2,
-        "resolved": 0,
-        "open": 5,
-        "rejected": 2,
-        "resolvedBranches": [],
-        "rejectedReceipts": [
-          {
-            "targetRef": "b5aeee1e",
-            "clauseRef": "",
-            "lens": "scope",
-            "organ": "SHROOMING",
-            "status": "EXECUTED",
-            "provenance": "prov-replay-777",
-            "material": "A single returned payload that is intentionally replayed under two different branch labels.",
-            "relation": "Purports to narrow scope.",
-            "receiptFingerprint": "a4d3d0e5",
-            "reasons": [
-              "CLAUSE_MISMATCH"
-            ]
-          },
-          {
-            "targetRef": "b5aeee1e",
-            "clauseRef": "",
-            "lens": "counterexample",
-            "organ": "DROPLET",
-            "status": "EXECUTED",
-            "provenance": "prov-replay-777",
-            "material": "A single returned payload that is intentionally replayed under two different branch labels.",
-            "relation": "Purports to provide a counterexample.",
-            "receiptFingerprint": "3e71c96a",
-            "reasons": [
-              "CLAUSE_MISMATCH"
-            ]
-          }
-        ],
-        "historicalEvidenceKeys": 0
-      }
-    },
-    {
-      "type": "PRIOR_RESOLUTION_LOST",
-      "detail": [
-        {
-          "lens": "scope",
-          "targetRef": "b5aeee1e",
-          "clauseRef": "3aabaca0",
-          "clauseRole": "CLAUSE",
-          "question": "界定適用範圍、例外與邊界條件：針對本輪 UNIVERSAL 命題（ref:b5aeee1e; clause:3aabaca0），哪個前提最可能先失效？",
-          "status": "UNRESOLVED",
-          "handoff": {
-            "lens": "scope",
-            "targetRef": "b5aeee1e",
-            "clauseRef": "3aabaca0",
-            "preferredOrgan": "SHROOMING",
-            "need": "boundary cases and competing readings",
-            "resolutionCriterion": "at least one explicit boundary/exception is supplied or the scope is narrowed",
-            "status": "OPEN",
-            "boundary": "Preferred organ is a routing request, not proof that the organ executed it. clauseRef scopes the return to the inspected clause when heuristic decomposition is available."
-          }
-        },
-        {
-          "lens": "counterexample",
-          "targetRef": "b5aeee1e",
-          "clauseRef": "3aabaca0",
-          "clauseRole": "CLAUSE",
-          "question": "主動尋找最小反例與破壞條件：針對本輪 UNIVERSAL 命題（ref:b5aeee1e; clause:3aabaca0），哪個前提最可能先失效？",
-          "status": "UNRESOLVED",
-          "handoff": {
-            "lens": "counterexample",
-            "targetRef": "b5aeee1e",
-            "clauseRef": "3aabaca0",
-            "preferredOrgan": "DROPLET",
-            "need": "a minimal counterexample or a bounded report that none was found in the searched scope",
-            "resolutionCriterion": "a concrete counterexample is supplied or search scope/coverage is made explicit",
-            "status": "OPEN",
-            "boundary": "Preferred organ is a routing request, not proof that the organ executed it. clauseRef scopes the return to the inspected clause when heuristic decomposition is available."
-          }
-        },
-        {
-          "lens": "excluded_alternative",
-          "targetRef": "b5aeee1e",
-          "clauseRef": "3aabaca0",
-          "clauseRole": "CLAUSE",
-          "question": "列出被排除但仍可解釋資料的替代方案：針對本輪 UNIVERSAL 命題（ref:b5aeee1e; clause:3aabaca0），哪個前提最可能先失效？",
-          "status": "UNRESOLVED",
-          "handoff": {
-            "lens": "excluded_alternative",
-            "targetRef": "b5aeee1e",
-            "clauseRef": "3aabaca0",
-            "preferredOrgan": "MUTHER",
-            "need": "alternative explanations or formulations already present in available materials",
-            "resolutionCriterion": "at least one non-equivalent alternative is surfaced with provenance",
-            "status": "OPEN",
-            "boundary": "Preferred organ is a routing request, not proof that the organ executed it. clauseRef scopes the return to the inspected clause when heuristic decomposition is available."
-          }
-        },
-        {
-          "lens": "evidence",
-          "targetRef": "b5aeee1e",
-          "clauseRef": "3aabaca0",
-          "clauseRole": "CLAUSE",
-          "question": "要求可追溯證據並區分支持與缺席證據：針對本輪 UNIVERSAL 命題（ref:b5aeee1e; clause:3aabaca0），哪個前提最可能先失效？",
-          "status": "UNRESOLVED",
-          "handoff": {
-            "lens": "evidence",
-            "targetRef": "b5aeee1e",
-            "clauseRef": "3aabaca0",
-            "preferredOrgan": "DROPLET",
-            "need": "claim-specific supporting and opposing evidence with provenance",
-            "resolutionCriterion": "evidence is traceable and relation to the target claim is stated",
-            "status": "OPEN",
-            "boundary": "Preferred organ is a routing request, not proof that the organ executed it. clauseRef scopes the return to the inspected clause when heuristic decomposition is available."
-          }
-        },
-        {
-          "lens": "criterion",
-          "targetRef": "b5aeee1e",
-          "clauseRef": "3aabaca0",
-          "clauseRole": "CLAUSE",
-          "question": "顯式化判準並測試判準是否偷換：針對本輪 UNIVERSAL 命題（ref:b5aeee1e; clause:3aabaca0），哪個前提最可能先失效？",
-          "status": "UNRESOLVED",
-          "handoff": {
-            "lens": "criterion",
-            "targetRef": "b5aeee1e",
-            "clauseRef": "3aabaca0",
-            "preferredOrgan": "SHROOMING",
-            "need": "competing criteria and a statement of who/what each criterion excludes",
-            "resolutionCriterion": "criterion is operational enough to distinguish at least one boundary case",
-            "status": "OPEN",
-            "boundary": "Preferred organ is a routing request, not proof that the organ executed it. clauseRef scopes the return to the inspected clause when heuristic decomposition is available."
-          }
-        }
-      ]
-    },
-    {
-      "type": "CROSS_CALL_REPLAY_NOT_AUDITED",
-      "detail": {
-        "received": 1,
-        "resolved": 0,
-        "open": 5,
-        "rejected": 1,
-        "resolvedBranches": [],
-        "rejectedReceipts": [
-          {
-            "targetRef": "b5aeee1e",
-            "clauseRef": "",
-            "lens": "counterexample",
-            "organ": "DROPLET",
-            "status": "EXECUTED",
-            "provenance": "prov-replay-777",
-            "material": "A single returned payload that is intentionally replayed under two different branch labels.",
-            "relation": "Purports to provide a counterexample.",
-            "receiptFingerprint": "3e71c96a",
-            "reasons": [
-              "CLAUSE_MISMATCH"
-            ]
-          }
-        ],
-        "historicalEvidenceKeys": 0
-      }
-    }
-  ],
-  "boundary": "PASS proves proposition-aware lens selection, compound-type detection, structural receipt closure, VAJRA→GUT referential continuity, and replay-amplification guards across both branches and repeated applications. Compound detection is an auditable lexical heuristic and does not claim semantic clause parsing. A provenance+material payload already consumed by a prior VAJRA result cannot be relabelled later to close another branch. Rejection is structural and auditable, not a semantic truth judgment."
+  "failures": [],
+  "boundary": "PASS proves proposition-aware lens selection, auditable heuristic clause decomposition, clause-scoped handoff isolation, structural receipt closure, VAJRA→GUT referential continuity, and replay-amplification guards across branches and repeated applications. Clause splitting is bounded syntax handling, not semantic parsing. Evidence about one clause cannot be relabelled to close another clause branch. Rejection is structural and auditable, not a semantic truth judgment."
 }
