@@ -1,11 +1,13 @@
 {
-  "schema": "nostromo-vajra-dynamic-test/v0.2.2",
-  "completedAt": "2026-08-30T09:05:08.875Z",
-  "status": "FAIL",
+  "schema": "nostromo-vajra-dynamic-test/v0.2.3",
+  "completedAt": "2026-08-30T09:05:34.279Z",
+  "status": "PASS",
   "guards": {
     "falseCertainty": true,
     "unresolvedBranches": true,
     "dynamicLensSelection": true,
+    "branchHandoffContracts": true,
+    "noFalseHandoffExecution": true,
     "gutReferentialContinuity": true,
     "inheritedTargetAntiEcho": true,
     "rawSourceNotCopiedIntoTrace": true
@@ -16,6 +18,102 @@
       "hollowTarget": false,
       "rawTargetEcho": false,
       "summarySample": "[QUESTION->SHROOMING] Deterministic heuristic dismantling. Saturation means the current rule set has stopped producing a new inspection path; it is not proof that the claim is settled. Open handoff contracts remain unresolved until another organ returns qualifying material. · [CLAIM->DROPLET] CAUSAL · [CLAIM->DROPLET] 命題成立條件需要顯式化 · [EVIDENCE_OR_PROVENANCE->M"
+    },
+    "handoffMap": {
+      "empirical": [
+        {
+          "lens": "evidence",
+          "targetRef": "20708907",
+          "preferredOrgan": "DROPLET",
+          "need": "claim-specific supporting and opposing evidence with provenance",
+          "resolutionCriterion": "evidence is traceable and relation to the target claim is stated",
+          "status": "OPEN",
+          "boundary": "Preferred organ is a routing request, not proof that the organ executed it."
+        },
+        {
+          "lens": "measurement",
+          "targetRef": "20708907",
+          "preferredOrgan": "DROPLET",
+          "need": "measurement definition, instrument/procedure, and validity limits",
+          "resolutionCriterion": "measure is linked to the claimed construct and key validity limit is explicit",
+          "status": "OPEN",
+          "boundary": "Preferred organ is a routing request, not proof that the organ executed it."
+        },
+        {
+          "lens": "source_quality",
+          "targetRef": "20708907",
+          "preferredOrgan": "DROPLET",
+          "need": "source independence, method quality, date/freshness, and reproducibility signals",
+          "resolutionCriterion": "source quality limits are explicit and derivative evidence is not counted as independent",
+          "status": "OPEN",
+          "boundary": "Preferred organ is a routing request, not proof that the organ executed it."
+        },
+        {
+          "lens": "counterexample",
+          "targetRef": "20708907",
+          "preferredOrgan": "DROPLET",
+          "need": "a minimal counterexample or a bounded report that none was found in the searched scope",
+          "resolutionCriterion": "a concrete counterexample is supplied or search scope/coverage is made explicit",
+          "status": "OPEN",
+          "boundary": "Preferred organ is a routing request, not proof that the organ executed it."
+        },
+        {
+          "lens": "scope",
+          "targetRef": "20708907",
+          "preferredOrgan": "SHROOMING",
+          "need": "boundary cases and competing readings",
+          "resolutionCriterion": "at least one explicit boundary/exception is supplied or the scope is narrowed",
+          "status": "OPEN",
+          "boundary": "Preferred organ is a routing request, not proof that the organ executed it."
+        }
+      ],
+      "causal": [
+        {
+          "lens": "causal_mechanism",
+          "targetRef": "0f5f7163",
+          "preferredOrgan": "MUTHER",
+          "need": "candidate mechanism, intermediate steps, and evidence-bearing links",
+          "resolutionCriterion": "a mechanism chain is stated with at least one independently checkable intermediate link",
+          "status": "OPEN",
+          "boundary": "Preferred organ is a routing request, not proof that the organ executed it."
+        },
+        {
+          "lens": "alternative_cause",
+          "targetRef": "0f5f7163",
+          "preferredOrgan": "DROPLET",
+          "need": "common causes, reverse causation, or competing mechanisms",
+          "resolutionCriterion": "at least one plausible competing cause is evidenced or explicitly bounded out",
+          "status": "OPEN",
+          "boundary": "Preferred organ is a routing request, not proof that the organ executed it."
+        },
+        {
+          "lens": "counterfactual",
+          "targetRef": "0f5f7163",
+          "preferredOrgan": "SHROOMING",
+          "need": "counterfactual scenarios that vary the alleged cause while holding relevant context explicit",
+          "resolutionCriterion": "at least one discriminating counterfactual prediction is stated",
+          "status": "OPEN",
+          "boundary": "Preferred organ is a routing request, not proof that the organ executed it."
+        },
+        {
+          "lens": "evidence",
+          "targetRef": "0f5f7163",
+          "preferredOrgan": "DROPLET",
+          "need": "claim-specific supporting and opposing evidence with provenance",
+          "resolutionCriterion": "evidence is traceable and relation to the target claim is stated",
+          "status": "OPEN",
+          "boundary": "Preferred organ is a routing request, not proof that the organ executed it."
+        },
+        {
+          "lens": "scope",
+          "targetRef": "0f5f7163",
+          "preferredOrgan": "SHROOMING",
+          "need": "boundary cases and competing readings",
+          "resolutionCriterion": "at least one explicit boundary/exception is supplied or the scope is narrowed",
+          "status": "OPEN",
+          "boundary": "Preferred organ is a routing request, not proof that the organ executed it."
+        }
+      ]
     }
   },
   "cases": {
@@ -27,7 +125,12 @@
         "excluded_alternative",
         "evidence",
         "criterion"
-      ]
+      ],
+      "handoffCounts": {
+        "SHROOMING": 2,
+        "DROPLET": 2,
+        "MUTHER": 1
+      }
     },
     "causal": {
       "type": "CAUSAL",
@@ -37,7 +140,12 @@
         "counterfactual",
         "evidence",
         "scope"
-      ]
+      ],
+      "handoffCounts": {
+        "MUTHER": 1,
+        "DROPLET": 2,
+        "SHROOMING": 2
+      }
     },
     "normative": {
       "type": "NORMATIVE",
@@ -47,7 +155,11 @@
         "tradeoff",
         "excluded_alternative",
         "scope"
-      ]
+      ],
+      "handoffCounts": {
+        "SHROOMING": 4,
+        "MUTHER": 1
+      }
     },
     "definition": {
       "type": "DEFINITION",
@@ -57,7 +169,13 @@
         "counterexample",
         "criterion",
         "scope"
-      ]
+      ],
+      "handoffCounts": {
+        "MUTHER": 1,
+        "VAJRA": 1,
+        "DROPLET": 1,
+        "SHROOMING": 2
+      }
     },
     "empirical": {
       "type": "EMPIRICAL",
@@ -67,7 +185,11 @@
         "source_quality",
         "counterexample",
         "scope"
-      ]
+      ],
+      "handoffCounts": {
+        "DROPLET": 4,
+        "SHROOMING": 1
+      }
     },
     "selfReference": {
       "type": "SELF_REFERENTIAL",
@@ -76,7 +198,11 @@
         "criterion",
         "scope",
         "counterexample"
-      ]
+      ],
+      "handoffCounts": {
+        "SHROOMING": 3,
+        "DROPLET": 1
+      }
     },
     "vague": {
       "type": "VAGUE",
@@ -85,38 +211,14 @@
         "criterion",
         "scope",
         "evidence"
-      ]
+      ],
+      "handoffCounts": {
+        "MUTHER": 1,
+        "SHROOMING": 2,
+        "DROPLET": 1
+      }
     }
   },
-  "failures": [
-    {
-      "type": "UNIVERSAL_VERSION",
-      "detail": "0.2.3"
-    },
-    {
-      "type": "CAUSAL_VERSION",
-      "detail": "0.2.3"
-    },
-    {
-      "type": "NORMATIVE_VERSION",
-      "detail": "0.2.3"
-    },
-    {
-      "type": "DEFINITION_VERSION",
-      "detail": "0.2.3"
-    },
-    {
-      "type": "EMPIRICAL_VERSION",
-      "detail": "0.2.3"
-    },
-    {
-      "type": "SELF_REFERENCE_VERSION",
-      "detail": "0.2.3"
-    },
-    {
-      "type": "VAGUE_VERSION",
-      "detail": "0.2.3"
-    }
-  ],
-  "boundary": "PASS proves that VAJRA selects different auditable dismantling lenses for different proposition classes, preserves unresolved branches, does not emit a settled-truth status in these adversarial cases, and survives GUT inherited-substrate anti-echo without leaving a hollow target, re-emitting the inherited proposition, or losing its compact targetRef. It does not prove semantic classification correctness, factual truth, or autonomous resolution of those branches."
+  "failures": [],
+  "boundary": "PASS proves that VAJRA selects different auditable dismantling lenses for different proposition classes and now turns each unresolved branch into an explicit OPEN work contract naming a preferred organ, requested material and resolution criterion. These are routing requests only: PASS does not claim that the requested organ executed the contract, that classification is semantically correct, or that a branch is resolved. The VAJRA→GUT regression still checks compact referential continuity and inherited-target anti-echo."
 }
