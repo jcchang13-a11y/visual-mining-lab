@@ -1,7 +1,7 @@
 {
   "schema": "nostromo-vajra-dynamic-test/v0.2.4",
-  "completedAt": "2026-08-30T12:07:59.285Z",
-  "status": "PASS",
+  "completedAt": "2026-08-30T13:02:54.714Z",
+  "status": "FAIL",
   "guards": {
     "falseCertainty": true,
     "unresolvedBranches": true,
@@ -137,9 +137,10 @@
           "preferredOrgan": "DROPLET",
           "status": "RESOLVED_BY_RECEIPT",
           "receiptFingerprint": "578487ef",
+          "evidenceKey": "f1156f6a",
           "provenance": "prov-verified-001",
           "relation": "One supports the target claim and one limits its scope.",
-          "boundary": "Resolution means the handoff contract received a matching executed, provenance-bearing return. It does not mean VAJRA semantically verified the returned material or proved the target claim."
+          "boundary": "Resolution means the handoff contract received a matching executed, provenance-bearing return. One provenance+material evidence payload may resolve only one branch per application, preventing cross-branch replay amplification. It does not mean VAJRA semantically verified the returned material or proved the target claim."
         }
       ],
       "rejectedReceipts": [
@@ -275,6 +276,39 @@
       }
     }
   },
-  "failures": [],
+  "failures": [
+    {
+      "type": "UNIVERSAL_VERSION",
+      "detail": "0.2.5"
+    },
+    {
+      "type": "CAUSAL_VERSION",
+      "detail": "0.2.5"
+    },
+    {
+      "type": "NORMATIVE_VERSION",
+      "detail": "0.2.5"
+    },
+    {
+      "type": "DEFINITION_VERSION",
+      "detail": "0.2.5"
+    },
+    {
+      "type": "EMPIRICAL_VERSION",
+      "detail": "0.2.5"
+    },
+    {
+      "type": "SELF_REFERENCE_VERSION",
+      "detail": "0.2.5"
+    },
+    {
+      "type": "VAGUE_VERSION",
+      "detail": "0.2.5"
+    },
+    {
+      "type": "RECEIPT_VERSION",
+      "detail": "0.2.5"
+    }
+  ],
   "boundary": "PASS proves proposition-aware lens selection, explicit handoff contracts, and structural receipt closure. A branch closes only when targetRef, lens and preferred organ match and the return carries explicit execution status, provenance, material and relation-to-target. RESOLVED_BY_RECEIPT certifies contract return only; it does not certify semantic correctness, evidence quality, or truth of the target proposition. VAJRA→GUT regressions preserve compact target references and inherited-target anti-echo."
 }
