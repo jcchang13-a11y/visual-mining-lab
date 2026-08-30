@@ -30,6 +30,10 @@ jobs:
       - name: Verify formal greenhouse continuity
         id: formal
         run: node nostromo/integration/formal-round-test.mjs
+      - name: Verify MU/TH/UR repository falsification executor
+        id: muther_falsify
+        continue-on-error: true
+        run: node nostromo/integration/muther-falsify-test.mjs
       - name: Run 50-round integration test
         id: integration
         continue-on-error: true
@@ -41,6 +45,7 @@ jobs:
           git config user.email "actions@users.noreply.github.com"
           test -f nostromo/integration/formal-round-last-result.json && cp nostromo/integration/formal-round-last-result.json /tmp/nostromo-formal-round-last-result.json || true
           test -f nostromo/integration/ci-last-result.json && cp nostromo/integration/ci-last-result.json /tmp/nostromo-ci-last-result.json || true
+          test -f nostromo/integration/muther-falsify-last-result.json && cp nostromo/integration/muther-falsify-last-result.json /tmp/nostromo-muther-falsify-last-result.json || true
           git fetch origin main
           git reset --hard origin/main
           if [ -f /tmp/nostromo-formal-round-last-result.json ]; then
@@ -51,12 +56,19 @@ jobs:
             cp /tmp/nostromo-ci-last-result.json nostromo/integration/ci-last-result.json
             git add nostromo/integration/ci-last-result.json
           fi
+          if [ -f /tmp/nostromo-muther-falsify-last-result.json ]; then
+            cp /tmp/nostromo-muther-falsify-last-result.json nostromo/integration/muther-falsify-last-result.json
+            git add nostromo/integration/muther-falsify-last-result.json
+          fi
           if git diff --cached --quiet; then
             echo "No result change"
           else
-            git commit -m "[nostromo-test] record integration and formal-chain results"
+            git commit -m "[nostromo-test] record integration and executor results"
             git push origin HEAD:main
           fi
+      - name: Enforce falsification executor conclusion
+        if: steps.muther_falsify.outcome != 'success'
+        run: exit 1
       - name: Enforce integration conclusion
         if: steps.integration.outcome != 'success'
         run: exit 1
