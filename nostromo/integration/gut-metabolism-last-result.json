@@ -1,7 +1,7 @@
 {
   "schema": "nostromo-gut-metabolism-test/v0.2.8",
-  "completedAt": "2026-08-30T11:03:28.453Z",
-  "status": "FAIL",
+  "completedAt": "2026-08-30T11:04:26.213Z",
+  "status": "PASS",
   "gut": {
     "version": "0.2.8",
     "mode": "DETERMINISTIC_HEURISTIC_ROUTER",
@@ -73,7 +73,7 @@
       "nestedEchoSuppressedCount": 0,
       "routeTagsStripped": 0,
       "segmentEchoSuppressedCount": 0,
-      "delimitedEchoSuppressedCount": 0
+      "delimitedEchoSuppressedCount": 1
     },
     "inheritedAntiEcho": {
       "strategy": "INHERITED_SUBSTRATE_SUBTRACTION+PREFIX_DIVERSITY_96+NESTED_ROUTE_TAG_CUTOFF+ROUTE_METADATA_STRIP+ADJACENT_SEGMENT_COLLAPSE+DELIMITED_LONG_SEGMENT_DEDUP",
@@ -152,26 +152,6 @@
     ],
     "boundary": "Certifies closed-loop routing for SHROOMING local deterministic sandbox plus a non-state-mutating greenhouse probe, MU/TH/UR repository mining, DROPLET explicit-URL verification, VAJRA and GUT, plus acceptance and digestion of externally executed Google Drive query mining, bounded authorized-source MINE_INTERNAL evidence, public web search, and connector-supplied claim-verification evidence. From round 2 onward, redacted connector evidence changes SHROOMING/greenhouse/VAJRA input. GUT receives the current round input as an inherited substrate and subtracts exact compacted echoes before producing the next carry; this proves contextual anti-echo routing, not semantic novelty detection. GitHub Actions does not itself search private Drive or the web."
   },
-  "failures": [
-    {
-      "type": "DELIMITED_ECHO_NOT_SUPPRESSED",
-      "detail": {
-        "strategy": "INHERITED_SUBSTRATE_SUBTRACTION+PREFIX_DIVERSITY_96+NESTED_ROUTE_TAG_CUTOFF+ROUTE_METADATA_STRIP+ADJACENT_SEGMENT_COLLAPSE+DELIMITED_LONG_SEGMENT_DEDUP",
-        "candidateCount": 1,
-        "selectedCount": 1,
-        "suppressedCount": 0,
-        "inheritedSubstrateStrippedCount": 0,
-        "nestedEchoAffectedAtoms": 0,
-        "nestedEchoSuppressedCount": 0,
-        "routeTagsStripped": 0,
-        "segmentEchoSuppressedCount": 0,
-        "delimitedEchoSuppressedCount": 0
-      }
-    },
-    {
-      "type": "DELIMITED_ECHO_SURVIVED_SUMMARY",
-      "detail": "[HISTORY->SHROOMING] This exact long metabolic fragment is repeated non-adjacently inside one atom and should survive only once after normalization· genuinely new middle signal· This exact long metabolic fragment is repeated non-adjacently inside one atom and should survive only once after normalization；another new signal"
-    }
-  ],
+  "failures": [],
   "boundary": "PASS proves deterministic heuristic metabolism plus contextual inherited-substrate de-echoing, exact repeated long-segment suppression within one atom across explicit separators, and protection against JSON-like engineering snippets being falsely promoted to high-priority semantic contradictions. It does not prove semantic novelty, semantic correctness, source truth, or live connector re-execution inside GitHub Actions."
 }
