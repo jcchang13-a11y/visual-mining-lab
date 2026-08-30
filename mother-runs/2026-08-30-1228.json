@@ -1,0 +1,30 @@
+{
+  "updatedAt":"2026-08-30 12:28 +08:00",
+  "mode":"small-batch mining + synthesis + privacy boundary test",
+  "preflight":{"checked":["mother-state.json","mother-latest.json","muther-ledger.json","muther-observer.json","existing remix/synthesis state"],"duplicateAvoidance":true,"sensitiveZone":"日日春 remained unopened and unused"},
+  "terminus":{
+    "sources":[{"id":"0B7vhvrekdjpbMklZYUdobjF5X1k","title":"20170501-0531_B_5月田野筆記(郭貽菱).docx","author":"郭貽菱","type":"field note","year":2017}],
+    "sourceSays":"The fall-prevention work team entered a household to address a bounded safety problem, but closer inspection connected the immediate fall risk to lighting, drainage, broken hot-water equipment, long-established bathing habits, fear of repair risk, family/community/state responsibility, and relationship work. The note explicitly says that what looks local can become an overall problem.",
+    "method":"counterexample-driven synthesis against the prior portability/legibility model",
+    "generated":"MUTHER candidate: LEGIBILITY CASCADE. Recognition interfaces do not only make latent capacities legible; they can also make hidden dependencies and failures legible. Once an intervention crosses a household/system boundary, each newly recognized dependency can enlarge the intervention scope: target problem -> linked infrastructure/habit -> trust/risk -> coordination/governance. Therefore better diagnosis can paradoxically increase, not reduce, the apparent size of the problem.",
+    "novelty":"adds a recursive scope-expansion mechanism; not a summary of the source and not attributed to the source author",
+    "quality":{"argument":"medium","evidence":"medium-high field evidence","observationDensity":"high","originality":"medium source / high candidate synthesis","reusability":"high"},
+    "counterexampleNeed":"seek a case where better diagnosis successfully narrows scope rather than expanding it, and a non-care domain where the cascade appears",
+    "repeatability":"not yet established"
+  },
+  "uncultured":{
+    "sampled":[
+      {"id":"18DwHnNMh3C4kkfrwE6p0uzdrsx_Ceffb","year":2019,"status":"excluded-sensitive-personal-record"},
+      {"id":"1I-BthQ6ux95W0ycNikahpOiDf1EjEqcTPA","year":2019,"status":"excluded-potentially-sensitive-photographed-document"},
+      {"id":"1qDbiReBRrkmsZ3L7pV2KTnsWFpTX8WsV","year":2021,"status":"excluded-sensitive-medical-record"}
+    ],
+    "method":"cross-date visual sampling + pre-remix privacy screening",
+    "generated":null,
+    "finding":"Three attempted cross-date samples were document-like records containing personal/sensitive information. They were stopped before structural extraction, remix, synthesis, or website publication.",
+    "novelty":"methodological failure converted into a boundary rule: visual mining needs privacy screening before composition extraction; filename/date alone is insufficient.",
+    "websiteInsertion":"no visual artifact inserted because all sampled candidates were excluded",
+    "repeatability":"privacy screen should become mandatory before future visual synthesis"
+  },
+  "sensitiveBoundary":{"日日春":"AUTHORIZATION REQUIRED; not entered"},
+  "ledger":{"status":"delta recorded separately","path":"muther-ledger-delta-2026-08-30-1228.json","note":"primary ledger was read for duplicate avoidance; this run writes a compact delta so new source/exclusion IDs are not lost"}
+}
