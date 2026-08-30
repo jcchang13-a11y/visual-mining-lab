@@ -1,9 +1,9 @@
 {
   "schema": "nostromo-gut-metabolism-test/v0.2.10",
-  "completedAt": "2026-08-30T17:02:37.671Z",
-  "status": "PASS",
+  "completedAt": "2026-08-30T18:04:05.636Z",
+  "status": "FAIL",
   "gut": {
-    "version": "0.2.10",
+    "version": "0.2.11",
     "mode": "DETERMINISTIC_HEURISTIC_ROUTER",
     "ingested": 10,
     "absorbed": 7,
@@ -28,7 +28,7 @@
       "HOLD": 4
     },
     "antiEcho": {
-      "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PREFIX_DIVERSITY_96+TAGGED_PAYLOAD_DEDUP+ROUTE_METADATA_STRIP+ADJACENT_SEGMENT_COLLAPSE+DELIMITED_LONG_SEGMENT_DEDUP",
+      "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PREFIX_DIVERSITY_96+TAGGED_PAYLOAD_DEDUP+ROUTE_METADATA_STRIP+ADJACENT_SEGMENT_COLLAPSE_12+DELIMITED_LONG_SEGMENT_DEDUP",
       "candidateCount": 4,
       "selectedCount": 2,
       "suppressedCount": 2,
@@ -40,7 +40,7 @@
       "delimitedEchoSuppressedCount": 0
     },
     "nestedAntiEcho": {
-      "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PREFIX_DIVERSITY_96+TAGGED_PAYLOAD_DEDUP+ROUTE_METADATA_STRIP+ADJACENT_SEGMENT_COLLAPSE+DELIMITED_LONG_SEGMENT_DEDUP",
+      "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PREFIX_DIVERSITY_96+TAGGED_PAYLOAD_DEDUP+ROUTE_METADATA_STRIP+ADJACENT_SEGMENT_COLLAPSE_12+DELIMITED_LONG_SEGMENT_DEDUP",
       "candidateCount": 1,
       "selectedCount": 1,
       "suppressedCount": 0,
@@ -54,7 +54,7 @@
     "repeatedTagNovelty": {
       "summary": "[CONTRADICTION->VAJRA] first contradiction remains distinct and should be kept： second contradiction is genuinely new evidence and must also survive normalization",
       "antiEcho": {
-        "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PREFIX_DIVERSITY_96+TAGGED_PAYLOAD_DEDUP+ROUTE_METADATA_STRIP+ADJACENT_SEGMENT_COLLAPSE+DELIMITED_LONG_SEGMENT_DEDUP",
+        "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PREFIX_DIVERSITY_96+TAGGED_PAYLOAD_DEDUP+ROUTE_METADATA_STRIP+ADJACENT_SEGMENT_COLLAPSE_12+DELIMITED_LONG_SEGMENT_DEDUP",
         "candidateCount": 1,
         "selectedCount": 1,
         "suppressedCount": 0,
@@ -67,7 +67,7 @@
       }
     },
     "segmentAntiEcho": {
-      "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PREFIX_DIVERSITY_96+TAGGED_PAYLOAD_DEDUP+ROUTE_METADATA_STRIP+ADJACENT_SEGMENT_COLLAPSE+DELIMITED_LONG_SEGMENT_DEDUP",
+      "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PREFIX_DIVERSITY_96+TAGGED_PAYLOAD_DEDUP+ROUTE_METADATA_STRIP+ADJACENT_SEGMENT_COLLAPSE_12+DELIMITED_LONG_SEGMENT_DEDUP",
       "candidateCount": 1,
       "selectedCount": 1,
       "suppressedCount": 0,
@@ -79,7 +79,7 @@
       "delimitedEchoSuppressedCount": 0
     },
     "delimitedAntiEcho": {
-      "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PREFIX_DIVERSITY_96+TAGGED_PAYLOAD_DEDUP+ROUTE_METADATA_STRIP+ADJACENT_SEGMENT_COLLAPSE+DELIMITED_LONG_SEGMENT_DEDUP",
+      "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PREFIX_DIVERSITY_96+TAGGED_PAYLOAD_DEDUP+ROUTE_METADATA_STRIP+ADJACENT_SEGMENT_COLLAPSE_12+DELIMITED_LONG_SEGMENT_DEDUP",
       "candidateCount": 1,
       "selectedCount": 1,
       "suppressedCount": 0,
@@ -91,7 +91,7 @@
       "delimitedEchoSuppressedCount": 1
     },
     "inheritedAntiEcho": {
-      "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PREFIX_DIVERSITY_96+TAGGED_PAYLOAD_DEDUP+ROUTE_METADATA_STRIP+ADJACENT_SEGMENT_COLLAPSE+DELIMITED_LONG_SEGMENT_DEDUP",
+      "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PREFIX_DIVERSITY_96+TAGGED_PAYLOAD_DEDUP+ROUTE_METADATA_STRIP+ADJACENT_SEGMENT_COLLAPSE_12+DELIMITED_LONG_SEGMENT_DEDUP",
       "candidateCount": 1,
       "selectedCount": 1,
       "suppressedCount": 0,
@@ -105,7 +105,7 @@
     "partialInheritedSafety": {
       "summary": "[CLAIM->DROPLET] novel-prefix CLAIM SEARCH-ENGINE DISCOVERY connector evidence payload CLAIM SEARCH-ENGINE DISCOVERY connector evidence payload CLAIM SEARCH-ENGINE DISCOVERY connector evidence payload CLAIM SEA novel-suffix",
       "antiEcho": {
-        "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PREFIX_DIVERSITY_96+TAGGED_PAYLOAD_DEDUP+ROUTE_METADATA_STRIP+ADJACENT_SEGMENT_COLLAPSE+DELIMITED_LONG_SEGMENT_DEDUP",
+        "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PREFIX_DIVERSITY_96+TAGGED_PAYLOAD_DEDUP+ROUTE_METADATA_STRIP+ADJACENT_SEGMENT_COLLAPSE_12+DELIMITED_LONG_SEGMENT_DEDUP",
         "candidateCount": 1,
         "selectedCount": 1,
         "suppressedCount": 0,
@@ -130,7 +130,7 @@
       },
       "summary": "[RAW_STRUCTURED_SNIPPET->MUTHER] {\"version\":\"2.3\",\"round\":\"R113\",\"task\":\"conflicting tasks and partial memory\",\"continuity\":\"history preserved\"}"
     },
-    "boundary": "Deterministic heuristic metabolism only. Inherited substrate subtraction now removes only exact full normalized substrates; truncated substrate prefixes are never used as deletion candidates because they can cut through novel tokens and create corrupted carry fragments. Repeated route metadata no longer triggers tail cutoff: only exact repeated tagged payloads of 24+ normalized characters are suppressed, so a later segment with the same route tag but novel payload is preserved. Repeated long segments inside one atom are deduplicated only across explicit separators and only at conservative length thresholds. JSON-like or heavily escaped structured snippets are classified before lexical contradiction detection and routed back to MUTHER at low priority. These rules are auditable heuristics, not semantic truth."
+    "boundary": "Deterministic heuristic metabolism only. Exact adjacent colon-delimited segments are now collapsed from 12 normalized characters upward, targeting short intra-atom metabolic echoes observed in closed-loop carry while preserving non-identical same-route material. Inherited substrate subtraction still removes only exact full normalized substrates; truncated substrate prefixes are never used as deletion candidates. Repeated route metadata suppresses only exact repeated tagged payloads of 24+ normalized characters. Non-adjacent long segments are deduplicated only across explicit separators. JSON-like or heavily escaped structured snippets are classified before lexical contradiction detection and routed back to MUTHER at low priority. These rules are auditable heuristics, not semantic truth."
   },
   "feedback": {
     "status": "PASS",
@@ -141,10 +141,10 @@
       "firstAppliedRound": 2,
       "privacy": "PRIVATE DRIVE RAW CONTENT/TITLES/IDS/URLS ARE NOT INCLUDED"
     },
-    "lastCarry": "[CONTRADICTION->VAJRA] 以 structure 位置重讀： 以 structure 位置重讀：： 主動尋找最小反例與破壞條件： 主動尋找最小反例與破壞條件：針對本輪 GENERAL 命題（ref:928e3df0），哪個前提最可能先失效？： VERIFIES AN EXPLICIT URL ONLY; DOES NOT CLA· [CONTRADICTION->VAJR · [CONTRADICTION->VAJRA] 以 counterexample 位置重讀： 以 structure 位置重讀：： 主動尋找最小反例與破壞條件： 主動尋找最小反例與破壞條件：針對本輪 GENERAL 命題（ref:928e3df0），哪個前提最可能先失效？： VERIFIES AN EXPLICIT URL ONLY; DOES NOT CLA· [CONTRADICTION->VAJR · [CONTRADICTION->VAJRA] 以 position 位置重讀： 以 structure 位置重讀：： 主動尋找最小反例與破壞條件： 主動尋找最小反例與破壞條件：針對本輪 GENERAL 命題（ref:928e3df0），哪個前提最可能先失效？： VERIFIES AN EXPLICIT URL ONLY; DOES NOT CLA· [CONTRADICTION->VAJR · [CONTRADICTION->VAJRA] 以 otherness 位置重讀： 以 structure 位置重讀：： 主動尋找最小反例與破壞條件： 主動尋找最小反例與破壞條件：針對本輪 GENERAL 命題（ref:928e3df0），哪個前提最可能先失效？： VERIFIES AN EXPLICIT URL ONLY; DOES NOT CLA· [CONTRADICTION->VAJR · [CONTRADICTION->VAJRA] 以 evidence 位置重讀： 以 structure 位置重讀：： 主動尋找最小反例與破壞條件： 主動尋找最小反例與破壞條件：針對本輪 GENERAL 命題（ref:928e3df0），哪個前提最可能先失效？： VERIFIES AN EXPLICIT URL ONLY; DOES NOT CLA· [CONTRADICTION->VAJR · [CONTRADICTION->VAJRA] 以 language 位置重讀： 以 structure 位置重讀：： 主動尋找最小反例與破壞條件： 主動尋找最小反例與破壞條件：針對本輪 GENERAL 命題（ref:928e3df0），哪個前提最可能先失效？： VERIFIES AN EXPLICIT URL ONLY; DOES NOT CLA· [CONTRADICTION->VAJR ",
+    "lastCarry": "[CONTRADICTION->VAJRA] 以 structure 位置重讀： 以 structure 位置重讀： 主動尋找最小反例與破壞條件：針對本輪 GENERAL 命題（ref:928e3df0），哪個前提最可能先失效？： VERIFIES AN EXPLICIT URL ONLY; DOES NOT CLA： 以 counterexam · [CONTRADICTION->VAJRA] 以 counterexample 位置重讀： 以 structure 位置重讀： 主動尋找最小反例與破壞條件：針對本輪 GENERAL 命題（ref:928e3df0），哪個前提最可能先失效？： VERIFIES AN EXPLICIT URL ONLY; DOES NOT CLA： 以 counterexam · [CONTRADICTION->VAJRA] 以 position 位置重讀： 以 structure 位置重讀： 主動尋找最小反例與破壞條件：針對本輪 GENERAL 命題（ref:928e3df0），哪個前提最可能先失效？： VERIFIES AN EXPLICIT URL ONLY; DOES NOT CLA： 以 counterexam · [CONTRADICTION->VAJRA] 以 otherness 位置重讀： 以 structure 位置重讀： 主動尋找最小反例與破壞條件：針對本輪 GENERAL 命題（ref:928e3df0），哪個前提最可能先失效？： VERIFIES AN EXPLICIT URL ONLY; DOES NOT CLA： 以 counterexam · [CONTRADICTION->VAJRA] 以 evidence 位置重讀： 以 structure 位置重讀： 主動尋找最小反例與破壞條件：針對本輪 GENERAL 命題（ref:928e3df0），哪個前提最可能先失效？： VERIFIES AN EXPLICIT URL ONLY; DOES NOT CLA： 以 counterexam · [CONTRADICTION->VAJRA] 以 language 位置重讀： 以 structure 位置重讀： 主動尋找最小反例與破壞條件：針對本輪 GENERAL 命題（ref:928e3df0），哪個前提最可能先失效？： VERIFIES AN EXPLICIT URL ONLY; DOES NOT CLA： 以 counterexam · [CONTRADICTION->VAJRA] 以 boundary 位置重讀： 以 structure 位置重讀： 主動尋找最小反例與破壞條件：針對本輪 GENERAL 命題（ref:928e3df0），哪個前提最可能先失效？： VERIFIES AN EXPLICIT ",
     "roundAntiEcho": [
       {
-        "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PREFIX_DIVERSITY_96+TAGGED_PAYLOAD_DEDUP+ROUTE_METADATA_STRIP+ADJACENT_SEGMENT_COLLAPSE+DELIMITED_LONG_SEGMENT_DEDUP",
+        "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PREFIX_DIVERSITY_96+TAGGED_PAYLOAD_DEDUP+ROUTE_METADATA_STRIP+ADJACENT_SEGMENT_COLLAPSE_12+DELIMITED_LONG_SEGMENT_DEDUP",
         "candidateCount": 190,
         "selectedCount": 12,
         "suppressedCount": 178,
@@ -156,7 +156,7 @@
         "delimitedEchoSuppressedCount": 0
       },
       {
-        "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PREFIX_DIVERSITY_96+TAGGED_PAYLOAD_DEDUP+ROUTE_METADATA_STRIP+ADJACENT_SEGMENT_COLLAPSE+DELIMITED_LONG_SEGMENT_DEDUP",
+        "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PREFIX_DIVERSITY_96+TAGGED_PAYLOAD_DEDUP+ROUTE_METADATA_STRIP+ADJACENT_SEGMENT_COLLAPSE_12+DELIMITED_LONG_SEGMENT_DEDUP",
         "candidateCount": 158,
         "selectedCount": 12,
         "suppressedCount": 146,
@@ -164,24 +164,29 @@
         "nestedEchoAffectedAtoms": 10,
         "nestedEchoSuppressedCount": 0,
         "routeTagsStripped": 30,
-        "segmentEchoSuppressedCount": 0,
+        "segmentEchoSuppressedCount": 10,
         "delimitedEchoSuppressedCount": 0
       },
       {
-        "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PREFIX_DIVERSITY_96+TAGGED_PAYLOAD_DEDUP+ROUTE_METADATA_STRIP+ADJACENT_SEGMENT_COLLAPSE+DELIMITED_LONG_SEGMENT_DEDUP",
+        "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PREFIX_DIVERSITY_96+TAGGED_PAYLOAD_DEDUP+ROUTE_METADATA_STRIP+ADJACENT_SEGMENT_COLLAPSE_12+DELIMITED_LONG_SEGMENT_DEDUP",
         "candidateCount": 158,
         "selectedCount": 12,
         "suppressedCount": 146,
         "inheritedSubstrateStrippedCount": 10,
-        "nestedEchoAffectedAtoms": 0,
+        "nestedEchoAffectedAtoms": 10,
         "nestedEchoSuppressedCount": 0,
-        "routeTagsStripped": 10,
+        "routeTagsStripped": 20,
         "segmentEchoSuppressedCount": 0,
         "delimitedEchoSuppressedCount": 0
       }
     ],
     "boundary": "Certifies closed-loop routing for SHROOMING local deterministic sandbox plus a non-state-mutating greenhouse probe, MU/TH/UR repository mining, DROPLET explicit-URL verification, VAJRA and GUT, plus acceptance and digestion of externally executed Google Drive query mining, bounded authorized-source MINE_INTERNAL evidence, public web search, and connector-supplied claim-verification evidence. From round 2 onward, redacted connector evidence changes SHROOMING/greenhouse/VAJRA input. GUT receives the combined current round input plus exact prior carry and exact redacted feedback directive as inherited substrates; this allows conservative exact embedded-substrate subtraction without fuzzy/prefix deletion. It proves contextual anti-echo routing, not semantic novelty detection. GitHub Actions does not itself search private Drive or the web."
   },
-  "failures": [],
+  "failures": [
+    {
+      "type": "GUT_VERSION",
+      "detail": "0.2.11"
+    }
+  ],
   "boundary": "PASS proves deterministic heuristic metabolism plus exact full inherited-substrate de-echoing without truncated-prefix deletion, exact repeated tagged-payload suppression without deleting novel same-tag payloads, repeated long-segment suppression within one atom across explicit separators, and protection against JSON-like engineering snippets being falsely promoted to high-priority semantic contradictions. It does not prove semantic novelty, semantic correctness, source truth, or live connector re-execution inside GitHub Actions."
 }
