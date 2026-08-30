@@ -1,7 +1,7 @@
 {
   "schema": "nostromo-gut-metabolism-test/v0.2.8",
-  "completedAt": "2026-08-30T11:04:26.213Z",
-  "status": "PASS",
+  "completedAt": "2026-08-30T12:05:10.115Z",
+  "status": "FAIL",
   "gut": {
     "version": "0.2.8",
     "mode": "DETERMINISTIC_HEURISTIC_ROUTER",
@@ -50,6 +50,21 @@
       "routeTagsStripped": 1,
       "segmentEchoSuppressedCount": 0,
       "delimitedEchoSuppressedCount": 0
+    },
+    "repeatedTagNovelty": {
+      "summary": "[CONTRADICTION->VAJRA] first contradiction remains distinct and should be kept",
+      "antiEcho": {
+        "strategy": "INHERITED_SUBSTRATE_SUBTRACTION+PREFIX_DIVERSITY_96+NESTED_ROUTE_TAG_CUTOFF+ROUTE_METADATA_STRIP+ADJACENT_SEGMENT_COLLAPSE+DELIMITED_LONG_SEGMENT_DEDUP",
+        "candidateCount": 1,
+        "selectedCount": 1,
+        "suppressedCount": 0,
+        "inheritedSubstrateStrippedCount": 0,
+        "nestedEchoAffectedAtoms": 1,
+        "nestedEchoSuppressedCount": 1,
+        "routeTagsStripped": 1,
+        "segmentEchoSuppressedCount": 0,
+        "delimitedEchoSuppressedCount": 0
+      }
     },
     "segmentAntiEcho": {
       "strategy": "INHERITED_SUBSTRATE_SUBTRACTION+PREFIX_DIVERSITY_96+NESTED_ROUTE_TAG_CUTOFF+ROUTE_METADATA_STRIP+ADJACENT_SEGMENT_COLLAPSE+DELIMITED_LONG_SEGMENT_DEDUP",
@@ -152,6 +167,11 @@
     ],
     "boundary": "Certifies closed-loop routing for SHROOMING local deterministic sandbox plus a non-state-mutating greenhouse probe, MU/TH/UR repository mining, DROPLET explicit-URL verification, VAJRA and GUT, plus acceptance and digestion of externally executed Google Drive query mining, bounded authorized-source MINE_INTERNAL evidence, public web search, and connector-supplied claim-verification evidence. From round 2 onward, redacted connector evidence changes SHROOMING/greenhouse/VAJRA input. GUT receives the current round input as an inherited substrate and subtracts exact compacted echoes before producing the next carry; this proves contextual anti-echo routing, not semantic novelty detection. GitHub Actions does not itself search private Drive or the web."
   },
-  "failures": [],
-  "boundary": "PASS proves deterministic heuristic metabolism plus contextual inherited-substrate de-echoing, exact repeated long-segment suppression within one atom across explicit separators, and protection against JSON-like engineering snippets being falsely promoted to high-priority semantic contradictions. It does not prove semantic novelty, semantic correctness, source truth, or live connector re-execution inside GitHub Actions."
+  "failures": [
+    {
+      "type": "REPEATED_TAG_NOVEL_SEGMENT_OVERTRIMMED",
+      "detail": "[CONTRADICTION->VAJRA] first contradiction remains distinct and should be kept"
+    }
+  ],
+  "boundary": "PASS proves deterministic heuristic metabolism plus contextual inherited-substrate de-echoing, exact repeated long-segment suppression within one atom across explicit separators, preservation of novel content even when route metadata repeats, and protection against JSON-like engineering snippets being falsely promoted to high-priority semantic contradictions. It does not prove semantic novelty, semantic correctness, source truth, or live connector re-execution inside GitHub Actions."
 }
