@@ -11,7 +11,6 @@ await loadScript('nostromo/vajra/vajra-engine.js');
 const failures=[];
 const check=(ok,type,detail)=>{if(!ok)failures.push({type,detail});};
 
-// Unit routing + provenance + failure handling.
 const sample={
   claim:'Claim: all five organs are already semantically mature.',
   question:'What evidence would change this conclusion?',
@@ -22,7 +21,7 @@ const sample={
   duplicateA:'same useful material',duplicateB:'same useful material'
 };
 const gut=globalThis.GutEngine.digest(sample,{source:'NOSTROMO/gut-metabolism-test'});
-check(gut.version==='0.2.11','GUT_VERSION',gut.version);
+check(gut.version==='0.2.12','GUT_VERSION',gut.version);
 check(gut.mode==='DETERMINISTIC_HEURISTIC_ROUTER','GUT_MODE',gut.mode);
 check(gut.routes?.DROPLET?.count>=1,'CLAIM_NOT_ROUTED_TO_DROPLET',gut.routes?.DROPLET);
 check(gut.routes?.SHROOMING?.count>=1,'QUESTION_NOT_ROUTED_TO_SHROOMING',gut.routes?.SHROOMING);
@@ -33,7 +32,6 @@ check(gut.excreted>=1,'DUPLICATE_NOT_EXCRETED',gut.waste);
 check(gut.held>=1,'UNCERTAINTY_NOT_HELD',gut.hold);
 check(gut.nutrients.every(x=>x.provenance?.inputSource==='NOSTROMO/gut-metabolism-test'),'PROVENANCE_LOST',gut.nutrients);
 
-// Exact inherited material should disappear, but a truncated prefix must not be destructively removed.
 const inherited='This inherited substrate is deliberately long enough to be recognized as prior-round material and must not be counted as novelty.';
 const inheritedGut=globalThis.GutEngine.digest({reaction:`new observation before ${inherited} new observation after`},{source:'NOSTROMO/gut-inherited-test',inheritedSubstrates:[inherited]});
 check(inheritedGut.antiEcho?.inheritedSubstrateStrippedCount>=1,'INHERITED_NOT_STRIPPED',inheritedGut.antiEcho);
@@ -45,11 +43,18 @@ const partialGut=globalThis.GutEngine.digest({reaction:`novel-prefix ${partial} 
 check(partialGut.antiEcho?.inheritedSubstrateStrippedCount===0,'TRUNCATED_SUBSTRATE_STRIPPED',partialGut.antiEcho);
 check(partialGut.summary.includes('novel-prefix')&&partialGut.summary.includes('novel-suffix'),'TRUNCATED_SUBSTRATE_CORRUPTED_WRAPPER',partialGut.summary);
 
-// Adversarial nested / intra-atom echo: long and short exact repetitions collapse; near-duplicates survive.
 const nested='[CONTRADICTION->VAJRA] Counterevidence: recursive carry repeats itself：[CONTRADICTION->VAJRA] Counterevidence: recursive carry repeats itself：[CONTRADICTION->VAJRA] Counterevidence: recursive carry repeats itself';
 const nestedGut=globalThis.GutEngine.digest({carry:nested},{source:'NOSTROMO/gut-nested-test'});
 check(nestedGut.antiEcho?.nestedEchoSuppressedCount>=2,'NESTED_TAGGED_ECHO_NOT_SUPPRESSED',nestedGut.antiEcho);
 check(!nestedGut.nutrients.some(x=>/\[[A-Z_]+->[A-Z/]+\]/.test(x.text)),'ROUTE_METADATA_SURVIVED',nestedGut.nutrients);
+
+const sharedTail='以 structure 位置重讀：主動尋找最小反例與破壞條件：針對本輪 GENERAL 命題，哪個前提最可能先失效？這一整段是跨 lens 完全相同而且足夠長的代謝尾巴，應只保留一次而不能每個 lens 都重新攜帶。';
+const taggedTail=`[CONTRADICTION->VAJRA] 以 counterexample 位置重讀：${sharedTail}：[CONTRADICTION->VAJRA] 以 position 位置重讀：${sharedTail}：[CONTRADICTION->VAJRA] 以 otherness 位置重讀：${sharedTail}`;
+const taggedTailGut=globalThis.GutEngine.digest({carry:taggedTail},{source:'NOSTROMO/gut-tagged-tail-test'});
+check(taggedTailGut.antiEcho?.taggedTailSuppressedCount===2,'TAGGED_SHARED_TAIL_NOT_SUPPRESSED',taggedTailGut.antiEcho);
+check((taggedTailGut.summary.match(/跨 lens 完全相同/g)||[]).length===1,'TAGGED_SHARED_TAIL_SURVIVED',taggedTailGut.summary);
+check(taggedTailGut.summary.includes('counterexample')&&taggedTailGut.summary.includes('position')&&taggedTailGut.summary.includes('otherness'),'TAGGED_UNIQUE_HEAD_LOST',taggedTailGut.summary);
+
 const shortA='以 structure 位置重讀';
 const shortB='主動尋找最小反例與破壞條件';
 const shortGut=globalThis.GutEngine.digest({carry:`${shortA}：${shortA}：${shortB}：${shortB}：真正的新材料應該保留`},{source:'NOSTROMO/gut-short-echo-test'});
@@ -61,17 +66,15 @@ const nearGut=globalThis.GutEngine.digest({carry:'以 structure 位置重讀：�
 check(nearGut.antiEcho?.segmentEchoSuppressedCount===0,'NEAR_DUPLICATE_OVERTRIMMED',nearGut.antiEcho);
 check(nearGut.summary.includes('structure')&&nearGut.summary.includes('counterexample'),'NEAR_DUPLICATE_CONTENT_LOST',nearGut.summary);
 
-// Structured engineering snippets must not become fake semantic contradictions.
 const structured='{"version":"2.3","round":"R113","task":"conflicting tasks and partial memory","continuity":"history preserved"}';
 const structuredGut=globalThis.GutEngine.digest({snippet:structured},{source:'NOSTROMO/gut-structured-test'});
 check(structuredGut.typeCounts?.RAW_STRUCTURED_SNIPPET===1,'STRUCTURED_SNIPPET_NOT_CLASSIFIED',structuredGut.typeCounts);
 check((structuredGut.typeCounts?.CONTRADICTION||0)===0,'STRUCTURED_FALSE_CONTRADICTION',structuredGut.typeCounts);
 check(structuredGut.routes?.MUTHER?.count===1,'STRUCTURED_NOT_ROUTED_TO_MUTHER',structuredGut.routes);
 
-// Cross-organ regression: connector feedback must alter round input while GUT continues to digest and de-echo.
 let active=null;
 try{
-  active=await runActiveExecutorLoop({rounds:3,seed:'GUT v0.2.11 feedback validation',mineQuery:'NOSTROMO',verifyUrl:'https://github.com/jcchang13-a11y/visual-mining-lab'});
+  active=await runActiveExecutorLoop({rounds:3,seed:'GUT v0.2.12 feedback validation',mineQuery:'NOSTROMO',verifyUrl:'https://github.com/jcchang13-a11y/visual-mining-lab'});
   check(active.status==='PASS','ACTIVE_LOOP_FAIL',{status:active.status,completedRounds:active.completedRounds});
   check(active.feedback?.appliedRounds===2,'FEEDBACK_APPLIED_ROUNDS',active.feedback);
   check(active.feedback?.firstAppliedRound===2,'FEEDBACK_FIRST_ROUND',active.feedback);
@@ -81,12 +84,12 @@ try{
 }catch(error){failures.push({type:'ACTIVE_LOOP_EXCEPTION',message:String(error?.message||error)});}
 
 const result={
-  schema:'nostromo-gut-metabolism-test/v0.2.11',completedAt:new Date().toISOString(),status:failures.length===0?'PASS':'FAIL',
+  schema:'nostromo-gut-metabolism-test/v0.2.12',completedAt:new Date().toISOString(),status:failures.length===0?'PASS':'FAIL',
   gut:{version:gut.version,mode:gut.mode,typeCounts:gut.typeCounts,routeCounts:Object.fromEntries(Object.entries(gut.routes).map(([k,v])=>[k,v.count])),boundary:gut.boundary},
-  antiEcho:{nested:nestedGut.antiEcho,shortAdjacent:shortGut.antiEcho,nearDuplicate:nearGut.antiEcho,inherited:inheritedGut.antiEcho,partialInherited:partialGut.antiEcho},
+  antiEcho:{nested:nestedGut.antiEcho,taggedTail:taggedTailGut.antiEcho,shortAdjacent:shortGut.antiEcho,nearDuplicate:nearGut.antiEcho,inherited:inheritedGut.antiEcho,partialInherited:partialGut.antiEcho},
   feedback:active?{status:active.status,completedRounds:active.completedRounds,feedback:active.feedback,lastCarry:active.trace?.at(-1)?.carryOut||null,roundAntiEcho:active.trace?.map(x=>x.gut?.antiEcho),boundary:active.boundary}:null,
   failures,
-  boundary:'PASS proves deterministic heuristic routing, provenance retention, quarantine/hold behavior, conservative exact inherited-substrate removal, exact tagged-payload de-echoing, short exact adjacent intra-atom echo suppression, near-duplicate preservation, structured-snippet protection, and a 3-round cross-organ connector-feedback regression. It does not prove semantic novelty, semantic correctness, or source truth.'
+  boundary:'PASS proves deterministic heuristic routing, provenance retention, quarantine/hold behavior, conservative exact inherited-substrate removal, exact tagged-payload de-echoing, exact repeated tagged-tail suppression while retaining distinct heads, short exact adjacent intra-atom echo suppression, near-duplicate preservation, structured-snippet protection, and a 3-round cross-organ connector-feedback regression. It does not prove semantic novelty, semantic correctness, or source truth.'
 };
 await fs.writeFile(path.join(root,'nostromo/integration/gut-metabolism-last-result.json'),JSON.stringify(result,null,2)+'\n','utf8');
 console.log(JSON.stringify(result,null,2));
