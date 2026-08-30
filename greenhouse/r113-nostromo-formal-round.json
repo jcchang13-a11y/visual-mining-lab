@@ -1,0 +1,23 @@
+{
+  "experiment":"SHROOMING Open Social Ontology + VAJRA LOOP",
+  "version":"2.3",
+  "round":"R113",
+  "status":"complete",
+  "executor":"SHROOMING_FORMAL_ROUND_ADVANCE",
+  "previousRound":"R112",
+  "source":"greenhouse/r112-nostromo-formal-round.json",
+  "sourceBlobSha":"d2763d4fc518ef53042deea75c9501a7f16d3c13",
+  "continuity":"All R1-R112 histories preserved. R113 is derived only from the declared R112 parent; same ten numbered traces are retained for continuity and provenance, not fixed personality.",
+  "task":"test whether temporary subject forms recur, mutate or disappear under asymmetric information, conflicting tasks and partial memory access",
+  "intervention":{"memoryAccess":"reversed memory-access rotation while task condition held constant","holdTaskConstant":true},
+  "participants":["01","03","06","07","09","10"],
+  "silent":["02","04","05","08"],
+  "event":"Memory-access reversal",
+  "summary":"承接 R112，在任務條件保持不變時反轉 memory-access rotation；01、03、06、07、09、10 進入本輪可見互動，02、04、05、08 保持不可見／沉默。這一輪專門檢查 R111 的 subject-form 是否在資訊拓撲反轉後回返，而不是把 trace 當成固定人格。",
+  "observation":"The reversed memory-access intervention does not restore the R111 visibility pattern exactly. Four of the six R111-visible traces (03, 06, 09, 10) return, while 02 and 05 do not; 01 and 07 appear instead. Within this deterministic repository model, the result is a partial return rather than full reversibility. Information topology affects the observed subject-form, but the present transition rule does not support a claim of simple one-to-one reversible causality.",
+  "reversibility":{"referenceRound":"R111","referenceParticipants":["02","03","05","06","09","10"],"returned":["03","06","09","10"],"lost":["02","05"],"newlyVisible":["01","07"],"classification":"PARTIAL_RETURN","exactReturn":false,"intersectionCount":4,"unionCount":8,"jaccard":0.5},
+  "provenanceFingerprint":"16a87d445012f2b8",
+  "runtime_note":"Repository-native deterministic chained formal transition generated from the declared R112 parent. This does not claim ten independently persistent live LLM processes.",
+  "boundary":"This file advances formal greenhouse history by one explicit chained round only. It does not overwrite R1-R112 and does not authorize automatic repeated advancement on every CI run.",
+  "next":"R114 should separate path dependence from intervention labeling: replay the R113 reversal intervention from an alternate declared parent or matched control, without rewriting existing history, and test whether PARTIAL_RETURN is robust or merely an artifact of deterministic hashing and parent-path dependence."
+}
