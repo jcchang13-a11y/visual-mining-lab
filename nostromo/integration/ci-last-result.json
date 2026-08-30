@@ -1,7 +1,7 @@
 {
-  "schema": "nostromo-integration-ci/v1.1",
-  "completedAt": "2026-08-30T04:09:02.124Z",
-  "status": "FAIL",
+  "schema": "nostromo-integration-ci/v1.2",
+  "completedAt": "2026-08-30T04:10:08.409Z",
+  "status": "PASS",
   "rounds": 50,
   "expectedPerRound": {
     "executedStateActions": 3,
@@ -149,6 +149,12 @@
       "evidenceCount": 1,
       "boundary": "A REAL PUBLIC WEB SEARCH WAS EXECUTED BY THE CONNECTOR RUNTIME; THIS DOES NOT MEAN GITHUB ACTIONS ITSELF HAS SEARCH-ENGINE ACCESS"
     },
+    "dropletVerify": {
+      "status": "EXECUTED",
+      "evidenceCount": 2,
+      "claim": "Magentic-One is a generalist multi-agent system published by Microsoft Research in November 2024.",
+      "boundary": "THE PUBLIC WEB CONNECTOR SUPPLIED CLAIM-SPECIFIC EVIDENCE. THE REPOSITORY STORES ONLY REDUCED EVIDENCE METADATA/FINGERPRINTS; CI DOES NOT PERFORM SEARCH-ENGINE DISCOVERY."
+    },
     "boundary": "This module validates and hands off persisted evidence from an authorized external connector runtime. It does not itself call Google Drive or a search engine. Private raw Drive content is not repository data, and claim verification remains distinct from search-engine execution."
   },
   "activeExecutorLoop": {
@@ -176,16 +182,6 @@
     "muther": "../../mother-latest.json",
     "droplet": "../droplet-state.json"
   },
-  "failures": [
-    {
-      "type": "CONNECTOR_HANDOFF_FAIL",
-      "detail": {
-        "status": "ACCEPTED",
-        "completedAt": "2026-08-30T12:08:00+08:00",
-        "actionsAccepted": 3,
-        "failures": []
-      }
-    }
-  ],
-  "boundary": "PASS certifies 50-round published-state integration, deterministic reproducibility and parent-blob continuity for R111→R112→R113, the R111↔R113 PARTIAL_RETURN measurement, a matched-parent audit showing that repo-executors v0.9 participant selection is parent-invariant when task and intervention are held constant, a 10-round closed loop of repository-native executors, and successful handoff into GUT of persisted Google Drive/public-web connector evidence. PARTIAL_RETURN must therefore not be presented as evidence of visibility path dependence under the current rule. It does not certify ten independent live LLM processes, causal reversibility outside this deterministic model, exhaustive whole-Drive mining, or that GitHub Actions itself can invoke private connectors."
+  "failures": [],
+  "boundary": "PASS certifies 50-round published-state integration, deterministic reproducibility and parent-blob continuity for R111→R112→R113, the R111↔R113 PARTIAL_RETURN measurement, a matched-parent audit showing that repo-executors v0.9 participant selection is parent-invariant when task and intervention are held constant, a 10-round closed loop of repository-native executors, and successful handoff into GUT of persisted Google Drive search, public-web search, and claim-specific DROPLET verification evidence. PARTIAL_RETURN must not be presented as evidence of visibility path dependence under the current rule. It does not certify ten independent live LLM processes, causal reversibility outside this deterministic model, exhaustive whole-Drive mining, or that GitHub Actions itself can invoke private connectors or search engines."
 }
