@@ -1,0 +1,41 @@
+{
+  "schema": "nostromo-droplet-claim-verify-test/v1.0",
+  "completedAt": "2026-08-30T04:08:16.692Z",
+  "status": "PASS",
+  "verification": {
+    "executor": "DROPLET_CLAIM_VERIFY",
+    "status": "EXECUTED",
+    "claim": "Magentic-One is a generalist multi-agent system published by Microsoft Research in November 2024.",
+    "claimFingerprint": "2b0cce93bbbc52ad",
+    "verdict": "SUPPORTED",
+    "counts": {
+      "evidence": 2,
+      "supports": 2,
+      "refutes": 0,
+      "authoritativeSupports": 2,
+      "authoritativeRefutes": 0
+    },
+    "evidenceFingerprint": "b5b41ee98585f7cb",
+    "evidence": [
+      {
+        "id": "E1",
+        "source": "Microsoft Research",
+        "sourceClass": "OFFICIAL",
+        "relation": "SUPPORTS",
+        "fingerprint": "05b19aff31a0265e",
+        "date": "2024-11-04"
+      },
+      {
+        "id": "E2",
+        "source": "Microsoft Research publication record",
+        "sourceClass": "OFFICIAL",
+        "relation": "SUPPORTS",
+        "fingerprint": "164fbdd09a7f060f",
+        "date": "2024-11"
+      }
+    ],
+    "boundary": "VERDICT IS COMPUTED ONLY FROM THE EXPLICIT EVIDENCE BUNDLE SUPPLIED BY AN ACTUAL CONNECTOR OR CALLER. THIS EXECUTOR DOES NOT SEARCH THE WEB ITSELF, DOES NOT TREAT ABSENCE OF REFUTATION AS GLOBAL TRUTH, AND DOES NOT UPGRADE STATIC STATE READING INTO CLAIM VERIFICATION."
+  },
+  "failures": [],
+  "boundary": "This test validates deterministic claim verdict computation from persisted redacted evidence. The underlying evidence was obtained by an actual public-web connector run; CI itself performs no search-engine discovery."
+}
