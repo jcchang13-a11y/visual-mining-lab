@@ -1,6 +1,6 @@
 {
-  "schema": "nostromo-connector-result/v0.1",
-  "completedAt": "2026-08-30T04:03:00+08:00",
+  "schema": "nostromo-connector-result/v0.2",
+  "completedAt": "2026-08-30T12:08:00+08:00",
   "status": "PASS",
   "mutherDrive": {
     "requestId": "MUTHER-DRIVE-0001",
@@ -8,13 +8,7 @@
     "status": "EXECUTED",
     "query": "剛吃飽",
     "returnedCount": 10,
-    "sampleFingerprints": [
-      "aab7c24aee40cc55",
-      "d861ce64774a515a",
-      "fba4c965d1f25ba1",
-      "bc37fec0aae9184d",
-      "b5261ceeb06a4abd"
-    ],
+    "sampleFingerprints": ["aab7c24aee40cc55","d861ce64774a515a","fba4c965d1f25ba1","bc37fec0aae9184d","b5261ceeb06a4abd"],
     "privacy": "RAW PRIVATE FILE IDS, URLS AND CONTENT ARE NOT PERSISTED IN THIS PUBLIC REPOSITORY",
     "boundary": "QUERY-SCOPED GOOGLE DRIVE SEARCH EXECUTED THROUGH THE AUTHORIZED CONNECTOR; NOT AN EXHAUSTIVE WHOLE-DRIVE MINE"
   },
@@ -24,15 +18,20 @@
     "status": "EXECUTED",
     "query": "Magentic-One AutoGen orchestrator Microsoft Research",
     "evidenceCount": 1,
-    "publicEvidence": [
-      {
-        "title": "Magentic-UI, an experimental human-centered web agent",
-        "source": "Microsoft Research",
-        "url": "https://www.microsoft.com/en-us/research/blog/magentic-ui-an-experimental-human-centered-web-agent/",
-        "finding": "Microsoft describes a modular team of specialized agents coordinated by an Orchestrator, adapted from Magentic-One."
-      }
-    ],
+    "publicEvidence": [{"title":"Magentic-UI, an experimental human-centered web agent","source":"Microsoft Research","url":"https://www.microsoft.com/en-us/research/blog/magentic-ui-an-experimental-human-centered-web-agent/","finding":"Microsoft describes a modular team of specialized agents coordinated by an Orchestrator, adapted from Magentic-One."}],
     "boundary": "A REAL PUBLIC WEB SEARCH WAS EXECUTED BY THE CONNECTOR RUNTIME; THIS DOES NOT MEAN GITHUB ACTIONS ITSELF HAS SEARCH-ENGINE ACCESS"
+  },
+  "dropletVerify": {
+    "requestId": "DROPLET-VERIFY-0001",
+    "executor": "PUBLIC_WEB_CLAIM_EVIDENCE_CONNECTOR",
+    "status": "EXECUTED",
+    "claim": "Magentic-One is a generalist multi-agent system published by Microsoft Research in November 2024.",
+    "evidenceCount": 2,
+    "redactedEvidence": [
+      {"source":"Microsoft Research","sourceClass":"OFFICIAL","relation":"SUPPORTS","date":"2024-11-04","fingerprint":"05b19aff31a0265e"},
+      {"source":"Microsoft Research publication record","sourceClass":"OFFICIAL","relation":"SUPPORTS","date":"2024-11","fingerprint":"164fbdd09a7f060f"}
+    ],
+    "boundary": "THE PUBLIC WEB CONNECTOR SUPPLIED CLAIM-SPECIFIC EVIDENCE. THE REPOSITORY STORES ONLY REDUCED EVIDENCE METADATA/FINGERPRINTS; CI DOES NOT PERFORM SEARCH-ENGINE DISCOVERY."
   },
   "failures": []
 }
