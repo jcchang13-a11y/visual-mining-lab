@@ -38,6 +38,10 @@ jobs:
         id: droplet_claim_verify
         continue-on-error: true
         run: node nostromo/integration/droplet-claim-verify-test.mjs
+      - name: Verify GUT metabolism and connector feedback routing
+        id: gut_metabolism
+        continue-on-error: true
+        run: node nostromo/integration/gut-metabolism-test.mjs
       - name: Run 50-round integration test
         id: integration
         continue-on-error: true
@@ -51,6 +55,7 @@ jobs:
           test -f nostromo/integration/ci-last-result.json && cp nostromo/integration/ci-last-result.json /tmp/nostromo-ci-last-result.json || true
           test -f nostromo/integration/muther-falsify-last-result.json && cp nostromo/integration/muther-falsify-last-result.json /tmp/nostromo-muther-falsify-last-result.json || true
           test -f nostromo/integration/droplet-claim-verify-last-result.json && cp nostromo/integration/droplet-claim-verify-last-result.json /tmp/nostromo-droplet-claim-verify-last-result.json || true
+          test -f nostromo/integration/gut-metabolism-last-result.json && cp nostromo/integration/gut-metabolism-last-result.json /tmp/nostromo-gut-metabolism-last-result.json || true
           git fetch origin main
           git reset --hard origin/main
           if [ -f /tmp/nostromo-formal-round-last-result.json ]; then
@@ -69,6 +74,10 @@ jobs:
             cp /tmp/nostromo-droplet-claim-verify-last-result.json nostromo/integration/droplet-claim-verify-last-result.json
             git add nostromo/integration/droplet-claim-verify-last-result.json
           fi
+          if [ -f /tmp/nostromo-gut-metabolism-last-result.json ]; then
+            cp /tmp/nostromo-gut-metabolism-last-result.json nostromo/integration/gut-metabolism-last-result.json
+            git add nostromo/integration/gut-metabolism-last-result.json
+          fi
           if git diff --cached --quiet; then
             echo "No result change"
           else
@@ -80,6 +89,9 @@ jobs:
         run: exit 1
       - name: Enforce DROPLET claim verification conclusion
         if: steps.droplet_claim_verify.outcome != 'success'
+        run: exit 1
+      - name: Enforce GUT metabolism conclusion
+        if: steps.gut_metabolism.outcome != 'success'
         run: exit 1
       - name: Enforce integration conclusion
         if: steps.integration.outcome != 'success'
