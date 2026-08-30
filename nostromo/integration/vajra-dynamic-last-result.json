@@ -1,7 +1,7 @@
 {
   "schema": "nostromo-vajra-dynamic-test/v0.2.0",
-  "completedAt": "2026-08-30T08:05:46.899Z",
-  "status": "PASS",
+  "completedAt": "2026-08-30T08:06:43.458Z",
+  "status": "FAIL",
   "guards": {
     "falseCertainty": true,
     "unresolvedBranches": true,
@@ -77,6 +77,35 @@
       ]
     }
   },
-  "failures": [],
+  "failures": [
+    {
+      "type": "UNIVERSAL_VERSION",
+      "detail": "0.2.1"
+    },
+    {
+      "type": "CAUSAL_VERSION",
+      "detail": "0.2.1"
+    },
+    {
+      "type": "NORMATIVE_VERSION",
+      "detail": "0.2.1"
+    },
+    {
+      "type": "DEFINITION_VERSION",
+      "detail": "0.2.1"
+    },
+    {
+      "type": "EMPIRICAL_VERSION",
+      "detail": "0.2.1"
+    },
+    {
+      "type": "SELF_REFERENCE_VERSION",
+      "detail": "0.2.1"
+    },
+    {
+      "type": "VAGUE_VERSION",
+      "detail": "0.2.1"
+    }
+  ],
   "boundary": "PASS proves that VAJRA selects different auditable dismantling lenses for different proposition classes, preserves unresolved branches, and does not emit a settled-truth status in these adversarial cases. It does not prove semantic classification correctness, factual truth, or autonomous resolution of those branches."
 }
