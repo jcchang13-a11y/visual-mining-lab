@@ -1,6 +1,6 @@
 {
-  "schema": "nostromo-connector-result/v0.2",
-  "completedAt": "2026-08-30T12:08:00+08:00",
+  "schema": "nostromo-connector-result/v0.3",
+  "completedAt": "2026-08-30T13:05:48+08:00",
   "status": "PASS",
   "mutherDrive": {
     "requestId": "MUTHER-DRIVE-0001",
@@ -11,6 +11,17 @@
     "sampleFingerprints": ["aab7c24aee40cc55","d861ce64774a515a","fba4c965d1f25ba1","bc37fec0aae9184d","b5261ceeb06a4abd"],
     "privacy": "RAW PRIVATE FILE IDS, URLS AND CONTENT ARE NOT PERSISTED IN THIS PUBLIC REPOSITORY",
     "boundary": "QUERY-SCOPED GOOGLE DRIVE SEARCH EXECUTED THROUGH THE AUTHORIZED CONNECTOR; NOT AN EXHAUSTIVE WHOLE-DRIVE MINE"
+  },
+  "mutherInternal": {
+    "requestId": "MUTHER-INTERNAL-0001",
+    "executor": "AUTHORIZED_INTERNAL_CONNECTOR_ROUTER",
+    "status": "EXECUTED",
+    "sourceClass": "GOOGLE_DRIVE_AUTHORIZED",
+    "query": "NOSTROMO",
+    "returnedCount": 4,
+    "sampleFingerprints": ["1220972fae68ea64","ffbf9be5968c43f5","6184166223aaf66d","489f2e0e9f1d3f15"],
+    "privacy": "RAW PRIVATE FILE IDS, URLS, TITLES AND CONTENT ARE NOT PERSISTED IN THIS PUBLIC REPOSITORY",
+    "boundary": "MINE_INTERNAL IS EXECUTABLE ONLY AS QUERY-SCOPED MINING OVER AN EXPLICITLY AUTHORIZED CONNECTOR SOURCE. THIS VERIFIED RUN USED GOOGLE DRIVE. IT DOES NOT CERTIFY EXHAUSTIVE MINING OF THE USER'S PRIVATE OR INTERNAL ENVIRONMENT."
   },
   "dropletWeb": {
     "requestId": "DROPLET-WEB-0001",
