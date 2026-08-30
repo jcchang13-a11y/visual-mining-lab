@@ -1,6 +1,6 @@
 {
   "schema": "nostromo-integration-ci/v1.1",
-  "completedAt": "2026-08-30T03:07:52.138Z",
+  "completedAt": "2026-08-30T03:19:07.086Z",
   "status": "PASS",
   "rounds": 50,
   "expectedPerRound": {
@@ -168,7 +168,7 @@
   },
   "sources": {
     "shroomingUpdated": "2026-08-23",
-    "mutherUpdated": "2026-08-30 10:18 +08:00",
+    "mutherUpdated": "2026-08-30 11:16 +08:00",
     "dropletUpdated": "2026-08-28"
   },
   "paths": {
