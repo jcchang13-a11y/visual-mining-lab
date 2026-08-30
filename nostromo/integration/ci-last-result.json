@@ -1,6 +1,6 @@
 {
   "schema": "nostromo-integration-ci/v1.3",
-  "completedAt": "2026-08-30T05:35:46.454Z",
+  "completedAt": "2026-08-30T06:07:26.990Z",
   "status": "PASS",
   "rounds": 50,
   "expectedPerRound": {
@@ -168,14 +168,14 @@
     "requestedRounds": 10,
     "completedRounds": 10,
     "roundsWithAllFourRepoExecutors": 10,
-    "gutAbsorbedTotal": 1318,
+    "gutAbsorbedTotal": 1327,
     "connectorHandoff": {
       "status": "ACCEPTED",
       "completedAt": "2026-08-30T13:05:48+08:00",
       "actionsAccepted": 4,
       "failures": []
     },
-    "lastCarry": "true · ef8f1eaa9971ec6f · SHROOMING_SANDBOX_READING · EXECUTED · LOCAL DETERMINISTIC SANDBOX; DOES NOT MODIFY OR CLAIM TO BE THE LIVE SHROOMING POPULATION · 5f9b12271f8f81d9 · sandbox-1 · structure · 以 structure 位置重讀：true · ef8f1eaa9971ec6f · SHROOMING_SANDBOX_READING · EXECUTED · LOCAL DETERMINISTIC SANDBOX; DOES NOT MODIFY OR CLAIM TO BE THE LIVE SHROOMING POPULATION · 8a4707ae1ca68584 · sand · 3639b1bf9a79b723 · sandbox-2 · counterexample",
+    "lastCarry": "[CONTRADICTION->VAJRA] 以歷史 trace 01 的最近可驗證位置（R110 / Regime shift: subject form becomes observable variable / participant）對問題做 scope 探針：[CONTRADICTION->VAJRA] 以歷史 trace 01 的最近可驗證位置（R110 / Regime shift: subject form becomes observable variable / participant）對問題做 scope 探針：[CONTRADICTION->VAJRA] 以歷史 trace 01 的最近可驗證位置（R110 / Regime shift: subject form becomes observable variable / participant）對問題做 scope 探針：[CONTRADICTION->VAJRA] 以歷史 trace 01 的最近可驗證位置（R110 / Regime shift: subject form becomes observable variable / participant）對問題做 scope 探針：[CONTRADICTION->VAJRA] 以歷史 trace 01 的最近可驗證位置（R110 / Regime shift: subject form becomes observable variable / participant）對問題做 scope 探針：[CONTRADICTION->VAJRA] 以歷史 trace 01 的最近可驗證位置（R110 / Regime shift: subject form becomes observable variable / participant）對問題做 scope 探針：[CONTRADICTION->VAJRA] 以歷史 trace 01 的最近可驗證位置（R110 / Regime shift: subject form becomes observable variable / participant）對問題做 scope 探針：[CONTRADICTION->VAJRA] 以歷史 trace 01 的最近可驗證位置（R110 / Regime shift: subject form becomes observable variable / participant）對問題做 scope 探針：[CONTRADICTION->VAJRA] 以歷史 trace 01 的最近可驗證位置（R110 / Regime shift: subject form becomes observable variable / participant",
     "boundary": "Certifies closed-loop routing for SHROOMING local deterministic sandbox plus a non-state-mutating greenhouse probe, MU/TH/UR repository mining, DROPLET explicit-URL verification, VAJRA and GUT, plus acceptance and digestion of externally executed Google Drive query mining, bounded authorized-source MINE_INTERNAL evidence, public web search, and connector-supplied claim-verification evidence. From round 2 onward, a redacted connector-evidence feedback directive is explicitly injected into SHROOMING/greenhouse/VAJRA input; this proves feedback routing, not connector re-execution or semantic correctness. MINE_INTERNAL is not exhaustive private-environment crawling. GitHub Actions does not itself search private Drive or the web."
   },
   "sources": {
