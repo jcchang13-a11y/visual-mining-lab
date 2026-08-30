@@ -1,7 +1,7 @@
 {
   "schema": "nostromo-vajra-dynamic-test/v0.2.4",
-  "completedAt": "2026-08-30T10:03:56.591Z",
-  "status": "FAIL",
+  "completedAt": "2026-08-30T10:04:58.495Z",
+  "status": "PASS",
   "guards": {
     "falseCertainty": true,
     "unresolvedBranches": true,
@@ -27,7 +27,7 @@
     },
     "receiptGut": {
       "targetRef": "20708907",
-      "summarySample": "[CONTRADICTION->VAJRA] 主動尋找最小反例與破壞條件 · [CONTRADICTION->VAJRA] 主動尋找最小反例與破壞條件：針對本輪 EMPIRICAL 命題（ref:20708907），哪個前提最可能先失效？ · [CLAIM->DROPLET] Handoff receipt matching is structural and auditable: targetRef, lens, preferred organ, explicit execution status, provenance, returned material and relation-to-target are required. RESOLVED_BY_RECEIPT means only that the"
+      "summarySample": "[CONTRADICTION->VAJRA] 主動尋找最小反例與破壞條件 · [CONTRADICTION->VAJRA] 主動尋找最小反例與破壞條件：針對本輪 EMPIRICAL 命題（ref:20708907），哪個前提最可能先失效？ · [CLAIM->DROPLET] EMPIRICAL · [EVIDENCE_OR_PROVENANCE->MUTHER] 要求可追溯證據並區分支持與缺席證據 · [CLAIM->DROPLET] 命題成立條件需要顯式化 · [EVIDENCE_OR_PROVENANCE->MUTHER] 資料品質、測量方式與來源獨立性需要檢查 · [CLAIM->DROPLET] claim-specific supporting and opposing evidence with "
     },
     "handoffMap": {
       "empirical": [
@@ -129,7 +129,7 @@
       "received": 4,
       "resolved": 1,
       "open": 4,
-      "rejected": 0,
+      "rejected": 2,
       "resolvedBranches": [
         {
           "targetRef": "20708907",
@@ -142,7 +142,34 @@
           "boundary": "Resolution means the handoff contract received a matching executed, provenance-bearing return. It does not mean VAJRA semantically verified the returned material or proved the target claim."
         }
       ],
-      "rejectedReceipts": []
+      "rejectedReceipts": [
+        {
+          "targetRef": "20708907",
+          "lens": "evidence",
+          "organ": "MUTHER",
+          "status": "EXECUTED",
+          "provenance": "prov-verified-001",
+          "material": "Two traceable evidence items were returned within the searched scope.",
+          "relation": "One supports the target claim and one limits its scope.",
+          "receiptFingerprint": "e931a2c2",
+          "reasons": [
+            "ORGAN_MISMATCH"
+          ]
+        },
+        {
+          "targetRef": "20708907",
+          "lens": "evidence",
+          "organ": "DROPLET",
+          "status": "EXECUTED",
+          "provenance": "",
+          "material": "Evidence-like material",
+          "relation": "Purports to support claim",
+          "receiptFingerprint": "4847eb65",
+          "reasons": [
+            "MISSING_PROVENANCE"
+          ]
+        }
+      ]
     }
   },
   "cases": {
@@ -248,29 +275,6 @@
       }
     }
   },
-  "failures": [
-    {
-      "type": "INVALID_RECEIPTS_NOT_REJECTED",
-      "detail": {
-        "received": 4,
-        "resolved": 1,
-        "open": 4,
-        "rejected": 0,
-        "resolvedBranches": [
-          {
-            "targetRef": "20708907",
-            "lens": "evidence",
-            "preferredOrgan": "DROPLET",
-            "status": "RESOLVED_BY_RECEIPT",
-            "receiptFingerprint": "578487ef",
-            "provenance": "prov-verified-001",
-            "relation": "One supports the target claim and one limits its scope.",
-            "boundary": "Resolution means the handoff contract received a matching executed, provenance-bearing return. It does not mean VAJRA semantically verified the returned material or proved the target claim."
-          }
-        ],
-        "rejectedReceipts": []
-      }
-    }
-  ],
+  "failures": [],
   "boundary": "PASS proves proposition-aware lens selection, explicit handoff contracts, and structural receipt closure. A branch closes only when targetRef, lens and preferred organ match and the return carries explicit execution status, provenance, material and relation-to-target. RESOLVED_BY_RECEIPT certifies contract return only; it does not certify semantic correctness, evidence quality, or truth of the target proposition. VAJRA→GUT regressions preserve compact target references and inherited-target anti-echo."
 }
