@@ -1,6 +1,6 @@
 {
-  "schema": "nostromo-organ-registry/v1.13",
-  "updatedAt": "2026-08-31T03:08:20+08:00",
+  "schema": "nostromo-organ-registry/v1.14",
+  "updatedAt": "2026-08-31T04:10:00+08:00",
   "truthRule": "DISPLAYED STATE MUST FOLLOW EVIDENCE",
   "evidence": "ci-last-result.json plus formal-round-last-result.json plus connector-last-result.json plus muther-falsify-last-result.json plus droplet-claim-verify-last-result.json plus gut-metabolism-last-result.json plus vajra-dynamic-last-result.json",
   "latestFormalRound": "greenhouse/r113-nostromo-formal-round.json",
@@ -29,23 +29,23 @@
     "boundary": "Isolated counterfactual executor only. It deliberately includes parent round ordinal in participant selection and has been CI-verified against R111 and R112. It does not write or advance formal greenhouse history and is engineering evidence that NOSTROMO can execute and audit a parent-sensitive transition, not evidence that the real SHROOMING population is causally path-dependent."
   },
   "latestThickening": {
-    "organ": "VAJRA",
-    "version": "0.2.7",
-    "status": "VERIFIED_COMPOUND_PROPOSITION_TYPE_DETECTION",
-    "test": "vajra-dynamic-last-result.json",
+    "organ": "GUT",
+    "version": "0.2.13",
+    "status": "VERIFIED_TAGGED_TAIL_AND_PRE_POST_ADJACENT_ANTI_ECHO",
+    "test": "gut-metabolism-last-result.json",
     "capabilities": [
-      "proposition-aware dynamic lens selection",
-      "compound proposition type detection",
-      "auditable branch handoff contracts",
-      "structural receipt validation",
-      "target/lens/organ/execution/provenance/relation matching",
-      "cross-branch evidence replay rejection",
-      "cross-application evidence replay rejection",
-      "prior branch resolution preservation",
-      "VAJRA→GUT referential continuity",
-      "inherited proposition anti-echo"
+      "heuristic material classification and routing",
+      "failure quarantine and uncertainty hold",
+      "provenance propagation",
+      "exact inherited-substrate subtraction",
+      "exact repeated tagged-payload suppression",
+      "exact repeated same-tag long-tail suppression while preserving distinct heads",
+      "pre/post short adjacent intra-atom echo collapse",
+      "near-duplicate preservation",
+      "structured-snippet protection",
+      "cross-organ feedback regression coverage"
     ],
-    "boundary": "VAJRA v0.2.7 no longer forces every sentence into one proposition type. Auditable lexical rules can preserve multiple detected types and merge their lens sets, so a causal+universal sentence can trigger both mechanism and counterexample work. This is heuristic compound-type detection, not semantic clause parsing, truth certification, or proof that the target claim is settled."
+    "boundary": "GUT v0.2.13 was promoted only after a failed v0.2.12 CI exposed a regression in short adjacent echo suppression and a subsequent full GitHub Actions run passed. It now removes exact repeated same-tag long tails of 80+ normalized characters while preserving distinct lens heads, and runs adjacent exact-segment collapse both before and after tagged processing. These are deterministic auditable anti-echo heuristics, not semantic novelty detection, truth verification, or paraphrase understanding."
   },
   "organs": {
     "shrooming": {
@@ -90,9 +90,9 @@
       "mode": "EXEC_CONNECTED_THICKENED",
       "source": "../gut/gut-engine.js",
       "actions": {
-        "DIGEST": "VERIFIED_HEURISTIC_METABOLIC_ROUTER_TAG_AWARE_ANTI_ECHO"
+        "DIGEST": "VERIFIED_HEURISTIC_METABOLIC_ROUTER_TAGGED_TAIL_PREPOST_ANTI_ECHO"
       },
-      "boundary": "GUT v0.2.11 classifies and routes material, quarantines failure/risk markers, preserves uncertainty, propagates provenance, removes exact inherited substrate echoes when caller context is supplied, strips route metadata, suppresses exact repeated tagged payloads, collapses short exact adjacent colon-delimited echoes from 12 normalized characters upward, and preserves near-duplicates that are not exact matches. JSON-like engineering snippets are downgraded before lexical contradiction detection. It remains heuristic: paraphrastic echo, semantic novelty, source truth and optimal routing are not certified."
+      "boundary": "GUT v0.2.13 classifies and routes material, quarantines failure/risk markers, preserves uncertainty, propagates provenance, removes exact inherited substrate echoes when caller context is supplied, strips route metadata, suppresses exact repeated tagged payloads, suppresses exact repeated same-tag colon-delimited tails of 80+ normalized characters while preserving distinct heads, and performs exact adjacent segment collapse both before and after tagged processing so the long-tail rule does not regress short intra-atom de-echoing. Near-duplicates that are not exact matches remain. JSON-like engineering snippets are downgraded before lexical contradiction detection. It remains heuristic: paraphrastic echo, semantic novelty, source truth and optimal routing are not certified."
     },
     "vajra": {
       "mode": "EXEC_CONNECTED_THICKENED",
