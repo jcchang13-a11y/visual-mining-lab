@@ -1,7 +1,7 @@
 {
-  "schema": "nostromo-integration-ci/v1.2",
-  "completedAt": "2026-08-30T05:08:29.162Z",
-  "status": "FAIL",
+  "schema": "nostromo-integration-ci/v1.3",
+  "completedAt": "2026-08-30T05:08:42.029Z",
+  "status": "PASS",
   "rounds": 50,
   "expectedPerRound": {
     "executedStateActions": 3,
@@ -144,6 +144,12 @@
       "returnedCount": 10,
       "boundary": "QUERY-SCOPED GOOGLE DRIVE SEARCH EXECUTED THROUGH THE AUTHORIZED CONNECTOR; NOT AN EXHAUSTIVE WHOLE-DRIVE MINE"
     },
+    "mutherInternal": {
+      "status": "EXECUTED",
+      "sourceClass": "GOOGLE_DRIVE_AUTHORIZED",
+      "returnedCount": 4,
+      "boundary": "MINE_INTERNAL IS EXECUTABLE ONLY AS QUERY-SCOPED MINING OVER AN EXPLICITLY AUTHORIZED CONNECTOR SOURCE. THIS VERIFIED RUN USED GOOGLE DRIVE. IT DOES NOT CERTIFY EXHAUSTIVE MINING OF THE USER'S PRIVATE OR INTERNAL ENVIRONMENT."
+    },
     "dropletWeb": {
       "status": "EXECUTED",
       "evidenceCount": 1,
@@ -182,16 +188,6 @@
     "muther": "../../mother-latest.json",
     "droplet": "../droplet-state.json"
   },
-  "failures": [
-    {
-      "type": "CONNECTOR_HANDOFF_FAIL",
-      "detail": {
-        "status": "ACCEPTED",
-        "completedAt": "2026-08-30T13:05:48+08:00",
-        "actionsAccepted": 4,
-        "failures": []
-      }
-    }
-  ],
-  "boundary": "PASS certifies 50-round published-state integration, deterministic reproducibility and parent-blob continuity for R111→R112→R113, the R111↔R113 PARTIAL_RETURN measurement, a matched-parent audit showing that repo-executors v0.9 participant selection is parent-invariant when task and intervention are held constant, a 10-round closed loop of repository-native executors, and successful handoff into GUT of persisted Google Drive search, public-web search, and claim-specific DROPLET verification evidence. PARTIAL_RETURN must not be presented as evidence of visibility path dependence under the current rule. It does not certify ten independent live LLM processes, causal reversibility outside this deterministic model, exhaustive whole-Drive mining, or that GitHub Actions itself can invoke private connectors or search engines."
+  "failures": [],
+  "boundary": "PASS certifies 50-round published-state integration, deterministic reproducibility and parent-blob continuity for R111→R112→R113, the R111↔R113 PARTIAL_RETURN measurement, a matched-parent audit showing that repo-executors v0.9 participant selection is parent-invariant when task and intervention are held constant, a 10-round closed loop of repository-native executors, and successful handoff into GUT of persisted Google Drive query evidence for MINE_DRIVE_QUERY, bounded authorized-source MINE_INTERNAL, public-web search, and claim-specific DROPLET verification. MINE_INTERNAL is certified only for explicit query-scoped authorized connector sources; the current verified source is Google Drive. It does not certify exhaustive private-environment mining, cross-source crawling, ten independent live LLM processes, causal reversibility outside this deterministic model, or that GitHub Actions itself can invoke private connectors or search engines."
 }
