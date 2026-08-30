@@ -1,0 +1,31 @@
+{
+  "updatedAt":"2026-08-30 13:30 +08:00",
+  "mode":"small-batch mining + counterexample synthesis + cross-subject structural visual retest",
+  "preflight":{"checked":["mother-state.json","mother-latest.json","muther-ledger.json","muther-observer.json","existing remix/synthesis state"],"duplicateAvoidance":true,"sensitiveZone":"日日春 metadata boundary enforced; bodies not opened"},
+  "terminus":{
+    "sources":[{"id":"1ea2o4nLVtpcK9Dn1tcuNXnrspfOGV89z","title":"劉維真_臺灣公有土地行政管理之研究.pdf","author":"劉維真","type":"doctoral dissertation / administrative research","year":2008}],
+    "sourceSays":"The dissertation argues that public-land management exceeds registry cleanup and includes use, revenue, disposition and intergovernmental allocation. At the same time, it says deeper analysis followed by classification can identify the core of management problems and support bounded problem-setting and solutions. It also notes that traditional single-domain policy classification is insufficient for complex cross-domain public-land management.",
+    "method":"non-care-domain counterexample + internally opposed reconstruction of the prior LEGIBILITY CASCADE candidate",
+    "generated":"MUTHER revision: LEGIBILITY IS BIDIRECTIONAL. Better recognition does not inherently enlarge intervention scope. It can produce at least two opposed moves: CASCADE, when newly visible dependencies recursively recruit additional domains; and COMPRESSION, when classification/partition makes a large field decisionable by isolating a tractable core. The key variable is therefore not diagnostic depth alone but what the recognition operation does to relations: dependency-discovery expands the action graph, while decision-partition can contract it. This is a MUTHER synthesis, not Liu Wei-jeen's stated model.",
+    "novelty":"important counterexample that prevents legibility cascade from becoming a one-way law; converts it into a bifurcating mechanism",
+    "quality":{"argument":"medium-high","evidence":"medium; primarily institutional/legal/management analysis rather than dense field observation","observationDensity":"medium","originality":"medium source / high synthesis revision","reusability":"high"},
+    "counterexample":"same source contains both scope expansion and scope compression, demonstrating that increased legibility can move intervention scope in opposite directions",
+    "repeatability":"candidate mechanism revised; needs additional non-land cases for each branch"
+  },
+  "uncultured":{
+    "sources":[{"id":"156PgTJ_t9L04CbFF5O1Gl6GD-jvqdI9m-g","title":"DSC_0030.JPG","type":"raw camera photograph","captured":"2018-12-03 14:15:45","privacyScreen":"PASS: outdoor scene; no visible people, private documents or sensitive records"}],
+    "sourceStructure":"wide mountain horizon + industrial shed mass + gravel field + hard diagonal light/shadow threshold + large soft animal-shaped foreground ride + smaller distant echo object + long cast shadow",
+    "method":"role extraction -> relation reduction -> scale/depth rewrite; no source pixels reused",
+    "generated":{"id":"REMIX 006","name":"THRESHOLD ECHO","roles":["HORIZON","SHELL","THRESHOLD","FIGURE","ECHO","CAST"],"path":"media-lab/experiments/muther-remix-006.svg"},
+    "novelty":"not collage: source objects are converted into spatial roles, then recomposed. Unlike REMIX 005's interior field/grid/node/opening/intrusion grammar, this retest uses an outdoor industrial landscape and promotes scale echo plus a light/shadow threshold into the governing structure.",
+    "counterexample":"the repeated figure could collapse into mere stylization if future tests cannot preserve the relation when object identity changes; therefore object-shape similarity is not counted as the method's success condition",
+    "repeatability":"promising second cross-subject confirmation of source-pixel-free role extraction; still below stable-method threshold",
+    "websiteInsertion":"PASS at repository path as UTF-8 SVG; direct GitHub Pages asset path available. Main observatory receives textual status through muther-observer.json. Static showcase card remains older REMIX 004 and was not falsely marked as updated."
+  },
+  "sensitiveBoundary":{
+    "status":"AUTHORIZATION REQUIRED",
+    "metadataOnlyHits":[{"id":"1XYc0iLpG7K5kcZa7uzK98xKZnrj03nWE_qZFlW821Ms","title":"2006日日春文化局大陸妹結案報告"},{"id":"1EJDzITnq9magI9KWdIZMHeFuTZU-bP0H0-r-VCaUdg0","title":"20060000日日春文化局大陸妹結案報告"}],
+    "action":"stopped at title/metadata boundary; no body fetch, summary, mining or synthesis"
+  },
+  "ledger":{"status":"delta recorded separately","path":"muther-ledger-delta-2026-08-30-1330.json"}
+}
