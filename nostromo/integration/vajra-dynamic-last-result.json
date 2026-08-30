@@ -1,6 +1,6 @@
 {
-  "schema": "nostromo-vajra-dynamic-test/v0.2.3",
-  "completedAt": "2026-08-30T10:03:22.049Z",
+  "schema": "nostromo-vajra-dynamic-test/v0.2.4",
+  "completedAt": "2026-08-30T10:03:56.591Z",
   "status": "FAIL",
   "guards": {
     "falseCertainty": true,
@@ -10,7 +10,13 @@
     "noFalseHandoffExecution": true,
     "gutReferentialContinuity": true,
     "inheritedTargetAntiEcho": true,
-    "rawSourceNotCopiedIntoTrace": true
+    "rawSourceNotCopiedIntoTrace": true,
+    "receiptTargetMatch": true,
+    "receiptOrganMatch": true,
+    "receiptExecutionEvidence": true,
+    "receiptProvenanceRequired": true,
+    "receiptRelationRequired": true,
+    "receiptDoesNotCertifyTruth": true
   },
   "crossOrgan": {
     "vajraGut": {
@@ -18,6 +24,10 @@
       "hollowTarget": false,
       "rawTargetEcho": false,
       "summarySample": "[QUESTION->SHROOMING] Deterministic heuristic dismantling. Saturation means the current rule set has stopped producing a new inspection path; it is not proof that the claim is settled. Open handoff contracts remain unresolved until another organ returns qualifying material. · [CLAIM->DROPLET] CAUSAL · [CLAIM->DROPLET] 命題成立條件需要顯式化 · [EVIDENCE_OR_PROVENANCE->M"
+    },
+    "receiptGut": {
+      "targetRef": "20708907",
+      "summarySample": "[CONTRADICTION->VAJRA] 主動尋找最小反例與破壞條件 · [CONTRADICTION->VAJRA] 主動尋找最小反例與破壞條件：針對本輪 EMPIRICAL 命題（ref:20708907），哪個前提最可能先失效？ · [CLAIM->DROPLET] Handoff receipt matching is structural and auditable: targetRef, lens, preferred organ, explicit execution status, provenance, returned material and relation-to-target are required. RESOLVED_BY_RECEIPT means only that the"
     },
     "handoffMap": {
       "empirical": [
@@ -114,6 +124,25 @@
           "boundary": "Preferred organ is a routing request, not proof that the organ executed it."
         }
       ]
+    },
+    "receiptResolution": {
+      "received": 4,
+      "resolved": 1,
+      "open": 4,
+      "rejected": 0,
+      "resolvedBranches": [
+        {
+          "targetRef": "20708907",
+          "lens": "evidence",
+          "preferredOrgan": "DROPLET",
+          "status": "RESOLVED_BY_RECEIPT",
+          "receiptFingerprint": "578487ef",
+          "provenance": "prov-verified-001",
+          "relation": "One supports the target claim and one limits its scope.",
+          "boundary": "Resolution means the handoff contract received a matching executed, provenance-bearing return. It does not mean VAJRA semantically verified the returned material or proved the target claim."
+        }
+      ],
+      "rejectedReceipts": []
     }
   },
   "cases": {
@@ -221,33 +250,27 @@
   },
   "failures": [
     {
-      "type": "UNIVERSAL_VERSION",
-      "detail": "0.2.4"
-    },
-    {
-      "type": "CAUSAL_VERSION",
-      "detail": "0.2.4"
-    },
-    {
-      "type": "NORMATIVE_VERSION",
-      "detail": "0.2.4"
-    },
-    {
-      "type": "DEFINITION_VERSION",
-      "detail": "0.2.4"
-    },
-    {
-      "type": "EMPIRICAL_VERSION",
-      "detail": "0.2.4"
-    },
-    {
-      "type": "SELF_REFERENCE_VERSION",
-      "detail": "0.2.4"
-    },
-    {
-      "type": "VAGUE_VERSION",
-      "detail": "0.2.4"
+      "type": "INVALID_RECEIPTS_NOT_REJECTED",
+      "detail": {
+        "received": 4,
+        "resolved": 1,
+        "open": 4,
+        "rejected": 0,
+        "resolvedBranches": [
+          {
+            "targetRef": "20708907",
+            "lens": "evidence",
+            "preferredOrgan": "DROPLET",
+            "status": "RESOLVED_BY_RECEIPT",
+            "receiptFingerprint": "578487ef",
+            "provenance": "prov-verified-001",
+            "relation": "One supports the target claim and one limits its scope.",
+            "boundary": "Resolution means the handoff contract received a matching executed, provenance-bearing return. It does not mean VAJRA semantically verified the returned material or proved the target claim."
+          }
+        ],
+        "rejectedReceipts": []
+      }
     }
   ],
-  "boundary": "PASS proves that VAJRA selects different auditable dismantling lenses for different proposition classes and now turns each unresolved branch into an explicit OPEN work contract naming a preferred organ, requested material and resolution criterion. These are routing requests only: PASS does not claim that the requested organ executed the contract, that classification is semantically correct, or that a branch is resolved. The VAJRA→GUT regression still checks compact referential continuity and inherited-target anti-echo."
+  "boundary": "PASS proves proposition-aware lens selection, explicit handoff contracts, and structural receipt closure. A branch closes only when targetRef, lens and preferred organ match and the return carries explicit execution status, provenance, material and relation-to-target. RESOLVED_BY_RECEIPT certifies contract return only; it does not certify semantic correctness, evidence quality, or truth of the target proposition. VAJRA→GUT regressions preserve compact target references and inherited-target anti-echo."
 }
