@@ -1,7 +1,7 @@
 {
-  "schema": "nostromo-gut-metabolism-test/v0.2.5",
-  "completedAt": "2026-08-30T07:13:15.563Z",
-  "status": "FAIL",
+  "schema": "nostromo-gut-metabolism-test/v0.2.6",
+  "completedAt": "2026-08-30T07:13:35.096Z",
+  "status": "PASS",
   "gut": {
     "version": "0.2.6",
     "mode": "DETERMINISTIC_HEURISTIC_ROUTER",
@@ -60,6 +60,17 @@
       "routeTagsStripped": 0,
       "segmentEchoSuppressedCount": 1
     },
+    "inheritedAntiEcho": {
+      "strategy": "INHERITED_SUBSTRATE_SUBTRACTION+PREFIX_DIVERSITY_96+NESTED_ROUTE_TAG_CUTOFF+ROUTE_METADATA_STRIP+ADJACENT_SEGMENT_COLLAPSE",
+      "candidateCount": 1,
+      "selectedCount": 1,
+      "suppressedCount": 0,
+      "inheritedSubstrateStrippedCount": 1,
+      "nestedEchoAffectedAtoms": 0,
+      "nestedEchoSuppressedCount": 0,
+      "routeTagsStripped": 0,
+      "segmentEchoSuppressedCount": 0
+    },
     "boundary": "Deterministic heuristic metabolism only. Classification, routing and echo suppression are auditable heuristics, not semantic truth. When the caller supplies inheritedSubstrates, exact compacted copies of prior-round substrate (including bounded 1200/180 character executor echoes) are subtracted before routing; this is contextual de-echoing and may remove legitimate exact quotations, so every subtraction is counted. Provenance-bearing fields propagate into atom records; failures are quarantined; uncertainty is held."
   },
   "feedback": {
@@ -72,13 +83,43 @@
       "privacy": "PRIVATE DRIVE RAW CONTENT/TITLES/IDS/URLS ARE NOT INCLUDED"
     },
     "lastCarry": "[CONTRADICTION->VAJRA] ogy + VAJRA LOOP\", \"version\"：\"2.2\", \"round\"：\"R112\", \"status\"：\"complete\", \"executor\"：\"SHROOMING_FORMAL_ROUND_ADVANCE\", \"previousRound\"：\"R111\", \"source\"：\"greenhouse/r111-nostromo-formal-round.json\", \"sourceBlobSha\"：\"1ec138bd3bce0158e661254225c2c84ccc35d02b\", \"continuity\"：\"All R1-R111 histories preserved. R112 is derived only from the declared R111 parent; same ten numbered traces are retained for continuity and provenance, not fixed personality.\", \"task\"：\"test whether temporary subject forms recur, mutate or disappear under asymmetric information, conflicting tasks and partial memory a · [CONTRADICTION->VAJRA] ogy + VAJRA LOOP\", \"version\"：\"2.3\", \"round\"：\"R113\", \"status\"：\"complete\", \"executor\"：\"SHROOMING_FORMAL_ROUND_ADVANCE\", \"previousRound\"：\"R112\", \"source\"：\"greenhouse/r112-nostromo-formal-round.json\", \"sourceBlobSha\"：\"d2763d4fc518ef53042deea75c9501a7f16d3c13\", \"continuity\"：\"All R1-R112 histories preserved. R113 is derived only from the declared R112 parent; same ten numbered traces are retained for continuity and provenance, not fixed personality.\", \"task\"：\"test whether temporary subject forms recur, mutate or disappear under asymmetric information, conflicti",
+    "roundAntiEcho": [
+      {
+        "strategy": "INHERITED_SUBSTRATE_SUBTRACTION+PREFIX_DIVERSITY_96+NESTED_ROUTE_TAG_CUTOFF+ROUTE_METADATA_STRIP+ADJACENT_SEGMENT_COLLAPSE",
+        "candidateCount": 157,
+        "selectedCount": 12,
+        "suppressedCount": 145,
+        "inheritedSubstrateStrippedCount": 0,
+        "nestedEchoAffectedAtoms": 0,
+        "nestedEchoSuppressedCount": 0,
+        "routeTagsStripped": 0,
+        "segmentEchoSuppressedCount": 0
+      },
+      {
+        "strategy": "INHERITED_SUBSTRATE_SUBTRACTION+PREFIX_DIVERSITY_96+NESTED_ROUTE_TAG_CUTOFF+ROUTE_METADATA_STRIP+ADJACENT_SEGMENT_COLLAPSE",
+        "candidateCount": 129,
+        "selectedCount": 12,
+        "suppressedCount": 117,
+        "inheritedSubstrateStrippedCount": 32,
+        "nestedEchoAffectedAtoms": 0,
+        "nestedEchoSuppressedCount": 0,
+        "routeTagsStripped": 0,
+        "segmentEchoSuppressedCount": 0
+      },
+      {
+        "strategy": "INHERITED_SUBSTRATE_SUBTRACTION+PREFIX_DIVERSITY_96+NESTED_ROUTE_TAG_CUTOFF+ROUTE_METADATA_STRIP+ADJACENT_SEGMENT_COLLAPSE",
+        "candidateCount": 129,
+        "selectedCount": 12,
+        "suppressedCount": 117,
+        "inheritedSubstrateStrippedCount": 32,
+        "nestedEchoAffectedAtoms": 0,
+        "nestedEchoSuppressedCount": 0,
+        "routeTagsStripped": 0,
+        "segmentEchoSuppressedCount": 0
+      }
+    ],
     "boundary": "Certifies closed-loop routing for SHROOMING local deterministic sandbox plus a non-state-mutating greenhouse probe, MU/TH/UR repository mining, DROPLET explicit-URL verification, VAJRA and GUT, plus acceptance and digestion of externally executed Google Drive query mining, bounded authorized-source MINE_INTERNAL evidence, public web search, and connector-supplied claim-verification evidence. From round 2 onward, redacted connector evidence changes SHROOMING/greenhouse/VAJRA input. GUT receives the current round input as an inherited substrate and subtracts exact compacted echoes before producing the next carry; this proves contextual anti-echo routing, not semantic novelty detection. GitHub Actions does not itself search private Drive or the web."
   },
-  "failures": [
-    {
-      "type": "GUT_VERSION",
-      "detail": "0.2.6"
-    }
-  ],
-  "boundary": "PASS proves deterministic heuristic classification, quarantine/hold/excretion, destination routing, provenance propagation, prefix-diversity suppression, nested route-tag echo cutoff, inherited route-metadata stripping, adjacent long-segment echo collapse, and explicit application of persisted redacted connector feedback from round 2. It does not prove semantic correctness, source truth, or live connector re-execution inside GitHub Actions."
+  "failures": [],
+  "boundary": "PASS proves deterministic heuristic classification, quarantine/hold/excretion, destination routing, provenance propagation, prefix-diversity suppression, route-metadata cleanup, bounded segment echo collapse, and contextual subtraction of exact inherited round substrate before next-carry generation. It does not prove semantic novelty, semantic correctness, source truth, or live connector re-execution inside GitHub Actions."
 }
