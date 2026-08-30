@@ -1,6 +1,6 @@
 {
-  "schema": "nostromo-formal-round-test/v1.0",
-  "completedAt": "2026-08-30T00:06:14.953Z",
+  "schema": "nostromo-formal-round-test/v1.1",
+  "completedAt": "2026-08-30T01:07:31.417Z",
   "status": "PASS",
   "chain": [
     "R111",
@@ -71,6 +71,50 @@
     "jaccard": 0.5,
     "exactReturn": false
   },
+  "parentControl": {
+    "taskFingerprint": "same-as-R113",
+    "intervention": {
+      "memoryAccess": "reversed memory-access rotation while task condition held constant",
+      "holdTaskConstant": true
+    },
+    "parentA": {
+      "path": "greenhouse/r111-nostromo-formal-round.json",
+      "blobSha": "1ec138bd3bce0158e661254225c2c84ccc35d02b",
+      "round": "R111",
+      "generatedRound": "R112",
+      "participants": [
+        "01",
+        "03",
+        "06",
+        "07",
+        "09",
+        "10"
+      ],
+      "provenanceFingerprint": "0a8ed88de7d7f8a1"
+    },
+    "parentB": {
+      "path": "greenhouse/r112-nostromo-formal-round.json",
+      "blobSha": "d2763d4fc518ef53042deea75c9501a7f16d3c13",
+      "round": "R112",
+      "generatedRound": "R113",
+      "participants": [
+        "01",
+        "03",
+        "06",
+        "07",
+        "09",
+        "10"
+      ],
+      "provenanceFingerprint": "16a87d445012f2b8"
+    },
+    "sameParticipants": true,
+    "sameSilent": true,
+    "provenanceDiffers": true,
+    "classification": "PARENT_INVARIANT_UNDER_CURRENT_VISIBILITY_RULE",
+    "interpretation": "Under repo-executors v0.9 the visibility selection is a function of task + intervention + trace id; parent identity affects provenance but not participant selection. Therefore R113 PARTIAL_RETURN cannot be cited as evidence of visibility path dependence in the current deterministic rule.",
+    "status": "PASS",
+    "failures": []
+  },
   "failures": [],
-  "boundary": "Certifies repository history continuity, parent Git blob identity, deterministic executor reproducibility, provenance, and the declared R111↔R113 visibility-return classification. It does not certify ten independently persistent live LLM processes or causal reversibility outside this deterministic repository model."
+  "boundary": "Certifies repository history continuity, parent Git blob identity, deterministic executor reproducibility, provenance, the declared R111↔R113 visibility-return classification, and a matched-parent audit of the current visibility rule. The matched-parent control shows parent identity changes provenance but not participant selection under repo-executors v0.9; therefore PARTIAL_RETURN is not evidence of visibility path dependence. It does not certify ten independently persistent live LLM processes or causal reversibility outside this deterministic repository model."
 }

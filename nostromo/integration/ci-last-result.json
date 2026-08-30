@@ -1,6 +1,6 @@
 {
   "schema": "nostromo-integration-ci/v1.0",
-  "completedAt": "2026-08-30T00:06:16.470Z",
+  "completedAt": "2026-08-30T01:07:34.162Z",
   "status": "PASS",
   "rounds": 50,
   "expectedPerRound": {
@@ -67,7 +67,7 @@
         "status": "PASS"
       }
     ],
-    "boundary": "Certifies repository history continuity, parent Git blob identity, deterministic executor reproducibility, provenance, and the declared R111↔R113 visibility-return classification. It does not certify ten independently persistent live LLM processes or causal reversibility outside this deterministic repository model."
+    "boundary": "Certifies repository history continuity, parent Git blob identity, deterministic executor reproducibility, provenance, the declared R111↔R113 visibility-return classification, and a matched-parent audit of the current visibility rule. The matched-parent control shows parent identity changes provenance but not participant selection under repo-executors v0.9; therefore PARTIAL_RETURN is not evidence of visibility path dependence. It does not certify ten independently persistent live LLM processes or causal reversibility outside this deterministic repository model."
   },
   "repositoryNativeExecutors": {
     "shrooming": {
