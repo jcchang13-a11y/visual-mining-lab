@@ -1,9 +1,9 @@
 {
   "schema": "nostromo-gut-metabolism-test/v0.2.12",
-  "completedAt": "2026-08-30T20:06:05.363Z",
+  "completedAt": "2026-08-30T20:07:24.280Z",
   "status": "FAIL",
   "gut": {
-    "version": "0.2.12",
+    "version": "0.2.13",
     "mode": "DETERMINISTIC_HEURISTIC_ROUTER",
     "typeCounts": {
       "CLAIM": 2,
@@ -22,11 +22,11 @@
       "VAJRA": 1,
       "HOLD": 4
     },
-    "boundary": "Deterministic heuristic metabolism only. Repeated tagged payloads now also collapse an exact repeated colon-delimited tail of 80+ normalized characters while retaining each distinct head. This targets cross-lens carry where a new lens prefix repeatedly wraps the same long inherited tail; only exact same-tag tails are removed. Exact adjacent colon-delimited segments are collapsed from 12 normalized characters upward. Inherited substrate subtraction still removes only exact full normalized substrates; truncated substrate prefixes are never used as deletion candidates. Repeated route metadata suppresses only exact repeated tagged payloads of 24+ normalized characters. Non-adjacent long segments are deduplicated only across explicit separators. JSON-like or heavily escaped structured snippets are classified before lexical contradiction detection and routed back to MUTHER at low priority. These rules are auditable heuristics, not semantic truth."
+    "boundary": "Deterministic heuristic metabolism only. Adjacent exact segment collapse now runs both before and after tagged-payload processing so the tagged-tail thickening cannot regress previously verified short intra-atom echo suppression. Repeated tagged payloads also collapse an exact repeated colon-delimited tail of 80+ normalized characters while retaining each distinct head. Only exact same-tag tails are removed. Inherited substrate subtraction removes only exact full normalized substrates; truncated prefixes are never deletion candidates. Non-adjacent long segments are deduplicated only across explicit separators. Structured snippets are protected before lexical contradiction detection. These rules are auditable heuristics, not semantic truth."
   },
   "antiEcho": {
     "nested": {
-      "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PREFIX_DIVERSITY_96+TAGGED_PAYLOAD_DEDUP+EXACT_TAGGED_TAIL_DEDUP_80+ROUTE_METADATA_STRIP+ADJACENT_SEGMENT_COLLAPSE_12+DELIMITED_LONG_SEGMENT_DEDUP",
+      "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PRE_POST_ADJACENT_SEGMENT_COLLAPSE_12+PREFIX_DIVERSITY_96+TAGGED_PAYLOAD_DEDUP+EXACT_TAGGED_TAIL_DEDUP_80+ROUTE_METADATA_STRIP+DELIMITED_LONG_SEGMENT_DEDUP",
       "candidateCount": 1,
       "selectedCount": 1,
       "suppressedCount": 0,
@@ -39,7 +39,7 @@
       "delimitedEchoSuppressedCount": 0
     },
     "taggedTail": {
-      "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PREFIX_DIVERSITY_96+TAGGED_PAYLOAD_DEDUP+EXACT_TAGGED_TAIL_DEDUP_80+ROUTE_METADATA_STRIP+ADJACENT_SEGMENT_COLLAPSE_12+DELIMITED_LONG_SEGMENT_DEDUP",
+      "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PRE_POST_ADJACENT_SEGMENT_COLLAPSE_12+PREFIX_DIVERSITY_96+TAGGED_PAYLOAD_DEDUP+EXACT_TAGGED_TAIL_DEDUP_80+ROUTE_METADATA_STRIP+DELIMITED_LONG_SEGMENT_DEDUP",
       "candidateCount": 1,
       "selectedCount": 1,
       "suppressedCount": 0,
@@ -52,7 +52,7 @@
       "delimitedEchoSuppressedCount": 0
     },
     "shortAdjacent": {
-      "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PREFIX_DIVERSITY_96+TAGGED_PAYLOAD_DEDUP+EXACT_TAGGED_TAIL_DEDUP_80+ROUTE_METADATA_STRIP+ADJACENT_SEGMENT_COLLAPSE_12+DELIMITED_LONG_SEGMENT_DEDUP",
+      "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PRE_POST_ADJACENT_SEGMENT_COLLAPSE_12+PREFIX_DIVERSITY_96+TAGGED_PAYLOAD_DEDUP+EXACT_TAGGED_TAIL_DEDUP_80+ROUTE_METADATA_STRIP+DELIMITED_LONG_SEGMENT_DEDUP",
       "candidateCount": 1,
       "selectedCount": 1,
       "suppressedCount": 0,
@@ -61,11 +61,11 @@
       "nestedEchoSuppressedCount": 0,
       "taggedTailSuppressedCount": 0,
       "routeTagsStripped": 0,
-      "segmentEchoSuppressedCount": 0,
+      "segmentEchoSuppressedCount": 2,
       "delimitedEchoSuppressedCount": 0
     },
     "nearDuplicate": {
-      "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PREFIX_DIVERSITY_96+TAGGED_PAYLOAD_DEDUP+EXACT_TAGGED_TAIL_DEDUP_80+ROUTE_METADATA_STRIP+ADJACENT_SEGMENT_COLLAPSE_12+DELIMITED_LONG_SEGMENT_DEDUP",
+      "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PRE_POST_ADJACENT_SEGMENT_COLLAPSE_12+PREFIX_DIVERSITY_96+TAGGED_PAYLOAD_DEDUP+EXACT_TAGGED_TAIL_DEDUP_80+ROUTE_METADATA_STRIP+DELIMITED_LONG_SEGMENT_DEDUP",
       "candidateCount": 1,
       "selectedCount": 1,
       "suppressedCount": 0,
@@ -78,7 +78,7 @@
       "delimitedEchoSuppressedCount": 0
     },
     "inherited": {
-      "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PREFIX_DIVERSITY_96+TAGGED_PAYLOAD_DEDUP+EXACT_TAGGED_TAIL_DEDUP_80+ROUTE_METADATA_STRIP+ADJACENT_SEGMENT_COLLAPSE_12+DELIMITED_LONG_SEGMENT_DEDUP",
+      "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PRE_POST_ADJACENT_SEGMENT_COLLAPSE_12+PREFIX_DIVERSITY_96+TAGGED_PAYLOAD_DEDUP+EXACT_TAGGED_TAIL_DEDUP_80+ROUTE_METADATA_STRIP+DELIMITED_LONG_SEGMENT_DEDUP",
       "candidateCount": 1,
       "selectedCount": 1,
       "suppressedCount": 0,
@@ -91,7 +91,7 @@
       "delimitedEchoSuppressedCount": 0
     },
     "partialInherited": {
-      "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PREFIX_DIVERSITY_96+TAGGED_PAYLOAD_DEDUP+EXACT_TAGGED_TAIL_DEDUP_80+ROUTE_METADATA_STRIP+ADJACENT_SEGMENT_COLLAPSE_12+DELIMITED_LONG_SEGMENT_DEDUP",
+      "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PRE_POST_ADJACENT_SEGMENT_COLLAPSE_12+PREFIX_DIVERSITY_96+TAGGED_PAYLOAD_DEDUP+EXACT_TAGGED_TAIL_DEDUP_80+ROUTE_METADATA_STRIP+DELIMITED_LONG_SEGMENT_DEDUP",
       "candidateCount": 1,
       "selectedCount": 1,
       "suppressedCount": 0,
@@ -116,7 +116,7 @@
     "lastCarry": "[CONTRADICTION->VAJRA] 以 structure 位置重讀： 以 structure 位置重讀： 主動尋找最小反例與破壞條件：針對本輪 GENERAL 命題（ref:dfd78c8e），哪個前提最可能先失效？： VERIFIES AN EXPLICIT URL ONLY; DOES NOT CLA： 以 counterexam · [CONTRADICTION->VAJRA] 以 counterexample 位置重讀： 以 structure 位置重讀： 主動尋找最小反例與破壞條件：針對本輪 GENERAL 命題（ref:dfd78c8e），哪個前提最可能先失效？： VERIFIES AN EXPLICIT URL ONLY; DOES NOT CLA： 以 counterexam · [CONTRADICTION->VAJRA] 以 position 位置重讀： 以 structure 位置重讀： 主動尋找最小反例與破壞條件：針對本輪 GENERAL 命題（ref:dfd78c8e），哪個前提最可能先失效？： VERIFIES AN EXPLICIT URL ONLY; DOES NOT CLA： 以 counterexam · [CONTRADICTION->VAJRA] 以 otherness 位置重讀： 以 structure 位置重讀： 主動尋找最小反例與破壞條件：針對本輪 GENERAL 命題（ref:dfd78c8e），哪個前提最可能先失效？： VERIFIES AN EXPLICIT URL ONLY; DOES NOT CLA： 以 counterexam · [CONTRADICTION->VAJRA] 以 evidence 位置重讀： 以 structure 位置重讀： 主動尋找最小反例與破壞條件：針對本輪 GENERAL 命題（ref:dfd78c8e），哪個前提最可能先失效？： VERIFIES AN EXPLICIT URL ONLY; DOES NOT CLA： 以 counterexam · [CONTRADICTION->VAJRA] 以 language 位置重讀： 以 structure 位置重讀： 主動尋找最小反例與破壞條件：針對本輪 GENERAL 命題（ref:dfd78c8e），哪個前提最可能先失效？： VERIFIES AN EXPLICIT URL ONLY; DOES NOT CLA： 以 counterexam · [CONTRADICTION->VAJRA] 以 boundary 位置重讀： 以 structure 位置重讀： 主動尋找最小反例與破壞條件：針對本輪 GENERAL 命題（ref:dfd78c8e），哪個前提最可能先失效？： VERIFIES AN EXPLICIT ",
     "roundAntiEcho": [
       {
-        "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PREFIX_DIVERSITY_96+TAGGED_PAYLOAD_DEDUP+EXACT_TAGGED_TAIL_DEDUP_80+ROUTE_METADATA_STRIP+ADJACENT_SEGMENT_COLLAPSE_12+DELIMITED_LONG_SEGMENT_DEDUP",
+        "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PRE_POST_ADJACENT_SEGMENT_COLLAPSE_12+PREFIX_DIVERSITY_96+TAGGED_PAYLOAD_DEDUP+EXACT_TAGGED_TAIL_DEDUP_80+ROUTE_METADATA_STRIP+DELIMITED_LONG_SEGMENT_DEDUP",
         "candidateCount": 190,
         "selectedCount": 12,
         "suppressedCount": 178,
@@ -129,7 +129,7 @@
         "delimitedEchoSuppressedCount": 0
       },
       {
-        "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PREFIX_DIVERSITY_96+TAGGED_PAYLOAD_DEDUP+EXACT_TAGGED_TAIL_DEDUP_80+ROUTE_METADATA_STRIP+ADJACENT_SEGMENT_COLLAPSE_12+DELIMITED_LONG_SEGMENT_DEDUP",
+        "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PRE_POST_ADJACENT_SEGMENT_COLLAPSE_12+PREFIX_DIVERSITY_96+TAGGED_PAYLOAD_DEDUP+EXACT_TAGGED_TAIL_DEDUP_80+ROUTE_METADATA_STRIP+DELIMITED_LONG_SEGMENT_DEDUP",
         "candidateCount": 166,
         "selectedCount": 12,
         "suppressedCount": 154,
@@ -138,11 +138,11 @@
         "nestedEchoSuppressedCount": 0,
         "taggedTailSuppressedCount": 0,
         "routeTagsStripped": 30,
-        "segmentEchoSuppressedCount": 0,
+        "segmentEchoSuppressedCount": 10,
         "delimitedEchoSuppressedCount": 0
       },
       {
-        "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PREFIX_DIVERSITY_96+TAGGED_PAYLOAD_DEDUP+EXACT_TAGGED_TAIL_DEDUP_80+ROUTE_METADATA_STRIP+ADJACENT_SEGMENT_COLLAPSE_12+DELIMITED_LONG_SEGMENT_DEDUP",
+        "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PRE_POST_ADJACENT_SEGMENT_COLLAPSE_12+PREFIX_DIVERSITY_96+TAGGED_PAYLOAD_DEDUP+EXACT_TAGGED_TAIL_DEDUP_80+ROUTE_METADATA_STRIP+DELIMITED_LONG_SEGMENT_DEDUP",
         "candidateCount": 166,
         "selectedCount": 12,
         "suppressedCount": 154,
@@ -159,20 +159,8 @@
   },
   "failures": [
     {
-      "type": "SHORT_ADJACENT_ECHO_NOT_SUPPRESSED",
-      "detail": {
-        "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PREFIX_DIVERSITY_96+TAGGED_PAYLOAD_DEDUP+EXACT_TAGGED_TAIL_DEDUP_80+ROUTE_METADATA_STRIP+ADJACENT_SEGMENT_COLLAPSE_12+DELIMITED_LONG_SEGMENT_DEDUP",
-        "candidateCount": 1,
-        "selectedCount": 1,
-        "suppressedCount": 0,
-        "inheritedSubstrateStrippedCount": 0,
-        "nestedEchoAffectedAtoms": 0,
-        "nestedEchoSuppressedCount": 0,
-        "taggedTailSuppressedCount": 0,
-        "routeTagsStripped": 0,
-        "segmentEchoSuppressedCount": 0,
-        "delimitedEchoSuppressedCount": 0
-      }
+      "type": "GUT_VERSION",
+      "detail": "0.2.13"
     }
   ],
   "boundary": "PASS proves deterministic heuristic routing, provenance retention, quarantine/hold behavior, conservative exact inherited-substrate removal, exact tagged-payload de-echoing, exact repeated tagged-tail suppression while retaining distinct heads, short exact adjacent intra-atom echo suppression, near-duplicate preservation, structured-snippet protection, and a 3-round cross-organ connector-feedback regression. It does not prove semantic novelty, semantic correctness, or source truth."
