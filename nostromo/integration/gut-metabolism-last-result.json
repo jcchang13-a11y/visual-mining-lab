@@ -1,6 +1,6 @@
 {
   "schema": "nostromo-gut-metabolism-test/v0.2.7",
-  "completedAt": "2026-08-30T08:07:05.533Z",
+  "completedAt": "2026-08-30T08:08:44.256Z",
   "status": "PASS",
   "gut": {
     "version": "0.2.7",
@@ -99,9 +99,9 @@
     "roundAntiEcho": [
       {
         "strategy": "INHERITED_SUBSTRATE_SUBTRACTION+PREFIX_DIVERSITY_96+NESTED_ROUTE_TAG_CUTOFF+ROUTE_METADATA_STRIP+ADJACENT_SEGMENT_COLLAPSE",
-        "candidateCount": 174,
+        "candidateCount": 173,
         "selectedCount": 12,
-        "suppressedCount": 162,
+        "suppressedCount": 161,
         "inheritedSubstrateStrippedCount": 0,
         "nestedEchoAffectedAtoms": 0,
         "nestedEchoSuppressedCount": 0,
@@ -113,7 +113,7 @@
         "candidateCount": 142,
         "selectedCount": 12,
         "suppressedCount": 130,
-        "inheritedSubstrateStrippedCount": 21,
+        "inheritedSubstrateStrippedCount": 20,
         "nestedEchoAffectedAtoms": 0,
         "nestedEchoSuppressedCount": 0,
         "routeTagsStripped": 0,
@@ -124,7 +124,7 @@
         "candidateCount": 143,
         "selectedCount": 12,
         "suppressedCount": 131,
-        "inheritedSubstrateStrippedCount": 21,
+        "inheritedSubstrateStrippedCount": 20,
         "nestedEchoAffectedAtoms": 0,
         "nestedEchoSuppressedCount": 0,
         "routeTagsStripped": 0,
