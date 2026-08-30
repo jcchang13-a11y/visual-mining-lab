@@ -1,4 +1,4 @@
-/* NOSTROMO GUT v0.2 — deterministic auditable metabolic router */
+/* NOSTROMO GUT v0.2.1 — deterministic auditable metabolic router */
 (function(root){
   const DESTINATIONS=['SHROOMING','MUTHER','DROPLET','VAJRA','HOLD'];
   function flatten(value,out,path,provenance){
@@ -29,6 +29,20 @@
     if(/request|action|execute|task|directive|next/i.test(lower+path))return {type:'ACTION',status:'ROUTE',route:'MUTHER',priority:3,reason:'actionable-material'};
     return {type:'MATERIAL',status:'ABSORB',route:'HOLD',priority:1,reason:'general-material'};
   }
+  function echoKey(text){
+    return String(text).toLowerCase().replace(/\s+/g,' ').replace(/^\[[^\]]+\]\s*/,'').slice(0,96);
+  }
+  function selectDiverse(ranked,limit){
+    const picked=[],seenEcho=new Set();
+    for(const item of ranked){
+      const key=echoKey(item.text);
+      if(key.length>=24&&seenEcho.has(key))continue;
+      if(key.length>=24)seenEcho.add(key);
+      picked.push(item);
+      if(picked.length>=limit)break;
+    }
+    return picked;
+  }
   function digest(input,options){
     options=options||{};
     const source=options.source||'unknown';
@@ -49,17 +63,19 @@
       else {nutrients.push(item);routes[meta.route].push(item);}
     }
     const ranked=[...nutrients].sort((a,b)=>b.priority-a.priority||a.path.localeCompare(b.path));
-    const summary=ranked.slice(0,12).map(x=>`[${x.type}->${x.route}] ${x.text}`).join(' · ');
+    const summaryItems=selectDiverse(ranked,12);
+    const summary=summaryItems.map(x=>`[${x.type}->${x.route}] ${x.text}`).join(' · ');
     const counts={}; for(const item of items)counts[item.type]=(counts[item.type]||0)+1;
     return {
-      organ:'GUT',version:'0.2',source,
+      organ:'GUT',version:'0.2.1',source,
       mode:'DETERMINISTIC_HEURISTIC_ROUTER',
       ingested:atoms.length,absorbed:nutrients.length,excreted:waste.length,quarantined:quarantine.length,held:hold.length,
       typeCounts:counts,
       routes:Object.fromEntries(Object.entries(routes).map(([k,v])=>[k,{count:v.length,items:v.slice(0,24)}])),
       nutrients:ranked.slice(0,80),waste:waste.slice(0,80),quarantine:quarantine.slice(0,80),hold:hold.slice(0,80),
-      summary,
-      boundary:'Deterministic heuristic metabolism only. Classification/routing is auditable but not semantic truth. Provenance-bearing fields are propagated into atom records; suspected failures are quarantined; uncertainty is held rather than upgraded to truth.'
+      summary,summaryItemCount:summaryItems.length,
+      antiEcho:{strategy:'PREFIX_DIVERSITY_96',candidateCount:ranked.length,selectedCount:summaryItems.length,suppressedCount:Math.max(0,ranked.length-summaryItems.length)},
+      boundary:'Deterministic heuristic metabolism only. Classification/routing and anti-echo suppression are auditable heuristics, not semantic truth. Provenance-bearing fields are propagated into atom records; suspected failures are quarantined; uncertainty is held rather than upgraded to truth.'
     };
   }
   root.GutEngine={digest};
