@@ -1,9 +1,9 @@
 {
   "schema": "nostromo-gut-metabolism-test/v0.2.2",
-  "completedAt": "2026-08-30T07:06:27.508Z",
+  "completedAt": "2026-08-30T07:07:31.576Z",
   "status": "FAIL",
   "gut": {
-    "version": "0.2.2",
+    "version": "0.2.3",
     "mode": "DETERMINISTIC_HEURISTIC_ROUTER",
     "ingested": 10,
     "absorbed": 7,
@@ -28,22 +28,24 @@
       "HOLD": 4
     },
     "antiEcho": {
-      "strategy": "PREFIX_DIVERSITY_96+NESTED_ROUTE_TAG_CUTOFF",
+      "strategy": "PREFIX_DIVERSITY_96+NESTED_ROUTE_TAG_CUTOFF+LEADING_ROUTE_WRAPPER_STRIP",
       "candidateCount": 4,
       "selectedCount": 2,
       "suppressedCount": 2,
       "nestedEchoAffectedAtoms": 0,
-      "nestedEchoSuppressedCount": 0
+      "nestedEchoSuppressedCount": 0,
+      "leadingRouteTagsStripped": 0
     },
     "nestedAntiEcho": {
-      "strategy": "PREFIX_DIVERSITY_96+NESTED_ROUTE_TAG_CUTOFF",
+      "strategy": "PREFIX_DIVERSITY_96+NESTED_ROUTE_TAG_CUTOFF+LEADING_ROUTE_WRAPPER_STRIP",
       "candidateCount": 1,
       "selectedCount": 1,
       "suppressedCount": 0,
       "nestedEchoAffectedAtoms": 1,
-      "nestedEchoSuppressedCount": 2
+      "nestedEchoSuppressedCount": 2,
+      "leadingRouteTagsStripped": 1
     },
-    "boundary": "Deterministic heuristic metabolism only. Classification, routing and echo suppression are auditable heuristics, not semantic truth. Provenance-bearing fields propagate into atom records; failures are quarantined; uncertainty is held. A repeated identical route tag inside one atom is treated as nested metabolic echo and cut at the first recurrence; suppression is explicitly counted."
+    "boundary": "Deterministic heuristic metabolism only. Classification, routing and echo suppression are auditable heuristics, not semantic truth. Provenance-bearing fields propagate into atom records; failures are quarantined; uncertainty is held. Repeated identical route tags nested inside one atom are cut at first recurrence, and inherited leading route wrappers are removed before new routing labels are emitted; both are explicitly counted."
   },
   "feedback": {
     "status": "PASS",
@@ -59,8 +61,8 @@
   },
   "failures": [
     {
-      "type": "NESTED_ECHO_SURVIVED_SUMMARY",
-      "detail": "[CONTRADICTION->VAJRA] [CONTRADICTION->VAJRA] Counterevidence: recursive carry repeats itself"
+      "type": "GUT_VERSION",
+      "detail": "0.2.3"
     }
   ],
   "boundary": "PASS proves deterministic heuristic classification, quarantine/hold/excretion, destination routing, provenance propagation, prefix-diversity suppression, nested same-route-tag echo cutoff, and explicit application of persisted redacted connector feedback from round 2. It does not prove semantic correctness, source truth, or live connector re-execution inside GitHub Actions."
