@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" role="img" aria-labelledby="t d">
+<title id="t">MUTHER REMIX 006 — Threshold Echo</title>
+<desc id="d">A structural remix derived from one 2018 camera photograph without reusing source pixels. The source roles are reduced to horizon, shell, threshold, foreground figure, distant echo and cast shadow, then recomposed into a new spatial relation.</desc>
+<rect width="1200" height="760" fill="#d9e0df"/>
+<!-- HORIZON: compressed landscape band -->
+<path d="M0 285 L95 242 L172 263 L250 222 L345 269 L438 214 L535 252 L640 198 L742 245 L851 190 L970 229 L1200 176 L1200 355 L0 355 Z" fill="#a9b5b3"/>
+<!-- SHELL: industrial mass translated into offset planes -->
+<path d="M650 240 L825 168 L1018 215 L1200 151 L1200 408 L650 408 Z" fill="#f1efea" stroke="#2d3433" stroke-width="5"/>
+<path d="M650 240 L825 168 L1018 215" fill="none" stroke="#2d3433" stroke-width="12"/>
+<rect x="744" y="291" width="116" height="117" fill="#c5cfcc" stroke="#2d3433" stroke-width="4"/>
+<rect x="1035" y="287" width="105" height="52" fill="#bbc6c3" stroke="#2d3433" stroke-width="4"/>
+<!-- FIELD -->
+<rect y="408" width="1200" height="352" fill="#bbb8ae"/>
+<!-- THRESHOLD: hard light/shadow boundary is promoted into a major diagonal -->
+<path d="M0 494 L0 760 L845 760 Z" fill="#434b49"/>
+<path d="M0 494 L845 760" stroke="#1f2423" stroke-width="7"/>
+<!-- DISTANT ECHO -->
+<g transform="translate(748 382) scale(.55)">
+  <path d="M0 58 Q24 6 72 18 L116 28 Q146 39 151 70 L140 118 L111 124 L99 94 L51 94 L38 124 L8 117 Z" fill="#c58d9b" stroke="#2d3433" stroke-width="5"/>
+  <circle cx="128" cy="53" r="23" fill="#c58d9b" stroke="#2d3433" stroke-width="5"/>
+</g>
+<!-- FOREGROUND FIGURE: source object role abstracted, not traced -->
+<g transform="translate(414 465)">
+  <path d="M0 135 Q12 54 73 30 Q118 10 168 34 Q224 60 233 133 L218 197 L166 199 L151 151 L83 151 L66 199 L15 197 Z" fill="#d6b95f" stroke="#2d3433" stroke-width="7"/>
+  <path d="M78 46 Q116 4 158 48 L151 97 L91 97 Z" fill="#d9d5c8" stroke="#2d3433" stroke-width="6"/>
+  <circle cx="102" cy="67" r="7" fill="#2d3433"/><circle cx="139" cy="67" r="7" fill="#2d3433"/>
+</g>
+<!-- CAST: object and threshold are made to disagree; the shadow crosses the boundary -->
+<path d="M598 654 C730 658 862 683 1016 746 L825 760 L557 704 Z" fill="#202625" opacity=".72"/>
+<!-- relation labels as mining notation -->
+<g font-family="ui-monospace,monospace" font-size="17" fill="#29302f">
+<text x="28" y="48">REMIX 006 / THRESHOLD ECHO</text>
+<text x="28" y="74">roles: HORIZON · SHELL · THRESHOLD · FIGURE · ECHO · CAST</text>
+<text x="28" y="100">source pixels: 0</text>
+</g>
+</svg>
