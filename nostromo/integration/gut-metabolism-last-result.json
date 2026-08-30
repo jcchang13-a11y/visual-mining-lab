@@ -1,7 +1,7 @@
 {
   "schema": "nostromo-gut-metabolism-test/v0.2.10",
-  "completedAt": "2026-08-30T16:03:20.370Z",
-  "status": "FAIL",
+  "completedAt": "2026-08-30T17:02:37.671Z",
+  "status": "PASS",
   "gut": {
     "version": "0.2.10",
     "mode": "DETERMINISTIC_HEURISTIC_ROUTER",
@@ -141,7 +141,7 @@
       "firstAppliedRound": 2,
       "privacy": "PRIVATE DRIVE RAW CONTENT/TITLES/IDS/URLS ARE NOT INCLUDED"
     },
-    "lastCarry": "[CONTRADICTION->VAJRA] 以歷史 trace 01 的最近可驗證位置（R110 / Regime shift: subject form becomes observable variable / participant）對問題做 scope 探針：： 以歷史 trace 01 的最近可驗證位置（R110 / Regime shift: subject form becomes observable variable / participant）對問題做 scope 探針：： 主動尋找最小反例與破壞條件： 主動尋找最小反例與破壞條件：針對本輪 GENERAL 命題（ref:928e3df0），哪個前提最可能先失效？： VERIFIES AN EXPLICIT URL ONLY; DOES NOT CLAIM SEARCH-ENGINE DISCOVERY： 200： Microsoft describes a modular team of specialized agents coordinated by an Orchestrator, adapted from Magentic-One.： Microsoft Research： Magentic-UI, an experimental human-centered web agent： https://www.microsoft.com/en-us/research/blog/magentic-ui-an-experimental-human-centered-web-agent/： THE PUBLIC WEB CONNECTOR SUPPLIED CLAIM-SPECIFIC EVIDENCE. THE REPOSITORY STORES ONLY REDUCED EVIDENCE METADATA/FINGERPRINTS; CI DOES NOT PERFORM SEARCH-ENGINE DISCOVERY.： Magentic-One is a generalist multi-agent system published by Microsoft Research in November 2024.： 2024-11-04： 05b19aff31a0265e EXTERNAL_CONNECTOR_FEEDBACK | drive_hits=10 | internal_hits=4 | public_web_finding=Microsoft describes a modular team of specialized age： 以歷史 trace 02 的最近可驗證位置（R110 / Regime shift: subject form becomes observ",
+    "lastCarry": "[CONTRADICTION->VAJRA] 以 structure 位置重讀： 以 structure 位置重讀：： 主動尋找最小反例與破壞條件： 主動尋找最小反例與破壞條件：針對本輪 GENERAL 命題（ref:928e3df0），哪個前提最可能先失效？： VERIFIES AN EXPLICIT URL ONLY; DOES NOT CLA· [CONTRADICTION->VAJR · [CONTRADICTION->VAJRA] 以 counterexample 位置重讀： 以 structure 位置重讀：： 主動尋找最小反例與破壞條件： 主動尋找最小反例與破壞條件：針對本輪 GENERAL 命題（ref:928e3df0），哪個前提最可能先失效？： VERIFIES AN EXPLICIT URL ONLY; DOES NOT CLA· [CONTRADICTION->VAJR · [CONTRADICTION->VAJRA] 以 position 位置重讀： 以 structure 位置重讀：： 主動尋找最小反例與破壞條件： 主動尋找最小反例與破壞條件：針對本輪 GENERAL 命題（ref:928e3df0），哪個前提最可能先失效？： VERIFIES AN EXPLICIT URL ONLY; DOES NOT CLA· [CONTRADICTION->VAJR · [CONTRADICTION->VAJRA] 以 otherness 位置重讀： 以 structure 位置重讀：： 主動尋找最小反例與破壞條件： 主動尋找最小反例與破壞條件：針對本輪 GENERAL 命題（ref:928e3df0），哪個前提最可能先失效？： VERIFIES AN EXPLICIT URL ONLY; DOES NOT CLA· [CONTRADICTION->VAJR · [CONTRADICTION->VAJRA] 以 evidence 位置重讀： 以 structure 位置重讀：： 主動尋找最小反例與破壞條件： 主動尋找最小反例與破壞條件：針對本輪 GENERAL 命題（ref:928e3df0），哪個前提最可能先失效？： VERIFIES AN EXPLICIT URL ONLY; DOES NOT CLA· [CONTRADICTION->VAJR · [CONTRADICTION->VAJRA] 以 language 位置重讀： 以 structure 位置重讀：： 主動尋找最小反例與破壞條件： 主動尋找最小反例與破壞條件：針對本輪 GENERAL 命題（ref:928e3df0），哪個前提最可能先失效？： VERIFIES AN EXPLICIT URL ONLY; DOES NOT CLA· [CONTRADICTION->VAJR ",
     "roundAntiEcho": [
       {
         "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PREFIX_DIVERSITY_96+TAGGED_PAYLOAD_DEDUP+ROUTE_METADATA_STRIP+ADJACENT_SEGMENT_COLLAPSE+DELIMITED_LONG_SEGMENT_DEDUP",
@@ -160,10 +160,10 @@
         "candidateCount": 158,
         "selectedCount": 12,
         "suppressedCount": 146,
-        "inheritedSubstrateStrippedCount": 0,
-        "nestedEchoAffectedAtoms": 20,
+        "inheritedSubstrateStrippedCount": 10,
+        "nestedEchoAffectedAtoms": 10,
         "nestedEchoSuppressedCount": 0,
-        "routeTagsStripped": 150,
+        "routeTagsStripped": 30,
         "segmentEchoSuppressedCount": 0,
         "delimitedEchoSuppressedCount": 0
       },
@@ -172,58 +172,16 @@
         "candidateCount": 158,
         "selectedCount": 12,
         "suppressedCount": 146,
-        "inheritedSubstrateStrippedCount": 0,
-        "nestedEchoAffectedAtoms": 10,
+        "inheritedSubstrateStrippedCount": 10,
+        "nestedEchoAffectedAtoms": 0,
         "nestedEchoSuppressedCount": 0,
-        "routeTagsStripped": 30,
+        "routeTagsStripped": 10,
         "segmentEchoSuppressedCount": 0,
         "delimitedEchoSuppressedCount": 0
       }
     ],
-    "boundary": "Certifies closed-loop routing for SHROOMING local deterministic sandbox plus a non-state-mutating greenhouse probe, MU/TH/UR repository mining, DROPLET explicit-URL verification, VAJRA and GUT, plus acceptance and digestion of externally executed Google Drive query mining, bounded authorized-source MINE_INTERNAL evidence, public web search, and connector-supplied claim-verification evidence. From round 2 onward, redacted connector evidence changes SHROOMING/greenhouse/VAJRA input. GUT receives the current round input as an inherited substrate and subtracts exact compacted echoes before producing the next carry; this proves contextual anti-echo routing, not semantic novelty detection. GitHub Actions does not itself search private Drive or the web."
+    "boundary": "Certifies closed-loop routing for SHROOMING local deterministic sandbox plus a non-state-mutating greenhouse probe, MU/TH/UR repository mining, DROPLET explicit-URL verification, VAJRA and GUT, plus acceptance and digestion of externally executed Google Drive query mining, bounded authorized-source MINE_INTERNAL evidence, public web search, and connector-supplied claim-verification evidence. From round 2 onward, redacted connector evidence changes SHROOMING/greenhouse/VAJRA input. GUT receives the combined current round input plus exact prior carry and exact redacted feedback directive as inherited substrates; this allows conservative exact embedded-substrate subtraction without fuzzy/prefix deletion. It proves contextual anti-echo routing, not semantic novelty detection. GitHub Actions does not itself search private Drive or the web."
   },
-  "failures": [
-    {
-      "type": "ACTIVE_INHERITED_SUBSTRATE_NOT_STRIPPED",
-      "detail": [
-        {
-          "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PREFIX_DIVERSITY_96+TAGGED_PAYLOAD_DEDUP+ROUTE_METADATA_STRIP+ADJACENT_SEGMENT_COLLAPSE+DELIMITED_LONG_SEGMENT_DEDUP",
-          "candidateCount": 190,
-          "selectedCount": 12,
-          "suppressedCount": 178,
-          "inheritedSubstrateStrippedCount": 0,
-          "nestedEchoAffectedAtoms": 0,
-          "nestedEchoSuppressedCount": 0,
-          "routeTagsStripped": 0,
-          "segmentEchoSuppressedCount": 0,
-          "delimitedEchoSuppressedCount": 0
-        },
-        {
-          "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PREFIX_DIVERSITY_96+TAGGED_PAYLOAD_DEDUP+ROUTE_METADATA_STRIP+ADJACENT_SEGMENT_COLLAPSE+DELIMITED_LONG_SEGMENT_DEDUP",
-          "candidateCount": 158,
-          "selectedCount": 12,
-          "suppressedCount": 146,
-          "inheritedSubstrateStrippedCount": 0,
-          "nestedEchoAffectedAtoms": 20,
-          "nestedEchoSuppressedCount": 0,
-          "routeTagsStripped": 150,
-          "segmentEchoSuppressedCount": 0,
-          "delimitedEchoSuppressedCount": 0
-        },
-        {
-          "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PREFIX_DIVERSITY_96+TAGGED_PAYLOAD_DEDUP+ROUTE_METADATA_STRIP+ADJACENT_SEGMENT_COLLAPSE+DELIMITED_LONG_SEGMENT_DEDUP",
-          "candidateCount": 158,
-          "selectedCount": 12,
-          "suppressedCount": 146,
-          "inheritedSubstrateStrippedCount": 0,
-          "nestedEchoAffectedAtoms": 10,
-          "nestedEchoSuppressedCount": 0,
-          "routeTagsStripped": 30,
-          "segmentEchoSuppressedCount": 0,
-          "delimitedEchoSuppressedCount": 0
-        }
-      ]
-    }
-  ],
+  "failures": [],
   "boundary": "PASS proves deterministic heuristic metabolism plus exact full inherited-substrate de-echoing without truncated-prefix deletion, exact repeated tagged-payload suppression without deleting novel same-tag payloads, repeated long-segment suppression within one atom across explicit separators, and protection against JSON-like engineering snippets being falsely promoted to high-priority semantic contradictions. It does not prove semantic novelty, semantic correctness, source truth, or live connector re-execution inside GitHub Actions."
 }

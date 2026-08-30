@@ -1,6 +1,6 @@
 {
   "schema": "nostromo-integration-ci/v1.3",
-  "completedAt": "2026-08-30T16:03:22.059Z",
+  "completedAt": "2026-08-30T17:02:39.585Z",
   "status": "PASS",
   "rounds": 50,
   "expectedPerRound": {
@@ -168,15 +168,15 @@
     "requestedRounds": 10,
     "completedRounds": 10,
     "roundsWithAllFourRepoExecutors": 10,
-    "gutAbsorbedTotal": 1612,
+    "gutAbsorbedTotal": 1608,
     "connectorHandoff": {
       "status": "ACCEPTED",
       "completedAt": "2026-08-30T13:05:48+08:00",
       "actionsAccepted": 4,
       "failures": []
     },
-    "lastCarry": "[CONTRADICTION->VAJRA] 以歷史 trace 01 的最近可驗證位置（R110 / Regime shift: subject form becomes observable variable / participant）對問題做 scope 探針： 以歷史 trace 01 的最近可驗證位置（R110 / Regime shift: subject form becomes observable variable / participant）對問題做 scope 探針： 以歷史 trace 01 的最近可驗證位置（R110 / Regime shift: subject form becomes observable variable / participant）對問題做 scope 探針： 以歷史 trace 01 的最近可驗證位置（R110 / Regime shift: subject form becomes observable variable / participant）對問題做 scope 探針： 以歷史 trace 01 的最近可驗證位置（R110 / Regime shift: subject form becomes observable variable / participant）對問題做 scope 探針： 以歷史 trace 01 的最近可驗證位置（R110 / Regime shift: subject form becomes observable variable / participant）對問題做 scope 探針： 以歷史 trace 01 的最近可驗證位置（R110 / Regime shift: subject form becomes observable variable / participant）對問題做 scope 探針： 以歷史 trace 01 的最近可驗證位置（R110 / Regime shift: subject form becomes observable variable / participant）對問題做 scope 探針：： 以歷史 trace 01 的最近可驗證位置（R110 / Regime shift: subject form becomes observable variable / participant）對問題做 scope 探針：： 主動尋找最小反例與破壞條件： 主動尋找最小反例與破壞條件：針對本輪 GENERAL 命題（ref:f792180f），哪個前提最可能先失效？： VERIFIES AN EXPLICIT URL ONLY; DOES NOT CLAIM SEARCH-ENGINE DISCOVERY： 200： Microsoft ",
-    "boundary": "Certifies closed-loop routing for SHROOMING local deterministic sandbox plus a non-state-mutating greenhouse probe, MU/TH/UR repository mining, DROPLET explicit-URL verification, VAJRA and GUT, plus acceptance and digestion of externally executed Google Drive query mining, bounded authorized-source MINE_INTERNAL evidence, public web search, and connector-supplied claim-verification evidence. From round 2 onward, redacted connector evidence changes SHROOMING/greenhouse/VAJRA input. GUT receives the current round input as an inherited substrate and subtracts exact compacted echoes before producing the next carry; this proves contextual anti-echo routing, not semantic novelty detection. GitHub Actions does not itself search private Drive or the web."
+    "lastCarry": "[CONTRADICTION->VAJRA] 以 structure 位置重讀： 以 structure 位置重讀： 以 structure 位置重讀： 以 structure 位置重讀： 以 structure 位置重讀： 以 structure 位置重讀： 以 structure 位置重讀： 以 structure 位置重讀： 以 structure 位置重讀：： 主動尋找最小反例與破壞條 · [CONTRADICTION->VAJRA] 以 counterexample 位置重讀： 以 structure 位置重讀： 以 structure 位置重讀： 以 structure 位置重讀： 以 structure 位置重讀： 以 structure 位置重讀： 以 structure 位置重讀： 以 structure 位置重讀： 以 structure 位置重讀：： 主動尋找最小反例與破壞條 · [CONTRADICTION->VAJRA] 以 position 位置重讀： 以 structure 位置重讀： 以 structure 位置重讀： 以 structure 位置重讀： 以 structure 位置重讀： 以 structure 位置重讀： 以 structure 位置重讀： 以 structure 位置重讀： 以 structure 位置重讀：： 主動尋找最小反例與破壞條 · [CONTRADICTION->VAJRA] 以 otherness 位置重讀： 以 structure 位置重讀： 以 structure 位置重讀： 以 structure 位置重讀： 以 structure 位置重讀： 以 structure 位置重讀： 以 structure 位置重讀： 以 structure 位置重讀： 以 structure 位置重讀：： 主動尋找最小反例與破壞條 · [CONTRADICTION->VAJRA] 以 evidence 位置重讀： 以 structure 位置重讀： 以 structure 位置重讀： 以 structure 位置重讀： 以 structure 位置重讀： 以 structure 位置重讀： 以 structure 位置重讀： 以 structure 位置重讀： 以 structure 位置重讀：： 主動尋找最小反例與破壞條 · [CONTRADICTION->VAJRA] 以 language 位置重讀： 以 structure 位置重讀： 以 structure 位置重讀： 以 structure 位置重讀： 以 structure 位置重讀： 以 structure 位置重讀： 以 structure 位置重讀： 以 structure 位置重讀： 以 structure 位置重讀：： 主動尋找最小反",
+    "boundary": "Certifies closed-loop routing for SHROOMING local deterministic sandbox plus a non-state-mutating greenhouse probe, MU/TH/UR repository mining, DROPLET explicit-URL verification, VAJRA and GUT, plus acceptance and digestion of externally executed Google Drive query mining, bounded authorized-source MINE_INTERNAL evidence, public web search, and connector-supplied claim-verification evidence. From round 2 onward, redacted connector evidence changes SHROOMING/greenhouse/VAJRA input. GUT receives the combined current round input plus exact prior carry and exact redacted feedback directive as inherited substrates; this allows conservative exact embedded-substrate subtraction without fuzzy/prefix deletion. It proves contextual anti-echo routing, not semantic novelty detection. GitHub Actions does not itself search private Drive or the web."
   },
   "sources": {
     "shroomingUpdated": "2026-08-23",
