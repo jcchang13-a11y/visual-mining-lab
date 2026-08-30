@@ -21,7 +21,7 @@ const sample={
   duplicateA:'same useful material',duplicateB:'same useful material'
 };
 const gut=globalThis.GutEngine.digest(sample,{source:'NOSTROMO/gut-metabolism-test'});
-check(gut.version==='0.2.13','GUT_VERSION',gut.version);
+check(gut.version==='0.2.14','GUT_VERSION',gut.version);
 check(gut.mode==='DETERMINISTIC_HEURISTIC_ROUTER','GUT_MODE',gut.mode);
 check(gut.routes?.DROPLET?.count>=1,'CLAIM_NOT_ROUTED_TO_DROPLET',gut.routes?.DROPLET);
 check(gut.routes?.SHROOMING?.count>=1,'QUESTION_NOT_ROUTED_TO_SHROOMING',gut.routes?.SHROOMING);
@@ -66,6 +66,17 @@ const nearGut=globalThis.GutEngine.digest({carry:'以 structure 位置重讀：�
 check(nearGut.antiEcho?.segmentEchoSuppressedCount===0,'NEAR_DUPLICATE_OVERTRIMMED',nearGut.antiEcho);
 check(nearGut.summary.includes('structure')&&nearGut.summary.includes('counterexample'),'NEAR_DUPLICATE_CONTENT_LOST',nearGut.summary);
 
+const sharedBody='主動尋找最小反例與破壞條件，並保留同一份來源與不確定性。這個身體刻意超過八十個字元，用來模擬不同 lens 只換短頭、卻把完全相同的大段內容反覆塞回 carry 的代謝回音。它應該只在摘要攜帶一次，但三個原始 nutrient 都必須留下。';
+const sharedBodyGut=globalThis.GutEngine.digest({
+  contradictionA:`lens-A：${sharedBody}`,
+  contradictionB:`lens-B：${sharedBody}`,
+  contradictionC:`lens-C：${sharedBody}`
+},{source:'NOSTROMO/gut-shared-body-summary-test'});
+check(sharedBodyGut.nutrients.length===3,'SHARED_BODY_NUTRIENTS_LOST',sharedBodyGut.nutrients);
+check(sharedBodyGut.antiEcho?.sharedBodySuppressedCount===2,'SHARED_BODY_SUMMARY_ECHO_NOT_SUPPRESSED',sharedBodyGut.antiEcho);
+check((sharedBodyGut.summary.match(/模擬不同 lens/g)||[]).length===1,'SHARED_BODY_STILL_REPEATED_IN_CARRY',sharedBodyGut.summary);
+check(sharedBodyGut.nutrients.every(x=>x.provenance?.inputSource==='NOSTROMO/gut-shared-body-summary-test'),'SHARED_BODY_PROVENANCE_LOST',sharedBodyGut.nutrients);
+
 const structured='{"version":"2.3","round":"R113","task":"conflicting tasks and partial memory","continuity":"history preserved"}';
 const structuredGut=globalThis.GutEngine.digest({snippet:structured},{source:'NOSTROMO/gut-structured-test'});
 check(structuredGut.typeCounts?.RAW_STRUCTURED_SNIPPET===1,'STRUCTURED_SNIPPET_NOT_CLASSIFIED',structuredGut.typeCounts);
@@ -74,7 +85,7 @@ check(structuredGut.routes?.MUTHER?.count===1,'STRUCTURED_NOT_ROUTED_TO_MUTHER',
 
 let active=null;
 try{
-  active=await runActiveExecutorLoop({rounds:3,seed:'GUT v0.2.13 feedback validation',mineQuery:'NOSTROMO',verifyUrl:'https://github.com/jcchang13-a11y/visual-mining-lab'});
+  active=await runActiveExecutorLoop({rounds:3,seed:'GUT v0.2.14 feedback validation',mineQuery:'NOSTROMO',verifyUrl:'https://github.com/jcchang13-a11y/visual-mining-lab'});
   check(active.status==='PASS','ACTIVE_LOOP_FAIL',{status:active.status,completedRounds:active.completedRounds});
   check(active.feedback?.appliedRounds===2,'FEEDBACK_APPLIED_ROUNDS',active.feedback);
   check(active.feedback?.firstAppliedRound===2,'FEEDBACK_FIRST_ROUND',active.feedback);
@@ -84,12 +95,12 @@ try{
 }catch(error){failures.push({type:'ACTIVE_LOOP_EXCEPTION',message:String(error?.message||error)});}
 
 const result={
-  schema:'nostromo-gut-metabolism-test/v0.2.13',completedAt:new Date().toISOString(),status:failures.length===0?'PASS':'FAIL',
+  schema:'nostromo-gut-metabolism-test/v0.2.14',completedAt:new Date().toISOString(),status:failures.length===0?'PASS':'FAIL',
   gut:{version:gut.version,mode:gut.mode,typeCounts:gut.typeCounts,routeCounts:Object.fromEntries(Object.entries(gut.routes).map(([k,v])=>[k,v.count])),boundary:gut.boundary},
-  antiEcho:{nested:nestedGut.antiEcho,taggedTail:taggedTailGut.antiEcho,shortAdjacent:shortGut.antiEcho,nearDuplicate:nearGut.antiEcho,inherited:inheritedGut.antiEcho,partialInherited:partialGut.antiEcho},
+  antiEcho:{nested:nestedGut.antiEcho,taggedTail:taggedTailGut.antiEcho,shortAdjacent:shortGut.antiEcho,nearDuplicate:nearGut.antiEcho,sharedBodySummary:sharedBodyGut.antiEcho,inherited:inheritedGut.antiEcho,partialInherited:partialGut.antiEcho},
   feedback:active?{status:active.status,completedRounds:active.completedRounds,feedback:active.feedback,lastCarry:active.trace?.at(-1)?.carryOut||null,roundAntiEcho:active.trace?.map(x=>x.gut?.antiEcho),boundary:active.boundary}:null,
   failures,
-  boundary:'PASS proves deterministic heuristic routing, provenance retention, quarantine/hold behavior, conservative exact inherited-substrate removal, exact tagged-payload de-echoing, exact repeated tagged-tail suppression while retaining distinct heads, pre/post short exact adjacent intra-atom echo suppression, near-duplicate preservation, structured-snippet protection, and a 3-round cross-organ connector-feedback regression. It does not prove semantic novelty, semantic correctness, or source truth.'
+  boundary:'PASS proves deterministic heuristic routing, provenance retention, quarantine/hold behavior, conservative exact inherited-substrate removal, exact tagged-payload de-echoing, exact repeated tagged-tail suppression while retaining distinct heads, pre/post short exact adjacent intra-atom echo suppression, shared-body summary diversity without deleting source nutrients, near-duplicate preservation, structured-snippet protection, and a 3-round cross-organ connector-feedback regression. It does not prove semantic novelty, semantic correctness, or source truth.'
 };
 await fs.writeFile(path.join(root,'nostromo/integration/gut-metabolism-last-result.json'),JSON.stringify(result,null,2)+'\n','utf8');
 console.log(JSON.stringify(result,null,2));
