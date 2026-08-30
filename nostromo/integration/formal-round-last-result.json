@@ -1,6 +1,6 @@
 {
-  "schema": "nostromo-formal-round-test/v1.1",
-  "completedAt": "2026-08-30T02:02:11.146Z",
+  "schema": "nostromo-formal-round-test/v1.2",
+  "completedAt": "2026-08-30T02:02:29.371Z",
   "status": "PASS",
   "chain": [
     "R111",
@@ -111,10 +111,60 @@
     "sameSilent": true,
     "provenanceDiffers": true,
     "classification": "PARENT_INVARIANT_UNDER_CURRENT_VISIBILITY_RULE",
-    "interpretation": "Under repo-executors v0.9 the visibility selection is a function of task + intervention + trace id; parent identity affects provenance but not participant selection. Therefore R113 PARTIAL_RETURN cannot be cited as evidence of visibility path dependence in the current deterministic rule.",
+    "interpretation": "Under repo-executors formal baseline v0.9 the visibility selection is a function of task + intervention + trace id; parent identity affects provenance but not participant selection. Therefore R113 PARTIAL_RETURN cannot be cited as evidence of visibility path dependence in the current formal deterministic rule.",
     "status": "PASS",
     "failures": []
   },
+  "parentSensitiveControl": {
+    "model": "EXPERIMENTAL_PARENT_SENSITIVE_V1",
+    "parentA": {
+      "path": "greenhouse/r111-nostromo-formal-round.json",
+      "blobSha": "1ec138bd3bce0158e661254225c2c84ccc35d02b",
+      "participants": [
+        "01",
+        "02",
+        "04",
+        "05",
+        "07",
+        "08",
+        "10"
+      ],
+      "silent": [
+        "03",
+        "06",
+        "09"
+      ],
+      "transitionFingerprint": "7fed0915f9b13e39"
+    },
+    "parentB": {
+      "path": "greenhouse/r112-nostromo-formal-round.json",
+      "blobSha": "d2763d4fc518ef53042deea75c9501a7f16d3c13",
+      "participants": [
+        "01",
+        "03",
+        "04",
+        "06",
+        "07",
+        "09",
+        "10"
+      ],
+      "silent": [
+        "02",
+        "05",
+        "08"
+      ],
+      "transitionFingerprint": "26e374ea2c286ab6"
+    },
+    "deterministic": true,
+    "parentChangesParticipants": true,
+    "parentChangesSilent": true,
+    "fingerprintDiffers": true,
+    "classification": "PARENT_SENSITIVE_BY_CONSTRUCTION",
+    "interpretation": "This isolated counterfactual branch deliberately includes parent round ordinal in participant selection. It proves the infrastructure can execute and audit a parent-sensitive transition while preserving the formal parent-invariant baseline. It is an engineering control, not evidence that the real greenhouse is path-dependent.",
+    "status": "PASS",
+    "failures": [],
+    "boundary": "ISOLATED COUNTERFACTUAL CONTROL BRANCH ONLY. UNLIKE THE FORMAL V0.9 BASELINE, PARTICIPANT SELECTION EXPLICITLY INCLUDES PARENT ROUND ORDINAL. THIS EXECUTOR DOES NOT WRITE OR ADVANCE FORMAL GREENHOUSE HISTORY AND MUST NOT BE CITED AS EVIDENCE THAT REAL SHROOMING HISTORY IS CAUSALLY PATH-DEPENDENT."
+  },
   "failures": [],
-  "boundary": "Certifies repository history continuity, parent Git blob identity, deterministic executor reproducibility, provenance, the declared R111↔R113 visibility-return classification, and a matched-parent audit of the current visibility rule. The matched-parent control shows parent identity changes provenance but not participant selection under repo-executors v0.9; therefore PARTIAL_RETURN is not evidence of visibility path dependence. It does not certify ten independently persistent live LLM processes or causal reversibility outside this deterministic repository model."
+  "boundary": "Certifies formal repository history continuity and reproducibility, the parent-invariant v0.9 baseline, and an isolated parent-sensitive counterfactual executor. The new branch is explicitly separated from formal greenhouse history: it demonstrates executor capability and matched-control observability, not real causal path dependence or ten independently persistent live LLM processes."
 }
