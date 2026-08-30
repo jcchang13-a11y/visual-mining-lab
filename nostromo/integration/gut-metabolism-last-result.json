@@ -1,6 +1,6 @@
 {
-  "schema": "nostromo-gut-metabolism-test/v0.2.11",
-  "completedAt": "2026-08-30T20:05:30.548Z",
+  "schema": "nostromo-gut-metabolism-test/v0.2.12",
+  "completedAt": "2026-08-30T20:06:05.363Z",
   "status": "FAIL",
   "gut": {
     "version": "0.2.12",
@@ -35,6 +35,19 @@
       "nestedEchoSuppressedCount": 2,
       "taggedTailSuppressedCount": 0,
       "routeTagsStripped": 1,
+      "segmentEchoSuppressedCount": 0,
+      "delimitedEchoSuppressedCount": 0
+    },
+    "taggedTail": {
+      "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PREFIX_DIVERSITY_96+TAGGED_PAYLOAD_DEDUP+EXACT_TAGGED_TAIL_DEDUP_80+ROUTE_METADATA_STRIP+ADJACENT_SEGMENT_COLLAPSE_12+DELIMITED_LONG_SEGMENT_DEDUP",
+      "candidateCount": 1,
+      "selectedCount": 1,
+      "suppressedCount": 0,
+      "inheritedSubstrateStrippedCount": 0,
+      "nestedEchoAffectedAtoms": 1,
+      "nestedEchoSuppressedCount": 0,
+      "taggedTailSuppressedCount": 2,
+      "routeTagsStripped": 3,
       "segmentEchoSuppressedCount": 0,
       "delimitedEchoSuppressedCount": 0
     },
@@ -100,7 +113,7 @@
       "firstAppliedRound": 2,
       "privacy": "PRIVATE DRIVE RAW CONTENT/TITLES/IDS/URLS ARE NOT INCLUDED"
     },
-    "lastCarry": "[CONTRADICTION->VAJRA] 以 structure 位置重讀： 以 structure 位置重讀： 主動尋找最小反例與破壞條件：針對本輪 GENERAL 命題（ref:2eb33ba7），哪個前提最可能先失效？： VERIFIES AN EXPLICIT URL ONLY; DOES NOT CLA： 以 counterexam · [CONTRADICTION->VAJRA] 以 counterexample 位置重讀： 以 structure 位置重讀： 主動尋找最小反例與破壞條件：針對本輪 GENERAL 命題（ref:2eb33ba7），哪個前提最可能先失效？： VERIFIES AN EXPLICIT URL ONLY; DOES NOT CLA： 以 counterexam · [CONTRADICTION->VAJRA] 以 position 位置重讀： 以 structure 位置重讀： 主動尋找最小反例與破壞條件：針對本輪 GENERAL 命題（ref:2eb33ba7），哪個前提最可能先失效？： VERIFIES AN EXPLICIT URL ONLY; DOES NOT CLA： 以 counterexam · [CONTRADICTION->VAJRA] 以 otherness 位置重讀： 以 structure 位置重讀： 主動尋找最小反例與破壞條件：針對本輪 GENERAL 命題（ref:2eb33ba7），哪個前提最可能先失效？： VERIFIES AN EXPLICIT URL ONLY; DOES NOT CLA： 以 counterexam · [CONTRADICTION->VAJRA] 以 evidence 位置重讀： 以 structure 位置重讀： 主動尋找最小反例與破壞條件：針對本輪 GENERAL 命題（ref:2eb33ba7），哪個前提最可能先失效？： VERIFIES AN EXPLICIT URL ONLY; DOES NOT CLA： 以 counterexam · [CONTRADICTION->VAJRA] 以 language 位置重讀： 以 structure 位置重讀： 主動尋找最小反例與破壞條件：針對本輪 GENERAL 命題（ref:2eb33ba7），哪個前提最可能先失效？： VERIFIES AN EXPLICIT URL ONLY; DOES NOT CLA： 以 counterexam · [CONTRADICTION->VAJRA] 以 boundary 位置重讀： 以 structure 位置重讀： 主動尋找最小反例與破壞條件：針對本輪 GENERAL 命題（ref:2eb33ba7），哪個前提最可能先失效？： VERIFIES AN EXPLICIT ",
+    "lastCarry": "[CONTRADICTION->VAJRA] 以 structure 位置重讀： 以 structure 位置重讀： 主動尋找最小反例與破壞條件：針對本輪 GENERAL 命題（ref:dfd78c8e），哪個前提最可能先失效？： VERIFIES AN EXPLICIT URL ONLY; DOES NOT CLA： 以 counterexam · [CONTRADICTION->VAJRA] 以 counterexample 位置重讀： 以 structure 位置重讀： 主動尋找最小反例與破壞條件：針對本輪 GENERAL 命題（ref:dfd78c8e），哪個前提最可能先失效？： VERIFIES AN EXPLICIT URL ONLY; DOES NOT CLA： 以 counterexam · [CONTRADICTION->VAJRA] 以 position 位置重讀： 以 structure 位置重讀： 主動尋找最小反例與破壞條件：針對本輪 GENERAL 命題（ref:dfd78c8e），哪個前提最可能先失效？： VERIFIES AN EXPLICIT URL ONLY; DOES NOT CLA： 以 counterexam · [CONTRADICTION->VAJRA] 以 otherness 位置重讀： 以 structure 位置重讀： 主動尋找最小反例與破壞條件：針對本輪 GENERAL 命題（ref:dfd78c8e），哪個前提最可能先失效？： VERIFIES AN EXPLICIT URL ONLY; DOES NOT CLA： 以 counterexam · [CONTRADICTION->VAJRA] 以 evidence 位置重讀： 以 structure 位置重讀： 主動尋找最小反例與破壞條件：針對本輪 GENERAL 命題（ref:dfd78c8e），哪個前提最可能先失效？： VERIFIES AN EXPLICIT URL ONLY; DOES NOT CLA： 以 counterexam · [CONTRADICTION->VAJRA] 以 language 位置重讀： 以 structure 位置重讀： 主動尋找最小反例與破壞條件：針對本輪 GENERAL 命題（ref:dfd78c8e），哪個前提最可能先失效？： VERIFIES AN EXPLICIT URL ONLY; DOES NOT CLA： 以 counterexam · [CONTRADICTION->VAJRA] 以 boundary 位置重讀： 以 structure 位置重讀： 主動尋找最小反例與破壞條件：針對本輪 GENERAL 命題（ref:dfd78c8e），哪個前提最可能先失效？： VERIFIES AN EXPLICIT ",
     "roundAntiEcho": [
       {
         "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PREFIX_DIVERSITY_96+TAGGED_PAYLOAD_DEDUP+EXACT_TAGGED_TAIL_DEDUP_80+ROUTE_METADATA_STRIP+ADJACENT_SEGMENT_COLLAPSE_12+DELIMITED_LONG_SEGMENT_DEDUP",
@@ -146,10 +159,6 @@
   },
   "failures": [
     {
-      "type": "GUT_VERSION",
-      "detail": "0.2.12"
-    },
-    {
       "type": "SHORT_ADJACENT_ECHO_NOT_SUPPRESSED",
       "detail": {
         "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PREFIX_DIVERSITY_96+TAGGED_PAYLOAD_DEDUP+EXACT_TAGGED_TAIL_DEDUP_80+ROUTE_METADATA_STRIP+ADJACENT_SEGMENT_COLLAPSE_12+DELIMITED_LONG_SEGMENT_DEDUP",
@@ -166,5 +175,5 @@
       }
     }
   ],
-  "boundary": "PASS proves deterministic heuristic routing, provenance retention, quarantine/hold behavior, conservative exact inherited-substrate removal, exact tagged-payload de-echoing, short exact adjacent intra-atom echo suppression, near-duplicate preservation, structured-snippet protection, and a 3-round cross-organ connector-feedback regression. It does not prove semantic novelty, semantic correctness, or source truth."
+  "boundary": "PASS proves deterministic heuristic routing, provenance retention, quarantine/hold behavior, conservative exact inherited-substrate removal, exact tagged-payload de-echoing, exact repeated tagged-tail suppression while retaining distinct heads, short exact adjacent intra-atom echo suppression, near-duplicate preservation, structured-snippet protection, and a 3-round cross-organ connector-feedback regression. It does not prove semantic novelty, semantic correctness, or source truth."
 }
