@@ -1,7 +1,7 @@
 {
-  "schema": "nostromo-integration-ci/v0.9",
-  "completedAt": "2026-08-30T00:04:28.911Z",
-  "status": "FAIL",
+  "schema": "nostromo-integration-ci/v1.0",
+  "completedAt": "2026-08-30T00:05:48.692Z",
+  "status": "PASS",
   "rounds": 50,
   "expectedPerRound": {
     "executedStateActions": 3,
@@ -18,6 +18,29 @@
       "R112",
       "R113"
     ],
+    "reversibility": {
+      "referenceRound": "R111",
+      "testRound": "R113",
+      "classification": "PARTIAL_RETURN",
+      "intersection": [
+        "03",
+        "06",
+        "09",
+        "10"
+      ],
+      "lost": [
+        "02",
+        "05"
+      ],
+      "newlyVisible": [
+        "01",
+        "07"
+      ],
+      "intersectionCount": 4,
+      "unionCount": 8,
+      "jaccard": 0.5,
+      "exactReturn": false
+    },
     "rounds": [
       {
         "round": "R111",
@@ -109,15 +132,6 @@
     "muther": "../../mother-latest.json",
     "droplet": "../droplet-state.json"
   },
-  "failures": [
-    {
-      "type": "FORMAL_CHAIN_UNEXPECTED",
-      "chain": [
-        "R111",
-        "R112",
-        "R113"
-      ]
-    }
-  ],
-  "boundary": "PASS certifies 50-round published-state integration, deterministic reproducibility and parent-blob continuity for the declared R111→R112 formal SHROOMING chain, a 10-round closed loop of repository-native executors, and successful handoff into GUT of persisted evidence from query-scoped Google Drive mining and public web search. It does not certify ten independent live LLM processes, exhaustive whole-Drive mining, or that GitHub Actions itself can invoke private connectors."
+  "failures": [],
+  "boundary": "PASS certifies 50-round published-state integration, deterministic reproducibility and parent-blob continuity for the declared R111→R112→R113 formal SHROOMING chain including the R111↔R113 PARTIAL_RETURN visibility classification, a 10-round closed loop of repository-native executors, and successful handoff into GUT of persisted evidence from query-scoped Google Drive mining and public web search. It does not certify ten independent live LLM processes, causal reversibility outside this deterministic model, exhaustive whole-Drive mining, or that GitHub Actions itself can invoke private connectors."
 }
