@@ -1,7 +1,7 @@
 {
   "schema": "nostromo-integration-ci/v0.9",
-  "completedAt": "2026-08-30T00:04:20.791Z",
-  "status": "PASS",
+  "completedAt": "2026-08-30T00:04:28.911Z",
+  "status": "FAIL",
   "rounds": 50,
   "expectedPerRound": {
     "executedStateActions": 3,
@@ -15,7 +15,8 @@
     "status": "PASS",
     "chain": [
       "R111",
-      "R112"
+      "R112",
+      "R113"
     ],
     "rounds": [
       {
@@ -33,9 +34,17 @@
         "provenanceFingerprint": "642c83b7ac6c748d",
         "executorCompatibility": "CHAIN_V0_9",
         "status": "PASS"
+      },
+      {
+        "round": "R113",
+        "previousRound": "R112",
+        "parentBlobSha": "d2763d4fc518ef53042deea75c9501a7f16d3c13",
+        "provenanceFingerprint": "16a87d445012f2b8",
+        "executorCompatibility": "CHAIN_V0_9",
+        "status": "PASS"
       }
     ],
-    "boundary": "Certifies repository history continuity, parent Git blob identity, deterministic executor reproducibility and provenance for the declared formal-round chain. It does not certify ten independently persistent live LLM processes."
+    "boundary": "Certifies repository history continuity, parent Git blob identity, deterministic executor reproducibility, provenance, and the declared R111↔R113 visibility-return classification. It does not certify ten independently persistent live LLM processes or causal reversibility outside this deterministic repository model."
   },
   "repositoryNativeExecutors": {
     "shrooming": {
@@ -100,6 +109,15 @@
     "muther": "../../mother-latest.json",
     "droplet": "../droplet-state.json"
   },
-  "failures": [],
+  "failures": [
+    {
+      "type": "FORMAL_CHAIN_UNEXPECTED",
+      "chain": [
+        "R111",
+        "R112",
+        "R113"
+      ]
+    }
+  ],
   "boundary": "PASS certifies 50-round published-state integration, deterministic reproducibility and parent-blob continuity for the declared R111→R112 formal SHROOMING chain, a 10-round closed loop of repository-native executors, and successful handoff into GUT of persisted evidence from query-scoped Google Drive mining and public web search. It does not certify ten independent live LLM processes, exhaustive whole-Drive mining, or that GitHub Actions itself can invoke private connectors."
 }

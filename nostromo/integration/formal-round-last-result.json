@@ -1,10 +1,11 @@
 {
-  "schema": "nostromo-formal-round-test/v0.9",
-  "completedAt": "2026-08-30T00:04:17.041Z",
+  "schema": "nostromo-formal-round-test/v1.0",
+  "completedAt": "2026-08-30T00:04:26.404Z",
   "status": "PASS",
   "chain": [
     "R111",
-    "R112"
+    "R112",
+    "R113"
   ],
   "rounds": [
     {
@@ -32,8 +33,44 @@
       "silent": 3,
       "status": "PASS",
       "failures": []
+    },
+    {
+      "round": "R113",
+      "previousRound": "R112",
+      "statePath": "greenhouse/r113-nostromo-formal-round.json",
+      "parentPath": "greenhouse/r112-nostromo-formal-round.json",
+      "parentBlobSha": "d2763d4fc518ef53042deea75c9501a7f16d3c13",
+      "provenanceFingerprint": "16a87d445012f2b8",
+      "executorCompatibility": "CHAIN_V0_9",
+      "participants": 6,
+      "silent": 4,
+      "status": "PASS",
+      "failures": []
     }
   ],
+  "reversibility": {
+    "referenceRound": "R111",
+    "testRound": "R113",
+    "classification": "PARTIAL_RETURN",
+    "intersection": [
+      "03",
+      "06",
+      "09",
+      "10"
+    ],
+    "lost": [
+      "02",
+      "05"
+    ],
+    "newlyVisible": [
+      "01",
+      "07"
+    ],
+    "intersectionCount": 4,
+    "unionCount": 8,
+    "jaccard": 0.5,
+    "exactReturn": false
+  },
   "failures": [],
-  "boundary": "Certifies repository history continuity, parent Git blob identity, deterministic executor reproducibility and provenance for the declared formal-round chain. It does not certify ten independently persistent live LLM processes."
+  "boundary": "Certifies repository history continuity, parent Git blob identity, deterministic executor reproducibility, provenance, and the declared R111↔R113 visibility-return classification. It does not certify ten independently persistent live LLM processes or causal reversibility outside this deterministic repository model."
 }
