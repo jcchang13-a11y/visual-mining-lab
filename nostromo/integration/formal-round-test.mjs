@@ -52,6 +52,37 @@ function setStats(a,b){
   return {intersection,lost,newlyVisible,intersectionCount:intersection.length,unionCount:union.size,jaccard:union.size?intersection.length/union.size:1,exactReturn:lost.length===0&&newlyVisible.length===0};
 }
 
+async function matchedParentControl(){
+  const r113=JSON.parse(await fs.readFile(cases[2],'utf8'));
+  const parentA='greenhouse/r111-nostromo-formal-round.json';
+  const parentB='greenhouse/r112-nostromo-formal-round.json';
+  const shaA=execFileSync('git',['hash-object',parentA],{encoding:'utf8'}).trim();
+  const shaB=execFileSync('git',['hash-object',parentB],{encoding:'utf8'}).trim();
+  const common={task:r113.task,intervention:r113.intervention||{},event:r113.event||null};
+  const a=await shroomAdvanceGreenhouseRound({...common,statePath:parentA,expectedSourceBlobSha:shaA});
+  const b=await shroomAdvanceGreenhouseRound({...common,statePath:parentB,expectedSourceBlobSha:shaB});
+  const sameParticipants=JSON.stringify(a.participants)===JSON.stringify(b.participants);
+  const sameSilent=JSON.stringify(a.silent)===JSON.stringify(b.silent);
+  const provenanceDiffers=a.provenanceFingerprint!==b.provenanceFingerprint;
+  const failures=[];
+  if(!sameParticipants)failures.push('MATCHED_PARENT_PARTICIPANTS_DIFFER');
+  if(!sameSilent)failures.push('MATCHED_PARENT_SILENT_DIFFER');
+  if(!provenanceDiffers)failures.push('MATCHED_PARENT_PROVENANCE_NOT_DISTINCT');
+  return {
+    taskFingerprint:'same-as-R113',
+    intervention:r113.intervention,
+    parentA:{path:parentA,blobSha:shaA,round:a.previousRound,generatedRound:a.round,participants:a.participants,provenanceFingerprint:a.provenanceFingerprint},
+    parentB:{path:parentB,blobSha:shaB,round:b.previousRound,generatedRound:b.round,participants:b.participants,provenanceFingerprint:b.provenanceFingerprint},
+    sameParticipants,
+    sameSilent,
+    provenanceDiffers,
+    classification:sameParticipants&&sameSilent?'PARENT_INVARIANT_UNDER_CURRENT_VISIBILITY_RULE':'PARENT_SENSITIVE_UNDER_CURRENT_VISIBILITY_RULE',
+    interpretation:'Under repo-executors v0.9 the visibility selection is a function of task + intervention + trace id; parent identity affects provenance but not participant selection. Therefore R113 PARTIAL_RETURN cannot be cited as evidence of visibility path dependence in the current deterministic rule.',
+    status:failures.length?'FAIL':'PASS',
+    failures
+  };
+}
+
 const rounds=[];
 for(const p of cases)rounds.push(await verify(p));
 const failures=rounds.flatMap(r=>r.failures.map(f=>`${r.round}:${f}`));
@@ -73,15 +104,19 @@ if(r113.reversibility){
   if(Math.abs(Number(r113.reversibility.jaccard)-reversibility.jaccard)>1e-12)failures.push('R113:REVERSIBILITY_JACCARD_MISMATCH');
 }else failures.push('R113:REVERSIBILITY_EVIDENCE_MISSING');
 
+const parentControl=await matchedParentControl();
+for(const f of parentControl.failures)failures.push(`PARENT_CONTROL:${f}`);
+
 const result={
-  schema:'nostromo-formal-round-test/v1.0',
+  schema:'nostromo-formal-round-test/v1.1',
   completedAt:new Date().toISOString(),
   status:failures.length?'FAIL':'PASS',
   chain:rounds.map(r=>r.round),
   rounds,
   reversibility,
+  parentControl,
   failures,
-  boundary:'Certifies repository history continuity, parent Git blob identity, deterministic executor reproducibility, provenance, and the declared R111↔R113 visibility-return classification. It does not certify ten independently persistent live LLM processes or causal reversibility outside this deterministic repository model.'
+  boundary:'Certifies repository history continuity, parent Git blob identity, deterministic executor reproducibility, provenance, the declared R111↔R113 visibility-return classification, and a matched-parent audit of the current visibility rule. The matched-parent control shows parent identity changes provenance but not participant selection under repo-executors v0.9; therefore PARTIAL_RETURN is not evidence of visibility path dependence. It does not certify ten independently persistent live LLM processes or causal reversibility outside this deterministic repository model.'
 };
 await fs.writeFile('nostromo/integration/formal-round-last-result.json',JSON.stringify(result,null,2)+'\n');
 console.log(JSON.stringify(result,null,2));
