@@ -1,7 +1,7 @@
 {
   "schema": "nostromo-vajra-dynamic-test/v0.2.5",
-  "completedAt": "2026-08-30T13:03:36.022Z",
-  "status": "PASS",
+  "completedAt": "2026-08-30T15:06:22.389Z",
+  "status": "FAIL",
   "guards": {
     "falseCertainty": true,
     "dynamicLensSelection": true,
@@ -37,7 +37,7 @@
           "evidenceKey": "f1156f6a",
           "provenance": "prov-verified-001",
           "relation": "One supports the target claim and one limits its scope.",
-          "boundary": "Resolution means the handoff contract received a matching executed, provenance-bearing return. One provenance+material evidence payload may resolve only one branch per application, preventing cross-branch replay amplification. It does not mean VAJRA semantically verified the returned material or proved the target claim."
+          "boundary": "Resolution means the handoff contract received a matching executed, provenance-bearing return. One provenance+material evidence payload may resolve only one branch across the accumulated VAJRA result history, preventing replay amplification across branches and repeated applications. It does not mean VAJRA semantically verified the returned material or proved the target claim."
         }
       ],
       "rejectedReceipts": [
@@ -67,7 +67,8 @@
             "MISSING_PROVENANCE"
           ]
         }
-      ]
+      ],
+      "historicalEvidenceKeys": 0
     },
     "replayAdversarial": {
       "targetRef": "b5aeee1e",
@@ -147,6 +148,39 @@
       ]
     }
   },
-  "failures": [],
+  "failures": [
+    {
+      "type": "UNIVERSAL_VERSION",
+      "detail": "0.2.6"
+    },
+    {
+      "type": "CAUSAL_VERSION",
+      "detail": "0.2.6"
+    },
+    {
+      "type": "EMPIRICAL_VERSION",
+      "detail": "0.2.6"
+    },
+    {
+      "type": "NORMATIVE_VERSION",
+      "detail": "0.2.6"
+    },
+    {
+      "type": "DEFINITION_VERSION",
+      "detail": "0.2.6"
+    },
+    {
+      "type": "SELF_REFERENCE_VERSION",
+      "detail": "0.2.6"
+    },
+    {
+      "type": "VAGUE_VERSION",
+      "detail": "0.2.6"
+    },
+    {
+      "type": "RECEIPT_VERSION",
+      "detail": "0.2.6"
+    }
+  ],
   "boundary": "PASS proves proposition-aware lens selection, structural receipt closure, VAJRA→GUT referential continuity, and a replay-amplification guard: one identical provenance+material payload cannot be relabelled to close multiple VAJRA branches in one application. Rejection is structural and auditable, not a semantic truth judgment."
 }
