@@ -1,4 +1,4 @@
-// NOSTROMO active executor loop v1.0
+// NOSTROMO active executor loop v1.1
 // Server/CI-side integration path for repository-native partial executors plus validated external connector evidence.
 import crypto from 'node:crypto';
 import {shroomSandboxReadingRound,shroomGreenhousePoseQuestion,mutherMineRepo,dropletVerifyUrl} from './repo-executors.mjs';
@@ -54,7 +54,7 @@ export async function runActiveExecutorLoop({rounds=10,seed='NOSTROMO active int
       boundary:'Connector actions executed externally once; later rounds apply a redacted evidence-derived feedback directive and do not claim re-execution.'
     };
     const executorPayload={round,feedbackApplied,feedbackFingerprint:feedback.fingerprint,shrooming,greenhouseProbe,muther,droplet,externalConnector,vajra};
-    const gut=globalThis.GutEngine.digest(executorPayload,{source:'NOSTROMO/active-executor-loop'});
+    const gut=globalThis.GutEngine.digest(executorPayload,{source:'NOSTROMO/active-executor-loop',inheritedSubstrates:[roundInput]});
     const statuses=[shrooming.status,greenhouseProbe.status,muther.status,droplet.status];
     const status=statuses.every(x=>x==='EXECUTED')?'PASS':'FAIL';
     const item={
@@ -74,7 +74,7 @@ export async function runActiveExecutorLoop({rounds=10,seed='NOSTROMO active int
         dropletVerify:externalConnector.actions?.dropletVerify?.status||null
       },
       vajra:{status:vajra.status,traceLength:vajra.trace.length},
-      gut:{ingested:gut.ingested,absorbed:gut.absorbed,excreted:gut.excreted},
+      gut:{ingested:gut.ingested,absorbed:gut.absorbed,excreted:gut.excreted,antiEcho:gut.antiEcho},
       carryIn:carry.slice(0,240),
       carryOut:gut.summary.slice(0,1200)
     };
@@ -84,7 +84,7 @@ export async function runActiveExecutorLoop({rounds=10,seed='NOSTROMO active int
   }
   const acceptedActions=['muther','mutherInternal','droplet','dropletVerify'].filter(k=>connectorEvidence.actions?.[k]?.status==='EXECUTED').length;
   return {
-    schema:'nostromo-active-executor-loop/v1.0',
+    schema:'nostromo-active-executor-loop/v1.1',
     status:trace.length===total&&trace.every(x=>x.status==='PASS')?'PASS':'FAIL',
     requestedRounds:total,
     completedRounds:trace.length,
@@ -92,6 +92,6 @@ export async function runActiveExecutorLoop({rounds=10,seed='NOSTROMO active int
     connectorHandoff:{status:connectorEvidence.status,completedAt:connectorEvidence.completedAt,actionsAccepted:acceptedActions,failures:connectorEvidence.failures},
     trace,
     completedAt:new Date().toISOString(),
-    boundary:'Certifies closed-loop routing for SHROOMING local deterministic sandbox plus a non-state-mutating greenhouse probe, MU/TH/UR repository mining, DROPLET explicit-URL verification, VAJRA and GUT, plus acceptance and digestion of externally executed Google Drive query mining, bounded authorized-source MINE_INTERNAL evidence, public web search, and connector-supplied claim-verification evidence. From round 2 onward, a redacted connector-evidence feedback directive is explicitly injected into SHROOMING/greenhouse/VAJRA input; this proves feedback routing, not connector re-execution or semantic correctness. MINE_INTERNAL is not exhaustive private-environment crawling. GitHub Actions does not itself search private Drive or the web.'
+    boundary:'Certifies closed-loop routing for SHROOMING local deterministic sandbox plus a non-state-mutating greenhouse probe, MU/TH/UR repository mining, DROPLET explicit-URL verification, VAJRA and GUT, plus acceptance and digestion of externally executed Google Drive query mining, bounded authorized-source MINE_INTERNAL evidence, public web search, and connector-supplied claim-verification evidence. From round 2 onward, redacted connector evidence changes SHROOMING/greenhouse/VAJRA input. GUT receives the current round input as an inherited substrate and subtracts exact compacted echoes before producing the next carry; this proves contextual anti-echo routing, not semantic novelty detection. GitHub Actions does not itself search private Drive or the web.'
   };
 }
