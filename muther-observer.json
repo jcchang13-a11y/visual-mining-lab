@@ -1,9 +1,9 @@
 {
-  "updatedAt":"2026-08-30 12:28 +08:00",
+  "updatedAt":"2026-08-30 13:30 +08:00",
   "overall":"RUNNING · SYNTHESIS TESTS · PRIVACY FILTER ACTIVE · SENSITIVE ZONE HELD",
-  "headline":"這輪端點星挖到一個新的候選機制：看得越清楚，問題有時反而越大。2017 暖暖防跌田野筆記裡，一個原本很局部的浴室防跌問題，往下追之後連到照明、排水、熱水器、生活習慣、修理風險與照顧責任。MUTHER 暫稱這個現象為『legibility cascade／可辨識性連鎖』。媒文化本輪嘗試跨年代抽樣，但連續碰到個人／敏感文件型影像，因此全部在冶煉前排除，沒有硬做作品。日日春仍完全未進入。",
-  "uncultured":{"plainStatus":"這輪沒有作品，但找到一個必須正式加進流程的防污染規則。","signal":"跨 2019、2021 的三個候選影像在實際查看後，都屬於個人或敏感文件型材料。MUTHER 沒有做構圖抽取、拼接、轉譯或上站，而是全部排除。這證明只靠檔名、日期或媒介名稱挑影像不夠，真正冶煉前必須先過 privacy screen。","next":"改抽明確非敏感、非文件型的舊相機照片，再拿 REMIX 005 的 field / grid / node / opening / intrusion 去做異題材重測。","artifact":null},
-  "terminus":{"plainStatus":"新增『看懂問題本身，也可能讓問題膨脹』這一層。","signal":"郭貽菱 2017 防跌工班田野筆記裡，原本鎖定浴室防跌，但實際進入家戶後，問題一路牽出照明、排水、熱水設備、既有洗澡方式、修理恐懼，以及家庭／社區／國家的照顧責任。MUTHER 因此提出候選模型 legibility cascade：辨認接口不只讓能力被看見，也會讓原本藏住的依賴關係與失效點一起浮出來；診斷越完整，介入範圍有時反而越大。這是 MUTHER 新生成的模型，不是原作者原話。","next":"找完全不同領域重測，並刻意找『診斷越好、問題反而越收斂』的反例。"},
-  "sensitiveZone":{"plainStatus":"日日春仍未授權，本輪完全沒有進入。","signal":"沒有打開日日春內部檔案，也沒有拿其中材料做摘要或冶煉。","next":"等待使用者明確授權。"},
-  "scale":{"now":"小批量巡礦＋跨年代冶煉＋反例測試＋視覺隱私篩檢＋敏感礦區邊界","later":"至少 30 輪跨人、年代、品質與方法重測；成功一次不算成熟","rule":"原始 Drive 材料不動；日日春未授權不得進入；個人／敏感文件型影像在冶煉前排除；衍生物與原礦分開；MUTHER 合成不得冒充原作者觀點。"}
+  "headline":"這輪兩邊都有進展。端點星找到 legibility cascade 的重要反例：看得更清楚不一定讓問題越挖越大；有時分類反而把複雜問題壓成可處理的核心。媒文化則用一張 2018 戶外相機照片重測結構冶煉，做出 REMIX 006：沒有沿用原圖像素，而是把山線、廠房、光影邊界、近物／遠物與投影改寫成新的『THRESHOLD ECHO』結構。日日春仍停在 metadata 邊界。",
+  "uncultured":{"plainStatus":"REMIX 006 已生成；跨題材的 source-pixel-free 結構抽取第二次成立，但還不到成熟方法。","signal":"2018 的戶外照片通過 privacy screen：畫面是山景、廠房、空地與兩個不同距離的軟體遊具，沒有可見人物或敏感文件。MUTHER 不直接拼貼照片，而把它抽成 HORIZON / SHELL / THRESHOLD / FIGURE / ECHO / CAST 六個角色，再重寫尺度與空間關係生成 SVG。這和 REMIX 005 的室內 field / grid / node / opening / intrusion 是不同題材、不同結構，所以比單一案例更有意義。","next":"拿完全不同物件與場景再測一次：如果拿掉『動物外形相似』仍能維持 threshold + echo 的結構，才更接近可重複視覺語法。","artifact":"media-lab/experiments/muther-remix-006.svg"},
+  "terminus":{"plainStatus":"legibility cascade 被重要反例修正：可辨識性不是單向擴張，而會分岔。","signal":"劉維真 2008《臺灣公有土地行政管理之研究》一方面說公地管理不能只看產籍，而會擴到使用、收益、處分、政府間撥用等；另一方面又明說深入分析並分類可以找出問題核心、建立課題與解法。MUTHER 因此把上一輪模型改成兩支：dependency-discovery 會讓行動圖擴張，decision-partition 則可能把大問題壓縮成可處理範圍。這是 MUTHER 合成，不是原作者原話。","next":"跨另外兩種材料各找一個 cascade 與 compression 案例，測試分岔條件是不是『新增依賴關係』對上『建立決策分區』。"},
+  "sensitiveZone":{"plainStatus":"日日春仍未授權；本輪再遇到兩個明確檔名，但只停在 metadata。","signal":"發現『2006日日春文化局大陸妹結案報告』與同名舊版本；沒有打開正文、摘要、採礦或冶煉。","next":"等待使用者明確授權；未授權前持續跳過。"},
+  "scale":{"now":"小批量巡礦＋跨領域反例冶煉＋source-pixel-free 視覺結構重測＋隱私篩檢＋敏感礦區邊界","later":"至少 30 輪跨人、年代、品質與方法重測；成功一次不算成熟","rule":"原始 Drive 材料不動；日日春未授權不得進入；個人／敏感文件型影像在冶煉前排除；衍生物與原礦分開；MUTHER 合成不得冒充原作者觀點。"}
 }
