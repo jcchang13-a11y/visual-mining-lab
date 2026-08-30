@@ -1,7 +1,7 @@
 {
-  "schema": "nostromo-vajra-dynamic-test/v0.2.5",
-  "completedAt": "2026-08-30T15:06:22.389Z",
-  "status": "FAIL",
+  "schema": "nostromo-vajra-dynamic-test/v0.2.6",
+  "completedAt": "2026-08-30T15:06:51.449Z",
+  "status": "PASS",
   "guards": {
     "falseCertainty": true,
     "dynamicLensSelection": true,
@@ -14,7 +14,9 @@
     "receiptProvenanceRequired": true,
     "receiptRelationRequired": true,
     "receiptDoesNotCertifyTruth": true,
-    "crossBranchEvidenceReplayRejected": true
+    "crossBranchEvidenceReplayRejected": true,
+    "crossApplicationEvidenceReplayRejected": true,
+    "priorResolutionPreserved": true
   },
   "crossOrgan": {
     "vajraGut": {
@@ -73,6 +75,12 @@
     "replayAdversarial": {
       "targetRef": "b5aeee1e",
       "resolved": 1,
+      "open": 4,
+      "rejected": 1,
+      "replayRejected": true
+    },
+    "crossApplicationReplay": {
+      "resolved": 0,
       "open": 4,
       "rejected": 1,
       "replayRejected": true
@@ -148,39 +156,6 @@
       ]
     }
   },
-  "failures": [
-    {
-      "type": "UNIVERSAL_VERSION",
-      "detail": "0.2.6"
-    },
-    {
-      "type": "CAUSAL_VERSION",
-      "detail": "0.2.6"
-    },
-    {
-      "type": "EMPIRICAL_VERSION",
-      "detail": "0.2.6"
-    },
-    {
-      "type": "NORMATIVE_VERSION",
-      "detail": "0.2.6"
-    },
-    {
-      "type": "DEFINITION_VERSION",
-      "detail": "0.2.6"
-    },
-    {
-      "type": "SELF_REFERENCE_VERSION",
-      "detail": "0.2.6"
-    },
-    {
-      "type": "VAGUE_VERSION",
-      "detail": "0.2.6"
-    },
-    {
-      "type": "RECEIPT_VERSION",
-      "detail": "0.2.6"
-    }
-  ],
-  "boundary": "PASS proves proposition-aware lens selection, structural receipt closure, VAJRA→GUT referential continuity, and a replay-amplification guard: one identical provenance+material payload cannot be relabelled to close multiple VAJRA branches in one application. Rejection is structural and auditable, not a semantic truth judgment."
+  "failures": [],
+  "boundary": "PASS proves proposition-aware lens selection, structural receipt closure, VAJRA→GUT referential continuity, and replay-amplification guards across both branches and repeated applications. A provenance+material payload already consumed by a prior VAJRA result cannot be relabelled later to close another branch. Rejection is structural and auditable, not a semantic truth judgment."
 }
