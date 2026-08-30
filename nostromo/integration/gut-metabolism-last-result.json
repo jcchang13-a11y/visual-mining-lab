@@ -1,9 +1,9 @@
 {
   "schema": "nostromo-gut-metabolism-test/v0.2.8",
-  "completedAt": "2026-08-30T12:05:10.115Z",
+  "completedAt": "2026-08-30T12:06:17.445Z",
   "status": "FAIL",
   "gut": {
-    "version": "0.2.8",
+    "version": "0.2.9",
     "mode": "DETERMINISTIC_HEURISTIC_ROUTER",
     "ingested": 10,
     "absorbed": 7,
@@ -28,7 +28,7 @@
       "HOLD": 4
     },
     "antiEcho": {
-      "strategy": "INHERITED_SUBSTRATE_SUBTRACTION+PREFIX_DIVERSITY_96+NESTED_ROUTE_TAG_CUTOFF+ROUTE_METADATA_STRIP+ADJACENT_SEGMENT_COLLAPSE+DELIMITED_LONG_SEGMENT_DEDUP",
+      "strategy": "INHERITED_SUBSTRATE_SUBTRACTION+PREFIX_DIVERSITY_96+TAGGED_PAYLOAD_DEDUP+ROUTE_METADATA_STRIP+ADJACENT_SEGMENT_COLLAPSE+DELIMITED_LONG_SEGMENT_DEDUP",
       "candidateCount": 4,
       "selectedCount": 2,
       "suppressedCount": 2,
@@ -40,7 +40,7 @@
       "delimitedEchoSuppressedCount": 0
     },
     "nestedAntiEcho": {
-      "strategy": "INHERITED_SUBSTRATE_SUBTRACTION+PREFIX_DIVERSITY_96+NESTED_ROUTE_TAG_CUTOFF+ROUTE_METADATA_STRIP+ADJACENT_SEGMENT_COLLAPSE+DELIMITED_LONG_SEGMENT_DEDUP",
+      "strategy": "INHERITED_SUBSTRATE_SUBTRACTION+PREFIX_DIVERSITY_96+TAGGED_PAYLOAD_DEDUP+ROUTE_METADATA_STRIP+ADJACENT_SEGMENT_COLLAPSE+DELIMITED_LONG_SEGMENT_DEDUP",
       "candidateCount": 1,
       "selectedCount": 1,
       "suppressedCount": 0,
@@ -52,22 +52,22 @@
       "delimitedEchoSuppressedCount": 0
     },
     "repeatedTagNovelty": {
-      "summary": "[CONTRADICTION->VAJRA] first contradiction remains distinct and should be kept",
+      "summary": "[CONTRADICTION->VAJRA] first contradiction remains distinct and should be kept： second contradiction is genuinely new evidence and must also survive normalization",
       "antiEcho": {
-        "strategy": "INHERITED_SUBSTRATE_SUBTRACTION+PREFIX_DIVERSITY_96+NESTED_ROUTE_TAG_CUTOFF+ROUTE_METADATA_STRIP+ADJACENT_SEGMENT_COLLAPSE+DELIMITED_LONG_SEGMENT_DEDUP",
+        "strategy": "INHERITED_SUBSTRATE_SUBTRACTION+PREFIX_DIVERSITY_96+TAGGED_PAYLOAD_DEDUP+ROUTE_METADATA_STRIP+ADJACENT_SEGMENT_COLLAPSE+DELIMITED_LONG_SEGMENT_DEDUP",
         "candidateCount": 1,
         "selectedCount": 1,
         "suppressedCount": 0,
         "inheritedSubstrateStrippedCount": 0,
         "nestedEchoAffectedAtoms": 1,
-        "nestedEchoSuppressedCount": 1,
-        "routeTagsStripped": 1,
+        "nestedEchoSuppressedCount": 0,
+        "routeTagsStripped": 2,
         "segmentEchoSuppressedCount": 0,
         "delimitedEchoSuppressedCount": 0
       }
     },
     "segmentAntiEcho": {
-      "strategy": "INHERITED_SUBSTRATE_SUBTRACTION+PREFIX_DIVERSITY_96+NESTED_ROUTE_TAG_CUTOFF+ROUTE_METADATA_STRIP+ADJACENT_SEGMENT_COLLAPSE+DELIMITED_LONG_SEGMENT_DEDUP",
+      "strategy": "INHERITED_SUBSTRATE_SUBTRACTION+PREFIX_DIVERSITY_96+TAGGED_PAYLOAD_DEDUP+ROUTE_METADATA_STRIP+ADJACENT_SEGMENT_COLLAPSE+DELIMITED_LONG_SEGMENT_DEDUP",
       "candidateCount": 1,
       "selectedCount": 1,
       "suppressedCount": 0,
@@ -79,7 +79,7 @@
       "delimitedEchoSuppressedCount": 0
     },
     "delimitedAntiEcho": {
-      "strategy": "INHERITED_SUBSTRATE_SUBTRACTION+PREFIX_DIVERSITY_96+NESTED_ROUTE_TAG_CUTOFF+ROUTE_METADATA_STRIP+ADJACENT_SEGMENT_COLLAPSE+DELIMITED_LONG_SEGMENT_DEDUP",
+      "strategy": "INHERITED_SUBSTRATE_SUBTRACTION+PREFIX_DIVERSITY_96+TAGGED_PAYLOAD_DEDUP+ROUTE_METADATA_STRIP+ADJACENT_SEGMENT_COLLAPSE+DELIMITED_LONG_SEGMENT_DEDUP",
       "candidateCount": 1,
       "selectedCount": 1,
       "suppressedCount": 0,
@@ -91,7 +91,7 @@
       "delimitedEchoSuppressedCount": 1
     },
     "inheritedAntiEcho": {
-      "strategy": "INHERITED_SUBSTRATE_SUBTRACTION+PREFIX_DIVERSITY_96+NESTED_ROUTE_TAG_CUTOFF+ROUTE_METADATA_STRIP+ADJACENT_SEGMENT_COLLAPSE+DELIMITED_LONG_SEGMENT_DEDUP",
+      "strategy": "INHERITED_SUBSTRATE_SUBTRACTION+PREFIX_DIVERSITY_96+TAGGED_PAYLOAD_DEDUP+ROUTE_METADATA_STRIP+ADJACENT_SEGMENT_COLLAPSE+DELIMITED_LONG_SEGMENT_DEDUP",
       "candidateCount": 1,
       "selectedCount": 1,
       "suppressedCount": 0,
@@ -115,7 +115,7 @@
       },
       "summary": "[RAW_STRUCTURED_SNIPPET->MUTHER] {\"version\":\"2.3\",\"round\":\"R113\",\"task\":\"conflicting tasks and partial memory\",\"continuity\":\"history preserved\"}"
     },
-    "boundary": "Deterministic heuristic metabolism only. Exact inherited substrate echoes are contextually subtracted and counted. Repeated long segments inside one atom are deduplicated only across explicit separators (middle dot, semicolon, or newline) and only at 40+ normalized characters, reducing intra-atom metabolic echo without claiming semantic equivalence. JSON-like or heavily escaped structured snippets are classified before lexical contradiction detection and routed back to MUTHER at low priority, preventing incidental words inside engineering artifacts from masquerading as high-priority semantic counterevidence. These rules are auditable heuristics, not semantic truth."
+    "boundary": "Deterministic heuristic metabolism only. Exact inherited substrate echoes are contextually subtracted and counted. Repeated route metadata no longer triggers tail cutoff: only exact repeated tagged payloads of 24+ normalized characters are suppressed, so a later segment with the same route tag but novel payload is preserved. Repeated long segments inside one atom are deduplicated only across explicit separators and only at conservative length thresholds. JSON-like or heavily escaped structured snippets are classified before lexical contradiction detection and routed back to MUTHER at low priority. These rules are auditable heuristics, not semantic truth."
   },
   "feedback": {
     "status": "PASS",
@@ -126,10 +126,10 @@
       "firstAppliedRound": 2,
       "privacy": "PRIVATE DRIVE RAW CONTENT/TITLES/IDS/URLS ARE NOT INCLUDED"
     },
-    "lastCarry": "[CONTRADICTION->VAJRA] 主動尋找最小反例與破壞條件 · [CONTRADICTION->VAJRA] 主動尋找最小反例與破壞條件：針對本輪 UNIVERSAL 命題（ref:2aa32a00），哪個前提最可能先失效？ · [CLAIM->DROPLET] VERIFIES AN EXPLICIT URL ONLY; DOES NOT CLAIM SEARCH-ENGINE DISCOVERY · [EVIDENCE_OR_PROVENANCE->MUTHER] 200 · [CLAIM->DROPLET] Connector actions executed externally once; later rounds apply a redacted evidence-derived feedback directive and do not claim re-execution. · [EVIDENCE_OR_PROVENANCE->MUTHER] nostromo-connector-evidence-carry/v1.0 · [QUESTION->SHROOMING] EXECUTES A NON-STATE-MUTATING QUESTION PROBE AGAINST THE LATEST PUBLISHED GREENHOUSE HISTORY. REACTIONS ARE TRACEABLE TRANSFORMATIONS OF RECORDED HISTORY, NOT CLAIMS OF TEN INDEPENDENT LIVE LLM PROCESSES, AND DO NOT ADVANCE THE FORMAL SHROOMING ROUND. · [QUESTION->SHROOMING] SHROOMING_GREENHOUSE_QUESTION_PROBE · [QUESTION->SHROOMING] f6fbd4d83698d8e7 · [QUESTION->SHROOMING] 以歷史 trace 01 的最近可驗證位置（R110 / Regime shift: subject form becomes observable variable / participant）對問題做 scope 探針： LAIM SEARCH-ENGINE DISCOVERY· 200· Connector actions executed externally once; later rounds apply a redacted evidence-derived feedback directive and do not claim re-execution. · [EVIDENCE_OR_PROVENANCE->M",
+    "lastCarry": "[CONTRADICTION->VAJRA] 主動尋找最小反例與破壞條件 · [CONTRADICTION->VAJRA] 主動尋找最小反例與破壞條件：針對本輪 UNIVERSAL 命題（ref:2aa32a00），哪個前提最可能先失效？ · [CLAIM->DROPLET] VERIFIES AN EXPLICIT URL ONLY; DOES NOT CLAIM SEARCH-ENGINE DISCOVERY · [EVIDENCE_OR_PROVENANCE->MUTHER] 200 · [CLAIM->DROPLET] Connector actions executed externally once; later rounds apply a redacted evidence-derived feedback directive and do not claim re-execution. · [EVIDENCE_OR_PROVENANCE->MUTHER] nostromo-connector-evidence-carry/v1.0 · [QUESTION->SHROOMING] EXECUTES A NON-STATE-MUTATING QUESTION PROBE AGAINST THE LATEST PUBLISHED GREENHOUSE HISTORY. REACTIONS ARE TRACEABLE TRANSFORMATIONS OF RECORDED HISTORY, NOT CLAIMS OF TEN INDEPENDENT LIVE LLM PROCESSES, AND DO NOT ADVANCE THE FORMAL SHROOMING ROUND. · [QUESTION->SHROOMING] SHROOMING_GREENHOUSE_QUESTION_PROBE · [QUESTION->SHROOMING] f6fbd4d83698d8e7 · [QUESTION->SHROOMING] 以歷史 trace 01 的最近可驗證位置（R110 / Regime shift: subject form becomes observable variable / participant）對問題做 scope 探針： LAIM SEARCH-ENGINE DISCOVERY·： 200： Connector actions executed externally once; later rounds apply a redacted evidence-derived feedback directive and do not claim re-execution.： nostromo-connector-evidenc",
     "roundAntiEcho": [
       {
-        "strategy": "INHERITED_SUBSTRATE_SUBTRACTION+PREFIX_DIVERSITY_96+NESTED_ROUTE_TAG_CUTOFF+ROUTE_METADATA_STRIP+ADJACENT_SEGMENT_COLLAPSE+DELIMITED_LONG_SEGMENT_DEDUP",
+        "strategy": "INHERITED_SUBSTRATE_SUBTRACTION+PREFIX_DIVERSITY_96+TAGGED_PAYLOAD_DEDUP+ROUTE_METADATA_STRIP+ADJACENT_SEGMENT_COLLAPSE+DELIMITED_LONG_SEGMENT_DEDUP",
         "candidateCount": 190,
         "selectedCount": 12,
         "suppressedCount": 178,
@@ -141,7 +141,7 @@
         "delimitedEchoSuppressedCount": 0
       },
       {
-        "strategy": "INHERITED_SUBSTRATE_SUBTRACTION+PREFIX_DIVERSITY_96+NESTED_ROUTE_TAG_CUTOFF+ROUTE_METADATA_STRIP+ADJACENT_SEGMENT_COLLAPSE+DELIMITED_LONG_SEGMENT_DEDUP",
+        "strategy": "INHERITED_SUBSTRATE_SUBTRACTION+PREFIX_DIVERSITY_96+TAGGED_PAYLOAD_DEDUP+ROUTE_METADATA_STRIP+ADJACENT_SEGMENT_COLLAPSE+DELIMITED_LONG_SEGMENT_DEDUP",
         "candidateCount": 158,
         "selectedCount": 12,
         "suppressedCount": 146,
@@ -153,14 +153,14 @@
         "delimitedEchoSuppressedCount": 0
       },
       {
-        "strategy": "INHERITED_SUBSTRATE_SUBTRACTION+PREFIX_DIVERSITY_96+NESTED_ROUTE_TAG_CUTOFF+ROUTE_METADATA_STRIP+ADJACENT_SEGMENT_COLLAPSE+DELIMITED_LONG_SEGMENT_DEDUP",
+        "strategy": "INHERITED_SUBSTRATE_SUBTRACTION+PREFIX_DIVERSITY_96+TAGGED_PAYLOAD_DEDUP+ROUTE_METADATA_STRIP+ADJACENT_SEGMENT_COLLAPSE+DELIMITED_LONG_SEGMENT_DEDUP",
         "candidateCount": 158,
         "selectedCount": 12,
         "suppressedCount": 146,
         "inheritedSubstrateStrippedCount": 20,
         "nestedEchoAffectedAtoms": 10,
-        "nestedEchoSuppressedCount": 30,
-        "routeTagsStripped": 20,
+        "nestedEchoSuppressedCount": 0,
+        "routeTagsStripped": 90,
         "segmentEchoSuppressedCount": 0,
         "delimitedEchoSuppressedCount": 0
       }
@@ -169,8 +169,8 @@
   },
   "failures": [
     {
-      "type": "REPEATED_TAG_NOVEL_SEGMENT_OVERTRIMMED",
-      "detail": "[CONTRADICTION->VAJRA] first contradiction remains distinct and should be kept"
+      "type": "GUT_VERSION",
+      "detail": "0.2.9"
     }
   ],
   "boundary": "PASS proves deterministic heuristic metabolism plus contextual inherited-substrate de-echoing, exact repeated long-segment suppression within one atom across explicit separators, preservation of novel content even when route metadata repeats, and protection against JSON-like engineering snippets being falsely promoted to high-priority semantic contradictions. It does not prove semantic novelty, semantic correctness, source truth, or live connector re-execution inside GitHub Actions."
