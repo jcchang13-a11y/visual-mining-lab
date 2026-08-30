@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" role="img" aria-labelledby="t d">
+<title id="t">MUTHER REMIX 005 — Intrusion Field</title>
+<desc id="d">A structural translation of a 2019 burst photograph: tilted room planes, cabinet grid, fan circle, doorway notch and a large body-shaped intrusion entering from outside the frame. No source pixels are reused.</desc>
+<rect width="1200" height="700" fill="#ded8ca"/>
+<!-- tilted architectural field -->
+<g transform="rotate(-18 600 350)">
+  <rect x="-120" y="235" width="930" height="520" fill="#b36b2f"/>
+  <g fill="none" stroke="#34271f" stroke-width="9" opacity=".82">
+    <path d="M-90 360H790M-70 485H805M-45 610H825"/>
+    <path d="M110 230V755M315 230V755M525 230V755M735 230V755"/>
+  </g>
+  <g fill="#ece7da">
+    <rect x="170" y="405" width="34" height="34"/>
+    <rect x="250" y="475" width="34" height="34"/>
+    <rect x="365" y="415" width="34" height="34"/>
+    <rect x="310" y="560" width="34" height="34"/>
+  </g>
+</g>
+<!-- room opening / corner -->
+<path d="M670 420L815 350 865 520 740 595Z" fill="#514a41"/>
+<path d="M700 430L810 380 837 493 748 548Z" fill="#a64036" opacity=".82"/>
+<!-- fan: stable circular node -->
+<g transform="translate(786 145)">
+  <circle r="76" fill="none" stroke="#6e716a" stroke-width="8" opacity=".55"/>
+  <circle r="49" fill="none" stroke="#6e716a" stroke-width="5" opacity=".45"/>
+  <circle r="13" fill="#6e716a"/>
+  <path d="M0-13C32-45 58-40 52-12C45 10 22 17 0 13M13 0C45 32 40 58 12 52C-10 45-17 22-13 0M0 13C-32 45-58 40-52 12C-45-10-22-17 0-13" fill="#7a7d76" opacity=".35"/>
+</g>
+<!-- intrusive body trace: deliberately too large for the frame -->
+<path d="M1260-55C1130-5 1035 44 968 91C910 132 900 172 961 187C1040 206 1121 163 1217 116L1280 84Z" fill="#b98c70"/>
+<path d="M1218 112C1146 147 1076 177 1024 181" fill="none" stroke="#755545" stroke-width="7" opacity=".55"/>
+<!-- lower-right compressed object cluster -->
+<g transform="translate(985 465) rotate(11)">
+  <rect x="0" y="0" width="260" height="175" rx="22" fill="#26728c"/>
+  <path d="M20 100L130 18 232 124" fill="none" stroke="#164651" stroke-width="22" opacity=".5"/>
+  <rect x="40" y="118" width="185" height="38" fill="#5a452e"/>
+</g>
+<!-- trace labels -->
+<g font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="19" fill="#2c2925">
+  <text x="36" y="42">MUTHER / UNCULTURED / REMIX 005</text>
+  <text x="36" y="68">STRUCTURAL TRANSLATION — NOT COLLAGE</text>
+  <text x="36" y="646">FIELD / GRID / NODE / OPENING / INTRUSION</text>
+  <text x="36" y="674">source family: 2019 burst · source pixels reused: 0</text>
+</g>
+</svg>
