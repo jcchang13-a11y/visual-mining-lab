@@ -1,4 +1,4 @@
-// NOSTROMO active executor loop v0.8
+// NOSTROMO active executor loop v0.9
 // Server/CI-side integration path for repository-native partial executors plus validated external connector evidence.
 import {shroomSandboxReadingRound,shroomGreenhousePoseQuestion,mutherMineRepo,dropletVerifyUrl} from './repo-executors.mjs';
 import {loadConnectorEvidence} from './connector-evidence.mjs';
@@ -21,11 +21,12 @@ export async function runActiveExecutorLoop({rounds=10,seed='NOSTROMO active int
 
     const vajra=globalThis.VajraEngine.run(carry,6);
     const externalConnector=round===1?connectorEvidence:{
-      schema:'nostromo-connector-evidence-carry/v0.8',
+      schema:'nostromo-connector-evidence-carry/v0.9',
       status:'CARRIED',
       completedAt:connectorEvidence.completedAt,
       actions:{
         muther:{action:'MINE_DRIVE_QUERY',status:'CARRIED'},
+        mutherInternal:{action:'MINE_INTERNAL',status:'CARRIED'},
         droplet:{action:'SEARCH_EXTERNAL',status:'CARRIED'},
         dropletVerify:{action:'VERIFY',status:'CARRIED'}
       },
@@ -47,6 +48,7 @@ export async function runActiveExecutorLoop({rounds=10,seed='NOSTROMO active int
         status:externalConnector.status,
         completedAt:externalConnector.completedAt||null,
         mutherDrive:externalConnector.actions?.muther?.status||null,
+        mutherInternal:externalConnector.actions?.mutherInternal?.status||null,
         dropletWeb:externalConnector.actions?.droplet?.status||null,
         dropletVerify:externalConnector.actions?.dropletVerify?.status||null
       },
@@ -59,15 +61,15 @@ export async function runActiveExecutorLoop({rounds=10,seed='NOSTROMO active int
     carry=item.carryOut||carry;
     if(status!=='PASS') break;
   }
-  const acceptedActions=['muther','droplet','dropletVerify'].filter(k=>connectorEvidence.actions?.[k]?.status==='EXECUTED').length;
+  const acceptedActions=['muther','mutherInternal','droplet','dropletVerify'].filter(k=>connectorEvidence.actions?.[k]?.status==='EXECUTED').length;
   return {
-    schema:'nostromo-active-executor-loop/v0.8',
+    schema:'nostromo-active-executor-loop/v0.9',
     status:trace.length===total&&trace.every(x=>x.status==='PASS')?'PASS':'FAIL',
     requestedRounds:total,
     completedRounds:trace.length,
     connectorHandoff:{status:connectorEvidence.status,completedAt:connectorEvidence.completedAt,actionsAccepted:acceptedActions,failures:connectorEvidence.failures},
     trace,
     completedAt:new Date().toISOString(),
-    boundary:'Certifies closed-loop routing for SHROOMING local deterministic sandbox plus a non-state-mutating greenhouse probe, MU/TH/UR repository mining, DROPLET explicit-URL verification, VAJRA and GUT, plus acceptance and digestion of externally executed Google Drive query mining, public web search, and connector-supplied claim-verification evidence. It does not claim that GitHub Actions itself searched the web or private Drive, nor that formal SHROOMING consists of ten independent persistent LLM processes.'
+    boundary:'Certifies closed-loop routing for SHROOMING local deterministic sandbox plus a non-state-mutating greenhouse probe, MU/TH/UR repository mining, DROPLET explicit-URL verification, VAJRA and GUT, plus acceptance and digestion of externally executed Google Drive query mining, bounded authorized-source MINE_INTERNAL evidence, public web search, and connector-supplied claim-verification evidence. MINE_INTERNAL is not exhaustive private-environment crawling. GitHub Actions does not itself search private Drive or the web.'
   };
 }
