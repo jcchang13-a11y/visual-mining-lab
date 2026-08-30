@@ -1,0 +1,19 @@
+{
+  "schema": "muther-falsify-ci/v0.1",
+  "completedAt": "2026-08-30T03:07:50.719Z",
+  "status": "PASS",
+  "executor": "MUTHER_REPO_FALSIFICATION_PROBE",
+  "claimFingerprint": "198f048a6dda7b2b",
+  "classification": "COUNTEREVIDENCE_FOUND",
+  "evidenceCount": 1,
+  "evidence": [
+    {
+      "path": "nostromo/integration/organ-registry.json",
+      "marker": "REQUEST_ONLY",
+      "occurrenceCount": 2,
+      "contentFingerprint": "bde199a7a0423ec2"
+    }
+  ],
+  "failures": [],
+  "boundary": "REPOSITORY-SCOPED COUNTEREVIDENCE PROBE ONLY. CONTRADICTION MARKERS ARE EXPLICIT CALLER-SUPPLIED TEST CRITERIA. COUNTEREVIDENCE FOUND DOES NOT BY ITSELF PROVE GLOBAL FALSITY; NO COUNTEREVIDENCE FOUND DOES NOT PROVE THE CLAIM TRUE. THIS EXECUTOR DOES NOT SEARCH PRIVATE GOOGLE DRIVE OR THE OPEN WEB."
+}
