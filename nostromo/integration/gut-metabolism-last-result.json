@@ -1,6 +1,6 @@
 {
-  "schema": "nostromo-gut-metabolism-test/v0.2.1",
-  "completedAt": "2026-08-30T07:06:01.107Z",
+  "schema": "nostromo-gut-metabolism-test/v0.2.2",
+  "completedAt": "2026-08-30T07:06:27.508Z",
   "status": "FAIL",
   "gut": {
     "version": "0.2.2",
@@ -35,6 +35,14 @@
       "nestedEchoAffectedAtoms": 0,
       "nestedEchoSuppressedCount": 0
     },
+    "nestedAntiEcho": {
+      "strategy": "PREFIX_DIVERSITY_96+NESTED_ROUTE_TAG_CUTOFF",
+      "candidateCount": 1,
+      "selectedCount": 1,
+      "suppressedCount": 0,
+      "nestedEchoAffectedAtoms": 1,
+      "nestedEchoSuppressedCount": 2
+    },
     "boundary": "Deterministic heuristic metabolism only. Classification, routing and echo suppression are auditable heuristics, not semantic truth. Provenance-bearing fields propagate into atom records; failures are quarantined; uncertainty is held. A repeated identical route tag inside one atom is treated as nested metabolic echo and cut at the first recurrence; suppression is explicitly counted."
   },
   "feedback": {
@@ -51,9 +59,9 @@
   },
   "failures": [
     {
-      "type": "GUT_VERSION",
-      "detail": "0.2.2"
+      "type": "NESTED_ECHO_SURVIVED_SUMMARY",
+      "detail": "[CONTRADICTION->VAJRA] [CONTRADICTION->VAJRA] Counterevidence: recursive carry repeats itself"
     }
   ],
-  "boundary": "PASS proves deterministic heuristic classification, quarantine/hold/excretion, destination routing, provenance propagation, prefix-diversity anti-echo suppression, and explicit application of persisted redacted connector feedback from round 2. It does not prove semantic correctness, source truth, or live connector re-execution inside GitHub Actions."
+  "boundary": "PASS proves deterministic heuristic classification, quarantine/hold/excretion, destination routing, provenance propagation, prefix-diversity suppression, nested same-route-tag echo cutoff, and explicit application of persisted redacted connector feedback from round 2. It does not prove semantic correctness, source truth, or live connector re-execution inside GitHub Actions."
 }
