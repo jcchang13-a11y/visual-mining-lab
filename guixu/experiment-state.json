@@ -1,0 +1,31 @@
+{
+  "habitat": "歸墟 · The Guixu Habitat",
+  "prototype": "v0.2",
+  "total_rounds": 20,
+  "completed_rounds": 1,
+  "current_phase": "survival-and-degradation",
+  "live_nostromo_connected": false,
+  "live_gangchibao_connected": false,
+  "rounds": [
+    {
+      "round": 1,
+      "name": "metabolic-coupling audit",
+      "date": "2026-08-30",
+      "target": "Verify that resource contraction changes actual resident activity rather than only visual indicators.",
+      "method": "Replayed the v0.2 160-second metabolism cycle for 10 cycles and measured resident-event frequency by metabolic state.",
+      "result": "FAIL_WITH_USEFUL_FINDING",
+      "observed_event_rates_per_minute": {
+        "HIGH": 4.8,
+        "NORMAL": 5.025,
+        "LOW": 5.1,
+        "DORMANT": 4.8
+      },
+      "finding": "The prototype changes resource labels, activity counters, and organ bars, but the resident event timer remains fixed at 12 seconds. LOW and DORMANT therefore do not truly lower metabolism; degradation is currently cosmetic at the event-loop layer.",
+      "constitutional_implication": "Article-level graceful degradation must govern scheduling and work volume, not merely presentation state.",
+      "next_correction": "Replace the fixed resident setInterval with a metabolism-aware scheduler: HIGH fastest, NORMAL baseline, LOW slower, DORMANT minimum heartbeat only. Then verify continuity across DORMANT -> LOW -> NORMAL recovery without visitor input.",
+      "requires_human_judgment": false
+    }
+  ],
+  "next_round": 2,
+  "next_round_name": "metabolism-aware scheduler and revival continuity"
+}
