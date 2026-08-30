@@ -1,6 +1,6 @@
 {
   "schema": "nostromo-integration-ci/v1.3",
-  "completedAt": "2026-08-30T18:05:11.966Z",
+  "completedAt": "2026-08-30T19:07:50.393Z",
   "status": "PASS",
   "rounds": 50,
   "expectedPerRound": {
@@ -168,7 +168,7 @@
     "requestedRounds": 10,
     "completedRounds": 10,
     "roundsWithAllFourRepoExecutors": 10,
-    "gutAbsorbedTotal": 1612,
+    "gutAbsorbedTotal": 1684,
     "connectorHandoff": {
       "status": "ACCEPTED",
       "completedAt": "2026-08-30T13:05:48+08:00",

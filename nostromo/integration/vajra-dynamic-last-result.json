@@ -1,7 +1,7 @@
 {
   "schema": "nostromo-vajra-dynamic-test/v0.2.6",
-  "completedAt": "2026-08-30T18:05:10.212Z",
-  "status": "PASS",
+  "completedAt": "2026-08-30T19:07:46.415Z",
+  "status": "FAIL",
   "guards": {
     "falseCertainty": true,
     "dynamicLensSelection": true,
@@ -22,7 +22,7 @@
     "vajraGut": {
       "targetRef": "0f5f7163",
       "rawTargetEcho": false,
-      "summarySample": "[QUESTION->SHROOMING] Deterministic heuristic dismantling. Saturation means the current rule set has stopped producing a new inspection path; it is not proof that the claim is settled. Open handoff contracts remain unresolved until another organ returns qualifying material. · [CLAIM->DROPLET] CAUSAL · [CLAIM->DROPLET] 命題成立條件需要顯式化 · [EVIDENCE_OR_PROVENANCE->M"
+      "summarySample": "[CONTRADICTION->VAJRA] 主動尋找最小反例與破壞條件 · [CONTRADICTION->VAJRA] 主動尋找最小反例與破壞條件：針對本輪 CAUSAL+UNIVERSAL 命題（ref:0f5f7163），哪個前提最可能先失效？ · [CLAIM->DROPLET] Deterministic proposition-aware dismantling only. Compound proposition types are detected by auditable lexical rules and their lens sets are merged without claiming semantic clause understanding. Classification, le"
     },
     "receiptResolution": {
       "received": 3,
@@ -104,7 +104,8 @@
         "alternative_cause",
         "counterfactual",
         "evidence",
-        "scope"
+        "scope",
+        "counterexample"
       ]
     },
     "normative": {
@@ -156,6 +157,39 @@
       ]
     }
   },
-  "failures": [],
+  "failures": [
+    {
+      "type": "UNIVERSAL_VERSION",
+      "detail": "0.2.7"
+    },
+    {
+      "type": "CAUSAL_VERSION",
+      "detail": "0.2.7"
+    },
+    {
+      "type": "EMPIRICAL_VERSION",
+      "detail": "0.2.7"
+    },
+    {
+      "type": "NORMATIVE_VERSION",
+      "detail": "0.2.7"
+    },
+    {
+      "type": "DEFINITION_VERSION",
+      "detail": "0.2.7"
+    },
+    {
+      "type": "SELF_REFERENCE_VERSION",
+      "detail": "0.2.7"
+    },
+    {
+      "type": "VAGUE_VERSION",
+      "detail": "0.2.7"
+    },
+    {
+      "type": "RECEIPT_VERSION",
+      "detail": "0.2.7"
+    }
+  ],
   "boundary": "PASS proves proposition-aware lens selection, structural receipt closure, VAJRA→GUT referential continuity, and replay-amplification guards across both branches and repeated applications. A provenance+material payload already consumed by a prior VAJRA result cannot be relabelled later to close another branch. Rejection is structural and auditable, not a semantic truth judgment."
 }
