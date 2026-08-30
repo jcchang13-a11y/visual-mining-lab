@@ -1,13 +1,14 @@
 {
-  "schema": "nostromo-vajra-dynamic-test/v0.2.1",
-  "completedAt": "2026-08-30T08:08:44.344Z",
-  "status": "FAIL",
+  "schema": "nostromo-vajra-dynamic-test/v0.2.2",
+  "completedAt": "2026-08-30T08:09:05.771Z",
+  "status": "PASS",
   "guards": {
     "falseCertainty": true,
     "unresolvedBranches": true,
     "dynamicLensSelection": true,
     "gutReferentialContinuity": true,
-    "inheritedTargetAntiEcho": true
+    "inheritedTargetAntiEcho": true,
+    "rawSourceNotCopiedIntoTrace": true
   },
   "crossOrgan": {
     "vajraGut": {
@@ -87,35 +88,6 @@
       ]
     }
   },
-  "failures": [
-    {
-      "type": "UNIVERSAL_VERSION",
-      "detail": "0.2.2"
-    },
-    {
-      "type": "CAUSAL_VERSION",
-      "detail": "0.2.2"
-    },
-    {
-      "type": "NORMATIVE_VERSION",
-      "detail": "0.2.2"
-    },
-    {
-      "type": "DEFINITION_VERSION",
-      "detail": "0.2.2"
-    },
-    {
-      "type": "EMPIRICAL_VERSION",
-      "detail": "0.2.2"
-    },
-    {
-      "type": "SELF_REFERENCE_VERSION",
-      "detail": "0.2.2"
-    },
-    {
-      "type": "VAGUE_VERSION",
-      "detail": "0.2.2"
-    }
-  ],
-  "boundary": "PASS proves that VAJRA selects different auditable dismantling lenses for different proposition classes, preserves unresolved branches, does not emit a settled-truth status in these adversarial cases, and survives GUT inherited-substrate anti-echo without leaving a hollow target or losing its compact targetRef. It does not prove semantic classification correctness, factual truth, or autonomous resolution of those branches."
+  "failures": [],
+  "boundary": "PASS proves that VAJRA selects different auditable dismantling lenses for different proposition classes, preserves unresolved branches, does not emit a settled-truth status in these adversarial cases, and survives GUT inherited-substrate anti-echo without leaving a hollow target, re-emitting the inherited proposition, or losing its compact targetRef. It does not prove semantic classification correctness, factual truth, or autonomous resolution of those branches."
 }
