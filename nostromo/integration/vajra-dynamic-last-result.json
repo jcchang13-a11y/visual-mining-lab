@@ -1,7 +1,7 @@
 {
   "schema": "nostromo-vajra-dynamic-test/v0.2.3",
-  "completedAt": "2026-08-30T09:06:19.829Z",
-  "status": "PASS",
+  "completedAt": "2026-08-30T10:03:22.049Z",
+  "status": "FAIL",
   "guards": {
     "falseCertainty": true,
     "unresolvedBranches": true,
@@ -219,6 +219,35 @@
       }
     }
   },
-  "failures": [],
+  "failures": [
+    {
+      "type": "UNIVERSAL_VERSION",
+      "detail": "0.2.4"
+    },
+    {
+      "type": "CAUSAL_VERSION",
+      "detail": "0.2.4"
+    },
+    {
+      "type": "NORMATIVE_VERSION",
+      "detail": "0.2.4"
+    },
+    {
+      "type": "DEFINITION_VERSION",
+      "detail": "0.2.4"
+    },
+    {
+      "type": "EMPIRICAL_VERSION",
+      "detail": "0.2.4"
+    },
+    {
+      "type": "SELF_REFERENCE_VERSION",
+      "detail": "0.2.4"
+    },
+    {
+      "type": "VAGUE_VERSION",
+      "detail": "0.2.4"
+    }
+  ],
   "boundary": "PASS proves that VAJRA selects different auditable dismantling lenses for different proposition classes and now turns each unresolved branch into an explicit OPEN work contract naming a preferred organ, requested material and resolution criterion. These are routing requests only: PASS does not claim that the requested organ executed the contract, that classification is semantically correct, or that a branch is resolved. The VAJRA→GUT regression still checks compact referential continuity and inherited-target anti-echo."
 }
