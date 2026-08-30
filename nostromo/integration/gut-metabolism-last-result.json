@@ -1,9 +1,9 @@
 {
   "schema": "nostromo-gut-metabolism-test/v0.2.9",
-  "completedAt": "2026-08-30T15:11:20.569Z",
-  "status": "PASS",
+  "completedAt": "2026-08-30T16:02:46.747Z",
+  "status": "FAIL",
   "gut": {
-    "version": "0.2.9",
+    "version": "0.2.10",
     "mode": "DETERMINISTIC_HEURISTIC_ROUTER",
     "ingested": 10,
     "absorbed": 7,
@@ -28,7 +28,7 @@
       "HOLD": 4
     },
     "antiEcho": {
-      "strategy": "INHERITED_SUBSTRATE_SUBTRACTION+PREFIX_DIVERSITY_96+TAGGED_PAYLOAD_DEDUP+ROUTE_METADATA_STRIP+ADJACENT_SEGMENT_COLLAPSE+DELIMITED_LONG_SEGMENT_DEDUP",
+      "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PREFIX_DIVERSITY_96+TAGGED_PAYLOAD_DEDUP+ROUTE_METADATA_STRIP+ADJACENT_SEGMENT_COLLAPSE+DELIMITED_LONG_SEGMENT_DEDUP",
       "candidateCount": 4,
       "selectedCount": 2,
       "suppressedCount": 2,
@@ -40,7 +40,7 @@
       "delimitedEchoSuppressedCount": 0
     },
     "nestedAntiEcho": {
-      "strategy": "INHERITED_SUBSTRATE_SUBTRACTION+PREFIX_DIVERSITY_96+TAGGED_PAYLOAD_DEDUP+ROUTE_METADATA_STRIP+ADJACENT_SEGMENT_COLLAPSE+DELIMITED_LONG_SEGMENT_DEDUP",
+      "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PREFIX_DIVERSITY_96+TAGGED_PAYLOAD_DEDUP+ROUTE_METADATA_STRIP+ADJACENT_SEGMENT_COLLAPSE+DELIMITED_LONG_SEGMENT_DEDUP",
       "candidateCount": 1,
       "selectedCount": 1,
       "suppressedCount": 0,
@@ -54,7 +54,7 @@
     "repeatedTagNovelty": {
       "summary": "[CONTRADICTION->VAJRA] first contradiction remains distinct and should be kept： second contradiction is genuinely new evidence and must also survive normalization",
       "antiEcho": {
-        "strategy": "INHERITED_SUBSTRATE_SUBTRACTION+PREFIX_DIVERSITY_96+TAGGED_PAYLOAD_DEDUP+ROUTE_METADATA_STRIP+ADJACENT_SEGMENT_COLLAPSE+DELIMITED_LONG_SEGMENT_DEDUP",
+        "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PREFIX_DIVERSITY_96+TAGGED_PAYLOAD_DEDUP+ROUTE_METADATA_STRIP+ADJACENT_SEGMENT_COLLAPSE+DELIMITED_LONG_SEGMENT_DEDUP",
         "candidateCount": 1,
         "selectedCount": 1,
         "suppressedCount": 0,
@@ -67,7 +67,7 @@
       }
     },
     "segmentAntiEcho": {
-      "strategy": "INHERITED_SUBSTRATE_SUBTRACTION+PREFIX_DIVERSITY_96+TAGGED_PAYLOAD_DEDUP+ROUTE_METADATA_STRIP+ADJACENT_SEGMENT_COLLAPSE+DELIMITED_LONG_SEGMENT_DEDUP",
+      "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PREFIX_DIVERSITY_96+TAGGED_PAYLOAD_DEDUP+ROUTE_METADATA_STRIP+ADJACENT_SEGMENT_COLLAPSE+DELIMITED_LONG_SEGMENT_DEDUP",
       "candidateCount": 1,
       "selectedCount": 1,
       "suppressedCount": 0,
@@ -79,7 +79,7 @@
       "delimitedEchoSuppressedCount": 0
     },
     "delimitedAntiEcho": {
-      "strategy": "INHERITED_SUBSTRATE_SUBTRACTION+PREFIX_DIVERSITY_96+TAGGED_PAYLOAD_DEDUP+ROUTE_METADATA_STRIP+ADJACENT_SEGMENT_COLLAPSE+DELIMITED_LONG_SEGMENT_DEDUP",
+      "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PREFIX_DIVERSITY_96+TAGGED_PAYLOAD_DEDUP+ROUTE_METADATA_STRIP+ADJACENT_SEGMENT_COLLAPSE+DELIMITED_LONG_SEGMENT_DEDUP",
       "candidateCount": 1,
       "selectedCount": 1,
       "suppressedCount": 0,
@@ -91,7 +91,7 @@
       "delimitedEchoSuppressedCount": 1
     },
     "inheritedAntiEcho": {
-      "strategy": "INHERITED_SUBSTRATE_SUBTRACTION+PREFIX_DIVERSITY_96+TAGGED_PAYLOAD_DEDUP+ROUTE_METADATA_STRIP+ADJACENT_SEGMENT_COLLAPSE+DELIMITED_LONG_SEGMENT_DEDUP",
+      "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PREFIX_DIVERSITY_96+TAGGED_PAYLOAD_DEDUP+ROUTE_METADATA_STRIP+ADJACENT_SEGMENT_COLLAPSE+DELIMITED_LONG_SEGMENT_DEDUP",
       "candidateCount": 1,
       "selectedCount": 1,
       "suppressedCount": 0,
@@ -115,7 +115,7 @@
       },
       "summary": "[RAW_STRUCTURED_SNIPPET->MUTHER] {\"version\":\"2.3\",\"round\":\"R113\",\"task\":\"conflicting tasks and partial memory\",\"continuity\":\"history preserved\"}"
     },
-    "boundary": "Deterministic heuristic metabolism only. Exact inherited substrate echoes are contextually subtracted and counted. Repeated route metadata no longer triggers tail cutoff: only exact repeated tagged payloads of 24+ normalized characters are suppressed, so a later segment with the same route tag but novel payload is preserved. Repeated long segments inside one atom are deduplicated only across explicit separators and only at conservative length thresholds. JSON-like or heavily escaped structured snippets are classified before lexical contradiction detection and routed back to MUTHER at low priority. These rules are auditable heuristics, not semantic truth."
+    "boundary": "Deterministic heuristic metabolism only. Inherited substrate subtraction now removes only exact full normalized substrates; truncated substrate prefixes are never used as deletion candidates because they can cut through novel tokens and create corrupted carry fragments. Repeated route metadata no longer triggers tail cutoff: only exact repeated tagged payloads of 24+ normalized characters are suppressed, so a later segment with the same route tag but novel payload is preserved. Repeated long segments inside one atom are deduplicated only across explicit separators and only at conservative length thresholds. JSON-like or heavily escaped structured snippets are classified before lexical contradiction detection and routed back to MUTHER at low priority. These rules are auditable heuristics, not semantic truth."
   },
   "feedback": {
     "status": "PASS",
@@ -126,10 +126,10 @@
       "firstAppliedRound": 2,
       "privacy": "PRIVATE DRIVE RAW CONTENT/TITLES/IDS/URLS ARE NOT INCLUDED"
     },
-    "lastCarry": "[CONTRADICTION->VAJRA] 主動尋找最小反例與破壞條件 · [CONTRADICTION->VAJRA] 主動尋找最小反例與破壞條件：針對本輪 UNIVERSAL 命題（ref:4e65f992），哪個前提最可能先失效？ · [CLAIM->DROPLET] VERIFIES AN EXPLICIT URL ONLY; DOES NOT CLAIM SEARCH-ENGINE DISCOVERY · [EVIDENCE_OR_PROVENANCE->MUTHER] 200 · [CLAIM->DROPLET] Connector actions executed externally once; later rounds apply a redacted evidence-derived feedback directive and do not claim re-execution. · [EVIDENCE_OR_PROVENANCE->MUTHER] nostromo-connector-evidence-carry/v1.0 · [QUESTION->SHROOMING] EXECUTES A NON-STATE-MUTATING QUESTION PROBE AGAINST THE LATEST PUBLISHED GREENHOUSE HISTORY. REACTIONS ARE TRACEABLE TRANSFORMATIONS OF RECORDED HISTORY, NOT CLAIMS OF TEN INDEPENDENT LIVE LLM PROCESSES, AND DO NOT ADVANCE THE FORMAL SHROOMING ROUND. · [QUESTION->SHROOMING] SHROOMING_GREENHOUSE_QUESTION_PROBE · [QUESTION->SHROOMING] 18715b0534f93025 · [QUESTION->SHROOMING] 以歷史 trace 01 的最近可驗證位置（R110 / Regime shift: subject form becomes observable variable / participant）對問題做 scope 探針： LAIM SEARCH-ENGINE DISCOVERY·： 200： Connector actions executed externally once; later rounds apply a redacted evidence-derived feedback directive and do not claim re-execution.： nostromo-connector-evidenc",
+    "lastCarry": "[CONTRADICTION->VAJRA] 以歷史 trace 01 的最近可驗證位置（R110 / Regime shift: subject form becomes observable variable / participant）對問題做 scope 探針：： 以歷史 trace 01 的最近可驗證位置（R110 / Regime shift: subject form becomes observable variable / participant）對問題做 scope 探針：： 主動尋找最小反例與破壞條件： 主動尋找最小反例與破壞條件：針對本輪 GENERAL 命題（ref:97a1f08c），哪個前提最可能先失效？： VERIFIES AN EXPLICIT URL ONLY; DOES NOT CLAIM SEARCH-ENGINE DISCOVERY： 200： Microsoft describes a modular team of specialized agents coordinated by an Orchestrator, adapted from Magentic-One.： Microsoft Research： Magentic-UI, an experimental human-centered web agent： https://www.microsoft.com/en-us/research/blog/magentic-ui-an-experimental-human-centered-web-agent/： THE PUBLIC WEB CONNECTOR SUPPLIED CLAIM-SPECIFIC EVIDENCE. THE REPOSITORY STORES ONLY REDUCED EVIDENCE METADATA/FINGERPRINTS; CI DOES NOT PERFORM SEARCH-ENGINE DISCOVERY.： Magentic-One is a generalist multi-agent system published by Microsoft Research in November 2024.： 2024-11-04： 05b19aff31a0265e EXTERNAL_CONNECTOR_FEEDBACK | drive_hits=10 | internal_hits=4 | public_web_finding=Microsoft describes a modular team of specialized age： 以歷史 trace 02 的最近可驗證位置（R110 / Regime shift: subject form becomes observ",
     "roundAntiEcho": [
       {
-        "strategy": "INHERITED_SUBSTRATE_SUBTRACTION+PREFIX_DIVERSITY_96+TAGGED_PAYLOAD_DEDUP+ROUTE_METADATA_STRIP+ADJACENT_SEGMENT_COLLAPSE+DELIMITED_LONG_SEGMENT_DEDUP",
+        "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PREFIX_DIVERSITY_96+TAGGED_PAYLOAD_DEDUP+ROUTE_METADATA_STRIP+ADJACENT_SEGMENT_COLLAPSE+DELIMITED_LONG_SEGMENT_DEDUP",
         "candidateCount": 190,
         "selectedCount": 12,
         "suppressedCount": 178,
@@ -141,32 +141,78 @@
         "delimitedEchoSuppressedCount": 0
       },
       {
-        "strategy": "INHERITED_SUBSTRATE_SUBTRACTION+PREFIX_DIVERSITY_96+TAGGED_PAYLOAD_DEDUP+ROUTE_METADATA_STRIP+ADJACENT_SEGMENT_COLLAPSE+DELIMITED_LONG_SEGMENT_DEDUP",
+        "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PREFIX_DIVERSITY_96+TAGGED_PAYLOAD_DEDUP+ROUTE_METADATA_STRIP+ADJACENT_SEGMENT_COLLAPSE+DELIMITED_LONG_SEGMENT_DEDUP",
         "candidateCount": 158,
         "selectedCount": 12,
         "suppressedCount": 146,
-        "inheritedSubstrateStrippedCount": 20,
-        "nestedEchoAffectedAtoms": 0,
+        "inheritedSubstrateStrippedCount": 0,
+        "nestedEchoAffectedAtoms": 20,
         "nestedEchoSuppressedCount": 0,
-        "routeTagsStripped": 0,
+        "routeTagsStripped": 150,
         "segmentEchoSuppressedCount": 0,
         "delimitedEchoSuppressedCount": 0
       },
       {
-        "strategy": "INHERITED_SUBSTRATE_SUBTRACTION+PREFIX_DIVERSITY_96+TAGGED_PAYLOAD_DEDUP+ROUTE_METADATA_STRIP+ADJACENT_SEGMENT_COLLAPSE+DELIMITED_LONG_SEGMENT_DEDUP",
+        "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PREFIX_DIVERSITY_96+TAGGED_PAYLOAD_DEDUP+ROUTE_METADATA_STRIP+ADJACENT_SEGMENT_COLLAPSE+DELIMITED_LONG_SEGMENT_DEDUP",
         "candidateCount": 158,
         "selectedCount": 12,
         "suppressedCount": 146,
-        "inheritedSubstrateStrippedCount": 20,
+        "inheritedSubstrateStrippedCount": 0,
         "nestedEchoAffectedAtoms": 10,
         "nestedEchoSuppressedCount": 0,
-        "routeTagsStripped": 90,
+        "routeTagsStripped": 30,
         "segmentEchoSuppressedCount": 0,
         "delimitedEchoSuppressedCount": 0
       }
     ],
     "boundary": "Certifies closed-loop routing for SHROOMING local deterministic sandbox plus a non-state-mutating greenhouse probe, MU/TH/UR repository mining, DROPLET explicit-URL verification, VAJRA and GUT, plus acceptance and digestion of externally executed Google Drive query mining, bounded authorized-source MINE_INTERNAL evidence, public web search, and connector-supplied claim-verification evidence. From round 2 onward, redacted connector evidence changes SHROOMING/greenhouse/VAJRA input. GUT receives the current round input as an inherited substrate and subtracts exact compacted echoes before producing the next carry; this proves contextual anti-echo routing, not semantic novelty detection. GitHub Actions does not itself search private Drive or the web."
   },
-  "failures": [],
+  "failures": [
+    {
+      "type": "GUT_VERSION",
+      "detail": "0.2.10"
+    },
+    {
+      "type": "ACTIVE_INHERITED_SUBSTRATE_NOT_STRIPPED",
+      "detail": [
+        {
+          "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PREFIX_DIVERSITY_96+TAGGED_PAYLOAD_DEDUP+ROUTE_METADATA_STRIP+ADJACENT_SEGMENT_COLLAPSE+DELIMITED_LONG_SEGMENT_DEDUP",
+          "candidateCount": 190,
+          "selectedCount": 12,
+          "suppressedCount": 178,
+          "inheritedSubstrateStrippedCount": 0,
+          "nestedEchoAffectedAtoms": 0,
+          "nestedEchoSuppressedCount": 0,
+          "routeTagsStripped": 0,
+          "segmentEchoSuppressedCount": 0,
+          "delimitedEchoSuppressedCount": 0
+        },
+        {
+          "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PREFIX_DIVERSITY_96+TAGGED_PAYLOAD_DEDUP+ROUTE_METADATA_STRIP+ADJACENT_SEGMENT_COLLAPSE+DELIMITED_LONG_SEGMENT_DEDUP",
+          "candidateCount": 158,
+          "selectedCount": 12,
+          "suppressedCount": 146,
+          "inheritedSubstrateStrippedCount": 0,
+          "nestedEchoAffectedAtoms": 20,
+          "nestedEchoSuppressedCount": 0,
+          "routeTagsStripped": 150,
+          "segmentEchoSuppressedCount": 0,
+          "delimitedEchoSuppressedCount": 0
+        },
+        {
+          "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PREFIX_DIVERSITY_96+TAGGED_PAYLOAD_DEDUP+ROUTE_METADATA_STRIP+ADJACENT_SEGMENT_COLLAPSE+DELIMITED_LONG_SEGMENT_DEDUP",
+          "candidateCount": 158,
+          "selectedCount": 12,
+          "suppressedCount": 146,
+          "inheritedSubstrateStrippedCount": 0,
+          "nestedEchoAffectedAtoms": 10,
+          "nestedEchoSuppressedCount": 0,
+          "routeTagsStripped": 30,
+          "segmentEchoSuppressedCount": 0,
+          "delimitedEchoSuppressedCount": 0
+        }
+      ]
+    }
+  ],
   "boundary": "PASS proves deterministic heuristic metabolism plus contextual inherited-substrate de-echoing, exact repeated tagged-payload suppression without deleting novel same-tag payloads, repeated long-segment suppression within one atom across explicit separators, and protection against JSON-like engineering snippets being falsely promoted to high-priority semantic contradictions. It does not prove semantic novelty, semantic correctness, source truth, or live connector re-execution inside GitHub Actions."
 }
