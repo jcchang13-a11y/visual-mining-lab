@@ -1,6 +1,6 @@
 {
   "schema": "nostromo-gut-metabolism-test/v0.2.7",
-  "completedAt": "2026-08-30T07:16:32.667Z",
+  "completedAt": "2026-08-30T08:03:05.649Z",
   "status": "PASS",
   "gut": {
     "version": "0.2.7",
@@ -95,13 +95,13 @@
       "firstAppliedRound": 2,
       "privacy": "PRIVATE DRIVE RAW CONTENT/TITLES/IDS/URLS ARE NOT INCLUDED"
     },
-    "lastCarry": "[CONTRADICTION->VAJRA] 尋找反例、邊界條件與被排除的替代解釋 · [CLAIM->DROPLET] VERIFIES AN EXPLICIT URL ONLY; DOES NOT CLAIM SEARCH-ENGINE DISCOVERY · [EVIDENCE_OR_PROVENANCE->MUTHER] 200 · [CLAIM->DROPLET] Connector actions executed externally once; later rounds apply a redacted evidence-derived feedback directive and do not claim re-execution. · [EVIDENCE_OR_PROVENANCE->MUTHER] nostromo-connector-evidence-carry/v1.0 · [QUESTION->SHROOMING] EXECUTES A NON-STATE-MUTATING QUESTION PROBE AGAINST THE LATEST PUBLISHED GREENHOUSE HISTORY. REACTIONS ARE TRACEABLE TRANSFORMATIONS OF RECORDED HISTORY, NOT CLAIMS OF TEN INDEPENDENT LIVE LLM PROCESSES, AND DO NOT ADVANCE THE FORMAL SHROOMING ROUND. · [QUESTION->SHROOMING] SHROOMING_GREENHOUSE_QUESTION_PROBE · [QUESTION->SHROOMING] 24a336b37f799c6e · [QUESTION->SHROOMING] 以歷史 trace 01 的最近可驗證位置（R110 / Regime shift: subject form becomes observable variable / participant）對問題做 scope 探針： · [EVIDENCE_OR_PROVENANCE->MUTHER] 8728279d81cc4036 · [EVIDENCE_OR_PROVENANCE->MUTHER] Regime shift: subject form becomes observable variable · [EVIDENCE_OR_PROVENANCE->MUTHER] R110",
+    "lastCarry": "[CONTRADICTION->VAJRA] 暫不定案；保留 scope 分支待證據或反例回填。 · [CONTRADICTION->VAJRA] 主動尋找最小反例與破壞條件 · [CONTRADICTION->VAJRA] 暫不定案；保留 counterexample 分支待證據或反例回填。 · [CONTRADICTION->VAJRA] 主動尋找最小反例與破壞條件：若對「 」做這個檢查，哪個前提最可能先失效？ · [CONTRADICTION->VAJRA] 暫不定案；保留 excluded_alternative 分支待證據或反例回填。 · [CONTRADICTION->VAJRA] 暫不定案；保留 evidence 分支待證據或反例回填。 · [CONTRADICTION->VAJRA] 暫不定案；保留 criterion 分支待證據或反例回填。 · [CLAIM->DROPLET] VERIFIES AN EXPLICIT URL ONLY; DOES NOT CLAIM SEARCH-ENGINE DISCOVERY · [EVIDENCE_OR_PROVENANCE->MUTHER] 200 · [CLAIM->DROPLET] Connector actions executed externally once; later rounds apply a redacted evidence-derived feedback directive and do not claim re-execution. · [EVIDENCE_OR_PROVENANCE->MUTHER] nostromo-connector-evidence-carry/v1.0 · [QUESTION->SHROOMING] EXECUTES A NON-STATE-MUTATING QUESTION PROBE AGAINST THE LATEST PUBLISHED GREENHOUSE HISTORY. REACTIONS ARE TRACEABLE TRANSFORMATIONS OF RECORDED HISTORY, NOT CLAIMS OF TEN INDEPENDENT LIVE LLM PROCESSES, AND DO NOT ADVANCE THE FORMAL SHROOMING ROUND.",
     "roundAntiEcho": [
       {
         "strategy": "INHERITED_SUBSTRATE_SUBTRACTION+PREFIX_DIVERSITY_96+NESTED_ROUTE_TAG_CUTOFF+ROUTE_METADATA_STRIP+ADJACENT_SEGMENT_COLLAPSE",
-        "candidateCount": 157,
+        "candidateCount": 172,
         "selectedCount": 12,
-        "suppressedCount": 145,
+        "suppressedCount": 160,
         "inheritedSubstrateStrippedCount": 0,
         "nestedEchoAffectedAtoms": 0,
         "nestedEchoSuppressedCount": 0,
@@ -110,10 +110,10 @@
       },
       {
         "strategy": "INHERITED_SUBSTRATE_SUBTRACTION+PREFIX_DIVERSITY_96+NESTED_ROUTE_TAG_CUTOFF+ROUTE_METADATA_STRIP+ADJACENT_SEGMENT_COLLAPSE",
-        "candidateCount": 129,
+        "candidateCount": 140,
         "selectedCount": 12,
-        "suppressedCount": 117,
-        "inheritedSubstrateStrippedCount": 32,
+        "suppressedCount": 128,
+        "inheritedSubstrateStrippedCount": 38,
         "nestedEchoAffectedAtoms": 0,
         "nestedEchoSuppressedCount": 0,
         "routeTagsStripped": 0,
@@ -121,10 +121,10 @@
       },
       {
         "strategy": "INHERITED_SUBSTRATE_SUBTRACTION+PREFIX_DIVERSITY_96+NESTED_ROUTE_TAG_CUTOFF+ROUTE_METADATA_STRIP+ADJACENT_SEGMENT_COLLAPSE",
-        "candidateCount": 129,
+        "candidateCount": 141,
         "selectedCount": 12,
-        "suppressedCount": 117,
-        "inheritedSubstrateStrippedCount": 32,
+        "suppressedCount": 129,
+        "inheritedSubstrateStrippedCount": 38,
         "nestedEchoAffectedAtoms": 0,
         "nestedEchoSuppressedCount": 0,
         "routeTagsStripped": 0,
