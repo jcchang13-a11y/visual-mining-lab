@@ -1,9 +1,9 @@
 {
   "schema": "nostromo-gut-metabolism-test/v0.2.1",
-  "completedAt": "2026-08-30T06:11:24.777Z",
-  "status": "PASS",
+  "completedAt": "2026-08-30T07:06:01.107Z",
+  "status": "FAIL",
   "gut": {
-    "version": "0.2.1",
+    "version": "0.2.2",
     "mode": "DETERMINISTIC_HEURISTIC_ROUTER",
     "ingested": 10,
     "absorbed": 7,
@@ -28,12 +28,14 @@
       "HOLD": 4
     },
     "antiEcho": {
-      "strategy": "PREFIX_DIVERSITY_96",
+      "strategy": "PREFIX_DIVERSITY_96+NESTED_ROUTE_TAG_CUTOFF",
       "candidateCount": 4,
       "selectedCount": 2,
-      "suppressedCount": 2
+      "suppressedCount": 2,
+      "nestedEchoAffectedAtoms": 0,
+      "nestedEchoSuppressedCount": 0
     },
-    "boundary": "Deterministic heuristic metabolism only. Classification/routing and anti-echo suppression are auditable heuristics, not semantic truth. Provenance-bearing fields are propagated into atom records; suspected failures are quarantined; uncertainty is held rather than upgraded to truth."
+    "boundary": "Deterministic heuristic metabolism only. Classification, routing and echo suppression are auditable heuristics, not semantic truth. Provenance-bearing fields propagate into atom records; failures are quarantined; uncertainty is held. A repeated identical route tag inside one atom is treated as nested metabolic echo and cut at the first recurrence; suppression is explicitly counted."
   },
   "feedback": {
     "status": "PASS",
@@ -44,9 +46,14 @@
       "firstAppliedRound": 2,
       "privacy": "PRIVATE DRIVE RAW CONTENT/TITLES/IDS/URLS ARE NOT INCLUDED"
     },
-    "lastCarry": "[CONTRADICTION->VAJRA] 以歷史 trace 01 的最近可驗證位置（R110 / Regime shift: subject form becomes observable variable / participant）對問題做 scope 探針：[CONTRADICTION->VAJRA] 以歷史 trace 01 的最近可驗證位置（R110 / Regime shift: subject form becomes observable variable / participant）對問題做 scope 探針：[CONTRADICTION->VAJRA] ogy + VAJRA LOOP\", \"version\":\"2.2\", \"round\":\"R112\", \"status\":\"complete\", \"executor\":\"SHROOMING_FORMAL_ROUND_ADVANCE\", \"previousRound\":\"R111\", \"source\":\"greenhouse/r111-nostromo-formal-round.json\", \"sourceBlobSha\":\"1ec138bd3bce0158e661254225c2c84ccc35d02b\", \"continuity\":\"All R1-R111 histories preserved. R112 is derived only from the declared R111 parent; same ten numbered traces are retained for continuity and provenance, not fixed personality.\", \"task\":\"test whether temporary subject forms recur, mutate or disappear under asymmetric information, conflicting tasks and partial memory a · [CONTRADICTION->VAJRA] ogy + VAJRA LOOP\", \"version\":\"2.3\", \"round\":\"R113\", \"status\":\"complete\", \"executor\":\"SHROOMING_FORMAL_ROUND_ADVANCE\", \"previousRound\":\"R112\", \"source\":\"greenhouse/r112-nostromo-formal-round.json\", \"sourceBlobSha\":\"d2763d4fc518ef53042deea75c9501a7f16d3c13\", \"continuity\":\"All R1-R112 historie",
+    "lastCarry": "[CONTRADICTION->VAJRA] 以歷史 trace 01 的最近可驗證位置（R110 / Regime shift: subject form becomes observable variable / participant）對問題做 scope 探針：[CONTRADICTION->VAJRA] 以歷史 trace 01 的最近可驗證位置（R110 / Regime shift: subject form becomes observable variable / participant）對問題做 scope 探針 · [CONTRADICTION->VAJRA] 以歷史 trace 02 的最近可驗證位置（R110 / Regime shift: subject form becomes observable variable / participant）對問題做 counterexample 探針：[CONTRADICTION->VAJRA] 以歷史 trace 01 的最近可驗證位置（R110 / Regime shift: subject form becomes observable variable / participant）對問題做 scope 探針 · [CONTRADICTION->VAJRA] 以歷史 trace 03 的最近可驗證位置（R110 / Regime shift: subject form becomes observable variable / participant）對問題做 subject-form 探針：[CONTRADICTION->VAJRA] 以歷史 trace 01 的最近可驗證位置（R110 / Regime shift: subject form becomes observable variable / participant）對問題做 scope 探針 · [CONTRADICTION->VAJRA] 以歷史 trace 04 的最近可驗證位置（R110 / Regime shift: subject form becomes observable variable / participant）對問題做 construction 探針：[CONTRADICTION->VAJRA] 以歷史 trace 01 的最近可驗證位置（R110 / Regime shift: subject form becomes observable variable / participant）對問題做 scope 探針 · [CONTRADICTION->VAJRA] 以歷史 trace 05 的最近可驗證位置（R110 / Regime shift: subject form becomes ob",
     "boundary": "Certifies closed-loop routing for SHROOMING local deterministic sandbox plus a non-state-mutating greenhouse probe, MU/TH/UR repository mining, DROPLET explicit-URL verification, VAJRA and GUT, plus acceptance and digestion of externally executed Google Drive query mining, bounded authorized-source MINE_INTERNAL evidence, public web search, and connector-supplied claim-verification evidence. From round 2 onward, a redacted connector-evidence feedback directive is explicitly injected into SHROOMING/greenhouse/VAJRA input; this proves feedback routing, not connector re-execution or semantic correctness. MINE_INTERNAL is not exhaustive private-environment crawling. GitHub Actions does not itself search private Drive or the web."
   },
-  "failures": [],
+  "failures": [
+    {
+      "type": "GUT_VERSION",
+      "detail": "0.2.2"
+    }
+  ],
   "boundary": "PASS proves deterministic heuristic classification, quarantine/hold/excretion, destination routing, provenance propagation, prefix-diversity anti-echo suppression, and explicit application of persisted redacted connector feedback from round 2. It does not prove semantic correctness, source truth, or live connector re-execution inside GitHub Actions."
 }
