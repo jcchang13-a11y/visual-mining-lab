@@ -1,0 +1,6 @@
+{
+  "schema":"nostromo-validation-trigger/v1.0",
+  "target":"GUT v0.2 + connector feedback routing",
+  "requestedChecks":["gut-metabolism-test","formal-round-test","muther-falsify-test","droplet-claim-verify-test","ci-test"],
+  "truthRule":"DISPLAYED STATE MUST FOLLOW EVIDENCE"
+}
