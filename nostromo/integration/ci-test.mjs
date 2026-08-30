@@ -1,4 +1,4 @@
-// NOSTROMO repository-native integration CI v1.0
+// NOSTROMO repository-native integration CI v1.1
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import vm from 'node:vm';
@@ -37,6 +37,7 @@ try{
   const expectedFormalChain=['R111','R112','R113'];
   if(JSON.stringify(formal.chain)!==JSON.stringify(expectedFormalChain))failures.push({type:'FORMAL_CHAIN_UNEXPECTED',expected:expectedFormalChain,chain:formal.chain});
   if(formal.reversibility?.classification!=='PARTIAL_RETURN'||formal.reversibility?.exactReturn!==false||Number(formal.reversibility?.jaccard)!==0.5)failures.push({type:'FORMAL_REVERSIBILITY_UNEXPECTED',reversibility:formal.reversibility||null});
+  if(formal.parentControl?.status!=='PASS'||formal.parentControl?.classification!=='PARENT_INVARIANT_UNDER_CURRENT_VISIBILITY_RULE'||formal.parentControl?.sameParticipants!==true||formal.parentControl?.provenanceDiffers!==true)failures.push({type:'FORMAL_PARENT_CONTROL_UNEXPECTED',parentControl:formal.parentControl||null});
 
   const sandbox=await shroomSandboxReadingRound({text:'若見諸相非相，即見如來。',agents:10,round:1});
   const greenhouseProbe=await shroomGreenhousePoseQuestion({question:'「我們」在這裡指的是誰？'});
@@ -64,15 +65,15 @@ try{
   }
 
   const result={
-    schema:'nostromo-integration-ci/v1.0',completedAt:new Date().toISOString(),status:out.status==='PASS'&&active.status==='PASS'&&connector.status==='ACCEPTED'&&formal.status==='PASS'&&failures.length===0?'PASS':'FAIL',rounds:out.rounds,
+    schema:'nostromo-integration-ci/v1.1',completedAt:new Date().toISOString(),status:out.status==='PASS'&&active.status==='PASS'&&connector.status==='ACCEPTED'&&formal.status==='PASS'&&failures.length===0?'PASS':'FAIL',rounds:out.rounds,
     expectedPerRound:{executedStateActions:3,blockedRemoteActions:3},
     totals:{executedStateActions:out.trace.reduce((n,r)=>n+(r.actions?.summary?.EXECUTED||0),0),blockedRemoteActions:out.trace.reduce((n,r)=>n+(r.actions?.summary?.QUEUED_UNEXECUTABLE||0),0)},
-    formalRoundChain:{status:formal.status,chain:formal.chain,reversibility:formal.reversibility||null,rounds:formal.rounds?.map(r=>({round:r.round,previousRound:r.previousRound,parentBlobSha:r.parentBlobSha,provenanceFingerprint:r.provenanceFingerprint,executorCompatibility:r.executorCompatibility,status:r.status}))||[],boundary:formal.boundary},
+    formalRoundChain:{status:formal.status,chain:formal.chain,reversibility:formal.reversibility||null,parentControl:formal.parentControl||null,rounds:formal.rounds?.map(r=>({round:r.round,previousRound:r.previousRound,parentBlobSha:r.parentBlobSha,provenanceFingerprint:r.provenanceFingerprint,executorCompatibility:r.executorCompatibility,status:r.status}))||[],boundary:formal.boundary},
     repositoryNativeExecutors:{shrooming:{status:sandbox.status,count:sandbox.count,boundary:sandbox.boundary},greenhouseProbe:{status:greenhouseProbe.status,count:greenhouseProbe.count,sourceRounds:greenhouseProbe.sourceRounds,boundary:greenhouseProbe.boundary},muther:{status:mine.status,hitCount:mine.hitCount,boundary:mine.boundary},droplet:{status:verify.status,statusCode:verify.statusCode||null,boundary:verify.boundary||null}},
     connectorExecutors:{status:connector.status,completedAt:connector.completedAt,mutherDrive:{status:connector.actions?.muther?.status,returnedCount:connector.actions?.muther?.returnedCount,boundary:connector.actions?.muther?.boundary},dropletWeb:{status:connector.actions?.droplet?.status,evidenceCount:connector.actions?.droplet?.evidenceCount,boundary:connector.actions?.droplet?.boundary},boundary:connector.boundary},
     activeExecutorLoop:{status:active.status,requestedRounds:active.requestedRounds,completedRounds:active.completedRounds,roundsWithAllFourRepoExecutors:active.trace.filter(r=>r.executors.shrooming.status==='EXECUTED'&&r.executors.greenhouseProbe.status==='EXECUTED'&&r.executors.muther.status==='EXECUTED'&&r.executors.droplet.status==='EXECUTED').length,gutAbsorbedTotal:active.trace.reduce((n,r)=>n+(r.gut?.absorbed||0),0),connectorHandoff:active.connectorHandoff,lastCarry:active.trace.at(-1)?.carryOut||null,boundary:active.boundary},
     sources:out.trace[0]?.sources||null,paths:globalThis.NostromoOrchestrator.paths,failures,
-    boundary:'PASS certifies 50-round published-state integration, deterministic reproducibility and parent-blob continuity for the declared R111→R112→R113 formal SHROOMING chain including the R111↔R113 PARTIAL_RETURN visibility classification, a 10-round closed loop of repository-native executors, and successful handoff into GUT of persisted evidence from query-scoped Google Drive mining and public web search. It does not certify ten independent live LLM processes, causal reversibility outside this deterministic model, exhaustive whole-Drive mining, or that GitHub Actions itself can invoke private connectors.'
+    boundary:'PASS certifies 50-round published-state integration, deterministic reproducibility and parent-blob continuity for R111→R112→R113, the R111↔R113 PARTIAL_RETURN measurement, a matched-parent audit showing that repo-executors v0.9 participant selection is parent-invariant when task and intervention are held constant, a 10-round closed loop of repository-native executors, and successful handoff into GUT of persisted Google Drive/public-web connector evidence. PARTIAL_RETURN must therefore not be presented as evidence of visibility path dependence under the current rule. It does not certify ten independent live LLM processes, causal reversibility outside this deterministic model, exhaustive whole-Drive mining, or that GitHub Actions itself can invoke private connectors.'
   };
   await writeResult(result); if(result.status!=='PASS')process.exitCode=1;
-}catch(error){const result={schema:'nostromo-integration-ci/v1.0',completedAt:new Date().toISOString(),status:'FAIL',rounds:0,failures:[{type:'UNCAUGHT_EXECUTION_ERROR',message:String(error?.message||error),stack:String(error?.stack||'').slice(0,4000)}],boundary:'Failure evidence was persisted before exiting. No uncompleted execution is counted as PASS.'};await writeResult(result);process.exitCode=1;}
+}catch(error){const result={schema:'nostromo-integration-ci/v1.1',completedAt:new Date().toISOString(),status:'FAIL',rounds:0,failures:[{type:'UNCAUGHT_EXECUTION_ERROR',message:String(error?.message||error),stack:String(error?.stack||'').slice(0,4000)}],boundary:'Failure evidence was persisted before exiting. No uncompleted execution is counted as PASS.'};await writeResult(result);process.exitCode=1;}
