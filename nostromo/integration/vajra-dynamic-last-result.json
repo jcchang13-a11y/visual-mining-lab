@@ -1,10 +1,11 @@
 {
-  "schema": "nostromo-vajra-dynamic-test/v0.2.6",
-  "completedAt": "2026-08-30T19:07:46.415Z",
-  "status": "FAIL",
+  "schema": "nostromo-vajra-dynamic-test/v0.2.7",
+  "completedAt": "2026-08-30T19:08:11.332Z",
+  "status": "PASS",
   "guards": {
     "falseCertainty": true,
     "dynamicLensSelection": true,
+    "compoundTypeDetection": true,
     "branchHandoffContracts": true,
     "gutReferentialContinuity": true,
     "inheritedTargetAntiEcho": true,
@@ -155,41 +156,23 @@
         "scope",
         "evidence"
       ]
+    },
+    "compound": {
+      "type": "CAUSAL",
+      "types": [
+        "CAUSAL",
+        "UNIVERSAL"
+      ],
+      "lenses": [
+        "causal_mechanism",
+        "alternative_cause",
+        "counterfactual",
+        "evidence",
+        "scope",
+        "counterexample"
+      ]
     }
   },
-  "failures": [
-    {
-      "type": "UNIVERSAL_VERSION",
-      "detail": "0.2.7"
-    },
-    {
-      "type": "CAUSAL_VERSION",
-      "detail": "0.2.7"
-    },
-    {
-      "type": "EMPIRICAL_VERSION",
-      "detail": "0.2.7"
-    },
-    {
-      "type": "NORMATIVE_VERSION",
-      "detail": "0.2.7"
-    },
-    {
-      "type": "DEFINITION_VERSION",
-      "detail": "0.2.7"
-    },
-    {
-      "type": "SELF_REFERENCE_VERSION",
-      "detail": "0.2.7"
-    },
-    {
-      "type": "VAGUE_VERSION",
-      "detail": "0.2.7"
-    },
-    {
-      "type": "RECEIPT_VERSION",
-      "detail": "0.2.7"
-    }
-  ],
-  "boundary": "PASS proves proposition-aware lens selection, structural receipt closure, VAJRA→GUT referential continuity, and replay-amplification guards across both branches and repeated applications. A provenance+material payload already consumed by a prior VAJRA result cannot be relabelled later to close another branch. Rejection is structural and auditable, not a semantic truth judgment."
+  "failures": [],
+  "boundary": "PASS proves proposition-aware lens selection, compound-type detection, structural receipt closure, VAJRA→GUT referential continuity, and replay-amplification guards across both branches and repeated applications. Compound detection is an auditable lexical heuristic and does not claim semantic clause parsing. A provenance+material payload already consumed by a prior VAJRA result cannot be relabelled later to close another branch. Rejection is structural and auditable, not a semantic truth judgment."
 }
