@@ -1,21 +1,23 @@
 {
-  "schema": "muther-falsify-ci/v0.1",
-  "completedAt": "2026-08-30T05:14:31.170Z",
-  "status": "FAIL",
+  "schema": "muther-falsify-ci/v0.2",
+  "completedAt": "2026-08-30T05:15:08.533Z",
+  "status": "PASS",
   "executor": "MUTHER_REPO_FALSIFICATION_PROBE",
-  "claimFingerprint": "198f048a6dda7b2b",
-  "classification": "NO_COUNTEREVIDENCE_FOUND_IN_DECLARED_SCOPE",
-  "evidenceCount": 0,
-  "evidence": [],
-  "failures": [
+  "claimFingerprint": "870ac5316413c790",
+  "classification": "COUNTEREVIDENCE_FOUND",
+  "evidenceCount": 1,
+  "evidence": [
     {
-      "type": "COUNTEREVIDENCE_NOT_FOUND",
-      "classification": "NO_COUNTEREVIDENCE_FOUND_IN_DECLARED_SCOPE",
-      "evidenceCount": 0
-    },
-    {
-      "type": "MARKER_EVIDENCE_MISSING"
+      "path": "nostromo/integration/organ-registry.json",
+      "marker": "does not grant exhaustive private-environment crawling",
+      "occurrenceCount": 1,
+      "contentFingerprint": "a90cf3813cce771a"
     }
   ],
-  "boundary": "REPOSITORY-SCOPED COUNTEREVIDENCE PROBE ONLY. CONTRADICTION MARKERS ARE EXPLICIT CALLER-SUPPLIED TEST CRITERIA. COUNTEREVIDENCE FOUND DOES NOT BY ITSELF PROVE GLOBAL FALSITY; NO COUNTEREVIDENCE FOUND DOES NOT PROVE THE CLAIM TRUE. THIS EXECUTOR DOES NOT SEARCH PRIVATE GOOGLE DRIVE OR THE OPEN WEB."
+  "registryAudit": {
+    "requestOnlyCount": 0,
+    "mineInternalMode": "AUTHORIZED_CONNECTOR_EXEC"
+  },
+  "failures": [],
+  "boundary": "REPOSITORY-SCOPED COUNTEREVIDENCE PROBE ONLY. CONTRADICTION MARKERS ARE EXPLICIT CALLER-SUPPLIED TEST CRITERIA. COUNTEREVIDENCE FOUND DOES NOT BY ITSELF PROVE GLOBAL FALSITY; NO COUNTEREVIDENCE FOUND DOES NOT PROVE THE CLAIM TRUE. THIS EXECUTOR DOES NOT SEARCH PRIVATE GOOGLE DRIVE OR THE OPEN WEB. TEST CLAIM IS DELIBERATELY FALSE: IT CHECKS THAT THE CURRENT REGISTRY EXPLICITLY REFUTES UNRESTRICTED PRIVATE-ENVIRONMENT CRAWLING WHILE MINE_INTERNAL IS BOUNDED TO AUTHORIZED QUERY-SCOPED CONNECTORS."
 }
