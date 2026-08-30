@@ -1,6 +1,6 @@
 {
-  "schema": "nostromo-organ-registry/v1.14",
-  "updatedAt": "2026-08-31T04:10:00+08:00",
+  "schema": "nostromo-organ-registry/v1.15",
+  "updatedAt": "2026-08-31T07:09:00+08:00",
   "truthRule": "DISPLAYED STATE MUST FOLLOW EVIDENCE",
   "evidence": "ci-last-result.json plus formal-round-last-result.json plus connector-last-result.json plus muther-falsify-last-result.json plus droplet-claim-verify-last-result.json plus gut-metabolism-last-result.json plus vajra-dynamic-last-result.json",
   "latestFormalRound": "greenhouse/r113-nostromo-formal-round.json",
@@ -29,23 +29,22 @@
     "boundary": "Isolated counterfactual executor only. It deliberately includes parent round ordinal in participant selection and has been CI-verified against R111 and R112. It does not write or advance formal greenhouse history and is engineering evidence that NOSTROMO can execute and audit a parent-sensitive transition, not evidence that the real SHROOMING population is causally path-dependent."
   },
   "latestThickening": {
-    "organ": "GUT",
-    "version": "0.2.13",
-    "status": "VERIFIED_TAGGED_TAIL_AND_PRE_POST_ADJACENT_ANTI_ECHO",
-    "test": "gut-metabolism-last-result.json",
+    "organ": "VAJRA",
+    "version": "0.2.8",
+    "status": "VERIFIED_CLAUSE_SCOPED_HANDOFF_ISOLATION",
+    "test": "vajra-dynamic-last-result.json",
     "capabilities": [
-      "heuristic material classification and routing",
-      "failure quarantine and uncertainty hold",
-      "provenance propagation",
-      "exact inherited-substrate subtraction",
-      "exact repeated tagged-payload suppression",
-      "exact repeated same-tag long-tail suppression while preserving distinct heads",
-      "pre/post short adjacent intra-atom echo collapse",
-      "near-duplicate preservation",
-      "structured-snippet protection",
-      "cross-organ feedback regression coverage"
+      "proposition-aware dynamic lens selection",
+      "compound proposition type detection",
+      "bounded syntactic cause/effect clause decomposition",
+      "stable targetRef plus clauseRef referential continuity",
+      "clause-scoped cross-organ handoff contracts",
+      "cross-clause receipt rejection",
+      "execution/provenance/relation requirements before structural closure",
+      "cross-branch and cross-application evidence replay guards",
+      "VAJRA to GUT anti-echo regression coverage"
     ],
-    "boundary": "GUT v0.2.13 was promoted only after a failed v0.2.12 CI exposed a regression in short adjacent echo suppression and a subsequent full GitHub Actions run passed. It now removes exact repeated same-tag long tails of 80+ normalized characters while preserving distinct lens heads, and runs adjacent exact-segment collapse both before and after tagged processing. These are deterministic auditable anti-echo heuristics, not semantic novelty detection, truth verification, or paraphrase understanding."
+    "boundary": "VAJRA v0.2.8 was promoted only after the dedicated adversarial test and full NOSTROMO GitHub Actions run succeeded. Compound claims can now be split by bounded syntactic causal patterns into clause-scoped references, and a receipt about one clause cannot structurally close a branch scoped to another clause. Clause splitting, lens choice and receipt closure remain deterministic auditable heuristics; they are not semantic parsing, factual verification, or proof that a proposition is settled."
   },
   "organs": {
     "shrooming": {
@@ -90,17 +89,17 @@
       "mode": "EXEC_CONNECTED_THICKENED",
       "source": "../gut/gut-engine.js",
       "actions": {
-        "DIGEST": "VERIFIED_HEURISTIC_METABOLIC_ROUTER_TAGGED_TAIL_PREPOST_ANTI_ECHO"
+        "DIGEST": "VERIFIED_HEURISTIC_METABOLIC_ROUTER_SHARED_BODY_TAGGED_TAIL_PREPOST_ANTI_ECHO"
       },
-      "boundary": "GUT v0.2.13 classifies and routes material, quarantines failure/risk markers, preserves uncertainty, propagates provenance, removes exact inherited substrate echoes when caller context is supplied, strips route metadata, suppresses exact repeated tagged payloads, suppresses exact repeated same-tag colon-delimited tails of 80+ normalized characters while preserving distinct heads, and performs exact adjacent segment collapse both before and after tagged processing so the long-tail rule does not regress short intra-atom de-echoing. Near-duplicates that are not exact matches remain. JSON-like engineering snippets are downgraded before lexical contradiction detection. It remains heuristic: paraphrastic echo, semantic novelty, source truth and optimal routing are not certified."
+      "boundary": "GUT v0.2.14 classifies and routes material, quarantines failure/risk markers, preserves uncertainty, propagates provenance, removes exact inherited substrate echoes when caller context is supplied, strips route metadata, suppresses exact repeated tagged payloads and same-tag long tails, collapses exact adjacent segments before and after tagged processing, and suppresses repeated long shared bodies in summary selection without deleting source nutrients. Near-duplicates that are not exact matches remain. JSON-like engineering snippets are downgraded before lexical contradiction detection. It remains heuristic: paraphrastic echo, semantic novelty, source truth and optimal routing are not certified."
     },
     "vajra": {
       "mode": "EXEC_CONNECTED_THICKENED",
       "source": "../vajra/vajra-engine.js",
       "actions": {
-        "DISMANTLE": "VERIFIED_COMPOUND_PROPOSITION_AWARE_HEURISTIC_DISMANTLER_WITH_PERSISTENT_REPLAY_GUARD"
+        "DISMANTLE": "VERIFIED_CLAUSE_SCOPED_PROPOSITION_AWARE_HEURISTIC_DISMANTLER_WITH_PERSISTENT_REPLAY_GUARD"
       },
-      "boundary": "VAJRA v0.2.7 performs proposition-aware dynamic dismantling and can retain multiple lexically detected proposition types in one target, merging their inspection lenses instead of forcing a single type. OPEN branch contracts still require targetRef, lens, preferred organ, execution status, provenance, material and relation-to-target before structural closure. The same provenance+material payload can resolve only one branch across accumulated VAJRA history. Compound-type detection and RESOLVED_BY_RECEIPT are structural heuristics, not semantic parsing, factual truth, or proof that the original proposition is settled."
+      "boundary": "VAJRA v0.2.8 performs proposition-aware dynamic dismantling, retains multiple lexically detected proposition types, and applies bounded syntactic clause decomposition for explicit causal forms. OPEN branch contracts carry targetRef plus clauseRef and still require matching lens, preferred organ, execution status, provenance, material and relation-to-target before structural closure. A receipt scoped to a different clause is rejected and remains visible in the audit trail. The same provenance+material payload can resolve only one branch across accumulated VAJRA history. Clause decomposition, type detection and RESOLVED_BY_RECEIPT are structural heuristics, not semantic parsing, factual truth, or proof that the original proposition is settled."
     }
   }
 }
