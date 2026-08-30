@@ -1,12 +1,12 @@
 {
-  "schema": "nostromo-connector-contract/v0.1",
+  "schema": "nostromo-connector-contract/v0.2",
   "truthRule": "DISPLAYED STATE MUST FOLLOW EVIDENCE",
   "executor": "AUTHORIZED CONNECTOR RUNTIME",
   "transport": "repository request/result queue serviced by the connected automation runtime",
   "privacy": {
     "privateSources": "raw private connector content must not be committed to the public repository",
     "persistAllowed": ["status", "counts", "mime/type aggregates", "timestamps", "non-reversible fingerprints", "public-web URLs and titles"],
-    "persistForbidden": ["private Drive URLs", "private Drive file IDs", "private document excerpts", "credentials", "tokens"]
+    "persistForbidden": ["private Drive URLs", "private Drive file IDs", "private Drive titles", "private document excerpts", "credentials", "tokens"]
   },
   "actions": {
     "MUTHER.MINE_DRIVE_QUERY": {
@@ -15,6 +15,14 @@
       "input": {"query": "string", "topn": "integer<=20"},
       "output": "redacted aggregate result + fingerprints",
       "boundary": "query-scoped Drive mining; not whole-Drive exhaustive mining"
+    },
+    "MUTHER.MINE_INTERNAL": {
+      "mode": "AUTHORIZED_CONNECTOR_EXEC",
+      "connector": "explicitly authorized internal connector source",
+      "currentVerifiedSource": "Google Drive",
+      "input": {"source": "authorized source class", "query": "string", "topn": "integer<=20", "scope": "AUTHORIZED_QUERY_ONLY"},
+      "output": "redacted aggregate result + non-reversible fingerprints",
+      "boundary": "MINE_INTERNAL means query-scoped mining over an explicitly authorized connector source only. It is not permission for exhaustive private-environment crawling, cross-source enumeration, or access to unconnected services."
     },
     "DROPLET.SEARCH_EXTERNAL": {
       "mode": "CONNECTOR_EXEC",
