@@ -22,7 +22,7 @@ const sample={
 const gut=globalThis.GutEngine.digest(sample,{source:'NOSTROMO/gut-metabolism-test'});
 const failures=[];
 function check(condition,type,detail){if(!condition)failures.push({type,detail});}
-check(gut.version==='0.2','GUT_VERSION',gut.version);
+check(gut.version==='0.2.1','GUT_VERSION',gut.version);
 check(gut.mode==='DETERMINISTIC_HEURISTIC_ROUTER','GUT_MODE',gut.mode);
 check(gut.routes?.DROPLET?.count>=1,'CLAIM_NOT_ROUTED_TO_DROPLET',gut.routes?.DROPLET);
 check(gut.routes?.SHROOMING?.count>=1,'QUESTION_NOT_ROUTED_TO_SHROOMING',gut.routes?.SHROOMING);
@@ -33,9 +33,15 @@ check(gut.excreted>=1,'DUPLICATE_NOT_EXCRETED',gut.waste);
 check(gut.held>=1,'UNCERTAINTY_NOT_HELD',gut.hold);
 check(gut.nutrients.every(x=>x.provenance?.inputSource==='NOSTROMO/gut-metabolism-test'),'PROVENANCE_LOST',gut.nutrients.filter(x=>x.provenance?.inputSource!=='NOSTROMO/gut-metabolism-test'));
 
+const echoStem='Counterevidence: repeated recursive carry should not monopolize the next-round summary because this long prefix is deliberately identical across generated variants. ';
+const echoFixture={a:echoStem+'variant A',b:echoStem+'variant B',c:echoStem+'variant C',question:'What novel signal remains after echo suppression?'};
+const echoGut=globalThis.GutEngine.digest(echoFixture,{source:'NOSTROMO/gut-anti-echo-test'});
+check(echoGut.antiEcho?.suppressedCount>=2,'ANTI_ECHO_NOT_SUPPRESSING',echoGut.antiEcho);
+check((echoGut.summary.match(/repeated recursive carry/g)||[]).length===1,'ANTI_ECHO_SUMMARY_REPEAT',echoGut.summary);
+
 let active=null;
 try{
-  active=await runActiveExecutorLoop({rounds:3,seed:'GUT v0.2 feedback validation',mineQuery:'NOSTROMO',verifyUrl:'https://github.com/jcchang13-a11y/visual-mining-lab'});
+  active=await runActiveExecutorLoop({rounds:3,seed:'GUT v0.2.1 feedback validation',mineQuery:'NOSTROMO',verifyUrl:'https://github.com/jcchang13-a11y/visual-mining-lab'});
   check(active.status==='PASS','ACTIVE_LOOP_FAIL',{status:active.status,completedRounds:active.completedRounds});
   check(active.feedback?.appliedRounds===2,'FEEDBACK_APPLIED_ROUNDS',active.feedback);
   check(active.feedback?.firstAppliedRound===2,'FEEDBACK_FIRST_ROUND',active.feedback);
@@ -45,13 +51,13 @@ try{
 }catch(error){failures.push({type:'ACTIVE_LOOP_EXCEPTION',message:String(error?.message||error)});}
 
 const result={
-  schema:'nostromo-gut-metabolism-test/v0.2',
+  schema:'nostromo-gut-metabolism-test/v0.2.1',
   completedAt:new Date().toISOString(),
   status:failures.length===0?'PASS':'FAIL',
-  gut:{version:gut.version,mode:gut.mode,ingested:gut.ingested,absorbed:gut.absorbed,excreted:gut.excreted,quarantined:gut.quarantined,held:gut.held,typeCounts:gut.typeCounts,routeCounts:Object.fromEntries(Object.entries(gut.routes).map(([k,v])=>[k,v.count])),boundary:gut.boundary},
-  feedback:active?{status:active.status,completedRounds:active.completedRounds,feedback:active.feedback,boundary:active.boundary}:null,
+  gut:{version:gut.version,mode:gut.mode,ingested:gut.ingested,absorbed:gut.absorbed,excreted:gut.excreted,quarantined:gut.quarantined,held:gut.held,typeCounts:gut.typeCounts,routeCounts:Object.fromEntries(Object.entries(gut.routes).map(([k,v])=>[k,v.count])),antiEcho:echoGut.antiEcho,boundary:gut.boundary},
+  feedback:active?{status:active.status,completedRounds:active.completedRounds,feedback:active.feedback,lastCarry:active.trace?.at(-1)?.carryOut||null,boundary:active.boundary}:null,
   failures,
-  boundary:'PASS proves deterministic heuristic classification, quarantine/hold/excretion, destination routing, provenance propagation, and explicit application of persisted redacted connector feedback from round 2. It does not prove semantic correctness, source truth, or live connector re-execution inside GitHub Actions.'
+  boundary:'PASS proves deterministic heuristic classification, quarantine/hold/excretion, destination routing, provenance propagation, prefix-diversity anti-echo suppression, and explicit application of persisted redacted connector feedback from round 2. It does not prove semantic correctness, source truth, or live connector re-execution inside GitHub Actions.'
 };
 await fs.writeFile(path.join(root,'nostromo/integration/gut-metabolism-last-result.json'),JSON.stringify(result,null,2)+'\n','utf8');
 console.log(JSON.stringify(result,null,2));
