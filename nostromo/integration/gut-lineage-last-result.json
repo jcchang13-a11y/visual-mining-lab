@@ -1,7 +1,7 @@
 {
   "schema": "nostromo-gut-lineage-test/v0.2.19-adversarial-lineage-signature",
-  "completedAt": "2026-08-31T20:07:46.081Z",
-  "status": "FAIL",
+  "completedAt": "2026-08-31T20:09:07.543Z",
+  "status": "PASS",
   "sameLineage": {
     "summaryItemCount": 1,
     "antiEcho": {
@@ -89,7 +89,7 @@
       "carryClauseSuppressedCount": 1,
       "volatileLineageClauseSuppressedCount": 0,
       "shortCarryTokenSuppressedCount": 0,
-      "lineageSignatureSuppressedCount": 0
+      "lineageSignatureSuppressedCount": 1
     },
     "summary": "[CONTRADICTION->VAJRA] CONTRADICTION_CONDITIONED：第一個反例要求重新檢查來源獨立性與測量時間：第二個反例要求重新檢查替代因果與邊界條件",
     "sourceNutrient": "CONTRADICTION_CONDITIONED：第一個反例要求重新檢查來源獨立性與測量時間：CONTRADICTION_CONDITIONED：第二個反例要求重新檢查替代因果與邊界條件"
@@ -107,29 +107,6 @@
     "fingerprint": "393ae7383acd9cef",
     "boundary": "Carry-only containment. Exact/lineage-equivalent colon clauses, nested long clauses, and same-route cross-segment near echoes (5-gram Jaccard >= 0.82 after ASCII/fullwidth volatile-lineage normalization, minimum 80 chars) are collapsed before recirculation; original GUT nutrients, routes and provenance are not mutated."
   },
-  "failures": [
-    {
-      "type": "LINEAGE_SIGNATURE_SUPPRESSION_NOT_ACCOUNTED",
-      "detail": {
-        "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PRE_POST_ADJACENT_SEGMENT_COLLAPSE_12+PREFIX_DIVERSITY_96+SHARED_BODY_SUMMARY_DIVERSITY_80_192+VOLATILE_REF_LINEAGE_NEUTRALIZATION+TAGGED_PAYLOAD_DEDUP+EXACT_TAGGED_TAIL_DEDUP_80+ROUTE_METADATA_STRIP+DELIMITED_LONG_SEGMENT_DEDUP+SUMMARY_EXACT_NONADJACENT_FULLWIDTH_COLON_CLAUSE_DEDUP_12+SUMMARY_VOLATILE_LINEAGE_FULLWIDTH_COLON_CLAUSE_DEDUP+SUMMARY_CONSECUTIVE_SHORT_TOKEN_COLLAPSE_4+SUMMARY_REPEATED_LINEAGE_SIGNATURE_COLLAPSE_5_64",
-        "candidateCount": 1,
-        "selectedCount": 1,
-        "suppressedCount": 0,
-        "sharedBodySuppressedCount": 0,
-        "volatileLineageSuppressedCount": 0,
-        "inheritedSubstrateStrippedCount": 0,
-        "nestedEchoAffectedAtoms": 0,
-        "nestedEchoSuppressedCount": 0,
-        "taggedTailSuppressedCount": 0,
-        "routeTagsStripped": 0,
-        "segmentEchoSuppressedCount": 0,
-        "delimitedEchoSuppressedCount": 0,
-        "carryClauseSuppressedCount": 1,
-        "volatileLineageClauseSuppressedCount": 0,
-        "shortCarryTokenSuppressedCount": 0,
-        "lineageSignatureSuppressedCount": 0
-      }
-    }
-  ],
+  "failures": [],
   "boundary": "This adversarial test preserves source nutrients and provenance while checking cross-atom, intra-atom, repeated machine-lineage signature, and cross-segment volatile-lineage carry echo. PASS requires repeated standalone lineage signatures to collapse only at carry rendering, same-route near-duplicate recirculation segments to collapse, and substantively distinct prose to survive."
 }
