@@ -1,6 +1,6 @@
 {
   "schema": "nostromo-gut-metabolism-test/v0.2.18",
-  "completedAt": "2026-08-31T08:03:35.627Z",
+  "completedAt": "2026-08-31T09:05:41.979Z",
   "status": "PASS",
   "gut": {
     "version": "0.2.18",
@@ -201,9 +201,9 @@
     "roundAntiEcho": [
       {
         "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PRE_POST_ADJACENT_SEGMENT_COLLAPSE_12+PREFIX_DIVERSITY_96+SHARED_BODY_SUMMARY_DIVERSITY_80_192+VOLATILE_REF_LINEAGE_NEUTRALIZATION+TAGGED_PAYLOAD_DEDUP+EXACT_TAGGED_TAIL_DEDUP_80+ROUTE_METADATA_STRIP+DELIMITED_LONG_SEGMENT_DEDUP+SUMMARY_EXACT_NONADJACENT_FULLWIDTH_COLON_CLAUSE_DEDUP_12+SUMMARY_VOLATILE_LINEAGE_FULLWIDTH_COLON_CLAUSE_DEDUP+SUMMARY_CONSECUTIVE_SHORT_TOKEN_COLLAPSE_4",
-        "candidateCount": 193,
+        "candidateCount": 208,
         "selectedCount": 12,
-        "suppressedCount": 181,
+        "suppressedCount": 196,
         "sharedBodySuppressedCount": 0,
         "volatileLineageSuppressedCount": 0,
         "inheritedSubstrateStrippedCount": 0,
@@ -219,9 +219,9 @@
       },
       {
         "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PRE_POST_ADJACENT_SEGMENT_COLLAPSE_12+PREFIX_DIVERSITY_96+SHARED_BODY_SUMMARY_DIVERSITY_80_192+VOLATILE_REF_LINEAGE_NEUTRALIZATION+TAGGED_PAYLOAD_DEDUP+EXACT_TAGGED_TAIL_DEDUP_80+ROUTE_METADATA_STRIP+DELIMITED_LONG_SEGMENT_DEDUP+SUMMARY_EXACT_NONADJACENT_FULLWIDTH_COLON_CLAUSE_DEDUP_12+SUMMARY_VOLATILE_LINEAGE_FULLWIDTH_COLON_CLAUSE_DEDUP+SUMMARY_CONSECUTIVE_SHORT_TOKEN_COLLAPSE_4",
-        "candidateCount": 177,
+        "candidateCount": 192,
         "selectedCount": 12,
-        "suppressedCount": 165,
+        "suppressedCount": 180,
         "sharedBodySuppressedCount": 9,
         "volatileLineageSuppressedCount": 0,
         "inheritedSubstrateStrippedCount": 10,
@@ -237,9 +237,9 @@
       },
       {
         "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PRE_POST_ADJACENT_SEGMENT_COLLAPSE_12+PREFIX_DIVERSITY_96+SHARED_BODY_SUMMARY_DIVERSITY_80_192+VOLATILE_REF_LINEAGE_NEUTRALIZATION+TAGGED_PAYLOAD_DEDUP+EXACT_TAGGED_TAIL_DEDUP_80+ROUTE_METADATA_STRIP+DELIMITED_LONG_SEGMENT_DEDUP+SUMMARY_EXACT_NONADJACENT_FULLWIDTH_COLON_CLAUSE_DEDUP_12+SUMMARY_VOLATILE_LINEAGE_FULLWIDTH_COLON_CLAUSE_DEDUP+SUMMARY_CONSECUTIVE_SHORT_TOKEN_COLLAPSE_4",
-        "candidateCount": 178,
+        "candidateCount": 193,
         "selectedCount": 12,
-        "suppressedCount": 166,
+        "suppressedCount": 181,
         "sharedBodySuppressedCount": 9,
         "volatileLineageSuppressedCount": 0,
         "inheritedSubstrateStrippedCount": 10,

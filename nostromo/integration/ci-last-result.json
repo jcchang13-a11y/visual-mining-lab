@@ -1,6 +1,6 @@
 {
   "schema": "nostromo-integration-ci/v1.3.1",
-  "completedAt": "2026-08-31T08:03:38.476Z",
+  "completedAt": "2026-08-31T09:05:44.428Z",
   "status": "PASS",
   "rounds": 50,
   "expectedPerRound": {
@@ -128,7 +128,7 @@
     "muther": {
       "status": "EXECUTED",
       "hitCount": 8,
-      "boundary": "MINES THIS GITHUB REPOSITORY ONLY; DOES NOT CLAIM GOOGLE DRIVE COVERAGE"
+      "boundary": "MINES THIS GITHUB REPOSITORY ONLY. CANDIDATE DEDUPLICATION NORMALIZES SUPERFICIAL FORMAT, VOLATILE TIMESTAMPS AND LONG IDENTIFIERS, THEN SELECTION ROUND-ROBINS ACROSS PATH-BASED SOURCE FAMILIES TO REDUCE FIRST-FILE AND COPY BIAS. THIS IS NOT SEMANTIC CLUSTERING, SOURCE-QUALITY JUDGMENT, NOVELTY PROOF, OR GOOGLE DRIVE COVERAGE."
     },
     "droplet": {
       "status": "EXECUTED",
@@ -168,7 +168,7 @@
     "requestedRounds": 10,
     "completedRounds": 10,
     "roundsWithAllFourRepoExecutors": 10,
-    "gutAbsorbedTotal": 1794,
+    "gutAbsorbedTotal": 1944,
     "connectorHandoff": {
       "status": "ACCEPTED",
       "completedAt": "2026-08-30T13:05:48+08:00",
