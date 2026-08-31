@@ -1,7 +1,7 @@
 {
   "schema": "nostromo-gut-lineage-test/v0.2.18-adversarial-cross-segment",
-  "completedAt": "2026-08-31T13:13:35.162Z",
-  "status": "FAIL",
+  "completedAt": "2026-08-31T13:14:40.203Z",
+  "status": "PASS",
   "sameLineage": {
     "summaryItemCount": 1,
     "antiEcho": {
@@ -69,51 +69,18 @@
     "sourceNutrient": "以 structure 位置重讀：主動尋找最小反例與破壞條件：針對本輪 UNIVERSAL+EMPIRICAL 命題（ref:111111aa; clause:222222bb），哪個前提最可能先失效？這段故意拉長，模擬跨輪 carry 只有 volatile provenance token 改變、其餘代謝內容完全相同的情況。：中間保留不同觀察：以 structure 位置重讀：主動尋找最小反例與破壞條件：針對本輪 UNIVERSAL+EMPIRICAL 命題（ref:333333cc; clause:444444dd），哪個前提最可能先失效？這段故意拉長，模擬跨輪 carry 只有 volatile provenance token 改變、其餘代謝內容完全相同的情況。：以 structure 位置重讀：主動尋找最小反例與破壞條件：針對本輪 UNIVERSAL+EMPIRICAL 命題（ref:555555ee; clause:666666ff），哪一份證據最需要重新驗證？這段故意拉長，模擬跨輪 carry 只有 volatile provenance token 改變、其餘代謝內容完全相同的情況。"
   },
   "crossSegmentNearEcho": {
-    "text": "[CONTRADICTION->VAJRA] 以 counterexample 位置重讀：CONTRADICTION_CONDITIONED：主動尋找最小反例與破壞條件：針對本輪 GENERAL 命題（ref：abcdef12; clause：12345678），哪個前提最可能先失效？這段故意拉長，模擬同一路由在相鄰器官輸出中只增加一層包裝但核心內容沒有改變。 · [CONTRADICTION->VAJRA] CONTRADICTION_CONDITIONED：以 counterexample 位置重讀：主動尋找最小反例與破壞條件：針對本輪 GENERAL 命題（ref：fedcba98; clause：87654321），哪個前提最可能先失效？這段故意拉長，模擬同一路由在相鄰器官輸出中只增加一層包裝但核心內容沒有改變。 · [CONTRADICTION->VAJRA] 另一份證據直接否定時間順序，因此需要重新檢查測量有效性、來源獨立性與替代因果。這是一條實質不同的反證材料，不能因為同一路由就被壓掉。",
+    "text": "[CONTRADICTION->VAJRA] 以 counterexample 位置重讀：CONTRADICTION_CONDITIONED：主動尋找最小反例與破壞條件：針對本輪 GENERAL 命題（ref：abcdef12; clause：12345678），哪個前提最可能先失效？這段故意拉長，模擬同一路由在相鄰器官輸出中只增加一層包裝但核心內容沒有改變。 · [CONTRADICTION->VAJRA] 另一份證據直接否定時間順序，因此需要重新檢查測量有效性、來源獨立性與替代因果。這是一條實質不同的反證材料，不能因為同一路由就被壓掉。",
     "echoSuppressed": 0,
     "routeCapped": 0,
     "intraSegmentSuppressed": 0,
     "shortTokenSuppressed": 0,
     "nestedClauseSuppressed": 0,
-    "crossSegmentNearEchoSuppressed": 0,
+    "crossSegmentNearEchoSuppressed": 1,
     "inputSegments": 3,
-    "outputSegments": 3,
-    "fingerprint": "c4665847722af407",
-    "boundary": "Carry-only containment. Exact/lineage-equivalent colon clauses, nested long clauses, and same-route cross-segment near echoes (5-gram Jaccard >= 0.82 after volatile-lineage normalization, minimum 80 chars) are collapsed before recirculation; original GUT nutrients, routes and provenance are not mutated."
+    "outputSegments": 2,
+    "fingerprint": "393ae7383acd9cef",
+    "boundary": "Carry-only containment. Exact/lineage-equivalent colon clauses, nested long clauses, and same-route cross-segment near echoes (5-gram Jaccard >= 0.82 after ASCII/fullwidth volatile-lineage normalization, minimum 80 chars) are collapsed before recirculation; original GUT nutrients, routes and provenance are not mutated."
   },
-  "failures": [
-    {
-      "type": "CROSS_SEGMENT_NEAR_ECHO_NOT_SUPPRESSED",
-      "detail": {
-        "text": "[CONTRADICTION->VAJRA] 以 counterexample 位置重讀：CONTRADICTION_CONDITIONED：主動尋找最小反例與破壞條件：針對本輪 GENERAL 命題（ref：abcdef12; clause：12345678），哪個前提最可能先失效？這段故意拉長，模擬同一路由在相鄰器官輸出中只增加一層包裝但核心內容沒有改變。 · [CONTRADICTION->VAJRA] CONTRADICTION_CONDITIONED：以 counterexample 位置重讀：主動尋找最小反例與破壞條件：針對本輪 GENERAL 命題（ref：fedcba98; clause：87654321），哪個前提最可能先失效？這段故意拉長，模擬同一路由在相鄰器官輸出中只增加一層包裝但核心內容沒有改變。 · [CONTRADICTION->VAJRA] 另一份證據直接否定時間順序，因此需要重新檢查測量有效性、來源獨立性與替代因果。這是一條實質不同的反證材料，不能因為同一路由就被壓掉。",
-        "echoSuppressed": 0,
-        "routeCapped": 0,
-        "intraSegmentSuppressed": 0,
-        "shortTokenSuppressed": 0,
-        "nestedClauseSuppressed": 0,
-        "crossSegmentNearEchoSuppressed": 0,
-        "inputSegments": 3,
-        "outputSegments": 3,
-        "fingerprint": "c4665847722af407",
-        "boundary": "Carry-only containment. Exact/lineage-equivalent colon clauses, nested long clauses, and same-route cross-segment near echoes (5-gram Jaccard >= 0.82 after volatile-lineage normalization, minimum 80 chars) are collapsed before recirculation; original GUT nutrients, routes and provenance are not mutated."
-      }
-    },
-    {
-      "type": "CROSS_SEGMENT_OUTPUT_COUNT_UNEXPECTED",
-      "detail": {
-        "text": "[CONTRADICTION->VAJRA] 以 counterexample 位置重讀：CONTRADICTION_CONDITIONED：主動尋找最小反例與破壞條件：針對本輪 GENERAL 命題（ref：abcdef12; clause：12345678），哪個前提最可能先失效？這段故意拉長，模擬同一路由在相鄰器官輸出中只增加一層包裝但核心內容沒有改變。 · [CONTRADICTION->VAJRA] CONTRADICTION_CONDITIONED：以 counterexample 位置重讀：主動尋找最小反例與破壞條件：針對本輪 GENERAL 命題（ref：fedcba98; clause：87654321），哪個前提最可能先失效？這段故意拉長，模擬同一路由在相鄰器官輸出中只增加一層包裝但核心內容沒有改變。 · [CONTRADICTION->VAJRA] 另一份證據直接否定時間順序，因此需要重新檢查測量有效性、來源獨立性與替代因果。這是一條實質不同的反證材料，不能因為同一路由就被壓掉。",
-        "echoSuppressed": 0,
-        "routeCapped": 0,
-        "intraSegmentSuppressed": 0,
-        "shortTokenSuppressed": 0,
-        "nestedClauseSuppressed": 0,
-        "crossSegmentNearEchoSuppressed": 0,
-        "inputSegments": 3,
-        "outputSegments": 3,
-        "fingerprint": "c4665847722af407",
-        "boundary": "Carry-only containment. Exact/lineage-equivalent colon clauses, nested long clauses, and same-route cross-segment near echoes (5-gram Jaccard >= 0.82 after volatile-lineage normalization, minimum 80 chars) are collapsed before recirculation; original GUT nutrients, routes and provenance are not mutated."
-      }
-    }
-  ],
+  "failures": [],
   "boundary": "This adversarial test preserves source nutrients and provenance while checking cross-atom, intra-atom, and cross-segment volatile-lineage carry echo. PASS requires same-route near-duplicate recirculation segments to collapse only at carry rendering while retaining a substantively distinct contradiction."
 }
