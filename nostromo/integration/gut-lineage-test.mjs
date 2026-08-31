@@ -16,7 +16,7 @@ const sameLineage=globalThis.GutEngine.digest({
   contradictionA:template('abcdef12','12345678'),
   contradictionB:template('fedcba98','87654321')
 },{source});
-check(sameLineage.version==='0.2.18','GUT_VERSION',sameLineage.version);
+check(sameLineage.version==='0.2.19','GUT_VERSION',sameLineage.version);
 check(sameLineage.nutrients.length===2,'SOURCE_NUTRIENTS_LOST',sameLineage.nutrients);
 check(sameLineage.nutrients.every(x=>x.provenance?.inputSource===source),'PROVENANCE_LOST',sameLineage.nutrients);
 check((sameLineage.antiEcho?.volatileLineageSuppressedCount||0)>=1,'VOLATILE_LINEAGE_NOT_SUPPRESSED',sameLineage.antiEcho);
@@ -42,6 +42,15 @@ check((intraAtom.nutrients[0]?.text.match(/哪個前提最可能先失效/g)||[]
 check(intraAtom.nutrients[0]?.provenance?.inputSource===`${source}/intra-atom`,'INTRA_ATOM_PROVENANCE_LOST',intraAtom.nutrients[0]);
 check((intraAtom.antiEcho?.volatileLineageClauseSuppressedCount||0)>=1,'INTRA_ATOM_VOLATILE_LINEAGE_NOT_ACCOUNTED',intraAtom.antiEcho);
 
+const signatureEcho=globalThis.GutEngine.digest({
+  contradiction:'CONTRADICTION_CONDITIONED：第一個反例要求重新檢查來源獨立性與測量時間：CONTRADICTION_CONDITIONED：第二個反例要求重新檢查替代因果與邊界條件'
+},{source:`${source}/signature-echo`});
+check((signatureEcho.summary.match(/CONTRADICTION_CONDITIONED/g)||[]).length===1,'LINEAGE_SIGNATURE_ECHO_SURVIVED',signatureEcho.summary);
+check(signatureEcho.summary.includes('第一個反例要求重新檢查來源獨立性與測量時間')&&signatureEcho.summary.includes('第二個反例要求重新檢查替代因果與邊界條件'),'LINEAGE_SIGNATURE_DISTINCT_PROSE_LOST',signatureEcho.summary);
+check((signatureEcho.nutrients[0]?.text.match(/CONTRADICTION_CONDITIONED/g)||[]).length===2,'LINEAGE_SIGNATURE_SOURCE_NUTRIENT_MUTATED',signatureEcho.nutrients[0]);
+check(signatureEcho.nutrients[0]?.provenance?.inputSource===`${source}/signature-echo`,'LINEAGE_SIGNATURE_PROVENANCE_LOST',signatureEcho.nutrients[0]);
+check((signatureEcho.antiEcho?.lineageSignatureSuppressedCount||0)>=1,'LINEAGE_SIGNATURE_SUPPRESSION_NOT_ACCOUNTED',signatureEcho.antiEcho);
+
 const sharedCore='主動尋找最小反例與破壞條件：針對本輪 GENERAL 命題（ref:abcdef12; clause:12345678），哪個前提最可能先失效？這段故意拉長，模擬同一路由在相鄰器官輸出中只增加一層包裝但核心內容沒有改變。';
 const nearDuplicateCarry=compactMetabolicCarry([
   `[CONTRADICTION->VAJRA] 以 counterexample 位置重讀：CONTRADICTION_CONDITIONED：${sharedCore}`,
@@ -53,15 +62,16 @@ check(nearDuplicateCarry.outputSegments===2,'CROSS_SEGMENT_OUTPUT_COUNT_UNEXPECT
 check(nearDuplicateCarry.text.includes('另一份證據直接否定時間順序'),'CROSS_SEGMENT_DISTINCT_CONTENT_LOST',nearDuplicateCarry.text);
 
 const result={
-  schema:'nostromo-gut-lineage-test/v0.2.18-adversarial-cross-segment',
+  schema:'nostromo-gut-lineage-test/v0.2.19-adversarial-lineage-signature',
   completedAt:new Date().toISOString(),
   status:failures.length===0?'PASS':'FAIL',
   sameLineage:{summaryItemCount:sameLineage.summaryItemCount,antiEcho:sameLineage.antiEcho,summary:sameLineage.summary},
   substantiveDifference:{summaryItemCount:substantiveDifference.summaryItemCount,antiEcho:substantiveDifference.antiEcho,summary:substantiveDifference.summary},
   intraAtom:{antiEcho:intraAtom.antiEcho,summary:intraAtom.summary,sourceNutrient:intraAtom.nutrients[0]?.text||null},
+  lineageSignature:{antiEcho:signatureEcho.antiEcho,summary:signatureEcho.summary,sourceNutrient:signatureEcho.nutrients[0]?.text||null},
   crossSegmentNearEcho:nearDuplicateCarry,
   failures,
-  boundary:'This adversarial test preserves source nutrients and provenance while checking cross-atom, intra-atom, and cross-segment volatile-lineage carry echo. PASS requires same-route near-duplicate recirculation segments to collapse only at carry rendering while retaining a substantively distinct contradiction.'
+  boundary:'This adversarial test preserves source nutrients and provenance while checking cross-atom, intra-atom, repeated machine-lineage signature, and cross-segment volatile-lineage carry echo. PASS requires repeated standalone lineage signatures to collapse only at carry rendering, same-route near-duplicate recirculation segments to collapse, and substantively distinct prose to survive.'
 };
 await fs.writeFile(path.join(root,'nostromo/integration/gut-lineage-last-result.json'),JSON.stringify(result,null,2)+'\n','utf8');
 console.log(JSON.stringify(result,null,2));
