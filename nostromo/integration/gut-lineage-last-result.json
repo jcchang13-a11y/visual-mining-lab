@@ -1,6 +1,6 @@
 {
-  "schema": "nostromo-gut-lineage-test/v0.2.18-adversarial-cross-segment",
-  "completedAt": "2026-08-31T20:06:06.528Z",
+  "schema": "nostromo-gut-lineage-test/v0.2.19-adversarial-lineage-signature",
+  "completedAt": "2026-08-31T20:06:27.191Z",
   "status": "FAIL",
   "sameLineage": {
     "summaryItemCount": 1,
@@ -71,6 +71,29 @@
     "summary": "[CONTRADICTION->VAJRA] 以 structure 位置重讀：主動尋找最小反例與破壞條件：針對本輪 UNIVERSAL+EMPIRICAL 命題（ref:111111aa; clause:222222bb），哪個前提最可能先失效？這段故意拉長，模擬跨輪 carry 只有 volatile provenance token 改變、其餘代謝內容完全相同的情況。：中間保留不同觀察：針對本輪 UNIVERSAL+EMPIRICAL 命題（ref:555555ee; clause:666666ff），哪一份證據最需要重新驗證？這段故意拉長，模擬跨輪 carry 只有 volatile provenance token 改變、其餘代謝內容完全相同的情況。",
     "sourceNutrient": "以 structure 位置重讀：主動尋找最小反例與破壞條件：針對本輪 UNIVERSAL+EMPIRICAL 命題（ref:111111aa; clause:222222bb），哪個前提最可能先失效？這段故意拉長，模擬跨輪 carry 只有 volatile provenance token 改變、其餘代謝內容完全相同的情況。：中間保留不同觀察：以 structure 位置重讀：主動尋找最小反例與破壞條件：針對本輪 UNIVERSAL+EMPIRICAL 命題（ref:333333cc; clause:444444dd），哪個前提最可能先失效？這段故意拉長，模擬跨輪 carry 只有 volatile provenance token 改變、其餘代謝內容完全相同的情況。：以 structure 位置重讀：主動尋找最小反例與破壞條件：針對本輪 UNIVERSAL+EMPIRICAL 命題（ref:555555ee; clause:666666ff），哪一份證據最需要重新驗證？這段故意拉長，模擬跨輪 carry 只有 volatile provenance token 改變、其餘代謝內容完全相同的情況。"
   },
+  "lineageSignature": {
+    "antiEcho": {
+      "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PRE_POST_ADJACENT_SEGMENT_COLLAPSE_12+PREFIX_DIVERSITY_96+SHARED_BODY_SUMMARY_DIVERSITY_80_192+VOLATILE_REF_LINEAGE_NEUTRALIZATION+TAGGED_PAYLOAD_DEDUP+EXACT_TAGGED_TAIL_DEDUP_80+ROUTE_METADATA_STRIP+DELIMITED_LONG_SEGMENT_DEDUP+SUMMARY_EXACT_NONADJACENT_FULLWIDTH_COLON_CLAUSE_DEDUP_12+SUMMARY_VOLATILE_LINEAGE_FULLWIDTH_COLON_CLAUSE_DEDUP+SUMMARY_CONSECUTIVE_SHORT_TOKEN_COLLAPSE_4+SUMMARY_REPEATED_LINEAGE_SIGNATURE_COLLAPSE_5_64",
+      "candidateCount": 1,
+      "selectedCount": 1,
+      "suppressedCount": 0,
+      "sharedBodySuppressedCount": 0,
+      "volatileLineageSuppressedCount": 0,
+      "inheritedSubstrateStrippedCount": 0,
+      "nestedEchoAffectedAtoms": 0,
+      "nestedEchoSuppressedCount": 0,
+      "taggedTailSuppressedCount": 0,
+      "routeTagsStripped": 0,
+      "segmentEchoSuppressedCount": 0,
+      "delimitedEchoSuppressedCount": 0,
+      "carryClauseSuppressedCount": 1,
+      "volatileLineageClauseSuppressedCount": 0,
+      "shortCarryTokenSuppressedCount": 0,
+      "lineageSignatureSuppressedCount": 0
+    },
+    "summary": "[CONTRADICTION->VAJRA] CONTRADICTION_CONDITIONED：第一個反例要求重新檢查來源獨立性與測量時間：第二個反例要求重新檢查替代因果與邊界條件",
+    "sourceNutrient": "CONTRADICTION_CONDITIONED：第一個反例要求重新檢查來源獨立性與測量時間：CONTRADICTION_CONDITIONED：第二個反例要求重新檢查替代因果與邊界條件"
+  },
   "crossSegmentNearEcho": {
     "text": "[CONTRADICTION->VAJRA] 以 counterexample 位置重讀：CONTRADICTION_CONDITIONED：主動尋找最小反例與破壞條件：針對本輪 GENERAL 命題（ref：abcdef12; clause：12345678），哪個前提最可能先失效？這段故意拉長，模擬同一路由在相鄰器官輸出中只增加一層包裝但核心內容沒有改變。 · [CONTRADICTION->VAJRA] 另一份證據直接否定時間順序，因此需要重新檢查測量有效性、來源獨立性與替代因果。這是一條實質不同的反證材料，不能因為同一路由就被壓掉。",
     "echoSuppressed": 0,
@@ -86,9 +109,27 @@
   },
   "failures": [
     {
-      "type": "GUT_VERSION",
-      "detail": "0.2.19"
+      "type": "LINEAGE_SIGNATURE_SUPPRESSION_NOT_ACCOUNTED",
+      "detail": {
+        "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PRE_POST_ADJACENT_SEGMENT_COLLAPSE_12+PREFIX_DIVERSITY_96+SHARED_BODY_SUMMARY_DIVERSITY_80_192+VOLATILE_REF_LINEAGE_NEUTRALIZATION+TAGGED_PAYLOAD_DEDUP+EXACT_TAGGED_TAIL_DEDUP_80+ROUTE_METADATA_STRIP+DELIMITED_LONG_SEGMENT_DEDUP+SUMMARY_EXACT_NONADJACENT_FULLWIDTH_COLON_CLAUSE_DEDUP_12+SUMMARY_VOLATILE_LINEAGE_FULLWIDTH_COLON_CLAUSE_DEDUP+SUMMARY_CONSECUTIVE_SHORT_TOKEN_COLLAPSE_4+SUMMARY_REPEATED_LINEAGE_SIGNATURE_COLLAPSE_5_64",
+        "candidateCount": 1,
+        "selectedCount": 1,
+        "suppressedCount": 0,
+        "sharedBodySuppressedCount": 0,
+        "volatileLineageSuppressedCount": 0,
+        "inheritedSubstrateStrippedCount": 0,
+        "nestedEchoAffectedAtoms": 0,
+        "nestedEchoSuppressedCount": 0,
+        "taggedTailSuppressedCount": 0,
+        "routeTagsStripped": 0,
+        "segmentEchoSuppressedCount": 0,
+        "delimitedEchoSuppressedCount": 0,
+        "carryClauseSuppressedCount": 1,
+        "volatileLineageClauseSuppressedCount": 0,
+        "shortCarryTokenSuppressedCount": 0,
+        "lineageSignatureSuppressedCount": 0
+      }
     }
   ],
-  "boundary": "This adversarial test preserves source nutrients and provenance while checking cross-atom, intra-atom, and cross-segment volatile-lineage carry echo. PASS requires same-route near-duplicate recirculation segments to collapse only at carry rendering while retaining a substantively distinct contradiction."
+  "boundary": "This adversarial test preserves source nutrients and provenance while checking cross-atom, intra-atom, repeated machine-lineage signature, and cross-segment volatile-lineage carry echo. PASS requires repeated standalone lineage signatures to collapse only at carry rendering, same-route near-duplicate recirculation segments to collapse, and substantively distinct prose to survive."
 }
