@@ -1,0 +1,60 @@
+{
+  "schema": "nostromo-vajra-adversarial-finding/v0.2.9-operator-collision",
+  "recordedAt": "2026-08-31T16:02:00+08:00",
+  "status": "OPEN_DEFECT_PRESERVED_BEFORE_FIX",
+  "organ": "VAJRA",
+  "versionObserved": "0.2.9",
+  "truthRule": "DISPLAYED STATE MUST FOLLOW EVIDENCE",
+  "finding": {
+    "classification": "SEMANTIC_OPERATOR_COLLISION_IN_REPLAY_CANONICALIZATION",
+    "mechanism": "canonicalEvidenceMaterial normalizes NFKC/lowercase and then removes all Unicode punctuation, symbols and whitespace via /[\\p{P}\\p{S}\\s]+/gu. This correctly blocks many superficial formatting mutations, but also removes meaning-bearing operators.",
+    "minimalCounterexamples": [
+      {
+        "a": "score > 10",
+        "b": "score < 10",
+        "canonicalA": "score10",
+        "canonicalB": "score10",
+        "collision": true,
+        "whyDistinct": "> and < reverse the comparison relation"
+      },
+      {
+        "a": "A + B",
+        "b": "A - B",
+        "canonicalA": "ab",
+        "canonicalB": "ab",
+        "collision": true,
+        "whyDistinct": "+ and - encode different operations"
+      },
+      {
+        "a": "p = 0.05",
+        "b": "p != 0.05",
+        "canonicalA": "p005",
+        "canonicalB": "p005",
+        "collision": true,
+        "whyDistinct": "equality and inequality are not formatting variants"
+      }
+    ],
+    "risk": "Two provenance-identical but substantively different evidence payloads can receive the same replay identity. The second payload may then be rejected as replayed evidence even though it changes the evidentiary relation. This is false deduplication, not merely conservative formatting normalization.",
+    "affectedCapability": "canonicalized replay identity across superficial formatting mutations",
+    "notYetPromoted": true
+  },
+  "requiredFixBoundary": {
+    "mustPreserve": [
+      "Unicode width normalization",
+      "letter-case normalization",
+      "whitespace normalization",
+      "purely typographic punctuation normalization where meaning is not changed",
+      "cross-branch and cross-application replay rejection"
+    ],
+    "mustDifferentiate": [
+      "> versus <",
+      "+ versus -",
+      "= versus !=",
+      ">= versus <=",
+      "other explicitly meaning-bearing operators"
+    ],
+    "testRequirement": "Add a dedicated adversarial operator-preservation test and rerun full NOSTROMO integration before any VAJRA version/status promotion.",
+    "boundary": "This file preserves a pre-fix defect. It is not evidence that VAJRA v0.2.9 is broken in every replay case, and it is not a verified fix. Public verified status must remain v0.2.9 until a corrected engine and full CI both pass."
+  },
+  "connectorQueue": "No pending authorized connector request was present in connector-queue.json during this inspection."
+}
