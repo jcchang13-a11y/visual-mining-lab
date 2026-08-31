@@ -1,6 +1,6 @@
 {
   "schema": "nostromo-integration-ci/v1.3.1",
-  "completedAt": "2026-08-31T12:11:23.383Z",
+  "completedAt": "2026-08-31T13:13:08.809Z",
   "status": "PASS",
   "rounds": 50,
   "expectedPerRound": {
@@ -183,7 +183,7 @@
       "totalNestedClauseSuppressed": 0,
       "totalShortTokenSuppressed": 0
     },
-    "boundary": "Certifies the closed-loop executor path plus carry-layer metabolic containment and a deterministic SHROOMING feedback-conditioned lens selector. From round 2 onward, redacted connector feedback can change SHROOMING inspection priority without claiming semantic learning or independent persistent agents. GUT nutrient atoms, routes and provenance remain intact; GitHub Actions does not itself search private Drive or the web."
+    "boundary": "Certifies the closed-loop executor path plus carry-layer metabolic containment and a deterministic SHROOMING feedback-conditioned lens selector. From round 2 onward, redacted connector feedback can change SHROOMING inspection priority without claiming semantic learning or independent persistent agents. Same-route near-duplicate carry segments are suppressed only at recirculation rendering after volatile-lineage normalization; GUT nutrient atoms, routes and provenance remain intact. GitHub Actions does not itself search private Drive or the web."
   },
   "sources": {
     "shroomingUpdated": "2026-08-23",
