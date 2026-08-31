@@ -1,4 +1,4 @@
-// NOSTROMO repository-native executors v1.0
+// NOSTROMO repository-native executors v1.1
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import https from 'node:https';
@@ -122,11 +122,27 @@ export async function shroomParentSensitiveControl({task='',statePath,expectedSo
 }
 
 async function walk(dir,out=[]){for(const e of await fs.readdir(dir,{withFileTypes:true})){if(['.git','node_modules'].includes(e.name))continue;const p=path.join(dir,e.name);if(e.isDirectory())await walk(p,out);else if(/\.(md|txt|json|js|mjs|html)$/i.test(e.name))out.push(p);}return out;}
+function sourceFamily(rel){const parts=String(rel).split(/[\\/]+/).filter(Boolean);if(parts[0]==='nostromo'&&parts[1])return `nostromo/${parts[1]}`;return parts[0]||'root';}
+function countOccurrences(text,q){let count=0,from=0;while(true){const i=text.indexOf(q,from);if(i<0)break;count++;from=i+Math.max(1,q.length);}return count;}
+function normalizeCandidateText(text){return String(text??'').normalize('NFKC').toLowerCase().replace(/\b\d{4}-\d{2}-\d{2}t\d{2}:\d{2}:\d{2}(?:\.\d+)?z?\b/gi,'<timestamp>').replace(/\b[0-9a-f]{8,64}\b/gi,'<hex>').replace(/\b\d{6,}\b/g,'<num>').replace(/[\p{P}\p{S}\s]+/gu,' ').trim();}
+export function mutherCandidateFingerprint(text){return hash(normalizeCandidateText(text));}
+function selectFamilyBalanced(candidates,limit){
+  const groups=new Map();for(const c of candidates){if(!groups.has(c.sourceFamily))groups.set(c.sourceFamily,[]);groups.get(c.sourceFamily).push(c);}
+  for(const arr of groups.values())arr.sort((a,b)=>b.queryOccurrenceCount-a.queryOccurrenceCount||a.path.localeCompare(b.path));
+  const families=[...groups.keys()].sort();const selected=[];let cursor=0;
+  while(selected.length<limit&&families.length){const family=families[cursor%families.length],arr=groups.get(family);if(arr?.length)selected.push(arr.shift());if(!arr?.length){const idx=families.indexOf(family);families.splice(idx,1);if(!families.length)break;cursor=cursor%families.length;}else cursor=(cursor+1)%families.length;}
+  return selected;
+}
 export async function mutherMineRepo({query='',limit=12}={}){
   const q=compact(query,200).toLowerCase(); if(!q)throw new Error('MUTHER_QUERY_REQUIRED');
-  const files=await walk(ROOT); const hits=[];
-  for(const file of files){let text;try{text=await fs.readFile(file,'utf8')}catch{continue}const idx=text.toLowerCase().indexOf(q);if(idx<0)continue;hits.push({path:path.relative(ROOT,file),snippet:compact(text.slice(Math.max(0,idx-180),idx+q.length+420),600)});if(hits.length>=Math.max(1,Math.min(50,Number(limit)||12)))break;}
-  return {executor:'MUTHER_REPOSITORY_MINE',status:'EXECUTED',query:q,hitCount:hits.length,boundary:'MINES THIS GITHUB REPOSITORY ONLY; DOES NOT CLAIM GOOGLE DRIVE COVERAGE',hits};
+  const files=await walk(ROOT); const candidates=[];
+  for(const file of files){let text;try{text=await fs.readFile(file,'utf8')}catch{continue}const lower=text.toLowerCase(),idx=lower.indexOf(q);if(idx<0)continue;const rel=path.relative(ROOT,file),snippet=compact(text.slice(Math.max(0,idx-180),idx+q.length+420),600);candidates.push({path:rel,snippet,sourceFamily:sourceFamily(rel),queryOccurrenceCount:countOccurrences(lower,q),contentFingerprint:mutherCandidateFingerprint(snippet)});}
+  candidates.sort((a,b)=>b.queryOccurrenceCount-a.queryOccurrenceCount||a.path.localeCompare(b.path));
+  const seen=new Set(),distinct=[];let duplicateSuppressedCount=0;
+  for(const c of candidates){if(seen.has(c.contentFingerprint)){duplicateSuppressedCount++;continue;}seen.add(c.contentFingerprint);distinct.push(c);}
+  const bounded=Math.max(1,Math.min(50,Number(limit)||12));
+  const hits=selectFamilyBalanced(distinct,bounded);
+  return {executor:'MUTHER_REPOSITORY_MINE',status:'EXECUTED',query:q,hitCount:hits.length,candidateHitCount:candidates.length,distinctCandidateCount:distinct.length,duplicateSuppressedCount,sourceFamilyCount:new Set(candidates.map(x=>x.sourceFamily)).size,selectedSourceFamilies:[...new Set(hits.map(x=>x.sourceFamily))],selection:'SUPERFICIAL_DUPLICATE_SUPPRESSION_PLUS_SOURCE_FAMILY_ROUND_ROBIN',boundary:'MINES THIS GITHUB REPOSITORY ONLY. CANDIDATE DEDUPLICATION NORMALIZES SUPERFICIAL FORMAT, VOLATILE TIMESTAMPS AND LONG IDENTIFIERS, THEN SELECTION ROUND-ROBINS ACROSS PATH-BASED SOURCE FAMILIES TO REDUCE FIRST-FILE AND COPY BIAS. THIS IS NOT SEMANTIC CLUSTERING, SOURCE-QUALITY JUDGMENT, NOVELTY PROOF, OR GOOGLE DRIVE COVERAGE.',hits};
 }
 
 function probe(url,timeoutMs=8000){return new Promise((resolve,reject)=>{const u=new URL(url);const lib=u.protocol==='https:'?https:http;const req=lib.request(u,{method:'GET',headers:{'User-Agent':'NOSTROMO-DROPLET/1.0'}},res=>{let bytes=0;res.on('data',c=>{bytes+=c.length;if(bytes>65536)req.destroy()});res.on('end',()=>resolve({statusCode:res.statusCode||0,contentType:res.headers['content-type']||null,bytesSampled:bytes,finalUrl:url}));res.on('close',()=>resolve({statusCode:res.statusCode||0,contentType:res.headers['content-type']||null,bytesSampled:bytes,finalUrl:url}));});req.setTimeout(timeoutMs,()=>req.destroy(new Error('TIMEOUT')));req.on('error',reject);req.end();});}
