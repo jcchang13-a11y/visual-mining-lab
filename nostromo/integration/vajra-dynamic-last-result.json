@@ -1,6 +1,6 @@
 {
   "schema": "nostromo-vajra-dynamic-test/v0.3.1",
-  "completedAt": "2026-08-31T21:08:57.135Z",
+  "completedAt": "2026-08-31T23:08:13.131Z",
   "status": "PASS",
   "guards": {
     "falseCertainty": true,
@@ -39,6 +39,7 @@
     "receiptResolution": {
       "received": 4,
       "resolved": 1,
+      "contested": 0,
       "open": 4,
       "rejected": 3,
       "resolvedBranches": [
@@ -52,9 +53,11 @@
           "evidenceKey": "0c2f6280",
           "provenance": "prov-verified-001",
           "relation": "One supports the target claim and one limits its scope.",
-          "boundary": "Resolution means the handoff contract received a matching clause-scoped, executed, provenance-bearing and minimally substantive return. Replay identity canonicalizes both provenance and returned material across Unicode width, letter case, whitespace, punctuation and symbols before fingerprinting, so superficial formatting mutations cannot mint a new evidence payload. One canonicalized provenance+material payload may resolve only one branch across accumulated VAJRA history. Minimal substance is a bounded length/placeholder heuristic, not semantic adequacy or truth verification."
+          "relationPolarity": "SUPPORTS",
+          "boundary": "Resolution means the handoff contract received a matching clause-scoped, executed, provenance-bearing and minimally substantive return with no detected opposing qualifying receipt in the same application. Replay identity canonicalizes both provenance and returned material across Unicode width, letter case, whitespace, punctuation and symbols before fingerprinting. One canonicalized provenance+material payload may resolve only one branch across accumulated VAJRA history. Minimal substance and relation polarity are bounded lexical heuristics, not semantic adequacy, source-quality judgment or truth verification."
         }
       ],
+      "contestedBranches": [],
       "rejectedReceipts": [
         {
           "targetRef": "20708907",
@@ -67,7 +70,8 @@
           "relation": "One supports the target claim and one limits its scope.",
           "receiptFingerprint": "7ee12fca",
           "reasons": [
-            "ORGAN_MISMATCH"
+            "ORGAN_MISMATCH",
+            "REPLAYED_EVIDENCE_WITHIN_BRANCH"
           ]
         },
         {
@@ -95,7 +99,8 @@
           "relation": "One supports the target claim and one limits its scope.",
           "receiptFingerprint": "c8953ad5",
           "reasons": [
-            "CLAUSE_MISMATCH"
+            "CLAUSE_MISMATCH",
+            "REPLAYED_EVIDENCE_WITHIN_BRANCH"
           ]
         }
       ],
