@@ -1,6 +1,7 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import vm from 'node:vm';
+import {compactMetabolicCarry} from './active-orchestrator.mjs';
 
 const root=process.cwd();
 const code=await fs.readFile(path.join(root,'nostromo/gut/gut-engine.js'),'utf8');
@@ -41,15 +42,26 @@ check((intraAtom.nutrients[0]?.text.match(/哪個前提最可能先失效/g)||[]
 check(intraAtom.nutrients[0]?.provenance?.inputSource===`${source}/intra-atom`,'INTRA_ATOM_PROVENANCE_LOST',intraAtom.nutrients[0]);
 check((intraAtom.antiEcho?.volatileLineageClauseSuppressedCount||0)>=1,'INTRA_ATOM_VOLATILE_LINEAGE_NOT_ACCOUNTED',intraAtom.antiEcho);
 
+const sharedCore='主動尋找最小反例與破壞條件：針對本輪 GENERAL 命題（ref:abcdef12; clause:12345678），哪個前提最可能先失效？這段故意拉長，模擬同一路由在相鄰器官輸出中只增加一層包裝但核心內容沒有改變。';
+const nearDuplicateCarry=compactMetabolicCarry([
+  `[CONTRADICTION->VAJRA] 以 counterexample 位置重讀：CONTRADICTION_CONDITIONED：${sharedCore}`,
+  `[CONTRADICTION->VAJRA] CONTRADICTION_CONDITIONED：以 counterexample 位置重讀：${sharedCore.replace('abcdef12','fedcba98').replace('12345678','87654321')}`,
+  '[CONTRADICTION->VAJRA] 另一份證據直接否定時間順序，因此需要重新檢查測量有效性、來源獨立性與替代因果。這是一條實質不同的反證材料，不能因為同一路由就被壓掉。'
+].join(' · '));
+check(nearDuplicateCarry.crossSegmentNearEchoSuppressed>=1,'CROSS_SEGMENT_NEAR_ECHO_NOT_SUPPRESSED',nearDuplicateCarry);
+check(nearDuplicateCarry.outputSegments===2,'CROSS_SEGMENT_OUTPUT_COUNT_UNEXPECTED',nearDuplicateCarry);
+check(nearDuplicateCarry.text.includes('另一份證據直接否定時間順序'),'CROSS_SEGMENT_DISTINCT_CONTENT_LOST',nearDuplicateCarry.text);
+
 const result={
-  schema:'nostromo-gut-lineage-test/v0.2.18-adversarial-intra-atom',
+  schema:'nostromo-gut-lineage-test/v0.2.18-adversarial-cross-segment',
   completedAt:new Date().toISOString(),
   status:failures.length===0?'PASS':'FAIL',
   sameLineage:{summaryItemCount:sameLineage.summaryItemCount,antiEcho:sameLineage.antiEcho,summary:sameLineage.summary},
   substantiveDifference:{summaryItemCount:substantiveDifference.summaryItemCount,antiEcho:substantiveDifference.antiEcho,summary:substantiveDifference.summary},
   intraAtom:{antiEcho:intraAtom.antiEcho,summary:intraAtom.summary,sourceNutrient:intraAtom.nutrients[0]?.text||null},
+  crossSegmentNearEcho:nearDuplicateCarry,
   failures,
-  boundary:'This adversarial test preserves source nutrients and provenance while checking both cross-atom and intra-atom volatile-lineage carry echo. PASS requires intra-atom provenance-only duplication to be removed only from carry rendering while retaining the original nutrient atom and a substantive alternative clause.'
+  boundary:'This adversarial test preserves source nutrients and provenance while checking cross-atom, intra-atom, and cross-segment volatile-lineage carry echo. PASS requires same-route near-duplicate recirculation segments to collapse only at carry rendering while retaining a substantively distinct contradiction.'
 };
 await fs.writeFile(path.join(root,'nostromo/integration/gut-lineage-last-result.json'),JSON.stringify(result,null,2)+'\n','utf8');
 console.log(JSON.stringify(result,null,2));
