@@ -28,14 +28,30 @@ const substantiveDifference=globalThis.GutEngine.digest({
 check(substantiveDifference.summaryItemCount===2,'SUBSTANTIVE_DIFFERENCE_OVERTRIMMED',substantiveDifference.summary);
 check(substantiveDifference.summary.includes('哪個前提最可能先失效')&&substantiveDifference.summary.includes('哪一份證據最需要重新驗證'),'DISTINCT_CONTENT_LOST',substantiveDifference.summary);
 
+// New adversarial case: the same provenance-only lineage can recur inside one carry atom.
+// Cross-atom diversity already suppresses it, but intra-atom carry compaction must do the same
+// without mutating the nutrient atom or deleting a genuinely different middle clause.
+const intraAtomA=template('111111aa','222222bb');
+const intraAtomB=template('333333cc','444444dd');
+const intraAtomDistinct=template('555555ee','666666ff','哪一份證據最需要重新驗證？');
+const intraAtom=globalThis.GutEngine.digest({
+  contradiction:`${intraAtomA}：中間保留不同觀察：${intraAtomB}：${intraAtomDistinct}`
+},{source:`${source}/intra-atom`});
+check((intraAtom.summary.match(/哪個前提最可能先失效/g)||[]).length===1,'INTRA_ATOM_VOLATILE_LINEAGE_ECHO_SURVIVED',intraAtom.summary);
+check(intraAtom.summary.includes('中間保留不同觀察'),'INTRA_ATOM_DISTINCT_MIDDLE_LOST',intraAtom.summary);
+check(intraAtom.summary.includes('哪一份證據最需要重新驗證'),'INTRA_ATOM_SUBSTANTIVE_DIFFERENCE_LOST',intraAtom.summary);
+check((intraAtom.nutrients[0]?.text.match(/哪個前提最可能先失效/g)||[]).length===2,'INTRA_ATOM_SOURCE_NUTRIENT_MUTATED',intraAtom.nutrients[0]);
+check(intraAtom.nutrients[0]?.provenance?.inputSource===`${source}/intra-atom`,'INTRA_ATOM_PROVENANCE_LOST',intraAtom.nutrients[0]);
+
 const result={
-  schema:'nostromo-gut-lineage-test/v0.2.17',
+  schema:'nostromo-gut-lineage-test/v0.2.17-adversarial-intra-atom',
   completedAt:new Date().toISOString(),
   status:failures.length===0?'PASS':'FAIL',
   sameLineage:{summaryItemCount:sameLineage.summaryItemCount,antiEcho:sameLineage.antiEcho,summary:sameLineage.summary},
   substantiveDifference:{summaryItemCount:substantiveDifference.summaryItemCount,antiEcho:substantiveDifference.antiEcho,summary:substantiveDifference.summary},
+  intraAtom:{antiEcho:intraAtom.antiEcho,summary:intraAtom.summary,sourceNutrient:intraAtom.nutrients[0]?.text||null},
   failures,
-  boundary:'PASS proves only that carry-summary diversity ignores volatile hexadecimal ref:/clause: identifiers when the surrounding content is otherwise the same, while preserving original nutrient atoms, provenance, and genuinely different substantive carry. It does not infer semantic equivalence beyond this explicit normalization rule.'
+  boundary:'This adversarial test preserves source nutrients and provenance while checking both cross-atom and intra-atom volatile-lineage carry echo. A FAIL on INTRA_ATOM_VOLATILE_LINEAGE_ECHO_SURVIVED is evidence of a rendering-layer metabolic echo defect, not a source-data corruption claim.'
 };
 await fs.writeFile(path.join(root,'nostromo/integration/gut-lineage-last-result.json'),JSON.stringify(result,null,2)+'\n','utf8');
 console.log(JSON.stringify(result,null,2));
