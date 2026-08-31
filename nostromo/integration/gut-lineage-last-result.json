@@ -1,6 +1,6 @@
 {
   "schema": "nostromo-gut-lineage-test/v0.2.19-adversarial-lineage-signature",
-  "completedAt": "2026-08-31T20:06:27.191Z",
+  "completedAt": "2026-08-31T20:07:46.081Z",
   "status": "FAIL",
   "sameLineage": {
     "summaryItemCount": 1,
