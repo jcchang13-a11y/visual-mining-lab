@@ -1,6 +1,6 @@
 {
-  "schema": "nostromo-organ-registry/v1.22",
-  "updatedAt": "2026-09-01T02:08:00+08:00",
+  "schema": "nostromo-organ-registry/v1.23",
+  "updatedAt": "2026-09-01T03:12:00+08:00",
   "truthRule": "DISPLAYED STATE MUST FOLLOW EVIDENCE",
   "evidence": "ci-last-result.json plus formal-round-last-result.json plus connector-last-result.json plus muther-falsify-last-result.json plus droplet-claim-verify-last-result.json plus gut-metabolism-last-result.json plus gut-lineage-last-result.json plus vajra-dynamic-last-result.json plus shroom-feedback-last-result.json",
   "latestFormalRound": "greenhouse/r113-nostromo-formal-round.json",
@@ -30,17 +30,17 @@
   },
   "latestThickening": {
     "organ": "VAJRA",
-    "version": "VAJRA v0.3.0",
-    "status": "VERIFIED_MINIMUM_SUBSTANCE_HANDOFF_GUARD",
+    "version": "VAJRA v0.3.1",
+    "status": "VERIFIED_PROVENANCE_FORMAT_REPLAY_GUARD",
     "test": "vajra-dynamic-last-result.json",
     "capabilities": [
-      "structurally complete but placeholder-only receipts no longer close a VAJRA branch",
-      "returned material must pass a bounded minimum-substance length/placeholder guard before structural closure",
-      "relation-to-target must also carry minimally inspectable substance rather than a token acknowledgement",
-      "thin-return rejection remains visible in the receipt audit record",
-      "existing clause isolation, provenance requirements and replay-amplification guards remain intact"
+      "replay identity now canonicalizes both provenance and returned material before fingerprinting",
+      "Unicode width, letter case, whitespace, punctuation and symbol-only provenance mutations no longer mint a fresh replay identity",
+      "one canonicalized provenance-plus-material payload remains limited to one branch across accumulated VAJRA history",
+      "provenance-format replay rejection is visible in the receipt audit record",
+      "existing clause isolation, minimum-substance receipt checks and cross-application replay guards remain intact"
     ],
-    "boundary": "Promotion followed a successful dedicated VAJRA adversarial test and full NOSTROMO GitHub Actions run 174. The new guard rejects short or placeholder-only material/relation before RESOLVED_BY_RECEIPT, but it is only a deterministic shallow-content heuristic. It does not prove semantic adequacy, relevance, source quality, factual truth, or that the handoff resolution criterion has been semantically satisfied."
+    "boundary": "Promotion followed successful NOSTROMO Integration Test run 176 at commit fb7ae444ff309a6294b7eafdcba3ad0b6162bbe9. The pre-fix v0.3.0 defect is retained in vajra-dynamic-last-result.json: provenance formatting could previously mint a fresh replay identity even though the public boundary claimed both provenance and material were canonicalized. v0.3.1 repairs that mismatch. Canonicalization is deterministic structural normalization only; it does not detect semantic paraphrase duplicates, judge source truth, or prove semantic adequacy of a returned handoff."
   },
   "organs": {
     "shrooming": {
@@ -95,7 +95,7 @@
       "actions": {
         "DISMANTLE": "VERIFIED_CLAUSE_SCOPED_PROPOSITION_AWARE_HEURISTIC_DISMANTLER_WITH_RECEIPT_SUBSTANCE_AND_REPLAY_GUARDS"
       },
-      "boundary": "VAJRA v0.3.0 performs proposition-aware dynamic dismantling, retains multiple lexically detected proposition types, and applies bounded syntactic clause decomposition for explicit causal forms. OPEN branch contracts carry targetRef plus clauseRef and require matching lens, preferred organ, execution status, provenance, material and relation-to-target before structural closure. A receipt scoped to another clause is rejected. Before closure, returned material and relation must now also pass a bounded minimum-substance guard that rejects short or placeholder-only acknowledgements. Replay identity canonicalizes Unicode width, letter case, whitespace, punctuation and symbols before fingerprinting provenance+material, so superficial formatting mutations cannot mint a fresh replay identity; the same canonicalized provenance+material payload can resolve only one branch across accumulated VAJRA history. This remains deterministic structural normalization and shallow content screening, not semantic adequacy judgment, semantic duplicate detection, semantic parsing, factual truth, or proof that the original proposition is settled."
+      "boundary": "VAJRA v0.3.1 performs proposition-aware dynamic dismantling, retains multiple lexically detected proposition types, and applies bounded syntactic clause decomposition for explicit causal forms. OPEN branch contracts carry targetRef plus clauseRef and require matching lens, preferred organ, execution status, provenance, material and relation-to-target before structural closure. A receipt scoped to another clause is rejected. Returned material and relation must pass a bounded minimum-substance guard. Replay identity canonicalizes both provenance and returned material across Unicode width, letter case, whitespace, punctuation and symbols before fingerprinting; superficial formatting changes in either field cannot mint a fresh replay identity, and one canonicalized provenance-plus-material payload can resolve only one branch across accumulated VAJRA history. This remains deterministic structural normalization and shallow content screening, not semantic adequacy judgment, semantic duplicate detection, semantic parsing, factual truth, or proof that the original proposition is settled."
     }
   }
 }
