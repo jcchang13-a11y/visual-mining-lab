@@ -1,6 +1,6 @@
 {
   "schema": "nostromo-droplet-claim-verify-test/v1.0",
-  "completedAt": "2026-08-31T09:07:02.131Z",
+  "completedAt": "2026-08-31T10:05:43.836Z",
   "status": "PASS",
   "verification": {
     "executor": "DROPLET_CLAIM_VERIFY",
@@ -10,31 +10,70 @@
     "verdict": "SUPPORTED",
     "counts": {
       "evidence": 2,
+      "uniqueEvidence": 2,
+      "duplicatesSuppressed": 0,
       "supports": 2,
       "refutes": 0,
       "authoritativeSupports": 2,
-      "authoritativeRefutes": 0
+      "authoritativeRefutes": 0,
+      "authoritativeSupportFamilies": 2,
+      "authoritativeRefuteFamilies": 0
     },
-    "evidenceFingerprint": "b5b41ee98585f7cb",
+    "conflicts": {
+      "authoritativeConflict": false,
+      "integrityConflict": false,
+      "contradictoryFingerprints": []
+    },
+    "evidenceFingerprint": "85c2560124ef9465",
     "evidence": [
       {
         "id": "E1",
         "source": "Microsoft Research",
         "sourceClass": "OFFICIAL",
+        "sourceFamily": "Microsoft Research",
         "relation": "SUPPORTS",
         "fingerprint": "05b19aff31a0265e",
-        "date": "2024-11-04"
+        "date": "2024-11-04",
+        "identityKey": "fp:05b19aff31a0265e",
+        "familyKey": "microsoftresearch"
       },
       {
         "id": "E2",
         "source": "Microsoft Research publication record",
         "sourceClass": "OFFICIAL",
+        "sourceFamily": "Microsoft Research publication record",
         "relation": "SUPPORTS",
         "fingerprint": "164fbdd09a7f060f",
-        "date": "2024-11"
+        "date": "2024-11",
+        "identityKey": "fp:164fbdd09a7f060f",
+        "familyKey": "microsoftresearchpublicationrecord"
       }
     ],
-    "boundary": "VERDICT IS COMPUTED ONLY FROM THE EXPLICIT EVIDENCE BUNDLE SUPPLIED BY AN ACTUAL CONNECTOR OR CALLER. THIS EXECUTOR DOES NOT SEARCH THE WEB ITSELF, DOES NOT TREAT ABSENCE OF REFUTATION AS GLOBAL TRUTH, AND DOES NOT UPGRADE STATIC STATE READING INTO CLAIM VERIFICATION."
+    "uniqueEvidence": [
+      {
+        "id": "E1",
+        "source": "Microsoft Research",
+        "sourceClass": "OFFICIAL",
+        "sourceFamily": "Microsoft Research",
+        "relation": "SUPPORTS",
+        "fingerprint": "05b19aff31a0265e",
+        "date": "2024-11-04",
+        "identityKey": "fp:05b19aff31a0265e",
+        "familyKey": "microsoftresearch"
+      },
+      {
+        "id": "E2",
+        "source": "Microsoft Research publication record",
+        "sourceClass": "OFFICIAL",
+        "sourceFamily": "Microsoft Research publication record",
+        "relation": "SUPPORTS",
+        "fingerprint": "164fbdd09a7f060f",
+        "date": "2024-11",
+        "identityKey": "fp:164fbdd09a7f060f",
+        "familyKey": "microsoftresearchpublicationrecord"
+      }
+    ],
+    "boundary": "VERDICT IS COMPUTED ONLY FROM THE EXPLICIT EVIDENCE BUNDLE SUPPLIED BY AN ACTUAL CONNECTOR OR CALLER. EXACT REPLAYED EVIDENCE IS SUPPRESSED BY FINGERPRINT/IDENTITY, SOURCE-FAMILY COUNTS ARE AUDIT SIGNALS RATHER THAN PROOF OF INDEPENDENCE, AND CONFLICTING AUTHORITATIVE DIRECTIONS OR CONTRADICTORY USE OF ONE FINGERPRINT FORCE INDETERMINATE. THIS EXECUTOR DOES NOT SEARCH THE WEB, SCORE METHODOLOGICAL QUALITY, PROVE SOURCE INDEPENDENCE, OR TREAT ABSENCE OF REFUTATION AS GLOBAL TRUTH."
   },
   "failures": [],
   "boundary": "This test validates deterministic claim verdict computation from persisted redacted evidence. The underlying evidence was obtained by an actual public-web connector run; CI itself performs no search-engine discovery."
