@@ -1,7 +1,8 @@
-// NOSTROMO active executor loop v1.1.3
+// NOSTROMO active executor loop v1.1.4
 // Server/CI-side integration path for repository-native partial executors plus validated external connector evidence.
 import crypto from 'node:crypto';
-import {shroomSandboxReadingRound,shroomGreenhousePoseQuestion,mutherMineRepo,dropletVerifyUrl} from './repo-executors.mjs';
+import {shroomGreenhousePoseQuestion,mutherMineRepo,dropletVerifyUrl} from './repo-executors.mjs';
+import {shroomFeedbackReadingRound} from './shroom-feedback-executor.mjs';
 import {loadConnectorEvidence} from './connector-evidence.mjs';
 
 function fp(value){return crypto.createHash('sha256').update(String(value)).digest('hex').slice(0,16);}
@@ -81,7 +82,7 @@ export async function runActiveExecutorLoop({rounds=10,seed='NOSTROMO active int
   for(let round=1;round<=total;round++){
     const feedbackApplied=round>1;
     const roundInput=feedbackApplied?`${carry}\n${feedback.directive}`:carry;
-    const shrooming=await shroomSandboxReadingRound({text:roundInput,agents:10,round});
+    const shrooming=await shroomFeedbackReadingRound({text:roundInput,agents:10,round});
     const greenhouseProbe=await shroomGreenhousePoseQuestion({question:roundInput});
     const muther=await mutherMineRepo({query:mineQuery,limit:8});
     let droplet;
@@ -95,9 +96,9 @@ export async function runActiveExecutorLoop({rounds=10,seed='NOSTROMO active int
     const metabolicCarry=compactMetabolicCarry(gut.summary);
     const statuses=[shrooming.status,greenhouseProbe.status,muther.status,droplet.status];
     const status=statuses.every(x=>x==='EXECUTED')?'PASS':'FAIL';
-    const item={round,status,feedback:{applied:feedbackApplied,fingerprint:feedback.fingerprint,privacy:feedback.privacy,inputFingerprint:fp(roundInput)},executors:{shrooming:{status:shrooming.status,count:shrooming.count,sourceFingerprint:shrooming.sourceFingerprint},greenhouseProbe:{status:greenhouseProbe.status,count:greenhouseProbe.count,sourceRounds:greenhouseProbe.sourceRounds,questionFingerprint:greenhouseProbe.questionFingerprint},muther:{status:muther.status,hitCount:muther.hitCount,query:muther.query},droplet:{status:droplet.status,statusCode:droplet.statusCode||null,finalUrl:droplet.finalUrl||null}},connector:{status:externalConnector.status,completedAt:externalConnector.completedAt||null,mutherDrive:externalConnector.actions?.muther?.status||null,mutherInternal:externalConnector.actions?.mutherInternal?.status||null,dropletWeb:externalConnector.actions?.droplet?.status||null,dropletVerify:externalConnector.actions?.dropletVerify?.status||null},vajra:{status:vajra.status,traceLength:vajra.trace.length},gut:{ingested:gut.ingested,absorbed:gut.absorbed,excreted:gut.excreted,antiEcho:gut.antiEcho},metabolicCarry,carryIn:carry.slice(0,240),carryOut:metabolicCarry.text};
+    const item={round,status,feedback:{applied:feedbackApplied,fingerprint:feedback.fingerprint,privacy:feedback.privacy,inputFingerprint:fp(roundInput)},executors:{shrooming:{status:shrooming.status,count:shrooming.count,sourceFingerprint:shrooming.sourceFingerprint,adaptation:shrooming.adaptation},greenhouseProbe:{status:greenhouseProbe.status,count:greenhouseProbe.count,sourceRounds:greenhouseProbe.sourceRounds,questionFingerprint:greenhouseProbe.questionFingerprint},muther:{status:muther.status,hitCount:muther.hitCount,query:muther.query},droplet:{status:droplet.status,statusCode:droplet.statusCode||null,finalUrl:droplet.finalUrl||null}},connector:{status:externalConnector.status,completedAt:externalConnector.completedAt||null,mutherDrive:externalConnector.actions?.muther?.status||null,mutherInternal:externalConnector.actions?.mutherInternal?.status||null,dropletWeb:externalConnector.actions?.droplet?.status||null,dropletVerify:externalConnector.actions?.dropletVerify?.status||null},vajra:{status:vajra.status,traceLength:vajra.trace.length},gut:{ingested:gut.ingested,absorbed:gut.absorbed,excreted:gut.excreted,antiEcho:gut.antiEcho},metabolicCarry,carryIn:carry.slice(0,240),carryOut:metabolicCarry.text};
     trace.push(item);carry=item.carryOut||carry;if(status!=='PASS') break;
   }
   const acceptedActions=['muther','mutherInternal','droplet','dropletVerify'].filter(k=>connectorEvidence.actions?.[k]?.status==='EXECUTED').length;
-  return {schema:'nostromo-active-executor-loop/v1.1.3',status:trace.length===total&&trace.every(x=>x.status==='PASS')?'PASS':'FAIL',requestedRounds:total,completedRounds:trace.length,feedback:{fingerprint:feedback.fingerprint,appliedRounds:trace.filter(x=>x.feedback.applied).length,firstAppliedRound:trace.find(x=>x.feedback.applied)?.round||null,privacy:feedback.privacy},connectorHandoff:{status:connectorEvidence.status,completedAt:connectorEvidence.completedAt,actionsAccepted:acceptedActions,failures:connectorEvidence.failures},trace,completedAt:new Date().toISOString(),boundary:'Certifies the existing closed-loop executor path plus carry-layer metabolic containment. GUT nutrient atoms, routes and provenance remain intact; only recirculated carry is bounded, lineage-normalized, duplicate-suppressed, intra-segment nested-echo collapsed and capped per route. This is deterministic containment, not semantic novelty detection. GitHub Actions does not itself search private Drive or the web.'};
+  return {schema:'nostromo-active-executor-loop/v1.1.4',status:trace.length===total&&trace.every(x=>x.status==='PASS')?'PASS':'FAIL',requestedRounds:total,completedRounds:trace.length,feedback:{fingerprint:feedback.fingerprint,appliedRounds:trace.filter(x=>x.feedback.applied).length,firstAppliedRound:trace.find(x=>x.feedback.applied)?.round||null,privacy:feedback.privacy},connectorHandoff:{status:connectorEvidence.status,completedAt:connectorEvidence.completedAt,actionsAccepted:acceptedActions,failures:connectorEvidence.failures},trace,completedAt:new Date().toISOString(),boundary:'Certifies the closed-loop executor path plus carry-layer metabolic containment and a deterministic SHROOMING feedback-conditioned lens selector. From round 2 onward, redacted connector feedback can change SHROOMING inspection priority without claiming semantic learning or independent persistent agents. GUT nutrient atoms, routes and provenance remain intact; GitHub Actions does not itself search private Drive or the web.'};
 }
