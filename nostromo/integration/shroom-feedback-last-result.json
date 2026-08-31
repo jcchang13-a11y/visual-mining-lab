@@ -1,0 +1,59 @@
+{
+  "schema": "nostromo-shroom-feedback-test/v0.1",
+  "completedAt": "2026-08-31T12:10:17.362Z",
+  "status": "PASS",
+  "baseline": {
+    "mode": "BASELINE",
+    "firstLens": "structure",
+    "lensOrder": [
+      "structure",
+      "counterexample",
+      "position",
+      "otherness",
+      "evidence",
+      "language",
+      "boundary",
+      "memory",
+      "use",
+      "anomaly"
+    ],
+    "feedbackFingerprint": "4ef4e94c0bd765e6"
+  },
+  "external": {
+    "mode": "EVIDENCE_CONDITIONED",
+    "firstLens": "evidence",
+    "lensOrder": [
+      "evidence",
+      "boundary",
+      "counterexample",
+      "structure",
+      "memory",
+      "position",
+      "otherness",
+      "language",
+      "use",
+      "anomaly"
+    ],
+    "feedbackFingerprint": "e1b2458dfa22657d"
+  },
+  "contradiction": {
+    "mode": "CONTRADICTION_CONDITIONED",
+    "firstLens": "counterexample",
+    "lensOrder": [
+      "counterexample",
+      "evidence",
+      "boundary",
+      "structure",
+      "position",
+      "memory",
+      "otherness",
+      "language",
+      "use",
+      "anomaly"
+    ],
+    "feedbackFingerprint": "25a18366e858ebc8"
+  },
+  "deterministicReplay": true,
+  "failures": [],
+  "boundary": "PASS demonstrates only deterministic structural conditioning: explicit upstream feedback changes SHROOMING lens priority and exact replay is stable. It does not demonstrate semantic learning, belief revision, independent agents, or real social emergence."
+}
