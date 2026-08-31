@@ -1,8 +1,8 @@
 {
-  "schema": "nostromo-organ-registry/v1.19",
-  "updatedAt": "2026-08-31T18:08:00+08:00",
+  "schema": "nostromo-organ-registry/v1.20",
+  "updatedAt": "2026-08-31T20:12:00+08:00",
   "truthRule": "DISPLAYED STATE MUST FOLLOW EVIDENCE",
-  "evidence": "ci-last-result.json plus formal-round-last-result.json plus connector-last-result.json plus muther-falsify-last-result.json plus droplet-claim-verify-last-result.json plus gut-metabolism-last-result.json plus gut-lineage-last-result.json plus vajra-dynamic-last-result.json",
+  "evidence": "ci-last-result.json plus formal-round-last-result.json plus connector-last-result.json plus muther-falsify-last-result.json plus droplet-claim-verify-last-result.json plus gut-metabolism-last-result.json plus gut-lineage-last-result.json plus vajra-dynamic-last-result.json plus shroom-feedback-last-result.json",
   "latestFormalRound": "greenhouse/r113-nostromo-formal-round.json",
   "latestFormalFinding": {
     "reference": "R111",
@@ -29,22 +29,22 @@
     "boundary": "Isolated counterfactual executor only. It deliberately includes parent round ordinal in participant selection and has been CI-verified against R111 and R112. It does not write or advance formal greenhouse history and is engineering evidence that NOSTROMO can execute and audit a parent-sensitive transition, not evidence that the real SHROOMING population is causally path-dependent."
   },
   "latestThickening": {
-    "organ": "DROPLET",
-    "version": "droplet-claim-verify-executor v1.1",
-    "status": "VERIFIED_DUPLICATE_AND_CONFLICT_CONTAINING_CLAIM_VERIFIER",
-    "test": "droplet-claim-verify-last-result.json",
+    "organ": "SHROOMING",
+    "version": "shroom-feedback-executor v0.1",
+    "status": "VERIFIED_FEEDBACK_CONDITIONED_HEURISTIC_READER",
+    "test": "shroom-feedback-last-result.json",
     "capabilities": [
-      "exact replay suppression by evidence fingerprint/identity",
-      "source-family audit counts without claiming real-world independence",
-      "authoritative support-vs-refute conflict containment",
-      "contradictory fingerprint integrity detection",
-      "low-authority-only support remains INDETERMINATE"
+      "explicit upstream evidence feedback changes inspection-lens priority",
+      "contradiction feedback prioritizes counterexample inspection",
+      "baseline material without feedback preserves baseline lens order",
+      "exact replay of the same feedback-conditioned input is deterministic",
+      "active executor loop now exposes the applied SHROOMING adaptation state"
     ],
-    "boundary": "DROPLET claim verification was promoted only after its v1.1 adversarial suite and the full NOSTROMO GitHub Actions run succeeded. Exact replayed evidence cannot inflate support counts, conflicting authoritative directions force INDETERMINATE, and one fingerprint used for contradictory relations is flagged as an integrity conflict. Source-family metadata is an audit signal supplied by the caller; this is not proof of source independence, methodological-quality scoring, semantic fact checking, or web search by GitHub CI."
+    "boundary": "Promotion followed a successful dedicated SHROOMING adversarial test and full NOSTROMO GitHub Actions run. The active-loop reader is no longer behaviorally blind to explicit redacted connector/metabolic feedback: evidence-bearing feedback moves evidence/boundary inspection forward and contradiction feedback moves counterexample inspection first. This is deterministic structural conditioning only; it is not semantic learning, persistent belief revision, proof of social emergence, or evidence of ten independent persistent LLM agents."
   },
   "organs": {
     "shrooming": {
-      "mode": "PARTIAL_EXEC",
+      "mode": "PARTIAL_EXEC_THICKENED",
       "source": "../../mycelium/state.json",
       "actions": {
         "READ_STATE": "EXEC_STATE",
@@ -54,7 +54,7 @@
         "RUN_READING_ROUND": "FORMAL_ROUND_EXEC",
         "RUN_PARENT_SENSITIVE_CONTROL": "EXPERIMENTAL_EXEC_VERIFIED"
       },
-      "boundary": "Published-state inspection, sandbox reading, greenhouse question probing, and explicit formal greenhouse round advancement are executable. RUN_READING_ROUND remains the verified parent-invariant v0.9 formal baseline and is chainable from a declared formal parent. The verified R111→R112→R113 chain preserves provenance and legacy R111 reproducibility. An isolated parent-sensitive counterfactual executor is also verified; it deliberately makes participant selection depend on parent round ordinal but never mutates formal greenhouse history. Neither branch represents ten independently persistent live LLM processes, and the experimental branch must not be presented as evidence of real path dependence."
+      "boundary": "Published-state inspection, sandbox reading, greenhouse question probing, and explicit formal greenhouse round advancement remain executable. In the verified active NOSTROMO loop, SHROOMING now has a separate feedback-conditioned deterministic reader that reorders inspection lenses when explicit redacted upstream evidence or contradiction signals are present; this makes cross-organ feedback alter SHROOMING behavior rather than merely append text. The formal RUN_READING_ROUND baseline remains parent-invariant v0.9 and unchanged, preserving R111→R112→R113 reproducibility. Neither the feedback-conditioned active-loop reader nor the formal/experimental branches represent semantic learning or ten independently persistent live LLM processes."
     },
     "muther": {
       "mode": "PARTIAL_EXEC_THICKENED",
