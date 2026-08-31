@@ -21,7 +21,7 @@ function buildConnectorFeedback(connectorEvidence){
   return {directive,fingerprint:fp(directive),privacy:'PRIVATE DRIVE RAW CONTENT/TITLES/IDS/URLS ARE NOT INCLUDED'};
 }
 function normalizeLineage(text){
-  return String(text).toLowerCase().replace(/\b(ref|clause)\s*[:=]\s*[0-9a-f]{6,64}\b/gi,'$1:<id>').replace(/\b[0-9a-f]{12,64}\b/gi,'<hash>').replace(/\s+/g,' ').trim();
+  return String(text).toLowerCase().replace(/\b(ref|clause)\s*[:：=]\s*[0-9a-f]{6,64}\b/gi,'$1:<id>').replace(/\b[0-9a-f]{12,64}\b/gi,'<hash>').replace(/\s+/g,' ').trim();
 }
 function carryStem(segment){return normalizeLineage(segment).slice(0,180);}
 function compactIntraSegmentEcho(segment){
@@ -92,7 +92,7 @@ export function compactMetabolicCarry(summary){
     if(kept.join(' · ').length>=900)break;
   }
   const text=kept.join(' · ').slice(0,900);
-  return {text,echoSuppressed,routeCapped,intraSegmentSuppressed,shortTokenSuppressed,nestedClauseSuppressed,crossSegmentNearEchoSuppressed,inputSegments:segments.length,outputSegments:kept.length,fingerprint:fp(text),boundary:'Carry-only containment. Exact/lineage-equivalent colon clauses, nested long clauses, and same-route cross-segment near echoes (5-gram Jaccard >= 0.82 after volatile-lineage normalization, minimum 80 chars) are collapsed before recirculation; original GUT nutrients, routes and provenance are not mutated.'};
+  return {text,echoSuppressed,routeCapped,intraSegmentSuppressed,shortTokenSuppressed,nestedClauseSuppressed,crossSegmentNearEchoSuppressed,inputSegments:segments.length,outputSegments:kept.length,fingerprint:fp(text),boundary:'Carry-only containment. Exact/lineage-equivalent colon clauses, nested long clauses, and same-route cross-segment near echoes (5-gram Jaccard >= 0.82 after ASCII/fullwidth volatile-lineage normalization, minimum 80 chars) are collapsed before recirculation; original GUT nutrients, routes and provenance are not mutated.'};
 }
 
 export async function runActiveExecutorLoop({rounds=10,seed='NOSTROMO active integration',mineQuery='NOSTROMO',verifyUrl='https://github.com/jcchang13-a11y/visual-mining-lab'}={}){
@@ -125,5 +125,5 @@ export async function runActiveExecutorLoop({rounds=10,seed='NOSTROMO active int
     trace.push(item);carry=item.carryOut||carry;if(status!=='PASS') break;
   }
   const acceptedActions=['muther','mutherInternal','droplet','dropletVerify'].filter(k=>connectorEvidence.actions?.[k]?.status==='EXECUTED').length;
-  return {schema:'nostromo-active-executor-loop/v1.1.5',status:trace.length===total&&trace.every(x=>x.status==='PASS')?'PASS':'FAIL',requestedRounds:total,completedRounds:trace.length,feedback:{fingerprint:feedback.fingerprint,appliedRounds:trace.filter(x=>x.feedback.applied).length,firstAppliedRound:trace.find(x=>x.feedback.applied)?.round||null,privacy:feedback.privacy},connectorHandoff:{status:connectorEvidence.status,completedAt:connectorEvidence.completedAt,actionsAccepted:acceptedActions,failures:connectorEvidence.failures},trace,completedAt:new Date().toISOString(),boundary:'Certifies the closed-loop executor path plus carry-layer metabolic containment and a deterministic SHROOMING feedback-conditioned lens selector. From round 2 onward, redacted connector feedback can change SHROOMING inspection priority without claiming semantic learning or independent persistent agents. Same-route near-duplicate carry segments are suppressed only at recirculation rendering after volatile-lineage normalization; GUT nutrient atoms, routes and provenance remain intact. GitHub Actions does not itself search private Drive or the web.'};
+  return {schema:'nostromo-active-executor-loop/v1.1.5',status:trace.length===total&&trace.every(x=>x.status==='PASS')?'PASS':'FAIL',requestedRounds:total,completedRounds:trace.length,feedback:{fingerprint:feedback.fingerprint,appliedRounds:trace.filter(x=>x.feedback.applied).length,firstAppliedRound:trace.find(x=>x.feedback.applied)?.round||null,privacy:feedback.privacy},connectorHandoff:{status:connectorEvidence.status,completedAt:connectorEvidence.completedAt,actionsAccepted:acceptedActions,failures:connectorEvidence.failures},trace,completedAt:new Date().toISOString(),boundary:'Certifies the closed-loop executor path plus carry-layer metabolic containment and a deterministic SHROOMING feedback-conditioned lens selector. From round 2 onward, redacted connector feedback can change SHROOMING inspection priority without claiming semantic learning or independent persistent agents. Same-route near-duplicate carry segments are suppressed only at recirculation rendering after ASCII/fullwidth volatile-lineage normalization; GUT nutrient atoms, routes and provenance remain intact. GitHub Actions does not itself search private Drive or the web.'};
 }
