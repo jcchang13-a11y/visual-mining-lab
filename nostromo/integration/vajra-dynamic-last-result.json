@@ -1,6 +1,6 @@
 {
-  "schema": "nostromo-vajra-dynamic-test/v0.3.0",
-  "completedAt": "2026-08-31T18:07:20.217Z",
+  "schema": "nostromo-vajra-dynamic-test/v0.3.1",
+  "completedAt": "2026-08-31T19:10:45.526Z",
   "status": "PASS",
   "guards": {
     "falseCertainty": true,
@@ -22,12 +22,13 @@
     "crossBranchEvidenceReplayRejected": true,
     "crossApplicationEvidenceReplayRejected": true,
     "formatMutationReplayRejected": true,
+    "provenanceMutationReplayRejected": true,
     "priorResolutionPreserved": true
   },
   "preFixFinding": {
-    "version": "0.2.9",
-    "classification": "STRUCTURALLY_VALID_PLACEHOLDER_RECEIPT_COULD_CLOSE_BRANCH",
-    "detail": "The prior receipt matcher required structure, execution, provenance, material and relation, but did not reject placeholder-only returned content. A receipt such as material=done and relation=checked could therefore close a branch without adding inspectable substance. v0.3.0 adds a bounded minimum-length and placeholder guard before closure."
+    "version": "0.3.0",
+    "classification": "PROVENANCE_FORMAT_MUTATION_COULD_MINT_NEW_REPLAY_IDENTITY",
+    "detail": "v0.3.0 canonicalized returned material but only whitespace-cleaned provenance before evidence fingerprinting. The public boundary claimed both provenance and material were protected against superficial formatting mutation, but provenance case, Unicode width and punctuation changes could still mint a fresh replay identity. v0.3.1 canonicalizes both fields before evidenceIdentity fingerprinting."
   },
   "crossOrgan": {
     "vajraGut": {
@@ -48,10 +49,10 @@
           "preferredOrgan": "DROPLET",
           "status": "RESOLVED_BY_RECEIPT",
           "receiptFingerprint": "1cf1db47",
-          "evidenceKey": "046be2d2",
+          "evidenceKey": "0c2f6280",
           "provenance": "prov-verified-001",
           "relation": "One supports the target claim and one limits its scope.",
-          "boundary": "Resolution means the handoff contract received a matching clause-scoped, executed, provenance-bearing and minimally substantive return. Replay identity canonicalizes Unicode width, letter case, whitespace, punctuation and symbols before fingerprinting provenance+material, so superficial formatting mutations cannot mint a new evidence payload. One canonicalized provenance+material payload may resolve only one branch across accumulated VAJRA history. Minimal substance is a bounded length/placeholder heuristic, not semantic adequacy or truth verification."
+          "boundary": "Resolution means the handoff contract received a matching clause-scoped, executed, provenance-bearing and minimally substantive return. Replay identity canonicalizes both provenance and returned material across Unicode width, letter case, whitespace, punctuation and symbols before fingerprinting, so superficial formatting mutations cannot mint a new evidence payload. One canonicalized provenance+material payload may resolve only one branch across accumulated VAJRA history. Minimal substance is a bounded length/placeholder heuristic, not semantic adequacy or truth verification."
         }
       ],
       "rejectedReceipts": [
@@ -127,6 +128,13 @@
       "replayRejected": true
     },
     "formatMutationReplay": {
+      "resolved": 1,
+      "open": 4,
+      "rejected": 1,
+      "canonicalEquivalent": true,
+      "replayRejected": true
+    },
+    "provenanceMutationReplay": {
       "resolved": 1,
       "open": 4,
       "rejected": 1,
@@ -265,5 +273,5 @@
     }
   },
   "failures": [],
-  "boundary": "PASS proves proposition-aware lens selection, auditable heuristic clause decomposition, clause-scoped handoff isolation, minimally substantive structural receipt closure, VAJRA→GUT referential continuity, and replay-amplification guards across branches, repeated applications, and superficial formatting mutations. The new minimum-substance guard is only a bounded length/placeholder heuristic; it does not prove semantic adequacy, relevance, source quality, or truth. Replay canonicalization covers Unicode width, case, whitespace, punctuation and symbols only; it is not semantic similarity detection. Clause splitting remains bounded syntax handling, not semantic parsing."
+  "boundary": "PASS proves proposition-aware lens selection, auditable heuristic clause decomposition, clause-scoped handoff isolation, minimally substantive structural receipt closure, VAJRA→GUT referential continuity, and replay-amplification guards across branches, repeated applications, returned-material formatting mutations, and provenance formatting mutations. The minimum-substance guard is only a bounded length/placeholder heuristic; it does not prove semantic adequacy, relevance, source quality, or truth. Replay canonicalization covers Unicode width, case, whitespace, punctuation and symbols only; it is not semantic similarity detection. Clause splitting remains bounded syntax handling, not semantic parsing."
 }
