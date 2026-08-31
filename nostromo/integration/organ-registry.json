@@ -1,8 +1,8 @@
 {
-  "schema": "nostromo-organ-registry/v1.16",
-  "updatedAt": "2026-08-31T08:10:00+08:00",
+  "schema": "nostromo-organ-registry/v1.17",
+  "updatedAt": "2026-08-31T15:22:00+08:00",
   "truthRule": "DISPLAYED STATE MUST FOLLOW EVIDENCE",
-  "evidence": "ci-last-result.json plus formal-round-last-result.json plus connector-last-result.json plus muther-falsify-last-result.json plus droplet-claim-verify-last-result.json plus gut-metabolism-last-result.json plus vajra-dynamic-last-result.json",
+  "evidence": "ci-last-result.json plus formal-round-last-result.json plus connector-last-result.json plus muther-falsify-last-result.json plus droplet-claim-verify-last-result.json plus gut-metabolism-last-result.json plus gut-lineage-last-result.json plus vajra-dynamic-last-result.json",
   "latestFormalRound": "greenhouse/r113-nostromo-formal-round.json",
   "latestFormalFinding": {
     "reference": "R111",
@@ -29,21 +29,20 @@
     "boundary": "Isolated counterfactual executor only. It deliberately includes parent round ordinal in participant selection and has been CI-verified against R111 and R112. It does not write or advance formal greenhouse history and is engineering evidence that NOSTROMO can execute and audit a parent-sensitive transition, not evidence that the real SHROOMING population is causally path-dependent."
   },
   "latestThickening": {
-    "organ": "GUT",
-    "version": "0.2.15",
-    "status": "VERIFIED_NONADJACENT_CARRY_CLAUSE_ANTI_ECHO",
-    "test": "gut-metabolism-last-result.json",
+    "organ": "VAJRA",
+    "version": "0.2.9",
+    "status": "VERIFIED_FORMAT_MUTATION_REPLAY_GUARD",
+    "test": "vajra-dynamic-last-result.json",
     "capabilities": [
-      "heuristic metabolic classification and routing",
-      "failure quarantine and uncertainty hold",
-      "provenance-preserving nutrient retention",
-      "exact inherited-substrate subtraction",
-      "tagged payload and repeated tagged-tail suppression",
-      "pre/post exact adjacent segment anti-echo",
-      "shared-body summary diversity",
-      "exact non-adjacent full-width-colon carry-clause compaction without mutating source nutrient atoms"
+      "proposition-aware dynamic lens selection",
+      "compound proposition type retention",
+      "bounded syntactic causal clause decomposition",
+      "clause-scoped handoff contracts with targetRef and clauseRef",
+      "structural receipt closure requiring execution evidence, provenance, material and relation-to-target",
+      "cross-clause and cross-application evidence replay rejection",
+      "canonicalized replay identity across Unicode width, letter case, whitespace, punctuation and symbol mutations"
     ],
-    "boundary": "GUT v0.2.15 was promoted only after its dedicated metabolism/adversarial test and the full NOSTROMO GitHub Actions run succeeded. The new rule acts only on carry rendering: exact repeated 12+ character clauses separated by full-width Chinese colons may be suppressed in the summary, while nutrient atoms, routes and provenance remain intact. It does not perform fuzzy semantic deletion, semantic novelty detection, source-truth judgment, or certify that all metabolic echo is solved."
+    "boundary": "VAJRA v0.2.9 was promoted only after its dedicated adversarial test and the full NOSTROMO GitHub Actions run succeeded. v0.2.8 could assign different replay keys to the same provenance-bearing payload after superficial formatting mutations. v0.2.9 canonicalizes Unicode width, case, whitespace, punctuation and symbols before replay fingerprinting, preventing that formatting-only replay path. This is deterministic exact normalization, not semantic similarity detection, semantic parsing, truth verification, or proof that the original proposition is settled."
   },
   "organs": {
     "shrooming": {
@@ -88,17 +87,17 @@
       "mode": "EXEC_CONNECTED_THICKENED",
       "source": "../gut/gut-engine.js",
       "actions": {
-        "DIGEST": "VERIFIED_HEURISTIC_METABOLIC_ROUTER_NONADJACENT_CARRY_ANTI_ECHO"
+        "DIGEST": "VERIFIED_HEURISTIC_METABOLIC_ROUTER_VOLATILE_LINEAGE_ANTI_ECHO"
       },
-      "boundary": "GUT v0.2.15 classifies and routes material, quarantines failure/risk markers, preserves uncertainty, propagates provenance, removes exact inherited substrate echoes when caller context is supplied, strips route metadata, suppresses exact repeated tagged payloads and same-tag long tails, collapses exact adjacent segments before and after tagged processing, suppresses repeated long shared bodies in summary selection, and now compacts exact non-adjacent 12+ character clauses separated by full-width Chinese colons in carry rendering only. Nutrient atoms and provenance are not mutated by this carry-only compaction. Near-duplicates and paraphrastic echoes remain unless another explicit exact rule catches them. Semantic novelty, source truth and optimal routing are not certified."
+      "boundary": "GUT v0.2.18 remains a deterministic heuristic metabolic router. It preserves nutrient atoms, routes and provenance while applying carry-rendering containment including exact inherited-substrate subtraction, route-metadata stripping, tagged payload/tail suppression, adjacent segment collapse, shared-body summary diversity, exact non-adjacent full-width-colon clause compaction, short-token run collapse, and volatile ref/clause lineage normalization. Dedicated metabolism, volatile-lineage adversarial and cross-organ feedback regressions pass. These are exact or bounded normalization rules, not fuzzy semantic deletion, semantic novelty detection, source-truth judgment, or proof that all metabolic echo is solved."
     },
     "vajra": {
       "mode": "EXEC_CONNECTED_THICKENED",
       "source": "../vajra/vajra-engine.js",
       "actions": {
-        "DISMANTLE": "VERIFIED_CLAUSE_SCOPED_PROPOSITION_AWARE_HEURISTIC_DISMANTLER_WITH_PERSISTENT_REPLAY_GUARD"
+        "DISMANTLE": "VERIFIED_CLAUSE_SCOPED_PROPOSITION_AWARE_HEURISTIC_DISMANTLER_WITH_CANONICALIZED_REPLAY_GUARD"
       },
-      "boundary": "VAJRA v0.2.8 performs proposition-aware dynamic dismantling, retains multiple lexically detected proposition types, and applies bounded syntactic clause decomposition for explicit causal forms. OPEN branch contracts carry targetRef plus clauseRef and still require matching lens, preferred organ, execution status, provenance, material and relation-to-target before structural closure. A receipt scoped to a different clause is rejected and remains visible in the audit trail. The same provenance+material payload can resolve only one branch across accumulated VAJRA history. Clause decomposition, type detection and RESOLVED_BY_RECEIPT are structural heuristics, not semantic parsing, factual truth, or proof that the original proposition is settled."
+      "boundary": "VAJRA v0.2.9 performs proposition-aware dynamic dismantling, retains multiple lexically detected proposition types, and applies bounded syntactic clause decomposition for explicit causal forms. OPEN branch contracts carry targetRef plus clauseRef and require matching lens, preferred organ, execution status, provenance, material and relation-to-target before structural closure. A receipt scoped to another clause is rejected. Replay identity canonicalizes Unicode width, letter case, whitespace, punctuation and symbols before fingerprinting provenance+material, so superficial formatting mutations cannot mint a fresh replay identity; the same canonicalized provenance+material payload can resolve only one branch across accumulated VAJRA history. This remains deterministic structural normalization, not semantic duplicate detection, semantic parsing, factual truth, or proof that the original proposition is settled."
     }
   }
 }
