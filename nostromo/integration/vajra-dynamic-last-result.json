@@ -1,7 +1,7 @@
 {
   "schema": "nostromo-vajra-dynamic-test/v0.2.8",
-  "completedAt": "2026-08-31T06:14:42.077Z",
-  "status": "PASS",
+  "completedAt": "2026-08-31T07:17:03.262Z",
+  "status": "FAIL",
   "guards": {
     "falseCertainty": true,
     "dynamicLensSelection": true,
@@ -41,10 +41,10 @@
           "preferredOrgan": "DROPLET",
           "status": "RESOLVED_BY_RECEIPT",
           "receiptFingerprint": "1cf1db47",
-          "evidenceKey": "f1156f6a",
+          "evidenceKey": "046be2d2",
           "provenance": "prov-verified-001",
           "relation": "One supports the target claim and one limits its scope.",
-          "boundary": "Resolution means the handoff contract received a matching clause-scoped, executed, provenance-bearing return. One provenance+material evidence payload may resolve only one branch across the accumulated VAJRA result history, preventing replay amplification across branches and repeated applications. It does not mean VAJRA semantically verified the returned material or proved the target claim."
+          "boundary": "Resolution means the handoff contract received a matching clause-scoped, executed, provenance-bearing return. Replay identity canonicalizes Unicode width, letter case, whitespace, punctuation and symbols before fingerprinting provenance+material, so superficial formatting mutations cannot mint a new evidence payload. One canonicalized provenance+material payload may resolve only one branch across accumulated VAJRA history. This is exact structural normalization, not semantic similarity detection or truth verification."
         }
       ],
       "rejectedReceipts": [
@@ -243,6 +243,43 @@
       ]
     }
   },
-  "failures": [],
+  "failures": [
+    {
+      "type": "UNIVERSAL_VERSION",
+      "detail": "0.2.9"
+    },
+    {
+      "type": "CAUSAL_VERSION",
+      "detail": "0.2.9"
+    },
+    {
+      "type": "EMPIRICAL_VERSION",
+      "detail": "0.2.9"
+    },
+    {
+      "type": "NORMATIVE_VERSION",
+      "detail": "0.2.9"
+    },
+    {
+      "type": "DEFINITION_VERSION",
+      "detail": "0.2.9"
+    },
+    {
+      "type": "SELF_REFERENCE_VERSION",
+      "detail": "0.2.9"
+    },
+    {
+      "type": "VAGUE_VERSION",
+      "detail": "0.2.9"
+    },
+    {
+      "type": "COMPOUND_VERSION",
+      "detail": "0.2.9"
+    },
+    {
+      "type": "RECEIPT_VERSION",
+      "detail": "0.2.9"
+    }
+  ],
   "boundary": "PASS proves proposition-aware lens selection, auditable heuristic clause decomposition, clause-scoped handoff isolation, structural receipt closure, VAJRA→GUT referential continuity, and replay-amplification guards across branches and repeated applications. Clause splitting is bounded syntax handling, not semantic parsing. Evidence about one clause cannot be relabelled to close another clause branch. Rejection is structural and auditable, not a semantic truth judgment."
 }
