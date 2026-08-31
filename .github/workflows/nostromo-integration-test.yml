@@ -50,6 +50,10 @@ jobs:
         id: vajra_dynamic
         continue-on-error: true
         run: node nostromo/integration/vajra-dynamic-test.mjs
+      - name: Verify SHROOMING feedback-conditioned reading
+        id: shroom_feedback
+        continue-on-error: true
+        run: node nostromo/integration/shroom-feedback-test.mjs
       - name: Run 50-round integration test
         id: integration
         continue-on-error: true
@@ -66,6 +70,7 @@ jobs:
           test -f nostromo/integration/gut-metabolism-last-result.json && cp nostromo/integration/gut-metabolism-last-result.json /tmp/nostromo-gut-metabolism-last-result.json || true
           test -f nostromo/integration/gut-lineage-last-result.json && cp nostromo/integration/gut-lineage-last-result.json /tmp/nostromo-gut-lineage-last-result.json || true
           test -f nostromo/integration/vajra-dynamic-last-result.json && cp nostromo/integration/vajra-dynamic-last-result.json /tmp/nostromo-vajra-dynamic-last-result.json || true
+          test -f nostromo/integration/shroom-feedback-last-result.json && cp nostromo/integration/shroom-feedback-last-result.json /tmp/nostromo-shroom-feedback-last-result.json || true
           git fetch origin main
           git reset --hard origin/main
           if [ -f /tmp/nostromo-formal-round-last-result.json ]; then
@@ -96,6 +101,10 @@ jobs:
             cp /tmp/nostromo-vajra-dynamic-last-result.json nostromo/integration/vajra-dynamic-last-result.json
             git add nostromo/integration/vajra-dynamic-last-result.json
           fi
+          if [ -f /tmp/nostromo-shroom-feedback-last-result.json ]; then
+            cp /tmp/nostromo-shroom-feedback-last-result.json nostromo/integration/shroom-feedback-last-result.json
+            git add nostromo/integration/shroom-feedback-last-result.json
+          fi
           if git diff --cached --quiet; then
             echo "No result change"
           else
@@ -116,6 +125,9 @@ jobs:
         run: exit 1
       - name: Enforce VAJRA dynamic dismantling conclusion
         if: steps.vajra_dynamic.outcome != 'success'
+        run: exit 1
+      - name: Enforce SHROOMING feedback-conditioning conclusion
+        if: steps.shroom_feedback.outcome != 'success'
         run: exit 1
       - name: Enforce integration conclusion
         if: steps.integration.outcome != 'success'
