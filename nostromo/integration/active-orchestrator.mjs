@@ -1,4 +1,4 @@
-// NOSTROMO active executor loop v1.1.2
+// NOSTROMO active executor loop v1.1.3
 // Server/CI-side integration path for repository-native partial executors plus validated external connector evidence.
 import crypto from 'node:crypto';
 import {shroomSandboxReadingRound,shroomGreenhousePoseQuestion,mutherMineRepo,dropletVerifyUrl} from './repo-executors.mjs';
@@ -19,14 +19,45 @@ function buildConnectorFeedback(connectorEvidence){
   ].join(' | ');
   return {directive,fingerprint:fp(directive),privacy:'PRIVATE DRIVE RAW CONTENT/TITLES/IDS/URLS ARE NOT INCLUDED'};
 }
-function carryStem(segment){
-  return String(segment).toLowerCase().replace(/\b(ref|clause)\s*[:=]\s*[0-9a-f]{6,64}\b/gi,'$1:<id>').replace(/\b[0-9a-f]{12,64}\b/gi,'<hash>').replace(/\s+/g,' ').slice(0,180);
+function normalizeLineage(text){
+  return String(text).toLowerCase().replace(/\b(ref|clause)\s*[:=]\s*[0-9a-f]{6,64}\b/gi,'$1:<id>').replace(/\b[0-9a-f]{12,64}\b/gi,'<hash>').replace(/\s+/g,' ').trim();
+}
+function carryStem(segment){return normalizeLineage(segment).slice(0,180);}
+function compactIntraSegmentEcho(segment){
+  const raw=String(segment||'').trim();
+  const tagMatch=raw.match(/^(\[[^\]]+\])\s*/);
+  const tag=tagMatch?.[1]||'';
+  const body=tagMatch?raw.slice(tagMatch[0].length):raw;
+  const clauses=body.split(/\s*[：:]\s*/).map(x=>x.trim()).filter(Boolean);
+  if(clauses.length<2)return {text:raw,suppressed:0,shortSuppressed:0,nestedSuppressed:0};
+  const kept=[];const norms=[];let suppressed=0,shortSuppressed=0,nestedSuppressed=0;
+  for(const clause of clauses){
+    const norm=normalizeLineage(clause);
+    if(!norm)continue;
+    if(norms.includes(norm)){suppressed++;if(norm.length<=4)shortSuppressed++;continue;}
+    if(norm.length>=24){
+      let swallowed=false;
+      for(let i=0;i<norms.length;i++){
+        const prior=norms[i];
+        if(prior.length<24)continue;
+        if(prior.includes(norm)){suppressed++;nestedSuppressed++;swallowed=true;break;}
+        if(norm.includes(prior)){
+          kept[i]=clause;norms[i]=norm;suppressed++;nestedSuppressed++;swallowed=true;break;
+        }
+      }
+      if(swallowed)continue;
+    }
+    kept.push(clause);norms.push(norm);
+  }
+  const clean=[tag,kept.join('：')].filter(Boolean).join(' ');
+  return {text:clean||raw,suppressed,shortSuppressed,nestedSuppressed};
 }
 function compactMetabolicCarry(summary){
   const segments=String(summary||'').split(/\s*·\s*/).map(x=>x.trim()).filter(Boolean);
-  const seen=new Set(),routeCounts=new Map(),kept=[];let echoSuppressed=0,routeCapped=0;
-  for(const segment of segments){
-    const stem=carryStem(segment),route=(segment.match(/^\[([^\]]+)\]/)||[])[1]||'UNTYPED';
+  const seen=new Set(),routeCounts=new Map(),kept=[];let echoSuppressed=0,routeCapped=0,intraSegmentSuppressed=0,shortTokenSuppressed=0,nestedClauseSuppressed=0;
+  for(const rawSegment of segments){
+    const intra=compactIntraSegmentEcho(rawSegment);intraSegmentSuppressed+=intra.suppressed;shortTokenSuppressed+=intra.shortSuppressed;nestedClauseSuppressed+=intra.nestedSuppressed;
+    const segment=intra.text,stem=carryStem(segment),route=(segment.match(/^\[([^\]]+)\]/)||[])[1]||'UNTYPED';
     if(stem.length>=32&&seen.has(stem)){echoSuppressed++;continue;}
     const count=routeCounts.get(route)||0;
     if(count>=3){routeCapped++;continue;}
@@ -35,7 +66,7 @@ function compactMetabolicCarry(summary){
     if(kept.join(' · ').length>=900)break;
   }
   const text=kept.join(' · ').slice(0,900);
-  return {text,echoSuppressed,routeCapped,inputSegments:segments.length,outputSegments:kept.length,fingerprint:fp(text),boundary:'Carry-only containment. Original GUT nutrients, routes and provenance are not mutated.'};
+  return {text,echoSuppressed,routeCapped,intraSegmentSuppressed,shortTokenSuppressed,nestedClauseSuppressed,inputSegments:segments.length,outputSegments:kept.length,fingerprint:fp(text),boundary:'Carry-only containment. Exact/lineage-equivalent colon clauses and nested long clauses are collapsed before recirculation; original GUT nutrients, routes and provenance are not mutated.'};
 }
 
 export async function runActiveExecutorLoop({rounds=10,seed='NOSTROMO active integration',mineQuery='NOSTROMO',verifyUrl='https://github.com/jcchang13-a11y/visual-mining-lab'}={}){
@@ -68,5 +99,5 @@ export async function runActiveExecutorLoop({rounds=10,seed='NOSTROMO active int
     trace.push(item);carry=item.carryOut||carry;if(status!=='PASS') break;
   }
   const acceptedActions=['muther','mutherInternal','droplet','dropletVerify'].filter(k=>connectorEvidence.actions?.[k]?.status==='EXECUTED').length;
-  return {schema:'nostromo-active-executor-loop/v1.1.2',status:trace.length===total&&trace.every(x=>x.status==='PASS')?'PASS':'FAIL',requestedRounds:total,completedRounds:trace.length,feedback:{fingerprint:feedback.fingerprint,appliedRounds:trace.filter(x=>x.feedback.applied).length,firstAppliedRound:trace.find(x=>x.feedback.applied)?.round||null,privacy:feedback.privacy},connectorHandoff:{status:connectorEvidence.status,completedAt:connectorEvidence.completedAt,actionsAccepted:acceptedActions,failures:connectorEvidence.failures},trace,completedAt:new Date().toISOString(),boundary:'Certifies the existing closed-loop executor path plus carry-layer metabolic containment. GUT nutrient atoms, routes and provenance remain intact; only the material recirculated into the next round is bounded, lineage-normalized, duplicate-suppressed and capped per route to reduce metabolic echo amplification. This is deterministic containment, not semantic novelty detection. GitHub Actions does not itself search private Drive or the web.'};
+  return {schema:'nostromo-active-executor-loop/v1.1.3',status:trace.length===total&&trace.every(x=>x.status==='PASS')?'PASS':'FAIL',requestedRounds:total,completedRounds:trace.length,feedback:{fingerprint:feedback.fingerprint,appliedRounds:trace.filter(x=>x.feedback.applied).length,firstAppliedRound:trace.find(x=>x.feedback.applied)?.round||null,privacy:feedback.privacy},connectorHandoff:{status:connectorEvidence.status,completedAt:connectorEvidence.completedAt,actionsAccepted:acceptedActions,failures:connectorEvidence.failures},trace,completedAt:new Date().toISOString(),boundary:'Certifies the existing closed-loop executor path plus carry-layer metabolic containment. GUT nutrient atoms, routes and provenance remain intact; only recirculated carry is bounded, lineage-normalized, duplicate-suppressed, intra-segment nested-echo collapsed and capped per route. This is deterministic containment, not semantic novelty detection. GitHub Actions does not itself search private Drive or the web.'};
 }
