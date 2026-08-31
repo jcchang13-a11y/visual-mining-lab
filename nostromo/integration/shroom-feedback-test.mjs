@@ -1,4 +1,5 @@
 // SHROOMING feedback-conditioning test v0.1
+// CI-gated acceptance test for cross-organ behavioral conditioning.
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import {shroomFeedbackReadingRound} from './shroom-feedback-executor.mjs';
