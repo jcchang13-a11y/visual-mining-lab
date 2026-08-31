@@ -1,7 +1,7 @@
 {
-  "schema": "nostromo-vajra-dynamic-test/v0.2.9",
-  "completedAt": "2026-08-31T18:06:23.820Z",
-  "status": "FAIL",
+  "schema": "nostromo-vajra-dynamic-test/v0.3.0",
+  "completedAt": "2026-08-31T18:07:20.217Z",
+  "status": "PASS",
   "guards": {
     "falseCertainty": true,
     "dynamicLensSelection": true,
@@ -17,6 +17,7 @@
     "receiptExecutionEvidence": true,
     "receiptProvenanceRequired": true,
     "receiptRelationRequired": true,
+    "receiptMinimumSubstance": true,
     "receiptDoesNotCertifyTruth": true,
     "crossBranchEvidenceReplayRejected": true,
     "crossApplicationEvidenceReplayRejected": true,
@@ -24,9 +25,9 @@
     "priorResolutionPreserved": true
   },
   "preFixFinding": {
-    "version": "0.2.8",
-    "classification": "SUPERFICIAL_FORMAT_MUTATION_COULD_MINT_DISTINCT_REPLAY_KEY",
-    "detail": "The prior replay key fingerprinted raw cleaned material. Case, Unicode width and punctuation changes could alter the key without changing the evidentiary payload. v0.2.9 canonicalizes only these superficial formatting dimensions before replay fingerprinting."
+    "version": "0.2.9",
+    "classification": "STRUCTURALLY_VALID_PLACEHOLDER_RECEIPT_COULD_CLOSE_BRANCH",
+    "detail": "The prior receipt matcher required structure, execution, provenance, material and relation, but did not reject placeholder-only returned content. A receipt such as material=done and relation=checked could therefore close a branch without adding inspectable substance. v0.3.0 adds a bounded minimum-length and placeholder guard before closure."
   },
   "crossOrgan": {
     "vajraGut": {
@@ -98,6 +99,13 @@
         }
       ],
       "historicalEvidenceKeys": 0
+    },
+    "thinReceiptAdversarial": {
+      "resolved": 0,
+      "open": 5,
+      "rejected": 1,
+      "materialGuardVisible": true,
+      "relationGuardVisible": true
     },
     "crossClauseAdversarial": {
       "targetRef": "c42d19f5",
@@ -256,43 +264,6 @@
       ]
     }
   },
-  "failures": [
-    {
-      "type": "UNIVERSAL_VERSION",
-      "detail": "0.3.0"
-    },
-    {
-      "type": "CAUSAL_VERSION",
-      "detail": "0.3.0"
-    },
-    {
-      "type": "EMPIRICAL_VERSION",
-      "detail": "0.3.0"
-    },
-    {
-      "type": "NORMATIVE_VERSION",
-      "detail": "0.3.0"
-    },
-    {
-      "type": "DEFINITION_VERSION",
-      "detail": "0.3.0"
-    },
-    {
-      "type": "SELF_REFERENCE_VERSION",
-      "detail": "0.3.0"
-    },
-    {
-      "type": "VAGUE_VERSION",
-      "detail": "0.3.0"
-    },
-    {
-      "type": "COMPOUND_VERSION",
-      "detail": "0.3.0"
-    },
-    {
-      "type": "RECEIPT_VERSION",
-      "detail": "0.3.0"
-    }
-  ],
-  "boundary": "PASS proves proposition-aware lens selection, auditable heuristic clause decomposition, clause-scoped handoff isolation, structural receipt closure, VAJRA→GUT referential continuity, and replay-amplification guards across branches, repeated applications, and superficial formatting mutations. Replay canonicalization covers Unicode width, case, whitespace, punctuation and symbols only; it is not semantic similarity detection. Clause splitting remains bounded syntax handling, not semantic parsing. Rejection is structural and auditable, not a semantic truth judgment."
+  "failures": [],
+  "boundary": "PASS proves proposition-aware lens selection, auditable heuristic clause decomposition, clause-scoped handoff isolation, minimally substantive structural receipt closure, VAJRA→GUT referential continuity, and replay-amplification guards across branches, repeated applications, and superficial formatting mutations. The new minimum-substance guard is only a bounded length/placeholder heuristic; it does not prove semantic adequacy, relevance, source quality, or truth. Replay canonicalization covers Unicode width, case, whitespace, punctuation and symbols only; it is not semantic similarity detection. Clause splitting remains bounded syntax handling, not semantic parsing."
 }
