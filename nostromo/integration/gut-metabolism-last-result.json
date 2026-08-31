@@ -1,6 +1,6 @@
 {
   "schema": "nostromo-gut-metabolism-test/v0.2.18",
-  "completedAt": "2026-08-31T12:07:34.527Z",
+  "completedAt": "2026-08-31T12:08:14.879Z",
   "status": "PASS",
   "gut": {
     "version": "0.2.18",
@@ -197,13 +197,13 @@
       "firstAppliedRound": 2,
       "privacy": "PRIVATE DRIVE RAW CONTENT/TITLES/IDS/URLS ARE NOT INCLUDED"
     },
-    "lastCarry": "[CONTRADICTION->VAJRA] 以 structure 位置重讀：主動尋找最小反例與破壞條件：針對本輪 GENERAL 命題（ref：31156498; clause：06b2fdae），哪個前提最可能先失效？：VERIFIES AN EXPLICIT URL O：針 · [CONTRADICTION->VAJRA] 以 structure 位置重讀：主動尋找最小反例與破壞條件：針對本輪 GENERAL 命題（ref：31156498 · [CONTRADICTION->VAJRA] clause：06b2fdae），哪個前提最可能先失效？：VERIFIES AN EXPLICIT URL O · 主動尋找最小反例與破壞條件：針對本輪 GENERAL 命題（ref：31156498：VERIFIES AN EXPLICIT URL ONLY · [CLAIM->DROPLET] VERIFIES AN EXPLICIT URL ONLY; DOES NOT CLAIM SEARCH-ENGINE DISCOVERY · [EVIDENCE_OR_PROVENANCE->MUTHER] 200 · [CLAIM->DROPLET] Connector actions executed externally once; later rounds apply a redacted evidence-derived feedback directive and do not claim re-execution. · [EVIDENCE_OR_PROVENANCE->MUTHER] nostromo-connector-evidence-carry/v1.0 · [QUESTION->SHROOMING] EXECUTES A NON-STATE-MUTATING QUESTION PROBE AGAINST THE LATEST PUBLISHED GREENHOUSE HISTORY. REACTIONS ARE TRACEABLE TRANSFORMATIO",
+    "lastCarry": "[CONTRADICTION->VAJRA] CONTRADICTION_CONDITIONED · [CONTRADICTION->VAJRA] 以 counterexample 位置重讀：CONTRADICTION_CONDITIONED：主動尋找最小反例與破壞條件：針對本輪 GENERAL 命題（ref：31156498; clause：06b2fdae），哪個前提最可能先失效？：VERIFIES AN · [CONTRADICTION->VAJRA] CONTRADICTION_CONDITIONED：以 counterexample 位置重讀：主動尋找最小反例與破壞條件：針對本輪 GENERAL 命題（ref：31156498 · 主動尋找最小反例與破壞條件：針對本輪 GENERAL 命題（ref：31156498：VERIFIES AN EXPLICIT URL ONLY · [CLAIM->DROPLET] VERIFIES AN EXPLICIT URL ONLY; DOES NOT CLAIM SEARCH-ENGINE DISCOVERY · [EVIDENCE_OR_PROVENANCE->MUTHER] 200 · [CLAIM->DROPLET] Connector actions executed externally once; later rounds apply a redacted evidence-derived feedback directive and do not claim re-execution. · [EVIDENCE_OR_PROVENANCE->MUTHER] nostromo-connector-evidence-carry/v1.0 · [QUESTION->SHROOMING] EXECUTES A NON-STATE-MUTATING QUESTION PROBE AGAINST THE LATEST PUBLISHED GREENHOUSE HISTORY. REACTIONS ARE TRACEABL",
     "roundAntiEcho": [
       {
         "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PRE_POST_ADJACENT_SEGMENT_COLLAPSE_12+PREFIX_DIVERSITY_96+SHARED_BODY_SUMMARY_DIVERSITY_80_192+VOLATILE_REF_LINEAGE_NEUTRALIZATION+TAGGED_PAYLOAD_DEDUP+EXACT_TAGGED_TAIL_DEDUP_80+ROUTE_METADATA_STRIP+DELIMITED_LONG_SEGMENT_DEDUP+SUMMARY_EXACT_NONADJACENT_FULLWIDTH_COLON_CLAUSE_DEDUP_12+SUMMARY_VOLATILE_LINEAGE_FULLWIDTH_COLON_CLAUSE_DEDUP+SUMMARY_CONSECUTIVE_SHORT_TOKEN_COLLAPSE_4",
-        "candidateCount": 208,
+        "candidateCount": 210,
         "selectedCount": 12,
-        "suppressedCount": 196,
+        "suppressedCount": 198,
         "sharedBodySuppressedCount": 0,
         "volatileLineageSuppressedCount": 0,
         "inheritedSubstrateStrippedCount": 0,
@@ -219,9 +219,9 @@
       },
       {
         "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PRE_POST_ADJACENT_SEGMENT_COLLAPSE_12+PREFIX_DIVERSITY_96+SHARED_BODY_SUMMARY_DIVERSITY_80_192+VOLATILE_REF_LINEAGE_NEUTRALIZATION+TAGGED_PAYLOAD_DEDUP+EXACT_TAGGED_TAIL_DEDUP_80+ROUTE_METADATA_STRIP+DELIMITED_LONG_SEGMENT_DEDUP+SUMMARY_EXACT_NONADJACENT_FULLWIDTH_COLON_CLAUSE_DEDUP_12+SUMMARY_VOLATILE_LINEAGE_FULLWIDTH_COLON_CLAUSE_DEDUP+SUMMARY_CONSECUTIVE_SHORT_TOKEN_COLLAPSE_4",
-        "candidateCount": 192,
+        "candidateCount": 194,
         "selectedCount": 12,
-        "suppressedCount": 180,
+        "suppressedCount": 182,
         "sharedBodySuppressedCount": 9,
         "volatileLineageSuppressedCount": 0,
         "inheritedSubstrateStrippedCount": 10,
@@ -237,9 +237,9 @@
       },
       {
         "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PRE_POST_ADJACENT_SEGMENT_COLLAPSE_12+PREFIX_DIVERSITY_96+SHARED_BODY_SUMMARY_DIVERSITY_80_192+VOLATILE_REF_LINEAGE_NEUTRALIZATION+TAGGED_PAYLOAD_DEDUP+EXACT_TAGGED_TAIL_DEDUP_80+ROUTE_METADATA_STRIP+DELIMITED_LONG_SEGMENT_DEDUP+SUMMARY_EXACT_NONADJACENT_FULLWIDTH_COLON_CLAUSE_DEDUP_12+SUMMARY_VOLATILE_LINEAGE_FULLWIDTH_COLON_CLAUSE_DEDUP+SUMMARY_CONSECUTIVE_SHORT_TOKEN_COLLAPSE_4",
-        "candidateCount": 193,
+        "candidateCount": 195,
         "selectedCount": 12,
-        "suppressedCount": 181,
+        "suppressedCount": 183,
         "sharedBodySuppressedCount": 9,
         "volatileLineageSuppressedCount": 0,
         "inheritedSubstrateStrippedCount": 10,
@@ -249,12 +249,12 @@
         "routeTagsStripped": 28,
         "segmentEchoSuppressedCount": 0,
         "delimitedEchoSuppressedCount": 0,
-        "carryClauseSuppressedCount": 3,
+        "carryClauseSuppressedCount": 1,
         "volatileLineageClauseSuppressedCount": 0,
         "shortCarryTokenSuppressedCount": 0
       }
     ],
-    "boundary": "Certifies the existing closed-loop executor path plus carry-layer metabolic containment. GUT nutrient atoms, routes and provenance remain intact; only recirculated carry is bounded, lineage-normalized, duplicate-suppressed, intra-segment nested-echo collapsed and capped per route. This is deterministic containment, not semantic novelty detection. GitHub Actions does not itself search private Drive or the web."
+    "boundary": "Certifies the closed-loop executor path plus carry-layer metabolic containment and a deterministic SHROOMING feedback-conditioned lens selector. From round 2 onward, redacted connector feedback can change SHROOMING inspection priority without claiming semantic learning or independent persistent agents. GUT nutrient atoms, routes and provenance remain intact; GitHub Actions does not itself search private Drive or the web."
   },
   "failures": [],
   "boundary": "PASS proves deterministic heuristic routing, provenance retention, quarantine/hold behavior, conservative exact inherited-substrate removal, exact tagged-payload de-echoing, exact repeated tagged-tail suppression while retaining distinct heads, pre/post short exact adjacent intra-atom echo suppression, shared-body summary diversity, exact non-adjacent full-width-colon carry-clause compaction, consecutive exact 1–4 character carry-token run collapse without mutating nutrient atoms or provenance, near-duplicate preservation, structured-snippet protection, and a 3-round cross-organ connector-feedback regression. Volatile ref/clause lineage normalization is tested separately. It does not prove semantic novelty, semantic correctness, or source truth."
