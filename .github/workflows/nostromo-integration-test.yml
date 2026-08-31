@@ -42,6 +42,10 @@ jobs:
         id: gut_metabolism
         continue-on-error: true
         run: node nostromo/integration/gut-metabolism-test.mjs
+      - name: Verify GUT volatile-lineage anti-echo boundary
+        id: gut_lineage
+        continue-on-error: true
+        run: node nostromo/integration/gut-lineage-test.mjs
       - name: Verify VAJRA proposition-aware dismantling
         id: vajra_dynamic
         continue-on-error: true
@@ -60,6 +64,7 @@ jobs:
           test -f nostromo/integration/muther-falsify-last-result.json && cp nostromo/integration/muther-falsify-last-result.json /tmp/nostromo-muther-falsify-last-result.json || true
           test -f nostromo/integration/droplet-claim-verify-last-result.json && cp nostromo/integration/droplet-claim-verify-last-result.json /tmp/nostromo-droplet-claim-verify-last-result.json || true
           test -f nostromo/integration/gut-metabolism-last-result.json && cp nostromo/integration/gut-metabolism-last-result.json /tmp/nostromo-gut-metabolism-last-result.json || true
+          test -f nostromo/integration/gut-lineage-last-result.json && cp nostromo/integration/gut-lineage-last-result.json /tmp/nostromo-gut-lineage-last-result.json || true
           test -f nostromo/integration/vajra-dynamic-last-result.json && cp nostromo/integration/vajra-dynamic-last-result.json /tmp/nostromo-vajra-dynamic-last-result.json || true
           git fetch origin main
           git reset --hard origin/main
@@ -83,6 +88,10 @@ jobs:
             cp /tmp/nostromo-gut-metabolism-last-result.json nostromo/integration/gut-metabolism-last-result.json
             git add nostromo/integration/gut-metabolism-last-result.json
           fi
+          if [ -f /tmp/nostromo-gut-lineage-last-result.json ]; then
+            cp /tmp/nostromo-gut-lineage-last-result.json nostromo/integration/gut-lineage-last-result.json
+            git add nostromo/integration/gut-lineage-last-result.json
+          fi
           if [ -f /tmp/nostromo-vajra-dynamic-last-result.json ]; then
             cp /tmp/nostromo-vajra-dynamic-last-result.json nostromo/integration/vajra-dynamic-last-result.json
             git add nostromo/integration/vajra-dynamic-last-result.json
@@ -101,6 +110,9 @@ jobs:
         run: exit 1
       - name: Enforce GUT metabolism conclusion
         if: steps.gut_metabolism.outcome != 'success'
+        run: exit 1
+      - name: Enforce GUT lineage anti-echo conclusion
+        if: steps.gut_lineage.outcome != 'success'
         run: exit 1
       - name: Enforce VAJRA dynamic dismantling conclusion
         if: steps.vajra_dynamic.outcome != 'success'
