@@ -1,9 +1,9 @@
 {
   "schema": "nostromo-gut-metabolism-test/v0.2.16",
-  "completedAt": "2026-08-31T01:06:03.456Z",
-  "status": "PASS",
+  "completedAt": "2026-08-31T02:02:43.305Z",
+  "status": "FAIL",
   "gut": {
-    "version": "0.2.16",
+    "version": "0.2.17",
     "mode": "DETERMINISTIC_HEURISTIC_ROUTER",
     "typeCounts": {
       "CLAIM": 2,
@@ -22,15 +22,16 @@
       "VAJRA": 1,
       "HOLD": 4
     },
-    "boundary": "Deterministic heuristic metabolism only. Summary carry additionally collapses consecutive exact 1–4 character colon-delimited token runs such as 針：針：針 while preserving a single token; this is rendering-layer de-echo only and does not mutate nutrient atoms, routes or provenance. Exact non-adjacent 12+ character carry clauses are also deduplicated only in carry rendering. Summary diversity treats a short colon-delimited head followed by an identical 80+ character body as one metabolic lineage. Adjacent exact segment collapse runs before and after tagged-payload processing. Repeated tagged payloads collapse exact repeated colon-delimited tails of 80+ normalized characters while retaining distinct heads. Inherited substrate subtraction removes only exact full normalized substrates; truncated prefixes are never deletion candidates. Structured snippets are protected before lexical contradiction detection. These rules are auditable heuristics, not semantic truth."
+    "boundary": "Deterministic heuristic metabolism only. Carry-summary lineage comparison neutralizes volatile ref:/clause: hexadecimal identifiers and long hash tokens before diversity selection so provenance-only identifier changes do not masquerade as new metabolic content; original nutrient atoms, routes and provenance remain untouched. Summary carry additionally collapses consecutive exact 1–4 character colon-delimited token runs such as 針：針：針 while preserving a single token; this is rendering-layer de-echo only and does not mutate nutrient atoms, routes or provenance. Exact non-adjacent 12+ character carry clauses are also deduplicated only in carry rendering. Summary diversity treats a short colon-delimited head followed by an identical 80+ character body as one metabolic lineage. Adjacent exact segment collapse runs before and after tagged-payload processing. Repeated tagged payloads collapse exact repeated colon-delimited tails of 80+ normalized characters while retaining distinct heads. Inherited substrate subtraction removes only exact full normalized substrates; truncated prefixes are never deletion candidates. Structured snippets are protected before lexical contradiction detection. These rules are auditable heuristics, not semantic truth."
   },
   "antiEcho": {
     "nested": {
-      "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PRE_POST_ADJACENT_SEGMENT_COLLAPSE_12+PREFIX_DIVERSITY_96+SHARED_BODY_SUMMARY_DIVERSITY_80_192+TAGGED_PAYLOAD_DEDUP+EXACT_TAGGED_TAIL_DEDUP_80+ROUTE_METADATA_STRIP+DELIMITED_LONG_SEGMENT_DEDUP+SUMMARY_EXACT_NONADJACENT_FULLWIDTH_COLON_CLAUSE_DEDUP_12+SUMMARY_CONSECUTIVE_SHORT_TOKEN_COLLAPSE_4",
+      "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PRE_POST_ADJACENT_SEGMENT_COLLAPSE_12+PREFIX_DIVERSITY_96+SHARED_BODY_SUMMARY_DIVERSITY_80_192+VOLATILE_REF_LINEAGE_NEUTRALIZATION+TAGGED_PAYLOAD_DEDUP+EXACT_TAGGED_TAIL_DEDUP_80+ROUTE_METADATA_STRIP+DELIMITED_LONG_SEGMENT_DEDUP+SUMMARY_EXACT_NONADJACENT_FULLWIDTH_COLON_CLAUSE_DEDUP_12+SUMMARY_CONSECUTIVE_SHORT_TOKEN_COLLAPSE_4",
       "candidateCount": 1,
       "selectedCount": 1,
       "suppressedCount": 0,
       "sharedBodySuppressedCount": 0,
+      "volatileLineageSuppressedCount": 0,
       "inheritedSubstrateStrippedCount": 0,
       "nestedEchoAffectedAtoms": 1,
       "nestedEchoSuppressedCount": 2,
@@ -42,11 +43,12 @@
       "shortCarryTokenSuppressedCount": 0
     },
     "taggedTail": {
-      "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PRE_POST_ADJACENT_SEGMENT_COLLAPSE_12+PREFIX_DIVERSITY_96+SHARED_BODY_SUMMARY_DIVERSITY_80_192+TAGGED_PAYLOAD_DEDUP+EXACT_TAGGED_TAIL_DEDUP_80+ROUTE_METADATA_STRIP+DELIMITED_LONG_SEGMENT_DEDUP+SUMMARY_EXACT_NONADJACENT_FULLWIDTH_COLON_CLAUSE_DEDUP_12+SUMMARY_CONSECUTIVE_SHORT_TOKEN_COLLAPSE_4",
+      "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PRE_POST_ADJACENT_SEGMENT_COLLAPSE_12+PREFIX_DIVERSITY_96+SHARED_BODY_SUMMARY_DIVERSITY_80_192+VOLATILE_REF_LINEAGE_NEUTRALIZATION+TAGGED_PAYLOAD_DEDUP+EXACT_TAGGED_TAIL_DEDUP_80+ROUTE_METADATA_STRIP+DELIMITED_LONG_SEGMENT_DEDUP+SUMMARY_EXACT_NONADJACENT_FULLWIDTH_COLON_CLAUSE_DEDUP_12+SUMMARY_CONSECUTIVE_SHORT_TOKEN_COLLAPSE_4",
       "candidateCount": 1,
       "selectedCount": 1,
       "suppressedCount": 0,
       "sharedBodySuppressedCount": 0,
+      "volatileLineageSuppressedCount": 0,
       "inheritedSubstrateStrippedCount": 0,
       "nestedEchoAffectedAtoms": 1,
       "nestedEchoSuppressedCount": 0,
@@ -58,11 +60,12 @@
       "shortCarryTokenSuppressedCount": 0
     },
     "shortAdjacent": {
-      "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PRE_POST_ADJACENT_SEGMENT_COLLAPSE_12+PREFIX_DIVERSITY_96+SHARED_BODY_SUMMARY_DIVERSITY_80_192+TAGGED_PAYLOAD_DEDUP+EXACT_TAGGED_TAIL_DEDUP_80+ROUTE_METADATA_STRIP+DELIMITED_LONG_SEGMENT_DEDUP+SUMMARY_EXACT_NONADJACENT_FULLWIDTH_COLON_CLAUSE_DEDUP_12+SUMMARY_CONSECUTIVE_SHORT_TOKEN_COLLAPSE_4",
+      "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PRE_POST_ADJACENT_SEGMENT_COLLAPSE_12+PREFIX_DIVERSITY_96+SHARED_BODY_SUMMARY_DIVERSITY_80_192+VOLATILE_REF_LINEAGE_NEUTRALIZATION+TAGGED_PAYLOAD_DEDUP+EXACT_TAGGED_TAIL_DEDUP_80+ROUTE_METADATA_STRIP+DELIMITED_LONG_SEGMENT_DEDUP+SUMMARY_EXACT_NONADJACENT_FULLWIDTH_COLON_CLAUSE_DEDUP_12+SUMMARY_CONSECUTIVE_SHORT_TOKEN_COLLAPSE_4",
       "candidateCount": 1,
       "selectedCount": 1,
       "suppressedCount": 0,
       "sharedBodySuppressedCount": 0,
+      "volatileLineageSuppressedCount": 0,
       "inheritedSubstrateStrippedCount": 0,
       "nestedEchoAffectedAtoms": 0,
       "nestedEchoSuppressedCount": 0,
@@ -74,11 +77,12 @@
       "shortCarryTokenSuppressedCount": 0
     },
     "nearDuplicate": {
-      "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PRE_POST_ADJACENT_SEGMENT_COLLAPSE_12+PREFIX_DIVERSITY_96+SHARED_BODY_SUMMARY_DIVERSITY_80_192+TAGGED_PAYLOAD_DEDUP+EXACT_TAGGED_TAIL_DEDUP_80+ROUTE_METADATA_STRIP+DELIMITED_LONG_SEGMENT_DEDUP+SUMMARY_EXACT_NONADJACENT_FULLWIDTH_COLON_CLAUSE_DEDUP_12+SUMMARY_CONSECUTIVE_SHORT_TOKEN_COLLAPSE_4",
+      "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PRE_POST_ADJACENT_SEGMENT_COLLAPSE_12+PREFIX_DIVERSITY_96+SHARED_BODY_SUMMARY_DIVERSITY_80_192+VOLATILE_REF_LINEAGE_NEUTRALIZATION+TAGGED_PAYLOAD_DEDUP+EXACT_TAGGED_TAIL_DEDUP_80+ROUTE_METADATA_STRIP+DELIMITED_LONG_SEGMENT_DEDUP+SUMMARY_EXACT_NONADJACENT_FULLWIDTH_COLON_CLAUSE_DEDUP_12+SUMMARY_CONSECUTIVE_SHORT_TOKEN_COLLAPSE_4",
       "candidateCount": 1,
       "selectedCount": 1,
       "suppressedCount": 0,
       "sharedBodySuppressedCount": 0,
+      "volatileLineageSuppressedCount": 0,
       "inheritedSubstrateStrippedCount": 0,
       "nestedEchoAffectedAtoms": 0,
       "nestedEchoSuppressedCount": 0,
@@ -90,11 +94,12 @@
       "shortCarryTokenSuppressedCount": 0
     },
     "sharedBodySummary": {
-      "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PRE_POST_ADJACENT_SEGMENT_COLLAPSE_12+PREFIX_DIVERSITY_96+SHARED_BODY_SUMMARY_DIVERSITY_80_192+TAGGED_PAYLOAD_DEDUP+EXACT_TAGGED_TAIL_DEDUP_80+ROUTE_METADATA_STRIP+DELIMITED_LONG_SEGMENT_DEDUP+SUMMARY_EXACT_NONADJACENT_FULLWIDTH_COLON_CLAUSE_DEDUP_12+SUMMARY_CONSECUTIVE_SHORT_TOKEN_COLLAPSE_4",
+      "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PRE_POST_ADJACENT_SEGMENT_COLLAPSE_12+PREFIX_DIVERSITY_96+SHARED_BODY_SUMMARY_DIVERSITY_80_192+VOLATILE_REF_LINEAGE_NEUTRALIZATION+TAGGED_PAYLOAD_DEDUP+EXACT_TAGGED_TAIL_DEDUP_80+ROUTE_METADATA_STRIP+DELIMITED_LONG_SEGMENT_DEDUP+SUMMARY_EXACT_NONADJACENT_FULLWIDTH_COLON_CLAUSE_DEDUP_12+SUMMARY_CONSECUTIVE_SHORT_TOKEN_COLLAPSE_4",
       "candidateCount": 3,
       "selectedCount": 1,
       "suppressedCount": 2,
       "sharedBodySuppressedCount": 2,
+      "volatileLineageSuppressedCount": 0,
       "inheritedSubstrateStrippedCount": 0,
       "nestedEchoAffectedAtoms": 0,
       "nestedEchoSuppressedCount": 0,
@@ -106,11 +111,12 @@
       "shortCarryTokenSuppressedCount": 0
     },
     "nonAdjacentCarry": {
-      "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PRE_POST_ADJACENT_SEGMENT_COLLAPSE_12+PREFIX_DIVERSITY_96+SHARED_BODY_SUMMARY_DIVERSITY_80_192+TAGGED_PAYLOAD_DEDUP+EXACT_TAGGED_TAIL_DEDUP_80+ROUTE_METADATA_STRIP+DELIMITED_LONG_SEGMENT_DEDUP+SUMMARY_EXACT_NONADJACENT_FULLWIDTH_COLON_CLAUSE_DEDUP_12+SUMMARY_CONSECUTIVE_SHORT_TOKEN_COLLAPSE_4",
+      "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PRE_POST_ADJACENT_SEGMENT_COLLAPSE_12+PREFIX_DIVERSITY_96+SHARED_BODY_SUMMARY_DIVERSITY_80_192+VOLATILE_REF_LINEAGE_NEUTRALIZATION+TAGGED_PAYLOAD_DEDUP+EXACT_TAGGED_TAIL_DEDUP_80+ROUTE_METADATA_STRIP+DELIMITED_LONG_SEGMENT_DEDUP+SUMMARY_EXACT_NONADJACENT_FULLWIDTH_COLON_CLAUSE_DEDUP_12+SUMMARY_CONSECUTIVE_SHORT_TOKEN_COLLAPSE_4",
       "candidateCount": 1,
       "selectedCount": 1,
       "suppressedCount": 0,
       "sharedBodySuppressedCount": 0,
+      "volatileLineageSuppressedCount": 0,
       "inheritedSubstrateStrippedCount": 0,
       "nestedEchoAffectedAtoms": 0,
       "nestedEchoSuppressedCount": 0,
@@ -122,11 +128,12 @@
       "shortCarryTokenSuppressedCount": 0
     },
     "shortTokenCarry": {
-      "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PRE_POST_ADJACENT_SEGMENT_COLLAPSE_12+PREFIX_DIVERSITY_96+SHARED_BODY_SUMMARY_DIVERSITY_80_192+TAGGED_PAYLOAD_DEDUP+EXACT_TAGGED_TAIL_DEDUP_80+ROUTE_METADATA_STRIP+DELIMITED_LONG_SEGMENT_DEDUP+SUMMARY_EXACT_NONADJACENT_FULLWIDTH_COLON_CLAUSE_DEDUP_12+SUMMARY_CONSECUTIVE_SHORT_TOKEN_COLLAPSE_4",
+      "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PRE_POST_ADJACENT_SEGMENT_COLLAPSE_12+PREFIX_DIVERSITY_96+SHARED_BODY_SUMMARY_DIVERSITY_80_192+VOLATILE_REF_LINEAGE_NEUTRALIZATION+TAGGED_PAYLOAD_DEDUP+EXACT_TAGGED_TAIL_DEDUP_80+ROUTE_METADATA_STRIP+DELIMITED_LONG_SEGMENT_DEDUP+SUMMARY_EXACT_NONADJACENT_FULLWIDTH_COLON_CLAUSE_DEDUP_12+SUMMARY_CONSECUTIVE_SHORT_TOKEN_COLLAPSE_4",
       "candidateCount": 1,
       "selectedCount": 1,
       "suppressedCount": 0,
       "sharedBodySuppressedCount": 0,
+      "volatileLineageSuppressedCount": 0,
       "inheritedSubstrateStrippedCount": 0,
       "nestedEchoAffectedAtoms": 0,
       "nestedEchoSuppressedCount": 0,
@@ -138,11 +145,12 @@
       "shortCarryTokenSuppressedCount": 3
     },
     "inherited": {
-      "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PRE_POST_ADJACENT_SEGMENT_COLLAPSE_12+PREFIX_DIVERSITY_96+SHARED_BODY_SUMMARY_DIVERSITY_80_192+TAGGED_PAYLOAD_DEDUP+EXACT_TAGGED_TAIL_DEDUP_80+ROUTE_METADATA_STRIP+DELIMITED_LONG_SEGMENT_DEDUP+SUMMARY_EXACT_NONADJACENT_FULLWIDTH_COLON_CLAUSE_DEDUP_12+SUMMARY_CONSECUTIVE_SHORT_TOKEN_COLLAPSE_4",
+      "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PRE_POST_ADJACENT_SEGMENT_COLLAPSE_12+PREFIX_DIVERSITY_96+SHARED_BODY_SUMMARY_DIVERSITY_80_192+VOLATILE_REF_LINEAGE_NEUTRALIZATION+TAGGED_PAYLOAD_DEDUP+EXACT_TAGGED_TAIL_DEDUP_80+ROUTE_METADATA_STRIP+DELIMITED_LONG_SEGMENT_DEDUP+SUMMARY_EXACT_NONADJACENT_FULLWIDTH_COLON_CLAUSE_DEDUP_12+SUMMARY_CONSECUTIVE_SHORT_TOKEN_COLLAPSE_4",
       "candidateCount": 1,
       "selectedCount": 1,
       "suppressedCount": 0,
       "sharedBodySuppressedCount": 0,
+      "volatileLineageSuppressedCount": 0,
       "inheritedSubstrateStrippedCount": 1,
       "nestedEchoAffectedAtoms": 0,
       "nestedEchoSuppressedCount": 0,
@@ -154,11 +162,12 @@
       "shortCarryTokenSuppressedCount": 0
     },
     "partialInherited": {
-      "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PRE_POST_ADJACENT_SEGMENT_COLLAPSE_12+PREFIX_DIVERSITY_96+SHARED_BODY_SUMMARY_DIVERSITY_80_192+TAGGED_PAYLOAD_DEDUP+EXACT_TAGGED_TAIL_DEDUP_80+ROUTE_METADATA_STRIP+DELIMITED_LONG_SEGMENT_DEDUP+SUMMARY_EXACT_NONADJACENT_FULLWIDTH_COLON_CLAUSE_DEDUP_12+SUMMARY_CONSECUTIVE_SHORT_TOKEN_COLLAPSE_4",
+      "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PRE_POST_ADJACENT_SEGMENT_COLLAPSE_12+PREFIX_DIVERSITY_96+SHARED_BODY_SUMMARY_DIVERSITY_80_192+VOLATILE_REF_LINEAGE_NEUTRALIZATION+TAGGED_PAYLOAD_DEDUP+EXACT_TAGGED_TAIL_DEDUP_80+ROUTE_METADATA_STRIP+DELIMITED_LONG_SEGMENT_DEDUP+SUMMARY_EXACT_NONADJACENT_FULLWIDTH_COLON_CLAUSE_DEDUP_12+SUMMARY_CONSECUTIVE_SHORT_TOKEN_COLLAPSE_4",
       "candidateCount": 1,
       "selectedCount": 1,
       "suppressedCount": 0,
       "sharedBodySuppressedCount": 0,
+      "volatileLineageSuppressedCount": 0,
       "inheritedSubstrateStrippedCount": 0,
       "nestedEchoAffectedAtoms": 0,
       "nestedEchoSuppressedCount": 0,
@@ -182,11 +191,12 @@
     "lastCarry": "[CONTRADICTION->VAJRA] 以 structure 位置重讀：主動尋找最小反例與破壞條件：針對本輪 GENERAL 命題（ref:c8f82eb2; clause:1be12d7f），哪個前提最可能先失效？：VERIFIES AN EXPLICIT URL O：針 · [CONTRADICTION->VAJRA] 以 structure 位置重讀：主動尋找最小反例與破壞條件：針對本輪 GENERAL 命題（ref:c8f82eb2 · [CONTRADICTION->VAJRA] clause:1be12d7f），哪個前提最可能先失效？：VERIFIES AN EXPLICIT URL O·：主動尋找最小反例與破壞條件：針對本輪 GENERAL 命題（ref:c8f82eb2：針對本輪 UNIVERSAL+EMPIRICAL 命題（ref:95d74691 · [CONTRADICTION->VAJRA] 主動尋找最小反例與破壞條件 · [CONTRADICTION->VAJRA] 主動尋找最小反例與破壞條件：針對本輪 UNIVERSAL+EMPIRICAL 命題（ref:e31146a7; clause:8e260042），哪個前提最可能先失效？ · [CLAIM->DROPLET] VERIFIES AN EXPLICIT URL ONLY; DOES NOT CLAIM SEARCH-ENGINE DISCOVERY · [EVIDENCE_OR_PROVENANCE->MUTHER] 200 · [CLAIM->DROPLET] Connector actions executed externally once; later rounds apply a redacted evidence-derived feedback directive and do not claim re-execution. · [EVIDENCE_OR_PROVENANCE->MUTHER] nostromo-connector-evidence-carry/v1.0 · [QUESTION->SHROOMING] EXECUTES A NON-STATE-MUTATING QUESTION PROBE AGAINST THE LATEST PUBLISHED GREENHOUSE HISTORY. REACTIONS ARE TRACEABLE TRANSFORMATIONS OF RECORDED HISTORY, NOT CLAIMS OF TEN INDEPENDENT LIVE LLM PROCESSES, AND DO NOT ADVANCE THE FORMAL SHROOMING ROUND. · [QUESTION->SHROOMI",
     "roundAntiEcho": [
       {
-        "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PRE_POST_ADJACENT_SEGMENT_COLLAPSE_12+PREFIX_DIVERSITY_96+SHARED_BODY_SUMMARY_DIVERSITY_80_192+TAGGED_PAYLOAD_DEDUP+EXACT_TAGGED_TAIL_DEDUP_80+ROUTE_METADATA_STRIP+DELIMITED_LONG_SEGMENT_DEDUP+SUMMARY_EXACT_NONADJACENT_FULLWIDTH_COLON_CLAUSE_DEDUP_12+SUMMARY_CONSECUTIVE_SHORT_TOKEN_COLLAPSE_4",
+        "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PRE_POST_ADJACENT_SEGMENT_COLLAPSE_12+PREFIX_DIVERSITY_96+SHARED_BODY_SUMMARY_DIVERSITY_80_192+VOLATILE_REF_LINEAGE_NEUTRALIZATION+TAGGED_PAYLOAD_DEDUP+EXACT_TAGGED_TAIL_DEDUP_80+ROUTE_METADATA_STRIP+DELIMITED_LONG_SEGMENT_DEDUP+SUMMARY_EXACT_NONADJACENT_FULLWIDTH_COLON_CLAUSE_DEDUP_12+SUMMARY_CONSECUTIVE_SHORT_TOKEN_COLLAPSE_4",
         "candidateCount": 193,
         "selectedCount": 12,
         "suppressedCount": 181,
         "sharedBodySuppressedCount": 0,
+        "volatileLineageSuppressedCount": 0,
         "inheritedSubstrateStrippedCount": 0,
         "nestedEchoAffectedAtoms": 0,
         "nestedEchoSuppressedCount": 0,
@@ -198,11 +208,12 @@
         "shortCarryTokenSuppressedCount": 0
       },
       {
-        "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PRE_POST_ADJACENT_SEGMENT_COLLAPSE_12+PREFIX_DIVERSITY_96+SHARED_BODY_SUMMARY_DIVERSITY_80_192+TAGGED_PAYLOAD_DEDUP+EXACT_TAGGED_TAIL_DEDUP_80+ROUTE_METADATA_STRIP+DELIMITED_LONG_SEGMENT_DEDUP+SUMMARY_EXACT_NONADJACENT_FULLWIDTH_COLON_CLAUSE_DEDUP_12+SUMMARY_CONSECUTIVE_SHORT_TOKEN_COLLAPSE_4",
+        "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PRE_POST_ADJACENT_SEGMENT_COLLAPSE_12+PREFIX_DIVERSITY_96+SHARED_BODY_SUMMARY_DIVERSITY_80_192+VOLATILE_REF_LINEAGE_NEUTRALIZATION+TAGGED_PAYLOAD_DEDUP+EXACT_TAGGED_TAIL_DEDUP_80+ROUTE_METADATA_STRIP+DELIMITED_LONG_SEGMENT_DEDUP+SUMMARY_EXACT_NONADJACENT_FULLWIDTH_COLON_CLAUSE_DEDUP_12+SUMMARY_CONSECUTIVE_SHORT_TOKEN_COLLAPSE_4",
         "candidateCount": 178,
         "selectedCount": 12,
         "suppressedCount": 166,
         "sharedBodySuppressedCount": 9,
+        "volatileLineageSuppressedCount": 9,
         "inheritedSubstrateStrippedCount": 10,
         "nestedEchoAffectedAtoms": 13,
         "nestedEchoSuppressedCount": 0,
@@ -214,11 +225,12 @@
         "shortCarryTokenSuppressedCount": 0
       },
       {
-        "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PRE_POST_ADJACENT_SEGMENT_COLLAPSE_12+PREFIX_DIVERSITY_96+SHARED_BODY_SUMMARY_DIVERSITY_80_192+TAGGED_PAYLOAD_DEDUP+EXACT_TAGGED_TAIL_DEDUP_80+ROUTE_METADATA_STRIP+DELIMITED_LONG_SEGMENT_DEDUP+SUMMARY_EXACT_NONADJACENT_FULLWIDTH_COLON_CLAUSE_DEDUP_12+SUMMARY_CONSECUTIVE_SHORT_TOKEN_COLLAPSE_4",
+        "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PRE_POST_ADJACENT_SEGMENT_COLLAPSE_12+PREFIX_DIVERSITY_96+SHARED_BODY_SUMMARY_DIVERSITY_80_192+VOLATILE_REF_LINEAGE_NEUTRALIZATION+TAGGED_PAYLOAD_DEDUP+EXACT_TAGGED_TAIL_DEDUP_80+ROUTE_METADATA_STRIP+DELIMITED_LONG_SEGMENT_DEDUP+SUMMARY_EXACT_NONADJACENT_FULLWIDTH_COLON_CLAUSE_DEDUP_12+SUMMARY_CONSECUTIVE_SHORT_TOKEN_COLLAPSE_4",
         "candidateCount": 180,
         "selectedCount": 12,
         "suppressedCount": 168,
         "sharedBodySuppressedCount": 9,
+        "volatileLineageSuppressedCount": 9,
         "inheritedSubstrateStrippedCount": 10,
         "nestedEchoAffectedAtoms": 12,
         "nestedEchoSuppressedCount": 0,
@@ -232,6 +244,11 @@
     ],
     "boundary": "Certifies closed-loop routing for SHROOMING local deterministic sandbox plus a non-state-mutating greenhouse probe, MU/TH/UR repository mining, DROPLET explicit-URL verification, VAJRA and GUT, plus acceptance and digestion of externally executed Google Drive query mining, bounded authorized-source MINE_INTERNAL evidence, public web search, and connector-supplied claim-verification evidence. From round 2 onward, redacted connector evidence changes SHROOMING/greenhouse/VAJRA input. GUT receives the combined current round input plus exact prior carry and exact redacted feedback directive as inherited substrates; this allows conservative exact embedded-substrate subtraction without fuzzy/prefix deletion. It proves contextual anti-echo routing, not semantic novelty detection. GitHub Actions does not itself search private Drive or the web."
   },
-  "failures": [],
+  "failures": [
+    {
+      "type": "GUT_VERSION",
+      "detail": "0.2.17"
+    }
+  ],
   "boundary": "PASS proves deterministic heuristic routing, provenance retention, quarantine/hold behavior, conservative exact inherited-substrate removal, exact tagged-payload de-echoing, exact repeated tagged-tail suppression while retaining distinct heads, pre/post short exact adjacent intra-atom echo suppression, shared-body summary diversity, exact non-adjacent full-width-colon carry-clause compaction, consecutive exact 1–4 character carry-token run collapse without mutating nutrient atoms or provenance, near-duplicate preservation, structured-snippet protection, and a 3-round cross-organ connector-feedback regression. It does not prove semantic novelty, semantic correctness, or source truth."
 }
