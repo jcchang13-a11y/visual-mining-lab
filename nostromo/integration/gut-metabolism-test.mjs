@@ -21,7 +21,7 @@ const sample={
   duplicateA:'same useful material',duplicateB:'same useful material'
 };
 const gut=globalThis.GutEngine.digest(sample,{source:'NOSTROMO/gut-metabolism-test'});
-check(gut.version==='0.2.16','GUT_VERSION',gut.version);
+check(gut.version==='0.2.17','GUT_VERSION',gut.version);
 check(gut.mode==='DETERMINISTIC_HEURISTIC_ROUTER','GUT_MODE',gut.mode);
 check(gut.routes?.DROPLET?.count>=1,'CLAIM_NOT_ROUTED_TO_DROPLET',gut.routes?.DROPLET);
 check(gut.routes?.SHROOMING?.count>=1,'QUESTION_NOT_ROUTED_TO_SHROOMING',gut.routes?.SHROOMING);
@@ -101,7 +101,7 @@ check(structuredGut.routes?.MUTHER?.count===1,'STRUCTURED_NOT_ROUTED_TO_MUTHER',
 
 let active=null;
 try{
-  active=await runActiveExecutorLoop({rounds:3,seed:'GUT v0.2.16 feedback validation',mineQuery:'NOSTROMO',verifyUrl:'https://github.com/jcchang13-a11y/visual-mining-lab'});
+  active=await runActiveExecutorLoop({rounds:3,seed:'GUT v0.2.17 feedback validation',mineQuery:'NOSTROMO',verifyUrl:'https://github.com/jcchang13-a11y/visual-mining-lab'});
   check(active.status==='PASS','ACTIVE_LOOP_FAIL',{status:active.status,completedRounds:active.completedRounds});
   check(active.feedback?.appliedRounds===2,'FEEDBACK_APPLIED_ROUNDS',active.feedback);
   check(active.feedback?.firstAppliedRound===2,'FEEDBACK_FIRST_ROUND',active.feedback);
@@ -111,12 +111,12 @@ try{
 }catch(error){failures.push({type:'ACTIVE_LOOP_EXCEPTION',message:String(error?.message||error)});}
 
 const result={
-  schema:'nostromo-gut-metabolism-test/v0.2.16',completedAt:new Date().toISOString(),status:failures.length===0?'PASS':'FAIL',
+  schema:'nostromo-gut-metabolism-test/v0.2.17',completedAt:new Date().toISOString(),status:failures.length===0?'PASS':'FAIL',
   gut:{version:gut.version,mode:gut.mode,typeCounts:gut.typeCounts,routeCounts:Object.fromEntries(Object.entries(gut.routes).map(([k,v])=>[k,v.count])),boundary:gut.boundary},
   antiEcho:{nested:nestedGut.antiEcho,taggedTail:taggedTailGut.antiEcho,shortAdjacent:shortGut.antiEcho,nearDuplicate:nearGut.antiEcho,sharedBodySummary:sharedBodyGut.antiEcho,nonAdjacentCarry:nonAdjacentGut.antiEcho,shortTokenCarry:shortTokenGut.antiEcho,inherited:inheritedGut.antiEcho,partialInherited:partialGut.antiEcho},
   feedback:active?{status:active.status,completedRounds:active.completedRounds,feedback:active.feedback,lastCarry:active.trace?.at(-1)?.carryOut||null,roundAntiEcho:active.trace?.map(x=>x.gut?.antiEcho),boundary:active.boundary}:null,
   failures,
-  boundary:'PASS proves deterministic heuristic routing, provenance retention, quarantine/hold behavior, conservative exact inherited-substrate removal, exact tagged-payload de-echoing, exact repeated tagged-tail suppression while retaining distinct heads, pre/post short exact adjacent intra-atom echo suppression, shared-body summary diversity, exact non-adjacent full-width-colon carry-clause compaction, consecutive exact 1–4 character carry-token run collapse without mutating nutrient atoms or provenance, near-duplicate preservation, structured-snippet protection, and a 3-round cross-organ connector-feedback regression. It does not prove semantic novelty, semantic correctness, or source truth.'
+  boundary:'PASS proves deterministic heuristic routing, provenance retention, quarantine/hold behavior, conservative exact inherited-substrate removal, exact tagged-payload de-echoing, exact repeated tagged-tail suppression while retaining distinct heads, pre/post short exact adjacent intra-atom echo suppression, shared-body summary diversity, exact non-adjacent full-width-colon carry-clause compaction, consecutive exact 1–4 character carry-token run collapse without mutating nutrient atoms or provenance, near-duplicate preservation, structured-snippet protection, and a 3-round cross-organ connector-feedback regression. Volatile ref/clause lineage normalization is tested separately. It does not prove semantic novelty, semantic correctness, or source truth.'
 };
 await fs.writeFile(path.join(root,'nostromo/integration/gut-metabolism-last-result.json'),JSON.stringify(result,null,2)+'\n','utf8');
 console.log(JSON.stringify(result,null,2));
