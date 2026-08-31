@@ -1,6 +1,6 @@
 {
-  "schema": "nostromo-organ-registry/v1.17",
-  "updatedAt": "2026-08-31T15:22:00+08:00",
+  "schema": "nostromo-organ-registry/v1.18",
+  "updatedAt": "2026-08-31T17:08:00+08:00",
   "truthRule": "DISPLAYED STATE MUST FOLLOW EVIDENCE",
   "evidence": "ci-last-result.json plus formal-round-last-result.json plus connector-last-result.json plus muther-falsify-last-result.json plus droplet-claim-verify-last-result.json plus gut-metabolism-last-result.json plus gut-lineage-last-result.json plus vajra-dynamic-last-result.json",
   "latestFormalRound": "greenhouse/r113-nostromo-formal-round.json",
@@ -29,20 +29,19 @@
     "boundary": "Isolated counterfactual executor only. It deliberately includes parent round ordinal in participant selection and has been CI-verified against R111 and R112. It does not write or advance formal greenhouse history and is engineering evidence that NOSTROMO can execute and audit a parent-sensitive transition, not evidence that the real SHROOMING population is causally path-dependent."
   },
   "latestThickening": {
-    "organ": "VAJRA",
-    "version": "0.2.9",
-    "status": "VERIFIED_FORMAT_MUTATION_REPLAY_GUARD",
-    "test": "vajra-dynamic-last-result.json",
+    "organ": "MU/TH/UR",
+    "version": "repo-executors v1.1",
+    "status": "VERIFIED_DIVERSITY_PRESERVING_REPO_MINE",
+    "test": "muther-falsify-last-result.json",
     "capabilities": [
-      "proposition-aware dynamic lens selection",
-      "compound proposition type retention",
-      "bounded syntactic causal clause decomposition",
-      "clause-scoped handoff contracts with targetRef and clauseRef",
-      "structural receipt closure requiring execution evidence, provenance, material and relation-to-target",
-      "cross-clause and cross-application evidence replay rejection",
-      "canonicalized replay identity across Unicode width, letter case, whitespace, punctuation and symbol mutations"
+      "repository-wide candidate collection before bounded selection",
+      "auditable query occurrence counts per candidate",
+      "superficial duplicate suppression with stable content fingerprints",
+      "path-based source-family classification",
+      "round-robin source-family selection to reduce first-file and copy bias",
+      "format/timestamp/long-identifier mutation normalization for duplicate identity"
     ],
-    "boundary": "VAJRA v0.2.9 was promoted only after its dedicated adversarial test and the full NOSTROMO GitHub Actions run succeeded. v0.2.8 could assign different replay keys to the same provenance-bearing payload after superficial formatting mutations. v0.2.9 canonicalizes Unicode width, case, whitespace, punctuation and symbols before replay fingerprinting, preventing that formatting-only replay path. This is deterministic exact normalization, not semantic similarity detection, semantic parsing, truth verification, or proof that the original proposition is settled."
+    "boundary": "MU/TH/UR repository mining was promoted only after its mining-depth regression and full NOSTROMO GitHub Actions run succeeded. The selector reduces exact/superficial-copy and first-file bias while preserving path, snippet, source-family, occurrence count and content fingerprint provenance. Source families are path-derived and duplicate identity is bounded structural normalization; this is not semantic clustering, source-quality judgment, novelty proof, whole-Drive mining, or evidence that selected material is true or important."
   },
   "organs": {
     "shrooming": {
@@ -59,17 +58,17 @@
       "boundary": "Published-state inspection, sandbox reading, greenhouse question probing, and explicit formal greenhouse round advancement are executable. RUN_READING_ROUND remains the verified parent-invariant v0.9 formal baseline and is chainable from a declared formal parent. The verified R111→R112→R113 chain preserves provenance and legacy R111 reproducibility. An isolated parent-sensitive counterfactual executor is also verified; it deliberately makes participant selection depend on parent round ordinal but never mutates formal greenhouse history. Neither branch represents ten independently persistent live LLM processes, and the experimental branch must not be presented as evidence of real path dependence."
     },
     "muther": {
-      "mode": "PARTIAL_EXEC",
+      "mode": "PARTIAL_EXEC_THICKENED",
       "source": "../../mother-latest.json",
       "actions": {
         "READ_STATE": "EXEC_STATE",
         "AUDIT_STATE": "EXEC_STATE",
-        "MINE_REPO": "CLOSED_LOOP_EXEC",
+        "MINE_REPO": "VERIFIED_DIVERSITY_PRESERVING_REPO_MINE",
         "MINE_DRIVE_QUERY": "CONNECTOR_EXEC",
         "MINE_INTERNAL": "AUTHORIZED_CONNECTOR_EXEC",
         "FALSIFY": "REPO_COUNTEREVIDENCE_EXEC"
       },
-      "boundary": "Published mining-state audit and repository corpus mining are closed-loop executable. Query-scoped Google Drive mining is executed by the authorized external connector runtime and handed back as redacted evidence. MINE_INTERNAL is executable only over an explicitly authorized connector source with an explicit query and bounded result count; the current verified source is Google Drive. This does not grant exhaustive private-environment crawling, cross-source enumeration, or access to unconnected services. FALSIFY executes a repository-scoped counterevidence probe; absence is never upgraded to truth."
+      "boundary": "Published mining-state audit and repository corpus mining are executable. MINE_REPO now collects repository candidates before bounded selection, fingerprints superficially normalized snippets, suppresses duplicate copies, records occurrence/provenance metadata and round-robins across path-derived source families to reduce first-file bias. This is deterministic structural diversity handling, not semantic clustering, source-quality scoring, novelty proof or truth judgment. Query-scoped Google Drive mining is executed by the authorized external connector runtime and handed back as redacted evidence. MINE_INTERNAL remains limited to explicit authorized query-scoped connector sources; it does not grant exhaustive private-environment crawling or cross-source enumeration. FALSIFY remains repository-scoped and absence is never upgraded to truth."
     },
     "droplet": {
       "mode": "PARTIAL_EXEC",
