@@ -1,4 +1,4 @@
-// NOSTROMO active executor loop v1.1.5
+// NOSTROMO active executor loop v1.1.6
 // Server/CI-side integration path for repository-native partial executors plus validated external connector evidence.
 import crypto from 'node:crypto';
 import {shroomGreenhousePoseQuestion,mutherMineRepo,dropletVerifyUrl} from './repo-executors.mjs';
@@ -24,14 +24,30 @@ function normalizeLineage(text){
   return String(text).toLowerCase().replace(/\b(ref|clause)\s*[:：=]\s*[0-9a-f]{6,64}\b/gi,'$1:<id>').replace(/\b[0-9a-f]{12,64}\b/gi,'<hash>').replace(/\s+/g,' ').trim();
 }
 function carryStem(segment){return normalizeLineage(segment).slice(0,180);}
+function clauseNgrams(text,n=4){
+  const s=normalizeLineage(text).replace(/[\s\p{P}\p{S}]+/gu,'');
+  const out=new Set();
+  if(s.length<n)return out;
+  for(let i=0;i<=s.length-n;i++)out.add(s.slice(i,i+n));
+  return out;
+}
+function clauseSimilarity(a,b){
+  const aa=normalizeLineage(a),bb=normalizeLineage(b);
+  if(Math.min(aa.length,bb.length)<32)return 0;
+  if(aa.includes(bb)||bb.includes(aa))return Math.min(aa.length,bb.length)/Math.max(aa.length,bb.length);
+  const A=clauseNgrams(aa),B=clauseNgrams(bb);
+  if(!A.size||!B.size)return 0;
+  let intersection=0;for(const g of A)if(B.has(g))intersection++;
+  return intersection/Math.min(A.size,B.size);
+}
 function compactIntraSegmentEcho(segment){
   const raw=String(segment||'').trim();
   const tagMatch=raw.match(/^(\[[^\]]+\])\s*/);
   const tag=tagMatch?.[1]||'';
   const body=tagMatch?raw.slice(tagMatch[0].length):raw;
   const clauses=body.split(/\s*[：:]\s*/).map(x=>x.trim()).filter(Boolean);
-  if(clauses.length<2)return {text:raw,suppressed:0,shortSuppressed:0,nestedSuppressed:0};
-  const kept=[];const norms=[];let suppressed=0,shortSuppressed=0,nestedSuppressed=0;
+  if(clauses.length<2)return {text:raw,suppressed:0,shortSuppressed:0,nestedSuppressed:0,nearDuplicateSuppressed:0};
+  const kept=[];const norms=[];let suppressed=0,shortSuppressed=0,nestedSuppressed=0,nearDuplicateSuppressed=0;
   for(const clause of clauses){
     const norm=normalizeLineage(clause);
     if(!norm)continue;
@@ -45,13 +61,18 @@ function compactIntraSegmentEcho(segment){
         if(norm.includes(prior)){
           kept[i]=clause;norms[i]=norm;suppressed++;nestedSuppressed++;swallowed=true;break;
         }
+        const sim=clauseSimilarity(prior,norm);
+        if(sim>=0.78){
+          if(norm.length>prior.length){kept[i]=clause;norms[i]=norm;}
+          suppressed++;nearDuplicateSuppressed++;swallowed=true;break;
+        }
       }
       if(swallowed)continue;
     }
     kept.push(clause);norms.push(norm);
   }
   const clean=[tag,kept.join('：')].filter(Boolean).join(' ');
-  return {text:clean||raw,suppressed,shortSuppressed,nestedSuppressed};
+  return {text:clean||raw,suppressed,shortSuppressed,nestedSuppressed,nearDuplicateSuppressed};
 }
 function stripRouteTag(segment){return String(segment||'').replace(/^\[[^\]]+\]\s*/,'').trim();}
 function charNgrams(text,n=5){
@@ -74,9 +95,9 @@ function nearEchoSimilarity(a,b){
 function routeOf(segment){return (String(segment||'').match(/^\[([^\]]+)\]/)||[])[1]||'UNTYPED';}
 export function compactMetabolicCarry(summary){
   const segments=String(summary||'').split(/\s*·\s*/).map(x=>x.trim()).filter(Boolean);
-  const seen=new Set(),routeCounts=new Map(),kept=[];let echoSuppressed=0,routeCapped=0,intraSegmentSuppressed=0,shortTokenSuppressed=0,nestedClauseSuppressed=0,crossSegmentNearEchoSuppressed=0;
+  const seen=new Set(),routeCounts=new Map(),kept=[];let echoSuppressed=0,routeCapped=0,intraSegmentSuppressed=0,shortTokenSuppressed=0,nestedClauseSuppressed=0,nearDuplicateClauseSuppressed=0,crossSegmentNearEchoSuppressed=0;
   for(const rawSegment of segments){
-    const intra=compactIntraSegmentEcho(rawSegment);intraSegmentSuppressed+=intra.suppressed;shortTokenSuppressed+=intra.shortSuppressed;nestedClauseSuppressed+=intra.nestedSuppressed;
+    const intra=compactIntraSegmentEcho(rawSegment);intraSegmentSuppressed+=intra.suppressed;shortTokenSuppressed+=intra.shortSuppressed;nestedClauseSuppressed+=intra.nestedSuppressed;nearDuplicateClauseSuppressed+=intra.nearDuplicateSuppressed||0;
     const segment=intra.text,stem=carryStem(segment),route=routeOf(segment);
     if(stem.length>=32&&seen.has(stem)){echoSuppressed++;continue;}
     let nearEcho=false;
@@ -92,7 +113,7 @@ export function compactMetabolicCarry(summary){
     if(kept.join(' · ').length>=900)break;
   }
   const text=kept.join(' · ').slice(0,900);
-  return {text,echoSuppressed,routeCapped,intraSegmentSuppressed,shortTokenSuppressed,nestedClauseSuppressed,crossSegmentNearEchoSuppressed,inputSegments:segments.length,outputSegments:kept.length,fingerprint:fp(text),boundary:'Carry-only containment. Exact/lineage-equivalent colon clauses, nested long clauses, and same-route cross-segment near echoes (5-gram Jaccard >= 0.82 after ASCII/fullwidth volatile-lineage normalization, minimum 80 chars) are collapsed before recirculation; original GUT nutrients, routes and provenance are not mutated.'};
+  return {text,echoSuppressed,routeCapped,intraSegmentSuppressed,shortTokenSuppressed,nestedClauseSuppressed,nearDuplicateClauseSuppressed,crossSegmentNearEchoSuppressed,inputSegments:segments.length,outputSegments:kept.length,fingerprint:fp(text),boundary:'Carry-only containment. Exact/lineage-equivalent colon clauses, nested long clauses, recursively wrapped near-duplicate clauses (4-gram containment similarity >= 0.78, minimum 32 chars), and same-route cross-segment near echoes are collapsed before recirculation; original GUT nutrients, routes and provenance are not mutated.'};
 }
 
 export async function runActiveExecutorLoop({rounds=10,seed='NOSTROMO active integration',mineQuery='NOSTROMO',verifyUrl='https://github.com/jcchang13-a11y/visual-mining-lab'}={}){
@@ -125,5 +146,5 @@ export async function runActiveExecutorLoop({rounds=10,seed='NOSTROMO active int
     trace.push(item);carry=item.carryOut||carry;if(status!=='PASS') break;
   }
   const acceptedActions=['muther','mutherInternal','droplet','dropletVerify'].filter(k=>connectorEvidence.actions?.[k]?.status==='EXECUTED').length;
-  return {schema:'nostromo-active-executor-loop/v1.1.5',status:trace.length===total&&trace.every(x=>x.status==='PASS')?'PASS':'FAIL',requestedRounds:total,completedRounds:trace.length,feedback:{fingerprint:feedback.fingerprint,appliedRounds:trace.filter(x=>x.feedback.applied).length,firstAppliedRound:trace.find(x=>x.feedback.applied)?.round||null,privacy:feedback.privacy},connectorHandoff:{status:connectorEvidence.status,completedAt:connectorEvidence.completedAt,actionsAccepted:acceptedActions,failures:connectorEvidence.failures},trace,completedAt:new Date().toISOString(),boundary:'Certifies the closed-loop executor path plus carry-layer metabolic containment and a deterministic SHROOMING feedback-conditioned lens selector. From round 2 onward, redacted connector feedback can change SHROOMING inspection priority without claiming semantic learning or independent persistent agents. Same-route near-duplicate carry segments are suppressed only at recirculation rendering after ASCII/fullwidth volatile-lineage normalization; GUT nutrient atoms, routes and provenance remain intact. GitHub Actions does not itself search private Drive or the web.'};
+  return {schema:'nostromo-active-executor-loop/v1.1.6',status:trace.length===total&&trace.every(x=>x.status==='PASS')?'PASS':'FAIL',requestedRounds:total,completedRounds:trace.length,feedback:{fingerprint:feedback.fingerprint,appliedRounds:trace.filter(x=>x.feedback.applied).length,firstAppliedRound:trace.find(x=>x.feedback.applied)?.round||null,privacy:feedback.privacy},connectorHandoff:{status:connectorEvidence.status,completedAt:connectorEvidence.completedAt,actionsAccepted:acceptedActions,failures:connectorEvidence.failures},trace,completedAt:new Date().toISOString(),boundary:'Certifies the closed-loop executor path plus carry-layer metabolic containment and a deterministic SHROOMING feedback-conditioned lens selector. From round 2 onward, redacted connector feedback can change SHROOMING inspection priority without claiming semantic learning or independent persistent agents. Recursive wrapper growth is contained only at carry rendering; GUT nutrient atoms, routes and provenance remain intact. GitHub Actions does not itself search private Drive or the web.'};
 }
