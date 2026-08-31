@@ -1,6 +1,6 @@
 {
-  "schema": "nostromo-gut-lineage-test/v0.2.19-adversarial-lineage-signature",
-  "completedAt": "2026-08-31T21:03:57.764Z",
+  "schema": "nostromo-gut-lineage-test/v0.2.19-recursive-wrapper-containment",
+  "completedAt": "2026-08-31T21:07:12.971Z",
   "status": "PASS",
   "sameLineage": {
     "summaryItemCount": 1,
@@ -106,8 +106,22 @@
     "inputSegments": 3,
     "outputSegments": 2,
     "fingerprint": "393ae7383acd9cef",
-    "boundary": "Carry-only containment. Exact/lineage-equivalent colon clauses, nested long clauses, recursively wrapped near-duplicate clauses (4-gram containment similarity >= 0.78, minimum 32 chars), and same-route cross-segment near echoes are collapsed before recirculation; original GUT nutrients, routes and provenance are not mutated."
+    "boundary": "Carry-only containment. Exact/lineage-equivalent colon clauses, nested long clauses, recursively wrapped near-duplicate clauses, and same-route cross-segment near echoes are collapsed before recirculation. Cross-segment comparison uses a containment coefficient over normalized 5-grams so wrapper growth cannot evade the audit merely by adding prefixes; original GUT nutrients, routes and provenance are not mutated."
+  },
+  "recursiveWrapperCarry": {
+    "text": "[CONTRADICTION->VAJRA] 以 counterexample 位置重讀：CONTRADICTION_CONDITIONED：主動尋找最小反例與破壞條件：針對本輪 GENERAL 命題（ref：f792180f; clause：9c5ac71），重新檢查來源獨立性、替代因果與邊界條件。這段核心內容刻意保持一致，只讓外層包裝逐輪增加。 · [CONTRADICTION->VAJRA] 新證據顯示時間順序相反，而且來自另一個獨立來源，因此必須保留這條不同的反證材料，不能因為同一路由而消失。",
+    "echoSuppressed": 0,
+    "routeCapped": 0,
+    "intraSegmentSuppressed": 1,
+    "shortTokenSuppressed": 0,
+    "nestedClauseSuppressed": 0,
+    "nearDuplicateClauseSuppressed": 0,
+    "crossSegmentNearEchoSuppressed": 2,
+    "inputSegments": 4,
+    "outputSegments": 2,
+    "fingerprint": "6a76787c3aeac8db",
+    "boundary": "Carry-only containment. Exact/lineage-equivalent colon clauses, nested long clauses, recursively wrapped near-duplicate clauses, and same-route cross-segment near echoes are collapsed before recirculation. Cross-segment comparison uses a containment coefficient over normalized 5-grams so wrapper growth cannot evade the audit merely by adding prefixes; original GUT nutrients, routes and provenance are not mutated."
   },
   "failures": [],
-  "boundary": "This adversarial test preserves source nutrients and provenance while checking cross-atom, intra-atom, repeated machine-lineage signature, and cross-segment volatile-lineage carry echo. PASS requires repeated standalone lineage signatures to collapse only at carry rendering, same-route near-duplicate recirculation segments to collapse, and substantively distinct prose to survive."
+  "boundary": "This adversarial test preserves source nutrients and provenance while checking cross-atom, intra-atom, repeated machine-lineage signature, cross-segment volatile-lineage carry echo, and recursive wrapper growth. PASS requires wrapper-only recirculation to collapse at carry rendering while substantively distinct evidence survives."
 }
