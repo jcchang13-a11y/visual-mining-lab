@@ -61,8 +61,20 @@ check(nearDuplicateCarry.crossSegmentNearEchoSuppressed>=1,'CROSS_SEGMENT_NEAR_E
 check(nearDuplicateCarry.outputSegments===2,'CROSS_SEGMENT_OUTPUT_COUNT_UNEXPECTED',nearDuplicateCarry);
 check(nearDuplicateCarry.text.includes('另一份證據直接否定時間順序'),'CROSS_SEGMENT_DISTINCT_CONTENT_LOST',nearDuplicateCarry.text);
 
+const recursiveCore='主動尋找最小反例與破壞條件：針對本輪 GENERAL 命題（ref:f792180f; clause:9c5ac71），重新檢查來源獨立性、替代因果與邊界條件。這段核心內容刻意保持一致，只讓外層包裝逐輪增加。';
+const recursiveWrapperCarry=compactMetabolicCarry([
+  `[CONTRADICTION->VAJRA] 以 counterexample 位置重讀：CONTRADICTION_CONDITIONED：${recursiveCore}`,
+  `[CONTRADICTION->VAJRA] CONTRADICTION_CONDITIONED：以 counterexample 位置重讀：${recursiveCore}`,
+  `[CONTRADICTION->VAJRA] CONTRADICTION_CONDITIONED：CONTRADICTION_CONDITIONED：以 counterexample 位置重讀：${recursiveCore}`,
+  '[CONTRADICTION->VAJRA] 新證據顯示時間順序相反，而且來自另一個獨立來源，因此必須保留這條不同的反證材料，不能因為同一路由而消失。'
+].join(' · '));
+check(recursiveWrapperCarry.crossSegmentNearEchoSuppressed>=2,'RECURSIVE_WRAPPER_ECHO_NOT_SUPPRESSED',recursiveWrapperCarry);
+check(recursiveWrapperCarry.outputSegments===2,'RECURSIVE_WRAPPER_OUTPUT_COUNT_UNEXPECTED',recursiveWrapperCarry);
+check((recursiveWrapperCarry.text.match(/針對本輪 GENERAL 命題/g)||[]).length===1,'RECURSIVE_WRAPPER_CORE_REPEATED',recursiveWrapperCarry.text);
+check(recursiveWrapperCarry.text.includes('新證據顯示時間順序相反'),'RECURSIVE_WRAPPER_DISTINCT_CONTENT_LOST',recursiveWrapperCarry.text);
+
 const result={
-  schema:'nostromo-gut-lineage-test/v0.2.19-adversarial-lineage-signature',
+  schema:'nostromo-gut-lineage-test/v0.2.19-recursive-wrapper-containment',
   completedAt:new Date().toISOString(),
   status:failures.length===0?'PASS':'FAIL',
   sameLineage:{summaryItemCount:sameLineage.summaryItemCount,antiEcho:sameLineage.antiEcho,summary:sameLineage.summary},
@@ -70,8 +82,9 @@ const result={
   intraAtom:{antiEcho:intraAtom.antiEcho,summary:intraAtom.summary,sourceNutrient:intraAtom.nutrients[0]?.text||null},
   lineageSignature:{antiEcho:signatureEcho.antiEcho,summary:signatureEcho.summary,sourceNutrient:signatureEcho.nutrients[0]?.text||null},
   crossSegmentNearEcho:nearDuplicateCarry,
+  recursiveWrapperCarry,
   failures,
-  boundary:'This adversarial test preserves source nutrients and provenance while checking cross-atom, intra-atom, repeated machine-lineage signature, and cross-segment volatile-lineage carry echo. PASS requires repeated standalone lineage signatures to collapse only at carry rendering, same-route near-duplicate recirculation segments to collapse, and substantively distinct prose to survive.'
+  boundary:'This adversarial test preserves source nutrients and provenance while checking cross-atom, intra-atom, repeated machine-lineage signature, cross-segment volatile-lineage carry echo, and recursive wrapper growth. PASS requires wrapper-only recirculation to collapse at carry rendering while substantively distinct evidence survives.'
 };
 await fs.writeFile(path.join(root,'nostromo/integration/gut-lineage-last-result.json'),JSON.stringify(result,null,2)+'\n','utf8');
 console.log(JSON.stringify(result,null,2));
