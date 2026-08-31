@@ -1,11 +1,11 @@
 {
   "schema": "nostromo-gut-lineage-test/v0.2.17-adversarial-intra-atom",
-  "completedAt": "2026-08-31T06:12:16.746Z",
+  "completedAt": "2026-08-31T06:14:17.242Z",
   "status": "FAIL",
   "sameLineage": {
     "summaryItemCount": 1,
     "antiEcho": {
-      "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PRE_POST_ADJACENT_SEGMENT_COLLAPSE_12+PREFIX_DIVERSITY_96+SHARED_BODY_SUMMARY_DIVERSITY_80_192+VOLATILE_REF_LINEAGE_NEUTRALIZATION+TAGGED_PAYLOAD_DEDUP+EXACT_TAGGED_TAIL_DEDUP_80+ROUTE_METADATA_STRIP+DELIMITED_LONG_SEGMENT_DEDUP+SUMMARY_EXACT_NONADJACENT_FULLWIDTH_COLON_CLAUSE_DEDUP_12+SUMMARY_CONSECUTIVE_SHORT_TOKEN_COLLAPSE_4",
+      "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PRE_POST_ADJACENT_SEGMENT_COLLAPSE_12+PREFIX_DIVERSITY_96+SHARED_BODY_SUMMARY_DIVERSITY_80_192+VOLATILE_REF_LINEAGE_NEUTRALIZATION+TAGGED_PAYLOAD_DEDUP+EXACT_TAGGED_TAIL_DEDUP_80+ROUTE_METADATA_STRIP+DELIMITED_LONG_SEGMENT_DEDUP+SUMMARY_EXACT_NONADJACENT_FULLWIDTH_COLON_CLAUSE_DEDUP_12+SUMMARY_VOLATILE_LINEAGE_FULLWIDTH_COLON_CLAUSE_DEDUP+SUMMARY_CONSECUTIVE_SHORT_TOKEN_COLLAPSE_4",
       "candidateCount": 2,
       "selectedCount": 1,
       "suppressedCount": 1,
@@ -19,6 +19,7 @@
       "segmentEchoSuppressedCount": 0,
       "delimitedEchoSuppressedCount": 0,
       "carryClauseSuppressedCount": 0,
+      "volatileLineageClauseSuppressedCount": 0,
       "shortCarryTokenSuppressedCount": 0
     },
     "summary": "[CONTRADICTION->VAJRA] 以 structure 位置重讀：主動尋找最小反例與破壞條件：針對本輪 UNIVERSAL+EMPIRICAL 命題（ref:abcdef12; clause:12345678），哪個前提最可能先失效？這段故意拉長，模擬跨輪 carry 只有 volatile provenance token 改變、其餘代謝內容完全相同的情況。"
@@ -26,7 +27,7 @@
   "substantiveDifference": {
     "summaryItemCount": 2,
     "antiEcho": {
-      "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PRE_POST_ADJACENT_SEGMENT_COLLAPSE_12+PREFIX_DIVERSITY_96+SHARED_BODY_SUMMARY_DIVERSITY_80_192+VOLATILE_REF_LINEAGE_NEUTRALIZATION+TAGGED_PAYLOAD_DEDUP+EXACT_TAGGED_TAIL_DEDUP_80+ROUTE_METADATA_STRIP+DELIMITED_LONG_SEGMENT_DEDUP+SUMMARY_EXACT_NONADJACENT_FULLWIDTH_COLON_CLAUSE_DEDUP_12+SUMMARY_CONSECUTIVE_SHORT_TOKEN_COLLAPSE_4",
+      "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PRE_POST_ADJACENT_SEGMENT_COLLAPSE_12+PREFIX_DIVERSITY_96+SHARED_BODY_SUMMARY_DIVERSITY_80_192+VOLATILE_REF_LINEAGE_NEUTRALIZATION+TAGGED_PAYLOAD_DEDUP+EXACT_TAGGED_TAIL_DEDUP_80+ROUTE_METADATA_STRIP+DELIMITED_LONG_SEGMENT_DEDUP+SUMMARY_EXACT_NONADJACENT_FULLWIDTH_COLON_CLAUSE_DEDUP_12+SUMMARY_VOLATILE_LINEAGE_FULLWIDTH_COLON_CLAUSE_DEDUP+SUMMARY_CONSECUTIVE_SHORT_TOKEN_COLLAPSE_4",
       "candidateCount": 2,
       "selectedCount": 2,
       "suppressedCount": 0,
@@ -40,13 +41,14 @@
       "segmentEchoSuppressedCount": 0,
       "delimitedEchoSuppressedCount": 0,
       "carryClauseSuppressedCount": 0,
+      "volatileLineageClauseSuppressedCount": 0,
       "shortCarryTokenSuppressedCount": 0
     },
     "summary": "[CONTRADICTION->VAJRA] 以 structure 位置重讀：主動尋找最小反例與破壞條件：針對本輪 UNIVERSAL+EMPIRICAL 命題（ref:aaaaaa11; clause:bbbbbb22），哪個前提最可能先失效？這段故意拉長，模擬跨輪 carry 只有 volatile provenance token 改變、其餘代謝內容完全相同的情況。 · [CONTRADICTION->VAJRA] 以 structure 位置重讀：主動尋找最小反例與破壞條件：針對本輪 UNIVERSAL+EMPIRICAL 命題（ref:cccccc33; clause:dddddd44），哪一份證據最需要重新驗證？這段故意拉長，模擬跨輪 carry 只有 volatile provenance token 改變、其餘代謝內容完全相同的情況。"
   },
   "intraAtom": {
     "antiEcho": {
-      "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PRE_POST_ADJACENT_SEGMENT_COLLAPSE_12+PREFIX_DIVERSITY_96+SHARED_BODY_SUMMARY_DIVERSITY_80_192+VOLATILE_REF_LINEAGE_NEUTRALIZATION+TAGGED_PAYLOAD_DEDUP+EXACT_TAGGED_TAIL_DEDUP_80+ROUTE_METADATA_STRIP+DELIMITED_LONG_SEGMENT_DEDUP+SUMMARY_EXACT_NONADJACENT_FULLWIDTH_COLON_CLAUSE_DEDUP_12+SUMMARY_CONSECUTIVE_SHORT_TOKEN_COLLAPSE_4",
+      "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PRE_POST_ADJACENT_SEGMENT_COLLAPSE_12+PREFIX_DIVERSITY_96+SHARED_BODY_SUMMARY_DIVERSITY_80_192+VOLATILE_REF_LINEAGE_NEUTRALIZATION+TAGGED_PAYLOAD_DEDUP+EXACT_TAGGED_TAIL_DEDUP_80+ROUTE_METADATA_STRIP+DELIMITED_LONG_SEGMENT_DEDUP+SUMMARY_EXACT_NONADJACENT_FULLWIDTH_COLON_CLAUSE_DEDUP_12+SUMMARY_VOLATILE_LINEAGE_FULLWIDTH_COLON_CLAUSE_DEDUP+SUMMARY_CONSECUTIVE_SHORT_TOKEN_COLLAPSE_4",
       "candidateCount": 1,
       "selectedCount": 1,
       "suppressedCount": 0,
@@ -59,16 +61,17 @@
       "routeTagsStripped": 0,
       "segmentEchoSuppressedCount": 0,
       "delimitedEchoSuppressedCount": 0,
-      "carryClauseSuppressedCount": 4,
+      "carryClauseSuppressedCount": 5,
+      "volatileLineageClauseSuppressedCount": 1,
       "shortCarryTokenSuppressedCount": 0
     },
-    "summary": "[CONTRADICTION->VAJRA] 以 structure 位置重讀：主動尋找最小反例與破壞條件：針對本輪 UNIVERSAL+EMPIRICAL 命題（ref:111111aa; clause:222222bb），哪個前提最可能先失效？這段故意拉長，模擬跨輪 carry 只有 volatile provenance token 改變、其餘代謝內容完全相同的情況。：中間保留不同觀察：針對本輪 UNIVERSAL+EMPIRICAL 命題（ref:333333cc; clause:444444dd），哪個前提最可能先失效？這段故意拉長，模擬跨輪 carry 只有 volatile provenance token 改變、其餘代謝內容完全相同的情況。：針對本輪 UNIVERSAL+EMPIRICAL 命題（ref:555555ee; clause:666666ff），哪一份證據最需要重新驗證？這段故意拉長，模擬跨輪 carry 只有 volatile provenance token 改變、其餘代謝內容完全相同的情況。",
+    "summary": "[CONTRADICTION->VAJRA] 以 structure 位置重讀：主動尋找最小反例與破壞條件：針對本輪 UNIVERSAL+EMPIRICAL 命題（ref:111111aa; clause:222222bb），哪個前提最可能先失效？這段故意拉長，模擬跨輪 carry 只有 volatile provenance token 改變、其餘代謝內容完全相同的情況。：中間保留不同觀察：針對本輪 UNIVERSAL+EMPIRICAL 命題（ref:555555ee; clause:666666ff），哪一份證據最需要重新驗證？這段故意拉長，模擬跨輪 carry 只有 volatile provenance token 改變、其餘代謝內容完全相同的情況。",
     "sourceNutrient": "以 structure 位置重讀：主動尋找最小反例與破壞條件：針對本輪 UNIVERSAL+EMPIRICAL 命題（ref:111111aa; clause:222222bb），哪個前提最可能先失效？這段故意拉長，模擬跨輪 carry 只有 volatile provenance token 改變、其餘代謝內容完全相同的情況。：中間保留不同觀察：以 structure 位置重讀：主動尋找最小反例與破壞條件：針對本輪 UNIVERSAL+EMPIRICAL 命題（ref:333333cc; clause:444444dd），哪個前提最可能先失效？這段故意拉長，模擬跨輪 carry 只有 volatile provenance token 改變、其餘代謝內容完全相同的情況。：以 structure 位置重讀：主動尋找最小反例與破壞條件：針對本輪 UNIVERSAL+EMPIRICAL 命題（ref:555555ee; clause:666666ff），哪一份證據最需要重新驗證？這段故意拉長，模擬跨輪 carry 只有 volatile provenance token 改變、其餘代謝內容完全相同的情況。"
   },
   "failures": [
     {
-      "type": "INTRA_ATOM_VOLATILE_LINEAGE_ECHO_SURVIVED",
-      "detail": "[CONTRADICTION->VAJRA] 以 structure 位置重讀：主動尋找最小反例與破壞條件：針對本輪 UNIVERSAL+EMPIRICAL 命題（ref:111111aa; clause:222222bb），哪個前提最可能先失效？這段故意拉長，模擬跨輪 carry 只有 volatile provenance token 改變、其餘代謝內容完全相同的情況。：中間保留不同觀察：針對本輪 UNIVERSAL+EMPIRICAL 命題（ref:333333cc; clause:444444dd），哪個前提最可能先失效？這段故意拉長，模擬跨輪 carry 只有 volatile provenance token 改變、其餘代謝內容完全相同的情況。：針對本輪 UNIVERSAL+EMPIRICAL 命題（ref:555555ee; clause:666666ff），哪一份證據最需要重新驗證？這段故意拉長，模擬跨輪 carry 只有 volatile provenance token 改變、其餘代謝內容完全相同的情況。"
+      "type": "GUT_VERSION",
+      "detail": "0.2.18"
     }
   ],
   "boundary": "This adversarial test preserves source nutrients and provenance while checking both cross-atom and intra-atom volatile-lineage carry echo. A FAIL on INTRA_ATOM_VOLATILE_LINEAGE_ECHO_SURVIVED is evidence of a rendering-layer metabolic echo defect, not a source-data corruption claim."
