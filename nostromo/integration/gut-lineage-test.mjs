@@ -73,8 +73,21 @@ check(recursiveWrapperCarry.outputSegments===2,'RECURSIVE_WRAPPER_OUTPUT_COUNT_U
 check((recursiveWrapperCarry.text.match(/針對本輪 GENERAL 命題/g)||[]).length===1,'RECURSIVE_WRAPPER_CORE_REPEATED',recursiveWrapperCarry.text);
 check(recursiveWrapperCarry.text.includes('新證據顯示時間順序相反'),'RECURSIVE_WRAPPER_DISTINCT_CONTENT_LOST',recursiveWrapperCarry.text);
 
+const lineageOnlyCarry=compactMetabolicCarry([
+  '[CONTRADICTION->VAJRA] clause:9c5ac71',
+  'clause:9c5ac71',
+  'clause:9c5ac71',
+  'ref:f792180f',
+  '[EVIDENCE_OR_PROVENANCE->MUTHER] ref:f792180f',
+  '[QUESTION->SHROOMING] 這是一條實質問題，必須保留而不能被 provenance token 去重邏輯吞掉。'
+].join(' · '));
+check(lineageOnlyCarry.lineageOnlySuppressed>=3,'LINEAGE_ONLY_TOKEN_ECHO_NOT_SUPPRESSED',lineageOnlyCarry);
+check((lineageOnlyCarry.text.match(/clause[:：]9c5ac71/g)||[]).length===1,'CLAUSE_TOKEN_REPEATED',lineageOnlyCarry.text);
+check((lineageOnlyCarry.text.match(/ref[:：]f792180f/g)||[]).length===1,'REF_TOKEN_REPEATED',lineageOnlyCarry.text);
+check(lineageOnlyCarry.text.includes('這是一條實質問題'),'LINEAGE_ONLY_DISTINCT_CONTENT_LOST',lineageOnlyCarry.text);
+
 const result={
-  schema:'nostromo-gut-lineage-test/v0.2.19-recursive-wrapper-containment',
+  schema:'nostromo-gut-lineage-test/v0.2.19-lineage-only-carry-containment',
   completedAt:new Date().toISOString(),
   status:failures.length===0?'PASS':'FAIL',
   sameLineage:{summaryItemCount:sameLineage.summaryItemCount,antiEcho:sameLineage.antiEcho,summary:sameLineage.summary},
@@ -83,8 +96,9 @@ const result={
   lineageSignature:{antiEcho:signatureEcho.antiEcho,summary:signatureEcho.summary,sourceNutrient:signatureEcho.nutrients[0]?.text||null},
   crossSegmentNearEcho:nearDuplicateCarry,
   recursiveWrapperCarry,
+  lineageOnlyCarry,
   failures,
-  boundary:'This adversarial test preserves source nutrients and provenance while checking cross-atom, intra-atom, repeated machine-lineage signature, cross-segment volatile-lineage carry echo, and recursive wrapper growth. PASS requires wrapper-only recirculation to collapse at carry rendering while substantively distinct evidence survives.'
+  boundary:'This adversarial test preserves source nutrients and provenance while checking cross-atom, intra-atom, repeated machine-lineage signature, cross-segment volatile-lineage carry echo, recursive wrapper growth, and repeated short ref/clause-only carry fragments. PASS requires wrapper-only and lineage-only recirculation to collapse at carry rendering while substantively distinct evidence survives.'
 };
 await fs.writeFile(path.join(root,'nostromo/integration/gut-lineage-last-result.json'),JSON.stringify(result,null,2)+'\n','utf8');
 console.log(JSON.stringify(result,null,2));
