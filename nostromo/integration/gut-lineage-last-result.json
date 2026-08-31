@@ -1,6 +1,6 @@
 {
   "schema": "nostromo-gut-lineage-test/v0.2.19-adversarial-lineage-signature",
-  "completedAt": "2026-08-31T20:09:07.543Z",
+  "completedAt": "2026-08-31T21:03:57.764Z",
   "status": "PASS",
   "sameLineage": {
     "summaryItemCount": 1,
@@ -101,11 +101,12 @@
     "intraSegmentSuppressed": 0,
     "shortTokenSuppressed": 0,
     "nestedClauseSuppressed": 0,
+    "nearDuplicateClauseSuppressed": 0,
     "crossSegmentNearEchoSuppressed": 1,
     "inputSegments": 3,
     "outputSegments": 2,
     "fingerprint": "393ae7383acd9cef",
-    "boundary": "Carry-only containment. Exact/lineage-equivalent colon clauses, nested long clauses, and same-route cross-segment near echoes (5-gram Jaccard >= 0.82 after ASCII/fullwidth volatile-lineage normalization, minimum 80 chars) are collapsed before recirculation; original GUT nutrients, routes and provenance are not mutated."
+    "boundary": "Carry-only containment. Exact/lineage-equivalent colon clauses, nested long clauses, recursively wrapped near-duplicate clauses (4-gram containment similarity >= 0.78, minimum 32 chars), and same-route cross-segment near echoes are collapsed before recirculation; original GUT nutrients, routes and provenance are not mutated."
   },
   "failures": [],
   "boundary": "This adversarial test preserves source nutrients and provenance while checking cross-atom, intra-atom, repeated machine-lineage signature, and cross-segment volatile-lineage carry echo. PASS requires repeated standalone lineage signatures to collapse only at carry rendering, same-route near-duplicate recirculation segments to collapse, and substantively distinct prose to survive."

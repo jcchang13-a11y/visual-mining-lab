@@ -1,6 +1,6 @@
 {
-  "schema": "nostromo-integration-ci/v1.3.1",
-  "completedAt": "2026-08-31T20:09:10.031Z",
+  "schema": "nostromo-integration-ci/v1.3.2",
+  "completedAt": "2026-08-31T21:04:00.880Z",
   "status": "PASS",
   "rounds": 50,
   "expectedPerRound": {
@@ -181,9 +181,10 @@
       "roundsChecked": 10,
       "totalIntraSegmentSuppressed": 0,
       "totalNestedClauseSuppressed": 0,
+      "totalNearDuplicateClauseSuppressed": 0,
       "totalShortTokenSuppressed": 0
     },
-    "boundary": "Certifies the closed-loop executor path plus carry-layer metabolic containment and a deterministic SHROOMING feedback-conditioned lens selector. From round 2 onward, redacted connector feedback can change SHROOMING inspection priority without claiming semantic learning or independent persistent agents. Same-route near-duplicate carry segments are suppressed only at recirculation rendering after ASCII/fullwidth volatile-lineage normalization; GUT nutrient atoms, routes and provenance remain intact. GitHub Actions does not itself search private Drive or the web."
+    "boundary": "Certifies the closed-loop executor path plus carry-layer metabolic containment and a deterministic SHROOMING feedback-conditioned lens selector. From round 2 onward, redacted connector feedback can change SHROOMING inspection priority without claiming semantic learning or independent persistent agents. Recursive wrapper growth is contained only at carry rendering; GUT nutrient atoms, routes and provenance remain intact. GitHub Actions does not itself search private Drive or the web."
   },
   "sources": {
     "shroomingUpdated": "2026-08-23",
@@ -196,5 +197,5 @@
     "droplet": "../droplet-state.json"
   },
   "failures": [],
-  "boundary": "PASS certifies 50-round published-state integration, deterministic reproducibility and parent-blob continuity for R111→R112→R113, the R111↔R113 PARTIAL_RETURN measurement, a matched-parent audit showing that repo-executors v0.9 participant selection is parent-invariant when task and intervention are held constant, a 10-round closed loop of repository-native executors, carry-layer adversarial checks against exact and nested intra-segment metabolic echo, and successful handoff into GUT of persisted Google Drive query evidence for MINE_DRIVE_QUERY, bounded authorized-source MINE_INTERNAL, public-web search, and claim-specific DROPLET verification. MINE_INTERNAL is certified only for explicit query-scoped authorized connector sources; the current verified source is Google Drive. It does not certify exhaustive private-environment mining, cross-source crawling, ten independent live LLM processes, causal reversibility outside this deterministic model, or that GitHub Actions itself can invoke private connectors or search engines."
+  "boundary": "PASS certifies 50-round published-state integration, deterministic reproducibility and parent-blob continuity for R111→R112→R113, the R111↔R113 PARTIAL_RETURN measurement, a matched-parent audit showing that repo-executors v0.9 participant selection is parent-invariant when task and intervention are held constant, a 10-round closed loop of repository-native executors, and carry-layer adversarial checks against exact, nested, and recursive-wrapper near-duplicate intra-segment metabolic echo. Connector evidence remains persisted and de-identified; GitHub Actions does not execute private connectors or search engines."
 }

@@ -1,6 +1,6 @@
 {
   "schema": "nostromo-gut-metabolism-test/v0.2.19",
-  "completedAt": "2026-08-31T20:09:07.438Z",
+  "completedAt": "2026-08-31T21:03:57.660Z",
   "status": "PASS",
   "gut": {
     "version": "0.2.19",
@@ -266,7 +266,7 @@
         "lineageSignatureSuppressedCount": 0
       }
     ],
-    "boundary": "Certifies the closed-loop executor path plus carry-layer metabolic containment and a deterministic SHROOMING feedback-conditioned lens selector. From round 2 onward, redacted connector feedback can change SHROOMING inspection priority without claiming semantic learning or independent persistent agents. Same-route near-duplicate carry segments are suppressed only at recirculation rendering after ASCII/fullwidth volatile-lineage normalization; GUT nutrient atoms, routes and provenance remain intact. GitHub Actions does not itself search private Drive or the web."
+    "boundary": "Certifies the closed-loop executor path plus carry-layer metabolic containment and a deterministic SHROOMING feedback-conditioned lens selector. From round 2 onward, redacted connector feedback can change SHROOMING inspection priority without claiming semantic learning or independent persistent agents. Recursive wrapper growth is contained only at carry rendering; GUT nutrient atoms, routes and provenance remain intact. GitHub Actions does not itself search private Drive or the web."
   },
   "failures": [],
   "boundary": "PASS proves deterministic heuristic routing, provenance retention, quarantine/hold behavior, conservative exact inherited-substrate removal, exact tagged-payload de-echoing, exact repeated tagged-tail suppression while retaining distinct heads, pre/post short exact adjacent intra-atom echo suppression, shared-body summary diversity, exact non-adjacent full-width-colon carry-clause compaction, consecutive exact 1–4 character carry-token run collapse without mutating nutrient atoms or provenance, near-duplicate preservation, structured-snippet protection, and a 3-round cross-organ connector-feedback regression. Repeated standalone machine-lineage signature suppression and volatile ref/clause lineage normalization are tested separately. It does not prove semantic novelty, semantic correctness, or source truth."
