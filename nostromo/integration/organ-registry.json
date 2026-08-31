@@ -1,6 +1,6 @@
 {
-  "schema": "nostromo-organ-registry/v1.21",
-  "updatedAt": "2026-08-31T21:15:00+08:00",
+  "schema": "nostromo-organ-registry/v1.22",
+  "updatedAt": "2026-09-01T02:08:00+08:00",
   "truthRule": "DISPLAYED STATE MUST FOLLOW EVIDENCE",
   "evidence": "ci-last-result.json plus formal-round-last-result.json plus connector-last-result.json plus muther-falsify-last-result.json plus droplet-claim-verify-last-result.json plus gut-metabolism-last-result.json plus gut-lineage-last-result.json plus vajra-dynamic-last-result.json plus shroom-feedback-last-result.json",
   "latestFormalRound": "greenhouse/r113-nostromo-formal-round.json",
@@ -29,18 +29,18 @@
     "boundary": "Isolated counterfactual executor only. It deliberately includes parent round ordinal in participant selection and has been CI-verified against R111 and R112. It does not write or advance formal greenhouse history and is engineering evidence that NOSTROMO can execute and audit a parent-sensitive transition, not evidence that the real SHROOMING population is causally path-dependent."
   },
   "latestThickening": {
-    "organ": "GUT",
-    "version": "GUT v0.2.18 + active recirculation containment v1.1.5",
-    "status": "VERIFIED_CROSS_SEGMENT_NEAR_ECHO_CONTAINMENT",
-    "test": "gut-lineage-last-result.json",
+    "organ": "VAJRA",
+    "version": "VAJRA v0.3.0",
+    "status": "VERIFIED_MINIMUM_SUBSTANCE_HANDOFF_GUARD",
+    "test": "vajra-dynamic-last-result.json",
     "capabilities": [
-      "same-route cross-segment near-duplicate carry is detected after volatile-lineage normalization",
-      "ASCII and fullwidth ref/clause delimiters are normalized before lineage comparison",
-      "5-character n-gram Jaccard threshold 0.82 is used only for carry recirculation segments of at least 80 normalized characters",
-      "a near-duplicate wrapper variant is suppressed while a substantively different contradiction survives",
-      "original GUT nutrient atoms, routes and provenance remain untouched"
+      "structurally complete but placeholder-only receipts no longer close a VAJRA branch",
+      "returned material must pass a bounded minimum-substance length/placeholder guard before structural closure",
+      "relation-to-target must also carry minimally inspectable substance rather than a token acknowledgement",
+      "thin-return rejection remains visible in the receipt audit record",
+      "existing clause isolation, provenance requirements and replay-amplification guards remain intact"
     ],
-    "boundary": "Promotion followed a preserved failing adversarial run that exposed a fullwidth lineage-normalization gap, then a successful dedicated GUT lineage test and full NOSTROMO GitHub Actions run. The new rule applies only to same-route recirculation rendering and is a bounded deterministic similarity heuristic, not semantic duplicate detection, truth judgment, or permission to delete source nutrients."
+    "boundary": "Promotion followed a successful dedicated VAJRA adversarial test and full NOSTROMO GitHub Actions run 174. The new guard rejects short or placeholder-only material/relation before RESOLVED_BY_RECEIPT, but it is only a deterministic shallow-content heuristic. It does not prove semantic adequacy, relevance, source quality, factual truth, or that the handoff resolution criterion has been semantically satisfied."
   },
   "organs": {
     "shrooming": {
@@ -93,9 +93,9 @@
       "mode": "EXEC_CONNECTED_THICKENED",
       "source": "../vajra/vajra-engine.js",
       "actions": {
-        "DISMANTLE": "VERIFIED_CLAUSE_SCOPED_PROPOSITION_AWARE_HEURISTIC_DISMANTLER_WITH_CANONICALIZED_REPLAY_GUARD"
+        "DISMANTLE": "VERIFIED_CLAUSE_SCOPED_PROPOSITION_AWARE_HEURISTIC_DISMANTLER_WITH_RECEIPT_SUBSTANCE_AND_REPLAY_GUARDS"
       },
-      "boundary": "VAJRA v0.2.9 performs proposition-aware dynamic dismantling, retains multiple lexically detected proposition types, and applies bounded syntactic clause decomposition for explicit causal forms. OPEN branch contracts carry targetRef plus clauseRef and require matching lens, preferred organ, execution status, provenance, material and relation-to-target before structural closure. A receipt scoped to another clause is rejected. Replay identity canonicalizes Unicode width, letter case, whitespace, punctuation and symbols before fingerprinting provenance+material, so superficial formatting mutations cannot mint a fresh replay identity; the same canonicalized provenance+material payload can resolve only one branch across accumulated VAJRA history. This remains deterministic structural normalization, not semantic duplicate detection, semantic parsing, factual truth, or proof that the original proposition is settled."
+      "boundary": "VAJRA v0.3.0 performs proposition-aware dynamic dismantling, retains multiple lexically detected proposition types, and applies bounded syntactic clause decomposition for explicit causal forms. OPEN branch contracts carry targetRef plus clauseRef and require matching lens, preferred organ, execution status, provenance, material and relation-to-target before structural closure. A receipt scoped to another clause is rejected. Before closure, returned material and relation must now also pass a bounded minimum-substance guard that rejects short or placeholder-only acknowledgements. Replay identity canonicalizes Unicode width, letter case, whitespace, punctuation and symbols before fingerprinting provenance+material, so superficial formatting mutations cannot mint a fresh replay identity; the same canonicalized provenance+material payload can resolve only one branch across accumulated VAJRA history. This remains deterministic structural normalization and shallow content screening, not semantic adequacy judgment, semantic duplicate detection, semantic parsing, factual truth, or proof that the original proposition is settled."
     }
   }
 }
