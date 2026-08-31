@@ -1,80 +1,343 @@
 {
-  "schema": "nostromo-droplet-claim-verify-test/v1.0",
-  "completedAt": "2026-08-31T10:05:43.836Z",
+  "schema": "nostromo-droplet-claim-verify-test/v1.1",
+  "completedAt": "2026-08-31T10:06:00.822Z",
   "status": "PASS",
-  "verification": {
-    "executor": "DROPLET_CLAIM_VERIFY",
-    "status": "EXECUTED",
-    "claim": "Magentic-One is a generalist multi-agent system published by Microsoft Research in November 2024.",
-    "claimFingerprint": "2b0cce93bbbc52ad",
-    "verdict": "SUPPORTED",
-    "counts": {
-      "evidence": 2,
-      "uniqueEvidence": 2,
-      "duplicatesSuppressed": 0,
-      "supports": 2,
-      "refutes": 0,
-      "authoritativeSupports": 2,
-      "authoritativeRefutes": 0,
-      "authoritativeSupportFamilies": 2,
-      "authoritativeRefuteFamilies": 0
-    },
-    "conflicts": {
-      "authoritativeConflict": false,
-      "integrityConflict": false,
-      "contradictoryFingerprints": []
-    },
-    "evidenceFingerprint": "85c2560124ef9465",
-    "evidence": [
-      {
-        "id": "E1",
-        "source": "Microsoft Research",
-        "sourceClass": "OFFICIAL",
-        "sourceFamily": "Microsoft Research",
-        "relation": "SUPPORTS",
-        "fingerprint": "05b19aff31a0265e",
-        "date": "2024-11-04",
-        "identityKey": "fp:05b19aff31a0265e",
-        "familyKey": "microsoftresearch"
+  "cases": {
+    "baseline": {
+      "executor": "DROPLET_CLAIM_VERIFY",
+      "status": "EXECUTED",
+      "claim": "Magentic-One is a generalist multi-agent system published by Microsoft Research in November 2024.",
+      "claimFingerprint": "2b0cce93bbbc52ad",
+      "verdict": "SUPPORTED",
+      "counts": {
+        "evidence": 2,
+        "uniqueEvidence": 2,
+        "duplicatesSuppressed": 0,
+        "supports": 2,
+        "refutes": 0,
+        "authoritativeSupports": 2,
+        "authoritativeRefutes": 0,
+        "authoritativeSupportFamilies": 1,
+        "authoritativeRefuteFamilies": 0
       },
-      {
-        "id": "E2",
-        "source": "Microsoft Research publication record",
-        "sourceClass": "OFFICIAL",
-        "sourceFamily": "Microsoft Research publication record",
-        "relation": "SUPPORTS",
-        "fingerprint": "164fbdd09a7f060f",
-        "date": "2024-11",
-        "identityKey": "fp:164fbdd09a7f060f",
-        "familyKey": "microsoftresearchpublicationrecord"
-      }
-    ],
-    "uniqueEvidence": [
-      {
-        "id": "E1",
-        "source": "Microsoft Research",
-        "sourceClass": "OFFICIAL",
-        "sourceFamily": "Microsoft Research",
-        "relation": "SUPPORTS",
-        "fingerprint": "05b19aff31a0265e",
-        "date": "2024-11-04",
-        "identityKey": "fp:05b19aff31a0265e",
-        "familyKey": "microsoftresearch"
+      "conflicts": {
+        "authoritativeConflict": false,
+        "integrityConflict": false,
+        "contradictoryFingerprints": []
       },
-      {
-        "id": "E2",
-        "source": "Microsoft Research publication record",
-        "sourceClass": "OFFICIAL",
-        "sourceFamily": "Microsoft Research publication record",
-        "relation": "SUPPORTS",
-        "fingerprint": "164fbdd09a7f060f",
-        "date": "2024-11",
-        "identityKey": "fp:164fbdd09a7f060f",
-        "familyKey": "microsoftresearchpublicationrecord"
-      }
-    ],
-    "boundary": "VERDICT IS COMPUTED ONLY FROM THE EXPLICIT EVIDENCE BUNDLE SUPPLIED BY AN ACTUAL CONNECTOR OR CALLER. EXACT REPLAYED EVIDENCE IS SUPPRESSED BY FINGERPRINT/IDENTITY, SOURCE-FAMILY COUNTS ARE AUDIT SIGNALS RATHER THAN PROOF OF INDEPENDENCE, AND CONFLICTING AUTHORITATIVE DIRECTIONS OR CONTRADICTORY USE OF ONE FINGERPRINT FORCE INDETERMINATE. THIS EXECUTOR DOES NOT SEARCH THE WEB, SCORE METHODOLOGICAL QUALITY, PROVE SOURCE INDEPENDENCE, OR TREAT ABSENCE OF REFUTATION AS GLOBAL TRUTH."
+      "evidenceFingerprint": "77ecfb0c8b102c3a",
+      "evidence": [
+        {
+          "id": "E1",
+          "source": "Microsoft Research",
+          "sourceClass": "OFFICIAL",
+          "sourceFamily": "Microsoft Research",
+          "relation": "SUPPORTS",
+          "fingerprint": "05b19aff31a0265e",
+          "date": "2024-11-04",
+          "identityKey": "fp:05b19aff31a0265e",
+          "familyKey": "microsoftresearch"
+        },
+        {
+          "id": "E2",
+          "source": "Microsoft Research publication record",
+          "sourceClass": "OFFICIAL",
+          "sourceFamily": "Microsoft Research",
+          "relation": "SUPPORTS",
+          "fingerprint": "164fbdd09a7f060f",
+          "date": "2024-11",
+          "identityKey": "fp:164fbdd09a7f060f",
+          "familyKey": "microsoftresearch"
+        }
+      ],
+      "uniqueEvidence": [
+        {
+          "id": "E1",
+          "source": "Microsoft Research",
+          "sourceClass": "OFFICIAL",
+          "sourceFamily": "Microsoft Research",
+          "relation": "SUPPORTS",
+          "fingerprint": "05b19aff31a0265e",
+          "date": "2024-11-04",
+          "identityKey": "fp:05b19aff31a0265e",
+          "familyKey": "microsoftresearch"
+        },
+        {
+          "id": "E2",
+          "source": "Microsoft Research publication record",
+          "sourceClass": "OFFICIAL",
+          "sourceFamily": "Microsoft Research",
+          "relation": "SUPPORTS",
+          "fingerprint": "164fbdd09a7f060f",
+          "date": "2024-11",
+          "identityKey": "fp:164fbdd09a7f060f",
+          "familyKey": "microsoftresearch"
+        }
+      ],
+      "boundary": "VERDICT IS COMPUTED ONLY FROM THE EXPLICIT EVIDENCE BUNDLE SUPPLIED BY AN ACTUAL CONNECTOR OR CALLER. EXACT REPLAYED EVIDENCE IS SUPPRESSED BY FINGERPRINT/IDENTITY, SOURCE-FAMILY COUNTS ARE AUDIT SIGNALS RATHER THAN PROOF OF INDEPENDENCE, AND CONFLICTING AUTHORITATIVE DIRECTIONS OR CONTRADICTORY USE OF ONE FINGERPRINT FORCE INDETERMINATE. THIS EXECUTOR DOES NOT SEARCH THE WEB, SCORE METHODOLOGICAL QUALITY, PROVE SOURCE INDEPENDENCE, OR TREAT ABSENCE OF REFUTATION AS GLOBAL TRUTH."
+    },
+    "duplicateReplay": {
+      "executor": "DROPLET_CLAIM_VERIFY",
+      "status": "EXECUTED",
+      "claim": "Magentic-One is a generalist multi-agent system published by Microsoft Research in November 2024.",
+      "claimFingerprint": "2b0cce93bbbc52ad",
+      "verdict": "SUPPORTED",
+      "counts": {
+        "evidence": 3,
+        "uniqueEvidence": 1,
+        "duplicatesSuppressed": 2,
+        "supports": 1,
+        "refutes": 0,
+        "authoritativeSupports": 1,
+        "authoritativeRefutes": 0,
+        "authoritativeSupportFamilies": 1,
+        "authoritativeRefuteFamilies": 0
+      },
+      "conflicts": {
+        "authoritativeConflict": false,
+        "integrityConflict": false,
+        "contradictoryFingerprints": []
+      },
+      "evidenceFingerprint": "950affc15860be8c",
+      "evidence": [
+        {
+          "id": "D1",
+          "source": "Official page",
+          "sourceClass": "OFFICIAL",
+          "sourceFamily": "Publisher A",
+          "relation": "SUPPORTS",
+          "fingerprint": "same-proof",
+          "date": "",
+          "identityKey": "fp:same-proof",
+          "familyKey": "publishera"
+        },
+        {
+          "id": "D2",
+          "source": "Copied official page",
+          "sourceClass": "OFFICIAL",
+          "sourceFamily": "Publisher A",
+          "relation": "SUPPORTS",
+          "fingerprint": "same-proof",
+          "date": "",
+          "identityKey": "fp:same-proof",
+          "familyKey": "publishera"
+        },
+        {
+          "id": "D3",
+          "source": "Copied official page again",
+          "sourceClass": "OFFICIAL",
+          "sourceFamily": "Publisher A",
+          "relation": "SUPPORTS",
+          "fingerprint": "same-proof",
+          "date": "",
+          "identityKey": "fp:same-proof",
+          "familyKey": "publishera"
+        }
+      ],
+      "uniqueEvidence": [
+        {
+          "id": "D1",
+          "source": "Official page",
+          "sourceClass": "OFFICIAL",
+          "sourceFamily": "Publisher A",
+          "relation": "SUPPORTS",
+          "fingerprint": "same-proof",
+          "date": "",
+          "identityKey": "fp:same-proof",
+          "familyKey": "publishera"
+        }
+      ],
+      "boundary": "VERDICT IS COMPUTED ONLY FROM THE EXPLICIT EVIDENCE BUNDLE SUPPLIED BY AN ACTUAL CONNECTOR OR CALLER. EXACT REPLAYED EVIDENCE IS SUPPRESSED BY FINGERPRINT/IDENTITY, SOURCE-FAMILY COUNTS ARE AUDIT SIGNALS RATHER THAN PROOF OF INDEPENDENCE, AND CONFLICTING AUTHORITATIVE DIRECTIONS OR CONTRADICTORY USE OF ONE FINGERPRINT FORCE INDETERMINATE. THIS EXECUTOR DOES NOT SEARCH THE WEB, SCORE METHODOLOGICAL QUALITY, PROVE SOURCE INDEPENDENCE, OR TREAT ABSENCE OF REFUTATION AS GLOBAL TRUTH."
+    },
+    "authoritativeConflict": {
+      "executor": "DROPLET_CLAIM_VERIFY",
+      "status": "EXECUTED",
+      "claim": "Magentic-One is a generalist multi-agent system published by Microsoft Research in November 2024.",
+      "claimFingerprint": "2b0cce93bbbc52ad",
+      "verdict": "INDETERMINATE",
+      "counts": {
+        "evidence": 2,
+        "uniqueEvidence": 2,
+        "duplicatesSuppressed": 0,
+        "supports": 1,
+        "refutes": 1,
+        "authoritativeSupports": 1,
+        "authoritativeRefutes": 1,
+        "authoritativeSupportFamilies": 1,
+        "authoritativeRefuteFamilies": 1
+      },
+      "conflicts": {
+        "authoritativeConflict": true,
+        "integrityConflict": false,
+        "contradictoryFingerprints": []
+      },
+      "evidenceFingerprint": "c5e8f445969d4c54",
+      "evidence": [
+        {
+          "id": "C1",
+          "source": "Official source A",
+          "sourceClass": "OFFICIAL",
+          "sourceFamily": "Authority A",
+          "relation": "SUPPORTS",
+          "fingerprint": "support-a",
+          "date": "",
+          "identityKey": "fp:support-a",
+          "familyKey": "authoritya"
+        },
+        {
+          "id": "C2",
+          "source": "Primary source B",
+          "sourceClass": "PRIMARY",
+          "sourceFamily": "Authority B",
+          "relation": "REFUTES",
+          "fingerprint": "refute-b",
+          "date": "",
+          "identityKey": "fp:refute-b",
+          "familyKey": "authorityb"
+        }
+      ],
+      "uniqueEvidence": [
+        {
+          "id": "C1",
+          "source": "Official source A",
+          "sourceClass": "OFFICIAL",
+          "sourceFamily": "Authority A",
+          "relation": "SUPPORTS",
+          "fingerprint": "support-a",
+          "date": "",
+          "identityKey": "fp:support-a",
+          "familyKey": "authoritya"
+        },
+        {
+          "id": "C2",
+          "source": "Primary source B",
+          "sourceClass": "PRIMARY",
+          "sourceFamily": "Authority B",
+          "relation": "REFUTES",
+          "fingerprint": "refute-b",
+          "date": "",
+          "identityKey": "fp:refute-b",
+          "familyKey": "authorityb"
+        }
+      ],
+      "boundary": "VERDICT IS COMPUTED ONLY FROM THE EXPLICIT EVIDENCE BUNDLE SUPPLIED BY AN ACTUAL CONNECTOR OR CALLER. EXACT REPLAYED EVIDENCE IS SUPPRESSED BY FINGERPRINT/IDENTITY, SOURCE-FAMILY COUNTS ARE AUDIT SIGNALS RATHER THAN PROOF OF INDEPENDENCE, AND CONFLICTING AUTHORITATIVE DIRECTIONS OR CONTRADICTORY USE OF ONE FINGERPRINT FORCE INDETERMINATE. THIS EXECUTOR DOES NOT SEARCH THE WEB, SCORE METHODOLOGICAL QUALITY, PROVE SOURCE INDEPENDENCE, OR TREAT ABSENCE OF REFUTATION AS GLOBAL TRUTH."
+    },
+    "fingerprintIntegrity": {
+      "executor": "DROPLET_CLAIM_VERIFY",
+      "status": "EXECUTED",
+      "claim": "Magentic-One is a generalist multi-agent system published by Microsoft Research in November 2024.",
+      "claimFingerprint": "2b0cce93bbbc52ad",
+      "verdict": "INDETERMINATE",
+      "counts": {
+        "evidence": 2,
+        "uniqueEvidence": 1,
+        "duplicatesSuppressed": 1,
+        "supports": 1,
+        "refutes": 0,
+        "authoritativeSupports": 1,
+        "authoritativeRefutes": 0,
+        "authoritativeSupportFamilies": 1,
+        "authoritativeRefuteFamilies": 0
+      },
+      "conflicts": {
+        "authoritativeConflict": false,
+        "integrityConflict": true,
+        "contradictoryFingerprints": [
+          "same-payload"
+        ]
+      },
+      "evidenceFingerprint": "f179e887e56cab3d",
+      "evidence": [
+        {
+          "id": "I1",
+          "source": "Source X",
+          "sourceClass": "OFFICIAL",
+          "sourceFamily": "Source X",
+          "relation": "SUPPORTS",
+          "fingerprint": "same-payload",
+          "date": "",
+          "identityKey": "fp:same-payload",
+          "familyKey": "sourcex"
+        },
+        {
+          "id": "I2",
+          "source": "Source X mirror",
+          "sourceClass": "OFFICIAL",
+          "sourceFamily": "Source X",
+          "relation": "REFUTES",
+          "fingerprint": "same-payload",
+          "date": "",
+          "identityKey": "fp:same-payload",
+          "familyKey": "sourcex"
+        }
+      ],
+      "uniqueEvidence": [
+        {
+          "id": "I1",
+          "source": "Source X",
+          "sourceClass": "OFFICIAL",
+          "sourceFamily": "Source X",
+          "relation": "SUPPORTS",
+          "fingerprint": "same-payload",
+          "date": "",
+          "identityKey": "fp:same-payload",
+          "familyKey": "sourcex"
+        }
+      ],
+      "boundary": "VERDICT IS COMPUTED ONLY FROM THE EXPLICIT EVIDENCE BUNDLE SUPPLIED BY AN ACTUAL CONNECTOR OR CALLER. EXACT REPLAYED EVIDENCE IS SUPPRESSED BY FINGERPRINT/IDENTITY, SOURCE-FAMILY COUNTS ARE AUDIT SIGNALS RATHER THAN PROOF OF INDEPENDENCE, AND CONFLICTING AUTHORITATIVE DIRECTIONS OR CONTRADICTORY USE OF ONE FINGERPRINT FORCE INDETERMINATE. THIS EXECUTOR DOES NOT SEARCH THE WEB, SCORE METHODOLOGICAL QUALITY, PROVE SOURCE INDEPENDENCE, OR TREAT ABSENCE OF REFUTATION AS GLOBAL TRUTH."
+    },
+    "lowAuthorityOnly": {
+      "executor": "DROPLET_CLAIM_VERIFY",
+      "status": "EXECUTED",
+      "claim": "Magentic-One is a generalist multi-agent system published by Microsoft Research in November 2024.",
+      "claimFingerprint": "2b0cce93bbbc52ad",
+      "verdict": "INDETERMINATE",
+      "counts": {
+        "evidence": 1,
+        "uniqueEvidence": 1,
+        "duplicatesSuppressed": 0,
+        "supports": 1,
+        "refutes": 0,
+        "authoritativeSupports": 0,
+        "authoritativeRefutes": 0,
+        "authoritativeSupportFamilies": 0,
+        "authoritativeRefuteFamilies": 0
+      },
+      "conflicts": {
+        "authoritativeConflict": false,
+        "integrityConflict": false,
+        "contradictoryFingerprints": []
+      },
+      "evidenceFingerprint": "32be21079be2ef71",
+      "evidence": [
+        {
+          "id": "L1",
+          "source": "Unclassified repost",
+          "sourceClass": "SECONDARY",
+          "sourceFamily": "Unknown repost",
+          "relation": "SUPPORTS",
+          "fingerprint": "secondary-only",
+          "date": "",
+          "identityKey": "fp:secondary-only",
+          "familyKey": "unknownrepost"
+        }
+      ],
+      "uniqueEvidence": [
+        {
+          "id": "L1",
+          "source": "Unclassified repost",
+          "sourceClass": "SECONDARY",
+          "sourceFamily": "Unknown repost",
+          "relation": "SUPPORTS",
+          "fingerprint": "secondary-only",
+          "date": "",
+          "identityKey": "fp:secondary-only",
+          "familyKey": "unknownrepost"
+        }
+      ],
+      "boundary": "VERDICT IS COMPUTED ONLY FROM THE EXPLICIT EVIDENCE BUNDLE SUPPLIED BY AN ACTUAL CONNECTOR OR CALLER. EXACT REPLAYED EVIDENCE IS SUPPRESSED BY FINGERPRINT/IDENTITY, SOURCE-FAMILY COUNTS ARE AUDIT SIGNALS RATHER THAN PROOF OF INDEPENDENCE, AND CONFLICTING AUTHORITATIVE DIRECTIONS OR CONTRADICTORY USE OF ONE FINGERPRINT FORCE INDETERMINATE. THIS EXECUTOR DOES NOT SEARCH THE WEB, SCORE METHODOLOGICAL QUALITY, PROVE SOURCE INDEPENDENCE, OR TREAT ABSENCE OF REFUTATION AS GLOBAL TRUTH."
+    }
   },
   "failures": [],
-  "boundary": "This test validates deterministic claim verdict computation from persisted redacted evidence. The underlying evidence was obtained by an actual public-web connector run; CI itself performs no search-engine discovery."
+  "boundary": "This test validates deterministic claim verdict computation from explicit evidence, exact replay suppression, source-family audit counts, authoritative-direction conflict containment, and fingerprint-integrity conflict containment. Source-family labels are caller-supplied audit metadata and do not prove real-world independence; CI performs no web search."
 }
