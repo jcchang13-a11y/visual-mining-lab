@@ -1,4 +1,4 @@
-// NOSTROMO active executor loop v1.1.6
+// NOSTROMO active executor loop v1.1.7
 // Server/CI-side integration path for repository-native partial executors plus validated external connector evidence.
 import crypto from 'node:crypto';
 import {shroomGreenhousePoseQuestion,mutherMineRepo,dropletVerifyUrl} from './repo-executors.mjs';
@@ -90,7 +90,7 @@ function nearEchoSimilarity(a,b){
   const A=charNgrams(aa),B=charNgrams(bb);
   if(!A.size||!B.size)return 0;
   let intersection=0;for(const g of A)if(B.has(g))intersection++;
-  return intersection/(A.size+B.size-intersection);
+  return intersection/Math.min(A.size,B.size);
 }
 function routeOf(segment){return (String(segment||'').match(/^\[([^\]]+)\]/)||[])[1]||'UNTYPED';}
 export function compactMetabolicCarry(summary){
@@ -113,7 +113,7 @@ export function compactMetabolicCarry(summary){
     if(kept.join(' · ').length>=900)break;
   }
   const text=kept.join(' · ').slice(0,900);
-  return {text,echoSuppressed,routeCapped,intraSegmentSuppressed,shortTokenSuppressed,nestedClauseSuppressed,nearDuplicateClauseSuppressed,crossSegmentNearEchoSuppressed,inputSegments:segments.length,outputSegments:kept.length,fingerprint:fp(text),boundary:'Carry-only containment. Exact/lineage-equivalent colon clauses, nested long clauses, recursively wrapped near-duplicate clauses (4-gram containment similarity >= 0.78, minimum 32 chars), and same-route cross-segment near echoes are collapsed before recirculation; original GUT nutrients, routes and provenance are not mutated.'};
+  return {text,echoSuppressed,routeCapped,intraSegmentSuppressed,shortTokenSuppressed,nestedClauseSuppressed,nearDuplicateClauseSuppressed,crossSegmentNearEchoSuppressed,inputSegments:segments.length,outputSegments:kept.length,fingerprint:fp(text),boundary:'Carry-only containment. Exact/lineage-equivalent colon clauses, nested long clauses, recursively wrapped near-duplicate clauses, and same-route cross-segment near echoes are collapsed before recirculation. Cross-segment comparison uses a containment coefficient over normalized 5-grams so wrapper growth cannot evade the audit merely by adding prefixes; original GUT nutrients, routes and provenance are not mutated.'};
 }
 
 export async function runActiveExecutorLoop({rounds=10,seed='NOSTROMO active integration',mineQuery='NOSTROMO',verifyUrl='https://github.com/jcchang13-a11y/visual-mining-lab'}={}){
@@ -146,5 +146,5 @@ export async function runActiveExecutorLoop({rounds=10,seed='NOSTROMO active int
     trace.push(item);carry=item.carryOut||carry;if(status!=='PASS') break;
   }
   const acceptedActions=['muther','mutherInternal','droplet','dropletVerify'].filter(k=>connectorEvidence.actions?.[k]?.status==='EXECUTED').length;
-  return {schema:'nostromo-active-executor-loop/v1.1.6',status:trace.length===total&&trace.every(x=>x.status==='PASS')?'PASS':'FAIL',requestedRounds:total,completedRounds:trace.length,feedback:{fingerprint:feedback.fingerprint,appliedRounds:trace.filter(x=>x.feedback.applied).length,firstAppliedRound:trace.find(x=>x.feedback.applied)?.round||null,privacy:feedback.privacy},connectorHandoff:{status:connectorEvidence.status,completedAt:connectorEvidence.completedAt,actionsAccepted:acceptedActions,failures:connectorEvidence.failures},trace,completedAt:new Date().toISOString(),boundary:'Certifies the closed-loop executor path plus carry-layer metabolic containment and a deterministic SHROOMING feedback-conditioned lens selector. From round 2 onward, redacted connector feedback can change SHROOMING inspection priority without claiming semantic learning or independent persistent agents. Recursive wrapper growth is contained only at carry rendering; GUT nutrient atoms, routes and provenance remain intact. GitHub Actions does not itself search private Drive or the web.'};
+  return {schema:'nostromo-active-executor-loop/v1.1.7',status:trace.length===total&&trace.every(x=>x.status==='PASS')?'PASS':'FAIL',requestedRounds:total,completedRounds:trace.length,feedback:{fingerprint:feedback.fingerprint,appliedRounds:trace.filter(x=>x.feedback.applied).length,firstAppliedRound:trace.find(x=>x.feedback.applied)?.round||null,privacy:feedback.privacy},connectorHandoff:{status:connectorEvidence.status,completedAt:connectorEvidence.completedAt,actionsAccepted:acceptedActions,failures:connectorEvidence.failures},trace,completedAt:new Date().toISOString(),boundary:'Certifies the closed-loop executor path plus carry-layer metabolic containment and a deterministic SHROOMING feedback-conditioned lens selector. From round 2 onward, redacted connector feedback can change SHROOMING inspection priority without claiming semantic learning or independent persistent agents. Recursive wrapper growth is contained only at carry rendering; GUT nutrient atoms, routes and provenance remain intact. GitHub Actions does not itself search private Drive or the web.'};
 }
