@@ -1,6 +1,6 @@
 {
-  "schema": "nostromo-vajra-uncertainty-test/v0.3.3",
-  "completedAt": "2026-09-01T05:07:05.915Z",
+  "schema": "nostromo-vajra-uncertainty-test/v0.3.4",
+  "completedAt": "2026-09-01T09:08:58.095Z",
   "status": "PASS",
   "guards": {
     "explicitUncertaintyCannotClose": true,
@@ -8,22 +8,23 @@
     "negatedRefuteCannotClose": true,
     "chineseUncertaintyCannotClose": true,
     "longUnspecifiedRelationCannotClose": true,
+    "mixedPolarityCannotClose": true,
     "positiveSupportStillCloses": true,
     "explicitRefuteStillCloses": true,
     "gutRegression": true
   },
   "finding": {
-    "classification": "RELATION_SPECIFICITY_GUARD_ADDED",
-    "detail": "A structurally complete and sufficiently long handoff receipt could previously close a VAJRA branch even when its relation merely discussed the target without saying whether the material supports or refutes it. v0.3.3 blocks both explicit uncertainty and long relation-unspecified returns, preserving them in the audit log while leaving the branch open."
+    "classification": "MIXED_POLARITY_FALSE_CLOSURE_GUARD_ADDED",
+    "detail": "A single structurally complete receipt whose relation simultaneously contains support and refute polarity is no longer allowed to close a VAJRA handoff. v0.3.4 preserves it as an audited MIXED_RELATION rejection and leaves the branch unresolved, preventing internally conflicted wording from being collapsed into a false binary resolution."
   },
   "crossOrgan": {
     "gut": {
-      "ingested": 254,
+      "ingested": 255,
       "absorbed": 46,
       "quarantined": 7,
       "summarySample": "[CONTRADICTION->VAJRA] 主動尋找最小反例與破壞條件 · [CONTRADICTION->VAJRA] 主動尋找最小反例與破壞條件：針對本輪 EMPIRICAL 命題（ref:20708907; clause:bf2b3177），哪個前提最可能先失效？ · [CLAIM->DROPLET] EMPIRICAL · [EVIDENCE_OR_PROVENANCE->MUTHER] 要求可追溯證據並區分支持與缺席證據 · [CLAIM->DROPLET] 命題成立條件需要顯式化 · [EVIDENCE_OR_PROVENANCE->MUTHER] 資料品質、測量方式與來源獨立性需要檢查 · [CLAIM->DROPLET] Preferred organ is a routing request"
     }
   },
   "failures": [],
-  "boundary": "PASS certifies only a bounded lexical anti-false-certainty guard over handoff receipt relations plus a GUT regression. Closure now requires an explicit SUPPORTS, REFUTES, or MIXED polarity signal after uncertainty screening. It does not semantically judge relevance, evidence quality, truth, or whether one source should outweigh another."
+  "boundary": "PASS certifies only a bounded lexical anti-false-certainty guard over handoff receipt relations plus a GUT regression. Closure now requires an unambiguous SUPPORTS or REFUTES polarity after uncertainty screening; MIXED remains unresolved. It does not semantically judge relevance, evidence quality, truth, or whether one source should outweigh another."
 }
