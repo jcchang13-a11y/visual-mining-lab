@@ -1,4 +1,4 @@
-// NOSTROMO repository-native integration CI v1.3.2
+// NOSTROMO repository-native integration CI v1.3.3
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import vm from 'node:vm';
@@ -15,13 +15,22 @@ globalThis.fetch=async function(input){const p=resolveRequest(input);try{const t
 async function loadScript(rel){const code=await fs.readFile(path.join(root,rel),'utf8');vm.runInThisContext(code,{filename:rel});}
 async function writeResult(result){await fs.writeFile(resultPath,JSON.stringify(result,null,2)+'\n','utf8');console.log(JSON.stringify(result,null,2));}
 function normalizeCarryClause(text){return String(text).toLowerCase().replace(/\b(ref|clause)\s*[:：=]\s*[0-9a-f]{6,64}\b/gi,'$1:<id>').replace(/\b[0-9a-f]{12,64}\b/gi,'<hash>').replace(/\s+/g,' ').trim();}
+function protectCarryLineageTokenColons(text){return String(text).replace(/\b(ref|clause)\s*[:：=]\s*([0-9a-f]{6,64})\b/gi,(_,kind,id)=>`${kind}§${id}`);}
+function restoreCarryLineageTokenColons(text){return String(text).replace(/\b(ref|clause)§([0-9a-f]{6,64})\b/gi,'$1:$2');}
+function exactCarryLineageTokens(text){const out=[],re=/\b(ref|clause)\s*[:：=]\s*([0-9a-f]{6,64})\b/gi;let m;while((m=re.exec(String(text||''))))out.push(`${m[1].toLowerCase()}:${m[2].toLowerCase()}`);return out;}
 function carryClauseNgrams(text,n=4){const s=normalizeCarryClause(text).replace(/[\s\p{P}\p{S}]+/gu,'');const out=new Set();if(s.length<n)return out;for(let i=0;i<=s.length-n;i++)out.add(s.slice(i,i+n));return out;}
 function carryClauseSimilarity(a,b){const aa=normalizeCarryClause(a),bb=normalizeCarryClause(b);if(Math.min(aa.length,bb.length)<32)return 0;if(aa.includes(bb)||bb.includes(aa))return Math.min(aa.length,bb.length)/Math.max(aa.length,bb.length);const A=carryClauseNgrams(aa),B=carryClauseNgrams(bb);if(!A.size||!B.size)return 0;let intersection=0;for(const g of A)if(B.has(g))intersection++;return intersection/Math.min(A.size,B.size);}
 function auditCarryEcho(text){
   const issues=[];
   for(const segment of String(text||'').split(/\s*·\s*/).filter(Boolean)){
     const body=segment.replace(/^\[[^\]]+\]\s*/,'');
-    const clauses=body.split(/\s*[：:]\s*/).map(normalizeCarryClause).filter(Boolean);
+    const lineageSeen=new Set();
+    for(const token of exactCarryLineageTokens(body)){
+      if(lineageSeen.has(token))issues.push({type:'REPEATED_EXACT_LINEAGE_TOKEN',token});
+      lineageSeen.add(token);
+    }
+    const protectedBody=protectCarryLineageTokenColons(body);
+    const clauses=protectedBody.split(/\s*[：:]\s*/).map(x=>normalizeCarryClause(restoreCarryLineageTokenColons(x))).filter(Boolean);
     const seen=new Set();
     for(let i=0;i<clauses.length;i++){
       const c=clauses[i];
@@ -93,7 +102,7 @@ try{
   }
 
   const result={
-    schema:'nostromo-integration-ci/v1.3.2',completedAt:new Date().toISOString(),status:out.status==='PASS'&&active.status==='PASS'&&connector.status==='ACCEPTED'&&formal.status==='PASS'&&failures.length===0?'PASS':'FAIL',rounds:out.rounds,
+    schema:'nostromo-integration-ci/v1.3.3',completedAt:new Date().toISOString(),status:out.status==='PASS'&&active.status==='PASS'&&connector.status==='ACCEPTED'&&formal.status==='PASS'&&failures.length===0?'PASS':'FAIL',rounds:out.rounds,
     expectedPerRound:{executedStateActions:3,blockedRemoteActions:3},
     totals:{executedStateActions:out.trace.reduce((n,r)=>n+(r.actions?.summary?.EXECUTED||0),0),blockedRemoteActions:out.trace.reduce((n,r)=>n+(r.actions?.summary?.QUEUED_UNEXECUTABLE||0),0)},
     formalRoundChain:{status:formal.status,chain:formal.chain,reversibility:formal.reversibility||null,parentControl:formal.parentControl||null,rounds:formal.rounds?.map(r=>({round:r.round,previousRound:r.previousRound,parentBlobSha:r.parentBlobSha,provenanceFingerprint:r.provenanceFingerprint,executorCompatibility:r.executorCompatibility,status:r.status}))||[],boundary:formal.boundary},
@@ -101,7 +110,7 @@ try{
     connectorExecutors:{status:connector.status,completedAt:connector.completedAt,mutherDrive:{status:connector.actions?.muther?.status,returnedCount:connector.actions?.muther?.returnedCount,boundary:connector.actions?.muther?.boundary},mutherInternal:{status:connector.actions?.mutherInternal?.status,sourceClass:connector.actions?.mutherInternal?.sourceClass,returnedCount:connector.actions?.mutherInternal?.returnedCount,boundary:connector.actions?.mutherInternal?.boundary},dropletWeb:{status:connector.actions?.droplet?.status,evidenceCount:connector.actions?.droplet?.evidenceCount,boundary:connector.actions?.droplet?.boundary},dropletVerify:{status:connector.actions?.dropletVerify?.status,evidenceCount:connector.actions?.dropletVerify?.evidenceCount,claim:connector.actions?.dropletVerify?.claim,boundary:connector.actions?.dropletVerify?.boundary},boundary:connector.boundary},
     activeExecutorLoop:{status:active.status,requestedRounds:active.requestedRounds,completedRounds:active.completedRounds,roundsWithAllFourRepoExecutors:active.trace.filter(r=>r.executors.shrooming.status==='EXECUTED'&&r.executors.greenhouseProbe.status==='EXECUTED'&&r.executors.muther.status==='EXECUTED'&&r.executors.droplet.status==='EXECUTED').length,gutAbsorbedTotal:active.trace.reduce((n,r)=>n+(r.gut?.absorbed||0),0),connectorHandoff:active.connectorHandoff,lastCarry:active.trace.at(-1)?.carryOut||null,carryEchoAudit:{status:active.trace.every(r=>auditCarryEcho(r.carryOut).length===0)?'PASS':'FAIL',roundsChecked:active.trace.length,totalIntraSegmentSuppressed:active.trace.reduce((n,r)=>n+(r.metabolicCarry?.intraSegmentSuppressed||0),0),totalNestedClauseSuppressed:active.trace.reduce((n,r)=>n+(r.metabolicCarry?.nestedClauseSuppressed||0),0),totalNearDuplicateClauseSuppressed:active.trace.reduce((n,r)=>n+(r.metabolicCarry?.nearDuplicateClauseSuppressed||0),0),totalShortTokenSuppressed:active.trace.reduce((n,r)=>n+(r.metabolicCarry?.shortTokenSuppressed||0),0)},boundary:active.boundary},
     sources:out.trace[0]?.sources||null,paths:globalThis.NostromoOrchestrator.paths,failures,
-    boundary:'PASS certifies 50-round published-state integration, deterministic reproducibility and parent-blob continuity for R111→R112→R113, the R111↔R113 PARTIAL_RETURN measurement, a matched-parent audit showing that repo-executors v0.9 participant selection is parent-invariant when task and intervention are held constant, a 10-round closed loop of repository-native executors, and carry-layer adversarial checks against exact, nested, and recursive-wrapper near-duplicate intra-segment metabolic echo. Connector evidence remains persisted and de-identified; GitHub Actions does not execute private connectors or search engines.'
+    boundary:'PASS certifies 50-round published-state integration, deterministic reproducibility and parent-blob continuity for R111→R112→R113, the R111↔R113 PARTIAL_RETURN measurement, a matched-parent audit showing that repo-executors v0.9 participant selection is parent-invariant when task and intervention are held constant, a 10-round closed loop of repository-native executors, and a lineage-token-aware carry audit: ref/clause machine tokens are protected from colon tokenization while repeated exact lineage tokens remain independently detectable. Connector evidence remains persisted and de-identified; GitHub Actions does not execute private connectors or search engines.'
   };
   await writeResult(result); if(result.status!=='PASS')process.exitCode=1;
-}catch(error){const result={schema:'nostromo-integration-ci/v1.3.2',completedAt:new Date().toISOString(),status:'FAIL',rounds:0,failures:[{type:'UNCAUGHT_EXECUTION_ERROR',message:String(error?.message||error),stack:String(error?.stack||'').slice(0,4000)}],boundary:'Failure evidence was persisted before exiting. No uncompleted execution is counted as PASS.'};await writeResult(result);process.exitCode=1;}
+}catch(error){const result={schema:'nostromo-integration-ci/v1.3.3',completedAt:new Date().toISOString(),status:'FAIL',rounds:0,failures:[{type:'UNCAUGHT_EXECUTION_ERROR',message:String(error?.message||error),stack:String(error?.stack||'').slice(0,4000)}],boundary:'Failure evidence was persisted before exiting. No uncompleted execution is counted as PASS.'};await writeResult(result);process.exitCode=1;}
