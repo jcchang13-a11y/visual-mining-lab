@@ -1,8 +1,8 @@
-/* VAJRA receipt uncertainty guard v0.3.6 — prevents indeterminate, unspecified, internally mixed, negated-polarity, or same-provenance opposing returns from closing handoff branches */
+/* VAJRA receipt uncertainty guard v0.3.6 + contest-persistence guard — prevents indeterminate, unspecified, internally mixed, negated-polarity, same-provenance opposing, or historically contested returns from creating false closure */
 (function(root){
   const engine=root.VajraEngine;
   if(!engine||typeof engine.applyHandoffResults!=='function') throw new Error('VAJRA_ENGINE_REQUIRED_BEFORE_UNCERTAINTY_GUARD');
-  if(engine.receiptUncertaintyGuardVersion==='0.3.6') return;
+  if(engine.receiptUncertaintyGuardVersion==='0.3.6'&&engine.receiptContestPersistenceGuardVersion==='0.1') return;
 
   const baseApply=engine.applyHandoffResults.bind(engine);
   function clean(text){return String(text||'').normalize('NFKC').replace(/\s+/g,' ').trim();}
@@ -32,13 +32,16 @@
     };
   }
   function branchKey(r){return [clean(r?.targetRef),clean(r?.clauseRef),clean(r?.lens),clean(r?.organ||r?.sourceOrgan)].join('|');}
+  function branchStateKey(b){return [clean(b?.targetRef),clean(b?.clauseRef),clean(b?.lens),clean(b?.handoff?.preferredOrgan)].join('|');}
   function applyHandoffResultsWithUncertaintyGuard(vajraResult,receipts=[]){
     const list=Array.isArray(receipts)?receipts:[];
+    const historicalContests=new Map((vajraResult?.unresolved||[]).filter(b=>b?.status==='CONTESTED_BY_RECEIPTS'&&b?.contest).map(b=>[branchStateKey(b),b]));
     const blocked=[],preEligible=[];
     for(const receipt of list){
       const relation=receipt?.relation||receipt?.relationToTarget||receipt?.assessment||'';
       const classification=relationClassification(relation);
-      if(classification==='INDETERMINATE') blocked.push({receipt,reason:'INDETERMINATE_RELATION',classification});
+      if(historicalContests.has(branchKey(receipt))) blocked.push({receipt,reason:'HISTORICAL_CONTEST_PRESERVED',classification});
+      else if(classification==='INDETERMINATE') blocked.push({receipt,reason:'INDETERMINATE_RELATION',classification});
       else if(classification==='UNSPECIFIED') blocked.push({receipt,reason:'UNSPECIFIED_RELATION',classification});
       else if(classification==='MIXED') blocked.push({receipt,reason:'MIXED_RELATION',classification});
       else preEligible.push({receipt,classification});
@@ -67,7 +70,7 @@
     const out=baseApply(vajraResult,eligible);
     if(!out||typeof out!=='object') return out;
     const hr=out.handoffResolution||{received:0,resolved:0,contested:0,open:0,rejected:0,resolvedBranches:[],contestedBranches:[],rejectedReceipts:[]};
-    const rejectedAudit=blocked.map(x=>normalizeAuditReceipt(x.receipt,x.reason,x.classification,x.reason==='SAME_PROVENANCE_CONFLICT'?{provenanceTopology:'SAME_PROVENANCE_OPPOSING_DIRECTIONS'}:{}));
+    const rejectedAudit=blocked.map(x=>normalizeAuditReceipt(x.receipt,x.reason,x.classification,x.reason==='SAME_PROVENANCE_CONFLICT'?{provenanceTopology:'SAME_PROVENANCE_OPPOSING_DIRECTIONS'}:x.reason==='HISTORICAL_CONTEST_PRESERVED'?{contestTopology:'PREEXISTING_CONTEST_REQUIRES_EXPLICIT_ADJUDICATION'}:{}));
     hr.received=(Number(hr.received)||0)+blocked.length;
     hr.rejected=(Number(hr.rejected)||0)+blocked.length;
     hr.rejectedReceipts=[...(hr.rejectedReceipts||[]),...rejectedAudit];
@@ -75,9 +78,28 @@
     hr.unspecified=blocked.filter(x=>x.classification==='UNSPECIFIED').length;
     hr.mixed=blocked.filter(x=>x.classification==='MIXED').length;
     hr.sameProvenanceConflict=blocked.filter(x=>x.reason==='SAME_PROVENANCE_CONFLICT').length;
+    hr.historicalContestPreserved=blocked.filter(x=>x.reason==='HISTORICAL_CONTEST_PRESERVED').length;
+
+    if(historicalContests.size){
+      out.unresolved=(out.unresolved||[]).map(branch=>{
+        const prior=historicalContests.get(branchStateKey(branch));
+        return prior?{...prior,handoff:{...(prior.handoff||{}),status:'CONTESTED_BY_RECEIPTS'}}:branch;
+      });
+      out.handoffs=out.unresolved.map(x=>x.handoff);
+      const resolvedBranches=out.unresolved.filter(x=>x?.status==='RESOLVED_BY_RECEIPT'&&x?.resolution).map(x=>x.resolution);
+      const contestedBranches=out.unresolved.filter(x=>x?.status==='CONTESTED_BY_RECEIPTS'&&x?.contest).map(x=>x.contest);
+      const openBranches=out.unresolved.filter(x=>x?.status==='UNRESOLVED');
+      hr.resolvedBranches=resolvedBranches;
+      hr.contestedBranches=contestedBranches;
+      hr.resolved=resolvedBranches.length;
+      hr.contested=contestedBranches.length;
+      hr.open=openBranches.length;
+      out.status=contestedBranches.length?(resolvedBranches.length?'PARTIAL_WITH_CONTESTED_RETURN':'CONTESTED_HANDOFF_RETURN'):(openBranches.length?'PARTIAL_HANDOFF_RETURN':'HANDOFFS_RETURNED');
+    }
+
     out.handoffResolution=hr;
     out.version='0.3.6';
-    out.boundary=`${out.boundary||''} Uncertainty/provenance guard v0.3.6: a structurally matching receipt cannot close a handoff unless its relation is unambiguously classified by the bounded polarity detector as SUPPORTS or REFUTES. Explicitly insufficient/uncertain relations, negated polarity wording such as “does not contradict”, “fails to support”, or “not inconsistent with”, and bounded Chinese equivalents are audited as INDETERMINATE_RELATION; long but noncommittal relations as UNSPECIFIED_RELATION; a single relation carrying both support and refute polarity as MIXED_RELATION. In addition, opposing SUPPORTS/REFUTES returns carrying the same canonical provenance identity are audited as SAME_PROVENANCE_CONFLICT and leave the branch open instead of being counted as an inter-source contest or allowing arrival-order closure. This prevents one provenance identity from masquerading as independent opposing evidence. Provenance identity is still caller-supplied/audited metadata, not proof of real-world source independence; this remains a lexical/structural guard, not semantic adjudication, source-quality ranking, or truth verification.`.trim();
+    out.boundary=`${out.boundary||''} Uncertainty/provenance guard v0.3.6: a structurally matching receipt cannot close a handoff unless its relation is unambiguously classified by the bounded polarity detector as SUPPORTS or REFUTES. Explicitly insufficient/uncertain relations, negated polarity wording such as “does not contradict”, “fails to support”, or “not inconsistent with”, and bounded Chinese equivalents are audited as INDETERMINATE_RELATION; long but noncommittal relations as UNSPECIFIED_RELATION; a single relation carrying both support and refute polarity as MIXED_RELATION. In addition, opposing SUPPORTS/REFUTES returns carrying the same canonical provenance identity are audited as SAME_PROVENANCE_CONFLICT and leave the branch open instead of being counted as an inter-source contest or allowing arrival-order closure. Contest-persistence guard 0.1: once a branch contains a preserved independent-source contest, later applications cannot silently erase it or close it with one additional directional receipt. Matching later receipts are audited as HISTORICAL_CONTEST_PRESERVED until an explicit adjudication mechanism exists. This prevents sequential arrival order from converting an unresolved conflict into false certainty. Provenance identity is still caller-supplied/audited metadata, not proof of real-world source independence; these remain lexical/structural guards, not semantic adjudication, source-quality ranking, or truth verification.`.trim();
     return out;
   }
 
@@ -86,4 +108,5 @@
   engine.isExplicitlyIndeterminate=isExplicitlyIndeterminate;
   engine.relationClassification=relationClassification;
   engine.receiptUncertaintyGuardVersion='0.3.6';
+  engine.receiptContestPersistenceGuardVersion='0.1';
 })(typeof window!=='undefined'?window:globalThis);
