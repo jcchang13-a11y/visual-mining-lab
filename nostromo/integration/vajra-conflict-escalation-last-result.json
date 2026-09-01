@@ -1,6 +1,6 @@
 {
   "schema": "nostromo-vajra-conflict-escalation-test/v0.1.2",
-  "completedAt": "2026-09-01T17:06:07.217Z",
+  "completedAt": "2026-09-01T18:09:21.039Z",
   "status": "PASS",
   "guards": {
     "multiOrganEscalation": true,
@@ -14,7 +14,7 @@
   "sample": {
     "organ": "VAJRA",
     "capability": "CONFLICT_ESCALATION",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "status": "CONFLICT_ESCALATION_REQUIRED",
     "contestedBranches": 1,
     "escalatedBranches": 1,
@@ -64,6 +64,21 @@
             ],
             "status": "OPEN",
             "closureAuthority": "NONE",
+            "returnContract": {
+              "required": [
+                "packetId",
+                "sourceOrgan",
+                "targetRef",
+                "clauseRef",
+                "status",
+                "provenance",
+                "material",
+                "relation"
+              ],
+              "status": "EXECUTED",
+              "closureAuthority": "NONE",
+              "boundary": "A qualifying return supplies auditable adjudication material only. It cannot certify truth or close the contested branch."
+            },
             "boundary": "This packet requests adjudication material. It cannot resolve the VAJRA branch or certify truth by itself."
           },
           {
@@ -85,6 +100,21 @@
             ],
             "status": "OPEN",
             "closureAuthority": "NONE",
+            "returnContract": {
+              "required": [
+                "packetId",
+                "sourceOrgan",
+                "targetRef",
+                "clauseRef",
+                "status",
+                "provenance",
+                "material",
+                "relation"
+              ],
+              "status": "EXECUTED",
+              "closureAuthority": "NONE",
+              "boundary": "A qualifying return supplies auditable adjudication material only. It cannot certify truth or close the contested branch."
+            },
             "boundary": "This packet requests adjudication material. It cannot resolve the VAJRA branch or certify truth by itself."
           },
           {
@@ -106,13 +136,28 @@
             ],
             "status": "OPEN",
             "closureAuthority": "NONE",
+            "returnContract": {
+              "required": [
+                "packetId",
+                "sourceOrgan",
+                "targetRef",
+                "clauseRef",
+                "status",
+                "provenance",
+                "material",
+                "relation"
+              ],
+              "status": "EXECUTED",
+              "closureAuthority": "NONE",
+              "boundary": "A qualifying return supplies auditable adjudication material only. It cannot certify truth or close the contested branch."
+            },
             "boundary": "This packet requests adjudication material. It cannot resolve the VAJRA branch or certify truth by itself."
           }
         ]
       }
     ],
     "quarantine": [],
-    "boundary": "Deterministic structural escalation only. It preserves contested VAJRA branches and turns them into explicit DROPLET/MUTHER/SHROOMING work contracts. It does not weigh truth, infer real-world source independence, or resolve conflict automatically."
+    "boundary": "Deterministic structural escalation and guarded return-contract generation only. It preserves contested VAJRA branches and turns them into explicit DROPLET/MUTHER/SHROOMING work contracts. It does not weigh truth, infer real-world source independence, or resolve conflict automatically."
   },
   "failures": [],
   "boundary": "PASS proves only deterministic conflict escalation contracts, packet identity, provenance/scope preservation and anti-false-closure guards. It does not adjudicate truth, source independence or source quality."
