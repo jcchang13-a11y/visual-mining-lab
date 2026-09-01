@@ -1,6 +1,6 @@
 {
-  "schema": "nostromo-organ-registry/v1.28",
-  "updatedAt": "2026-09-02T02:11:00+08:00",
+  "schema": "nostromo-organ-registry/v1.29",
+  "updatedAt": "2026-09-02T05:18:00+08:00",
   "truthRule": "DISPLAYED STATE MUST FOLLOW EVIDENCE",
   "evidence": "ci-last-result.json plus formal-round-last-result.json plus connector-last-result.json plus muther-falsify-last-result.json plus droplet-claim-verify-last-result.json plus gut-metabolism-last-result.json plus gut-lineage-last-result.json plus vajra-dynamic-last-result.json plus vajra-uncertainty-last-result.json plus vajra-conflict-escalation-last-result.json plus shroom-feedback-last-result.json",
   "latestFormalRound": "greenhouse/r113-nostromo-formal-round.json",
@@ -29,19 +29,18 @@
     "boundary": "Isolated counterfactual executor only. It deliberately includes parent round ordinal in participant selection and has been CI-verified against R111 and R112. It does not write or advance formal greenhouse history and is engineering evidence that NOSTROMO can execute and audit a parent-sensitive transition, not evidence that the real SHROOMING population is causally path-dependent."
   },
   "latestThickening": {
-    "organ": "VAJRA",
-    "version": "VAJRA v0.3.6 + CONFLICT_ESCALATION 0.2.0 + RETURN_INTAKE 0.1.0",
-    "status": "VERIFIED_GUARDED_MULTI_ORGAN_CONFLICT_RETURN_INTAKE",
-    "test": "vajra-conflict-escalation-last-result.json",
+    "organ": "GUT",
+    "version": "GUT v0.2.24",
+    "status": "VERIFIED_OUT_OF_BAND_REFERENTIAL_CARRY",
+    "test": "gut-metabolism-last-result.json + gut-lineage-last-result.json + vajra-dynamic-last-result.json",
     "capabilities": [
-      "preserved CONTESTED_BY_RECEIPTS branches still become explicit DROPLET, MUTHER and SHROOMING adjudication packets instead of being silently collapsed",
-      "every packet now declares a machine-readable return contract requiring packet identity, returning organ, target/clause scope, execution status, provenance, substantive material and relation-to-target",
-      "returned adjudication material is correlated back to the exact issued packet and preserves organ identity, targetRef, clauseRef, lens and provenance",
-      "wrong-organ substitution, unknown packet IDs, scope mismatch, missing provenance, placeholder material and replay duplicates are quarantined instead of entering VAJRA as evidence",
-      "a complete three-organ return set remains REVIEW_REQUIRED with closureAuthority NONE and cannot certify truth or close the contested branch by itself",
-      "the guarded return-intake payload remains digestible by GUT without leaking a resolved/truth-certified claim into the metabolic summary"
+      "machine-only hexadecimal ref, targetRef, clause and clauseRef identifiers are removed from prose carry so lineage metadata cannot masquerade as semantic novelty",
+      "a bounded out-of-band carryRefs ledger preserves referential identity, route, type, path and provenance without reinserting identifiers into semantic carry text",
+      "original nutrient atoms, routing decisions and provenance remain unchanged by carry rendering cleanup",
+      "VAJRA to GUT targetRef continuity now survives through carryRefs while inherited proposition text and machine identifiers remain excluded from prose carry",
+      "existing intra-atom, cross-segment, recursive-wrapper, volatile-lineage, short-CJK and delimiter-collision anti-echo adversarial tests remain green"
     ],
-    "boundary": "Promotion is backed by successful NOSTROMO Integration Test run 210 at commit 26f118eeac9da47e64856a02af15610d96763800. Dedicated vajra-conflict-escalation-last-result.json is PASS with failures [] and schema v0.2.0. This verifies deterministic packet correlation and return-quality guards, not execution of the external organs, semantic adjudication, real-world source independence, evidence-quality weighting or factual truth. Accepted returns must still pass VAJRA's independent receipt guards before any structural branch resolution can occur."
+    "boundary": "Promotion is backed by successful NOSTROMO Integration Test run 220 for commit 277c5f062631c488e978e0b941ab3b82841a4604, followed by bot-recorded result commit 1eaf6be914a2bb24f050543fe9032ff597355179. GUT metabolism, lineage, VAJRA dynamic, all organ regressions and the 50-round integration suite passed. carryRefs preserve identifiers and provenance only; they are not evidence, truth claims or semantic nutrients. This verifies deterministic structural containment and referential continuity, not semantic novelty detection, semantic equivalence, source truth or complete elimination of all possible metabolic echo."
   },
   "organs": {
     "shrooming": {
@@ -86,9 +85,9 @@
       "mode": "EXEC_CONNECTED_THICKENED",
       "source": "../gut/gut-engine.js",
       "actions": {
-        "DIGEST": "VERIFIED_HEURISTIC_METABOLIC_ROUTER_CROSS_SEGMENT_ANTI_ECHO"
+        "DIGEST": "VERIFIED_HEURISTIC_METABOLIC_ROUTER_OUT_OF_BAND_REFERENTIAL_CARRY"
       },
-      "boundary": "GUT v0.2.21 is a deterministic heuristic metabolic router. It preserves nutrient atoms, routes and provenance while applying carry-rendering containment including inherited-substrate subtraction, route-metadata stripping, tagged payload/tail suppression, adjacent and delimited segment collapse, shared-body summary diversity, exact non-adjacent full-width-colon clause compaction, short-token run collapse, volatile ref/clause lineage normalization, repeated lineage-signature collapse and active-loop same-route cross-segment near-echo suppression. The latest active-loop carry echo audit remains PASS under current checks. These are bounded deterministic normalization rules, not semantic deletion, semantic novelty detection, source-truth judgment, or proof that all metabolic echo is solved."
+      "boundary": "GUT v0.2.24 is a deterministic heuristic metabolic router. It preserves nutrient atoms, routes and provenance while applying bounded carry-rendering containment for inherited substrate, intra-atom and cross-segment echoes, volatile lineage, nested clauses, repeated route metadata and delimiter collisions. Machine-only hexadecimal ref/targetRef/clause/clauseRef identifiers are excluded from prose carry and preserved separately in a bounded carryRefs ledger with path, route, type and provenance, so referential continuity no longer depends on polluting semantic carry text. The verified VAJRA→GUT regression confirms targetRef continuity through carryRefs while the prose summary remains free of those machine tokens. These are deterministic structural normalization and routing rules, not semantic deletion, semantic novelty detection, semantic identity, source-truth judgment or proof that all metabolic echo is solved."
     },
     "vajra": {
       "mode": "EXEC_CONNECTED_THICKENED",
