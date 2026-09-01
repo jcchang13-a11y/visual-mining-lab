@@ -1,7 +1,7 @@
 {
   "schema": "nostromo-vajra-uncertainty-test/v0.3.4",
-  "completedAt": "2026-09-01T10:09:18.869Z",
-  "status": "PASS",
+  "completedAt": "2026-09-01T12:09:47.664Z",
+  "status": "FAIL",
   "guards": {
     "explicitUncertaintyCannotClose": true,
     "negatedSupportCannotClose": true,
@@ -25,6 +25,31 @@
       "summarySample": "[CONTRADICTION->VAJRA] 主動尋找最小反例與破壞條件 · [CONTRADICTION->VAJRA] 主動尋找最小反例與破壞條件：針對本輪 EMPIRICAL 命題（ref:20708907; clause:bf2b3177），哪個前提最可能先失效？ · [CLAIM->DROPLET] EMPIRICAL · [EVIDENCE_OR_PROVENANCE->MUTHER] 要求可追溯證據並區分支持與缺席證據 · [CLAIM->DROPLET] 命題成立條件需要顯式化 · [EVIDENCE_OR_PROVENANCE->MUTHER] 資料品質、測量方式與來源獨立性需要檢查 · [CLAIM->DROPLET] Preferred organ is a routing request"
     }
   },
-  "failures": [],
+  "failures": [
+    {
+      "type": "GUARD_VERSION_MISSING",
+      "detail": "0.3.5"
+    },
+    {
+      "type": "INSUFFICIENT_VERSION",
+      "detail": "0.3.5"
+    },
+    {
+      "type": "NEGATED_REFUTE_VERSION",
+      "detail": "0.3.5"
+    },
+    {
+      "type": "ZH_UNCERTAIN_VERSION",
+      "detail": "0.3.5"
+    },
+    {
+      "type": "UNSPECIFIED_VERSION",
+      "detail": "0.3.5"
+    },
+    {
+      "type": "MIXED_VERSION",
+      "detail": "0.3.5"
+    }
+  ],
   "boundary": "PASS certifies only a bounded lexical anti-false-certainty guard over handoff receipt relations plus a GUT regression. Closure now requires an unambiguous SUPPORTS or REFUTES polarity after uncertainty screening; MIXED remains unresolved. It does not semantically judge relevance, evidence quality, truth, or whether one source should outweigh another."
 }
