@@ -9,6 +9,22 @@
 
 【大乘正宗分第三】
 佛告須菩提：「諸菩薩摩訶薩應如是降伏其心：所有一切眾生之類，若卵生，若胎生，若濕生，若化生；若有色，若無色；若有想，若無想，若非有想非無想，我皆令入無餘涅槃而滅度之。如是滅度無量無數無邊眾生，實無眾生得滅度者。何以故？須菩提，若菩薩有我相、人相、眾生相、壽者相，即非菩薩。」
+[[/SUTRA]]`,
+'30220':`[[SUTRA: 本單元涉及經文｜妙行無住分第四]]
+【妙行無住分第四】
+「復次，須菩提，菩薩於法，應無所住，行於布施。所謂不住色布施，不住聲、香、味、觸、法布施。
+
+須菩提，菩薩應如是布施，不住於相。何以故？若菩薩不住相布施，其福德不可思量。
+
+須菩提，於意云何？東方虛空可思量不？」
+
+「不也，世尊。」
+
+「須菩提，南西北方、四維、上下虛空，可思量不？」
+
+「不也，世尊。」
+
+「須菩提，菩薩無住相布施，福德亦復如是不可思量。須菩提，菩薩但應如所教住。」
 [[/SUTRA]]`};const p=new URLSearchParams(location.search);let u=p.get('u')||units[0];let i=units.indexOf(u);if(i<0){i=0;u=units[0]}document.getElementById('unitTitle').textContent=u;document.getElementById('status').textContent=`單元 ${String(i+1).padStart(2,'0')} / 22`;const nav=document.getElementById('nav');if(i>0)nav.innerHTML+=`<a href="reader.html?u=${units[i-1]}">← ${units[i-1]}</a>`;if(i<units.length-1)nav.innerHTML+=`<a href="reader.html?u=${units[i+1]}">${units[i+1]} →</a>`;
 function makeFormula(label,block=false){const f=document.createElement('span');f.className='gcb-formula'+(block?' block':'');const n=document.createElement('span');n.className='gcb-name';n.textContent=`「${label}」`;const b=document.createElement('span');b.className='gcb-bar';const d=document.createElement('span');d.className='gcb-neg';d.textContent=`～${label}`;f.append(n,b,d);return f}
 function appendInline(parent,line){const re=/\{\{([^{}\n]+)\}\}/g;let last=0,m;while((m=re.exec(line))){if(m.index>last)parent.append(document.createTextNode(line.slice(last,m.index)));parent.append(makeFormula(m[1].trim(),line.trim()===m[0]));last=re.lastIndex}if(last<line.length)parent.append(document.createTextNode(line.slice(last)))}
