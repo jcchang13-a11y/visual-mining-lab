@@ -51,6 +51,14 @@
 「須菩提，於意云何？如來得阿耨多羅三藐三菩提耶？如來有所說法耶？」
 
 須菩提言：「如我解佛所說義，無有定法名阿耨多羅三藐三菩提，亦無有定法如來可說。何以故？如來所說法，皆不可取、不可說、非法、非非法。所以者何？一切賢聖皆以無為法而有差別。」
+[[/SUTRA]]`,
+'30260B':`[[SUTRA: 本單元涉及經文｜依法出生分第八]]
+【依法出生分第八】
+「須菩提，於意云何？若人滿三千大千世界七寶，以用布施，是人所得福德，寧為多不？」
+
+須菩提言：「甚多，世尊。何以故？是福德即非福德性，是故如來說福德多。」
+
+「若復有人，於此經中受持乃至四句偈等，為他人說，其福勝彼。何以故？須菩提，一切諸佛，及諸佛阿耨多羅三藐三菩提法，皆從此經出。須菩提，所謂佛法者，即非佛法。」
 [[/SUTRA]]`};const p=new URLSearchParams(location.search);let u=p.get('u')||units[0];let i=units.indexOf(u);if(i<0){i=0;u=units[0]}document.getElementById('unitTitle').textContent=u;document.getElementById('status').textContent=`單元 ${String(i+1).padStart(2,'0')} / 22`;const nav=document.getElementById('nav');if(i>0)nav.innerHTML+=`<a href="reader.html?u=${units[i-1]}">← ${units[i-1]}</a>`;if(i<units.length-1)nav.innerHTML+=`<a href="reader.html?u=${units[i+1]}">${units[i+1]} →</a>`;
 function makeFormula(label,block=false){const f=document.createElement('span');f.className='gcb-formula'+(block?' block':'');const n=document.createElement('span');n.className='gcb-name';n.textContent=`「${label}」`;const b=document.createElement('span');b.className='gcb-bar';const d=document.createElement('span');d.className='gcb-neg';d.textContent=`～${label}`;f.append(n,b,d);return f}
 function appendInline(parent,line){const re=/\{\{([^{}\n]+)\}\}/g;let last=0,m;while((m=re.exec(line))){if(m.index>last)parent.append(document.createTextNode(line.slice(last,m.index)));parent.append(makeFormula(m[1].trim(),line.trim()===m[0]));last=re.lastIndex}if(last<line.length)parent.append(document.createTextNode(line.slice(last)))}
