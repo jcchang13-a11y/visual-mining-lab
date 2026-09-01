@@ -1,6 +1,6 @@
 {
   "schema": "nostromo-vajra-conflict-escalation-test/v0.3.0",
-  "completedAt": "2026-09-01T22:04:38.722Z",
+  "completedAt": "2026-09-01T23:07:30.547Z",
   "status": "PASS",
   "guards": {
     "multiOrganEscalation": true,
@@ -172,7 +172,7 @@
   "returnIntake": {
     "organ": "VAJRA",
     "capability": "CONFLICT_ESCALATION_RETURN_INTAKE",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "status": "RETURNS_ACCEPTED_REVIEW_REQUIRED",
     "closureBlocked": true,
     "closureAuthority": "NONE",
@@ -271,7 +271,7 @@
     ],
     "quarantine": [],
     "next": "Feed accepted receipt objects back into VAJRA conflict state as adjudication context; keep the contested branch open and use the returned organ differences to choose the next discriminating question.",
-    "boundary": "Deterministic packet-correlation and return-quality guard. It blocks scope loss, wrong-organ substitution, replay duplicates, provenance-less returns and placeholder material. Even a complete three-organ return set remains REVIEW_REQUIRED and cannot close a contested VAJRA branch by itself."
+    "boundary": "Deterministic packet-correlation and return-quality guard. It blocks scope loss, wrong-organ substitution, exact replay duplicates, mutated replays of an already accepted packet, provenance-less returns and placeholder material. One issued packet can contribute at most one accepted return per intake. Even a complete three-organ return set remains REVIEW_REQUIRED and cannot close a contested VAJRA branch by itself."
   },
   "contextIntegration": {
     "unresolved": [
@@ -381,6 +381,7 @@
       "CLAUSE_REF_MISMATCH",
       "INSUFFICIENT_RETURN_MATERIAL",
       "INSUFFICIENT_TARGET_RELATION",
+      "PACKET_ALREADY_RETURNED",
       "PROVENANCE_REQUIRED",
       "REPLAY_DUPLICATE",
       "WRONG_RETURNING_ORGAN"
