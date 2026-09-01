@@ -1,6 +1,6 @@
 {
-  "schema": "nostromo-organ-registry/v1.24",
-  "updatedAt": "2026-09-01T10:08:00+08:00",
+  "schema": "nostromo-organ-registry/v1.25",
+  "updatedAt": "2026-09-01T18:12:00+08:00",
   "truthRule": "DISPLAYED STATE MUST FOLLOW EVIDENCE",
   "evidence": "ci-last-result.json plus formal-round-last-result.json plus connector-last-result.json plus muther-falsify-last-result.json plus droplet-claim-verify-last-result.json plus gut-metabolism-last-result.json plus gut-lineage-last-result.json plus vajra-dynamic-last-result.json plus vajra-uncertainty-last-result.json plus shroom-feedback-last-result.json",
   "latestFormalRound": "greenhouse/r113-nostromo-formal-round.json",
@@ -30,17 +30,17 @@
   },
   "latestThickening": {
     "organ": "VAJRA",
-    "version": "VAJRA v0.3.2",
-    "status": "VERIFIED_EXPLICIT_UNCERTAINTY_FALSE_CERTAINTY_GUARD",
+    "version": "VAJRA v0.3.4",
+    "status": "VERIFIED_MIXED_POLARITY_FALSE_CLOSURE_GUARD",
     "test": "vajra-uncertainty-last-result.json",
     "capabilities": [
-      "a structurally valid receipt whose relation explicitly says evidence is insufficient, indeterminate, unknown, or unable to support/refute no longer closes a handoff branch",
-      "English negated-support/refute patterns and Chinese uncertainty phrases are retained as audited INDETERMINATE_RELATION rejections",
-      "uncertain returns preserve the branch as unresolved instead of manufacturing closure",
-      "positive support receipts can still close when they satisfy the existing target, clause, organ, execution, provenance, substance and replay guards",
-      "VAJRA-to-GUT regression remains intact and inherited target substrate is not reintroduced into carry summary"
+      "explicit uncertainty, negated support/refute and noncommittal relation wording cannot close a structurally valid handoff branch",
+      "a single receipt carrying both support and refute polarity is retained as MIXED_RELATION and leaves the branch unresolved instead of manufacturing a binary resolution",
+      "positive SUPPORTS and explicit REFUTES receipts still close when they satisfy target, clause, organ, execution, provenance, substance and replay guards",
+      "conflicting qualifying receipts remain CONTESTED rather than being arbitrarily collapsed",
+      "VAJRA-to-GUT regression remains intact under the current bounded test"
     ],
-    "boundary": "Promotion followed successful NOSTROMO Integration Test run 188 at commit 4c9feac4dbc1e671413d15169e4ad55e88d486e1. Dedicated vajra-uncertainty-last-result.json is PASS with failures []. VAJRA v0.3.2 is the verified v0.3.1 core plus receipt-uncertainty-guard.js; the core engine file itself remains v0.3.1. The new guard is bounded lexical detection only: it does not semantically judge relevance, evidence quality, truth, or how an uncertain source should be weighted against a supporting source."
+    "boundary": "Promotion is backed by successful NOSTROMO Integration Test run 196 at commit a8ee3b0b31bff9504633781ee01833b562298da8. Dedicated vajra-uncertainty-last-result.json is PASS with failures [] and schema v0.3.4. This is a bounded lexical/structural anti-false-certainty guard only: it does not semantically judge relevance, evidence quality, source independence, truth, or how competing sources should be weighted."
   },
   "organs": {
     "shrooming": {
@@ -93,9 +93,9 @@
       "mode": "EXEC_CONNECTED_THICKENED",
       "source": "../vajra/vajra-engine.js + ../vajra/receipt-uncertainty-guard.js",
       "actions": {
-        "DISMANTLE": "VERIFIED_CLAUSE_SCOPED_PROPOSITION_AWARE_HEURISTIC_DISMANTLER_WITH_RECEIPT_SUBSTANCE_REPLAY_CONFLICT_AND_UNCERTAINTY_GUARDS"
+        "DISMANTLE": "VERIFIED_CLAUSE_SCOPED_PROPOSITION_AWARE_HEURISTIC_DISMANTLER_WITH_RECEIPT_SUBSTANCE_REPLAY_CONFLICT_UNCERTAINTY_AND_MIXED_POLARITY_GUARDS"
       },
-      "boundary": "VAJRA v0.3.2 consists of the v0.3.1 proposition-aware dismantler plus a verified uncertainty-aware receipt guard. It retains multiple lexically detected proposition types and bounded syntactic clause decomposition for explicit causal forms. OPEN branch contracts carry targetRef plus clauseRef and require matching lens, preferred organ, execution status, provenance, substantive returned material and relation-to-target before structural closure. Cross-clause receipts are rejected; replay identity canonicalizes both provenance and returned material; conflicting qualifying support/refute receipts remain CONTESTED instead of being arbitrarily closed. The v0.3.2 guard additionally refuses closure when the relation explicitly reports insufficient, indeterminate, unknown or non-supporting/non-refuting evidence, preserving that receipt in the audit as INDETERMINATE_RELATION. All of these remain deterministic lexical/structural heuristics, not semantic adequacy judgment, source-quality judgment, factual truth, or proof that the original proposition is settled."
+      "boundary": "VAJRA v0.3.4 retains the v0.3.1 proposition-aware core and layers the verified receipt uncertainty/relation guard through v0.3.4. It keeps lexically detected proposition types and bounded syntactic clause decomposition for explicit causal forms. OPEN branch contracts carry targetRef plus clauseRef and require matching lens, preferred organ, execution status, provenance, substantive returned material and relation-to-target before structural closure. Cross-clause receipts are rejected; replay identity canonicalizes provenance and returned material; conflicting qualifying support/refute receipts remain CONTESTED; explicit uncertainty and noncommittal relations remain unresolved; and a single receipt containing both support and refute polarity is rejected as MIXED_RELATION rather than falsely closing. These remain deterministic lexical/structural heuristics, not semantic adequacy judgment, source-quality judgment, factual truth, or proof that the original proposition is settled."
     }
   }
 }
