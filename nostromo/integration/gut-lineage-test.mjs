@@ -16,7 +16,7 @@ const sameLineage=globalThis.GutEngine.digest({
   contradictionA:template('abcdef12','12345678'),
   contradictionB:template('fedcba98','87654321')
 },{source});
-check(sameLineage.version==='0.2.19','GUT_VERSION',sameLineage.version);
+check(sameLineage.version==='0.2.20','GUT_VERSION',sameLineage.version);
 check(sameLineage.nutrients.length===2,'SOURCE_NUTRIENTS_LOST',sameLineage.nutrients);
 check(sameLineage.nutrients.every(x=>x.provenance?.inputSource===source),'PROVENANCE_LOST',sameLineage.nutrients);
 check((sameLineage.antiEcho?.volatileLineageSuppressedCount||0)>=1,'VOLATILE_LINEAGE_NOT_SUPPRESSED',sameLineage.antiEcho);
@@ -41,6 +41,15 @@ check(intraAtom.summary.includes('哪一份證據最需要重新驗證'),'INTRA_
 check((intraAtom.nutrients[0]?.text.match(/哪個前提最可能先失效/g)||[]).length===2,'INTRA_ATOM_SOURCE_NUTRIENT_MUTATED',intraAtom.nutrients[0]);
 check(intraAtom.nutrients[0]?.provenance?.inputSource===`${source}/intra-atom`,'INTRA_ATOM_PROVENANCE_LOST',intraAtom.nutrients[0]);
 check((intraAtom.antiEcho?.volatileLineageClauseSuppressedCount||0)>=1,'INTRA_ATOM_VOLATILE_LINEAGE_NOT_ACCOUNTED',intraAtom.antiEcho);
+
+const shortCjkPhrase='主動尋找最小反例與破壞條件';
+const shortCjkNested=globalThis.GutEngine.digest({
+  contradiction:`${shortCjkPhrase}：針對本輪 GENERAL 命題，${shortCjkPhrase}並檢查來源獨立性、替代因果與邊界條件`
+},{source:`${source}/short-cjk-nested`});
+check((shortCjkNested.summary.match(new RegExp(shortCjkPhrase,'g'))||[]).length===1,'SHORT_CJK_NESTED_ECHO_SURVIVED',shortCjkNested.summary);
+check((shortCjkNested.nutrients[0]?.text.match(new RegExp(shortCjkPhrase,'g'))||[]).length===2,'SHORT_CJK_SOURCE_NUTRIENT_MUTATED',shortCjkNested.nutrients[0]);
+check(shortCjkNested.nutrients[0]?.provenance?.inputSource===`${source}/short-cjk-nested`,'SHORT_CJK_PROVENANCE_LOST',shortCjkNested.nutrients[0]);
+check((shortCjkNested.antiEcho?.nestedCarryClauseSuppressedCount||0)>=1,'SHORT_CJK_NESTED_SUPPRESSION_NOT_ACCOUNTED',shortCjkNested.antiEcho);
 
 const signatureEcho=globalThis.GutEngine.digest({
   contradiction:'CONTRADICTION_CONDITIONED：第一個反例要求重新檢查來源獨立性與測量時間：CONTRADICTION_CONDITIONED：第二個反例要求重新檢查替代因果與邊界條件'
@@ -99,19 +108,20 @@ check(observedReplay.text.includes('這是一條不同的未解問題'),'OBSERVE
 check((observedReplay.lineageOnlySuppressed||0)>=1,'OBSERVED_REPLAY_LINEAGE_SUPPRESSION_NOT_ACCOUNTED',observedReplay);
 
 const result={
-  schema:'nostromo-gut-lineage-test/v0.2.19-observed-token-fragment-replay',
+  schema:'nostromo-gut-lineage-test/v0.2.20-script-aware-cjk-nested-echo',
   completedAt:new Date().toISOString(),
   status:failures.length===0?'PASS':'FAIL',
   sameLineage:{summaryItemCount:sameLineage.summaryItemCount,antiEcho:sameLineage.antiEcho,summary:sameLineage.summary},
   substantiveDifference:{summaryItemCount:substantiveDifference.summaryItemCount,antiEcho:substantiveDifference.antiEcho,summary:substantiveDifference.summary},
   intraAtom:{antiEcho:intraAtom.antiEcho,summary:intraAtom.summary,sourceNutrient:intraAtom.nutrients[0]?.text||null},
+  shortCjkNested:{antiEcho:shortCjkNested.antiEcho,summary:shortCjkNested.summary,sourceNutrient:shortCjkNested.nutrients[0]?.text||null},
   lineageSignature:{antiEcho:signatureEcho.antiEcho,summary:signatureEcho.summary,sourceNutrient:signatureEcho.nutrients[0]?.text||null},
   crossSegmentNearEcho:nearDuplicateCarry,
   recursiveWrapperCarry,
   lineageOnlyCarry,
   observedReplay,
   failures,
-  boundary:'This adversarial test preserves source nutrients and provenance while checking cross-atom, intra-atom, repeated machine-lineage signature, cross-segment volatile-lineage carry echo, recursive wrapper growth, repeated short ref/clause-only carry fragments, and a replay derived from the previously observed malformed carry. PASS requires ref:/clause: hexadecimal tokens to survive tokenization intact until lineage-aware suppression removes redundant standalone fragments, while substantively distinct evidence and questions survive.'
+  boundary:'This adversarial test preserves source nutrients and provenance while checking cross-atom, intra-atom, short-CJK nested-clause, repeated machine-lineage signature, cross-segment volatile-lineage carry echo, recursive wrapper growth, repeated short ref/clause-only carry fragments, and a replay derived from the previously observed malformed carry. PASS requires script-aware carry rendering to collapse short meaningful Chinese phrases when they are replayed inside a longer clause, without deleting the underlying nutrient or provenance.'
 };
 await fs.writeFile(path.join(root,'nostromo/integration/gut-lineage-last-result.json'),JSON.stringify(result,null,2)+'\n','utf8');
 console.log(JSON.stringify(result,null,2));
