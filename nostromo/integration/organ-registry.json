@@ -1,6 +1,6 @@
 {
-  "schema": "nostromo-organ-registry/v1.29",
-  "updatedAt": "2026-09-02T05:18:00+08:00",
+  "schema": "nostromo-organ-registry/v1.30",
+  "updatedAt": "2026-09-02T07:08:00+08:00",
   "truthRule": "DISPLAYED STATE MUST FOLLOW EVIDENCE",
   "evidence": "ci-last-result.json plus formal-round-last-result.json plus connector-last-result.json plus muther-falsify-last-result.json plus droplet-claim-verify-last-result.json plus gut-metabolism-last-result.json plus gut-lineage-last-result.json plus vajra-dynamic-last-result.json plus vajra-uncertainty-last-result.json plus vajra-conflict-escalation-last-result.json plus shroom-feedback-last-result.json",
   "latestFormalRound": "greenhouse/r113-nostromo-formal-round.json",
@@ -29,18 +29,18 @@
     "boundary": "Isolated counterfactual executor only. It deliberately includes parent round ordinal in participant selection and has been CI-verified against R111 and R112. It does not write or advance formal greenhouse history and is engineering evidence that NOSTROMO can execute and audit a parent-sensitive transition, not evidence that the real SHROOMING population is causally path-dependent."
   },
   "latestThickening": {
-    "organ": "GUT",
-    "version": "GUT v0.2.24",
-    "status": "VERIFIED_OUT_OF_BAND_REFERENTIAL_CARRY",
-    "test": "gut-metabolism-last-result.json + gut-lineage-last-result.json + vajra-dynamic-last-result.json",
+    "organ": "VAJRA",
+    "version": "VAJRA v0.3.7",
+    "status": "VERIFIED_MUTATED_PACKET_REPLAY_CONTAINMENT",
+    "test": "vajra-conflict-escalation-last-result.json + ci-last-result.json",
     "capabilities": [
-      "machine-only hexadecimal ref, targetRef, clause and clauseRef identifiers are removed from prose carry so lineage metadata cannot masquerade as semantic novelty",
-      "a bounded out-of-band carryRefs ledger preserves referential identity, route, type, path and provenance without reinserting identifiers into semantic carry text",
-      "original nutrient atoms, routing decisions and provenance remain unchanged by carry rendering cleanup",
-      "VAJRA to GUT targetRef continuity now survives through carryRefs while inherited proposition text and machine identifiers remain excluded from prose carry",
-      "existing intra-atom, cross-segment, recursive-wrapper, volatile-lineage, short-CJK and delimiter-collision anti-echo adversarial tests remain green"
+      "one issued adjudication packet can contribute at most one accepted return per intake",
+      "a second return for the same packet is quarantined as PACKET_ALREADY_RETURNED even when material, relation or provenance has been mutated",
+      "mutated replay cannot increase a single organ's accepted-return count or overweight its adjudication contribution",
+      "existing targetRef, clauseRef, returning-organ, provenance, substance, exact-replay and placeholder guards remain active",
+      "original opposing evidence, provenance, conflict state and closureAuthority NONE remain preserved across multi-organ feedback"
     ],
-    "boundary": "Promotion is backed by successful NOSTROMO Integration Test run 220 for commit 277c5f062631c488e978e0b941ab3b82841a4604, followed by bot-recorded result commit 1eaf6be914a2bb24f050543fe9032ff597355179. GUT metabolism, lineage, VAJRA dynamic, all organ regressions and the 50-round integration suite passed. carryRefs preserve identifiers and provenance only; they are not evidence, truth claims or semantic nutrients. This verifies deterministic structural containment and referential continuity, not semantic novelty detection, semantic equivalence, source truth or complete elimination of all possible metabolic echo."
+    "boundary": "Promotion is backed by successful NOSTROMO Integration Test run 225 for commit ab4f1efeae74be1824624abadd367931a2a8d534. VAJRA conflict escalation, uncertainty/conflict guards, GUT regressions, SHROOMING feedback, MUTHER, DROPLET, formal greenhouse continuity and the 50-round integration suite all passed. This verifies deterministic packet-level replay containment only. It does not prove returned material is true, that different provenance strings represent independent real-world sources, or that multi-organ conflict has been semantically adjudicated."
   },
   "organs": {
     "shrooming": {
@@ -93,9 +93,9 @@
       "mode": "EXEC_CONNECTED_THICKENED",
       "source": "../vajra/vajra-engine.js + ../vajra/receipt-uncertainty-guard.js + ./vajra-conflict-escalation.mjs",
       "actions": {
-        "DISMANTLE": "VERIFIED_PROPOSITION_AWARE_DISMANTLER_WITH_RECEIPT_GUARDS_AND_GUARDED_MULTI_ORGAN_CONFLICT_RETURN_INTAKE"
+        "DISMANTLE": "VERIFIED_PROPOSITION_AWARE_DISMANTLER_WITH_RECEIPT_GUARDS_MULTI_ORGAN_CONTEXT_AND_PACKET_REPLAY_CONTAINMENT"
       },
-      "boundary": "VAJRA v0.3.6 retains the v0.3.1 proposition-aware core and layers verified uncertainty/provenance, contest-persistence and conflict-return guards. OPEN branch contracts carry targetRef plus clauseRef and require matching lens, preferred organ, execution status, provenance, substantive returned material and relation-to-target before structural closure. Conflicting qualifying independent-provenance support/refute receipts remain CONTESTED; explicit uncertainty, mixed polarity and bounded negated-polarity wording cannot manufacture closure. Preserved contests generate three auditable open work packets: DROPLET for source-quality adjudication, MUTHER for context/method audit, and SHROOMING for criterion/boundary stress. Packet returns must match issued identity, returning organ and scope, retain provenance and substantive relation, and survive replay/placeholder guards; malformed returns are quarantined. Even all three accepted returns have closureAuthority NONE and remain review-required. These remain deterministic lexical/structural heuristics and routing contracts, not semantic adjudication, source-quality weighting, factual truth, or proof that the original proposition is settled."
+      "boundary": "VAJRA v0.3.7 retains the proposition-aware core and verified uncertainty/provenance, contest-persistence and multi-organ conflict-context guards. Preserved contests generate DROPLET, MUTHER and SHROOMING adjudication packets with explicit scope and provenance contracts. Packet returns must match issued identity, returning organ, targetRef, clauseRef and substantive relation. Exact replays are blocked, and a second mutated return for an already accepted packet is now quarantined as PACKET_ALREADY_RETURNED, preventing one organ from amplifying its weight by changing text or provenance on the same work order. Complete three-organ context can change VAJRA nextAction/nextQuestion while closureAuthority remains NONE and opposing evidence stays preserved. These remain deterministic lexical/structural heuristics and routing contracts, not semantic adjudication, source-quality weighting, factual truth, real-world source-independence proof or evidence that the original proposition is settled."
     }
   }
 }
