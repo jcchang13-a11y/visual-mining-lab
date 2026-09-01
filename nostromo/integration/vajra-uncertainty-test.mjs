@@ -12,7 +12,7 @@ const target='目前測試資料顯示 GUT 可以隔離重複污染。';
 const base=globalThis.VajraEngine.run(target,6);
 const contract=base.handoffs.find(x=>x.lens==='evidence');
 check(Boolean(contract),'EVIDENCE_CONTRACT_MISSING',base.handoffs);
-check(globalThis.VajraEngine.receiptUncertaintyGuardVersion==='0.3.5','GUARD_VERSION_MISSING',globalThis.VajraEngine.receiptUncertaintyGuardVersion);
+check(globalThis.VajraEngine.receiptUncertaintyGuardVersion==='0.3.6','GUARD_VERSION_MISSING',globalThis.VajraEngine.receiptUncertaintyGuardVersion);
 const common={targetRef:contract.targetRef,clauseRef:contract.clauseRef,lens:'evidence',organ:contract.preferredOrgan,status:'EXECUTED',material:'The searched evidence bundle contains multiple traceable observations and preserves source provenance.'};
 const insufficient={...common,provenanceFingerprint:'prov-uncertain-001',relationToTarget:'The available evidence is insufficient and does not support a conclusion about the target claim.'};
 const negatedRefute={...common,provenanceFingerprint:'prov-uncertain-002',relationToTarget:'The evidence does not refute the target claim, but remains insufficient to support it.'};
@@ -35,7 +35,7 @@ for(const [label,receipt,reason,counter] of [
   ['MIXED',mixedRelation,'MIXED_RELATION','mixed']
 ]){
   const applied=globalThis.VajraEngine.applyHandoffResults(base,[receipt]);
-  check(applied.version==='0.3.5',`${label}_VERSION`,applied.version);
+  check(applied.version==='0.3.6',`${label}_VERSION`,applied.version);
   check(applied.handoffResolution.resolved===0,`${label}_FALSE_RESOLUTION`,applied.handoffResolution);
   check(applied.unresolved.find(x=>x.lens==='evidence')?.status==='UNRESOLVED',`${label}_BRANCH_CLOSED`,applied.unresolved);
   check(applied.handoffResolution.rejectedReceipts.some(x=>x.reasons?.includes(reason)),`${label}_REJECTION_NOT_AUDITED`,applied.handoffResolution);
@@ -49,10 +49,24 @@ check(supportApplied.unresolved.find(x=>x.lens==='evidence')?.status==='RESOLVED
 const refuteApplied=globalThis.VajraEngine.applyHandoffResults(base,[refuting]);
 check(refuteApplied.handoffResolution.resolved===1,'REFUTING_RECEIPT_BLOCKED',refuteApplied.handoffResolution);
 check(refuteApplied.unresolved.find(x=>x.lens==='evidence')?.status==='RESOLVED_BY_RECEIPT','REFUTING_BRANCH_NOT_CLOSED',refuteApplied.unresolved);
-const gut=globalThis.GutEngine.digest({vajra:globalThis.VajraEngine.applyHandoffResults(base,[mixedRelation])},{source:'VAJRA_MIXED_RELATION_GUT_REGRESSION',inheritedSubstrates:[target]});
-check(!gut.summary.includes(target),'GUT_TARGET_ECHO_AFTER_MIXED_RELATION_GUARD',gut.summary);
+const sameProvSupport={...common,provenanceFingerprint:'prov-same-source-001',material:'The same provenance identity emits one supporting return about the tested condition.',relationToTarget:'This return supports the target claim under the tested condition.'};
+const sameProvRefute={...common,provenanceFingerprint:'PROV SAME SOURCE 001',material:'The same provenance identity also emits an opposing return about the same tested condition.',relationToTarget:'This return refutes the target claim under the tested condition.'};
+const sameProvApplied=globalThis.VajraEngine.applyHandoffResults(base,[sameProvSupport,sameProvRefute]);
+const sameProvBranch=sameProvApplied.unresolved.find(x=>x.lens==='evidence');
+check(sameProvApplied.version==='0.3.6','SAME_PROVENANCE_VERSION',sameProvApplied.version);
+check(sameProvApplied.handoffResolution.resolved===0,'SAME_PROVENANCE_FALSE_RESOLUTION',sameProvApplied.handoffResolution);
+check(sameProvApplied.handoffResolution.contested===0,'SAME_PROVENANCE_FALSE_INTERSOURCE_CONTEST',sameProvApplied.handoffResolution);
+check(sameProvApplied.handoffResolution.sameProvenanceConflict===2,'SAME_PROVENANCE_CONFLICT_COUNT',sameProvApplied.handoffResolution);
+check(sameProvApplied.handoffResolution.rejectedReceipts.filter(x=>x.reasons?.includes('SAME_PROVENANCE_CONFLICT')).length===2,'SAME_PROVENANCE_REJECTIONS_NOT_AUDITED',sameProvApplied.handoffResolution);
+check(sameProvBranch?.status==='UNRESOLVED','SAME_PROVENANCE_BRANCH_CLOSED',sameProvBranch);
+const independentApplied=globalThis.VajraEngine.applyHandoffResults(base,[sameProvSupport,{...sameProvRefute,provenanceFingerprint:'prov-independent-source-002'}]);
+check(independentApplied.handoffResolution.resolved===0,'INDEPENDENT_CONFLICT_FALSE_RESOLUTION',independentApplied.handoffResolution);
+check(independentApplied.handoffResolution.contested===1,'INDEPENDENT_CONFLICT_NOT_PRESERVED',independentApplied.handoffResolution);
+check(independentApplied.unresolved.find(x=>x.lens==='evidence')?.status==='CONTESTED_BY_RECEIPTS','INDEPENDENT_CONFLICT_BRANCH_NOT_CONTESTED',independentApplied.unresolved);
+const gut=globalThis.GutEngine.digest({vajra:globalThis.VajraEngine.applyHandoffResults(base,[mixedRelation]),sameProvenance:sameProvApplied},{source:'VAJRA_PROVENANCE_GUARD_GUT_REGRESSION',inheritedSubstrates:[target]});
+check(!gut.summary.includes(target),'GUT_TARGET_ECHO_AFTER_PROVENANCE_GUARD',gut.summary);
 check(gut.ingested>0&&gut.absorbed>=0,'GUT_REGRESSION_FAILED',{ingested:gut.ingested,absorbed:gut.absorbed});
-const result={schema:'nostromo-vajra-uncertainty-test/v0.3.5',completedAt:new Date().toISOString(),status:failures.length?'FAIL':'PASS',guards:{explicitUncertaintyCannotClose:true,negatedSupportCannotClose:true,negatedRefuteCannotClose:true,negatedContradictionCannotClose:true,notInconsistentCannotClose:true,failsToSupportCannotClose:true,chineseUncertaintyCannotClose:true,chineseNegatedPolarityCannotClose:true,longUnspecifiedRelationCannotClose:true,mixedPolarityCannotClose:true,positiveSupportStillCloses:true,explicitRefuteStillCloses:true,gutRegression:true},finding:{classification:'NEGATED_POLARITY_FALSE_CLOSURE_GUARD_ADDED',detail:'v0.3.5 blocks polarity tokens when they occur inside bounded negation or hedge constructions. Phrases such as “does not contradict”, “fails to support”, “not inconsistent with”, and explicit Chinese negated-polarity equivalents are now audited as INDETERMINATE_RELATION instead of being allowed to inherit SUPPORTS/REFUTES from a lexical substring.'},crossOrgan:{gut:{ingested:gut.ingested,absorbed:gut.absorbed,quarantined:gut.quarantined,summarySample:gut.summary.slice(0,360)}},failures,boundary:'PASS certifies only a bounded lexical anti-false-certainty guard over handoff receipt relations plus a GUT regression. Closure requires an unambiguous SUPPORTS or REFUTES polarity after uncertainty and negation screening; MIXED, UNSPECIFIED and bounded negated-polarity wording remain unresolved. It does not semantically judge relevance, evidence quality, truth, or whether one source should outweigh another.'};
+const result={schema:'nostromo-vajra-uncertainty-test/v0.3.6',completedAt:new Date().toISOString(),status:failures.length?'FAIL':'PASS',guards:{explicitUncertaintyCannotClose:true,negatedSupportCannotClose:true,negatedRefuteCannotClose:true,negatedContradictionCannotClose:true,notInconsistentCannotClose:true,failsToSupportCannotClose:true,chineseUncertaintyCannotClose:true,chineseNegatedPolarityCannotClose:true,longUnspecifiedRelationCannotClose:true,mixedPolarityCannotClose:true,positiveSupportStillCloses:true,explicitRefuteStillCloses:true,sameCanonicalProvenanceOppositionCannotResolve:true,sameCanonicalProvenanceOppositionIsNotCountedAsInterSourceContest:true,independentProvenanceOppositionStillContests:true,gutRegression:true},finding:{classification:'SAME_PROVENANCE_OPPOSING_DIRECTION_GUARD_ADDED',detail:'v0.3.6 canonicalizes the caller-supplied provenance identity before branch resolution. Opposing SUPPORTS/REFUTES returns carrying the same canonical provenance are audited as SAME_PROVENANCE_CONFLICT and leave the branch open rather than being treated as independent opposing evidence or resolved by arrival order. Distinct-provenance opposing returns remain CONTESTED_BY_RECEIPTS.'},crossOrgan:{gut:{ingested:gut.ingested,absorbed:gut.absorbed,quarantined:gut.quarantined,summarySample:gut.summary.slice(0,360)}},failures,boundary:'PASS certifies only a bounded lexical/structural anti-false-certainty and provenance-topology guard plus a GUT regression. Provenance identity is caller-supplied metadata, not proof of real-world source independence. The guard prevents one canonical provenance identity from masquerading as independent opposing evidence; it does not semantically judge relevance, evidence quality, truth, or how genuinely independent sources should be weighted.'};
 await fs.writeFile(path.join(root,'nostromo/integration/vajra-uncertainty-last-result.json'),JSON.stringify(result,null,2)+'\n','utf8');
 console.log(JSON.stringify(result,null,2));
 if(result.status!=='PASS')process.exitCode=1;
