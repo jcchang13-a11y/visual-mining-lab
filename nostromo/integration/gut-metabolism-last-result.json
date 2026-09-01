@@ -1,9 +1,9 @@
 {
-  "schema": "nostromo-gut-metabolism-test/v0.2.19",
-  "completedAt": "2026-09-01T04:06:47.326Z",
-  "status": "FAIL",
+  "schema": "nostromo-gut-metabolism-test/v0.2.21",
+  "completedAt": "2026-09-01T04:10:40.238Z",
+  "status": "PASS",
   "gut": {
-    "version": "0.2.20",
+    "version": "0.2.21",
     "mode": "DETERMINISTIC_HEURISTIC_ROUTER",
     "typeCounts": {
       "CLAIM": 2,
@@ -22,7 +22,7 @@
       "VAJRA": 1,
       "HOLD": 4
     },
-    "boundary": "Deterministic heuristic metabolism only. Carry-summary lineage comparison neutralizes volatile ref:/clause: hexadecimal identifiers and long hash tokens before diversity selection so provenance-only identifier changes do not masquerade as new metabolic content; the same normalization is also applied to fullwidth-colon-delimited clauses inside a single carry atom, while original nutrient atoms, routes and provenance remain untouched. Script-aware carry compaction treats a clause as substantive when it has at least 12 normalized characters or at least 8 CJK characters, allowing short meaningful Chinese phrases nested inside longer clauses to collapse in carry rendering without mutating source nutrients. Summary carry collapses repeated standalone machine lineage signatures of 5–64 characters containing _ or - only in carry rendering; distinct prose clauses and source nutrients remain intact. Summary carry additionally collapses consecutive exact 1–4 character colon-delimited token runs while preserving a single token. Inherited substrate subtraction removes only exact full normalized substrates; truncated prefixes are never deletion candidates. These rules are auditable heuristics, not semantic truth."
+    "boundary": "Deterministic heuristic metabolism only. Carry-summary lineage comparison neutralizes volatile ref:/clause: hexadecimal identifiers and long hash tokens before diversity selection so provenance-only identifier changes do not masquerade as new metabolic content; the same normalization is also applied to fullwidth-colon-delimited clauses inside a single carry atom, while original nutrient atoms, routes and provenance remain untouched. Script-aware carry compaction runs whenever at least two fullwidth-colon clauses are present and treats a clause as substantive when it has at least 12 normalized characters or at least 8 CJK characters, allowing short meaningful Chinese phrases nested inside longer clauses to collapse in carry rendering without mutating source nutrients. Summary carry collapses repeated standalone machine lineage signatures of 5–64 characters containing _ or - only in carry rendering; distinct prose clauses and source nutrients remain intact. Summary carry additionally collapses consecutive exact 1–4 character colon-delimited token runs while preserving a single token. Inherited substrate subtraction removes only exact full normalized substrates; truncated prefixes are never deletion candidates. These rules are auditable heuristics, not semantic truth."
   },
   "antiEcho": {
     "nested": {
@@ -215,7 +215,7 @@
       "firstAppliedRound": 2,
       "privacy": "PRIVATE DRIVE RAW CONTENT/TITLES/IDS/URLS ARE NOT INCLUDED"
     },
-    "lastCarry": "[CONTRADICTION->VAJRA] CONTRADICTION_CONDITIONED · [CONTRADICTION->VAJRA] 以 counterexample 位置重讀：CONTRADICTION_CONDITIONED：主動尋找最小反例與破壞條件：針對本輪 GENERAL 命題（ref:14b7682f; clause:ba57259a），哪個前提最可能先失效？：VERIFIES AN · [CONTRADICTION->VAJRA] clause:ba57259a），哪個前提最可能先失效？：VERIFIES AN EXPLICIT URL O · 主動尋找最小反例與破壞條件：針對本輪 GENERAL 命題（ref:14b7682f：VERIFIES AN EXPLICIT URL ONLY · [CLAIM->DROPLET] VERIFIES AN EXPLICIT URL ONLY; DOES NOT CLAIM SEARCH-ENGINE DISCOVERY · [EVIDENCE_OR_PROVENANCE->MUTHER] 200 · [CLAIM->DROPLET] Connector actions executed externally once; later rounds apply a redacted evidence-derived feedback directive and do not claim re-execution. · [EVIDENCE_OR_PROVENANCE->MUTHER] nostromo-connector-evidence-carry/v1.0 · [QUESTION->SHROOMING] EXECUTES A NON-STATE-MUTATING QUESTION PROBE AGAINST THE LATEST PUBLISHED GREENHOUSE HISTORY. REACTIONS ARE TRACEABLE TRANSFORMATIONS OF RECORDED HISTO",
+    "lastCarry": "[CONTRADICTION->VAJRA] CONTRADICTION_CONDITIONED · [CONTRADICTION->VAJRA] 以 counterexample 位置重讀：CONTRADICTION_CONDITIONED：主動尋找最小反例與破壞條件：針對本輪 GENERAL 命題（ref:ebcef194; clause:ee6da708），哪個前提最可能先失效？：VERIFIES AN · [CONTRADICTION->VAJRA] clause:ee6da708），哪個前提最可能先失效？：VERIFIES AN EXPLICIT URL O · 主動尋找最小反例與破壞條件：針對本輪 GENERAL 命題（ref:ebcef194：VERIFIES AN EXPLICIT URL ONLY · [CLAIM->DROPLET] VERIFIES AN EXPLICIT URL ONLY; DOES NOT CLAIM SEARCH-ENGINE DISCOVERY · [EVIDENCE_OR_PROVENANCE->MUTHER] 200 · [CLAIM->DROPLET] Connector actions executed externally once; later rounds apply a redacted evidence-derived feedback directive and do not claim re-execution. · [EVIDENCE_OR_PROVENANCE->MUTHER] nostromo-connector-evidence-carry/v1.0 · [QUESTION->SHROOMING] EXECUTES A NON-STATE-MUTATING QUESTION PROBE AGAINST THE LATEST PUBLISHED GREENHOUSE HISTORY. REACTIONS ARE TRACEABLE TRANSFORMATIONS OF RECORDED HISTO",
     "roundAntiEcho": [
       {
         "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PRE_POST_ADJACENT_SEGMENT_COLLAPSE_12+PREFIX_DIVERSITY_96+SHARED_BODY_SUMMARY_DIVERSITY_80_192+VOLATILE_REF_LINEAGE_NEUTRALIZATION+TAGGED_PAYLOAD_DEDUP+EXACT_TAGGED_TAIL_DEDUP_80+ROUTE_METADATA_STRIP+DELIMITED_LONG_SEGMENT_DEDUP+SUMMARY_EXACT_NONADJACENT_FULLWIDTH_COLON_CLAUSE_DEDUP+SUMMARY_SCRIPT_AWARE_NESTED_CLAUSE_COLLAPSE+SUMMARY_VOLATILE_LINEAGE_FULLWIDTH_COLON_CLAUSE_DEDUP+SUMMARY_CONSECUTIVE_SHORT_TOKEN_COLLAPSE_4+SUMMARY_REPEATED_LINEAGE_SIGNATURE_COLLAPSE_5_64",
@@ -280,11 +280,6 @@
     ],
     "boundary": "Certifies the closed-loop executor path plus carry-layer metabolic containment and a deterministic SHROOMING feedback-conditioned lens selector. From round 2 onward, redacted connector feedback can change SHROOMING inspection priority without claiming semantic learning or independent persistent agents. Recursive wrapper growth, ref/clause token fragmentation, embedded-token replay, and repeated lineage-only carry fragments are contained only at carry rendering; GUT nutrient atoms, routes and provenance remain intact. GitHub Actions does not itself search private Drive or the web."
   },
-  "failures": [
-    {
-      "type": "GUT_VERSION",
-      "detail": "0.2.20"
-    }
-  ],
+  "failures": [],
   "boundary": "PASS proves deterministic heuristic routing, provenance retention, quarantine/hold behavior, conservative exact inherited-substrate removal, exact tagged-payload de-echoing, exact repeated tagged-tail suppression while retaining distinct heads, pre/post short exact adjacent intra-atom echo suppression, shared-body summary diversity, exact non-adjacent full-width-colon carry-clause compaction, consecutive exact 1–4 character carry-token run collapse without mutating nutrient atoms or provenance, near-duplicate preservation, structured-snippet protection, and a 3-round cross-organ connector-feedback regression. Repeated standalone machine-lineage signature suppression and volatile ref/clause lineage normalization are tested separately. It does not prove semantic novelty, semantic correctness, or source truth."
 }

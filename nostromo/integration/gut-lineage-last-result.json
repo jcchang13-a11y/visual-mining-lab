@@ -1,7 +1,7 @@
 {
-  "schema": "nostromo-gut-lineage-test/v0.2.20-script-aware-cjk-nested-echo",
-  "completedAt": "2026-09-01T04:06:47.434Z",
-  "status": "FAIL",
+  "schema": "nostromo-gut-lineage-test/v0.2.21-script-aware-cjk-nested-echo",
+  "completedAt": "2026-09-01T04:10:40.330Z",
+  "status": "PASS",
   "sameLineage": {
     "summaryItemCount": 1,
     "antiEcho": {
@@ -93,9 +93,9 @@
       "volatileLineageClauseSuppressedCount": 0,
       "shortCarryTokenSuppressedCount": 0,
       "lineageSignatureSuppressedCount": 0,
-      "nestedCarryClauseSuppressedCount": 0
+      "nestedCarryClauseSuppressedCount": 1
     },
-    "summary": "[CONTRADICTION->VAJRA] 主動尋找最小反例與破壞條件：針對本輪 GENERAL 命題，主動尋找最小反例與破壞條件並檢查來源獨立性、替代因果與邊界條件",
+    "summary": "[CONTRADICTION->VAJRA] 針對本輪 GENERAL 命題，主動尋找最小反例與破壞條件並檢查來源獨立性、替代因果與邊界條件",
     "sourceNutrient": "主動尋找最小反例與破壞條件：針對本輪 GENERAL 命題，主動尋找最小反例與破壞條件並檢查來源獨立性、替代因果與邊界條件"
   },
   "lineageSignature": {
@@ -186,34 +186,6 @@
     "fingerprint": "2287e9ce710d757b",
     "boundary": "Carry-only containment. ref:/clause: hexadecimal lineage tokens are protected from colon tokenization before intra-segment compaction; standalone lineage fragments are suppressed when the same exact token is already embedded in a retained substantive segment, and repeated standalone lineage classes are also collapsed. Exact/lineage-equivalent clauses, nested long clauses, recursively wrapped near-duplicate clauses, repeated ref/clause-only lineage tokens, and same-route cross-segment near echoes are collapsed before recirculation. Cross-segment comparison uses a containment coefficient over normalized 5-grams so wrapper growth cannot evade the audit merely by adding prefixes; original GUT nutrients, routes and provenance are not mutated."
   },
-  "failures": [
-    {
-      "type": "SHORT_CJK_NESTED_ECHO_SURVIVED",
-      "detail": "[CONTRADICTION->VAJRA] 主動尋找最小反例與破壞條件：針對本輪 GENERAL 命題，主動尋找最小反例與破壞條件並檢查來源獨立性、替代因果與邊界條件"
-    },
-    {
-      "type": "SHORT_CJK_NESTED_SUPPRESSION_NOT_ACCOUNTED",
-      "detail": {
-        "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PRE_POST_ADJACENT_SEGMENT_COLLAPSE_12+PREFIX_DIVERSITY_96+SHARED_BODY_SUMMARY_DIVERSITY_80_192+VOLATILE_REF_LINEAGE_NEUTRALIZATION+TAGGED_PAYLOAD_DEDUP+EXACT_TAGGED_TAIL_DEDUP_80+ROUTE_METADATA_STRIP+DELIMITED_LONG_SEGMENT_DEDUP+SUMMARY_EXACT_NONADJACENT_FULLWIDTH_COLON_CLAUSE_DEDUP+SUMMARY_SCRIPT_AWARE_NESTED_CLAUSE_COLLAPSE+SUMMARY_VOLATILE_LINEAGE_FULLWIDTH_COLON_CLAUSE_DEDUP+SUMMARY_CONSECUTIVE_SHORT_TOKEN_COLLAPSE_4+SUMMARY_REPEATED_LINEAGE_SIGNATURE_COLLAPSE_5_64",
-        "candidateCount": 1,
-        "selectedCount": 1,
-        "suppressedCount": 0,
-        "sharedBodySuppressedCount": 0,
-        "volatileLineageSuppressedCount": 0,
-        "inheritedSubstrateStrippedCount": 0,
-        "nestedEchoAffectedAtoms": 0,
-        "nestedEchoSuppressedCount": 0,
-        "taggedTailSuppressedCount": 0,
-        "routeTagsStripped": 0,
-        "segmentEchoSuppressedCount": 0,
-        "delimitedEchoSuppressedCount": 0,
-        "carryClauseSuppressedCount": 0,
-        "volatileLineageClauseSuppressedCount": 0,
-        "shortCarryTokenSuppressedCount": 0,
-        "lineageSignatureSuppressedCount": 0,
-        "nestedCarryClauseSuppressedCount": 0
-      }
-    }
-  ],
+  "failures": [],
   "boundary": "This adversarial test preserves source nutrients and provenance while checking cross-atom, intra-atom, short-CJK nested-clause, repeated machine-lineage signature, cross-segment volatile-lineage carry echo, recursive wrapper growth, repeated short ref/clause-only carry fragments, and a replay derived from the previously observed malformed carry. PASS requires script-aware carry rendering to collapse short meaningful Chinese phrases when they are replayed inside a longer clause, without deleting the underlying nutrient or provenance."
 }
