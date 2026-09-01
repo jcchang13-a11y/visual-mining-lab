@@ -1,14 +1,19 @@
 {
-  "schema": "nostromo-vajra-conflict-escalation-test/v0.1.2",
-  "completedAt": "2026-09-01T18:09:21.039Z",
+  "schema": "nostromo-vajra-conflict-escalation-test/v0.2.0",
+  "completedAt": "2026-09-01T18:09:58.185Z",
   "status": "PASS",
   "guards": {
     "multiOrganEscalation": true,
     "closureRemainsBlocked": true,
     "provenancePreserved": true,
     "packetIdsUnique": true,
+    "returnContractsPresent": true,
     "malformedContestQuarantined": true,
     "noContestNoFalsePositive": true,
+    "threeOrganReturnsAccepted": true,
+    "returnIntakeNoClosure": true,
+    "adversarialReturnsQuarantined": true,
+    "unknownPacketQuarantined": true,
     "gutRegression": true
   },
   "sample": {
@@ -159,6 +164,122 @@
     "quarantine": [],
     "boundary": "Deterministic structural escalation and guarded return-contract generation only. It preserves contested VAJRA branches and turns them into explicit DROPLET/MUTHER/SHROOMING work contracts. It does not weigh truth, infer real-world source independence, or resolve conflict automatically."
   },
+  "returnIntake": {
+    "organ": "VAJRA",
+    "capability": "CONFLICT_ESCALATION_RETURN_INTAKE",
+    "version": "0.1.0",
+    "status": "RETURNS_ACCEPTED_REVIEW_REQUIRED",
+    "closureBlocked": true,
+    "closureAuthority": "NONE",
+    "expectedPackets": 3,
+    "acceptedReturns": 3,
+    "quarantinedReturns": 0,
+    "missingPacketIds": [],
+    "allPacketsReturned": true,
+    "byOrgan": {
+      "DROPLET": 1,
+      "MUTHER": 1,
+      "SHROOMING": 1
+    },
+    "accepted": [
+      {
+        "packetId": "2963633f",
+        "sourceOrgan": "DROPLET",
+        "targetRef": "t001",
+        "clauseRef": "c001",
+        "lens": "evidence",
+        "purpose": "SOURCE_QUALITY_ADJUDICATION",
+        "status": "ACCEPTED_RETURN",
+        "provenance": "droplet-source-audit-01",
+        "material": "Two opposing evidence items originate from separate declared source families, but methodological comparability remains only partially established.",
+        "relation": "Source independence is provisionally stronger than before while comparable-condition coverage remains unresolved.",
+        "returnKey": "1cc59341",
+        "closureAuthority": "NONE",
+        "receipt": {
+          "targetRef": "t001",
+          "clauseRef": "c001",
+          "lens": "evidence",
+          "organ": "DROPLET",
+          "status": "EXECUTED",
+          "provenance": "droplet-source-audit-01",
+          "material": "Two opposing evidence items originate from separate declared source families, but methodological comparability remains only partially established.",
+          "relation": "Source independence is provisionally stronger than before while comparable-condition coverage remains unresolved.",
+          "packetId": "2963633f",
+          "closureAuthority": "NONE"
+        },
+        "boundary": "Accepted as packet-correlated adjudication material only; this acceptance is not factual verification and grants no truth-closure authority."
+      },
+      {
+        "packetId": "5618a826",
+        "sourceOrgan": "MUTHER",
+        "targetRef": "t001",
+        "clauseRef": "c001",
+        "lens": "evidence",
+        "purpose": "CONTEXT_AND_METHOD_AUDIT",
+        "status": "ACCEPTED_RETURN",
+        "provenance": "muther-context-audit-01",
+        "material": "Repository context exposes a scope qualifier that narrows one supporting statement to condition A and leaves the broader formulation unsupported.",
+        "relation": "The disagreement may partly reflect scope mismatch, so the original contested branch should remain open.",
+        "returnKey": "c44c8158",
+        "closureAuthority": "NONE",
+        "receipt": {
+          "targetRef": "t001",
+          "clauseRef": "c001",
+          "lens": "evidence",
+          "organ": "MUTHER",
+          "status": "EXECUTED",
+          "provenance": "muther-context-audit-01",
+          "material": "Repository context exposes a scope qualifier that narrows one supporting statement to condition A and leaves the broader formulation unsupported.",
+          "relation": "The disagreement may partly reflect scope mismatch, so the original contested branch should remain open.",
+          "packetId": "5618a826",
+          "closureAuthority": "NONE"
+        },
+        "boundary": "Accepted as packet-correlated adjudication material only; this acceptance is not factual verification and grants no truth-closure authority."
+      },
+      {
+        "packetId": "70745601",
+        "sourceOrgan": "SHROOMING",
+        "targetRef": "t001",
+        "clauseRef": "c001",
+        "lens": "evidence",
+        "purpose": "CRITERION_AND_BOUNDARY_STRESS",
+        "status": "ACCEPTED_RETURN",
+        "provenance": "shroom-boundary-stress-01",
+        "material": "A boundary reading separates the claim into matched-condition and unmatched-condition cases, producing different judgments without erasing either evidence position.",
+        "relation": "The competing criterion changes which cases count as counterexamples and therefore requires explicit adjudication.",
+        "returnKey": "dbfe77fe",
+        "closureAuthority": "NONE",
+        "receipt": {
+          "targetRef": "t001",
+          "clauseRef": "c001",
+          "lens": "evidence",
+          "organ": "SHROOMING",
+          "status": "EXECUTED",
+          "provenance": "shroom-boundary-stress-01",
+          "material": "A boundary reading separates the claim into matched-condition and unmatched-condition cases, producing different judgments without erasing either evidence position.",
+          "relation": "The competing criterion changes which cases count as counterexamples and therefore requires explicit adjudication.",
+          "packetId": "70745601",
+          "closureAuthority": "NONE"
+        },
+        "boundary": "Accepted as packet-correlated adjudication material only; this acceptance is not factual verification and grants no truth-closure authority."
+      }
+    ],
+    "quarantine": [],
+    "next": "Feed accepted receipt objects back into VAJRA receipt guards; keep the contested branch open unless those guards independently establish a structurally qualifying resolution. Return intake itself never settles truth.",
+    "boundary": "Deterministic packet-correlation and return-quality guard. It blocks scope loss, wrong-organ substitution, replay duplicates, provenance-less returns and placeholder material. Even a complete three-organ return set remains REVIEW_REQUIRED and cannot close a contested VAJRA branch by itself."
+  },
+  "adversarialSummary": {
+    "accepted": 1,
+    "quarantined": 5,
+    "reasons": [
+      "CLAUSE_REF_MISMATCH",
+      "INSUFFICIENT_RETURN_MATERIAL",
+      "INSUFFICIENT_TARGET_RELATION",
+      "PROVENANCE_REQUIRED",
+      "REPLAY_DUPLICATE",
+      "WRONG_RETURNING_ORGAN"
+    ]
+  },
   "failures": [],
-  "boundary": "PASS proves only deterministic conflict escalation contracts, packet identity, provenance/scope preservation and anti-false-closure guards. It does not adjudicate truth, source independence or source quality."
+  "boundary": "PASS proves deterministic conflict escalation plus a packet-correlated return intake that preserves organ identity, scope and provenance while quarantining replay, wrong-organ, placeholder and malformed returns. Even a complete three-organ return set remains review-required with closureAuthority NONE. It does not adjudicate truth, prove source independence or execute the external organs by itself."
 }
