@@ -1,11 +1,11 @@
 {
   "schema": "nostromo-gut-lineage-test/v0.2.19-observed-token-fragment-replay",
-  "completedAt": "2026-09-01T03:06:14.527Z",
-  "status": "PASS",
+  "completedAt": "2026-09-01T04:06:18.815Z",
+  "status": "FAIL",
   "sameLineage": {
     "summaryItemCount": 1,
     "antiEcho": {
-      "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PRE_POST_ADJACENT_SEGMENT_COLLAPSE_12+PREFIX_DIVERSITY_96+SHARED_BODY_SUMMARY_DIVERSITY_80_192+VOLATILE_REF_LINEAGE_NEUTRALIZATION+TAGGED_PAYLOAD_DEDUP+EXACT_TAGGED_TAIL_DEDUP_80+ROUTE_METADATA_STRIP+DELIMITED_LONG_SEGMENT_DEDUP+SUMMARY_EXACT_NONADJACENT_FULLWIDTH_COLON_CLAUSE_DEDUP_12+SUMMARY_VOLATILE_LINEAGE_FULLWIDTH_COLON_CLAUSE_DEDUP+SUMMARY_CONSECUTIVE_SHORT_TOKEN_COLLAPSE_4+SUMMARY_REPEATED_LINEAGE_SIGNATURE_COLLAPSE_5_64",
+      "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PRE_POST_ADJACENT_SEGMENT_COLLAPSE_12+PREFIX_DIVERSITY_96+SHARED_BODY_SUMMARY_DIVERSITY_80_192+VOLATILE_REF_LINEAGE_NEUTRALIZATION+TAGGED_PAYLOAD_DEDUP+EXACT_TAGGED_TAIL_DEDUP_80+ROUTE_METADATA_STRIP+DELIMITED_LONG_SEGMENT_DEDUP+SUMMARY_EXACT_NONADJACENT_FULLWIDTH_COLON_CLAUSE_DEDUP+SUMMARY_SCRIPT_AWARE_NESTED_CLAUSE_COLLAPSE+SUMMARY_VOLATILE_LINEAGE_FULLWIDTH_COLON_CLAUSE_DEDUP+SUMMARY_CONSECUTIVE_SHORT_TOKEN_COLLAPSE_4+SUMMARY_REPEATED_LINEAGE_SIGNATURE_COLLAPSE_5_64",
       "candidateCount": 2,
       "selectedCount": 1,
       "suppressedCount": 1,
@@ -21,14 +21,15 @@
       "carryClauseSuppressedCount": 0,
       "volatileLineageClauseSuppressedCount": 0,
       "shortCarryTokenSuppressedCount": 0,
-      "lineageSignatureSuppressedCount": 0
+      "lineageSignatureSuppressedCount": 0,
+      "nestedCarryClauseSuppressedCount": 0
     },
     "summary": "[CONTRADICTION->VAJRA] 以 structure 位置重讀：主動尋找最小反例與破壞條件：針對本輪 UNIVERSAL+EMPIRICAL 命題（ref:abcdef12; clause:12345678），哪個前提最可能先失效？這段故意拉長，模擬跨輪 carry 只有 volatile provenance token 改變、其餘代謝內容完全相同的情況。"
   },
   "substantiveDifference": {
     "summaryItemCount": 2,
     "antiEcho": {
-      "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PRE_POST_ADJACENT_SEGMENT_COLLAPSE_12+PREFIX_DIVERSITY_96+SHARED_BODY_SUMMARY_DIVERSITY_80_192+VOLATILE_REF_LINEAGE_NEUTRALIZATION+TAGGED_PAYLOAD_DEDUP+EXACT_TAGGED_TAIL_DEDUP_80+ROUTE_METADATA_STRIP+DELIMITED_LONG_SEGMENT_DEDUP+SUMMARY_EXACT_NONADJACENT_FULLWIDTH_COLON_CLAUSE_DEDUP_12+SUMMARY_VOLATILE_LINEAGE_FULLWIDTH_COLON_CLAUSE_DEDUP+SUMMARY_CONSECUTIVE_SHORT_TOKEN_COLLAPSE_4+SUMMARY_REPEATED_LINEAGE_SIGNATURE_COLLAPSE_5_64",
+      "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PRE_POST_ADJACENT_SEGMENT_COLLAPSE_12+PREFIX_DIVERSITY_96+SHARED_BODY_SUMMARY_DIVERSITY_80_192+VOLATILE_REF_LINEAGE_NEUTRALIZATION+TAGGED_PAYLOAD_DEDUP+EXACT_TAGGED_TAIL_DEDUP_80+ROUTE_METADATA_STRIP+DELIMITED_LONG_SEGMENT_DEDUP+SUMMARY_EXACT_NONADJACENT_FULLWIDTH_COLON_CLAUSE_DEDUP+SUMMARY_SCRIPT_AWARE_NESTED_CLAUSE_COLLAPSE+SUMMARY_VOLATILE_LINEAGE_FULLWIDTH_COLON_CLAUSE_DEDUP+SUMMARY_CONSECUTIVE_SHORT_TOKEN_COLLAPSE_4+SUMMARY_REPEATED_LINEAGE_SIGNATURE_COLLAPSE_5_64",
       "candidateCount": 2,
       "selectedCount": 2,
       "suppressedCount": 0,
@@ -44,13 +45,14 @@
       "carryClauseSuppressedCount": 0,
       "volatileLineageClauseSuppressedCount": 0,
       "shortCarryTokenSuppressedCount": 0,
-      "lineageSignatureSuppressedCount": 0
+      "lineageSignatureSuppressedCount": 0,
+      "nestedCarryClauseSuppressedCount": 0
     },
     "summary": "[CONTRADICTION->VAJRA] 以 structure 位置重讀：主動尋找最小反例與破壞條件：針對本輪 UNIVERSAL+EMPIRICAL 命題（ref:aaaaaa11; clause:bbbbbb22），哪個前提最可能先失效？這段故意拉長，模擬跨輪 carry 只有 volatile provenance token 改變、其餘代謝內容完全相同的情況。 · [CONTRADICTION->VAJRA] 以 structure 位置重讀：主動尋找最小反例與破壞條件：針對本輪 UNIVERSAL+EMPIRICAL 命題（ref:cccccc33; clause:dddddd44），哪一份證據最需要重新驗證？這段故意拉長，模擬跨輪 carry 只有 volatile provenance token 改變、其餘代謝內容完全相同的情況。"
   },
   "intraAtom": {
     "antiEcho": {
-      "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PRE_POST_ADJACENT_SEGMENT_COLLAPSE_12+PREFIX_DIVERSITY_96+SHARED_BODY_SUMMARY_DIVERSITY_80_192+VOLATILE_REF_LINEAGE_NEUTRALIZATION+TAGGED_PAYLOAD_DEDUP+EXACT_TAGGED_TAIL_DEDUP_80+ROUTE_METADATA_STRIP+DELIMITED_LONG_SEGMENT_DEDUP+SUMMARY_EXACT_NONADJACENT_FULLWIDTH_COLON_CLAUSE_DEDUP_12+SUMMARY_VOLATILE_LINEAGE_FULLWIDTH_COLON_CLAUSE_DEDUP+SUMMARY_CONSECUTIVE_SHORT_TOKEN_COLLAPSE_4+SUMMARY_REPEATED_LINEAGE_SIGNATURE_COLLAPSE_5_64",
+      "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PRE_POST_ADJACENT_SEGMENT_COLLAPSE_12+PREFIX_DIVERSITY_96+SHARED_BODY_SUMMARY_DIVERSITY_80_192+VOLATILE_REF_LINEAGE_NEUTRALIZATION+TAGGED_PAYLOAD_DEDUP+EXACT_TAGGED_TAIL_DEDUP_80+ROUTE_METADATA_STRIP+DELIMITED_LONG_SEGMENT_DEDUP+SUMMARY_EXACT_NONADJACENT_FULLWIDTH_COLON_CLAUSE_DEDUP+SUMMARY_SCRIPT_AWARE_NESTED_CLAUSE_COLLAPSE+SUMMARY_VOLATILE_LINEAGE_FULLWIDTH_COLON_CLAUSE_DEDUP+SUMMARY_CONSECUTIVE_SHORT_TOKEN_COLLAPSE_4+SUMMARY_REPEATED_LINEAGE_SIGNATURE_COLLAPSE_5_64",
       "candidateCount": 1,
       "selectedCount": 1,
       "suppressedCount": 0,
@@ -66,14 +68,15 @@
       "carryClauseSuppressedCount": 5,
       "volatileLineageClauseSuppressedCount": 1,
       "shortCarryTokenSuppressedCount": 0,
-      "lineageSignatureSuppressedCount": 0
+      "lineageSignatureSuppressedCount": 0,
+      "nestedCarryClauseSuppressedCount": 0
     },
     "summary": "[CONTRADICTION->VAJRA] 以 structure 位置重讀：主動尋找最小反例與破壞條件：針對本輪 UNIVERSAL+EMPIRICAL 命題（ref:111111aa; clause:222222bb），哪個前提最可能先失效？這段故意拉長，模擬跨輪 carry 只有 volatile provenance token 改變、其餘代謝內容完全相同的情況。：中間保留不同觀察：針對本輪 UNIVERSAL+EMPIRICAL 命題（ref:555555ee; clause:666666ff），哪一份證據最需要重新驗證？這段故意拉長，模擬跨輪 carry 只有 volatile provenance token 改變、其餘代謝內容完全相同的情況。",
     "sourceNutrient": "以 structure 位置重讀：主動尋找最小反例與破壞條件：針對本輪 UNIVERSAL+EMPIRICAL 命題（ref:111111aa; clause:222222bb），哪個前提最可能先失效？這段故意拉長，模擬跨輪 carry 只有 volatile provenance token 改變、其餘代謝內容完全相同的情況。：中間保留不同觀察：以 structure 位置重讀：主動尋找最小反例與破壞條件：針對本輪 UNIVERSAL+EMPIRICAL 命題（ref:333333cc; clause:444444dd），哪個前提最可能先失效？這段故意拉長，模擬跨輪 carry 只有 volatile provenance token 改變、其餘代謝內容完全相同的情況。：以 structure 位置重讀：主動尋找最小反例與破壞條件：針對本輪 UNIVERSAL+EMPIRICAL 命題（ref:555555ee; clause:666666ff），哪一份證據最需要重新驗證？這段故意拉長，模擬跨輪 carry 只有 volatile provenance token 改變、其餘代謝內容完全相同的情況。"
   },
   "lineageSignature": {
     "antiEcho": {
-      "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PRE_POST_ADJACENT_SEGMENT_COLLAPSE_12+PREFIX_DIVERSITY_96+SHARED_BODY_SUMMARY_DIVERSITY_80_192+VOLATILE_REF_LINEAGE_NEUTRALIZATION+TAGGED_PAYLOAD_DEDUP+EXACT_TAGGED_TAIL_DEDUP_80+ROUTE_METADATA_STRIP+DELIMITED_LONG_SEGMENT_DEDUP+SUMMARY_EXACT_NONADJACENT_FULLWIDTH_COLON_CLAUSE_DEDUP_12+SUMMARY_VOLATILE_LINEAGE_FULLWIDTH_COLON_CLAUSE_DEDUP+SUMMARY_CONSECUTIVE_SHORT_TOKEN_COLLAPSE_4+SUMMARY_REPEATED_LINEAGE_SIGNATURE_COLLAPSE_5_64",
+      "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PRE_POST_ADJACENT_SEGMENT_COLLAPSE_12+PREFIX_DIVERSITY_96+SHARED_BODY_SUMMARY_DIVERSITY_80_192+VOLATILE_REF_LINEAGE_NEUTRALIZATION+TAGGED_PAYLOAD_DEDUP+EXACT_TAGGED_TAIL_DEDUP_80+ROUTE_METADATA_STRIP+DELIMITED_LONG_SEGMENT_DEDUP+SUMMARY_EXACT_NONADJACENT_FULLWIDTH_COLON_CLAUSE_DEDUP+SUMMARY_SCRIPT_AWARE_NESTED_CLAUSE_COLLAPSE+SUMMARY_VOLATILE_LINEAGE_FULLWIDTH_COLON_CLAUSE_DEDUP+SUMMARY_CONSECUTIVE_SHORT_TOKEN_COLLAPSE_4+SUMMARY_REPEATED_LINEAGE_SIGNATURE_COLLAPSE_5_64",
       "candidateCount": 1,
       "selectedCount": 1,
       "suppressedCount": 0,
@@ -89,7 +92,8 @@
       "carryClauseSuppressedCount": 1,
       "volatileLineageClauseSuppressedCount": 0,
       "shortCarryTokenSuppressedCount": 0,
-      "lineageSignatureSuppressedCount": 1
+      "lineageSignatureSuppressedCount": 1,
+      "nestedCarryClauseSuppressedCount": 0
     },
     "summary": "[CONTRADICTION->VAJRA] CONTRADICTION_CONDITIONED：第一個反例要求重新檢查來源獨立性與測量時間：第二個反例要求重新檢查替代因果與邊界條件",
     "sourceNutrient": "CONTRADICTION_CONDITIONED：第一個反例要求重新檢查來源獨立性與測量時間：CONTRADICTION_CONDITIONED：第二個反例要求重新檢查替代因果與邊界條件"
@@ -158,6 +162,11 @@
     "fingerprint": "2287e9ce710d757b",
     "boundary": "Carry-only containment. ref:/clause: hexadecimal lineage tokens are protected from colon tokenization before intra-segment compaction; standalone lineage fragments are suppressed when the same exact token is already embedded in a retained substantive segment, and repeated standalone lineage classes are also collapsed. Exact/lineage-equivalent clauses, nested long clauses, recursively wrapped near-duplicate clauses, repeated ref/clause-only lineage tokens, and same-route cross-segment near echoes are collapsed before recirculation. Cross-segment comparison uses a containment coefficient over normalized 5-grams so wrapper growth cannot evade the audit merely by adding prefixes; original GUT nutrients, routes and provenance are not mutated."
   },
-  "failures": [],
+  "failures": [
+    {
+      "type": "GUT_VERSION",
+      "detail": "0.2.20"
+    }
+  ],
   "boundary": "This adversarial test preserves source nutrients and provenance while checking cross-atom, intra-atom, repeated machine-lineage signature, cross-segment volatile-lineage carry echo, recursive wrapper growth, repeated short ref/clause-only carry fragments, and a replay derived from the previously observed malformed carry. PASS requires ref:/clause: hexadecimal tokens to survive tokenization intact until lineage-aware suppression removes redundant standalone fragments, while substantively distinct evidence and questions survive."
 }
