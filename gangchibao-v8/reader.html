@@ -91,6 +91,33 @@
 「不也，世尊。何以故？莊嚴佛土者，即非莊嚴，是名莊嚴。」
 
 「是故須菩提，諸菩薩摩訶薩，應如是生清淨心。」
+[[/SUTRA]]`,
+'30310B':`[[SUTRA: 本單元涉及經文｜莊嚴佛土分第十末段／無為福勝分第十一／尊重正教分第十二／如法受持分第十三前段]]
+【莊嚴佛土分第十末段】
+「須菩提，譬如有人，身如須彌山王。於意云何？是身為大不？」
+
+須菩提言：「甚大，世尊。何以故？佛說非身，是名大身。」
+
+【無為福勝分第十一】
+「須菩提，如恆河中所有沙數，如是沙等恆河，於意云何？是諸恆河沙寧為多不？」
+
+須菩提言：「甚多，世尊。但諸恆河尚多無數，何況其沙。」
+
+「須菩提，我今實言告汝：若有善男子、善女人，以七寶滿爾所恆河沙數三千大千世界，以用布施，得福多不？」
+
+須菩提言：「甚多，世尊。」
+
+佛告須菩提：「若善男子、善女人，於此經中，乃至受持四句偈等，為他人說，而此福德勝前福德。」
+
+【尊重正教分第十二】
+「復次，須菩提，隨說是經，乃至四句偈等，當知此處，一切世間天、人、阿修羅，皆應供養，如佛塔廟，何況有人盡能受持讀誦。
+
+須菩提，當知是人，成就最上第一希有之法。若是經典所在之處，則為有佛，若尊重弟子。」
+
+【如法受持分第十三前段】
+爾時，須菩提白佛言：「世尊，當何名此經？我等云何奉持？」
+
+佛告須菩提：「是經名為金剛般若波羅蜜。以是名字，汝當奉持。」
 [[/SUTRA]]`};const p=new URLSearchParams(location.search);let u=p.get('u')||units[0];let i=units.indexOf(u);if(i<0){i=0;u=units[0]}document.getElementById('unitTitle').textContent=u;document.getElementById('status').textContent=`單元 ${String(i+1).padStart(2,'0')} / 22`;const nav=document.getElementById('nav');if(i>0)nav.innerHTML+=`<a href="reader.html?u=${units[i-1]}">← ${units[i-1]}</a>`;if(i<units.length-1)nav.innerHTML+=`<a href="reader.html?u=${units[i+1]}">${units[i+1]} →</a>`;
 function makeFormula(label,block=false){const f=document.createElement('span');f.className='gcb-formula'+(block?' block':'');const n=document.createElement('span');n.className='gcb-name';n.textContent=`「${label}」`;const b=document.createElement('span');b.className='gcb-bar';const d=document.createElement('span');d.className='gcb-neg';d.textContent=`～${label}`;f.append(n,b,d);return f}
 function appendInline(parent,line){const re=/\{\{([^{}\n]+)\}\}/g;let last=0,m;while((m=re.exec(line))){if(m.index>last)parent.append(document.createTextNode(line.slice(last,m.index)));parent.append(makeFormula(m[1].trim(),line.trim()===m[0]));last=re.lastIndex}if(last<line.length)parent.append(document.createTextNode(line.slice(last)))}
