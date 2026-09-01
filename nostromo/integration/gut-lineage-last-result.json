@@ -1,7 +1,7 @@
 {
-  "schema": "nostromo-gut-lineage-test/v0.2.19-lineage-only-carry-containment",
-  "completedAt": "2026-09-01T02:06:10.630Z",
-  "status": "PASS",
+  "schema": "nostromo-gut-lineage-test/v0.2.19-observed-token-fragment-replay",
+  "completedAt": "2026-09-01T03:04:00.289Z",
+  "status": "FAIL",
   "sameLineage": {
     "summaryItemCount": 1,
     "antiEcho": {
@@ -95,7 +95,7 @@
     "sourceNutrient": "CONTRADICTION_CONDITIONED：第一個反例要求重新檢查來源獨立性與測量時間：CONTRADICTION_CONDITIONED：第二個反例要求重新檢查替代因果與邊界條件"
   },
   "crossSegmentNearEcho": {
-    "text": "[CONTRADICTION->VAJRA] 以 counterexample 位置重讀：CONTRADICTION_CONDITIONED：主動尋找最小反例與破壞條件：針對本輪 GENERAL 命題（ref：abcdef12; clause：12345678），哪個前提最可能先失效？這段故意拉長，模擬同一路由在相鄰器官輸出中只增加一層包裝但核心內容沒有改變。 · [CONTRADICTION->VAJRA] 另一份證據直接否定時間順序，因此需要重新檢查測量有效性、來源獨立性與替代因果。這是一條實質不同的反證材料，不能因為同一路由就被壓掉。",
+    "text": "[CONTRADICTION->VAJRA] 以 counterexample 位置重讀：CONTRADICTION_CONDITIONED：主動尋找最小反例與破壞條件：針對本輪 GENERAL 命題（ref:abcdef12; clause:12345678），哪個前提最可能先失效？這段故意拉長，模擬同一路由在相鄰器官輸出中只增加一層包裝但核心內容沒有改變。 · [CONTRADICTION->VAJRA] 另一份證據直接否定時間順序，因此需要重新檢查測量有效性、來源獨立性與替代因果。這是一條實質不同的反證材料，不能因為同一路由就被壓掉。",
     "echoSuppressed": 0,
     "lineageOnlySuppressed": 0,
     "routeCapped": 0,
@@ -106,11 +106,11 @@
     "crossSegmentNearEchoSuppressed": 1,
     "inputSegments": 3,
     "outputSegments": 2,
-    "fingerprint": "393ae7383acd9cef",
-    "boundary": "Carry-only containment. Exact/lineage-equivalent colon clauses, nested long clauses, recursively wrapped near-duplicate clauses, repeated ref/clause-only lineage tokens, and same-route cross-segment near echoes are collapsed before recirculation. Cross-segment comparison uses a containment coefficient over normalized 5-grams so wrapper growth cannot evade the audit merely by adding prefixes; original GUT nutrients, routes and provenance are not mutated."
+    "fingerprint": "1659e1c702bdab4e",
+    "boundary": "Carry-only containment. ref:/clause: hexadecimal lineage tokens are protected from colon tokenization before intra-segment compaction; redundant standalone lineage fragments, exact/lineage-equivalent clauses, nested long clauses, recursively wrapped near-duplicate clauses, repeated ref/clause-only lineage tokens, and same-route cross-segment near echoes are collapsed before recirculation. Cross-segment comparison uses a containment coefficient over normalized 5-grams so wrapper growth cannot evade the audit merely by adding prefixes; original GUT nutrients, routes and provenance are not mutated."
   },
   "recursiveWrapperCarry": {
-    "text": "[CONTRADICTION->VAJRA] 以 counterexample 位置重讀：CONTRADICTION_CONDITIONED：主動尋找最小反例與破壞條件：針對本輪 GENERAL 命題（ref：f792180f; clause：9c5ac71），重新檢查來源獨立性、替代因果與邊界條件。這段核心內容刻意保持一致，只讓外層包裝逐輪增加。 · [CONTRADICTION->VAJRA] 新證據顯示時間順序相反，而且來自另一個獨立來源，因此必須保留這條不同的反證材料，不能因為同一路由而消失。",
+    "text": "[CONTRADICTION->VAJRA] 以 counterexample 位置重讀：CONTRADICTION_CONDITIONED：主動尋找最小反例與破壞條件：針對本輪 GENERAL 命題（ref:f792180f; clause:9c5ac71），重新檢查來源獨立性、替代因果與邊界條件。這段核心內容刻意保持一致，只讓外層包裝逐輪增加。 · [CONTRADICTION->VAJRA] 新證據顯示時間順序相反，而且來自另一個獨立來源，因此必須保留這條不同的反證材料，不能因為同一路由而消失。",
     "echoSuppressed": 0,
     "lineageOnlySuppressed": 0,
     "routeCapped": 0,
@@ -121,11 +121,11 @@
     "crossSegmentNearEchoSuppressed": 2,
     "inputSegments": 4,
     "outputSegments": 2,
-    "fingerprint": "6a76787c3aeac8db",
-    "boundary": "Carry-only containment. Exact/lineage-equivalent colon clauses, nested long clauses, recursively wrapped near-duplicate clauses, repeated ref/clause-only lineage tokens, and same-route cross-segment near echoes are collapsed before recirculation. Cross-segment comparison uses a containment coefficient over normalized 5-grams so wrapper growth cannot evade the audit merely by adding prefixes; original GUT nutrients, routes and provenance are not mutated."
+    "fingerprint": "2cab19fc77f6a4a9",
+    "boundary": "Carry-only containment. ref:/clause: hexadecimal lineage tokens are protected from colon tokenization before intra-segment compaction; redundant standalone lineage fragments, exact/lineage-equivalent clauses, nested long clauses, recursively wrapped near-duplicate clauses, repeated ref/clause-only lineage tokens, and same-route cross-segment near echoes are collapsed before recirculation. Cross-segment comparison uses a containment coefficient over normalized 5-grams so wrapper growth cannot evade the audit merely by adding prefixes; original GUT nutrients, routes and provenance are not mutated."
   },
   "lineageOnlyCarry": {
-    "text": "[CONTRADICTION->VAJRA] clause：9c5ac71 · ref：f792180f · [QUESTION->SHROOMING] 這是一條實質問題，必須保留而不能被 provenance token 去重邏輯吞掉。",
+    "text": "[CONTRADICTION->VAJRA] clause:9c5ac71 · ref:f792180f · [QUESTION->SHROOMING] 這是一條實質問題，必須保留而不能被 provenance token 去重邏輯吞掉。",
     "echoSuppressed": 0,
     "lineageOnlySuppressed": 3,
     "routeCapped": 0,
@@ -136,9 +136,29 @@
     "crossSegmentNearEchoSuppressed": 0,
     "inputSegments": 6,
     "outputSegments": 3,
-    "fingerprint": "4b75e981d5fc3309",
-    "boundary": "Carry-only containment. Exact/lineage-equivalent colon clauses, nested long clauses, recursively wrapped near-duplicate clauses, repeated ref/clause-only lineage tokens, and same-route cross-segment near echoes are collapsed before recirculation. Cross-segment comparison uses a containment coefficient over normalized 5-grams so wrapper growth cannot evade the audit merely by adding prefixes; original GUT nutrients, routes and provenance are not mutated."
+    "fingerprint": "04c09ed6c5787721",
+    "boundary": "Carry-only containment. ref:/clause: hexadecimal lineage tokens are protected from colon tokenization before intra-segment compaction; redundant standalone lineage fragments, exact/lineage-equivalent clauses, nested long clauses, recursively wrapped near-duplicate clauses, repeated ref/clause-only lineage tokens, and same-route cross-segment near echoes are collapsed before recirculation. Cross-segment comparison uses a containment coefficient over normalized 5-grams so wrapper growth cannot evade the audit merely by adding prefixes; original GUT nutrients, routes and provenance are not mutated."
   },
-  "failures": [],
-  "boundary": "This adversarial test preserves source nutrients and provenance while checking cross-atom, intra-atom, repeated machine-lineage signature, cross-segment volatile-lineage carry echo, recursive wrapper growth, and repeated short ref/clause-only carry fragments. PASS requires wrapper-only and lineage-only recirculation to collapse at carry rendering while substantively distinct evidence survives."
+  "observedReplay": {
+    "text": "[CONTRADICTION->VAJRA] 以 counterexample 位置重讀：CONTRADICTION_CONDITIONED：主動尋找最小反例與破壞條件：針對本輪 GENERAL 命題（ref:f792180f; clause:9c5ac71），哪個前提最可能先失效？：VERIFIES AN EXPLICIT URL ONLY · [CONTRADICTION->VAJRA] clause:9c5ac71 · [CLAIM->DROPLET] VERIFIES AN EXPLICIT URL ONLY; DOES NOT CLAIM SEARCH-ENGINE DISCOVERY · [QUESTION->SHROOMING] 這是一條不同的未解問題，應該保留並進入下一輪閱讀。",
+    "echoSuppressed": 0,
+    "lineageOnlySuppressed": 1,
+    "routeCapped": 0,
+    "intraSegmentSuppressed": 0,
+    "shortTokenSuppressed": 0,
+    "nestedClauseSuppressed": 0,
+    "nearDuplicateClauseSuppressed": 0,
+    "crossSegmentNearEchoSuppressed": 0,
+    "inputSegments": 5,
+    "outputSegments": 4,
+    "fingerprint": "e60c12c7241503bd",
+    "boundary": "Carry-only containment. ref:/clause: hexadecimal lineage tokens are protected from colon tokenization before intra-segment compaction; redundant standalone lineage fragments, exact/lineage-equivalent clauses, nested long clauses, recursively wrapped near-duplicate clauses, repeated ref/clause-only lineage tokens, and same-route cross-segment near echoes are collapsed before recirculation. Cross-segment comparison uses a containment coefficient over normalized 5-grams so wrapper growth cannot evade the audit merely by adding prefixes; original GUT nutrients, routes and provenance are not mutated."
+  },
+  "failures": [
+    {
+      "type": "OBSERVED_STANDALONE_LINEAGE_FRAGMENT_SURVIVED",
+      "detail": "[CONTRADICTION->VAJRA] 以 counterexample 位置重讀：CONTRADICTION_CONDITIONED：主動尋找最小反例與破壞條件：針對本輪 GENERAL 命題（ref:f792180f; clause:9c5ac71），哪個前提最可能先失效？：VERIFIES AN EXPLICIT URL ONLY · [CONTRADICTION->VAJRA] clause:9c5ac71 · [CLAIM->DROPLET] VERIFIES AN EXPLICIT URL ONLY; DOES NOT CLAIM SEARCH-ENGINE DISCOVERY · [QUESTION->SHROOMING] 這是一條不同的未解問題，應該保留並進入下一輪閱讀。"
+    }
+  ],
+  "boundary": "This adversarial test preserves source nutrients and provenance while checking cross-atom, intra-atom, repeated machine-lineage signature, cross-segment volatile-lineage carry echo, recursive wrapper growth, repeated short ref/clause-only carry fragments, and a replay derived from the previously observed malformed carry. PASS requires ref:/clause: hexadecimal tokens to survive tokenization intact until lineage-aware suppression removes redundant standalone fragments, while substantively distinct evidence and questions survive."
 }
