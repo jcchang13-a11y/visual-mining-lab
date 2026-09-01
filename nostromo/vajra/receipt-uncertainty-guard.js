@@ -1,8 +1,8 @@
-/* VAJRA receipt uncertainty guard v0.3.3 — prevents indeterminate or relation-unspecified returns from closing handoff branches */
+/* VAJRA receipt uncertainty guard v0.3.4 — prevents indeterminate, unspecified, or internally mixed returns from closing handoff branches */
 (function(root){
   const engine=root.VajraEngine;
   if(!engine||typeof engine.applyHandoffResults!=='function') throw new Error('VAJRA_ENGINE_REQUIRED_BEFORE_UNCERTAINTY_GUARD');
-  if(engine.receiptUncertaintyGuardVersion==='0.3.3') return;
+  if(engine.receiptUncertaintyGuardVersion==='0.3.4') return;
 
   const baseApply=engine.applyHandoffResults.bind(engine);
   function clean(text){return String(text||'').normalize('NFKC').replace(/\s+/g,' ').trim();}
@@ -32,6 +32,7 @@
       const classification=relationClassification(relation);
       if(classification==='INDETERMINATE') blocked.push({receipt,reason:'INDETERMINATE_RELATION',classification});
       else if(classification==='UNSPECIFIED') blocked.push({receipt,reason:'UNSPECIFIED_RELATION',classification});
+      else if(classification==='MIXED') blocked.push({receipt,reason:'MIXED_RELATION',classification});
       else eligible.push(receipt);
     }
     const out=baseApply(vajraResult,eligible);
@@ -43,14 +44,15 @@
     hr.rejectedReceipts=[...(hr.rejectedReceipts||[]),...rejectedAudit];
     hr.indeterminate=blocked.filter(x=>x.classification==='INDETERMINATE').length;
     hr.unspecified=blocked.filter(x=>x.classification==='UNSPECIFIED').length;
+    hr.mixed=blocked.filter(x=>x.classification==='MIXED').length;
     out.handoffResolution=hr;
-    out.version='0.3.3';
-    out.boundary=`${out.boundary||''} Uncertainty guard v0.3.3: a structurally matching receipt cannot close a handoff unless its relation is explicitly classified by the bounded polarity detector as SUPPORTS, REFUTES, or MIXED. Explicitly insufficient/uncertain relations are audited as INDETERMINATE_RELATION; long but noncommittal relations are audited as UNSPECIFIED_RELATION. Both leave the branch open. This prevents structural completeness from being mistaken for epistemic resolution; it remains a lexical guard, not semantic adjudication or truth verification.`.trim();
+    out.version='0.3.4';
+    out.boundary=`${out.boundary||''} Uncertainty guard v0.3.4: a structurally matching receipt cannot close a handoff unless its relation is unambiguously classified by the bounded polarity detector as SUPPORTS or REFUTES. Explicitly insufficient/uncertain relations are audited as INDETERMINATE_RELATION; long but noncommittal relations as UNSPECIFIED_RELATION; a single relation carrying both support and refute polarity as MIXED_RELATION. All three leave the branch open. This prevents structural completeness or internally conflicted wording from being mistaken for epistemic resolution; it remains a lexical guard, not semantic adjudication or truth verification.`.trim();
     return out;
   }
 
   engine.applyHandoffResults=applyHandoffResultsWithUncertaintyGuard;
   engine.isExplicitlyIndeterminate=isExplicitlyIndeterminate;
   engine.relationClassification=relationClassification;
-  engine.receiptUncertaintyGuardVersion='0.3.3';
+  engine.receiptUncertaintyGuardVersion='0.3.4';
 })(typeof window!=='undefined'?window:globalThis);
