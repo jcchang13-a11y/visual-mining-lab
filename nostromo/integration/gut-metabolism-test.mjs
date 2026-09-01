@@ -21,7 +21,7 @@ const sample={
   duplicateA:'same useful material',duplicateB:'same useful material'
 };
 const gut=globalThis.GutEngine.digest(sample,{source:'NOSTROMO/gut-metabolism-test'});
-check(gut.version==='0.2.22','GUT_VERSION',gut.version);
+check(gut.version==='0.2.23','GUT_VERSION',gut.version);
 check(gut.mode==='DETERMINISTIC_HEURISTIC_ROUTER','GUT_MODE',gut.mode);
 check(gut.routes?.DROPLET?.count>=1,'CLAIM_NOT_ROUTED_TO_DROPLET',gut.routes?.DROPLET);
 check(gut.routes?.SHROOMING?.count>=1,'QUESTION_NOT_ROUTED_TO_SHROOMING',gut.routes?.SHROOMING);
@@ -93,6 +93,14 @@ check(!shortTokenGut.summary.includes('針：針'),'SHORT_TOKEN_REPEAT_SURVIVED'
 check((shortTokenGut.nutrients[0]?.text.match(/針/g)||[]).length===5,'SHORT_TOKEN_SOURCE_NUTRIENT_MUTATED',shortTokenGut.nutrients[0]);
 check(shortTokenGut.nutrients[0]?.provenance?.inputSource==='NOSTROMO/gut-short-token-carry-test','SHORT_TOKEN_PROVENANCE_LOST',shortTokenGut.nutrients[0]);
 
+const metadataPayload='針對本輪 GENERAL 命題（ref:e7fc8099; clause:10b8c8cf），哪個前提最可能先失效？：clause:10b8c8cf：真正的新觀察仍然必須保留';
+const metadataGut=globalThis.GutEngine.digest({contradiction:metadataPayload},{source:'NOSTROMO/gut-carry-machine-metadata-test'});
+check(metadataGut.antiEcho?.carryMachineMetadataSuppressedCount>=3,'CARRY_MACHINE_METADATA_NOT_SUPPRESSED',metadataGut.antiEcho);
+check(!/\b(?:ref|clause)\s*[:=：]\s*[0-9a-f]{6,64}\b/i.test(metadataGut.summary),'CARRY_MACHINE_METADATA_SURVIVED',metadataGut.summary);
+check(metadataGut.summary.includes('哪個前提最可能先失效')&&metadataGut.summary.includes('真正的新觀察仍然必須保留'),'CARRY_MACHINE_METADATA_STRIP_LOST_PROSE',metadataGut.summary);
+check(metadataGut.nutrients[0]?.text.includes('ref:e7fc8099')&&metadataGut.nutrients[0]?.text.includes('clause:10b8c8cf'),'CARRY_MACHINE_METADATA_SOURCE_MUTATED',metadataGut.nutrients[0]);
+check(metadataGut.nutrients[0]?.provenance?.inputSource==='NOSTROMO/gut-carry-machine-metadata-test','CARRY_MACHINE_METADATA_PROVENANCE_LOST',metadataGut.nutrients[0]);
+
 const structured='{"version":"2.3","round":"R113","task":"conflicting tasks and partial memory","continuity":"history preserved"}';
 const structuredGut=globalThis.GutEngine.digest({snippet:structured},{source:'NOSTROMO/gut-structured-test'});
 check(structuredGut.typeCounts?.RAW_STRUCTURED_SNIPPET===1,'STRUCTURED_SNIPPET_NOT_CLASSIFIED',structuredGut.typeCounts);
@@ -101,22 +109,23 @@ check(structuredGut.routes?.MUTHER?.count===1,'STRUCTURED_NOT_ROUTED_TO_MUTHER',
 
 let active=null;
 try{
-  active=await runActiveExecutorLoop({rounds:3,seed:'GUT v0.2.22 feedback validation',mineQuery:'NOSTROMO',verifyUrl:'https://github.com/jcchang13-a11y/visual-mining-lab'});
+  active=await runActiveExecutorLoop({rounds:3,seed:'GUT v0.2.23 feedback validation',mineQuery:'NOSTROMO',verifyUrl:'https://github.com/jcchang13-a11y/visual-mining-lab'});
   check(active.status==='PASS','ACTIVE_LOOP_FAIL',{status:active.status,completedRounds:active.completedRounds});
   check(active.feedback?.appliedRounds===2,'FEEDBACK_APPLIED_ROUNDS',active.feedback);
   check(active.feedback?.firstAppliedRound===2,'FEEDBACK_FIRST_ROUND',active.feedback);
   check(active.trace?.[0]?.feedback?.inputFingerprint!==active.trace?.[1]?.feedback?.inputFingerprint,'FEEDBACK_INPUT_NOT_CHANGED',active.trace?.map(x=>x.feedback?.inputFingerprint));
   check(active.trace?.every(x=>x.gut?.absorbed>0),'ACTIVE_GUT_EMPTY',active.trace?.map(x=>x.gut));
   check(active.trace?.slice(1).every(x=>(x.gut?.antiEcho?.inheritedSubstrateStrippedCount||0)>0),'ACTIVE_INHERITED_NOT_STRIPPED',active.trace?.map(x=>x.gut?.antiEcho));
+  check(!/\b(?:ref|clause)\s*[:=：]\s*[0-9a-f]{6,64}\b/i.test(active.trace?.at(-1)?.carryOut||''),'ACTIVE_CARRY_MACHINE_METADATA_SURVIVED',active.trace?.at(-1)?.carryOut);
 }catch(error){failures.push({type:'ACTIVE_LOOP_EXCEPTION',message:String(error?.message||error)});}
 
 const result={
-  schema:'nostromo-gut-metabolism-test/v0.2.22',completedAt:new Date().toISOString(),status:failures.length===0?'PASS':'FAIL',
+  schema:'nostromo-gut-metabolism-test/v0.2.23',completedAt:new Date().toISOString(),status:failures.length===0?'PASS':'FAIL',
   gut:{version:gut.version,mode:gut.mode,typeCounts:gut.typeCounts,routeCounts:Object.fromEntries(Object.entries(gut.routes).map(([k,v])=>[k,v.count])),boundary:gut.boundary},
-  antiEcho:{nested:nestedGut.antiEcho,taggedTail:taggedTailGut.antiEcho,shortAdjacent:shortGut.antiEcho,nearDuplicate:nearGut.antiEcho,sharedBodySummary:sharedBodyGut.antiEcho,nonAdjacentCarry:nonAdjacentGut.antiEcho,shortTokenCarry:shortTokenGut.antiEcho,inherited:inheritedGut.antiEcho,partialInherited:partialGut.antiEcho},
+  antiEcho:{nested:nestedGut.antiEcho,taggedTail:taggedTailGut.antiEcho,shortAdjacent:shortGut.antiEcho,nearDuplicate:nearGut.antiEcho,sharedBodySummary:sharedBodyGut.antiEcho,nonAdjacentCarry:nonAdjacentGut.antiEcho,shortTokenCarry:shortTokenGut.antiEcho,machineMetadataCarry:metadataGut.antiEcho,inherited:inheritedGut.antiEcho,partialInherited:partialGut.antiEcho},
   feedback:active?{status:active.status,completedRounds:active.completedRounds,feedback:active.feedback,lastCarry:active.trace?.at(-1)?.carryOut||null,roundAntiEcho:active.trace?.map(x=>x.gut?.antiEcho),boundary:active.boundary}:null,
   failures,
-  boundary:'PASS proves deterministic heuristic routing, provenance retention, quarantine/hold behavior, conservative exact inherited-substrate removal, exact tagged-payload de-echoing, exact repeated tagged-tail suppression while retaining distinct heads, pre/post short exact adjacent intra-atom echo suppression, shared-body summary diversity, exact non-adjacent full-width-colon carry-clause compaction, consecutive exact 1–4 character carry-token run collapse without mutating nutrient atoms or provenance, near-duplicate preservation, structured-snippet protection, and a 3-round cross-organ connector-feedback regression. Repeated standalone machine-lineage signature suppression and volatile ref/clause lineage normalization are tested separately. It does not prove semantic novelty, semantic correctness, or source truth.'
+  boundary:'PASS proves deterministic heuristic routing, provenance retention, quarantine/hold behavior, conservative exact inherited-substrate removal, exact tagged-payload de-echoing, exact repeated tagged-tail suppression while retaining distinct heads, pre/post short exact adjacent intra-atom echo suppression, shared-body summary diversity, exact non-adjacent full-width-colon carry-clause compaction, consecutive exact 1–4 character carry-token run collapse, and summary-only machine ref/clause metadata containment without mutating nutrient atoms or provenance, plus near-duplicate preservation, structured-snippet protection, and a 3-round cross-organ connector-feedback regression whose final carry contains no hexadecimal ref/clause metadata tokens. Repeated standalone machine-lineage signature suppression and volatile ref/clause lineage normalization are tested separately. It does not prove semantic novelty, semantic correctness, or source truth.'
 };
 await fs.writeFile(path.join(root,'nostromo/integration/gut-metabolism-last-result.json'),JSON.stringify(result,null,2)+'\n','utf8');
 console.log(JSON.stringify(result,null,2));
