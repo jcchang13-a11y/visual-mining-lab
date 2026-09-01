@@ -54,6 +54,10 @@ jobs:
         id: vajra_conflict
         continue-on-error: true
         run: node nostromo/integration/vajra-conflict-test.mjs
+      - name: Verify VAJRA uncertainty-aware receipt closure
+        id: vajra_uncertainty
+        continue-on-error: true
+        run: node nostromo/integration/vajra-uncertainty-test.mjs
       - name: Verify SHROOMING feedback-conditioned reading
         id: shroom_feedback
         continue-on-error: true
@@ -75,6 +79,7 @@ jobs:
           test -f nostromo/integration/gut-lineage-last-result.json && cp nostromo/integration/gut-lineage-last-result.json /tmp/nostromo-gut-lineage-last-result.json || true
           test -f nostromo/integration/vajra-dynamic-last-result.json && cp nostromo/integration/vajra-dynamic-last-result.json /tmp/nostromo-vajra-dynamic-last-result.json || true
           test -f nostromo/integration/vajra-conflict-last-result.json && cp nostromo/integration/vajra-conflict-last-result.json /tmp/nostromo-vajra-conflict-last-result.json || true
+          test -f nostromo/integration/vajra-uncertainty-last-result.json && cp nostromo/integration/vajra-uncertainty-last-result.json /tmp/nostromo-vajra-uncertainty-last-result.json || true
           test -f nostromo/integration/shroom-feedback-last-result.json && cp nostromo/integration/shroom-feedback-last-result.json /tmp/nostromo-shroom-feedback-last-result.json || true
           git fetch origin main
           git reset --hard origin/main
@@ -110,6 +115,10 @@ jobs:
             cp /tmp/nostromo-vajra-conflict-last-result.json nostromo/integration/vajra-conflict-last-result.json
             git add nostromo/integration/vajra-conflict-last-result.json
           fi
+          if [ -f /tmp/nostromo-vajra-uncertainty-last-result.json ]; then
+            cp /tmp/nostromo-vajra-uncertainty-last-result.json nostromo/integration/vajra-uncertainty-last-result.json
+            git add nostromo/integration/vajra-uncertainty-last-result.json
+          fi
           if [ -f /tmp/nostromo-shroom-feedback-last-result.json ]; then
             cp /tmp/nostromo-shroom-feedback-last-result.json nostromo/integration/shroom-feedback-last-result.json
             git add nostromo/integration/shroom-feedback-last-result.json
@@ -137,6 +146,9 @@ jobs:
         run: exit 1
       - name: Enforce VAJRA conflict-preservation conclusion
         if: steps.vajra_conflict.outcome != 'success'
+        run: exit 1
+      - name: Enforce VAJRA uncertainty guard conclusion
+        if: steps.vajra_uncertainty.outcome != 'success'
         run: exit 1
       - name: Enforce SHROOMING feedback-conditioning conclusion
         if: steps.shroom_feedback.outcome != 'success'
