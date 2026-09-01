@@ -1,11 +1,11 @@
 {
-  "schema": "nostromo-vajra-conflict-test/v0.2",
-  "completedAt": "2026-09-01T13:11:12.996Z",
+  "schema": "nostromo-vajra-conflict-test/v0.3",
+  "completedAt": "2026-09-01T15:10:16.063Z",
   "status": "PASS",
   "finding": {
-    "classification": "INDEPENDENT_CONFLICT_PRESERVED_SAME_PROVENANCE_CONFLICT_QUARANTINED",
-    "before": "The v0.3.1 core preserved opposing qualifying returns but did not distinguish whether the opposing returns shared the same caller-supplied provenance identity.",
-    "after": "The v0.3.6 guard leaves same-canonical-provenance opposition unresolved and audited as SAME_PROVENANCE_CONFLICT, while distinct-provenance opposing returns remain CONTESTED_BY_RECEIPTS."
+    "classification": "INDEPENDENT_CONFLICT_PERSISTS_ACROSS_APPLICATIONS",
+    "before": "The v0.3.1 core preserved opposing qualifying returns within one application, but a later applyHandoffResults call could erase a historical contest when no new receipt arrived or convert it into unilateral closure when one later directional receipt arrived.",
+    "after": "The contest-persistence guard preserves CONTESTED_BY_RECEIPTS across later applications. A matching unilateral late receipt is audited as HISTORICAL_CONTEST_PRESERVED and cannot close the branch until a future explicit adjudication mechanism exists."
   },
   "guards": {
     "opposingIndependentReceiptsDoNotCloseBranch": true,
@@ -13,6 +13,9 @@
     "sameProvenanceOppositionDoesNotMasqueradeAsInterSourceConflict": true,
     "nonConflictReceiptStillResolves": true,
     "unspecifiedRelationDoesNotManufactureConflict": true,
+    "historicalContestSurvivesEmptyReplay": true,
+    "historicalContestSurvivesLaterUnilateralReceipt": true,
+    "lateReceiptIsAuditedNotSilentlyDiscarded": true,
     "falseCertaintyBlocked": true
   },
   "sample": {
@@ -59,7 +62,8 @@
       "indeterminate": 0,
       "unspecified": 0,
       "mixed": 0,
-      "sameProvenanceConflict": 0
+      "sameProvenanceConflict": 0,
+      "historicalContestPreserved": 0
     },
     "evidenceBranch": {
       "lens": "evidence",
@@ -151,9 +155,122 @@
       "indeterminate": 0,
       "unspecified": 0,
       "mixed": 0,
-      "sameProvenanceConflict": 2
+      "sameProvenanceConflict": 2,
+      "historicalContestPreserved": 0
+    },
+    "replayedContest": {
+      "status": "CONTESTED_HANDOFF_RETURN",
+      "resolution": {
+        "received": 0,
+        "resolved": 0,
+        "contested": 1,
+        "open": 4,
+        "rejected": 0,
+        "resolvedBranches": [],
+        "contestedBranches": [
+          {
+            "targetRef": "20708907",
+            "clauseRef": "bf2b3177",
+            "lens": "evidence",
+            "preferredOrgan": "DROPLET",
+            "status": "CONTESTED_BY_RECEIPTS",
+            "polarities": [
+              "SUPPORTS",
+              "REFUTES"
+            ],
+            "evidence": [
+              {
+                "receiptFingerprint": "dc1a61d6",
+                "evidenceKey": "51553429",
+                "provenance": "conflict-source-support-001",
+                "relation": "This evidence supports the target claim under the tested condition.",
+                "polarity": "SUPPORTS"
+              },
+              {
+                "receiptFingerprint": "0c82f6cf",
+                "evidenceKey": "11d9166c",
+                "provenance": "conflict-source-refute-002",
+                "relation": "This evidence refutes and contradicts the target claim under a matched condition.",
+                "polarity": "REFUTES"
+              }
+            ],
+            "boundary": "Multiple structurally qualifying, provenance-bearing returns make opposing relation claims about the same clause-scoped handoff. VAJRA preserves the conflict and refuses closure; this polarity detector is lexical and bounded, not semantic adjudication."
+          }
+        ],
+        "rejectedReceipts": [],
+        "historicalEvidenceKeys": 2,
+        "indeterminate": 0,
+        "unspecified": 0,
+        "mixed": 0,
+        "sameProvenanceConflict": 0,
+        "historicalContestPreserved": 0
+      }
+    },
+    "lateReceiptContest": {
+      "status": "CONTESTED_HANDOFF_RETURN",
+      "resolution": {
+        "received": 1,
+        "resolved": 0,
+        "contested": 1,
+        "open": 4,
+        "rejected": 1,
+        "resolvedBranches": [],
+        "contestedBranches": [
+          {
+            "targetRef": "20708907",
+            "clauseRef": "bf2b3177",
+            "lens": "evidence",
+            "preferredOrgan": "DROPLET",
+            "status": "CONTESTED_BY_RECEIPTS",
+            "polarities": [
+              "SUPPORTS",
+              "REFUTES"
+            ],
+            "evidence": [
+              {
+                "receiptFingerprint": "dc1a61d6",
+                "evidenceKey": "51553429",
+                "provenance": "conflict-source-support-001",
+                "relation": "This evidence supports the target claim under the tested condition.",
+                "polarity": "SUPPORTS"
+              },
+              {
+                "receiptFingerprint": "0c82f6cf",
+                "evidenceKey": "11d9166c",
+                "provenance": "conflict-source-refute-002",
+                "relation": "This evidence refutes and contradicts the target claim under a matched condition.",
+                "polarity": "REFUTES"
+              }
+            ],
+            "boundary": "Multiple structurally qualifying, provenance-bearing returns make opposing relation claims about the same clause-scoped handoff. VAJRA preserves the conflict and refuses closure; this polarity detector is lexical and bounded, not semantic adjudication."
+          }
+        ],
+        "rejectedReceipts": [
+          {
+            "targetRef": "20708907",
+            "clauseRef": "bf2b3177",
+            "lens": "evidence",
+            "organ": "DROPLET",
+            "status": "EXECUTED",
+            "provenance": "conflict-source-late-support-004",
+            "material": "A later independent source reports another successful duplicate-isolation observation under a related condition.",
+            "relation": "This later evidence supports the target claim under the observed condition.",
+            "relationClassification": "SUPPORTS",
+            "reasons": [
+              "HISTORICAL_CONTEST_PRESERVED"
+            ],
+            "contestTopology": "PREEXISTING_CONTEST_REQUIRES_EXPLICIT_ADJUDICATION"
+          }
+        ],
+        "historicalEvidenceKeys": 2,
+        "indeterminate": 0,
+        "unspecified": 0,
+        "mixed": 0,
+        "sameProvenanceConflict": 0,
+        "historicalContestPreserved": 1
+      }
     }
   },
   "failures": [],
-  "boundary": "PASS demonstrates a bounded anti-false-certainty provenance-topology guard. Distinct caller-supplied provenance identities with opposing qualifying relation signals remain CONTESTED_BY_RECEIPTS. Opposing signals under one canonical provenance identity are kept open and audited rather than counted as independent evidence. Provenance identity remains metadata, not proof of real-world source independence or source quality."
+  "boundary": "PASS demonstrates a bounded anti-false-certainty provenance-topology and temporal contest-persistence guard. Distinct caller-supplied provenance identities with opposing qualifying relation signals remain CONTESTED_BY_RECEIPTS across subsequent applications; a later unilateral directional return cannot erase the prior conflict. This does not adjudicate which side is true, weight source quality, or prove real-world source independence. Explicit conflict resolution remains a future capability."
 }

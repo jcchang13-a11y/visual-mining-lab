@@ -1,6 +1,6 @@
 {
   "schema": "nostromo-gut-lineage-test/v0.2.21-script-aware-cjk-nested-echo",
-  "completedAt": "2026-09-01T13:11:12.848Z",
+  "completedAt": "2026-09-01T15:10:15.951Z",
   "status": "PASS",
   "sameLineage": {
     "summaryItemCount": 1,
