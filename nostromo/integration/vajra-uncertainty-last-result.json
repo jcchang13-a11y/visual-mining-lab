@@ -1,6 +1,6 @@
 {
-  "schema": "nostromo-vajra-uncertainty-test/v0.3.5",
-  "completedAt": "2026-09-01T12:13:19.658Z",
+  "schema": "nostromo-vajra-uncertainty-test/v0.3.6",
+  "completedAt": "2026-09-01T13:11:13.079Z",
   "status": "PASS",
   "guards": {
     "explicitUncertaintyCannotClose": true,
@@ -15,20 +15,23 @@
     "mixedPolarityCannotClose": true,
     "positiveSupportStillCloses": true,
     "explicitRefuteStillCloses": true,
+    "sameCanonicalProvenanceOppositionCannotResolve": true,
+    "sameCanonicalProvenanceOppositionIsNotCountedAsInterSourceContest": true,
+    "independentProvenanceOppositionStillContests": true,
     "gutRegression": true
   },
   "finding": {
-    "classification": "NEGATED_POLARITY_FALSE_CLOSURE_GUARD_ADDED",
-    "detail": "v0.3.5 blocks polarity tokens when they occur inside bounded negation or hedge constructions. Phrases such as “does not contradict”, “fails to support”, “not inconsistent with”, and explicit Chinese negated-polarity equivalents are now audited as INDETERMINATE_RELATION instead of being allowed to inherit SUPPORTS/REFUTES from a lexical substring."
+    "classification": "SAME_PROVENANCE_OPPOSING_DIRECTION_GUARD_ADDED",
+    "detail": "v0.3.6 canonicalizes the caller-supplied provenance identity before branch resolution. Opposing SUPPORTS/REFUTES returns carrying the same canonical provenance are audited as SAME_PROVENANCE_CONFLICT and leave the branch open rather than being treated as independent opposing evidence or resolved by arrival order. Distinct-provenance opposing returns remain CONTESTED_BY_RECEIPTS."
   },
   "crossOrgan": {
     "gut": {
-      "ingested": 255,
+      "ingested": 524,
       "absorbed": 46,
-      "quarantined": 7,
+      "quarantined": 17,
       "summarySample": "[CONTRADICTION->VAJRA] 主動尋找最小反例與破壞條件 · [CONTRADICTION->VAJRA] 主動尋找最小反例與破壞條件：針對本輪 EMPIRICAL 命題（ref:20708907; clause:bf2b3177），哪個前提最可能先失效？ · [CLAIM->DROPLET] EMPIRICAL · [EVIDENCE_OR_PROVENANCE->MUTHER] 要求可追溯證據並區分支持與缺席證據 · [CLAIM->DROPLET] 命題成立條件需要顯式化 · [EVIDENCE_OR_PROVENANCE->MUTHER] 資料品質、測量方式與來源獨立性需要檢查 · [CLAIM->DROPLET] Preferred organ is a routing request"
     }
   },
   "failures": [],
-  "boundary": "PASS certifies only a bounded lexical anti-false-certainty guard over handoff receipt relations plus a GUT regression. Closure requires an unambiguous SUPPORTS or REFUTES polarity after uncertainty and negation screening; MIXED, UNSPECIFIED and bounded negated-polarity wording remain unresolved. It does not semantically judge relevance, evidence quality, truth, or whether one source should outweigh another."
+  "boundary": "PASS certifies only a bounded lexical/structural anti-false-certainty and provenance-topology guard plus a GUT regression. Provenance identity is caller-supplied metadata, not proof of real-world source independence. The guard prevents one canonical provenance identity from masquerading as independent opposing evidence; it does not semantically judge relevance, evidence quality, truth, or how genuinely independent sources should be weighted."
 }

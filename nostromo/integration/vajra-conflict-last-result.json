@@ -1,15 +1,16 @@
 {
-  "schema": "nostromo-vajra-conflict-test/v0.1",
-  "completedAt": "2026-09-01T12:13:19.604Z",
+  "schema": "nostromo-vajra-conflict-test/v0.2",
+  "completedAt": "2026-09-01T13:11:12.996Z",
   "status": "PASS",
   "finding": {
-    "classification": "FIRST_QUALIFYING_RECEIPT_COULD_HIDE_OPPOSING_RETURN",
-    "before": "Previous receipt resolution accepted the first structurally valid return for a branch and did not preserve a second, independently provenance-bearing return that asserted the opposite relation.",
-    "after": "The patch lexically labels qualifying relations as SUPPORTS/REFUTES/MIXED/UNSPECIFIED and leaves the branch CONTESTED_BY_RECEIPTS when opposing signals coexist."
+    "classification": "INDEPENDENT_CONFLICT_PRESERVED_SAME_PROVENANCE_CONFLICT_QUARANTINED",
+    "before": "The v0.3.1 core preserved opposing qualifying returns but did not distinguish whether the opposing returns shared the same caller-supplied provenance identity.",
+    "after": "The v0.3.6 guard leaves same-canonical-provenance opposition unresolved and audited as SAME_PROVENANCE_CONFLICT, while distinct-provenance opposing returns remain CONTESTED_BY_RECEIPTS."
   },
   "guards": {
-    "opposingReceiptsDoNotCloseBranch": true,
-    "conflictEvidencePreserved": true,
+    "opposingIndependentReceiptsDoNotCloseBranch": true,
+    "independentConflictEvidencePreserved": true,
+    "sameProvenanceOppositionDoesNotMasqueradeAsInterSourceConflict": true,
     "nonConflictReceiptStillResolves": true,
     "unspecifiedRelationDoesNotManufactureConflict": true,
     "falseCertaintyBlocked": true
@@ -54,7 +55,11 @@
         }
       ],
       "rejectedReceipts": [],
-      "historicalEvidenceKeys": 0
+      "historicalEvidenceKeys": 0,
+      "indeterminate": 0,
+      "unspecified": 0,
+      "mixed": 0,
+      "sameProvenanceConflict": 0
     },
     "evidenceBranch": {
       "lens": "evidence",
@@ -101,8 +106,54 @@
         ],
         "boundary": "Multiple structurally qualifying, provenance-bearing returns make opposing relation claims about the same clause-scoped handoff. VAJRA preserves the conflict and refuses closure; this polarity detector is lexical and bounded, not semantic adjudication."
       }
+    },
+    "sameProvenanceResolution": {
+      "received": 2,
+      "resolved": 0,
+      "contested": 0,
+      "open": 5,
+      "rejected": 2,
+      "resolvedBranches": [],
+      "contestedBranches": [],
+      "rejectedReceipts": [
+        {
+          "targetRef": "20708907",
+          "clauseRef": "bf2b3177",
+          "lens": "evidence",
+          "organ": "DROPLET",
+          "status": "EXECUTED",
+          "provenance": "conflict-source-support-001",
+          "material": "A traceable supporting evidence payload reports successful duplicate isolation under the tested condition.",
+          "relation": "This evidence supports the target claim under the tested condition.",
+          "relationClassification": "SUPPORTS",
+          "reasons": [
+            "SAME_PROVENANCE_CONFLICT"
+          ],
+          "provenanceTopology": "SAME_PROVENANCE_OPPOSING_DIRECTIONS"
+        },
+        {
+          "targetRef": "20708907",
+          "clauseRef": "bf2b3177",
+          "lens": "evidence",
+          "organ": "DROPLET",
+          "status": "EXECUTED",
+          "provenance": "CONFLICT SOURCE SUPPORT 001",
+          "material": "A separate traceable opposing evidence payload reports failure to isolate duplicate contamination under a matched condition.",
+          "relation": "This evidence refutes and contradicts the target claim under a matched condition.",
+          "relationClassification": "REFUTES",
+          "reasons": [
+            "SAME_PROVENANCE_CONFLICT"
+          ],
+          "provenanceTopology": "SAME_PROVENANCE_OPPOSING_DIRECTIONS"
+        }
+      ],
+      "historicalEvidenceKeys": 0,
+      "indeterminate": 0,
+      "unspecified": 0,
+      "mixed": 0,
+      "sameProvenanceConflict": 2
     }
   },
   "failures": [],
-  "boundary": "PASS demonstrates a bounded anti-false-certainty guard: independently provenance-bearing qualifying returns with opposing lexical relation signals are preserved as CONTESTED_BY_RECEIPTS rather than resolved by arrival order. This is lexical conflict detection only, not semantic evidence adjudication, source-quality ranking, or truth determination."
+  "boundary": "PASS demonstrates a bounded anti-false-certainty provenance-topology guard. Distinct caller-supplied provenance identities with opposing qualifying relation signals remain CONTESTED_BY_RECEIPTS. Opposing signals under one canonical provenance identity are kept open and audited rather than counted as independent evidence. Provenance identity remains metadata, not proof of real-world source independence or source quality."
 }
