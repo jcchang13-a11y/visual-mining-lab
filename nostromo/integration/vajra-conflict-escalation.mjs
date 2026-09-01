@@ -91,7 +91,7 @@ function packetIndex(escalation){
 }
 
 export function ingestConflictEscalationReturns(escalation,returns=[]){
-  const packets=packetIndex(escalation),accepted=[],quarantine=[],seen=new Set();
+  const packets=packetIndex(escalation),accepted=[],quarantine=[],seen=new Set(),seenPackets=new Set();
   for(const raw of Array.isArray(returns)?returns:[]){
     const packetId=clean(raw?.packetId),sourceOrgan=clean(raw?.sourceOrgan||raw?.organ),targetRef=clean(raw?.targetRef),clauseRef=clean(raw?.clauseRef),status=clean(raw?.status),provenance=returnProvenance(raw),material=returnMaterial(raw),relation=returnRelation(raw);
     const packet=packets.get(packetId),reasons=[];
@@ -99,6 +99,7 @@ export function ingestConflictEscalationReturns(escalation,returns=[]){
     if(packet&&sourceOrgan!==clean(packet.targetOrgan))reasons.push('WRONG_RETURNING_ORGAN');
     if(packet&&targetRef!==clean(packet.targetRef))reasons.push('TARGET_REF_MISMATCH');
     if(packet&&clauseRef!==clean(packet.clauseRef))reasons.push('CLAUSE_REF_MISMATCH');
+    if(packet&&seenPackets.has(packetId))reasons.push('PACKET_ALREADY_RETURNED');
     if(status!=='EXECUTED')reasons.push('NOT_EXECUTED');
     if(!provenance)reasons.push('PROVENANCE_REQUIRED');
     if(!substantive(material,24))reasons.push('INSUFFICIENT_RETURN_MATERIAL');
@@ -106,7 +107,7 @@ export function ingestConflictEscalationReturns(escalation,returns=[]){
     const returnKey=fp(`${packetId}|${sourceOrgan}|${provenance}|${material}|${relation}`);
     if(seen.has(returnKey))reasons.push('REPLAY_DUPLICATE');
     if(reasons.length){quarantine.push({packetId,sourceOrgan,targetRef,clauseRef,status:'QUARANTINED_RETURN',reasons:[...new Set(reasons)],returnKey});continue;}
-    seen.add(returnKey);
+    seen.add(returnKey);seenPackets.add(packetId);
     accepted.push({
       packetId,sourceOrgan,targetRef,clauseRef,lens:packet.lens,purpose:packet.purpose,status:'ACCEPTED_RETURN',
       provenance,material,relation,returnKey,
@@ -118,7 +119,7 @@ export function ingestConflictEscalationReturns(escalation,returns=[]){
   const expected=[...packets.keys()],returned=new Set(accepted.map(x=>x.packetId)),missing=expected.filter(id=>!returned.has(id));
   const byOrgan=accepted.reduce((m,x)=>(m[x.sourceOrgan]=(m[x.sourceOrgan]||0)+1,m),{});
   return {
-    organ:'VAJRA',capability:'CONFLICT_ESCALATION_RETURN_INTAKE',version:'0.1.0',
+    organ:'VAJRA',capability:'CONFLICT_ESCALATION_RETURN_INTAKE',version:'0.2.0',
     status:quarantine.length?'RETURNS_ACCEPTED_WITH_QUARANTINE':accepted.length?'RETURNS_ACCEPTED_REVIEW_REQUIRED':'NO_QUALIFYING_RETURNS',
     closureBlocked:Boolean(escalation?.closureBlocked),
     closureAuthority:'NONE',
@@ -126,7 +127,7 @@ export function ingestConflictEscalationReturns(escalation,returns=[]){
     allPacketsReturned:expected.length>0&&missing.length===0,
     byOrgan,accepted,quarantine,
     next:'Feed accepted receipt objects back into VAJRA conflict state as adjudication context; keep the contested branch open and use the returned organ differences to choose the next discriminating question.',
-    boundary:'Deterministic packet-correlation and return-quality guard. It blocks scope loss, wrong-organ substitution, replay duplicates, provenance-less returns and placeholder material. Even a complete three-organ return set remains REVIEW_REQUIRED and cannot close a contested VAJRA branch by itself.'
+    boundary:'Deterministic packet-correlation and return-quality guard. It blocks scope loss, wrong-organ substitution, exact replay duplicates, mutated replays of an already accepted packet, provenance-less returns and placeholder material. One issued packet can contribute at most one accepted return per intake. Even a complete three-organ return set remains REVIEW_REQUIRED and cannot close a contested VAJRA branch by itself.'
   };
 }
 
