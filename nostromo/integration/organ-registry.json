@@ -1,8 +1,8 @@
 {
-  "schema": "nostromo-organ-registry/v1.26",
-  "updatedAt": "2026-09-01T20:12:00+08:00",
+  "schema": "nostromo-organ-registry/v1.27",
+  "updatedAt": "2026-09-02T01:07:00+08:00",
   "truthRule": "DISPLAYED STATE MUST FOLLOW EVIDENCE",
-  "evidence": "ci-last-result.json plus formal-round-last-result.json plus connector-last-result.json plus muther-falsify-last-result.json plus droplet-claim-verify-last-result.json plus gut-metabolism-last-result.json plus gut-lineage-last-result.json plus vajra-dynamic-last-result.json plus vajra-uncertainty-last-result.json plus shroom-feedback-last-result.json",
+  "evidence": "ci-last-result.json plus formal-round-last-result.json plus connector-last-result.json plus muther-falsify-last-result.json plus droplet-claim-verify-last-result.json plus gut-metabolism-last-result.json plus gut-lineage-last-result.json plus vajra-dynamic-last-result.json plus vajra-uncertainty-last-result.json plus vajra-conflict-escalation-last-result.json plus shroom-feedback-last-result.json",
   "latestFormalRound": "greenhouse/r113-nostromo-formal-round.json",
   "latestFormalFinding": {
     "reference": "R111",
@@ -30,18 +30,18 @@
   },
   "latestThickening": {
     "organ": "VAJRA",
-    "version": "VAJRA v0.3.5",
-    "status": "VERIFIED_NEGATED_POLARITY_FALSE_CLOSURE_GUARD",
-    "test": "vajra-uncertainty-last-result.json",
+    "version": "VAJRA v0.3.6 + CONFLICT_ESCALATION 0.1.0",
+    "status": "VERIFIED_MULTI_ORGAN_CONFLICT_ESCALATION_WITH_FALSE_CLOSURE_BLOCK",
+    "test": "vajra-conflict-escalation-last-result.json",
     "capabilities": [
-      "explicit uncertainty, noncommittal relation wording and bounded negated-polarity wording cannot close a structurally valid handoff branch",
-      "phrases such as does not contradict, fails to support and not inconsistent with, plus bounded Chinese equivalents, are audited as INDETERMINATE_RELATION instead of inheriting polarity from a lexical substring",
-      "a single receipt carrying both support and refute polarity remains MIXED_RELATION and leaves the branch unresolved instead of manufacturing a binary resolution",
-      "positive SUPPORTS and explicit REFUTES receipts still close when they satisfy target, clause, organ, execution, provenance, substance and replay guards",
-      "conflicting qualifying receipts remain CONTESTED rather than being arbitrarily collapsed",
-      "VAJRA-to-GUT regression remains intact under the current bounded test"
+      "a preserved CONTESTED_BY_RECEIPTS branch is converted into explicit open work contracts for DROPLET, MUTHER and SHROOMING instead of being silently collapsed",
+      "each escalation packet preserves targetRef, clauseRef, evidence keys and caller-supplied provenance references while receiving a unique packet identity",
+      "escalation packets have closureAuthority NONE and cannot themselves certify truth or close the VAJRA branch",
+      "malformed contested branches with missing provenance or scope are quarantined instead of propagated as adjudication work",
+      "no-contest input does not manufacture a false escalation",
+      "the escalation payload remains digestible by GUT without leaking a resolved/truth-certified claim into the cross-organ summary"
     ],
-    "boundary": "Promotion is backed by successful NOSTROMO Integration Test at commit 7f6168cc211a89c0566392bc54b067add950bf9f. Dedicated vajra-uncertainty-last-result.json is PASS with failures [] and schema v0.3.5; ci-last-result.json is also PASS with failures []. This is a bounded lexical/structural anti-false-certainty guard only: it does not semantically judge relevance, evidence quality, source independence, truth, or how competing sources should be weighted."
+    "boundary": "Promotion is backed by successful NOSTROMO Integration Test run 206 at commit 50b9a3e1c59f341702de827fac4894c4684cec6f. Dedicated vajra-conflict-escalation-last-result.json is PASS with failures [] and schema v0.1.2. This is deterministic structural conflict routing only: DROPLET, MUTHER and SHROOMING receive distinct adjudication requests, but the current module does not itself execute those packets, establish real-world source independence, weigh evidence quality, or semantically resolve the disagreement."
   },
   "organs": {
     "shrooming": {
@@ -88,15 +88,15 @@
       "actions": {
         "DIGEST": "VERIFIED_HEURISTIC_METABOLIC_ROUTER_CROSS_SEGMENT_ANTI_ECHO"
       },
-      "boundary": "GUT v0.2.19 is a deterministic heuristic metabolic router. It preserves nutrient atoms, routes and provenance while applying carry-rendering containment including inherited-substrate subtraction, route-metadata stripping, tagged payload/tail suppression, adjacent and delimited segment collapse, shared-body summary diversity, exact non-adjacent full-width-colon clause compaction, short-token run collapse, volatile ref/clause lineage normalization, repeated lineage-signature collapse and active-loop same-route cross-segment near-echo suppression. The latest 10-round active-loop carry echo audit is PASS with zero detected exact, nested, recursive-wrapper or short-token issues under the current checks. These are bounded deterministic normalization rules, not semantic deletion, semantic novelty detection, source-truth judgment, or proof that all metabolic echo is solved."
+      "boundary": "GUT v0.2.21 is a deterministic heuristic metabolic router. It preserves nutrient atoms, routes and provenance while applying carry-rendering containment including inherited-substrate subtraction, route-metadata stripping, tagged payload/tail suppression, adjacent and delimited segment collapse, shared-body summary diversity, exact non-adjacent full-width-colon clause compaction, short-token run collapse, volatile ref/clause lineage normalization, repeated lineage-signature collapse and active-loop same-route cross-segment near-echo suppression. The latest active-loop carry echo audit remains PASS under current checks. These are bounded deterministic normalization rules, not semantic deletion, semantic novelty detection, source-truth judgment, or proof that all metabolic echo is solved."
     },
     "vajra": {
       "mode": "EXEC_CONNECTED_THICKENED",
-      "source": "../vajra/vajra-engine.js + ../vajra/receipt-uncertainty-guard.js",
+      "source": "../vajra/vajra-engine.js + ../vajra/receipt-uncertainty-guard.js + ./vajra-conflict-escalation.mjs",
       "actions": {
-        "DISMANTLE": "VERIFIED_CLAUSE_SCOPED_PROPOSITION_AWARE_HEURISTIC_DISMANTLER_WITH_RECEIPT_SUBSTANCE_REPLAY_CONFLICT_UNCERTAINTY_MIXED_POLARITY_AND_NEGATION_GUARDS"
+        "DISMANTLE": "VERIFIED_PROPOSITION_AWARE_DISMANTLER_WITH_RECEIPT_GUARDS_AND_MULTI_ORGAN_CONFLICT_ESCALATION"
       },
-      "boundary": "VAJRA v0.3.5 retains the v0.3.1 proposition-aware core and layers the verified receipt uncertainty/relation guard through v0.3.5. It keeps lexically detected proposition types and bounded syntactic clause decomposition for explicit causal forms. OPEN branch contracts carry targetRef plus clauseRef and require matching lens, preferred organ, execution status, provenance, substantive returned material and relation-to-target before structural closure. Cross-clause receipts are rejected; replay identity canonicalizes provenance and returned material; conflicting qualifying support/refute receipts remain CONTESTED; explicit uncertainty and noncommittal relations remain unresolved; a single receipt containing both support and refute polarity is rejected as MIXED_RELATION; and bounded negation/hedge constructions that merely contain words such as support, contradict or consistent cannot manufacture a false polarity closure. These remain deterministic lexical/structural heuristics, not semantic adequacy judgment, source-quality judgment, factual truth, or proof that the original proposition is settled."
+      "boundary": "VAJRA v0.3.6 retains the v0.3.1 proposition-aware core and layers the verified uncertainty/provenance and contest-persistence guards. OPEN branch contracts carry targetRef plus clauseRef and require matching lens, preferred organ, execution status, provenance, substantive returned material and relation-to-target before structural closure. Conflicting qualifying independent-provenance support/refute receipts remain CONTESTED; explicit uncertainty, mixed polarity and bounded negated-polarity wording cannot manufacture closure. The verified conflict-escalation module now converts a structurally valid preserved contest into three auditable open work packets: DROPLET for source-quality adjudication, MUTHER for context/method audit, and SHROOMING for criterion/boundary stress. Every packet has closureAuthority NONE, preserves target/clause/evidence/provenance references and cannot resolve truth by itself. Malformed contests are quarantined. These remain deterministic lexical/structural heuristics and routing contracts, not semantic adjudication, source-quality weighting, factual truth, or proof that the original proposition is settled."
     }
   }
 }
