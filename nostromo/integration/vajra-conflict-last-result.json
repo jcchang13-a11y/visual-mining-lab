@@ -1,6 +1,6 @@
 {
   "schema": "nostromo-vajra-conflict-test/v0.1",
-  "completedAt": "2026-09-01T09:08:58.022Z",
+  "completedAt": "2026-09-01T10:09:18.798Z",
   "status": "PASS",
   "finding": {
     "classification": "FIRST_QUALIFYING_RECEIPT_COULD_HIDE_OPPOSING_RETURN",
