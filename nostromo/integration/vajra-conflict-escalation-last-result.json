@@ -1,0 +1,119 @@
+{
+  "schema": "nostromo-vajra-conflict-escalation-test/v0.1.2",
+  "completedAt": "2026-09-01T17:06:07.217Z",
+  "status": "PASS",
+  "guards": {
+    "multiOrganEscalation": true,
+    "closureRemainsBlocked": true,
+    "provenancePreserved": true,
+    "packetIdsUnique": true,
+    "malformedContestQuarantined": true,
+    "noContestNoFalsePositive": true,
+    "gutRegression": true
+  },
+  "sample": {
+    "organ": "VAJRA",
+    "capability": "CONFLICT_ESCALATION",
+    "version": "0.1.0",
+    "status": "CONFLICT_ESCALATION_REQUIRED",
+    "contestedBranches": 1,
+    "escalatedBranches": 1,
+    "quarantinedBranches": 0,
+    "closureBlocked": true,
+    "resolutionPolicy": "MULTI_ORGAN_ADJUDICATION_REQUIRED_NO_AUTOMATIC_TRUTH_CLOSURE",
+    "escalations": [
+      {
+        "targetRef": "t001",
+        "clauseRef": "c001",
+        "lens": "evidence",
+        "status": "ESCALATION_REQUIRED",
+        "closureBlocked": true,
+        "evidence": [
+          {
+            "index": 0,
+            "evidenceKey": "e-support",
+            "provenance": "source-A",
+            "polarity": "SUPPORTS",
+            "relation": "supports under condition A"
+          },
+          {
+            "index": 1,
+            "evidenceKey": "e-refute",
+            "provenance": "source-B",
+            "polarity": "REFUTES",
+            "relation": "refutes under matched condition A"
+          }
+        ],
+        "packets": [
+          {
+            "packetId": "2963633f",
+            "sourceOrgan": "VAJRA",
+            "targetOrgan": "DROPLET",
+            "targetRef": "t001",
+            "clauseRef": "c001",
+            "lens": "evidence",
+            "purpose": "SOURCE_QUALITY_ADJUDICATION",
+            "need": "Check source independence, freshness, method quality, derivative-source overlap, and whether the opposing evidence actually covers comparable conditions.",
+            "evidenceKeys": [
+              "e-support",
+              "e-refute"
+            ],
+            "provenanceRefs": [
+              "source-A",
+              "source-B"
+            ],
+            "status": "OPEN",
+            "closureAuthority": "NONE",
+            "boundary": "This packet requests adjudication material. It cannot resolve the VAJRA branch or certify truth by itself."
+          },
+          {
+            "packetId": "5618a826",
+            "sourceOrgan": "VAJRA",
+            "targetOrgan": "MUTHER",
+            "targetRef": "t001",
+            "clauseRef": "c001",
+            "lens": "evidence",
+            "purpose": "CONTEXT_AND_METHOD_AUDIT",
+            "need": "Mine available source context, definitions, methods, and omitted qualifiers that could explain the disagreement without erasing either side.",
+            "evidenceKeys": [
+              "e-support",
+              "e-refute"
+            ],
+            "provenanceRefs": [
+              "source-A",
+              "source-B"
+            ],
+            "status": "OPEN",
+            "closureAuthority": "NONE",
+            "boundary": "This packet requests adjudication material. It cannot resolve the VAJRA branch or certify truth by itself."
+          },
+          {
+            "packetId": "70745601",
+            "sourceOrgan": "VAJRA",
+            "targetOrgan": "SHROOMING",
+            "targetRef": "t001",
+            "clauseRef": "c001",
+            "lens": "evidence",
+            "purpose": "CRITERION_AND_BOUNDARY_STRESS",
+            "need": "Generate competing criteria and boundary readings that would discriminate the opposing evidence positions, preserving unresolved disagreement.",
+            "evidenceKeys": [
+              "e-support",
+              "e-refute"
+            ],
+            "provenanceRefs": [
+              "source-A",
+              "source-B"
+            ],
+            "status": "OPEN",
+            "closureAuthority": "NONE",
+            "boundary": "This packet requests adjudication material. It cannot resolve the VAJRA branch or certify truth by itself."
+          }
+        ]
+      }
+    ],
+    "quarantine": [],
+    "boundary": "Deterministic structural escalation only. It preserves contested VAJRA branches and turns them into explicit DROPLET/MUTHER/SHROOMING work contracts. It does not weigh truth, infer real-world source independence, or resolve conflict automatically."
+  },
+  "failures": [],
+  "boundary": "PASS proves only deterministic conflict escalation contracts, packet identity, provenance/scope preservation and anti-false-closure guards. It does not adjudicate truth, source independence or source quality."
+}
