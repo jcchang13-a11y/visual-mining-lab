@@ -2,8 +2,9 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import vm from 'node:vm';
 const root=process.cwd();
-const code=await fs.readFile(path.join(root,'nostromo/vajra/vajra-engine.js'),'utf8');
-vm.runInThisContext(code,{filename:'nostromo/vajra/vajra-engine.js'});
+async function loadScript(rel){const code=await fs.readFile(path.join(root,rel),'utf8');vm.runInThisContext(code,{filename:rel});}
+await loadScript('nostromo/vajra/vajra-engine.js');
+await loadScript('nostromo/vajra/receipt-uncertainty-guard.js');
 const failures=[];
 const check=(condition,type,detail)=>{if(!condition)failures.push({type,detail});};
 const base=globalThis.VajraEngine.run('目前測試資料顯示 GUT 可以隔離重複污染。',6);
@@ -12,7 +13,8 @@ const support={targetRef:contract.targetRef,clauseRef:contract.clauseRef,lens:'e
 const refute={targetRef:contract.targetRef,clauseRef:contract.clauseRef,lens:'evidence',organ:'DROPLET',status:'EXECUTED',provenanceFingerprint:'conflict-source-refute-002',material:'A separate traceable opposing evidence payload reports failure to isolate duplicate contamination under a matched condition.',relationToTarget:'This evidence refutes and contradicts the target claim under a matched condition.'};
 const contested=globalThis.VajraEngine.applyHandoffResults(base,[support,refute]);
 const branch=contested.unresolved.find(x=>x.lens==='evidence');
-check(contested.version==='0.3.1','VERSION_REGRESSION',contested.version);
+check(globalThis.VajraEngine.receiptUncertaintyGuardVersion==='0.3.6','GUARD_VERSION_REGRESSION',globalThis.VajraEngine.receiptUncertaintyGuardVersion);
+check(contested.version==='0.3.6','VERSION_REGRESSION',contested.version);
 check(contested.handoffResolution.resolved===0,'CONFLICT_FALSELY_RESOLVED',contested.handoffResolution);
 check(contested.handoffResolution.contested===1,'CONFLICT_NOT_RECORDED',contested.handoffResolution);
 check(branch?.status==='CONTESTED_BY_RECEIPTS','CONTESTED_BRANCH_NOT_PRESERVED',branch);
@@ -27,7 +29,13 @@ check(supportingOnly.handoffResolution.contested===0,'NONCONFLICT_FALSE_CONTEST'
 const unspecified={...support,provenanceFingerprint:'conflict-source-unspecified-003',material:'A separate descriptive evidence payload records an observation without asserting a directional relation.',relationToTarget:'This material concerns the target but does not state a directional conclusion.'};
 const supportPlusUnspecified=globalThis.VajraEngine.applyHandoffResults(base,[support,unspecified]);
 check(supportPlusUnspecified.handoffResolution.resolved===1,'UNSPECIFIED_RELATION_FALSE_CONTEST',supportPlusUnspecified.handoffResolution);
-const result={schema:'nostromo-vajra-conflict-test/v0.1',completedAt:new Date().toISOString(),status:failures.length===0?'PASS':'FAIL',finding:{classification:'FIRST_QUALIFYING_RECEIPT_COULD_HIDE_OPPOSING_RETURN',before:'Previous receipt resolution accepted the first structurally valid return for a branch and did not preserve a second, independently provenance-bearing return that asserted the opposite relation.',after:'The patch lexically labels qualifying relations as SUPPORTS/REFUTES/MIXED/UNSPECIFIED and leaves the branch CONTESTED_BY_RECEIPTS when opposing signals coexist.'},guards:{opposingReceiptsDoNotCloseBranch:true,conflictEvidencePreserved:true,nonConflictReceiptStillResolves:true,unspecifiedRelationDoesNotManufactureConflict:true,falseCertaintyBlocked:true},sample:{status:contested.status,handoffResolution:contested.handoffResolution,evidenceBranch:branch},failures,boundary:'PASS demonstrates a bounded anti-false-certainty guard: independently provenance-bearing qualifying returns with opposing lexical relation signals are preserved as CONTESTED_BY_RECEIPTS rather than resolved by arrival order. This is lexical conflict detection only, not semantic evidence adjudication, source-quality ranking, or truth determination.'};
+const sameProvRefute={...refute,provenanceFingerprint:'CONFLICT SOURCE SUPPORT 001'};
+const sameProv=globalThis.VajraEngine.applyHandoffResults(base,[support,sameProvRefute]);
+check(sameProv.handoffResolution.resolved===0,'SAME_PROVENANCE_FALSE_RESOLUTION',sameProv.handoffResolution);
+check(sameProv.handoffResolution.contested===0,'SAME_PROVENANCE_FALSE_INTERSOURCE_CONTEST',sameProv.handoffResolution);
+check(sameProv.handoffResolution.sameProvenanceConflict===2,'SAME_PROVENANCE_CONFLICT_NOT_AUDITED',sameProv.handoffResolution);
+check(sameProv.unresolved.find(x=>x.lens==='evidence')?.status==='UNRESOLVED','SAME_PROVENANCE_BRANCH_NOT_OPEN',sameProv.unresolved);
+const result={schema:'nostromo-vajra-conflict-test/v0.2',completedAt:new Date().toISOString(),status:failures.length===0?'PASS':'FAIL',finding:{classification:'INDEPENDENT_CONFLICT_PRESERVED_SAME_PROVENANCE_CONFLICT_QUARANTINED',before:'The v0.3.1 core preserved opposing qualifying returns but did not distinguish whether the opposing returns shared the same caller-supplied provenance identity.',after:'The v0.3.6 guard leaves same-canonical-provenance opposition unresolved and audited as SAME_PROVENANCE_CONFLICT, while distinct-provenance opposing returns remain CONTESTED_BY_RECEIPTS.'},guards:{opposingIndependentReceiptsDoNotCloseBranch:true,independentConflictEvidencePreserved:true,sameProvenanceOppositionDoesNotMasqueradeAsInterSourceConflict:true,nonConflictReceiptStillResolves:true,unspecifiedRelationDoesNotManufactureConflict:true,falseCertaintyBlocked:true},sample:{status:contested.status,handoffResolution:contested.handoffResolution,evidenceBranch:branch,sameProvenanceResolution:sameProv.handoffResolution},failures,boundary:'PASS demonstrates a bounded anti-false-certainty provenance-topology guard. Distinct caller-supplied provenance identities with opposing qualifying relation signals remain CONTESTED_BY_RECEIPTS. Opposing signals under one canonical provenance identity are kept open and audited rather than counted as independent evidence. Provenance identity remains metadata, not proof of real-world source independence or source quality.'};
 await fs.writeFile(path.join(root,'nostromo/integration/vajra-conflict-last-result.json'),JSON.stringify(result,null,2)+'\n','utf8');
 console.log(JSON.stringify(result,null,2));
 if(result.status!=='PASS')process.exitCode=1;
