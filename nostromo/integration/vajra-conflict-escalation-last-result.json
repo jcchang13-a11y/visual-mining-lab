@@ -1,6 +1,6 @@
 {
-  "schema": "nostromo-vajra-conflict-escalation-test/v0.2.0",
-  "completedAt": "2026-09-01T22:04:10.561Z",
+  "schema": "nostromo-vajra-conflict-escalation-test/v0.3.0",
+  "completedAt": "2026-09-01T22:04:38.722Z",
   "status": "PASS",
   "guards": {
     "multiOrganEscalation": true,
@@ -12,6 +12,11 @@
     "noContestNoFalsePositive": true,
     "threeOrganReturnsAccepted": true,
     "returnIntakeNoClosure": true,
+    "multiOrganContextChangesNextAction": true,
+    "contextClosureStillBlocked": true,
+    "originalConflictPreserved": true,
+    "partialContextWaitsForMissingOrgans": true,
+    "unmatchedContextQuarantined": true,
     "adversarialReturnsQuarantined": true,
     "unknownPacketQuarantined": true,
     "gutRegression": true
@@ -268,6 +273,107 @@
     "next": "Feed accepted receipt objects back into VAJRA conflict state as adjudication context; keep the contested branch open and use the returned organ differences to choose the next discriminating question.",
     "boundary": "Deterministic packet-correlation and return-quality guard. It blocks scope loss, wrong-organ substitution, replay duplicates, provenance-less returns and placeholder material. Even a complete three-organ return set remains REVIEW_REQUIRED and cannot close a contested VAJRA branch by itself."
   },
+  "contextIntegration": {
+    "unresolved": [
+      {
+        "targetRef": "t001",
+        "clauseRef": "c001",
+        "lens": "evidence",
+        "status": "CONTESTED_WITH_ADJUDICATION_CONTEXT",
+        "contest": {
+          "status": "CONTESTED_BY_RECEIPTS",
+          "evidence": [
+            {
+              "index": 0,
+              "evidenceKey": "e-support",
+              "provenance": "source-A",
+              "polarity": "SUPPORTS",
+              "relation": "supports under condition A"
+            },
+            {
+              "index": 1,
+              "evidenceKey": "e-refute",
+              "provenance": "source-B",
+              "polarity": "REFUTES",
+              "relation": "refutes under matched condition A"
+            }
+          ]
+        },
+        "adjudicationContext": {
+          "status": "ADJUDICATION_CONTEXT_COMPLETE",
+          "requiredOrgans": [
+            "DROPLET",
+            "MUTHER",
+            "SHROOMING"
+          ],
+          "receivedOrgans": [
+            "DROPLET",
+            "MUTHER",
+            "SHROOMING"
+          ],
+          "missingOrgans": [],
+          "complete": true,
+          "byOrgan": {
+            "DROPLET": {
+              "sourceOrgan": "DROPLET",
+              "purpose": "SOURCE_QUALITY_ADJUDICATION",
+              "packetId": "2963633f",
+              "returnKey": "1cc59341",
+              "provenance": "droplet-source-audit-01",
+              "material": "Two opposing evidence items originate from separate declared source families, but methodological comparability remains only partially established.",
+              "relation": "Source independence is provisionally stronger than before while comparable-condition coverage remains unresolved.",
+              "status": "CONTEXT_ACCEPTED",
+              "closureAuthority": "NONE"
+            },
+            "MUTHER": {
+              "sourceOrgan": "MUTHER",
+              "purpose": "CONTEXT_AND_METHOD_AUDIT",
+              "packetId": "5618a826",
+              "returnKey": "c44c8158",
+              "provenance": "muther-context-audit-01",
+              "material": "Repository context exposes a scope qualifier that narrows one supporting statement to condition A and leaves the broader formulation unsupported.",
+              "relation": "The disagreement may partly reflect scope mismatch, so the original contested branch should remain open.",
+              "status": "CONTEXT_ACCEPTED",
+              "closureAuthority": "NONE"
+            },
+            "SHROOMING": {
+              "sourceOrgan": "SHROOMING",
+              "purpose": "CRITERION_AND_BOUNDARY_STRESS",
+              "packetId": "70745601",
+              "returnKey": "dbfe77fe",
+              "provenance": "shroom-boundary-stress-01",
+              "material": "A boundary reading separates the claim into matched-condition and unmatched-condition cases, producing different judgments without erasing either evidence position.",
+              "relation": "The competing criterion changes which cases count as counterexamples and therefore requires explicit adjudication.",
+              "status": "CONTEXT_ACCEPTED",
+              "closureAuthority": "NONE"
+            }
+          },
+          "closureAuthority": "NONE",
+          "boundary": "This context records how other organs changed the VAJRA conflict state. Completeness means all required organ returns are present, not that the dispute is resolved or that any return is true."
+        },
+        "nextAction": "REASSESS_CONFLICT_WITH_DISCRIMINATING_CONDITION",
+        "nextQuestion": "在保留原支持／反駁證據的前提下，綜合來源品質、方法／語境與邊界判準三種回傳，哪一個最小可檢查條件最能區分這些相反結果？",
+        "closureBlocked": true,
+        "closureAuthority": "NONE",
+        "boundary": "Multi-organ adjudication returns have changed the next VAJRA action, but the original opposing evidence and provenance remain preserved. Context integration is not truth adjudication."
+      }
+    ],
+    "organ": "VAJRA",
+    "capability": "CONFLICT_ADJUDICATION_CONTEXT",
+    "version": "0.1.0",
+    "status": "ADJUDICATION_CONTEXT_INTEGRATED",
+    "handoffs": [],
+    "adjudicationIntegration": {
+      "received": 3,
+      "contextualizedBranches": 1,
+      "completeContexts": 1,
+      "quarantinedReturns": 0,
+      "quarantine": []
+    },
+    "closureBlocked": true,
+    "closureAuthority": "NONE",
+    "boundary": "Deterministic conflict-context integration. Accepted DROPLET/MUTHER/SHROOMING returns can change VAJRA nextAction and nextQuestion only when targetRef, clauseRef and lens match a preserved contested branch. The original opposing evidence and provenance are retained. Complete three-organ context means coverage is complete, not truth is settled; automatic closure remains forbidden."
+  },
   "adversarialSummary": {
     "accepted": 1,
     "quarantined": 5,
@@ -281,5 +387,5 @@
     ]
   },
   "failures": [],
-  "boundary": "PASS proves deterministic conflict escalation plus a packet-correlated return intake that preserves organ identity, scope and provenance while quarantining replay, wrong-organ, placeholder and malformed returns. Even a complete three-organ return set remains review-required with closureAuthority NONE. It does not adjudicate truth, prove source independence or execute the external organs by itself."
+  "boundary": "PASS proves deterministic conflict escalation, packet-correlated return intake, and a feedback step in which accepted DROPLET/MUTHER/SHROOMING adjudication material changes VAJRA nextAction/nextQuestion while preserving the original opposing evidence, provenance, closure block and no-truth-authority boundary. Complete three-organ context is coverage only, not semantic adjudication or proof of source independence."
 }
