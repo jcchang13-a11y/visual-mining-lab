@@ -126,6 +126,14 @@
 須菩提，於意云何？如來有所說法不？」
 
 須菩提白佛言：「世尊，如來無所說。」
+[[/SUTRA]]`,
+'30330':`[[SUTRA: 本單元涉及經文｜如法受持分第十三後段一：世界與微塵]]
+【如法受持分第十三後段一】
+「須菩提，於意云何？三千大千世界所有微塵，是為多不？」
+
+須菩提言：「甚多，世尊。」
+
+「須菩提，諸微塵，如來說非微塵，是名微塵。如來說世界，非世界，是名世界。」
 [[/SUTRA]]`};const p=new URLSearchParams(location.search);let u=p.get('u')||units[0];let i=units.indexOf(u);if(i<0){i=0;u=units[0]}document.getElementById('unitTitle').textContent=u;document.getElementById('status').textContent=`單元 ${String(i+1).padStart(2,'0')} / 22`;const nav=document.getElementById('nav');if(i>0)nav.innerHTML+=`<a href="reader.html?u=${units[i-1]}">← ${units[i-1]}</a>`;if(i<units.length-1)nav.innerHTML+=`<a href="reader.html?u=${units[i+1]}">${units[i+1]} →</a>`;
 function makeFormula(label,block=false){const f=document.createElement('span');f.className='gcb-formula'+(block?' block':'');const n=document.createElement('span');n.className='gcb-name';n.textContent=`「${label}」`;const b=document.createElement('span');b.className='gcb-bar';const d=document.createElement('span');d.className='gcb-neg';d.textContent=`～${label}`;f.append(n,b,d);return f}
 function appendInline(parent,line){const re=/\{\{([^{}\n]+)\}\}/g;let last=0,m;while((m=re.exec(line))){if(m.index>last)parent.append(document.createTextNode(line.slice(last,m.index)));parent.append(makeFormula(m[1].trim(),line.trim()===m[0]));last=re.lastIndex}if(last<line.length)parent.append(document.createTextNode(line.slice(last)))}
