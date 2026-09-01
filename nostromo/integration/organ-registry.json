@@ -1,6 +1,6 @@
 {
-  "schema": "nostromo-organ-registry/v1.27",
-  "updatedAt": "2026-09-02T01:07:00+08:00",
+  "schema": "nostromo-organ-registry/v1.28",
+  "updatedAt": "2026-09-02T02:11:00+08:00",
   "truthRule": "DISPLAYED STATE MUST FOLLOW EVIDENCE",
   "evidence": "ci-last-result.json plus formal-round-last-result.json plus connector-last-result.json plus muther-falsify-last-result.json plus droplet-claim-verify-last-result.json plus gut-metabolism-last-result.json plus gut-lineage-last-result.json plus vajra-dynamic-last-result.json plus vajra-uncertainty-last-result.json plus vajra-conflict-escalation-last-result.json plus shroom-feedback-last-result.json",
   "latestFormalRound": "greenhouse/r113-nostromo-formal-round.json",
@@ -30,18 +30,18 @@
   },
   "latestThickening": {
     "organ": "VAJRA",
-    "version": "VAJRA v0.3.6 + CONFLICT_ESCALATION 0.1.0",
-    "status": "VERIFIED_MULTI_ORGAN_CONFLICT_ESCALATION_WITH_FALSE_CLOSURE_BLOCK",
+    "version": "VAJRA v0.3.6 + CONFLICT_ESCALATION 0.2.0 + RETURN_INTAKE 0.1.0",
+    "status": "VERIFIED_GUARDED_MULTI_ORGAN_CONFLICT_RETURN_INTAKE",
     "test": "vajra-conflict-escalation-last-result.json",
     "capabilities": [
-      "a preserved CONTESTED_BY_RECEIPTS branch is converted into explicit open work contracts for DROPLET, MUTHER and SHROOMING instead of being silently collapsed",
-      "each escalation packet preserves targetRef, clauseRef, evidence keys and caller-supplied provenance references while receiving a unique packet identity",
-      "escalation packets have closureAuthority NONE and cannot themselves certify truth or close the VAJRA branch",
-      "malformed contested branches with missing provenance or scope are quarantined instead of propagated as adjudication work",
-      "no-contest input does not manufacture a false escalation",
-      "the escalation payload remains digestible by GUT without leaking a resolved/truth-certified claim into the cross-organ summary"
+      "preserved CONTESTED_BY_RECEIPTS branches still become explicit DROPLET, MUTHER and SHROOMING adjudication packets instead of being silently collapsed",
+      "every packet now declares a machine-readable return contract requiring packet identity, returning organ, target/clause scope, execution status, provenance, substantive material and relation-to-target",
+      "returned adjudication material is correlated back to the exact issued packet and preserves organ identity, targetRef, clauseRef, lens and provenance",
+      "wrong-organ substitution, unknown packet IDs, scope mismatch, missing provenance, placeholder material and replay duplicates are quarantined instead of entering VAJRA as evidence",
+      "a complete three-organ return set remains REVIEW_REQUIRED with closureAuthority NONE and cannot certify truth or close the contested branch by itself",
+      "the guarded return-intake payload remains digestible by GUT without leaking a resolved/truth-certified claim into the metabolic summary"
     ],
-    "boundary": "Promotion is backed by successful NOSTROMO Integration Test run 206 at commit 50b9a3e1c59f341702de827fac4894c4684cec6f. Dedicated vajra-conflict-escalation-last-result.json is PASS with failures [] and schema v0.1.2. This is deterministic structural conflict routing only: DROPLET, MUTHER and SHROOMING receive distinct adjudication requests, but the current module does not itself execute those packets, establish real-world source independence, weigh evidence quality, or semantically resolve the disagreement."
+    "boundary": "Promotion is backed by successful NOSTROMO Integration Test run 210 at commit 26f118eeac9da47e64856a02af15610d96763800. Dedicated vajra-conflict-escalation-last-result.json is PASS with failures [] and schema v0.2.0. This verifies deterministic packet correlation and return-quality guards, not execution of the external organs, semantic adjudication, real-world source independence, evidence-quality weighting or factual truth. Accepted returns must still pass VAJRA's independent receipt guards before any structural branch resolution can occur."
   },
   "organs": {
     "shrooming": {
@@ -94,9 +94,9 @@
       "mode": "EXEC_CONNECTED_THICKENED",
       "source": "../vajra/vajra-engine.js + ../vajra/receipt-uncertainty-guard.js + ./vajra-conflict-escalation.mjs",
       "actions": {
-        "DISMANTLE": "VERIFIED_PROPOSITION_AWARE_DISMANTLER_WITH_RECEIPT_GUARDS_AND_MULTI_ORGAN_CONFLICT_ESCALATION"
+        "DISMANTLE": "VERIFIED_PROPOSITION_AWARE_DISMANTLER_WITH_RECEIPT_GUARDS_AND_GUARDED_MULTI_ORGAN_CONFLICT_RETURN_INTAKE"
       },
-      "boundary": "VAJRA v0.3.6 retains the v0.3.1 proposition-aware core and layers the verified uncertainty/provenance and contest-persistence guards. OPEN branch contracts carry targetRef plus clauseRef and require matching lens, preferred organ, execution status, provenance, substantive returned material and relation-to-target before structural closure. Conflicting qualifying independent-provenance support/refute receipts remain CONTESTED; explicit uncertainty, mixed polarity and bounded negated-polarity wording cannot manufacture closure. The verified conflict-escalation module now converts a structurally valid preserved contest into three auditable open work packets: DROPLET for source-quality adjudication, MUTHER for context/method audit, and SHROOMING for criterion/boundary stress. Every packet has closureAuthority NONE, preserves target/clause/evidence/provenance references and cannot resolve truth by itself. Malformed contests are quarantined. These remain deterministic lexical/structural heuristics and routing contracts, not semantic adjudication, source-quality weighting, factual truth, or proof that the original proposition is settled."
+      "boundary": "VAJRA v0.3.6 retains the v0.3.1 proposition-aware core and layers verified uncertainty/provenance, contest-persistence and conflict-return guards. OPEN branch contracts carry targetRef plus clauseRef and require matching lens, preferred organ, execution status, provenance, substantive returned material and relation-to-target before structural closure. Conflicting qualifying independent-provenance support/refute receipts remain CONTESTED; explicit uncertainty, mixed polarity and bounded negated-polarity wording cannot manufacture closure. Preserved contests generate three auditable open work packets: DROPLET for source-quality adjudication, MUTHER for context/method audit, and SHROOMING for criterion/boundary stress. Packet returns must match issued identity, returning organ and scope, retain provenance and substantive relation, and survive replay/placeholder guards; malformed returns are quarantined. Even all three accepted returns have closureAuthority NONE and remain review-required. These remain deterministic lexical/structural heuristics and routing contracts, not semantic adjudication, source-quality weighting, factual truth, or proof that the original proposition is settled."
     }
   }
 }
