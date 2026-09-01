@@ -16,7 +16,7 @@ const sameLineage=globalThis.GutEngine.digest({
   contradictionA:template('abcdef12','12345678'),
   contradictionB:template('fedcba98','87654321')
 },{source});
-check(sameLineage.version==='0.2.20','GUT_VERSION',sameLineage.version);
+check(sameLineage.version==='0.2.21','GUT_VERSION',sameLineage.version);
 check(sameLineage.nutrients.length===2,'SOURCE_NUTRIENTS_LOST',sameLineage.nutrients);
 check(sameLineage.nutrients.every(x=>x.provenance?.inputSource===source),'PROVENANCE_LOST',sameLineage.nutrients);
 check((sameLineage.antiEcho?.volatileLineageSuppressedCount||0)>=1,'VOLATILE_LINEAGE_NOT_SUPPRESSED',sameLineage.antiEcho);
@@ -108,7 +108,7 @@ check(observedReplay.text.includes('這是一條不同的未解問題'),'OBSERVE
 check((observedReplay.lineageOnlySuppressed||0)>=1,'OBSERVED_REPLAY_LINEAGE_SUPPRESSION_NOT_ACCOUNTED',observedReplay);
 
 const result={
-  schema:'nostromo-gut-lineage-test/v0.2.20-script-aware-cjk-nested-echo',
+  schema:'nostromo-gut-lineage-test/v0.2.21-script-aware-cjk-nested-echo',
   completedAt:new Date().toISOString(),
   status:failures.length===0?'PASS':'FAIL',
   sameLineage:{summaryItemCount:sameLineage.summaryItemCount,antiEcho:sameLineage.antiEcho,summary:sameLineage.summary},
