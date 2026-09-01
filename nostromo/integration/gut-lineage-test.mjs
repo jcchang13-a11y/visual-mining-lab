@@ -16,7 +16,7 @@ const sameLineage=globalThis.GutEngine.digest({
   contradictionA:template('abcdef12','12345678'),
   contradictionB:template('fedcba98','87654321')
 },{source});
-check(sameLineage.version==='0.2.21','GUT_VERSION',sameLineage.version);
+check(sameLineage.version==='0.2.22','GUT_VERSION',sameLineage.version);
 check(sameLineage.nutrients.length===2,'SOURCE_NUTRIENTS_LOST',sameLineage.nutrients);
 check(sameLineage.nutrients.every(x=>x.provenance?.inputSource===source),'PROVENANCE_LOST',sameLineage.nutrients);
 check((sameLineage.antiEcho?.volatileLineageSuppressedCount||0)>=1,'VOLATILE_LINEAGE_NOT_SUPPRESSED',sameLineage.antiEcho);
@@ -107,8 +107,21 @@ check(observedReplay.text.includes('VERIFIES AN EXPLICIT URL ONLY'),'OBSERVED_RE
 check(observedReplay.text.includes('這是一條不同的未解問題'),'OBSERVED_REPLAY_DISTINCT_QUESTION_LOST',observedReplay.text);
 check((observedReplay.lineageOnlySuppressed||0)>=1,'OBSERVED_REPLAY_LINEAGE_SUPPRESSION_NOT_ACCOUNTED',observedReplay);
 
+const delimiterCollisionSource='第一個反例要求保留來源脈絡 · [QUESTION->SHROOMING] 這段其實只是同一個 nutrient 內的文字，不是新的 top-level carry item · clause:9c5ac71';
+const delimiterCollision=globalThis.GutEngine.digest({
+  contradiction:delimiterCollisionSource
+},{source:`${source}/delimiter-collision`});
+check((delimiterCollision.antiEcho?.carryDelimiterNeutralizedCount||0)===2,'CARRY_DELIMITER_COLLISION_NOT_ACCOUNTED',delimiterCollision.antiEcho);
+check(!delimiterCollision.summary.includes(' · '),'CARRY_DELIMITER_COLLISION_SURVIVED_SINGLE_ITEM_SUMMARY',delimiterCollision.summary);
+check((delimiterCollision.summary.match(/ ∙ /g)||[]).length===2,'CARRY_DELIMITER_COLLISION_RENDER_UNEXPECTED',delimiterCollision.summary);
+check((delimiterCollision.nutrients[0]?.text.match(/·/g)||[]).length===2,'CARRY_DELIMITER_SOURCE_NUTRIENT_MUTATED',delimiterCollision.nutrients[0]);
+check(delimiterCollision.nutrients[0]?.provenance?.inputSource===`${source}/delimiter-collision`,'CARRY_DELIMITER_PROVENANCE_LOST',delimiterCollision.nutrients[0]);
+const delimiterCarry=compactMetabolicCarry(delimiterCollision.summary);
+check(delimiterCarry.inputSegments===1&&delimiterCarry.outputSegments===1,'CARRY_DELIMITER_CREATED_PSEUDO_SEGMENTS',delimiterCarry);
+check(delimiterCarry.text.includes(' ∙ '),'CARRY_DELIMITER_READABLE_SEPARATOR_LOST',delimiterCarry.text);
+
 const result={
-  schema:'nostromo-gut-lineage-test/v0.2.21-script-aware-cjk-nested-echo',
+  schema:'nostromo-gut-lineage-test/v0.2.22-carry-delimiter-collision',
   completedAt:new Date().toISOString(),
   status:failures.length===0?'PASS':'FAIL',
   sameLineage:{summaryItemCount:sameLineage.summaryItemCount,antiEcho:sameLineage.antiEcho,summary:sameLineage.summary},
@@ -120,8 +133,9 @@ const result={
   recursiveWrapperCarry,
   lineageOnlyCarry,
   observedReplay,
+  delimiterCollision:{summary:delimiterCollision.summary,sourceNutrient:delimiterCollision.nutrients[0]?.text||null,antiEcho:delimiterCollision.antiEcho,carry:delimiterCarry},
   failures,
-  boundary:'This adversarial test preserves source nutrients and provenance while checking cross-atom, intra-atom, short-CJK nested-clause, repeated machine-lineage signature, cross-segment volatile-lineage carry echo, recursive wrapper growth, repeated short ref/clause-only carry fragments, and a replay derived from the previously observed malformed carry. PASS requires script-aware carry rendering to collapse short meaningful Chinese phrases when they are replayed inside a longer clause, without deleting the underlying nutrient or provenance.'
+  boundary:'This adversarial test preserves source nutrients and provenance while checking cross-atom, intra-atom, short-CJK nested-clause, repeated machine-lineage signature, cross-segment volatile-lineage carry echo, recursive wrapper growth, repeated short ref/clause-only carry fragments, a replay derived from the previously observed malformed carry, and top-level middle-dot delimiter collision inside a single nutrient. PASS requires script-aware carry rendering to collapse short meaningful Chinese phrases when they are replayed inside a longer clause, without deleting the underlying nutrient or provenance; PASS also requires internal ` · ` glyphs to be neutralized only in summary rendering so they cannot become false top-level carry segments.'
 };
 await fs.writeFile(path.join(root,'nostromo/integration/gut-lineage-last-result.json'),JSON.stringify(result,null,2)+'\n','utf8');
 console.log(JSON.stringify(result,null,2));
