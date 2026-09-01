@@ -1,6 +1,6 @@
 {
   "schema": "nostromo-vajra-dynamic-test/v0.3.1",
-  "completedAt": "2026-09-01T19:16:25.191Z",
+  "completedAt": "2026-09-01T19:20:45.525Z",
   "status": "PASS",
   "guards": {
     "falseCertainty": true,
@@ -34,7 +34,7 @@
     "vajraGut": {
       "targetRef": "0f5f7163",
       "rawTargetEcho": false,
-      "summarySample": "[CONTRADICTION->VAJRA] 主動尋找最小反例與破壞條件 · [CONTRADICTION->VAJRA] 主動尋找最小反例與破壞條件：針對本輪 CAUSAL+UNIVERSAL 命題（ref:0f5f7163; clause:07b06bbd），哪個前提最可能先失效？ · [CLAIM->DROPLET] Deterministic proposition-aware dismantling only. Compound proposition types and clause boundaries are detected by auditable syntactic heuristics without claiming semantic understanding. Classifica"
+      "summarySample": "[CONTRADICTION->VAJRA] 主動尋找最小反例與破壞條件 · [CONTRADICTION->VAJRA] 主動尋找最小反例與破壞條件：針對本輪 CAUSAL+UNIVERSAL 命題（ref=0f5f7163; clause=07b06bbd），哪個前提最可能先失效？ · [CLAIM->DROPLET] Deterministic proposition-aware dismantling only. Compound proposition types and clause boundaries are detected by auditable syntactic heuristics without claiming semantic understanding. Classifica"
     },
     "receiptResolution": {
       "received": 4,
