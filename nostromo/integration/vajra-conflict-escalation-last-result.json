@@ -1,6 +1,6 @@
 {
   "schema": "nostromo-vajra-conflict-escalation-test/v0.2.0",
-  "completedAt": "2026-09-01T21:16:25.161Z",
+  "completedAt": "2026-09-01T22:04:10.561Z",
   "status": "PASS",
   "guards": {
     "multiOrganEscalation": true,
@@ -265,7 +265,7 @@
       }
     ],
     "quarantine": [],
-    "next": "Feed accepted receipt objects back into VAJRA receipt guards; keep the contested branch open unless those guards independently establish a structurally qualifying resolution. Return intake itself never settles truth.",
+    "next": "Feed accepted receipt objects back into VAJRA conflict state as adjudication context; keep the contested branch open and use the returned organ differences to choose the next discriminating question.",
     "boundary": "Deterministic packet-correlation and return-quality guard. It blocks scope loss, wrong-organ substitution, replay duplicates, provenance-less returns and placeholder material. Even a complete three-organ return set remains REVIEW_REQUIRED and cannot close a contested VAJRA branch by itself."
   },
   "adversarialSummary": {
