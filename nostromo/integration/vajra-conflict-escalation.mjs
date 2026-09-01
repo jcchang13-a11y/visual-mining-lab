@@ -1,6 +1,8 @@
 const clean=v=>String(v??'').replace(/\s+/g,' ').trim();
 const fp=text=>{let h=2166136261;for(const ch of clean(text)){h^=ch.codePointAt(0);h=Math.imul(h,16777619)>>>0;}return h.toString(16).padStart(8,'0');};
 const CONTEST='CONTESTED_BY_RECEIPTS';
+const CONTEXTUAL_CONTEST='CONTESTED_WITH_ADJUDICATION_CONTEXT';
+const REQUIRED_ADJUDICATION_ORGANS=['DROPLET','MUTHER','SHROOMING'];
 
 function evidenceList(branch){
   const raw=branch?.contest?.evidence || branch?.evidence || [];
@@ -123,7 +125,76 @@ export function ingestConflictEscalationReturns(escalation,returns=[]){
     expectedPackets:expected.length,acceptedReturns:accepted.length,quarantinedReturns:quarantine.length,missingPacketIds:missing,
     allPacketsReturned:expected.length>0&&missing.length===0,
     byOrgan,accepted,quarantine,
-    next:'Feed accepted receipt objects back into VAJRA receipt guards; keep the contested branch open unless those guards independently establish a structurally qualifying resolution. Return intake itself never settles truth.',
+    next:'Feed accepted receipt objects back into VAJRA conflict state as adjudication context; keep the contested branch open and use the returned organ differences to choose the next discriminating question.',
     boundary:'Deterministic packet-correlation and return-quality guard. It blocks scope loss, wrong-organ substitution, replay duplicates, provenance-less returns and placeholder material. Even a complete three-organ return set remains REVIEW_REQUIRED and cannot close a contested VAJRA branch by itself.'
+  };
+}
+
+function contestKey(targetRef,clauseRef,lens){return [clean(targetRef),clean(clauseRef||targetRef),clean(lens)].join('|');}
+function adjudicationContextFromReturns(returns){
+  const byOrgan={};
+  for(const r of returns){
+    if(!REQUIRED_ADJUDICATION_ORGANS.includes(r.sourceOrgan))continue;
+    byOrgan[r.sourceOrgan]={
+      sourceOrgan:r.sourceOrgan,purpose:r.purpose,packetId:r.packetId,returnKey:r.returnKey,
+      provenance:r.provenance,material:r.material,relation:r.relation,status:'CONTEXT_ACCEPTED',closureAuthority:'NONE'
+    };
+  }
+  const receivedOrgans=REQUIRED_ADJUDICATION_ORGANS.filter(o=>byOrgan[o]);
+  const missingOrgans=REQUIRED_ADJUDICATION_ORGANS.filter(o=>!byOrgan[o]);
+  return {
+    status:missingOrgans.length?'PARTIAL_ADJUDICATION_CONTEXT':'ADJUDICATION_CONTEXT_COMPLETE',
+    requiredOrgans:[...REQUIRED_ADJUDICATION_ORGANS],receivedOrgans,missingOrgans,complete:missingOrgans.length===0,
+    byOrgan,
+    closureAuthority:'NONE',
+    boundary:'This context records how other organs changed the VAJRA conflict state. Completeness means all required organ returns are present, not that the dispute is resolved or that any return is true.'
+  };
+}
+
+export function integrateConflictAdjudicationContext(vajra,intake){
+  const source=vajra&&typeof vajra==='object'?vajra:{unresolved:[]};
+  const accepted=Array.isArray(intake?.accepted)?intake.accepted:[];
+  const grouped=new Map();
+  for(const r of accepted){
+    const key=contestKey(r.targetRef,r.clauseRef,r.lens);
+    if(!grouped.has(key))grouped.set(key,[]);
+    grouped.get(key).push(r);
+  }
+  const attachedKeys=new Set(),quarantine=[];let contextualized=0,completeContexts=0;
+  const unresolved=(source.unresolved||[]).map(branch=>{
+    const isContest=branch?.status===CONTEST||branch?.contest?.status===CONTEST||branch?.status===CONTEXTUAL_CONTEST;
+    if(!isContest)return branch;
+    const key=contestKey(branch?.targetRef||branch?.contest?.targetRef,branch?.clauseRef||branch?.contest?.clauseRef,branch?.lens||branch?.contest?.lens);
+    const returns=grouped.get(key)||[];
+    if(!returns.length)return branch;
+    attachedKeys.add(key);contextualized++;
+    const adjudicationContext=adjudicationContextFromReturns(returns);
+    if(adjudicationContext.complete)completeContexts++;
+    const nextAction=adjudicationContext.complete?'REASSESS_CONFLICT_WITH_DISCRIMINATING_CONDITION':'WAIT_FOR_ADDITIONAL_ADJUDICATION_CONTEXT';
+    const nextQuestion=adjudicationContext.complete
+      ?'在保留原支持／反駁證據的前提下，綜合來源品質、方法／語境與邊界判準三種回傳，哪一個最小可檢查條件最能區分這些相反結果？'
+      :`衝突仍缺 ${adjudicationContext.missingOrgans.join('、')} 的回傳；不得因目前已收到的材料先行關閉分支。`;
+    return {
+      ...branch,status:CONTEXTUAL_CONTEST,
+      contest:{...(branch.contest||{}),status:CONTEST,evidence:evidenceList(branch)},
+      adjudicationContext,
+      nextAction,nextQuestion,
+      closureBlocked:true,closureAuthority:'NONE',
+      boundary:'Multi-organ adjudication returns have changed the next VAJRA action, but the original opposing evidence and provenance remain preserved. Context integration is not truth adjudication.'
+    };
+  });
+  for(const [key,returns] of grouped){
+    if(attachedKeys.has(key))continue;
+    for(const r of returns)quarantine.push({returnKey:r.returnKey,packetId:r.packetId,sourceOrgan:r.sourceOrgan,targetRef:r.targetRef,clauseRef:r.clauseRef,lens:r.lens,status:'QUARANTINED_CONTEXT_RETURN',reasons:['NO_MATCHING_CONTESTED_BRANCH']});
+  }
+  const status=quarantine.length&&contextualized?'ADJUDICATION_CONTEXT_INTEGRATED_WITH_QUARANTINE':contextualized?'ADJUDICATION_CONTEXT_INTEGRATED':quarantine.length?'NO_CONTEXT_INTEGRATED_WITH_QUARANTINE':'NO_ADJUDICATION_CONTEXT';
+  return {
+    ...source,organ:'VAJRA',capability:'CONFLICT_ADJUDICATION_CONTEXT',version:'0.1.0',status,
+    unresolved,
+    handoffs:unresolved.map(x=>x.handoff).filter(Boolean),
+    adjudicationIntegration:{received:accepted.length,contextualizedBranches:contextualized,completeContexts,quarantinedReturns:quarantine.length,quarantine},
+    closureBlocked:unresolved.some(b=>b?.status===CONTEST||b?.status===CONTEXTUAL_CONTEST||b?.contest?.status===CONTEST),
+    closureAuthority:'NONE',
+    boundary:'Deterministic conflict-context integration. Accepted DROPLET/MUTHER/SHROOMING returns can change VAJRA nextAction and nextQuestion only when targetRef, clauseRef and lens match a preserved contested branch. The original opposing evidence and provenance are retained. Complete three-organ context means coverage is complete, not truth is settled; automatic closure remains forbidden.'
   };
 }
