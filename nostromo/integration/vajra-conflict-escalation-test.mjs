@@ -1,6 +1,6 @@
 import fs from 'node:fs/promises';
 import vm from 'node:vm';
-import {escalateVajraConflicts,ingestConflictEscalationReturns} from './vajra-conflict-escalation.mjs';
+import {escalateVajraConflicts,ingestConflictEscalationReturns,integrateConflictAdjudicationContext} from './vajra-conflict-escalation.mjs';
 const failures=[];
 const contested={unresolved:[{targetRef:'t001',clauseRef:'c001',lens:'evidence',status:'CONTESTED_BY_RECEIPTS',contest:{status:'CONTESTED_BY_RECEIPTS',evidence:[
   {evidenceKey:'e-support',provenance:'source-A',polarity:'SUPPORTS',relation:'supports under condition A'},
@@ -22,7 +22,6 @@ if(malformed.quarantinedBranches!==1||malformed.escalatedBranches!==0||!malforme
 const none=escalateVajraConflicts({unresolved:[]});
 if(none.status!=='NO_CONTEST'||none.closureBlocked!==false)failures.push({type:'NO_CONTEST_FALSE_POSITIVE',none});
 
-// Return intake: all three organs may return useful material, but intake itself must never close truth.
 const packetByOrgan=Object.fromEntries(packets.map(p=>[p.targetOrgan,p]));
 const goodReturns=[
   {packetId:packetByOrgan.DROPLET.packetId,sourceOrgan:'DROPLET',targetRef:'t001',clauseRef:'c001',status:'EXECUTED',provenance:'droplet-source-audit-01',material:'Two opposing evidence items originate from separate declared source families, but methodological comparability remains only partially established.',relation:'Source independence is provisionally stronger than before while comparable-condition coverage remains unresolved.'},
@@ -35,15 +34,25 @@ if(intake.closureAuthority!=='NONE'||intake.closureBlocked!==true||intake.accept
 if(JSON.stringify(Object.keys(intake.byOrgan).sort())!==JSON.stringify(['DROPLET','MUTHER','SHROOMING']))failures.push({type:'RETURN_ORGAN_DIVERSITY_LOST',byOrgan:intake.byOrgan});
 if(intake.accepted.some(x=>x.targetRef!=='t001'||x.clauseRef!=='c001'||!x.provenance||!x.returnKey))failures.push({type:'RETURN_SCOPE_OR_PROVENANCE_LOST'});
 
-// Adversarial return set: wrong organ, replay, missing provenance, placeholder material and scope mismatch must be quarantined.
-const pD=packetByOrgan.DROPLET;
+// New feedback ability: accepted multi-organ returns must change VAJRA's next behavior without erasing the conflict.
+const integrated=integrateConflictAdjudicationContext(contested,intake);
+const contextualBranch=integrated.unresolved.find(x=>x.targetRef==='t001'&&x.clauseRef==='c001');
+if(integrated.status!=='ADJUDICATION_CONTEXT_INTEGRATED'||integrated.adjudicationIntegration?.contextualizedBranches!==1)failures.push({type:'ADJUDICATION_CONTEXT_NOT_INTEGRATED',integrated});
+if(contextualBranch?.status!=='CONTESTED_WITH_ADJUDICATION_CONTEXT'||contextualBranch?.closureBlocked!==true||contextualBranch?.closureAuthority!=='NONE')failures.push({type:'CONTEST_FALSELY_CLOSED_AFTER_CONTEXT',contextualBranch});
+if(contextualBranch?.adjudicationContext?.complete!==true||JSON.stringify(contextualBranch?.adjudicationContext?.receivedOrgans)!==JSON.stringify(['DROPLET','MUTHER','SHROOMING']))failures.push({type:'THREE_ORGAN_CONTEXT_COVERAGE_LOST',context:contextualBranch?.adjudicationContext});
+if(contextualBranch?.nextAction!=='REASSESS_CONFLICT_WITH_DISCRIMINATING_CONDITION'||!/最小可檢查條件/.test(contextualBranch?.nextQuestion||''))failures.push({type:'MULTI_ORGAN_RETURNS_DID_NOT_CHANGE_VAJRA_BEHAVIOR',nextAction:contextualBranch?.nextAction,nextQuestion:contextualBranch?.nextQuestion});
+const preservedEvidence=contextualBranch?.contest?.evidence||[];
+if(preservedEvidence.length!==2||preservedEvidence[0]?.provenance!=='source-A'||preservedEvidence[1]?.provenance!=='source-B')failures.push({type:'ORIGINAL_CONFLICT_PROVENANCE_LOST',preservedEvidence});
+const partialIntake=ingestConflictEscalationReturns(out,[goodReturns[0]]);
+const partialIntegrated=integrateConflictAdjudicationContext(contested,partialIntake);
+const partialBranch=partialIntegrated.unresolved[0];
+if(partialBranch?.nextAction!=='WAIT_FOR_ADDITIONAL_ADJUDICATION_CONTEXT'||partialBranch?.adjudicationContext?.complete!==false||partialBranch?.adjudicationContext?.missingOrgans?.length!==2)failures.push({type:'PARTIAL_CONTEXT_CREATED_PREMATURE_REASSESSMENT',partialBranch});
+const unmatched=integrateConflictAdjudicationContext({unresolved:[]},{accepted:intake.accepted});
+if(unmatched.adjudicationIntegration?.quarantinedReturns!==3||!unmatched.adjudicationIntegration?.quarantine?.every(x=>x.reasons?.includes('NO_MATCHING_CONTESTED_BRANCH')))failures.push({type:'UNMATCHED_CONTEXT_RETURN_NOT_QUARANTINED',unmatched});
+
 const adversarial=[
-  {...goodReturns[0],sourceOrgan:'MUTHER'},
-  goodReturns[0],
-  goodReturns[0],
-  {...goodReturns[1],provenance:''},
-  {...goodReturns[2],material:'done',relation:'ok'},
-  {...goodReturns[2],clauseRef:'wrong-clause'}
+  {...goodReturns[0],sourceOrgan:'MUTHER'},goodReturns[0],goodReturns[0],
+  {...goodReturns[1],provenance:''},{...goodReturns[2],material:'done',relation:'ok'},{...goodReturns[2],clauseRef:'wrong-clause'}
 ];
 const hostile=ingestConflictEscalationReturns(out,adversarial);
 const hostileReasons=new Set(hostile.quarantine.flatMap(x=>x.reasons||[]));
@@ -52,23 +61,23 @@ if(hostile.closureAuthority!=='NONE'||hostile.closureBlocked!==true)failures.pus
 const unknown=ingestConflictEscalationReturns(out,[{packetId:'not-a-packet',sourceOrgan:'DROPLET',targetRef:'t001',clauseRef:'c001',status:'EXECUTED',provenance:'p',material:'This return has enough text to look substantial but belongs to no issued packet.',relation:'It must not be attached to the contested branch.'}]);
 if(!unknown.quarantine[0]?.reasons?.includes('UNKNOWN_PACKET'))failures.push({type:'UNKNOWN_PACKET_NOT_QUARANTINED',unknown});
 
-// Cross-organ GUT regression: escalation and accepted returns must remain digestible without becoming truth-closure claims.
 const gutCode=await fs.readFile('nostromo/gut/gut-engine.js','utf8').catch(()=>null);
-let gut=null,gutReturns=null;
+let gut=null,gutReturns=null,gutIntegrated=null;
 if(gutCode){
   vm.runInThisContext(gutCode,{filename:'gut-engine.js'});
   gut=globalThis.GutEngine?.digest(out,{source:'VAJRA_CONFLICT_ESCALATION'});
   gutReturns=globalThis.GutEngine?.digest(intake,{source:'VAJRA_CONFLICT_RETURN_INTAKE'});
-  if(!gut?.absorbed||!gutReturns?.absorbed)failures.push({type:'GUT_CANNOT_DIGEST_ESCALATION_OR_RETURNS'});
-  if(/resolved_by_receipt|truth_certified|claim settled/i.test(`${gut?.summary||''} ${gutReturns?.summary||''}`))failures.push({type:'GUT_FALSE_CLOSURE_LEAK'});
+  gutIntegrated=globalThis.GutEngine?.digest(integrated,{source:'VAJRA_ADJUDICATION_CONTEXT'});
+  if(!gut?.absorbed||!gutReturns?.absorbed||!gutIntegrated?.absorbed)failures.push({type:'GUT_CANNOT_DIGEST_ESCALATION_RETURNS_OR_CONTEXT'});
+  if(/resolved_by_receipt|truth_certified|claim settled/i.test(`${gut?.summary||''} ${gutReturns?.summary||''} ${gutIntegrated?.summary||''}`))failures.push({type:'GUT_FALSE_CLOSURE_LEAK'});
 }
 const result={
-  schema:'nostromo-vajra-conflict-escalation-test/v0.2.0',completedAt:new Date().toISOString(),status:failures.length?'FAIL':'PASS',
+  schema:'nostromo-vajra-conflict-escalation-test/v0.3.0',completedAt:new Date().toISOString(),status:failures.length?'FAIL':'PASS',
   guards:{
-    multiOrganEscalation:targets.length===3,closureRemainsBlocked:out.closureBlocked===true,provenancePreserved:packets.every(p=>p.provenanceRefs.length===2),packetIdsUnique:new Set(packetIds).size===packets.length&&packetIds.every(Boolean),returnContractsPresent:packets.every(p=>p.returnContract?.closureAuthority==='NONE'),malformedContestQuarantined:malformed.quarantinedBranches===1,noContestNoFalsePositive:none.status==='NO_CONTEST',threeOrganReturnsAccepted:intake.acceptedReturns===3&&intake.allPacketsReturned,returnIntakeNoClosure:intake.closureAuthority==='NONE'&&intake.closureBlocked===true,adversarialReturnsQuarantined:['WRONG_RETURNING_ORGAN','REPLAY_DUPLICATE','PROVENANCE_REQUIRED','INSUFFICIENT_RETURN_MATERIAL','INSUFFICIENT_TARGET_RELATION','CLAUSE_REF_MISMATCH'].every(r=>hostileReasons.has(r)),unknownPacketQuarantined:unknown.quarantine[0]?.reasons?.includes('UNKNOWN_PACKET')||false,gutRegression:gut?gut.absorbed>0&&gutReturns?.absorbed>0:null
+    multiOrganEscalation:targets.length===3,closureRemainsBlocked:out.closureBlocked===true,provenancePreserved:packets.every(p=>p.provenanceRefs.length===2),packetIdsUnique:new Set(packetIds).size===packets.length&&packetIds.every(Boolean),returnContractsPresent:packets.every(p=>p.returnContract?.closureAuthority==='NONE'),malformedContestQuarantined:malformed.quarantinedBranches===1,noContestNoFalsePositive:none.status==='NO_CONTEST',threeOrganReturnsAccepted:intake.acceptedReturns===3&&intake.allPacketsReturned,returnIntakeNoClosure:intake.closureAuthority==='NONE'&&intake.closureBlocked===true,multiOrganContextChangesNextAction:contextualBranch?.nextAction==='REASSESS_CONFLICT_WITH_DISCRIMINATING_CONDITION',contextClosureStillBlocked:contextualBranch?.closureBlocked===true&&contextualBranch?.closureAuthority==='NONE',originalConflictPreserved:preservedEvidence.length===2,partialContextWaitsForMissingOrgans:partialBranch?.nextAction==='WAIT_FOR_ADDITIONAL_ADJUDICATION_CONTEXT',unmatchedContextQuarantined:unmatched.adjudicationIntegration?.quarantinedReturns===3,adversarialReturnsQuarantined:['WRONG_RETURNING_ORGAN','REPLAY_DUPLICATE','PROVENANCE_REQUIRED','INSUFFICIENT_RETURN_MATERIAL','INSUFFICIENT_TARGET_RELATION','CLAUSE_REF_MISMATCH'].every(r=>hostileReasons.has(r)),unknownPacketQuarantined:unknown.quarantine[0]?.reasons?.includes('UNKNOWN_PACKET')||false,gutRegression:gut?gut.absorbed>0&&gutReturns?.absorbed>0&&gutIntegrated?.absorbed>0:null
   },
-  sample:out,returnIntake:intake,adversarialSummary:{accepted:hostile.acceptedReturns,quarantined:hostile.quarantinedReturns,reasons:[...hostileReasons].sort()},failures,
-  boundary:'PASS proves deterministic conflict escalation plus a packet-correlated return intake that preserves organ identity, scope and provenance while quarantining replay, wrong-organ, placeholder and malformed returns. Even a complete three-organ return set remains review-required with closureAuthority NONE. It does not adjudicate truth, prove source independence or execute the external organs by itself.'
+  sample:out,returnIntake:intake,contextIntegration:integrated,adversarialSummary:{accepted:hostile.acceptedReturns,quarantined:hostile.quarantinedReturns,reasons:[...hostileReasons].sort()},failures,
+  boundary:'PASS proves deterministic conflict escalation, packet-correlated return intake, and a feedback step in which accepted DROPLET/MUTHER/SHROOMING adjudication material changes VAJRA nextAction/nextQuestion while preserving the original opposing evidence, provenance, closure block and no-truth-authority boundary. Complete three-organ context is coverage only, not semantic adjudication or proof of source independence.'
 };
 await fs.writeFile('nostromo/integration/vajra-conflict-escalation-last-result.json',JSON.stringify(result,null,2)+'\n','utf8');
 console.log(JSON.stringify(result,null,2));
