@@ -1,6 +1,6 @@
 {
-  "schema": "nostromo-vajra-conflict-escalation-test/v0.3.0",
-  "completedAt": "2026-09-01T23:07:30.547Z",
+  "schema": "nostromo-vajra-conflict-escalation-test/v0.4.0",
+  "completedAt": "2026-09-01T23:07:59.817Z",
   "status": "PASS",
   "guards": {
     "multiOrganEscalation": true,
@@ -17,6 +17,7 @@
     "originalConflictPreserved": true,
     "partialContextWaitsForMissingOrgans": true,
     "unmatchedContextQuarantined": true,
+    "mutatedPacketReplayContained": true,
     "adversarialReturnsQuarantined": true,
     "unknownPacketQuarantined": true,
     "gutRegression": true
@@ -374,6 +375,13 @@
     "closureAuthority": "NONE",
     "boundary": "Deterministic conflict-context integration. Accepted DROPLET/MUTHER/SHROOMING returns can change VAJRA nextAction and nextQuestion only when targetRef, clauseRef and lens match a preserved contested branch. The original opposing evidence and provenance are retained. Complete three-organ context means coverage is complete, not truth is settled; automatic closure remains forbidden."
   },
+  "mutatedReplaySummary": {
+    "accepted": 1,
+    "quarantined": 1,
+    "reasons": [
+      "PACKET_ALREADY_RETURNED"
+    ]
+  },
   "adversarialSummary": {
     "accepted": 1,
     "quarantined": 5,
@@ -388,5 +396,5 @@
     ]
   },
   "failures": [],
-  "boundary": "PASS proves deterministic conflict escalation, packet-correlated return intake, and a feedback step in which accepted DROPLET/MUTHER/SHROOMING adjudication material changes VAJRA nextAction/nextQuestion while preserving the original opposing evidence, provenance, closure block and no-truth-authority boundary. Complete three-organ context is coverage only, not semantic adjudication or proof of source independence."
+  "boundary": "PASS proves deterministic conflict escalation, packet-correlated return intake, one-return-per-issued-packet replay containment, and a feedback step in which accepted DROPLET/MUTHER/SHROOMING adjudication material changes VAJRA nextAction/nextQuestion while preserving the original opposing evidence, provenance, closure block and no-truth-authority boundary. Mutating text or provenance cannot turn the same issued packet into extra organ weight. Complete three-organ context is coverage only, not semantic adjudication or proof of source independence."
 }
