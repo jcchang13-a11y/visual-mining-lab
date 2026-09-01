@@ -1,8 +1,8 @@
 {
-  "schema": "nostromo-organ-registry/v1.23",
-  "updatedAt": "2026-09-01T03:12:00+08:00",
+  "schema": "nostromo-organ-registry/v1.24",
+  "updatedAt": "2026-09-01T10:08:00+08:00",
   "truthRule": "DISPLAYED STATE MUST FOLLOW EVIDENCE",
-  "evidence": "ci-last-result.json plus formal-round-last-result.json plus connector-last-result.json plus muther-falsify-last-result.json plus droplet-claim-verify-last-result.json plus gut-metabolism-last-result.json plus gut-lineage-last-result.json plus vajra-dynamic-last-result.json plus shroom-feedback-last-result.json",
+  "evidence": "ci-last-result.json plus formal-round-last-result.json plus connector-last-result.json plus muther-falsify-last-result.json plus droplet-claim-verify-last-result.json plus gut-metabolism-last-result.json plus gut-lineage-last-result.json plus vajra-dynamic-last-result.json plus vajra-uncertainty-last-result.json plus shroom-feedback-last-result.json",
   "latestFormalRound": "greenhouse/r113-nostromo-formal-round.json",
   "latestFormalFinding": {
     "reference": "R111",
@@ -30,17 +30,17 @@
   },
   "latestThickening": {
     "organ": "VAJRA",
-    "version": "VAJRA v0.3.1",
-    "status": "VERIFIED_PROVENANCE_FORMAT_REPLAY_GUARD",
-    "test": "vajra-dynamic-last-result.json",
+    "version": "VAJRA v0.3.2",
+    "status": "VERIFIED_EXPLICIT_UNCERTAINTY_FALSE_CERTAINTY_GUARD",
+    "test": "vajra-uncertainty-last-result.json",
     "capabilities": [
-      "replay identity now canonicalizes both provenance and returned material before fingerprinting",
-      "Unicode width, letter case, whitespace, punctuation and symbol-only provenance mutations no longer mint a fresh replay identity",
-      "one canonicalized provenance-plus-material payload remains limited to one branch across accumulated VAJRA history",
-      "provenance-format replay rejection is visible in the receipt audit record",
-      "existing clause isolation, minimum-substance receipt checks and cross-application replay guards remain intact"
+      "a structurally valid receipt whose relation explicitly says evidence is insufficient, indeterminate, unknown, or unable to support/refute no longer closes a handoff branch",
+      "English negated-support/refute patterns and Chinese uncertainty phrases are retained as audited INDETERMINATE_RELATION rejections",
+      "uncertain returns preserve the branch as unresolved instead of manufacturing closure",
+      "positive support receipts can still close when they satisfy the existing target, clause, organ, execution, provenance, substance and replay guards",
+      "VAJRA-to-GUT regression remains intact and inherited target substrate is not reintroduced into carry summary"
     ],
-    "boundary": "Promotion followed successful NOSTROMO Integration Test run 176 at commit fb7ae444ff309a6294b7eafdcba3ad0b6162bbe9. The pre-fix v0.3.0 defect is retained in vajra-dynamic-last-result.json: provenance formatting could previously mint a fresh replay identity even though the public boundary claimed both provenance and material were canonicalized. v0.3.1 repairs that mismatch. Canonicalization is deterministic structural normalization only; it does not detect semantic paraphrase duplicates, judge source truth, or prove semantic adequacy of a returned handoff."
+    "boundary": "Promotion followed successful NOSTROMO Integration Test run 188 at commit 4c9feac4dbc1e671413d15169e4ad55e88d486e1. Dedicated vajra-uncertainty-last-result.json is PASS with failures []. VAJRA v0.3.2 is the verified v0.3.1 core plus receipt-uncertainty-guard.js; the core engine file itself remains v0.3.1. The new guard is bounded lexical detection only: it does not semantically judge relevance, evidence quality, truth, or how an uncertain source should be weighted against a supporting source."
   },
   "organs": {
     "shrooming": {
@@ -87,15 +87,15 @@
       "actions": {
         "DIGEST": "VERIFIED_HEURISTIC_METABOLIC_ROUTER_CROSS_SEGMENT_ANTI_ECHO"
       },
-      "boundary": "GUT v0.2.18 remains a deterministic heuristic metabolic router. It preserves nutrient atoms, routes and provenance while applying carry-rendering containment including exact inherited-substrate subtraction, route-metadata stripping, tagged payload/tail suppression, adjacent segment collapse, shared-body summary diversity, exact non-adjacent full-width-colon clause compaction, short-token run collapse, volatile ref/clause lineage normalization, and active-loop same-route cross-segment near-echo suppression. The recirculation layer v1.1.5 normalizes both ASCII and fullwidth ref/clause delimiters, then applies a bounded 5-character n-gram Jaccard threshold of 0.82 only to normalized segments at least 80 characters long. Dedicated adversarial testing demonstrated one wrapper-only duplicate being suppressed while a substantively different contradiction remained. These are bounded deterministic normalization rules, not semantic deletion, semantic novelty detection, source-truth judgment, or proof that all metabolic echo is solved."
+      "boundary": "GUT v0.2.19 is a deterministic heuristic metabolic router. It preserves nutrient atoms, routes and provenance while applying carry-rendering containment including inherited-substrate subtraction, route-metadata stripping, tagged payload/tail suppression, adjacent and delimited segment collapse, shared-body summary diversity, exact non-adjacent full-width-colon clause compaction, short-token run collapse, volatile ref/clause lineage normalization, repeated lineage-signature collapse and active-loop same-route cross-segment near-echo suppression. The latest 10-round active-loop carry echo audit is PASS with zero detected exact, nested, recursive-wrapper or short-token issues under the current checks. These are bounded deterministic normalization rules, not semantic deletion, semantic novelty detection, source-truth judgment, or proof that all metabolic echo is solved."
     },
     "vajra": {
       "mode": "EXEC_CONNECTED_THICKENED",
-      "source": "../vajra/vajra-engine.js",
+      "source": "../vajra/vajra-engine.js + ../vajra/receipt-uncertainty-guard.js",
       "actions": {
-        "DISMANTLE": "VERIFIED_CLAUSE_SCOPED_PROPOSITION_AWARE_HEURISTIC_DISMANTLER_WITH_RECEIPT_SUBSTANCE_AND_REPLAY_GUARDS"
+        "DISMANTLE": "VERIFIED_CLAUSE_SCOPED_PROPOSITION_AWARE_HEURISTIC_DISMANTLER_WITH_RECEIPT_SUBSTANCE_REPLAY_CONFLICT_AND_UNCERTAINTY_GUARDS"
       },
-      "boundary": "VAJRA v0.3.1 performs proposition-aware dynamic dismantling, retains multiple lexically detected proposition types, and applies bounded syntactic clause decomposition for explicit causal forms. OPEN branch contracts carry targetRef plus clauseRef and require matching lens, preferred organ, execution status, provenance, material and relation-to-target before structural closure. A receipt scoped to another clause is rejected. Returned material and relation must pass a bounded minimum-substance guard. Replay identity canonicalizes both provenance and returned material across Unicode width, letter case, whitespace, punctuation and symbols before fingerprinting; superficial formatting changes in either field cannot mint a fresh replay identity, and one canonicalized provenance-plus-material payload can resolve only one branch across accumulated VAJRA history. This remains deterministic structural normalization and shallow content screening, not semantic adequacy judgment, semantic duplicate detection, semantic parsing, factual truth, or proof that the original proposition is settled."
+      "boundary": "VAJRA v0.3.2 consists of the v0.3.1 proposition-aware dismantler plus a verified uncertainty-aware receipt guard. It retains multiple lexically detected proposition types and bounded syntactic clause decomposition for explicit causal forms. OPEN branch contracts carry targetRef plus clauseRef and require matching lens, preferred organ, execution status, provenance, substantive returned material and relation-to-target before structural closure. Cross-clause receipts are rejected; replay identity canonicalizes both provenance and returned material; conflicting qualifying support/refute receipts remain CONTESTED instead of being arbitrarily closed. The v0.3.2 guard additionally refuses closure when the relation explicitly reports insufficient, indeterminate, unknown or non-supporting/non-refuting evidence, preserving that receipt in the audit as INDETERMINATE_RELATION. All of these remain deterministic lexical/structural heuristics, not semantic adequacy judgment, source-quality judgment, factual truth, or proof that the original proposition is settled."
     }
   }
 }
