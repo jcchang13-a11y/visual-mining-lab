@@ -1,6 +1,6 @@
 {
   "schema": "nostromo-vajra-uncertainty-test/v0.3.6",
-  "completedAt": "2026-09-01T20:07:38.657Z",
+  "completedAt": "2026-09-01T21:10:52.558Z",
   "status": "PASS",
   "guards": {
     "explicitUncertaintyCannotClose": true,
@@ -29,7 +29,7 @@
       "ingested": 526,
       "absorbed": 46,
       "quarantined": 17,
-      "summarySample": "[CONTRADICTION->VAJRA] 主動尋找最小反例與破壞條件 · [CONTRADICTION->VAJRA] 主動尋找最小反例與破壞條件：針對本輪 EMPIRICAL 命題（ref=20708907; clause=bf2b3177），哪個前提最可能先失效？ · [CLAIM->DROPLET] EMPIRICAL · [EVIDENCE_OR_PROVENANCE->MUTHER] 要求可追溯證據並區分支持與缺席證據 · [CLAIM->DROPLET] 命題成立條件需要顯式化 · [EVIDENCE_OR_PROVENANCE->MUTHER] 資料品質、測量方式與來源獨立性需要檢查 · [CLAIM->DROPLET] Preferred organ is a routing request"
+      "summarySample": "[CONTRADICTION->VAJRA] 主動尋找最小反例與破壞條件 · [CONTRADICTION->VAJRA] 主動尋找最小反例與破壞條件：針對本輪 EMPIRICAL 命題，哪個前提最可能先失效？ · [CLAIM->DROPLET] EMPIRICAL · [EVIDENCE_OR_PROVENANCE->MUTHER] 要求可追溯證據並區分支持與缺席證據 · [CLAIM->DROPLET] 命題成立條件需要顯式化 · [EVIDENCE_OR_PROVENANCE->MUTHER] 資料品質、測量方式與來源獨立性需要檢查 · [CLAIM->DROPLET] Preferred organ is a routing request, not proof that the organ exec"
     }
   },
   "failures": [],

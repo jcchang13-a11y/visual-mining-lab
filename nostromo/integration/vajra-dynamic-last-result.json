@@ -1,7 +1,7 @@
 {
   "schema": "nostromo-vajra-dynamic-test/v0.3.1",
-  "completedAt": "2026-09-01T20:07:38.514Z",
-  "status": "PASS",
+  "completedAt": "2026-09-01T21:10:52.398Z",
+  "status": "FAIL",
   "guards": {
     "falseCertainty": true,
     "dynamicLensSelection": true,
@@ -34,7 +34,7 @@
     "vajraGut": {
       "targetRef": "0f5f7163",
       "rawTargetEcho": false,
-      "summarySample": "[CONTRADICTION->VAJRA] 主動尋找最小反例與破壞條件 · [CONTRADICTION->VAJRA] 主動尋找最小反例與破壞條件：針對本輪 CAUSAL+UNIVERSAL 命題（ref=0f5f7163; clause=07b06bbd），哪個前提最可能先失效？ · [CLAIM->DROPLET] Deterministic proposition-aware dismantling only. Compound proposition types and clause boundaries are detected by auditable syntactic heuristics without claiming semantic understanding. Classifica"
+      "summarySample": "[CONTRADICTION->VAJRA] 主動尋找最小反例與破壞條件 · [CONTRADICTION->VAJRA] 主動尋找最小反例與破壞條件：針對本輪 CAUSAL+UNIVERSAL 命題，哪個前提最可能先失效？ · [CLAIM->DROPLET] Deterministic proposition-aware dismantling only. Compound proposition types and clause boundaries are detected by auditable syntactic heuristics without claiming semantic understanding. Classification, clause selection, lens ch"
     },
     "receiptResolution": {
       "received": 4,
@@ -277,6 +277,11 @@
       ]
     }
   },
-  "failures": [],
+  "failures": [
+    {
+      "type": "VAJRA_GUT_TARGET_REF_LOST",
+      "detail": "[CONTRADICTION->VAJRA] 主動尋找最小反例與破壞條件 · [CONTRADICTION->VAJRA] 主動尋找最小反例與破壞條件：針對本輪 CAUSAL+UNIVERSAL 命題，哪個前提最可能先失效？ · [CLAIM->DROPLET] Deterministic proposition-aware dismantling only. Compound proposition types and clause boundaries are detected by auditable syntactic heuristics without claiming semantic understanding. Classification, clause selection, lens choice and preferred-organ handoff are heuristics, not semantic truth; a handoff is a work contract, not evidence that the requested organ executed it. The inherited proposition is intentionally not copied into VAJRA output; targetRef and clauseRef preserve referential continuity while the caller retains the source substrate and provenance. · [EVIDENCE_OR_PROVENANCE->MUTHER] 外部證據增加 · [CLAIM->DROPLET] CAUSAL · [CLAIM->DROPLET] UNIVERSAL · [CLAIM->DROPLET] 命題成立條件需要顯式化 · [CLAIM->DROPLET] WHOLE_POSITION · [CLAIM->DROPLET] Preferred organ is a routing request, not proof that the organ executed it. clauseRef scopes the return to the inspected clause when heuristic decomposition is available. · [EVIDENCE_OR_PROVENANCE->MUTHER] candidate mechanism, intermediate steps, and evidence-bearing links · [EVIDENCE_OR_PROVENANCE->MUTHER] 暫不定案；保留 causal_mechanism 分支，優先交給 MUTHER 補回 candidate mechanism, intermediate steps, and evidence-bearing links。 · [CLAIM->DROPLET] "
+    }
+  ],
   "boundary": "PASS proves proposition-aware lens selection, auditable heuristic clause decomposition, clause-scoped handoff isolation, minimally substantive structural receipt closure, VAJRA→GUT referential continuity, and replay-amplification guards across branches, repeated applications, returned-material formatting mutations, and provenance formatting mutations. The minimum-substance guard is only a bounded length/placeholder heuristic; it does not prove semantic adequacy, relevance, source quality, or truth. Replay canonicalization covers Unicode width, case, whitespace, punctuation and symbols only; it is not semantic similarity detection. Clause splitting remains bounded syntax handling, not semantic parsing."
 }
