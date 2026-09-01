@@ -1,12 +1,16 @@
 {
-  "schema": "nostromo-vajra-uncertainty-test/v0.3.4",
-  "completedAt": "2026-09-01T12:09:47.664Z",
-  "status": "FAIL",
+  "schema": "nostromo-vajra-uncertainty-test/v0.3.5",
+  "completedAt": "2026-09-01T12:10:51.526Z",
+  "status": "PASS",
   "guards": {
     "explicitUncertaintyCannotClose": true,
     "negatedSupportCannotClose": true,
     "negatedRefuteCannotClose": true,
+    "negatedContradictionCannotClose": true,
+    "notInconsistentCannotClose": true,
+    "failsToSupportCannotClose": true,
     "chineseUncertaintyCannotClose": true,
+    "chineseNegatedPolarityCannotClose": true,
     "longUnspecifiedRelationCannotClose": true,
     "mixedPolarityCannotClose": true,
     "positiveSupportStillCloses": true,
@@ -14,8 +18,8 @@
     "gutRegression": true
   },
   "finding": {
-    "classification": "MIXED_POLARITY_FALSE_CLOSURE_GUARD_ADDED",
-    "detail": "A single structurally complete receipt whose relation simultaneously contains support and refute polarity is no longer allowed to close a VAJRA handoff. v0.3.4 preserves it as an audited MIXED_RELATION rejection and leaves the branch unresolved, preventing internally conflicted wording from being collapsed into a false binary resolution."
+    "classification": "NEGATED_POLARITY_FALSE_CLOSURE_GUARD_ADDED",
+    "detail": "v0.3.5 blocks polarity tokens when they occur inside bounded negation or hedge constructions. Phrases such as “does not contradict”, “fails to support”, “not inconsistent with”, and explicit Chinese negated-polarity equivalents are now audited as INDETERMINATE_RELATION instead of being allowed to inherit SUPPORTS/REFUTES from a lexical substring."
   },
   "crossOrgan": {
     "gut": {
@@ -25,31 +29,6 @@
       "summarySample": "[CONTRADICTION->VAJRA] 主動尋找最小反例與破壞條件 · [CONTRADICTION->VAJRA] 主動尋找最小反例與破壞條件：針對本輪 EMPIRICAL 命題（ref:20708907; clause:bf2b3177），哪個前提最可能先失效？ · [CLAIM->DROPLET] EMPIRICAL · [EVIDENCE_OR_PROVENANCE->MUTHER] 要求可追溯證據並區分支持與缺席證據 · [CLAIM->DROPLET] 命題成立條件需要顯式化 · [EVIDENCE_OR_PROVENANCE->MUTHER] 資料品質、測量方式與來源獨立性需要檢查 · [CLAIM->DROPLET] Preferred organ is a routing request"
     }
   },
-  "failures": [
-    {
-      "type": "GUARD_VERSION_MISSING",
-      "detail": "0.3.5"
-    },
-    {
-      "type": "INSUFFICIENT_VERSION",
-      "detail": "0.3.5"
-    },
-    {
-      "type": "NEGATED_REFUTE_VERSION",
-      "detail": "0.3.5"
-    },
-    {
-      "type": "ZH_UNCERTAIN_VERSION",
-      "detail": "0.3.5"
-    },
-    {
-      "type": "UNSPECIFIED_VERSION",
-      "detail": "0.3.5"
-    },
-    {
-      "type": "MIXED_VERSION",
-      "detail": "0.3.5"
-    }
-  ],
-  "boundary": "PASS certifies only a bounded lexical anti-false-certainty guard over handoff receipt relations plus a GUT regression. Closure now requires an unambiguous SUPPORTS or REFUTES polarity after uncertainty screening; MIXED remains unresolved. It does not semantically judge relevance, evidence quality, truth, or whether one source should outweigh another."
+  "failures": [],
+  "boundary": "PASS certifies only a bounded lexical anti-false-certainty guard over handoff receipt relations plus a GUT regression. Closure requires an unambiguous SUPPORTS or REFUTES polarity after uncertainty and negation screening; MIXED, UNSPECIFIED and bounded negated-polarity wording remain unresolved. It does not semantically judge relevance, evidence quality, truth, or whether one source should outweigh another."
 }
