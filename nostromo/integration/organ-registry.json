@@ -1,6 +1,6 @@
 {
-  "schema": "nostromo-organ-registry/v1.32",
-  "updatedAt": "2026-09-02T09:06:00+08:00",
+  "schema": "nostromo-organ-registry/v1.33",
+  "updatedAt": "2026-09-02T10:08:00+08:00",
   "truthRule": "DISPLAYED STATE MUST FOLLOW EVIDENCE",
   "evidence": "ci-last-result.json plus formal-round-last-result.json plus connector-last-result.json plus muther-falsify-last-result.json plus droplet-claim-verify-last-result.json plus gut-metabolism-last-result.json plus gut-lineage-last-result.json plus vajra-dynamic-last-result.json plus vajra-uncertainty-last-result.json plus vajra-conflict-escalation-last-result.json plus shroom-feedback-last-result.json",
   "latestFormalRound": "greenhouse/r113-nostromo-formal-round.json",
@@ -30,19 +30,19 @@
   },
   "latestThickening": {
     "organ": "VAJRA",
-    "version": "VAJRA v0.3.9",
-    "status": "VERIFIED_LEDGER_ATTESTATION_ANTI_FALSE_COMPLETENESS",
-    "test": "vajra-conflict-escalation-last-result.json + NOSTROMO Integration Test run 229",
+    "version": "VAJRA v0.3.10",
+    "status": "VERIFIED_CONTENT_BOUND_HISTORY_ATTESTATION",
+    "test": "vajra-conflict-escalation-last-result.json v0.7.0 + NOSTROMO Integration Test run 232",
     "capabilities": [
-      "bare acceptedPacketIds remain conservative replay blockers but no longer count by themselves as proof that historical adjudication work was completed",
-      "returnLedger now carries bounded acceptedRecords with packetId, returning organ, targetRef, clauseRef and returnKey for structural historical attestation",
-      "only structurally matching historical accepted records can satisfy cross-intake completion accounting",
-      "unknown historical packet IDs are rejected from the carried accepted lineage instead of silently polluting it",
-      "malformed historical records with wrong organ, scope or missing returnKey are rejected and cannot create false allPacketsReturned",
+      "historical acceptedRecords now carry packet identity, returning organ, targetRef, clauseRef, provenance, substantive returned material, target relation and returnKey instead of relying on packet identity alone",
+      "historical completion is counted only when returnKey recomputes from the carried packetId, sourceOrgan, provenance, material and relation content",
+      "contentless historical records are rejected from completion accounting even when packet, organ and scope fields look structurally correct",
+      "post-acceptance mutation of carried historical material with a stale returnKey is rejected with RETURN_KEY_CONTENT_MISMATCH",
+      "bare acceptedPacketIds remain conservative replay blockers but cannot satisfy missingPacketIds or manufacture allPacketsReturned",
       "same-intake and cross-intake mutated packet replay guards remain active",
-      "original opposing evidence, provenance, conflict state and closureAuthority NONE remain preserved across multi-organ feedback"
+      "three-organ adjudication context can continue to change VAJRA nextAction and nextQuestion while original opposing evidence, provenance and closureAuthority NONE remain preserved"
     ],
-    "boundary": "Promotion is backed by successful NOSTROMO Integration Test run 229 for commit f0ba42522ae726e4550106d34fc71f4cb0e113fc and vajra-conflict-escalation-test/v0.6.0 PASS. The new guard separates replay blocking from completion proof: bare packet IDs can prevent duplicate weight but cannot manufacture historical completion; structurally matching accepted records are required. This is deterministic structural attestation, not cryptographic authenticity, semantic truth adjudication, source-quality weighting or proof that distinct provenance values represent independent real-world sources."
+    "boundary": "Promotion is backed by successful NOSTROMO Integration Test run 232 for commit 854d38f02c6ac391185a77224eb21950ecd98fbb and vajra-conflict-escalation-test/v0.7.0 PASS. The source guard itself first passed run 231 for commit cdcc00df36cecfdace2664ae849daeb0269e0949; run 232 then adversarially verified contentless-history rejection and stale-returnKey rejection after historical content mutation. This is deterministic content-bound structural lineage integrity, not cryptographic authenticity, semantic truth adjudication, source-quality weighting or proof that distinct provenance values represent independent real-world sources."
   },
   "organs": {
     "shrooming": {
@@ -95,9 +95,9 @@
       "mode": "EXEC_CONNECTED_THICKENED",
       "source": "../vajra/vajra-engine.js + ../vajra/receipt-uncertainty-guard.js + ./vajra-conflict-escalation.mjs",
       "actions": {
-        "DISMANTLE": "VERIFIED_PROPOSITION_AWARE_DISMANTLER_WITH_RECEIPT_GUARDS_MULTI_ORGAN_CONTEXT_CROSS_INTAKE_REPLAY_AND_LEDGER_ATTESTATION"
+        "DISMANTLE": "VERIFIED_PROPOSITION_AWARE_DISMANTLER_WITH_RECEIPT_GUARDS_MULTI_ORGAN_CONTEXT_CROSS_INTAKE_REPLAY_AND_CONTENT_BOUND_HISTORY_ATTESTATION"
       },
-      "boundary": "VAJRA v0.3.9 retains proposition-aware dismantling, uncertainty/provenance preservation, contest persistence and multi-organ conflict-context routing. Same-intake mutation replay is blocked with PACKET_ALREADY_RETURNED and cross-intake replay with PACKET_PREVIOUSLY_RETURNED. The return ledger now separates conservative replay memory from completion evidence: bare known packet IDs may block a duplicate return but cannot satisfy missingPacketIds or allPacketsReturned; historical completion requires a structurally matching accepted record tied to issued packet identity, returning organ, targetRef, clauseRef and returnKey. Unknown IDs and malformed historical records are excluded from completion lineage. Complete three-organ context can still alter nextAction/nextQuestion while closureAuthority remains NONE. These remain deterministic lexical/structural guards, not cryptographic attestation, semantic adjudication, factual truth or real-world source-independence proof."
+      "boundary": "VAJRA v0.3.10 retains proposition-aware dismantling, uncertainty/provenance preservation, contest persistence and multi-organ conflict-context routing. Same-intake mutation replay is blocked with PACKET_ALREADY_RETURNED and cross-intake replay with PACKET_PREVIOUSLY_RETURNED. Historical completion now requires content-bound attestation: packet identity, returning organ, targetRef, clauseRef, provenance, substantive material and target relation must be carried, and returnKey must recompute from the carried return content. Bare known packet IDs may still conservatively block duplicate returns but cannot satisfy historical completion. Contentless records and records whose carried content was altered after acceptance with a stale returnKey remain unattested. Complete three-organ context can still alter nextAction/nextQuestion while closureAuthority remains NONE. These remain deterministic lexical/structural guards, not cryptographic signatures, semantic adjudication, factual truth or real-world source-independence proof."
     }
   }
 }
