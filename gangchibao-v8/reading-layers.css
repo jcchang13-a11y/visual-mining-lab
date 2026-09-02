@@ -1,0 +1,114 @@
+/* 《剛吃飽》第八版｜爛尾樓版
+   全書共用閱讀地層規格
+   原則：不清場，只加鷹架。僅建立穩定辨識層，不替正文做內容整理。 */
+
+:root{
+  --gcb-ink:#171717;
+  --gcb-sutra-ink:#292722;
+  --gcb-muted:#6f6b64;
+  --gcb-code:#55524d;
+  --gcb-paper:#fffdf6;
+  --gcb-sutra-paper:#f1eee5;
+  --gcb-work-paper:#faf8f1;
+  --gcb-rule:#aaa59b;
+}
+
+/* L1｜主要正文：預設閱讀層，不另加裝飾。 */
+.article{
+  color:var(--gcb-ink);
+  line-height:1.85;
+}
+
+/* L2｜經文：原始材料層。固定使用明體／襯線、較寬行距、低彩度底。 */
+.sutra-block{
+  display:block;
+  margin:1.25em 0;
+  padding:1em 1.15em;
+  border-left:3px solid #77736c;
+  background:var(--gcb-sutra-paper);
+  color:var(--gcb-sutra-ink);
+  font-family:"Noto Serif TC","PMingLiU","MingLiU",serif;
+  font-size:1.04em;
+  line-height:2;
+  letter-spacing:.02em;
+}
+.sutra-label{
+  display:block;
+  margin-bottom:.55em;
+  color:var(--gcb-muted);
+  font-family:system-ui,-apple-system,BlinkMacSystemFont,"Noto Sans TC",sans-serif;
+  font-size:.72rem;
+  line-height:1.5;
+  letter-spacing:.14em;
+}
+
+/* L3｜施工語／工作註記：保留現場語感，但降低閱讀權重。 */
+.work-note{
+  display:block;
+  margin:1em 0;
+  padding:.75em 1em;
+  border:1px dashed var(--gcb-rule);
+  background:var(--gcb-work-paper);
+  color:var(--gcb-muted);
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  font-size:.9em;
+  line-height:1.65;
+}
+
+/* L4｜公式與結構代碼：技術層。 */
+.structure-code,
+.gcb-formula{
+  color:var(--gcb-code);
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+.structure-code{letter-spacing:.03em}
+.gcb-formula{
+  display:inline-grid;
+  grid-template-rows:auto 1px auto;
+  justify-items:center;
+  align-items:center;
+  vertical-align:middle;
+  white-space:nowrap;
+  line-height:1.15;
+  margin:.18em .16em;
+  padding:.06em .18em;
+  font-weight:600;
+}
+.gcb-formula .gcb-name{padding:0 .28em .12em}
+.gcb-formula .gcb-bar{width:100%;min-width:2.2em;height:1px;background:currentColor}
+.gcb-formula .gcb-neg{padding:.12em .28em 0}
+.gcb-formula.block{
+  display:grid;
+  width:max-content;
+  max-width:100%;
+  margin:.8em auto;
+  font-size:1.08em;
+}
+
+/* 缺失既有圖形只留施工槽，不代畫。 */
+.figure-slot{
+  display:block;
+  margin:1.4em auto;
+  padding:1.1em;
+  border:1px dashed #99958d;
+  max-width:38em;
+  text-align:center;
+  color:var(--gcb-muted);
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  font-size:.82em;
+  line-height:1.6;
+  white-space:normal;
+}
+.figure-slot::before{
+  content:"FIGURE SLOT / 待接回原圖";
+  display:block;
+  margin-bottom:.35em;
+  font-weight:700;
+  letter-spacing:.08em;
+}
+
+@media print{
+  .sutra-block,.work-note{break-inside:avoid}
+  .sutra-block{background:#f4f2ec}
+  .work-note{background:#fff}
+}
