@@ -1,9 +1,10 @@
 {
-  "purpose": "single CI trigger for MUTHER lexical near-duplicate containment verification",
+  "purpose": "single CI trigger for MUTHER lexical near-duplicate containment verification after adversarial fixture correction",
   "stagedCommits": [
     "a720782b6f3993b52d2d9471aef1df4a679f5556",
     "bc457e5785fd517e52c67376b4f55d41365ce32c",
-    "2ebb99d4f821ea717482d90abff5aba7dc1965e4"
+    "2ebb99d4f821ea717482d90abff5aba7dc1965e4",
+    "265f522d19c58ea5ca669ffaa3c3cee4c079bac8"
   ],
   "truthRule": "DISPLAYED STATE MUST FOLLOW EVIDENCE"
 }
