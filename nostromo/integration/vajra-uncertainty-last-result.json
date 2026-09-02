@@ -1,6 +1,6 @@
 {
-  "schema": "nostromo-vajra-uncertainty-test/v0.3.7",
-  "completedAt": "2026-09-02T06:07:11.409Z",
+  "schema": "nostromo-vajra-uncertainty-test/v0.3.8",
+  "completedAt": "2026-09-02T06:08:22.634Z",
   "status": "FAIL",
   "guards": {
     "explicitUncertaintyCannotClose": true,
@@ -21,69 +21,22 @@
     "genericSpecializedReceiptCannotClose": true,
     "lensSpecificScopeReceiptCanClose": true,
     "boundedCounterexampleCoverageCanClose": true,
+    "boundedNullDoesNotBecomeTruth": true,
     "gutRegression": true
   },
   "finding": {
-    "classification": "LENS_SPECIFIC_HANDOFF_ADEQUACY_GUARD_ADDED",
-    "detail": "v0.3.7 prevents a long generic SUPPORTS/REFUTES receipt from closing a specialized VAJRA branch unless the returned material contains bounded lexical evidence that the requested lens-specific work was actually addressed. Scope requires boundary/scope material; counterexample requires a counterexample or bounded search coverage; other specialized lenses have corresponding conservative markers. Evidence-lens behavior remains governed by provenance, substance, polarity, conflict, and uncertainty guards."
+    "classification": "LENS_SPECIFIC_ADEQUACY_WITH_BOUNDED_NULL_SEMANTICS",
+    "detail": "v0.3.8 keeps generic specialized receipts from closing VAJRA branches, while distinguishing completion of a bounded counterexample search from certainty about the target claim. A no-counterexample return closes only when it explicitly states bounded scope/coverage and explicitly disclaims proof; the resolution is marked BOUNDED_NULL rather than SUPPORTS."
   },
   "crossOrgan": {
     "gut": {
-      "ingested": 790,
-      "absorbed": 46,
+      "ingested": 1063,
+      "absorbed": 53,
       "quarantined": 22,
-      "summarySample": "[CONTRADICTION->VAJRA] 主動尋找最小反例與破壞條件 · [CONTRADICTION->VAJRA] 主動尋找最小反例與破壞條件：針對本輪 EMPIRICAL 命題，哪個前提最可能先失效？ · [CLAIM->DROPLET] EMPIRICAL · [EVIDENCE_OR_PROVENANCE->MUTHER] 要求可追溯證據並區分支持與缺席證據 · [CLAIM->DROPLET] 命題成立條件需要顯式化 · [EVIDENCE_OR_PROVENANCE->MUTHER] 資料品質、測量方式與來源獨立性需要檢查 · [CLAIM->DROPLET] Preferred organ is a routing request, not proof that the organ exec"
+      "summarySample": "[CONTRADICTION->VAJRA] Multiple structurally qualifying, provenance-bearing returns make opposing relation claims about the same clause-scoped handoff. VAJRA preserves the conflict and refuses closure; this polarity detector is lexical and bounded, not semantic adjudication. · [CONTRADICTION->VAJRA] 主動尋找最小反例與破壞條件 · [CONTRADICTION->VAJRA] 主動尋找最小反例與破壞條件：針對本輪 E"
     }
   },
   "failures": [
-    {
-      "type": "GUARD_VERSION_MISSING",
-      "detail": "0.3.8"
-    },
-    {
-      "type": "ADEQUACY_GUARD_VERSION_MISSING",
-      "detail": "0.2"
-    },
-    {
-      "type": "INSUFFICIENT_VERSION",
-      "detail": "0.3.8"
-    },
-    {
-      "type": "NEGATED_REFUTE_VERSION",
-      "detail": "0.3.8"
-    },
-    {
-      "type": "ZH_UNCERTAIN_VERSION",
-      "detail": "0.3.8"
-    },
-    {
-      "type": "NEGATED_CONTRADICT_VERSION",
-      "detail": "0.3.8"
-    },
-    {
-      "type": "NOT_INCONSISTENT_VERSION",
-      "detail": "0.3.8"
-    },
-    {
-      "type": "FAILS_TO_SUPPORT_VERSION",
-      "detail": "0.3.8"
-    },
-    {
-      "type": "ZH_NEGATED_VERSION",
-      "detail": "0.3.8"
-    },
-    {
-      "type": "UNSPECIFIED_VERSION",
-      "detail": "0.3.8"
-    },
-    {
-      "type": "MIXED_VERSION",
-      "detail": "0.3.8"
-    },
-    {
-      "type": "SAME_PROVENANCE_VERSION",
-      "detail": "0.3.8"
-    },
     {
       "type": "ADEQUATE_COUNTEREXAMPLE_RECEIPT_BLOCKED",
       "detail": {
@@ -125,7 +78,55 @@
         "contractAdequacyBlocked": 0,
         "boundedNullAccepted": 0
       }
+    },
+    {
+      "type": "BOUNDED_NULL_NOT_AUDITED",
+      "detail": {
+        "received": 1,
+        "resolved": 0,
+        "contested": 1,
+        "open": 5,
+        "rejected": 0,
+        "resolvedBranches": [],
+        "contestedBranches": [
+          {
+            "targetRef": "20708907",
+            "clauseRef": "bf2b3177",
+            "lens": "counterexample",
+            "preferredOrgan": "DROPLET",
+            "status": "CONTESTED_BY_RECEIPTS",
+            "polarities": [
+              "MIXED"
+            ],
+            "evidence": [
+              {
+                "receiptFingerprint": "ab44474c",
+                "evidenceKey": "1ccbb257",
+                "provenance": "prov-counter-adequate-001",
+                "relation": "This bounded counterexample search supports only the tested scope and does not establish the claim globally.",
+                "polarity": "MIXED"
+              }
+            ],
+            "boundary": "Multiple structurally qualifying, provenance-bearing returns make opposing relation claims about the same clause-scoped handoff. VAJRA preserves the conflict and refuses closure; this polarity detector is lexical and bounded, not semantic adjudication."
+          }
+        ],
+        "rejectedReceipts": [],
+        "historicalEvidenceKeys": 0,
+        "indeterminate": 0,
+        "unspecified": 0,
+        "mixed": 0,
+        "sameProvenanceConflict": 0,
+        "historicalContestPreserved": 0,
+        "contractAdequacyBlocked": 0,
+        "boundedNullAccepted": 0
+      }
+    },
+    {
+      "type": "BOUNDED_NULL_SEMANTICS_LOST"
+    },
+    {
+      "type": "BOUNDED_NULL_TRUTH_DISCLAIMER_MISSING"
     }
   ],
-  "boundary": "PASS certifies only a bounded lexical/structural anti-false-certainty, provenance-topology, and lens-specific adequacy guard plus a GUT regression. It deliberately prefers false-negative OPEN branches over false closure. It does not semantically judge whether a receipt truly satisfies the handoff, whether evidence is high quality, or whether a target claim is true."
+  "boundary": "PASS certifies only bounded lexical/structural anti-false-certainty, provenance-topology, lens-specific adequacy, and BOUNDED_NULL work-contract semantics plus a GUT regression. BOUNDED_NULL is not evidence that a claim is true, and no search completeness beyond the declared scope is certified."
 }
