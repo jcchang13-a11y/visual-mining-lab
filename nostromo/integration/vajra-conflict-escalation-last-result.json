@@ -1,6 +1,6 @@
 {
-  "schema": "nostromo-vajra-conflict-escalation-test/v0.6.0",
-  "completedAt": "2026-09-02T02:04:14.777Z",
+  "schema": "nostromo-vajra-conflict-escalation-test/v0.7.0",
+  "completedAt": "2026-09-02T02:06:17.310Z",
   "status": "PASS",
   "guards": {
     "multiOrganEscalation": true,
@@ -24,6 +24,8 @@
     "attestedHistoryCarriesCompletion": true,
     "unknownHistoryRejected": true,
     "malformedHistoryRejected": true,
+    "contentlessHistoryRejected": true,
+    "tamperedHistoricalContentRejected": true,
     "adversarialReturnsQuarantined": true,
     "unknownPacketQuarantined": true,
     "gutRegression": true
@@ -524,6 +526,31 @@
           "RETURN_KEY_CONTENT_MISMATCH"
         ]
       }
+    ],
+    "contentlessRejected": [
+      {
+        "packetId": "2963633f",
+        "sourceOrgan": "DROPLET",
+        "targetRef": "t001",
+        "clauseRef": "c001",
+        "reasons": [
+          "HISTORICAL_PROVENANCE_REQUIRED",
+          "HISTORICAL_MATERIAL_REQUIRED",
+          "HISTORICAL_RELATION_REQUIRED",
+          "RETURN_KEY_CONTENT_MISMATCH"
+        ]
+      }
+    ],
+    "tamperedRejected": [
+      {
+        "packetId": "2963633f",
+        "sourceOrgan": "DROPLET",
+        "targetRef": "t001",
+        "clauseRef": "c001",
+        "reasons": [
+          "RETURN_KEY_CONTENT_MISMATCH"
+        ]
+      }
     ]
   },
   "adversarialSummary": {
@@ -540,5 +567,5 @@
     ]
   },
   "failures": [],
-  "boundary": "PASS proves deterministic conflict escalation, packet-correlated return intake, same-intake and cross-intake replay containment, plus history-attestation separation: bare known packet IDs may conservatively block replay but cannot manufacture historical completion or allPacketsReturned; only structurally matching accepted records can carry completion across intakes. Unknown and malformed historical ledger entries are excluded from accepted lineage. This is deterministic structural attestation, not cryptographic authenticity, semantic adjudication, source independence proof or truth closure."
+  "boundary": "PASS proves deterministic conflict escalation, packet-correlated return intake, same-intake and cross-intake replay containment, plus content-bound history attestation: bare known packet IDs may conservatively block replay but cannot manufacture historical completion; historical completion requires packet scope, provenance, substantive returned material and target relation whose content recomputes to the carried returnKey. Contentless or post-acceptance-mutated records remain unattested. This is deterministic structural lineage integrity, not cryptographic authenticity, semantic adjudication, source independence proof or truth closure."
 }
