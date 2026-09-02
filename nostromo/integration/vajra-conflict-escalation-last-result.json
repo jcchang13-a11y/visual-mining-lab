@@ -1,7 +1,7 @@
 {
-  "schema": "nostromo-vajra-conflict-escalation-test/v0.7.0",
-  "completedAt": "2026-09-02T09:10:27.613Z",
-  "status": "FAIL",
+  "schema": "nostromo-vajra-conflict-escalation-test/v0.7.1",
+  "completedAt": "2026-09-02T09:15:20.587Z",
+  "status": "PASS",
   "guards": {
     "multiOrganEscalation": true,
     "closureRemainsBlocked": true,
@@ -13,7 +13,7 @@
     "threeOrganReturnsAccepted": true,
     "returnIntakeNoClosure": true,
     "returnLedgerExposed": true,
-    "multiOrganContextChangesNextAction": false,
+    "multiOrganContextChangesNextAction": true,
     "contextClosureStillBlocked": true,
     "originalConflictPreserved": true,
     "partialContextWaitsForMissingOrgans": true,
@@ -609,12 +609,6 @@
       "WRONG_RETURNING_ORGAN"
     ]
   },
-  "failures": [
-    {
-      "type": "MULTI_ORGAN_RETURNS_DID_NOT_CHANGE_VAJRA_BEHAVIOR",
-      "nextAction": "REASSESS_CONFLICT_WITH_SCOPE_BOUNDARY",
-      "nextQuestion": "先固定適用範圍：把命題縮到雙方材料真正共同涵蓋的最小條件後，哪一筆證據仍與另一筆發生直接衝突？"
-    }
-  ],
-  "boundary": "PASS proves deterministic conflict escalation, packet-correlated return intake, same-intake and cross-intake replay containment, plus content-bound history attestation: bare known packet IDs may conservatively block replay but cannot manufacture historical completion; historical completion requires packet scope, provenance, substantive returned material and target relation whose content recomputes to the carried returnKey. Contentless or post-acceptance-mutated records remain unattested. This is deterministic structural lineage integrity, not cryptographic authenticity, semantic adjudication, source independence proof or truth closure."
+  "failures": [],
+  "boundary": "PASS proves deterministic conflict escalation, packet-correlated return intake, same-intake and cross-intake replay containment, content-bound history attestation, and compatibility with content-conditioned next-question routing: complete multi-organ adjudication context must produce an explicit discriminator-conditioned reassessment action while closure remains blocked. This is deterministic structural lineage and routing integrity, not cryptographic authenticity, semantic adjudication, source independence proof or truth closure."
 }
