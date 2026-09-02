@@ -1,7 +1,7 @@
 {
   "schema": "nostromo-vajra-conflict-test/v0.3",
-  "completedAt": "2026-09-02T05:08:32.254Z",
-  "status": "PASS",
+  "completedAt": "2026-09-02T06:03:51.825Z",
+  "status": "FAIL",
   "finding": {
     "classification": "INDEPENDENT_CONFLICT_PERSISTS_ACROSS_APPLICATIONS",
     "before": "The v0.3.1 core preserved opposing qualifying returns within one application, but a later applyHandoffResults call could erase a historical contest when no new receipt arrived or convert it into unilateral closure when one later directional receipt arrived.",
@@ -63,7 +63,8 @@
       "unspecified": 0,
       "mixed": 0,
       "sameProvenanceConflict": 0,
-      "historicalContestPreserved": 0
+      "historicalContestPreserved": 0,
+      "contractAdequacyBlocked": 0
     },
     "evidenceBranch": {
       "lens": "evidence",
@@ -156,7 +157,8 @@
       "unspecified": 0,
       "mixed": 0,
       "sameProvenanceConflict": 2,
-      "historicalContestPreserved": 0
+      "historicalContestPreserved": 0,
+      "contractAdequacyBlocked": 0
     },
     "replayedContest": {
       "status": "CONTESTED_HANDOFF_RETURN",
@@ -203,7 +205,8 @@
         "unspecified": 0,
         "mixed": 0,
         "sameProvenanceConflict": 0,
-        "historicalContestPreserved": 0
+        "historicalContestPreserved": 0,
+        "contractAdequacyBlocked": 0
       }
     },
     "lateReceiptContest": {
@@ -267,10 +270,20 @@
         "unspecified": 0,
         "mixed": 0,
         "sameProvenanceConflict": 0,
-        "historicalContestPreserved": 1
+        "historicalContestPreserved": 1,
+        "contractAdequacyBlocked": 0
       }
     }
   },
-  "failures": [],
+  "failures": [
+    {
+      "type": "GUARD_VERSION_REGRESSION",
+      "detail": "0.3.7"
+    },
+    {
+      "type": "VERSION_REGRESSION",
+      "detail": "0.3.7"
+    }
+  ],
   "boundary": "PASS demonstrates a bounded anti-false-certainty provenance-topology and temporal contest-persistence guard. Distinct caller-supplied provenance identities with opposing qualifying relation signals remain CONTESTED_BY_RECEIPTS across subsequent applications; a later unilateral directional return cannot erase the prior conflict. This does not adjudicate which side is true, weight source quality, or prove real-world source independence. Explicit conflict resolution remains a future capability."
 }
