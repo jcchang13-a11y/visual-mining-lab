@@ -62,7 +62,7 @@ if(replayGuardedBranch?.adjudicationContext?.byOrgan?.MUTHER?.material!==replayB
 
 // Adversarial thickening: a light wrapper around replayed material must not masquerade as independent cross-organ evidence.
 const nearReplayA='The intervention improved outcome X under bounded condition Y after the measurement protocol excluded baseline drift and preserved the original comparison window.';
-const nearReplayB='MUTHER contextual note: The intervention improved outcome X under bounded condition Y after the measurement protocol excluded baseline drift and preserved the original comparison window. This note only restates the upstream result.';
+const nearReplayB='Context note: The intervention improved outcome X under bounded condition Y after the measurement protocol excluded baseline drift and preserved the original comparison window. [replayed]';
 const nearReplayProbe=boundedNearDuplicate(nearReplayA,nearReplayB);
 const nearReplayReturns=[
   {sourceOrgan:'DROPLET',provenance:'web-family-near-A',material:nearReplayA},
