@@ -1,5 +1,5 @@
 import fs from 'node:fs/promises';
-import {guardVajraAdjudicationProvenance,provenanceAudit,canonicalProvenance,canonicalMaterial} from './vajra-provenance-diversity-guard.mjs';
+import {guardVajraAdjudicationProvenance,provenanceAudit,canonicalProvenance,canonicalMaterial,boundedNearDuplicate} from './vajra-provenance-diversity-guard.mjs';
 const failures=[];
 
 const baseEvidence=[
@@ -21,7 +21,7 @@ const collisionBranch={
 };
 const guarded=guardVajraAdjudicationProvenance({unresolved:[collisionBranch],closureAuthority:'NONE'});
 const branch=guarded.unresolved[0];
-if(guarded.version!=='0.3.0')failures.push({type:'VERSION_REGRESSION',version:guarded.version});
+if(guarded.version!=='0.3.1')failures.push({type:'VERSION_REGRESSION',version:guarded.version});
 if(guarded.status!=='UPSTREAM_REPLAY_GUARD_ACTIVE')failures.push({type:'COLLISION_GUARD_NOT_ACTIVE',guarded});
 if(branch?.provenanceDiversityAudit?.sharedProvenance!==true||branch?.provenanceDiversityAudit?.collisions?.length!==1)failures.push({type:'SHARED_PROVENANCE_NOT_DETECTED',audit:branch?.provenanceDiversityAudit});
 if(branch?.nextAction!=='AUDIT_SHARED_UPSTREAM_BEFORE_REASSESSMENT'||!/provenance|上游/.test(branch?.nextQuestion||''))failures.push({type:'COLLISION_DID_NOT_CHANGE_VAJRA_BEHAVIOR',nextAction:branch?.nextAction,nextQuestion:branch?.nextQuestion});
@@ -38,7 +38,6 @@ if(canonicalProvenance(mutatedReturns[0].provenance)!==canonicalProvenance(mutat
 if(mutationAudit.sharedProvenance!==true||mutationAudit.formatMutationCollisions!==1)failures.push({type:'FORMAT_MUTATION_COLLISION_BYPASSED_GUARD',mutationAudit});
 if(mutationAudit.uniqueProvenanceCount!==2||mutationAudit.structurallyDistinctProvenanceLabels!==false)failures.push({type:'FORMAT_MUTATION_INFLATED_PROVENANCE_COUNT',mutationAudit});
 
-// Adversarial thickening: different provenance labels must not hide exact/format-mutated replay of the same returned material across organs.
 const replayA='The same upstream evidence says the intervention improved outcome X under bounded condition Y.';
 const replayB='ＴＨＥ same upstream evidence — says the intervention improved outcome X under bounded condition Y!';
 const contentReplayReturns=[
@@ -61,26 +60,50 @@ if(replayGuarded.status!=='UPSTREAM_REPLAY_GUARD_ACTIVE'||replayGuarded.provenan
 if(replayGuardedBranch?.nextAction!=='AUDIT_CROSS_ORGAN_CONTENT_REPLAY_BEFORE_REASSESSMENT'||replayGuardedBranch?.closureBlocked!==true)failures.push({type:'CONTENT_REPLAY_DID_NOT_BLOCK_PREMATURE_REASSESSMENT',replayGuardedBranch});
 if(replayGuardedBranch?.adjudicationContext?.byOrgan?.MUTHER?.material!==replayB)failures.push({type:'RAW_REPLAY_RETURN_MUTATED'});
 
+// Adversarial thickening: a light wrapper around replayed material must not masquerade as independent cross-organ evidence.
+const nearReplayA='The intervention improved outcome X under bounded condition Y after the measurement protocol excluded baseline drift and preserved the original comparison window.';
+const nearReplayB='MUTHER contextual note: The intervention improved outcome X under bounded condition Y after the measurement protocol excluded baseline drift and preserved the original comparison window. This note only restates the upstream result.';
+const nearReplayProbe=boundedNearDuplicate(nearReplayA,nearReplayB);
+const nearReplayReturns=[
+  {sourceOrgan:'DROPLET',provenance:'web-family-near-A',material:nearReplayA},
+  {sourceOrgan:'MUTHER',provenance:'drive-family-near-B',material:nearReplayB},
+  {sourceOrgan:'SHROOMING',provenance:'trace-family-near-C',material:'A genuinely different boundary reading asks whether outcome X disappears when the comparison window is shifted before intervention exposure.'}
+];
+const nearReplayAudit=provenanceAudit(nearReplayReturns);
+if(!nearReplayProbe.match||nearReplayProbe.score<0.82)failures.push({type:'BOUNDED_NEAR_REPLAY_PROBE_MISSED',nearReplayProbe});
+if(nearReplayAudit.sharedContent!==false||nearReplayAudit.nearSharedContent!==true||nearReplayAudit.nearContentCollisions?.length!==1)failures.push({type:'WRAPPER_NEAR_REPLAY_NOT_DETECTED',nearReplayAudit});
+if(nearReplayAudit.status!=='UPSTREAM_REPLAY_REVIEW_REQUIRED')failures.push({type:'WRAPPER_NEAR_REPLAY_DID_NOT_TRIGGER_REVIEW',nearReplayAudit});
+const nearReplayBranch={...collisionBranch,adjudicationContext:{...collisionBranch.adjudicationContext,byOrgan:{
+  DROPLET:{...collisionBranch.adjudicationContext.byOrgan.DROPLET,provenance:nearReplayReturns[0].provenance,material:nearReplayReturns[0].material},
+  MUTHER:{...collisionBranch.adjudicationContext.byOrgan.MUTHER,provenance:nearReplayReturns[1].provenance,material:nearReplayReturns[1].material},
+  SHROOMING:{...collisionBranch.adjudicationContext.byOrgan.SHROOMING,provenance:nearReplayReturns[2].provenance,material:nearReplayReturns[2].material}
+}}};
+const nearGuarded=guardVajraAdjudicationProvenance({unresolved:[nearReplayBranch],closureAuthority:'NONE'});
+const nearGuardedBranch=nearGuarded.unresolved[0];
+if(nearGuarded.provenanceDiversity?.nearContentCollisionBranches!==1||nearGuardedBranch?.closureBlocked!==true)failures.push({type:'WRAPPER_NEAR_REPLAY_DID_NOT_CHANGE_VAJRA_BEHAVIOR',nearGuarded});
+if(nearGuardedBranch?.adjudicationContext?.byOrgan?.MUTHER?.material!==nearReplayB)failures.push({type:'RAW_NEAR_REPLAY_RETURN_MUTATED'});
+
 const distinctReturns=[
-  {sourceOrgan:'DROPLET',provenance:'prov-a',material:'Independent material A with enough substantive length to be auditable.'},
-  {sourceOrgan:'MUTHER',provenance:'prov-b',material:'Independent material B with enough substantive length to be auditable.'},
-  {sourceOrgan:'SHROOMING',provenance:'prov-c',material:'Independent material C with enough substantive length to be auditable.'}
+  {sourceOrgan:'DROPLET',provenance:'prov-a',material:'Independent material A with enough substantive length to be auditable and a distinct measurement description.'},
+  {sourceOrgan:'MUTHER',provenance:'prov-b',material:'Independent material B with enough substantive length to be auditable and a separate historical mechanism.'},
+  {sourceOrgan:'SHROOMING',provenance:'prov-c',material:'Independent material C with enough substantive length to be auditable and a competing boundary interpretation.'}
 ];
 const distinctAudit=provenanceAudit(distinctReturns);
-if(distinctAudit.status!=='PROVENANCE_LABELS_DISTINCT_NOT_INDEPENDENCE_PROOF'||distinctAudit.sourceIndependenceProven!==false||distinctAudit.sharedContent!==false)failures.push({type:'DISTINCT_RETURNS_FALSELY_UPGRADED_OR_COLLIDED',distinctAudit});
+if(distinctAudit.status!=='PROVENANCE_LABELS_DISTINCT_NOT_INDEPENDENCE_PROOF'||distinctAudit.sourceIndependenceProven!==false||distinctAudit.sharedContent!==false||distinctAudit.nearSharedContent!==false)failures.push({type:'DISTINCT_RETURNS_FALSELY_UPGRADED_OR_COLLIDED',distinctAudit});
 const partialAudit=provenanceAudit(distinctReturns.slice(0,2));
 if(partialAudit.status!=='PARTIAL_PROVENANCE_COVERAGE'||partialAudit.complete!==false)failures.push({type:'PARTIAL_COVERAGE_FALSELY_COMPLETE',partialAudit});
 
 const result={
-  schema:'vajra-provenance-diversity-test/v0.3.0',completedAt:new Date().toISOString(),status:failures.length?'FAIL':'PASS',
-  capability:'ADJUDICATION_PROVENANCE_DIVERSITY_AND_CROSS_ORGAN_CONTENT_REPLAY_GUARD',
+  schema:'vajra-provenance-diversity-test/v0.3.1',completedAt:new Date().toISOString(),status:failures.length?'FAIL':'PASS',
+  capability:'ADJUDICATION_PROVENANCE_DIVERSITY_EXACT_AND_BOUNDED_NEAR_CONTENT_REPLAY_GUARD',
   collisionCase:{status:guarded.status,audit:branch?.provenanceDiversityAudit,nextAction:branch?.nextAction,closureAuthority:branch?.closureAuthority},
   provenanceFormatMutationCase:mutationAudit,
   contentReplayCase:{status:replayGuarded.status,audit:contentReplayAudit,nextAction:replayGuardedBranch?.nextAction,closureAuthority:replayGuardedBranch?.closureAuthority},
+  nearReplayCase:{probe:nearReplayProbe,audit:nearReplayAudit,status:nearGuarded.status,nextAction:nearGuardedBranch?.nextAction,closureAuthority:nearGuardedBranch?.closureAuthority},
   distinctCase:distinctAudit,partialCase:partialAudit,
-  guards:{exactProvenanceReuseDetected:true,provenanceFormatMutationDetected:true,crossOrganContentReplayDetected:true,contentFormatMutationDetected:true,distinctProvenanceCannotHideReplay:true,replayChangesVajraBehavior:true,sourceIndependenceNeverInferred:true,rawReturnsPreserved:true},
+  guards:{exactProvenanceReuseDetected:true,provenanceFormatMutationDetected:true,crossOrganContentReplayDetected:true,contentFormatMutationDetected:true,boundedWrapperNearReplayDetected:true,distinctProvenanceCannotHideReplay:true,replayChangesVajraBehavior:true,sourceIndependenceNeverInferred:true,rawReturnsPreserved:true},
   failures,
-  boundary:'PASS proves deterministic detection of exact/bounded-format provenance reuse and cross-organ replay of the same sufficiently long canonical returned material even when provenance labels differ. It blocks premature conflict reassessment and preserves raw returns. It does not prove semantic equivalence beyond canonical identity, derivative-source relationships beyond observed replay, real-world source independence, cryptographic identity, or factual truth.'
+  boundary:'PASS proves deterministic detection of exact/bounded-format provenance reuse, exact canonical cross-organ content replay, and bounded high-overlap lexical replay when one organ lightly wraps another organ’s sufficiently long material. Near replay uses containment/character 5-gram similarity with a fixed 0.82 threshold; it is a replay-risk signal, not semantic identity or derivation proof. Raw returns remain preserved and source independence is never inferred.'
 };
 await fs.writeFile('nostromo/integration/vajra-provenance-diversity-last-result.json',JSON.stringify(result,null,2)+'\n');
 console.log(JSON.stringify(result,null,2));
