@@ -1,4 +1,4 @@
-// DROPLET claim verification CI test v1.1
+// DROPLET claim verification CI test v1.2
 import fs from 'node:fs/promises';
 import {verifyClaim} from './droplet-claim-verify-executor.mjs';
 
@@ -57,19 +57,44 @@ try{
   });
   if(cases.lowAuthorityOnly.verdict!=='INDETERMINATE') failures.push({case:'lowAuthorityOnly',type:'LOW_AUTHORITY_UPGRADED_TO_TRUTH',verdict:cases.lowAuthorityOnly.verdict});
 
+  const policy={asOf:'2026-09-02',maxAgeDays:180};
+  cases.staleAuthority=verifyClaim({
+    claim:'The service is currently available.',
+    freshnessPolicy:policy,
+    evidence:[{id:'S1',source:'Official status page snapshot',sourceFamily:'Official status',sourceClass:'OFFICIAL',relation:'SUPPORTS',date:'2024-11-04',fingerprint:'stale-official'}]
+  });
+  if(cases.staleAuthority.verdict!=='INDETERMINATE') failures.push({case:'staleAuthority',type:'STALE_EVIDENCE_CREATED_CERTAINTY',verdict:cases.staleAuthority.verdict});
+  if(cases.staleAuthority.counts.staleEvidence!==1||cases.staleAuthority.counts.eligibleAuthoritativeSupports!==0) failures.push({case:'staleAuthority',type:'STALE_EVIDENCE_NOT_QUARANTINED',counts:cases.staleAuthority.counts});
+
+  cases.freshAuthority=verifyClaim({
+    claim:'The service is currently available.',
+    freshnessPolicy:policy,
+    evidence:[{id:'F1',source:'Official status page',sourceFamily:'Official status',sourceClass:'OFFICIAL',relation:'SUPPORTS',date:'2026-09-01',fingerprint:'fresh-official'}]
+  });
+  if(cases.freshAuthority.verdict!=='SUPPORTED') failures.push({case:'freshAuthority',type:'FRESH_EVIDENCE_BLOCKED',verdict:cases.freshAuthority.verdict});
+  if(cases.freshAuthority.counts.eligibleAuthoritativeSupports!==1) failures.push({case:'freshAuthority',type:'FRESH_EVIDENCE_NOT_ELIGIBLE',counts:cases.freshAuthority.counts});
+
+  cases.unknownDateAuthority=verifyClaim({
+    claim:'The service is currently available.',
+    freshnessPolicy:policy,
+    evidence:[{id:'U1',source:'Official undated page',sourceFamily:'Official status',sourceClass:'OFFICIAL',relation:'SUPPORTS',fingerprint:'undated-official'}]
+  });
+  if(cases.unknownDateAuthority.verdict!=='INDETERMINATE') failures.push({case:'unknownDateAuthority',type:'UNDATED_EVIDENCE_CREATED_CERTAINTY',verdict:cases.unknownDateAuthority.verdict});
+  if(cases.unknownDateAuthority.counts.unknownDateEvidence!==1) failures.push({case:'unknownDateAuthority',type:'UNKNOWN_DATE_NOT_FLAGGED',counts:cases.unknownDateAuthority.counts});
+
   const result={
-    schema:'nostromo-droplet-claim-verify-test/v1.1',
+    schema:'nostromo-droplet-claim-verify-test/v1.2',
     completedAt:new Date().toISOString(),
     status:failures.length?'FAIL':'PASS',
     cases,
     failures,
-    boundary:'This test validates deterministic claim verdict computation from explicit evidence, exact replay suppression, source-family audit counts, authoritative-direction conflict containment, and fingerprint-integrity conflict containment. Source-family labels are caller-supplied audit metadata and do not prove real-world independence; CI performs no web search.'
+    boundary:'This test validates deterministic claim verdict computation from explicit evidence, exact replay suppression, source-family audit counts, authoritative-direction conflict containment, fingerprint-integrity conflict containment, and opt-in freshness gating that prevents stale or undated evidence from creating certainty. CI performs no web search and does not infer whether a claim is time-sensitive.'
   };
   await fs.writeFile(outPath,JSON.stringify(result,null,2)+'\n','utf8');
   console.log(JSON.stringify(result,null,2));
   if(result.status!=='PASS') process.exitCode=1;
 }catch(error){
-  const result={schema:'nostromo-droplet-claim-verify-test/v1.1',completedAt:new Date().toISOString(),status:'FAIL',failures:[...failures,{type:'UNCAUGHT',message:String(error?.message||error)}]};
+  const result={schema:'nostromo-droplet-claim-verify-test/v1.2',completedAt:new Date().toISOString(),status:'FAIL',failures:[...failures,{type:'UNCAUGHT',message:String(error?.message||error)}]};
   await fs.writeFile(outPath,JSON.stringify(result,null,2)+'\n','utf8');
   console.log(JSON.stringify(result,null,2));
   process.exitCode=1;
