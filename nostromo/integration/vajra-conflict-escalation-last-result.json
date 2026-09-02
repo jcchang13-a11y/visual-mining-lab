@@ -1,6 +1,6 @@
 {
-  "schema": "nostromo-vajra-conflict-escalation-test/v0.4.0",
-  "completedAt": "2026-09-01T23:09:26.748Z",
+  "schema": "nostromo-vajra-conflict-escalation-test/v0.5.0",
+  "completedAt": "2026-09-02T00:08:37.474Z",
   "status": "PASS",
   "guards": {
     "multiOrganEscalation": true,
@@ -12,12 +12,15 @@
     "noContestNoFalsePositive": true,
     "threeOrganReturnsAccepted": true,
     "returnIntakeNoClosure": true,
+    "returnLedgerExposed": true,
     "multiOrganContextChangesNextAction": true,
     "contextClosureStillBlocked": true,
     "originalConflictPreserved": true,
     "partialContextWaitsForMissingOrgans": true,
     "unmatchedContextQuarantined": true,
     "mutatedPacketReplayContained": true,
+    "crossIntakeReplayContained": true,
+    "crossIntakeLedgerPreserved": true,
     "adversarialReturnsQuarantined": true,
     "unknownPacketQuarantined": true,
     "gutRegression": true
@@ -173,7 +176,7 @@
   "returnIntake": {
     "organ": "VAJRA",
     "capability": "CONFLICT_ESCALATION_RETURN_INTAKE",
-    "version": "0.2.0",
+    "version": "0.2.1",
     "status": "RETURNS_ACCEPTED_REVIEW_REQUIRED",
     "closureBlocked": true,
     "closureAuthority": "NONE",
@@ -271,8 +274,22 @@
       }
     ],
     "quarantine": [],
-    "next": "Feed accepted receipt objects back into VAJRA conflict state as adjudication context; keep the contested branch open and use the returned organ differences to choose the next discriminating question.",
-    "boundary": "Deterministic packet-correlation and return-quality guard. It blocks scope loss, wrong-organ substitution, exact replay duplicates, mutated replays of an already accepted packet, provenance-less returns and placeholder material. One issued packet can contribute at most one accepted return per intake. Even a complete three-organ return set remains REVIEW_REQUIRED and cannot close a contested VAJRA branch by itself."
+    "acceptedPacketIds": [
+      "2963633f",
+      "5618a826",
+      "70745601"
+    ],
+    "returnLedger": {
+      "acceptedPacketIds": [
+        "2963633f",
+        "5618a826",
+        "70745601"
+      ],
+      "previouslyAcceptedCount": 0,
+      "newlyAcceptedCount": 3
+    },
+    "next": "Feed accepted receipt objects back into VAJRA conflict state as adjudication context; persist acceptedPacketIds between intakes so delayed or mutated replay cannot accumulate extra organ weight; keep the contested branch open and use the returned organ differences to choose the next discriminating question.",
+    "boundary": "Deterministic packet-correlation and return-quality guard. It blocks scope loss, wrong-organ substitution, exact replay duplicates, mutated replays within one intake, replay of packets accepted in earlier intakes when their acceptedPacketIds ledger is supplied, provenance-less returns and placeholder material. One issued packet can contribute at most one accepted return across a ledgered conflict lifecycle. Even a complete three-organ return set remains REVIEW_REQUIRED and cannot close a contested VAJRA branch by itself."
   },
   "contextIntegration": {
     "unresolved": [
@@ -382,6 +399,21 @@
       "PACKET_ALREADY_RETURNED"
     ]
   },
+  "crossIntakeReplaySummary": {
+    "firstAccepted": 1,
+    "secondAccepted": 0,
+    "secondQuarantined": 1,
+    "reasons": [
+      "PACKET_PREVIOUSLY_RETURNED"
+    ],
+    "ledger": {
+      "acceptedPacketIds": [
+        "2963633f"
+      ],
+      "previouslyAcceptedCount": 1,
+      "newlyAcceptedCount": 0
+    }
+  },
   "adversarialSummary": {
     "accepted": 1,
     "quarantined": 5,
@@ -396,5 +428,5 @@
     ]
   },
   "failures": [],
-  "boundary": "PASS proves deterministic conflict escalation, packet-correlated return intake, one-return-per-issued-packet replay containment, and a feedback step in which accepted DROPLET/MUTHER/SHROOMING adjudication material changes VAJRA nextAction/nextQuestion while preserving the original opposing evidence, provenance, closure block and no-truth-authority boundary. Mutating text or provenance cannot turn the same issued packet into extra organ weight. Complete three-organ context is coverage only, not semantic adjudication or proof of source independence."
+  "boundary": "PASS proves deterministic conflict escalation, packet-correlated return intake, same-intake and ledgered cross-intake one-return-per-issued-packet replay containment, and a feedback step in which accepted DROPLET/MUTHER/SHROOMING adjudication material changes VAJRA nextAction/nextQuestion while preserving the original opposing evidence, provenance, closure block and no-truth-authority boundary. Mutating text or provenance cannot turn the same issued packet into extra organ weight when acceptedPacketIds is persisted between intakes. Complete three-organ context is coverage only, not semantic adjudication or proof of source independence."
 }
