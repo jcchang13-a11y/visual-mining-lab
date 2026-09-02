@@ -1,42 +1,42 @@
 {
-  "schema": "muther-repo-diversity-test/v0.1.0",
-  "completedAt": "2026-09-02T13:10:43.565Z",
-  "status": "FAIL",
+  "schema": "muther-repo-diversity-test/v0.1.1",
+  "completedAt": "2026-09-02T13:12:21.925Z",
+  "status": "PASS",
   "capability": "LEXICAL_NEAR_DUPLICATE_POLLUTION_CONTAINMENT",
   "unit": {
-    "nearSimilarity": 1,
+    "nearSimilarity": 0.9518,
     "distinctSimilarity": 0.105,
     "threshold": 0.88
   },
   "adversarial": {
-    "candidateHitCount": 4,
-    "exactDuplicateSuppressedCount": 1,
-    "nearDuplicateSuppressedCount": 0,
-    "lexicallyDistinctCandidateCount": 3,
+    "candidateHitCount": 3,
+    "exactDuplicateSuppressedCount": 0,
+    "nearDuplicateSuppressedCount": 1,
+    "lexicallyDistinctCandidateCount": 2,
     "retainedPaths": [
-      "nostromo/integration/muther-repo-diversity-test.mjs",
       "tmp-muther-near-a/a.md",
       "tmp-muther-near-c/c.md"
     ],
-    "nearDuplicateAudit": []
+    "nearDuplicateAudit": [
+      {
+        "suppressedPath": "tmp-muther-near-b/b.md",
+        "keptPath": "tmp-muther-near-a/a.md",
+        "similarity": 0.9518,
+        "suppressedFingerprint": "4a13d1506ce79597",
+        "keptFingerprint": "bbb5fe189f082f10",
+        "suppressedSourceFamily": "tmp-muther-near-b",
+        "keptSourceFamily": "tmp-muther-near-a"
+      }
+    ]
   },
   "provenance": {
     "selectedSourceFamilies": [
-      "nostromo/integration",
       "tmp-muther-near-a",
       "tmp-muther-near-c"
     ],
-    "sourceFamilyCount": 4
+    "sourceFamilyCount": 3
   },
   "crossOrganRegression": "The main NOSTROMO integration test runs separately in the same workflow and must remain PASS before public promotion.",
-  "boundary": "PASS certifies conservative lexical near-duplicate containment for repository-mining candidates under controlled formatting/timestamp/fingerprint mutation. It does not certify semantic equivalence, source independence, source quality, novelty, factual truth, or Google Drive coverage.",
-  "failures": [
-    "expected exactly 3 fixture candidates, got 4",
-    "exact duplicate suppression should remain 0, got 1",
-    "expected one lexical near-duplicate suppression, got 0",
-    "expected two lexically distinct candidates, got 3",
-    "expected two retained hits, got 3",
-    "expected one auditable near-duplicate record",
-    "family-balanced selection should retain two source families after suppression"
-  ]
+  "boundary": "PASS certifies conservative lexical near-duplicate containment for repository-mining candidates under controlled lexical, formatting, timestamp and fingerprint mutation. It does not certify semantic equivalence, source independence, source quality, novelty, factual truth, or Google Drive coverage.",
+  "failures": []
 }
