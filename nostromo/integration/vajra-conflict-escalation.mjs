@@ -89,6 +89,7 @@ function packetIndex(escalation){
   for(const branch of escalation?.escalations||[])for(const p of branch?.packets||[])if(p?.packetId)map.set(clean(p.packetId),p);
   return map;
 }
+function contentBoundReturnKey(packetId,sourceOrgan,provenance,material,relation){return fp(`${clean(packetId)}|${clean(sourceOrgan)}|${clean(provenance)}|${clean(material)}|${clean(relation)}`);}
 function historicalPacketState(history,packets){
   const candidateIds=[];
   if(Array.isArray(history?.acceptedPacketIds))candidateIds.push(...history.acceptedPacketIds);
@@ -106,19 +107,25 @@ function historicalPacketState(history,packets){
   for(const raw of rawRecords){
     const packetId=clean(raw?.packetId),packet=packets.get(packetId);
     const sourceOrgan=clean(raw?.sourceOrgan||raw?.organ),targetRef=clean(raw?.targetRef),clauseRef=clean(raw?.clauseRef),returnKey=clean(raw?.returnKey);
+    const provenance=returnProvenance(raw),material=returnMaterial(raw),relation=returnRelation(raw);
     const reasons=[];
     if(!packetId||!packet)reasons.push('UNKNOWN_PACKET');
     if(packet&&sourceOrgan!==clean(packet.targetOrgan))reasons.push('WRONG_RETURNING_ORGAN');
     if(packet&&targetRef!==clean(packet.targetRef))reasons.push('TARGET_REF_MISMATCH');
     if(packet&&clauseRef!==clean(packet.clauseRef))reasons.push('CLAUSE_REF_MISMATCH');
     if(!/^[0-9a-f]{8}$/i.test(returnKey))reasons.push('RETURN_KEY_ATTESTATION_REQUIRED');
+    if(!provenance)reasons.push('HISTORICAL_PROVENANCE_REQUIRED');
+    if(!substantive(material,24))reasons.push('HISTORICAL_MATERIAL_REQUIRED');
+    if(!substantive(relation,12))reasons.push('HISTORICAL_RELATION_REQUIRED');
+    const recomputed=contentBoundReturnKey(packetId,sourceOrgan,provenance,material,relation);
+    if(returnKey&&recomputed!==returnKey)reasons.push('RETURN_KEY_CONTENT_MISMATCH');
     if(reasons.length){rejectedHistoricalRecords.push({packetId,sourceOrgan,targetRef,clauseRef,reasons:[...new Set(reasons)]});continue;}
     knownIds.add(packetId);
-    attested.set(packetId,{packetId,sourceOrgan,targetRef,clauseRef,returnKey});
+    attested.set(packetId,{packetId,sourceOrgan,targetRef,clauseRef,returnKey,provenance,material,relation});
   }
   return {blockIds:knownIds,attested,rejectedHistoricalIds:[...new Set(rejectedHistoricalIds)],rejectedHistoricalRecords};
 }
-function acceptedRecord(x){return {packetId:clean(x?.packetId),sourceOrgan:clean(x?.sourceOrgan),targetRef:clean(x?.targetRef),clauseRef:clean(x?.clauseRef),returnKey:clean(x?.returnKey)};}
+function acceptedRecord(x){return {packetId:clean(x?.packetId),sourceOrgan:clean(x?.sourceOrgan),targetRef:clean(x?.targetRef),clauseRef:clean(x?.clauseRef),returnKey:clean(x?.returnKey),provenance:returnProvenance(x),material:returnMaterial(x),relation:returnRelation(x)};}
 
 export function ingestConflictEscalationReturns(escalation,returns=[],history={}){
   const packets=packetIndex(escalation),accepted=[],quarantine=[],seen=new Set(),seenPackets=new Set();
@@ -136,7 +143,7 @@ export function ingestConflictEscalationReturns(escalation,returns=[],history={}
     if(!provenance)reasons.push('PROVENANCE_REQUIRED');
     if(!substantive(material,24))reasons.push('INSUFFICIENT_RETURN_MATERIAL');
     if(!substantive(relation,12))reasons.push('INSUFFICIENT_TARGET_RELATION');
-    const returnKey=fp(`${packetId}|${sourceOrgan}|${provenance}|${material}|${relation}`);
+    const returnKey=contentBoundReturnKey(packetId,sourceOrgan,provenance,material,relation);
     if(seen.has(returnKey))reasons.push('REPLAY_DUPLICATE');
     if(reasons.length){quarantine.push({packetId,sourceOrgan,targetRef,clauseRef,status:'QUARANTINED_RETURN',reasons:[...new Set(reasons)],returnKey});continue;}
     seen.add(returnKey);seenPackets.add(packetId);
@@ -156,7 +163,7 @@ export function ingestConflictEscalationReturns(escalation,returns=[],history={}
   const acceptedRecords=[...historical.attested.values(),...accepted.map(acceptedRecord)].filter(x=>x.packetId).sort((a,b)=>a.packetId.localeCompare(b.packetId));
   const unattestedPacketIds=acceptedPacketIds.filter(id=>!completedEvidence.has(id));
   return {
-    organ:'VAJRA',capability:'CONFLICT_ESCALATION_RETURN_INTAKE',version:'0.2.2',
+    organ:'VAJRA',capability:'CONFLICT_ESCALATION_RETURN_INTAKE',version:'0.2.3',
     status:quarantine.length?'RETURNS_ACCEPTED_WITH_QUARANTINE':accepted.length?'RETURNS_ACCEPTED_REVIEW_REQUIRED':'NO_QUALIFYING_RETURNS',
     closureBlocked:Boolean(escalation?.closureBlocked),
     closureAuthority:'NONE',
@@ -164,8 +171,8 @@ export function ingestConflictEscalationReturns(escalation,returns=[],history={}
     allPacketsReturned:expected.length>0&&missing.length===0,
     byOrgan,accepted,quarantine,acceptedPacketIds,
     returnLedger:{acceptedPacketIds,acceptedRecords,previouslyAcceptedCount:previouslyAccepted.size,previouslyAttestedCount:previouslyAttested.size,newlyAcceptedCount:accepted.length,unattestedPacketIds,rejectedHistoricalIds:historical.rejectedHistoricalIds,rejectedHistoricalRecords:historical.rejectedHistoricalRecords},
-    next:'Feed accepted receipt objects back into VAJRA conflict state as adjudication context; persist returnLedger.acceptedRecords as well as acceptedPacketIds between intakes. Bare packet IDs remain conservative replay blockers but cannot by themselves satisfy historical completion or allPacketsReturned. Keep the contested branch open and use returned organ differences to choose the next discriminating question.',
-    boundary:'Deterministic packet-correlation, replay containment and history-attestation guard. Known bare acceptedPacketIds can conservatively block delayed replay, but only structurally attested accepted records matching issued packet identity, returning organ, targetRef, clauseRef and returnKey can count toward historical completion. Unknown or malformed historical ledger entries cannot create false allPacketsReturned. This is structural lineage attestation rather than cryptographic authenticity or factual verification; automatic truth closure remains forbidden.'
+    next:'Feed accepted receipt objects back into VAJRA conflict state as adjudication context; persist content-bound returnLedger.acceptedRecords as well as acceptedPacketIds between intakes. Bare packet IDs remain conservative replay blockers but cannot by themselves satisfy historical completion or allPacketsReturned. Keep the contested branch open and use returned organ differences to choose the next discriminating question.',
+    boundary:'Deterministic packet-correlation, replay containment and content-bound history-attestation guard. Known bare acceptedPacketIds can conservatively block delayed replay, but historical completion requires packet scope plus provenance, substantive material, target relation and a returnKey that recomputes from that carried content. Unknown, malformed, truncated or content-mismatched historical ledger entries cannot create false allPacketsReturned. This is structural lineage integrity rather than cryptographic authenticity or factual verification; automatic truth closure remains forbidden.'
   };
 }
 
