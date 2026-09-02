@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 360" role="img" aria-labelledby="title desc">
+  <title id="title">第二十一分回溯信心線</title>
+  <desc id="desc">中心為第二十一分，向外依次回溯第十四分與第六分。</desc>
+  <rect width="360" height="360" fill="white"/>
+  <g fill="none" stroke="black" stroke-width="2">
+    <circle cx="180" cy="180" r="54"/>
+    <circle cx="180" cy="180" r="104"/>
+    <circle cx="180" cy="180" r="154"/>
+  </g>
+  <g fill="black" font-family="system-ui, sans-serif" font-size="22" text-anchor="middle">
+    <text x="180" y="188">21</text>
+    <text x="180" y="108">14</text>
+    <text x="180" y="58">6</text>
+  </g>
+</svg>
