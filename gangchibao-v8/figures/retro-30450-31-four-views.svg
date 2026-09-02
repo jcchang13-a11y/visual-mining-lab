@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 360" role="img" aria-labelledby="title desc">
+  <title id="title">第三十一分四見回溯線</title>
+  <desc id="desc">第三十一分把我見、人見、眾生見、壽者見回扣前文四相材料；正文明確點名第二十五、第十七、第十四、第六、第三分。</desc>
+  <rect width="360" height="360" fill="white"/>
+  <g fill="none" stroke="black" stroke-width="2">
+    <circle cx="180" cy="180" r="38"/>
+    <circle cx="180" cy="180" r="62"/>
+    <circle cx="180" cy="180" r="86"/>
+    <circle cx="180" cy="180" r="110"/>
+    <circle cx="180" cy="180" r="134"/>
+    <circle cx="180" cy="180" r="158"/>
+  </g>
+  <g fill="black" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Noto Sans TC', sans-serif" font-size="20" text-anchor="middle" dominant-baseline="middle">
+    <text x="180" y="180">31</text>
+    <text x="180" y="128">25</text>
+    <text x="180" y="104">17</text>
+    <text x="180" y="80">14</text>
+    <text x="180" y="56">6</text>
+    <text x="180" y="32">3</text>
+  </g>
+</svg>
