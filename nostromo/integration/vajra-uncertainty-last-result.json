@@ -1,7 +1,7 @@
 {
   "schema": "nostromo-vajra-uncertainty-test/v0.3.8",
-  "completedAt": "2026-09-02T06:08:22.634Z",
-  "status": "FAIL",
+  "completedAt": "2026-09-02T06:09:49.672Z",
+  "status": "PASS",
   "guards": {
     "explicitUncertaintyCannotClose": true,
     "negatedSupportCannotClose": true,
@@ -26,107 +26,16 @@
   },
   "finding": {
     "classification": "LENS_SPECIFIC_ADEQUACY_WITH_BOUNDED_NULL_SEMANTICS",
-    "detail": "v0.3.8 keeps generic specialized receipts from closing VAJRA branches, while distinguishing completion of a bounded counterexample search from certainty about the target claim. A no-counterexample return closes only when it explicitly states bounded scope/coverage and explicitly disclaims proof; the resolution is marked BOUNDED_NULL rather than SUPPORTS."
+    "detail": "v0.3.8 keeps generic specialized receipts from closing VAJRA branches, while distinguishing completion of a bounded counterexample search from certainty about the target claim. A no-counterexample return closes only when it explicitly states bounded scope/coverage and explicitly disclaims proof; the relation channel remains neutral and the resolution is marked BOUNDED_NULL rather than SUPPORTS."
   },
   "crossOrgan": {
     "gut": {
-      "ingested": 1063,
+      "ingested": 1061,
       "absorbed": 53,
       "quarantined": 22,
-      "summarySample": "[CONTRADICTION->VAJRA] Multiple structurally qualifying, provenance-bearing returns make opposing relation claims about the same clause-scoped handoff. VAJRA preserves the conflict and refuses closure; this polarity detector is lexical and bounded, not semantic adjudication. · [CONTRADICTION->VAJRA] 主動尋找最小反例與破壞條件 · [CONTRADICTION->VAJRA] 主動尋找最小反例與破壞條件：針對本輪 E"
+      "summarySample": "[CONTRADICTION->VAJRA] 主動尋找最小反例與破壞條件 · [CONTRADICTION->VAJRA] 主動尋找最小反例與破壞條件：針對本輪 EMPIRICAL 命題，哪個前提最可能先失效？ · [QUESTION->SHROOMING] Resolution means the handoff contract received a matching clause-scoped, executed, provenance-bearing and minimally substantive return with no detected opposing qualifying receipt in the same application. Replay identity normalize"
     }
   },
-  "failures": [
-    {
-      "type": "ADEQUATE_COUNTEREXAMPLE_RECEIPT_BLOCKED",
-      "detail": {
-        "received": 1,
-        "resolved": 0,
-        "contested": 1,
-        "open": 5,
-        "rejected": 0,
-        "resolvedBranches": [],
-        "contestedBranches": [
-          {
-            "targetRef": "20708907",
-            "clauseRef": "bf2b3177",
-            "lens": "counterexample",
-            "preferredOrgan": "DROPLET",
-            "status": "CONTESTED_BY_RECEIPTS",
-            "polarities": [
-              "MIXED"
-            ],
-            "evidence": [
-              {
-                "receiptFingerprint": "ab44474c",
-                "evidenceKey": "1ccbb257",
-                "provenance": "prov-counter-adequate-001",
-                "relation": "This bounded counterexample search supports only the tested scope and does not establish the claim globally.",
-                "polarity": "MIXED"
-              }
-            ],
-            "boundary": "Multiple structurally qualifying, provenance-bearing returns make opposing relation claims about the same clause-scoped handoff. VAJRA preserves the conflict and refuses closure; this polarity detector is lexical and bounded, not semantic adjudication."
-          }
-        ],
-        "rejectedReceipts": [],
-        "historicalEvidenceKeys": 0,
-        "indeterminate": 0,
-        "unspecified": 0,
-        "mixed": 0,
-        "sameProvenanceConflict": 0,
-        "historicalContestPreserved": 0,
-        "contractAdequacyBlocked": 0,
-        "boundedNullAccepted": 0
-      }
-    },
-    {
-      "type": "BOUNDED_NULL_NOT_AUDITED",
-      "detail": {
-        "received": 1,
-        "resolved": 0,
-        "contested": 1,
-        "open": 5,
-        "rejected": 0,
-        "resolvedBranches": [],
-        "contestedBranches": [
-          {
-            "targetRef": "20708907",
-            "clauseRef": "bf2b3177",
-            "lens": "counterexample",
-            "preferredOrgan": "DROPLET",
-            "status": "CONTESTED_BY_RECEIPTS",
-            "polarities": [
-              "MIXED"
-            ],
-            "evidence": [
-              {
-                "receiptFingerprint": "ab44474c",
-                "evidenceKey": "1ccbb257",
-                "provenance": "prov-counter-adequate-001",
-                "relation": "This bounded counterexample search supports only the tested scope and does not establish the claim globally.",
-                "polarity": "MIXED"
-              }
-            ],
-            "boundary": "Multiple structurally qualifying, provenance-bearing returns make opposing relation claims about the same clause-scoped handoff. VAJRA preserves the conflict and refuses closure; this polarity detector is lexical and bounded, not semantic adjudication."
-          }
-        ],
-        "rejectedReceipts": [],
-        "historicalEvidenceKeys": 0,
-        "indeterminate": 0,
-        "unspecified": 0,
-        "mixed": 0,
-        "sameProvenanceConflict": 0,
-        "historicalContestPreserved": 0,
-        "contractAdequacyBlocked": 0,
-        "boundedNullAccepted": 0
-      }
-    },
-    {
-      "type": "BOUNDED_NULL_SEMANTICS_LOST"
-    },
-    {
-      "type": "BOUNDED_NULL_TRUTH_DISCLAIMER_MISSING"
-    }
-  ],
+  "failures": [],
   "boundary": "PASS certifies only bounded lexical/structural anti-false-certainty, provenance-topology, lens-specific adequacy, and BOUNDED_NULL work-contract semantics plus a GUT regression. BOUNDED_NULL is not evidence that a claim is true, and no search completeness beyond the declared scope is certified."
 }
