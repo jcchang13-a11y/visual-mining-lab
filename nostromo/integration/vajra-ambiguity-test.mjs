@@ -34,6 +34,7 @@ if(rawBranch?.status!=='RESOLVED_BY_RECEIPT')failures.push({type:'BASELINE_DID_N
 if(audit.status!=='AMBIGUITY_FOUND')failures.push({type:'AMBIGUITY_NOT_DETECTED',audit});
 if(guardedBranch?.status!=='AMBIGUOUS_BY_RECEIPTS')failures.push({type:'FALSE_CERTAINTY_NOT_BLOCKED',actual:guardedBranch?.status});
 if(!guarded.receiptAmbiguityAudit?.ambiguous?.length)failures.push({type:'AMBIGUITY_AUDIT_MISSING'});
+if(audit.qualifyingReceiptCount!==2)failures.push({type:'QUALIFYING_COUNT_WRONG',actual:audit.qualifyingReceiptCount});
 
 // Control: two explicit same-direction relations should not be forced ambiguous.
 const receiptC={...common,provenance:'source-C-independent',material:'A second bounded report independently reproduced the same failure mode under the same scoped condition.',relation:'This evidence supports narrowing the universal reliability claim because the scoped failure is reproduced.'};
@@ -41,8 +42,25 @@ const control=applyGuardedHandoffResults(base,[receiptA,receiptC],V);
 const controlBranch=control.unresolved.find(x=>x.targetRef===branch?.targetRef&&x.clauseRef===branch?.clauseRef&&x.lens===branch?.lens);
 if(controlBranch?.status==='AMBIGUOUS_BY_RECEIPTS')failures.push({type:'SAME_DIRECTION_CONTROL_FALSE_POSITIVE'});
 
+// Poison control: malformed/non-executed returns must not manufacture ambiguity.
+const poisonMissingProvenance={...common,provenance:'',material:'A vague additional return that would otherwise look unrelated to the first receipt.',relation:'Its relation to the target is not determined.'};
+const poisonNotExecuted={...common,status:'QUEUED',provenance:'source-poison-queued',material:'Queued material that has not actually been returned by the requested organ.',relation:'Its relation to the target is not determined.'};
+const poisonMissingRelation={...common,provenance:'source-poison-no-relation',material:'Returned material with no explicit statement connecting it to the target claim.',relation:''};
+const poisonAudit=auditReceiptAmbiguity([receiptA,poisonMissingProvenance,poisonNotExecuted,poisonMissingRelation]);
+const poisonGuarded=applyGuardedHandoffResults(base,[receiptA,poisonMissingProvenance,poisonNotExecuted,poisonMissingRelation],V);
+const poisonBranch=poisonGuarded.unresolved.find(x=>x.targetRef===branch?.targetRef&&x.clauseRef===branch?.clauseRef&&x.lens===branch?.lens);
+if(poisonAudit.status!=='NO_AMBIGUITY_FOUND')failures.push({type:'MALFORMED_RECEIPT_CREATED_AMBIGUITY',audit:poisonAudit});
+if(poisonAudit.qualifyingReceiptCount!==1)failures.push({type:'POISON_QUALIFYING_COUNT_WRONG',actual:poisonAudit.qualifyingReceiptCount});
+if(poisonAudit.rejectedReceiptCount!==3)failures.push({type:'POISON_REJECTION_COUNT_WRONG',actual:poisonAudit.rejectedReceiptCount});
+if(poisonBranch?.status==='AMBIGUOUS_BY_RECEIPTS')failures.push({type:'POISON_CHANGED_BRANCH_TO_AMBIGUOUS'});
+
+const rejectionReasons=[...new Set((poisonAudit.rejectedReceipts||[]).flatMap(x=>x.reasons||[]))];
+for(const expected of ['MISSING_PROVENANCE','NO_EXECUTION_EVIDENCE','MISSING_RELATION_TO_TARGET']){
+  if(!rejectionReasons.includes(expected))failures.push({type:'EXPECTED_POISON_REASON_MISSING',expected,rejectionReasons});
+}
+
 const result={
-  schema:'nostromo-vajra-ambiguity-test/v0.1',
+  schema:'nostromo-vajra-ambiguity-test/v0.2',
   completedAt:new Date().toISOString(),
   status:failures.length?'FAIL':'PASS',
   finding:{
@@ -50,10 +68,13 @@ const result={
     guardedStatus:guardedBranch?.status||null,
     ambiguityDetected:audit.ambiguous.length,
     controlStatus:controlBranch?.status||null,
-    interpretation:'The base receipt matcher can close on the first qualifying receipt when another qualifying return has an unspecified relation. The ambiguity guard preserves that branch as open instead of letting receipt order create false certainty.'
+    poisonAuditStatus:poisonAudit.status,
+    poisonRejected:poisonAudit.rejectedReceiptCount,
+    poisonBranchStatus:poisonBranch?.status||null,
+    interpretation:'The guard preserves genuine structural ambiguity while excluding malformed, non-executed, provenance-free or relation-free returns from ambiguity formation, preventing junk receipts from manufacturing uncertainty or changing routing state.'
   },
   failures,
-  boundary:'This test demonstrates a deterministic structural/lexical false-certainty guard. UNSPECIFIED means the bounded polarity detector cannot classify the relation; it does not prove semantic disagreement, source independence, truth, or evidence quality.'
+  boundary:'This test demonstrates a deterministic structural/lexical false-certainty and ambiguity-poisoning guard. UNSPECIFIED means the bounded polarity detector cannot classify the relation; qualification means only that minimum execution/provenance/material/relation fields exist. It does not prove semantic disagreement, source independence, truth, or evidence quality.'
 };
 await fs.writeFile(resultPath,JSON.stringify(result,null,2)+'\n','utf8');
 console.log(JSON.stringify(result,null,2));
