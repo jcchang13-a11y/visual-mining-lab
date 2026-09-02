@@ -1,5 +1,5 @@
 import fs from 'node:fs/promises';
-import {guardVajraAdjudicationProvenance,provenanceAudit,canonicalProvenance,canonicalMaterial,boundedNearDuplicate} from './vajra-provenance-diversity-guard.mjs';
+import {guardVajraAdjudicationProvenance,provenanceAudit,canonicalProvenance,canonicalMaterial,boundedNearDuplicate,semanticOperatorSignature} from './vajra-provenance-diversity-guard.mjs';
 const failures=[];
 
 const baseEvidence=[
@@ -21,7 +21,7 @@ const collisionBranch={
 };
 const guarded=guardVajraAdjudicationProvenance({unresolved:[collisionBranch],closureAuthority:'NONE'});
 const branch=guarded.unresolved[0];
-if(guarded.version!=='0.3.2')failures.push({type:'VERSION_REGRESSION',version:guarded.version});
+if(guarded.version!=='0.3.3')failures.push({type:'VERSION_REGRESSION',version:guarded.version});
 if(guarded.status!=='UPSTREAM_REPLAY_GUARD_ACTIVE')failures.push({type:'COLLISION_GUARD_NOT_ACTIVE',guarded});
 if(branch?.provenanceDiversityAudit?.sharedProvenance!==true||branch?.provenanceDiversityAudit?.collisions?.length!==1)failures.push({type:'SHARED_PROVENANCE_NOT_DETECTED',audit:branch?.provenanceDiversityAudit});
 if(branch?.nextAction!=='AUDIT_SHARED_UPSTREAM_BEFORE_REASSESSMENT'||!/provenance|上游/.test(branch?.nextQuestion||''))failures.push({type:'COLLISION_DID_NOT_CHANGE_VAJRA_BEHAVIOR',nextAction:branch?.nextAction,nextQuestion:branch?.nextQuestion});
@@ -60,7 +60,6 @@ if(replayGuarded.status!=='UPSTREAM_REPLAY_GUARD_ACTIVE'||replayGuarded.provenan
 if(replayGuardedBranch?.nextAction!=='AUDIT_CROSS_ORGAN_CONTENT_REPLAY_BEFORE_REASSESSMENT'||replayGuardedBranch?.closureBlocked!==true)failures.push({type:'CONTENT_REPLAY_DID_NOT_BLOCK_PREMATURE_REASSESSMENT',replayGuardedBranch});
 if(replayGuardedBranch?.adjudicationContext?.byOrgan?.MUTHER?.material!==replayB)failures.push({type:'RAW_REPLAY_RETURN_MUTATED'});
 
-// Operator-preservation adversarial cases: semantic relation changes must not be erased by replay canonicalization.
 const operatorPairs=[
   ['score > 10','score < 10'],
   ['A + B','A - B'],
@@ -69,16 +68,21 @@ const operatorPairs=[
 ];
 for(const [a,b] of operatorPairs){
   if(canonicalMaterial(a)===canonicalMaterial(b))failures.push({type:'SEMANTIC_OPERATOR_COLLISION',a,b,canonical:canonicalMaterial(a)});
+  if(semanticOperatorSignature(a).join('|')===semanticOperatorSignature(b).join('|'))failures.push({type:'SEMANTIC_OPERATOR_SIGNATURE_COLLISION',a,b,signatureA:semanticOperatorSignature(a),signatureB:semanticOperatorSignature(b)});
 }
+const operatorDistinctA='The threshold result is score > 10 under the registered measurement rule and retained analysis window.';
+const operatorDistinctB='The threshold result is score < 10 under the registered measurement rule and retained analysis window.';
+const operatorDistinctProbe=boundedNearDuplicate(operatorDistinctA,operatorDistinctB);
 const operatorDistinctReturns=[
-  {sourceOrgan:'DROPLET',provenance:'op-a',material:'The threshold result is score > 10 under the registered measurement rule and retained analysis window.'},
-  {sourceOrgan:'MUTHER',provenance:'op-b',material:'The threshold result is score < 10 under the registered measurement rule and retained analysis window.'},
+  {sourceOrgan:'DROPLET',provenance:'op-a',material:operatorDistinctA},
+  {sourceOrgan:'MUTHER',provenance:'op-b',material:operatorDistinctB},
   {sourceOrgan:'SHROOMING',provenance:'op-c',material:'A separate boundary reading questions whether the threshold rule applies after the measurement window shifts.'}
 ];
 const operatorDistinctAudit=provenanceAudit(operatorDistinctReturns);
 if(operatorDistinctAudit.sharedContent===true)failures.push({type:'OPERATOR_DISTINCT_MATERIAL_FALSELY_EXACT_REPLAY',operatorDistinctAudit});
+if(operatorDistinctProbe.match!==false||operatorDistinctProbe.mode!=='SEMANTIC_OPERATOR_DIVERGENCE')failures.push({type:'OPERATOR_DIVERGENCE_FALSELY_NEAR_REPLAY',operatorDistinctProbe});
+if(operatorDistinctAudit.nearSharedContent!==false||operatorDistinctAudit.replayRisk!==false||operatorDistinctAudit.status!=='PROVENANCE_LABELS_DISTINCT_NOT_INDEPENDENCE_PROOF')failures.push({type:'OPERATOR_DIVERGENCE_FALSELY_BLOCKED_REASSESSMENT',operatorDistinctAudit});
 
-// Adversarial thickening: a light wrapper around replayed material must not masquerade as independent cross-organ evidence.
 const nearReplayA='The intervention improved outcome X under bounded condition Y after the measurement protocol excluded baseline drift and preserved the original comparison window.';
 const nearReplayB='Context note: The intervention improved outcome X under bounded condition Y after the measurement protocol excluded baseline drift and preserved the original comparison window. [replayed]';
 const nearReplayProbe=boundedNearDuplicate(nearReplayA,nearReplayB);
@@ -112,17 +116,17 @@ const partialAudit=provenanceAudit(distinctReturns.slice(0,2));
 if(partialAudit.status!=='PARTIAL_PROVENANCE_COVERAGE'||partialAudit.complete!==false)failures.push({type:'PARTIAL_COVERAGE_FALSELY_COMPLETE',partialAudit});
 
 const result={
-  schema:'vajra-provenance-diversity-test/v0.3.2',completedAt:new Date().toISOString(),status:failures.length?'FAIL':'PASS',
-  capability:'ADJUDICATION_PROVENANCE_DIVERSITY_OPERATOR_PRESERVING_EXACT_AND_BOUNDED_NEAR_CONTENT_REPLAY_GUARD',
+  schema:'vajra-provenance-diversity-test/v0.3.3',completedAt:new Date().toISOString(),status:failures.length?'FAIL':'PASS',
+  capability:'ADJUDICATION_PROVENANCE_DIVERSITY_OPERATOR_DIVERGENCE_AWARE_EXACT_AND_BOUNDED_NEAR_CONTENT_REPLAY_GUARD',
   collisionCase:{status:guarded.status,audit:branch?.provenanceDiversityAudit,nextAction:branch?.nextAction,closureAuthority:branch?.closureAuthority},
   provenanceFormatMutationCase:mutationAudit,
   contentReplayCase:{status:replayGuarded.status,audit:contentReplayAudit,nextAction:replayGuardedBranch?.nextAction,closureAuthority:replayGuardedBranch?.closureAuthority},
-  operatorPreservationCase:{pairs:operatorPairs,audit:operatorDistinctAudit},
+  operatorPreservationCase:{pairs:operatorPairs,probe:operatorDistinctProbe,audit:operatorDistinctAudit},
   nearReplayCase:{probe:nearReplayProbe,audit:nearReplayAudit,status:nearGuarded.status,nextAction:nearGuardedBranch?.nextAction,closureAuthority:nearGuardedBranch?.closureAuthority},
   distinctCase:distinctAudit,partialCase:partialAudit,
-  guards:{exactProvenanceReuseDetected:true,provenanceFormatMutationDetected:true,crossOrganContentReplayDetected:true,contentFormatMutationDetected:true,semanticOperatorsPreserved:true,boundedWrapperNearReplayDetected:true,distinctProvenanceCannotHideReplay:true,replayChangesVajraBehavior:true,sourceIndependenceNeverInferred:true,rawReturnsPreserved:true},
+  guards:{exactProvenanceReuseDetected:true,provenanceFormatMutationDetected:true,crossOrganContentReplayDetected:true,contentFormatMutationDetected:true,semanticOperatorsPreserved:true,operatorDivergenceOverridesLexicalNearReplay:true,boundedWrapperNearReplayDetected:true,distinctProvenanceCannotHideReplay:true,replayChangesVajraBehavior:true,sourceIndependenceNeverInferred:true,rawReturnsPreserved:true},
   failures,
-  boundary:'PASS proves deterministic detection of exact/bounded-format provenance reuse, operator-preserving exact canonical cross-organ content replay, and bounded high-overlap lexical replay when one organ lightly wraps another organ’s sufficiently long material. Comparison/equality/arithmetic operators are not discarded as formatting, preventing false replay collapse for opposite relations. Near replay remains a lexical risk signal, not semantic identity or derivation proof. Raw returns remain preserved and source independence is never inferred.'
+  boundary:'PASS proves deterministic detection of exact/bounded-format provenance reuse, operator-preserving exact canonical cross-organ content replay, and bounded high-overlap lexical replay when one organ lightly wraps another organ’s sufficiently long material. When both materials contain explicit comparison/equality/arithmetic operators and their operator signatures diverge, lexical overlap no longer falsely collapses them into near replay. This is syntactic operator protection, not semantic theorem proving. Raw returns remain preserved and source independence is never inferred.'
 };
 await fs.writeFile('nostromo/integration/vajra-provenance-diversity-last-result.json',JSON.stringify(result,null,2)+'\n');
 console.log(JSON.stringify(result,null,2));
