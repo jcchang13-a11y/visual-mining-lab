@@ -1,0 +1,14 @@
+{
+  "schema": "nostromo-vajra-ambiguity-test/v0.1",
+  "completedAt": "2026-09-02T18:07:47.782Z",
+  "status": "PASS",
+  "finding": {
+    "baselineStatus": "RESOLVED_BY_RECEIPT",
+    "guardedStatus": "AMBIGUOUS_BY_RECEIPTS",
+    "ambiguityDetected": 1,
+    "controlStatus": "RESOLVED_BY_RECEIPT",
+    "interpretation": "The base receipt matcher can close on the first qualifying receipt when another qualifying return has an unspecified relation. The ambiguity guard preserves that branch as open instead of letting receipt order create false certainty."
+  },
+  "failures": [],
+  "boundary": "This test demonstrates a deterministic structural/lexical false-certainty guard. UNSPECIFIED means the bounded polarity detector cannot classify the relation; it does not prove semantic disagreement, source independence, truth, or evidence quality."
+}
