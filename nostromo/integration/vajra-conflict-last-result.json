@@ -1,6 +1,6 @@
 {
   "schema": "nostromo-vajra-conflict-test/v0.3",
-  "completedAt": "2026-09-02T06:03:51.825Z",
+  "completedAt": "2026-09-02T06:04:26.146Z",
   "status": "FAIL",
   "finding": {
     "classification": "INDEPENDENT_CONFLICT_PERSISTS_ACROSS_APPLICATIONS",
