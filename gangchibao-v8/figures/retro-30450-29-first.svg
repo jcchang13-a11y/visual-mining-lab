@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 360" role="img" aria-labelledby="title desc">
+  <title id="title">第二十九分回溯第一分</title>
+  <desc id="desc">第二十九分以如來的來去坐臥，明確回看第一分飯後乞食、還至本處、洗足敷座的身體行動。</desc>
+  <rect width="360" height="360" fill="white"/>
+  <g fill="none" stroke="black" stroke-width="2">
+    <circle cx="180" cy="180" r="62"/>
+    <circle cx="180" cy="180" r="132"/>
+  </g>
+  <g fill="black" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Noto Sans TC', sans-serif" font-size="24" text-anchor="middle" dominant-baseline="middle">
+    <text x="180" y="180">29</text>
+    <text x="180" y="68">1</text>
+  </g>
+</svg>
