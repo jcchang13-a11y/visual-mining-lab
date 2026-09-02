@@ -1,8 +1,8 @@
 {
-  "schema": "nostromo-organ-registry/v1.36",
-  "updatedAt": "2026-09-02T13:12:00+08:00",
+  "schema": "nostromo-organ-registry/v1.37",
+  "updatedAt": "2026-09-02T21:13:00+08:00",
   "truthRule": "DISPLAYED STATE MUST FOLLOW EVIDENCE",
-  "evidence": "ci-last-result.json plus formal-round-last-result.json plus connector-last-result.json plus muther-falsify-last-result.json plus droplet-claim-verify-last-result.json plus gut-metabolism-last-result.json plus gut-lineage-last-result.json plus vajra-dynamic-last-result.json plus vajra-uncertainty-last-result.json plus vajra-conflict-escalation-last-result.json plus vajra-provenance-diversity-last-result.json plus shroom-feedback-last-result.json",
+  "evidence": "ci-last-result.json plus formal-round-last-result.json plus connector-last-result.json plus muther-falsify-last-result.json plus muther-repo-diversity-last-result.json plus droplet-claim-verify-last-result.json plus gut-metabolism-last-result.json plus gut-lineage-last-result.json plus vajra-dynamic-last-result.json plus vajra-uncertainty-last-result.json plus vajra-conflict-escalation-last-result.json plus vajra-provenance-diversity-last-result.json plus shroom-feedback-last-result.json",
   "latestFormalRound": "greenhouse/r113-nostromo-formal-round.json",
   "latestFormalFinding": {
     "reference": "R111",
@@ -29,18 +29,18 @@
     "boundary": "Isolated counterfactual executor only. It deliberately includes parent round ordinal in participant selection and has been CI-verified against R111 and R112. It does not write or advance formal greenhouse history and is engineering evidence that NOSTROMO can execute and audit a parent-sensitive transition, not evidence that the real SHROOMING population is causally path-dependent."
   },
   "latestThickening": {
-    "organ": "VAJRA",
-    "version": "VAJRA v0.3.13",
-    "status": "VERIFIED_CANONICAL_PROVENANCE_FORMAT_MUTATION_COLLISION_GUARD",
-    "test": "vajra-provenance-diversity-last-result.json v0.2.0 + NOSTROMO Integration Test run 240",
+    "organ": "MU/TH/UR",
+    "version": "MUTHER repo mine v1.2",
+    "status": "VERIFIED_LEXICAL_NEAR_DUPLICATE_POLLUTION_CONTAINMENT",
+    "test": "muther-repo-diversity-last-result.json v0.1.1 + NOSTROMO Integration Test run 261",
     "capabilities": [
-      "cross-organ provenance diversity now compares a bounded canonical provenance identity rather than raw labels only",
-      "Unicode width, case, whitespace, punctuation and symbol-only formatting mutations of the same provenance label no longer inflate apparent source diversity",
-      "format-mutated provenance reuse activates the same collision review path and blocks premature conflict reassessment",
-      "unique provenance counts are computed from canonical provenance identities while all raw caller-supplied labels remain visible in the audit record",
-      "distinct canonical labels still never count as proof of real-world source independence, and all prior VAJRA/GUT/SHROOMING/MUTHER/DROPLET regression tests remain passing"
+      "repository mining now applies a conservative character-shingle overlap guard after exact superficial deduplication and before source-family balancing",
+      "near-identical cross-file candidates with lexical, punctuation, timestamp and fingerprint mutations can no longer automatically inflate apparent ore diversity",
+      "suppressed near-duplicate candidates retain an auditable record of kept path, suppressed path, source families, fingerprints and measured overlap",
+      "materially distinct lexical candidates sharing the same query token remain eligible for selection",
+      "the initial failed adversarial run 259 was preserved; the corrected fixture separated exact-duplicate handling from near-duplicate handling and run 261 passed with all existing cross-organ regression tests still passing"
     ],
-    "boundary": "Promotion is backed by successful NOSTROMO Integration Test run 240 for commit b30865061d29869dd96b4f74a3e486949817842e and vajra-provenance-diversity-test/v0.2.0 PASS. The guard catches only bounded superficial provenance-label mutations. It does not infer semantic equivalence, derivative-source relationships, cryptographic identity, real-world source independence, or factual truth."
+    "boundary": "Promotion is backed by successful NOSTROMO Integration Test run 261 for commit 9477e5ad792ae51dc7cc39db2b6b17536db7477a and muther-repo-diversity-test/v0.1.1 PASS. The guard is conservative lexical pollution containment only. It does not infer semantic equivalence, real-world source independence, source quality, methodological quality, novelty, factual truth, or Google Drive coverage."
   },
   "organs": {
     "shrooming": {
@@ -62,12 +62,12 @@
       "actions": {
         "READ_STATE": "EXEC_STATE",
         "AUDIT_STATE": "EXEC_STATE",
-        "MINE_REPO": "VERIFIED_DIVERSITY_PRESERVING_REPO_MINE",
+        "MINE_REPO": "VERIFIED_DIVERSITY_PRESERVING_REPO_MINE_WITH_LEXICAL_NEAR_DUPLICATE_CONTAINMENT",
         "MINE_DRIVE_QUERY": "CONNECTOR_EXEC",
         "MINE_INTERNAL": "AUTHORIZED_CONNECTOR_EXEC",
         "FALSIFY": "REPO_COUNTEREVIDENCE_EXEC"
       },
-      "boundary": "Published mining-state audit and repository corpus mining are executable. MINE_REPO collects repository candidates before bounded selection, fingerprints superficially normalized snippets, suppresses duplicate copies, records occurrence/provenance metadata and round-robins across path-derived source families to reduce first-file bias. This is deterministic structural diversity handling, not semantic clustering, source-quality scoring, novelty proof or truth judgment. Query-scoped Google Drive mining is executed by the authorized external connector runtime and handed back as redacted evidence. MINE_INTERNAL remains limited to explicit authorized query-scoped connector sources; it does not grant exhaustive private-environment crawling or cross-source enumeration. FALSIFY remains repository-scoped and absence is never upgraded to truth."
+      "boundary": "Published mining-state audit and repository corpus mining are executable. MINE_REPO collects repository candidates before bounded selection, fingerprints superficially normalized snippets, suppresses exact copies, then applies a conservative character-shingle lexical-overlap guard before round-robin selection across path-derived source families. Near-duplicate suppression preserves an audit ledger instead of silently deleting provenance. This reduces repeated-copy pollution but remains deterministic lexical/structural handling, not semantic clustering, source-independence proof, source-quality scoring, novelty proof or truth judgment. Query-scoped Google Drive mining is executed by the authorized external connector runtime and handed back as redacted evidence. MINE_INTERNAL remains limited to explicit authorized query-scoped connector sources; it does not grant exhaustive private-environment crawling or cross-source enumeration. FALSIFY remains repository-scoped and absence is never upgraded to truth."
     },
     "droplet": {
       "mode": "PARTIAL_EXEC_THICKENED",
@@ -95,7 +95,7 @@
       "actions": {
         "DISMANTLE": "VERIFIED_PROPOSITION_AWARE_DISMANTLER_WITH_RECEIPT_GUARDS_MULTI_ORGAN_CONTEXT_CROSS_INTAKE_REPLAY_CONTENT_BOUND_HISTORY_ATTESTATION_CANONICAL_PROVENANCE_DIVERSITY_AND_OPERATOR_PRESERVATION"
       },
-      "boundary": "VAJRA v0.3.13 retains proposition-aware dismantling, uncertainty/provenance preservation, contest persistence, multi-organ conflict-context routing, replay containment, content-bound history attestation and semantic-operator-preserving replay identity. Its cross-organ provenance-diversity layer now canonicalizes bounded superficial label formatting before collision comparison, so case/spacing/punctuation/symbol mutations of one provenance label cannot masquerade as new source diversity. Raw provenance labels remain preserved for audit. Distinct canonical labels still do not prove real-world source independence. These remain deterministic lexical/structural guards, not cryptographic signatures, semantic adjudication, factual truth, derivative-source detection or real-world source-independence proof."
+      "boundary": "VAJRA retains proposition-aware dismantling, uncertainty/provenance preservation, contest persistence, multi-organ conflict-context routing, replay containment, content-bound history attestation and semantic-operator-preserving replay identity. Its cross-organ provenance-diversity layer canonicalizes bounded superficial label formatting before collision comparison, so case/spacing/punctuation/symbol mutations of one provenance label cannot masquerade as new source diversity. Raw provenance labels remain preserved for audit. Distinct canonical labels still do not prove real-world source independence. These remain deterministic lexical/structural guards, not cryptographic signatures, semantic adjudication, factual truth, derivative-source detection or real-world source-independence proof."
     }
   }
 }
