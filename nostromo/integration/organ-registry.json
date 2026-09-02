@@ -1,6 +1,6 @@
 {
-  "schema": "nostromo-organ-registry/v1.30",
-  "updatedAt": "2026-09-02T07:08:00+08:00",
+  "schema": "nostromo-organ-registry/v1.31",
+  "updatedAt": "2026-09-02T08:09:00+08:00",
   "truthRule": "DISPLAYED STATE MUST FOLLOW EVIDENCE",
   "evidence": "ci-last-result.json plus formal-round-last-result.json plus connector-last-result.json plus muther-falsify-last-result.json plus droplet-claim-verify-last-result.json plus gut-metabolism-last-result.json plus gut-lineage-last-result.json plus vajra-dynamic-last-result.json plus vajra-uncertainty-last-result.json plus vajra-conflict-escalation-last-result.json plus shroom-feedback-last-result.json",
   "latestFormalRound": "greenhouse/r113-nostromo-formal-round.json",
@@ -30,17 +30,19 @@
   },
   "latestThickening": {
     "organ": "VAJRA",
-    "version": "VAJRA v0.3.7",
-    "status": "VERIFIED_MUTATED_PACKET_REPLAY_CONTAINMENT",
-    "test": "vajra-conflict-escalation-last-result.json + ci-last-result.json",
+    "version": "VAJRA v0.3.8",
+    "status": "VERIFIED_CROSS_INTAKE_PACKET_REPLAY_CONTAINMENT",
+    "test": "vajra-conflict-escalation-last-result.json + NOSTROMO Integration Test run 227",
     "capabilities": [
-      "one issued adjudication packet can contribute at most one accepted return per intake",
-      "a second return for the same packet is quarantined as PACKET_ALREADY_RETURNED even when material, relation or provenance has been mutated",
-      "mutated replay cannot increase a single organ's accepted-return count or overweight its adjudication contribution",
+      "accepted adjudication packet IDs are exposed in a bounded return ledger for persistence across intakes",
+      "a delayed or mutated return for a packet already accepted in an earlier intake is quarantined as PACKET_PREVIOUSLY_RETURNED when the ledger is supplied",
+      "same-intake mutated replay remains quarantined as PACKET_ALREADY_RETURNED",
+      "previously accepted packets are not falsely re-counted as missing in later intakes",
+      "cross-intake replay cannot accumulate extra organ weight when acceptedPacketIds is persisted through the conflict lifecycle",
       "existing targetRef, clauseRef, returning-organ, provenance, substance, exact-replay and placeholder guards remain active",
       "original opposing evidence, provenance, conflict state and closureAuthority NONE remain preserved across multi-organ feedback"
     ],
-    "boundary": "Promotion is backed by successful NOSTROMO Integration Test run 225 for commit ab4f1efeae74be1824624abadd367931a2a8d534. VAJRA conflict escalation, uncertainty/conflict guards, GUT regressions, SHROOMING feedback, MUTHER, DROPLET, formal greenhouse continuity and the 50-round integration suite all passed. This verifies deterministic packet-level replay containment only. It does not prove returned material is true, that different provenance strings represent independent real-world sources, or that multi-organ conflict has been semantically adjudicated."
+    "boundary": "Promotion is backed by successful NOSTROMO Integration Test run 227 for commit 970322634b1be0bb5beed6b8cd251472dad97d78 and vajra-conflict-escalation-test/v0.5.0 PASS. This verifies deterministic cross-intake packet replay containment only when the acceptedPacketIds ledger is actually persisted and supplied to later intake calls; omitting that history removes the cross-intake detection signal. It does not prove returned material is true, that different provenance strings represent independent real-world sources, or that multi-organ conflict has been semantically adjudicated."
   },
   "organs": {
     "shrooming": {
@@ -93,9 +95,9 @@
       "mode": "EXEC_CONNECTED_THICKENED",
       "source": "../vajra/vajra-engine.js + ../vajra/receipt-uncertainty-guard.js + ./vajra-conflict-escalation.mjs",
       "actions": {
-        "DISMANTLE": "VERIFIED_PROPOSITION_AWARE_DISMANTLER_WITH_RECEIPT_GUARDS_MULTI_ORGAN_CONTEXT_AND_PACKET_REPLAY_CONTAINMENT"
+        "DISMANTLE": "VERIFIED_PROPOSITION_AWARE_DISMANTLER_WITH_RECEIPT_GUARDS_MULTI_ORGAN_CONTEXT_AND_CROSS_INTAKE_PACKET_REPLAY_CONTAINMENT"
       },
-      "boundary": "VAJRA v0.3.7 retains the proposition-aware core and verified uncertainty/provenance, contest-persistence and multi-organ conflict-context guards. Preserved contests generate DROPLET, MUTHER and SHROOMING adjudication packets with explicit scope and provenance contracts. Packet returns must match issued identity, returning organ, targetRef, clauseRef and substantive relation. Exact replays are blocked, and a second mutated return for an already accepted packet is now quarantined as PACKET_ALREADY_RETURNED, preventing one organ from amplifying its weight by changing text or provenance on the same work order. Complete three-organ context can change VAJRA nextAction/nextQuestion while closureAuthority remains NONE and opposing evidence stays preserved. These remain deterministic lexical/structural heuristics and routing contracts, not semantic adjudication, source-quality weighting, factual truth, real-world source-independence proof or evidence that the original proposition is settled."
+      "boundary": "VAJRA v0.3.8 retains the proposition-aware core and verified uncertainty/provenance, contest-persistence and multi-organ conflict-context guards. Preserved contests generate DROPLET, MUTHER and SHROOMING adjudication packets with explicit scope and provenance contracts. Packet returns must match issued identity, returning organ, targetRef, clauseRef and substantive relation. Same-intake mutation replay is blocked with PACKET_ALREADY_RETURNED. The intake now also exposes acceptedPacketIds and can consume that ledger on later calls; a delayed or mutated return for a packet accepted earlier is quarantined as PACKET_PREVIOUSLY_RETURNED, preventing replay weight from accumulating across time when the ledger is persisted. Complete three-organ context can change VAJRA nextAction/nextQuestion while closureAuthority remains NONE and opposing evidence stays preserved. These remain deterministic lexical/structural heuristics and routing contracts, not semantic adjudication, source-quality weighting, factual truth, real-world source-independence proof or evidence that the original proposition is settled."
     }
   }
 }
