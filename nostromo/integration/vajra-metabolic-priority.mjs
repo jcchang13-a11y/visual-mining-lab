@@ -1,11 +1,11 @@
-// VAJRA metabolic-priority bridge v0.1.0
+// VAJRA metabolic-priority bridge v0.1.1
 // Deterministic, auditable reprioritization only: GUT signals may change which open VAJRA branch is inspected next, never close or validate a branch.
 
 const LENS_SIGNAL_WEIGHTS={
   CONTRADICTION:{counterexample:7,evidence:6,alternative_cause:5,scope:3,category_error:2},
   RISK_OR_FAILURE:{evidence:6,scope:5,source_quality:4,counterexample:4,criterion:2},
   UNCERTAINTY:{scope:7,criterion:6,measurement:5,definition_boundary:5,evidence:3},
-  EVIDENCE_OR_PROVENANCE:{source_quality:7,evidence:6,measurement:5,scope:2},
+  EVIDENCE_OR_PROVENANCE:{source_quality:9,evidence:6,measurement:5,scope:2},
   QUESTION:{definition_boundary:6,scope:6,counterfactual:5,criterion:4},
   CLAIM:{evidence:7,counterexample:6,scope:4,excluded_alternative:3},
   HISTORY:{self_reference:6,scope:5,criterion:2},
@@ -16,18 +16,30 @@ const LENS_SIGNAL_WEIGHTS={
 function clean(v){return String(v??'').replace(/\s+/g,' ').trim();}
 function fnv(text){let h=2166136261;for(const ch of clean(text)){h^=ch.codePointAt(0);h=Math.imul(h,16777619)>>>0;}return h.toString(16).padStart(8,'0');}
 function openBranches(vajraResult){return (vajraResult?.unresolved||[]).filter(b=>b&&b.status!=='RESOLVED_BY_RECEIPT');}
+function metabolicItems(metabolic){
+  // GUT v0.2.x intentionally exposes routed semantic atoms as nutrients and risk atoms as quarantine.
+  // `items` is accepted only as a compatibility fallback for older/future adapters; do not infer signals from rendered summary text.
+  if(Array.isArray(metabolic?.nutrients))return [...metabolic.nutrients,...(Array.isArray(metabolic?.quarantine)?metabolic.quarantine:[])];
+  if(Array.isArray(metabolic?.items))return metabolic.items;
+  return [];
+}
 function metabolicSignals(metabolic){
   const signals=[];
-  for(const item of metabolic?.items||[]){
+  const seen=new Set();
+  for(const item of metabolicItems(metabolic)){
     const type=clean(item?.type||'MATERIAL').toUpperCase();
-    if(type==='LOW_SIGNAL'||type==='DUPLICATE')continue;
-    signals.push({
+    if(type==='LOW_SIGNAL'||type==='DUPLICATE'||type==='RAW_STRUCTURED_SNIPPET')continue;
+    const signal={
       type,
       priority:Number.isFinite(Number(item?.priority))?Number(item.priority):0,
       route:clean(item?.route||'HOLD').toUpperCase(),
       path:clean(item?.path),
       provenance:{...(item?.provenance||{})}
-    });
+    };
+    const key=JSON.stringify(signal);
+    if(seen.has(key))continue;
+    seen.add(key);
+    signals.push(signal);
   }
   return signals;
 }
@@ -50,10 +62,10 @@ export function prioritizeVajraBranches(vajraResult,metabolic){
   const branches=openBranches(vajraResult);
   const signals=metabolicSignals(metabolic);
   const feedbackFingerprint=signalFingerprint(signals);
-  if(!vajraResult||!vajraResult.targetRef)return {status:'INVALID_VAJRA_RESULT',selected:null,ranked:[],signals,feedbackFingerprint,boundary:'No reprioritization performed.'};
-  if(!branches.length)return {status:'NO_OPEN_BRANCH',targetRef:vajraResult.targetRef,selected:null,ranked:[],signals,feedbackFingerprint,boundary:'No open VAJRA branch exists; this bridge never reopens or closes branches.'};
+  if(!vajraResult||!vajraResult.targetRef)return {status:'INVALID_VAJRA_RESULT',selected:null,ranked:[],signals,feedbackFingerprint,closureAuthority:'NONE',branchStateMutated:false,boundary:'No reprioritization performed.'};
+  if(!branches.length)return {status:'NO_OPEN_BRANCH',targetRef:vajraResult.targetRef,selected:null,ranked:[],signals,feedbackFingerprint,closureAuthority:'NONE',branchStateMutated:false,boundary:'No open VAJRA branch exists; this bridge never reopens or closes branches.'};
   const ranked=branches.map((b,i)=>scoreBranch(b,signals,i)).sort((a,b)=>b.score-a.score||a.index-b.index);
-  if(!signals.length||ranked[0].score<=0)return {status:'NO_METABOLIC_PRIORITY_SIGNAL',targetRef:vajraResult.targetRef,selected:null,ranked,signals,feedbackFingerprint,closureAuthority:'NONE',boundary:'GUT supplied no recognized prioritization signal. Original VAJRA ordering remains authoritative; no branch state changed.'};
+  if(!signals.length||ranked[0].score<=0)return {status:'NO_METABOLIC_PRIORITY_SIGNAL',targetRef:vajraResult.targetRef,selected:null,ranked,signals,feedbackFingerprint,closureAuthority:'NONE',branchStateMutated:false,boundary:'GUT supplied no recognized prioritization signal. Original VAJRA ordering remains authoritative; no branch state changed.'};
   const selected=ranked[0];
   return {
     status:'PRIORITIZED_BY_GUT_SIGNAL',
@@ -64,6 +76,6 @@ export function prioritizeVajraBranches(vajraResult,metabolic){
     feedbackFingerprint,
     closureAuthority:'NONE',
     branchStateMutated:false,
-    boundary:'Deterministic lexical/type routing bridge. GUT output may change which unresolved VAJRA branch is inspected next, but cannot resolve, validate, suppress or create evidence for any branch. Scores are auditable heuristics, not semantic importance or truth judgments; provenance is carried only as source metadata and the feedback fingerprint is not evidence.'
+    boundary:'Deterministic lexical/type routing bridge. It reads GUT source atoms (nutrients plus quarantined risk atoms), never the rendered carry summary. GUT output may change which unresolved VAJRA branch is inspected next, but cannot resolve, validate, suppress or create evidence for any branch. Scores are auditable heuristics, not semantic importance or truth judgments; provenance is carried only as source metadata and the feedback fingerprint is not evidence.'
   };
 }
