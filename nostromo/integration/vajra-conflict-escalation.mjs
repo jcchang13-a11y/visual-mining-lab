@@ -89,9 +89,17 @@ function packetIndex(escalation){
   for(const branch of escalation?.escalations||[])for(const p of branch?.packets||[])if(p?.packetId)map.set(clean(p.packetId),p);
   return map;
 }
+function historicalPacketIds(history){
+  const ids=[];
+  if(Array.isArray(history?.acceptedPacketIds))ids.push(...history.acceptedPacketIds);
+  if(Array.isArray(history?.accepted))ids.push(...history.accepted.map(x=>x?.packetId));
+  if(Array.isArray(history?.returnLedger?.acceptedPacketIds))ids.push(...history.returnLedger.acceptedPacketIds);
+  return new Set(ids.map(clean).filter(Boolean));
+}
 
-export function ingestConflictEscalationReturns(escalation,returns=[]){
+export function ingestConflictEscalationReturns(escalation,returns=[],history={}){
   const packets=packetIndex(escalation),accepted=[],quarantine=[],seen=new Set(),seenPackets=new Set();
+  const previouslyAccepted=historicalPacketIds(history);
   for(const raw of Array.isArray(returns)?returns:[]){
     const packetId=clean(raw?.packetId),sourceOrgan=clean(raw?.sourceOrgan||raw?.organ),targetRef=clean(raw?.targetRef),clauseRef=clean(raw?.clauseRef),status=clean(raw?.status),provenance=returnProvenance(raw),material=returnMaterial(raw),relation=returnRelation(raw);
     const packet=packets.get(packetId),reasons=[];
@@ -99,6 +107,7 @@ export function ingestConflictEscalationReturns(escalation,returns=[]){
     if(packet&&sourceOrgan!==clean(packet.targetOrgan))reasons.push('WRONG_RETURNING_ORGAN');
     if(packet&&targetRef!==clean(packet.targetRef))reasons.push('TARGET_REF_MISMATCH');
     if(packet&&clauseRef!==clean(packet.clauseRef))reasons.push('CLAUSE_REF_MISMATCH');
+    if(packet&&previouslyAccepted.has(packetId))reasons.push('PACKET_PREVIOUSLY_RETURNED');
     if(packet&&seenPackets.has(packetId))reasons.push('PACKET_ALREADY_RETURNED');
     if(status!=='EXECUTED')reasons.push('NOT_EXECUTED');
     if(!provenance)reasons.push('PROVENANCE_REQUIRED');
@@ -116,18 +125,20 @@ export function ingestConflictEscalationReturns(escalation,returns=[]){
       boundary:'Accepted as packet-correlated adjudication material only; this acceptance is not factual verification and grants no truth-closure authority.'
     });
   }
-  const expected=[...packets.keys()],returned=new Set(accepted.map(x=>x.packetId)),missing=expected.filter(id=>!returned.has(id));
+  const expected=[...packets.keys()],returned=new Set(accepted.map(x=>x.packetId)),missing=expected.filter(id=>!returned.has(id)&&!previouslyAccepted.has(id));
   const byOrgan=accepted.reduce((m,x)=>(m[x.sourceOrgan]=(m[x.sourceOrgan]||0)+1,m),{});
+  const acceptedPacketIds=[...new Set([...previouslyAccepted,...accepted.map(x=>x.packetId)])].sort();
   return {
-    organ:'VAJRA',capability:'CONFLICT_ESCALATION_RETURN_INTAKE',version:'0.2.0',
+    organ:'VAJRA',capability:'CONFLICT_ESCALATION_RETURN_INTAKE',version:'0.2.1',
     status:quarantine.length?'RETURNS_ACCEPTED_WITH_QUARANTINE':accepted.length?'RETURNS_ACCEPTED_REVIEW_REQUIRED':'NO_QUALIFYING_RETURNS',
     closureBlocked:Boolean(escalation?.closureBlocked),
     closureAuthority:'NONE',
     expectedPackets:expected.length,acceptedReturns:accepted.length,quarantinedReturns:quarantine.length,missingPacketIds:missing,
     allPacketsReturned:expected.length>0&&missing.length===0,
-    byOrgan,accepted,quarantine,
-    next:'Feed accepted receipt objects back into VAJRA conflict state as adjudication context; keep the contested branch open and use the returned organ differences to choose the next discriminating question.',
-    boundary:'Deterministic packet-correlation and return-quality guard. It blocks scope loss, wrong-organ substitution, exact replay duplicates, mutated replays of an already accepted packet, provenance-less returns and placeholder material. One issued packet can contribute at most one accepted return per intake. Even a complete three-organ return set remains REVIEW_REQUIRED and cannot close a contested VAJRA branch by itself.'
+    byOrgan,accepted,quarantine,acceptedPacketIds,
+    returnLedger:{acceptedPacketIds,previouslyAcceptedCount:previouslyAccepted.size,newlyAcceptedCount:accepted.length},
+    next:'Feed accepted receipt objects back into VAJRA conflict state as adjudication context; persist acceptedPacketIds between intakes so delayed or mutated replay cannot accumulate extra organ weight; keep the contested branch open and use the returned organ differences to choose the next discriminating question.',
+    boundary:'Deterministic packet-correlation and return-quality guard. It blocks scope loss, wrong-organ substitution, exact replay duplicates, mutated replays within one intake, replay of packets accepted in earlier intakes when their acceptedPacketIds ledger is supplied, provenance-less returns and placeholder material. One issued packet can contribute at most one accepted return across a ledgered conflict lifecycle. Even a complete three-organ return set remains REVIEW_REQUIRED and cannot close a contested VAJRA branch by itself.'
   };
 }
 
