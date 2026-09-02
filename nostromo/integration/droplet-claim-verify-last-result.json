@@ -1,6 +1,6 @@
 {
   "schema": "nostromo-droplet-claim-verify-test/v1.1",
-  "completedAt": "2026-09-02T13:12:21.982Z",
+  "completedAt": "2026-09-02T14:07:33.517Z",
   "status": "PASS",
   "cases": {
     "baseline": {
@@ -17,6 +17,10 @@
         "refutes": 0,
         "authoritativeSupports": 2,
         "authoritativeRefutes": 0,
+        "eligibleAuthoritativeSupports": 2,
+        "eligibleAuthoritativeRefutes": 0,
+        "staleEvidence": 0,
+        "unknownDateEvidence": 0,
         "authoritativeSupportFamilies": 1,
         "authoritativeRefuteFamilies": 0
       },
@@ -24,6 +28,25 @@
         "authoritativeConflict": false,
         "integrityConflict": false,
         "contradictoryFingerprints": []
+      },
+      "freshness": {
+        "active": false,
+        "asOf": "",
+        "maxAgeDays": null,
+        "rows": [
+          {
+            "id": "E1",
+            "status": "NOT_APPLIED",
+            "date": "2024-11-04",
+            "ageDays": null
+          },
+          {
+            "id": "E2",
+            "status": "NOT_APPLIED",
+            "date": "2024-11",
+            "ageDays": null
+          }
+        ]
       },
       "evidenceFingerprint": "77ecfb0c8b102c3a",
       "evidence": [
@@ -74,7 +97,7 @@
           "familyKey": "microsoftresearch"
         }
       ],
-      "boundary": "VERDICT IS COMPUTED ONLY FROM THE EXPLICIT EVIDENCE BUNDLE SUPPLIED BY AN ACTUAL CONNECTOR OR CALLER. EXACT REPLAYED EVIDENCE IS SUPPRESSED BY FINGERPRINT/IDENTITY, SOURCE-FAMILY COUNTS ARE AUDIT SIGNALS RATHER THAN PROOF OF INDEPENDENCE, AND CONFLICTING AUTHORITATIVE DIRECTIONS OR CONTRADICTORY USE OF ONE FINGERPRINT FORCE INDETERMINATE. THIS EXECUTOR DOES NOT SEARCH THE WEB, SCORE METHODOLOGICAL QUALITY, PROVE SOURCE INDEPENDENCE, OR TREAT ABSENCE OF REFUTATION AS GLOBAL TRUTH."
+      "boundary": "VERDICT IS COMPUTED ONLY FROM THE EXPLICIT EVIDENCE BUNDLE SUPPLIED BY AN ACTUAL CONNECTOR OR CALLER. EXACT REPLAYED EVIDENCE IS SUPPRESSED BY FINGERPRINT/IDENTITY. WHEN AN EXPLICIT AS-OF DATE AND MAX-AGE POLICY ARE SUPPLIED, STALE OR UNDATED EVIDENCE REMAINS AUDITABLE BUT CANNOT CREATE CERTAINTY. SOURCE-FAMILY COUNTS ARE AUDIT SIGNALS RATHER THAN PROOF OF INDEPENDENCE, AND CONFLICTING AUTHORITATIVE DIRECTIONS OR CONTRADICTORY USE OF ONE FINGERPRINT FORCE INDETERMINATE. THIS EXECUTOR DOES NOT SEARCH THE WEB, INFER WHETHER A CLAIM IS TIME-SENSITIVE, SCORE METHODOLOGICAL QUALITY, PROVE SOURCE INDEPENDENCE, OR TREAT ABSENCE OF REFUTATION AS GLOBAL TRUTH."
     },
     "duplicateReplay": {
       "executor": "DROPLET_CLAIM_VERIFY",
@@ -90,6 +113,10 @@
         "refutes": 0,
         "authoritativeSupports": 1,
         "authoritativeRefutes": 0,
+        "eligibleAuthoritativeSupports": 1,
+        "eligibleAuthoritativeRefutes": 0,
+        "staleEvidence": 0,
+        "unknownDateEvidence": 0,
         "authoritativeSupportFamilies": 1,
         "authoritativeRefuteFamilies": 0
       },
@@ -97,6 +124,19 @@
         "authoritativeConflict": false,
         "integrityConflict": false,
         "contradictoryFingerprints": []
+      },
+      "freshness": {
+        "active": false,
+        "asOf": "",
+        "maxAgeDays": null,
+        "rows": [
+          {
+            "id": "D1",
+            "status": "NOT_APPLIED",
+            "date": "",
+            "ageDays": null
+          }
+        ]
       },
       "evidenceFingerprint": "950affc15860be8c",
       "evidence": [
@@ -147,7 +187,7 @@
           "familyKey": "publishera"
         }
       ],
-      "boundary": "VERDICT IS COMPUTED ONLY FROM THE EXPLICIT EVIDENCE BUNDLE SUPPLIED BY AN ACTUAL CONNECTOR OR CALLER. EXACT REPLAYED EVIDENCE IS SUPPRESSED BY FINGERPRINT/IDENTITY, SOURCE-FAMILY COUNTS ARE AUDIT SIGNALS RATHER THAN PROOF OF INDEPENDENCE, AND CONFLICTING AUTHORITATIVE DIRECTIONS OR CONTRADICTORY USE OF ONE FINGERPRINT FORCE INDETERMINATE. THIS EXECUTOR DOES NOT SEARCH THE WEB, SCORE METHODOLOGICAL QUALITY, PROVE SOURCE INDEPENDENCE, OR TREAT ABSENCE OF REFUTATION AS GLOBAL TRUTH."
+      "boundary": "VERDICT IS COMPUTED ONLY FROM THE EXPLICIT EVIDENCE BUNDLE SUPPLIED BY AN ACTUAL CONNECTOR OR CALLER. EXACT REPLAYED EVIDENCE IS SUPPRESSED BY FINGERPRINT/IDENTITY. WHEN AN EXPLICIT AS-OF DATE AND MAX-AGE POLICY ARE SUPPLIED, STALE OR UNDATED EVIDENCE REMAINS AUDITABLE BUT CANNOT CREATE CERTAINTY. SOURCE-FAMILY COUNTS ARE AUDIT SIGNALS RATHER THAN PROOF OF INDEPENDENCE, AND CONFLICTING AUTHORITATIVE DIRECTIONS OR CONTRADICTORY USE OF ONE FINGERPRINT FORCE INDETERMINATE. THIS EXECUTOR DOES NOT SEARCH THE WEB, INFER WHETHER A CLAIM IS TIME-SENSITIVE, SCORE METHODOLOGICAL QUALITY, PROVE SOURCE INDEPENDENCE, OR TREAT ABSENCE OF REFUTATION AS GLOBAL TRUTH."
     },
     "authoritativeConflict": {
       "executor": "DROPLET_CLAIM_VERIFY",
@@ -163,6 +203,10 @@
         "refutes": 1,
         "authoritativeSupports": 1,
         "authoritativeRefutes": 1,
+        "eligibleAuthoritativeSupports": 1,
+        "eligibleAuthoritativeRefutes": 1,
+        "staleEvidence": 0,
+        "unknownDateEvidence": 0,
         "authoritativeSupportFamilies": 1,
         "authoritativeRefuteFamilies": 1
       },
@@ -170,6 +214,25 @@
         "authoritativeConflict": true,
         "integrityConflict": false,
         "contradictoryFingerprints": []
+      },
+      "freshness": {
+        "active": false,
+        "asOf": "",
+        "maxAgeDays": null,
+        "rows": [
+          {
+            "id": "C1",
+            "status": "NOT_APPLIED",
+            "date": "",
+            "ageDays": null
+          },
+          {
+            "id": "C2",
+            "status": "NOT_APPLIED",
+            "date": "",
+            "ageDays": null
+          }
+        ]
       },
       "evidenceFingerprint": "c5e8f445969d4c54",
       "evidence": [
@@ -220,7 +283,7 @@
           "familyKey": "authorityb"
         }
       ],
-      "boundary": "VERDICT IS COMPUTED ONLY FROM THE EXPLICIT EVIDENCE BUNDLE SUPPLIED BY AN ACTUAL CONNECTOR OR CALLER. EXACT REPLAYED EVIDENCE IS SUPPRESSED BY FINGERPRINT/IDENTITY, SOURCE-FAMILY COUNTS ARE AUDIT SIGNALS RATHER THAN PROOF OF INDEPENDENCE, AND CONFLICTING AUTHORITATIVE DIRECTIONS OR CONTRADICTORY USE OF ONE FINGERPRINT FORCE INDETERMINATE. THIS EXECUTOR DOES NOT SEARCH THE WEB, SCORE METHODOLOGICAL QUALITY, PROVE SOURCE INDEPENDENCE, OR TREAT ABSENCE OF REFUTATION AS GLOBAL TRUTH."
+      "boundary": "VERDICT IS COMPUTED ONLY FROM THE EXPLICIT EVIDENCE BUNDLE SUPPLIED BY AN ACTUAL CONNECTOR OR CALLER. EXACT REPLAYED EVIDENCE IS SUPPRESSED BY FINGERPRINT/IDENTITY. WHEN AN EXPLICIT AS-OF DATE AND MAX-AGE POLICY ARE SUPPLIED, STALE OR UNDATED EVIDENCE REMAINS AUDITABLE BUT CANNOT CREATE CERTAINTY. SOURCE-FAMILY COUNTS ARE AUDIT SIGNALS RATHER THAN PROOF OF INDEPENDENCE, AND CONFLICTING AUTHORITATIVE DIRECTIONS OR CONTRADICTORY USE OF ONE FINGERPRINT FORCE INDETERMINATE. THIS EXECUTOR DOES NOT SEARCH THE WEB, INFER WHETHER A CLAIM IS TIME-SENSITIVE, SCORE METHODOLOGICAL QUALITY, PROVE SOURCE INDEPENDENCE, OR TREAT ABSENCE OF REFUTATION AS GLOBAL TRUTH."
     },
     "fingerprintIntegrity": {
       "executor": "DROPLET_CLAIM_VERIFY",
@@ -236,6 +299,10 @@
         "refutes": 0,
         "authoritativeSupports": 1,
         "authoritativeRefutes": 0,
+        "eligibleAuthoritativeSupports": 1,
+        "eligibleAuthoritativeRefutes": 0,
+        "staleEvidence": 0,
+        "unknownDateEvidence": 0,
         "authoritativeSupportFamilies": 1,
         "authoritativeRefuteFamilies": 0
       },
@@ -244,6 +311,19 @@
         "integrityConflict": true,
         "contradictoryFingerprints": [
           "same-payload"
+        ]
+      },
+      "freshness": {
+        "active": false,
+        "asOf": "",
+        "maxAgeDays": null,
+        "rows": [
+          {
+            "id": "I1",
+            "status": "NOT_APPLIED",
+            "date": "",
+            "ageDays": null
+          }
         ]
       },
       "evidenceFingerprint": "f179e887e56cab3d",
@@ -284,7 +364,7 @@
           "familyKey": "sourcex"
         }
       ],
-      "boundary": "VERDICT IS COMPUTED ONLY FROM THE EXPLICIT EVIDENCE BUNDLE SUPPLIED BY AN ACTUAL CONNECTOR OR CALLER. EXACT REPLAYED EVIDENCE IS SUPPRESSED BY FINGERPRINT/IDENTITY, SOURCE-FAMILY COUNTS ARE AUDIT SIGNALS RATHER THAN PROOF OF INDEPENDENCE, AND CONFLICTING AUTHORITATIVE DIRECTIONS OR CONTRADICTORY USE OF ONE FINGERPRINT FORCE INDETERMINATE. THIS EXECUTOR DOES NOT SEARCH THE WEB, SCORE METHODOLOGICAL QUALITY, PROVE SOURCE INDEPENDENCE, OR TREAT ABSENCE OF REFUTATION AS GLOBAL TRUTH."
+      "boundary": "VERDICT IS COMPUTED ONLY FROM THE EXPLICIT EVIDENCE BUNDLE SUPPLIED BY AN ACTUAL CONNECTOR OR CALLER. EXACT REPLAYED EVIDENCE IS SUPPRESSED BY FINGERPRINT/IDENTITY. WHEN AN EXPLICIT AS-OF DATE AND MAX-AGE POLICY ARE SUPPLIED, STALE OR UNDATED EVIDENCE REMAINS AUDITABLE BUT CANNOT CREATE CERTAINTY. SOURCE-FAMILY COUNTS ARE AUDIT SIGNALS RATHER THAN PROOF OF INDEPENDENCE, AND CONFLICTING AUTHORITATIVE DIRECTIONS OR CONTRADICTORY USE OF ONE FINGERPRINT FORCE INDETERMINATE. THIS EXECUTOR DOES NOT SEARCH THE WEB, INFER WHETHER A CLAIM IS TIME-SENSITIVE, SCORE METHODOLOGICAL QUALITY, PROVE SOURCE INDEPENDENCE, OR TREAT ABSENCE OF REFUTATION AS GLOBAL TRUTH."
     },
     "lowAuthorityOnly": {
       "executor": "DROPLET_CLAIM_VERIFY",
@@ -300,6 +380,10 @@
         "refutes": 0,
         "authoritativeSupports": 0,
         "authoritativeRefutes": 0,
+        "eligibleAuthoritativeSupports": 0,
+        "eligibleAuthoritativeRefutes": 0,
+        "staleEvidence": 0,
+        "unknownDateEvidence": 0,
         "authoritativeSupportFamilies": 0,
         "authoritativeRefuteFamilies": 0
       },
@@ -307,6 +391,19 @@
         "authoritativeConflict": false,
         "integrityConflict": false,
         "contradictoryFingerprints": []
+      },
+      "freshness": {
+        "active": false,
+        "asOf": "",
+        "maxAgeDays": null,
+        "rows": [
+          {
+            "id": "L1",
+            "status": "NOT_APPLIED",
+            "date": "",
+            "ageDays": null
+          }
+        ]
       },
       "evidenceFingerprint": "32be21079be2ef71",
       "evidence": [
@@ -335,7 +432,7 @@
           "familyKey": "unknownrepost"
         }
       ],
-      "boundary": "VERDICT IS COMPUTED ONLY FROM THE EXPLICIT EVIDENCE BUNDLE SUPPLIED BY AN ACTUAL CONNECTOR OR CALLER. EXACT REPLAYED EVIDENCE IS SUPPRESSED BY FINGERPRINT/IDENTITY, SOURCE-FAMILY COUNTS ARE AUDIT SIGNALS RATHER THAN PROOF OF INDEPENDENCE, AND CONFLICTING AUTHORITATIVE DIRECTIONS OR CONTRADICTORY USE OF ONE FINGERPRINT FORCE INDETERMINATE. THIS EXECUTOR DOES NOT SEARCH THE WEB, SCORE METHODOLOGICAL QUALITY, PROVE SOURCE INDEPENDENCE, OR TREAT ABSENCE OF REFUTATION AS GLOBAL TRUTH."
+      "boundary": "VERDICT IS COMPUTED ONLY FROM THE EXPLICIT EVIDENCE BUNDLE SUPPLIED BY AN ACTUAL CONNECTOR OR CALLER. EXACT REPLAYED EVIDENCE IS SUPPRESSED BY FINGERPRINT/IDENTITY. WHEN AN EXPLICIT AS-OF DATE AND MAX-AGE POLICY ARE SUPPLIED, STALE OR UNDATED EVIDENCE REMAINS AUDITABLE BUT CANNOT CREATE CERTAINTY. SOURCE-FAMILY COUNTS ARE AUDIT SIGNALS RATHER THAN PROOF OF INDEPENDENCE, AND CONFLICTING AUTHORITATIVE DIRECTIONS OR CONTRADICTORY USE OF ONE FINGERPRINT FORCE INDETERMINATE. THIS EXECUTOR DOES NOT SEARCH THE WEB, INFER WHETHER A CLAIM IS TIME-SENSITIVE, SCORE METHODOLOGICAL QUALITY, PROVE SOURCE INDEPENDENCE, OR TREAT ABSENCE OF REFUTATION AS GLOBAL TRUTH."
     }
   },
   "failures": [],
