@@ -89,17 +89,40 @@ function packetIndex(escalation){
   for(const branch of escalation?.escalations||[])for(const p of branch?.packets||[])if(p?.packetId)map.set(clean(p.packetId),p);
   return map;
 }
-function historicalPacketIds(history){
-  const ids=[];
-  if(Array.isArray(history?.acceptedPacketIds))ids.push(...history.acceptedPacketIds);
-  if(Array.isArray(history?.accepted))ids.push(...history.accepted.map(x=>x?.packetId));
-  if(Array.isArray(history?.returnLedger?.acceptedPacketIds))ids.push(...history.returnLedger.acceptedPacketIds);
-  return new Set(ids.map(clean).filter(Boolean));
+function historicalPacketState(history,packets){
+  const candidateIds=[];
+  if(Array.isArray(history?.acceptedPacketIds))candidateIds.push(...history.acceptedPacketIds);
+  if(Array.isArray(history?.accepted))candidateIds.push(...history.accepted.map(x=>x?.packetId));
+  if(Array.isArray(history?.returnLedger?.acceptedPacketIds))candidateIds.push(...history.returnLedger.acceptedPacketIds);
+  const knownIds=new Set(),rejectedHistoricalIds=[];
+  for(const rawId of candidateIds){
+    const id=clean(rawId); if(!id)continue;
+    if(packets.has(id))knownIds.add(id); else rejectedHistoricalIds.push(id);
+  }
+  const rawRecords=[];
+  if(Array.isArray(history?.accepted))rawRecords.push(...history.accepted);
+  if(Array.isArray(history?.returnLedger?.acceptedRecords))rawRecords.push(...history.returnLedger.acceptedRecords);
+  const attested=new Map(),rejectedHistoricalRecords=[];
+  for(const raw of rawRecords){
+    const packetId=clean(raw?.packetId),packet=packets.get(packetId);
+    const sourceOrgan=clean(raw?.sourceOrgan||raw?.organ),targetRef=clean(raw?.targetRef),clauseRef=clean(raw?.clauseRef),returnKey=clean(raw?.returnKey);
+    const reasons=[];
+    if(!packetId||!packet)reasons.push('UNKNOWN_PACKET');
+    if(packet&&sourceOrgan!==clean(packet.targetOrgan))reasons.push('WRONG_RETURNING_ORGAN');
+    if(packet&&targetRef!==clean(packet.targetRef))reasons.push('TARGET_REF_MISMATCH');
+    if(packet&&clauseRef!==clean(packet.clauseRef))reasons.push('CLAUSE_REF_MISMATCH');
+    if(!/^[0-9a-f]{8}$/i.test(returnKey))reasons.push('RETURN_KEY_ATTESTATION_REQUIRED');
+    if(reasons.length){rejectedHistoricalRecords.push({packetId,sourceOrgan,targetRef,clauseRef,reasons:[...new Set(reasons)]});continue;}
+    knownIds.add(packetId);
+    attested.set(packetId,{packetId,sourceOrgan,targetRef,clauseRef,returnKey});
+  }
+  return {blockIds:knownIds,attested,rejectedHistoricalIds:[...new Set(rejectedHistoricalIds)],rejectedHistoricalRecords};
 }
+function acceptedRecord(x){return {packetId:clean(x?.packetId),sourceOrgan:clean(x?.sourceOrgan),targetRef:clean(x?.targetRef),clauseRef:clean(x?.clauseRef),returnKey:clean(x?.returnKey)};}
 
 export function ingestConflictEscalationReturns(escalation,returns=[],history={}){
   const packets=packetIndex(escalation),accepted=[],quarantine=[],seen=new Set(),seenPackets=new Set();
-  const previouslyAccepted=historicalPacketIds(history);
+  const historical=historicalPacketState(history,packets),previouslyAccepted=historical.blockIds,previouslyAttested=new Set(historical.attested.keys());
   for(const raw of Array.isArray(returns)?returns:[]){
     const packetId=clean(raw?.packetId),sourceOrgan=clean(raw?.sourceOrgan||raw?.organ),targetRef=clean(raw?.targetRef),clauseRef=clean(raw?.clauseRef),status=clean(raw?.status),provenance=returnProvenance(raw),material=returnMaterial(raw),relation=returnRelation(raw);
     const packet=packets.get(packetId),reasons=[];
@@ -125,20 +148,24 @@ export function ingestConflictEscalationReturns(escalation,returns=[],history={}
       boundary:'Accepted as packet-correlated adjudication material only; this acceptance is not factual verification and grants no truth-closure authority.'
     });
   }
-  const expected=[...packets.keys()],returned=new Set(accepted.map(x=>x.packetId)),missing=expected.filter(id=>!returned.has(id)&&!previouslyAccepted.has(id));
+  const expected=[...packets.keys()],returned=new Set(accepted.map(x=>x.packetId));
+  const completedEvidence=new Set([...previouslyAttested,...returned]);
+  const missing=expected.filter(id=>!completedEvidence.has(id));
   const byOrgan=accepted.reduce((m,x)=>(m[x.sourceOrgan]=(m[x.sourceOrgan]||0)+1,m),{});
   const acceptedPacketIds=[...new Set([...previouslyAccepted,...accepted.map(x=>x.packetId)])].sort();
+  const acceptedRecords=[...historical.attested.values(),...accepted.map(acceptedRecord)].filter(x=>x.packetId).sort((a,b)=>a.packetId.localeCompare(b.packetId));
+  const unattestedPacketIds=acceptedPacketIds.filter(id=>!completedEvidence.has(id));
   return {
-    organ:'VAJRA',capability:'CONFLICT_ESCALATION_RETURN_INTAKE',version:'0.2.1',
+    organ:'VAJRA',capability:'CONFLICT_ESCALATION_RETURN_INTAKE',version:'0.2.2',
     status:quarantine.length?'RETURNS_ACCEPTED_WITH_QUARANTINE':accepted.length?'RETURNS_ACCEPTED_REVIEW_REQUIRED':'NO_QUALIFYING_RETURNS',
     closureBlocked:Boolean(escalation?.closureBlocked),
     closureAuthority:'NONE',
     expectedPackets:expected.length,acceptedReturns:accepted.length,quarantinedReturns:quarantine.length,missingPacketIds:missing,
     allPacketsReturned:expected.length>0&&missing.length===0,
     byOrgan,accepted,quarantine,acceptedPacketIds,
-    returnLedger:{acceptedPacketIds,previouslyAcceptedCount:previouslyAccepted.size,newlyAcceptedCount:accepted.length},
-    next:'Feed accepted receipt objects back into VAJRA conflict state as adjudication context; persist acceptedPacketIds between intakes so delayed or mutated replay cannot accumulate extra organ weight; keep the contested branch open and use the returned organ differences to choose the next discriminating question.',
-    boundary:'Deterministic packet-correlation and return-quality guard. It blocks scope loss, wrong-organ substitution, exact replay duplicates, mutated replays within one intake, replay of packets accepted in earlier intakes when their acceptedPacketIds ledger is supplied, provenance-less returns and placeholder material. One issued packet can contribute at most one accepted return across a ledgered conflict lifecycle. Even a complete three-organ return set remains REVIEW_REQUIRED and cannot close a contested VAJRA branch by itself.'
+    returnLedger:{acceptedPacketIds,acceptedRecords,previouslyAcceptedCount:previouslyAccepted.size,previouslyAttestedCount:previouslyAttested.size,newlyAcceptedCount:accepted.length,unattestedPacketIds,rejectedHistoricalIds:historical.rejectedHistoricalIds,rejectedHistoricalRecords:historical.rejectedHistoricalRecords},
+    next:'Feed accepted receipt objects back into VAJRA conflict state as adjudication context; persist returnLedger.acceptedRecords as well as acceptedPacketIds between intakes. Bare packet IDs remain conservative replay blockers but cannot by themselves satisfy historical completion or allPacketsReturned. Keep the contested branch open and use returned organ differences to choose the next discriminating question.',
+    boundary:'Deterministic packet-correlation, replay containment and history-attestation guard. Known bare acceptedPacketIds can conservatively block delayed replay, but only structurally attested accepted records matching issued packet identity, returning organ, targetRef, clauseRef and returnKey can count toward historical completion. Unknown or malformed historical ledger entries cannot create false allPacketsReturned. This is structural lineage attestation rather than cryptographic authenticity or factual verification; automatic truth closure remains forbidden.'
   };
 }
 
