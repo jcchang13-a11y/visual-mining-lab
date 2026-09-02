@@ -1,8 +1,8 @@
-/* VAJRA receipt uncertainty guard v0.3.7 + contest-persistence + contract-adequacy guard — prevents indeterminate, unspecified, internally mixed, negated-polarity, same-provenance opposing, historically contested, or lens-inadequate returns from creating false closure */
+/* VAJRA receipt uncertainty guard v0.3.8 + contest-persistence + contract-adequacy guard — prevents indeterminate, unspecified, internally mixed, negated-polarity, same-provenance opposing, historically contested, or lens-inadequate returns from creating false closure while allowing explicitly bounded null-search completion */
 (function(root){
   const engine=root.VajraEngine;
   if(!engine||typeof engine.applyHandoffResults!=='function') throw new Error('VAJRA_ENGINE_REQUIRED_BEFORE_UNCERTAINTY_GUARD');
-  if(engine.receiptUncertaintyGuardVersion==='0.3.7'&&engine.receiptContestPersistenceGuardVersion==='0.1'&&engine.receiptContractAdequacyGuardVersion==='0.1') return;
+  if(engine.receiptUncertaintyGuardVersion==='0.3.8'&&engine.receiptContestPersistenceGuardVersion==='0.1'&&engine.receiptContractAdequacyGuardVersion==='0.2') return;
 
   const baseApply=engine.applyHandoffResults.bind(engine);
   function clean(text){return String(text||'').normalize('NFKC').replace(/\s+/g,' ').trim();}
@@ -47,6 +47,15 @@
     const relation=clean(receipt?.relation||receipt?.relationToTarget||receipt?.assessment);
     return rule.test(`${material} ${relation}`)?'':'HANDOFF_RESOLUTION_CRITERION_NOT_EVIDENCED';
   }
+  function isBoundedNullSearch(receipt){
+    if(clean(receipt?.lens).toLowerCase()!=='counterexample') return false;
+    const material=clean(receipt?.material||receipt?.summary||receipt?.evidence||receipt?.result).toLowerCase();
+    const relation=clean(receipt?.relation||receipt?.relationToTarget||receipt?.assessment).toLowerCase();
+    const saysNull=/\bno\s+counterexample\b|\bcounterexample\s+(?:was|were)?\s*not\s+found\b|未找到反例|沒有找到反例|未發現反例|沒有發現反例/.test(`${material} ${relation}`);
+    const saysBounded=/\b(?:searched|search)\s+scope\b|\bcoverage\b|\bbounded\b|\bwithin\b.{0,80}\b(?:rounds?|documents?|sources?|scope)\b|搜尋範圍|檢索範圍|涵蓋|限定範圍|有限範圍/.test(`${material} ${relation}`);
+    const disclaimsTruth=/\bdoes\s+not\s+(?:establish|prove|demonstrate)\b|\bnot\s+(?:establish|prove|demonstrate)\b|不(?:足以)?證明|不代表.*(?:為真|成立)|不能證明/.test(`${material} ${relation}`);
+    return saysNull&&saysBounded&&disclaimsTruth;
+  }
   function normalizeAuditReceipt(r,reason,classification,extra={}){
     return {
       targetRef:clean(r?.targetRef),clauseRef:clean(r?.clauseRef),lens:clean(r?.lens),organ:clean(r?.organ||r?.sourceOrgan),status:clean(r?.status),
@@ -60,17 +69,19 @@
   function applyHandoffResultsWithUncertaintyGuard(vajraResult,receipts=[]){
     const list=Array.isArray(receipts)?receipts:[];
     const historicalContests=new Map((vajraResult?.unresolved||[]).filter(b=>b?.status==='CONTESTED_BY_RECEIPTS'&&b?.contest).map(b=>[branchStateKey(b),b]));
-    const blocked=[],preEligible=[];
+    const blocked=[],preEligible=[],boundedNullKeys=new Set();
     for(const receipt of list){
       const relation=receipt?.relation||receipt?.relationToTarget||receipt?.assessment||'';
-      const classification=relationClassification(relation);
+      let classification=relationClassification(relation);
+      const boundedNull=isBoundedNullSearch(receipt);
+      if(boundedNull) classification='BOUNDED_NULL';
       const adequacyReason=contractAdequacyReason(receipt);
       if(historicalContests.has(branchKey(receipt))) blocked.push({receipt,reason:'HISTORICAL_CONTEST_PRESERVED',classification});
       else if(classification==='INDETERMINATE') blocked.push({receipt,reason:'INDETERMINATE_RELATION',classification});
       else if(classification==='UNSPECIFIED') blocked.push({receipt,reason:'UNSPECIFIED_RELATION',classification});
       else if(classification==='MIXED') blocked.push({receipt,reason:'MIXED_RELATION',classification});
       else if(adequacyReason) blocked.push({receipt,reason:adequacyReason,classification});
-      else preEligible.push({receipt,classification});
+      else {preEligible.push({receipt,classification});if(classification==='BOUNDED_NULL')boundedNullKeys.add(branchKey(receipt));}
     }
 
     const provenanceGroups=new Map();
@@ -106,9 +117,19 @@
     hr.sameProvenanceConflict=blocked.filter(x=>x.reason==='SAME_PROVENANCE_CONFLICT').length;
     hr.historicalContestPreserved=blocked.filter(x=>x.reason==='HISTORICAL_CONTEST_PRESERVED').length;
     hr.contractAdequacyBlocked=blocked.filter(x=>x.reason==='HANDOFF_RESOLUTION_CRITERION_NOT_EVIDENCED').length;
+    hr.boundedNullAccepted=0;
+
+    out.unresolved=(out.unresolved||[]).map(branch=>{
+      const key=branchStateKey(branch);
+      if(branch?.status==='RESOLVED_BY_RECEIPT'&&branch?.resolution&&boundedNullKeys.has(key)){
+        hr.boundedNullAccepted++;
+        return {...branch,resolution:{...branch.resolution,relationPolarity:'BOUNDED_NULL',boundary:`${branch.resolution.boundary||''} BOUNDED_NULL means the requested bounded counterexample search completed with explicit scope/coverage and found no counterexample; it is evidence of search completion only, not support that the target claim is true.`}};
+      }
+      return branch;
+    });
 
     if(historicalContests.size){
-      out.unresolved=(out.unresolved||[]).map(branch=>{
+      out.unresolved=out.unresolved.map(branch=>{
         const prior=historicalContests.get(branchStateKey(branch));
         return prior?{...prior,handoff:{...(prior.handoff||{}),status:'CONTESTED_BY_RECEIPTS'}}:branch;
       });
@@ -122,11 +143,13 @@
       hr.contested=contestedBranches.length;
       hr.open=openBranches.length;
       out.status=contestedBranches.length?(resolvedBranches.length?'PARTIAL_WITH_CONTESTED_RETURN':'CONTESTED_HANDOFF_RETURN'):(openBranches.length?'PARTIAL_HANDOFF_RETURN':'HANDOFFS_RETURNED');
+    } else {
+      hr.resolvedBranches=out.unresolved.filter(x=>x?.status==='RESOLVED_BY_RECEIPT'&&x?.resolution).map(x=>x.resolution);
     }
 
     out.handoffResolution=hr;
-    out.version='0.3.7';
-    out.boundary=`${out.boundary||''} Uncertainty/provenance/adequacy guard v0.3.7: a structurally matching receipt cannot close a handoff unless its relation is unambiguously classified by the bounded polarity detector as SUPPORTS or REFUTES. Explicitly insufficient/uncertain relations, negated polarity wording such as “does not contradict”, “fails to support”, or “not inconsistent with”, and bounded Chinese equivalents are audited as INDETERMINATE_RELATION; long but noncommittal relations as UNSPECIFIED_RELATION; a single relation carrying both support and refute polarity as MIXED_RELATION. Opposing SUPPORTS/REFUTES returns carrying the same canonical provenance identity are audited as SAME_PROVENANCE_CONFLICT and leave the branch open. Contest-persistence guard 0.1 preserves a prior independent-source contest until an explicit adjudication mechanism exists. Contract-adequacy guard 0.1 additionally requires bounded lens-specific evidence that the requested work was actually addressed before closure: boundary/scope material for scope, counterexample or bounded search coverage for counterexample, operational criteria for criterion, mechanism steps for causal mechanism, measurement validity for measurement, source-quality signals for source_quality, and corresponding explicit markers for the other specialized lenses. A long generic receipt can therefore no longer close an unrelated branch merely by saying it supports or refutes the claim. These are conservative lexical/structural guards, not semantic adjudication, source-quality ranking, or truth verification; false negatives intentionally preserve an OPEN branch rather than manufacture certainty.`.trim();
+    out.version='0.3.8';
+    out.boundary=`${out.boundary||''} Uncertainty/provenance/adequacy guard v0.3.8: ordinary structurally matching receipts cannot close a handoff unless their relation is unambiguously classified by the bounded polarity detector as SUPPORTS or REFUTES. Explicitly insufficient/uncertain relations, negated polarity wording, long noncommittal relations, and mixed polarity remain blocked. Opposing SUPPORTS/REFUTES returns carrying the same canonical provenance identity are audited as SAME_PROVENANCE_CONFLICT; prior independent-source contests persist until explicit adjudication exists. Contract-adequacy guard 0.2 requires bounded lens-specific evidence that the requested work was actually addressed. One deliberate exception separates task completion from claim certainty: a COUNTEREXAMPLE handoff may resolve as BOUNDED_NULL when the receipt explicitly says no counterexample was found, states bounded search scope/coverage, and explicitly disclaims that the null result proves the claim. BOUNDED_NULL closes only the search work contract; it never upgrades absence of a found counterexample into truth. These are conservative lexical/structural guards, not semantic adjudication, source-quality ranking, search completeness proof, or truth verification.`.trim();
     return out;
   }
 
@@ -135,7 +158,8 @@
   engine.isExplicitlyIndeterminate=isExplicitlyIndeterminate;
   engine.relationClassification=relationClassification;
   engine.contractAdequacyReason=contractAdequacyReason;
-  engine.receiptUncertaintyGuardVersion='0.3.7';
+  engine.isBoundedNullSearch=isBoundedNullSearch;
+  engine.receiptUncertaintyGuardVersion='0.3.8';
   engine.receiptContestPersistenceGuardVersion='0.1';
-  engine.receiptContractAdequacyGuardVersion='0.1';
+  engine.receiptContractAdequacyGuardVersion='0.2';
 })(typeof window!=='undefined'?window:globalThis);
