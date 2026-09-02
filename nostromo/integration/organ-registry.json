@@ -1,6 +1,6 @@
 {
-  "schema": "nostromo-organ-registry/v1.38",
-  "updatedAt": "2026-09-02T22:09:00+08:00",
+  "schema": "nostromo-organ-registry/v1.39",
+  "updatedAt": "2026-09-03T01:08:00+08:00",
   "truthRule": "DISPLAYED STATE MUST FOLLOW EVIDENCE",
   "evidence": "ci-last-result.json plus formal-round-last-result.json plus connector-last-result.json plus muther-falsify-last-result.json plus muther-repo-diversity-last-result.json plus droplet-claim-verify-last-result.json plus gut-metabolism-last-result.json plus gut-lineage-last-result.json plus vajra-dynamic-last-result.json plus vajra-uncertainty-last-result.json plus vajra-conflict-escalation-last-result.json plus vajra-provenance-diversity-last-result.json plus shroom-feedback-last-result.json",
   "latestFormalRound": "greenhouse/r113-nostromo-formal-round.json",
@@ -29,18 +29,18 @@
     "boundary": "Isolated counterfactual executor only. It deliberately includes parent round ordinal in participant selection and has been CI-verified against R111 and R112. It does not write or advance formal greenhouse history and is engineering evidence that NOSTROMO can execute and audit a parent-sensitive transition, not evidence that the real SHROOMING population is causally path-dependent."
   },
   "latestThickening": {
-    "organ": "DROPLET",
-    "version": "DROPLET claim verify v1.2",
-    "status": "VERIFIED_OPT_IN_FRESHNESS_FALSE_CERTAINTY_GUARD",
-    "test": "droplet-claim-verify-last-result.json v1.2 + NOSTROMO Integration Test run 265",
+    "organ": "VAJRA",
+    "version": "VAJRA cross-organ replay guard v0.3.2",
+    "status": "VERIFIED_OPERATOR_PRESERVING_CONTENT_REPLAY_IDENTITY",
+    "test": "vajra-provenance-diversity-last-result.json v0.3.2 + NOSTROMO Integration Test run 268",
     "capabilities": [
-      "claim verification now accepts an explicit as-of date plus maximum evidence age policy without inferring freshness requirements by itself",
-      "when that policy is active, stale authoritative evidence remains auditable but cannot create SUPPORTED or REFUTED certainty",
-      "undated authoritative evidence is explicitly marked UNKNOWN_DATE and likewise cannot create certainty under the active policy",
-      "fresh authoritative evidence remains eligible, while duplicate replay, authoritative-direction conflict and fingerprint-integrity conflict containment continue to apply",
-      "the baseline no-policy path remains backward compatible, so historical claims are not silently reclassified merely because the current clock advanced"
+      "cross-organ replay canonicalization now preserves explicit meaning-bearing comparison, equality and arithmetic operators instead of stripping them as formatting",
+      "operator-opposed material such as score > 10 versus score < 10, A + B versus A - B, p = 0.05 versus p != 0.05, and >= versus <= no longer collapses to one replay identity",
+      "existing width/case/whitespace/non-semantic formatting normalization remains active for replay containment",
+      "exact provenance reuse, exact content replay and bounded lexical wrapper replay still block premature reassessment",
+      "raw organ returns remain preserved and distinct provenance labels are still not upgraded to proof of real-world source independence"
     ],
-    "boundary": "Promotion is backed by successful NOSTROMO Integration Test run 265 for commit e365643a1dcec4a3432a984b942e5ed81b5a6633 and nostromo-droplet-claim-verify-test/v1.2 PASS. Freshness gating is opt-in and caller-policy-driven. DROPLET does not infer whether a claim is time-sensitive, search the web itself, score methodological quality, prove source independence, or convert absence of refutation into truth."
+    "boundary": "Promotion is backed by successful NOSTROMO Integration Test run 268 for commit 07bcf50d7b68a2e4620e792014d67bf42b03ae63 and vajra-provenance-diversity-test/v0.3.2 PASS. This fixes a false-deduplication risk inside the cross-organ provenance/content replay guard. Operator preservation is deterministic lexical protection, not semantic theorem proving, factual adjudication, derivative-source detection or proof of source independence."
   },
   "organs": {
     "shrooming": {
@@ -95,7 +95,7 @@
       "actions": {
         "DISMANTLE": "VERIFIED_PROPOSITION_AWARE_DISMANTLER_WITH_RECEIPT_GUARDS_MULTI_ORGAN_CONTEXT_CROSS_INTAKE_REPLAY_CONTENT_BOUND_HISTORY_ATTESTATION_CANONICAL_PROVENANCE_DIVERSITY_AND_OPERATOR_PRESERVATION"
       },
-      "boundary": "VAJRA retains proposition-aware dismantling, uncertainty/provenance preservation, contest persistence, multi-organ conflict-context routing, replay containment, content-bound history attestation and semantic-operator-preserving replay identity. Its cross-organ provenance-diversity layer canonicalizes bounded superficial label formatting before collision comparison, so case/spacing/punctuation/symbol mutations of one provenance label cannot masquerade as new source diversity. Raw provenance labels remain preserved for audit. Distinct canonical labels still do not prove real-world source independence. These remain deterministic lexical/structural guards, not cryptographic signatures, semantic adjudication, factual truth, derivative-source detection or real-world source-independence proof."
+      "boundary": "VAJRA retains proposition-aware dismantling, uncertainty/provenance preservation, contest persistence, multi-organ conflict-context routing, replay containment, content-bound history attestation and semantic-operator-preserving replay identity. Its cross-organ provenance-diversity/content-replay guard is now v0.3.2: bounded superficial formatting remains normalized while explicit comparison/equality/arithmetic operators are protected before canonicalization, preventing operator-opposed evidence from being falsely collapsed as replay. Exact and bounded lexical replay risk still changes VAJRA behavior by blocking premature reassessment. Raw provenance labels and raw returned material remain preserved for audit. Distinct canonical labels still do not prove real-world source independence. These remain deterministic lexical/structural guards, not cryptographic signatures, semantic adjudication, factual truth, derivative-source detection or real-world source-independence proof."
     }
   }
 }
