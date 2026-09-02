@@ -1,8 +1,8 @@
 {
-  "schema": "nostromo-vajra-context-conditioning-test/v0.1.1",
-  "completedAt": "2026-09-02T12:09:21.615Z",
-  "status": "PASS",
-  "capability": "MULTI_ORGAN_RETURN_CONTENT_CONDITIONS_NEXT_VAJRA_QUESTION",
+  "schema": "nostromo-vajra-context-conditioning-test/v0.2.0",
+  "completedAt": "2026-09-02T12:09:47.887Z",
+  "status": "FAIL",
+  "capability": "MULTI_ORGAN_RETURN_AND_GUT_METABOLISM_CONDITION_NEXT_VAJRA_BEHAVIOR",
   "samples": {
     "scope": {
       "selected": "SCOPE_BOUNDARY",
@@ -20,6 +20,20 @@
         "MUTHER",
         "SHROOMING"
       ]
+    },
+    "gutConditioning": {
+      "contradiction": {
+        "feedbackFingerprint": "741638a5",
+        "signalTypes": []
+      },
+      "provenance": {
+        "feedbackFingerprint": "741638a5",
+        "signalTypes": []
+      },
+      "empty": {
+        "status": "NO_METABOLIC_PRIORITY_SIGNAL",
+        "selected": null
+      }
     }
   },
   "guards": {
@@ -27,8 +41,157 @@
     "originalConflictPreserved": true,
     "closureRemainsBlocked": true,
     "partialCoverageCannotTriggerConditionedReassessment": true,
-    "provenanceRetained": true
+    "provenanceRetained": true,
+    "gutMetabolismChangesVajraPriority": false,
+    "gutCannotCloseVajraBranch": true,
+    "targetRefPreserved": true,
+    "emptySignalCannotInventPriority": true
   },
-  "failures": [],
-  "boundary": "PASS demonstrates a bounded deterministic change in VAJRA behavior caused by the content of completed DROPLET/MUTHER/SHROOMING adjudication returns. Cue selection is lexical and auditable, not semantic truth adjudication; complete context still cannot close a contested branch."
+  "failures": [
+    {
+      "type": "GUT_CONTRADICTION_DID_NOT_PRIORITIZE",
+      "detail": {
+        "status": "NO_METABOLIC_PRIORITY_SIGNAL",
+        "targetRef": "20708907",
+        "selected": null,
+        "ranked": [
+          {
+            "index": 0,
+            "lens": "evidence",
+            "targetRef": "20708907",
+            "clauseRef": "bf2b3177",
+            "status": "UNRESOLVED",
+            "score": 0,
+            "reasons": []
+          },
+          {
+            "index": 1,
+            "lens": "measurement",
+            "targetRef": "20708907",
+            "clauseRef": "bf2b3177",
+            "status": "UNRESOLVED",
+            "score": 0,
+            "reasons": []
+          },
+          {
+            "index": 2,
+            "lens": "source_quality",
+            "targetRef": "20708907",
+            "clauseRef": "bf2b3177",
+            "status": "UNRESOLVED",
+            "score": 0,
+            "reasons": []
+          },
+          {
+            "index": 3,
+            "lens": "counterexample",
+            "targetRef": "20708907",
+            "clauseRef": "bf2b3177",
+            "status": "UNRESOLVED",
+            "score": 0,
+            "reasons": []
+          },
+          {
+            "index": 4,
+            "lens": "scope",
+            "targetRef": "20708907",
+            "clauseRef": "bf2b3177",
+            "status": "UNRESOLVED",
+            "score": 0,
+            "reasons": []
+          }
+        ],
+        "signals": [],
+        "feedbackFingerprint": "741638a5",
+        "closureAuthority": "NONE",
+        "boundary": "GUT supplied no recognized prioritization signal. Original VAJRA ordering remains authoritative; no branch state changed."
+      }
+    },
+    {
+      "type": "GUT_PROVENANCE_DID_NOT_PRIORITIZE",
+      "detail": {
+        "status": "NO_METABOLIC_PRIORITY_SIGNAL",
+        "targetRef": "20708907",
+        "selected": null,
+        "ranked": [
+          {
+            "index": 0,
+            "lens": "evidence",
+            "targetRef": "20708907",
+            "clauseRef": "bf2b3177",
+            "status": "UNRESOLVED",
+            "score": 0,
+            "reasons": []
+          },
+          {
+            "index": 1,
+            "lens": "measurement",
+            "targetRef": "20708907",
+            "clauseRef": "bf2b3177",
+            "status": "UNRESOLVED",
+            "score": 0,
+            "reasons": []
+          },
+          {
+            "index": 2,
+            "lens": "source_quality",
+            "targetRef": "20708907",
+            "clauseRef": "bf2b3177",
+            "status": "UNRESOLVED",
+            "score": 0,
+            "reasons": []
+          },
+          {
+            "index": 3,
+            "lens": "counterexample",
+            "targetRef": "20708907",
+            "clauseRef": "bf2b3177",
+            "status": "UNRESOLVED",
+            "score": 0,
+            "reasons": []
+          },
+          {
+            "index": 4,
+            "lens": "scope",
+            "targetRef": "20708907",
+            "clauseRef": "bf2b3177",
+            "status": "UNRESOLVED",
+            "score": 0,
+            "reasons": []
+          }
+        ],
+        "signals": [],
+        "feedbackFingerprint": "741638a5",
+        "closureAuthority": "NONE",
+        "boundary": "GUT supplied no recognized prioritization signal. Original VAJRA ordering remains authoritative; no branch state changed."
+      }
+    },
+    {
+      "type": "CONTRADICTION_DID_NOT_PRIORITIZE_COUNTEREXAMPLE",
+      "detail": null
+    },
+    {
+      "type": "PROVENANCE_DID_NOT_PRIORITIZE_SOURCE_QUALITY",
+      "detail": null
+    },
+    {
+      "type": "DIFFERENT_GUT_METABOLISM_DID_NOT_CHANGE_VAJRA_PRIORITY",
+      "detail": {
+        "contradiction": null,
+        "provenance": null
+      }
+    },
+    {
+      "type": "METABOLIC_PRIORITY_MUTATED_BRANCH_STATE",
+      "detail": {}
+    },
+    {
+      "type": "DISTINCT_GUT_FEEDBACK_FINGERPRINT_COLLISION",
+      "detail": {
+        "a": "741638a5",
+        "b": "741638a5"
+      }
+    }
+  ],
+  "boundary": "PASS demonstrates two bounded forms of cross-organ regulation: completed DROPLET/MUTHER/SHROOMING adjudication content changes VAJRA conflict reassessment, and GUT metabolic classification can change which still-open VAJRA branch is inspected next. Both mechanisms are deterministic and auditable. Neither GUT nor the adjudication bridge gains authority to close, validate or prove a VAJRA branch; cue and priority selection remain lexical/type heuristics rather than semantic truth judgments."
 }

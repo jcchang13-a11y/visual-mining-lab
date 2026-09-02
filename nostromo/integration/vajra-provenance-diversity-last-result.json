@@ -1,6 +1,6 @@
 {
   "schema": "vajra-provenance-diversity-test/v0.3.1",
-  "completedAt": "2026-09-02T12:09:21.563Z",
+  "completedAt": "2026-09-02T12:09:47.824Z",
   "status": "PASS",
   "capability": "ADJUDICATION_PROVENANCE_DIVERSITY_EXACT_AND_BOUNDED_NEAR_CONTENT_REPLAY_GUARD",
   "collisionCase": {
