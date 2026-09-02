@@ -1,14 +1,17 @@
 {
-  "schema": "nostromo-vajra-ambiguity-test/v0.1",
-  "completedAt": "2026-09-02T20:09:06.039Z",
+  "schema": "nostromo-vajra-ambiguity-test/v0.2",
+  "completedAt": "2026-09-02T22:06:41.970Z",
   "status": "PASS",
   "finding": {
     "baselineStatus": "RESOLVED_BY_RECEIPT",
     "guardedStatus": "AMBIGUOUS_BY_RECEIPTS",
     "ambiguityDetected": 1,
     "controlStatus": "RESOLVED_BY_RECEIPT",
-    "interpretation": "The base receipt matcher can close on the first qualifying receipt when another qualifying return has an unspecified relation. The ambiguity guard preserves that branch as open instead of letting receipt order create false certainty."
+    "poisonAuditStatus": "NO_AMBIGUITY_FOUND",
+    "poisonRejected": 3,
+    "poisonBranchStatus": "RESOLVED_BY_RECEIPT",
+    "interpretation": "The guard preserves genuine structural ambiguity while excluding malformed, non-executed, provenance-free or relation-free returns from ambiguity formation, preventing junk receipts from manufacturing uncertainty or changing routing state."
   },
   "failures": [],
-  "boundary": "This test demonstrates a deterministic structural/lexical false-certainty guard. UNSPECIFIED means the bounded polarity detector cannot classify the relation; it does not prove semantic disagreement, source independence, truth, or evidence quality."
+  "boundary": "This test demonstrates a deterministic structural/lexical false-certainty and ambiguity-poisoning guard. UNSPECIFIED means the bounded polarity detector cannot classify the relation; qualification means only that minimum execution/provenance/material/relation fields exist. It does not prove semantic disagreement, source independence, truth, or evidence quality."
 }
