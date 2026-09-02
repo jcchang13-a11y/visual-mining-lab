@@ -1,9 +1,9 @@
 {
-  "purpose": "single CI trigger for VAJRA provenance-diversity guard verification",
+  "purpose": "single CI trigger for MUTHER lexical near-duplicate containment verification",
   "stagedCommits": [
-    "f1e0a5f4fb4ae5564074da5600f4e73f8017fdd0",
-    "b5529bfd37444d87581fd8313fe93eefadb189e6",
-    "8e807b4d4a876574bf49da67cec613e4dff32347"
+    "a720782b6f3993b52d2d9471aef1df4a679f5556",
+    "bc457e5785fd517e52c67376b4f55d41365ce32c",
+    "2ebb99d4f821ea717482d90abff5aba7dc1965e4"
   ],
   "truthRule": "DISPLAYED STATE MUST FOLLOW EVIDENCE"
 }
