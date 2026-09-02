@@ -1,8 +1,8 @@
 {
-  "schema": "vajra-provenance-diversity-test/v0.1.0",
-  "completedAt": "2026-09-02T04:09:26.889Z",
+  "schema": "vajra-provenance-diversity-test/v0.2.0",
+  "completedAt": "2026-09-02T05:08:32.455Z",
   "status": "PASS",
-  "capability": "ADJUDICATION_PROVENANCE_DIVERSITY_GUARD",
+  "capability": "ADJUDICATION_PROVENANCE_DIVERSITY_GUARD_WITH_FORMAT_MUTATION_CONTAINMENT",
   "collisionCase": {
     "status": "PROVENANCE_COLLISION_GUARD_ACTIVE",
     "audit": {
@@ -21,18 +21,63 @@
       "uniqueProvenanceCount": 2,
       "collisions": [
         {
-          "provenance": "shared-upstream-fingerprint-001",
+          "provenanceIdentity": "sharedupstreamfingerprint001",
+          "provenanceLabels": [
+            "shared-upstream-fingerprint-001"
+          ],
           "organs": [
             "DROPLET",
             "MUTHER"
-          ]
+          ],
+          "formatMutationDetected": false
         }
       ],
       "sharedProvenance": true,
+      "formatMutationCollisions": 0,
       "structurallyDistinctProvenanceLabels": false,
       "sourceIndependenceProven": false,
       "status": "PROVENANCE_COLLISION_REVIEW_REQUIRED",
-      "boundary": "This guard detects exact provenance-label reuse across organ returns. Distinct labels are not proof of real-world source independence, and collisions do not prove dependence; they block treating organ-count diversity as evidence-source diversity."
+      "boundary": "This guard compares a bounded canonical provenance identity: Unicode width, case, whitespace, punctuation and symbol-only formatting differences are normalized before cross-organ collision detection. This catches superficial provenance-label mutations that would otherwise inflate apparent source diversity. Distinct canonical labels are not proof of real-world source independence, and collisions do not prove dependence; they only block treating organ-count diversity as evidence-source diversity."
+    },
+    "nextAction": "AUDIT_SHARED_PROVENANCE_BEFORE_REASSESSMENT",
+    "closureAuthority": "NONE"
+  },
+  "formatMutationCase": {
+    "status": "PROVENANCE_COLLISION_GUARD_ACTIVE",
+    "audit": {
+      "requiredOrgans": [
+        "DROPLET",
+        "MUTHER",
+        "SHROOMING"
+      ],
+      "receivedOrgans": [
+        "DROPLET",
+        "MUTHER",
+        "SHROOMING"
+      ],
+      "complete": true,
+      "receivedCount": 3,
+      "uniqueProvenanceCount": 2,
+      "collisions": [
+        {
+          "provenanceIdentity": "sharedupstreamfingerprint001",
+          "provenanceLabels": [
+            "Shared-Upstream Fingerprint 001",
+            "shared_upstream-fingerprint_001"
+          ],
+          "organs": [
+            "DROPLET",
+            "MUTHER"
+          ],
+          "formatMutationDetected": true
+        }
+      ],
+      "sharedProvenance": true,
+      "formatMutationCollisions": 1,
+      "structurallyDistinctProvenanceLabels": false,
+      "sourceIndependenceProven": false,
+      "status": "PROVENANCE_COLLISION_REVIEW_REQUIRED",
+      "boundary": "This guard compares a bounded canonical provenance identity: Unicode width, case, whitespace, punctuation and symbol-only formatting differences are normalized before cross-organ collision detection. This catches superficial provenance-label mutations that would otherwise inflate apparent source diversity. Distinct canonical labels are not proof of real-world source independence, and collisions do not prove dependence; they only block treating organ-count diversity as evidence-source diversity."
     },
     "nextAction": "AUDIT_SHARED_PROVENANCE_BEFORE_REASSESSMENT",
     "closureAuthority": "NONE"
@@ -53,10 +98,11 @@
     "uniqueProvenanceCount": 3,
     "collisions": [],
     "sharedProvenance": false,
+    "formatMutationCollisions": 0,
     "structurallyDistinctProvenanceLabels": true,
     "sourceIndependenceProven": false,
     "status": "PROVENANCE_LABELS_DISTINCT_NOT_INDEPENDENCE_PROOF",
-    "boundary": "This guard detects exact provenance-label reuse across organ returns. Distinct labels are not proof of real-world source independence, and collisions do not prove dependence; they block treating organ-count diversity as evidence-source diversity."
+    "boundary": "This guard compares a bounded canonical provenance identity: Unicode width, case, whitespace, punctuation and symbol-only formatting differences are normalized before cross-organ collision detection. This catches superficial provenance-label mutations that would otherwise inflate apparent source diversity. Distinct canonical labels are not proof of real-world source independence, and collisions do not prove dependence; they only block treating organ-count diversity as evidence-source diversity."
   },
   "partialCase": {
     "requiredOrgans": [
@@ -73,11 +119,20 @@
     "uniqueProvenanceCount": 2,
     "collisions": [],
     "sharedProvenance": false,
+    "formatMutationCollisions": 0,
     "structurallyDistinctProvenanceLabels": false,
     "sourceIndependenceProven": false,
     "status": "PARTIAL_PROVENANCE_COVERAGE",
-    "boundary": "This guard detects exact provenance-label reuse across organ returns. Distinct labels are not proof of real-world source independence, and collisions do not prove dependence; they block treating organ-count diversity as evidence-source diversity."
+    "boundary": "This guard compares a bounded canonical provenance identity: Unicode width, case, whitespace, punctuation and symbol-only formatting differences are normalized before cross-organ collision detection. This catches superficial provenance-label mutations that would otherwise inflate apparent source diversity. Distinct canonical labels are not proof of real-world source independence, and collisions do not prove dependence; they only block treating organ-count diversity as evidence-source diversity."
+  },
+  "guards": {
+    "exactReuseDetected": true,
+    "formatMutationReuseDetected": true,
+    "mutationDoesNotInflateUniqueCount": true,
+    "mutationChangesVajraBehavior": true,
+    "sourceIndependenceNeverInferred": true,
+    "originalConflictEvidencePreserved": true
   },
   "failures": [],
-  "boundary": "PASS proves deterministic detection of exact cross-organ provenance-label reuse and behavior change away from premature conflict reassessment. It does not prove real-world source independence when labels differ, semantic identity when labels match, or factual truth."
+  "boundary": "PASS proves deterministic detection of exact and bounded superficial-format mutations of cross-organ provenance labels, including Unicode width/case/spacing/punctuation/symbol-only variation, and behavior change away from premature conflict reassessment. It does not prove real-world source independence when canonical labels differ, semantic identity when labels collide, derivative-source relationships, cryptographic identity, or factual truth."
 }
