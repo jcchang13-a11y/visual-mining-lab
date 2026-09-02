@@ -1,8 +1,8 @@
 {
-  "schema": "vajra-provenance-diversity-test/v0.3.2",
-  "completedAt": "2026-09-02T20:07:03.862Z",
-  "status": "FAIL",
-  "capability": "ADJUDICATION_PROVENANCE_DIVERSITY_OPERATOR_PRESERVING_EXACT_AND_BOUNDED_NEAR_CONTENT_REPLAY_GUARD",
+  "schema": "vajra-provenance-diversity-test/v0.3.3",
+  "completedAt": "2026-09-02T20:07:43.178Z",
+  "status": "PASS",
+  "capability": "ADJUDICATION_PROVENANCE_DIVERSITY_OPERATOR_DIVERGENCE_AWARE_EXACT_AND_BOUNDED_NEAR_CONTENT_REPLAY_GUARD",
   "collisionCase": {
     "status": "UPSTREAM_REPLAY_GUARD_ACTIVE",
     "audit": {
@@ -159,6 +159,17 @@
         "x <= 4"
       ]
     ],
+    "probe": {
+      "match": false,
+      "score": 0,
+      "mode": "SEMANTIC_OPERATOR_DIVERGENCE",
+      "operatorSignatureA": [
+        "op_gt"
+      ],
+      "operatorSignatureB": [
+        "op_lt"
+      ]
+    },
     "audit": {
       "requiredOrgans": [
         "DROPLET",
@@ -305,17 +316,13 @@
     "crossOrganContentReplayDetected": true,
     "contentFormatMutationDetected": true,
     "semanticOperatorsPreserved": true,
+    "operatorDivergenceOverridesLexicalNearReplay": true,
     "boundedWrapperNearReplayDetected": true,
     "distinctProvenanceCannotHideReplay": true,
     "replayChangesVajraBehavior": true,
     "sourceIndependenceNeverInferred": true,
     "rawReturnsPreserved": true
   },
-  "failures": [
-    {
-      "type": "VERSION_REGRESSION",
-      "version": "0.3.3"
-    }
-  ],
-  "boundary": "PASS proves deterministic detection of exact/bounded-format provenance reuse, operator-preserving exact canonical cross-organ content replay, and bounded high-overlap lexical replay when one organ lightly wraps another organ’s sufficiently long material. Comparison/equality/arithmetic operators are not discarded as formatting, preventing false replay collapse for opposite relations. Near replay remains a lexical risk signal, not semantic identity or derivation proof. Raw returns remain preserved and source independence is never inferred."
+  "failures": [],
+  "boundary": "PASS proves deterministic detection of exact/bounded-format provenance reuse, operator-preserving exact canonical cross-organ content replay, and bounded high-overlap lexical replay when one organ lightly wraps another organ’s sufficiently long material. When both materials contain explicit comparison/equality/arithmetic operators and their operator signatures diverge, lexical overlap no longer falsely collapses them into near replay. This is syntactic operator protection, not semantic theorem proving. Raw returns remain preserved and source independence is never inferred."
 }
