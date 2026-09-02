@@ -1,6 +1,6 @@
 {
-  "schema": "nostromo-vajra-conflict-escalation-test/v0.5.0",
-  "completedAt": "2026-09-02T00:08:37.474Z",
+  "schema": "nostromo-vajra-conflict-escalation-test/v0.6.0",
+  "completedAt": "2026-09-02T01:05:55.208Z",
   "status": "PASS",
   "guards": {
     "multiOrganEscalation": true,
@@ -20,7 +20,10 @@
     "unmatchedContextQuarantined": true,
     "mutatedPacketReplayContained": true,
     "crossIntakeReplayContained": true,
-    "crossIntakeLedgerPreserved": true,
+    "idOnlyHistoryCannotComplete": true,
+    "attestedHistoryCarriesCompletion": true,
+    "unknownHistoryRejected": true,
+    "malformedHistoryRejected": true,
     "adversarialReturnsQuarantined": true,
     "unknownPacketQuarantined": true,
     "gutRegression": true
@@ -176,7 +179,7 @@
   "returnIntake": {
     "organ": "VAJRA",
     "capability": "CONFLICT_ESCALATION_RETURN_INTAKE",
-    "version": "0.2.1",
+    "version": "0.2.2",
     "status": "RETURNS_ACCEPTED_REVIEW_REQUIRED",
     "closureBlocked": true,
     "closureAuthority": "NONE",
@@ -285,11 +288,38 @@
         "5618a826",
         "70745601"
       ],
+      "acceptedRecords": [
+        {
+          "packetId": "2963633f",
+          "sourceOrgan": "DROPLET",
+          "targetRef": "t001",
+          "clauseRef": "c001",
+          "returnKey": "1cc59341"
+        },
+        {
+          "packetId": "5618a826",
+          "sourceOrgan": "MUTHER",
+          "targetRef": "t001",
+          "clauseRef": "c001",
+          "returnKey": "c44c8158"
+        },
+        {
+          "packetId": "70745601",
+          "sourceOrgan": "SHROOMING",
+          "targetRef": "t001",
+          "clauseRef": "c001",
+          "returnKey": "dbfe77fe"
+        }
+      ],
       "previouslyAcceptedCount": 0,
-      "newlyAcceptedCount": 3
+      "previouslyAttestedCount": 0,
+      "newlyAcceptedCount": 3,
+      "unattestedPacketIds": [],
+      "rejectedHistoricalIds": [],
+      "rejectedHistoricalRecords": []
     },
-    "next": "Feed accepted receipt objects back into VAJRA conflict state as adjudication context; persist acceptedPacketIds between intakes so delayed or mutated replay cannot accumulate extra organ weight; keep the contested branch open and use the returned organ differences to choose the next discriminating question.",
-    "boundary": "Deterministic packet-correlation and return-quality guard. It blocks scope loss, wrong-organ substitution, exact replay duplicates, mutated replays within one intake, replay of packets accepted in earlier intakes when their acceptedPacketIds ledger is supplied, provenance-less returns and placeholder material. One issued packet can contribute at most one accepted return across a ledgered conflict lifecycle. Even a complete three-organ return set remains REVIEW_REQUIRED and cannot close a contested VAJRA branch by itself."
+    "next": "Feed accepted receipt objects back into VAJRA conflict state as adjudication context; persist returnLedger.acceptedRecords as well as acceptedPacketIds between intakes. Bare packet IDs remain conservative replay blockers but cannot by themselves satisfy historical completion or allPacketsReturned. Keep the contested branch open and use returned organ differences to choose the next discriminating question.",
+    "boundary": "Deterministic packet-correlation, replay containment and history-attestation guard. Known bare acceptedPacketIds can conservatively block delayed replay, but only structurally attested accepted records matching issued packet identity, returning organ, targetRef, clauseRef and returnKey can count toward historical completion. Unknown or malformed historical ledger entries cannot create false allPacketsReturned. This is structural lineage attestation rather than cryptographic authenticity or factual verification; automatic truth closure remains forbidden."
   },
   "contextIntegration": {
     "unresolved": [
@@ -401,18 +431,84 @@
   },
   "crossIntakeReplaySummary": {
     "firstAccepted": 1,
-    "secondAccepted": 0,
-    "secondQuarantined": 1,
-    "reasons": [
-      "PACKET_PREVIOUSLY_RETURNED"
-    ],
-    "ledger": {
-      "acceptedPacketIds": [
-        "2963633f"
+    "idOnlySecond": {
+      "accepted": 0,
+      "quarantined": 1,
+      "missing": [
+        "2963633f",
+        "5618a826",
+        "70745601"
       ],
-      "previouslyAcceptedCount": 1,
-      "newlyAcceptedCount": 0
+      "ledger": {
+        "acceptedPacketIds": [
+          "2963633f"
+        ],
+        "acceptedRecords": [],
+        "previouslyAcceptedCount": 1,
+        "previouslyAttestedCount": 0,
+        "newlyAcceptedCount": 0,
+        "unattestedPacketIds": [
+          "2963633f"
+        ],
+        "rejectedHistoricalIds": [],
+        "rejectedHistoricalRecords": []
+      }
+    },
+    "attestedSecond": {
+      "accepted": 0,
+      "quarantined": 1,
+      "missing": [
+        "5618a826",
+        "70745601"
+      ],
+      "ledger": {
+        "acceptedPacketIds": [
+          "2963633f"
+        ],
+        "acceptedRecords": [
+          {
+            "packetId": "2963633f",
+            "sourceOrgan": "DROPLET",
+            "targetRef": "t001",
+            "clauseRef": "c001",
+            "returnKey": "1cc59341"
+          }
+        ],
+        "previouslyAcceptedCount": 1,
+        "previouslyAttestedCount": 1,
+        "newlyAcceptedCount": 0,
+        "unattestedPacketIds": [],
+        "rejectedHistoricalIds": [],
+        "rejectedHistoricalRecords": []
+      }
     }
+  },
+  "historyPoisonSummary": {
+    "forgedAllReturned": false,
+    "forgedMissing": [
+      "2963633f",
+      "5618a826",
+      "70745601"
+    ],
+    "unattested": [
+      "2963633f",
+      "5618a826",
+      "70745601"
+    ],
+    "rejectedIds": [
+      "deadbeef"
+    ],
+    "rejectedRecords": [
+      {
+        "packetId": "2963633f",
+        "sourceOrgan": "MUTHER",
+        "targetRef": "t001",
+        "clauseRef": "c001",
+        "reasons": [
+          "WRONG_RETURNING_ORGAN"
+        ]
+      }
+    ]
   },
   "adversarialSummary": {
     "accepted": 1,
@@ -428,5 +524,5 @@
     ]
   },
   "failures": [],
-  "boundary": "PASS proves deterministic conflict escalation, packet-correlated return intake, same-intake and ledgered cross-intake one-return-per-issued-packet replay containment, and a feedback step in which accepted DROPLET/MUTHER/SHROOMING adjudication material changes VAJRA nextAction/nextQuestion while preserving the original opposing evidence, provenance, closure block and no-truth-authority boundary. Mutating text or provenance cannot turn the same issued packet into extra organ weight when acceptedPacketIds is persisted between intakes. Complete three-organ context is coverage only, not semantic adjudication or proof of source independence."
+  "boundary": "PASS proves deterministic conflict escalation, packet-correlated return intake, same-intake and cross-intake replay containment, plus history-attestation separation: bare known packet IDs may conservatively block replay but cannot manufacture historical completion or allPacketsReturned; only structurally matching accepted records can carry completion across intakes. Unknown and malformed historical ledger entries are excluded from accepted lineage. This is deterministic structural attestation, not cryptographic authenticity, semantic adjudication, source independence proof or truth closure."
 }
