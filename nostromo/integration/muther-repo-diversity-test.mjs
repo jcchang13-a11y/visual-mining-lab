@@ -3,13 +3,13 @@ import path from 'node:path';
 import {mutherMineRepo,mutherCandidateSimilarity} from './repo-executors.mjs';
 
 const ROOT=process.cwd();
-const query='MUTHER_NEAR_DUP_GUARD_X9';
+const query=['MUTHER_NEAR','DUP_GUARD_X9'].join('_');
 const fixtureDirs=['tmp-muther-near-a','tmp-muther-near-b','tmp-muther-near-c'];
 const failures=[];
 const assert=(condition,message)=>{if(!condition)failures.push(message);};
 
 const base=`${query} evidence bundle records a bounded repository observation, preserves provenance, routes contradictory material to review, and never upgrades absence of counterevidence into truth. The candidate is intentionally long enough to exercise lexical overlap containment. Timestamp 2026-09-02T12:00:00Z fingerprint abcdef1234567890.`;
-const near=`${query} — evidence bundle records a bounded repository observation; preserves provenance; routes contradictory material to review; and never upgrades absence of counterevidence into truth. The candidate is intentionally long enough to exercise lexical overlap containment. Timestamp 2026-09-02T12:45:00Z fingerprint fedcba0987654321.`;
+const near=`${query} — evidence bundle records a strictly bounded repository observation; preserves provenance; routes contradictory material to review; and never upgrades absence of counterevidence into truth. The candidate is intentionally long enough to exercise lexical overlap containment. Timestamp 2026-09-02T12:45:00Z fingerprint fedcba0987654321.`;
 const distinct=`${query} describes a separate mining result about image grammar extraction, source-family coverage, and unresolved visual anomalies. It shares the probe token only so the repository miner must retain materially different lexical content instead of collapsing every query hit into one candidate.`;
 
 try{
@@ -37,7 +37,7 @@ try{
   assert(/NOT SEMANTIC IDENTITY/.test(result.boundary||''),'boundary must explicitly deny semantic-identity inference');
 
   const output={
-    schema:'muther-repo-diversity-test/v0.1.0',
+    schema:'muther-repo-diversity-test/v0.1.1',
     completedAt:new Date().toISOString(),
     status:failures.length?'FAIL':'PASS',
     capability:'LEXICAL_NEAR_DUPLICATE_POLLUTION_CONTAINMENT',
@@ -45,7 +45,7 @@ try{
     adversarial:{candidateHitCount:result.candidateHitCount,exactDuplicateSuppressedCount:result.duplicateSuppressedCount,nearDuplicateSuppressedCount:result.nearDuplicateSuppressedCount,lexicallyDistinctCandidateCount:result.lexicallyDistinctCandidateCount,retainedPaths,nearDuplicateAudit:result.nearDuplicateAudit},
     provenance:{selectedSourceFamilies:result.selectedSourceFamilies,sourceFamilyCount:result.sourceFamilyCount},
     crossOrganRegression:'The main NOSTROMO integration test runs separately in the same workflow and must remain PASS before public promotion.',
-    boundary:'PASS certifies conservative lexical near-duplicate containment for repository-mining candidates under controlled formatting/timestamp/fingerprint mutation. It does not certify semantic equivalence, source independence, source quality, novelty, factual truth, or Google Drive coverage.',
+    boundary:'PASS certifies conservative lexical near-duplicate containment for repository-mining candidates under controlled lexical, formatting, timestamp and fingerprint mutation. It does not certify semantic equivalence, source independence, source quality, novelty, factual truth, or Google Drive coverage.',
     failures
   };
   await fs.writeFile(path.join(ROOT,'nostromo/integration/muther-repo-diversity-last-result.json'),JSON.stringify(output,null,2)+'\n','utf8');
