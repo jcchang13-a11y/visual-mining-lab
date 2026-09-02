@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 420" role="img" aria-labelledby="title desc">
+  <title id="title">第十八分空間線回溯第十三、第十二、第十一、第八分</title>
+  <desc id="desc">中心為第十八分，向外依序回溯第十三分、第十二分、第十一分與第八分。</desc>
+  <rect width="420" height="420" fill="#fff"/>
+  <g fill="none" stroke="#111" stroke-width="2">
+    <circle cx="210" cy="210" r="42"/>
+    <circle cx="210" cy="210" r="80"/>
+    <circle cx="210" cy="210" r="118"/>
+    <circle cx="210" cy="210" r="156"/>
+    <circle cx="210" cy="210" r="194"/>
+  </g>
+  <g fill="#111" font-family="Arial, Helvetica, sans-serif" font-size="19" text-anchor="middle">
+    <text x="210" y="217">18</text>
+    <text x="210" y="151">13</text>
+    <text x="210" y="113">12</text>
+    <text x="210" y="75">11</text>
+    <text x="210" y="37">8</text>
+  </g>
+</svg>
