@@ -1,11 +1,11 @@
 {
-  "schema": "nostromo-vajra-conflict-test/v0.3",
-  "completedAt": "2026-09-02T06:04:26.146Z",
-  "status": "FAIL",
+  "schema": "nostromo-vajra-conflict-test/v0.3.1",
+  "completedAt": "2026-09-02T06:05:13.238Z",
+  "status": "PASS",
   "finding": {
     "classification": "INDEPENDENT_CONFLICT_PERSISTS_ACROSS_APPLICATIONS",
     "before": "The v0.3.1 core preserved opposing qualifying returns within one application, but a later applyHandoffResults call could erase a historical contest when no new receipt arrived or convert it into unilateral closure when one later directional receipt arrived.",
-    "after": "The contest-persistence guard preserves CONTESTED_BY_RECEIPTS across later applications. A matching unilateral late receipt is audited as HISTORICAL_CONTEST_PRESERVED and cannot close the branch until a future explicit adjudication mechanism exists."
+    "after": "The contest-persistence guard preserves CONTESTED_BY_RECEIPTS across later applications. A matching unilateral late receipt is audited as HISTORICAL_CONTEST_PRESERVED and cannot close the branch until a future explicit adjudication mechanism exists. v0.3.7 adds a lens-specific adequacy guard without weakening this conflict behavior."
   },
   "guards": {
     "opposingIndependentReceiptsDoNotCloseBranch": true,
@@ -16,6 +16,7 @@
     "historicalContestSurvivesEmptyReplay": true,
     "historicalContestSurvivesLaterUnilateralReceipt": true,
     "lateReceiptIsAuditedNotSilentlyDiscarded": true,
+    "contractAdequacyGuardCoexistsWithConflictGuard": true,
     "falseCertaintyBlocked": true
   },
   "sample": {
@@ -275,15 +276,6 @@
       }
     }
   },
-  "failures": [
-    {
-      "type": "GUARD_VERSION_REGRESSION",
-      "detail": "0.3.7"
-    },
-    {
-      "type": "VERSION_REGRESSION",
-      "detail": "0.3.7"
-    }
-  ],
-  "boundary": "PASS demonstrates a bounded anti-false-certainty provenance-topology and temporal contest-persistence guard. Distinct caller-supplied provenance identities with opposing qualifying relation signals remain CONTESTED_BY_RECEIPTS across subsequent applications; a later unilateral directional return cannot erase the prior conflict. This does not adjudicate which side is true, weight source quality, or prove real-world source independence. Explicit conflict resolution remains a future capability."
+  "failures": [],
+  "boundary": "PASS demonstrates a bounded anti-false-certainty provenance-topology and temporal contest-persistence guard under VAJRA receipt guard v0.3.7. Distinct caller-supplied provenance identities with opposing qualifying relation signals remain CONTESTED_BY_RECEIPTS across subsequent applications; a later unilateral directional return cannot erase the prior conflict. This does not adjudicate which side is true, weight source quality, or prove real-world source independence. Explicit conflict resolution remains a future capability."
 }
