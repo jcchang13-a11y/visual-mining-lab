@@ -62,6 +62,10 @@ jobs:
         id: vajra_escalation
         continue-on-error: true
         run: node nostromo/integration/vajra-conflict-escalation-test.mjs
+      - name: Verify VAJRA cross-organ provenance diversity guard
+        id: vajra_provenance_diversity
+        continue-on-error: true
+        run: node nostromo/integration/vajra-provenance-diversity-test.mjs
       - name: Verify SHROOMING feedback-conditioned reading
         id: shroom_feedback
         continue-on-error: true
@@ -85,6 +89,7 @@ jobs:
           test -f nostromo/integration/vajra-conflict-last-result.json && cp nostromo/integration/vajra-conflict-last-result.json /tmp/nostromo-vajra-conflict-last-result.json || true
           test -f nostromo/integration/vajra-uncertainty-last-result.json && cp nostromo/integration/vajra-uncertainty-last-result.json /tmp/nostromo-vajra-uncertainty-last-result.json || true
           test -f nostromo/integration/vajra-conflict-escalation-last-result.json && cp nostromo/integration/vajra-conflict-escalation-last-result.json /tmp/nostromo-vajra-conflict-escalation-last-result.json || true
+          test -f nostromo/integration/vajra-provenance-diversity-last-result.json && cp nostromo/integration/vajra-provenance-diversity-last-result.json /tmp/nostromo-vajra-provenance-diversity-last-result.json || true
           test -f nostromo/integration/shroom-feedback-last-result.json && cp nostromo/integration/shroom-feedback-last-result.json /tmp/nostromo-shroom-feedback-last-result.json || true
           git fetch origin main
           git reset --hard origin/main
@@ -128,6 +133,10 @@ jobs:
             cp /tmp/nostromo-vajra-conflict-escalation-last-result.json nostromo/integration/vajra-conflict-escalation-last-result.json
             git add nostromo/integration/vajra-conflict-escalation-last-result.json
           fi
+          if [ -f /tmp/nostromo-vajra-provenance-diversity-last-result.json ]; then
+            cp /tmp/nostromo-vajra-provenance-diversity-last-result.json nostromo/integration/vajra-provenance-diversity-last-result.json
+            git add nostromo/integration/vajra-provenance-diversity-last-result.json
+          fi
           if [ -f /tmp/nostromo-shroom-feedback-last-result.json ]; then
             cp /tmp/nostromo-shroom-feedback-last-result.json nostromo/integration/shroom-feedback-last-result.json
             git add nostromo/integration/shroom-feedback-last-result.json
@@ -161,6 +170,9 @@ jobs:
         run: exit 1
       - name: Enforce VAJRA conflict escalation conclusion
         if: steps.vajra_escalation.outcome != 'success'
+        run: exit 1
+      - name: Enforce VAJRA provenance diversity conclusion
+        if: steps.vajra_provenance_diversity.outcome != 'success'
         run: exit 1
       - name: Enforce SHROOMING feedback-conditioning conclusion
         if: steps.shroom_feedback.outcome != 'success'
