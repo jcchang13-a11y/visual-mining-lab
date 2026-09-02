@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 360" role="img" aria-labelledby="title desc">
+  <title id="title">第十四分回溯第三、第四、第十分</title>
+  <desc id="desc">中心為第十四分，向外依序回溯第十分、第四分、第三分。</desc>
+  <rect width="360" height="360" fill="#fff"/>
+  <g fill="none" stroke="#111" stroke-width="2">
+    <circle cx="180" cy="180" r="42"/>
+    <circle cx="180" cy="180" r="82"/>
+    <circle cx="180" cy="180" r="122"/>
+    <circle cx="180" cy="180" r="158"/>
+  </g>
+  <g fill="#111" font-family="Arial, Helvetica, sans-serif" font-size="20" text-anchor="middle">
+    <text x="180" y="187">14</text>
+    <text x="180" y="112">10</text>
+    <text x="180" y="72">4</text>
+    <text x="180" y="36">3</text>
+  </g>
+</svg>
