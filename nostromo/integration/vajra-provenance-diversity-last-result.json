@@ -1,10 +1,10 @@
 {
-  "schema": "vajra-provenance-diversity-test/v0.2.0",
-  "completedAt": "2026-09-02T06:09:49.802Z",
+  "schema": "vajra-provenance-diversity-test/v0.3.0",
+  "completedAt": "2026-09-02T07:05:18.757Z",
   "status": "PASS",
-  "capability": "ADJUDICATION_PROVENANCE_DIVERSITY_GUARD_WITH_FORMAT_MUTATION_CONTAINMENT",
+  "capability": "ADJUDICATION_PROVENANCE_DIVERSITY_AND_CROSS_ORGAN_CONTENT_REPLAY_GUARD",
   "collisionCase": {
-    "status": "PROVENANCE_COLLISION_GUARD_ACTIVE",
+    "status": "UPSTREAM_REPLAY_GUARD_ACTIVE",
     "audit": {
       "requiredOrgans": [
         "DROPLET",
@@ -32,18 +32,61 @@
           "formatMutationDetected": false
         }
       ],
+      "contentCollisions": [],
       "sharedProvenance": true,
+      "sharedContent": false,
+      "replayRisk": true,
       "formatMutationCollisions": 0,
+      "contentFormatMutationCollisions": 0,
       "structurallyDistinctProvenanceLabels": false,
       "sourceIndependenceProven": false,
-      "status": "PROVENANCE_COLLISION_REVIEW_REQUIRED",
-      "boundary": "This guard compares a bounded canonical provenance identity: Unicode width, case, whitespace, punctuation and symbol-only formatting differences are normalized before cross-organ collision detection. This catches superficial provenance-label mutations that would otherwise inflate apparent source diversity. Distinct canonical labels are not proof of real-world source independence, and collisions do not prove dependence; they only block treating organ-count diversity as evidence-source diversity."
+      "status": "UPSTREAM_REPLAY_REVIEW_REQUIRED",
+      "boundary": "This guard compares bounded canonical provenance labels and bounded canonical returned material. Unicode width, case, whitespace, punctuation and symbol-only formatting differences are normalized. Cross-organ reuse of the same sufficiently long material is treated as replay risk even when provenance labels differ, preventing organ relabeling from masquerading as evidence-source diversity. Distinct labels and distinct material are still not proof of real-world source independence; collisions do not prove dependence or factual error."
     },
-    "nextAction": "AUDIT_SHARED_PROVENANCE_BEFORE_REASSESSMENT",
+    "nextAction": "AUDIT_SHARED_UPSTREAM_BEFORE_REASSESSMENT",
     "closureAuthority": "NONE"
   },
-  "formatMutationCase": {
-    "status": "PROVENANCE_COLLISION_GUARD_ACTIVE",
+  "provenanceFormatMutationCase": {
+    "requiredOrgans": [
+      "DROPLET",
+      "MUTHER",
+      "SHROOMING"
+    ],
+    "receivedOrgans": [
+      "DROPLET",
+      "MUTHER",
+      "SHROOMING"
+    ],
+    "complete": true,
+    "receivedCount": 3,
+    "uniqueProvenanceCount": 2,
+    "collisions": [
+      {
+        "provenanceIdentity": "sharedupstreamfingerprint001",
+        "provenanceLabels": [
+          "Shared-Upstream Fingerprint 001",
+          "shared_upstream-fingerprint_001"
+        ],
+        "organs": [
+          "DROPLET",
+          "MUTHER"
+        ],
+        "formatMutationDetected": true
+      }
+    ],
+    "contentCollisions": [],
+    "sharedProvenance": true,
+    "sharedContent": false,
+    "replayRisk": true,
+    "formatMutationCollisions": 1,
+    "contentFormatMutationCollisions": 0,
+    "structurallyDistinctProvenanceLabels": false,
+    "sourceIndependenceProven": false,
+    "status": "UPSTREAM_REPLAY_REVIEW_REQUIRED",
+    "boundary": "This guard compares bounded canonical provenance labels and bounded canonical returned material. Unicode width, case, whitespace, punctuation and symbol-only formatting differences are normalized. Cross-organ reuse of the same sufficiently long material is treated as replay risk even when provenance labels differ, preventing organ relabeling from masquerading as evidence-source diversity. Distinct labels and distinct material are still not proof of real-world source independence; collisions do not prove dependence or factual error."
+  },
+  "contentReplayCase": {
+    "status": "UPSTREAM_REPLAY_GUARD_ACTIVE",
     "audit": {
       "requiredOrgans": [
         "DROPLET",
@@ -57,29 +100,38 @@
       ],
       "complete": true,
       "receivedCount": 3,
-      "uniqueProvenanceCount": 2,
-      "collisions": [
+      "uniqueProvenanceCount": 3,
+      "collisions": [],
+      "contentCollisions": [
         {
-          "provenanceIdentity": "sharedupstreamfingerprint001",
-          "provenanceLabels": [
-            "Shared-Upstream Fingerprint 001",
-            "shared_upstream-fingerprint_001"
+          "materialIdentity": "thesameupstreamevidencesaystheinterventionimprovedoutcomexunderboundedconditiony",
+          "materialSamples": [
+            "The same upstream evidence says the intervention improved outcome X under bounded condition Y.",
+            "THE same upstream evidence — says the intervention improved outcome X under bounded condition Y!"
           ],
           "organs": [
             "DROPLET",
             "MUTHER"
           ],
+          "provenanceLabels": [
+            "drive-note-family-B",
+            "web-source-family-A"
+          ],
+          "distinctCanonicalProvenanceCount": 2,
           "formatMutationDetected": true
         }
       ],
-      "sharedProvenance": true,
-      "formatMutationCollisions": 1,
-      "structurallyDistinctProvenanceLabels": false,
+      "sharedProvenance": false,
+      "sharedContent": true,
+      "replayRisk": true,
+      "formatMutationCollisions": 0,
+      "contentFormatMutationCollisions": 1,
+      "structurallyDistinctProvenanceLabels": true,
       "sourceIndependenceProven": false,
-      "status": "PROVENANCE_COLLISION_REVIEW_REQUIRED",
-      "boundary": "This guard compares a bounded canonical provenance identity: Unicode width, case, whitespace, punctuation and symbol-only formatting differences are normalized before cross-organ collision detection. This catches superficial provenance-label mutations that would otherwise inflate apparent source diversity. Distinct canonical labels are not proof of real-world source independence, and collisions do not prove dependence; they only block treating organ-count diversity as evidence-source diversity."
+      "status": "UPSTREAM_REPLAY_REVIEW_REQUIRED",
+      "boundary": "This guard compares bounded canonical provenance labels and bounded canonical returned material. Unicode width, case, whitespace, punctuation and symbol-only formatting differences are normalized. Cross-organ reuse of the same sufficiently long material is treated as replay risk even when provenance labels differ, preventing organ relabeling from masquerading as evidence-source diversity. Distinct labels and distinct material are still not proof of real-world source independence; collisions do not prove dependence or factual error."
     },
-    "nextAction": "AUDIT_SHARED_PROVENANCE_BEFORE_REASSESSMENT",
+    "nextAction": "AUDIT_CROSS_ORGAN_CONTENT_REPLAY_BEFORE_REASSESSMENT",
     "closureAuthority": "NONE"
   },
   "distinctCase": {
@@ -97,12 +149,16 @@
     "receivedCount": 3,
     "uniqueProvenanceCount": 3,
     "collisions": [],
+    "contentCollisions": [],
     "sharedProvenance": false,
+    "sharedContent": false,
+    "replayRisk": false,
     "formatMutationCollisions": 0,
+    "contentFormatMutationCollisions": 0,
     "structurallyDistinctProvenanceLabels": true,
     "sourceIndependenceProven": false,
     "status": "PROVENANCE_LABELS_DISTINCT_NOT_INDEPENDENCE_PROOF",
-    "boundary": "This guard compares a bounded canonical provenance identity: Unicode width, case, whitespace, punctuation and symbol-only formatting differences are normalized before cross-organ collision detection. This catches superficial provenance-label mutations that would otherwise inflate apparent source diversity. Distinct canonical labels are not proof of real-world source independence, and collisions do not prove dependence; they only block treating organ-count diversity as evidence-source diversity."
+    "boundary": "This guard compares bounded canonical provenance labels and bounded canonical returned material. Unicode width, case, whitespace, punctuation and symbol-only formatting differences are normalized. Cross-organ reuse of the same sufficiently long material is treated as replay risk even when provenance labels differ, preventing organ relabeling from masquerading as evidence-source diversity. Distinct labels and distinct material are still not proof of real-world source independence; collisions do not prove dependence or factual error."
   },
   "partialCase": {
     "requiredOrgans": [
@@ -118,21 +174,27 @@
     "receivedCount": 2,
     "uniqueProvenanceCount": 2,
     "collisions": [],
+    "contentCollisions": [],
     "sharedProvenance": false,
+    "sharedContent": false,
+    "replayRisk": false,
     "formatMutationCollisions": 0,
+    "contentFormatMutationCollisions": 0,
     "structurallyDistinctProvenanceLabels": false,
     "sourceIndependenceProven": false,
     "status": "PARTIAL_PROVENANCE_COVERAGE",
-    "boundary": "This guard compares a bounded canonical provenance identity: Unicode width, case, whitespace, punctuation and symbol-only formatting differences are normalized before cross-organ collision detection. This catches superficial provenance-label mutations that would otherwise inflate apparent source diversity. Distinct canonical labels are not proof of real-world source independence, and collisions do not prove dependence; they only block treating organ-count diversity as evidence-source diversity."
+    "boundary": "This guard compares bounded canonical provenance labels and bounded canonical returned material. Unicode width, case, whitespace, punctuation and symbol-only formatting differences are normalized. Cross-organ reuse of the same sufficiently long material is treated as replay risk even when provenance labels differ, preventing organ relabeling from masquerading as evidence-source diversity. Distinct labels and distinct material are still not proof of real-world source independence; collisions do not prove dependence or factual error."
   },
   "guards": {
-    "exactReuseDetected": true,
-    "formatMutationReuseDetected": true,
-    "mutationDoesNotInflateUniqueCount": true,
-    "mutationChangesVajraBehavior": true,
+    "exactProvenanceReuseDetected": true,
+    "provenanceFormatMutationDetected": true,
+    "crossOrganContentReplayDetected": true,
+    "contentFormatMutationDetected": true,
+    "distinctProvenanceCannotHideReplay": true,
+    "replayChangesVajraBehavior": true,
     "sourceIndependenceNeverInferred": true,
-    "originalConflictEvidencePreserved": true
+    "rawReturnsPreserved": true
   },
   "failures": [],
-  "boundary": "PASS proves deterministic detection of exact and bounded superficial-format mutations of cross-organ provenance labels, including Unicode width/case/spacing/punctuation/symbol-only variation, and behavior change away from premature conflict reassessment. It does not prove real-world source independence when canonical labels differ, semantic identity when labels collide, derivative-source relationships, cryptographic identity, or factual truth."
+  "boundary": "PASS proves deterministic detection of exact/bounded-format provenance reuse and cross-organ replay of the same sufficiently long canonical returned material even when provenance labels differ. It blocks premature conflict reassessment and preserves raw returns. It does not prove semantic equivalence beyond canonical identity, derivative-source relationships beyond observed replay, real-world source independence, cryptographic identity, or factual truth."
 }
