@@ -1,8 +1,8 @@
 {
-  "schema": "vajra-provenance-diversity-test/v0.3.1",
-  "completedAt": "2026-09-02T17:04:58.740Z",
-  "status": "FAIL",
-  "capability": "ADJUDICATION_PROVENANCE_DIVERSITY_EXACT_AND_BOUNDED_NEAR_CONTENT_REPLAY_GUARD",
+  "schema": "vajra-provenance-diversity-test/v0.3.2",
+  "completedAt": "2026-09-02T17:05:41.146Z",
+  "status": "PASS",
+  "capability": "ADJUDICATION_PROVENANCE_DIVERSITY_OPERATOR_PRESERVING_EXACT_AND_BOUNDED_NEAR_CONTENT_REPLAY_GUARD",
   "collisionCase": {
     "status": "UPSTREAM_REPLAY_GUARD_ACTIVE",
     "audit": {
@@ -140,6 +140,72 @@
     "nextAction": "AUDIT_CROSS_ORGAN_CONTENT_REPLAY_BEFORE_REASSESSMENT",
     "closureAuthority": "NONE"
   },
+  "operatorPreservationCase": {
+    "pairs": [
+      [
+        "score > 10",
+        "score < 10"
+      ],
+      [
+        "A + B",
+        "A - B"
+      ],
+      [
+        "p = 0.05",
+        "p != 0.05"
+      ],
+      [
+        "x >= 4",
+        "x <= 4"
+      ]
+    ],
+    "audit": {
+      "requiredOrgans": [
+        "DROPLET",
+        "MUTHER",
+        "SHROOMING"
+      ],
+      "receivedOrgans": [
+        "DROPLET",
+        "MUTHER",
+        "SHROOMING"
+      ],
+      "complete": true,
+      "receivedCount": 3,
+      "uniqueProvenanceCount": 3,
+      "collisions": [],
+      "contentCollisions": [],
+      "nearContentCollisions": [
+        {
+          "organs": [
+            "DROPLET",
+            "MUTHER"
+          ],
+          "provenanceLabels": [
+            "op-a",
+            "op-b"
+          ],
+          "materialSamples": [
+            "The threshold result is score > 10 under the registered measurement rule and retained analysis window.",
+            "The threshold result is score < 10 under the registered measurement rule and retained analysis window."
+          ],
+          "similarityScore": 0.8889,
+          "similarityMode": "CHAR_5GRAM_JACCARD",
+          "boundary": "Bounded lexical near-replay signal only; this does not prove semantic identity or common upstream origin."
+        }
+      ],
+      "sharedProvenance": false,
+      "sharedContent": false,
+      "nearSharedContent": true,
+      "replayRisk": true,
+      "formatMutationCollisions": 0,
+      "contentFormatMutationCollisions": 0,
+      "structurallyDistinctProvenanceLabels": true,
+      "sourceIndependenceProven": false,
+      "status": "UPSTREAM_REPLAY_REVIEW_REQUIRED",
+      "boundary": "This guard compares bounded canonical provenance labels, operator-preserving canonical returned material, and a bounded lexical near-replay signal using containment/character 5-gram similarity for sufficiently long cross-organ material. Unicode width, case, whitespace and non-semantic formatting differences are normalized, while explicit comparison/equality/arithmetic operators are retained in material identity. Exact or near replay across organs is treated as replay risk. Distinct labels and distinct material are still not proof of real-world source independence; similarity does not prove semantic identity, derivation, dependence or factual error."
+    }
+  },
   "nearReplayCase": {
     "probe": {
       "match": true,
@@ -256,17 +322,13 @@
     "provenanceFormatMutationDetected": true,
     "crossOrganContentReplayDetected": true,
     "contentFormatMutationDetected": true,
+    "semanticOperatorsPreserved": true,
     "boundedWrapperNearReplayDetected": true,
     "distinctProvenanceCannotHideReplay": true,
     "replayChangesVajraBehavior": true,
     "sourceIndependenceNeverInferred": true,
     "rawReturnsPreserved": true
   },
-  "failures": [
-    {
-      "type": "VERSION_REGRESSION",
-      "version": "0.3.2"
-    }
-  ],
-  "boundary": "PASS proves deterministic detection of exact/bounded-format provenance reuse, exact canonical cross-organ content replay, and bounded high-overlap lexical replay when one organ lightly wraps another organ’s sufficiently long material. Near replay uses containment/character 5-gram similarity with a fixed 0.82 threshold; it is a replay-risk signal, not semantic identity or derivation proof. Raw returns remain preserved and source independence is never inferred."
+  "failures": [],
+  "boundary": "PASS proves deterministic detection of exact/bounded-format provenance reuse, operator-preserving exact canonical cross-organ content replay, and bounded high-overlap lexical replay when one organ lightly wraps another organ’s sufficiently long material. Comparison/equality/arithmetic operators are not discarded as formatting, preventing false replay collapse for opposite relations. Near replay remains a lexical risk signal, not semantic identity or derivation proof. Raw returns remain preserved and source independence is never inferred."
 }
