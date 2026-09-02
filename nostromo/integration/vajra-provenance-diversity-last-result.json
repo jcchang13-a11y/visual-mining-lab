@@ -1,8 +1,8 @@
 {
-  "schema": "vajra-provenance-diversity-test/v0.3.0",
-  "completedAt": "2026-09-02T09:18:29.422Z",
+  "schema": "vajra-provenance-diversity-test/v0.3.1",
+  "completedAt": "2026-09-02T11:06:40.616Z",
   "status": "PASS",
-  "capability": "ADJUDICATION_PROVENANCE_DIVERSITY_AND_CROSS_ORGAN_CONTENT_REPLAY_GUARD",
+  "capability": "ADJUDICATION_PROVENANCE_DIVERSITY_EXACT_AND_BOUNDED_NEAR_CONTENT_REPLAY_GUARD",
   "collisionCase": {
     "status": "UPSTREAM_REPLAY_GUARD_ACTIVE",
     "audit": {
@@ -33,15 +33,17 @@
         }
       ],
       "contentCollisions": [],
+      "nearContentCollisions": [],
       "sharedProvenance": true,
       "sharedContent": false,
+      "nearSharedContent": false,
       "replayRisk": true,
       "formatMutationCollisions": 0,
       "contentFormatMutationCollisions": 0,
       "structurallyDistinctProvenanceLabels": false,
       "sourceIndependenceProven": false,
       "status": "UPSTREAM_REPLAY_REVIEW_REQUIRED",
-      "boundary": "This guard compares bounded canonical provenance labels and bounded canonical returned material. Unicode width, case, whitespace, punctuation and symbol-only formatting differences are normalized. Cross-organ reuse of the same sufficiently long material is treated as replay risk even when provenance labels differ, preventing organ relabeling from masquerading as evidence-source diversity. Distinct labels and distinct material are still not proof of real-world source independence; collisions do not prove dependence or factual error."
+      "boundary": "This guard compares bounded canonical provenance labels, canonical returned material, and a bounded lexical near-replay signal using containment/character 5-gram similarity for sufficiently long cross-organ material. Unicode width, case, whitespace, punctuation and symbol-only formatting differences are normalized. Exact or near replay across organs is treated as replay risk, preventing light wrappers or organ relabeling from masquerading as evidence-source diversity. Distinct labels and distinct material are still not proof of real-world source independence; similarity does not prove semantic identity, derivation, dependence or factual error."
     },
     "nextAction": "AUDIT_SHARED_UPSTREAM_BEFORE_REASSESSMENT",
     "closureAuthority": "NONE"
@@ -75,15 +77,17 @@
       }
     ],
     "contentCollisions": [],
+    "nearContentCollisions": [],
     "sharedProvenance": true,
     "sharedContent": false,
+    "nearSharedContent": false,
     "replayRisk": true,
     "formatMutationCollisions": 1,
     "contentFormatMutationCollisions": 0,
     "structurallyDistinctProvenanceLabels": false,
     "sourceIndependenceProven": false,
     "status": "UPSTREAM_REPLAY_REVIEW_REQUIRED",
-    "boundary": "This guard compares bounded canonical provenance labels and bounded canonical returned material. Unicode width, case, whitespace, punctuation and symbol-only formatting differences are normalized. Cross-organ reuse of the same sufficiently long material is treated as replay risk even when provenance labels differ, preventing organ relabeling from masquerading as evidence-source diversity. Distinct labels and distinct material are still not proof of real-world source independence; collisions do not prove dependence or factual error."
+    "boundary": "This guard compares bounded canonical provenance labels, canonical returned material, and a bounded lexical near-replay signal using containment/character 5-gram similarity for sufficiently long cross-organ material. Unicode width, case, whitespace, punctuation and symbol-only formatting differences are normalized. Exact or near replay across organs is treated as replay risk, preventing light wrappers or organ relabeling from masquerading as evidence-source diversity. Distinct labels and distinct material are still not proof of real-world source independence; similarity does not prove semantic identity, derivation, dependence or factual error."
   },
   "contentReplayCase": {
     "status": "UPSTREAM_REPLAY_GUARD_ACTIVE",
@@ -121,16 +125,74 @@
           "formatMutationDetected": true
         }
       ],
+      "nearContentCollisions": [],
       "sharedProvenance": false,
       "sharedContent": true,
+      "nearSharedContent": false,
       "replayRisk": true,
       "formatMutationCollisions": 0,
       "contentFormatMutationCollisions": 1,
       "structurallyDistinctProvenanceLabels": true,
       "sourceIndependenceProven": false,
       "status": "UPSTREAM_REPLAY_REVIEW_REQUIRED",
-      "boundary": "This guard compares bounded canonical provenance labels and bounded canonical returned material. Unicode width, case, whitespace, punctuation and symbol-only formatting differences are normalized. Cross-organ reuse of the same sufficiently long material is treated as replay risk even when provenance labels differ, preventing organ relabeling from masquerading as evidence-source diversity. Distinct labels and distinct material are still not proof of real-world source independence; collisions do not prove dependence or factual error."
+      "boundary": "This guard compares bounded canonical provenance labels, canonical returned material, and a bounded lexical near-replay signal using containment/character 5-gram similarity for sufficiently long cross-organ material. Unicode width, case, whitespace, punctuation and symbol-only formatting differences are normalized. Exact or near replay across organs is treated as replay risk, preventing light wrappers or organ relabeling from masquerading as evidence-source diversity. Distinct labels and distinct material are still not proof of real-world source independence; similarity does not prove semantic identity, derivation, dependence or factual error."
     },
+    "nextAction": "AUDIT_CROSS_ORGAN_CONTENT_REPLAY_BEFORE_REASSESSMENT",
+    "closureAuthority": "NONE"
+  },
+  "nearReplayCase": {
+    "probe": {
+      "match": true,
+      "score": 0.8805,
+      "mode": "BOUNDED_CONTAINMENT"
+    },
+    "audit": {
+      "requiredOrgans": [
+        "DROPLET",
+        "MUTHER",
+        "SHROOMING"
+      ],
+      "receivedOrgans": [
+        "DROPLET",
+        "MUTHER",
+        "SHROOMING"
+      ],
+      "complete": true,
+      "receivedCount": 3,
+      "uniqueProvenanceCount": 3,
+      "collisions": [],
+      "contentCollisions": [],
+      "nearContentCollisions": [
+        {
+          "organs": [
+            "DROPLET",
+            "MUTHER"
+          ],
+          "provenanceLabels": [
+            "web-family-near-A",
+            "drive-family-near-B"
+          ],
+          "materialSamples": [
+            "The intervention improved outcome X under bounded condition Y after the measurement protocol excluded baseline drift and preserved the original comparison window.",
+            "Context note: The intervention improved outcome X under bounded condition Y after the measurement protocol excluded baseline drift and preserved the original comparison window. [replayed]"
+          ],
+          "similarityScore": 0.8805,
+          "similarityMode": "BOUNDED_CONTAINMENT",
+          "boundary": "Bounded lexical near-replay signal only; this does not prove semantic identity or common upstream origin."
+        }
+      ],
+      "sharedProvenance": false,
+      "sharedContent": false,
+      "nearSharedContent": true,
+      "replayRisk": true,
+      "formatMutationCollisions": 0,
+      "contentFormatMutationCollisions": 0,
+      "structurallyDistinctProvenanceLabels": true,
+      "sourceIndependenceProven": false,
+      "status": "UPSTREAM_REPLAY_REVIEW_REQUIRED",
+      "boundary": "This guard compares bounded canonical provenance labels, canonical returned material, and a bounded lexical near-replay signal using containment/character 5-gram similarity for sufficiently long cross-organ material. Unicode width, case, whitespace, punctuation and symbol-only formatting differences are normalized. Exact or near replay across organs is treated as replay risk, preventing light wrappers or organ relabeling from masquerading as evidence-source diversity. Distinct labels and distinct material are still not proof of real-world source independence; similarity does not prove semantic identity, derivation, dependence or factual error."
+    },
+    "status": "UPSTREAM_REPLAY_GUARD_ACTIVE",
     "nextAction": "AUDIT_CROSS_ORGAN_CONTENT_REPLAY_BEFORE_REASSESSMENT",
     "closureAuthority": "NONE"
   },
@@ -150,15 +212,17 @@
     "uniqueProvenanceCount": 3,
     "collisions": [],
     "contentCollisions": [],
+    "nearContentCollisions": [],
     "sharedProvenance": false,
     "sharedContent": false,
+    "nearSharedContent": false,
     "replayRisk": false,
     "formatMutationCollisions": 0,
     "contentFormatMutationCollisions": 0,
     "structurallyDistinctProvenanceLabels": true,
     "sourceIndependenceProven": false,
     "status": "PROVENANCE_LABELS_DISTINCT_NOT_INDEPENDENCE_PROOF",
-    "boundary": "This guard compares bounded canonical provenance labels and bounded canonical returned material. Unicode width, case, whitespace, punctuation and symbol-only formatting differences are normalized. Cross-organ reuse of the same sufficiently long material is treated as replay risk even when provenance labels differ, preventing organ relabeling from masquerading as evidence-source diversity. Distinct labels and distinct material are still not proof of real-world source independence; collisions do not prove dependence or factual error."
+    "boundary": "This guard compares bounded canonical provenance labels, canonical returned material, and a bounded lexical near-replay signal using containment/character 5-gram similarity for sufficiently long cross-organ material. Unicode width, case, whitespace, punctuation and symbol-only formatting differences are normalized. Exact or near replay across organs is treated as replay risk, preventing light wrappers or organ relabeling from masquerading as evidence-source diversity. Distinct labels and distinct material are still not proof of real-world source independence; similarity does not prove semantic identity, derivation, dependence or factual error."
   },
   "partialCase": {
     "requiredOrgans": [
@@ -175,26 +239,29 @@
     "uniqueProvenanceCount": 2,
     "collisions": [],
     "contentCollisions": [],
+    "nearContentCollisions": [],
     "sharedProvenance": false,
     "sharedContent": false,
+    "nearSharedContent": false,
     "replayRisk": false,
     "formatMutationCollisions": 0,
     "contentFormatMutationCollisions": 0,
     "structurallyDistinctProvenanceLabels": false,
     "sourceIndependenceProven": false,
     "status": "PARTIAL_PROVENANCE_COVERAGE",
-    "boundary": "This guard compares bounded canonical provenance labels and bounded canonical returned material. Unicode width, case, whitespace, punctuation and symbol-only formatting differences are normalized. Cross-organ reuse of the same sufficiently long material is treated as replay risk even when provenance labels differ, preventing organ relabeling from masquerading as evidence-source diversity. Distinct labels and distinct material are still not proof of real-world source independence; collisions do not prove dependence or factual error."
+    "boundary": "This guard compares bounded canonical provenance labels, canonical returned material, and a bounded lexical near-replay signal using containment/character 5-gram similarity for sufficiently long cross-organ material. Unicode width, case, whitespace, punctuation and symbol-only formatting differences are normalized. Exact or near replay across organs is treated as replay risk, preventing light wrappers or organ relabeling from masquerading as evidence-source diversity. Distinct labels and distinct material are still not proof of real-world source independence; similarity does not prove semantic identity, derivation, dependence or factual error."
   },
   "guards": {
     "exactProvenanceReuseDetected": true,
     "provenanceFormatMutationDetected": true,
     "crossOrganContentReplayDetected": true,
     "contentFormatMutationDetected": true,
+    "boundedWrapperNearReplayDetected": true,
     "distinctProvenanceCannotHideReplay": true,
     "replayChangesVajraBehavior": true,
     "sourceIndependenceNeverInferred": true,
     "rawReturnsPreserved": true
   },
   "failures": [],
-  "boundary": "PASS proves deterministic detection of exact/bounded-format provenance reuse and cross-organ replay of the same sufficiently long canonical returned material even when provenance labels differ. It blocks premature conflict reassessment and preserves raw returns. It does not prove semantic equivalence beyond canonical identity, derivative-source relationships beyond observed replay, real-world source independence, cryptographic identity, or factual truth."
+  "boundary": "PASS proves deterministic detection of exact/bounded-format provenance reuse, exact canonical cross-organ content replay, and bounded high-overlap lexical replay when one organ lightly wraps another organ’s sufficiently long material. Near replay uses containment/character 5-gram similarity with a fixed 0.82 threshold; it is a replay-risk signal, not semantic identity or derivation proof. Raw returns remain preserved and source independence is never inferred."
 }
