@@ -1,8 +1,8 @@
 {
-  "schema": "nostromo-organ-registry/v1.33",
-  "updatedAt": "2026-09-02T10:08:00+08:00",
+  "schema": "nostromo-organ-registry/v1.34",
+  "updatedAt": "2026-09-02T11:08:00+08:00",
   "truthRule": "DISPLAYED STATE MUST FOLLOW EVIDENCE",
-  "evidence": "ci-last-result.json plus formal-round-last-result.json plus connector-last-result.json plus muther-falsify-last-result.json plus droplet-claim-verify-last-result.json plus gut-metabolism-last-result.json plus gut-lineage-last-result.json plus vajra-dynamic-last-result.json plus vajra-uncertainty-last-result.json plus vajra-conflict-escalation-last-result.json plus shroom-feedback-last-result.json",
+  "evidence": "ci-last-result.json plus formal-round-last-result.json plus connector-last-result.json plus muther-falsify-last-result.json plus droplet-claim-verify-last-result.json plus gut-metabolism-last-result.json plus gut-lineage-last-result.json plus vajra-dynamic-last-result.json plus vajra-uncertainty-last-result.json plus vajra-conflict-escalation-last-result.json plus vajra-provenance-diversity-last-result.json plus shroom-feedback-last-result.json",
   "latestFormalRound": "greenhouse/r113-nostromo-formal-round.json",
   "latestFormalFinding": {
     "reference": "R111",
@@ -30,19 +30,18 @@
   },
   "latestThickening": {
     "organ": "VAJRA",
-    "version": "VAJRA v0.3.10",
-    "status": "VERIFIED_CONTENT_BOUND_HISTORY_ATTESTATION",
-    "test": "vajra-conflict-escalation-last-result.json v0.7.0 + NOSTROMO Integration Test run 232",
+    "version": "VAJRA v0.3.11",
+    "status": "VERIFIED_CROSS_ORGAN_PROVENANCE_DIVERSITY_GUARD",
+    "test": "vajra-provenance-diversity-last-result.json v0.1.0 + NOSTROMO Integration Test run 236",
     "capabilities": [
-      "historical acceptedRecords now carry packet identity, returning organ, targetRef, clauseRef, provenance, substantive returned material, target relation and returnKey instead of relying on packet identity alone",
-      "historical completion is counted only when returnKey recomputes from the carried packetId, sourceOrgan, provenance, material and relation content",
-      "contentless historical records are rejected from completion accounting even when packet, organ and scope fields look structurally correct",
-      "post-acceptance mutation of carried historical material with a stale returnKey is rejected with RETURN_KEY_CONTENT_MISMATCH",
-      "bare acceptedPacketIds remain conservative replay blockers but cannot satisfy missingPacketIds or manufacture allPacketsReturned",
-      "same-intake and cross-intake mutated packet replay guards remain active",
-      "three-organ adjudication context can continue to change VAJRA nextAction and nextQuestion while original opposing evidence, provenance and closureAuthority NONE remain preserved"
+      "exact provenance-label reuse across DROPLET, MUTHER and SHROOMING adjudication returns is detected instead of being mistaken for three independent evidence sources",
+      "when a collision is detected, VAJRA changes nextAction from conflict reassessment to AUDIT_SHARED_PROVENANCE_BEFORE_REASSESSMENT",
+      "the original contested evidence, all returned material, closureBlocked and closureAuthority NONE remain preserved",
+      "complete three-organ coverage with distinct provenance labels is explicitly marked as not proving real-world source independence",
+      "partial organ coverage remains partial and cannot be upgraded to complete adjudication context",
+      "the guard distinguishes organ-count diversity from provenance-label diversity without claiming semantic equivalence or factual truth"
     ],
-    "boundary": "Promotion is backed by successful NOSTROMO Integration Test run 232 for commit 854d38f02c6ac391185a77224eb21950ecd98fbb and vajra-conflict-escalation-test/v0.7.0 PASS. The source guard itself first passed run 231 for commit cdcc00df36cecfdace2664ae849daeb0269e0949; run 232 then adversarially verified contentless-history rejection and stale-returnKey rejection after historical content mutation. This is deterministic content-bound structural lineage integrity, not cryptographic authenticity, semantic truth adjudication, source-quality weighting or proof that distinct provenance values represent independent real-world sources."
+    "boundary": "Promotion is backed by successful NOSTROMO Integration Test run 236 for commit 3a387953ef8e73d7ac519f2ad1228ce643b55c25 and vajra-provenance-diversity-test/v0.1.0 PASS. This is a deterministic exact provenance-label collision guard. Matching labels block treating multiple organ returns as independent evidence; differing labels still do not prove real-world independence, derivative-source separation, semantic difference or factual truth."
   },
   "organs": {
     "shrooming": {
@@ -93,11 +92,11 @@
     },
     "vajra": {
       "mode": "EXEC_CONNECTED_THICKENED",
-      "source": "../vajra/vajra-engine.js + ../vajra/receipt-uncertainty-guard.js + ./vajra-conflict-escalation.mjs",
+      "source": "../vajra/vajra-engine.js + ../vajra/receipt-uncertainty-guard.js + ./vajra-conflict-escalation.mjs + ./vajra-provenance-diversity-guard.mjs",
       "actions": {
-        "DISMANTLE": "VERIFIED_PROPOSITION_AWARE_DISMANTLER_WITH_RECEIPT_GUARDS_MULTI_ORGAN_CONTEXT_CROSS_INTAKE_REPLAY_AND_CONTENT_BOUND_HISTORY_ATTESTATION"
+        "DISMANTLE": "VERIFIED_PROPOSITION_AWARE_DISMANTLER_WITH_RECEIPT_GUARDS_MULTI_ORGAN_CONTEXT_CROSS_INTAKE_REPLAY_CONTENT_BOUND_HISTORY_ATTESTATION_AND_PROVENANCE_DIVERSITY_GUARD"
       },
-      "boundary": "VAJRA v0.3.10 retains proposition-aware dismantling, uncertainty/provenance preservation, contest persistence and multi-organ conflict-context routing. Same-intake mutation replay is blocked with PACKET_ALREADY_RETURNED and cross-intake replay with PACKET_PREVIOUSLY_RETURNED. Historical completion now requires content-bound attestation: packet identity, returning organ, targetRef, clauseRef, provenance, substantive material and target relation must be carried, and returnKey must recompute from the carried return content. Bare known packet IDs may still conservatively block duplicate returns but cannot satisfy historical completion. Contentless records and records whose carried content was altered after acceptance with a stale returnKey remain unattested. Complete three-organ context can still alter nextAction/nextQuestion while closureAuthority remains NONE. These remain deterministic lexical/structural guards, not cryptographic signatures, semantic adjudication, factual truth or real-world source-independence proof."
+      "boundary": "VAJRA v0.3.11 retains proposition-aware dismantling, uncertainty/provenance preservation, contest persistence, multi-organ conflict-context routing, replay containment and content-bound history attestation. It now also audits exact cross-organ provenance-label reuse before treating complete organ coverage as suitable for conflict reassessment. When multiple organ returns reuse the same provenance label, nextAction changes to AUDIT_SHARED_PROVENANCE_BEFORE_REASSESSMENT; original opposing evidence and returned material remain preserved and closureAuthority stays NONE. Distinct provenance labels are explicitly not treated as proof of real-world source independence. These remain deterministic lexical/structural guards, not cryptographic signatures, semantic adjudication, factual truth or real-world source-independence proof."
     }
   }
 }
