@@ -1,0 +1,74 @@
+{
+  "schema": "nostromo-vajra-context-conditioning-test/v0.1.0",
+  "completedAt": "2026-09-02T09:10:27.734Z",
+  "status": "FAIL",
+  "capability": "MULTI_ORGAN_RETURN_CONTENT_CONDITIONS_NEXT_VAJRA_QUESTION",
+  "samples": {
+    "scope": {
+      "selected": "SCOPE_BOUNDARY",
+      "nextAction": "REASSESS_CONFLICT_WITH_SCOPE_BOUNDARY",
+      "nextQuestion": "先固定適用範圍：把命題縮到雙方材料真正共同涵蓋的最小條件後，哪一筆證據仍與另一筆發生直接衝突？"
+    },
+    "method": {
+      "selected": "METHOD_MEASUREMENT",
+      "nextAction": "REASSESS_CONFLICT_WITH_METHOD_MEASUREMENT",
+      "nextQuestion": "先固定方法與測量：若要求雙方使用可比較的測量定義與程序，哪個觀察最先不再支持原來的方向？"
+    },
+    "partial": {
+      "nextAction": "WAIT_FOR_ADDITIONAL_ADJUDICATION_CONTEXT",
+      "missingOrgans": [
+        "MUTHER",
+        "SHROOMING"
+      ]
+    }
+  },
+  "guards": {
+    "contentChangesBehavior": true,
+    "originalConflictPreserved": true,
+    "closureRemainsBlocked": true,
+    "partialCoverageCannotTriggerConditionedReassessment": true,
+    "provenanceRetained": true
+  },
+  "failures": [
+    {
+      "type": "SOURCE_COMPARABILITY_CUE_NOT_SELECTED",
+      "detail": {
+        "selected": "SCOPE_BOUNDARY",
+        "score": 3,
+        "organs": [
+          "DROPLET",
+          "MUTHER",
+          "SHROOMING"
+        ],
+        "candidates": [
+          {
+            "id": "SCOPE_BOUNDARY",
+            "score": 3,
+            "organs": [
+              "DROPLET",
+              "MUTHER",
+              "SHROOMING"
+            ]
+          },
+          {
+            "id": "SOURCE_COMPARABILITY",
+            "score": 1,
+            "organs": [
+              "DROPLET"
+            ]
+          },
+          {
+            "id": "CRITERION",
+            "score": 1,
+            "organs": [
+              "SHROOMING"
+            ]
+          }
+        ],
+        "question": "先固定適用範圍：把命題縮到雙方材料真正共同涵蓋的最小條件後，哪一筆證據仍與另一筆發生直接衝突？",
+        "boundary": "Deterministic lexical cue selection only. The selected discriminator changes VAJRA next-question routing based on returned organ material; it is not semantic adjudication, truth weighting, or proof that the selected condition is causally decisive."
+      }
+    }
+  ],
+  "boundary": "PASS demonstrates a bounded deterministic change in VAJRA behavior caused by the content of completed DROPLET/MUTHER/SHROOMING adjudication returns. Cue selection is lexical and auditable, not semantic truth adjudication; complete context still cannot close a contested branch."
+}

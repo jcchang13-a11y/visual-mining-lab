@@ -1,7 +1,7 @@
 {
   "schema": "nostromo-vajra-conflict-escalation-test/v0.7.0",
-  "completedAt": "2026-09-02T07:05:18.687Z",
-  "status": "PASS",
+  "completedAt": "2026-09-02T09:10:27.613Z",
+  "status": "FAIL",
   "guards": {
     "multiOrganEscalation": true,
     "closureRemainsBlocked": true,
@@ -13,7 +13,7 @@
     "threeOrganReturnsAccepted": true,
     "returnIntakeNoClosure": true,
     "returnLedgerExposed": true,
-    "multiOrganContextChangesNextAction": true,
+    "multiOrganContextChangesNextAction": false,
     "contextClosureStillBlocked": true,
     "originalConflictPreserved": true,
     "partialContextWaitsForMissingOrgans": true,
@@ -410,16 +410,59 @@
           "closureAuthority": "NONE",
           "boundary": "This context records how other organs changed the VAJRA conflict state. Completeness means all required organ returns are present, not that the dispute is resolved or that any return is true."
         },
-        "nextAction": "REASSESS_CONFLICT_WITH_DISCRIMINATING_CONDITION",
-        "nextQuestion": "在保留原支持／反駁證據的前提下，綜合來源品質、方法／語境與邊界判準三種回傳，哪一個最小可檢查條件最能區分這些相反結果？",
+        "discriminator": {
+          "selected": "SCOPE_BOUNDARY",
+          "score": 3,
+          "organs": [
+            "DROPLET",
+            "MUTHER",
+            "SHROOMING"
+          ],
+          "candidates": [
+            {
+              "id": "SCOPE_BOUNDARY",
+              "score": 3,
+              "organs": [
+                "DROPLET",
+                "MUTHER",
+                "SHROOMING"
+              ]
+            },
+            {
+              "id": "SOURCE_COMPARABILITY",
+              "score": 1,
+              "organs": [
+                "DROPLET"
+              ]
+            },
+            {
+              "id": "METHOD_MEASUREMENT",
+              "score": 1,
+              "organs": [
+                "DROPLET"
+              ]
+            },
+            {
+              "id": "CRITERION",
+              "score": 1,
+              "organs": [
+                "SHROOMING"
+              ]
+            }
+          ],
+          "question": "先固定適用範圍：把命題縮到雙方材料真正共同涵蓋的最小條件後，哪一筆證據仍與另一筆發生直接衝突？",
+          "boundary": "Deterministic lexical cue selection only. The selected discriminator changes VAJRA next-question routing based on returned organ material; it is not semantic adjudication, truth weighting, or proof that the selected condition is causally decisive."
+        },
+        "nextAction": "REASSESS_CONFLICT_WITH_SCOPE_BOUNDARY",
+        "nextQuestion": "先固定適用範圍：把命題縮到雙方材料真正共同涵蓋的最小條件後，哪一筆證據仍與另一筆發生直接衝突？",
         "closureBlocked": true,
         "closureAuthority": "NONE",
-        "boundary": "Multi-organ adjudication returns have changed the next VAJRA action, but the original opposing evidence and provenance remain preserved. Context integration is not truth adjudication."
+        "boundary": "Multi-organ adjudication returns now condition the next VAJRA discriminating question through an auditable bounded cue selector. The original opposing evidence and provenance remain preserved. Context integration and cue selection are not truth adjudication."
       }
     ],
     "organ": "VAJRA",
     "capability": "CONFLICT_ADJUDICATION_CONTEXT",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "status": "ADJUDICATION_CONTEXT_INTEGRATED",
     "handoffs": [],
     "adjudicationIntegration": {
@@ -431,7 +474,7 @@
     },
     "closureBlocked": true,
     "closureAuthority": "NONE",
-    "boundary": "Deterministic conflict-context integration. Accepted DROPLET/MUTHER/SHROOMING returns can change VAJRA nextAction and nextQuestion only when targetRef, clauseRef and lens match a preserved contested branch. The original opposing evidence and provenance are retained. Complete three-organ context means coverage is complete, not truth is settled; automatic closure remains forbidden."
+    "boundary": "Deterministic conflict-context integration with content-conditioned next-question selection. Accepted DROPLET/MUTHER/SHROOMING returns can change VAJRA nextAction and nextQuestion only when targetRef, clauseRef and lens match a preserved contested branch. The original opposing evidence and provenance are retained. Complete three-organ context means coverage is complete, not truth is settled; automatic closure remains forbidden."
   },
   "mutatedReplaySummary": {
     "accepted": 1,
@@ -566,6 +609,12 @@
       "WRONG_RETURNING_ORGAN"
     ]
   },
-  "failures": [],
+  "failures": [
+    {
+      "type": "MULTI_ORGAN_RETURNS_DID_NOT_CHANGE_VAJRA_BEHAVIOR",
+      "nextAction": "REASSESS_CONFLICT_WITH_SCOPE_BOUNDARY",
+      "nextQuestion": "先固定適用範圍：把命題縮到雙方材料真正共同涵蓋的最小條件後，哪一筆證據仍與另一筆發生直接衝突？"
+    }
+  ],
   "boundary": "PASS proves deterministic conflict escalation, packet-correlated return intake, same-intake and cross-intake replay containment, plus content-bound history attestation: bare known packet IDs may conservatively block replay but cannot manufacture historical completion; historical completion requires packet scope, provenance, substantive returned material and target relation whose content recomputes to the carried returnKey. Contentless or post-acceptance-mutated records remain unattested. This is deterministic structural lineage integrity, not cryptographic authenticity, semantic adjudication, source independence proof or truth closure."
 }
