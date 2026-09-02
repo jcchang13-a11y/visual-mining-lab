@@ -1,6 +1,6 @@
 {
-  "schema": "nostromo-organ-registry/v1.34",
-  "updatedAt": "2026-09-02T11:08:00+08:00",
+  "schema": "nostromo-organ-registry/v1.35",
+  "updatedAt": "2026-09-02T12:08:00+08:00",
   "truthRule": "DISPLAYED STATE MUST FOLLOW EVIDENCE",
   "evidence": "ci-last-result.json plus formal-round-last-result.json plus connector-last-result.json plus muther-falsify-last-result.json plus droplet-claim-verify-last-result.json plus gut-metabolism-last-result.json plus gut-lineage-last-result.json plus vajra-dynamic-last-result.json plus vajra-uncertainty-last-result.json plus vajra-conflict-escalation-last-result.json plus vajra-provenance-diversity-last-result.json plus shroom-feedback-last-result.json",
   "latestFormalRound": "greenhouse/r113-nostromo-formal-round.json",
@@ -30,18 +30,17 @@
   },
   "latestThickening": {
     "organ": "VAJRA",
-    "version": "VAJRA v0.3.11",
-    "status": "VERIFIED_CROSS_ORGAN_PROVENANCE_DIVERSITY_GUARD",
-    "test": "vajra-provenance-diversity-last-result.json v0.1.0 + NOSTROMO Integration Test run 236",
+    "version": "VAJRA v0.3.12",
+    "status": "VERIFIED_SEMANTIC_OPERATOR_PRESERVING_REPLAY_IDENTITY",
+    "test": "vajra-dynamic-last-result.json v0.3.2 + NOSTROMO Integration Test run 238",
     "capabilities": [
-      "exact provenance-label reuse across DROPLET, MUTHER and SHROOMING adjudication returns is detected instead of being mistaken for three independent evidence sources",
-      "when a collision is detected, VAJRA changes nextAction from conflict reassessment to AUDIT_SHARED_PROVENANCE_BEFORE_REASSESSMENT",
-      "the original contested evidence, all returned material, closureBlocked and closureAuthority NONE remain preserved",
-      "complete three-organ coverage with distinct provenance labels is explicitly marked as not proving real-world source independence",
-      "partial organ coverage remains partial and cannot be upgraded to complete adjudication context",
-      "the guard distinguishes organ-count diversity from provenance-label diversity without claiming semantic equivalence or factual truth"
+      "replay canonicalization still collapses Unicode width, case, whitespace and purely typographic punctuation mutations",
+      "meaning-bearing comparison and equality operators are now preserved so > versus <, = versus != and >= versus <= do not collapse to the same evidence identity",
+      "context-marked arithmetic plus/minus is preserved for spaced symbolic expressions and compact numeric expressions, preventing A + B versus A - B and 5+3 versus 5-3 false deduplication",
+      "the prior formatting-mutation, provenance-mutation, cross-branch and cross-application replay guards remain passing",
+      "VAJRA→GUT targetRef continuity, provenance preservation and the existing uncertainty/conflict/provenance-diversity layers remain passing under the full integration regression"
     ],
-    "boundary": "Promotion is backed by successful NOSTROMO Integration Test run 236 for commit 3a387953ef8e73d7ac519f2ad1228ce643b55c25 and vajra-provenance-diversity-test/v0.1.0 PASS. This is a deterministic exact provenance-label collision guard. Matching labels block treating multiple organ returns as independent evidence; differing labels still do not prove real-world independence, derivative-source separation, semantic difference or factual truth."
+    "boundary": "Promotion is backed by successful NOSTROMO Integration Test run 238 for commit 586dc771c8b1dc5829592daa97696614437c8a83 and vajra-dynamic-test/v0.3.2 PASS. The operator guard is lexical and intentionally bounded. It does not parse arbitrary mathematics or programming languages, decide semantic equivalence, judge source quality, or certify truth."
   },
   "organs": {
     "shrooming": {
@@ -94,9 +93,9 @@
       "mode": "EXEC_CONNECTED_THICKENED",
       "source": "../vajra/vajra-engine.js + ../vajra/receipt-uncertainty-guard.js + ./vajra-conflict-escalation.mjs + ./vajra-provenance-diversity-guard.mjs",
       "actions": {
-        "DISMANTLE": "VERIFIED_PROPOSITION_AWARE_DISMANTLER_WITH_RECEIPT_GUARDS_MULTI_ORGAN_CONTEXT_CROSS_INTAKE_REPLAY_CONTENT_BOUND_HISTORY_ATTESTATION_AND_PROVENANCE_DIVERSITY_GUARD"
+        "DISMANTLE": "VERIFIED_PROPOSITION_AWARE_DISMANTLER_WITH_RECEIPT_GUARDS_MULTI_ORGAN_CONTEXT_CROSS_INTAKE_REPLAY_CONTENT_BOUND_HISTORY_ATTESTATION_PROVENANCE_DIVERSITY_AND_OPERATOR_PRESERVATION"
       },
-      "boundary": "VAJRA v0.3.11 retains proposition-aware dismantling, uncertainty/provenance preservation, contest persistence, multi-organ conflict-context routing, replay containment and content-bound history attestation. It now also audits exact cross-organ provenance-label reuse before treating complete organ coverage as suitable for conflict reassessment. When multiple organ returns reuse the same provenance label, nextAction changes to AUDIT_SHARED_PROVENANCE_BEFORE_REASSESSMENT; original opposing evidence and returned material remain preserved and closureAuthority stays NONE. Distinct provenance labels are explicitly not treated as proof of real-world source independence. These remain deterministic lexical/structural guards, not cryptographic signatures, semantic adjudication, factual truth or real-world source-independence proof."
+      "boundary": "VAJRA v0.3.12 retains proposition-aware dismantling, uncertainty/provenance preservation, contest persistence, multi-organ conflict-context routing, replay containment, content-bound history attestation and cross-organ provenance-diversity auditing. The v0.3.2 core now prevents replay canonicalization from erasing a bounded set of meaning-bearing operators: comparison/equality operators and context-marked arithmetic plus/minus remain part of evidence identity while superficial typography is still normalized. This closes the preserved v0.2.9/v0.3.1 operator-collision defect without claiming general semantic parsing. Distinct provenance labels still do not prove real-world source independence. These remain deterministic lexical/structural guards, not cryptographic signatures, semantic adjudication, factual truth or real-world source-independence proof."
     }
   }
 }
