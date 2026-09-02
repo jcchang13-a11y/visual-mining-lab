@@ -1,6 +1,6 @@
 {
-  "schema": "nostromo-organ-registry/v1.37",
-  "updatedAt": "2026-09-02T21:13:00+08:00",
+  "schema": "nostromo-organ-registry/v1.38",
+  "updatedAt": "2026-09-02T22:09:00+08:00",
   "truthRule": "DISPLAYED STATE MUST FOLLOW EVIDENCE",
   "evidence": "ci-last-result.json plus formal-round-last-result.json plus connector-last-result.json plus muther-falsify-last-result.json plus muther-repo-diversity-last-result.json plus droplet-claim-verify-last-result.json plus gut-metabolism-last-result.json plus gut-lineage-last-result.json plus vajra-dynamic-last-result.json plus vajra-uncertainty-last-result.json plus vajra-conflict-escalation-last-result.json plus vajra-provenance-diversity-last-result.json plus shroom-feedback-last-result.json",
   "latestFormalRound": "greenhouse/r113-nostromo-formal-round.json",
@@ -29,18 +29,18 @@
     "boundary": "Isolated counterfactual executor only. It deliberately includes parent round ordinal in participant selection and has been CI-verified against R111 and R112. It does not write or advance formal greenhouse history and is engineering evidence that NOSTROMO can execute and audit a parent-sensitive transition, not evidence that the real SHROOMING population is causally path-dependent."
   },
   "latestThickening": {
-    "organ": "MU/TH/UR",
-    "version": "MUTHER repo mine v1.2",
-    "status": "VERIFIED_LEXICAL_NEAR_DUPLICATE_POLLUTION_CONTAINMENT",
-    "test": "muther-repo-diversity-last-result.json v0.1.1 + NOSTROMO Integration Test run 261",
+    "organ": "DROPLET",
+    "version": "DROPLET claim verify v1.2",
+    "status": "VERIFIED_OPT_IN_FRESHNESS_FALSE_CERTAINTY_GUARD",
+    "test": "droplet-claim-verify-last-result.json v1.2 + NOSTROMO Integration Test run 265",
     "capabilities": [
-      "repository mining now applies a conservative character-shingle overlap guard after exact superficial deduplication and before source-family balancing",
-      "near-identical cross-file candidates with lexical, punctuation, timestamp and fingerprint mutations can no longer automatically inflate apparent ore diversity",
-      "suppressed near-duplicate candidates retain an auditable record of kept path, suppressed path, source families, fingerprints and measured overlap",
-      "materially distinct lexical candidates sharing the same query token remain eligible for selection",
-      "the initial failed adversarial run 259 was preserved; the corrected fixture separated exact-duplicate handling from near-duplicate handling and run 261 passed with all existing cross-organ regression tests still passing"
+      "claim verification now accepts an explicit as-of date plus maximum evidence age policy without inferring freshness requirements by itself",
+      "when that policy is active, stale authoritative evidence remains auditable but cannot create SUPPORTED or REFUTED certainty",
+      "undated authoritative evidence is explicitly marked UNKNOWN_DATE and likewise cannot create certainty under the active policy",
+      "fresh authoritative evidence remains eligible, while duplicate replay, authoritative-direction conflict and fingerprint-integrity conflict containment continue to apply",
+      "the baseline no-policy path remains backward compatible, so historical claims are not silently reclassified merely because the current clock advanced"
     ],
-    "boundary": "Promotion is backed by successful NOSTROMO Integration Test run 261 for commit 9477e5ad792ae51dc7cc39db2b6b17536db7477a and muther-repo-diversity-test/v0.1.1 PASS. The guard is conservative lexical pollution containment only. It does not infer semantic equivalence, real-world source independence, source quality, methodological quality, novelty, factual truth, or Google Drive coverage."
+    "boundary": "Promotion is backed by successful NOSTROMO Integration Test run 265 for commit e365643a1dcec4a3432a984b942e5ed81b5a6633 and nostromo-droplet-claim-verify-test/v1.2 PASS. Freshness gating is opt-in and caller-policy-driven. DROPLET does not infer whether a claim is time-sensitive, search the web itself, score methodological quality, prove source independence, or convert absence of refutation into truth."
   },
   "organs": {
     "shrooming": {
@@ -77,9 +77,9 @@
         "AUDIT_EVIDENCE": "EXEC_STATE",
         "VERIFY_URL": "CLOSED_LOOP_EXEC",
         "SEARCH_EXTERNAL": "CONNECTOR_EXEC",
-        "VERIFY": "VERIFIED_DUPLICATE_AND_CONFLICT_CONTAINING_CLAIM_VERIFY"
+        "VERIFY": "VERIFIED_DUPLICATE_CONFLICT_AND_OPT_IN_FRESHNESS_CONTAINING_CLAIM_VERIFY"
       },
-      "boundary": "Published evidence audit and explicit-URL verification are executable. Search-engine discovery is executed by the external web connector runtime. VERIFY v1.1 computes SUPPORTED, REFUTED or INDETERMINATE over an explicit evidence bundle while suppressing exact replay amplification, counting caller-supplied source families as audit metadata, forcing INDETERMINATE on conflicting authoritative directions, and flagging contradictory use of one evidence fingerprint. It does not search the web by itself, prove source independence, score methodological quality, or treat absence of refutation as global truth."
+      "boundary": "Published evidence audit and explicit-URL verification are executable. Search-engine discovery is executed by the external web connector runtime. VERIFY v1.2 computes SUPPORTED, REFUTED or INDETERMINATE over an explicit evidence bundle while suppressing exact replay amplification, counting caller-supplied source families as audit metadata, forcing INDETERMINATE on conflicting authoritative directions or contradictory use of one evidence fingerprint, and optionally enforcing a caller-supplied freshness policy. Under an active freshness policy, stale or undated evidence stays visible for audit but cannot create certainty. It does not infer whether a claim is time-sensitive, search the web by itself, prove source independence, score methodological quality, or treat absence of refutation as global truth."
     },
     "gut": {
       "mode": "EXEC_CONNECTED_THICKENED",
