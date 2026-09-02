@@ -1,0 +1,5 @@
+/* 《剛吃飽》第八版｜爛尾樓版｜回溯圖閱讀層 */
+.retro-figure{display:block;margin:1.6em auto;max-width:34em;text-align:center;white-space:normal}
+.retro-figure__img{display:block;width:min(100%,32em);height:auto;margin:0 auto;filter:grayscale(1);background:transparent}
+.retro-figure__caption{margin:.65em auto 0;max-width:30em;color:#666;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.78em;line-height:1.55;letter-spacing:.02em}
+@media print{.retro-figure{break-inside:avoid}.retro-figure__img{max-width:100%}}
