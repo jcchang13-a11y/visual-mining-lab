@@ -1,6 +1,6 @@
 {
   "schema": "nostromo-vajra-uncertainty-test/v0.3.7",
-  "completedAt": "2026-09-02T06:05:13.330Z",
+  "completedAt": "2026-09-02T06:07:11.409Z",
   "status": "FAIL",
   "guards": {
     "explicitUncertaintyCannotClose": true,
@@ -29,7 +29,7 @@
   },
   "crossOrgan": {
     "gut": {
-      "ingested": 787,
+      "ingested": 790,
       "absorbed": 46,
       "quarantined": 22,
       "summarySample": "[CONTRADICTION->VAJRA] 主動尋找最小反例與破壞條件 · [CONTRADICTION->VAJRA] 主動尋找最小反例與破壞條件：針對本輪 EMPIRICAL 命題，哪個前提最可能先失效？ · [CLAIM->DROPLET] EMPIRICAL · [EVIDENCE_OR_PROVENANCE->MUTHER] 要求可追溯證據並區分支持與缺席證據 · [CLAIM->DROPLET] 命題成立條件需要顯式化 · [EVIDENCE_OR_PROVENANCE->MUTHER] 資料品質、測量方式與來源獨立性需要檢查 · [CLAIM->DROPLET] Preferred organ is a routing request, not proof that the organ exec"
@@ -37,38 +37,93 @@
   },
   "failures": [
     {
+      "type": "GUARD_VERSION_MISSING",
+      "detail": "0.3.8"
+    },
+    {
+      "type": "ADEQUACY_GUARD_VERSION_MISSING",
+      "detail": "0.2"
+    },
+    {
+      "type": "INSUFFICIENT_VERSION",
+      "detail": "0.3.8"
+    },
+    {
+      "type": "NEGATED_REFUTE_VERSION",
+      "detail": "0.3.8"
+    },
+    {
+      "type": "ZH_UNCERTAIN_VERSION",
+      "detail": "0.3.8"
+    },
+    {
+      "type": "NEGATED_CONTRADICT_VERSION",
+      "detail": "0.3.8"
+    },
+    {
+      "type": "NOT_INCONSISTENT_VERSION",
+      "detail": "0.3.8"
+    },
+    {
+      "type": "FAILS_TO_SUPPORT_VERSION",
+      "detail": "0.3.8"
+    },
+    {
+      "type": "ZH_NEGATED_VERSION",
+      "detail": "0.3.8"
+    },
+    {
+      "type": "UNSPECIFIED_VERSION",
+      "detail": "0.3.8"
+    },
+    {
+      "type": "MIXED_VERSION",
+      "detail": "0.3.8"
+    },
+    {
+      "type": "SAME_PROVENANCE_VERSION",
+      "detail": "0.3.8"
+    },
+    {
       "type": "ADEQUATE_COUNTEREXAMPLE_RECEIPT_BLOCKED",
       "detail": {
         "received": 1,
         "resolved": 0,
-        "contested": 0,
+        "contested": 1,
         "open": 5,
-        "rejected": 1,
+        "rejected": 0,
         "resolvedBranches": [],
-        "contestedBranches": [],
-        "rejectedReceipts": [
+        "contestedBranches": [
           {
             "targetRef": "20708907",
             "clauseRef": "bf2b3177",
             "lens": "counterexample",
-            "organ": "DROPLET",
-            "status": "EXECUTED",
-            "provenance": "prov-counter-adequate-001",
-            "material": "No counterexample was found inside the explicitly searched scope of the ten active rounds; coverage is bounded and does not extend beyond those rounds.",
-            "relation": "This bounded counterexample search supports only the tested scope and does not establish the claim globally.",
-            "relationClassification": "INDETERMINATE",
-            "reasons": [
-              "INDETERMINATE_RELATION"
-            ]
+            "preferredOrgan": "DROPLET",
+            "status": "CONTESTED_BY_RECEIPTS",
+            "polarities": [
+              "MIXED"
+            ],
+            "evidence": [
+              {
+                "receiptFingerprint": "ab44474c",
+                "evidenceKey": "1ccbb257",
+                "provenance": "prov-counter-adequate-001",
+                "relation": "This bounded counterexample search supports only the tested scope and does not establish the claim globally.",
+                "polarity": "MIXED"
+              }
+            ],
+            "boundary": "Multiple structurally qualifying, provenance-bearing returns make opposing relation claims about the same clause-scoped handoff. VAJRA preserves the conflict and refuses closure; this polarity detector is lexical and bounded, not semantic adjudication."
           }
         ],
+        "rejectedReceipts": [],
         "historicalEvidenceKeys": 0,
-        "indeterminate": 1,
+        "indeterminate": 0,
         "unspecified": 0,
         "mixed": 0,
         "sameProvenanceConflict": 0,
         "historicalContestPreserved": 0,
-        "contractAdequacyBlocked": 0
+        "contractAdequacyBlocked": 0,
+        "boundedNullAccepted": 0
       }
     }
   ],
