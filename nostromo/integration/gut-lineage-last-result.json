@@ -1,6 +1,6 @@
 {
   "schema": "nostromo-gut-lineage-test/v0.2.24-out-of-band-carry-refs",
-  "completedAt": "2026-09-02T22:06:41.780Z",
+  "completedAt": "2026-09-02T23:06:44.653Z",
   "status": "PASS",
   "sameLineage": {
     "summaryItemCount": 1,

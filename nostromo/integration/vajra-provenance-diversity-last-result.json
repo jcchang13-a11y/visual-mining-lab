@@ -1,7 +1,7 @@
 {
   "schema": "vajra-provenance-diversity-test/v0.3.3",
-  "completedAt": "2026-09-02T22:06:42.165Z",
-  "status": "PASS",
+  "completedAt": "2026-09-02T23:06:45.184Z",
+  "status": "FAIL",
   "capability": "ADJUDICATION_PROVENANCE_DIVERSITY_OPERATOR_DIVERGENCE_AWARE_EXACT_AND_BOUNDED_NEAR_CONTENT_REPLAY_GUARD",
   "collisionCase": {
     "status": "UPSTREAM_REPLAY_GUARD_ACTIVE",
@@ -43,7 +43,7 @@
       "structurallyDistinctProvenanceLabels": false,
       "sourceIndependenceProven": false,
       "status": "UPSTREAM_REPLAY_REVIEW_REQUIRED",
-      "boundary": "This guard compares bounded canonical provenance labels, operator-preserving canonical returned material, and a bounded lexical near-replay signal using containment/character 5-gram similarity for sufficiently long cross-organ material. Unicode width, case, whitespace and non-semantic formatting differences are normalized. Explicit comparison/equality/arithmetic operators are retained and, when both materials contain explicit operators with different operator signatures, lexical near-replay cannot override that meaning-bearing divergence. Exact or otherwise high-overlap near replay across organs remains replay risk. Distinct labels and distinct material are still not proof of real-world source independence; similarity does not prove semantic identity, derivation, dependence or factual error."
+      "boundary": "This guard compares bounded canonical provenance labels, operator-preserving canonical returned material, and a bounded lexical near-replay signal using containment/character 5-gram similarity for sufficiently long cross-organ material. Unicode width, case, whitespace and non-semantic formatting differences are normalized. Explicit comparison/equality/arithmetic operators, including multiplication and division, are retained and, when both materials contain explicit operators with different operator signatures, lexical near-replay cannot override that meaning-bearing divergence. Exact or otherwise high-overlap near replay across organs remains replay risk. Distinct labels and distinct material are still not proof of real-world source independence; similarity does not prove semantic identity, derivation, dependence or factual error."
     },
     "nextAction": "AUDIT_SHARED_UPSTREAM_BEFORE_REASSESSMENT",
     "closureAuthority": "NONE"
@@ -87,7 +87,7 @@
     "structurallyDistinctProvenanceLabels": false,
     "sourceIndependenceProven": false,
     "status": "UPSTREAM_REPLAY_REVIEW_REQUIRED",
-    "boundary": "This guard compares bounded canonical provenance labels, operator-preserving canonical returned material, and a bounded lexical near-replay signal using containment/character 5-gram similarity for sufficiently long cross-organ material. Unicode width, case, whitespace and non-semantic formatting differences are normalized. Explicit comparison/equality/arithmetic operators are retained and, when both materials contain explicit operators with different operator signatures, lexical near-replay cannot override that meaning-bearing divergence. Exact or otherwise high-overlap near replay across organs remains replay risk. Distinct labels and distinct material are still not proof of real-world source independence; similarity does not prove semantic identity, derivation, dependence or factual error."
+    "boundary": "This guard compares bounded canonical provenance labels, operator-preserving canonical returned material, and a bounded lexical near-replay signal using containment/character 5-gram similarity for sufficiently long cross-organ material. Unicode width, case, whitespace and non-semantic formatting differences are normalized. Explicit comparison/equality/arithmetic operators, including multiplication and division, are retained and, when both materials contain explicit operators with different operator signatures, lexical near-replay cannot override that meaning-bearing divergence. Exact or otherwise high-overlap near replay across organs remains replay risk. Distinct labels and distinct material are still not proof of real-world source independence; similarity does not prove semantic identity, derivation, dependence or factual error."
   },
   "contentReplayCase": {
     "status": "UPSTREAM_REPLAY_GUARD_ACTIVE",
@@ -135,7 +135,7 @@
       "structurallyDistinctProvenanceLabels": true,
       "sourceIndependenceProven": false,
       "status": "UPSTREAM_REPLAY_REVIEW_REQUIRED",
-      "boundary": "This guard compares bounded canonical provenance labels, operator-preserving canonical returned material, and a bounded lexical near-replay signal using containment/character 5-gram similarity for sufficiently long cross-organ material. Unicode width, case, whitespace and non-semantic formatting differences are normalized. Explicit comparison/equality/arithmetic operators are retained and, when both materials contain explicit operators with different operator signatures, lexical near-replay cannot override that meaning-bearing divergence. Exact or otherwise high-overlap near replay across organs remains replay risk. Distinct labels and distinct material are still not proof of real-world source independence; similarity does not prove semantic identity, derivation, dependence or factual error."
+      "boundary": "This guard compares bounded canonical provenance labels, operator-preserving canonical returned material, and a bounded lexical near-replay signal using containment/character 5-gram similarity for sufficiently long cross-organ material. Unicode width, case, whitespace and non-semantic formatting differences are normalized. Explicit comparison/equality/arithmetic operators, including multiplication and division, are retained and, when both materials contain explicit operators with different operator signatures, lexical near-replay cannot override that meaning-bearing divergence. Exact or otherwise high-overlap near replay across organs remains replay risk. Distinct labels and distinct material are still not proof of real-world source independence; similarity does not prove semantic identity, derivation, dependence or factual error."
     },
     "nextAction": "AUDIT_CROSS_ORGAN_CONTENT_REPLAY_BEFORE_REASSESSMENT",
     "closureAuthority": "NONE"
@@ -196,7 +196,7 @@
       "structurallyDistinctProvenanceLabels": true,
       "sourceIndependenceProven": false,
       "status": "PROVENANCE_LABELS_DISTINCT_NOT_INDEPENDENCE_PROOF",
-      "boundary": "This guard compares bounded canonical provenance labels, operator-preserving canonical returned material, and a bounded lexical near-replay signal using containment/character 5-gram similarity for sufficiently long cross-organ material. Unicode width, case, whitespace and non-semantic formatting differences are normalized. Explicit comparison/equality/arithmetic operators are retained and, when both materials contain explicit operators with different operator signatures, lexical near-replay cannot override that meaning-bearing divergence. Exact or otherwise high-overlap near replay across organs remains replay risk. Distinct labels and distinct material are still not proof of real-world source independence; similarity does not prove semantic identity, derivation, dependence or factual error."
+      "boundary": "This guard compares bounded canonical provenance labels, operator-preserving canonical returned material, and a bounded lexical near-replay signal using containment/character 5-gram similarity for sufficiently long cross-organ material. Unicode width, case, whitespace and non-semantic formatting differences are normalized. Explicit comparison/equality/arithmetic operators, including multiplication and division, are retained and, when both materials contain explicit operators with different operator signatures, lexical near-replay cannot override that meaning-bearing divergence. Exact or otherwise high-overlap near replay across organs remains replay risk. Distinct labels and distinct material are still not proof of real-world source independence; similarity does not prove semantic identity, derivation, dependence or factual error."
     }
   },
   "nearReplayCase": {
@@ -249,7 +249,7 @@
       "structurallyDistinctProvenanceLabels": true,
       "sourceIndependenceProven": false,
       "status": "UPSTREAM_REPLAY_REVIEW_REQUIRED",
-      "boundary": "This guard compares bounded canonical provenance labels, operator-preserving canonical returned material, and a bounded lexical near-replay signal using containment/character 5-gram similarity for sufficiently long cross-organ material. Unicode width, case, whitespace and non-semantic formatting differences are normalized. Explicit comparison/equality/arithmetic operators are retained and, when both materials contain explicit operators with different operator signatures, lexical near-replay cannot override that meaning-bearing divergence. Exact or otherwise high-overlap near replay across organs remains replay risk. Distinct labels and distinct material are still not proof of real-world source independence; similarity does not prove semantic identity, derivation, dependence or factual error."
+      "boundary": "This guard compares bounded canonical provenance labels, operator-preserving canonical returned material, and a bounded lexical near-replay signal using containment/character 5-gram similarity for sufficiently long cross-organ material. Unicode width, case, whitespace and non-semantic formatting differences are normalized. Explicit comparison/equality/arithmetic operators, including multiplication and division, are retained and, when both materials contain explicit operators with different operator signatures, lexical near-replay cannot override that meaning-bearing divergence. Exact or otherwise high-overlap near replay across organs remains replay risk. Distinct labels and distinct material are still not proof of real-world source independence; similarity does not prove semantic identity, derivation, dependence or factual error."
     },
     "status": "UPSTREAM_REPLAY_GUARD_ACTIVE",
     "nextAction": "AUDIT_CROSS_ORGAN_CONTENT_REPLAY_BEFORE_REASSESSMENT",
@@ -281,7 +281,7 @@
     "structurallyDistinctProvenanceLabels": true,
     "sourceIndependenceProven": false,
     "status": "PROVENANCE_LABELS_DISTINCT_NOT_INDEPENDENCE_PROOF",
-    "boundary": "This guard compares bounded canonical provenance labels, operator-preserving canonical returned material, and a bounded lexical near-replay signal using containment/character 5-gram similarity for sufficiently long cross-organ material. Unicode width, case, whitespace and non-semantic formatting differences are normalized. Explicit comparison/equality/arithmetic operators are retained and, when both materials contain explicit operators with different operator signatures, lexical near-replay cannot override that meaning-bearing divergence. Exact or otherwise high-overlap near replay across organs remains replay risk. Distinct labels and distinct material are still not proof of real-world source independence; similarity does not prove semantic identity, derivation, dependence or factual error."
+    "boundary": "This guard compares bounded canonical provenance labels, operator-preserving canonical returned material, and a bounded lexical near-replay signal using containment/character 5-gram similarity for sufficiently long cross-organ material. Unicode width, case, whitespace and non-semantic formatting differences are normalized. Explicit comparison/equality/arithmetic operators, including multiplication and division, are retained and, when both materials contain explicit operators with different operator signatures, lexical near-replay cannot override that meaning-bearing divergence. Exact or otherwise high-overlap near replay across organs remains replay risk. Distinct labels and distinct material are still not proof of real-world source independence; similarity does not prove semantic identity, derivation, dependence or factual error."
   },
   "partialCase": {
     "requiredOrgans": [
@@ -308,7 +308,7 @@
     "structurallyDistinctProvenanceLabels": false,
     "sourceIndependenceProven": false,
     "status": "PARTIAL_PROVENANCE_COVERAGE",
-    "boundary": "This guard compares bounded canonical provenance labels, operator-preserving canonical returned material, and a bounded lexical near-replay signal using containment/character 5-gram similarity for sufficiently long cross-organ material. Unicode width, case, whitespace and non-semantic formatting differences are normalized. Explicit comparison/equality/arithmetic operators are retained and, when both materials contain explicit operators with different operator signatures, lexical near-replay cannot override that meaning-bearing divergence. Exact or otherwise high-overlap near replay across organs remains replay risk. Distinct labels and distinct material are still not proof of real-world source independence; similarity does not prove semantic identity, derivation, dependence or factual error."
+    "boundary": "This guard compares bounded canonical provenance labels, operator-preserving canonical returned material, and a bounded lexical near-replay signal using containment/character 5-gram similarity for sufficiently long cross-organ material. Unicode width, case, whitespace and non-semantic formatting differences are normalized. Explicit comparison/equality/arithmetic operators, including multiplication and division, are retained and, when both materials contain explicit operators with different operator signatures, lexical near-replay cannot override that meaning-bearing divergence. Exact or otherwise high-overlap near replay across organs remains replay risk. Distinct labels and distinct material are still not proof of real-world source independence; similarity does not prove semantic identity, derivation, dependence or factual error."
   },
   "guards": {
     "exactProvenanceReuseDetected": true,
@@ -323,6 +323,11 @@
     "sourceIndependenceNeverInferred": true,
     "rawReturnsPreserved": true
   },
-  "failures": [],
+  "failures": [
+    {
+      "type": "VERSION_REGRESSION",
+      "version": "0.3.4"
+    }
+  ],
   "boundary": "PASS proves deterministic detection of exact/bounded-format provenance reuse, operator-preserving exact canonical cross-organ content replay, and bounded high-overlap lexical replay when one organ lightly wraps another organ’s sufficiently long material. When both materials contain explicit comparison/equality/arithmetic operators and their operator signatures diverge, lexical overlap no longer falsely collapses them into near replay. This is syntactic operator protection, not semantic theorem proving. Raw returns remain preserved and source independence is never inferred."
 }
