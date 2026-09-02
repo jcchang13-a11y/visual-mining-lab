@@ -1,6 +1,6 @@
 {
-  "schema": "nostromo-organ-registry/v1.35",
-  "updatedAt": "2026-09-02T12:08:00+08:00",
+  "schema": "nostromo-organ-registry/v1.36",
+  "updatedAt": "2026-09-02T13:12:00+08:00",
   "truthRule": "DISPLAYED STATE MUST FOLLOW EVIDENCE",
   "evidence": "ci-last-result.json plus formal-round-last-result.json plus connector-last-result.json plus muther-falsify-last-result.json plus droplet-claim-verify-last-result.json plus gut-metabolism-last-result.json plus gut-lineage-last-result.json plus vajra-dynamic-last-result.json plus vajra-uncertainty-last-result.json plus vajra-conflict-escalation-last-result.json plus vajra-provenance-diversity-last-result.json plus shroom-feedback-last-result.json",
   "latestFormalRound": "greenhouse/r113-nostromo-formal-round.json",
@@ -30,17 +30,17 @@
   },
   "latestThickening": {
     "organ": "VAJRA",
-    "version": "VAJRA v0.3.12",
-    "status": "VERIFIED_SEMANTIC_OPERATOR_PRESERVING_REPLAY_IDENTITY",
-    "test": "vajra-dynamic-last-result.json v0.3.2 + NOSTROMO Integration Test run 238",
+    "version": "VAJRA v0.3.13",
+    "status": "VERIFIED_CANONICAL_PROVENANCE_FORMAT_MUTATION_COLLISION_GUARD",
+    "test": "vajra-provenance-diversity-last-result.json v0.2.0 + NOSTROMO Integration Test run 240",
     "capabilities": [
-      "replay canonicalization still collapses Unicode width, case, whitespace and purely typographic punctuation mutations",
-      "meaning-bearing comparison and equality operators are now preserved so > versus <, = versus != and >= versus <= do not collapse to the same evidence identity",
-      "context-marked arithmetic plus/minus is preserved for spaced symbolic expressions and compact numeric expressions, preventing A + B versus A - B and 5+3 versus 5-3 false deduplication",
-      "the prior formatting-mutation, provenance-mutation, cross-branch and cross-application replay guards remain passing",
-      "VAJRA→GUT targetRef continuity, provenance preservation and the existing uncertainty/conflict/provenance-diversity layers remain passing under the full integration regression"
+      "cross-organ provenance diversity now compares a bounded canonical provenance identity rather than raw labels only",
+      "Unicode width, case, whitespace, punctuation and symbol-only formatting mutations of the same provenance label no longer inflate apparent source diversity",
+      "format-mutated provenance reuse activates the same collision review path and blocks premature conflict reassessment",
+      "unique provenance counts are computed from canonical provenance identities while all raw caller-supplied labels remain visible in the audit record",
+      "distinct canonical labels still never count as proof of real-world source independence, and all prior VAJRA/GUT/SHROOMING/MUTHER/DROPLET regression tests remain passing"
     ],
-    "boundary": "Promotion is backed by successful NOSTROMO Integration Test run 238 for commit 586dc771c8b1dc5829592daa97696614437c8a83 and vajra-dynamic-test/v0.3.2 PASS. The operator guard is lexical and intentionally bounded. It does not parse arbitrary mathematics or programming languages, decide semantic equivalence, judge source quality, or certify truth."
+    "boundary": "Promotion is backed by successful NOSTROMO Integration Test run 240 for commit b30865061d29869dd96b4f74a3e486949817842e and vajra-provenance-diversity-test/v0.2.0 PASS. The guard catches only bounded superficial provenance-label mutations. It does not infer semantic equivalence, derivative-source relationships, cryptographic identity, real-world source independence, or factual truth."
   },
   "organs": {
     "shrooming": {
@@ -93,9 +93,9 @@
       "mode": "EXEC_CONNECTED_THICKENED",
       "source": "../vajra/vajra-engine.js + ../vajra/receipt-uncertainty-guard.js + ./vajra-conflict-escalation.mjs + ./vajra-provenance-diversity-guard.mjs",
       "actions": {
-        "DISMANTLE": "VERIFIED_PROPOSITION_AWARE_DISMANTLER_WITH_RECEIPT_GUARDS_MULTI_ORGAN_CONTEXT_CROSS_INTAKE_REPLAY_CONTENT_BOUND_HISTORY_ATTESTATION_PROVENANCE_DIVERSITY_AND_OPERATOR_PRESERVATION"
+        "DISMANTLE": "VERIFIED_PROPOSITION_AWARE_DISMANTLER_WITH_RECEIPT_GUARDS_MULTI_ORGAN_CONTEXT_CROSS_INTAKE_REPLAY_CONTENT_BOUND_HISTORY_ATTESTATION_CANONICAL_PROVENANCE_DIVERSITY_AND_OPERATOR_PRESERVATION"
       },
-      "boundary": "VAJRA v0.3.12 retains proposition-aware dismantling, uncertainty/provenance preservation, contest persistence, multi-organ conflict-context routing, replay containment, content-bound history attestation and cross-organ provenance-diversity auditing. The v0.3.2 core now prevents replay canonicalization from erasing a bounded set of meaning-bearing operators: comparison/equality operators and context-marked arithmetic plus/minus remain part of evidence identity while superficial typography is still normalized. This closes the preserved v0.2.9/v0.3.1 operator-collision defect without claiming general semantic parsing. Distinct provenance labels still do not prove real-world source independence. These remain deterministic lexical/structural guards, not cryptographic signatures, semantic adjudication, factual truth or real-world source-independence proof."
+      "boundary": "VAJRA v0.3.13 retains proposition-aware dismantling, uncertainty/provenance preservation, contest persistence, multi-organ conflict-context routing, replay containment, content-bound history attestation and semantic-operator-preserving replay identity. Its cross-organ provenance-diversity layer now canonicalizes bounded superficial label formatting before collision comparison, so case/spacing/punctuation/symbol mutations of one provenance label cannot masquerade as new source diversity. Raw provenance labels remain preserved for audit. Distinct canonical labels still do not prove real-world source independence. These remain deterministic lexical/structural guards, not cryptographic signatures, semantic adjudication, factual truth, derivative-source detection or real-world source-independence proof."
     }
   }
 }
