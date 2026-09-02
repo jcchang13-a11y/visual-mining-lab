@@ -12,8 +12,8 @@ const target='目前測試資料顯示 GUT 可以隔離重複污染。';
 const base=globalThis.VajraEngine.run(target,6);
 const contract=base.handoffs.find(x=>x.lens==='evidence');
 check(Boolean(contract),'EVIDENCE_CONTRACT_MISSING',base.handoffs);
-check(globalThis.VajraEngine.receiptUncertaintyGuardVersion==='0.3.7','GUARD_VERSION_MISSING',globalThis.VajraEngine.receiptUncertaintyGuardVersion);
-check(globalThis.VajraEngine.receiptContractAdequacyGuardVersion==='0.1','ADEQUACY_GUARD_VERSION_MISSING',globalThis.VajraEngine.receiptContractAdequacyGuardVersion);
+check(globalThis.VajraEngine.receiptUncertaintyGuardVersion==='0.3.8','GUARD_VERSION_MISSING',globalThis.VajraEngine.receiptUncertaintyGuardVersion);
+check(globalThis.VajraEngine.receiptContractAdequacyGuardVersion==='0.2','ADEQUACY_GUARD_VERSION_MISSING',globalThis.VajraEngine.receiptContractAdequacyGuardVersion);
 const common={targetRef:contract.targetRef,clauseRef:contract.clauseRef,lens:'evidence',organ:contract.preferredOrgan,status:'EXECUTED',material:'The searched evidence bundle contains multiple traceable observations and preserves source provenance.'};
 const insufficient={...common,provenanceFingerprint:'prov-uncertain-001',relationToTarget:'The available evidence is insufficient and does not support a conclusion about the target claim.'};
 const negatedRefute={...common,provenanceFingerprint:'prov-uncertain-002',relationToTarget:'The evidence does not refute the target claim, but remains insufficient to support it.'};
@@ -36,7 +36,7 @@ for(const [label,receipt,reason,counter] of [
   ['MIXED',mixedRelation,'MIXED_RELATION','mixed']
 ]){
   const applied=globalThis.VajraEngine.applyHandoffResults(base,[receipt]);
-  check(applied.version==='0.3.7',`${label}_VERSION`,applied.version);
+  check(applied.version==='0.3.8',`${label}_VERSION`,applied.version);
   check(applied.handoffResolution.resolved===0,`${label}_FALSE_RESOLUTION`,applied.handoffResolution);
   check(applied.unresolved.find(x=>x.lens==='evidence')?.status==='UNRESOLVED',`${label}_BRANCH_CLOSED`,applied.unresolved);
   check(applied.handoffResolution.rejectedReceipts.some(x=>x.reasons?.includes(reason)),`${label}_REJECTION_NOT_AUDITED`,applied.handoffResolution);
@@ -54,7 +54,7 @@ const sameProvSupport={...common,provenanceFingerprint:'prov-same-source-001',ma
 const sameProvRefute={...common,provenanceFingerprint:'PROV SAME SOURCE 001',material:'The same provenance identity also emits an opposing return about the same tested condition.',relationToTarget:'This return refutes the target claim under the tested condition.'};
 const sameProvApplied=globalThis.VajraEngine.applyHandoffResults(base,[sameProvSupport,sameProvRefute]);
 const sameProvBranch=sameProvApplied.unresolved.find(x=>x.lens==='evidence');
-check(sameProvApplied.version==='0.3.7','SAME_PROVENANCE_VERSION',sameProvApplied.version);
+check(sameProvApplied.version==='0.3.8','SAME_PROVENANCE_VERSION',sameProvApplied.version);
 check(sameProvApplied.handoffResolution.resolved===0,'SAME_PROVENANCE_FALSE_RESOLUTION',sameProvApplied.handoffResolution);
 check(sameProvApplied.handoffResolution.contested===0,'SAME_PROVENANCE_FALSE_INTERSOURCE_CONTEST',sameProvApplied.handoffResolution);
 check(sameProvApplied.handoffResolution.sameProvenanceConflict===2,'SAME_PROVENANCE_CONFLICT_COUNT',sameProvApplied.handoffResolution);
@@ -65,7 +65,6 @@ check(independentApplied.handoffResolution.resolved===0,'INDEPENDENT_CONFLICT_FA
 check(independentApplied.handoffResolution.contested===1,'INDEPENDENT_CONFLICT_NOT_PRESERVED',independentApplied.handoffResolution);
 check(independentApplied.unresolved.find(x=>x.lens==='evidence')?.status==='CONTESTED_BY_RECEIPTS','INDEPENDENT_CONFLICT_BRANCH_NOT_CONTESTED',independentApplied.unresolved);
 
-// v0.3.7 adversarial adequacy test: a long generic directional receipt must not close a specialized lens.
 const scopeContract=base.handoffs.find(x=>x.lens==='scope');
 check(Boolean(scopeContract),'SCOPE_CONTRACT_MISSING',base.handoffs);
 const genericScope={targetRef:scopeContract.targetRef,clauseRef:scopeContract.clauseRef,lens:'scope',organ:scopeContract.preferredOrgan,status:'EXECUTED',provenanceFingerprint:'prov-scope-generic-001',material:'The returned analysis contains a detailed discussion of the target claim and several observations from the current experiment.',relationToTarget:'This analysis supports the target claim based on the returned observations.'};
@@ -86,12 +85,16 @@ check(genericCounterApplied.handoffResolution.resolved===0,'GENERIC_COUNTEREXAMP
 check(genericCounterApplied.handoffResolution.contractAdequacyBlocked===1,'GENERIC_COUNTEREXAMPLE_ADEQUACY_COUNT',genericCounterApplied.handoffResolution);
 const adequateCounter={...genericCounter,provenanceFingerprint:'prov-counter-adequate-001',material:'No counterexample was found inside the explicitly searched scope of the ten active rounds; coverage is bounded and does not extend beyond those rounds.',relationToTarget:'This bounded counterexample search supports only the tested scope and does not establish the claim globally.'};
 const adequateCounterApplied=globalThis.VajraEngine.applyHandoffResults(base,[adequateCounter]);
+const adequateCounterBranch=adequateCounterApplied.unresolved.find(x=>x.lens==='counterexample');
 check(adequateCounterApplied.handoffResolution.resolved===1,'ADEQUATE_COUNTEREXAMPLE_RECEIPT_BLOCKED',adequateCounterApplied.handoffResolution);
+check(adequateCounterApplied.handoffResolution.boundedNullAccepted===1,'BOUNDED_NULL_NOT_AUDITED',adequateCounterApplied.handoffResolution);
+check(adequateCounterBranch?.resolution?.relationPolarity==='BOUNDED_NULL','BOUNDED_NULL_SEMANTICS_LOST',adequateCounterBranch?.resolution);
+check(String(adequateCounterBranch?.resolution?.boundary||'').includes('not support that the target claim is true'),'BOUNDED_NULL_TRUTH_DISCLAIMER_MISSING',adequateCounterBranch?.resolution);
 
-const gut=globalThis.GutEngine.digest({vajra:globalThis.VajraEngine.applyHandoffResults(base,[mixedRelation]),sameProvenance:sameProvApplied,genericScope:genericScopeApplied},{source:'VAJRA_PROVENANCE_ADEQUACY_GUARD_GUT_REGRESSION',inheritedSubstrates:[target]});
+const gut=globalThis.GutEngine.digest({vajra:globalThis.VajraEngine.applyHandoffResults(base,[mixedRelation]),sameProvenance:sameProvApplied,genericScope:genericScopeApplied,boundedNull:adequateCounterApplied},{source:'VAJRA_PROVENANCE_ADEQUACY_GUARD_GUT_REGRESSION',inheritedSubstrates:[target]});
 check(!gut.summary.includes(target),'GUT_TARGET_ECHO_AFTER_PROVENANCE_GUARD',gut.summary);
 check(gut.ingested>0&&gut.absorbed>=0,'GUT_REGRESSION_FAILED',{ingested:gut.ingested,absorbed:gut.absorbed});
-const result={schema:'nostromo-vajra-uncertainty-test/v0.3.7',completedAt:new Date().toISOString(),status:failures.length?'FAIL':'PASS',guards:{explicitUncertaintyCannotClose:true,negatedSupportCannotClose:true,negatedRefuteCannotClose:true,negatedContradictionCannotClose:true,notInconsistentCannotClose:true,failsToSupportCannotClose:true,chineseUncertaintyCannotClose:true,chineseNegatedPolarityCannotClose:true,longUnspecifiedRelationCannotClose:true,mixedPolarityCannotClose:true,positiveSupportStillCloses:true,explicitRefuteStillCloses:true,sameCanonicalProvenanceOppositionCannotResolve:true,sameCanonicalProvenanceOppositionIsNotCountedAsInterSourceContest:true,independentProvenanceOppositionStillContests:true,genericSpecializedReceiptCannotClose:true,lensSpecificScopeReceiptCanClose:true,boundedCounterexampleCoverageCanClose:true,gutRegression:true},finding:{classification:'LENS_SPECIFIC_HANDOFF_ADEQUACY_GUARD_ADDED',detail:'v0.3.7 prevents a long generic SUPPORTS/REFUTES receipt from closing a specialized VAJRA branch unless the returned material contains bounded lexical evidence that the requested lens-specific work was actually addressed. Scope requires boundary/scope material; counterexample requires a counterexample or bounded search coverage; other specialized lenses have corresponding conservative markers. Evidence-lens behavior remains governed by provenance, substance, polarity, conflict, and uncertainty guards.'},crossOrgan:{gut:{ingested:gut.ingested,absorbed:gut.absorbed,quarantined:gut.quarantined,summarySample:gut.summary.slice(0,360)}},failures,boundary:'PASS certifies only a bounded lexical/structural anti-false-certainty, provenance-topology, and lens-specific adequacy guard plus a GUT regression. It deliberately prefers false-negative OPEN branches over false closure. It does not semantically judge whether a receipt truly satisfies the handoff, whether evidence is high quality, or whether a target claim is true.'};
+const result={schema:'nostromo-vajra-uncertainty-test/v0.3.8',completedAt:new Date().toISOString(),status:failures.length?'FAIL':'PASS',guards:{explicitUncertaintyCannotClose:true,negatedSupportCannotClose:true,negatedRefuteCannotClose:true,negatedContradictionCannotClose:true,notInconsistentCannotClose:true,failsToSupportCannotClose:true,chineseUncertaintyCannotClose:true,chineseNegatedPolarityCannotClose:true,longUnspecifiedRelationCannotClose:true,mixedPolarityCannotClose:true,positiveSupportStillCloses:true,explicitRefuteStillCloses:true,sameCanonicalProvenanceOppositionCannotResolve:true,sameCanonicalProvenanceOppositionIsNotCountedAsInterSourceContest:true,independentProvenanceOppositionStillContests:true,genericSpecializedReceiptCannotClose:true,lensSpecificScopeReceiptCanClose:true,boundedCounterexampleCoverageCanClose:true,boundedNullDoesNotBecomeTruth:true,gutRegression:true},finding:{classification:'LENS_SPECIFIC_ADEQUACY_WITH_BOUNDED_NULL_SEMANTICS',detail:'v0.3.8 keeps generic specialized receipts from closing VAJRA branches, while distinguishing completion of a bounded counterexample search from certainty about the target claim. A no-counterexample return closes only when it explicitly states bounded scope/coverage and explicitly disclaims proof; the resolution is marked BOUNDED_NULL rather than SUPPORTS.'},crossOrgan:{gut:{ingested:gut.ingested,absorbed:gut.absorbed,quarantined:gut.quarantined,summarySample:gut.summary.slice(0,360)}},failures,boundary:'PASS certifies only bounded lexical/structural anti-false-certainty, provenance-topology, lens-specific adequacy, and BOUNDED_NULL work-contract semantics plus a GUT regression. BOUNDED_NULL is not evidence that a claim is true, and no search completeness beyond the declared scope is certified.'};
 await fs.writeFile(path.join(root,'nostromo/integration/vajra-uncertainty-last-result.json'),JSON.stringify(result,null,2)+'\n','utf8');
 console.log(JSON.stringify(result,null,2));
 if(result.status!=='PASS')process.exitCode=1;
