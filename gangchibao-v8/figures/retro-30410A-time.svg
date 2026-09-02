@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 460" role="img" aria-labelledby="title desc">
+  <title id="title">第十八分時間線回溯第十六、第十五、第十四、第六、第一分</title>
+  <desc id="desc">中心為第十八分，向外依序回溯第十六分、第十五分、第十四分、第六分與第一分。</desc>
+  <rect width="460" height="460" fill="#fff"/>
+  <g fill="none" stroke="#111" stroke-width="2">
+    <circle cx="230" cy="230" r="38"/>
+    <circle cx="230" cy="230" r="72"/>
+    <circle cx="230" cy="230" r="106"/>
+    <circle cx="230" cy="230" r="140"/>
+    <circle cx="230" cy="230" r="174"/>
+    <circle cx="230" cy="230" r="208"/>
+  </g>
+  <g fill="#111" font-family="Arial, Helvetica, sans-serif" font-size="18" text-anchor="middle">
+    <text x="230" y="236">18</text>
+    <text x="230" y="178">16</text>
+    <text x="230" y="144">15</text>
+    <text x="230" y="110">14</text>
+    <text x="230" y="76">6</text>
+    <text x="230" y="42">1</text>
+  </g>
+</svg>
