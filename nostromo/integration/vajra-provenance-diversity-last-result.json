@@ -1,0 +1,83 @@
+{
+  "schema": "vajra-provenance-diversity-test/v0.1.0",
+  "completedAt": "2026-09-02T03:07:01.906Z",
+  "status": "PASS",
+  "capability": "ADJUDICATION_PROVENANCE_DIVERSITY_GUARD",
+  "collisionCase": {
+    "status": "PROVENANCE_COLLISION_GUARD_ACTIVE",
+    "audit": {
+      "requiredOrgans": [
+        "DROPLET",
+        "MUTHER",
+        "SHROOMING"
+      ],
+      "receivedOrgans": [
+        "DROPLET",
+        "MUTHER",
+        "SHROOMING"
+      ],
+      "complete": true,
+      "receivedCount": 3,
+      "uniqueProvenanceCount": 2,
+      "collisions": [
+        {
+          "provenance": "shared-upstream-fingerprint-001",
+          "organs": [
+            "DROPLET",
+            "MUTHER"
+          ]
+        }
+      ],
+      "sharedProvenance": true,
+      "structurallyDistinctProvenanceLabels": false,
+      "sourceIndependenceProven": false,
+      "status": "PROVENANCE_COLLISION_REVIEW_REQUIRED",
+      "boundary": "This guard detects exact provenance-label reuse across organ returns. Distinct labels are not proof of real-world source independence, and collisions do not prove dependence; they block treating organ-count diversity as evidence-source diversity."
+    },
+    "nextAction": "AUDIT_SHARED_PROVENANCE_BEFORE_REASSESSMENT",
+    "closureAuthority": "NONE"
+  },
+  "distinctCase": {
+    "requiredOrgans": [
+      "DROPLET",
+      "MUTHER",
+      "SHROOMING"
+    ],
+    "receivedOrgans": [
+      "DROPLET",
+      "MUTHER",
+      "SHROOMING"
+    ],
+    "complete": true,
+    "receivedCount": 3,
+    "uniqueProvenanceCount": 3,
+    "collisions": [],
+    "sharedProvenance": false,
+    "structurallyDistinctProvenanceLabels": true,
+    "sourceIndependenceProven": false,
+    "status": "PROVENANCE_LABELS_DISTINCT_NOT_INDEPENDENCE_PROOF",
+    "boundary": "This guard detects exact provenance-label reuse across organ returns. Distinct labels are not proof of real-world source independence, and collisions do not prove dependence; they block treating organ-count diversity as evidence-source diversity."
+  },
+  "partialCase": {
+    "requiredOrgans": [
+      "DROPLET",
+      "MUTHER",
+      "SHROOMING"
+    ],
+    "receivedOrgans": [
+      "DROPLET",
+      "MUTHER"
+    ],
+    "complete": false,
+    "receivedCount": 2,
+    "uniqueProvenanceCount": 2,
+    "collisions": [],
+    "sharedProvenance": false,
+    "structurallyDistinctProvenanceLabels": false,
+    "sourceIndependenceProven": false,
+    "status": "PARTIAL_PROVENANCE_COVERAGE",
+    "boundary": "This guard detects exact provenance-label reuse across organ returns. Distinct labels are not proof of real-world source independence, and collisions do not prove dependence; they block treating organ-count diversity as evidence-source diversity."
+  },
+  "failures": [],
+  "boundary": "PASS proves deterministic detection of exact cross-organ provenance-label reuse and behavior change away from premature conflict reassessment. It does not prove real-world source independence when labels differ, semantic identity when labels match, or factual truth."
+}
