@@ -1,6 +1,6 @@
 {
-  "schema": "nostromo-vajra-dynamic-test/v0.3.1",
-  "completedAt": "2026-09-02T03:07:01.599Z",
+  "schema": "nostromo-vajra-dynamic-test/v0.3.2",
+  "completedAt": "2026-09-02T04:07:34.090Z",
   "status": "PASS",
   "guards": {
     "falseCertainty": true,
@@ -25,12 +25,13 @@
     "crossApplicationEvidenceReplayRejected": true,
     "formatMutationReplayRejected": true,
     "provenanceMutationReplayRejected": true,
+    "semanticOperatorPreservation": true,
     "priorResolutionPreserved": true
   },
   "preFixFinding": {
-    "version": "0.3.0",
-    "classification": "PROVENANCE_FORMAT_MUTATION_COULD_MINT_NEW_REPLAY_IDENTITY",
-    "detail": "v0.3.0 canonicalized returned material but only whitespace-cleaned provenance before evidence fingerprinting. The public boundary claimed both provenance and material were protected against superficial formatting mutation, but provenance case, Unicode width and punctuation changes could still mint a fresh replay identity. v0.3.1 canonicalizes both fields before evidenceIdentity fingerprinting."
+    "version": "0.3.1",
+    "classification": "SEMANTIC_OPERATOR_COLLISION_IN_REPLAY_CANONICALIZATION",
+    "detail": "v0.3.1 removed all Unicode punctuation and symbols from returned material. This correctly normalized typographic mutations but also collapsed meaning-bearing operators such as >/<, +/- and =/!=. v0.3.2 preserves a bounded operator vocabulary before punctuation stripping while retaining prior formatting-mutation and provenance-mutation replay guards."
   },
   "crossOrgan": {
     "vajraGut": {
@@ -62,7 +63,7 @@
           "provenance": "prov-verified-001",
           "relation": "One supports the target claim and one limits its scope.",
           "relationPolarity": "SUPPORTS",
-          "boundary": "Resolution means the handoff contract received a matching clause-scoped, executed, provenance-bearing and minimally substantive return with no detected opposing qualifying receipt in the same application. Replay identity canonicalizes both provenance and returned material across Unicode width, letter case, whitespace, punctuation and symbols before fingerprinting. One canonicalized provenance+material payload may resolve only one branch across accumulated VAJRA history. Minimal substance and relation polarity are bounded lexical heuristics, not semantic adequacy, source-quality judgment or truth verification."
+          "boundary": "Resolution means the handoff contract received a matching clause-scoped, executed, provenance-bearing and minimally substantive return with no detected opposing qualifying receipt in the same application. Replay identity normalizes Unicode width, letter case, whitespace and typographic punctuation while preserving a bounded set of meaning-bearing comparison/equality operators and context-marked arithmetic plus/minus. One canonicalized provenance+material payload may resolve only one branch across accumulated VAJRA history. Minimal substance and relation polarity are bounded lexical heuristics, not semantic adequacy, source-quality judgment or truth verification."
         }
       ],
       "contestedBranches": [],
@@ -153,7 +154,49 @@
       "rejected": 1,
       "canonicalEquivalent": true,
       "replayRejected": true
-    }
+    },
+    "operatorPreservation": [
+      {
+        "label": "GT_LT",
+        "a": "score > 10",
+        "b": "score < 10",
+        "canonicalA": "scoreopgt10",
+        "canonicalB": "scoreoplt10",
+        "distinct": true
+      },
+      {
+        "label": "PLUS_MINUS",
+        "a": "A + B",
+        "b": "A - B",
+        "canonicalA": "aopplusb",
+        "canonicalB": "aopminusb",
+        "distinct": true
+      },
+      {
+        "label": "EQ_NE",
+        "a": "p = 0.05",
+        "b": "p != 0.05",
+        "canonicalA": "popeq005",
+        "canonicalB": "popne005",
+        "distinct": true
+      },
+      {
+        "label": "GE_LE",
+        "a": "x >= 3",
+        "b": "x <= 3",
+        "canonicalA": "xopge3",
+        "canonicalB": "xople3",
+        "distinct": true
+      },
+      {
+        "label": "NUMERIC_PLUS_MINUS",
+        "a": "5+3",
+        "b": "5-3",
+        "canonicalA": "5opplus3",
+        "canonicalB": "5opminus3",
+        "distinct": true
+      }
+    ]
   },
   "cases": {
     "universal": {
@@ -286,5 +329,5 @@
     }
   },
   "failures": [],
-  "boundary": "PASS proves proposition-aware lens selection, auditable heuristic clause decomposition, clause-scoped handoff isolation, minimally substantive structural receipt closure, VAJRA→GUT referential continuity through GUT carryRefs rather than prose carry pollution, and replay-amplification guards across branches, repeated applications, returned-material formatting mutations, and provenance formatting mutations. The minimum-substance guard is only a bounded length/placeholder heuristic; it does not prove semantic adequacy, relevance, source quality, or truth. GUT carryRefs are out-of-band identifiers with provenance, not evidence or truth claims. Replay canonicalization covers Unicode width, case, whitespace, punctuation and symbols only; it is not semantic similarity detection. Clause splitting remains bounded syntax handling, not semantic parsing."
+  "boundary": "PASS proves proposition-aware lens selection, auditable heuristic clause decomposition, clause-scoped handoff isolation, minimally substantive structural receipt closure, VAJRA→GUT referential continuity through GUT carryRefs rather than prose carry pollution, replay-amplification guards across branches/repeated applications/format mutations, and bounded preservation of meaning-bearing operators in evidence identity. The operator guard is lexical and intentionally bounded: it protects comparison/equality operators and context-marked arithmetic plus/minus, not arbitrary mathematical or programming semantics. The minimum-substance guard does not prove semantic adequacy, relevance, source quality, or truth. GUT carryRefs are out-of-band identifiers with provenance, not evidence or truth claims. Clause splitting remains bounded syntax handling, not semantic parsing."
 }
