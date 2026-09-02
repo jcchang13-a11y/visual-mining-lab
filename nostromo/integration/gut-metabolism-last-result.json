@@ -1,6 +1,6 @@
 {
   "schema": "nostromo-gut-metabolism-test/v0.2.24",
-  "completedAt": "2026-09-02T18:07:47.420Z",
+  "completedAt": "2026-09-02T19:06:54.579Z",
   "status": "PASS",
   "gut": {
     "version": "0.2.24",
@@ -286,9 +286,9 @@
     "roundAntiEcho": [
       {
         "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PRE_POST_ADJACENT_SEGMENT_COLLAPSE_12+PREFIX_DIVERSITY_96+SHARED_BODY_SUMMARY_DIVERSITY_80_192+VOLATILE_REF_LINEAGE_NEUTRALIZATION+TAGGED_PAYLOAD_DEDUP+EXACT_TAGGED_TAIL_DEDUP_80+ROUTE_METADATA_STRIP+DELIMITED_LONG_SEGMENT_DEDUP+SUMMARY_EXACT_NONADJACENT_FULLWIDTH_COLON_CLAUSE_DEDUP+SUMMARY_SCRIPT_AWARE_NESTED_CLAUSE_COLLAPSE+SUMMARY_VOLATILE_LINEAGE_FULLWIDTH_COLON_CLAUSE_DEDUP+SUMMARY_CONSECUTIVE_SHORT_TOKEN_COLLAPSE_4+SUMMARY_REPEATED_LINEAGE_SIGNATURE_COLLAPSE_5_64+CARRY_MACHINE_METADATA_STRIP+OUT_OF_BAND_CARRY_REF_LEDGER+CARRY_DELIMITER_COLLISION_NEUTRALIZATION+CARRY_LINEAGE_SEPARATOR_NEUTRALIZATION",
-        "candidateCount": 242,
+        "candidateCount": 244,
         "selectedCount": 12,
-        "suppressedCount": 230,
+        "suppressedCount": 232,
         "sharedBodySuppressedCount": 0,
         "volatileLineageSuppressedCount": 0,
         "inheritedSubstrateStrippedCount": 0,
@@ -308,9 +308,9 @@
       },
       {
         "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PRE_POST_ADJACENT_SEGMENT_COLLAPSE_12+PREFIX_DIVERSITY_96+SHARED_BODY_SUMMARY_DIVERSITY_80_192+VOLATILE_REF_LINEAGE_NEUTRALIZATION+TAGGED_PAYLOAD_DEDUP+EXACT_TAGGED_TAIL_DEDUP_80+ROUTE_METADATA_STRIP+DELIMITED_LONG_SEGMENT_DEDUP+SUMMARY_EXACT_NONADJACENT_FULLWIDTH_COLON_CLAUSE_DEDUP+SUMMARY_SCRIPT_AWARE_NESTED_CLAUSE_COLLAPSE+SUMMARY_VOLATILE_LINEAGE_FULLWIDTH_COLON_CLAUSE_DEDUP+SUMMARY_CONSECUTIVE_SHORT_TOKEN_COLLAPSE_4+SUMMARY_REPEATED_LINEAGE_SIGNATURE_COLLAPSE_5_64+CARRY_MACHINE_METADATA_STRIP+OUT_OF_BAND_CARRY_REF_LEDGER+CARRY_DELIMITER_COLLISION_NEUTRALIZATION+CARRY_LINEAGE_SEPARATOR_NEUTRALIZATION",
-        "candidateCount": 224,
+        "candidateCount": 334,
         "selectedCount": 12,
-        "suppressedCount": 212,
+        "suppressedCount": 322,
         "sharedBodySuppressedCount": 9,
         "volatileLineageSuppressedCount": 0,
         "inheritedSubstrateStrippedCount": 10,
@@ -330,9 +330,9 @@
       },
       {
         "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PRE_POST_ADJACENT_SEGMENT_COLLAPSE_12+PREFIX_DIVERSITY_96+SHARED_BODY_SUMMARY_DIVERSITY_80_192+VOLATILE_REF_LINEAGE_NEUTRALIZATION+TAGGED_PAYLOAD_DEDUP+EXACT_TAGGED_TAIL_DEDUP_80+ROUTE_METADATA_STRIP+DELIMITED_LONG_SEGMENT_DEDUP+SUMMARY_EXACT_NONADJACENT_FULLWIDTH_COLON_CLAUSE_DEDUP+SUMMARY_SCRIPT_AWARE_NESTED_CLAUSE_COLLAPSE+SUMMARY_VOLATILE_LINEAGE_FULLWIDTH_COLON_CLAUSE_DEDUP+SUMMARY_CONSECUTIVE_SHORT_TOKEN_COLLAPSE_4+SUMMARY_REPEATED_LINEAGE_SIGNATURE_COLLAPSE_5_64+CARRY_MACHINE_METADATA_STRIP+OUT_OF_BAND_CARRY_REF_LEDGER+CARRY_DELIMITER_COLLISION_NEUTRALIZATION+CARRY_LINEAGE_SEPARATOR_NEUTRALIZATION",
-        "candidateCount": 227,
+        "candidateCount": 340,
         "selectedCount": 12,
-        "suppressedCount": 215,
+        "suppressedCount": 328,
         "sharedBodySuppressedCount": 9,
         "volatileLineageSuppressedCount": 0,
         "inheritedSubstrateStrippedCount": 10,
@@ -351,7 +351,7 @@
         "carryDelimiterNeutralizedCount": 1
       }
     ],
-    "boundary": "Certifies the closed-loop executor path plus carry-layer metabolic containment and a deterministic SHROOMING feedback-conditioned lens selector. From round 2 onward, redacted connector feedback can change SHROOMING inspection priority without claiming semantic learning or independent persistent agents. Recursive wrapper growth, ref/clause token fragmentation, embedded-token replay, and repeated lineage-only carry fragments are contained only at carry rendering; GUT nutrient atoms, routes and provenance remain intact. GitHub Actions does not itself search private Drive or the web."
+    "boundary": "Certifies the closed-loop executor path plus carry-layer metabolic containment, deterministic SHROOMING feedback-conditioned reading, and prior-round GUT→VAJRA branch reprioritization. From round 2 onward, redacted connector feedback can change SHROOMING inspection priority and source-preserving GUT metabolic atoms can change which unresolved VAJRA branch is inspected first. Neither mechanism gains closure authority or claims semantic learning. Recursive wrapper growth, ref/clause token fragmentation, embedded-token replay, and repeated lineage-only carry fragments are contained only at carry rendering; GUT nutrient atoms, routes and provenance remain intact. GitHub Actions does not itself search private Drive or the web."
   },
   "failures": [],
   "boundary": "PASS proves deterministic heuristic routing, provenance retention, quarantine/hold behavior, conservative exact inherited-substrate removal, exact tagged-payload de-echoing, exact repeated tagged-tail suppression while retaining distinct heads, pre/post short exact adjacent intra-atom echo suppression, shared-body summary diversity, exact non-adjacent full-width-colon carry-clause compaction, consecutive exact 1–4 character carry-token run collapse, summary-only machine ref/clause metadata containment, and a bounded out-of-band carryRefs ledger that preserves referential identity and provenance without re-inserting machine IDs into prose carry. It also proves near-duplicate preservation, structured-snippet protection, and a 3-round cross-organ connector-feedback regression whose final prose carry contains no hexadecimal ref/clause metadata tokens. It does not prove semantic novelty, semantic correctness, reference truth, or source truth."
