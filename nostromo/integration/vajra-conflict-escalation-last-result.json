@@ -1,6 +1,6 @@
 {
   "schema": "nostromo-vajra-conflict-escalation-test/v0.6.0",
-  "completedAt": "2026-09-02T01:07:56.358Z",
+  "completedAt": "2026-09-02T02:04:14.777Z",
   "status": "PASS",
   "guards": {
     "multiOrganEscalation": true,
@@ -179,7 +179,7 @@
   "returnIntake": {
     "organ": "VAJRA",
     "capability": "CONFLICT_ESCALATION_RETURN_INTAKE",
-    "version": "0.2.2",
+    "version": "0.2.3",
     "status": "RETURNS_ACCEPTED_REVIEW_REQUIRED",
     "closureBlocked": true,
     "closureAuthority": "NONE",
@@ -294,21 +294,30 @@
           "sourceOrgan": "DROPLET",
           "targetRef": "t001",
           "clauseRef": "c001",
-          "returnKey": "1cc59341"
+          "returnKey": "1cc59341",
+          "provenance": "droplet-source-audit-01",
+          "material": "Two opposing evidence items originate from separate declared source families, but methodological comparability remains only partially established.",
+          "relation": "Source independence is provisionally stronger than before while comparable-condition coverage remains unresolved."
         },
         {
           "packetId": "5618a826",
           "sourceOrgan": "MUTHER",
           "targetRef": "t001",
           "clauseRef": "c001",
-          "returnKey": "c44c8158"
+          "returnKey": "c44c8158",
+          "provenance": "muther-context-audit-01",
+          "material": "Repository context exposes a scope qualifier that narrows one supporting statement to condition A and leaves the broader formulation unsupported.",
+          "relation": "The disagreement may partly reflect scope mismatch, so the original contested branch should remain open."
         },
         {
           "packetId": "70745601",
           "sourceOrgan": "SHROOMING",
           "targetRef": "t001",
           "clauseRef": "c001",
-          "returnKey": "dbfe77fe"
+          "returnKey": "dbfe77fe",
+          "provenance": "shroom-boundary-stress-01",
+          "material": "A boundary reading separates the claim into matched-condition and unmatched-condition cases, producing different judgments without erasing either evidence position.",
+          "relation": "The competing criterion changes which cases count as counterexamples and therefore requires explicit adjudication."
         }
       ],
       "previouslyAcceptedCount": 0,
@@ -318,8 +327,8 @@
       "rejectedHistoricalIds": [],
       "rejectedHistoricalRecords": []
     },
-    "next": "Feed accepted receipt objects back into VAJRA conflict state as adjudication context; persist returnLedger.acceptedRecords as well as acceptedPacketIds between intakes. Bare packet IDs remain conservative replay blockers but cannot by themselves satisfy historical completion or allPacketsReturned. Keep the contested branch open and use returned organ differences to choose the next discriminating question.",
-    "boundary": "Deterministic packet-correlation, replay containment and history-attestation guard. Known bare acceptedPacketIds can conservatively block delayed replay, but only structurally attested accepted records matching issued packet identity, returning organ, targetRef, clauseRef and returnKey can count toward historical completion. Unknown or malformed historical ledger entries cannot create false allPacketsReturned. This is structural lineage attestation rather than cryptographic authenticity or factual verification; automatic truth closure remains forbidden."
+    "next": "Feed accepted receipt objects back into VAJRA conflict state as adjudication context; persist content-bound returnLedger.acceptedRecords as well as acceptedPacketIds between intakes. Bare packet IDs remain conservative replay blockers but cannot by themselves satisfy historical completion or allPacketsReturned. Keep the contested branch open and use returned organ differences to choose the next discriminating question.",
+    "boundary": "Deterministic packet-correlation, replay containment and content-bound history-attestation guard. Known bare acceptedPacketIds can conservatively block delayed replay, but historical completion requires packet scope plus provenance, substantive material, target relation and a returnKey that recomputes from that carried content. Unknown, malformed, truncated or content-mismatched historical ledger entries cannot create false allPacketsReturned. This is structural lineage integrity rather than cryptographic authenticity or factual verification; automatic truth closure remains forbidden."
   },
   "contextIntegration": {
     "unresolved": [
@@ -471,7 +480,10 @@
             "sourceOrgan": "DROPLET",
             "targetRef": "t001",
             "clauseRef": "c001",
-            "returnKey": "1cc59341"
+            "returnKey": "1cc59341",
+            "provenance": "droplet-source-audit-01",
+            "material": "Two opposing evidence items originate from separate declared source families, but methodological comparability remains only partially established.",
+            "relation": "Source independence is provisionally stronger than before while comparable-condition coverage remains unresolved."
           }
         ],
         "previouslyAcceptedCount": 1,
@@ -505,7 +517,11 @@
         "targetRef": "t001",
         "clauseRef": "c001",
         "reasons": [
-          "WRONG_RETURNING_ORGAN"
+          "WRONG_RETURNING_ORGAN",
+          "HISTORICAL_PROVENANCE_REQUIRED",
+          "HISTORICAL_MATERIAL_REQUIRED",
+          "HISTORICAL_RELATION_REQUIRED",
+          "RETURN_KEY_CONTENT_MISMATCH"
         ]
       }
     ]
