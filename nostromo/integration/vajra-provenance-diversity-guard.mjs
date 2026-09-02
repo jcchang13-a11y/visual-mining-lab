@@ -14,10 +14,12 @@ function protectSemanticOperators(v){
     [/(?<=[\p{L}\p{N})])\s*\+\s*(?=[\p{L}\p{N}(])/gu,' op_plus ']
   ];
   for(const [re,token] of replacements)s=s.replace(re,token);
-  // Preserve subtraction when it is presented as an explicit infix operator with spacing;
-  // ordinary hyphenated words remain typographic material and are still normalized away.
   s=s.replace(/(?<=[\p{L}\p{N})])\s+-\s+(?=[\p{L}\p{N}(])/gu,' op_minus ');
   return s;
+}
+function semanticOperatorSignature(v){
+  const protectedText=protectSemanticOperators(v);
+  return [...protectedText.matchAll(/\bop_(?:ne|gte|lte|eqeq|gt|lt|eq|plus|minus)\b/g)].map(m=>m[0]).sort();
 }
 function canonicalMaterial(v){
   return protectSemanticOperators(v).replace(/[\p{P}\p{S}\s]+/gu,'');
@@ -39,6 +41,10 @@ function boundedNearDuplicate(a,b){
   const ca=canonicalMaterial(a),cb=canonicalMaterial(b);
   if(ca.length<48||cb.length<48)return {match:false,score:0,mode:'TOO_SHORT'};
   if(ca===cb)return {match:true,score:1,mode:'CANONICAL_EXACT'};
+  const opA=semanticOperatorSignature(a),opB=semanticOperatorSignature(b);
+  if(opA.length&&opB.length&&opA.join('|')!==opB.join('|')){
+    return {match:false,score:0,mode:'SEMANTIC_OPERATOR_DIVERGENCE',operatorSignatureA:opA,operatorSignatureB:opB};
+  }
   const shorter=ca.length<=cb.length?ca:cb,longer=ca.length>cb.length?ca:cb;
   const containment=longer.includes(shorter)?shorter.length/longer.length:0;
   const grams=jaccard(shingleSet(ca),shingleSet(cb));
@@ -135,7 +141,7 @@ function provenanceAudit(returns){
     structurallyDistinctProvenanceLabels:complete&&!sharedProvenance&&uniqueProvenanceCount===receivedOrgans.length,
     sourceIndependenceProven:false,
     status:replayRisk?'UPSTREAM_REPLAY_REVIEW_REQUIRED':complete?'PROVENANCE_LABELS_DISTINCT_NOT_INDEPENDENCE_PROOF':'PARTIAL_PROVENANCE_COVERAGE',
-    boundary:'This guard compares bounded canonical provenance labels, operator-preserving canonical returned material, and a bounded lexical near-replay signal using containment/character 5-gram similarity for sufficiently long cross-organ material. Unicode width, case, whitespace and non-semantic formatting differences are normalized, while explicit comparison/equality/arithmetic operators are retained in material identity. Exact or near replay across organs is treated as replay risk. Distinct labels and distinct material are still not proof of real-world source independence; similarity does not prove semantic identity, derivation, dependence or factual error.'
+    boundary:'This guard compares bounded canonical provenance labels, operator-preserving canonical returned material, and a bounded lexical near-replay signal using containment/character 5-gram similarity for sufficiently long cross-organ material. Unicode width, case, whitespace and non-semantic formatting differences are normalized. Explicit comparison/equality/arithmetic operators are retained and, when both materials contain explicit operators with different operator signatures, lexical near-replay cannot override that meaning-bearing divergence. Exact or otherwise high-overlap near replay across organs remains replay risk. Distinct labels and distinct material are still not proof of real-world source independence; similarity does not prove semantic identity, derivation, dependence or factual error.'
   };
 }
 
@@ -170,13 +176,13 @@ export function guardVajraAdjudicationProvenance(vajra){
     ...source,
     organ:'VAJRA',
     capability:'ADJUDICATION_PROVENANCE_CONTENT_AND_NEAR_REPLAY_GUARD',
-    version:'0.3.2',
+    version:'0.3.3',
     status:collisionBranches?'UPSTREAM_REPLAY_GUARD_ACTIVE':auditedBranches?'PROVENANCE_DIVERSITY_AUDITED':'NO_ADJUDICATION_CONTEXT_TO_AUDIT',
     unresolved,
     provenanceDiversity:{auditedBranches,collisionBranches,formatMutationCollisionBranches,contentCollisionBranches,contentFormatMutationCollisionBranches,nearContentCollisionBranches,sourceIndependenceProven:false},
     closureAuthority:'NONE',
-    boundary:'Deterministic cross-organ provenance/content replay guard v0.3.2. It canonicalizes bounded superficial formatting, preserves explicit meaning-bearing comparison/equality/arithmetic operators in material identity, and applies bounded lexical near-replay checks for sufficiently long material. It blocks premature reassessment when organs replay exact or highly overlapping material under different labels without collapsing operator-distinct evidence. It does not infer semantic equivalence, derivative-source relationships, cryptographic identity, real-world independence, or factual truth.'
+    boundary:'Deterministic cross-organ provenance/content replay guard v0.3.3. It canonicalizes bounded superficial formatting, preserves explicit meaning-bearing comparison/equality/arithmetic operators in material identity, and prevents lexical near-replay similarity from collapsing materials whose explicit operator signatures diverge. It still applies bounded lexical near-replay checks for sufficiently long material without operator divergence and blocks premature reassessment on exact or otherwise high-overlap replay. It does not infer semantic equivalence, derivative-source relationships, cryptographic identity, real-world independence, or factual truth.'
   };
 }
 
-export {provenanceAudit,canonicalProvenance,canonicalMaterial,boundedNearDuplicate,protectSemanticOperators};
+export {provenanceAudit,canonicalProvenance,canonicalMaterial,boundedNearDuplicate,protectSemanticOperators,semanticOperatorSignature};
