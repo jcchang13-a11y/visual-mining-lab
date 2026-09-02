@@ -1,0 +1,28 @@
+{
+  "schema": "nostromo-research-failure-evidence/v0.1",
+  "recordedAt": "2026-09-03T05:04:51+08:00",
+  "organ": "VAJRA",
+  "component": "vajra-provenance-diversity-guard.mjs v0.3.3",
+  "status": "REPRODUCED_UNFIXED",
+  "failureClass": "SEMANTIC_OPERATOR_LOSS_IN_CANONICAL_REPLAY_IDENTITY",
+  "cases": [
+    {
+      "a": "The score is A * B under the registered calculation rule and preserved comparison window.",
+      "b": "The score is A / B under the registered calculation rule and preserved comparison window.",
+      "currentOperatorSignatureA": [],
+      "currentOperatorSignatureB": [],
+      "currentCanonicalIdentityEqual": true
+    },
+    {
+      "a": "The normalized rate is x * 10 under the registered calculation rule and preserved comparison window.",
+      "b": "The normalized rate is x / 10 under the registered calculation rule and preserved comparison window.",
+      "currentOperatorSignatureA": [],
+      "currentOperatorSignatureB": [],
+      "currentCanonicalIdentityEqual": true
+    }
+  ],
+  "mechanism": "v0.3.3 protects comparison/equality plus/minus operators before punctuation/symbol stripping, but does not protect multiplication or division. '*' and '/' are therefore erased by canonicalMaterial, allowing operator-opposed material to collapse to the same exact replay identity.",
+  "risk": "VAJRA can falsely classify multiplicative-versus-divisive cross-organ returns as exact upstream replay, blocking reassessment even though the explicit calculation relation differs.",
+  "nextFix": "Extend semantic operator protection/signature to multiplication and division, add exact-collision and near-replay adversarial tests, then promote only after NOSTROMO Integration Test passes.",
+  "boundary": "This is deterministic syntactic failure evidence. It does not assert semantic equivalence or factual truth. Public VAJRA status remains v0.3.3 until a tested fix passes CI."
+}
