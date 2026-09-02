@@ -1,0 +1,9 @@
+{
+  "purpose": "single CI trigger for VAJRA provenance-diversity guard verification",
+  "stagedCommits": [
+    "f1e0a5f4fb4ae5564074da5600f4e73f8017fdd0",
+    "b5529bfd37444d87581fd8313fe93eefadb189e6",
+    "8e807b4d4a876574bf49da67cec613e4dff32347"
+  ],
+  "truthRule": "DISPLAYED STATE MUST FOLLOW EVIDENCE"
+}
