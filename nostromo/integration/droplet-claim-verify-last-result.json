@@ -1,6 +1,6 @@
 {
-  "schema": "nostromo-droplet-claim-verify-test/v1.3",
-  "completedAt": "2026-09-03T12:08:52.769Z",
+  "schema": "nostromo-droplet-claim-verify-test/v1.4",
+  "completedAt": "2026-09-03T13:04:20.007Z",
   "status": "PASS",
   "cases": {
     "baseline": {
@@ -24,7 +24,9 @@
         "futureEvidence": 0,
         "overlappingDateEvidence": 0,
         "authoritativeSupportFamilies": 1,
-        "authoritativeRefuteFamilies": 0
+        "authoritativeRefuteFamilies": 0,
+        "eligibleAuthoritativeSupportFamilies": 1,
+        "eligibleAuthoritativeRefuteFamilies": 0
       },
       "conflicts": {
         "authoritativeConflict": false,
@@ -51,6 +53,15 @@
             "precision": null
           }
         ]
+      },
+      "diversity": {
+        "active": false,
+        "minAuthoritativeFamilies": null,
+        "eligibleAuthoritativeSupportFamilies": 1,
+        "eligibleAuthoritativeRefuteFamilies": 0,
+        "supportSatisfied": true,
+        "refuteSatisfied": true,
+        "boundary": "SOURCE-FAMILY DIVERSITY IS AN OPT-IN CORROBORATION GATE OVER CALLER-SUPPLIED FAMILY LABELS. IT LIMITS FALSE CERTAINTY FROM ONE DECLARED FAMILY BUT DOES NOT PROVE REAL-WORLD SOURCE INDEPENDENCE OR DERIVATIVE-SOURCE STATUS."
       },
       "evidenceFingerprint": "77ecfb0c8b102c3a",
       "evidence": [
@@ -101,7 +112,7 @@
           "familyKey": "microsoftresearch"
         }
       ],
-      "boundary": "VERDICT IS COMPUTED ONLY FROM THE EXPLICIT EVIDENCE BUNDLE SUPPLIED BY AN ACTUAL CONNECTOR OR CALLER. EXACT REPLAYED EVIDENCE IS SUPPRESSED BY FINGERPRINT/IDENTITY. WHEN AN EXPLICIT AS-OF DATE AND MAX-AGE POLICY ARE SUPPLIED, STALE, UNDATED, FUTURE-DATED, OR DATE-RANGE-OVERLAPPING EVIDENCE REMAINS AUDITABLE BUT CANNOT CREATE CERTAINTY. SOURCE-FAMILY COUNTS ARE AUDIT SIGNALS RATHER THAN PROOF OF INDEPENDENCE, AND CONFLICTING AUTHORITATIVE DIRECTIONS OR CONTRADICTORY USE OF ONE FINGERPRINT FORCE INDETERMINATE. THIS EXECUTOR DOES NOT SEARCH THE WEB, INFER WHETHER A CLAIM IS TIME-SENSITIVE, SCORE METHODOLOGICAL QUALITY, PROVE SOURCE INDEPENDENCE, OR TREAT ABSENCE OF REFUTATION AS GLOBAL TRUTH."
+      "boundary": "VERDICT IS COMPUTED ONLY FROM THE EXPLICIT EVIDENCE BUNDLE SUPPLIED BY AN ACTUAL CONNECTOR OR CALLER. EXACT REPLAYED EVIDENCE IS SUPPRESSED BY FINGERPRINT/IDENTITY. WHEN AN EXPLICIT AS-OF DATE AND MAX-AGE POLICY ARE SUPPLIED, STALE, UNDATED, FUTURE-DATED, OR DATE-RANGE-OVERLAPPING EVIDENCE REMAINS AUDITABLE BUT CANNOT CREATE CERTAINTY. WHEN AN OPT-IN MINIMUM AUTHORITATIVE SOURCE-FAMILY POLICY IS SUPPLIED, ONE DECLARED FAMILY CANNOT CREATE CERTAINTY BY ITSELF. SOURCE-FAMILY LABELS REMAIN CALLER-SUPPLIED AUDIT SIGNALS, NOT PROOF OF INDEPENDENCE. CONFLICTING AUTHORITATIVE DIRECTIONS OR CONTRADICTORY USE OF ONE FINGERPRINT FORCE INDETERMINATE. THIS EXECUTOR DOES NOT SEARCH THE WEB, INFER WHETHER A CLAIM IS TIME-SENSITIVE, SCORE METHODOLOGICAL QUALITY, PROVE SOURCE INDEPENDENCE, DETECT DERIVATIVE SOURCES, OR TREAT ABSENCE OF REFUTATION AS GLOBAL TRUTH."
     },
     "duplicateReplay": {
       "executor": "DROPLET_CLAIM_VERIFY",
@@ -124,7 +135,9 @@
         "futureEvidence": 0,
         "overlappingDateEvidence": 0,
         "authoritativeSupportFamilies": 1,
-        "authoritativeRefuteFamilies": 0
+        "authoritativeRefuteFamilies": 0,
+        "eligibleAuthoritativeSupportFamilies": 1,
+        "eligibleAuthoritativeRefuteFamilies": 0
       },
       "conflicts": {
         "authoritativeConflict": false,
@@ -144,6 +157,15 @@
             "precision": null
           }
         ]
+      },
+      "diversity": {
+        "active": false,
+        "minAuthoritativeFamilies": null,
+        "eligibleAuthoritativeSupportFamilies": 1,
+        "eligibleAuthoritativeRefuteFamilies": 0,
+        "supportSatisfied": true,
+        "refuteSatisfied": true,
+        "boundary": "SOURCE-FAMILY DIVERSITY IS AN OPT-IN CORROBORATION GATE OVER CALLER-SUPPLIED FAMILY LABELS. IT LIMITS FALSE CERTAINTY FROM ONE DECLARED FAMILY BUT DOES NOT PROVE REAL-WORLD SOURCE INDEPENDENCE OR DERIVATIVE-SOURCE STATUS."
       },
       "evidenceFingerprint": "950affc15860be8c",
       "evidence": [
@@ -194,7 +216,7 @@
           "familyKey": "publishera"
         }
       ],
-      "boundary": "VERDICT IS COMPUTED ONLY FROM THE EXPLICIT EVIDENCE BUNDLE SUPPLIED BY AN ACTUAL CONNECTOR OR CALLER. EXACT REPLAYED EVIDENCE IS SUPPRESSED BY FINGERPRINT/IDENTITY. WHEN AN EXPLICIT AS-OF DATE AND MAX-AGE POLICY ARE SUPPLIED, STALE, UNDATED, FUTURE-DATED, OR DATE-RANGE-OVERLAPPING EVIDENCE REMAINS AUDITABLE BUT CANNOT CREATE CERTAINTY. SOURCE-FAMILY COUNTS ARE AUDIT SIGNALS RATHER THAN PROOF OF INDEPENDENCE, AND CONFLICTING AUTHORITATIVE DIRECTIONS OR CONTRADICTORY USE OF ONE FINGERPRINT FORCE INDETERMINATE. THIS EXECUTOR DOES NOT SEARCH THE WEB, INFER WHETHER A CLAIM IS TIME-SENSITIVE, SCORE METHODOLOGICAL QUALITY, PROVE SOURCE INDEPENDENCE, OR TREAT ABSENCE OF REFUTATION AS GLOBAL TRUTH."
+      "boundary": "VERDICT IS COMPUTED ONLY FROM THE EXPLICIT EVIDENCE BUNDLE SUPPLIED BY AN ACTUAL CONNECTOR OR CALLER. EXACT REPLAYED EVIDENCE IS SUPPRESSED BY FINGERPRINT/IDENTITY. WHEN AN EXPLICIT AS-OF DATE AND MAX-AGE POLICY ARE SUPPLIED, STALE, UNDATED, FUTURE-DATED, OR DATE-RANGE-OVERLAPPING EVIDENCE REMAINS AUDITABLE BUT CANNOT CREATE CERTAINTY. WHEN AN OPT-IN MINIMUM AUTHORITATIVE SOURCE-FAMILY POLICY IS SUPPLIED, ONE DECLARED FAMILY CANNOT CREATE CERTAINTY BY ITSELF. SOURCE-FAMILY LABELS REMAIN CALLER-SUPPLIED AUDIT SIGNALS, NOT PROOF OF INDEPENDENCE. CONFLICTING AUTHORITATIVE DIRECTIONS OR CONTRADICTORY USE OF ONE FINGERPRINT FORCE INDETERMINATE. THIS EXECUTOR DOES NOT SEARCH THE WEB, INFER WHETHER A CLAIM IS TIME-SENSITIVE, SCORE METHODOLOGICAL QUALITY, PROVE SOURCE INDEPENDENCE, DETECT DERIVATIVE SOURCES, OR TREAT ABSENCE OF REFUTATION AS GLOBAL TRUTH."
     },
     "authoritativeConflict": {
       "executor": "DROPLET_CLAIM_VERIFY",
@@ -217,7 +239,9 @@
         "futureEvidence": 0,
         "overlappingDateEvidence": 0,
         "authoritativeSupportFamilies": 1,
-        "authoritativeRefuteFamilies": 1
+        "authoritativeRefuteFamilies": 1,
+        "eligibleAuthoritativeSupportFamilies": 1,
+        "eligibleAuthoritativeRefuteFamilies": 1
       },
       "conflicts": {
         "authoritativeConflict": true,
@@ -244,6 +268,15 @@
             "precision": null
           }
         ]
+      },
+      "diversity": {
+        "active": false,
+        "minAuthoritativeFamilies": null,
+        "eligibleAuthoritativeSupportFamilies": 1,
+        "eligibleAuthoritativeRefuteFamilies": 1,
+        "supportSatisfied": true,
+        "refuteSatisfied": true,
+        "boundary": "SOURCE-FAMILY DIVERSITY IS AN OPT-IN CORROBORATION GATE OVER CALLER-SUPPLIED FAMILY LABELS. IT LIMITS FALSE CERTAINTY FROM ONE DECLARED FAMILY BUT DOES NOT PROVE REAL-WORLD SOURCE INDEPENDENCE OR DERIVATIVE-SOURCE STATUS."
       },
       "evidenceFingerprint": "c5e8f445969d4c54",
       "evidence": [
@@ -294,7 +327,7 @@
           "familyKey": "authorityb"
         }
       ],
-      "boundary": "VERDICT IS COMPUTED ONLY FROM THE EXPLICIT EVIDENCE BUNDLE SUPPLIED BY AN ACTUAL CONNECTOR OR CALLER. EXACT REPLAYED EVIDENCE IS SUPPRESSED BY FINGERPRINT/IDENTITY. WHEN AN EXPLICIT AS-OF DATE AND MAX-AGE POLICY ARE SUPPLIED, STALE, UNDATED, FUTURE-DATED, OR DATE-RANGE-OVERLAPPING EVIDENCE REMAINS AUDITABLE BUT CANNOT CREATE CERTAINTY. SOURCE-FAMILY COUNTS ARE AUDIT SIGNALS RATHER THAN PROOF OF INDEPENDENCE, AND CONFLICTING AUTHORITATIVE DIRECTIONS OR CONTRADICTORY USE OF ONE FINGERPRINT FORCE INDETERMINATE. THIS EXECUTOR DOES NOT SEARCH THE WEB, INFER WHETHER A CLAIM IS TIME-SENSITIVE, SCORE METHODOLOGICAL QUALITY, PROVE SOURCE INDEPENDENCE, OR TREAT ABSENCE OF REFUTATION AS GLOBAL TRUTH."
+      "boundary": "VERDICT IS COMPUTED ONLY FROM THE EXPLICIT EVIDENCE BUNDLE SUPPLIED BY AN ACTUAL CONNECTOR OR CALLER. EXACT REPLAYED EVIDENCE IS SUPPRESSED BY FINGERPRINT/IDENTITY. WHEN AN EXPLICIT AS-OF DATE AND MAX-AGE POLICY ARE SUPPLIED, STALE, UNDATED, FUTURE-DATED, OR DATE-RANGE-OVERLAPPING EVIDENCE REMAINS AUDITABLE BUT CANNOT CREATE CERTAINTY. WHEN AN OPT-IN MINIMUM AUTHORITATIVE SOURCE-FAMILY POLICY IS SUPPLIED, ONE DECLARED FAMILY CANNOT CREATE CERTAINTY BY ITSELF. SOURCE-FAMILY LABELS REMAIN CALLER-SUPPLIED AUDIT SIGNALS, NOT PROOF OF INDEPENDENCE. CONFLICTING AUTHORITATIVE DIRECTIONS OR CONTRADICTORY USE OF ONE FINGERPRINT FORCE INDETERMINATE. THIS EXECUTOR DOES NOT SEARCH THE WEB, INFER WHETHER A CLAIM IS TIME-SENSITIVE, SCORE METHODOLOGICAL QUALITY, PROVE SOURCE INDEPENDENCE, DETECT DERIVATIVE SOURCES, OR TREAT ABSENCE OF REFUTATION AS GLOBAL TRUTH."
     },
     "fingerprintIntegrity": {
       "executor": "DROPLET_CLAIM_VERIFY",
@@ -317,7 +350,9 @@
         "futureEvidence": 0,
         "overlappingDateEvidence": 0,
         "authoritativeSupportFamilies": 1,
-        "authoritativeRefuteFamilies": 0
+        "authoritativeRefuteFamilies": 0,
+        "eligibleAuthoritativeSupportFamilies": 1,
+        "eligibleAuthoritativeRefuteFamilies": 0
       },
       "conflicts": {
         "authoritativeConflict": false,
@@ -339,6 +374,15 @@
             "precision": null
           }
         ]
+      },
+      "diversity": {
+        "active": false,
+        "minAuthoritativeFamilies": null,
+        "eligibleAuthoritativeSupportFamilies": 1,
+        "eligibleAuthoritativeRefuteFamilies": 0,
+        "supportSatisfied": true,
+        "refuteSatisfied": true,
+        "boundary": "SOURCE-FAMILY DIVERSITY IS AN OPT-IN CORROBORATION GATE OVER CALLER-SUPPLIED FAMILY LABELS. IT LIMITS FALSE CERTAINTY FROM ONE DECLARED FAMILY BUT DOES NOT PROVE REAL-WORLD SOURCE INDEPENDENCE OR DERIVATIVE-SOURCE STATUS."
       },
       "evidenceFingerprint": "f179e887e56cab3d",
       "evidence": [
@@ -378,7 +422,7 @@
           "familyKey": "sourcex"
         }
       ],
-      "boundary": "VERDICT IS COMPUTED ONLY FROM THE EXPLICIT EVIDENCE BUNDLE SUPPLIED BY AN ACTUAL CONNECTOR OR CALLER. EXACT REPLAYED EVIDENCE IS SUPPRESSED BY FINGERPRINT/IDENTITY. WHEN AN EXPLICIT AS-OF DATE AND MAX-AGE POLICY ARE SUPPLIED, STALE, UNDATED, FUTURE-DATED, OR DATE-RANGE-OVERLAPPING EVIDENCE REMAINS AUDITABLE BUT CANNOT CREATE CERTAINTY. SOURCE-FAMILY COUNTS ARE AUDIT SIGNALS RATHER THAN PROOF OF INDEPENDENCE, AND CONFLICTING AUTHORITATIVE DIRECTIONS OR CONTRADICTORY USE OF ONE FINGERPRINT FORCE INDETERMINATE. THIS EXECUTOR DOES NOT SEARCH THE WEB, INFER WHETHER A CLAIM IS TIME-SENSITIVE, SCORE METHODOLOGICAL QUALITY, PROVE SOURCE INDEPENDENCE, OR TREAT ABSENCE OF REFUTATION AS GLOBAL TRUTH."
+      "boundary": "VERDICT IS COMPUTED ONLY FROM THE EXPLICIT EVIDENCE BUNDLE SUPPLIED BY AN ACTUAL CONNECTOR OR CALLER. EXACT REPLAYED EVIDENCE IS SUPPRESSED BY FINGERPRINT/IDENTITY. WHEN AN EXPLICIT AS-OF DATE AND MAX-AGE POLICY ARE SUPPLIED, STALE, UNDATED, FUTURE-DATED, OR DATE-RANGE-OVERLAPPING EVIDENCE REMAINS AUDITABLE BUT CANNOT CREATE CERTAINTY. WHEN AN OPT-IN MINIMUM AUTHORITATIVE SOURCE-FAMILY POLICY IS SUPPLIED, ONE DECLARED FAMILY CANNOT CREATE CERTAINTY BY ITSELF. SOURCE-FAMILY LABELS REMAIN CALLER-SUPPLIED AUDIT SIGNALS, NOT PROOF OF INDEPENDENCE. CONFLICTING AUTHORITATIVE DIRECTIONS OR CONTRADICTORY USE OF ONE FINGERPRINT FORCE INDETERMINATE. THIS EXECUTOR DOES NOT SEARCH THE WEB, INFER WHETHER A CLAIM IS TIME-SENSITIVE, SCORE METHODOLOGICAL QUALITY, PROVE SOURCE INDEPENDENCE, DETECT DERIVATIVE SOURCES, OR TREAT ABSENCE OF REFUTATION AS GLOBAL TRUTH."
     },
     "lowAuthorityOnly": {
       "executor": "DROPLET_CLAIM_VERIFY",
@@ -401,7 +445,9 @@
         "futureEvidence": 0,
         "overlappingDateEvidence": 0,
         "authoritativeSupportFamilies": 0,
-        "authoritativeRefuteFamilies": 0
+        "authoritativeRefuteFamilies": 0,
+        "eligibleAuthoritativeSupportFamilies": 0,
+        "eligibleAuthoritativeRefuteFamilies": 0
       },
       "conflicts": {
         "authoritativeConflict": false,
@@ -421,6 +467,15 @@
             "precision": null
           }
         ]
+      },
+      "diversity": {
+        "active": false,
+        "minAuthoritativeFamilies": null,
+        "eligibleAuthoritativeSupportFamilies": 0,
+        "eligibleAuthoritativeRefuteFamilies": 0,
+        "supportSatisfied": true,
+        "refuteSatisfied": true,
+        "boundary": "SOURCE-FAMILY DIVERSITY IS AN OPT-IN CORROBORATION GATE OVER CALLER-SUPPLIED FAMILY LABELS. IT LIMITS FALSE CERTAINTY FROM ONE DECLARED FAMILY BUT DOES NOT PROVE REAL-WORLD SOURCE INDEPENDENCE OR DERIVATIVE-SOURCE STATUS."
       },
       "evidenceFingerprint": "32be21079be2ef71",
       "evidence": [
@@ -449,7 +504,7 @@
           "familyKey": "unknownrepost"
         }
       ],
-      "boundary": "VERDICT IS COMPUTED ONLY FROM THE EXPLICIT EVIDENCE BUNDLE SUPPLIED BY AN ACTUAL CONNECTOR OR CALLER. EXACT REPLAYED EVIDENCE IS SUPPRESSED BY FINGERPRINT/IDENTITY. WHEN AN EXPLICIT AS-OF DATE AND MAX-AGE POLICY ARE SUPPLIED, STALE, UNDATED, FUTURE-DATED, OR DATE-RANGE-OVERLAPPING EVIDENCE REMAINS AUDITABLE BUT CANNOT CREATE CERTAINTY. SOURCE-FAMILY COUNTS ARE AUDIT SIGNALS RATHER THAN PROOF OF INDEPENDENCE, AND CONFLICTING AUTHORITATIVE DIRECTIONS OR CONTRADICTORY USE OF ONE FINGERPRINT FORCE INDETERMINATE. THIS EXECUTOR DOES NOT SEARCH THE WEB, INFER WHETHER A CLAIM IS TIME-SENSITIVE, SCORE METHODOLOGICAL QUALITY, PROVE SOURCE INDEPENDENCE, OR TREAT ABSENCE OF REFUTATION AS GLOBAL TRUTH."
+      "boundary": "VERDICT IS COMPUTED ONLY FROM THE EXPLICIT EVIDENCE BUNDLE SUPPLIED BY AN ACTUAL CONNECTOR OR CALLER. EXACT REPLAYED EVIDENCE IS SUPPRESSED BY FINGERPRINT/IDENTITY. WHEN AN EXPLICIT AS-OF DATE AND MAX-AGE POLICY ARE SUPPLIED, STALE, UNDATED, FUTURE-DATED, OR DATE-RANGE-OVERLAPPING EVIDENCE REMAINS AUDITABLE BUT CANNOT CREATE CERTAINTY. WHEN AN OPT-IN MINIMUM AUTHORITATIVE SOURCE-FAMILY POLICY IS SUPPLIED, ONE DECLARED FAMILY CANNOT CREATE CERTAINTY BY ITSELF. SOURCE-FAMILY LABELS REMAIN CALLER-SUPPLIED AUDIT SIGNALS, NOT PROOF OF INDEPENDENCE. CONFLICTING AUTHORITATIVE DIRECTIONS OR CONTRADICTORY USE OF ONE FINGERPRINT FORCE INDETERMINATE. THIS EXECUTOR DOES NOT SEARCH THE WEB, INFER WHETHER A CLAIM IS TIME-SENSITIVE, SCORE METHODOLOGICAL QUALITY, PROVE SOURCE INDEPENDENCE, DETECT DERIVATIVE SOURCES, OR TREAT ABSENCE OF REFUTATION AS GLOBAL TRUTH."
     },
     "staleAuthority": {
       "executor": "DROPLET_CLAIM_VERIFY",
@@ -472,7 +527,9 @@
         "futureEvidence": 0,
         "overlappingDateEvidence": 0,
         "authoritativeSupportFamilies": 1,
-        "authoritativeRefuteFamilies": 0
+        "authoritativeRefuteFamilies": 0,
+        "eligibleAuthoritativeSupportFamilies": 0,
+        "eligibleAuthoritativeRefuteFamilies": 0
       },
       "conflicts": {
         "authoritativeConflict": false,
@@ -492,6 +549,15 @@
             "precision": "DAY"
           }
         ]
+      },
+      "diversity": {
+        "active": false,
+        "minAuthoritativeFamilies": null,
+        "eligibleAuthoritativeSupportFamilies": 0,
+        "eligibleAuthoritativeRefuteFamilies": 0,
+        "supportSatisfied": true,
+        "refuteSatisfied": true,
+        "boundary": "SOURCE-FAMILY DIVERSITY IS AN OPT-IN CORROBORATION GATE OVER CALLER-SUPPLIED FAMILY LABELS. IT LIMITS FALSE CERTAINTY FROM ONE DECLARED FAMILY BUT DOES NOT PROVE REAL-WORLD SOURCE INDEPENDENCE OR DERIVATIVE-SOURCE STATUS."
       },
       "evidenceFingerprint": "dacc4e60ebb332c7",
       "evidence": [
@@ -520,7 +586,7 @@
           "familyKey": "officialstatus"
         }
       ],
-      "boundary": "VERDICT IS COMPUTED ONLY FROM THE EXPLICIT EVIDENCE BUNDLE SUPPLIED BY AN ACTUAL CONNECTOR OR CALLER. EXACT REPLAYED EVIDENCE IS SUPPRESSED BY FINGERPRINT/IDENTITY. WHEN AN EXPLICIT AS-OF DATE AND MAX-AGE POLICY ARE SUPPLIED, STALE, UNDATED, FUTURE-DATED, OR DATE-RANGE-OVERLAPPING EVIDENCE REMAINS AUDITABLE BUT CANNOT CREATE CERTAINTY. SOURCE-FAMILY COUNTS ARE AUDIT SIGNALS RATHER THAN PROOF OF INDEPENDENCE, AND CONFLICTING AUTHORITATIVE DIRECTIONS OR CONTRADICTORY USE OF ONE FINGERPRINT FORCE INDETERMINATE. THIS EXECUTOR DOES NOT SEARCH THE WEB, INFER WHETHER A CLAIM IS TIME-SENSITIVE, SCORE METHODOLOGICAL QUALITY, PROVE SOURCE INDEPENDENCE, OR TREAT ABSENCE OF REFUTATION AS GLOBAL TRUTH."
+      "boundary": "VERDICT IS COMPUTED ONLY FROM THE EXPLICIT EVIDENCE BUNDLE SUPPLIED BY AN ACTUAL CONNECTOR OR CALLER. EXACT REPLAYED EVIDENCE IS SUPPRESSED BY FINGERPRINT/IDENTITY. WHEN AN EXPLICIT AS-OF DATE AND MAX-AGE POLICY ARE SUPPLIED, STALE, UNDATED, FUTURE-DATED, OR DATE-RANGE-OVERLAPPING EVIDENCE REMAINS AUDITABLE BUT CANNOT CREATE CERTAINTY. WHEN AN OPT-IN MINIMUM AUTHORITATIVE SOURCE-FAMILY POLICY IS SUPPLIED, ONE DECLARED FAMILY CANNOT CREATE CERTAINTY BY ITSELF. SOURCE-FAMILY LABELS REMAIN CALLER-SUPPLIED AUDIT SIGNALS, NOT PROOF OF INDEPENDENCE. CONFLICTING AUTHORITATIVE DIRECTIONS OR CONTRADICTORY USE OF ONE FINGERPRINT FORCE INDETERMINATE. THIS EXECUTOR DOES NOT SEARCH THE WEB, INFER WHETHER A CLAIM IS TIME-SENSITIVE, SCORE METHODOLOGICAL QUALITY, PROVE SOURCE INDEPENDENCE, DETECT DERIVATIVE SOURCES, OR TREAT ABSENCE OF REFUTATION AS GLOBAL TRUTH."
     },
     "freshAuthority": {
       "executor": "DROPLET_CLAIM_VERIFY",
@@ -543,7 +609,9 @@
         "futureEvidence": 0,
         "overlappingDateEvidence": 0,
         "authoritativeSupportFamilies": 1,
-        "authoritativeRefuteFamilies": 0
+        "authoritativeRefuteFamilies": 0,
+        "eligibleAuthoritativeSupportFamilies": 1,
+        "eligibleAuthoritativeRefuteFamilies": 0
       },
       "conflicts": {
         "authoritativeConflict": false,
@@ -563,6 +631,15 @@
             "precision": "DAY"
           }
         ]
+      },
+      "diversity": {
+        "active": false,
+        "minAuthoritativeFamilies": null,
+        "eligibleAuthoritativeSupportFamilies": 1,
+        "eligibleAuthoritativeRefuteFamilies": 0,
+        "supportSatisfied": true,
+        "refuteSatisfied": true,
+        "boundary": "SOURCE-FAMILY DIVERSITY IS AN OPT-IN CORROBORATION GATE OVER CALLER-SUPPLIED FAMILY LABELS. IT LIMITS FALSE CERTAINTY FROM ONE DECLARED FAMILY BUT DOES NOT PROVE REAL-WORLD SOURCE INDEPENDENCE OR DERIVATIVE-SOURCE STATUS."
       },
       "evidenceFingerprint": "b6fe0ef3e1071c04",
       "evidence": [
@@ -591,7 +668,7 @@
           "familyKey": "officialstatus"
         }
       ],
-      "boundary": "VERDICT IS COMPUTED ONLY FROM THE EXPLICIT EVIDENCE BUNDLE SUPPLIED BY AN ACTUAL CONNECTOR OR CALLER. EXACT REPLAYED EVIDENCE IS SUPPRESSED BY FINGERPRINT/IDENTITY. WHEN AN EXPLICIT AS-OF DATE AND MAX-AGE POLICY ARE SUPPLIED, STALE, UNDATED, FUTURE-DATED, OR DATE-RANGE-OVERLAPPING EVIDENCE REMAINS AUDITABLE BUT CANNOT CREATE CERTAINTY. SOURCE-FAMILY COUNTS ARE AUDIT SIGNALS RATHER THAN PROOF OF INDEPENDENCE, AND CONFLICTING AUTHORITATIVE DIRECTIONS OR CONTRADICTORY USE OF ONE FINGERPRINT FORCE INDETERMINATE. THIS EXECUTOR DOES NOT SEARCH THE WEB, INFER WHETHER A CLAIM IS TIME-SENSITIVE, SCORE METHODOLOGICAL QUALITY, PROVE SOURCE INDEPENDENCE, OR TREAT ABSENCE OF REFUTATION AS GLOBAL TRUTH."
+      "boundary": "VERDICT IS COMPUTED ONLY FROM THE EXPLICIT EVIDENCE BUNDLE SUPPLIED BY AN ACTUAL CONNECTOR OR CALLER. EXACT REPLAYED EVIDENCE IS SUPPRESSED BY FINGERPRINT/IDENTITY. WHEN AN EXPLICIT AS-OF DATE AND MAX-AGE POLICY ARE SUPPLIED, STALE, UNDATED, FUTURE-DATED, OR DATE-RANGE-OVERLAPPING EVIDENCE REMAINS AUDITABLE BUT CANNOT CREATE CERTAINTY. WHEN AN OPT-IN MINIMUM AUTHORITATIVE SOURCE-FAMILY POLICY IS SUPPLIED, ONE DECLARED FAMILY CANNOT CREATE CERTAINTY BY ITSELF. SOURCE-FAMILY LABELS REMAIN CALLER-SUPPLIED AUDIT SIGNALS, NOT PROOF OF INDEPENDENCE. CONFLICTING AUTHORITATIVE DIRECTIONS OR CONTRADICTORY USE OF ONE FINGERPRINT FORCE INDETERMINATE. THIS EXECUTOR DOES NOT SEARCH THE WEB, INFER WHETHER A CLAIM IS TIME-SENSITIVE, SCORE METHODOLOGICAL QUALITY, PROVE SOURCE INDEPENDENCE, DETECT DERIVATIVE SOURCES, OR TREAT ABSENCE OF REFUTATION AS GLOBAL TRUTH."
     },
     "unknownDateAuthority": {
       "executor": "DROPLET_CLAIM_VERIFY",
@@ -614,7 +691,9 @@
         "futureEvidence": 0,
         "overlappingDateEvidence": 0,
         "authoritativeSupportFamilies": 1,
-        "authoritativeRefuteFamilies": 0
+        "authoritativeRefuteFamilies": 0,
+        "eligibleAuthoritativeSupportFamilies": 0,
+        "eligibleAuthoritativeRefuteFamilies": 0
       },
       "conflicts": {
         "authoritativeConflict": false,
@@ -634,6 +713,15 @@
             "precision": null
           }
         ]
+      },
+      "diversity": {
+        "active": false,
+        "minAuthoritativeFamilies": null,
+        "eligibleAuthoritativeSupportFamilies": 0,
+        "eligibleAuthoritativeRefuteFamilies": 0,
+        "supportSatisfied": true,
+        "refuteSatisfied": true,
+        "boundary": "SOURCE-FAMILY DIVERSITY IS AN OPT-IN CORROBORATION GATE OVER CALLER-SUPPLIED FAMILY LABELS. IT LIMITS FALSE CERTAINTY FROM ONE DECLARED FAMILY BUT DOES NOT PROVE REAL-WORLD SOURCE INDEPENDENCE OR DERIVATIVE-SOURCE STATUS."
       },
       "evidenceFingerprint": "ddd19ab5be730fc2",
       "evidence": [
@@ -662,7 +750,7 @@
           "familyKey": "officialstatus"
         }
       ],
-      "boundary": "VERDICT IS COMPUTED ONLY FROM THE EXPLICIT EVIDENCE BUNDLE SUPPLIED BY AN ACTUAL CONNECTOR OR CALLER. EXACT REPLAYED EVIDENCE IS SUPPRESSED BY FINGERPRINT/IDENTITY. WHEN AN EXPLICIT AS-OF DATE AND MAX-AGE POLICY ARE SUPPLIED, STALE, UNDATED, FUTURE-DATED, OR DATE-RANGE-OVERLAPPING EVIDENCE REMAINS AUDITABLE BUT CANNOT CREATE CERTAINTY. SOURCE-FAMILY COUNTS ARE AUDIT SIGNALS RATHER THAN PROOF OF INDEPENDENCE, AND CONFLICTING AUTHORITATIVE DIRECTIONS OR CONTRADICTORY USE OF ONE FINGERPRINT FORCE INDETERMINATE. THIS EXECUTOR DOES NOT SEARCH THE WEB, INFER WHETHER A CLAIM IS TIME-SENSITIVE, SCORE METHODOLOGICAL QUALITY, PROVE SOURCE INDEPENDENCE, OR TREAT ABSENCE OF REFUTATION AS GLOBAL TRUTH."
+      "boundary": "VERDICT IS COMPUTED ONLY FROM THE EXPLICIT EVIDENCE BUNDLE SUPPLIED BY AN ACTUAL CONNECTOR OR CALLER. EXACT REPLAYED EVIDENCE IS SUPPRESSED BY FINGERPRINT/IDENTITY. WHEN AN EXPLICIT AS-OF DATE AND MAX-AGE POLICY ARE SUPPLIED, STALE, UNDATED, FUTURE-DATED, OR DATE-RANGE-OVERLAPPING EVIDENCE REMAINS AUDITABLE BUT CANNOT CREATE CERTAINTY. WHEN AN OPT-IN MINIMUM AUTHORITATIVE SOURCE-FAMILY POLICY IS SUPPLIED, ONE DECLARED FAMILY CANNOT CREATE CERTAINTY BY ITSELF. SOURCE-FAMILY LABELS REMAIN CALLER-SUPPLIED AUDIT SIGNALS, NOT PROOF OF INDEPENDENCE. CONFLICTING AUTHORITATIVE DIRECTIONS OR CONTRADICTORY USE OF ONE FINGERPRINT FORCE INDETERMINATE. THIS EXECUTOR DOES NOT SEARCH THE WEB, INFER WHETHER A CLAIM IS TIME-SENSITIVE, SCORE METHODOLOGICAL QUALITY, PROVE SOURCE INDEPENDENCE, DETECT DERIVATIVE SOURCES, OR TREAT ABSENCE OF REFUTATION AS GLOBAL TRUTH."
     },
     "futureAuthority": {
       "executor": "DROPLET_CLAIM_VERIFY",
@@ -685,7 +773,9 @@
         "futureEvidence": 1,
         "overlappingDateEvidence": 0,
         "authoritativeSupportFamilies": 1,
-        "authoritativeRefuteFamilies": 0
+        "authoritativeRefuteFamilies": 0,
+        "eligibleAuthoritativeSupportFamilies": 0,
+        "eligibleAuthoritativeRefuteFamilies": 0
       },
       "conflicts": {
         "authoritativeConflict": false,
@@ -705,6 +795,15 @@
             "precision": "DAY"
           }
         ]
+      },
+      "diversity": {
+        "active": false,
+        "minAuthoritativeFamilies": null,
+        "eligibleAuthoritativeSupportFamilies": 0,
+        "eligibleAuthoritativeRefuteFamilies": 0,
+        "supportSatisfied": true,
+        "refuteSatisfied": true,
+        "boundary": "SOURCE-FAMILY DIVERSITY IS AN OPT-IN CORROBORATION GATE OVER CALLER-SUPPLIED FAMILY LABELS. IT LIMITS FALSE CERTAINTY FROM ONE DECLARED FAMILY BUT DOES NOT PROVE REAL-WORLD SOURCE INDEPENDENCE OR DERIVATIVE-SOURCE STATUS."
       },
       "evidenceFingerprint": "ba7fc50e12ec7c10",
       "evidence": [
@@ -733,7 +832,7 @@
           "familyKey": "officialstatus"
         }
       ],
-      "boundary": "VERDICT IS COMPUTED ONLY FROM THE EXPLICIT EVIDENCE BUNDLE SUPPLIED BY AN ACTUAL CONNECTOR OR CALLER. EXACT REPLAYED EVIDENCE IS SUPPRESSED BY FINGERPRINT/IDENTITY. WHEN AN EXPLICIT AS-OF DATE AND MAX-AGE POLICY ARE SUPPLIED, STALE, UNDATED, FUTURE-DATED, OR DATE-RANGE-OVERLAPPING EVIDENCE REMAINS AUDITABLE BUT CANNOT CREATE CERTAINTY. SOURCE-FAMILY COUNTS ARE AUDIT SIGNALS RATHER THAN PROOF OF INDEPENDENCE, AND CONFLICTING AUTHORITATIVE DIRECTIONS OR CONTRADICTORY USE OF ONE FINGERPRINT FORCE INDETERMINATE. THIS EXECUTOR DOES NOT SEARCH THE WEB, INFER WHETHER A CLAIM IS TIME-SENSITIVE, SCORE METHODOLOGICAL QUALITY, PROVE SOURCE INDEPENDENCE, OR TREAT ABSENCE OF REFUTATION AS GLOBAL TRUTH."
+      "boundary": "VERDICT IS COMPUTED ONLY FROM THE EXPLICIT EVIDENCE BUNDLE SUPPLIED BY AN ACTUAL CONNECTOR OR CALLER. EXACT REPLAYED EVIDENCE IS SUPPRESSED BY FINGERPRINT/IDENTITY. WHEN AN EXPLICIT AS-OF DATE AND MAX-AGE POLICY ARE SUPPLIED, STALE, UNDATED, FUTURE-DATED, OR DATE-RANGE-OVERLAPPING EVIDENCE REMAINS AUDITABLE BUT CANNOT CREATE CERTAINTY. WHEN AN OPT-IN MINIMUM AUTHORITATIVE SOURCE-FAMILY POLICY IS SUPPLIED, ONE DECLARED FAMILY CANNOT CREATE CERTAINTY BY ITSELF. SOURCE-FAMILY LABELS REMAIN CALLER-SUPPLIED AUDIT SIGNALS, NOT PROOF OF INDEPENDENCE. CONFLICTING AUTHORITATIVE DIRECTIONS OR CONTRADICTORY USE OF ONE FINGERPRINT FORCE INDETERMINATE. THIS EXECUTOR DOES NOT SEARCH THE WEB, INFER WHETHER A CLAIM IS TIME-SENSITIVE, SCORE METHODOLOGICAL QUALITY, PROVE SOURCE INDEPENDENCE, DETECT DERIVATIVE SOURCES, OR TREAT ABSENCE OF REFUTATION AS GLOBAL TRUTH."
     },
     "partialMonthOverlap": {
       "executor": "DROPLET_CLAIM_VERIFY",
@@ -756,7 +855,9 @@
         "futureEvidence": 0,
         "overlappingDateEvidence": 1,
         "authoritativeSupportFamilies": 1,
-        "authoritativeRefuteFamilies": 0
+        "authoritativeRefuteFamilies": 0,
+        "eligibleAuthoritativeSupportFamilies": 0,
+        "eligibleAuthoritativeRefuteFamilies": 0
       },
       "conflicts": {
         "authoritativeConflict": false,
@@ -776,6 +877,15 @@
             "precision": "MONTH"
           }
         ]
+      },
+      "diversity": {
+        "active": false,
+        "minAuthoritativeFamilies": null,
+        "eligibleAuthoritativeSupportFamilies": 0,
+        "eligibleAuthoritativeRefuteFamilies": 0,
+        "supportSatisfied": true,
+        "refuteSatisfied": true,
+        "boundary": "SOURCE-FAMILY DIVERSITY IS AN OPT-IN CORROBORATION GATE OVER CALLER-SUPPLIED FAMILY LABELS. IT LIMITS FALSE CERTAINTY FROM ONE DECLARED FAMILY BUT DOES NOT PROVE REAL-WORLD SOURCE INDEPENDENCE OR DERIVATIVE-SOURCE STATUS."
       },
       "evidenceFingerprint": "0fc9c41b806e4364",
       "evidence": [
@@ -804,9 +914,342 @@
           "familyKey": "officialstatus"
         }
       ],
-      "boundary": "VERDICT IS COMPUTED ONLY FROM THE EXPLICIT EVIDENCE BUNDLE SUPPLIED BY AN ACTUAL CONNECTOR OR CALLER. EXACT REPLAYED EVIDENCE IS SUPPRESSED BY FINGERPRINT/IDENTITY. WHEN AN EXPLICIT AS-OF DATE AND MAX-AGE POLICY ARE SUPPLIED, STALE, UNDATED, FUTURE-DATED, OR DATE-RANGE-OVERLAPPING EVIDENCE REMAINS AUDITABLE BUT CANNOT CREATE CERTAINTY. SOURCE-FAMILY COUNTS ARE AUDIT SIGNALS RATHER THAN PROOF OF INDEPENDENCE, AND CONFLICTING AUTHORITATIVE DIRECTIONS OR CONTRADICTORY USE OF ONE FINGERPRINT FORCE INDETERMINATE. THIS EXECUTOR DOES NOT SEARCH THE WEB, INFER WHETHER A CLAIM IS TIME-SENSITIVE, SCORE METHODOLOGICAL QUALITY, PROVE SOURCE INDEPENDENCE, OR TREAT ABSENCE OF REFUTATION AS GLOBAL TRUTH."
+      "boundary": "VERDICT IS COMPUTED ONLY FROM THE EXPLICIT EVIDENCE BUNDLE SUPPLIED BY AN ACTUAL CONNECTOR OR CALLER. EXACT REPLAYED EVIDENCE IS SUPPRESSED BY FINGERPRINT/IDENTITY. WHEN AN EXPLICIT AS-OF DATE AND MAX-AGE POLICY ARE SUPPLIED, STALE, UNDATED, FUTURE-DATED, OR DATE-RANGE-OVERLAPPING EVIDENCE REMAINS AUDITABLE BUT CANNOT CREATE CERTAINTY. WHEN AN OPT-IN MINIMUM AUTHORITATIVE SOURCE-FAMILY POLICY IS SUPPLIED, ONE DECLARED FAMILY CANNOT CREATE CERTAINTY BY ITSELF. SOURCE-FAMILY LABELS REMAIN CALLER-SUPPLIED AUDIT SIGNALS, NOT PROOF OF INDEPENDENCE. CONFLICTING AUTHORITATIVE DIRECTIONS OR CONTRADICTORY USE OF ONE FINGERPRINT FORCE INDETERMINATE. THIS EXECUTOR DOES NOT SEARCH THE WEB, INFER WHETHER A CLAIM IS TIME-SENSITIVE, SCORE METHODOLOGICAL QUALITY, PROVE SOURCE INDEPENDENCE, DETECT DERIVATIVE SOURCES, OR TREAT ABSENCE OF REFUTATION AS GLOBAL TRUTH."
+    },
+    "singleFamilyCorroborationGate": {
+      "executor": "DROPLET_CLAIM_VERIFY",
+      "status": "EXECUTED",
+      "claim": "The project has independent authoritative corroboration.",
+      "claimFingerprint": "1648ed54fe4a48f9",
+      "verdict": "INDETERMINATE",
+      "counts": {
+        "evidence": 2,
+        "uniqueEvidence": 2,
+        "duplicatesSuppressed": 0,
+        "supports": 2,
+        "refutes": 0,
+        "authoritativeSupports": 2,
+        "authoritativeRefutes": 0,
+        "eligibleAuthoritativeSupports": 2,
+        "eligibleAuthoritativeRefutes": 0,
+        "staleEvidence": 0,
+        "unknownDateEvidence": 0,
+        "futureEvidence": 0,
+        "overlappingDateEvidence": 0,
+        "authoritativeSupportFamilies": 1,
+        "authoritativeRefuteFamilies": 0,
+        "eligibleAuthoritativeSupportFamilies": 1,
+        "eligibleAuthoritativeRefuteFamilies": 0
+      },
+      "conflicts": {
+        "authoritativeConflict": false,
+        "integrityConflict": false,
+        "contradictoryFingerprints": []
+      },
+      "freshness": {
+        "active": false,
+        "asOf": "",
+        "maxAgeDays": null,
+        "rows": [
+          {
+            "id": "G1",
+            "status": "NOT_APPLIED",
+            "date": "",
+            "ageDays": null,
+            "precision": null
+          },
+          {
+            "id": "G2",
+            "status": "NOT_APPLIED",
+            "date": "",
+            "ageDays": null,
+            "precision": null
+          }
+        ]
+      },
+      "diversity": {
+        "active": true,
+        "minAuthoritativeFamilies": 2,
+        "eligibleAuthoritativeSupportFamilies": 1,
+        "eligibleAuthoritativeRefuteFamilies": 0,
+        "supportSatisfied": false,
+        "refuteSatisfied": false,
+        "boundary": "SOURCE-FAMILY DIVERSITY IS AN OPT-IN CORROBORATION GATE OVER CALLER-SUPPLIED FAMILY LABELS. IT LIMITS FALSE CERTAINTY FROM ONE DECLARED FAMILY BUT DOES NOT PROVE REAL-WORLD SOURCE INDEPENDENCE OR DERIVATIVE-SOURCE STATUS."
+      },
+      "evidenceFingerprint": "f57769bc16534ca4",
+      "evidence": [
+        {
+          "id": "G1",
+          "source": "Official page A",
+          "sourceClass": "OFFICIAL",
+          "sourceFamily": "Publisher A",
+          "relation": "SUPPORTS",
+          "fingerprint": "family-a-proof-1",
+          "date": "",
+          "identityKey": "fp:family-a-proof-1",
+          "familyKey": "publishera"
+        },
+        {
+          "id": "G2",
+          "source": "Official page B",
+          "sourceClass": "PRIMARY",
+          "sourceFamily": "Publisher A",
+          "relation": "SUPPORTS",
+          "fingerprint": "family-a-proof-2",
+          "date": "",
+          "identityKey": "fp:family-a-proof-2",
+          "familyKey": "publishera"
+        }
+      ],
+      "uniqueEvidence": [
+        {
+          "id": "G1",
+          "source": "Official page A",
+          "sourceClass": "OFFICIAL",
+          "sourceFamily": "Publisher A",
+          "relation": "SUPPORTS",
+          "fingerprint": "family-a-proof-1",
+          "date": "",
+          "identityKey": "fp:family-a-proof-1",
+          "familyKey": "publishera"
+        },
+        {
+          "id": "G2",
+          "source": "Official page B",
+          "sourceClass": "PRIMARY",
+          "sourceFamily": "Publisher A",
+          "relation": "SUPPORTS",
+          "fingerprint": "family-a-proof-2",
+          "date": "",
+          "identityKey": "fp:family-a-proof-2",
+          "familyKey": "publishera"
+        }
+      ],
+      "boundary": "VERDICT IS COMPUTED ONLY FROM THE EXPLICIT EVIDENCE BUNDLE SUPPLIED BY AN ACTUAL CONNECTOR OR CALLER. EXACT REPLAYED EVIDENCE IS SUPPRESSED BY FINGERPRINT/IDENTITY. WHEN AN EXPLICIT AS-OF DATE AND MAX-AGE POLICY ARE SUPPLIED, STALE, UNDATED, FUTURE-DATED, OR DATE-RANGE-OVERLAPPING EVIDENCE REMAINS AUDITABLE BUT CANNOT CREATE CERTAINTY. WHEN AN OPT-IN MINIMUM AUTHORITATIVE SOURCE-FAMILY POLICY IS SUPPLIED, ONE DECLARED FAMILY CANNOT CREATE CERTAINTY BY ITSELF. SOURCE-FAMILY LABELS REMAIN CALLER-SUPPLIED AUDIT SIGNALS, NOT PROOF OF INDEPENDENCE. CONFLICTING AUTHORITATIVE DIRECTIONS OR CONTRADICTORY USE OF ONE FINGERPRINT FORCE INDETERMINATE. THIS EXECUTOR DOES NOT SEARCH THE WEB, INFER WHETHER A CLAIM IS TIME-SENSITIVE, SCORE METHODOLOGICAL QUALITY, PROVE SOURCE INDEPENDENCE, DETECT DERIVATIVE SOURCES, OR TREAT ABSENCE OF REFUTATION AS GLOBAL TRUTH."
+    },
+    "twoFamilyCorroboration": {
+      "executor": "DROPLET_CLAIM_VERIFY",
+      "status": "EXECUTED",
+      "claim": "The project has independent authoritative corroboration.",
+      "claimFingerprint": "1648ed54fe4a48f9",
+      "verdict": "SUPPORTED",
+      "counts": {
+        "evidence": 2,
+        "uniqueEvidence": 2,
+        "duplicatesSuppressed": 0,
+        "supports": 2,
+        "refutes": 0,
+        "authoritativeSupports": 2,
+        "authoritativeRefutes": 0,
+        "eligibleAuthoritativeSupports": 2,
+        "eligibleAuthoritativeRefutes": 0,
+        "staleEvidence": 0,
+        "unknownDateEvidence": 0,
+        "futureEvidence": 0,
+        "overlappingDateEvidence": 0,
+        "authoritativeSupportFamilies": 2,
+        "authoritativeRefuteFamilies": 0,
+        "eligibleAuthoritativeSupportFamilies": 2,
+        "eligibleAuthoritativeRefuteFamilies": 0
+      },
+      "conflicts": {
+        "authoritativeConflict": false,
+        "integrityConflict": false,
+        "contradictoryFingerprints": []
+      },
+      "freshness": {
+        "active": false,
+        "asOf": "",
+        "maxAgeDays": null,
+        "rows": [
+          {
+            "id": "G3",
+            "status": "NOT_APPLIED",
+            "date": "",
+            "ageDays": null,
+            "precision": null
+          },
+          {
+            "id": "G4",
+            "status": "NOT_APPLIED",
+            "date": "",
+            "ageDays": null,
+            "precision": null
+          }
+        ]
+      },
+      "diversity": {
+        "active": true,
+        "minAuthoritativeFamilies": 2,
+        "eligibleAuthoritativeSupportFamilies": 2,
+        "eligibleAuthoritativeRefuteFamilies": 0,
+        "supportSatisfied": true,
+        "refuteSatisfied": false,
+        "boundary": "SOURCE-FAMILY DIVERSITY IS AN OPT-IN CORROBORATION GATE OVER CALLER-SUPPLIED FAMILY LABELS. IT LIMITS FALSE CERTAINTY FROM ONE DECLARED FAMILY BUT DOES NOT PROVE REAL-WORLD SOURCE INDEPENDENCE OR DERIVATIVE-SOURCE STATUS."
+      },
+      "evidenceFingerprint": "a57806d9b2180d89",
+      "evidence": [
+        {
+          "id": "G3",
+          "source": "Official page A",
+          "sourceClass": "OFFICIAL",
+          "sourceFamily": "Publisher A",
+          "relation": "SUPPORTS",
+          "fingerprint": "family-a-proof",
+          "date": "",
+          "identityKey": "fp:family-a-proof",
+          "familyKey": "publishera"
+        },
+        {
+          "id": "G4",
+          "source": "Primary record B",
+          "sourceClass": "PRIMARY",
+          "sourceFamily": "Publisher B",
+          "relation": "SUPPORTS",
+          "fingerprint": "family-b-proof",
+          "date": "",
+          "identityKey": "fp:family-b-proof",
+          "familyKey": "publisherb"
+        }
+      ],
+      "uniqueEvidence": [
+        {
+          "id": "G3",
+          "source": "Official page A",
+          "sourceClass": "OFFICIAL",
+          "sourceFamily": "Publisher A",
+          "relation": "SUPPORTS",
+          "fingerprint": "family-a-proof",
+          "date": "",
+          "identityKey": "fp:family-a-proof",
+          "familyKey": "publishera"
+        },
+        {
+          "id": "G4",
+          "source": "Primary record B",
+          "sourceClass": "PRIMARY",
+          "sourceFamily": "Publisher B",
+          "relation": "SUPPORTS",
+          "fingerprint": "family-b-proof",
+          "date": "",
+          "identityKey": "fp:family-b-proof",
+          "familyKey": "publisherb"
+        }
+      ],
+      "boundary": "VERDICT IS COMPUTED ONLY FROM THE EXPLICIT EVIDENCE BUNDLE SUPPLIED BY AN ACTUAL CONNECTOR OR CALLER. EXACT REPLAYED EVIDENCE IS SUPPRESSED BY FINGERPRINT/IDENTITY. WHEN AN EXPLICIT AS-OF DATE AND MAX-AGE POLICY ARE SUPPLIED, STALE, UNDATED, FUTURE-DATED, OR DATE-RANGE-OVERLAPPING EVIDENCE REMAINS AUDITABLE BUT CANNOT CREATE CERTAINTY. WHEN AN OPT-IN MINIMUM AUTHORITATIVE SOURCE-FAMILY POLICY IS SUPPLIED, ONE DECLARED FAMILY CANNOT CREATE CERTAINTY BY ITSELF. SOURCE-FAMILY LABELS REMAIN CALLER-SUPPLIED AUDIT SIGNALS, NOT PROOF OF INDEPENDENCE. CONFLICTING AUTHORITATIVE DIRECTIONS OR CONTRADICTORY USE OF ONE FINGERPRINT FORCE INDETERMINATE. THIS EXECUTOR DOES NOT SEARCH THE WEB, INFER WHETHER A CLAIM IS TIME-SENSITIVE, SCORE METHODOLOGICAL QUALITY, PROVE SOURCE INDEPENDENCE, DETECT DERIVATIVE SOURCES, OR TREAT ABSENCE OF REFUTATION AS GLOBAL TRUTH."
+    },
+    "staleSecondFamilyDoesNotSatisfy": {
+      "executor": "DROPLET_CLAIM_VERIFY",
+      "status": "EXECUTED",
+      "claim": "The service is currently available.",
+      "claimFingerprint": "d497cc82bca8a5da",
+      "verdict": "INDETERMINATE",
+      "counts": {
+        "evidence": 2,
+        "uniqueEvidence": 2,
+        "duplicatesSuppressed": 0,
+        "supports": 2,
+        "refutes": 0,
+        "authoritativeSupports": 2,
+        "authoritativeRefutes": 0,
+        "eligibleAuthoritativeSupports": 1,
+        "eligibleAuthoritativeRefutes": 0,
+        "staleEvidence": 1,
+        "unknownDateEvidence": 0,
+        "futureEvidence": 0,
+        "overlappingDateEvidence": 0,
+        "authoritativeSupportFamilies": 2,
+        "authoritativeRefuteFamilies": 0,
+        "eligibleAuthoritativeSupportFamilies": 1,
+        "eligibleAuthoritativeRefuteFamilies": 0
+      },
+      "conflicts": {
+        "authoritativeConflict": false,
+        "integrityConflict": false,
+        "contradictoryFingerprints": []
+      },
+      "freshness": {
+        "active": true,
+        "asOf": "2026-09-02",
+        "maxAgeDays": 180,
+        "rows": [
+          {
+            "id": "G5",
+            "status": "FRESH",
+            "date": "2026-09-01",
+            "ageDays": 1,
+            "precision": "DAY"
+          },
+          {
+            "id": "G6",
+            "status": "STALE",
+            "date": "2024-01-01",
+            "ageDays": 975,
+            "precision": "DAY"
+          }
+        ]
+      },
+      "diversity": {
+        "active": true,
+        "minAuthoritativeFamilies": 2,
+        "eligibleAuthoritativeSupportFamilies": 1,
+        "eligibleAuthoritativeRefuteFamilies": 0,
+        "supportSatisfied": false,
+        "refuteSatisfied": false,
+        "boundary": "SOURCE-FAMILY DIVERSITY IS AN OPT-IN CORROBORATION GATE OVER CALLER-SUPPLIED FAMILY LABELS. IT LIMITS FALSE CERTAINTY FROM ONE DECLARED FAMILY BUT DOES NOT PROVE REAL-WORLD SOURCE INDEPENDENCE OR DERIVATIVE-SOURCE STATUS."
+      },
+      "evidenceFingerprint": "2911420663975fee",
+      "evidence": [
+        {
+          "id": "G5",
+          "source": "Fresh official page",
+          "sourceClass": "OFFICIAL",
+          "sourceFamily": "Publisher A",
+          "relation": "SUPPORTS",
+          "fingerprint": "fresh-family-a",
+          "date": "2026-09-01",
+          "identityKey": "fp:fresh-family-a",
+          "familyKey": "publishera"
+        },
+        {
+          "id": "G6",
+          "source": "Old primary record",
+          "sourceClass": "PRIMARY",
+          "sourceFamily": "Publisher B",
+          "relation": "SUPPORTS",
+          "fingerprint": "stale-family-b",
+          "date": "2024-01-01",
+          "identityKey": "fp:stale-family-b",
+          "familyKey": "publisherb"
+        }
+      ],
+      "uniqueEvidence": [
+        {
+          "id": "G5",
+          "source": "Fresh official page",
+          "sourceClass": "OFFICIAL",
+          "sourceFamily": "Publisher A",
+          "relation": "SUPPORTS",
+          "fingerprint": "fresh-family-a",
+          "date": "2026-09-01",
+          "identityKey": "fp:fresh-family-a",
+          "familyKey": "publishera"
+        },
+        {
+          "id": "G6",
+          "source": "Old primary record",
+          "sourceClass": "PRIMARY",
+          "sourceFamily": "Publisher B",
+          "relation": "SUPPORTS",
+          "fingerprint": "stale-family-b",
+          "date": "2024-01-01",
+          "identityKey": "fp:stale-family-b",
+          "familyKey": "publisherb"
+        }
+      ],
+      "boundary": "VERDICT IS COMPUTED ONLY FROM THE EXPLICIT EVIDENCE BUNDLE SUPPLIED BY AN ACTUAL CONNECTOR OR CALLER. EXACT REPLAYED EVIDENCE IS SUPPRESSED BY FINGERPRINT/IDENTITY. WHEN AN EXPLICIT AS-OF DATE AND MAX-AGE POLICY ARE SUPPLIED, STALE, UNDATED, FUTURE-DATED, OR DATE-RANGE-OVERLAPPING EVIDENCE REMAINS AUDITABLE BUT CANNOT CREATE CERTAINTY. WHEN AN OPT-IN MINIMUM AUTHORITATIVE SOURCE-FAMILY POLICY IS SUPPLIED, ONE DECLARED FAMILY CANNOT CREATE CERTAINTY BY ITSELF. SOURCE-FAMILY LABELS REMAIN CALLER-SUPPLIED AUDIT SIGNALS, NOT PROOF OF INDEPENDENCE. CONFLICTING AUTHORITATIVE DIRECTIONS OR CONTRADICTORY USE OF ONE FINGERPRINT FORCE INDETERMINATE. THIS EXECUTOR DOES NOT SEARCH THE WEB, INFER WHETHER A CLAIM IS TIME-SENSITIVE, SCORE METHODOLOGICAL QUALITY, PROVE SOURCE INDEPENDENCE, DETECT DERIVATIVE SOURCES, OR TREAT ABSENCE OF REFUTATION AS GLOBAL TRUTH."
     }
   },
   "failures": [],
-  "boundary": "This test validates deterministic claim verdict computation from explicit evidence, exact replay suppression, source-family audit counts, authoritative-direction conflict containment, fingerprint-integrity conflict containment, and opt-in temporal gating that prevents stale, undated, future-dated, or date-range-overlapping evidence from creating certainty. CI performs no web search and does not infer whether a claim is time-sensitive."
+  "boundary": "This test validates deterministic claim verdict computation from explicit evidence, exact replay suppression, source-family audit counts, authoritative-direction conflict containment, fingerprint-integrity conflict containment, opt-in temporal gating, and an opt-in minimum authoritative source-family corroboration gate. The diversity gate uses caller-supplied family labels and therefore limits declared-family concentration without proving real-world source independence or derivative-source status. CI performs no web search and does not infer whether a claim is time-sensitive."
 }
