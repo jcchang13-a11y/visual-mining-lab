@@ -1,4 +1,4 @@
-// DROPLET claim verification executor v1.2
+// DROPLET claim verification executor v1.3
 import crypto from 'node:crypto';
 
 const hash=s=>crypto.createHash('sha256').update(String(s)).digest('hex').slice(0,16);
@@ -28,22 +28,25 @@ function normalizeEvidence(e,i){
 function parseAsOf(value){
   const m=clean(value).match(/^(\d{4})-(\d{2})-(\d{2})$/);
   if(!m) return null;
-  const d=new Date(`${m[1]}-${m[2]}-${m[3]}T00:00:00Z`);
+  const d=new Date(`${m[1]}-${m[2]}-${m[3]}T23:59:59.999Z`);
   return Number.isNaN(d.getTime())?null:d;
 }
 
-function parseEvidenceDateEnd(value){
+function parseEvidenceDateRange(value){
   const s=clean(value);
   let m=s.match(/^(\d{4})-(\d{2})-(\d{2})$/);
   if(m){
-    const d=new Date(`${m[1]}-${m[2]}-${m[3]}T23:59:59.999Z`);
-    return Number.isNaN(d.getTime())?null:d;
+    const start=new Date(`${m[1]}-${m[2]}-${m[3]}T00:00:00.000Z`);
+    const end=new Date(`${m[1]}-${m[2]}-${m[3]}T23:59:59.999Z`);
+    return Number.isNaN(start.getTime())?null:{start,end,precision:'DAY'};
   }
   m=s.match(/^(\d{4})-(\d{2})$/);
   if(m){
     const year=Number(m[1]), month=Number(m[2]);
     if(month<1||month>12) return null;
-    return new Date(Date.UTC(year,month,0,23,59,59,999));
+    const start=new Date(Date.UTC(year,month-1,1,0,0,0,0));
+    const end=new Date(Date.UTC(year,month,0,23,59,59,999));
+    return {start,end,precision:'MONTH'};
   }
   return null;
 }
@@ -53,11 +56,13 @@ function buildFreshnessAudit(unique,{asOf='',maxAgeDays=null}={}){
   const ageLimit=Number(maxAgeDays);
   const active=!!asOfDate&&Number.isFinite(ageLimit)&&ageLimit>=0;
   const rows=unique.map(e=>{
-    if(!active) return {id:e.id,status:'NOT_APPLIED',date:e.date,ageDays:null};
-    const evidenceDate=parseEvidenceDateEnd(e.date);
-    if(!evidenceDate) return {id:e.id,status:'UNKNOWN_DATE',date:e.date,ageDays:null};
-    const ageDays=Math.max(0,Math.floor((asOfDate.getTime()-evidenceDate.getTime())/86400000));
-    return {id:e.id,status:ageDays>ageLimit?'STALE':'FRESH',date:e.date,ageDays};
+    if(!active) return {id:e.id,status:'NOT_APPLIED',date:e.date,ageDays:null,precision:null};
+    const range=parseEvidenceDateRange(e.date);
+    if(!range) return {id:e.id,status:'UNKNOWN_DATE',date:e.date,ageDays:null,precision:null};
+    if(range.start.getTime()>asOfDate.getTime()) return {id:e.id,status:'FUTURE',date:e.date,ageDays:null,precision:range.precision};
+    if(range.end.getTime()>asOfDate.getTime()) return {id:e.id,status:'OVERLAPS_AS_OF',date:e.date,ageDays:null,precision:range.precision};
+    const ageDays=Math.max(0,Math.floor((asOfDate.getTime()-range.end.getTime())/86400000));
+    return {id:e.id,status:ageDays>ageLimit?'STALE':'FRESH',date:e.date,ageDays,precision:range.precision};
   });
   return {active,asOf:active?clean(asOf):'',maxAgeDays:active?ageLimit:null,rows};
 }
@@ -95,6 +100,8 @@ export function verifyClaim({claim='',evidence=[],freshnessPolicy={}}={}){
   const eligibleAuthoritativeRefutes=authoritativeRefutes.filter(eligibleForCertainty);
   const staleEvidence=freshness.rows.filter(r=>r.status==='STALE');
   const unknownDateEvidence=freshness.rows.filter(r=>r.status==='UNKNOWN_DATE');
+  const futureEvidence=freshness.rows.filter(r=>r.status==='FUTURE');
+  const overlappingDateEvidence=freshness.rows.filter(r=>r.status==='OVERLAPS_AS_OF');
   const supportFamilies=new Set(authoritativeSupports.map(e=>e.familyKey));
   const refuteFamilies=new Set(authoritativeRefutes.map(e=>e.familyKey));
   const authoritativeConflict=authoritativeSupports.length>0&&authoritativeRefutes.length>0;
@@ -120,6 +127,8 @@ export function verifyClaim({claim='',evidence=[],freshnessPolicy={}}={}){
       eligibleAuthoritativeRefutes:eligibleAuthoritativeRefutes.length,
       staleEvidence:staleEvidence.length,
       unknownDateEvidence:unknownDateEvidence.length,
+      futureEvidence:futureEvidence.length,
+      overlappingDateEvidence:overlappingDateEvidence.length,
       authoritativeSupportFamilies:supportFamilies.size,
       authoritativeRefuteFamilies:refuteFamilies.size
     },
@@ -128,6 +137,6 @@ export function verifyClaim({claim='',evidence=[],freshnessPolicy={}}={}){
     evidenceFingerprint,
     evidence:normalized,
     uniqueEvidence:unique,
-    boundary:'VERDICT IS COMPUTED ONLY FROM THE EXPLICIT EVIDENCE BUNDLE SUPPLIED BY AN ACTUAL CONNECTOR OR CALLER. EXACT REPLAYED EVIDENCE IS SUPPRESSED BY FINGERPRINT/IDENTITY. WHEN AN EXPLICIT AS-OF DATE AND MAX-AGE POLICY ARE SUPPLIED, STALE OR UNDATED EVIDENCE REMAINS AUDITABLE BUT CANNOT CREATE CERTAINTY. SOURCE-FAMILY COUNTS ARE AUDIT SIGNALS RATHER THAN PROOF OF INDEPENDENCE, AND CONFLICTING AUTHORITATIVE DIRECTIONS OR CONTRADICTORY USE OF ONE FINGERPRINT FORCE INDETERMINATE. THIS EXECUTOR DOES NOT SEARCH THE WEB, INFER WHETHER A CLAIM IS TIME-SENSITIVE, SCORE METHODOLOGICAL QUALITY, PROVE SOURCE INDEPENDENCE, OR TREAT ABSENCE OF REFUTATION AS GLOBAL TRUTH.'
+    boundary:'VERDICT IS COMPUTED ONLY FROM THE EXPLICIT EVIDENCE BUNDLE SUPPLIED BY AN ACTUAL CONNECTOR OR CALLER. EXACT REPLAYED EVIDENCE IS SUPPRESSED BY FINGERPRINT/IDENTITY. WHEN AN EXPLICIT AS-OF DATE AND MAX-AGE POLICY ARE SUPPLIED, STALE, UNDATED, FUTURE-DATED, OR DATE-RANGE-OVERLAPPING EVIDENCE REMAINS AUDITABLE BUT CANNOT CREATE CERTAINTY. SOURCE-FAMILY COUNTS ARE AUDIT SIGNALS RATHER THAN PROOF OF INDEPENDENCE, AND CONFLICTING AUTHORITATIVE DIRECTIONS OR CONTRADICTORY USE OF ONE FINGERPRINT FORCE INDETERMINATE. THIS EXECUTOR DOES NOT SEARCH THE WEB, INFER WHETHER A CLAIM IS TIME-SENSITIVE, SCORE METHODOLOGICAL QUALITY, PROVE SOURCE INDEPENDENCE, OR TREAT ABSENCE OF REFUTATION AS GLOBAL TRUTH.'
   };
 }
