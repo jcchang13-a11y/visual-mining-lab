@@ -5,7 +5,8 @@ import {mutherMineRepo,mutherCandidateSimilarity} from './repo-executors.mjs';
 const ROOT=process.cwd();
 const query=['MUTHER_NEAR','DUP_GUARD_X9'].join('_');
 const multiQuery=['MUTHER_MULTI','WINDOW_X7'].join('_');
-const fixtureDirs=['tmp-muther-near-a','tmp-muther-near-b','tmp-muther-near-c','tmp-muther-multi'];
+const exactQuery=['MUTHER_EXACT','REPLAY_P9'].join('_');
+const fixtureDirs=['tmp-muther-near-a','tmp-muther-near-b','tmp-muther-near-c','tmp-muther-multi','tmp-muther-exact-a','tmp-muther-exact-b'];
 const failures=[];
 const assert=(condition,message)=>{if(!condition)failures.push(message);};
 
@@ -19,6 +20,7 @@ const multi=[
   `${multiQuery} third vein records a contradictory methodological note about sampling bias, negative cases, and a failed classification rule that needs separate review.`,
   `${multiQuery} fourth vein records a visual-material observation about recurring spatial composition, media residue, and an anomaly cluster unrelated to the first two retained veins.`
 ].map((x,i)=>i===0||i===1?x:(spacer+x)).join('\n');
+const exact=`${exactQuery} exact replay fixture records one bounded observation about duplicated repository material, source-family provenance, and the rule that copied text must not be counted twice as independent evidence. The text is intentionally identical across two distinct source families.`;
 
 try{
   for(const dir of fixtureDirs)await fs.mkdir(path.join(ROOT,dir),{recursive:true});
@@ -26,6 +28,8 @@ try{
   await fs.writeFile(path.join(ROOT,fixtureDirs[1],'b.md'),near,'utf8');
   await fs.writeFile(path.join(ROOT,fixtureDirs[2],'c.md'),distinct,'utf8');
   await fs.writeFile(path.join(ROOT,fixtureDirs[3],'multi.md'),multi,'utf8');
+  await fs.writeFile(path.join(ROOT,fixtureDirs[4],'copy-a.md'),exact,'utf8');
+  await fs.writeFile(path.join(ROOT,fixtureDirs[5],'copy-b.md'),exact,'utf8');
 
   const nearSimilarity=mutherCandidateSimilarity(base,near);
   const distinctSimilarity=mutherCandidateSimilarity(base,distinct);
@@ -36,6 +40,7 @@ try{
   assert(distinctSimilarity<0.88,`distinct fixture similarity unexpectedly high: ${distinctSimilarity}`);
   assert(fixtureCandidates===3,`expected exactly 3 fixture candidates, got ${fixtureCandidates}`);
   assert(result.duplicateSuppressedCount===0,`exact duplicate suppression should remain 0, got ${result.duplicateSuppressedCount}`);
+  assert((result.exactDuplicateAudit||[]).length===0,'near-duplicate fixture should not manufacture an exact-duplicate audit');
   assert(result.nearDuplicateSuppressedCount===1,`expected one lexical near-duplicate suppression, got ${result.nearDuplicateSuppressedCount}`);
   assert(result.lexicallyDistinctCandidateCount===2,`expected two lexically distinct candidates, got ${result.lexicallyDistinctCandidateCount}`);
   assert(result.hitCount===2,`expected two retained hits, got ${result.hitCount}`);
@@ -57,17 +62,34 @@ try{
   assert(/FIRST-HIT BLINDNESS/.test(multiResult.boundary||''),'boundary must declare bounded first-hit-blindness mitigation');
   assert(/TRUE QUERY OCCURRENCE/.test(multiResult.boundary||''),'boundary must state that occurrence ordinals refer to true source occurrences');
 
+  const exactResult=await mutherMineRepo({query:exactQuery,limit:10,nearDuplicateThreshold:0.88});
+  const exactAudit=exactResult.exactDuplicateAudit||[];
+  assert(exactResult.candidateHitCount===2,`expected two exact-replay candidates before suppression, got ${exactResult.candidateHitCount}`);
+  assert(exactResult.duplicateSuppressedCount===1,`expected one exact duplicate suppression, got ${exactResult.duplicateSuppressedCount}`);
+  assert(exactResult.hitCount===1,`exact replay must remain one material hit after suppression, got ${exactResult.hitCount}`);
+  assert(exactAudit.length===1,`expected one exact-duplicate provenance audit record, got ${exactAudit.length}`);
+  assert(exactResult.exactDuplicateCrossFamilyCount===1,`expected one cross-family exact replay record, got ${exactResult.exactDuplicateCrossFamilyCount}`);
+  const exactRecord=exactAudit[0]||{};
+  assert(Boolean(exactRecord.keptPath&&exactRecord.suppressedPath),'exact duplicate audit must retain kept and suppressed paths');
+  assert(Boolean(exactRecord.keptSourceFamily&&exactRecord.suppressedSourceFamily),'exact duplicate audit must retain both source families');
+  assert(exactRecord.keptSourceFamily!==exactRecord.suppressedSourceFamily,'exact replay fixture should span two source families');
+  assert(exactRecord.crossFamily===true,'cross-family exact replay must be explicitly marked');
+  assert(exactRecord.keptOccurrenceOrdinal===1&&exactRecord.suppressedOccurrenceOrdinal===1,'exact duplicate audit must retain true occurrence ordinals');
+  assert(/SUPPRESSED COPIES NOW RETAIN A BOUNDED SOURCE-PATH/.test(exactResult.boundary||''),'boundary must state exact-replay provenance retention');
+  assert(/NOT UPGRADED TO INDEPENDENT EVIDENCE/.test(exactResult.boundary||''),'boundary must deny independence inference from cross-family copies');
+
   const output={
-    schema:'muther-repo-diversity-test/v0.2.1',
+    schema:'muther-repo-diversity-test/v0.2.2',
     completedAt:new Date().toISOString(),
     status:failures.length?'FAIL':'PASS',
-    capability:'LEXICAL_NEAR_DUPLICATE_CONTAINMENT_PLUS_BOUNDED_MULTI_WINDOW_COVERAGE_WITH_TRUE_OCCURRENCE_PROVENANCE',
+    capability:'LEXICAL_NEAR_DUPLICATE_CONTAINMENT_PLUS_BOUNDED_MULTI_WINDOW_COVERAGE_PLUS_EXACT_REPLAY_PROVENANCE_RETENTION',
     unit:{nearSimilarity:Number(nearSimilarity.toFixed(4)),distinctSimilarity:Number(distinctSimilarity.toFixed(4)),threshold:result.nearDuplicateThreshold},
     adversarial:{candidateHitCount:result.candidateHitCount,exactDuplicateSuppressedCount:result.duplicateSuppressedCount,nearDuplicateSuppressedCount:result.nearDuplicateSuppressedCount,lexicallyDistinctCandidateCount:result.lexicallyDistinctCandidateCount,retainedPaths,nearDuplicateAudit:result.nearDuplicateAudit},
     multiWindow:{filesWithMultipleOccurrences:multiResult.filesWithMultipleOccurrences,totalQueryOccurrences:multiResult.totalQueryOccurrences,occurrenceWindowCandidateCount:multiResult.occurrenceWindowCandidateCount,retainedVeinCount:multiHits.length,occurrenceOrdinals:multiOrdinals,skippedTrueOccurrenceOrdinal:2,selectedDistinctFileCount:multiResult.selectedDistinctFileCount,maxWindowsPerFile:multiResult.maxWindowsPerFile,minWindowGap:multiResult.minWindowGap},
-    provenance:{selectedSourceFamilies:result.selectedSourceFamilies,sourceFamilyCount:result.sourceFamilyCount,trueOccurrenceOrdinalPreserved:JSON.stringify(multiOrdinals)===JSON.stringify([1,3,4])},
-    crossOrganRegression:'The main NOSTROMO integration test runs separately in the same workflow and must remain PASS before public promotion.',
-    boundary:'PASS certifies conservative lexical near-duplicate containment, bounded extraction of separated query windows, and preservation of each selected window’s true query-occurrence ordinal in its source file even when an intervening nearby occurrence is intentionally skipped. It does not certify semantic vein detection, semantic equivalence, exhaustive within-file coverage, source independence, source quality, novelty, factual truth, or Google Drive coverage.',
+    exactReplay:{candidateHitCount:exactResult.candidateHitCount,retainedHitCount:exactResult.hitCount,duplicateSuppressedCount:exactResult.duplicateSuppressedCount,crossFamilyCount:exactResult.exactDuplicateCrossFamilyCount,audit:exactAudit,contentCountedOnce:exactResult.hitCount===1,provenanceRetained:exactAudit.length===1&&Boolean(exactRecord.keptPath&&exactRecord.suppressedPath&&exactRecord.keptSourceFamily&&exactRecord.suppressedSourceFamily)},
+    provenance:{selectedSourceFamilies:result.selectedSourceFamilies,sourceFamilyCount:result.sourceFamilyCount,trueOccurrenceOrdinalPreserved:JSON.stringify(multiOrdinals)===JSON.stringify([1,3,4]),exactReplayCrossFamilyProvenanceRetained:exactAudit.length===1&&exactRecord.crossFamily===true},
+    crossOrganRegression:'The main NOSTROMO integration test runs separately in the same workflow and must remain PASS before public promotion. Because the full MUTHER executor object is handed to GUT, the bounded exactDuplicateAudit remains available downstream without duplicating the suppressed material as an additional hit.',
+    boundary:'PASS certifies conservative lexical near-duplicate containment, bounded extraction of separated query windows, preservation of each selected window’s true query-occurrence ordinal, and bounded provenance retention for exact content copies that are suppressed from material amplification. It does not certify semantic vein detection, semantic equivalence, exhaustive within-file coverage, source independence, source quality, novelty, factual truth, or Google Drive coverage.',
     failures
   };
   await fs.writeFile(path.join(ROOT,'nostromo/integration/muther-repo-diversity-last-result.json'),JSON.stringify(output,null,2)+'\n','utf8');
