@@ -1,4 +1,4 @@
-// DROPLET claim verification CI test v1.2
+// DROPLET claim verification CI test v1.3
 import fs from 'node:fs/promises';
 import {verifyClaim} from './droplet-claim-verify-executor.mjs';
 
@@ -82,19 +82,35 @@ try{
   if(cases.unknownDateAuthority.verdict!=='INDETERMINATE') failures.push({case:'unknownDateAuthority',type:'UNDATED_EVIDENCE_CREATED_CERTAINTY',verdict:cases.unknownDateAuthority.verdict});
   if(cases.unknownDateAuthority.counts.unknownDateEvidence!==1) failures.push({case:'unknownDateAuthority',type:'UNKNOWN_DATE_NOT_FLAGGED',counts:cases.unknownDateAuthority.counts});
 
+  cases.futureAuthority=verifyClaim({
+    claim:'The service is currently available.',
+    freshnessPolicy:policy,
+    evidence:[{id:'T1',source:'Future official status page',sourceFamily:'Official status',sourceClass:'OFFICIAL',relation:'SUPPORTS',date:'2026-09-03',fingerprint:'future-official'}]
+  });
+  if(cases.futureAuthority.verdict!=='INDETERMINATE') failures.push({case:'futureAuthority',type:'FUTURE_EVIDENCE_CREATED_CERTAINTY',verdict:cases.futureAuthority.verdict});
+  if(cases.futureAuthority.counts.futureEvidence!==1||cases.futureAuthority.counts.eligibleAuthoritativeSupports!==0) failures.push({case:'futureAuthority',type:'FUTURE_EVIDENCE_NOT_QUARANTINED',counts:cases.futureAuthority.counts});
+
+  cases.partialMonthOverlap=verifyClaim({
+    claim:'The service is currently available.',
+    freshnessPolicy:policy,
+    evidence:[{id:'T2',source:'Month-only official record',sourceFamily:'Official status',sourceClass:'OFFICIAL',relation:'SUPPORTS',date:'2026-09',fingerprint:'month-overlap'}]
+  });
+  if(cases.partialMonthOverlap.verdict!=='INDETERMINATE') failures.push({case:'partialMonthOverlap',type:'OVERLAPPING_DATE_RANGE_CREATED_CERTAINTY',verdict:cases.partialMonthOverlap.verdict});
+  if(cases.partialMonthOverlap.counts.overlappingDateEvidence!==1||cases.partialMonthOverlap.counts.eligibleAuthoritativeSupports!==0) failures.push({case:'partialMonthOverlap',type:'OVERLAPPING_DATE_RANGE_NOT_QUARANTINED',counts:cases.partialMonthOverlap.counts});
+
   const result={
-    schema:'nostromo-droplet-claim-verify-test/v1.2',
+    schema:'nostromo-droplet-claim-verify-test/v1.3',
     completedAt:new Date().toISOString(),
     status:failures.length?'FAIL':'PASS',
     cases,
     failures,
-    boundary:'This test validates deterministic claim verdict computation from explicit evidence, exact replay suppression, source-family audit counts, authoritative-direction conflict containment, fingerprint-integrity conflict containment, and opt-in freshness gating that prevents stale or undated evidence from creating certainty. CI performs no web search and does not infer whether a claim is time-sensitive.'
+    boundary:'This test validates deterministic claim verdict computation from explicit evidence, exact replay suppression, source-family audit counts, authoritative-direction conflict containment, fingerprint-integrity conflict containment, and opt-in temporal gating that prevents stale, undated, future-dated, or date-range-overlapping evidence from creating certainty. CI performs no web search and does not infer whether a claim is time-sensitive.'
   };
   await fs.writeFile(outPath,JSON.stringify(result,null,2)+'\n','utf8');
   console.log(JSON.stringify(result,null,2));
   if(result.status!=='PASS') process.exitCode=1;
 }catch(error){
-  const result={schema:'nostromo-droplet-claim-verify-test/v1.2',completedAt:new Date().toISOString(),status:'FAIL',failures:[...failures,{type:'UNCAUGHT',message:String(error?.message||error)}]};
+  const result={schema:'nostromo-droplet-claim-verify-test/v1.3',completedAt:new Date().toISOString(),status:'FAIL',failures:[...failures,{type:'UNCAUGHT',message:String(error?.message||error)}]};
   await fs.writeFile(outPath,JSON.stringify(result,null,2)+'\n','utf8');
   console.log(JSON.stringify(result,null,2));
   process.exitCode=1;
