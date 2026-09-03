@@ -1,6 +1,6 @@
 {
-  "schema": "nostromo-organ-registry/v1.42",
-  "updatedAt": "2026-09-03T12:06:30+08:00",
+  "schema": "nostromo-organ-registry/v1.43",
+  "updatedAt": "2026-09-03T13:14:00+08:00",
   "truthRule": "DISPLAYED STATE MUST FOLLOW EVIDENCE",
   "evidence": "ci-last-result.json plus formal-round-last-result.json plus connector-last-result.json plus muther-falsify-last-result.json plus muther-repo-diversity-last-result.json plus droplet-claim-verify-last-result.json plus gut-metabolism-last-result.json plus gut-lineage-last-result.json plus vajra-dynamic-last-result.json plus vajra-ambiguity-last-result.json plus vajra-uncertainty-last-result.json plus vajra-conflict-escalation-last-result.json plus vajra-provenance-diversity-last-result.json plus shroom-feedback-last-result.json",
   "latestFormalRound": "greenhouse/r113-nostromo-formal-round.json",
@@ -29,19 +29,19 @@
     "boundary": "Isolated counterfactual executor only. It deliberately includes parent round ordinal in participant selection and has been CI-verified against R111 and R112. It does not write or advance formal greenhouse history and is engineering evidence that NOSTROMO can execute and audit a parent-sensitive transition, not evidence that the real SHROOMING population is causally path-dependent."
   },
   "latestThickening": {
-    "organ": "VAJRA",
-    "version": "VAJRA branch-scoped cross-organ ambiguity guard v0.3",
-    "status": "VERIFIED_BRANCH_SCOPED_CROSS_ORGAN_AMBIGUITY_PRESERVATION",
-    "test": "vajra-ambiguity-last-result.json v0.3 + NOSTROMO Integration Test run 286",
+    "organ": "MUTHER",
+    "version": "MUTHER bounded multi-window vein coverage v1.3",
+    "status": "VERIFIED_BOUNDED_MULTI_WINDOW_VEIN_COVERAGE",
+    "test": "muther-repo-diversity-last-result.json v0.2.0 + NOSTROMO Integration Test run 290",
     "capabilities": [
-      "receipt ambiguity is now keyed to the VAJRA branch identity targetRef + clauseRef + lens rather than being partitioned by organ label",
-      "qualifying returns from DROPLET and MU/TH/UR that address the same branch can jointly preserve AMBIGUOUS_BY_RECEIPTS instead of allowing arrival order to manufacture closure",
-      "cross-organ diversity by itself does not manufacture ambiguity when the qualifying relations point in the same explicit direction",
-      "malformed, non-executed, provenance-free, empty-material or relation-free returns remain excluded from ambiguity formation",
-      "distinct organ and provenance counts are retained as audit metadata without being upgraded to proof of real-world source independence",
-      "the existing explicit-conflict, uncertainty, replay, provenance-diversity and operator-preservation guards remain intact"
+      "a matching repository file may contribute a bounded number of separated query windows instead of only the first hit",
+      "multiple materially different local contexts inside one file can survive into the candidate pool with occurrence ordinal and offset provenance",
+      "exact-copy and conservative lexical near-duplicate containment still run before bounded source-family-balanced selection",
+      "near-duplicate suppression retains an auditable ledger rather than silently deleting provenance",
+      "controlled adversarial coverage retained three separated query windows from one file while continuing to suppress a 0.9518-similarity near duplicate",
+      "the 50-round NOSTROMO regression and 10-round active closed loop remain PASS with failures empty"
     ],
-    "boundary": "The branch-scoped guard was implemented in commit eb8ccc00d045a3e2106d8194b44d5458b98fa92d and passed the full NOSTROMO Integration Test run 285. Dedicated cross-organ adversarial and same-direction control coverage was then added in commit a04c214f38799357da8a0d89d4c479cdce4e4204; NOSTROMO Integration Test run 286 completed successfully. This proves deterministic branch-scoped ambiguity containment across organ labels. It does not prove semantic disagreement, factual truth, evidence quality, derivative-source detection or source independence."
+    "boundary": "The implementation commit 24114bf117519b41b19a176228248865d7313342 exposed a stale assertion wording in the new adversarial test; the failing record was preserved instead of hidden. Commit 1cbc8b3dea01d385e848f75e8ed40b6b506f37c5 corrected only that assertion, after which NOSTROMO Integration Test run 290 completed successfully and muther-repo-diversity-test v0.2.0 reported PASS with failures []. This proves bounded lexical/structural multi-window coverage that reduces first-hit blindness. It does not prove semantic vein detection, exhaustive within-file coverage, semantic identity, source independence, source quality, novelty, factual truth, or Google Drive coverage."
   },
   "organs": {
     "shrooming": {
@@ -63,12 +63,12 @@
       "actions": {
         "READ_STATE": "EXEC_STATE",
         "AUDIT_STATE": "EXEC_STATE",
-        "MINE_REPO": "VERIFIED_DIVERSITY_PRESERVING_REPO_MINE_WITH_LEXICAL_NEAR_DUPLICATE_CONTAINMENT",
+        "MINE_REPO": "VERIFIED_DIVERSITY_PRESERVING_MULTI_WINDOW_REPO_MINE_WITH_LEXICAL_NEAR_DUPLICATE_CONTAINMENT",
         "MINE_DRIVE_QUERY": "CONNECTOR_EXEC",
         "MINE_INTERNAL": "AUTHORIZED_CONNECTOR_EXEC",
         "FALSIFY": "REPO_COUNTEREVIDENCE_EXEC"
       },
-      "boundary": "Published mining-state audit and repository corpus mining are executable. MINE_REPO collects repository candidates before bounded selection, fingerprints superficially normalized snippets, suppresses exact copies, then applies a conservative character-shingle lexical-overlap guard before round-robin selection across path-derived source families. Near-duplicate suppression preserves an audit ledger instead of silently deleting provenance. This reduces repeated-copy pollution but remains deterministic lexical/structural handling, not semantic clustering, source-independence proof, source-quality scoring, novelty proof or truth judgment. Query-scoped Google Drive mining is executed by the authorized external connector runtime and handed back as redacted evidence. MINE_INTERNAL remains limited to explicit authorized query-scoped connector sources; it does not grant exhaustive private-environment crawling or cross-source enumeration. FALSIFY remains repository-scoped and absence is never upgraded to truth."
+      "boundary": "Published mining-state audit and repository corpus mining are executable. MINE_REPO now allows each matching repository file to contribute a bounded number of separated query windows before deduplication, preserving path, occurrence ordinal, occurrence offset, query-occurrence count and source-family provenance. This reduces structural first-hit blindness when one file contains multiple distinct local contexts. Candidates are still fingerprinted after superficial normalization, exact copies are suppressed, a conservative character-shingle lexical-overlap guard contains near duplicates with an audit ledger, and bounded selection remains round-robin across path-derived source families. This is deterministic lexical/structural coverage, not semantic clustering or vein detection, exhaustive within-file coverage, source-independence proof, source-quality scoring, novelty proof or truth judgment. Query-scoped Google Drive mining is executed by the authorized external connector runtime and handed back as redacted evidence. MINE_INTERNAL remains limited to explicit authorized query-scoped connector sources; it does not grant exhaustive private-environment crawling or cross-source enumeration. FALSIFY remains repository-scoped and absence is never upgraded to truth."
     },
     "droplet": {
       "mode": "PARTIAL_EXEC_THICKENED",
