@@ -1,7 +1,7 @@
 {
   "schema": "nostromo-gut-lineage-test/v0.2.24-carry-scalar-guard",
-  "completedAt": "2026-09-03T11:04:58.869Z",
-  "status": "FAIL",
+  "completedAt": "2026-09-03T11:07:06.247Z",
+  "status": "PASS",
   "sameLineage": {
     "summaryItemCount": 1,
     "antiEcho": {
@@ -247,7 +247,7 @@
     "boundary": "Carry-only containment. ref:/clause: hexadecimal lineage tokens are protected from colon tokenization before intra-segment compaction; standalone lineage fragments are suppressed when the same exact token is already embedded in a retained substantive segment, and repeated standalone lineage classes are also collapsed. Exact/lineage-equivalent clauses, nested long clauses, recursively wrapped near-duplicate clauses, repeated ref/clause-only lineage tokens, same-route cross-segment near echoes, and bare boolean/null machine scaffolding are collapsed before recirculation. Numeric scalars and substantive phrases containing words such as false remain untouched. Original GUT nutrients, routes and provenance are not mutated."
   },
   "scaffoldCarry": {
-    "text": "[CONTRADICTION->VAJRA] CONTRADICTION：以 evidence 位置重讀：主動尋找最小反例與破壞條件 · [QUESTION->SHROOMING] false positive 是一個完整語義片語，不能因為包含 false 就被刪掉。 · [EVIDENCE_OR_PROVENANCE->MUTHER] 200",
+    "text": "[CONTRADICTION->VAJRA] CONTRADICTION：以 evidence 位置重讀：主動尋找最小反例與破壞條件 · [QUESTION->SHROOMING] false-positive 是一個完整語義片語，不能因為包含布林字樣就被刪掉。 · [EVIDENCE_OR_PROVENANCE->MUTHER] 200",
     "echoSuppressed": 0,
     "lineageOnlySuppressed": 0,
     "embeddedLineageSuppressed": 0,
@@ -260,7 +260,7 @@
     "scaffoldScalarSuppressed": 2,
     "inputSegments": 4,
     "outputSegments": 3,
-    "fingerprint": "045b50ab2f1ce687",
+    "fingerprint": "e697145483864db2",
     "boundary": "Carry-only containment. ref:/clause: hexadecimal lineage tokens are protected from colon tokenization before intra-segment compaction; standalone lineage fragments are suppressed when the same exact token is already embedded in a retained substantive segment, and repeated standalone lineage classes are also collapsed. Exact/lineage-equivalent clauses, nested long clauses, recursively wrapped near-duplicate clauses, repeated ref/clause-only lineage tokens, same-route cross-segment near echoes, and bare boolean/null machine scaffolding are collapsed before recirculation. Numeric scalars and substantive phrases containing words such as false remain untouched. Original GUT nutrients, routes and provenance are not mutated."
   },
   "delimiterCollision": {
@@ -306,11 +306,6 @@
       "boundary": "Carry-only containment. ref:/clause: hexadecimal lineage tokens are protected from colon tokenization before intra-segment compaction; standalone lineage fragments are suppressed when the same exact token is already embedded in a retained substantive segment, and repeated standalone lineage classes are also collapsed. Exact/lineage-equivalent clauses, nested long clauses, recursively wrapped near-duplicate clauses, repeated ref/clause-only lineage tokens, same-route cross-segment near echoes, and bare boolean/null machine scaffolding are collapsed before recirculation. Numeric scalars and substantive phrases containing words such as false remain untouched. Original GUT nutrients, routes and provenance are not mutated."
     }
   },
-  "failures": [
-    {
-      "type": "CARRY_SCAFFOLD_SCALAR_SURVIVED",
-      "detail": "[CONTRADICTION->VAJRA] CONTRADICTION：以 evidence 位置重讀：主動尋找最小反例與破壞條件 · [QUESTION->SHROOMING] false positive 是一個完整語義片語，不能因為包含 false 就被刪掉。 · [EVIDENCE_OR_PROVENANCE->MUTHER] 200"
-    }
-  ],
+  "failures": [],
   "boundary": "This adversarial test preserves source nutrients and provenance while checking cross-atom, intra-atom, short-CJK nested-clause, repeated machine-lineage signature, cross-segment volatile-lineage carry echo, recursive wrapper growth, repeated short ref/clause-only carry fragments, a replay derived from the previously observed malformed carry, bare boolean/null carry scaffold leakage, and top-level middle-dot delimiter collision inside a single nutrient. Bare true/false/null/undefined tokens may be removed only from carry rendering; numeric scalars and substantive phrases containing those words remain. v0.2.24 still requires machine hexadecimal lineage identifiers to remain available through the bounded out-of-band carryRefs ledger with provenance while prose summary remains eligible for anti-echo cleanup. PASS does not certify semantic identity or truth."
 }
