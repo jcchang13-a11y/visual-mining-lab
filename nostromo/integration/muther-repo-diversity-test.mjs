@@ -15,9 +15,10 @@ const distinct=`${query} describes a separate mining result about image grammar 
 const spacer='\n'+('bounded filler context without the probe token '.repeat(18))+'\n';
 const multi=[
   `${multiQuery} first vein records an archival provenance problem involving document lineage, extraction boundaries, and unresolved authorship metadata.`,
-  `${multiQuery} second vein records a contradictory methodological note about sampling bias, negative cases, and a failed classification rule that needs separate review.`,
-  `${multiQuery} third vein records a visual-material observation about recurring spatial composition, media residue, and an anomaly cluster unrelated to the first two veins.`
-].join(spacer);
+  `${multiQuery} nearby echo is deliberately too close to the first occurrence to earn its own extraction window, but it still counts as the second true occurrence in source provenance.`,
+  `${multiQuery} third vein records a contradictory methodological note about sampling bias, negative cases, and a failed classification rule that needs separate review.`,
+  `${multiQuery} fourth vein records a visual-material observation about recurring spatial composition, media residue, and an anomaly cluster unrelated to the first two retained veins.`
+].map((x,i)=>i===0||i===1?x:(spacer+x)).join('\n');
 
 try{
   for(const dir of fixtureDirs)await fs.mkdir(path.join(ROOT,dir),{recursive:true});
@@ -48,23 +49,25 @@ try{
   const multiHits=(multiResult.hits||[]).filter(x=>x.path.startsWith('tmp-muther-multi/'));
   const multiOrdinals=[...new Set(multiHits.map(x=>x.occurrenceOrdinal).filter(Boolean))].sort((a,b)=>a-b);
   assert(multiResult.filesWithMultipleOccurrences===1,`expected one multi-occurrence file, got ${multiResult.filesWithMultipleOccurrences}`);
-  assert(multiResult.occurrenceWindowCandidateCount===3,`expected three bounded occurrence windows, got ${multiResult.occurrenceWindowCandidateCount}`);
+  assert(multiResult.totalQueryOccurrences===4,`expected four true query occurrences including the skipped nearby occurrence, got ${multiResult.totalQueryOccurrences}`);
+  assert(multiResult.occurrenceWindowCandidateCount===3,`expected three bounded occurrence windows after gap suppression, got ${multiResult.occurrenceWindowCandidateCount}`);
   assert(multiHits.length===3,`expected three retained distinct veins from one file, got ${multiHits.length}`);
-  assert(JSON.stringify(multiOrdinals)===JSON.stringify([1,2,3]),`expected occurrence ordinals 1,2,3, got ${JSON.stringify(multiOrdinals)}`);
+  assert(JSON.stringify(multiOrdinals)===JSON.stringify([1,3,4]),`expected true source occurrence ordinals 1,3,4 after skipping nearby occurrence 2, got ${JSON.stringify(multiOrdinals)}`);
   assert(multiResult.selectedDistinctFileCount===1,`expected one selected file carrying multiple veins, got ${multiResult.selectedDistinctFileCount}`);
   assert(/FIRST-HIT BLINDNESS/.test(multiResult.boundary||''),'boundary must declare bounded first-hit-blindness mitigation');
+  assert(/TRUE QUERY OCCURRENCE/.test(multiResult.boundary||''),'boundary must state that occurrence ordinals refer to true source occurrences');
 
   const output={
-    schema:'muther-repo-diversity-test/v0.2.0',
+    schema:'muther-repo-diversity-test/v0.2.1',
     completedAt:new Date().toISOString(),
     status:failures.length?'FAIL':'PASS',
-    capability:'LEXICAL_NEAR_DUPLICATE_POLLUTION_CONTAINMENT_PLUS_BOUNDED_MULTI_WINDOW_VEIN_COVERAGE',
+    capability:'LEXICAL_NEAR_DUPLICATE_CONTAINMENT_PLUS_BOUNDED_MULTI_WINDOW_COVERAGE_WITH_TRUE_OCCURRENCE_PROVENANCE',
     unit:{nearSimilarity:Number(nearSimilarity.toFixed(4)),distinctSimilarity:Number(distinctSimilarity.toFixed(4)),threshold:result.nearDuplicateThreshold},
     adversarial:{candidateHitCount:result.candidateHitCount,exactDuplicateSuppressedCount:result.duplicateSuppressedCount,nearDuplicateSuppressedCount:result.nearDuplicateSuppressedCount,lexicallyDistinctCandidateCount:result.lexicallyDistinctCandidateCount,retainedPaths,nearDuplicateAudit:result.nearDuplicateAudit},
-    multiWindow:{filesWithMultipleOccurrences:multiResult.filesWithMultipleOccurrences,occurrenceWindowCandidateCount:multiResult.occurrenceWindowCandidateCount,retainedVeinCount:multiHits.length,occurrenceOrdinals:multiOrdinals,selectedDistinctFileCount:multiResult.selectedDistinctFileCount,maxWindowsPerFile:multiResult.maxWindowsPerFile,minWindowGap:multiResult.minWindowGap},
-    provenance:{selectedSourceFamilies:result.selectedSourceFamilies,sourceFamilyCount:result.sourceFamilyCount},
+    multiWindow:{filesWithMultipleOccurrences:multiResult.filesWithMultipleOccurrences,totalQueryOccurrences:multiResult.totalQueryOccurrences,occurrenceWindowCandidateCount:multiResult.occurrenceWindowCandidateCount,retainedVeinCount:multiHits.length,occurrenceOrdinals:multiOrdinals,skippedTrueOccurrenceOrdinal:2,selectedDistinctFileCount:multiResult.selectedDistinctFileCount,maxWindowsPerFile:multiResult.maxWindowsPerFile,minWindowGap:multiResult.minWindowGap},
+    provenance:{selectedSourceFamilies:result.selectedSourceFamilies,sourceFamilyCount:result.sourceFamilyCount,trueOccurrenceOrdinalPreserved:JSON.stringify(multiOrdinals)===JSON.stringify([1,3,4])},
     crossOrganRegression:'The main NOSTROMO integration test runs separately in the same workflow and must remain PASS before public promotion.',
-    boundary:'PASS certifies conservative lexical near-duplicate containment plus bounded extraction of multiple separated query windows from one repository file under controlled fixtures. It reduces first-hit blindness but does not certify semantic vein detection, semantic equivalence, exhaustive within-file coverage, source independence, source quality, novelty, factual truth, or Google Drive coverage.',
+    boundary:'PASS certifies conservative lexical near-duplicate containment, bounded extraction of separated query windows, and preservation of each selected window’s true query-occurrence ordinal in its source file even when an intervening nearby occurrence is intentionally skipped. It does not certify semantic vein detection, semantic equivalence, exhaustive within-file coverage, source independence, source quality, novelty, factual truth, or Google Drive coverage.',
     failures
   };
   await fs.writeFile(path.join(ROOT,'nostromo/integration/muther-repo-diversity-last-result.json'),JSON.stringify(output,null,2)+'\n','utf8');
