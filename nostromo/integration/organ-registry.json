@@ -1,6 +1,6 @@
 {
-  "schema": "nostromo-organ-registry/v1.40",
-  "updatedAt": "2026-09-03T04:08:00+08:00",
+  "schema": "nostromo-organ-registry/v1.41",
+  "updatedAt": "2026-09-03T10:08:00+08:00",
   "truthRule": "DISPLAYED STATE MUST FOLLOW EVIDENCE",
   "evidence": "ci-last-result.json plus formal-round-last-result.json plus connector-last-result.json plus muther-falsify-last-result.json plus muther-repo-diversity-last-result.json plus droplet-claim-verify-last-result.json plus gut-metabolism-last-result.json plus gut-lineage-last-result.json plus vajra-dynamic-last-result.json plus vajra-uncertainty-last-result.json plus vajra-conflict-escalation-last-result.json plus vajra-provenance-diversity-last-result.json plus shroom-feedback-last-result.json",
   "latestFormalRound": "greenhouse/r113-nostromo-formal-round.json",
@@ -31,17 +31,18 @@
   "latestThickening": {
     "organ": "VAJRA",
     "version": "VAJRA cross-organ replay guard v0.3.3",
-    "status": "VERIFIED_OPERATOR_DIVERGENCE_AWARE_NEAR_REPLAY_GUARD",
-    "test": "vajra-provenance-diversity-last-result.json v0.3.3 + NOSTROMO Integration Test run 273",
+    "status": "VERIFIED_MULTIPLICATIVE_OPERATOR_DIVERGENCE_REPLAY_GUARD",
+    "test": "vajra-provenance-diversity-last-result.json v0.3.3 + NOSTROMO Integration Test runs 280 and 281",
     "capabilities": [
-      "cross-organ replay canonicalization preserves explicit meaning-bearing comparison, equality and arithmetic operators",
+      "cross-organ replay canonicalization preserves explicit meaning-bearing comparison, equality, addition/subtraction, multiplication and division operators",
       "when two sufficiently long materials both contain explicit operators but their operator signatures diverge, lexical overlap can no longer falsely classify them as near replay",
-      "operator-opposed materials such as score > 10 versus score < 10 remain distinct both under exact canonical identity and bounded near-replay handling",
+      "operator-opposed materials such as score > 10 versus score < 10 and outcome = exposure * duration versus outcome = exposure / duration remain distinct under bounded near-replay handling",
+      "ASCII and mathematical multiplication/division forms (*, /, ×, ÷) have dedicated adversarial coverage",
       "ordinary lightly wrapped repeated material without operator divergence still triggers bounded lexical replay review",
       "exact provenance reuse, exact content replay and bounded lexical wrapper replay still block premature reassessment",
       "raw organ returns remain preserved and distinct provenance labels are still not upgraded to proof of real-world source independence"
     ],
-    "boundary": "Promotion is backed by successful NOSTROMO Integration Test run 273 for commit 11bf69770732179e3548828750a388f8b400a7e8 and vajra-provenance-diversity-test/v0.3.3 PASS. This fixes a second-order false-positive risk: v0.3.2 preserved operators in exact content identity but could still flag operator-opposed sentences as near replay because their surrounding words were highly similar. v0.3.3 blocks that lexical override only when both materials contain explicit, divergent operator signatures. This remains deterministic syntactic protection, not semantic theorem proving, factual adjudication, derivative-source detection or proof of source independence."
+    "boundary": "Multiplication/division protection was already present in executable v0.3.3 and dedicated adversarial tests, and was successfully exercised by NOSTROMO Integration Test run 280 for commit 7b699398a9806565f6297613c11e1ff6051bbab1. The stale boundary text that still called it unpromoted was corrected in commit 9e811b439dc2f99e7f067b0bc1aa0c3a53a078ca; full NOSTROMO Integration Test run 281 then completed successfully. This is deterministic syntactic operator-divergence protection, not semantic theorem proving, factual adjudication, derivative-source detection or proof of source independence."
   },
   "organs": {
     "shrooming": {
@@ -96,7 +97,7 @@
       "actions": {
         "DISMANTLE": "VERIFIED_PROPOSITION_AWARE_DISMANTLER_WITH_RECEIPT_GUARDS_MULTI_ORGAN_CONTEXT_CROSS_INTAKE_REPLAY_CONTENT_BOUND_HISTORY_ATTESTATION_CANONICAL_PROVENANCE_DIVERSITY_OPERATOR_PRESERVATION_AND_OPERATOR_DIVERGENCE_NEAR_REPLAY_PROTECTION"
       },
-      "boundary": "VAJRA retains proposition-aware dismantling, uncertainty/provenance preservation, contest persistence, multi-organ conflict-context routing, replay containment, content-bound history attestation and semantic-operator-preserving replay identity. Its cross-organ provenance-diversity/content-replay guard is now v0.3.3: bounded superficial formatting remains normalized, explicit comparison/equality/arithmetic operators are protected before canonicalization, and lexical near-replay similarity cannot override an explicit operator-signature divergence when both compared materials contain such operators. Exact replay and ordinary bounded lexical wrapper replay still change VAJRA behavior by blocking premature reassessment. Raw provenance labels and raw returned material remain preserved for audit. Distinct canonical labels still do not prove real-world source independence. These remain deterministic lexical/structural guards, not cryptographic signatures, semantic adjudication, factual truth, derivative-source detection or real-world source-independence proof."
+      "boundary": "VAJRA retains proposition-aware dismantling, uncertainty/provenance preservation, contest persistence, multi-organ conflict-context routing, replay containment, content-bound history attestation and semantic-operator-preserving replay identity. Its cross-organ provenance-diversity/content-replay guard is v0.3.3: bounded superficial formatting remains normalized; explicit comparison, equality, addition/subtraction, multiplication and division operators are protected before canonicalization; and lexical near-replay similarity cannot override explicit divergent operator signatures when both compared materials contain such operators. Dedicated adversarial coverage includes *, /, × and ÷ and is backed by successful full integration runs 280 and 281. Exact replay and ordinary bounded lexical wrapper replay still change VAJRA behavior by blocking premature reassessment. Raw provenance labels and raw returned material remain preserved for audit. Distinct canonical labels still do not prove real-world source independence. These remain deterministic lexical/structural guards, not cryptographic signatures, semantic adjudication, factual truth, derivative-source detection or real-world source-independence proof."
     }
   }
 }
