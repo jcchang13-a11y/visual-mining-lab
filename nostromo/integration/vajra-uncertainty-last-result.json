@@ -1,6 +1,6 @@
 {
   "schema": "nostromo-vajra-uncertainty-test/v0.3.8",
-  "completedAt": "2026-09-03T13:04:27.224Z",
+  "completedAt": "2026-09-03T14:09:39.154Z",
   "status": "PASS",
   "guards": {
     "explicitUncertaintyCannotClose": true,
@@ -31,9 +31,9 @@
   "crossOrgan": {
     "gut": {
       "ingested": 1061,
-      "absorbed": 53,
-      "quarantined": 22,
-      "summarySample": "[CONTRADICTION->VAJRA] 主動尋找最小反例與破壞條件 · [CONTRADICTION->VAJRA] 主動尋找最小反例與破壞條件：針對本輪 EMPIRICAL 命題，哪個前提最可能先失效？ · [QUESTION->SHROOMING] Resolution means the handoff contract received a matching clause-scoped, executed, provenance-bearing and minimally substantive return with no detected opposing qualifying receipt in the same application. Replay identity normalize"
+      "absorbed": 75,
+      "quarantined": 0,
+      "summarySample": "[CONTRADICTION->VAJRA] SAME_PROVENANCE_CONFLICT · [CONTRADICTION->VAJRA] This return refutes the target claim under the tested condition. · [CONTRADICTION->VAJRA] REFUTES · [CONTRADICTION->VAJRA] Handoff receipt matching is structural and auditable: targetRef, clauseRef, lens, preferred organ, explicit execution status, provenance, returned material and rela"
     }
   },
   "failures": [],
