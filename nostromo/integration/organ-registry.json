@@ -1,6 +1,6 @@
 {
-  "schema": "nostromo-organ-registry/v1.44",
-  "updatedAt": "2026-09-03T15:06:00+08:00",
+  "schema": "nostromo-organ-registry/v1.45",
+  "updatedAt": "2026-09-03T17:08:00+08:00",
   "truthRule": "DISPLAYED STATE MUST FOLLOW EVIDENCE",
   "evidence": "ci-last-result.json plus formal-round-last-result.json plus connector-last-result.json plus muther-falsify-last-result.json plus muther-repo-diversity-last-result.json plus droplet-claim-verify-last-result.json plus gut-metabolism-last-result.json plus gut-lineage-last-result.json plus vajra-dynamic-last-result.json plus vajra-ambiguity-last-result.json plus vajra-uncertainty-last-result.json plus vajra-conflict-escalation-last-result.json plus vajra-provenance-diversity-last-result.json plus shroom-feedback-last-result.json",
   "latestFormalRound": "greenhouse/r113-nostromo-formal-round.json",
@@ -29,19 +29,20 @@
     "boundary": "Isolated counterfactual executor only. It deliberately includes parent round ordinal in participant selection and has been CI-verified against R111 and R112. It does not write or advance formal greenhouse history and is engineering evidence that NOSTROMO can execute and audit a parent-sensitive transition, not evidence that the real SHROOMING population is causally path-dependent."
   },
   "latestThickening": {
-    "organ": "DROPLET",
-    "version": "DROPLET temporal leakage containment v1.3",
-    "status": "VERIFIED_FUTURE_AND_OVERLAPPING_DATE_QUARANTINE",
-    "test": "droplet-claim-verify-last-result.json v1.3 + NOSTROMO Integration Test run 293",
+    "organ": "SHROOMING",
+    "version": "SHROOMING feedback-conditioned reader v0.3",
+    "status": "VERIFIED_COMPOSITIONAL_STRUCTURED_FEEDBACK_CONDITIONING",
+    "test": "shroom-feedback-last-result.json v0.3 + NOSTROMO Integration Test run 299",
     "capabilities": [
-      "an active freshness policy no longer treats future-dated evidence as age zero and therefore fresh",
-      "day-precision evidence strictly after the declared as-of date is marked FUTURE and cannot create certainty",
-      "coarse month-precision evidence whose date range straddles the declared as-of date is marked OVERLAPS_AS_OF and cannot create certainty",
-      "stale, unknown-date, future-dated and date-range-overlapping evidence remain visible in the audit instead of being silently discarded",
-      "fresh authoritative evidence on or before the as-of boundary remains eligible for certainty",
-      "full NOSTROMO Integration Test run 293 completed successfully after the new temporal adversarial cases passed"
+      "multiple explicit structured upstream signal classes can now compose bounded reading-lens priorities instead of one precedence branch silently erasing the others",
+      "evidence plus question feedback preserves both evidence and position/boundary pressure in the deterministic lens order",
+      "contradiction plus question feedback preserves counterexample pressure while retaining position and boundary pressure",
+      "ordinary prose merely mentioning evidence, source, contradiction or counterevidence still cannot hijack conditioning",
+      "mixed-signal score contributions and active signal classes remain auditable",
+      "deterministic replay holds for both single-signal and mixed-signal cases",
+      "full NOSTROMO Integration Test run 299 completed successfully after the new SHROOMING adversarial cases passed"
     ],
-    "boundary": "The previous v1.2 freshness calculation used max(0, ageDays), which could make future-dated evidence look fresh under an active freshness policy. v1.3 replaces that leakage path with explicit date ranges and quarantines FUTURE and OVERLAPS_AS_OF evidence from certainty while retaining it for audit. This is opt-in deterministic temporal gating. It still does not infer whether a claim is time-sensitive, search the web itself, validate publication timestamps, score methodological quality, prove source independence, or adjudicate factual truth beyond the supplied evidence bundle."
+    "boundary": "SHROOMING v0.3 is a deterministic structural feedback composer. It does not semantically understand evidence, revise beliefs, prove that ten traces are independent agents, or create real social emergence. It only allows explicit machine-structured evidence, contradiction and question signals to combine bounded lens priorities without silent precedence loss, while preserving lexical-contamination resistance and auditability."
   },
   "organs": {
     "shrooming": {
@@ -55,7 +56,7 @@
         "RUN_READING_ROUND": "FORMAL_ROUND_EXEC",
         "RUN_PARENT_SENSITIVE_CONTROL": "EXPERIMENTAL_EXEC_VERIFIED"
       },
-      "boundary": "Published-state inspection, sandbox reading, greenhouse question probing, and explicit formal greenhouse round advancement remain executable. In the verified active NOSTROMO loop, SHROOMING has a separate feedback-conditioned deterministic reader that reorders inspection lenses when explicit redacted upstream evidence or contradiction signals are present; this makes cross-organ feedback alter SHROOMING behavior rather than merely append text. The formal RUN_READING_ROUND baseline remains parent-invariant v0.9 and unchanged, preserving R111→R112→R113 reproducibility. Neither the feedback-conditioned active-loop reader nor the formal/experimental branches represent semantic learning or ten independently persistent live LLM processes."
+      "boundary": "Published-state inspection, sandbox reading, greenhouse question probing, and explicit formal greenhouse round advancement remain executable. In the verified active NOSTROMO loop, SHROOMING has a separate feedback-conditioned deterministic reader v0.3. Only explicit structured upstream markers can condition reading; when evidence, contradiction and question signal classes co-occur, their bounded lens priorities compose instead of one signal silently overriding the others. Ordinary lexical mentions remain auditable but cannot hijack conditioning. The formal RUN_READING_ROUND baseline remains parent-invariant v0.9 and unchanged, preserving R111→R112→R113 reproducibility. Neither the feedback-conditioned active-loop reader nor the formal/experimental branches represent semantic learning or ten independently persistent live LLM processes."
     },
     "muther": {
       "mode": "PARTIAL_EXEC_THICKENED",
