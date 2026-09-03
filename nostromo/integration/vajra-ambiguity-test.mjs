@@ -62,6 +62,29 @@ const control=applyGuardedHandoffResults(base,[receiptA,receiptC],V);
 const controlBranch=control.unresolved.find(x=>x.targetRef===branch?.targetRef&&x.clauseRef===branch?.clauseRef&&x.lens===branch?.lens);
 if(controlBranch?.status==='AMBIGUOUS_BY_RECEIPTS')failures.push({type:'SAME_DIRECTION_CONTROL_FALSE_POSITIVE'});
 
+// Negation adversarial cases: obvious negated polarity phrases must not be
+// misclassified as positive support/refute merely because the bare keyword occurs.
+const negatedSupport={...common,provenance:'source-neg-support',material:'A bounded return reports the tested observation without endorsing the target claim.',relation:'This evidence does not support the target claim under the tested condition.'};
+const negatedSupportAudit=auditReceiptAmbiguity([receiptA,negatedSupport]);
+const negatedSupportFinding=negatedSupportAudit.ambiguous?.[0]||null;
+const negatedSupportPolarity=negatedSupportFinding?.receipts?.find(x=>x.provenance==='source-neg-support')?.polarity||null;
+if(negatedSupportAudit.status!=='AMBIGUITY_FOUND')failures.push({type:'NEGATED_SUPPORT_FALSE_POLARITY',audit:negatedSupportAudit});
+if(negatedSupportPolarity!=='UNSPECIFIED')failures.push({type:'NEGATED_SUPPORT_NOT_UNSPECIFIED',actual:negatedSupportPolarity});
+
+const explicitRefute={...common,provenance:'source-explicit-refute',material:'A bounded adversarial run directly contradicts the universal reliability claim within the tested scope.',relation:'This evidence refutes the universal reliability claim within the tested scope.'};
+const negatedRefute={...common,provenance:'source-neg-refute',material:'A separate bounded return does not establish whether the target claim fails.',relation:'This evidence does not refute the target claim under the tested condition.'};
+const negatedRefuteAudit=auditReceiptAmbiguity([explicitRefute,negatedRefute]);
+const negatedRefuteFinding=negatedRefuteAudit.ambiguous?.[0]||null;
+const negatedRefutePolarity=negatedRefuteFinding?.receipts?.find(x=>x.provenance==='source-neg-refute')?.polarity||null;
+if(negatedRefuteAudit.status!=='AMBIGUITY_FOUND')failures.push({type:'NEGATED_REFUTE_FALSE_POLARITY',audit:negatedRefuteAudit});
+if(negatedRefutePolarity!=='UNSPECIFIED')failures.push({type:'NEGATED_REFUTE_NOT_UNSPECIFIED',actual:negatedRefutePolarity});
+
+const chineseNegatedSupport={...common,provenance:'source-zh-neg-support',material:'這份材料只描述測試結果，沒有建立目標命題。',relation:'這份證據並未支持目標命題。'};
+const chineseNegatedSupportAudit=auditReceiptAmbiguity([receiptA,chineseNegatedSupport]);
+const chineseNegatedSupportPolarity=chineseNegatedSupportAudit.ambiguous?.[0]?.receipts?.find(x=>x.provenance==='source-zh-neg-support')?.polarity||null;
+if(chineseNegatedSupportAudit.status!=='AMBIGUITY_FOUND')failures.push({type:'ZH_NEGATED_SUPPORT_FALSE_POLARITY',audit:chineseNegatedSupportAudit});
+if(chineseNegatedSupportPolarity!=='UNSPECIFIED')failures.push({type:'ZH_NEGATED_SUPPORT_NOT_UNSPECIFIED',actual:chineseNegatedSupportPolarity});
+
 // Poison control: malformed/non-executed returns must not manufacture ambiguity.
 const poisonMissingProvenance={...common,provenance:'',material:'A vague additional return that would otherwise look unrelated to the first receipt.',relation:'Its relation to the target is not determined.'};
 const poisonNotExecuted={...common,status:'QUEUED',provenance:'source-poison-queued',material:'Queued material that has not actually been returned by the requested organ.',relation:'Its relation to the target is not determined.'};
@@ -80,7 +103,7 @@ for(const expected of ['MISSING_PROVENANCE','NO_EXECUTION_EVIDENCE','MISSING_REL
 }
 
 const result={
-  schema:'nostromo-vajra-ambiguity-test/v0.3',
+  schema:'nostromo-vajra-ambiguity-test/v0.4',
   completedAt:new Date().toISOString(),
   status:failures.length?'FAIL':'PASS',
   finding:{
@@ -92,13 +115,19 @@ const result={
     crossOrganDistinctOrgans:crossOrganFinding?.distinctOrganCount||0,
     crossOrganControlStatus:crossOrganControlBranch?.status||null,
     controlStatus:controlBranch?.status||null,
+    negatedSupportStatus:negatedSupportAudit.status,
+    negatedSupportPolarity,
+    negatedRefuteStatus:negatedRefuteAudit.status,
+    negatedRefutePolarity,
+    chineseNegatedSupportStatus:chineseNegatedSupportAudit.status,
+    chineseNegatedSupportPolarity,
     poisonAuditStatus:poisonAudit.status,
     poisonRejected:poisonAudit.rejectedReceiptCount,
     poisonBranchStatus:poisonBranch?.status||null,
-    interpretation:'The guard preserves branch-scoped ambiguity across organ boundaries while excluding malformed, non-executed, provenance-free or relation-free returns. Different organ labels no longer partition one VAJRA branch into separate first-receipt closure domains, while organ diversity by itself does not manufacture ambiguity.'
+    interpretation:'The guard preserves branch-scoped ambiguity across organ boundaries, excludes malformed returns, and now masks bounded English/Chinese negated support/refute phrases before polarity detection so bare keywords cannot manufacture false directional evidence.'
   },
   failures,
-  boundary:'This test demonstrates a deterministic structural/lexical false-certainty and ambiguity-poisoning guard, including cross-organ branch-scoped returns. UNSPECIFIED means the bounded polarity detector cannot classify the relation; qualification means only that minimum execution/provenance/material/relation fields exist. Distinct organ/provenance counts are audit metadata, not proof of source independence. It does not prove semantic disagreement, truth or evidence quality.'
+  boundary:'This test demonstrates a deterministic structural/lexical false-certainty and ambiguity-poisoning guard, including cross-organ branch-scoped returns and bounded polarity-negation handling. UNSPECIFIED means the bounded polarity detector cannot safely classify the relation; qualification means only that minimum execution/provenance/material/relation fields exist. Distinct organ/provenance counts are audit metadata, not proof of source independence. Negation masking is intentionally narrow and does not amount to semantic negation scope resolution, truth judgment or evidence-quality scoring.'
 };
 await fs.writeFile(resultPath,JSON.stringify(result,null,2)+'\n','utf8');
 console.log(JSON.stringify(result,null,2));
