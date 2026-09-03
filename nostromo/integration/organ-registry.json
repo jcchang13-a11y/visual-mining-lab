@@ -1,6 +1,6 @@
 {
-  "schema": "nostromo-organ-registry/v1.54",
-  "updatedAt": "2026-09-04T04:09:00+08:00",
+  "schema": "nostromo-organ-registry/v1.55",
+  "updatedAt": "2026-09-04T06:12:00+08:00",
   "truthRule": "DISPLAYED STATE MUST FOLLOW EVIDENCE",
   "evidence": "ci-last-result.json plus formal-round-last-result.json plus connector-last-result.json plus muther-falsify-last-result.json plus muther-repo-diversity-last-result.json plus droplet-claim-verify-last-result.json plus gut-metabolism-last-result.json plus gut-lineage-last-result.json plus vajra-dynamic-last-result.json plus vajra-ambiguity-last-result.json plus vajra-modality-last-result.json plus vajra-uncertainty-last-result.json plus vajra-conflict-escalation-last-result.json plus vajra-provenance-diversity-last-result.json plus shroom-feedback-last-result.json",
   "latestFormalRound": "greenhouse/r113-nostromo-formal-round.json",
@@ -30,19 +30,20 @@
   },
   "latestThickening": {
     "organ": "VAJRA",
-    "version": "VAJRA receipt ambiguity guard v0.4.3",
-    "status": "VERIFIED_BOUNDED_MODALITY_FALSE_CERTAINTY_GUARD",
-    "test": "vajra-modality-last-result.json v0.4.3 + NOSTROMO VAJRA Modality Test run 1 + NOSTROMO Integration Test run 328",
+    "version": "VAJRA receipt ambiguity/conflict guard v0.5.0",
+    "status": "VERIFIED_CROSS_ORGAN_EXPLICIT_CONFLICT_CLOSURE_BLOCK_AND_ESCALATION",
+    "test": "vajra-ambiguity-last-result.json v0.5.0 + NOSTROMO Integration Test run 331",
     "capabilities": [
-      "branch-scoped qualifying returns from different organs remain audited together instead of being separated by organ label",
-      "bounded English modal phrases such as may support and might refute remain lexically UNSPECIFIED rather than manufacturing directional evidence",
-      "bounded non-committal phrases such as does not necessarily support and does not necessarily refute remain lexically UNSPECIFIED",
-      "bounded Chinese modal phrases such as 可能支持 and 未必反駁 remain lexically UNSPECIFIED",
-      "same-direction explicit cross-organ receipts remain a control and do not become ambiguous merely because organ provenance differs",
-      "cross-organ provenance metadata remains visible while distinct organ labels are not upgraded to proof of independent evidence",
-      "dedicated modality adversarial test and full NOSTROMO integration both completed successfully with empty failure logs"
+      "branch-scoped qualifying returns from different organs remain audited together instead of being partitioned by preferred-organ label",
+      "explicit opposite SUPPORTS/REFUTES polarity across organ labels now blocks preferred-organ first-receipt closure",
+      "a cross-organ explicit disagreement becomes CONTESTED_BY_RECEIPTS instead of being silently discarded as an organ mismatch",
+      "the resulting contested branch is directly compatible with the existing VAJRA conflict-escalation layer",
+      "verified escalation produces bounded no-closure work packets for DROPLET, MUTHER and SHROOMING",
+      "same-direction explicit cross-organ receipts remain a control and do not become contested merely because organ provenance differs",
+      "existing bounded negation, insufficiency and modality masking continues to preserve UNSPECIFIED ambiguity without manufacturing polarity",
+      "full NOSTROMO integration completed successfully after the new adversarial case, with the ambiguity test reporting failures=[]"
     ],
-    "boundary": "This is a deterministic structural/lexical false-certainty guard for a bounded English/Chinese modality phrase set. It prevents explicit hedging from being misread as positive SUPPORTS/REFUTES signals and preserves cross-organ branch ambiguity when relation polarity remains UNSPECIFIED. It does not perform general semantic modality or negation scope resolution, probabilistic reasoning, factual adjudication, evidence-quality scoring, derivative-source detection or proof of source independence."
+    "boundary": "This is a deterministic structural/lexical cross-organ conflict guard. It proves that a qualifying executed return from a non-preferred organ can block premature VAJRA closure when it states explicit opposite lexical polarity on the same targetRef + clauseRef + lens branch, and that this contest can be handed into the existing multi-organ escalation machinery. It does not prove either organ is correct, that the sources are independent, or that the conflict is semantic rather than lexical; it does not perform factual adjudication, evidence-quality scoring, derivative-source detection or general natural-language inference."
   },
   "organs": {
     "shrooming": {
@@ -95,9 +96,9 @@
       "mode": "EXEC_CONNECTED_THICKENED",
       "source": "../vajra/vajra-engine.js + ../vajra/receipt-uncertainty-guard.js + ./vajra-conflict-escalation.mjs + ./vajra-provenance-diversity-guard.mjs + ./vajra-ambiguity-guard.mjs",
       "actions": {
-        "DISMANTLE": "VERIFIED_PROPOSITION_AWARE_DISMANTLER_WITH_RECEIPT_GUARDS_BRANCH_SCOPED_CROSS_ORGAN_NEGATION_INSUFFICIENCY_AND_BOUNDED_MODALITY_AWARE_AMBIGUITY_MULTI_ORGAN_CONTEXT_REPLAY_HISTORY_PROVENANCE_DIVERSITY_AND_OPERATOR_PROTECTION"
+        "DISMANTLE": "VERIFIED_PROPOSITION_AWARE_DISMANTLER_WITH_RECEIPT_GUARDS_BRANCH_SCOPED_CROSS_ORGAN_EXPLICIT_CONFLICT_NEGATION_INSUFFICIENCY_AND_BOUNDED_MODALITY_AWARE_AMBIGUITY_MULTI_ORGAN_ESCALATION_CONTEXT_REPLAY_HISTORY_PROVENANCE_DIVERSITY_AND_OPERATOR_PROTECTION"
       },
-      "boundary": "VAJRA retains proposition-aware dismantling, uncertainty/provenance preservation, contest persistence, multi-organ conflict-context routing, replay containment, content-bound history attestation and semantic-operator-preserving replay identity. Its ambiguity guard is now v0.4.3 and branch-scoped: qualifying executed returns that share targetRef + clauseRef + lens are evaluated together even when organ labels differ, so cross-organ arrival order cannot silently create first-receipt closure when at least one relation remains lexically UNSPECIFIED. Bounded English/Chinese negation, insufficiency and explicit modality masks prevent phrases such as does not support, insufficient evidence to support, may support, might refute, does not necessarily support, 可能支持 and 未必反駁 from being counted as positive directional evidence merely because a bare polarity keyword appears. Same-direction explicit cross-organ returns do not become ambiguous merely because their organ labels differ, and malformed/non-executed returns remain excluded. Its cross-organ provenance-diversity/content-replay guard remains v0.3.3, including comparison, equality, addition/subtraction, multiplication and division operator preservation. Distinct organ or canonical provenance labels still do not prove real-world source independence. These remain deterministic lexical/structural guards, not general semantic negation/modality scope resolution, semantic adjudication, factual truth, derivative-source detection or real-world source-independence proof."
+      "boundary": "VAJRA retains proposition-aware dismantling, uncertainty/provenance preservation, contest persistence, multi-organ conflict-context routing, replay containment, content-bound history attestation and semantic-operator-preserving replay identity. Its branch-scoped receipt ambiguity/conflict guard is now v0.5.0: qualifying executed returns that share targetRef + clauseRef + lens are audited together even when organ labels differ. When explicit opposite lexical polarity arrives from different organs, a preferred-organ return can no longer silently close the branch while the non-preferred return is discarded as an organ mismatch; the branch is promoted to CONTESTED_BY_RECEIPTS and is compatible with existing conflict escalation to DROPLET, MUTHER and SHROOMING. When at least one relation remains lexically UNSPECIFIED, branch ambiguity is preserved instead. Bounded English/Chinese negation, insufficiency and explicit modality masks remain active, and same-direction explicit cross-organ returns remain a control rather than a false contest. Its cross-organ provenance-diversity/content-replay guard remains v0.3.3, including comparison, equality, addition/subtraction, multiplication and division operator preservation. Distinct organ or canonical provenance labels still do not prove real-world source independence. These remain deterministic lexical/structural guards, not general semantic negation/modality scope resolution, semantic adjudication, factual truth, derivative-source detection or real-world source-independence proof."
     }
   }
 }
