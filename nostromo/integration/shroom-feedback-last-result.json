@@ -1,6 +1,6 @@
 {
-  "schema": "nostromo-shroom-feedback-test/v0.1",
-  "completedAt": "2026-09-03T07:06:54.271Z",
+  "schema": "nostromo-shroom-feedback-test/v0.2",
+  "completedAt": "2026-09-03T08:09:13.777Z",
   "status": "PASS",
   "baseline": {
     "mode": "BASELINE",
@@ -18,6 +18,16 @@
       "anomaly"
     ],
     "feedbackFingerprint": "4ef4e94c0bd765e6"
+  },
+  "lexicalNoise": {
+    "mode": "BASELINE",
+    "firstLens": "structure",
+    "changedFromBaseline": false,
+    "ignoredLexicalMentions": {
+      "contradiction": true,
+      "evidence": true,
+      "question": false
+    }
   },
   "external": {
     "mode": "EVIDENCE_CONDITIONED",
@@ -51,9 +61,26 @@
       "use",
       "anomaly"
     ],
-    "feedbackFingerprint": "25a18366e858ebc8"
+    "feedbackFingerprint": "cc6cfbcb8a06a485"
+  },
+  "explicitQuestion": {
+    "mode": "QUESTION_CONDITIONED",
+    "firstLens": "position",
+    "lensOrder": [
+      "position",
+      "boundary",
+      "structure",
+      "counterexample",
+      "evidence",
+      "otherness",
+      "memory",
+      "language",
+      "use",
+      "anomaly"
+    ],
+    "feedbackFingerprint": "e778a04f559c7820"
   },
   "deterministicReplay": true,
   "failures": [],
-  "boundary": "PASS demonstrates only deterministic structural conditioning: explicit upstream feedback changes SHROOMING lens priority and exact replay is stable. It does not demonstrate semantic learning, belief revision, independent agents, or real social emergence."
+  "boundary": "PASS demonstrates deterministic structural conditioning with lexical-contamination resistance: explicit structured upstream markers can change SHROOMING lens priority, while ordinary prose merely mentioning evidence/source/contradiction/counterevidence cannot by itself reorder the reader. Ignored lexical mentions remain auditable. This does not demonstrate semantic learning, belief revision, independent agents, or real social emergence."
 }
