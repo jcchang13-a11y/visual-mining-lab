@@ -1,4 +1,4 @@
-// VAJRA receipt ambiguity guard v0.4
+// VAJRA receipt ambiguity guard v0.4.1
 // Prevents first-receipt false closure when multiple structurally qualifying returns
 // for the same VAJRA branch include polarity-unspecified material. Ambiguity is
 // branch-scoped (targetRef + clauseRef + lens), not organ-scoped, so different
@@ -11,14 +11,16 @@
 
 function clean(v){return String(v??'').replace(/\s+/g,' ').trim();}
 function maskNegatedPolarityPhrases(text){
+  // Replacement sentinels intentionally contain no support/refute vocabulary;
+  // otherwise the downstream lexical detector would re-detect the masked word.
   return text
-    .replace(/\b(?:does|do|did|is|are|was|were|can|could|may|might|will|would|should|has|have|had)\s+not\s+(?:directly\s+)?(?:support|supports|supported|supporting|confirm|confirms|confirmed|confirming|corroborate|corroborates|corroborated|corroborating)\b/g,' <negated-support> ')
-    .replace(/\b(?:fails?|failed)\s+to\s+(?:support|confirm|corroborate)\b/g,' <negated-support> ')
-    .replace(/\bnot\s+consistent\s+with\b/g,' <negated-consistency> ')
-    .replace(/(?:不|未|無法|不能|並未)(?:直接)?(?:支持|佐證|印證|吻合|一致)/g,' <negated-support> ')
-    .replace(/\b(?:does|do|did|is|are|was|were|can|could|may|might|will|would|should|has|have|had)\s+not\s+(?:directly\s+)?(?:refute|refutes|refuted|refuting|contradict|contradicts|contradicted|contradicting|oppose|opposes|opposed|falsify|falsifies|falsified|falsifying)\b/g,' <negated-refute> ')
-    .replace(/\b(?:fails?|failed)\s+to\s+(?:refute|contradict|oppose|falsify)\b/g,' <negated-refute> ')
-    .replace(/(?:不|未|無法|不能|並未)(?:直接)?(?:反駁|反證|否證|矛盾|相反)/g,' <negated-refute> ');
+    .replace(/\b(?:does|do|did|is|are|was|were|can|could|may|might|will|would|should|has|have|had)\s+not\s+(?:directly\s+)?(?:support|supports|supported|supporting|confirm|confirms|confirmed|confirming|corroborate|corroborates|corroborated|corroborating)\b/g,' <neg-pos> ')
+    .replace(/\b(?:fails?|failed)\s+to\s+(?:support|confirm|corroborate)\b/g,' <neg-pos> ')
+    .replace(/\bnot\s+consistent\s+with\b/g,' <neg-cons> ')
+    .replace(/(?:不|未|無法|不能|並未)(?:直接)?(?:支持|佐證|印證|吻合|一致)/g,' <neg-pos> ')
+    .replace(/\b(?:does|do|did|is|are|was|were|can|could|may|might|will|would|should|has|have|had)\s+not\s+(?:directly\s+)?(?:refute|refutes|refuted|refuting|contradict|contradicts|contradicted|contradicting|oppose|opposes|opposed|falsify|falsifies|falsified|falsifying)\b/g,' <neg-neg> ')
+    .replace(/\b(?:fails?|failed)\s+to\s+(?:refute|contradict|oppose|falsify)\b/g,' <neg-neg> ')
+    .replace(/(?:不|未|無法|不能|並未)(?:直接)?(?:反駁|反證|否證|矛盾|相反)/g,' <neg-neg> ');
 }
 function relationPolarity(text){
   const s=clean(text).normalize('NFKC').toLowerCase();
@@ -134,7 +136,7 @@ export function applyGuardedHandoffResults(vajraResult,receipts=[],engine=global
   const openBranches=unresolved.filter(x=>x.status!=='RESOLVED_BY_RECEIPT');
   return {
     ...base,
-    version:`${base.version||'unknown'}+ambiguity-guard-v0.4`,
+    version:`${base.version||'unknown'}+ambiguity-guard-v0.4.1`,
     status:resolvedBranches.length?'PARTIAL_WITH_AMBIGUOUS_RETURN':'AMBIGUOUS_HANDOFF_RETURN',
     unresolved,
     handoffs:unresolved.map(x=>x.handoff),
