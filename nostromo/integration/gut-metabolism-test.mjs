@@ -33,13 +33,13 @@ check(gut.held>=1,'UNCERTAINTY_NOT_HELD',gut.hold);
 check(gut.nutrients.every(x=>x.provenance?.inputSource==='NOSTROMO/gut-metabolism-test'),'PROVENANCE_LOST',gut.nutrients);
 
 const riskContextGut=globalThis.GutEngine.digest({
-  evidenceFinding:'Evidence: the measured error rate fell from twelve percent to four percent after the patch.',
+  evidence:'Evidence: the measured error rate fell from twelve percent to four percent after the patch.',
   contradiction:'Counterevidence: the previously rejected assumption conflicts with the measured trace.',
   claim:'Claim: an invalid premise can still generate a useful falsification target.',
   machineFailure:{status:'FAILED',error:'network timeout while retrieving authorized evidence'}
 },{source:'NOSTROMO/gut-risk-context-test'});
 check(riskContextGut.quarantined===2,'RISK_CONTEXT_FALSE_QUARANTINE_COUNT',{quarantined:riskContextGut.quarantined,quarantine:riskContextGut.quarantine});
-check(riskContextGut.routes?.MUTHER?.items?.some(x=>x.path==='root.evidenceFinding'),'ERROR_RATE_PROSE_FALSELY_QUARANTINED',riskContextGut.routes?.MUTHER);
+check(riskContextGut.routes?.MUTHER?.items?.some(x=>x.path==='root.evidence'),'ERROR_RATE_PROSE_FALSELY_QUARANTINED',riskContextGut.routes?.MUTHER);
 check(riskContextGut.routes?.VAJRA?.items?.some(x=>x.path==='root.contradiction'),'REJECTED_ASSUMPTION_FALSELY_QUARANTINED',riskContextGut.routes?.VAJRA);
 check(riskContextGut.routes?.DROPLET?.items?.some(x=>x.path==='root.claim'),'INVALID_PREMISE_FALSELY_QUARANTINED',riskContextGut.routes?.DROPLET);
 check(riskContextGut.quarantine?.every(x=>x.path.startsWith('root.machineFailure.')),'TRUE_FAILURE_ESCAPED_CONTEXTUAL_QUARANTINE',riskContextGut.quarantine);
