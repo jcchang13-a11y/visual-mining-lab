@@ -1,4 +1,4 @@
-// NOSTROMO active executor loop v1.1.11
+// NOSTROMO active executor loop v1.1.12
 // Server/CI-side integration path for repository-native partial executors plus validated external connector evidence.
 import crypto from 'node:crypto';
 import {shroomGreenhousePoseQuestion,mutherMineRepo,dropletVerifyUrl} from './repo-executors.mjs';
@@ -27,6 +27,7 @@ function normalizeLineage(text){
 function protectLineageTokenColons(text){return String(text).replace(/\b(ref|clause)\s*[:：=]\s*([0-9a-f]{6,64})\b/gi,(_,kind,id)=>`${kind}§${id}`);}
 function restoreLineageTokenColons(text){return String(text).replace(/\b(ref|clause)§([0-9a-f]{6,64})\b/gi,'$1:$2');}
 function isNormalizedLineageToken(text){return /^(?:ref|clause):<id>$/i.test(String(text||'').trim());}
+function isCarryScaffoldScalar(text){return /^(?:true|false|null|undefined)$/i.test(String(text||'').trim());}
 function exactLineageTokenKey(text){const m=String(text||'').match(/^\s*(?:\[[^\]]+\]\s*)?(ref|clause)\s*[:：=]\s*([0-9a-f]{6,64})\s*$/i);return m?`${m[1].toLowerCase()}:${m[2].toLowerCase()}`:'';}
 function embeddedLineageTokenKeys(text){const out=new Set(),re=/\b(ref|clause)\s*[:：=]\s*([0-9a-f]{6,64})\b/gi;let m;while((m=re.exec(String(text||''))))out.add(`${m[1].toLowerCase()}:${m[2].toLowerCase()}`);return out;}
 function carryStem(segment){return normalizeLineage(segment).slice(0,180);}
@@ -52,11 +53,12 @@ function compactIntraSegmentEcho(segment){
   const tag=tagMatch?.[1]||'';
   const body=tagMatch?raw.slice(tagMatch[0].length):raw;
   const clauses=protectLineageTokenColons(body).split(/\s*[：:]\s*/).map(x=>restoreLineageTokenColons(x).trim()).filter(Boolean);
-  if(clauses.length<2)return {text:raw,suppressed:0,shortSuppressed:0,nestedSuppressed:0,nearDuplicateSuppressed:0};
-  const kept=[];const norms=[];let suppressed=0,shortSuppressed=0,nestedSuppressed=0,nearDuplicateSuppressed=0;
+  if(clauses.length<2)return {text:raw,suppressed:0,shortSuppressed:0,nestedSuppressed:0,nearDuplicateSuppressed:0,scaffoldScalarSuppressed:0};
+  const kept=[];const norms=[];let suppressed=0,shortSuppressed=0,nestedSuppressed=0,nearDuplicateSuppressed=0,scaffoldScalarSuppressed=0;
   for(const clause of clauses){
     const norm=normalizeLineage(clause);
     if(!norm)continue;
+    if(isCarryScaffoldScalar(norm)){suppressed++;scaffoldScalarSuppressed++;continue;}
     if(norms.includes(norm)){suppressed++;if(norm.length<=4||isNormalizedLineageToken(norm))shortSuppressed++;continue;}
     if(isNormalizedLineageToken(norm)&&norms.some(prior=>prior.includes(norm))){suppressed++;shortSuppressed++;continue;}
     if(norm.length>=24){
@@ -80,10 +82,11 @@ function compactIntraSegmentEcho(segment){
     kept.push(clause);norms.push(norm);
   }
   const clean=[tag,kept.join('：')].filter(Boolean).join(' ');
-  return {text:clean||raw,suppressed,shortSuppressed,nestedSuppressed,nearDuplicateSuppressed};
+  return {text:clean||raw,suppressed,shortSuppressed,nestedSuppressed,nearDuplicateSuppressed,scaffoldScalarSuppressed};
 }
 function stripRouteTag(segment){return String(segment||'').replace(/^\[[^\]]+\]\s*/,'').trim();}
 function isVolatileLineageOnly(segment){return /^(?:ref|clause)\s*[:：=]\s*[0-9a-f]{6,64}$/i.test(stripRouteTag(segment));}
+function isCarryScaffoldOnly(segment){return isCarryScaffoldScalar(stripRouteTag(segment));}
 function lineageOnlyKey(segment){return normalizeLineage(stripRouteTag(segment));}
 function charNgrams(text,n=5){
   const s=normalizeLineage(stripRouteTag(text));
@@ -105,9 +108,10 @@ function nearEchoSimilarity(a,b){
 function routeOf(segment){return (String(segment||'').match(/^\[([^\]]+)\]/)||[])[1]||'UNTYPED';}
 export function compactMetabolicCarry(summary){
   const segments=String(summary||'').split(/\s*·\s*/).map(x=>x.trim()).filter(Boolean);
-  const seen=new Set(),lineageTokenSeen=new Set(),embeddedLineageSeen=new Set(),routeCounts=new Map(),kept=[];let echoSuppressed=0,lineageOnlySuppressed=0,embeddedLineageSuppressed=0,routeCapped=0,intraSegmentSuppressed=0,shortTokenSuppressed=0,nestedClauseSuppressed=0,nearDuplicateClauseSuppressed=0,crossSegmentNearEchoSuppressed=0;
+  const seen=new Set(),lineageTokenSeen=new Set(),embeddedLineageSeen=new Set(),routeCounts=new Map(),kept=[];let echoSuppressed=0,lineageOnlySuppressed=0,embeddedLineageSuppressed=0,routeCapped=0,intraSegmentSuppressed=0,shortTokenSuppressed=0,nestedClauseSuppressed=0,nearDuplicateClauseSuppressed=0,crossSegmentNearEchoSuppressed=0,scaffoldScalarSuppressed=0;
   for(const rawSegment of segments){
-    const intra=compactIntraSegmentEcho(rawSegment);intraSegmentSuppressed+=intra.suppressed;shortTokenSuppressed+=intra.shortSuppressed;nestedClauseSuppressed+=intra.nestedSuppressed;nearDuplicateClauseSuppressed+=intra.nearDuplicateSuppressed||0;
+    if(isCarryScaffoldOnly(rawSegment)){scaffoldScalarSuppressed++;continue;}
+    const intra=compactIntraSegmentEcho(rawSegment);intraSegmentSuppressed+=intra.suppressed;shortTokenSuppressed+=intra.shortSuppressed;nestedClauseSuppressed+=intra.nestedSuppressed;nearDuplicateClauseSuppressed+=intra.nearDuplicateSuppressed||0;scaffoldScalarSuppressed+=intra.scaffoldScalarSuppressed||0;
     const segment=intra.text,stem=carryStem(segment),route=routeOf(segment);
     if(isVolatileLineageOnly(segment)){
       const genericKey=lineageOnlyKey(segment),exactKey=exactLineageTokenKey(segment);
@@ -131,7 +135,7 @@ export function compactMetabolicCarry(summary){
     if(kept.join(' · ').length>=900)break;
   }
   const text=kept.join(' · ').slice(0,900);
-  return {text,echoSuppressed,lineageOnlySuppressed,embeddedLineageSuppressed,routeCapped,intraSegmentSuppressed,shortTokenSuppressed,nestedClauseSuppressed,nearDuplicateClauseSuppressed,crossSegmentNearEchoSuppressed,inputSegments:segments.length,outputSegments:kept.length,fingerprint:fp(text),boundary:'Carry-only containment. ref:/clause: hexadecimal lineage tokens are protected from colon tokenization before intra-segment compaction; standalone lineage fragments are suppressed when the same exact token is already embedded in a retained substantive segment, and repeated standalone lineage classes are also collapsed. Exact/lineage-equivalent clauses, nested long clauses, recursively wrapped near-duplicate clauses, repeated ref/clause-only lineage tokens, and same-route cross-segment near echoes are collapsed before recirculation. Cross-segment comparison uses a containment coefficient over normalized 5-grams so wrapper growth cannot evade the audit merely by adding prefixes; original GUT nutrients, routes and provenance are not mutated.'};
+  return {text,echoSuppressed,lineageOnlySuppressed,embeddedLineageSuppressed,routeCapped,intraSegmentSuppressed,shortTokenSuppressed,nestedClauseSuppressed,nearDuplicateClauseSuppressed,crossSegmentNearEchoSuppressed,scaffoldScalarSuppressed,inputSegments:segments.length,outputSegments:kept.length,fingerprint:fp(text),boundary:'Carry-only containment. ref:/clause: hexadecimal lineage tokens are protected from colon tokenization before intra-segment compaction; standalone lineage fragments are suppressed when the same exact token is already embedded in a retained substantive segment, and repeated standalone lineage classes are also collapsed. Exact/lineage-equivalent clauses, nested long clauses, recursively wrapped near-duplicate clauses, repeated ref/clause-only lineage tokens, same-route cross-segment near echoes, and bare boolean/null machine scaffolding are collapsed before recirculation. Numeric scalars and substantive phrases containing words such as false remain untouched. Original GUT nutrients, routes and provenance are not mutated.'};
 }
 
 export async function runActiveExecutorLoop({rounds=10,seed='NOSTROMO active integration',mineQuery='NOSTROMO',verifyUrl='https://github.com/jcchang13-a11y/visual-mining-lab'}={}){
@@ -168,5 +172,5 @@ export async function runActiveExecutorLoop({rounds=10,seed='NOSTROMO active int
   const acceptedActions=['muther','mutherInternal','droplet','dropletVerify'].filter(k=>connectorEvidence.actions?.[k]?.status==='EXECUTED').length;
   const priorityRounds=trace.filter(x=>x.vajra?.metabolicPriority?.status==='PRIORITIZED_BY_GUT_SIGNAL');
   const priorityChangedRounds=priorityRounds.filter(x=>x.vajra.metabolicPriority.selectedLens&&x.vajra.metabolicPriority.selectedLens!==x.vajra.defaultFirstLens);
-  return {schema:'nostromo-active-executor-loop/v1.1.11',status:trace.length===total&&trace.every(x=>x.status==='PASS')?'PASS':'FAIL',requestedRounds:total,completedRounds:trace.length,feedback:{fingerprint:feedback.fingerprint,appliedRounds:trace.filter(x=>x.feedback.applied).length,firstAppliedRound:trace.find(x=>x.feedback.applied)?.round||null,privacy:feedback.privacy},vajraMetabolicFeedback:{priorityRounds:priorityRounds.length,behaviorChangedRounds:priorityChangedRounds.length,firstPriorityRound:priorityRounds[0]?.round||null,selectedLenses:[...new Set(priorityRounds.map(x=>x.vajra.metabolicPriority.selectedLens).filter(Boolean))],closureAuthority:'NONE',boundary:'Prior-round GUT nutrients/quarantine may reprioritize only still-open VAJRA branches. This bridge changes inspection order only; it cannot resolve, validate, suppress, or create evidence for a branch.'},connectorHandoff:{status:connectorEvidence.status,completedAt:connectorEvidence.completedAt,actionsAccepted:acceptedActions,failures:connectorEvidence.failures},trace,completedAt:new Date().toISOString(),boundary:'Certifies the closed-loop executor path plus carry-layer metabolic containment, deterministic SHROOMING feedback-conditioned reading, and prior-round GUT→VAJRA branch reprioritization. From round 2 onward, redacted connector feedback can change SHROOMING inspection priority and source-preserving GUT metabolic atoms can change which unresolved VAJRA branch is inspected first. Neither mechanism gains closure authority or claims semantic learning. Recursive wrapper growth, ref/clause token fragmentation, embedded-token replay, and repeated lineage-only carry fragments are contained only at carry rendering; GUT nutrient atoms, routes and provenance remain intact. GitHub Actions does not itself search private Drive or the web.'};
+  return {schema:'nostromo-active-executor-loop/v1.1.12',status:trace.length===total&&trace.every(x=>x.status==='PASS')?'PASS':'FAIL',requestedRounds:total,completedRounds:trace.length,feedback:{fingerprint:feedback.fingerprint,appliedRounds:trace.filter(x=>x.feedback.applied).length,firstAppliedRound:trace.find(x=>x.feedback.applied)?.round||null,privacy:feedback.privacy},vajraMetabolicFeedback:{priorityRounds:priorityRounds.length,behaviorChangedRounds:priorityChangedRounds.length,firstPriorityRound:priorityRounds[0]?.round||null,selectedLenses:[...new Set(priorityRounds.map(x=>x.vajra.metabolicPriority.selectedLens).filter(Boolean))],closureAuthority:'NONE',boundary:'Prior-round GUT nutrients/quarantine may reprioritize only still-open VAJRA branches. This bridge changes inspection order only; it cannot resolve, validate, suppress, or create evidence for a branch.'},connectorHandoff:{status:connectorEvidence.status,completedAt:connectorEvidence.completedAt,actionsAccepted:acceptedActions,failures:connectorEvidence.failures},trace,completedAt:new Date().toISOString(),boundary:'Certifies the closed-loop executor path plus carry-layer metabolic containment, deterministic SHROOMING feedback-conditioned reading, and prior-round GUT→VAJRA branch reprioritization. From round 2 onward, redacted connector feedback can change SHROOMING inspection priority and source-preserving GUT metabolic atoms can change which unresolved VAJRA branch is inspected first. Neither mechanism gains closure authority or claims semantic learning. Recursive wrapper growth, ref/clause token fragmentation, embedded-token replay, repeated lineage-only carry fragments, and bare boolean/null machine scaffolding are contained only at carry rendering; GUT nutrient atoms, routes and provenance remain intact. GitHub Actions does not itself search private Drive or the web.'};
 }
