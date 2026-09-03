@@ -1,17 +1,21 @@
 {
-  "schema": "nostromo-vajra-ambiguity-test/v0.2",
-  "completedAt": "2026-09-03T04:04:48.283Z",
+  "schema": "nostromo-vajra-ambiguity-test/v0.3",
+  "completedAt": "2026-09-03T04:06:17.719Z",
   "status": "PASS",
   "finding": {
     "baselineStatus": "RESOLVED_BY_RECEIPT",
     "guardedStatus": "AMBIGUOUS_BY_RECEIPTS",
     "ambiguityDetected": 1,
+    "crossOrganStatus": "AMBIGUOUS_BY_RECEIPTS",
+    "crossOrganAmbiguityDetected": 1,
+    "crossOrganDistinctOrgans": 2,
+    "crossOrganControlStatus": "RESOLVED_BY_RECEIPT",
     "controlStatus": "RESOLVED_BY_RECEIPT",
     "poisonAuditStatus": "NO_AMBIGUITY_FOUND",
     "poisonRejected": 3,
     "poisonBranchStatus": "RESOLVED_BY_RECEIPT",
-    "interpretation": "The guard preserves genuine structural ambiguity while excluding malformed, non-executed, provenance-free or relation-free returns from ambiguity formation, preventing junk receipts from manufacturing uncertainty or changing routing state."
+    "interpretation": "The guard preserves branch-scoped ambiguity across organ boundaries while excluding malformed, non-executed, provenance-free or relation-free returns. Different organ labels no longer partition one VAJRA branch into separate first-receipt closure domains, while organ diversity by itself does not manufacture ambiguity."
   },
   "failures": [],
-  "boundary": "This test demonstrates a deterministic structural/lexical false-certainty and ambiguity-poisoning guard. UNSPECIFIED means the bounded polarity detector cannot classify the relation; qualification means only that minimum execution/provenance/material/relation fields exist. It does not prove semantic disagreement, source independence, truth, or evidence quality."
+  "boundary": "This test demonstrates a deterministic structural/lexical false-certainty and ambiguity-poisoning guard, including cross-organ branch-scoped returns. UNSPECIFIED means the bounded polarity detector cannot classify the relation; qualification means only that minimum execution/provenance/material/relation fields exist. Distinct organ/provenance counts are audit metadata, not proof of source independence. It does not prove semantic disagreement, truth or evidence quality."
 }
