@@ -1,6 +1,6 @@
 {
-  "schema": "nostromo-organ-registry/v1.51",
-  "updatedAt": "2026-09-04T01:07:00+08:00",
+  "schema": "nostromo-organ-registry/v1.52",
+  "updatedAt": "2026-09-04T02:08:00+08:00",
   "truthRule": "DISPLAYED STATE MUST FOLLOW EVIDENCE",
   "evidence": "ci-last-result.json plus formal-round-last-result.json plus connector-last-result.json plus muther-falsify-last-result.json plus muther-repo-diversity-last-result.json plus droplet-claim-verify-last-result.json plus gut-metabolism-last-result.json plus gut-lineage-last-result.json plus vajra-dynamic-last-result.json plus vajra-ambiguity-last-result.json plus vajra-uncertainty-last-result.json plus vajra-conflict-escalation-last-result.json plus vajra-provenance-diversity-last-result.json plus shroom-feedback-last-result.json",
   "latestFormalRound": "greenhouse/r113-nostromo-formal-round.json",
@@ -29,20 +29,20 @@
     "boundary": "Isolated counterfactual executor only. It deliberately includes parent round ordinal in participant selection and has been CI-verified against R111 and R112. It does not write or advance formal greenhouse history and is engineering evidence that NOSTROMO can execute and audit a parent-sensitive transition, not evidence that the real SHROOMING population is causally path-dependent."
   },
   "latestThickening": {
-    "organ": "DROPLET",
-    "version": "DROPLET declared-family corroboration gate v1.5",
-    "status": "VERIFIED_DECLARED_SOURCE_FAMILY_DIVERSITY_GATE",
-    "test": "droplet-claim-verify-last-result.json v1.5 + NOSTROMO Integration Test run 320",
+    "organ": "SHROOMING",
+    "version": "SHROOMING bounded-disagreement feedback reader v0.4",
+    "status": "VERIFIED_BOUNDED_DISAGREEMENT_PRESERVING_FEEDBACK_CONDITIONING",
+    "test": "shroom-feedback-last-result.json v0.4 + NOSTROMO Integration Test run 323",
     "capabilities": [
-      "an opt-in minimum authoritative source-family corroboration gate now counts only explicitly caller-declared sourceFamily or publisher labels",
-      "different source display names without declared family identity cannot manufacture multi-family corroboration or create certainty",
-      "undeclared eligible authoritative evidence remains visible and is counted separately for audit instead of being silently discarded",
-      "explicit two-family authoritative corroboration continues to satisfy the gate when family labels are actually supplied",
-      "exact replay suppression, authoritative-direction conflict containment, contradictory fingerprint containment and opt-in freshness gating remain intact",
-      "stale, undated, future-dated and as-of-overlapping evidence still remains auditable but cannot create certainty under an active freshness policy",
-      "NOSTROMO Integration Test run 320 completed successfully with DROPLET v1.5 adversarial source-name-fragmentation coverage and failures empty"
+      "explicit structured evidence, contradiction and question signals still alter deterministic SHROOMING lens priorities while ordinary lexical mentions cannot hijack conditioning",
+      "multiple structured signal classes compose into one bounded priority profile instead of silently overriding one another",
+      "conditioned ten-reader rounds preserve multiple audited stances rather than collapsing every trace into one response orientation",
+      "HOLD_UNRESOLVED remains present in every conditioned adversarial sample so unresolved conflict can survive upstream pressure",
+      "every conditioned reaction retains closureAuthority NONE, preventing a feedback marker from becoming automatic consensus or truth authority",
+      "deterministic replay succeeds for both single-signal evidence conditioning and mixed contradiction-plus-question conditioning",
+      "NOSTROMO Integration Test run 323 completed successfully with SHROOMING v0.4 adversarial disagreement-preservation coverage and failures empty"
     ],
-    "boundary": "This is a deterministic corroboration-safety gate over explicit caller-supplied family metadata. It prevents source display-name fragmentation from masquerading as independent corroboration, but explicit family labels are still audit signals rather than proof of real-world source independence, common ownership, derivative-source status, methodological quality or truth. DROPLET still does not search the web inside CI or infer whether a claim requires freshness gating."
+    "boundary": "This is deterministic structural stance diversification over explicit structured feedback markers. It demonstrates that upstream evidence, contradiction or question signals can change SHROOMING behavior without forcing all ten traces into one closure-seeking response. It does not demonstrate semantic understanding, learned belief revision, ten independently persistent live LLM agents, autonomous social emergence or real-world epistemic independence."
   },
   "organs": {
     "shrooming": {
@@ -56,7 +56,7 @@
         "RUN_READING_ROUND": "FORMAL_ROUND_EXEC",
         "RUN_PARENT_SENSITIVE_CONTROL": "EXPERIMENTAL_EXEC_VERIFIED"
       },
-      "boundary": "Published-state inspection, sandbox reading, greenhouse question probing, and explicit formal greenhouse round advancement remain executable. In the verified active NOSTROMO loop, SHROOMING has a separate feedback-conditioned deterministic reader v0.3. Only explicit structured upstream markers can condition reading; when evidence, contradiction and question signal classes co-occur, their bounded lens priorities compose instead of one signal silently overriding the others. Ordinary lexical mentions remain auditable but cannot hijack conditioning. The formal RUN_READING_ROUND baseline remains parent-invariant v0.9 and unchanged, preserving R111→R112→R113 reproducibility. Neither the feedback-conditioned active-loop reader nor the formal/experimental branches represent semantic learning or ten independently persistent live LLM processes."
+      "boundary": "Published-state inspection, sandbox reading, greenhouse question probing, and explicit formal greenhouse round advancement remain executable. In the verified active NOSTROMO loop, SHROOMING has a separate feedback-conditioned deterministic reader v0.4. Only explicit structured upstream markers can condition reading; when evidence, contradiction and question signal classes co-occur, their bounded lens priorities compose instead of one signal silently overriding the others. Ordinary lexical mentions remain auditable but cannot hijack conditioning. Conditioned rounds now also preserve bounded stance disagreement across VERIFY/CHALLENGE/HOLD_UNRESOLVED/RECONSTRUCT or PROPOSE/REFRAME roles, with no reaction receiving closure authority. The formal RUN_READING_ROUND baseline remains parent-invariant v0.9 and unchanged, preserving R111→R112→R113 reproducibility. Neither the feedback-conditioned active-loop reader nor the formal/experimental branches represent semantic learning, belief revision, ten independently persistent live LLM processes or real social emergence."
     },
     "muther": {
       "mode": "PARTIAL_EXEC_THICKENED",
