@@ -1,7 +1,7 @@
 {
-  "schema": "nostromo-gut-lineage-test/v0.2.24-out-of-band-carry-refs",
-  "completedAt": "2026-09-03T09:05:41.969Z",
-  "status": "PASS",
+  "schema": "nostromo-gut-lineage-test/v0.2.24-carry-scalar-guard",
+  "completedAt": "2026-09-03T11:04:58.869Z",
+  "status": "FAIL",
   "sameLineage": {
     "summaryItemCount": 1,
     "antiEcho": {
@@ -189,10 +189,11 @@
     "nestedClauseSuppressed": 0,
     "nearDuplicateClauseSuppressed": 0,
     "crossSegmentNearEchoSuppressed": 1,
+    "scaffoldScalarSuppressed": 0,
     "inputSegments": 3,
     "outputSegments": 2,
     "fingerprint": "1659e1c702bdab4e",
-    "boundary": "Carry-only containment. ref:/clause: hexadecimal lineage tokens are protected from colon tokenization before intra-segment compaction; standalone lineage fragments are suppressed when the same exact token is already embedded in a retained substantive segment, and repeated standalone lineage classes are also collapsed. Exact/lineage-equivalent clauses, nested long clauses, recursively wrapped near-duplicate clauses, repeated ref/clause-only lineage tokens, and same-route cross-segment near echoes are collapsed before recirculation. Cross-segment comparison uses a containment coefficient over normalized 5-grams so wrapper growth cannot evade the audit merely by adding prefixes; original GUT nutrients, routes and provenance are not mutated."
+    "boundary": "Carry-only containment. ref:/clause: hexadecimal lineage tokens are protected from colon tokenization before intra-segment compaction; standalone lineage fragments are suppressed when the same exact token is already embedded in a retained substantive segment, and repeated standalone lineage classes are also collapsed. Exact/lineage-equivalent clauses, nested long clauses, recursively wrapped near-duplicate clauses, repeated ref/clause-only lineage tokens, same-route cross-segment near echoes, and bare boolean/null machine scaffolding are collapsed before recirculation. Numeric scalars and substantive phrases containing words such as false remain untouched. Original GUT nutrients, routes and provenance are not mutated."
   },
   "recursiveWrapperCarry": {
     "text": "[CONTRADICTION->VAJRA] 以 counterexample 位置重讀：CONTRADICTION_CONDITIONED：主動尋找最小反例與破壞條件：針對本輪 GENERAL 命題（ref:f792180f; clause:9c5ac71），重新檢查來源獨立性、替代因果與邊界條件。這段核心內容刻意保持一致，只讓外層包裝逐輪增加。 · [CONTRADICTION->VAJRA] 新證據顯示時間順序相反，而且來自另一個獨立來源，因此必須保留這條不同的反證材料，不能因為同一路由而消失。",
@@ -205,10 +206,11 @@
     "nestedClauseSuppressed": 0,
     "nearDuplicateClauseSuppressed": 0,
     "crossSegmentNearEchoSuppressed": 2,
+    "scaffoldScalarSuppressed": 0,
     "inputSegments": 4,
     "outputSegments": 2,
     "fingerprint": "2cab19fc77f6a4a9",
-    "boundary": "Carry-only containment. ref:/clause: hexadecimal lineage tokens are protected from colon tokenization before intra-segment compaction; standalone lineage fragments are suppressed when the same exact token is already embedded in a retained substantive segment, and repeated standalone lineage classes are also collapsed. Exact/lineage-equivalent clauses, nested long clauses, recursively wrapped near-duplicate clauses, repeated ref/clause-only lineage tokens, and same-route cross-segment near echoes are collapsed before recirculation. Cross-segment comparison uses a containment coefficient over normalized 5-grams so wrapper growth cannot evade the audit merely by adding prefixes; original GUT nutrients, routes and provenance are not mutated."
+    "boundary": "Carry-only containment. ref:/clause: hexadecimal lineage tokens are protected from colon tokenization before intra-segment compaction; standalone lineage fragments are suppressed when the same exact token is already embedded in a retained substantive segment, and repeated standalone lineage classes are also collapsed. Exact/lineage-equivalent clauses, nested long clauses, recursively wrapped near-duplicate clauses, repeated ref/clause-only lineage tokens, same-route cross-segment near echoes, and bare boolean/null machine scaffolding are collapsed before recirculation. Numeric scalars and substantive phrases containing words such as false remain untouched. Original GUT nutrients, routes and provenance are not mutated."
   },
   "lineageOnlyCarry": {
     "text": "[CONTRADICTION->VAJRA] clause:9c5ac71 · ref:f792180f · [QUESTION->SHROOMING] 這是一條實質問題，必須保留而不能被 provenance token 去重邏輯吞掉。",
@@ -221,10 +223,11 @@
     "nestedClauseSuppressed": 0,
     "nearDuplicateClauseSuppressed": 0,
     "crossSegmentNearEchoSuppressed": 0,
+    "scaffoldScalarSuppressed": 0,
     "inputSegments": 6,
     "outputSegments": 3,
     "fingerprint": "04c09ed6c5787721",
-    "boundary": "Carry-only containment. ref:/clause: hexadecimal lineage tokens are protected from colon tokenization before intra-segment compaction; standalone lineage fragments are suppressed when the same exact token is already embedded in a retained substantive segment, and repeated standalone lineage classes are also collapsed. Exact/lineage-equivalent clauses, nested long clauses, recursively wrapped near-duplicate clauses, repeated ref/clause-only lineage tokens, and same-route cross-segment near echoes are collapsed before recirculation. Cross-segment comparison uses a containment coefficient over normalized 5-grams so wrapper growth cannot evade the audit merely by adding prefixes; original GUT nutrients, routes and provenance are not mutated."
+    "boundary": "Carry-only containment. ref:/clause: hexadecimal lineage tokens are protected from colon tokenization before intra-segment compaction; standalone lineage fragments are suppressed when the same exact token is already embedded in a retained substantive segment, and repeated standalone lineage classes are also collapsed. Exact/lineage-equivalent clauses, nested long clauses, recursively wrapped near-duplicate clauses, repeated ref/clause-only lineage tokens, same-route cross-segment near echoes, and bare boolean/null machine scaffolding are collapsed before recirculation. Numeric scalars and substantive phrases containing words such as false remain untouched. Original GUT nutrients, routes and provenance are not mutated."
   },
   "observedReplay": {
     "text": "[CONTRADICTION->VAJRA] 以 counterexample 位置重讀：CONTRADICTION_CONDITIONED：主動尋找最小反例與破壞條件：針對本輪 GENERAL 命題（ref:f792180f; clause:9c5ac71），哪個前提最可能先失效？：VERIFIES AN EXPLICIT URL ONLY · [CLAIM->DROPLET] VERIFIES AN EXPLICIT URL ONLY; DOES NOT CLAIM SEARCH-ENGINE DISCOVERY · [QUESTION->SHROOMING] 這是一條不同的未解問題，應該保留並進入下一輪閱讀。",
@@ -237,10 +240,28 @@
     "nestedClauseSuppressed": 0,
     "nearDuplicateClauseSuppressed": 0,
     "crossSegmentNearEchoSuppressed": 0,
+    "scaffoldScalarSuppressed": 0,
     "inputSegments": 5,
     "outputSegments": 3,
     "fingerprint": "2287e9ce710d757b",
-    "boundary": "Carry-only containment. ref:/clause: hexadecimal lineage tokens are protected from colon tokenization before intra-segment compaction; standalone lineage fragments are suppressed when the same exact token is already embedded in a retained substantive segment, and repeated standalone lineage classes are also collapsed. Exact/lineage-equivalent clauses, nested long clauses, recursively wrapped near-duplicate clauses, repeated ref/clause-only lineage tokens, and same-route cross-segment near echoes are collapsed before recirculation. Cross-segment comparison uses a containment coefficient over normalized 5-grams so wrapper growth cannot evade the audit merely by adding prefixes; original GUT nutrients, routes and provenance are not mutated."
+    "boundary": "Carry-only containment. ref:/clause: hexadecimal lineage tokens are protected from colon tokenization before intra-segment compaction; standalone lineage fragments are suppressed when the same exact token is already embedded in a retained substantive segment, and repeated standalone lineage classes are also collapsed. Exact/lineage-equivalent clauses, nested long clauses, recursively wrapped near-duplicate clauses, repeated ref/clause-only lineage tokens, same-route cross-segment near echoes, and bare boolean/null machine scaffolding are collapsed before recirculation. Numeric scalars and substantive phrases containing words such as false remain untouched. Original GUT nutrients, routes and provenance are not mutated."
+  },
+  "scaffoldCarry": {
+    "text": "[CONTRADICTION->VAJRA] CONTRADICTION：以 evidence 位置重讀：主動尋找最小反例與破壞條件 · [QUESTION->SHROOMING] false positive 是一個完整語義片語，不能因為包含 false 就被刪掉。 · [EVIDENCE_OR_PROVENANCE->MUTHER] 200",
+    "echoSuppressed": 0,
+    "lineageOnlySuppressed": 0,
+    "embeddedLineageSuppressed": 0,
+    "routeCapped": 0,
+    "intraSegmentSuppressed": 1,
+    "shortTokenSuppressed": 0,
+    "nestedClauseSuppressed": 0,
+    "nearDuplicateClauseSuppressed": 0,
+    "crossSegmentNearEchoSuppressed": 0,
+    "scaffoldScalarSuppressed": 2,
+    "inputSegments": 4,
+    "outputSegments": 3,
+    "fingerprint": "045b50ab2f1ce687",
+    "boundary": "Carry-only containment. ref:/clause: hexadecimal lineage tokens are protected from colon tokenization before intra-segment compaction; standalone lineage fragments are suppressed when the same exact token is already embedded in a retained substantive segment, and repeated standalone lineage classes are also collapsed. Exact/lineage-equivalent clauses, nested long clauses, recursively wrapped near-duplicate clauses, repeated ref/clause-only lineage tokens, same-route cross-segment near echoes, and bare boolean/null machine scaffolding are collapsed before recirculation. Numeric scalars and substantive phrases containing words such as false remain untouched. Original GUT nutrients, routes and provenance are not mutated."
   },
   "delimiterCollision": {
     "summary": "[CONTRADICTION->VAJRA] 第一個反例要求保留來源脈絡 ∙ 這段其實只是同一個 nutrient 內的文字，不是新的 top-level carry item ∙ ",
@@ -278,12 +299,18 @@
       "nestedClauseSuppressed": 0,
       "nearDuplicateClauseSuppressed": 0,
       "crossSegmentNearEchoSuppressed": 0,
+      "scaffoldScalarSuppressed": 0,
       "inputSegments": 1,
       "outputSegments": 1,
       "fingerprint": "d4017a0360ccfc71",
-      "boundary": "Carry-only containment. ref:/clause: hexadecimal lineage tokens are protected from colon tokenization before intra-segment compaction; standalone lineage fragments are suppressed when the same exact token is already embedded in a retained substantive segment, and repeated standalone lineage classes are also collapsed. Exact/lineage-equivalent clauses, nested long clauses, recursively wrapped near-duplicate clauses, repeated ref/clause-only lineage tokens, and same-route cross-segment near echoes are collapsed before recirculation. Cross-segment comparison uses a containment coefficient over normalized 5-grams so wrapper growth cannot evade the audit merely by adding prefixes; original GUT nutrients, routes and provenance are not mutated."
+      "boundary": "Carry-only containment. ref:/clause: hexadecimal lineage tokens are protected from colon tokenization before intra-segment compaction; standalone lineage fragments are suppressed when the same exact token is already embedded in a retained substantive segment, and repeated standalone lineage classes are also collapsed. Exact/lineage-equivalent clauses, nested long clauses, recursively wrapped near-duplicate clauses, repeated ref/clause-only lineage tokens, same-route cross-segment near echoes, and bare boolean/null machine scaffolding are collapsed before recirculation. Numeric scalars and substantive phrases containing words such as false remain untouched. Original GUT nutrients, routes and provenance are not mutated."
     }
   },
-  "failures": [],
-  "boundary": "This adversarial test preserves source nutrients and provenance while checking cross-atom, intra-atom, short-CJK nested-clause, repeated machine-lineage signature, cross-segment volatile-lineage carry echo, recursive wrapper growth, repeated short ref/clause-only carry fragments, a replay derived from the previously observed malformed carry, and top-level middle-dot delimiter collision inside a single nutrient. v0.2.24 additionally requires machine hexadecimal lineage identifiers to remain available through the bounded out-of-band carryRefs ledger with provenance while prose summary remains eligible for anti-echo cleanup. PASS does not certify semantic identity or truth."
+  "failures": [
+    {
+      "type": "CARRY_SCAFFOLD_SCALAR_SURVIVED",
+      "detail": "[CONTRADICTION->VAJRA] CONTRADICTION：以 evidence 位置重讀：主動尋找最小反例與破壞條件 · [QUESTION->SHROOMING] false positive 是一個完整語義片語，不能因為包含 false 就被刪掉。 · [EVIDENCE_OR_PROVENANCE->MUTHER] 200"
+    }
+  ],
+  "boundary": "This adversarial test preserves source nutrients and provenance while checking cross-atom, intra-atom, short-CJK nested-clause, repeated machine-lineage signature, cross-segment volatile-lineage carry echo, recursive wrapper growth, repeated short ref/clause-only carry fragments, a replay derived from the previously observed malformed carry, bare boolean/null carry scaffold leakage, and top-level middle-dot delimiter collision inside a single nutrient. Bare true/false/null/undefined tokens may be removed only from carry rendering; numeric scalars and substantive phrases containing those words remain. v0.2.24 still requires machine hexadecimal lineage identifiers to remain available through the bounded out-of-band carryRefs ledger with provenance while prose summary remains eligible for anti-echo cleanup. PASS does not certify semantic identity or truth."
 }
