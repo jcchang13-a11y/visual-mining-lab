@@ -1,6 +1,6 @@
 {
-  "schema": "nostromo-organ-registry/v1.50",
-  "updatedAt": "2026-09-04T00:10:00+08:00",
+  "schema": "nostromo-organ-registry/v1.51",
+  "updatedAt": "2026-09-04T01:07:00+08:00",
   "truthRule": "DISPLAYED STATE MUST FOLLOW EVIDENCE",
   "evidence": "ci-last-result.json plus formal-round-last-result.json plus connector-last-result.json plus muther-falsify-last-result.json plus muther-repo-diversity-last-result.json plus droplet-claim-verify-last-result.json plus gut-metabolism-last-result.json plus gut-lineage-last-result.json plus vajra-dynamic-last-result.json plus vajra-ambiguity-last-result.json plus vajra-uncertainty-last-result.json plus vajra-conflict-escalation-last-result.json plus vajra-provenance-diversity-last-result.json plus shroom-feedback-last-result.json",
   "latestFormalRound": "greenhouse/r113-nostromo-formal-round.json",
@@ -29,20 +29,20 @@
     "boundary": "Isolated counterfactual executor only. It deliberately includes parent round ordinal in participant selection and has been CI-verified against R111 and R112. It does not write or advance formal greenhouse history and is engineering evidence that NOSTROMO can execute and audit a parent-sensitive transition, not evidence that the real SHROOMING population is causally path-dependent."
   },
   "latestThickening": {
-    "organ": "MU/TH/UR",
-    "version": "MUTHER repository exact-replay provenance retention v0.2.2",
-    "status": "VERIFIED_EXACT_REPLAY_PROVENANCE_RETENTION_WITHOUT_MATERIAL_AMPLIFICATION",
-    "test": "muther-repo-diversity-last-result.json v0.2.2 + NOSTROMO Integration Test run 317",
+    "organ": "DROPLET",
+    "version": "DROPLET declared-family corroboration gate v1.5",
+    "status": "VERIFIED_DECLARED_SOURCE_FAMILY_DIVERSITY_GATE",
+    "test": "droplet-claim-verify-last-result.json v1.5 + NOSTROMO Integration Test run 320",
     "capabilities": [
-      "exact normalized content replay is still counted once as material instead of being amplified by copied repository text",
-      "a bounded exactDuplicateAudit now preserves the kept and suppressed repository paths, source families, true occurrence ordinals, occurrence offsets and shared content fingerprint",
-      "cross-family exact replay is explicitly marked rather than silently disappearing into a duplicate count",
-      "cross-family copies are not upgraded to independent evidence merely because their path-derived source-family labels differ",
-      "existing lexical near-duplicate containment, bounded multi-window extraction, true occurrence provenance and source-family-balanced selection remain intact",
-      "the full MUTHER executor packet carries the bounded exact-replay provenance audit downstream to GUT without restoring the suppressed copy as an extra material hit",
-      "NOSTROMO Integration Test run 317 completed successfully and the v0.2.2 adversarial exact-replay fixture retained one material hit plus one auditable cross-family provenance record with failures empty"
+      "an opt-in minimum authoritative source-family corroboration gate now counts only explicitly caller-declared sourceFamily or publisher labels",
+      "different source display names without declared family identity cannot manufacture multi-family corroboration or create certainty",
+      "undeclared eligible authoritative evidence remains visible and is counted separately for audit instead of being silently discarded",
+      "explicit two-family authoritative corroboration continues to satisfy the gate when family labels are actually supplied",
+      "exact replay suppression, authoritative-direction conflict containment, contradictory fingerprint containment and opt-in freshness gating remain intact",
+      "stale, undated, future-dated and as-of-overlapping evidence still remains auditable but cannot create certainty under an active freshness policy",
+      "NOSTROMO Integration Test run 320 completed successfully with DROPLET v1.5 adversarial source-name-fragmentation coverage and failures empty"
     ],
-    "boundary": "This is deterministic bounded replay containment and provenance retention. It preserves where exact copied material was encountered without counting those copies as independent evidence. It does not prove common authorship, derivative-source lineage, semantic equivalence, source independence, source quality, novelty, truth or exhaustive repository coverage."
+    "boundary": "This is a deterministic corroboration-safety gate over explicit caller-supplied family metadata. It prevents source display-name fragmentation from masquerading as independent corroboration, but explicit family labels are still audit signals rather than proof of real-world source independence, common ownership, derivative-source status, methodological quality or truth. DROPLET still does not search the web inside CI or infer whether a claim requires freshness gating."
   },
   "organs": {
     "shrooming": {
@@ -79,9 +79,9 @@
         "AUDIT_EVIDENCE": "EXEC_STATE",
         "VERIFY_URL": "CLOSED_LOOP_EXEC",
         "SEARCH_EXTERNAL": "CONNECTOR_EXEC",
-        "VERIFY": "VERIFIED_DUPLICATE_CONFLICT_AND_OPT_IN_TEMPORAL_LEAKAGE_CONTAINING_CLAIM_VERIFY"
+        "VERIFY": "VERIFIED_DECLARED_FAMILY_DIVERSITY_DUPLICATE_CONFLICT_AND_OPT_IN_TEMPORAL_LEAKAGE_CONTAINING_CLAIM_VERIFY"
       },
-      "boundary": "Published evidence audit and explicit-URL verification are executable. Search-engine discovery is executed by the external web connector runtime. VERIFY v1.3 computes SUPPORTED, REFUTED or INDETERMINATE over an explicit evidence bundle while suppressing exact replay amplification, counting caller-supplied source families as audit metadata, forcing INDETERMINATE on conflicting authoritative directions or contradictory use of one evidence fingerprint, and optionally enforcing a caller-supplied freshness policy. Under an active policy, stale, undated, future-dated, and coarse date ranges that overlap the as-of boundary stay visible for audit but cannot create certainty. It does not infer whether a claim is time-sensitive, search the web by itself, validate timestamps, prove source independence, score methodological quality, or treat absence of refutation as global truth."
+      "boundary": "Published evidence audit and explicit-URL verification are executable. Search-engine discovery is executed by the external web connector runtime. VERIFY v1.5 computes SUPPORTED, REFUTED or INDETERMINATE over an explicit evidence bundle while suppressing exact replay amplification, forcing INDETERMINATE on conflicting authoritative directions or contradictory use of one evidence fingerprint, optionally enforcing a caller-supplied freshness policy, and optionally enforcing a minimum authoritative source-family corroboration gate. Under the diversity gate, only explicitly caller-declared sourceFamily or publisher labels count toward corroboration; different source display names without declared family identity stay auditable but cannot manufacture independent-family certainty. Under an active freshness policy, stale, undated, future-dated and coarse date ranges that overlap the as-of boundary stay visible for audit but cannot create certainty. It does not infer whether a claim is time-sensitive, search the web by itself, validate timestamps, prove source independence, detect derivative sources, score methodological quality, or treat absence of refutation as global truth."
     },
     "gut": {
       "mode": "EXEC_CONNECTED_THICKENED",
