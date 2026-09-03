@@ -1,6 +1,6 @@
 {
-  "schema": "nostromo-shroom-feedback-test/v0.2",
-  "completedAt": "2026-09-03T08:09:13.777Z",
+  "schema": "nostromo-shroom-feedback-test/v0.3",
+  "completedAt": "2026-09-03T09:05:42.601Z",
   "status": "PASS",
   "baseline": {
     "mode": "BASELINE",
@@ -17,7 +17,7 @@
       "use",
       "anomaly"
     ],
-    "feedbackFingerprint": "4ef4e94c0bd765e6"
+    "feedbackFingerprint": "281be431286810e8"
   },
   "lexicalNoise": {
     "mode": "BASELINE",
@@ -36,15 +36,15 @@
       "evidence",
       "boundary",
       "counterexample",
-      "structure",
       "memory",
+      "structure",
       "position",
       "otherness",
       "language",
       "use",
       "anomaly"
     ],
-    "feedbackFingerprint": "e1b2458dfa22657d"
+    "feedbackFingerprint": "e4507841e0963dc9"
   },
   "contradiction": {
     "mode": "CONTRADICTION_CONDITIONED",
@@ -55,13 +55,13 @@
       "boundary",
       "structure",
       "position",
-      "memory",
       "otherness",
       "language",
+      "memory",
       "use",
       "anomaly"
     ],
-    "feedbackFingerprint": "cc6cfbcb8a06a485"
+    "feedbackFingerprint": "0a165a2fa9b0804f"
   },
   "explicitQuestion": {
     "mode": "QUESTION_CONDITIONED",
@@ -71,16 +71,81 @@
       "boundary",
       "structure",
       "counterexample",
-      "evidence",
       "otherness",
+      "evidence",
+      "language",
       "memory",
+      "use",
+      "anomaly"
+    ],
+    "feedbackFingerprint": "5c51339d0cbc9025"
+  },
+  "mixedEvidenceQuestion": {
+    "mode": "MIXED_CONDITIONED",
+    "activeSignalClasses": [
+      "EVIDENCE",
+      "QUESTION"
+    ],
+    "firstLens": "evidence",
+    "lensOrder": [
+      "evidence",
+      "boundary",
+      "position",
+      "counterexample",
+      "structure",
+      "memory",
+      "otherness",
       "language",
       "use",
       "anomaly"
     ],
-    "feedbackFingerprint": "e778a04f559c7820"
+    "lensScores": {
+      "structure": 2.1,
+      "counterexample": 3.09,
+      "position": 5.08,
+      "otherness": 0.07,
+      "evidence": 6.06,
+      "language": 0.05,
+      "boundary": 6.04,
+      "memory": 1.03,
+      "use": 0.02,
+      "anomaly": 0.01
+    }
+  },
+  "mixedContradictionQuestion": {
+    "mode": "MIXED_CONDITIONED",
+    "activeSignalClasses": [
+      "CONTRADICTION",
+      "QUESTION"
+    ],
+    "firstLens": "counterexample",
+    "lensOrder": [
+      "counterexample",
+      "position",
+      "boundary",
+      "structure",
+      "evidence",
+      "otherness",
+      "language",
+      "memory",
+      "use",
+      "anomaly"
+    ],
+    "lensScores": {
+      "structure": 3.1,
+      "counterexample": 7.09,
+      "position": 5.08,
+      "otherness": 0.07,
+      "evidence": 3.06,
+      "language": 0.05,
+      "boundary": 5.04,
+      "memory": 0.03,
+      "use": 0.02,
+      "anomaly": 0.01
+    }
   },
   "deterministicReplay": true,
+  "mixedDeterministicReplay": true,
   "failures": [],
-  "boundary": "PASS demonstrates deterministic structural conditioning with lexical-contamination resistance: explicit structured upstream markers can change SHROOMING lens priority, while ordinary prose merely mentioning evidence/source/contradiction/counterevidence cannot by itself reorder the reader. Ignored lexical mentions remain auditable. This does not demonstrate semantic learning, belief revision, independent agents, or real social emergence."
+  "boundary": "PASS demonstrates deterministic structural multi-signal conditioning with lexical-contamination resistance: explicit structured evidence, contradiction and question signals can compose bounded lens priorities instead of one precedence branch silently erasing the others. Ordinary prose mentions cannot reorder the reader, and score contributions remain auditable. This does not demonstrate semantic learning, belief revision, independent agents, or real social emergence."
 }
