@@ -1,6 +1,6 @@
 {
   "schema": "vajra-provenance-diversity-test/v0.3.3",
-  "completedAt": "2026-09-02T23:08:06.976Z",
+  "completedAt": "2026-09-03T00:06:38.927Z",
   "status": "PASS",
   "capability": "ADJUDICATION_PROVENANCE_DIVERSITY_OPERATOR_DIVERGENCE_AWARE_EXACT_AND_BOUNDED_NEAR_CONTENT_REPLAY_GUARD",
   "collisionCase": {
@@ -157,6 +157,14 @@
       [
         "x >= 4",
         "x <= 4"
+      ],
+      [
+        "A * B",
+        "A / B"
+      ],
+      [
+        "A × B",
+        "A ÷ B"
       ]
     ],
     "probe": {
@@ -168,6 +176,19 @@
       ],
       "operatorSignatureB": [
         "op_lt"
+      ]
+    },
+    "multiplicativeProbe": {
+      "match": false,
+      "score": 0,
+      "mode": "SEMANTIC_OPERATOR_DIVERGENCE",
+      "operatorSignatureA": [
+        "op_eq",
+        "op_mul"
+      ],
+      "operatorSignatureB": [
+        "op_div",
+        "op_eq"
       ]
     },
     "audit": {
@@ -316,6 +337,7 @@
     "crossOrganContentReplayDetected": true,
     "contentFormatMutationDetected": true,
     "semanticOperatorsPreserved": true,
+    "multiplicationDivisionOperatorsPreserved": true,
     "operatorDivergenceOverridesLexicalNearReplay": true,
     "boundedWrapperNearReplayDetected": true,
     "distinctProvenanceCannotHideReplay": true,
@@ -324,5 +346,5 @@
     "rawReturnsPreserved": true
   },
   "failures": [],
-  "boundary": "PASS proves deterministic detection of exact/bounded-format provenance reuse, operator-preserving exact canonical cross-organ content replay, and bounded high-overlap lexical replay when one organ lightly wraps another organ’s sufficiently long material. When both materials contain explicit comparison/equality/arithmetic operators and their operator signatures diverge, lexical overlap no longer falsely collapses them into near replay. This is syntactic operator protection, not semantic theorem proving. Raw returns remain preserved and source independence is never inferred."
+  "boundary": "PASS proves deterministic detection of exact/bounded-format provenance reuse, operator-preserving exact canonical cross-organ content replay, and bounded high-overlap lexical replay when one organ lightly wraps another organ’s sufficiently long material. Comparison, equality, addition/subtraction, multiplication and division operators are protected. When both materials contain explicit operators and their operator signatures diverge, lexical overlap no longer falsely collapses them into near replay. This is syntactic operator protection, not semantic theorem proving. Raw returns remain preserved and source independence is never inferred."
 }
