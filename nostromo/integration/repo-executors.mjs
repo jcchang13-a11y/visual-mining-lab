@@ -1,4 +1,4 @@
-// NOSTROMO repository-native executors v1.2
+// NOSTROMO repository-native executors v1.3
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import https from 'node:https';
@@ -123,31 +123,44 @@ export async function shroomParentSensitiveControl({task='',statePath,expectedSo
 
 async function walk(dir,out=[]){for(const e of await fs.readdir(dir,{withFileTypes:true})){if(['.git','node_modules'].includes(e.name))continue;const p=path.join(dir,e.name);if(e.isDirectory())await walk(p,out);else if(/\.(md|txt|json|js|mjs|html)$/i.test(e.name))out.push(p);}return out;}
 function sourceFamily(rel){const parts=String(rel).split(/[\\/]+/).filter(Boolean);if(parts[0]==='nostromo'&&parts[1])return `nostromo/${parts[1]}`;return parts[0]||'root';}
-function countOccurrences(text,q){let count=0,from=0;while(true){const i=text.indexOf(q,from);if(i<0)break;count++;from=i+Math.max(1,q.length);}return count;}
+function occurrenceStarts(text,q){const out=[];let from=0;while(true){const i=text.indexOf(q,from);if(i<0)break;out.push(i);from=i+Math.max(1,q.length);}return out;}
+function countOccurrences(text,q){return occurrenceStarts(text,q).length;}
+function boundedOccurrenceWindows(starts,{maxWindows=4,minGap=320}={}){const selected=[];for(const i of starts){if(selected.length>=maxWindows)break;if(!selected.length||i-selected.at(-1)>=minGap)selected.push(i);}return selected;}
 function normalizeCandidateText(text){return String(text??'').normalize('NFKC').toLowerCase().replace(/\b\d{4}-\d{2}-\d{2}t\d{2}:\d{2}:\d{2}(?:\.\d+)?z?\b/gi,'<timestamp>').replace(/\b[0-9a-f]{8,64}\b/gi,'<hex>').replace(/\b\d{6,}\b/g,'<num>').replace(/[\p{P}\p{S}\s]+/gu,' ').trim();}
 export function mutherCandidateFingerprint(text){return hash(normalizeCandidateText(text));}
 function shingleSet(text,width=5){const normalized=normalizeCandidateText(text).replace(/\s+/g,' ');if(!normalized)return new Set();if(normalized.length<=width)return new Set([normalized]);const out=new Set();for(let i=0;i<=normalized.length-width;i++)out.add(normalized.slice(i,i+width));return out;}
 export function mutherCandidateSimilarity(a,b){const A=shingleSet(a),B=shingleSet(b);if(!A.size&&!B.size)return 1;if(!A.size||!B.size)return 0;let intersection=0;for(const token of A)if(B.has(token))intersection++;return intersection/(A.size+B.size-intersection);}
-function suppressNearDuplicates(candidates,threshold=0.88){const kept=[],audit=[];let nearDuplicateSuppressedCount=0;for(const candidate of candidates){let match=null;for(const prior of kept){const similarity=mutherCandidateSimilarity(candidate.snippet,prior.snippet);if(similarity>=threshold){match={prior,similarity};break;}}if(match){nearDuplicateSuppressedCount++;if(audit.length<24)audit.push({suppressedPath:candidate.path,keptPath:match.prior.path,similarity:Number(match.similarity.toFixed(4)),suppressedFingerprint:candidate.contentFingerprint,keptFingerprint:match.prior.contentFingerprint,suppressedSourceFamily:candidate.sourceFamily,keptSourceFamily:match.prior.sourceFamily});continue;}kept.push(candidate);}return {kept,nearDuplicateSuppressedCount,audit};}
+function suppressNearDuplicates(candidates,threshold=0.88){const kept=[],audit=[];let nearDuplicateSuppressedCount=0;for(const candidate of candidates){let match=null;for(const prior of kept){const similarity=mutherCandidateSimilarity(candidate.snippet,prior.snippet);if(similarity>=threshold){match={prior,similarity};break;}}if(match){nearDuplicateSuppressedCount++;if(audit.length<24)audit.push({suppressedPath:candidate.path,suppressedOccurrenceOrdinal:candidate.occurrenceOrdinal||null,keptPath:match.prior.path,keptOccurrenceOrdinal:match.prior.occurrenceOrdinal||null,similarity:Number(match.similarity.toFixed(4)),suppressedFingerprint:candidate.contentFingerprint,keptFingerprint:match.prior.contentFingerprint,suppressedSourceFamily:candidate.sourceFamily,keptSourceFamily:match.prior.sourceFamily});continue;}kept.push(candidate);}return {kept,nearDuplicateSuppressedCount,audit};}
 function selectFamilyBalanced(candidates,limit){
   const groups=new Map();for(const c of candidates){if(!groups.has(c.sourceFamily))groups.set(c.sourceFamily,[]);groups.get(c.sourceFamily).push(c);}
-  for(const arr of groups.values())arr.sort((a,b)=>b.queryOccurrenceCount-a.queryOccurrenceCount||a.path.localeCompare(b.path));
+  for(const arr of groups.values())arr.sort((a,b)=>b.queryOccurrenceCount-a.queryOccurrenceCount||a.path.localeCompare(b.path)||(a.occurrenceOrdinal||0)-(b.occurrenceOrdinal||0));
   const families=[...groups.keys()].sort();const selected=[];let cursor=0;
   while(selected.length<limit&&families.length){const family=families[cursor%families.length],arr=groups.get(family);if(arr?.length)selected.push(arr.shift());if(!arr?.length){const idx=families.indexOf(family);families.splice(idx,1);if(!families.length)break;cursor=cursor%families.length;}else cursor=(cursor+1)%families.length;}
   return selected;
 }
-export async function mutherMineRepo({query='',limit=12,nearDuplicateThreshold=0.88}={}){
+export async function mutherMineRepo({query='',limit=12,nearDuplicateThreshold=0.88,maxWindowsPerFile=4,minWindowGap=320}={}){
   const q=compact(query,200).toLowerCase(); if(!q)throw new Error('MUTHER_QUERY_REQUIRED');
-  const files=await walk(ROOT); const candidates=[];
-  for(const file of files){let text;try{text=await fs.readFile(file,'utf8')}catch{continue}const lower=text.toLowerCase(),idx=lower.indexOf(q);if(idx<0)continue;const rel=path.relative(ROOT,file),snippet=compact(text.slice(Math.max(0,idx-180),idx+q.length+420),600);candidates.push({path:rel,snippet,sourceFamily:sourceFamily(rel),queryOccurrenceCount:countOccurrences(lower,q),contentFingerprint:mutherCandidateFingerprint(snippet)});}
-  candidates.sort((a,b)=>b.queryOccurrenceCount-a.queryOccurrenceCount||a.path.localeCompare(b.path));
+  const windowLimit=Math.max(1,Math.min(8,Number(maxWindowsPerFile)||4));
+  const gap=Math.max(120,Math.min(2000,Number(minWindowGap)||320));
+  const files=await walk(ROOT); const candidates=[];let filesWithMultipleOccurrences=0;let totalQueryOccurrences=0;
+  for(const file of files){
+    let text;try{text=await fs.readFile(file,'utf8')}catch{continue}
+    const lower=text.toLowerCase(),starts=occurrenceStarts(lower,q);if(!starts.length)continue;
+    totalQueryOccurrences+=starts.length;if(starts.length>1)filesWithMultipleOccurrences++;
+    const rel=path.relative(ROOT,file),windows=boundedOccurrenceWindows(starts,{maxWindows:windowLimit,minGap:gap});
+    windows.forEach((idx,i)=>{
+      const snippet=compact(text.slice(Math.max(0,idx-180),idx+q.length+420),600);
+      candidates.push({path:rel,snippet,sourceFamily:sourceFamily(rel),queryOccurrenceCount:starts.length,occurrenceOrdinal:i+1,occurrenceIndex:idx,contentFingerprint:mutherCandidateFingerprint(snippet)});
+    });
+  }
+  candidates.sort((a,b)=>b.queryOccurrenceCount-a.queryOccurrenceCount||a.path.localeCompare(b.path)||(a.occurrenceOrdinal||0)-(b.occurrenceOrdinal||0));
   const seen=new Set(),exactDistinct=[];let duplicateSuppressedCount=0;
   for(const c of candidates){if(seen.has(c.contentFingerprint)){duplicateSuppressedCount++;continue;}seen.add(c.contentFingerprint);exactDistinct.push(c);}
   const threshold=Math.max(0.75,Math.min(0.99,Number(nearDuplicateThreshold)||0.88));
   const near=suppressNearDuplicates(exactDistinct,threshold);
   const bounded=Math.max(1,Math.min(50,Number(limit)||12));
   const hits=selectFamilyBalanced(near.kept,bounded);
-  return {executor:'MUTHER_REPOSITORY_MINE',status:'EXECUTED',query:q,hitCount:hits.length,candidateHitCount:candidates.length,distinctCandidateCount:exactDistinct.length,lexicallyDistinctCandidateCount:near.kept.length,duplicateSuppressedCount,nearDuplicateSuppressedCount:near.nearDuplicateSuppressedCount,nearDuplicateThreshold:threshold,nearDuplicateAudit:near.audit,sourceFamilyCount:new Set(candidates.map(x=>x.sourceFamily)).size,selectedSourceFamilies:[...new Set(hits.map(x=>x.sourceFamily))],selection:'SUPERFICIAL_EXACT_AND_LEXICAL_NEAR_DUPLICATE_SUPPRESSION_PLUS_SOURCE_FAMILY_ROUND_ROBIN',boundary:'MINES THIS GITHUB REPOSITORY ONLY. CANDIDATE DEDUPLICATION NORMALIZES SUPERFICIAL FORMAT, VOLATILE TIMESTAMPS AND LONG IDENTIFIERS, THEN APPLIES A CONSERVATIVE CHARACTER-SHINGLE OVERLAP GUARD BEFORE ROUND-ROBIN SELECTION ACROSS PATH-BASED SOURCE FAMILIES. THE NEAR-DUPLICATE GUARD IS A LEXICAL POLLUTION CONTAINMENT HEURISTIC, NOT SEMANTIC IDENTITY, SOURCE-INDEPENDENCE PROOF, SOURCE-QUALITY JUDGMENT, NOVELTY PROOF, TRUTH JUDGMENT, OR GOOGLE DRIVE COVERAGE.',hits};
+  return {executor:'MUTHER_REPOSITORY_MINE',status:'EXECUTED',query:q,hitCount:hits.length,candidateHitCount:candidates.length,occurrenceWindowCandidateCount:candidates.length,totalQueryOccurrences,filesWithMultipleOccurrences,maxWindowsPerFile:windowLimit,minWindowGap:gap,distinctCandidateCount:exactDistinct.length,lexicallyDistinctCandidateCount:near.kept.length,duplicateSuppressedCount,nearDuplicateSuppressedCount:near.nearDuplicateSuppressedCount,nearDuplicateThreshold:threshold,nearDuplicateAudit:near.audit,sourceFamilyCount:new Set(candidates.map(x=>x.sourceFamily)).size,selectedSourceFamilies:[...new Set(hits.map(x=>x.sourceFamily))],selectedDistinctFileCount:new Set(hits.map(x=>x.path)).size,selection:'BOUNDED_MULTI_WINDOW_EXTRACTION_PLUS_SUPERFICIAL_EXACT_AND_LEXICAL_NEAR_DUPLICATE_SUPPRESSION_PLUS_SOURCE_FAMILY_ROUND_ROBIN',boundary:'MINES THIS GITHUB REPOSITORY ONLY. EACH MATCHING FILE MAY CONTRIBUTE A BOUNDED NUMBER OF SEPARATED QUERY WINDOWS BEFORE DEDUPLICATION, REDUCING FIRST-HIT BLINDNESS WHEN ONE FILE CONTAINS MULTIPLE DISTINCT LOCAL CONTEXTS. CANDIDATE DEDUPLICATION NORMALIZES SUPERFICIAL FORMAT, VOLATILE TIMESTAMPS AND LONG IDENTIFIERS, THEN APPLIES A CONSERVATIVE CHARACTER-SHINGLE OVERLAP GUARD BEFORE ROUND-ROBIN SELECTION ACROSS PATH-BASED SOURCE FAMILIES. THIS IS BOUNDED LEXICAL/STRUCTURAL VEIN COVERAGE, NOT SEMANTIC VEIN DETECTION, EXHAUSTIVE WITHIN-FILE COVERAGE, SEMANTIC IDENTITY, SOURCE-INDEPENDENCE PROOF, SOURCE-QUALITY JUDGMENT, NOVELTY PROOF, TRUTH JUDGMENT, OR GOOGLE DRIVE COVERAGE.',hits};
 }
 
 function probe(url,timeoutMs=8000){return new Promise((resolve,reject)=>{const u=new URL(url);const lib=u.protocol==='https:'?https:http;const req=lib.request(u,{method:'GET',headers:{'User-Agent':'NOSTROMO-DROPLET/1.0'}},res=>{let bytes=0;res.on('data',c=>{bytes+=c.length;if(bytes>65536)req.destroy()});res.on('end',()=>resolve({statusCode:res.statusCode||0,contentType:res.headers['content-type']||null,bytesSampled:bytes,finalUrl:url}));res.on('close',()=>resolve({statusCode:res.statusCode||0,contentType:res.headers['content-type']||null,bytesSampled:bytes,finalUrl:url}));});req.setTimeout(timeoutMs,()=>req.destroy(new Error('TIMEOUT')));req.on('error',reject);req.end();});}
