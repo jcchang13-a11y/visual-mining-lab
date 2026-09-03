@@ -1,8 +1,8 @@
 {
-  "purpose": "single CI trigger for VAJRA ambiguity-poisoning resistance verification",
+  "purpose": "single CI trigger for SHROOMING mixed structured-feedback composition verification",
   "stagedCommits": [
-    "a9608151cb425975cde443df0bfdf29542f046a7",
-    "5f16c4c2769342a5d830a0a0a36d5cebbeed6482"
+    "a34c506c15141927ff43f8bd05579b3e4bc71823",
+    "a47acfad6ef48036f6212936094fef9a4aa2ec24"
   ],
   "truthRule": "DISPLAYED STATE MUST FOLLOW EVIDENCE"
 }
