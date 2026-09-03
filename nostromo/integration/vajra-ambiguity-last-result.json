@@ -1,6 +1,6 @@
 {
-  "schema": "nostromo-vajra-ambiguity-test/v0.4",
-  "completedAt": "2026-09-03T18:08:40.959Z",
+  "schema": "nostromo-vajra-ambiguity-test/v0.4.2",
+  "completedAt": "2026-09-03T19:06:12.469Z",
   "status": "PASS",
   "finding": {
     "baselineStatus": "RESOLVED_BY_RECEIPT",
@@ -17,11 +17,19 @@
     "negatedRefutePolarity": "UNSPECIFIED",
     "chineseNegatedSupportStatus": "AMBIGUITY_FOUND",
     "chineseNegatedSupportPolarity": "UNSPECIFIED",
+    "insufficientSupportStatus": "AMBIGUITY_FOUND",
+    "insufficientSupportPolarity": "UNSPECIFIED",
+    "insufficientRefuteStatus": "AMBIGUITY_FOUND",
+    "insufficientRefutePolarity": "UNSPECIFIED",
+    "chineseInsufficientSupportStatus": "AMBIGUITY_FOUND",
+    "chineseInsufficientSupportPolarity": "UNSPECIFIED",
+    "chineseInsufficientRefuteStatus": "AMBIGUITY_FOUND",
+    "chineseInsufficientRefutePolarity": "UNSPECIFIED",
     "poisonAuditStatus": "NO_AMBIGUITY_FOUND",
     "poisonRejected": 3,
     "poisonBranchStatus": "RESOLVED_BY_RECEIPT",
-    "interpretation": "The guard preserves branch-scoped ambiguity across organ boundaries, excludes malformed returns, and now masks bounded English/Chinese negated support/refute phrases before polarity detection so bare keywords cannot manufacture false directional evidence."
+    "interpretation": "The guard preserves branch-scoped ambiguity across organ boundaries, excludes malformed returns, and masks bounded English/Chinese negated or explicitly insufficient support/refute phrases before polarity detection so lexical keywords cannot manufacture false directional evidence."
   },
   "failures": [],
-  "boundary": "This test demonstrates a deterministic structural/lexical false-certainty and ambiguity-poisoning guard, including cross-organ branch-scoped returns and bounded polarity-negation handling. UNSPECIFIED means the bounded polarity detector cannot safely classify the relation; qualification means only that minimum execution/provenance/material/relation fields exist. Distinct organ/provenance counts are audit metadata, not proof of source independence. Negation masking is intentionally narrow and does not amount to semantic negation scope resolution, truth judgment or evidence-quality scoring."
+  "boundary": "This test demonstrates a deterministic structural/lexical false-certainty and ambiguity-poisoning guard, including cross-organ branch-scoped returns plus bounded negation and insufficiency handling. UNSPECIFIED means the bounded polarity detector cannot safely classify the relation; qualification means only that minimum execution/provenance/material/relation fields exist. Distinct organ/provenance counts are audit metadata, not proof of source independence. Masking is intentionally narrow and does not amount to general semantic negation or modality scope resolution, truth judgment or evidence-quality scoring."
 }
