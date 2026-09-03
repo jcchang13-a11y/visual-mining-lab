@@ -8,6 +8,7 @@
    已存在，則只抽出其中既有 SUTRA 區塊接到正文最前方；不改正文、不猜經文範圍。
 
    既有原圖缺件只在 placement 已被施工檔鎖定時補 slot；不仿畫、不替代原圖。
+   出版標誌亦只接既有 publication-mark.md 施工位；原圖未進 GitHub 前只顯示 slot。
 */
 (function(){
   const MARKER=/^\s*\[\[RETRO:\s*([^|\]]+?)(?:\s*\|\s*([^\]]+?))?\s*\]\]\s*$/i;
@@ -159,11 +160,51 @@
     }
   }
 
+  let publicationLoading=false;
+  let publicationChecked=false;
+  async function ensurePublicationMark(){
+    if(publicationChecked||publicationLoading) return false;
+    const wrap=document.querySelector('main.wrap');
+    if(!wrap||wrap.querySelector('[data-publication-mark]')) return false;
+    publicationLoading=true;
+    publicationChecked=true;
+    try{
+      const r=await fetch('publication-mark.md?v=20260904-publication-wire');
+      if(!r.ok) return false;
+      const text=await r.text();
+      if(!text.includes('DIPLOMA／文憑工廠／MILL')) return false;
+
+      const section=document.createElement('section');
+      section.className='figure-slot';
+      section.dataset.publicationMark='diploma-mill';
+      section.dataset.gcbLayer='publication-mark-slot';
+
+      const title=document.createElement('div');
+      title.className='figure-slot-title';
+      title.textContent='文憑工廠（Diploma Mill）出版標誌';
+
+      const note=document.createElement('div');
+      note.className='figure-slot-note';
+      note.textContent='DIPLOMA／文憑工廠／MILL 圓形印章原圖待接回；不重畫、不清稿，保留原始粗糙印刷感。';
+      section.append(title,note);
+
+      const footer=wrap.querySelector('.footer');
+      if(footer) footer.insertAdjacentElement('afterend',section);
+      else wrap.append(section);
+      return true;
+    }catch(_){
+      return false;
+    }finally{
+      publicationLoading=false;
+    }
+  }
+
   function observe(root){
     if(!root) return null;
     renderMarkers(root);
     ensureSutraEntrance(root);
     ensureKnownFigureSlot(root);
+    ensurePublicationMark();
     let scheduled=false;
     const observer=new MutationObserver(()=>{
       renderMarkers(root);
@@ -174,6 +215,7 @@
           scheduled=false;
           ensureSutraEntrance(root);
           ensureKnownFigureSlot(root);
+          ensurePublicationMark();
         });
       }
     });
@@ -190,6 +232,7 @@
     makeFigureSlot,
     ensureKnownFigureSlot,
     ensureSutraEntrance,
+    ensurePublicationMark,
     observe
   };
 })();
