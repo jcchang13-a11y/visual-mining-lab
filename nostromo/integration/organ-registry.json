@@ -1,8 +1,8 @@
 {
-  "schema": "nostromo-organ-registry/v1.55",
-  "updatedAt": "2026-09-04T06:12:00+08:00",
+  "schema": "nostromo-organ-registry/v1.56",
+  "updatedAt": "2026-09-04T07:10:00+08:00",
   "truthRule": "DISPLAYED STATE MUST FOLLOW EVIDENCE",
-  "evidence": "ci-last-result.json plus formal-round-last-result.json plus connector-last-result.json plus muther-falsify-last-result.json plus muther-repo-diversity-last-result.json plus droplet-claim-verify-last-result.json plus gut-metabolism-last-result.json plus gut-lineage-last-result.json plus vajra-dynamic-last-result.json plus vajra-ambiguity-last-result.json plus vajra-modality-last-result.json plus vajra-uncertainty-last-result.json plus vajra-conflict-escalation-last-result.json plus vajra-provenance-diversity-last-result.json plus shroom-feedback-last-result.json",
+  "evidence": "ci-last-result.json plus formal-round-last-result.json plus connector-last-result.json plus muther-falsify-last-result.json plus muther-repo-diversity-last-result.json plus droplet-claim-verify-last-result.json plus gut-metabolism-last-result.json plus gut-ancestor-failure-last-result.json plus gut-lineage-last-result.json plus vajra-dynamic-last-result.json plus vajra-ambiguity-last-result.json plus vajra-modality-last-result.json plus vajra-uncertainty-last-result.json plus vajra-conflict-escalation-last-result.json plus vajra-provenance-diversity-last-result.json plus shroom-feedback-last-result.json",
   "latestFormalRound": "greenhouse/r113-nostromo-formal-round.json",
   "latestFormalFinding": {
     "reference": "R111",
@@ -29,21 +29,19 @@
     "boundary": "Isolated counterfactual executor only. It deliberately includes parent round ordinal in participant selection and has been CI-verified against R111 and R112. It does not write or advance formal greenhouse history and is engineering evidence that NOSTROMO can execute and audit a parent-sensitive transition, not evidence that the real SHROOMING population is causally path-dependent."
   },
   "latestThickening": {
-    "organ": "VAJRA",
-    "version": "VAJRA receipt ambiguity/conflict guard v0.5.0",
-    "status": "VERIFIED_CROSS_ORGAN_EXPLICIT_CONFLICT_CLOSURE_BLOCK_AND_ESCALATION",
-    "test": "vajra-ambiguity-last-result.json v0.5.0 + NOSTROMO Integration Test run 331",
+    "organ": "GUT",
+    "version": "GUT failed-ancestor execution-context quarantine on v0.2.25",
+    "status": "VERIFIED_FAILED_EXECUTOR_DESCENDANT_PAYLOAD_QUARANTINE",
+    "test": "gut-ancestor-failure-last-result.json v0.2 + NOSTROMO Integration Test run 335",
     "capabilities": [
-      "branch-scoped qualifying returns from different organs remain audited together instead of being partitioned by preferred-organ label",
-      "explicit opposite SUPPORTS/REFUTES polarity across organ labels now blocks preferred-organ first-receipt closure",
-      "a cross-organ explicit disagreement becomes CONTESTED_BY_RECEIPTS instead of being silently discarded as an organ mismatch",
-      "the resulting contested branch is directly compatible with the existing VAJRA conflict-escalation layer",
-      "verified escalation produces bounded no-closure work packets for DROPLET, MUTHER and SHROOMING",
-      "same-direction explicit cross-organ receipts remain a control and do not become contested merely because organ provenance differs",
-      "existing bounded negation, insufficiency and modality masking continues to preserve UNSPECIFIED ambiguity without manufacturing polarity",
-      "full NOSTROMO integration completed successfully after the new adversarial case, with the ambiguity test reporting failures=[]"
+      "FAILED executor-envelope status is propagated through existing provenance into descendant payload atoms",
+      "descendant claim, evidence and question fields under a FAILED ancestor are quarantined before semantic routing and cannot escape as fresh material to DROPLET, MUTHER or SHROOMING",
+      "the failed-bundle adversarial fixture quarantined all five descendant atoms and routed zero failed payload atoms to active semantic destinations",
+      "quarantined descendants retain the inherited FAILED status and input-source provenance for audit",
+      "an EXECUTED control envelope remains normally routable even when its semantic prose contains words such as invalid or error",
+      "existing GUT metabolism, lineage anti-echo, VAJRA, MUTHER, DROPLET, SHROOMING and 50-round integration tests remain successful after the containment change"
     ],
-    "boundary": "This is a deterministic structural/lexical cross-organ conflict guard. It proves that a qualifying executed return from a non-preferred organ can block premature VAJRA closure when it states explicit opposite lexical polarity on the same targetRef + clauseRef + lens branch, and that this contest can be handed into the existing multi-organ escalation machinery. It does not prove either organ is correct, that the sources are independent, or that the conflict is semantic rather than lexical; it does not perform factual adjudication, evidence-quality scoring, derivative-source detection or general natural-language inference."
+    "boundary": "This is deterministic structural execution-context containment. It prevents a failed executor envelope from amplifying its sibling payload as if that payload were a fresh successful claim, evidence item or question. It does not determine whether the quarantined content is semantically false, whether an upstream executor should have failed, whether a source is trustworthy, or whether a healthy payload is true."
   },
   "organs": {
     "shrooming": {
@@ -88,9 +86,9 @@
       "mode": "EXEC_CONNECTED_THICKENED",
       "source": "../gut/gut-engine.js",
       "actions": {
-        "DIGEST": "VERIFIED_HEURISTIC_METABOLIC_ROUTER_CONTEXT_GATED_RISK_QUARANTINE_OUT_OF_BAND_REFERENTIAL_CARRY_WITH_SCALAR_SCAFFOLD_CONTAINMENT"
+        "DIGEST": "VERIFIED_HEURISTIC_METABOLIC_ROUTER_CONTEXT_GATED_ANCESTOR_FAILURE_QUARANTINE_OUT_OF_BAND_REFERENTIAL_CARRY_WITH_SCALAR_SCAFFOLD_CONTAINMENT"
       },
-      "boundary": "GUT v0.2.25 is a deterministic heuristic metabolic router, with active carry rendering v1.1.12. Risk quarantine is now context-gated: dedicated failure/risk paths, explicit failure status values, and explicit status/result/outcome failure markers are quarantined, while ordinary semantic prose that merely mentions error, rejected or invalid remains eligible for normal evidence/claim/contradiction routing. It preserves nutrient atoms, routes and provenance while applying bounded carry-rendering containment for inherited substrate, intra-atom and cross-segment echoes, volatile lineage, nested clauses, repeated route metadata, delimiter collisions and exact bare true/false/null/undefined scaffolding. Machine-only hexadecimal ref/targetRef/clause/clauseRef identifiers are excluded from prose carry and preserved separately in a bounded carryRefs ledger with path, route, type and provenance. Bare scalar cleanup is carry-only: numeric evidence and substantive lexical phrases are retained, and source nutrients are not mutated. These are deterministic structural/contextual routing rules, not semantic deletion, truth judgment, semantic novelty detection, semantic identity, semantic risk understanding or proof that all metabolic echo is solved."
+      "boundary": "GUT v0.2.25 is a deterministic heuristic metabolic router, with active carry rendering v1.1.12. Risk quarantine is context-gated: dedicated failure/risk paths, explicit failure status values, explicit status/result/outcome failure markers, and descendant payload atoms carrying an inherited failed/rejected/invalid/quarantine/untrusted ancestor status in provenance are quarantined before semantic routing. The verified failed-ancestor adversarial test shows that a FAILED executor bundle cannot leak sibling claim/evidence/question payloads into downstream organs as fresh successful material, while an EXECUTED control envelope remains routable even when ordinary semantic prose mentions invalid or error. It preserves nutrient atoms, routes and provenance while applying bounded carry-rendering containment for inherited substrate, intra-atom and cross-segment echoes, volatile lineage, nested clauses, repeated route metadata, delimiter collisions and exact bare true/false/null/undefined scaffolding. Machine-only hexadecimal ref/targetRef/clause/clauseRef identifiers are excluded from prose carry and preserved separately in a bounded carryRefs ledger with path, route, type and provenance. Bare scalar cleanup is carry-only: numeric evidence and substantive lexical phrases are retained, and source nutrients are not mutated. These are deterministic structural/contextual routing rules, not semantic deletion, truth judgment, semantic novelty detection, semantic identity, semantic risk understanding, source-quality judgment or proof that all metabolic echo is solved."
     },
     "vajra": {
       "mode": "EXEC_CONNECTED_THICKENED",
