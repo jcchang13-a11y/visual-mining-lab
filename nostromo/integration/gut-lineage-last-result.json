@@ -1,6 +1,6 @@
 {
   "schema": "nostromo-gut-lineage-test/v0.2.25-carry-scalar-guard",
-  "completedAt": "2026-09-03T17:06:22.051Z",
+  "completedAt": "2026-09-03T17:08:13.199Z",
   "status": "PASS",
   "sameLineage": {
     "summaryItemCount": 1,
