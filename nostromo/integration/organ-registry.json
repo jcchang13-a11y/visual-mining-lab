@@ -1,6 +1,6 @@
 {
-  "schema": "nostromo-organ-registry/v1.45",
-  "updatedAt": "2026-09-03T17:08:00+08:00",
+  "schema": "nostromo-organ-registry/v1.46",
+  "updatedAt": "2026-09-03T19:08:00+08:00",
   "truthRule": "DISPLAYED STATE MUST FOLLOW EVIDENCE",
   "evidence": "ci-last-result.json plus formal-round-last-result.json plus connector-last-result.json plus muther-falsify-last-result.json plus muther-repo-diversity-last-result.json plus droplet-claim-verify-last-result.json plus gut-metabolism-last-result.json plus gut-lineage-last-result.json plus vajra-dynamic-last-result.json plus vajra-ambiguity-last-result.json plus vajra-uncertainty-last-result.json plus vajra-conflict-escalation-last-result.json plus vajra-provenance-diversity-last-result.json plus shroom-feedback-last-result.json",
   "latestFormalRound": "greenhouse/r113-nostromo-formal-round.json",
@@ -29,20 +29,20 @@
     "boundary": "Isolated counterfactual executor only. It deliberately includes parent round ordinal in participant selection and has been CI-verified against R111 and R112. It does not write or advance formal greenhouse history and is engineering evidence that NOSTROMO can execute and audit a parent-sensitive transition, not evidence that the real SHROOMING population is causally path-dependent."
   },
   "latestThickening": {
-    "organ": "SHROOMING",
-    "version": "SHROOMING feedback-conditioned reader v0.3",
-    "status": "VERIFIED_COMPOSITIONAL_STRUCTURED_FEEDBACK_CONDITIONING",
-    "test": "shroom-feedback-last-result.json v0.3 + NOSTROMO Integration Test run 299",
+    "organ": "GUT",
+    "version": "GUT carry scaffold scalar containment v1.1.12",
+    "status": "VERIFIED_CARRY_SCAFFOLD_SCALAR_CONTAINMENT",
+    "test": "gut-lineage-last-result.json v0.2.24-carry-scalar-guard + NOSTROMO Integration Test run 302",
     "capabilities": [
-      "multiple explicit structured upstream signal classes can now compose bounded reading-lens priorities instead of one precedence branch silently erasing the others",
-      "evidence plus question feedback preserves both evidence and position/boundary pressure in the deterministic lens order",
-      "contradiction plus question feedback preserves counterexample pressure while retaining position and boundary pressure",
-      "ordinary prose merely mentioning evidence, source, contradiction or counterevidence still cannot hijack conditioning",
-      "mixed-signal score contributions and active signal classes remain auditable",
-      "deterministic replay holds for both single-signal and mixed-signal cases",
-      "full NOSTROMO Integration Test run 299 completed successfully after the new SHROOMING adversarial cases passed"
+      "bare true, false, null and undefined machine-scaffolding tokens no longer recirculate as prose carry",
+      "the guard applies both to standalone routed segments and to colon-delimited clauses embedded inside a retained carry segment",
+      "numeric scalars such as HTTP status 200 remain available instead of being broadly stripped",
+      "substantive lexical uses such as false-positive remain intact because only exact bare scaffolding tokens are removed",
+      "suppression remains explicitly auditable through scaffoldScalarSuppressed",
+      "original GUT nutrient atoms, routes and provenance are not mutated by this carry-only cleanup",
+      "full NOSTROMO Integration Test run 302 completed successfully after the corrected adversarial control passed"
     ],
-    "boundary": "SHROOMING v0.3 is a deterministic structural feedback composer. It does not semantically understand evidence, revise beliefs, prove that ten traces are independent agents, or create real social emergence. It only allows explicit machine-structured evidence, contradiction and question signals to combine bounded lens priorities without silent precedence loss, while preserving lexical-contamination resistance and auditability."
+    "boundary": "This is deterministic carry-rendering hygiene, not semantic truth evaluation. The guard removes only exact bare boolean/null scaffolding from recirculating prose; it does not decide whether a proposition is true or false, does not delete numeric evidence, and does not alter the source nutrient/provenance record."
   },
   "organs": {
     "shrooming": {
@@ -87,9 +87,9 @@
       "mode": "EXEC_CONNECTED_THICKENED",
       "source": "../gut/gut-engine.js",
       "actions": {
-        "DIGEST": "VERIFIED_HEURISTIC_METABOLIC_ROUTER_OUT_OF_BAND_REFERENTIAL_CARRY"
+        "DIGEST": "VERIFIED_HEURISTIC_METABOLIC_ROUTER_OUT_OF_BAND_REFERENTIAL_CARRY_WITH_SCALAR_SCAFFOLD_CONTAINMENT"
       },
-      "boundary": "GUT v0.2.24 is a deterministic heuristic metabolic router. It preserves nutrient atoms, routes and provenance while applying bounded carry-rendering containment for inherited substrate, intra-atom and cross-segment echoes, volatile lineage, nested clauses, repeated route metadata and delimiter collisions. Machine-only hexadecimal ref/targetRef/clause/clauseRef identifiers are excluded from prose carry and preserved separately in a bounded carryRefs ledger with path, route, type and provenance, so referential continuity no longer depends on polluting semantic carry text. The verified VAJRA→GUT regression confirms targetRef continuity through carryRefs while the prose summary remains free of those machine tokens. These are deterministic structural normalization and routing rules, not semantic deletion, semantic novelty detection, semantic identity, source-truth judgment or proof that all metabolic echo is solved."
+      "boundary": "GUT v0.2.24 remains a deterministic heuristic metabolic router, with active carry rendering v1.1.12. It preserves nutrient atoms, routes and provenance while applying bounded carry-rendering containment for inherited substrate, intra-atom and cross-segment echoes, volatile lineage, nested clauses, repeated route metadata, delimiter collisions and exact bare true/false/null/undefined scaffolding. Machine-only hexadecimal ref/targetRef/clause/clauseRef identifiers are excluded from prose carry and preserved separately in a bounded carryRefs ledger with path, route, type and provenance. Bare scalar cleanup is carry-only: numeric evidence and substantive lexical phrases are retained, and source nutrients are not mutated. These are deterministic structural normalization and routing rules, not semantic deletion, truth judgment, semantic novelty detection, semantic identity or proof that all metabolic echo is solved."
     },
     "vajra": {
       "mode": "EXEC_CONNECTED_THICKENED",
