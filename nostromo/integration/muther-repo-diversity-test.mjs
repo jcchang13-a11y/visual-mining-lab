@@ -42,7 +42,7 @@ try{
   const retainedPaths=(result.hits||[]).map(x=>x.path);
   assert(retainedPaths.some(x=>x.startsWith('tmp-muther-near-c/')),'materially distinct lexical candidate was incorrectly suppressed');
   assert(new Set(result.selectedSourceFamilies||[]).size===2,'family-balanced selection should retain two source families after suppression');
-  assert(/NOT SEMANTIC IDENTITY/.test(result.boundary||''),'boundary must explicitly deny semantic-identity inference');
+  assert(/SEMANTIC IDENTITY/.test(result.boundary||'') && /NOT SEMANTIC VEIN DETECTION/.test(result.boundary||''),'boundary must explicitly deny semantic identity / semantic vein inference');
 
   const multiResult=await mutherMineRepo({query:multiQuery,limit:10,nearDuplicateThreshold:0.88,maxWindowsPerFile:4,minWindowGap:320});
   const multiHits=(multiResult.hits||[]).filter(x=>x.path.startsWith('tmp-muther-multi/'));
