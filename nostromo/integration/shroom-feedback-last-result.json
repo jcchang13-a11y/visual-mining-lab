@@ -1,7 +1,7 @@
 {
   "schema": "nostromo-shroom-feedback-test/v0.3",
-  "completedAt": "2026-09-03T17:08:13.795Z",
-  "status": "PASS",
+  "completedAt": "2026-09-03T18:05:41.086Z",
+  "status": "FAIL",
   "baseline": {
     "mode": "BASELINE",
     "firstLens": "structure",
@@ -17,7 +17,7 @@
       "use",
       "anomaly"
     ],
-    "feedbackFingerprint": "281be431286810e8"
+    "feedbackFingerprint": "9f6928c26aa0cd01"
   },
   "lexicalNoise": {
     "mode": "BASELINE",
@@ -44,7 +44,7 @@
       "use",
       "anomaly"
     ],
-    "feedbackFingerprint": "e4507841e0963dc9"
+    "feedbackFingerprint": "fbaea570d575eef6"
   },
   "contradiction": {
     "mode": "CONTRADICTION_CONDITIONED",
@@ -61,7 +61,7 @@
       "use",
       "anomaly"
     ],
-    "feedbackFingerprint": "0a165a2fa9b0804f"
+    "feedbackFingerprint": "2ac6ee75d93e0a58"
   },
   "explicitQuestion": {
     "mode": "QUESTION_CONDITIONED",
@@ -78,7 +78,7 @@
       "use",
       "anomaly"
     ],
-    "feedbackFingerprint": "5c51339d0cbc9025"
+    "feedbackFingerprint": "9417e00c6cd0d349"
   },
   "mixedEvidenceQuestion": {
     "mode": "MIXED_CONDITIONED",
@@ -146,6 +146,11 @@
   },
   "deterministicReplay": true,
   "mixedDeterministicReplay": true,
-  "failures": [],
+  "failures": [
+    {
+      "type": "CONDITIONING_BASIS_NOT_EXPLICIT",
+      "basis": "STRUCTURED_FEEDBACK_COMPOSITION_WITH_BOUNDED_DISAGREEMENT"
+    }
+  ],
   "boundary": "PASS demonstrates deterministic structural multi-signal conditioning with lexical-contamination resistance: explicit structured evidence, contradiction and question signals can compose bounded lens priorities instead of one precedence branch silently erasing the others. Ordinary prose mentions cannot reorder the reader, and score contributions remain auditable. This does not demonstrate semantic learning, belief revision, independent agents, or real social emergence."
 }

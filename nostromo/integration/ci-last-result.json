@@ -1,6 +1,6 @@
 {
   "schema": "nostromo-integration-ci/v1.3.3",
-  "completedAt": "2026-09-03T17:08:36.205Z",
+  "completedAt": "2026-09-03T18:06:05.912Z",
   "status": "PASS",
   "rounds": 50,
   "expectedPerRound": {
@@ -168,14 +168,14 @@
     "requestedRounds": 10,
     "completedRounds": 10,
     "roundsWithAllFourRepoExecutors": 10,
-    "gutAbsorbedTotal": 3504,
+    "gutAbsorbedTotal": 3532,
     "connectorHandoff": {
       "status": "ACCEPTED",
       "completedAt": "2026-08-30T13:05:48+08:00",
       "actionsAccepted": 4,
       "failures": []
     },
-    "lastCarry": "[CONTRADICTION->VAJRA] CONTRADICTION · [CONTRADICTION->VAJRA] 以 counterexample 位置重讀：CONTRADICTION：以 evidence 位置重讀：主動尋找最小反例與破壞條件：針對本輪 GENERAL 命題，哪個前提最可能先失效？：VERIFIES AN EXPLICIT URL · [CONTRADICTION->VAJRA] 主動尋找最小反例與破壞條件 · [CLAIM->DROPLET] VERIFIES AN EXPLICIT URL ONLY; DOES NOT CLAIM SEARCH-ENGINE DISCOVERY · [EVIDENCE_OR_PROVENANCE->MUTHER] 200 · [CLAIM->DROPLET] Connector actions executed externally once; later rounds apply a redacted evidence-derived feedback directive and do not claim re-execution. · [EVIDENCE_OR_PROVENANCE->MUTHER] nostromo-connector-evidence-carry/v1.0 · [QUESTION->SHROOMING] EXECUTES A NON-STATE-MUTATING QUESTION PROBE AGAINST THE LATEST PUBLISHED GREENHOUSE HISTORY. REACTIONS ARE TRACEABLE TRANSFORMATIONS OF RECORDED HISTORY, NOT CLAIMS OF TEN INDEPENDENT LIVE LLM PROCESSES, AND DO NOT ADVANCE THE FORMAL SHROOMING ROUND.",
+    "lastCarry": "[CONTRADICTION->VAJRA] CONTRADICTION · [CONTRADICTION->VAJRA] STRUCTURED_FEEDBACK_COMPOSITION_WITH_BOUNDED_DISAGREEMENT · [CONTRADICTION->VAJRA] DETERMINISTIC_STANCE_DIVERSIFICATION · [CLAIM->DROPLET] VERIFIES AN EXPLICIT URL ONLY; DOES NOT CLAIM SEARCH-ENGINE DISCOVERY · [EVIDENCE_OR_PROVENANCE->MUTHER] 200 · [CLAIM->DROPLET] Connector actions executed externally once; later rounds apply a redacted evidence-derived feedback directive and do not claim re-execution. · [EVIDENCE_OR_PROVENANCE->MUTHER] nostromo-connector-evidence-carry/v1.0",
     "carryEchoAudit": {
       "status": "PASS",
       "roundsChecked": 10,
