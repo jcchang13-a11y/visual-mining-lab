@@ -1,4 +1,4 @@
-// DROPLET claim verification executor v1.4
+// DROPLET claim verification executor v1.5
 import crypto from 'node:crypto';
 
 const hash=s=>crypto.createHash('sha256').update(String(s)).digest('hex').slice(0,16);
@@ -11,17 +11,20 @@ function normalizeEvidence(e,i){
   const sourceClass=clean(e.sourceClass||'unknown').toUpperCase();
   const relation=['SUPPORTS','REFUTES','INDETERMINATE'].includes(e.relation)?e.relation:'INDETERMINATE';
   const fingerprint=clean(e.fingerprint||'');
-  const sourceFamily=clean(e.sourceFamily||e.publisher||source||'unknown');
+  const declaredSourceFamily=clean(e.sourceFamily||e.publisher||'');
+  const familyDeclared=!!declaredSourceFamily;
+  const sourceFamily=declaredSourceFamily||source||'unknown';
   return {
     id:e.id||`E${i+1}`,
     source,
     sourceClass,
     sourceFamily,
+    familyDeclared,
     relation,
     fingerprint,
     date:clean(e.date||''),
     identityKey:fingerprint?`fp:${fingerprint}`:`src:${canonical(sourceFamily)}|${relation}`,
-    familyKey:canonical(sourceFamily)||'unknown'
+    familyKey:familyDeclared?(canonical(declaredSourceFamily)||'unknown'):'unknown'
   };
 }
 
@@ -70,17 +73,21 @@ function buildFreshnessAudit(unique,{asOf='',maxAgeDays=null}={}){
 function buildDiversityAudit(eligibleSupports,eligibleRefutes,{minAuthoritativeFamilies=null}={}){
   const minFamilies=Number(minAuthoritativeFamilies);
   const active=Number.isInteger(minFamilies)&&minFamilies>=2;
-  const familySet=rows=>new Set(rows.map(e=>e.familyKey).filter(k=>k&&k!=='unknown'));
+  const familySet=rows=>new Set(rows.filter(e=>e.familyDeclared).map(e=>e.familyKey).filter(k=>k&&k!=='unknown'));
   const supportFamilies=familySet(eligibleSupports);
   const refuteFamilies=familySet(eligibleRefutes);
+  const undeclaredSupportCount=eligibleSupports.filter(e=>!e.familyDeclared).length;
+  const undeclaredRefuteCount=eligibleRefutes.filter(e=>!e.familyDeclared).length;
   return {
     active,
     minAuthoritativeFamilies:active?minFamilies:null,
     eligibleAuthoritativeSupportFamilies:supportFamilies.size,
     eligibleAuthoritativeRefuteFamilies:refuteFamilies.size,
+    undeclaredEligibleAuthoritativeSupports:undeclaredSupportCount,
+    undeclaredEligibleAuthoritativeRefutes:undeclaredRefuteCount,
     supportSatisfied:!active||supportFamilies.size>=minFamilies,
     refuteSatisfied:!active||refuteFamilies.size>=minFamilies,
-    boundary:'SOURCE-FAMILY DIVERSITY IS AN OPT-IN CORROBORATION GATE OVER CALLER-SUPPLIED FAMILY LABELS. IT LIMITS FALSE CERTAINTY FROM ONE DECLARED FAMILY BUT DOES NOT PROVE REAL-WORLD SOURCE INDEPENDENCE OR DERIVATIVE-SOURCE STATUS.'
+    boundary:'SOURCE-FAMILY DIVERSITY IS AN OPT-IN CORROBORATION GATE OVER EXPLICIT CALLER-SUPPLIED FAMILY/PUBLISHER LABELS. UNDECLARED FAMILY IDENTITY CANNOT BE INFERRED FROM SOURCE DISPLAY NAMES TO SATISFY THE GATE. THIS LIMITS FALSE CERTAINTY FROM SOURCE-NAME FRAGMENTATION BUT DOES NOT PROVE REAL-WORLD SOURCE INDEPENDENCE OR DERIVATIVE-SOURCE STATUS.'
   };
 }
 
@@ -119,8 +126,8 @@ export function verifyClaim({claim='',evidence=[],freshnessPolicy={},diversityPo
   const unknownDateEvidence=freshness.rows.filter(r=>r.status==='UNKNOWN_DATE');
   const futureEvidence=freshness.rows.filter(r=>r.status==='FUTURE');
   const overlappingDateEvidence=freshness.rows.filter(r=>r.status==='OVERLAPS_AS_OF');
-  const supportFamilies=new Set(authoritativeSupports.map(e=>e.familyKey));
-  const refuteFamilies=new Set(authoritativeRefutes.map(e=>e.familyKey));
+  const supportFamilies=new Set(authoritativeSupports.filter(e=>e.familyDeclared).map(e=>e.familyKey));
+  const refuteFamilies=new Set(authoritativeRefutes.filter(e=>e.familyDeclared).map(e=>e.familyKey));
   const diversity=buildDiversityAudit(eligibleAuthoritativeSupports,eligibleAuthoritativeRefutes,diversityPolicy);
   const authoritativeConflict=authoritativeSupports.length>0&&authoritativeRefutes.length>0;
   const integrityConflict=contradictoryFingerprints.length>0;
@@ -150,7 +157,9 @@ export function verifyClaim({claim='',evidence=[],freshnessPolicy={},diversityPo
       authoritativeSupportFamilies:supportFamilies.size,
       authoritativeRefuteFamilies:refuteFamilies.size,
       eligibleAuthoritativeSupportFamilies:diversity.eligibleAuthoritativeSupportFamilies,
-      eligibleAuthoritativeRefuteFamilies:diversity.eligibleAuthoritativeRefuteFamilies
+      eligibleAuthoritativeRefuteFamilies:diversity.eligibleAuthoritativeRefuteFamilies,
+      undeclaredEligibleAuthoritativeSupports:diversity.undeclaredEligibleAuthoritativeSupports,
+      undeclaredEligibleAuthoritativeRefutes:diversity.undeclaredEligibleAuthoritativeRefutes
     },
     conflicts:{authoritativeConflict,integrityConflict,contradictoryFingerprints},
     freshness,
@@ -158,6 +167,6 @@ export function verifyClaim({claim='',evidence=[],freshnessPolicy={},diversityPo
     evidenceFingerprint,
     evidence:normalized,
     uniqueEvidence:unique,
-    boundary:'VERDICT IS COMPUTED ONLY FROM THE EXPLICIT EVIDENCE BUNDLE SUPPLIED BY AN ACTUAL CONNECTOR OR CALLER. EXACT REPLAYED EVIDENCE IS SUPPRESSED BY FINGERPRINT/IDENTITY. WHEN AN EXPLICIT AS-OF DATE AND MAX-AGE POLICY ARE SUPPLIED, STALE, UNDATED, FUTURE-DATED, OR DATE-RANGE-OVERLAPPING EVIDENCE REMAINS AUDITABLE BUT CANNOT CREATE CERTAINTY. WHEN AN OPT-IN MINIMUM AUTHORITATIVE SOURCE-FAMILY POLICY IS SUPPLIED, ONE DECLARED FAMILY CANNOT CREATE CERTAINTY BY ITSELF. SOURCE-FAMILY LABELS REMAIN CALLER-SUPPLIED AUDIT SIGNALS, NOT PROOF OF INDEPENDENCE. CONFLICTING AUTHORITATIVE DIRECTIONS OR CONTRADICTORY USE OF ONE FINGERPRINT FORCE INDETERMINATE. THIS EXECUTOR DOES NOT SEARCH THE WEB, INFER WHETHER A CLAIM IS TIME-SENSITIVE, SCORE METHODOLOGICAL QUALITY, PROVE SOURCE INDEPENDENCE, DETECT DERIVATIVE SOURCES, OR TREAT ABSENCE OF REFUTATION AS GLOBAL TRUTH.'
+    boundary:'VERDICT IS COMPUTED ONLY FROM THE EXPLICIT EVIDENCE BUNDLE SUPPLIED BY AN ACTUAL CONNECTOR OR CALLER. EXACT REPLAYED EVIDENCE IS SUPPRESSED BY FINGERPRINT/IDENTITY. WHEN AN EXPLICIT AS-OF DATE AND MAX-AGE POLICY ARE SUPPLIED, STALE, UNDATED, FUTURE-DATED, OR DATE-RANGE-OVERLAPPING EVIDENCE REMAINS AUDITABLE BUT CANNOT CREATE CERTAINTY. WHEN AN OPT-IN MINIMUM AUTHORITATIVE SOURCE-FAMILY POLICY IS SUPPLIED, ONLY EXPLICIT FAMILY/PUBLISHER LABELS CAN SATISFY THE DIVERSITY GATE; SOURCE DISPLAY NAMES ARE NOT SILENTLY PROMOTED INTO INDEPENDENT FAMILIES. SOURCE-FAMILY LABELS REMAIN CALLER-SUPPLIED AUDIT SIGNALS, NOT PROOF OF INDEPENDENCE. CONFLICTING AUTHORITATIVE DIRECTIONS OR CONTRADICTORY USE OF ONE FINGERPRINT FORCE INDETERMINATE. THIS EXECUTOR DOES NOT SEARCH THE WEB, INFER WHETHER A CLAIM IS TIME-SENSITIVE, SCORE METHODOLOGICAL QUALITY, PROVE SOURCE INDEPENDENCE, DETECT DERIVATIVE SOURCES, OR TREAT ABSENCE OF REFUTATION AS GLOBAL TRUTH.'
   };
 }
