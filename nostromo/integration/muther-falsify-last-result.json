@@ -1,6 +1,6 @@
 {
   "schema": "muther-falsify-ci/v0.3",
-  "completedAt": "2026-09-03T05:12:33.752Z",
+  "completedAt": "2026-09-03T07:03:15.350Z",
   "status": "PASS",
   "executor": "MUTHER_REPO_FALSIFICATION_PROBE",
   "claimFingerprint": "870ac5316413c790",
@@ -11,7 +11,7 @@
       "path": "nostromo/integration/organ-registry.json",
       "marker": "does not grant exhaustive private-environment crawling",
       "occurrenceCount": 1,
-      "contentFingerprint": "751d08cdafcf558a"
+      "contentFingerprint": "0d16d8273a9dbba1"
     }
   ],
   "registryAudit": {
