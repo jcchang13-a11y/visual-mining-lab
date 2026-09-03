@@ -1,4 +1,4 @@
-// DROPLET claim verification CI test v1.4
+// DROPLET claim verification CI test v1.5
 import fs from 'node:fs/promises';
 import {verifyClaim} from './droplet-claim-verify-executor.mjs';
 
@@ -134,19 +134,32 @@ try{
   if(cases.staleSecondFamilyDoesNotSatisfy.verdict!=='INDETERMINATE') failures.push({case:'staleSecondFamilyDoesNotSatisfy',type:'STALE_FAMILY_SATISFIED_DIVERSITY',verdict:cases.staleSecondFamilyDoesNotSatisfy.verdict});
   if(cases.staleSecondFamilyDoesNotSatisfy.counts.eligibleAuthoritativeSupportFamilies!==1) failures.push({case:'staleSecondFamilyDoesNotSatisfy',type:'STALE_FAMILY_COUNTED_AS_ELIGIBLE',counts:cases.staleSecondFamilyDoesNotSatisfy.counts});
 
+  cases.undeclaredFamilyNamesDoNotSatisfy=verifyClaim({
+    claim:'The project has independent authoritative corroboration.',
+    diversityPolicy,
+    evidence:[
+      {id:'G7',source:'Official portal alpha',sourceClass:'OFFICIAL',relation:'SUPPORTS',fingerprint:'undeclared-a'},
+      {id:'G8',source:'Primary database beta',sourceClass:'PRIMARY',relation:'SUPPORTS',fingerprint:'undeclared-b'}
+    ]
+  });
+  if(cases.undeclaredFamilyNamesDoNotSatisfy.verdict!=='INDETERMINATE') failures.push({case:'undeclaredFamilyNamesDoNotSatisfy',type:'SOURCE_NAME_FRAGMENTATION_CREATED_CERTAINTY',verdict:cases.undeclaredFamilyNamesDoNotSatisfy.verdict});
+  if(cases.undeclaredFamilyNamesDoNotSatisfy.diversity.supportSatisfied) failures.push({case:'undeclaredFamilyNamesDoNotSatisfy',type:'UNDECLARED_FAMILY_SATISFIED_GATE',diversity:cases.undeclaredFamilyNamesDoNotSatisfy.diversity});
+  if(cases.undeclaredFamilyNamesDoNotSatisfy.counts.eligibleAuthoritativeSupportFamilies!==0) failures.push({case:'undeclaredFamilyNamesDoNotSatisfy',type:'SOURCE_NAME_COUNTED_AS_DECLARED_FAMILY',counts:cases.undeclaredFamilyNamesDoNotSatisfy.counts});
+  if(cases.undeclaredFamilyNamesDoNotSatisfy.counts.undeclaredEligibleAuthoritativeSupports!==2) failures.push({case:'undeclaredFamilyNamesDoNotSatisfy',type:'UNDECLARED_EVIDENCE_NOT_AUDITED',counts:cases.undeclaredFamilyNamesDoNotSatisfy.counts});
+
   const result={
-    schema:'nostromo-droplet-claim-verify-test/v1.4',
+    schema:'nostromo-droplet-claim-verify-test/v1.5',
     completedAt:new Date().toISOString(),
     status:failures.length?'FAIL':'PASS',
     cases,
     failures,
-    boundary:'This test validates deterministic claim verdict computation from explicit evidence, exact replay suppression, source-family audit counts, authoritative-direction conflict containment, fingerprint-integrity conflict containment, opt-in temporal gating, and an opt-in minimum authoritative source-family corroboration gate. The diversity gate uses caller-supplied family labels and therefore limits declared-family concentration without proving real-world source independence or derivative-source status. CI performs no web search and does not infer whether a claim is time-sensitive.'
+    boundary:'This test validates deterministic claim verdict computation from explicit evidence, exact replay suppression, authoritative-direction and fingerprint-integrity conflict containment, opt-in temporal gating, and an opt-in minimum authoritative source-family corroboration gate. Only explicitly caller-declared sourceFamily/publisher labels may satisfy the diversity gate; different source display names without declared family identity remain auditable but cannot manufacture corroboration. The diversity gate still does not prove real-world source independence or derivative-source status. CI performs no web search and does not infer whether a claim is time-sensitive.'
   };
   await fs.writeFile(outPath,JSON.stringify(result,null,2)+'\n','utf8');
   console.log(JSON.stringify(result,null,2));
   if(result.status!=='PASS') process.exitCode=1;
 }catch(error){
-  const result={schema:'nostromo-droplet-claim-verify-test/v1.4',completedAt:new Date().toISOString(),status:'FAIL',failures:[...failures,{type:'UNCAUGHT',message:String(error?.message||error)}]};
+  const result={schema:'nostromo-droplet-claim-verify-test/v1.5',completedAt:new Date().toISOString(),status:'FAIL',failures:[...failures,{type:'UNCAUGHT',message:String(error?.message||error)}]};
   await fs.writeFile(outPath,JSON.stringify(result,null,2)+'\n','utf8');
   console.log(JSON.stringify(result,null,2));
   process.exitCode=1;
