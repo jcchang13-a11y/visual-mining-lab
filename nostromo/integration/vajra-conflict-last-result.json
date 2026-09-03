@@ -1,6 +1,6 @@
 {
   "schema": "nostromo-vajra-conflict-test/v0.3.2",
-  "completedAt": "2026-09-03T02:06:26.327Z",
+  "completedAt": "2026-09-03T03:05:35.551Z",
   "status": "PASS",
   "finding": {
     "classification": "INDEPENDENT_CONFLICT_PERSISTS_ACROSS_APPLICATIONS",
@@ -67,6 +67,7 @@
       "sameProvenanceConflict": 0,
       "historicalContestPreserved": 0,
       "contractAdequacyBlocked": 0,
+      "evidenceAdequacyBlocked": 0,
       "boundedNullAccepted": 0
     },
     "evidenceBranch": {
@@ -162,6 +163,7 @@
       "sameProvenanceConflict": 2,
       "historicalContestPreserved": 0,
       "contractAdequacyBlocked": 0,
+      "evidenceAdequacyBlocked": 0,
       "boundedNullAccepted": 0
     },
     "replayedContest": {
@@ -211,6 +213,7 @@
         "sameProvenanceConflict": 0,
         "historicalContestPreserved": 0,
         "contractAdequacyBlocked": 0,
+        "evidenceAdequacyBlocked": 0,
         "boundedNullAccepted": 0
       }
     },
@@ -277,6 +280,7 @@
         "sameProvenanceConflict": 0,
         "historicalContestPreserved": 1,
         "contractAdequacyBlocked": 0,
+        "evidenceAdequacyBlocked": 0,
         "boundedNullAccepted": 0
       }
     }

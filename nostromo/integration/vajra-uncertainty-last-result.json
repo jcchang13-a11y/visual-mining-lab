@@ -1,7 +1,7 @@
 {
   "schema": "nostromo-vajra-uncertainty-test/v0.3.8",
-  "completedAt": "2026-09-03T02:06:26.482Z",
-  "status": "PASS",
+  "completedAt": "2026-09-03T03:05:35.708Z",
+  "status": "FAIL",
   "guards": {
     "explicitUncertaintyCannotClose": true,
     "negatedSupportCannotClose": true,
@@ -30,12 +30,267 @@
   },
   "crossOrgan": {
     "gut": {
-      "ingested": 1061,
+      "ingested": 1065,
       "absorbed": 53,
-      "quarantined": 22,
+      "quarantined": 20,
       "summarySample": "[CONTRADICTION->VAJRA] 主動尋找最小反例與破壞條件 · [CONTRADICTION->VAJRA] 主動尋找最小反例與破壞條件：針對本輪 EMPIRICAL 命題，哪個前提最可能先失效？ · [QUESTION->SHROOMING] Resolution means the handoff contract received a matching clause-scoped, executed, provenance-bearing and minimally substantive return with no detected opposing qualifying receipt in the same application. Replay identity normalize"
     }
   },
-  "failures": [],
+  "failures": [
+    {
+      "type": "SAME_PROVENANCE_CONFLICT_COUNT",
+      "detail": {
+        "received": 2,
+        "resolved": 0,
+        "contested": 0,
+        "open": 5,
+        "rejected": 2,
+        "resolvedBranches": [],
+        "contestedBranches": [],
+        "rejectedReceipts": [
+          {
+            "targetRef": "20708907",
+            "clauseRef": "bf2b3177",
+            "lens": "evidence",
+            "organ": "DROPLET",
+            "status": "EXECUTED",
+            "provenance": "prov-same-source-001",
+            "material": "The same provenance identity emits one supporting return about the tested condition.",
+            "relation": "This return supports the target claim under the tested condition.",
+            "relationClassification": "SUPPORTS",
+            "reasons": [
+              "HANDOFF_RESOLUTION_CRITERION_NOT_EVIDENCED"
+            ],
+            "adequacyTopology": "LENS_SPECIFIC_CRITERION_MISSING"
+          },
+          {
+            "targetRef": "20708907",
+            "clauseRef": "bf2b3177",
+            "lens": "evidence",
+            "organ": "DROPLET",
+            "status": "EXECUTED",
+            "provenance": "PROV SAME SOURCE 001",
+            "material": "The same provenance identity also emits an opposing return about the same tested condition.",
+            "relation": "This return refutes the target claim under the tested condition.",
+            "relationClassification": "REFUTES",
+            "reasons": [
+              "HANDOFF_RESOLUTION_CRITERION_NOT_EVIDENCED"
+            ],
+            "adequacyTopology": "LENS_SPECIFIC_CRITERION_MISSING"
+          }
+        ],
+        "historicalEvidenceKeys": 0,
+        "indeterminate": 0,
+        "unspecified": 0,
+        "mixed": 0,
+        "sameProvenanceConflict": 0,
+        "historicalContestPreserved": 0,
+        "contractAdequacyBlocked": 2,
+        "evidenceAdequacyBlocked": 2,
+        "boundedNullAccepted": 0
+      }
+    },
+    {
+      "type": "SAME_PROVENANCE_REJECTIONS_NOT_AUDITED",
+      "detail": {
+        "received": 2,
+        "resolved": 0,
+        "contested": 0,
+        "open": 5,
+        "rejected": 2,
+        "resolvedBranches": [],
+        "contestedBranches": [],
+        "rejectedReceipts": [
+          {
+            "targetRef": "20708907",
+            "clauseRef": "bf2b3177",
+            "lens": "evidence",
+            "organ": "DROPLET",
+            "status": "EXECUTED",
+            "provenance": "prov-same-source-001",
+            "material": "The same provenance identity emits one supporting return about the tested condition.",
+            "relation": "This return supports the target claim under the tested condition.",
+            "relationClassification": "SUPPORTS",
+            "reasons": [
+              "HANDOFF_RESOLUTION_CRITERION_NOT_EVIDENCED"
+            ],
+            "adequacyTopology": "LENS_SPECIFIC_CRITERION_MISSING"
+          },
+          {
+            "targetRef": "20708907",
+            "clauseRef": "bf2b3177",
+            "lens": "evidence",
+            "organ": "DROPLET",
+            "status": "EXECUTED",
+            "provenance": "PROV SAME SOURCE 001",
+            "material": "The same provenance identity also emits an opposing return about the same tested condition.",
+            "relation": "This return refutes the target claim under the tested condition.",
+            "relationClassification": "REFUTES",
+            "reasons": [
+              "HANDOFF_RESOLUTION_CRITERION_NOT_EVIDENCED"
+            ],
+            "adequacyTopology": "LENS_SPECIFIC_CRITERION_MISSING"
+          }
+        ],
+        "historicalEvidenceKeys": 0,
+        "indeterminate": 0,
+        "unspecified": 0,
+        "mixed": 0,
+        "sameProvenanceConflict": 0,
+        "historicalContestPreserved": 0,
+        "contractAdequacyBlocked": 2,
+        "evidenceAdequacyBlocked": 2,
+        "boundedNullAccepted": 0
+      }
+    },
+    {
+      "type": "INDEPENDENT_CONFLICT_NOT_PRESERVED",
+      "detail": {
+        "received": 2,
+        "resolved": 0,
+        "contested": 0,
+        "open": 5,
+        "rejected": 2,
+        "resolvedBranches": [],
+        "contestedBranches": [],
+        "rejectedReceipts": [
+          {
+            "targetRef": "20708907",
+            "clauseRef": "bf2b3177",
+            "lens": "evidence",
+            "organ": "DROPLET",
+            "status": "EXECUTED",
+            "provenance": "prov-same-source-001",
+            "material": "The same provenance identity emits one supporting return about the tested condition.",
+            "relation": "This return supports the target claim under the tested condition.",
+            "relationClassification": "SUPPORTS",
+            "reasons": [
+              "HANDOFF_RESOLUTION_CRITERION_NOT_EVIDENCED"
+            ],
+            "adequacyTopology": "LENS_SPECIFIC_CRITERION_MISSING"
+          },
+          {
+            "targetRef": "20708907",
+            "clauseRef": "bf2b3177",
+            "lens": "evidence",
+            "organ": "DROPLET",
+            "status": "EXECUTED",
+            "provenance": "prov-independent-source-002",
+            "material": "The same provenance identity also emits an opposing return about the same tested condition.",
+            "relation": "This return refutes the target claim under the tested condition.",
+            "relationClassification": "REFUTES",
+            "reasons": [
+              "HANDOFF_RESOLUTION_CRITERION_NOT_EVIDENCED"
+            ],
+            "adequacyTopology": "LENS_SPECIFIC_CRITERION_MISSING"
+          }
+        ],
+        "historicalEvidenceKeys": 0,
+        "indeterminate": 0,
+        "unspecified": 0,
+        "mixed": 0,
+        "sameProvenanceConflict": 0,
+        "historicalContestPreserved": 0,
+        "contractAdequacyBlocked": 2,
+        "evidenceAdequacyBlocked": 2,
+        "boundedNullAccepted": 0
+      }
+    },
+    {
+      "type": "INDEPENDENT_CONFLICT_BRANCH_NOT_CONTESTED",
+      "detail": [
+        {
+          "lens": "evidence",
+          "targetRef": "20708907",
+          "clauseRef": "bf2b3177",
+          "clauseRole": "CLAUSE",
+          "question": "要求可追溯證據並區分支持與缺席證據：針對本輪 EMPIRICAL 命題（ref:20708907; clause:bf2b3177），哪個前提最可能先失效？",
+          "status": "UNRESOLVED",
+          "handoff": {
+            "lens": "evidence",
+            "targetRef": "20708907",
+            "clauseRef": "bf2b3177",
+            "preferredOrgan": "DROPLET",
+            "need": "claim-specific supporting and opposing evidence with provenance",
+            "resolutionCriterion": "evidence is traceable and relation to the target claim is stated",
+            "status": "OPEN",
+            "boundary": "Preferred organ is a routing request, not proof that the organ executed it. clauseRef scopes the return to the inspected clause when heuristic decomposition is available."
+          }
+        },
+        {
+          "lens": "measurement",
+          "targetRef": "20708907",
+          "clauseRef": "bf2b3177",
+          "clauseRole": "CLAUSE",
+          "question": "檢查測量是否真的對應所宣稱概念：針對本輪 EMPIRICAL 命題（ref:20708907; clause:bf2b3177），哪個前提最可能先失效？",
+          "status": "UNRESOLVED",
+          "handoff": {
+            "lens": "measurement",
+            "targetRef": "20708907",
+            "clauseRef": "bf2b3177",
+            "preferredOrgan": "DROPLET",
+            "need": "measurement definition, instrument/procedure, and validity limits",
+            "resolutionCriterion": "measure is linked to the claimed construct and key validity limit is explicit",
+            "status": "OPEN",
+            "boundary": "Preferred organ is a routing request, not proof that the organ executed it. clauseRef scopes the return to the inspected clause when heuristic decomposition is available."
+          }
+        },
+        {
+          "lens": "source_quality",
+          "targetRef": "20708907",
+          "clauseRef": "bf2b3177",
+          "clauseRole": "CLAUSE",
+          "question": "檢查來源獨立性、方法品質、時間與可重現性：針對本輪 EMPIRICAL 命題（ref:20708907; clause:bf2b3177），哪個前提最可能先失效？",
+          "status": "UNRESOLVED",
+          "handoff": {
+            "lens": "source_quality",
+            "targetRef": "20708907",
+            "clauseRef": "bf2b3177",
+            "preferredOrgan": "DROPLET",
+            "need": "source independence, method quality, date/freshness, and reproducibility signals",
+            "resolutionCriterion": "source quality limits are explicit and derivative evidence is not counted as independent",
+            "status": "OPEN",
+            "boundary": "Preferred organ is a routing request, not proof that the organ executed it. clauseRef scopes the return to the inspected clause when heuristic decomposition is available."
+          }
+        },
+        {
+          "lens": "counterexample",
+          "targetRef": "20708907",
+          "clauseRef": "bf2b3177",
+          "clauseRole": "CLAUSE",
+          "question": "主動尋找最小反例與破壞條件：針對本輪 EMPIRICAL 命題（ref:20708907; clause:bf2b3177），哪個前提最可能先失效？",
+          "status": "UNRESOLVED",
+          "handoff": {
+            "lens": "counterexample",
+            "targetRef": "20708907",
+            "clauseRef": "bf2b3177",
+            "preferredOrgan": "DROPLET",
+            "need": "a minimal counterexample or a bounded report that none was found in the searched scope",
+            "resolutionCriterion": "a concrete counterexample is supplied or search scope/coverage is made explicit",
+            "status": "OPEN",
+            "boundary": "Preferred organ is a routing request, not proof that the organ executed it. clauseRef scopes the return to the inspected clause when heuristic decomposition is available."
+          }
+        },
+        {
+          "lens": "scope",
+          "targetRef": "20708907",
+          "clauseRef": "bf2b3177",
+          "clauseRole": "CLAUSE",
+          "question": "界定適用範圍、例外與邊界條件：針對本輪 EMPIRICAL 命題（ref:20708907; clause:bf2b3177），哪個前提最可能先失效？",
+          "status": "UNRESOLVED",
+          "handoff": {
+            "lens": "scope",
+            "targetRef": "20708907",
+            "clauseRef": "bf2b3177",
+            "preferredOrgan": "SHROOMING",
+            "need": "boundary cases and competing readings",
+            "resolutionCriterion": "at least one explicit boundary/exception is supplied or the scope is narrowed",
+            "status": "OPEN",
+            "boundary": "Preferred organ is a routing request, not proof that the organ executed it. clauseRef scopes the return to the inspected clause when heuristic decomposition is available."
+          }
+        }
+      ]
+    }
+  ],
   "boundary": "PASS certifies only bounded lexical/structural anti-false-certainty, provenance-topology, lens-specific adequacy, and BOUNDED_NULL work-contract semantics plus a GUT regression. BOUNDED_NULL is not evidence that a claim is true, and no search completeness beyond the declared scope is certified."
 }
