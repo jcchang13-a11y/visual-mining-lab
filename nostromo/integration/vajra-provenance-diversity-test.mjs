@@ -64,7 +64,9 @@ const operatorPairs=[
   ['score > 10','score < 10'],
   ['A + B','A - B'],
   ['p = 0.05','p != 0.05'],
-  ['x >= 4','x <= 4']
+  ['x >= 4','x <= 4'],
+  ['A * B','A / B'],
+  ['A × B','A ÷ B']
 ];
 for(const [a,b] of operatorPairs){
   if(canonicalMaterial(a)===canonicalMaterial(b))failures.push({type:'SEMANTIC_OPERATOR_COLLISION',a,b,canonical:canonicalMaterial(a)});
@@ -82,6 +84,11 @@ const operatorDistinctAudit=provenanceAudit(operatorDistinctReturns);
 if(operatorDistinctAudit.sharedContent===true)failures.push({type:'OPERATOR_DISTINCT_MATERIAL_FALSELY_EXACT_REPLAY',operatorDistinctAudit});
 if(operatorDistinctProbe.match!==false||operatorDistinctProbe.mode!=='SEMANTIC_OPERATOR_DIVERGENCE')failures.push({type:'OPERATOR_DIVERGENCE_FALSELY_NEAR_REPLAY',operatorDistinctProbe});
 if(operatorDistinctAudit.nearSharedContent!==false||operatorDistinctAudit.replayRisk!==false||operatorDistinctAudit.status!=='PROVENANCE_LABELS_DISTINCT_NOT_INDEPENDENCE_PROOF')failures.push({type:'OPERATOR_DIVERGENCE_FALSELY_BLOCKED_REASSESSMENT',operatorDistinctAudit});
+
+const multiplicativeDistinctA='The registered model applies outcome = exposure * duration under the retained analysis window and calibrated scale.';
+const multiplicativeDistinctB='The registered model applies outcome = exposure / duration under the retained analysis window and calibrated scale.';
+const multiplicativeProbe=boundedNearDuplicate(multiplicativeDistinctA,multiplicativeDistinctB);
+if(multiplicativeProbe.match!==false||multiplicativeProbe.mode!=='SEMANTIC_OPERATOR_DIVERGENCE')failures.push({type:'MULTIPLICATION_DIVISION_DIVERGENCE_FALSELY_NEAR_REPLAY',multiplicativeProbe});
 
 const nearReplayA='The intervention improved outcome X under bounded condition Y after the measurement protocol excluded baseline drift and preserved the original comparison window.';
 const nearReplayB='Context note: The intervention improved outcome X under bounded condition Y after the measurement protocol excluded baseline drift and preserved the original comparison window. [replayed]';
@@ -121,12 +128,12 @@ const result={
   collisionCase:{status:guarded.status,audit:branch?.provenanceDiversityAudit,nextAction:branch?.nextAction,closureAuthority:branch?.closureAuthority},
   provenanceFormatMutationCase:mutationAudit,
   contentReplayCase:{status:replayGuarded.status,audit:contentReplayAudit,nextAction:replayGuardedBranch?.nextAction,closureAuthority:replayGuardedBranch?.closureAuthority},
-  operatorPreservationCase:{pairs:operatorPairs,probe:operatorDistinctProbe,audit:operatorDistinctAudit},
+  operatorPreservationCase:{pairs:operatorPairs,probe:operatorDistinctProbe,multiplicativeProbe,audit:operatorDistinctAudit},
   nearReplayCase:{probe:nearReplayProbe,audit:nearReplayAudit,status:nearGuarded.status,nextAction:nearGuardedBranch?.nextAction,closureAuthority:nearGuardedBranch?.closureAuthority},
   distinctCase:distinctAudit,partialCase:partialAudit,
-  guards:{exactProvenanceReuseDetected:true,provenanceFormatMutationDetected:true,crossOrganContentReplayDetected:true,contentFormatMutationDetected:true,semanticOperatorsPreserved:true,operatorDivergenceOverridesLexicalNearReplay:true,boundedWrapperNearReplayDetected:true,distinctProvenanceCannotHideReplay:true,replayChangesVajraBehavior:true,sourceIndependenceNeverInferred:true,rawReturnsPreserved:true},
+  guards:{exactProvenanceReuseDetected:true,provenanceFormatMutationDetected:true,crossOrganContentReplayDetected:true,contentFormatMutationDetected:true,semanticOperatorsPreserved:true,multiplicationDivisionOperatorsPreserved:true,operatorDivergenceOverridesLexicalNearReplay:true,boundedWrapperNearReplayDetected:true,distinctProvenanceCannotHideReplay:true,replayChangesVajraBehavior:true,sourceIndependenceNeverInferred:true,rawReturnsPreserved:true},
   failures,
-  boundary:'PASS proves deterministic detection of exact/bounded-format provenance reuse, operator-preserving exact canonical cross-organ content replay, and bounded high-overlap lexical replay when one organ lightly wraps another organ’s sufficiently long material. When both materials contain explicit comparison/equality/arithmetic operators and their operator signatures diverge, lexical overlap no longer falsely collapses them into near replay. This is syntactic operator protection, not semantic theorem proving. Raw returns remain preserved and source independence is never inferred.'
+  boundary:'PASS proves deterministic detection of exact/bounded-format provenance reuse, operator-preserving exact canonical cross-organ content replay, and bounded high-overlap lexical replay when one organ lightly wraps another organ’s sufficiently long material. Comparison, equality, addition/subtraction, multiplication and division operators are protected. When both materials contain explicit operators and their operator signatures diverge, lexical overlap no longer falsely collapses them into near replay. This is syntactic operator protection, not semantic theorem proving. Raw returns remain preserved and source independence is never inferred.'
 };
 await fs.writeFile('nostromo/integration/vajra-provenance-diversity-last-result.json',JSON.stringify(result,null,2)+'\n');
 console.log(JSON.stringify(result,null,2));
