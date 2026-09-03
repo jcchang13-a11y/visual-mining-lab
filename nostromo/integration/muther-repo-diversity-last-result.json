@@ -1,8 +1,8 @@
 {
-  "schema": "muther-repo-diversity-test/v0.2.1",
-  "completedAt": "2026-09-03T15:07:18.067Z",
+  "schema": "muther-repo-diversity-test/v0.2.2",
+  "completedAt": "2026-09-03T16:07:29.363Z",
   "status": "PASS",
-  "capability": "LEXICAL_NEAR_DUPLICATE_CONTAINMENT_PLUS_BOUNDED_MULTI_WINDOW_COVERAGE_WITH_TRUE_OCCURRENCE_PROVENANCE",
+  "capability": "LEXICAL_NEAR_DUPLICATE_CONTAINMENT_PLUS_BOUNDED_MULTI_WINDOW_COVERAGE_PLUS_EXACT_REPLAY_PROVENANCE_RETENTION",
   "unit": {
     "nearSimilarity": 0.9518,
     "distinctSimilarity": 0.105,
@@ -46,15 +46,38 @@
     "maxWindowsPerFile": 4,
     "minWindowGap": 320
   },
+  "exactReplay": {
+    "candidateHitCount": 2,
+    "retainedHitCount": 1,
+    "duplicateSuppressedCount": 1,
+    "crossFamilyCount": 1,
+    "audit": [
+      {
+        "suppressedPath": "tmp-muther-exact-b/copy-b.md",
+        "suppressedOccurrenceOrdinal": 1,
+        "suppressedOccurrenceIndex": 0,
+        "suppressedSourceFamily": "tmp-muther-exact-b",
+        "keptPath": "tmp-muther-exact-a/copy-a.md",
+        "keptOccurrenceOrdinal": 1,
+        "keptOccurrenceIndex": 0,
+        "keptSourceFamily": "tmp-muther-exact-a",
+        "contentFingerprint": "9f3024bfe91ff625",
+        "crossFamily": true
+      }
+    ],
+    "contentCountedOnce": true,
+    "provenanceRetained": true
+  },
   "provenance": {
     "selectedSourceFamilies": [
       "tmp-muther-near-a",
       "tmp-muther-near-c"
     ],
     "sourceFamilyCount": 3,
-    "trueOccurrenceOrdinalPreserved": true
+    "trueOccurrenceOrdinalPreserved": true,
+    "exactReplayCrossFamilyProvenanceRetained": true
   },
-  "crossOrganRegression": "The main NOSTROMO integration test runs separately in the same workflow and must remain PASS before public promotion.",
-  "boundary": "PASS certifies conservative lexical near-duplicate containment, bounded extraction of separated query windows, and preservation of each selected window’s true query-occurrence ordinal in its source file even when an intervening nearby occurrence is intentionally skipped. It does not certify semantic vein detection, semantic equivalence, exhaustive within-file coverage, source independence, source quality, novelty, factual truth, or Google Drive coverage.",
+  "crossOrganRegression": "The main NOSTROMO integration test runs separately in the same workflow and must remain PASS before public promotion. Because the full MUTHER executor object is handed to GUT, the bounded exactDuplicateAudit remains available downstream without duplicating the suppressed material as an additional hit.",
+  "boundary": "PASS certifies conservative lexical near-duplicate containment, bounded extraction of separated query windows, preservation of each selected window’s true query-occurrence ordinal, and bounded provenance retention for exact content copies that are suppressed from material amplification. It does not certify semantic vein detection, semantic equivalence, exhaustive within-file coverage, source independence, source quality, novelty, factual truth, or Google Drive coverage.",
   "failures": []
 }
