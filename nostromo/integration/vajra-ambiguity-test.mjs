@@ -36,9 +36,6 @@ if(guardedBranch?.status!=='AMBIGUOUS_BY_RECEIPTS')failures.push({type:'FALSE_CE
 if(!guarded.receiptAmbiguityAudit?.ambiguous?.length)failures.push({type:'AMBIGUITY_AUDIT_MISSING'});
 if(audit.qualifyingReceiptCount!==2)failures.push({type:'QUALIFYING_COUNT_WRONG',actual:audit.qualifyingReceiptCount});
 
-// Cross-organ adversarial case: the same VAJRA branch must remain ambiguous when
-// one qualifying return comes from DROPLET and another from MU/TH/UR. Organ labels
-// are provenance metadata, not separate closure domains.
 const crossOrganA={...receiptA,organ:'DROPLET',provenance:'droplet-source-A'};
 const crossOrganB={...receiptB,organ:'MU/TH/UR',provenance:'muther-source-B'};
 const crossOrganAudit=auditReceiptAmbiguity([crossOrganA,crossOrganB]);
@@ -50,20 +47,16 @@ if(crossOrganBranch?.status!=='AMBIGUOUS_BY_RECEIPTS')failures.push({type:'CROSS
 if(crossOrganFinding?.distinctOrganCount!==2)failures.push({type:'CROSS_ORGAN_COUNT_WRONG',actual:crossOrganFinding?.distinctOrganCount});
 if(!Array.isArray(crossOrganFinding?.organs)||!crossOrganFinding.organs.includes('DROPLET')||!crossOrganFinding.organs.includes('MU/TH/UR'))failures.push({type:'CROSS_ORGAN_AUDIT_METADATA_MISSING',organs:crossOrganFinding?.organs});
 
-// Cross-organ same-direction control: organ diversity alone must not manufacture ambiguity.
 const crossOrganSameDirection={...receiptA,organ:'MU/TH/UR',provenance:'muther-source-C',material:'A repository mining result independently reproduces the scoped failure.',relation:'This evidence supports narrowing the universal reliability claim because the same scoped failure is reproduced.'};
 const crossOrganControl=applyGuardedHandoffResults(base,[crossOrganA,crossOrganSameDirection],V);
 const crossOrganControlBranch=crossOrganControl.unresolved.find(x=>x.targetRef===branch?.targetRef&&x.clauseRef===branch?.clauseRef&&x.lens===branch?.lens);
 if(crossOrganControlBranch?.status==='AMBIGUOUS_BY_RECEIPTS')failures.push({type:'CROSS_ORGAN_DIVERSITY_FALSE_POSITIVE'});
 
-// Control: two explicit same-direction relations should not be forced ambiguous.
 const receiptC={...common,provenance:'source-C-independent',material:'A second bounded report independently reproduced the same failure mode under the same scoped condition.',relation:'This evidence supports narrowing the universal reliability claim because the scoped failure is reproduced.'};
 const control=applyGuardedHandoffResults(base,[receiptA,receiptC],V);
 const controlBranch=control.unresolved.find(x=>x.targetRef===branch?.targetRef&&x.clauseRef===branch?.clauseRef&&x.lens===branch?.lens);
 if(controlBranch?.status==='AMBIGUOUS_BY_RECEIPTS')failures.push({type:'SAME_DIRECTION_CONTROL_FALSE_POSITIVE'});
 
-// Negation adversarial cases: obvious negated polarity phrases must not be
-// misclassified as positive support/refute merely because the bare keyword occurs.
 const negatedSupport={...common,provenance:'source-neg-support',material:'A bounded return reports the tested observation without endorsing the target claim.',relation:'This evidence does not support the target claim under the tested condition.'};
 const negatedSupportAudit=auditReceiptAmbiguity([receiptA,negatedSupport]);
 const negatedSupportFinding=negatedSupportAudit.ambiguous?.[0]||null;
@@ -85,7 +78,32 @@ const chineseNegatedSupportPolarity=chineseNegatedSupportAudit.ambiguous?.[0]?.r
 if(chineseNegatedSupportAudit.status!=='AMBIGUITY_FOUND')failures.push({type:'ZH_NEGATED_SUPPORT_FALSE_POLARITY',audit:chineseNegatedSupportAudit});
 if(chineseNegatedSupportPolarity!=='UNSPECIFIED')failures.push({type:'ZH_NEGATED_SUPPORT_NOT_UNSPECIFIED',actual:chineseNegatedSupportPolarity});
 
-// Poison control: malformed/non-executed returns must not manufacture ambiguity.
+// Insufficiency adversarial cases: evidence that is explicitly insufficient to
+// support/refute a target must remain UNSPECIFIED rather than becoming directional.
+const insufficientSupport={...common,provenance:'source-insufficient-support',material:'The bounded run is informative but too narrow to settle the target branch.',relation:'This is insufficient evidence to support the target claim.'};
+const insufficientSupportAudit=auditReceiptAmbiguity([receiptA,insufficientSupport]);
+const insufficientSupportPolarity=insufficientSupportAudit.ambiguous?.[0]?.receipts?.find(x=>x.provenance==='source-insufficient-support')?.polarity||null;
+if(insufficientSupportAudit.status!=='AMBIGUITY_FOUND')failures.push({type:'INSUFFICIENT_SUPPORT_FALSE_POLARITY',audit:insufficientSupportAudit});
+if(insufficientSupportPolarity!=='UNSPECIFIED')failures.push({type:'INSUFFICIENT_SUPPORT_NOT_UNSPECIFIED',actual:insufficientSupportPolarity});
+
+const insufficientRefute={...common,provenance:'source-insufficient-refute',material:'The bounded return does not cover the decisive failure condition.',relation:'This is inadequate evidence to refute the target claim.'};
+const insufficientRefuteAudit=auditReceiptAmbiguity([explicitRefute,insufficientRefute]);
+const insufficientRefutePolarity=insufficientRefuteAudit.ambiguous?.[0]?.receipts?.find(x=>x.provenance==='source-insufficient-refute')?.polarity||null;
+if(insufficientRefuteAudit.status!=='AMBIGUITY_FOUND')failures.push({type:'INSUFFICIENT_REFUTE_FALSE_POLARITY',audit:insufficientRefuteAudit});
+if(insufficientRefutePolarity!=='UNSPECIFIED')failures.push({type:'INSUFFICIENT_REFUTE_NOT_UNSPECIFIED',actual:insufficientRefutePolarity});
+
+const chineseInsufficientSupport={...common,provenance:'source-zh-insufficient-support',material:'這份材料仍有資訊價值，但範圍不足。',relation:'這份證據不足以支持目標命題。'};
+const chineseInsufficientSupportAudit=auditReceiptAmbiguity([receiptA,chineseInsufficientSupport]);
+const chineseInsufficientSupportPolarity=chineseInsufficientSupportAudit.ambiguous?.[0]?.receipts?.find(x=>x.provenance==='source-zh-insufficient-support')?.polarity||null;
+if(chineseInsufficientSupportAudit.status!=='AMBIGUITY_FOUND')failures.push({type:'ZH_INSUFFICIENT_SUPPORT_FALSE_POLARITY',audit:chineseInsufficientSupportAudit});
+if(chineseInsufficientSupportPolarity!=='UNSPECIFIED')failures.push({type:'ZH_INSUFFICIENT_SUPPORT_NOT_UNSPECIFIED',actual:chineseInsufficientSupportPolarity});
+
+const chineseInsufficientRefute={...common,provenance:'source-zh-insufficient-refute',material:'這份材料沒有覆蓋足以否定命題的條件。',relation:'現有證據尚不足以反駁目標命題。'};
+const chineseInsufficientRefuteAudit=auditReceiptAmbiguity([explicitRefute,chineseInsufficientRefute]);
+const chineseInsufficientRefutePolarity=chineseInsufficientRefuteAudit.ambiguous?.[0]?.receipts?.find(x=>x.provenance==='source-zh-insufficient-refute')?.polarity||null;
+if(chineseInsufficientRefuteAudit.status!=='AMBIGUITY_FOUND')failures.push({type:'ZH_INSUFFICIENT_REFUTE_FALSE_POLARITY',audit:chineseInsufficientRefuteAudit});
+if(chineseInsufficientRefutePolarity!=='UNSPECIFIED')failures.push({type:'ZH_INSUFFICIENT_REFUTE_NOT_UNSPECIFIED',actual:chineseInsufficientRefutePolarity});
+
 const poisonMissingProvenance={...common,provenance:'',material:'A vague additional return that would otherwise look unrelated to the first receipt.',relation:'Its relation to the target is not determined.'};
 const poisonNotExecuted={...common,status:'QUEUED',provenance:'source-poison-queued',material:'Queued material that has not actually been returned by the requested organ.',relation:'Its relation to the target is not determined.'};
 const poisonMissingRelation={...common,provenance:'source-poison-no-relation',material:'Returned material with no explicit statement connecting it to the target claim.',relation:''};
@@ -103,7 +121,7 @@ for(const expected of ['MISSING_PROVENANCE','NO_EXECUTION_EVIDENCE','MISSING_REL
 }
 
 const result={
-  schema:'nostromo-vajra-ambiguity-test/v0.4',
+  schema:'nostromo-vajra-ambiguity-test/v0.4.2',
   completedAt:new Date().toISOString(),
   status:failures.length?'FAIL':'PASS',
   finding:{
@@ -121,13 +139,21 @@ const result={
     negatedRefutePolarity,
     chineseNegatedSupportStatus:chineseNegatedSupportAudit.status,
     chineseNegatedSupportPolarity,
+    insufficientSupportStatus:insufficientSupportAudit.status,
+    insufficientSupportPolarity,
+    insufficientRefuteStatus:insufficientRefuteAudit.status,
+    insufficientRefutePolarity,
+    chineseInsufficientSupportStatus:chineseInsufficientSupportAudit.status,
+    chineseInsufficientSupportPolarity,
+    chineseInsufficientRefuteStatus:chineseInsufficientRefuteAudit.status,
+    chineseInsufficientRefutePolarity,
     poisonAuditStatus:poisonAudit.status,
     poisonRejected:poisonAudit.rejectedReceiptCount,
     poisonBranchStatus:poisonBranch?.status||null,
-    interpretation:'The guard preserves branch-scoped ambiguity across organ boundaries, excludes malformed returns, and now masks bounded English/Chinese negated support/refute phrases before polarity detection so bare keywords cannot manufacture false directional evidence.'
+    interpretation:'The guard preserves branch-scoped ambiguity across organ boundaries, excludes malformed returns, and masks bounded English/Chinese negated or explicitly insufficient support/refute phrases before polarity detection so lexical keywords cannot manufacture false directional evidence.'
   },
   failures,
-  boundary:'This test demonstrates a deterministic structural/lexical false-certainty and ambiguity-poisoning guard, including cross-organ branch-scoped returns and bounded polarity-negation handling. UNSPECIFIED means the bounded polarity detector cannot safely classify the relation; qualification means only that minimum execution/provenance/material/relation fields exist. Distinct organ/provenance counts are audit metadata, not proof of source independence. Negation masking is intentionally narrow and does not amount to semantic negation scope resolution, truth judgment or evidence-quality scoring.'
+  boundary:'This test demonstrates a deterministic structural/lexical false-certainty and ambiguity-poisoning guard, including cross-organ branch-scoped returns plus bounded negation and insufficiency handling. UNSPECIFIED means the bounded polarity detector cannot safely classify the relation; qualification means only that minimum execution/provenance/material/relation fields exist. Distinct organ/provenance counts are audit metadata, not proof of source independence. Masking is intentionally narrow and does not amount to general semantic negation or modality scope resolution, truth judgment or evidence-quality scoring.'
 };
 await fs.writeFile(resultPath,JSON.stringify(result,null,2)+'\n','utf8');
 console.log(JSON.stringify(result,null,2));
