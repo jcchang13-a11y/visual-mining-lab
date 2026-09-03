@@ -1,7 +1,7 @@
 {
-  "schema": "nostromo-shroom-feedback-test/v0.3",
-  "completedAt": "2026-09-03T18:05:41.086Z",
-  "status": "FAIL",
+  "schema": "nostromo-shroom-feedback-test/v0.4",
+  "completedAt": "2026-09-03T18:06:05.359Z",
+  "status": "PASS",
   "baseline": {
     "mode": "BASELINE",
     "firstLens": "structure",
@@ -17,6 +17,12 @@
       "use",
       "anomaly"
     ],
+    "stances": [
+      "OBSERVE"
+    ],
+    "stanceCounts": {
+      "OBSERVE": 10
+    },
     "feedbackFingerprint": "9f6928c26aa0cd01"
   },
   "lexicalNoise": {
@@ -27,7 +33,10 @@
       "contradiction": true,
       "evidence": true,
       "question": false
-    }
+    },
+    "stances": [
+      "OBSERVE"
+    ]
   },
   "external": {
     "mode": "EVIDENCE_CONDITIONED",
@@ -44,6 +53,18 @@
       "use",
       "anomaly"
     ],
+    "stances": [
+      "VERIFY",
+      "CHALLENGE",
+      "HOLD_UNRESOLVED",
+      "RECONSTRUCT"
+    ],
+    "stanceCounts": {
+      "VERIFY": 3,
+      "CHALLENGE": 3,
+      "HOLD_UNRESOLVED": 2,
+      "RECONSTRUCT": 2
+    },
     "feedbackFingerprint": "fbaea570d575eef6"
   },
   "contradiction": {
@@ -61,6 +82,18 @@
       "use",
       "anomaly"
     ],
+    "stances": [
+      "CHALLENGE",
+      "VERIFY",
+      "HOLD_UNRESOLVED",
+      "RECONSTRUCT"
+    ],
+    "stanceCounts": {
+      "CHALLENGE": 3,
+      "VERIFY": 3,
+      "HOLD_UNRESOLVED": 2,
+      "RECONSTRUCT": 2
+    },
     "feedbackFingerprint": "2ac6ee75d93e0a58"
   },
   "explicitQuestion": {
@@ -78,14 +111,22 @@
       "use",
       "anomaly"
     ],
+    "stances": [
+      "PROPOSE",
+      "CHALLENGE",
+      "HOLD_UNRESOLVED",
+      "REFRAME"
+    ],
+    "stanceCounts": {
+      "PROPOSE": 3,
+      "CHALLENGE": 3,
+      "HOLD_UNRESOLVED": 2,
+      "REFRAME": 2
+    },
     "feedbackFingerprint": "9417e00c6cd0d349"
   },
   "mixedEvidenceQuestion": {
     "mode": "MIXED_CONDITIONED",
-    "activeSignalClasses": [
-      "EVIDENCE",
-      "QUESTION"
-    ],
     "firstLens": "evidence",
     "lensOrder": [
       "evidence",
@@ -99,25 +140,22 @@
       "use",
       "anomaly"
     ],
-    "lensScores": {
-      "structure": 2.1,
-      "counterexample": 3.09,
-      "position": 5.08,
-      "otherness": 0.07,
-      "evidence": 6.06,
-      "language": 0.05,
-      "boundary": 6.04,
-      "memory": 1.03,
-      "use": 0.02,
-      "anomaly": 0.01
-    }
+    "stances": [
+      "PROPOSE",
+      "CHALLENGE",
+      "HOLD_UNRESOLVED",
+      "REFRAME"
+    ],
+    "stanceCounts": {
+      "PROPOSE": 3,
+      "CHALLENGE": 3,
+      "HOLD_UNRESOLVED": 2,
+      "REFRAME": 2
+    },
+    "feedbackFingerprint": "68a083777c049468"
   },
   "mixedContradictionQuestion": {
     "mode": "MIXED_CONDITIONED",
-    "activeSignalClasses": [
-      "CONTRADICTION",
-      "QUESTION"
-    ],
     "firstLens": "counterexample",
     "lensOrder": [
       "counterexample",
@@ -131,26 +169,22 @@
       "use",
       "anomaly"
     ],
-    "lensScores": {
-      "structure": 3.1,
-      "counterexample": 7.09,
-      "position": 5.08,
-      "otherness": 0.07,
-      "evidence": 3.06,
-      "language": 0.05,
-      "boundary": 5.04,
-      "memory": 0.03,
-      "use": 0.02,
-      "anomaly": 0.01
-    }
+    "stances": [
+      "CHALLENGE",
+      "VERIFY",
+      "HOLD_UNRESOLVED",
+      "RECONSTRUCT"
+    ],
+    "stanceCounts": {
+      "CHALLENGE": 3,
+      "VERIFY": 3,
+      "HOLD_UNRESOLVED": 2,
+      "RECONSTRUCT": 2
+    },
+    "feedbackFingerprint": "538c06b3ffe4f9b2"
   },
   "deterministicReplay": true,
   "mixedDeterministicReplay": true,
-  "failures": [
-    {
-      "type": "CONDITIONING_BASIS_NOT_EXPLICIT",
-      "basis": "STRUCTURED_FEEDBACK_COMPOSITION_WITH_BOUNDED_DISAGREEMENT"
-    }
-  ],
-  "boundary": "PASS demonstrates deterministic structural multi-signal conditioning with lexical-contamination resistance: explicit structured evidence, contradiction and question signals can compose bounded lens priorities instead of one precedence branch silently erasing the others. Ordinary prose mentions cannot reorder the reader, and score contributions remain auditable. This does not demonstrate semantic learning, belief revision, independent agents, or real social emergence."
+  "failures": [],
+  "boundary": "PASS demonstrates deterministic structured multi-signal conditioning with lexical-contamination resistance plus bounded disagreement preservation. Conditioned rounds retain multiple audited stances, including HOLD_UNRESOLVED, while every reaction keeps closureAuthority NONE; therefore an upstream evidence/contradiction/question marker can change SHROOMING behavior without forcing all ten traces into one closure-seeking response. This does not demonstrate semantic learning, belief revision, independent agents, or real social emergence."
 }
