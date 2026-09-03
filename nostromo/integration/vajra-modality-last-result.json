@@ -1,0 +1,42 @@
+{
+  "schema": "nostromo-vajra-modality-test/v0.4.3",
+  "completedAt": "2026-09-03T20:06:16.754Z",
+  "status": "PASS",
+  "finding": {
+    "englishMaySupport": {
+      "status": "AMBIGUITY_FOUND",
+      "polarity": "UNSPECIFIED",
+      "distinctOrgans": 2
+    },
+    "englishMightRefute": {
+      "status": "AMBIGUITY_FOUND",
+      "polarity": "UNSPECIFIED",
+      "distinctOrgans": 2
+    },
+    "englishNotNecessarilySupport": {
+      "status": "AMBIGUITY_FOUND",
+      "polarity": "UNSPECIFIED",
+      "distinctOrgans": 2
+    },
+    "englishNotNecessarilyRefute": {
+      "status": "AMBIGUITY_FOUND",
+      "polarity": "UNSPECIFIED",
+      "distinctOrgans": 2
+    },
+    "chineseMaySupport": {
+      "status": "AMBIGUITY_FOUND",
+      "polarity": "UNSPECIFIED",
+      "distinctOrgans": 2
+    },
+    "chineseMayRefute": {
+      "status": "AMBIGUITY_FOUND",
+      "polarity": "UNSPECIFIED",
+      "distinctOrgans": 2
+    },
+    "sameDirectionControl": "NO_AMBIGUITY_FOUND",
+    "crossOrganDistinctOrgans": 2,
+    "interpretation": "Bounded modal or non-committal support/refute phrases remain UNSPECIFIED, so cross-organ receipt order cannot manufacture directional certainty from may/might/not-necessarily/可能/未必 wording."
+  },
+  "failures": [],
+  "boundary": "This is deterministic lexical modality containment for a narrow English/Chinese phrase set. It does not perform general modality scope, probabilistic reasoning, factual adjudication, source-quality scoring, derivative-source detection or proof of source independence."
+}
