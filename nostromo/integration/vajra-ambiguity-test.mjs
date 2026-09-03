@@ -36,6 +36,26 @@ if(guardedBranch?.status!=='AMBIGUOUS_BY_RECEIPTS')failures.push({type:'FALSE_CE
 if(!guarded.receiptAmbiguityAudit?.ambiguous?.length)failures.push({type:'AMBIGUITY_AUDIT_MISSING'});
 if(audit.qualifyingReceiptCount!==2)failures.push({type:'QUALIFYING_COUNT_WRONG',actual:audit.qualifyingReceiptCount});
 
+// Cross-organ adversarial case: the same VAJRA branch must remain ambiguous when
+// one qualifying return comes from DROPLET and another from MU/TH/UR. Organ labels
+// are provenance metadata, not separate closure domains.
+const crossOrganA={...receiptA,organ:'DROPLET',provenance:'droplet-source-A'};
+const crossOrganB={...receiptB,organ:'MU/TH/UR',provenance:'muther-source-B'};
+const crossOrganAudit=auditReceiptAmbiguity([crossOrganA,crossOrganB]);
+const crossOrganGuarded=applyGuardedHandoffResults(base,[crossOrganA,crossOrganB],V);
+const crossOrganBranch=crossOrganGuarded.unresolved.find(x=>x.targetRef===branch?.targetRef&&x.clauseRef===branch?.clauseRef&&x.lens===branch?.lens);
+const crossOrganFinding=crossOrganAudit.ambiguous?.[0]||null;
+if(crossOrganAudit.status!=='AMBIGUITY_FOUND')failures.push({type:'CROSS_ORGAN_AMBIGUITY_NOT_DETECTED',audit:crossOrganAudit});
+if(crossOrganBranch?.status!=='AMBIGUOUS_BY_RECEIPTS')failures.push({type:'CROSS_ORGAN_FALSE_CLOSURE_NOT_BLOCKED',actual:crossOrganBranch?.status});
+if(crossOrganFinding?.distinctOrganCount!==2)failures.push({type:'CROSS_ORGAN_COUNT_WRONG',actual:crossOrganFinding?.distinctOrganCount});
+if(!Array.isArray(crossOrganFinding?.organs)||!crossOrganFinding.organs.includes('DROPLET')||!crossOrganFinding.organs.includes('MU/TH/UR'))failures.push({type:'CROSS_ORGAN_AUDIT_METADATA_MISSING',organs:crossOrganFinding?.organs});
+
+// Cross-organ same-direction control: organ diversity alone must not manufacture ambiguity.
+const crossOrganSameDirection={...receiptA,organ:'MU/TH/UR',provenance:'muther-source-C',material:'A repository mining result independently reproduces the scoped failure.',relation:'This evidence supports narrowing the universal reliability claim because the same scoped failure is reproduced.'};
+const crossOrganControl=applyGuardedHandoffResults(base,[crossOrganA,crossOrganSameDirection],V);
+const crossOrganControlBranch=crossOrganControl.unresolved.find(x=>x.targetRef===branch?.targetRef&&x.clauseRef===branch?.clauseRef&&x.lens===branch?.lens);
+if(crossOrganControlBranch?.status==='AMBIGUOUS_BY_RECEIPTS')failures.push({type:'CROSS_ORGAN_DIVERSITY_FALSE_POSITIVE'});
+
 // Control: two explicit same-direction relations should not be forced ambiguous.
 const receiptC={...common,provenance:'source-C-independent',material:'A second bounded report independently reproduced the same failure mode under the same scoped condition.',relation:'This evidence supports narrowing the universal reliability claim because the scoped failure is reproduced.'};
 const control=applyGuardedHandoffResults(base,[receiptA,receiptC],V);
@@ -60,21 +80,25 @@ for(const expected of ['MISSING_PROVENANCE','NO_EXECUTION_EVIDENCE','MISSING_REL
 }
 
 const result={
-  schema:'nostromo-vajra-ambiguity-test/v0.2',
+  schema:'nostromo-vajra-ambiguity-test/v0.3',
   completedAt:new Date().toISOString(),
   status:failures.length?'FAIL':'PASS',
   finding:{
     baselineStatus:rawBranch?.status||null,
     guardedStatus:guardedBranch?.status||null,
     ambiguityDetected:audit.ambiguous.length,
+    crossOrganStatus:crossOrganBranch?.status||null,
+    crossOrganAmbiguityDetected:crossOrganAudit.ambiguous.length,
+    crossOrganDistinctOrgans:crossOrganFinding?.distinctOrganCount||0,
+    crossOrganControlStatus:crossOrganControlBranch?.status||null,
     controlStatus:controlBranch?.status||null,
     poisonAuditStatus:poisonAudit.status,
     poisonRejected:poisonAudit.rejectedReceiptCount,
     poisonBranchStatus:poisonBranch?.status||null,
-    interpretation:'The guard preserves genuine structural ambiguity while excluding malformed, non-executed, provenance-free or relation-free returns from ambiguity formation, preventing junk receipts from manufacturing uncertainty or changing routing state.'
+    interpretation:'The guard preserves branch-scoped ambiguity across organ boundaries while excluding malformed, non-executed, provenance-free or relation-free returns. Different organ labels no longer partition one VAJRA branch into separate first-receipt closure domains, while organ diversity by itself does not manufacture ambiguity.'
   },
   failures,
-  boundary:'This test demonstrates a deterministic structural/lexical false-certainty and ambiguity-poisoning guard. UNSPECIFIED means the bounded polarity detector cannot classify the relation; qualification means only that minimum execution/provenance/material/relation fields exist. It does not prove semantic disagreement, source independence, truth, or evidence quality.'
+  boundary:'This test demonstrates a deterministic structural/lexical false-certainty and ambiguity-poisoning guard, including cross-organ branch-scoped returns. UNSPECIFIED means the bounded polarity detector cannot classify the relation; qualification means only that minimum execution/provenance/material/relation fields exist. Distinct organ/provenance counts are audit metadata, not proof of source independence. It does not prove semantic disagreement, truth or evidence quality.'
 };
 await fs.writeFile(resultPath,JSON.stringify(result,null,2)+'\n','utf8');
 console.log(JSON.stringify(result,null,2));
