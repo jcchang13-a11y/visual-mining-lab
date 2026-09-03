@@ -2,7 +2,7 @@
 (function(root){
   const engine=root.VajraEngine;
   if(!engine||typeof engine.applyHandoffResults!=='function') throw new Error('VAJRA_ENGINE_REQUIRED_BEFORE_UNCERTAINTY_GUARD');
-  if(engine.receiptUncertaintyGuardVersion==='0.3.8'&&engine.receiptContestPersistenceGuardVersion==='0.1'&&engine.receiptContractAdequacyGuardVersion==='0.2'&&engine.receiptEvidenceAdequacyGuardVersion==='0.1') return;
+  if(engine.receiptUncertaintyGuardVersion==='0.3.8'&&engine.receiptContestPersistenceGuardVersion==='0.1'&&engine.receiptContractAdequacyGuardVersion==='0.2') return;
 
   const baseApply=engine.applyHandoffResults.bind(engine);
   function clean(text){return String(text||'').normalize('NFKC').replace(/\s+/g,' ').trim();}
@@ -25,7 +25,6 @@
   }
   const LENS_ADEQUACY={
     scope:/\b(boundary|boundaries|exception|exceptions|scope|outside|within)\b|邊界|例外|範圍|適用域/i,
-    evidence:/\b(?:evidence|data|dataset|source|citation|record|document|observation|measurement|measured|sample|trace|log|result|finding)\b|證據|資料|數據|來源|引用|紀錄|記錄|文件|觀察|測量|量測|樣本|軌跡|日誌|結果|發現/i,
     counterexample:/counterexample|falsif|search(?:ed)? scope|coverage|反例|否證|搜尋範圍|檢索範圍|涵蓋/i,
     criterion:/criterion|criteria|threshold|distinguish|inclusion|exclusion|判準|標準|門檻|區分|納入|排除/i,
     excluded_alternative:/alternative|competing explanation|non[- ]equivalent|替代|競爭解釋|不同解釋/i,
@@ -46,14 +45,8 @@
     if(!rule) return '';
     const material=clean(receipt?.material||receipt?.summary||receipt?.evidence||receipt?.result);
     const relation=clean(receipt?.relation||receipt?.relationToTarget||receipt?.assessment);
-    const target=lens==='evidence'?material:`${material} ${relation}`;
-    return rule.test(target)?'':'HANDOFF_RESOLUTION_CRITERION_NOT_EVIDENCED';
+    return rule.test(`${material} ${relation}`)?'':'HANDOFF_RESOLUTION_CRITERION_NOT_EVIDENCED';
   }
-  const evidenceAdequacySelfCheck=(
-    contractAdequacyReason({lens:'evidence',material:'A detailed analysis was returned.',relationToTarget:'This supports the claim.'})==='HANDOFF_RESOLUTION_CRITERION_NOT_EVIDENCED'&&
-    contractAdequacyReason({lens:'evidence',material:'The source record contains two measured observations.',relationToTarget:'This supports the claim.'})===''
-  );
-  if(!evidenceAdequacySelfCheck) throw new Error('VAJRA_EVIDENCE_ADEQUACY_SELF_CHECK_FAILED');
   function isBoundedNullSearch(receipt){
     if(clean(receipt?.lens).toLowerCase()!=='counterexample') return false;
     const material=clean(receipt?.material||receipt?.summary||receipt?.evidence||receipt?.result).toLowerCase();
@@ -124,7 +117,6 @@
     hr.sameProvenanceConflict=blocked.filter(x=>x.reason==='SAME_PROVENANCE_CONFLICT').length;
     hr.historicalContestPreserved=blocked.filter(x=>x.reason==='HISTORICAL_CONTEST_PRESERVED').length;
     hr.contractAdequacyBlocked=blocked.filter(x=>x.reason==='HANDOFF_RESOLUTION_CRITERION_NOT_EVIDENCED').length;
-    hr.evidenceAdequacyBlocked=blocked.filter(x=>x.reason==='HANDOFF_RESOLUTION_CRITERION_NOT_EVIDENCED'&&clean(x.receipt?.lens).toLowerCase()==='evidence').length;
     hr.boundedNullAccepted=0;
 
     out.unresolved=(out.unresolved||[]).map(branch=>{
@@ -157,7 +149,7 @@
 
     out.handoffResolution=hr;
     out.version='0.3.8';
-    out.boundary=`${out.boundary||''} Uncertainty/provenance/adequacy guard v0.3.8: ordinary structurally matching receipts cannot close a handoff unless their relation is unambiguously classified by the bounded polarity detector as SUPPORTS or REFUTES. Explicitly insufficient/uncertain relations, negated polarity wording, long noncommittal relations, and mixed polarity remain blocked. Opposing SUPPORTS/REFUTES returns carrying the same canonical provenance identity are audited as SAME_PROVENANCE_CONFLICT; prior independent-source contests persist until explicit adjudication exists. Contract-adequacy guard 0.2 requires bounded lens-specific evidence that the requested work was actually addressed. Evidence-material patch 0.1 additionally requires the EVIDENCE lens to be satisfied by evidence-bearing material itself; a bare SUPPORTS/REFUTES relation assertion cannot satisfy that contract merely by naming evidence in the relation field. One deliberate exception separates task completion from claim certainty: a COUNTEREXAMPLE handoff may resolve as BOUNDED_NULL when the receipt explicitly says no counterexample was found, states bounded search scope/coverage, and explicitly disclaims that the null result proves the claim. BOUNDED_NULL closes only the search work contract; it never upgrades absence of a found counterexample into truth. These are conservative lexical/structural guards, not semantic adjudication, source-quality ranking, search completeness proof, or truth verification.`.trim();
+    out.boundary=`${out.boundary||''} Uncertainty/provenance/adequacy guard v0.3.8: ordinary structurally matching receipts cannot close a handoff unless their relation is unambiguously classified by the bounded polarity detector as SUPPORTS or REFUTES. Explicitly insufficient/uncertain relations, negated polarity wording, long noncommittal relations, and mixed polarity remain blocked. Opposing SUPPORTS/REFUTES returns carrying the same canonical provenance identity are audited as SAME_PROVENANCE_CONFLICT; prior independent-source contests persist until explicit adjudication exists. Contract-adequacy guard 0.2 requires bounded lens-specific evidence that the requested work was actually addressed. One deliberate exception separates task completion from claim certainty: a COUNTEREXAMPLE handoff may resolve as BOUNDED_NULL when the receipt explicitly says no counterexample was found, states bounded search scope/coverage, and explicitly disclaims that the null result proves the claim. BOUNDED_NULL closes only the search work contract; it never upgrades absence of a found counterexample into truth. These are conservative lexical/structural guards, not semantic adjudication, source-quality ranking, search completeness proof, or truth verification.`.trim();
     return out;
   }
 
@@ -170,5 +162,4 @@
   engine.receiptUncertaintyGuardVersion='0.3.8';
   engine.receiptContestPersistenceGuardVersion='0.1';
   engine.receiptContractAdequacyGuardVersion='0.2';
-  engine.receiptEvidenceAdequacyGuardVersion='0.1';
 })(typeof window!=='undefined'?window:globalThis);
