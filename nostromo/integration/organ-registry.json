@@ -1,6 +1,6 @@
 {
-  "schema": "nostromo-organ-registry/v1.48",
-  "updatedAt": "2026-09-03T22:18:00+08:00",
+  "schema": "nostromo-organ-registry/v1.49",
+  "updatedAt": "2026-09-03T23:09:00+08:00",
   "truthRule": "DISPLAYED STATE MUST FOLLOW EVIDENCE",
   "evidence": "ci-last-result.json plus formal-round-last-result.json plus connector-last-result.json plus muther-falsify-last-result.json plus muther-repo-diversity-last-result.json plus droplet-claim-verify-last-result.json plus gut-metabolism-last-result.json plus gut-lineage-last-result.json plus vajra-dynamic-last-result.json plus vajra-ambiguity-last-result.json plus vajra-uncertainty-last-result.json plus vajra-conflict-escalation-last-result.json plus vajra-provenance-diversity-last-result.json plus shroom-feedback-last-result.json",
   "latestFormalRound": "greenhouse/r113-nostromo-formal-round.json",
@@ -29,19 +29,19 @@
     "boundary": "Isolated counterfactual executor only. It deliberately includes parent round ordinal in participant selection and has been CI-verified against R111 and R112. It does not write or advance formal greenhouse history and is engineering evidence that NOSTROMO can execute and audit a parent-sensitive transition, not evidence that the real SHROOMING population is causally path-dependent."
   },
   "latestThickening": {
-    "organ": "GUT",
-    "version": "GUT contextual risk quarantine v0.2.25",
-    "status": "VERIFIED_CONTEXT_GATED_RISK_QUARANTINE",
-    "test": "gut-metabolism-last-result.json v0.2.25 + gut-lineage-last-result.json v0.2.25 + NOSTROMO Integration Test run 311",
+    "organ": "VAJRA",
+    "version": "VAJRA receipt ambiguity negation guard v0.4.1",
+    "status": "VERIFIED_NEGATION_AWARE_RECEIPT_POLARITY_AMBIGUITY_GUARD",
+    "test": "vajra-ambiguity-last-result.json v0.4 + NOSTROMO Integration Test run 315",
     "capabilities": [
-      "risk/failure quarantine is now context-gated instead of firing on any ordinary prose that merely contains words such as error, rejected or invalid",
-      "dedicated failure/risk paths, explicit failure status values, and explicit status/result/outcome failure markers remain quarantined",
-      "adversarial prose containing measured error rate, previously rejected assumption, and invalid premise remains available for evidence, contradiction, or claim routing rather than being discarded as risk",
-      "true synthetic machine failure atoms remain quarantined while nutrient provenance is preserved",
-      "existing carry anti-echo, out-of-band carryRefs, scalar-scaffold containment, lineage continuity and 3-round connector-feedback regression remain intact",
-      "full NOSTROMO Integration Test run 311 completed successfully, including GUT metabolism, lineage adversarial regression, all other organ regressions, and 50-round integration with failures empty"
+      "bounded English negated support/refute phrases such as does not support and does not refute are masked before lexical polarity classification so the bare keyword cannot manufacture directional evidence",
+      "bounded Chinese negated support phrases such as 並未支持 are likewise kept UNSPECIFIED rather than being promoted to SUPPORTS",
+      "branch-scoped ambiguity remains preserved across different organ labels when one qualifying executed return has an UNSPECIFIED relation",
+      "same-direction cross-organ controls remain resolvable and organ diversity alone does not manufacture ambiguity",
+      "malformed, non-executed, provenance-free, empty-material or relation-free returns remain excluded from ambiguity formation",
+      "NOSTROMO Integration Test run 315 completed successfully with the negation adversarial cases, prior ambiguity controls, cross-organ controls, poison controls and full integration failures empty"
     ],
-    "boundary": "This is deterministic contextual routing, not semantic risk understanding. Ordinary prose surviving quarantine is not thereby certified true or safe; the change only prevents a small risk lexicon from silently deleting semantically relevant material outside explicit failure contexts."
+    "boundary": "This is deterministic bounded lexical negation masking and branch-scoped structural audit logic. It does not resolve general semantic negation scope, adjudicate truth, score evidence quality, prove source independence or infer that UNSPECIFIED material is contradictory."
   },
   "organs": {
     "shrooming": {
@@ -94,9 +94,9 @@
       "mode": "EXEC_CONNECTED_THICKENED",
       "source": "../vajra/vajra-engine.js + ../vajra/receipt-uncertainty-guard.js + ./vajra-conflict-escalation.mjs + ./vajra-provenance-diversity-guard.mjs + ./vajra-ambiguity-guard.mjs",
       "actions": {
-        "DISMANTLE": "VERIFIED_PROPOSITION_AWARE_DISMANTLER_WITH_RECEIPT_GUARDS_BRANCH_SCOPED_CROSS_ORGAN_AMBIGUITY_MULTI_ORGAN_CONTEXT_REPLAY_HISTORY_PROVENANCE_DIVERSITY_AND_OPERATOR_PROTECTION"
+        "DISMANTLE": "VERIFIED_PROPOSITION_AWARE_DISMANTLER_WITH_RECEIPT_GUARDS_BRANCH_SCOPED_CROSS_ORGAN_NEGATION_AWARE_AMBIGUITY_MULTI_ORGAN_CONTEXT_REPLAY_HISTORY_PROVENANCE_DIVERSITY_AND_OPERATOR_PROTECTION"
       },
-      "boundary": "VAJRA retains proposition-aware dismantling, uncertainty/provenance preservation, contest persistence, multi-organ conflict-context routing, replay containment, content-bound history attestation and semantic-operator-preserving replay identity. Its ambiguity guard is now v0.3 and branch-scoped: qualifying executed returns that share targetRef + clauseRef + lens are evaluated together even when their organ labels differ, so cross-organ arrival order cannot silently create first-receipt closure when at least one relation remains lexically UNSPECIFIED. Same-direction cross-organ returns do not become ambiguous merely because their organ labels differ, and malformed/non-executed returns remain excluded. Its cross-organ provenance-diversity/content-replay guard remains v0.3.3, including comparison, equality, addition/subtraction, multiplication and division operator preservation. Distinct organ or canonical provenance labels still do not prove real-world source independence. These remain deterministic lexical/structural guards, not semantic adjudication, factual truth, derivative-source detection or real-world source-independence proof."
+      "boundary": "VAJRA retains proposition-aware dismantling, uncertainty/provenance preservation, contest persistence, multi-organ conflict-context routing, replay containment, content-bound history attestation and semantic-operator-preserving replay identity. Its ambiguity guard is now v0.4.1 and branch-scoped: qualifying executed returns that share targetRef + clauseRef + lens are evaluated together even when organ labels differ, so cross-organ arrival order cannot silently create first-receipt closure when at least one relation remains lexically UNSPECIFIED. A bounded English/Chinese negation mask prevents obvious negated support/refute phrases such as does not support, does not refute and 並未支持 from being counted as positive directional evidence merely because the bare keyword appears. Same-direction cross-organ returns do not become ambiguous merely because their organ labels differ, and malformed/non-executed returns remain excluded. Its cross-organ provenance-diversity/content-replay guard remains v0.3.3, including comparison, equality, addition/subtraction, multiplication and division operator preservation. Distinct organ or canonical provenance labels still do not prove real-world source independence. These remain deterministic lexical/structural guards, not general semantic negation-scope resolution, semantic adjudication, factual truth, derivative-source detection or real-world source-independence proof."
     }
   }
 }
