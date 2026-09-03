@@ -1,4 +1,4 @@
-// DROPLET claim verification CI test v1.3
+// DROPLET claim verification CI test v1.4
 import fs from 'node:fs/promises';
 import {verifyClaim} from './droplet-claim-verify-executor.mjs';
 
@@ -98,19 +98,55 @@ try{
   if(cases.partialMonthOverlap.verdict!=='INDETERMINATE') failures.push({case:'partialMonthOverlap',type:'OVERLAPPING_DATE_RANGE_CREATED_CERTAINTY',verdict:cases.partialMonthOverlap.verdict});
   if(cases.partialMonthOverlap.counts.overlappingDateEvidence!==1||cases.partialMonthOverlap.counts.eligibleAuthoritativeSupports!==0) failures.push({case:'partialMonthOverlap',type:'OVERLAPPING_DATE_RANGE_NOT_QUARANTINED',counts:cases.partialMonthOverlap.counts});
 
+  const diversityPolicy={minAuthoritativeFamilies:2};
+  cases.singleFamilyCorroborationGate=verifyClaim({
+    claim:'The project has independent authoritative corroboration.',
+    diversityPolicy,
+    evidence:[
+      {id:'G1',source:'Official page A',sourceFamily:'Publisher A',sourceClass:'OFFICIAL',relation:'SUPPORTS',fingerprint:'family-a-proof-1'},
+      {id:'G2',source:'Official page B',sourceFamily:'Publisher A',sourceClass:'PRIMARY',relation:'SUPPORTS',fingerprint:'family-a-proof-2'}
+    ]
+  });
+  if(cases.singleFamilyCorroborationGate.verdict!=='INDETERMINATE') failures.push({case:'singleFamilyCorroborationGate',type:'ONE_FAMILY_CREATED_CERTAINTY',verdict:cases.singleFamilyCorroborationGate.verdict});
+  if(!cases.singleFamilyCorroborationGate.diversity.active||cases.singleFamilyCorroborationGate.diversity.supportSatisfied) failures.push({case:'singleFamilyCorroborationGate',type:'DIVERSITY_GATE_NOT_APPLIED',diversity:cases.singleFamilyCorroborationGate.diversity});
+  if(cases.singleFamilyCorroborationGate.counts.eligibleAuthoritativeSupportFamilies!==1) failures.push({case:'singleFamilyCorroborationGate',type:'ELIGIBLE_FAMILY_COUNT_DRIFT',counts:cases.singleFamilyCorroborationGate.counts});
+
+  cases.twoFamilyCorroboration=verifyClaim({
+    claim:'The project has independent authoritative corroboration.',
+    diversityPolicy,
+    evidence:[
+      {id:'G3',source:'Official page A',sourceFamily:'Publisher A',sourceClass:'OFFICIAL',relation:'SUPPORTS',fingerprint:'family-a-proof'},
+      {id:'G4',source:'Primary record B',sourceFamily:'Publisher B',sourceClass:'PRIMARY',relation:'SUPPORTS',fingerprint:'family-b-proof'}
+    ]
+  });
+  if(cases.twoFamilyCorroboration.verdict!=='SUPPORTED') failures.push({case:'twoFamilyCorroboration',type:'TWO_FAMILY_CORROBORATION_BLOCKED',verdict:cases.twoFamilyCorroboration.verdict});
+  if(!cases.twoFamilyCorroboration.diversity.supportSatisfied||cases.twoFamilyCorroboration.counts.eligibleAuthoritativeSupportFamilies!==2) failures.push({case:'twoFamilyCorroboration',type:'DIVERSITY_SATISFACTION_DRIFT',diversity:cases.twoFamilyCorroboration.diversity,counts:cases.twoFamilyCorroboration.counts});
+
+  cases.staleSecondFamilyDoesNotSatisfy=verifyClaim({
+    claim:'The service is currently available.',
+    freshnessPolicy:policy,
+    diversityPolicy,
+    evidence:[
+      {id:'G5',source:'Fresh official page',sourceFamily:'Publisher A',sourceClass:'OFFICIAL',relation:'SUPPORTS',date:'2026-09-01',fingerprint:'fresh-family-a'},
+      {id:'G6',source:'Old primary record',sourceFamily:'Publisher B',sourceClass:'PRIMARY',relation:'SUPPORTS',date:'2024-01-01',fingerprint:'stale-family-b'}
+    ]
+  });
+  if(cases.staleSecondFamilyDoesNotSatisfy.verdict!=='INDETERMINATE') failures.push({case:'staleSecondFamilyDoesNotSatisfy',type:'STALE_FAMILY_SATISFIED_DIVERSITY',verdict:cases.staleSecondFamilyDoesNotSatisfy.verdict});
+  if(cases.staleSecondFamilyDoesNotSatisfy.counts.eligibleAuthoritativeSupportFamilies!==1) failures.push({case:'staleSecondFamilyDoesNotSatisfy',type:'STALE_FAMILY_COUNTED_AS_ELIGIBLE',counts:cases.staleSecondFamilyDoesNotSatisfy.counts});
+
   const result={
-    schema:'nostromo-droplet-claim-verify-test/v1.3',
+    schema:'nostromo-droplet-claim-verify-test/v1.4',
     completedAt:new Date().toISOString(),
     status:failures.length?'FAIL':'PASS',
     cases,
     failures,
-    boundary:'This test validates deterministic claim verdict computation from explicit evidence, exact replay suppression, source-family audit counts, authoritative-direction conflict containment, fingerprint-integrity conflict containment, and opt-in temporal gating that prevents stale, undated, future-dated, or date-range-overlapping evidence from creating certainty. CI performs no web search and does not infer whether a claim is time-sensitive.'
+    boundary:'This test validates deterministic claim verdict computation from explicit evidence, exact replay suppression, source-family audit counts, authoritative-direction conflict containment, fingerprint-integrity conflict containment, opt-in temporal gating, and an opt-in minimum authoritative source-family corroboration gate. The diversity gate uses caller-supplied family labels and therefore limits declared-family concentration without proving real-world source independence or derivative-source status. CI performs no web search and does not infer whether a claim is time-sensitive.'
   };
   await fs.writeFile(outPath,JSON.stringify(result,null,2)+'\n','utf8');
   console.log(JSON.stringify(result,null,2));
   if(result.status!=='PASS') process.exitCode=1;
 }catch(error){
-  const result={schema:'nostromo-droplet-claim-verify-test/v1.3',completedAt:new Date().toISOString(),status:'FAIL',failures:[...failures,{type:'UNCAUGHT',message:String(error?.message||error)}]};
+  const result={schema:'nostromo-droplet-claim-verify-test/v1.4',completedAt:new Date().toISOString(),status:'FAIL',failures:[...failures,{type:'UNCAUGHT',message:String(error?.message||error)}]};
   await fs.writeFile(outPath,JSON.stringify(result,null,2)+'\n','utf8');
   console.log(JSON.stringify(result,null,2));
   process.exitCode=1;
