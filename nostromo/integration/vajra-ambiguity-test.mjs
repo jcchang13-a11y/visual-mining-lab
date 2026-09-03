@@ -2,6 +2,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import vm from 'node:vm';
 import {applyGuardedHandoffResults,auditReceiptAmbiguity} from './vajra-ambiguity-guard.mjs';
+import {escalateVajraConflicts} from './vajra-conflict-escalation.mjs';
 
 const root=process.cwd();
 const resultPath=path.join(root,'nostromo','integration','vajra-ambiguity-last-result.json');
@@ -50,12 +51,12 @@ if(!Array.isArray(crossOrganFinding?.organs)||!crossOrganFinding.organs.includes
 const crossOrganSameDirection={...receiptA,organ:'MU/TH/UR',provenance:'muther-source-C',material:'A repository mining result independently reproduces the scoped failure.',relation:'This evidence supports narrowing the universal reliability claim because the same scoped failure is reproduced.'};
 const crossOrganControl=applyGuardedHandoffResults(base,[crossOrganA,crossOrganSameDirection],V);
 const crossOrganControlBranch=crossOrganControl.unresolved.find(x=>x.targetRef===branch?.targetRef&&x.clauseRef===branch?.clauseRef&&x.lens===branch?.lens);
-if(crossOrganControlBranch?.status==='AMBIGUOUS_BY_RECEIPTS')failures.push({type:'CROSS_ORGAN_DIVERSITY_FALSE_POSITIVE'});
+if(crossOrganControlBranch?.status==='AMBIGUOUS_BY_RECEIPTS'||crossOrganControlBranch?.status==='CONTESTED_BY_RECEIPTS')failures.push({type:'CROSS_ORGAN_DIVERSITY_FALSE_POSITIVE'});
 
 const receiptC={...common,provenance:'source-C-independent',material:'A second bounded report independently reproduced the same failure mode under the same scoped condition.',relation:'This evidence supports narrowing the universal reliability claim because the scoped failure is reproduced.'};
 const control=applyGuardedHandoffResults(base,[receiptA,receiptC],V);
 const controlBranch=control.unresolved.find(x=>x.targetRef===branch?.targetRef&&x.clauseRef===branch?.clauseRef&&x.lens===branch?.lens);
-if(controlBranch?.status==='AMBIGUOUS_BY_RECEIPTS')failures.push({type:'SAME_DIRECTION_CONTROL_FALSE_POSITIVE'});
+if(controlBranch?.status==='AMBIGUOUS_BY_RECEIPTS'||controlBranch?.status==='CONTESTED_BY_RECEIPTS')failures.push({type:'SAME_DIRECTION_CONTROL_FALSE_POSITIVE'});
 
 const negatedSupport={...common,provenance:'source-neg-support',material:'A bounded return reports the tested observation without endorsing the target claim.',relation:'This evidence does not support the target claim under the tested condition.'};
 const negatedSupportAudit=auditReceiptAmbiguity([receiptA,negatedSupport]);
@@ -104,6 +105,28 @@ const chineseInsufficientRefutePolarity=chineseInsufficientRefuteAudit.ambiguous
 if(chineseInsufficientRefuteAudit.status!=='AMBIGUITY_FOUND')failures.push({type:'ZH_INSUFFICIENT_REFUTE_FALSE_POLARITY',audit:chineseInsufficientRefuteAudit});
 if(chineseInsufficientRefutePolarity!=='UNSPECIFIED')failures.push({type:'ZH_INSUFFICIENT_REFUTE_NOT_UNSPECIFIED',actual:chineseInsufficientRefutePolarity});
 
+// Cross-organ explicit conflict adversarial case. The base engine accepts only the
+// preferred-organ return and therefore exposes the exact arrival/scope gap this guard
+// is responsible for. A non-preferred but otherwise qualifying executed return with
+// opposite explicit polarity must block closure and become a real contest that can be
+// handed to the existing VAJRA conflict-escalation layer.
+const crossOrganExplicitRefute={...common,organ:'MU/TH/UR',provenance:'muther-explicit-refute',material:'A separately routed repository result reproduces a failure condition that directly contradicts the universal reliability claim.',relation:'This evidence refutes the universal reliability claim within the reproduced failure condition.'};
+const crossOrganExplicitRaw=V.applyHandoffResults(base,[crossOrganA,crossOrganExplicitRefute]);
+const crossOrganExplicitRawBranch=crossOrganExplicitRaw.unresolved.find(x=>x.targetRef===branch?.targetRef&&x.clauseRef===branch?.clauseRef&&x.lens===branch?.lens);
+const crossOrganExplicitAudit=auditReceiptAmbiguity([crossOrganA,crossOrganExplicitRefute]);
+const crossOrganExplicitGuarded=applyGuardedHandoffResults(base,[crossOrganA,crossOrganExplicitRefute],V);
+const crossOrganExplicitBranch=crossOrganExplicitGuarded.unresolved.find(x=>x.targetRef===branch?.targetRef&&x.clauseRef===branch?.clauseRef&&x.lens===branch?.lens);
+const crossOrganExplicitFinding=crossOrganExplicitAudit.contested?.[0]||null;
+const crossOrganEscalation=escalateVajraConflicts(crossOrganExplicitGuarded);
+if(crossOrganExplicitRawBranch?.status!=='RESOLVED_BY_RECEIPT')failures.push({type:'CROSS_ORGAN_EXPLICIT_BASELINE_DID_NOT_EXPOSE_FALSE_CLOSURE',actual:crossOrganExplicitRawBranch?.status});
+if(crossOrganExplicitAudit.status!=='CONFLICT_FOUND')failures.push({type:'CROSS_ORGAN_EXPLICIT_CONFLICT_NOT_DETECTED',audit:crossOrganExplicitAudit});
+if(crossOrganExplicitBranch?.status!=='CONTESTED_BY_RECEIPTS')failures.push({type:'CROSS_ORGAN_EXPLICIT_FALSE_CLOSURE_NOT_BLOCKED',actual:crossOrganExplicitBranch?.status});
+if(crossOrganExplicitFinding?.distinctOrganCount!==2)failures.push({type:'CROSS_ORGAN_EXPLICIT_ORGAN_COUNT_WRONG',actual:crossOrganExplicitFinding?.distinctOrganCount});
+if(!crossOrganExplicitFinding?.polarities?.includes('SUPPORTS')||!crossOrganExplicitFinding?.polarities?.includes('REFUTES'))failures.push({type:'CROSS_ORGAN_EXPLICIT_POLARITIES_MISSING',polarities:crossOrganExplicitFinding?.polarities});
+if(crossOrganEscalation?.escalatedBranches!==1||crossOrganEscalation?.status!=='CONFLICT_ESCALATION_REQUIRED')failures.push({type:'CROSS_ORGAN_EXPLICIT_ESCALATION_NOT_TRIGGERED',escalation:crossOrganEscalation});
+const escalationOrgans=[...new Set((crossOrganEscalation?.escalations?.[0]?.packets||[]).map(x=>x.targetOrgan))];
+for(const organ of ['DROPLET','MUTHER','SHROOMING'])if(!escalationOrgans.includes(organ))failures.push({type:'CROSS_ORGAN_EXPLICIT_ESCALATION_ORGAN_MISSING',organ,escalationOrgans});
+
 const poisonMissingProvenance={...common,provenance:'',material:'A vague additional return that would otherwise look unrelated to the first receipt.',relation:'Its relation to the target is not determined.'};
 const poisonNotExecuted={...common,status:'QUEUED',provenance:'source-poison-queued',material:'Queued material that has not actually been returned by the requested organ.',relation:'Its relation to the target is not determined.'};
 const poisonMissingRelation={...common,provenance:'source-poison-no-relation',material:'Returned material with no explicit statement connecting it to the target claim.',relation:''};
@@ -113,7 +136,7 @@ const poisonBranch=poisonGuarded.unresolved.find(x=>x.targetRef===branch?.target
 if(poisonAudit.status!=='NO_AMBIGUITY_FOUND')failures.push({type:'MALFORMED_RECEIPT_CREATED_AMBIGUITY',audit:poisonAudit});
 if(poisonAudit.qualifyingReceiptCount!==1)failures.push({type:'POISON_QUALIFYING_COUNT_WRONG',actual:poisonAudit.qualifyingReceiptCount});
 if(poisonAudit.rejectedReceiptCount!==3)failures.push({type:'POISON_REJECTION_COUNT_WRONG',actual:poisonAudit.rejectedReceiptCount});
-if(poisonBranch?.status==='AMBIGUOUS_BY_RECEIPTS')failures.push({type:'POISON_CHANGED_BRANCH_TO_AMBIGUOUS'});
+if(poisonBranch?.status==='AMBIGUOUS_BY_RECEIPTS'||poisonBranch?.status==='CONTESTED_BY_RECEIPTS')failures.push({type:'POISON_CHANGED_BRANCH_TO_UNRESOLVED_CONFLICT_STATE'});
 
 const rejectionReasons=[...new Set((poisonAudit.rejectedReceipts||[]).flatMap(x=>x.reasons||[]))];
 for(const expected of ['MISSING_PROVENANCE','NO_EXECUTION_EVIDENCE','MISSING_RELATION_TO_TARGET']){
@@ -121,7 +144,7 @@ for(const expected of ['MISSING_PROVENANCE','NO_EXECUTION_EVIDENCE','MISSING_REL
 }
 
 const result={
-  schema:'nostromo-vajra-ambiguity-test/v0.4.2',
+  schema:'nostromo-vajra-ambiguity-test/v0.5.0',
   completedAt:new Date().toISOString(),
   status:failures.length?'FAIL':'PASS',
   finding:{
@@ -147,13 +170,20 @@ const result={
     chineseInsufficientSupportPolarity,
     chineseInsufficientRefuteStatus:chineseInsufficientRefuteAudit.status,
     chineseInsufficientRefutePolarity,
+    crossOrganExplicitBaselineStatus:crossOrganExplicitRawBranch?.status||null,
+    crossOrganExplicitAuditStatus:crossOrganExplicitAudit.status,
+    crossOrganExplicitGuardedStatus:crossOrganExplicitBranch?.status||null,
+    crossOrganExplicitDistinctOrgans:crossOrganExplicitFinding?.distinctOrganCount||0,
+    crossOrganExplicitPolarities:crossOrganExplicitFinding?.polarities||[],
+    crossOrganExplicitEscalationStatus:crossOrganEscalation?.status||null,
+    crossOrganExplicitEscalationOrgans:escalationOrgans,
     poisonAuditStatus:poisonAudit.status,
     poisonRejected:poisonAudit.rejectedReceiptCount,
     poisonBranchStatus:poisonBranch?.status||null,
-    interpretation:'The guard preserves branch-scoped ambiguity across organ boundaries, excludes malformed returns, and masks bounded English/Chinese negated or explicitly insufficient support/refute phrases before polarity detection so lexical keywords cannot manufacture false directional evidence.'
+    interpretation:'The guard preserves branch-scoped ambiguity and explicit conflict across organ boundaries, excludes malformed returns, masks bounded negated/insufficient/hedged support-refute phrases, and converts opposite explicit cross-organ polarity into a contested VAJRA branch that the existing conflict-escalation layer can route back to DROPLET, MUTHER and SHROOMING.'
   },
   failures,
-  boundary:'This test demonstrates a deterministic structural/lexical false-certainty and ambiguity-poisoning guard, including cross-organ branch-scoped returns plus bounded negation and insufficiency handling. UNSPECIFIED means the bounded polarity detector cannot safely classify the relation; qualification means only that minimum execution/provenance/material/relation fields exist. Distinct organ/provenance counts are audit metadata, not proof of source independence. Masking is intentionally narrow and does not amount to general semantic negation or modality scope resolution, truth judgment or evidence-quality scoring.'
+  boundary:'This test demonstrates a deterministic structural/lexical false-certainty, ambiguity-poisoning and cross-organ explicit-conflict guard. A preferred-organ receipt cannot create closure when another structurally qualifying executed organ return on the same branch states the opposite explicit polarity; the branch becomes CONTESTED_BY_RECEIPTS and is compatible with VAJRA conflict escalation. UNSPECIFIED means the bounded polarity detector cannot safely classify the relation; qualification means only that minimum execution/provenance/material/relation fields exist. Distinct organ/provenance counts are audit metadata, not proof of source independence. Masking and polarity remain intentionally narrow and do not amount to general semantic negation/modality scope resolution, truth judgment or evidence-quality scoring.'
 };
 await fs.writeFile(resultPath,JSON.stringify(result,null,2)+'\n','utf8');
 console.log(JSON.stringify(result,null,2));
