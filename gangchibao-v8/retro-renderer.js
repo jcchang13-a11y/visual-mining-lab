@@ -6,10 +6,20 @@
    另兼任後段「本單元涉及經文」施工切片的最小接線層：
    若正文自身尚未含 [[SUTRA: ...]]，且 construction-sections/{unit}-sutra-entrance.md
    已存在，則只抽出其中既有 SUTRA 區塊接到正文最前方；不改正文、不猜經文範圍。
+
+   既有原圖缺件只在 placement 已被施工檔鎖定時補 slot；不仿畫、不替代原圖。
 */
 (function(){
   const MARKER=/^\s*\[\[RETRO:\s*([^|\]]+?)(?:\s*\|\s*([^\]]+?))?\s*\]\]\s*$/i;
   const SUTRA_BLOCK=/\[\[SUTRA(?::\s*([^\]]*?))?\]\]\s*([\s\S]*?)\s*\[\[\/SUTRA\]\]/i;
+  const KNOWN_FIGURE_SLOTS={
+    '30310B':{
+      key:'sumeru-world-original',
+      title:'須彌世界／佛教空間地理觀示意圖',
+      note:'使用者原始圖待接回；不仿製、不重畫。',
+      anchor:'從這裡開始，後面所有東西都不再是日常尺度了。'
+    }
+  };
 
   function makeRetroFigure(src, caption){
     const figure=document.createElement('figure');
@@ -84,6 +94,46 @@
     return section;
   }
 
+  function makeFigureSlot(spec){
+    const slot=document.createElement('div');
+    slot.className='figure-slot';
+    slot.dataset.gcbLayer='existing-figure-slot';
+    slot.dataset.figureSlot=spec.key;
+
+    const title=document.createElement('div');
+    title.className='figure-slot-title';
+    title.textContent=spec.title;
+
+    const note=document.createElement('div');
+    note.className='figure-slot-note';
+    note.textContent=spec.note;
+    slot.append(title,note);
+    return slot;
+  }
+
+  function ensureKnownFigureSlot(root){
+    if(!root) return false;
+    const unit=new URLSearchParams(location.search).get('u');
+    const spec=KNOWN_FIGURE_SLOTS[unit];
+    if(!spec||root.querySelector(`[data-figure-slot="${spec.key}"]`)) return false;
+
+    const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);
+    while(walker.nextNode()){
+      const node=walker.currentNode;
+      const value=node.nodeValue||'';
+      const at=value.indexOf(spec.anchor);
+      if(at<0) continue;
+
+      const end=at+spec.anchor.length;
+      const tail=node.splitText(end);
+      const slot=makeFigureSlot(spec);
+      tail.parentNode.insertBefore(slot,tail);
+      tail.parentNode.insertBefore(document.createTextNode('\n'),tail);
+      return true;
+    }
+    return false;
+  }
+
   let sutraLoading=false;
   let sutraCheckedFor='';
   async function ensureSutraEntrance(root){
@@ -113,14 +163,17 @@
     if(!root) return null;
     renderMarkers(root);
     ensureSutraEntrance(root);
+    ensureKnownFigureSlot(root);
     let scheduled=false;
     const observer=new MutationObserver(()=>{
       renderMarkers(root);
+      ensureKnownFigureSlot(root);
       if(!scheduled){
         scheduled=true;
         queueMicrotask(()=>{
           scheduled=false;
           ensureSutraEntrance(root);
+          ensureKnownFigureSlot(root);
         });
       }
     });
@@ -134,6 +187,8 @@
     renderMarkers,
     parseSutraScaffold,
     makeSutraBlock,
+    makeFigureSlot,
+    ensureKnownFigureSlot,
     ensureSutraEntrance,
     observe
   };
