@@ -16,7 +16,7 @@ const sameLineage=globalThis.GutEngine.digest({
   contradictionA:template('abcdef12','12345678'),
   contradictionB:template('fedcba98','87654321')
 },{source});
-check(sameLineage.version==='0.2.24','GUT_VERSION',sameLineage.version);
+check(sameLineage.version==='0.2.25','GUT_VERSION',sameLineage.version);
 check(sameLineage.nutrients.length===2,'SOURCE_NUTRIENTS_LOST',sameLineage.nutrients);
 check(sameLineage.nutrients.every(x=>x.provenance?.inputSource===source),'PROVENANCE_LOST',sameLineage.nutrients);
 check((sameLineage.antiEcho?.volatileLineageSuppressedCount||0)>=1,'VOLATILE_LINEAGE_NOT_SUPPRESSED',sameLineage.antiEcho);
@@ -135,7 +135,7 @@ check(delimiterCarry.inputSegments===1&&delimiterCarry.outputSegments===1,'CARRY
 check(delimiterCarry.text.includes(' ∙ '),'CARRY_DELIMITER_READABLE_SEPARATOR_LOST',delimiterCarry.text);
 
 const result={
-  schema:'nostromo-gut-lineage-test/v0.2.24-carry-scalar-guard',
+  schema:'nostromo-gut-lineage-test/v0.2.25-carry-scalar-guard',
   completedAt:new Date().toISOString(),
   status:failures.length===0?'PASS':'FAIL',
   sameLineage:{summaryItemCount:sameLineage.summaryItemCount,antiEcho:sameLineage.antiEcho,summary:sameLineage.summary,carryRefs:sameLineage.carryRefs},
@@ -150,7 +150,7 @@ const result={
   scaffoldCarry,
   delimiterCollision:{summary:delimiterCollision.summary,sourceNutrient:delimiterCollision.nutrients[0]?.text||null,antiEcho:delimiterCollision.antiEcho,carry:delimiterCarry},
   failures,
-  boundary:'This adversarial test preserves source nutrients and provenance while checking cross-atom, intra-atom, short-CJK nested-clause, repeated machine-lineage signature, cross-segment volatile-lineage carry echo, recursive wrapper growth, repeated short ref/clause-only carry fragments, a replay derived from the previously observed malformed carry, bare boolean/null carry scaffold leakage, and top-level middle-dot delimiter collision inside a single nutrient. Bare true/false/null/undefined tokens may be removed only from carry rendering; numeric scalars and substantive phrases containing those words remain. v0.2.24 still requires machine hexadecimal lineage identifiers to remain available through the bounded out-of-band carryRefs ledger with provenance while prose summary remains eligible for anti-echo cleanup. PASS does not certify semantic identity or truth.'
+  boundary:'This adversarial test preserves source nutrients and provenance while checking cross-atom, intra-atom, short-CJK nested-clause, repeated machine-lineage signature, cross-segment volatile-lineage carry echo, recursive wrapper growth, repeated short ref/clause-only carry fragments, a replay derived from the previously observed malformed carry, bare boolean/null carry scaffold leakage, and top-level middle-dot delimiter collision inside a single nutrient. Bare true/false/null/undefined tokens may be removed only from carry rendering; numeric scalars and substantive phrases containing those words remain. v0.2.25 requires machine hexadecimal lineage identifiers to remain available through the bounded out-of-band carryRefs ledger with provenance while prose summary remains eligible for anti-echo cleanup. PASS does not certify semantic identity or truth.'
 };
 await fs.writeFile(path.join(root,'nostromo/integration/gut-lineage-last-result.json'),JSON.stringify(result,null,2)+'\n','utf8');
 console.log(JSON.stringify(result,null,2));
