@@ -1,0 +1,81 @@
+{
+  "schema": "nostromo-gut-ancestor-failure-test/v0.1",
+  "completedAt": "2026-09-03T23:07:01.131Z",
+  "engineVersion": "0.2.25",
+  "status": "BASELINE_NOT_PROMOTED",
+  "promoted": false,
+  "failedBundle": {
+    "quarantined": 5,
+    "routeCounts": {
+      "SHROOMING": 0,
+      "MUTHER": 0,
+      "DROPLET": 0,
+      "VAJRA": 0,
+      "HOLD": 5
+    },
+    "quarantine": [
+      {
+        "path": "root.failedBundle.organ",
+        "type": "RISK_OR_FAILURE",
+        "reason": "ancestor-failure-status-provenance",
+        "provenance": {
+          "inputSource": "NOSTROMO/gut-ancestor-failure-test",
+          "organ": "DROPLET",
+          "status": "FAILED"
+        }
+      },
+      {
+        "path": "root.failedBundle.status",
+        "type": "RISK_OR_FAILURE",
+        "reason": "ancestor-failure-status-provenance",
+        "provenance": {
+          "inputSource": "NOSTROMO/gut-ancestor-failure-test",
+          "organ": "DROPLET",
+          "status": "FAILED"
+        }
+      },
+      {
+        "path": "root.failedBundle.claim",
+        "type": "RISK_OR_FAILURE",
+        "reason": "ancestor-failure-status-provenance",
+        "provenance": {
+          "inputSource": "NOSTROMO/gut-ancestor-failure-test",
+          "organ": "DROPLET",
+          "status": "FAILED"
+        }
+      },
+      {
+        "path": "root.failedBundle.evidence",
+        "type": "RISK_OR_FAILURE",
+        "reason": "ancestor-failure-status-provenance",
+        "provenance": {
+          "inputSource": "NOSTROMO/gut-ancestor-failure-test",
+          "organ": "DROPLET",
+          "status": "FAILED"
+        }
+      },
+      {
+        "path": "root.failedBundle.question",
+        "type": "RISK_OR_FAILURE",
+        "reason": "ancestor-failure-status-provenance",
+        "provenance": {
+          "inputSource": "NOSTROMO/gut-ancestor-failure-test",
+          "organ": "DROPLET",
+          "status": "FAILED"
+        }
+      }
+    ]
+  },
+  "healthyControl": {
+    "quarantined": 0,
+    "routeCounts": {
+      "SHROOMING": 0,
+      "MUTHER": 2,
+      "DROPLET": 1,
+      "VAJRA": 0,
+      "HOLD": 1
+    }
+  },
+  "failures": [],
+  "boundary": "This adversarial test distinguishes executor-envelope failure context from ordinary semantic prose. Once GUT v0.2.26 is promoted, a FAILED ancestor status must quarantine descendant payload atoms before they can be routed as fresh claims/evidence/questions, while an EXECUTED ancestor must not quarantine useful prose merely because it contains words such as invalid or error. This is structural execution-context containment, not semantic truth or source-quality judgment."
+}
