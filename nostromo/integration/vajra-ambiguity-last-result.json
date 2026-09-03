@@ -1,6 +1,6 @@
 {
-  "schema": "nostromo-vajra-ambiguity-test/v0.4.2",
-  "completedAt": "2026-09-03T22:10:49.560Z",
+  "schema": "nostromo-vajra-ambiguity-test/v0.5.0",
+  "completedAt": "2026-09-03T22:11:34.908Z",
   "status": "PASS",
   "finding": {
     "baselineStatus": "RESOLVED_BY_RECEIPT",
@@ -25,11 +25,25 @@
     "chineseInsufficientSupportPolarity": "UNSPECIFIED",
     "chineseInsufficientRefuteStatus": "AMBIGUITY_FOUND",
     "chineseInsufficientRefutePolarity": "UNSPECIFIED",
+    "crossOrganExplicitBaselineStatus": "RESOLVED_BY_RECEIPT",
+    "crossOrganExplicitAuditStatus": "CONFLICT_FOUND",
+    "crossOrganExplicitGuardedStatus": "CONTESTED_BY_RECEIPTS",
+    "crossOrganExplicitDistinctOrgans": 2,
+    "crossOrganExplicitPolarities": [
+      "SUPPORTS",
+      "REFUTES"
+    ],
+    "crossOrganExplicitEscalationStatus": "CONFLICT_ESCALATION_REQUIRED",
+    "crossOrganExplicitEscalationOrgans": [
+      "DROPLET",
+      "MUTHER",
+      "SHROOMING"
+    ],
     "poisonAuditStatus": "NO_AMBIGUITY_FOUND",
     "poisonRejected": 3,
     "poisonBranchStatus": "RESOLVED_BY_RECEIPT",
-    "interpretation": "The guard preserves branch-scoped ambiguity across organ boundaries, excludes malformed returns, and masks bounded English/Chinese negated or explicitly insufficient support/refute phrases before polarity detection so lexical keywords cannot manufacture false directional evidence."
+    "interpretation": "The guard preserves branch-scoped ambiguity and explicit conflict across organ boundaries, excludes malformed returns, masks bounded negated/insufficient/hedged support-refute phrases, and converts opposite explicit cross-organ polarity into a contested VAJRA branch that the existing conflict-escalation layer can route back to DROPLET, MUTHER and SHROOMING."
   },
   "failures": [],
-  "boundary": "This test demonstrates a deterministic structural/lexical false-certainty and ambiguity-poisoning guard, including cross-organ branch-scoped returns plus bounded negation and insufficiency handling. UNSPECIFIED means the bounded polarity detector cannot safely classify the relation; qualification means only that minimum execution/provenance/material/relation fields exist. Distinct organ/provenance counts are audit metadata, not proof of source independence. Masking is intentionally narrow and does not amount to general semantic negation or modality scope resolution, truth judgment or evidence-quality scoring."
+  "boundary": "This test demonstrates a deterministic structural/lexical false-certainty, ambiguity-poisoning and cross-organ explicit-conflict guard. A preferred-organ receipt cannot create closure when another structurally qualifying executed organ return on the same branch states the opposite explicit polarity; the branch becomes CONTESTED_BY_RECEIPTS and is compatible with VAJRA conflict escalation. UNSPECIFIED means the bounded polarity detector cannot safely classify the relation; qualification means only that minimum execution/provenance/material/relation fields exist. Distinct organ/provenance counts are audit metadata, not proof of source independence. Masking and polarity remain intentionally narrow and do not amount to general semantic negation/modality scope resolution, truth judgment or evidence-quality scoring."
 }
