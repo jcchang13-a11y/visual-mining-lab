@@ -1,9 +1,9 @@
 {
-  "schema": "nostromo-gut-ancestor-failure-test/v0.1",
-  "completedAt": "2026-09-03T23:07:01.131Z",
+  "schema": "nostromo-gut-ancestor-failure-test/v0.2",
+  "completedAt": "2026-09-03T23:08:01.296Z",
   "engineVersion": "0.2.25",
-  "status": "BASELINE_NOT_PROMOTED",
-  "promoted": false,
+  "status": "PASS",
+  "promoted": true,
   "failedBundle": {
     "quarantined": 5,
     "routeCounts": {
@@ -77,5 +77,5 @@
     }
   },
   "failures": [],
-  "boundary": "This adversarial test distinguishes executor-envelope failure context from ordinary semantic prose. Once GUT v0.2.26 is promoted, a FAILED ancestor status must quarantine descendant payload atoms before they can be routed as fresh claims/evidence/questions, while an EXECUTED ancestor must not quarantine useful prose merely because it contains words such as invalid or error. This is structural execution-context containment, not semantic truth or source-quality judgment."
+  "boundary": "This adversarial test distinguishes executor-envelope failure context from ordinary semantic prose. On GUT v0.2.25, a FAILED ancestor status must quarantine descendant payload atoms before they can be routed as fresh claims/evidence/questions, while an EXECUTED ancestor must not quarantine useful prose merely because it contains words such as invalid or error. This is structural execution-context containment, not semantic truth or source-quality judgment."
 }
