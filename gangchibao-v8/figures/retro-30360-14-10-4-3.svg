@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 360" role="img" aria-labelledby="title desc">
+  <title id="title">第十四分回溯第十、第四、第三分</title>
+  <desc id="desc">黑白極簡同心圓。中心為第十四分，外圈依回溯層次標示第十分、第四分、第三分，表示本單元把無所住、布施與度眾生問題重新叫回來。</desc>
+  <rect width="360" height="360" fill="#fff"/>
+  <circle cx="180" cy="180" r="150" fill="none" stroke="#111" stroke-width="1.5"/>
+  <circle cx="180" cy="180" r="112" fill="none" stroke="#111" stroke-width="1.5"/>
+  <circle cx="180" cy="180" r="76" fill="none" stroke="#111" stroke-width="1.5"/>
+  <circle cx="180" cy="180" r="42" fill="none" stroke="#111" stroke-width="1.5"/>
+  <text x="180" y="174" text-anchor="middle" font-family="serif" font-size="18" fill="#111">第十四分</text>
+  <text x="180" y="197" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#111">14</text>
+  <text x="180" y="114" text-anchor="middle" font-family="serif" font-size="16" fill="#111">第十分</text>
+  <text x="180" y="133" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#111">10</text>
+  <text x="180" y="76" text-anchor="middle" font-family="serif" font-size="16" fill="#111">第四分</text>
+  <text x="180" y="95" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#111">4</text>
+  <text x="180" y="38" text-anchor="middle" font-family="serif" font-size="16" fill="#111">第三分</text>
+  <text x="180" y="57" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#111">3</text>
+</svg>
