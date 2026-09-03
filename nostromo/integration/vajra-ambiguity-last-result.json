@@ -1,6 +1,6 @@
 {
   "schema": "nostromo-vajra-ambiguity-test/v0.5.0",
-  "completedAt": "2026-09-03T22:11:34.908Z",
+  "completedAt": "2026-09-03T22:13:12.855Z",
   "status": "PASS",
   "finding": {
     "baselineStatus": "RESOLVED_BY_RECEIPT",
