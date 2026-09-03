@@ -1,7 +1,7 @@
 {
-  "schema": "nostromo-vajra-ambiguity-test/v0.3",
-  "completedAt": "2026-09-03T15:03:32.267Z",
-  "status": "PASS",
+  "schema": "nostromo-vajra-ambiguity-test/v0.4",
+  "completedAt": "2026-09-03T15:03:57.821Z",
+  "status": "FAIL",
   "finding": {
     "baselineStatus": "RESOLVED_BY_RECEIPT",
     "guardedStatus": "AMBIGUOUS_BY_RECEIPTS",
@@ -11,11 +11,66 @@
     "crossOrganDistinctOrgans": 2,
     "crossOrganControlStatus": "RESOLVED_BY_RECEIPT",
     "controlStatus": "RESOLVED_BY_RECEIPT",
+    "negatedSupportStatus": "NO_AMBIGUITY_FOUND",
+    "negatedSupportPolarity": null,
+    "negatedRefuteStatus": "NO_AMBIGUITY_FOUND",
+    "negatedRefutePolarity": null,
+    "chineseNegatedSupportStatus": "NO_AMBIGUITY_FOUND",
+    "chineseNegatedSupportPolarity": null,
     "poisonAuditStatus": "NO_AMBIGUITY_FOUND",
     "poisonRejected": 3,
     "poisonBranchStatus": "RESOLVED_BY_RECEIPT",
-    "interpretation": "The guard preserves branch-scoped ambiguity across organ boundaries while excluding malformed, non-executed, provenance-free or relation-free returns. Different organ labels no longer partition one VAJRA branch into separate first-receipt closure domains, while organ diversity by itself does not manufacture ambiguity."
+    "interpretation": "The guard preserves branch-scoped ambiguity across organ boundaries, excludes malformed returns, and now masks bounded English/Chinese negated support/refute phrases before polarity detection so bare keywords cannot manufacture false directional evidence."
   },
-  "failures": [],
-  "boundary": "This test demonstrates a deterministic structural/lexical false-certainty and ambiguity-poisoning guard, including cross-organ branch-scoped returns. UNSPECIFIED means the bounded polarity detector cannot classify the relation; qualification means only that minimum execution/provenance/material/relation fields exist. Distinct organ/provenance counts are audit metadata, not proof of source independence. It does not prove semantic disagreement, truth or evidence quality."
+  "failures": [
+    {
+      "type": "NEGATED_SUPPORT_FALSE_POLARITY",
+      "audit": {
+        "status": "NO_AMBIGUITY_FOUND",
+        "ambiguous": [],
+        "groupCount": 1,
+        "qualifyingReceiptCount": 2,
+        "rejectedReceiptCount": 0,
+        "rejectedReceipts": [],
+        "boundary": "Ambiguity is computed over branch-scoped structurally qualifying executed returns with provenance, material and an explicit relation-to-target field. A bounded English/Chinese negation mask prevents obvious negated support/refute phrases from creating false polarity. Organ labels remain preserved for audit but do not partition one VAJRA branch into separate closure domains. Qualification is necessary but not sufficient for semantic adequacy, source independence or source quality."
+      }
+    },
+    {
+      "type": "NEGATED_SUPPORT_NOT_UNSPECIFIED",
+      "actual": null
+    },
+    {
+      "type": "NEGATED_REFUTE_FALSE_POLARITY",
+      "audit": {
+        "status": "NO_AMBIGUITY_FOUND",
+        "ambiguous": [],
+        "groupCount": 1,
+        "qualifyingReceiptCount": 2,
+        "rejectedReceiptCount": 0,
+        "rejectedReceipts": [],
+        "boundary": "Ambiguity is computed over branch-scoped structurally qualifying executed returns with provenance, material and an explicit relation-to-target field. A bounded English/Chinese negation mask prevents obvious negated support/refute phrases from creating false polarity. Organ labels remain preserved for audit but do not partition one VAJRA branch into separate closure domains. Qualification is necessary but not sufficient for semantic adequacy, source independence or source quality."
+      }
+    },
+    {
+      "type": "NEGATED_REFUTE_NOT_UNSPECIFIED",
+      "actual": null
+    },
+    {
+      "type": "ZH_NEGATED_SUPPORT_FALSE_POLARITY",
+      "audit": {
+        "status": "NO_AMBIGUITY_FOUND",
+        "ambiguous": [],
+        "groupCount": 1,
+        "qualifyingReceiptCount": 2,
+        "rejectedReceiptCount": 0,
+        "rejectedReceipts": [],
+        "boundary": "Ambiguity is computed over branch-scoped structurally qualifying executed returns with provenance, material and an explicit relation-to-target field. A bounded English/Chinese negation mask prevents obvious negated support/refute phrases from creating false polarity. Organ labels remain preserved for audit but do not partition one VAJRA branch into separate closure domains. Qualification is necessary but not sufficient for semantic adequacy, source independence or source quality."
+      }
+    },
+    {
+      "type": "ZH_NEGATED_SUPPORT_NOT_UNSPECIFIED",
+      "actual": null
+    }
+  ],
+  "boundary": "This test demonstrates a deterministic structural/lexical false-certainty and ambiguity-poisoning guard, including cross-organ branch-scoped returns and bounded polarity-negation handling. UNSPECIFIED means the bounded polarity detector cannot safely classify the relation; qualification means only that minimum execution/provenance/material/relation fields exist. Distinct organ/provenance counts are audit metadata, not proof of source independence. Negation masking is intentionally narrow and does not amount to semantic negation scope resolution, truth judgment or evidence-quality scoring."
 }
