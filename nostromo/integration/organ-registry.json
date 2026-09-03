@@ -1,6 +1,6 @@
 {
-  "schema": "nostromo-organ-registry/v1.43",
-  "updatedAt": "2026-09-03T13:14:00+08:00",
+  "schema": "nostromo-organ-registry/v1.44",
+  "updatedAt": "2026-09-03T15:06:00+08:00",
   "truthRule": "DISPLAYED STATE MUST FOLLOW EVIDENCE",
   "evidence": "ci-last-result.json plus formal-round-last-result.json plus connector-last-result.json plus muther-falsify-last-result.json plus muther-repo-diversity-last-result.json plus droplet-claim-verify-last-result.json plus gut-metabolism-last-result.json plus gut-lineage-last-result.json plus vajra-dynamic-last-result.json plus vajra-ambiguity-last-result.json plus vajra-uncertainty-last-result.json plus vajra-conflict-escalation-last-result.json plus vajra-provenance-diversity-last-result.json plus shroom-feedback-last-result.json",
   "latestFormalRound": "greenhouse/r113-nostromo-formal-round.json",
@@ -29,19 +29,19 @@
     "boundary": "Isolated counterfactual executor only. It deliberately includes parent round ordinal in participant selection and has been CI-verified against R111 and R112. It does not write or advance formal greenhouse history and is engineering evidence that NOSTROMO can execute and audit a parent-sensitive transition, not evidence that the real SHROOMING population is causally path-dependent."
   },
   "latestThickening": {
-    "organ": "MUTHER",
-    "version": "MUTHER bounded multi-window vein coverage v1.3",
-    "status": "VERIFIED_BOUNDED_MULTI_WINDOW_VEIN_COVERAGE",
-    "test": "muther-repo-diversity-last-result.json v0.2.0 + NOSTROMO Integration Test run 290",
+    "organ": "DROPLET",
+    "version": "DROPLET temporal leakage containment v1.3",
+    "status": "VERIFIED_FUTURE_AND_OVERLAPPING_DATE_QUARANTINE",
+    "test": "droplet-claim-verify-last-result.json v1.3 + NOSTROMO Integration Test run 293",
     "capabilities": [
-      "a matching repository file may contribute a bounded number of separated query windows instead of only the first hit",
-      "multiple materially different local contexts inside one file can survive into the candidate pool with occurrence ordinal and offset provenance",
-      "exact-copy and conservative lexical near-duplicate containment still run before bounded source-family-balanced selection",
-      "near-duplicate suppression retains an auditable ledger rather than silently deleting provenance",
-      "controlled adversarial coverage retained three separated query windows from one file while continuing to suppress a 0.9518-similarity near duplicate",
-      "the 50-round NOSTROMO regression and 10-round active closed loop remain PASS with failures empty"
+      "an active freshness policy no longer treats future-dated evidence as age zero and therefore fresh",
+      "day-precision evidence strictly after the declared as-of date is marked FUTURE and cannot create certainty",
+      "coarse month-precision evidence whose date range straddles the declared as-of date is marked OVERLAPS_AS_OF and cannot create certainty",
+      "stale, unknown-date, future-dated and date-range-overlapping evidence remain visible in the audit instead of being silently discarded",
+      "fresh authoritative evidence on or before the as-of boundary remains eligible for certainty",
+      "full NOSTROMO Integration Test run 293 completed successfully after the new temporal adversarial cases passed"
     ],
-    "boundary": "The implementation commit 24114bf117519b41b19a176228248865d7313342 exposed a stale assertion wording in the new adversarial test; the failing record was preserved instead of hidden. Commit 1cbc8b3dea01d385e848f75e8ed40b6b506f37c5 corrected only that assertion, after which NOSTROMO Integration Test run 290 completed successfully and muther-repo-diversity-test v0.2.0 reported PASS with failures []. This proves bounded lexical/structural multi-window coverage that reduces first-hit blindness. It does not prove semantic vein detection, exhaustive within-file coverage, semantic identity, source independence, source quality, novelty, factual truth, or Google Drive coverage."
+    "boundary": "The previous v1.2 freshness calculation used max(0, ageDays), which could make future-dated evidence look fresh under an active freshness policy. v1.3 replaces that leakage path with explicit date ranges and quarantines FUTURE and OVERLAPS_AS_OF evidence from certainty while retaining it for audit. This is opt-in deterministic temporal gating. It still does not infer whether a claim is time-sensitive, search the web itself, validate publication timestamps, score methodological quality, prove source independence, or adjudicate factual truth beyond the supplied evidence bundle."
   },
   "organs": {
     "shrooming": {
@@ -78,9 +78,9 @@
         "AUDIT_EVIDENCE": "EXEC_STATE",
         "VERIFY_URL": "CLOSED_LOOP_EXEC",
         "SEARCH_EXTERNAL": "CONNECTOR_EXEC",
-        "VERIFY": "VERIFIED_DUPLICATE_CONFLICT_AND_OPT_IN_FRESHNESS_CONTAINING_CLAIM_VERIFY"
+        "VERIFY": "VERIFIED_DUPLICATE_CONFLICT_AND_OPT_IN_TEMPORAL_LEAKAGE_CONTAINING_CLAIM_VERIFY"
       },
-      "boundary": "Published evidence audit and explicit-URL verification are executable. Search-engine discovery is executed by the external web connector runtime. VERIFY v1.2 computes SUPPORTED, REFUTED or INDETERMINATE over an explicit evidence bundle while suppressing exact replay amplification, counting caller-supplied source families as audit metadata, forcing INDETERMINATE on conflicting authoritative directions or contradictory use of one evidence fingerprint, and optionally enforcing a caller-supplied freshness policy. Under an active freshness policy, stale or undated evidence stays visible for audit but cannot create certainty. It does not infer whether a claim is time-sensitive, search the web by itself, prove source independence, score methodological quality, or treat absence of refutation as global truth."
+      "boundary": "Published evidence audit and explicit-URL verification are executable. Search-engine discovery is executed by the external web connector runtime. VERIFY v1.3 computes SUPPORTED, REFUTED or INDETERMINATE over an explicit evidence bundle while suppressing exact replay amplification, counting caller-supplied source families as audit metadata, forcing INDETERMINATE on conflicting authoritative directions or contradictory use of one evidence fingerprint, and optionally enforcing a caller-supplied freshness policy. Under an active policy, stale, undated, future-dated, and coarse date ranges that overlap the as-of boundary stay visible for audit but cannot create certainty. It does not infer whether a claim is time-sensitive, search the web by itself, validate timestamps, prove source independence, score methodological quality, or treat absence of refutation as global truth."
     },
     "gut": {
       "mode": "EXEC_CONNECTED_THICKENED",
