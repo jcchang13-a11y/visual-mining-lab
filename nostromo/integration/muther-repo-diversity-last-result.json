@@ -1,8 +1,8 @@
 {
-  "schema": "muther-repo-diversity-test/v0.1.1",
-  "completedAt": "2026-09-03T04:07:22.264Z",
-  "status": "PASS",
-  "capability": "LEXICAL_NEAR_DUPLICATE_POLLUTION_CONTAINMENT",
+  "schema": "muther-repo-diversity-test/v0.2.0",
+  "completedAt": "2026-09-03T05:07:05.847Z",
+  "status": "FAIL",
+  "capability": "LEXICAL_NEAR_DUPLICATE_POLLUTION_CONTAINMENT_PLUS_BOUNDED_MULTI_WINDOW_VEIN_COVERAGE",
   "unit": {
     "nearSimilarity": 0.9518,
     "distinctSimilarity": 0.105,
@@ -20,7 +20,9 @@
     "nearDuplicateAudit": [
       {
         "suppressedPath": "tmp-muther-near-b/b.md",
+        "suppressedOccurrenceOrdinal": 1,
         "keptPath": "tmp-muther-near-a/a.md",
+        "keptOccurrenceOrdinal": 1,
         "similarity": 0.9518,
         "suppressedFingerprint": "4a13d1506ce79597",
         "keptFingerprint": "bbb5fe189f082f10",
@@ -28,6 +30,19 @@
         "keptSourceFamily": "tmp-muther-near-a"
       }
     ]
+  },
+  "multiWindow": {
+    "filesWithMultipleOccurrences": 1,
+    "occurrenceWindowCandidateCount": 3,
+    "retainedVeinCount": 3,
+    "occurrenceOrdinals": [
+      1,
+      2,
+      3
+    ],
+    "selectedDistinctFileCount": 1,
+    "maxWindowsPerFile": 4,
+    "minWindowGap": 320
   },
   "provenance": {
     "selectedSourceFamilies": [
@@ -37,6 +52,8 @@
     "sourceFamilyCount": 3
   },
   "crossOrganRegression": "The main NOSTROMO integration test runs separately in the same workflow and must remain PASS before public promotion.",
-  "boundary": "PASS certifies conservative lexical near-duplicate containment for repository-mining candidates under controlled lexical, formatting, timestamp and fingerprint mutation. It does not certify semantic equivalence, source independence, source quality, novelty, factual truth, or Google Drive coverage.",
-  "failures": []
+  "boundary": "PASS certifies conservative lexical near-duplicate containment plus bounded extraction of multiple separated query windows from one repository file under controlled fixtures. It reduces first-hit blindness but does not certify semantic vein detection, semantic equivalence, exhaustive within-file coverage, source independence, source quality, novelty, factual truth, or Google Drive coverage.",
+  "failures": [
+    "boundary must explicitly deny semantic-identity inference"
+  ]
 }
