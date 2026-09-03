@@ -1,5 +1,5 @@
-// NOSTROMO SHROOMING feedback-conditioned reader v0.2
-// Deterministic thickening: only explicit upstream feedback markers may reorder feedback-sensitive lenses.
+// NOSTROMO SHROOMING feedback-conditioned reader v0.3
+// Deterministic thickening: explicit structured upstream signals compose instead of collapsing to one precedence branch.
 import crypto from 'node:crypto';
 
 const compact=(s,n=600)=>String(s??'').replace(/\s+/g,' ').trim().slice(0,n);
@@ -31,20 +31,38 @@ function feedbackSignals(text){
 }
 
 function chooseLenses(signals){
-  if(signals.contradiction)return ['counterexample','evidence','boundary','structure','position','memory','otherness','language','use','anomaly'];
-  if(signals.external||signals.evidence)return ['evidence','boundary','counterexample','structure','memory','position','otherness','language','use','anomaly'];
-  if(signals.question)return ['position','boundary','structure','counterexample','evidence','otherness','memory','language','use','anomaly'];
-  return [...BASELINE];
+  const scores=new Map(BASELINE.map((lens,i)=>[lens,(BASELINE.length-i)/100]));
+  const contributions=[];
+  const add=(signal,lens,weight)=>{scores.set(lens,(scores.get(lens)||0)+weight);contributions.push({signal,lens,weight});};
+  if(signals.contradiction){add('contradiction','counterexample',6);add('contradiction','evidence',3);add('contradiction','boundary',2);add('contradiction','structure',1);}
+  if(signals.external||signals.evidence){add('evidence','evidence',6);add('evidence','boundary',3);add('evidence','counterexample',2);add('evidence','memory',1);}
+  if(signals.question){add('question','position',5);add('question','boundary',3);add('question','structure',2);add('question','counterexample',1);}
+  const order=[...BASELINE].sort((a,b)=>(scores.get(b)-scores.get(a))||(BASELINE.indexOf(a)-BASELINE.indexOf(b)));
+  return {order,scores:Object.fromEntries(BASELINE.map(l=>[l,Number(scores.get(l).toFixed(2))])),contributions};
+}
+
+function adaptationMode(signals){
+  const classes=[];
+  if(signals.contradiction)classes.push('CONTRADICTION');
+  if(signals.external||signals.evidence)classes.push('EVIDENCE');
+  if(signals.question)classes.push('QUESTION');
+  if(classes.length>1)return 'MIXED_CONDITIONED';
+  if(classes[0]==='CONTRADICTION')return 'CONTRADICTION_CONDITIONED';
+  if(classes[0]==='EVIDENCE')return 'EVIDENCE_CONDITIONED';
+  if(classes[0]==='QUESTION')return 'QUESTION_CONDITIONED';
+  return 'BASELINE';
 }
 
 export async function shroomFeedbackReadingRound({text='',agents=10,round=1}={}){
   const source=compact(text,4000); if(!source)throw new Error('SHROOM_TEXT_REQUIRED');
   const count=Math.max(1,Math.min(20,Number(agents)||10));
   const signals=feedbackSignals(source);
-  const lenses=chooseLenses(signals);
+  const selected=chooseLenses(signals);
+  const lenses=selected.order;
   const changedFromBaseline=lenses.some((lens,i)=>lens!==BASELINE[i]);
-  const mode=signals.contradiction?'CONTRADICTION_CONDITIONED':(signals.external||signals.evidence)?'EVIDENCE_CONDITIONED':signals.question?'QUESTION_CONDITIONED':'BASELINE';
-  const signalFingerprintInput={external:signals.external,contradiction:signals.contradiction,evidence:signals.evidence,question:signals.question};
+  const mode=adaptationMode(signals);
+  const activeSignalClasses=[signals.contradiction?'CONTRADICTION':null,(signals.external||signals.evidence)?'EVIDENCE':null,signals.question?'QUESTION':null].filter(Boolean);
+  const signalFingerprintInput={external:signals.external,contradiction:signals.contradiction,evidence:signals.evidence,question:signals.question,activeSignalClasses};
   const reactions=Array.from({length:count},(_,i)=>({
     agent:`sandbox-${i+1}`,
     lens:lenses[i%lenses.length],
@@ -57,14 +75,17 @@ export async function shroomFeedbackReadingRound({text='',agents=10,round=1}={})
     adaptation:{
       mode,
       signals:{external:signals.external,contradiction:signals.contradiction,evidence:signals.evidence,question:signals.question},
+      activeSignalClasses,
       lexicalMentions:signals.lexicalMentions,
       ignoredLexicalMentions:signals.ignoredLexicalMentions,
-      conditioningBasis:'STRUCTURED_FEEDBACK_ONLY',
+      conditioningBasis:'STRUCTURED_FEEDBACK_COMPOSITION',
       lensOrder:lenses,
+      lensScores:selected.scores,
+      scoreContributions:selected.contributions,
       changedFromBaseline,
       feedbackFingerprint:hash(JSON.stringify(signalFingerprintInput))
     },
     reactions,
-    boundary:'LOCAL DETERMINISTIC HEURISTIC READER. ONLY EXPLICIT STRUCTURED UPSTREAM MARKERS MAY REORDER FEEDBACK-SENSITIVE LENSES; ORDINARY PROSE THAT MERELY MENTIONS EVIDENCE, SOURCE, CONTRADICTION OR COUNTEREVIDENCE IS AUDITED BUT CANNOT BY ITSELF HIJACK FEEDBACK CONDITIONING. THIS REDUCES LEXICAL FEEDBACK CONTAMINATION. IT IS STRUCTURAL CONDITIONING, NOT SEMANTIC UNDERSTANDING, LEARNED BELIEF CHANGE, OR TEN INDEPENDENT PERSISTENT LLM PROCESSES.'
+    boundary:'LOCAL DETERMINISTIC HEURISTIC READER. ONLY EXPLICIT STRUCTURED UPSTREAM MARKERS MAY CONDITION READING. WHEN MULTIPLE STRUCTURED SIGNAL CLASSES CO-OCCUR, THEIR BOUNDED LENS PRIORITIES COMPOSE INSTEAD OF ONE SIGNAL SILENTLY OVERRIDING THE OTHERS; ORDINARY PROSE MENTIONS REMAIN AUDITED BUT CANNOT HIJACK CONDITIONING. THIS IS STRUCTURAL MULTI-SIGNAL PRIORITIZATION, NOT SEMANTIC UNDERSTANDING, LEARNED BELIEF CHANGE, OR TEN INDEPENDENT PERSISTENT LLM PROCESSES.'
   };
 }
