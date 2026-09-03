@@ -109,6 +109,18 @@ check(observedReplay.text.includes('VERIFIES AN EXPLICIT URL ONLY'),'OBSERVED_RE
 check(observedReplay.text.includes('這是一條不同的未解問題'),'OBSERVED_REPLAY_DISTINCT_QUESTION_LOST',observedReplay.text);
 check((observedReplay.lineageOnlySuppressed||0)>=1,'OBSERVED_REPLAY_LINEAGE_SUPPRESSION_NOT_ACCOUNTED',observedReplay);
 
+const scaffoldCarry=compactMetabolicCarry([
+  '[CONTRADICTION->VAJRA] CONTRADICTION：false：以 evidence 位置重讀：主動尋找最小反例與破壞條件',
+  '[CLAIM->DROPLET] true',
+  '[QUESTION->SHROOMING] false positive 是一個完整語義片語，不能因為包含 false 就被刪掉。',
+  '[EVIDENCE_OR_PROVENANCE->MUTHER] 200'
+].join(' · '));
+check(!/(?:^|[：·\s])(?:true|false|null|undefined)(?:$|[：·\s])/i.test(scaffoldCarry.text.replace(/false positive/gi,'')),'CARRY_SCAFFOLD_SCALAR_SURVIVED',scaffoldCarry.text);
+check((scaffoldCarry.scaffoldScalarSuppressed||0)>=2,'CARRY_SCAFFOLD_SCALAR_NOT_ACCOUNTED',scaffoldCarry);
+check(scaffoldCarry.text.includes('false positive 是一個完整語義片語'),'SUBSTANTIVE_FALSE_PHRASE_OVERTRIMMED',scaffoldCarry.text);
+check(scaffoldCarry.text.includes('200'),'NUMERIC_SCALAR_OVERTRIMMED',scaffoldCarry.text);
+check(scaffoldCarry.text.includes('主動尋找最小反例與破壞條件'),'SCAFFOLD_CONTROL_SUBSTANTIVE_CLAUSE_LOST',scaffoldCarry.text);
+
 const delimiterCollisionSource='第一個反例要求保留來源脈絡 · [QUESTION->SHROOMING] 這段其實只是同一個 nutrient 內的文字，不是新的 top-level carry item · clause:9c5ac71';
 const delimiterCollision=globalThis.GutEngine.digest({
   contradiction:delimiterCollisionSource
@@ -123,7 +135,7 @@ check(delimiterCarry.inputSegments===1&&delimiterCarry.outputSegments===1,'CARRY
 check(delimiterCarry.text.includes(' ∙ '),'CARRY_DELIMITER_READABLE_SEPARATOR_LOST',delimiterCarry.text);
 
 const result={
-  schema:'nostromo-gut-lineage-test/v0.2.24-out-of-band-carry-refs',
+  schema:'nostromo-gut-lineage-test/v0.2.24-carry-scalar-guard',
   completedAt:new Date().toISOString(),
   status:failures.length===0?'PASS':'FAIL',
   sameLineage:{summaryItemCount:sameLineage.summaryItemCount,antiEcho:sameLineage.antiEcho,summary:sameLineage.summary,carryRefs:sameLineage.carryRefs},
@@ -135,9 +147,10 @@ const result={
   recursiveWrapperCarry,
   lineageOnlyCarry,
   observedReplay,
+  scaffoldCarry,
   delimiterCollision:{summary:delimiterCollision.summary,sourceNutrient:delimiterCollision.nutrients[0]?.text||null,antiEcho:delimiterCollision.antiEcho,carry:delimiterCarry},
   failures,
-  boundary:'This adversarial test preserves source nutrients and provenance while checking cross-atom, intra-atom, short-CJK nested-clause, repeated machine-lineage signature, cross-segment volatile-lineage carry echo, recursive wrapper growth, repeated short ref/clause-only carry fragments, a replay derived from the previously observed malformed carry, and top-level middle-dot delimiter collision inside a single nutrient. v0.2.24 additionally requires machine hexadecimal lineage identifiers to remain available through the bounded out-of-band carryRefs ledger with provenance while prose summary remains eligible for anti-echo cleanup. PASS does not certify semantic identity or truth.'
+  boundary:'This adversarial test preserves source nutrients and provenance while checking cross-atom, intra-atom, short-CJK nested-clause, repeated machine-lineage signature, cross-segment volatile-lineage carry echo, recursive wrapper growth, repeated short ref/clause-only carry fragments, a replay derived from the previously observed malformed carry, bare boolean/null carry scaffold leakage, and top-level middle-dot delimiter collision inside a single nutrient. Bare true/false/null/undefined tokens may be removed only from carry rendering; numeric scalars and substantive phrases containing those words remain. v0.2.24 still requires machine hexadecimal lineage identifiers to remain available through the bounded out-of-band carryRefs ledger with provenance while prose summary remains eligible for anti-echo cleanup. PASS does not certify semantic identity or truth.'
 };
 await fs.writeFile(path.join(root,'nostromo/integration/gut-lineage-last-result.json'),JSON.stringify(result,null,2)+'\n','utf8');
 console.log(JSON.stringify(result,null,2));
