@@ -1,6 +1,6 @@
 {
-  "schema": "nostromo-organ-registry/v1.46",
-  "updatedAt": "2026-09-03T19:08:00+08:00",
+  "schema": "nostromo-organ-registry/v1.47",
+  "updatedAt": "2026-09-03T20:09:32+08:00",
   "truthRule": "DISPLAYED STATE MUST FOLLOW EVIDENCE",
   "evidence": "ci-last-result.json plus formal-round-last-result.json plus connector-last-result.json plus muther-falsify-last-result.json plus muther-repo-diversity-last-result.json plus droplet-claim-verify-last-result.json plus gut-metabolism-last-result.json plus gut-lineage-last-result.json plus vajra-dynamic-last-result.json plus vajra-ambiguity-last-result.json plus vajra-uncertainty-last-result.json plus vajra-conflict-escalation-last-result.json plus vajra-provenance-diversity-last-result.json plus shroom-feedback-last-result.json",
   "latestFormalRound": "greenhouse/r113-nostromo-formal-round.json",
@@ -29,20 +29,19 @@
     "boundary": "Isolated counterfactual executor only. It deliberately includes parent round ordinal in participant selection and has been CI-verified against R111 and R112. It does not write or advance formal greenhouse history and is engineering evidence that NOSTROMO can execute and audit a parent-sensitive transition, not evidence that the real SHROOMING population is causally path-dependent."
   },
   "latestThickening": {
-    "organ": "GUT",
-    "version": "GUT carry scaffold scalar containment v1.1.12",
-    "status": "VERIFIED_CARRY_SCAFFOLD_SCALAR_CONTAINMENT",
-    "test": "gut-lineage-last-result.json v0.2.24-carry-scalar-guard + NOSTROMO Integration Test run 302",
+    "organ": "MU/TH/UR",
+    "version": "MUTHER true occurrence provenance v0.2.1",
+    "status": "VERIFIED_TRUE_SOURCE_OCCURRENCE_PROVENANCE",
+    "test": "muther-repo-diversity-last-result.json v0.2.1 + NOSTROMO Integration Test run 305",
     "capabilities": [
-      "bare true, false, null and undefined machine-scaffolding tokens no longer recirculate as prose carry",
-      "the guard applies both to standalone routed segments and to colon-delimited clauses embedded inside a retained carry segment",
-      "numeric scalars such as HTTP status 200 remain available instead of being broadly stripped",
-      "substantive lexical uses such as false-positive remain intact because only exact bare scaffolding tokens are removed",
-      "suppression remains explicitly auditable through scaffoldScalarSuppressed",
-      "original GUT nutrient atoms, routes and provenance are not mutated by this carry-only cleanup",
-      "full NOSTROMO Integration Test run 302 completed successfully after the corrected adversarial control passed"
+      "bounded multi-window repository mining now preserves the true query-occurrence ordinal from the source file rather than renumbering only the windows that survived the gap guard",
+      "when a nearby occurrence is intentionally skipped, later retained windows keep their actual source order; the adversarial fixture verified retained ordinals 1, 3 and 4 while true occurrence 2 was skipped",
+      "totalQueryOccurrences remains separately auditable from occurrenceWindowCandidateCount, so gap suppression cannot silently rewrite source-event count",
+      "occurrence offset, source path, query-occurrence count and source-family provenance remain attached to retained candidates",
+      "exact and lexical near-duplicate suppression plus family-balanced bounded selection remain unchanged",
+      "full NOSTROMO Integration Test run 305 completed successfully with failures empty"
     ],
-    "boundary": "This is deterministic carry-rendering hygiene, not semantic truth evaluation. The guard removes only exact bare boolean/null scaffolding from recirculating prose; it does not decide whether a proposition is true or false, does not delete numeric evidence, and does not alter the source nutrient/provenance record."
+    "boundary": "This is deterministic provenance repair for bounded lexical/structural repository mining. It preserves true source occurrence order for selected windows but does not provide semantic vein detection, exhaustive within-file coverage, source-independence proof, source-quality scoring, novelty proof, truth judgment or whole-Drive coverage."
   },
   "organs": {
     "shrooming": {
@@ -64,12 +63,12 @@
       "actions": {
         "READ_STATE": "EXEC_STATE",
         "AUDIT_STATE": "EXEC_STATE",
-        "MINE_REPO": "VERIFIED_DIVERSITY_PRESERVING_MULTI_WINDOW_REPO_MINE_WITH_LEXICAL_NEAR_DUPLICATE_CONTAINMENT",
+        "MINE_REPO": "VERIFIED_DIVERSITY_PRESERVING_MULTI_WINDOW_REPO_MINE_WITH_TRUE_OCCURRENCE_PROVENANCE_AND_LEXICAL_NEAR_DUPLICATE_CONTAINMENT",
         "MINE_DRIVE_QUERY": "CONNECTOR_EXEC",
         "MINE_INTERNAL": "AUTHORIZED_CONNECTOR_EXEC",
         "FALSIFY": "REPO_COUNTEREVIDENCE_EXEC"
       },
-      "boundary": "Published mining-state audit and repository corpus mining are executable. MINE_REPO now allows each matching repository file to contribute a bounded number of separated query windows before deduplication, preserving path, occurrence ordinal, occurrence offset, query-occurrence count and source-family provenance. This reduces structural first-hit blindness when one file contains multiple distinct local contexts. Candidates are still fingerprinted after superficial normalization, exact copies are suppressed, a conservative character-shingle lexical-overlap guard contains near duplicates with an audit ledger, and bounded selection remains round-robin across path-derived source families. This is deterministic lexical/structural coverage, not semantic clustering or vein detection, exhaustive within-file coverage, source-independence proof, source-quality scoring, novelty proof or truth judgment. Query-scoped Google Drive mining is executed by the authorized external connector runtime and handed back as redacted evidence. MINE_INTERNAL remains limited to explicit authorized query-scoped connector sources; it does not grant exhaustive private-environment crawling or cross-source enumeration. FALSIFY remains repository-scoped and absence is never upgraded to truth."
+      "boundary": "Published mining-state audit and repository corpus mining are executable. MINE_REPO allows each matching repository file to contribute a bounded number of separated query windows before deduplication, preserving path, true source occurrence ordinal, occurrence offset, query-occurrence count and source-family provenance. The verified v0.2.1 adversarial test proves that if occurrence 2 is skipped by the minimum-gap guard, later selected occurrences retain ordinals 3 and 4 instead of being renumbered as selected windows 2 and 3. This reduces structural first-hit blindness without compressing source-event order. Candidates are still fingerprinted after superficial normalization, exact copies are suppressed, a conservative character-shingle lexical-overlap guard contains near duplicates with an audit ledger, and bounded selection remains round-robin across path-derived source families. This is deterministic lexical/structural coverage, not semantic clustering or vein detection, exhaustive within-file coverage, source-independence proof, source-quality scoring, novelty proof or truth judgment. Query-scoped Google Drive mining is executed by the authorized external connector runtime and handed back as redacted evidence. MINE_INTERNAL remains limited to explicit authorized query-scoped connector sources; it does not grant exhaustive private-environment crawling or cross-source enumeration. FALSIFY remains repository-scoped and absence is never upgraded to truth."
     },
     "droplet": {
       "mode": "PARTIAL_EXEC_THICKENED",
