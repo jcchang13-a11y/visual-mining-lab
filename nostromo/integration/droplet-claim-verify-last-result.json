@@ -1,6 +1,6 @@
 {
-  "schema": "nostromo-droplet-claim-verify-test/v1.2",
-  "completedAt": "2026-09-03T07:03:15.723Z",
+  "schema": "nostromo-droplet-claim-verify-test/v1.3",
+  "completedAt": "2026-09-03T07:03:42.639Z",
   "status": "PASS",
   "cases": {
     "baseline": {
@@ -663,8 +663,150 @@
         }
       ],
       "boundary": "VERDICT IS COMPUTED ONLY FROM THE EXPLICIT EVIDENCE BUNDLE SUPPLIED BY AN ACTUAL CONNECTOR OR CALLER. EXACT REPLAYED EVIDENCE IS SUPPRESSED BY FINGERPRINT/IDENTITY. WHEN AN EXPLICIT AS-OF DATE AND MAX-AGE POLICY ARE SUPPLIED, STALE, UNDATED, FUTURE-DATED, OR DATE-RANGE-OVERLAPPING EVIDENCE REMAINS AUDITABLE BUT CANNOT CREATE CERTAINTY. SOURCE-FAMILY COUNTS ARE AUDIT SIGNALS RATHER THAN PROOF OF INDEPENDENCE, AND CONFLICTING AUTHORITATIVE DIRECTIONS OR CONTRADICTORY USE OF ONE FINGERPRINT FORCE INDETERMINATE. THIS EXECUTOR DOES NOT SEARCH THE WEB, INFER WHETHER A CLAIM IS TIME-SENSITIVE, SCORE METHODOLOGICAL QUALITY, PROVE SOURCE INDEPENDENCE, OR TREAT ABSENCE OF REFUTATION AS GLOBAL TRUTH."
+    },
+    "futureAuthority": {
+      "executor": "DROPLET_CLAIM_VERIFY",
+      "status": "EXECUTED",
+      "claim": "The service is currently available.",
+      "claimFingerprint": "d497cc82bca8a5da",
+      "verdict": "INDETERMINATE",
+      "counts": {
+        "evidence": 1,
+        "uniqueEvidence": 1,
+        "duplicatesSuppressed": 0,
+        "supports": 1,
+        "refutes": 0,
+        "authoritativeSupports": 1,
+        "authoritativeRefutes": 0,
+        "eligibleAuthoritativeSupports": 0,
+        "eligibleAuthoritativeRefutes": 0,
+        "staleEvidence": 0,
+        "unknownDateEvidence": 0,
+        "futureEvidence": 1,
+        "overlappingDateEvidence": 0,
+        "authoritativeSupportFamilies": 1,
+        "authoritativeRefuteFamilies": 0
+      },
+      "conflicts": {
+        "authoritativeConflict": false,
+        "integrityConflict": false,
+        "contradictoryFingerprints": []
+      },
+      "freshness": {
+        "active": true,
+        "asOf": "2026-09-02",
+        "maxAgeDays": 180,
+        "rows": [
+          {
+            "id": "T1",
+            "status": "FUTURE",
+            "date": "2026-09-03",
+            "ageDays": null,
+            "precision": "DAY"
+          }
+        ]
+      },
+      "evidenceFingerprint": "ba7fc50e12ec7c10",
+      "evidence": [
+        {
+          "id": "T1",
+          "source": "Future official status page",
+          "sourceClass": "OFFICIAL",
+          "sourceFamily": "Official status",
+          "relation": "SUPPORTS",
+          "fingerprint": "future-official",
+          "date": "2026-09-03",
+          "identityKey": "fp:future-official",
+          "familyKey": "officialstatus"
+        }
+      ],
+      "uniqueEvidence": [
+        {
+          "id": "T1",
+          "source": "Future official status page",
+          "sourceClass": "OFFICIAL",
+          "sourceFamily": "Official status",
+          "relation": "SUPPORTS",
+          "fingerprint": "future-official",
+          "date": "2026-09-03",
+          "identityKey": "fp:future-official",
+          "familyKey": "officialstatus"
+        }
+      ],
+      "boundary": "VERDICT IS COMPUTED ONLY FROM THE EXPLICIT EVIDENCE BUNDLE SUPPLIED BY AN ACTUAL CONNECTOR OR CALLER. EXACT REPLAYED EVIDENCE IS SUPPRESSED BY FINGERPRINT/IDENTITY. WHEN AN EXPLICIT AS-OF DATE AND MAX-AGE POLICY ARE SUPPLIED, STALE, UNDATED, FUTURE-DATED, OR DATE-RANGE-OVERLAPPING EVIDENCE REMAINS AUDITABLE BUT CANNOT CREATE CERTAINTY. SOURCE-FAMILY COUNTS ARE AUDIT SIGNALS RATHER THAN PROOF OF INDEPENDENCE, AND CONFLICTING AUTHORITATIVE DIRECTIONS OR CONTRADICTORY USE OF ONE FINGERPRINT FORCE INDETERMINATE. THIS EXECUTOR DOES NOT SEARCH THE WEB, INFER WHETHER A CLAIM IS TIME-SENSITIVE, SCORE METHODOLOGICAL QUALITY, PROVE SOURCE INDEPENDENCE, OR TREAT ABSENCE OF REFUTATION AS GLOBAL TRUTH."
+    },
+    "partialMonthOverlap": {
+      "executor": "DROPLET_CLAIM_VERIFY",
+      "status": "EXECUTED",
+      "claim": "The service is currently available.",
+      "claimFingerprint": "d497cc82bca8a5da",
+      "verdict": "INDETERMINATE",
+      "counts": {
+        "evidence": 1,
+        "uniqueEvidence": 1,
+        "duplicatesSuppressed": 0,
+        "supports": 1,
+        "refutes": 0,
+        "authoritativeSupports": 1,
+        "authoritativeRefutes": 0,
+        "eligibleAuthoritativeSupports": 0,
+        "eligibleAuthoritativeRefutes": 0,
+        "staleEvidence": 0,
+        "unknownDateEvidence": 0,
+        "futureEvidence": 0,
+        "overlappingDateEvidence": 1,
+        "authoritativeSupportFamilies": 1,
+        "authoritativeRefuteFamilies": 0
+      },
+      "conflicts": {
+        "authoritativeConflict": false,
+        "integrityConflict": false,
+        "contradictoryFingerprints": []
+      },
+      "freshness": {
+        "active": true,
+        "asOf": "2026-09-02",
+        "maxAgeDays": 180,
+        "rows": [
+          {
+            "id": "T2",
+            "status": "OVERLAPS_AS_OF",
+            "date": "2026-09",
+            "ageDays": null,
+            "precision": "MONTH"
+          }
+        ]
+      },
+      "evidenceFingerprint": "0fc9c41b806e4364",
+      "evidence": [
+        {
+          "id": "T2",
+          "source": "Month-only official record",
+          "sourceClass": "OFFICIAL",
+          "sourceFamily": "Official status",
+          "relation": "SUPPORTS",
+          "fingerprint": "month-overlap",
+          "date": "2026-09",
+          "identityKey": "fp:month-overlap",
+          "familyKey": "officialstatus"
+        }
+      ],
+      "uniqueEvidence": [
+        {
+          "id": "T2",
+          "source": "Month-only official record",
+          "sourceClass": "OFFICIAL",
+          "sourceFamily": "Official status",
+          "relation": "SUPPORTS",
+          "fingerprint": "month-overlap",
+          "date": "2026-09",
+          "identityKey": "fp:month-overlap",
+          "familyKey": "officialstatus"
+        }
+      ],
+      "boundary": "VERDICT IS COMPUTED ONLY FROM THE EXPLICIT EVIDENCE BUNDLE SUPPLIED BY AN ACTUAL CONNECTOR OR CALLER. EXACT REPLAYED EVIDENCE IS SUPPRESSED BY FINGERPRINT/IDENTITY. WHEN AN EXPLICIT AS-OF DATE AND MAX-AGE POLICY ARE SUPPLIED, STALE, UNDATED, FUTURE-DATED, OR DATE-RANGE-OVERLAPPING EVIDENCE REMAINS AUDITABLE BUT CANNOT CREATE CERTAINTY. SOURCE-FAMILY COUNTS ARE AUDIT SIGNALS RATHER THAN PROOF OF INDEPENDENCE, AND CONFLICTING AUTHORITATIVE DIRECTIONS OR CONTRADICTORY USE OF ONE FINGERPRINT FORCE INDETERMINATE. THIS EXECUTOR DOES NOT SEARCH THE WEB, INFER WHETHER A CLAIM IS TIME-SENSITIVE, SCORE METHODOLOGICAL QUALITY, PROVE SOURCE INDEPENDENCE, OR TREAT ABSENCE OF REFUTATION AS GLOBAL TRUTH."
     }
   },
   "failures": [],
-  "boundary": "This test validates deterministic claim verdict computation from explicit evidence, exact replay suppression, source-family audit counts, authoritative-direction conflict containment, fingerprint-integrity conflict containment, and opt-in freshness gating that prevents stale or undated evidence from creating certainty. CI performs no web search and does not infer whether a claim is time-sensitive."
+  "boundary": "This test validates deterministic claim verdict computation from explicit evidence, exact replay suppression, source-family audit counts, authoritative-direction conflict containment, fingerprint-integrity conflict containment, and opt-in temporal gating that prevents stale, undated, future-dated, or date-range-overlapping evidence from creating certainty. CI performs no web search and does not infer whether a claim is time-sensitive."
 }
