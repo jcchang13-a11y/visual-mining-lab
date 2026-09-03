@@ -1,8 +1,8 @@
 {
-  "schema": "nostromo-organ-registry/v1.41",
-  "updatedAt": "2026-09-03T10:08:00+08:00",
+  "schema": "nostromo-organ-registry/v1.42",
+  "updatedAt": "2026-09-03T12:06:30+08:00",
   "truthRule": "DISPLAYED STATE MUST FOLLOW EVIDENCE",
-  "evidence": "ci-last-result.json plus formal-round-last-result.json plus connector-last-result.json plus muther-falsify-last-result.json plus muther-repo-diversity-last-result.json plus droplet-claim-verify-last-result.json plus gut-metabolism-last-result.json plus gut-lineage-last-result.json plus vajra-dynamic-last-result.json plus vajra-uncertainty-last-result.json plus vajra-conflict-escalation-last-result.json plus vajra-provenance-diversity-last-result.json plus shroom-feedback-last-result.json",
+  "evidence": "ci-last-result.json plus formal-round-last-result.json plus connector-last-result.json plus muther-falsify-last-result.json plus muther-repo-diversity-last-result.json plus droplet-claim-verify-last-result.json plus gut-metabolism-last-result.json plus gut-lineage-last-result.json plus vajra-dynamic-last-result.json plus vajra-ambiguity-last-result.json plus vajra-uncertainty-last-result.json plus vajra-conflict-escalation-last-result.json plus vajra-provenance-diversity-last-result.json plus shroom-feedback-last-result.json",
   "latestFormalRound": "greenhouse/r113-nostromo-formal-round.json",
   "latestFormalFinding": {
     "reference": "R111",
@@ -30,19 +30,18 @@
   },
   "latestThickening": {
     "organ": "VAJRA",
-    "version": "VAJRA cross-organ replay guard v0.3.3",
-    "status": "VERIFIED_MULTIPLICATIVE_OPERATOR_DIVERGENCE_REPLAY_GUARD",
-    "test": "vajra-provenance-diversity-last-result.json v0.3.3 + NOSTROMO Integration Test runs 280 and 281",
+    "version": "VAJRA branch-scoped cross-organ ambiguity guard v0.3",
+    "status": "VERIFIED_BRANCH_SCOPED_CROSS_ORGAN_AMBIGUITY_PRESERVATION",
+    "test": "vajra-ambiguity-last-result.json v0.3 + NOSTROMO Integration Test run 286",
     "capabilities": [
-      "cross-organ replay canonicalization preserves explicit meaning-bearing comparison, equality, addition/subtraction, multiplication and division operators",
-      "when two sufficiently long materials both contain explicit operators but their operator signatures diverge, lexical overlap can no longer falsely classify them as near replay",
-      "operator-opposed materials such as score > 10 versus score < 10 and outcome = exposure * duration versus outcome = exposure / duration remain distinct under bounded near-replay handling",
-      "ASCII and mathematical multiplication/division forms (*, /, ×, ÷) have dedicated adversarial coverage",
-      "ordinary lightly wrapped repeated material without operator divergence still triggers bounded lexical replay review",
-      "exact provenance reuse, exact content replay and bounded lexical wrapper replay still block premature reassessment",
-      "raw organ returns remain preserved and distinct provenance labels are still not upgraded to proof of real-world source independence"
+      "receipt ambiguity is now keyed to the VAJRA branch identity targetRef + clauseRef + lens rather than being partitioned by organ label",
+      "qualifying returns from DROPLET and MU/TH/UR that address the same branch can jointly preserve AMBIGUOUS_BY_RECEIPTS instead of allowing arrival order to manufacture closure",
+      "cross-organ diversity by itself does not manufacture ambiguity when the qualifying relations point in the same explicit direction",
+      "malformed, non-executed, provenance-free, empty-material or relation-free returns remain excluded from ambiguity formation",
+      "distinct organ and provenance counts are retained as audit metadata without being upgraded to proof of real-world source independence",
+      "the existing explicit-conflict, uncertainty, replay, provenance-diversity and operator-preservation guards remain intact"
     ],
-    "boundary": "Multiplication/division protection was already present in executable v0.3.3 and dedicated adversarial tests, and was successfully exercised by NOSTROMO Integration Test run 280 for commit 7b699398a9806565f6297613c11e1ff6051bbab1. The stale boundary text that still called it unpromoted was corrected in commit 9e811b439dc2f99e7f067b0bc1aa0c3a53a078ca; full NOSTROMO Integration Test run 281 then completed successfully. This is deterministic syntactic operator-divergence protection, not semantic theorem proving, factual adjudication, derivative-source detection or proof of source independence."
+    "boundary": "The branch-scoped guard was implemented in commit eb8ccc00d045a3e2106d8194b44d5458b98fa92d and passed the full NOSTROMO Integration Test run 285. Dedicated cross-organ adversarial and same-direction control coverage was then added in commit a04c214f38799357da8a0d89d4c479cdce4e4204; NOSTROMO Integration Test run 286 completed successfully. This proves deterministic branch-scoped ambiguity containment across organ labels. It does not prove semantic disagreement, factual truth, evidence quality, derivative-source detection or source independence."
   },
   "organs": {
     "shrooming": {
@@ -93,11 +92,11 @@
     },
     "vajra": {
       "mode": "EXEC_CONNECTED_THICKENED",
-      "source": "../vajra/vajra-engine.js + ../vajra/receipt-uncertainty-guard.js + ./vajra-conflict-escalation.mjs + ./vajra-provenance-diversity-guard.mjs",
+      "source": "../vajra/vajra-engine.js + ../vajra/receipt-uncertainty-guard.js + ./vajra-conflict-escalation.mjs + ./vajra-provenance-diversity-guard.mjs + ./vajra-ambiguity-guard.mjs",
       "actions": {
-        "DISMANTLE": "VERIFIED_PROPOSITION_AWARE_DISMANTLER_WITH_RECEIPT_GUARDS_MULTI_ORGAN_CONTEXT_CROSS_INTAKE_REPLAY_CONTENT_BOUND_HISTORY_ATTESTATION_CANONICAL_PROVENANCE_DIVERSITY_OPERATOR_PRESERVATION_AND_OPERATOR_DIVERGENCE_NEAR_REPLAY_PROTECTION"
+        "DISMANTLE": "VERIFIED_PROPOSITION_AWARE_DISMANTLER_WITH_RECEIPT_GUARDS_BRANCH_SCOPED_CROSS_ORGAN_AMBIGUITY_MULTI_ORGAN_CONTEXT_REPLAY_HISTORY_PROVENANCE_DIVERSITY_AND_OPERATOR_PROTECTION"
       },
-      "boundary": "VAJRA retains proposition-aware dismantling, uncertainty/provenance preservation, contest persistence, multi-organ conflict-context routing, replay containment, content-bound history attestation and semantic-operator-preserving replay identity. Its cross-organ provenance-diversity/content-replay guard is v0.3.3: bounded superficial formatting remains normalized; explicit comparison, equality, addition/subtraction, multiplication and division operators are protected before canonicalization; and lexical near-replay similarity cannot override explicit divergent operator signatures when both compared materials contain such operators. Dedicated adversarial coverage includes *, /, × and ÷ and is backed by successful full integration runs 280 and 281. Exact replay and ordinary bounded lexical wrapper replay still change VAJRA behavior by blocking premature reassessment. Raw provenance labels and raw returned material remain preserved for audit. Distinct canonical labels still do not prove real-world source independence. These remain deterministic lexical/structural guards, not cryptographic signatures, semantic adjudication, factual truth, derivative-source detection or real-world source-independence proof."
+      "boundary": "VAJRA retains proposition-aware dismantling, uncertainty/provenance preservation, contest persistence, multi-organ conflict-context routing, replay containment, content-bound history attestation and semantic-operator-preserving replay identity. Its ambiguity guard is now v0.3 and branch-scoped: qualifying executed returns that share targetRef + clauseRef + lens are evaluated together even when their organ labels differ, so cross-organ arrival order cannot silently create first-receipt closure when at least one relation remains lexically UNSPECIFIED. Same-direction cross-organ returns do not become ambiguous merely because their organ labels differ, and malformed/non-executed returns remain excluded. Its cross-organ provenance-diversity/content-replay guard remains v0.3.3, including comparison, equality, addition/subtraction, multiplication and division operator preservation. Distinct organ or canonical provenance labels still do not prove real-world source independence. These remain deterministic lexical/structural guards, not semantic adjudication, factual truth, derivative-source detection or real-world source-independence proof."
     }
   }
 }
