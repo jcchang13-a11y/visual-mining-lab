@@ -112,12 +112,12 @@ check((observedReplay.lineageOnlySuppressed||0)>=1,'OBSERVED_REPLAY_LINEAGE_SUPP
 const scaffoldCarry=compactMetabolicCarry([
   '[CONTRADICTION->VAJRA] CONTRADICTION：false：以 evidence 位置重讀：主動尋找最小反例與破壞條件',
   '[CLAIM->DROPLET] true',
-  '[QUESTION->SHROOMING] false positive 是一個完整語義片語，不能因為包含 false 就被刪掉。',
+  '[QUESTION->SHROOMING] false-positive 是一個完整語義片語，不能因為包含布林字樣就被刪掉。',
   '[EVIDENCE_OR_PROVENANCE->MUTHER] 200'
 ].join(' · '));
-check(!/(?:^|[：·\s])(?:true|false|null|undefined)(?:$|[：·\s])/i.test(scaffoldCarry.text.replace(/false positive/gi,'')),'CARRY_SCAFFOLD_SCALAR_SURVIVED',scaffoldCarry.text);
+check(!/(?:^|[：·\s])(?:true|false|null|undefined)(?:$|[：·\s])/i.test(scaffoldCarry.text),'CARRY_SCAFFOLD_SCALAR_SURVIVED',scaffoldCarry.text);
 check((scaffoldCarry.scaffoldScalarSuppressed||0)>=2,'CARRY_SCAFFOLD_SCALAR_NOT_ACCOUNTED',scaffoldCarry);
-check(scaffoldCarry.text.includes('false positive 是一個完整語義片語'),'SUBSTANTIVE_FALSE_PHRASE_OVERTRIMMED',scaffoldCarry.text);
+check(scaffoldCarry.text.includes('false-positive 是一個完整語義片語'),'SUBSTANTIVE_FALSE_PHRASE_OVERTRIMMED',scaffoldCarry.text);
 check(scaffoldCarry.text.includes('200'),'NUMERIC_SCALAR_OVERTRIMMED',scaffoldCarry.text);
 check(scaffoldCarry.text.includes('主動尋找最小反例與破壞條件'),'SCAFFOLD_CONTROL_SUBSTANTIVE_CLAUSE_LOST',scaffoldCarry.text);
 
