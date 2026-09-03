@@ -1,6 +1,6 @@
 {
-  "schema": "nostromo-organ-registry/v1.49",
-  "updatedAt": "2026-09-03T23:09:00+08:00",
+  "schema": "nostromo-organ-registry/v1.50",
+  "updatedAt": "2026-09-04T00:10:00+08:00",
   "truthRule": "DISPLAYED STATE MUST FOLLOW EVIDENCE",
   "evidence": "ci-last-result.json plus formal-round-last-result.json plus connector-last-result.json plus muther-falsify-last-result.json plus muther-repo-diversity-last-result.json plus droplet-claim-verify-last-result.json plus gut-metabolism-last-result.json plus gut-lineage-last-result.json plus vajra-dynamic-last-result.json plus vajra-ambiguity-last-result.json plus vajra-uncertainty-last-result.json plus vajra-conflict-escalation-last-result.json plus vajra-provenance-diversity-last-result.json plus shroom-feedback-last-result.json",
   "latestFormalRound": "greenhouse/r113-nostromo-formal-round.json",
@@ -29,19 +29,20 @@
     "boundary": "Isolated counterfactual executor only. It deliberately includes parent round ordinal in participant selection and has been CI-verified against R111 and R112. It does not write or advance formal greenhouse history and is engineering evidence that NOSTROMO can execute and audit a parent-sensitive transition, not evidence that the real SHROOMING population is causally path-dependent."
   },
   "latestThickening": {
-    "organ": "VAJRA",
-    "version": "VAJRA receipt ambiguity negation guard v0.4.1",
-    "status": "VERIFIED_NEGATION_AWARE_RECEIPT_POLARITY_AMBIGUITY_GUARD",
-    "test": "vajra-ambiguity-last-result.json v0.4 + NOSTROMO Integration Test run 315",
+    "organ": "MU/TH/UR",
+    "version": "MUTHER repository exact-replay provenance retention v0.2.2",
+    "status": "VERIFIED_EXACT_REPLAY_PROVENANCE_RETENTION_WITHOUT_MATERIAL_AMPLIFICATION",
+    "test": "muther-repo-diversity-last-result.json v0.2.2 + NOSTROMO Integration Test run 317",
     "capabilities": [
-      "bounded English negated support/refute phrases such as does not support and does not refute are masked before lexical polarity classification so the bare keyword cannot manufacture directional evidence",
-      "bounded Chinese negated support phrases such as 並未支持 are likewise kept UNSPECIFIED rather than being promoted to SUPPORTS",
-      "branch-scoped ambiguity remains preserved across different organ labels when one qualifying executed return has an UNSPECIFIED relation",
-      "same-direction cross-organ controls remain resolvable and organ diversity alone does not manufacture ambiguity",
-      "malformed, non-executed, provenance-free, empty-material or relation-free returns remain excluded from ambiguity formation",
-      "NOSTROMO Integration Test run 315 completed successfully with the negation adversarial cases, prior ambiguity controls, cross-organ controls, poison controls and full integration failures empty"
+      "exact normalized content replay is still counted once as material instead of being amplified by copied repository text",
+      "a bounded exactDuplicateAudit now preserves the kept and suppressed repository paths, source families, true occurrence ordinals, occurrence offsets and shared content fingerprint",
+      "cross-family exact replay is explicitly marked rather than silently disappearing into a duplicate count",
+      "cross-family copies are not upgraded to independent evidence merely because their path-derived source-family labels differ",
+      "existing lexical near-duplicate containment, bounded multi-window extraction, true occurrence provenance and source-family-balanced selection remain intact",
+      "the full MUTHER executor packet carries the bounded exact-replay provenance audit downstream to GUT without restoring the suppressed copy as an extra material hit",
+      "NOSTROMO Integration Test run 317 completed successfully and the v0.2.2 adversarial exact-replay fixture retained one material hit plus one auditable cross-family provenance record with failures empty"
     ],
-    "boundary": "This is deterministic bounded lexical negation masking and branch-scoped structural audit logic. It does not resolve general semantic negation scope, adjudicate truth, score evidence quality, prove source independence or infer that UNSPECIFIED material is contradictory."
+    "boundary": "This is deterministic bounded replay containment and provenance retention. It preserves where exact copied material was encountered without counting those copies as independent evidence. It does not prove common authorship, derivative-source lineage, semantic equivalence, source independence, source quality, novelty, truth or exhaustive repository coverage."
   },
   "organs": {
     "shrooming": {
@@ -63,12 +64,12 @@
       "actions": {
         "READ_STATE": "EXEC_STATE",
         "AUDIT_STATE": "EXEC_STATE",
-        "MINE_REPO": "VERIFIED_DIVERSITY_PRESERVING_MULTI_WINDOW_REPO_MINE_WITH_TRUE_OCCURRENCE_PROVENANCE_AND_LEXICAL_NEAR_DUPLICATE_CONTAINMENT",
+        "MINE_REPO": "VERIFIED_DIVERSITY_PRESERVING_MULTI_WINDOW_REPO_MINE_WITH_TRUE_OCCURRENCE_AND_EXACT_REPLAY_PROVENANCE_RETENTION_PLUS_LEXICAL_NEAR_DUPLICATE_CONTAINMENT",
         "MINE_DRIVE_QUERY": "CONNECTOR_EXEC",
         "MINE_INTERNAL": "AUTHORIZED_CONNECTOR_EXEC",
         "FALSIFY": "REPO_COUNTEREVIDENCE_EXEC"
       },
-      "boundary": "Published mining-state audit and repository corpus mining are executable. MINE_REPO allows each matching repository file to contribute a bounded number of separated query windows before deduplication, preserving path, true source occurrence ordinal, occurrence offset, query-occurrence count and source-family provenance. The verified v0.2.1 adversarial test proves that if occurrence 2 is skipped by the minimum-gap guard, later selected occurrences retain ordinals 3 and 4 instead of being renumbered as selected windows 2 and 3. This reduces structural first-hit blindness without compressing source-event order. Candidates are still fingerprinted after superficial normalization, exact copies are suppressed, a conservative character-shingle lexical-overlap guard contains near duplicates with an audit ledger, and bounded selection remains round-robin across path-derived source families. This is deterministic lexical/structural coverage, not semantic clustering or vein detection, exhaustive within-file coverage, source-independence proof, source-quality scoring, novelty proof or truth judgment. Query-scoped Google Drive mining is executed by the authorized external connector runtime and handed back as redacted evidence. MINE_INTERNAL remains limited to explicit authorized query-scoped connector sources; it does not grant exhaustive private-environment crawling or cross-source enumeration. FALSIFY remains repository-scoped and absence is never upgraded to truth."
+      "boundary": "Published mining-state audit and repository corpus mining are executable. MINE_REPO allows each matching repository file to contribute a bounded number of separated query windows before deduplication, preserving path, true source occurrence ordinal, occurrence offset, query-occurrence count and source-family provenance. The verified v0.2.2 adversarial suite preserves true ordinals when nearby occurrences are skipped and now also preserves a bounded provenance audit for exact normalized content copies that are suppressed from material amplification. Exact replay remains one material hit; suppressed copies retain kept/suppressed path, source-family, occurrence and fingerprint metadata, including an explicit cross-family flag. Cross-family copies are not upgraded to independent evidence. A conservative character-shingle lexical-overlap guard still contains near duplicates with an audit ledger, and bounded selection remains round-robin across path-derived source families. This is deterministic lexical/structural coverage and replay provenance retention, not semantic clustering or vein detection, exhaustive within-file coverage, derivative-source inference, source-independence proof, source-quality scoring, novelty proof or truth judgment. Query-scoped Google Drive mining is executed by the authorized external connector runtime and handed back as redacted evidence. MINE_INTERNAL remains limited to explicit authorized query-scoped connector sources; it does not grant exhaustive private-environment crawling or cross-source enumeration. FALSIFY remains repository-scoped and absence is never upgraded to truth."
     },
     "droplet": {
       "mode": "PARTIAL_EXEC_THICKENED",
