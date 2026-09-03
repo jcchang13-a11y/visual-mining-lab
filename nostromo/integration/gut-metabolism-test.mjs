@@ -21,7 +21,7 @@ const sample={
   duplicateA:'same useful material',duplicateB:'same useful material'
 };
 const gut=globalThis.GutEngine.digest(sample,{source:'NOSTROMO/gut-metabolism-test'});
-check(gut.version==='0.2.24','GUT_VERSION',gut.version);
+check(gut.version==='0.2.25','GUT_VERSION',gut.version);
 check(gut.mode==='DETERMINISTIC_HEURISTIC_ROUTER','GUT_MODE',gut.mode);
 check(gut.routes?.DROPLET?.count>=1,'CLAIM_NOT_ROUTED_TO_DROPLET',gut.routes?.DROPLET);
 check(gut.routes?.SHROOMING?.count>=1,'QUESTION_NOT_ROUTED_TO_SHROOMING',gut.routes?.SHROOMING);
@@ -31,6 +31,19 @@ check(gut.quarantined>=1,'FAILURE_NOT_QUARANTINED',gut.quarantine);
 check(gut.excreted>=1,'DUPLICATE_NOT_EXCRETED',gut.waste);
 check(gut.held>=1,'UNCERTAINTY_NOT_HELD',gut.hold);
 check(gut.nutrients.every(x=>x.provenance?.inputSource==='NOSTROMO/gut-metabolism-test'),'PROVENANCE_LOST',gut.nutrients);
+
+const riskContextGut=globalThis.GutEngine.digest({
+  evidenceFinding:'Evidence: the measured error rate fell from twelve percent to four percent after the patch.',
+  contradiction:'Counterevidence: the previously rejected assumption conflicts with the measured trace.',
+  claim:'Claim: an invalid premise can still generate a useful falsification target.',
+  machineFailure:{status:'FAILED',error:'network timeout while retrieving authorized evidence'}
+},{source:'NOSTROMO/gut-risk-context-test'});
+check(riskContextGut.quarantined===2,'RISK_CONTEXT_FALSE_QUARANTINE_COUNT',{quarantined:riskContextGut.quarantined,quarantine:riskContextGut.quarantine});
+check(riskContextGut.routes?.MUTHER?.items?.some(x=>x.path==='root.evidenceFinding'),'ERROR_RATE_PROSE_FALSELY_QUARANTINED',riskContextGut.routes?.MUTHER);
+check(riskContextGut.routes?.VAJRA?.items?.some(x=>x.path==='root.contradiction'),'REJECTED_ASSUMPTION_FALSELY_QUARANTINED',riskContextGut.routes?.VAJRA);
+check(riskContextGut.routes?.DROPLET?.items?.some(x=>x.path==='root.claim'),'INVALID_PREMISE_FALSELY_QUARANTINED',riskContextGut.routes?.DROPLET);
+check(riskContextGut.quarantine?.every(x=>x.path.startsWith('root.machineFailure.')),'TRUE_FAILURE_ESCAPED_CONTEXTUAL_QUARANTINE',riskContextGut.quarantine);
+check(riskContextGut.nutrients?.every(x=>x.provenance?.inputSource==='NOSTROMO/gut-risk-context-test'),'RISK_CONTEXT_PROVENANCE_LOST',riskContextGut.nutrients);
 
 const inherited='This inherited substrate is deliberately long enough to be recognized as prior-round material and must not be counted as novelty.';
 const inheritedGut=globalThis.GutEngine.digest({reaction:`new observation before ${inherited} new observation after`},{source:'NOSTROMO/gut-inherited-test',inheritedSubstrates:[inherited]});
@@ -112,7 +125,7 @@ check(structuredGut.routes?.MUTHER?.count===1,'STRUCTURED_NOT_ROUTED_TO_MUTHER',
 
 let active=null;
 try{
-  active=await runActiveExecutorLoop({rounds:3,seed:'GUT v0.2.24 feedback validation',mineQuery:'NOSTROMO',verifyUrl:'https://github.com/jcchang13-a11y/visual-mining-lab'});
+  active=await runActiveExecutorLoop({rounds:3,seed:'GUT v0.2.25 feedback validation',mineQuery:'NOSTROMO',verifyUrl:'https://github.com/jcchang13-a11y/visual-mining-lab'});
   check(active.status==='PASS','ACTIVE_LOOP_FAIL',{status:active.status,completedRounds:active.completedRounds});
   check(active.feedback?.appliedRounds===2,'FEEDBACK_APPLIED_ROUNDS',active.feedback);
   check(active.feedback?.firstAppliedRound===2,'FEEDBACK_FIRST_ROUND',active.feedback);
@@ -123,13 +136,14 @@ try{
 }catch(error){failures.push({type:'ACTIVE_LOOP_EXCEPTION',message:String(error?.message||error)});}
 
 const result={
-  schema:'nostromo-gut-metabolism-test/v0.2.24',completedAt:new Date().toISOString(),status:failures.length===0?'PASS':'FAIL',
+  schema:'nostromo-gut-metabolism-test/v0.2.25',completedAt:new Date().toISOString(),status:failures.length===0?'PASS':'FAIL',
   gut:{version:gut.version,mode:gut.mode,typeCounts:gut.typeCounts,routeCounts:Object.fromEntries(Object.entries(gut.routes).map(([k,v])=>[k,v.count])),boundary:gut.boundary},
+  riskContext:{status:riskContextGut.quarantined===2?'PASS':'FAIL',quarantined:riskContextGut.quarantined,routeCounts:Object.fromEntries(Object.entries(riskContextGut.routes).map(([k,v])=>[k,v.count])),boundary:'Ordinary semantic prose containing error/rejected/invalid lexemes must remain routable; only dedicated failure/risk paths or explicit machine-like failure status markers are quarantined.'},
   antiEcho:{nested:nestedGut.antiEcho,taggedTail:taggedTailGut.antiEcho,shortAdjacent:shortGut.antiEcho,nearDuplicate:nearGut.antiEcho,sharedBodySummary:sharedBodyGut.antiEcho,nonAdjacentCarry:nonAdjacentGut.antiEcho,shortTokenCarry:shortTokenGut.antiEcho,machineMetadataCarry:metadataGut.antiEcho,inherited:inheritedGut.antiEcho,partialInherited:partialGut.antiEcho},
   carryRefLedger:{count:metadataGut.carryRefCount,refs:metadataGut.carryRefs},
   feedback:active?{status:active.status,completedRounds:active.completedRounds,feedback:active.feedback,lastCarry:active.trace?.at(-1)?.carryOut||null,roundAntiEcho:active.trace?.map(x=>x.gut?.antiEcho),boundary:active.boundary}:null,
   failures,
-  boundary:'PASS proves deterministic heuristic routing, provenance retention, quarantine/hold behavior, conservative exact inherited-substrate removal, exact tagged-payload de-echoing, exact repeated tagged-tail suppression while retaining distinct heads, pre/post short exact adjacent intra-atom echo suppression, shared-body summary diversity, exact non-adjacent full-width-colon carry-clause compaction, consecutive exact 1–4 character carry-token run collapse, summary-only machine ref/clause metadata containment, and a bounded out-of-band carryRefs ledger that preserves referential identity and provenance without re-inserting machine IDs into prose carry. It also proves near-duplicate preservation, structured-snippet protection, and a 3-round cross-organ connector-feedback regression whose final prose carry contains no hexadecimal ref/clause metadata tokens. It does not prove semantic novelty, semantic correctness, reference truth, or source truth.'
+  boundary:'PASS proves deterministic heuristic routing, provenance retention, contextual risk quarantine that does not discard ordinary semantic prose merely for mentioning error/rejected/invalid lexemes, conservative exact inherited-substrate removal, exact tagged-payload de-echoing, exact repeated tagged-tail suppression while retaining distinct heads, pre/post short exact adjacent intra-atom echo suppression, shared-body summary diversity, exact non-adjacent full-width-colon carry-clause compaction, consecutive exact 1–4 character carry-token run collapse, summary-only machine ref/clause metadata containment, and a bounded out-of-band carryRefs ledger that preserves referential identity and provenance without re-inserting machine IDs into prose carry. It also proves near-duplicate preservation, structured-snippet protection, and a 3-round cross-organ connector-feedback regression whose final prose carry contains no hexadecimal ref/clause metadata tokens. It does not prove semantic novelty, semantic correctness, reference truth, or source truth.'
 };
 await fs.writeFile(path.join(root,'nostromo/integration/gut-metabolism-last-result.json'),JSON.stringify(result,null,2)+'\n','utf8');
 console.log(JSON.stringify(result,null,2));
