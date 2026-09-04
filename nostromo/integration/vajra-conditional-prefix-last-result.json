@@ -1,0 +1,108 @@
+{
+  "schema": "nostromo-vajra-conditional-prefix-test/v0.2",
+  "status": "PASS",
+  "guard": "VAJRA ambiguity/conflict guard v0.5.3",
+  "capability": "BOUNDED_ENGLISH_CHINESE_CONDITION_AND_EXCEPTION_SCOPE_CONTAINMENT",
+  "observations": [
+    {
+      "name": "ONLY_IF_PREFIX",
+      "relation": "Only if retries remain disabled, this evidence supports the target claim.",
+      "expected": "UNSPECIFIED",
+      "actual": "UNSPECIFIED",
+      "auditStatus": "AMBIGUITY_FOUND"
+    },
+    {
+      "name": "PROVIDED_PREFIX",
+      "relation": "Provided that duplicate inputs are retained, this evidence refutes the target claim.",
+      "expected": "UNSPECIFIED",
+      "actual": "UNSPECIFIED",
+      "auditStatus": "AMBIGUITY_FOUND"
+    },
+    {
+      "name": "ASSUMING_PREFIX",
+      "relation": "Assuming that the cache is cold, this evidence confirms the target claim.",
+      "expected": "UNSPECIFIED",
+      "actual": "UNSPECIFIED",
+      "auditStatus": "AMBIGUITY_FOUND"
+    },
+    {
+      "name": "SUBJECT_TO_PREFIX",
+      "relation": "Subject to the stated sampling restriction, this evidence contradicts the target claim.",
+      "expected": "UNSPECIFIED",
+      "actual": "UNSPECIFIED",
+      "auditStatus": "AMBIGUITY_FOUND"
+    },
+    {
+      "name": "UNDER_CONDITION_PREFIX",
+      "relation": "Under the condition that the fallback is disabled, this evidence corroborates the target claim.",
+      "expected": "UNSPECIFIED",
+      "actual": "UNSPECIFIED",
+      "auditStatus": "AMBIGUITY_FOUND"
+    },
+    {
+      "name": "UNLESS_PREFIX",
+      "relation": "Unless retries are disabled, this evidence supports the target claim.",
+      "expected": "UNSPECIFIED",
+      "actual": "UNSPECIFIED",
+      "auditStatus": "AMBIGUITY_FOUND"
+    },
+    {
+      "name": "EXCEPT_WHEN_PREFIX",
+      "relation": "Except when duplicate inputs are retained, this evidence refutes the target claim.",
+      "expected": "UNSPECIFIED",
+      "actual": "UNSPECIFIED",
+      "auditStatus": "AMBIGUITY_FOUND"
+    },
+    {
+      "name": "EXCEPT_IF_SUFFIX",
+      "relation": "This evidence supports the target claim except if the fallback path is active.",
+      "expected": "UNSPECIFIED",
+      "actual": "UNSPECIFIED",
+      "auditStatus": "AMBIGUITY_FOUND"
+    },
+    {
+      "name": "ZH_UNLESS_PREFIX",
+      "relation": "除非重試機制關閉，這份證據才支持目標命題。",
+      "expected": "UNSPECIFIED",
+      "actual": "UNSPECIFIED",
+      "auditStatus": "AMBIGUITY_FOUND"
+    },
+    {
+      "name": "ZH_EXCEPT_PREFIX",
+      "relation": "除了快取失效的情況之外，這份證據反駁目標命題。",
+      "expected": "UNSPECIFIED",
+      "actual": "UNSPECIFIED",
+      "auditStatus": "AMBIGUITY_FOUND"
+    },
+    {
+      "name": "SENTENCE_BOUNDARY_CONTROL",
+      "relation": "Only if retries remain disabled, logging behavior changes. This evidence supports the target claim.",
+      "expected": "SUPPORTS",
+      "actual": "SUPPORTS",
+      "auditStatus": "AMBIGUITY_FOUND"
+    },
+    {
+      "name": "SEMICOLON_BOUNDARY_CONTROL",
+      "relation": "Provided that duplicate inputs are retained, logging behavior changes; this evidence refutes the target claim.",
+      "expected": "REFUTES",
+      "actual": "REFUTES",
+      "auditStatus": "AMBIGUITY_FOUND"
+    },
+    {
+      "name": "UNLESS_SENTENCE_BOUNDARY_CONTROL",
+      "relation": "Unless retries are disabled, logging behavior changes. This evidence supports the target claim.",
+      "expected": "SUPPORTS",
+      "actual": "SUPPORTS",
+      "auditStatus": "AMBIGUITY_FOUND"
+    },
+    {
+      "name": "EXCEPT_SEMICOLON_BOUNDARY_CONTROL",
+      "relation": "Except when duplicate inputs are retained, logging behavior changes; this evidence refutes the target claim.",
+      "expected": "REFUTES",
+      "actual": "REFUTES",
+      "auditStatus": "AMBIGUITY_FOUND"
+    }
+  ],
+  "failures": [],
+  "boundary": "This adversarial test covers bounded English/Chinese condition and exception-scope forms around support/refute vocabulary and verifies that prefix masking does not cross sentence or semicolon boundaries. It is lexical/structural scope containment, not general logical parsing or semantic condition/exception adjudication."
+}
