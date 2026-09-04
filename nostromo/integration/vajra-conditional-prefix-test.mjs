@@ -40,6 +40,12 @@ const cases=[
   ['ZH_RUO_PREFIX_REFUTE','若這份證據反駁目標命題，樣本仍需重跑。','UNSPECIFIED'],
   ['ZH_TANGRUO_PREFIX_SUPPORT','倘若這份證據支持目標命題，來源獨立性仍未知。','UNSPECIFIED'],
   ['ZH_ZHIYAO_PREFIX_REFUTE','只要這份證據反駁目標命題，仍應保留未解條件。','UNSPECIFIED'],
+  ['IF_SAME_SENTENCE_MAIN_SUPPORT','If provenance is audited, this evidence supports the target claim.','UNSPECIFIED'],
+  ['WHEN_SAME_SENTENCE_MAIN_REFUTE','When the bounded sample is complete, this evidence refutes the target claim.','UNSPECIFIED'],
+  ['AS_LONG_AS_SAME_SENTENCE_MAIN_SUPPORT','As long as source independence is verified, this evidence confirms the target claim.','UNSPECIFIED'],
+  ['ZH_IF_SAME_SENTENCE_MAIN_SUPPORT','如果來源完成核實，這份證據支持目標命題。','UNSPECIFIED'],
+  ['ZH_RUO_SAME_SENTENCE_MAIN_REFUTE','若樣本完成重跑，這份證據反駁目標命題。','UNSPECIFIED'],
+  ['ZH_ZHIYAO_SAME_SENTENCE_MAIN_SUPPORT','只要來源彼此獨立，這份證據佐證目標命題。','UNSPECIFIED'],
   ['SENTENCE_BOUNDARY_CONTROL','Only if retries remain disabled, logging behavior changes. This evidence supports the target claim.','SUPPORTS'],
   ['SEMICOLON_BOUNDARY_CONTROL','Provided that duplicate inputs are retained, logging behavior changes; this evidence refutes the target claim.','REFUTES'],
   ['UNLESS_SENTENCE_BOUNDARY_CONTROL','Unless retries are disabled, logging behavior changes. This evidence supports the target claim.','SUPPORTS'],
@@ -63,13 +69,13 @@ for(const [name,relation,expected] of cases){
 }
 
 const result={
-  schema:'nostromo-vajra-conditional-prefix-test/v0.5',
+  schema:'nostromo-vajra-conditional-prefix-test/v0.6',
   status:failures.length?'FAIL':'PASS',
-  guard:'VAJRA ambiguity/conflict guard v0.5.6',
-  capability:'BOUNDED_ENGLISH_CHINESE_GENERIC_CONDITION_EXCEPTION_CONCESSIVE_AND_CONTRASTIVE_SCOPE_CONTAINMENT',
+  guard:'VAJRA ambiguity/conflict guard v0.5.7',
+  capability:'BOUNDED_ENGLISH_CHINESE_GENERIC_CONDITIONAL_SENTENCE_EXCEPTION_CONCESSIVE_AND_CONTRASTIVE_SCOPE_CONTAINMENT',
   observations,
   failures,
-  boundary:'This adversarial test covers bounded English/Chinese condition, exception, concessive and contrastive comma-delimited prefix forms around support/refute vocabulary. Generic if/when/as-long-as and 如果/若/倘若/只要 prefixes are now included. It verifies that subordinate directional polarity cannot manufacture unconditional closure while a later main-clause directional statement remains visible. This is lexical/structural scope containment, not general logical parsing or semantic discourse adjudication.'
+  boundary:'This adversarial test covers bounded English/Chinese condition, exception, concessive and contrastive scope forms around support/refute vocabulary. Generic if/when/as-long-as and 如果/若/倘若/只要 comma-delimited conditions now verify two separate protections: directional words inside the condition prefix cannot manufacture closure, and a directional main clause in the same conditional sentence also remains UNSPECIFIED rather than being flattened into unconditional support/refute. A later sentence after a full sentence boundary remains visible. Concessive/contrastive main clauses remain visible by design. This is lexical/structural scope containment, not general logical parsing or semantic discourse adjudication.'
 };
 await fs.writeFile('nostromo/integration/vajra-conditional-prefix-last-result.json',JSON.stringify(result,null,2)+'\n');
 console.log(JSON.stringify(result,null,2));
