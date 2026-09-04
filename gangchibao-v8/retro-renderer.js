@@ -37,6 +37,14 @@
     }
   };
   const KNOWN_RETRO_FIGURES={
+    '30340':[
+      {
+        key:'retro-30340-13-5',
+        src:'figures/retro-30340.svg',
+        caption:'第十三分回收第五分的身相／見如來問題：13 → 5',
+        anchor:'可是它不是單純重複。它確實回收第五分，但焦點已經換了。'
+      }
+    ],
     '30360':[
       {
         key:'retro-30360-14-10-4-3',
