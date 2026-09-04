@@ -3,6 +3,7 @@ import fs from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
 
+const ROOT=process.cwd();
 const failures=[];
 const assert=(ok,msg)=>{if(!ok)failures.push(msg)};
 const tmp=await fs.mkdtemp(path.join(os.tmpdir(),'shroom-stateful-'));
@@ -25,6 +26,7 @@ assert(x.behaviorFingerprint!==y.behaviorFingerprint,'changed recorded history m
 assert(x.reactions.some(r=>r.disposition==='INSTABILITY_AUDIT'),'must detect unstable participation histories');
 assert(x.reactions.every(r=>r.historyFingerprint&&r.preferredOrgan),'every reaction must preserve history provenance and routing intent');
 assert(!x.boundary.includes('persistent LLMs')||x.boundary.includes('does not'),'boundary must not claim independent persistent agents');
-const result={schema:'nostromo-shroom-stateful-probe-test/v0.1',status:failures.length?'FAIL':'PASS',sameHistoryDeterministic:x.behaviorFingerprint===x2.behaviorFingerprint,changedHistoryChangesBehavior:x.behaviorFingerprint!==y.behaviorFingerprint,dispositions:[...new Set(x.reactions.map(r=>r.disposition))],failures,boundary:x.boundary};
+const result={schema:'nostromo-shroom-stateful-probe-test/v0.1',completedAt:new Date().toISOString(),status:failures.length?'FAIL':'PASS',sameHistoryDeterministic:x.behaviorFingerprint===x2.behaviorFingerprint,changedHistoryChangesBehavior:x.behaviorFingerprint!==y.behaviorFingerprint,dispositions:[...new Set(x.reactions.map(r=>r.disposition))],routingIntents:[...new Set(x.reactions.map(r=>r.preferredOrgan))],historyFingerprintCount:new Set(x.reactions.map(r=>r.historyFingerprint)).size,boundary:x.boundary,failures};
+await fs.writeFile(path.join(ROOT,'nostromo/integration/shroom-stateful-probe-last-result.json'),JSON.stringify(result,null,2)+'\n','utf8');
 console.log(JSON.stringify(result,null,2));
 if(failures.length)process.exit(1);
