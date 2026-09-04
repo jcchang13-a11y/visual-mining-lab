@@ -1,6 +1,6 @@
 {
   "schema": "nostromo-vajra-conflict-escalation-test/v0.7.1",
-  "completedAt": "2026-09-04T16:05:00.384Z",
+  "completedAt": "2026-09-04T16:05:40.668Z",
   "status": "PASS",
   "guards": {
     "multiOrganEscalation": true,
