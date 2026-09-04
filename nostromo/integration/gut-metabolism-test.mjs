@@ -21,7 +21,7 @@ const sample={
   duplicateA:'same useful material',duplicateB:'same useful material'
 };
 const gut=globalThis.GutEngine.digest(sample,{source:'NOSTROMO/gut-metabolism-test'});
-check(gut.version==='0.2.25','GUT_VERSION',gut.version);
+check(gut.version==='0.2.26','GUT_VERSION',gut.version);
 check(gut.mode==='DETERMINISTIC_HEURISTIC_ROUTER','GUT_MODE',gut.mode);
 check(gut.routes?.DROPLET?.count>=1,'CLAIM_NOT_ROUTED_TO_DROPLET',gut.routes?.DROPLET);
 check(gut.routes?.SHROOMING?.count>=1,'QUESTION_NOT_ROUTED_TO_SHROOMING',gut.routes?.SHROOMING);
@@ -125,7 +125,7 @@ check(structuredGut.routes?.MUTHER?.count===1,'STRUCTURED_NOT_ROUTED_TO_MUTHER',
 
 let active=null;
 try{
-  active=await runActiveExecutorLoop({rounds:3,seed:'GUT v0.2.25 feedback validation',mineQuery:'NOSTROMO',verifyUrl:'https://github.com/jcchang13-a11y/visual-mining-lab'});
+  active=await runActiveExecutorLoop({rounds:3,seed:'GUT v0.2.26 feedback validation',mineQuery:'NOSTROMO',verifyUrl:'https://github.com/jcchang13-a11y/visual-mining-lab'});
   check(active.status==='PASS','ACTIVE_LOOP_FAIL',{status:active.status,completedRounds:active.completedRounds});
   check(active.feedback?.appliedRounds===2,'FEEDBACK_APPLIED_ROUNDS',active.feedback);
   check(active.feedback?.firstAppliedRound===2,'FEEDBACK_FIRST_ROUND',active.feedback);
@@ -136,7 +136,7 @@ try{
 }catch(error){failures.push({type:'ACTIVE_LOOP_EXCEPTION',message:String(error?.message||error)});}
 
 const result={
-  schema:'nostromo-gut-metabolism-test/v0.2.25',completedAt:new Date().toISOString(),status:failures.length===0?'PASS':'FAIL',
+  schema:'nostromo-gut-metabolism-test/v0.2.26',completedAt:new Date().toISOString(),status:failures.length===0?'PASS':'FAIL',
   gut:{version:gut.version,mode:gut.mode,typeCounts:gut.typeCounts,routeCounts:Object.fromEntries(Object.entries(gut.routes).map(([k,v])=>[k,v.count])),boundary:gut.boundary},
   riskContext:{status:riskContextGut.quarantined===2?'PASS':'FAIL',quarantined:riskContextGut.quarantined,routeCounts:Object.fromEntries(Object.entries(riskContextGut.routes).map(([k,v])=>[k,v.count])),boundary:'Ordinary semantic prose containing error/rejected/invalid lexemes must remain routable; only dedicated failure/risk paths or explicit machine-like failure status markers are quarantined.'},
   antiEcho:{nested:nestedGut.antiEcho,taggedTail:taggedTailGut.antiEcho,shortAdjacent:shortGut.antiEcho,nearDuplicate:nearGut.antiEcho,sharedBodySummary:sharedBodyGut.antiEcho,nonAdjacentCarry:nonAdjacentGut.antiEcho,shortTokenCarry:shortTokenGut.antiEcho,machineMetadataCarry:metadataGut.antiEcho,inherited:inheritedGut.antiEcho,partialInherited:partialGut.antiEcho},
