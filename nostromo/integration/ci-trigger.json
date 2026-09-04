@@ -1,10 +1,11 @@
 {
-  "purpose": "single CI trigger for GUT terminal non-success ancestor quarantine verification v0.2.26",
+  "purpose": "single CI trigger for GUT terminal non-success ancestor quarantine verification v0.2.26 after stale lineage-version correction",
   "stagedCommits": [
     "427c5e5b53731326f5c90236f2dfedeeec429492",
     "5af1be21b367565a109c8289f03dec3ec48082a9",
-    "d4f3944ebead5bdae4db9f2ef8e85e9e37b1b57f"
+    "d4f3944ebead5bdae4db9f2ef8e85e9e37b1b57f",
+    "a526be893ea39ad61d53d26856fb5e498319d305"
   ],
-  "priorFailedRun": 33856828532,
+  "priorFailedRuns": [33856828532,33857053959],
   "truthRule": "DISPLAYED STATE MUST FOLLOW EVIDENCE"
 }
