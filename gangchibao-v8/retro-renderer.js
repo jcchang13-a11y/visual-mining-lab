@@ -36,6 +36,16 @@
       anchor:'N：第十七分不是重複第二分，而是回頭清算誰在發心、誰在得法、誰在當菩薩。'
     }
   };
+  const KNOWN_RETRO_FIGURES={
+    '30430':[
+      {
+        key:'retro-30430-19',
+        src:'figures/retro-30430-19.svg',
+        caption:'第十九分回溯布施與福德線：19 → 15 → 13 → 11 → 8 → 4',
+        anchor:'第十九分是在回收前面整條布施與福德的力線。'
+      }
+    ]
+  };
 
   function makeRetroFigure(src, caption){
     const figure=document.createElement('figure');
@@ -148,6 +158,34 @@
       return true;
     }
     return false;
+  }
+
+  function ensureKnownRetroFigures(root){
+    if(!root) return 0;
+    const unit=new URLSearchParams(location.search).get('u');
+    const specs=KNOWN_RETRO_FIGURES[unit]||[];
+    let count=0;
+
+    specs.forEach(spec=>{
+      if(root.querySelector(`[data-retro-key="${spec.key}"]`)) return;
+      const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);
+      while(walker.nextNode()){
+        const node=walker.currentNode;
+        const value=node.nodeValue||'';
+        const at=value.indexOf(spec.anchor);
+        if(at<0) continue;
+
+        const end=at+spec.anchor.length;
+        const tail=node.splitText(end);
+        const figure=makeRetroFigure(spec.src,spec.caption);
+        figure.dataset.retroKey=spec.key;
+        tail.parentNode.insertBefore(figure,tail);
+        tail.parentNode.insertBefore(document.createTextNode('\n'),tail);
+        count++;
+        break;
+      }
+    });
+    return count;
   }
 
   function renderStructureLines(root){
@@ -267,18 +305,21 @@
     renderStructureLines(root);
     ensureSutraEntrance(root);
     ensureKnownFigureSlot(root);
+    ensureKnownRetroFigures(root);
     ensurePublicationMark();
     let scheduled=false;
     const observer=new MutationObserver(()=>{
       renderMarkers(root);
       renderStructureLines(root);
       ensureKnownFigureSlot(root);
+      ensureKnownRetroFigures(root);
       if(!scheduled){
         scheduled=true;
         queueMicrotask(()=>{
           scheduled=false;
           ensureSutraEntrance(root);
           ensureKnownFigureSlot(root);
+          ensureKnownRetroFigures(root);
           renderStructureLines(root);
           ensurePublicationMark();
         });
@@ -296,6 +337,7 @@
     makeSutraBlock,
     makeFigureSlot,
     ensureKnownFigureSlot,
+    ensureKnownRetroFigures,
     renderStructureLines,
     ensureSutraEntrance,
     ensurePublicationMark,
