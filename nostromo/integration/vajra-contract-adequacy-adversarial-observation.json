@@ -1,0 +1,25 @@
+{
+  "schema": "nostromo-vajra-adversarial-observation/v0.1",
+  "observedAt": "2026-09-04T12:05:00+08:00",
+  "status": "OPEN_DEFECT_EVIDENCE",
+  "organ": "VAJRA",
+  "component": "receipt-uncertainty-guard.js contractAdequacyReason",
+  "currentGuardVersion": "0.2",
+  "observation": "Lens adequacy is currently satisfied by the presence of a lens keyword anywhere in material + relation. A receipt can therefore mention the requested criterion only to disclaim having examined it, while still passing the adequacy keyword gate if its relation is otherwise directional.",
+  "adversarialExample": {
+    "lens": "scope",
+    "material": "Scope was not examined; no boundary analysis was performed.",
+    "relation": "This supports the target claim.",
+    "expectedSafeBehavior": "BLOCK_OR_REMAIN_UNRESOLVED",
+    "currentStructuralRisk": "The scope/boundary tokens satisfy LENS_ADEQUACY even though they occur inside an explicit non-performance disclaimer."
+  },
+  "qualityRisk": [
+    "false closure",
+    "fake certainty",
+    "organ handoff appears completed without requested work",
+    "lexical keyword spoofing of cross-organ contract adequacy"
+  ],
+  "requiredFixDirection": "Add a bounded lens-work negation/non-performance guard before positive adequacy acceptance; preserve positive controls where the lens criterion is actually examined. Do not promote public registry status until adversarial, positive-control, cross-organ regression and full GitHub Actions acceptance pass.",
+  "truthRule": "DISPLAYED STATE MUST FOLLOW EVIDENCE",
+  "publicStatusPromotion": false
+}
