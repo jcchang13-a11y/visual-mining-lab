@@ -1,9 +1,11 @@
 {
-  "purpose": "single CI trigger for VAJRA bounded English condition-prefix containment verification",
+  "purpose": "single CI trigger for VAJRA bounded English condition-prefix containment verification v0.5.2",
   "stagedCommits": [
     "07a03b3fa8cf55160bf73c51294243e444827d84",
     "df1a4b89e5204e05b3819641df27839b513b0ab1",
-    "9ed55052ffcda6f6e7e556388a3bd4cfa62fc762"
+    "9ed55052ffcda6f6e7e556388a3bd4cfa62fc762",
+    "2ec38c7590107dd6a075cb8be30ddf7473f2ba1a"
   ],
+  "priorFailedRun": 33831870085,
   "truthRule": "DISPLAYED STATE MUST FOLLOW EVIDENCE"
 }
