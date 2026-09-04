@@ -1,12 +1,13 @@
-// VAJRA receipt ambiguity/conflict guard v0.5.0
+// VAJRA receipt ambiguity/conflict guard v0.5.1
 // Prevents first-receipt false closure when multiple structurally qualifying returns
 // for the same VAJRA branch are ambiguous or explicitly conflict. Audit scope is
 // branch-scoped (targetRef + clauseRef + lens), not organ-scoped, so a preferred
 // organ cannot silently close a branch while another executed organ return explicitly
 // points the opposite way. Malformed or non-executed returns are excluded. Relation
 // polarity is negation-aware for a bounded set of English/Chinese support/refute
-// phrases, including explicit insufficiency and modality phrases. This is deterministic
-// audit logic, not semantic adjudication, source-independence proof or source-quality scoring.
+// phrases, including explicit insufficiency, modality and conditionality phrases.
+// This is deterministic audit logic, not semantic adjudication, source-independence
+// proof or source-quality scoring.
 
 function clean(v){return String(v??'').replace(/\s+/g,' ').trim();}
 function fp(text){let h=2166136261;for(const ch of clean(text)){h^=ch.codePointAt(0);h=Math.imul(h,16777619)>>>0;}return h.toString(16).padStart(8,'0');}
@@ -35,9 +36,21 @@ function maskHedgedPolarityPhrases(text){
     .replace(/(?:可能|或許|也許|未必|不一定)(?:直接)?(?:支持|佐證|印證|吻合|一致)/g,' <hedged-pos> ')
     .replace(/(?:可能|或許|也許|未必|不一定)(?:直接)?(?:反駁|反證|否證|矛盾|相反)/g,' <hedged-neg> ');
 }
+function maskConditionalPolarityPhrases(text){
+  // A relation that is explicitly conditional must not close a broader branch as if
+  // it were unconditional directional evidence. These bounded patterns deliberately
+  // prefer false-negative polarity (UNSPECIFIED) over false certainty.
+  return text
+    .replace(/\b(?:conditionally|provisionally)\s+(?:directly\s+)?(?:support|supports|supported|supporting|confirm|confirms|confirmed|confirming|corroborate|corroborates|corroborated|corroborating)\b/g,' <conditional-pos> ')
+    .replace(/\b(?:support|supports|supported|supporting|confirm|confirms|confirmed|confirming|corroborate|corroborates|corroborated|corroborating)\b(?=.{0,60}\b(?:only\s+if|provided\s+that|assuming\s+that|subject\s+to|under\s+the\s+condition\s+that)\b)/g,' <conditional-pos> ')
+    .replace(/\b(?:conditionally|provisionally)\s+(?:directly\s+)?(?:refute|refutes|refuted|refuting|contradict|contradicts|contradicted|contradicting|oppose|opposes|opposed|falsify|falsifies|falsified|falsifying)\b/g,' <conditional-neg> ')
+    .replace(/\b(?:refute|refutes|refuted|refuting|contradict|contradicts|contradicted|contradicting|oppose|opposes|opposed|falsify|falsifies|falsified|falsifying)\b(?=.{0,60}\b(?:only\s+if|provided\s+that|assuming\s+that|subject\s+to|under\s+the\s+condition\s+that)\b)/g,' <conditional-neg> ')
+    .replace(/(?:只有在|僅在|只在|在特定條件下|有條件地)[^。；;]{0,48}(?:才)?(?:支持|佐證|印證|吻合|一致)/g,' <conditional-pos> ')
+    .replace(/(?:只有在|僅在|只在|在特定條件下|有條件地)[^。；;]{0,48}(?:才)?(?:反駁|反證|否證|矛盾|相反)/g,' <conditional-neg> ');
+}
 function relationPolarity(text){
   const s=clean(text).normalize('NFKC').toLowerCase();
-  const scan=maskHedgedPolarityPhrases(maskNegatedPolarityPhrases(s));
+  const scan=maskConditionalPolarityPhrases(maskHedgedPolarityPhrases(maskNegatedPolarityPhrases(s)));
   const support=/\bsupport(?:s|ed|ing)?\b|corroborat|consistent with|confirm|支持|佐證|印證|吻合|一致/.test(scan);
   const refute=/\brefut(?:e|es|ed|ing)?\b|\bcontradict(?:s|ed|ing)?\b|\boppose(?:s|d)?\b|counterexample|falsif|反駁|反證|否證|矛盾|相反/.test(scan);
   if(support&&refute)return 'MIXED';
@@ -127,7 +140,7 @@ export function auditReceiptAmbiguity(receipts=[]){
     if(polarities.includes('UNSPECIFIED')){
       ambiguous.push(branchAuditFinding(
         key,items,'AMBIGUOUS_BY_RECEIPTS',polarities,
-        'Multiple structurally qualifying executed returns address the same VAJRA branch, but at least one relation is lexically UNSPECIFIED. Bounded negation/insufficiency/modality masking prevents phrases such as does not support, insufficient to support, does not refute, insufficient to refute and Chinese equivalents from being counted as positive polarity evidence. Branch scope deliberately crosses organ labels so arrival order across organs cannot manufacture closure. Distinct organ/provenance counts are audit metadata only; they do not prove source independence. Malformed, non-executed, provenance-free, empty-material or relation-free returns cannot manufacture ambiguity. This is a lexical safety rule, not semantic disagreement detection.'
+        'Multiple structurally qualifying executed returns address the same VAJRA branch, but at least one relation is lexically UNSPECIFIED. Bounded negation/insufficiency/modality/conditionality masking prevents phrases such as does not support, insufficient to support, might support, supports only if, does not refute and Chinese equivalents from being counted as unconditional polarity evidence. Branch scope deliberately crosses organ labels so arrival order across organs cannot manufacture closure. Distinct organ/provenance counts are audit metadata only; they do not prove source independence. Malformed, non-executed, provenance-free, empty-material or relation-free returns cannot manufacture ambiguity. This is a lexical safety rule, not semantic disagreement detection.'
       ));
     }
   }
@@ -138,7 +151,7 @@ export function auditReceiptAmbiguity(receipts=[]){
     qualifyingReceiptCount:[...groups.values()].reduce((n,x)=>n+x.length,0),
     rejectedReceiptCount:rejected.length,
     rejectedReceipts:rejected,
-    boundary:'Ambiguity/conflict is computed over branch-scoped structurally qualifying executed returns with provenance, material and an explicit relation-to-target field. A bounded English/Chinese negation, insufficiency and explicit modality mask prevents obvious non-directional support/refute phrases from creating false polarity. Explicit opposing polarity across organ labels is preserved as a contested branch rather than ignored as an organ mismatch. Organ labels remain preserved for audit but do not partition one VAJRA branch into separate closure domains. Qualification is necessary but not sufficient for semantic adequacy, source independence or source quality.'
+    boundary:'Ambiguity/conflict is computed over branch-scoped structurally qualifying executed returns with provenance, material and an explicit relation-to-target field. A bounded English/Chinese negation, insufficiency, modality and conditionality mask prevents obvious non-directional or explicitly conditional support/refute phrases from creating false unconditional polarity. Explicit opposing polarity across organ labels is preserved as a contested branch rather than ignored as an organ mismatch. Organ labels remain preserved for audit but do not partition one VAJRA branch into separate closure domains. Qualification is necessary but not sufficient for semantic adequacy, source independence or source quality.'
   };
 }
 
@@ -181,7 +194,7 @@ export function applyGuardedHandoffResults(vajraResult,receipts=[],engine=global
   const status=contestedBranches.length?(resolvedBranches.length?'PARTIAL_WITH_CONTESTED_RETURN':'CONTESTED_HANDOFF_RETURN'):(resolvedBranches.length?'PARTIAL_WITH_AMBIGUOUS_RETURN':'AMBIGUOUS_HANDOFF_RETURN');
   return {
     ...base,
-    version:`${base.version||'unknown'}+ambiguity-conflict-guard-v0.5.0`,
+    version:`${base.version||'unknown'}+ambiguity-conflict-guard-v0.5.1`,
     status,
     unresolved,
     handoffs:unresolved.map(x=>x.handoff),
@@ -195,6 +208,6 @@ export function applyGuardedHandoffResults(vajraResult,receipts=[],engine=global
       contestedBranches:contestedBranches.map(x=>x.contest),
       ambiguousBranches:audit.ambiguous
     },
-    boundary:`${base.boundary||''} Ambiguity/conflict guard: branch-scoped qualifying executed returns are audited across organ labels. Explicit opposing polarity creates CONTESTED_BY_RECEIPTS and blocks preferred-organ first-receipt closure; an UNSPECIFIED relation creates AMBIGUOUS_BY_RECEIPTS. Obvious negated, explicitly insufficient, or explicitly hedged support/refute phrases are masked before lexical polarity classification; malformed/non-executed returns are excluded. Distinct organ/provenance labels remain audit metadata rather than proof of independence. This guard is lexical and structural, not semantic adjudication.`.trim()
+    boundary:`${base.boundary||''} Ambiguity/conflict guard: branch-scoped qualifying executed returns are audited across organ labels. Explicit opposing polarity creates CONTESTED_BY_RECEIPTS and blocks preferred-organ first-receipt closure; an UNSPECIFIED relation creates AMBIGUOUS_BY_RECEIPTS. Obvious negated, explicitly insufficient, explicitly hedged, or explicitly conditional support/refute phrases are masked before lexical polarity classification; malformed/non-executed returns are excluded. Distinct organ/provenance labels remain audit metadata rather than proof of independence. This guard is lexical and structural, not semantic adjudication.`.trim()
   };
 }
