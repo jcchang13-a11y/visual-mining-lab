@@ -20,6 +20,12 @@
       note:'使用者原始圖待接回；不仿製、不重畫。',
       anchor:'從這裡開始，後面所有東西都不再是日常尺度了。'
     },
+    '30340':{
+      key:'buddha-tathagata-original',
+      title:'佛／如來相對關係圖',
+      note:'使用者原始圖待接回；不仿製、不重畫。',
+      anchor:'這裡也要注意「佛」和「如來」的稱呼切換。'
+    },
     '30390':{
       key:'pls-three-circles-original',
       title:'P／L／S 三圓圖',
