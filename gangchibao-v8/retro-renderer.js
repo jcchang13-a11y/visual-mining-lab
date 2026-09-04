@@ -9,10 +9,13 @@
 
    既有原圖缺件只在 placement 已被施工檔鎖定時補 slot；不仿畫、不替代原圖。
    出版標誌亦只接既有 publication-mark.md 施工位；原圖未進 GitHub 前只顯示 slot。
+
+   P／L／S／N／F 結構行只做閱讀層辨識：不改字、不重排、不清理工作語。
 */
 (function(){
   const MARKER=/^\s*\[\[RETRO:\s*([^|\]]+?)(?:\s*\|\s*([^\]]+?))?\s*\]\]\s*$/i;
   const SUTRA_BLOCK=/\[\[SUTRA(?::\s*([^\]]*?))?\]\]\s*([\s\S]*?)\s*\[\[\/SUTRA\]\]/i;
+  const STRUCTURE_LINE=/^\s*(?:PLS|P|L|S|N|F)\s*[：:]/;
   const KNOWN_FIGURE_SLOTS={
     '30310B':{
       key:'sumeru-world-original',
@@ -147,6 +150,53 @@
     return false;
   }
 
+  function renderStructureLines(root){
+    if(!root) return 0;
+    let active=false;
+    let count=0;
+    const children=Array.from(root.childNodes);
+
+    children.forEach(node=>{
+      if(node.nodeType===Node.ELEMENT_NODE){
+        if(active && node.classList && node.classList.contains('gcb-formula')){
+          node.classList.add('structure-code');
+          node.dataset.gcbLayer='structure-code';
+        }
+        return;
+      }
+      if(node.nodeType!==Node.TEXT_NODE) return;
+
+      const value=node.nodeValue||'';
+      if(!value) return;
+      const parts=value.split(/(\r?\n)/);
+      const frag=document.createDocumentFragment();
+
+      parts.forEach(part=>{
+        if(/^\r?\n$/.test(part)){
+          frag.append(document.createTextNode(part));
+          active=false;
+          return;
+        }
+        if(!part) return;
+        if(!active && STRUCTURE_LINE.test(part)){
+          active=true;
+          count++;
+        }
+        if(active){
+          const span=document.createElement('span');
+          span.className='structure-code';
+          span.dataset.gcbLayer='structure-code';
+          span.textContent=part;
+          frag.append(span);
+        }else{
+          frag.append(document.createTextNode(part));
+        }
+      });
+      node.replaceWith(frag);
+    });
+    return count;
+  }
+
   let sutraLoading=false;
   let sutraCheckedFor='';
   async function ensureSutraEntrance(root){
@@ -214,12 +264,14 @@
   function observe(root){
     if(!root) return null;
     renderMarkers(root);
+    renderStructureLines(root);
     ensureSutraEntrance(root);
     ensureKnownFigureSlot(root);
     ensurePublicationMark();
     let scheduled=false;
     const observer=new MutationObserver(()=>{
       renderMarkers(root);
+      renderStructureLines(root);
       ensureKnownFigureSlot(root);
       if(!scheduled){
         scheduled=true;
@@ -227,6 +279,7 @@
           scheduled=false;
           ensureSutraEntrance(root);
           ensureKnownFigureSlot(root);
+          renderStructureLines(root);
           ensurePublicationMark();
         });
       }
@@ -243,6 +296,7 @@
     makeSutraBlock,
     makeFigureSlot,
     ensureKnownFigureSlot,
+    renderStructureLines,
     ensureSutraEntrance,
     ensurePublicationMark,
     observe
