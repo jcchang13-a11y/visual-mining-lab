@@ -1,7 +1,7 @@
 {
   "schema": "nostromo-gut-lineage-test/v0.2.25-carry-scalar-guard",
-  "completedAt": "2026-09-04T08:07:16.431Z",
-  "status": "PASS",
+  "completedAt": "2026-09-04T09:08:25.240Z",
+  "status": "FAIL",
   "sameLineage": {
     "summaryItemCount": 1,
     "antiEcho": {
@@ -306,6 +306,11 @@
       "boundary": "Carry-only containment. ref:/clause: hexadecimal lineage tokens are protected from colon tokenization before intra-segment compaction; standalone lineage fragments are suppressed when the same exact token is already embedded in a retained substantive segment, and repeated standalone lineage classes are also collapsed. Exact/lineage-equivalent clauses, nested long clauses, recursively wrapped near-duplicate clauses, repeated ref/clause-only lineage tokens, same-route cross-segment near echoes, and bare boolean/null machine scaffolding are collapsed before recirculation. Numeric scalars and substantive phrases containing words such as false remain untouched. Original GUT nutrients, routes and provenance are not mutated."
     }
   },
-  "failures": [],
+  "failures": [
+    {
+      "type": "GUT_VERSION",
+      "detail": "0.2.26"
+    }
+  ],
   "boundary": "This adversarial test preserves source nutrients and provenance while checking cross-atom, intra-atom, short-CJK nested-clause, repeated machine-lineage signature, cross-segment volatile-lineage carry echo, recursive wrapper growth, repeated short ref/clause-only carry fragments, a replay derived from the previously observed malformed carry, bare boolean/null carry scaffold leakage, and top-level middle-dot delimiter collision inside a single nutrient. Bare true/false/null/undefined tokens may be removed only from carry rendering; numeric scalars and substantive phrases containing those words remain. v0.2.25 requires machine hexadecimal lineage identifiers to remain available through the bounded out-of-band carryRefs ledger with provenance while prose summary remains eligible for anti-echo cleanup. PASS does not certify semantic identity or truth."
 }

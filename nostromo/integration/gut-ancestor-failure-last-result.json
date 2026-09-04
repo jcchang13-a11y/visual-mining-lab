@@ -1,7 +1,7 @@
 {
-  "schema": "nostromo-gut-ancestor-failure-test/v0.2",
-  "completedAt": "2026-09-04T08:07:16.337Z",
-  "engineVersion": "0.2.25",
+  "schema": "nostromo-gut-ancestor-failure-test/v0.3",
+  "completedAt": "2026-09-04T09:08:25.131Z",
+  "engineVersion": "0.2.26",
   "status": "PASS",
   "promoted": true,
   "failedBundle": {
@@ -66,6 +66,386 @@
       }
     ]
   },
+  "terminalNonSuccess": [
+    {
+      "status": "CANCELLED",
+      "quarantined": 5,
+      "routeCounts": {
+        "SHROOMING": 0,
+        "MUTHER": 0,
+        "DROPLET": 0,
+        "VAJRA": 0,
+        "HOLD": 5
+      },
+      "quarantine": [
+        {
+          "path": "root.bundle.organ",
+          "type": "RISK_OR_FAILURE",
+          "reason": "ancestor-failure-status-provenance",
+          "provenance": {
+            "inputSource": "NOSTROMO/gut-terminal-nonsuccess-cancelled",
+            "organ": "MU/TH/UR",
+            "status": "CANCELLED"
+          }
+        },
+        {
+          "path": "root.bundle.status",
+          "type": "RISK_OR_FAILURE",
+          "reason": "ancestor-failure-status-provenance",
+          "provenance": {
+            "inputSource": "NOSTROMO/gut-terminal-nonsuccess-cancelled",
+            "organ": "MU/TH/UR",
+            "status": "CANCELLED"
+          }
+        },
+        {
+          "path": "root.bundle.claim",
+          "type": "RISK_OR_FAILURE",
+          "reason": "ancestor-failure-status-provenance",
+          "provenance": {
+            "inputSource": "NOSTROMO/gut-terminal-nonsuccess-cancelled",
+            "organ": "MU/TH/UR",
+            "status": "CANCELLED"
+          }
+        },
+        {
+          "path": "root.bundle.evidence",
+          "type": "RISK_OR_FAILURE",
+          "reason": "ancestor-failure-status-provenance",
+          "provenance": {
+            "inputSource": "NOSTROMO/gut-terminal-nonsuccess-cancelled",
+            "organ": "MU/TH/UR",
+            "status": "CANCELLED"
+          }
+        },
+        {
+          "path": "root.bundle.question",
+          "type": "RISK_OR_FAILURE",
+          "reason": "ancestor-failure-status-provenance",
+          "provenance": {
+            "inputSource": "NOSTROMO/gut-terminal-nonsuccess-cancelled",
+            "organ": "MU/TH/UR",
+            "status": "CANCELLED"
+          }
+        }
+      ]
+    },
+    {
+      "status": "TIMEOUT",
+      "quarantined": 5,
+      "routeCounts": {
+        "SHROOMING": 0,
+        "MUTHER": 0,
+        "DROPLET": 0,
+        "VAJRA": 0,
+        "HOLD": 5
+      },
+      "quarantine": [
+        {
+          "path": "root.bundle.organ",
+          "type": "RISK_OR_FAILURE",
+          "reason": "ancestor-failure-status-provenance",
+          "provenance": {
+            "inputSource": "NOSTROMO/gut-terminal-nonsuccess-timeout",
+            "organ": "MU/TH/UR",
+            "status": "TIMEOUT"
+          }
+        },
+        {
+          "path": "root.bundle.status",
+          "type": "RISK_OR_FAILURE",
+          "reason": "ancestor-failure-status-provenance",
+          "provenance": {
+            "inputSource": "NOSTROMO/gut-terminal-nonsuccess-timeout",
+            "organ": "MU/TH/UR",
+            "status": "TIMEOUT"
+          }
+        },
+        {
+          "path": "root.bundle.claim",
+          "type": "RISK_OR_FAILURE",
+          "reason": "ancestor-failure-status-provenance",
+          "provenance": {
+            "inputSource": "NOSTROMO/gut-terminal-nonsuccess-timeout",
+            "organ": "MU/TH/UR",
+            "status": "TIMEOUT"
+          }
+        },
+        {
+          "path": "root.bundle.evidence",
+          "type": "RISK_OR_FAILURE",
+          "reason": "ancestor-failure-status-provenance",
+          "provenance": {
+            "inputSource": "NOSTROMO/gut-terminal-nonsuccess-timeout",
+            "organ": "MU/TH/UR",
+            "status": "TIMEOUT"
+          }
+        },
+        {
+          "path": "root.bundle.question",
+          "type": "RISK_OR_FAILURE",
+          "reason": "ancestor-failure-status-provenance",
+          "provenance": {
+            "inputSource": "NOSTROMO/gut-terminal-nonsuccess-timeout",
+            "organ": "MU/TH/UR",
+            "status": "TIMEOUT"
+          }
+        }
+      ]
+    },
+    {
+      "status": "TIMED_OUT",
+      "quarantined": 5,
+      "routeCounts": {
+        "SHROOMING": 0,
+        "MUTHER": 0,
+        "DROPLET": 0,
+        "VAJRA": 0,
+        "HOLD": 5
+      },
+      "quarantine": [
+        {
+          "path": "root.bundle.organ",
+          "type": "RISK_OR_FAILURE",
+          "reason": "ancestor-failure-status-provenance",
+          "provenance": {
+            "inputSource": "NOSTROMO/gut-terminal-nonsuccess-timed_out",
+            "organ": "MU/TH/UR",
+            "status": "TIMED_OUT"
+          }
+        },
+        {
+          "path": "root.bundle.status",
+          "type": "RISK_OR_FAILURE",
+          "reason": "ancestor-failure-status-provenance",
+          "provenance": {
+            "inputSource": "NOSTROMO/gut-terminal-nonsuccess-timed_out",
+            "organ": "MU/TH/UR",
+            "status": "TIMED_OUT"
+          }
+        },
+        {
+          "path": "root.bundle.claim",
+          "type": "RISK_OR_FAILURE",
+          "reason": "ancestor-failure-status-provenance",
+          "provenance": {
+            "inputSource": "NOSTROMO/gut-terminal-nonsuccess-timed_out",
+            "organ": "MU/TH/UR",
+            "status": "TIMED_OUT"
+          }
+        },
+        {
+          "path": "root.bundle.evidence",
+          "type": "RISK_OR_FAILURE",
+          "reason": "ancestor-failure-status-provenance",
+          "provenance": {
+            "inputSource": "NOSTROMO/gut-terminal-nonsuccess-timed_out",
+            "organ": "MU/TH/UR",
+            "status": "TIMED_OUT"
+          }
+        },
+        {
+          "path": "root.bundle.question",
+          "type": "RISK_OR_FAILURE",
+          "reason": "ancestor-failure-status-provenance",
+          "provenance": {
+            "inputSource": "NOSTROMO/gut-terminal-nonsuccess-timed_out",
+            "organ": "MU/TH/UR",
+            "status": "TIMED_OUT"
+          }
+        }
+      ]
+    },
+    {
+      "status": "ABORTED",
+      "quarantined": 5,
+      "routeCounts": {
+        "SHROOMING": 0,
+        "MUTHER": 0,
+        "DROPLET": 0,
+        "VAJRA": 0,
+        "HOLD": 5
+      },
+      "quarantine": [
+        {
+          "path": "root.bundle.organ",
+          "type": "RISK_OR_FAILURE",
+          "reason": "ancestor-failure-status-provenance",
+          "provenance": {
+            "inputSource": "NOSTROMO/gut-terminal-nonsuccess-aborted",
+            "organ": "MU/TH/UR",
+            "status": "ABORTED"
+          }
+        },
+        {
+          "path": "root.bundle.status",
+          "type": "RISK_OR_FAILURE",
+          "reason": "ancestor-failure-status-provenance",
+          "provenance": {
+            "inputSource": "NOSTROMO/gut-terminal-nonsuccess-aborted",
+            "organ": "MU/TH/UR",
+            "status": "ABORTED"
+          }
+        },
+        {
+          "path": "root.bundle.claim",
+          "type": "RISK_OR_FAILURE",
+          "reason": "ancestor-failure-status-provenance",
+          "provenance": {
+            "inputSource": "NOSTROMO/gut-terminal-nonsuccess-aborted",
+            "organ": "MU/TH/UR",
+            "status": "ABORTED"
+          }
+        },
+        {
+          "path": "root.bundle.evidence",
+          "type": "RISK_OR_FAILURE",
+          "reason": "ancestor-failure-status-provenance",
+          "provenance": {
+            "inputSource": "NOSTROMO/gut-terminal-nonsuccess-aborted",
+            "organ": "MU/TH/UR",
+            "status": "ABORTED"
+          }
+        },
+        {
+          "path": "root.bundle.question",
+          "type": "RISK_OR_FAILURE",
+          "reason": "ancestor-failure-status-provenance",
+          "provenance": {
+            "inputSource": "NOSTROMO/gut-terminal-nonsuccess-aborted",
+            "organ": "MU/TH/UR",
+            "status": "ABORTED"
+          }
+        }
+      ]
+    },
+    {
+      "status": "BLOCKED",
+      "quarantined": 5,
+      "routeCounts": {
+        "SHROOMING": 0,
+        "MUTHER": 0,
+        "DROPLET": 0,
+        "VAJRA": 0,
+        "HOLD": 5
+      },
+      "quarantine": [
+        {
+          "path": "root.bundle.organ",
+          "type": "RISK_OR_FAILURE",
+          "reason": "ancestor-failure-status-provenance",
+          "provenance": {
+            "inputSource": "NOSTROMO/gut-terminal-nonsuccess-blocked",
+            "organ": "MU/TH/UR",
+            "status": "BLOCKED"
+          }
+        },
+        {
+          "path": "root.bundle.status",
+          "type": "RISK_OR_FAILURE",
+          "reason": "ancestor-failure-status-provenance",
+          "provenance": {
+            "inputSource": "NOSTROMO/gut-terminal-nonsuccess-blocked",
+            "organ": "MU/TH/UR",
+            "status": "BLOCKED"
+          }
+        },
+        {
+          "path": "root.bundle.claim",
+          "type": "RISK_OR_FAILURE",
+          "reason": "ancestor-failure-status-provenance",
+          "provenance": {
+            "inputSource": "NOSTROMO/gut-terminal-nonsuccess-blocked",
+            "organ": "MU/TH/UR",
+            "status": "BLOCKED"
+          }
+        },
+        {
+          "path": "root.bundle.evidence",
+          "type": "RISK_OR_FAILURE",
+          "reason": "ancestor-failure-status-provenance",
+          "provenance": {
+            "inputSource": "NOSTROMO/gut-terminal-nonsuccess-blocked",
+            "organ": "MU/TH/UR",
+            "status": "BLOCKED"
+          }
+        },
+        {
+          "path": "root.bundle.question",
+          "type": "RISK_OR_FAILURE",
+          "reason": "ancestor-failure-status-provenance",
+          "provenance": {
+            "inputSource": "NOSTROMO/gut-terminal-nonsuccess-blocked",
+            "organ": "MU/TH/UR",
+            "status": "BLOCKED"
+          }
+        }
+      ]
+    },
+    {
+      "status": "SKIPPED",
+      "quarantined": 5,
+      "routeCounts": {
+        "SHROOMING": 0,
+        "MUTHER": 0,
+        "DROPLET": 0,
+        "VAJRA": 0,
+        "HOLD": 5
+      },
+      "quarantine": [
+        {
+          "path": "root.bundle.organ",
+          "type": "RISK_OR_FAILURE",
+          "reason": "ancestor-failure-status-provenance",
+          "provenance": {
+            "inputSource": "NOSTROMO/gut-terminal-nonsuccess-skipped",
+            "organ": "MU/TH/UR",
+            "status": "SKIPPED"
+          }
+        },
+        {
+          "path": "root.bundle.status",
+          "type": "RISK_OR_FAILURE",
+          "reason": "ancestor-failure-status-provenance",
+          "provenance": {
+            "inputSource": "NOSTROMO/gut-terminal-nonsuccess-skipped",
+            "organ": "MU/TH/UR",
+            "status": "SKIPPED"
+          }
+        },
+        {
+          "path": "root.bundle.claim",
+          "type": "RISK_OR_FAILURE",
+          "reason": "ancestor-failure-status-provenance",
+          "provenance": {
+            "inputSource": "NOSTROMO/gut-terminal-nonsuccess-skipped",
+            "organ": "MU/TH/UR",
+            "status": "SKIPPED"
+          }
+        },
+        {
+          "path": "root.bundle.evidence",
+          "type": "RISK_OR_FAILURE",
+          "reason": "ancestor-failure-status-provenance",
+          "provenance": {
+            "inputSource": "NOSTROMO/gut-terminal-nonsuccess-skipped",
+            "organ": "MU/TH/UR",
+            "status": "SKIPPED"
+          }
+        },
+        {
+          "path": "root.bundle.question",
+          "type": "RISK_OR_FAILURE",
+          "reason": "ancestor-failure-status-provenance",
+          "provenance": {
+            "inputSource": "NOSTROMO/gut-terminal-nonsuccess-skipped",
+            "organ": "MU/TH/UR",
+            "status": "SKIPPED"
+          }
+        }
+      ]
+    }
+  ],
   "healthyControl": {
     "quarantined": 0,
     "routeCounts": {
@@ -73,9 +453,9 @@
       "MUTHER": 2,
       "DROPLET": 1,
       "VAJRA": 0,
-      "HOLD": 1
+      "HOLD": 2
     }
   },
   "failures": [],
-  "boundary": "This adversarial test distinguishes executor-envelope failure context from ordinary semantic prose. On GUT v0.2.25, a FAILED ancestor status must quarantine descendant payload atoms before they can be routed as fresh claims/evidence/questions, while an EXECUTED ancestor must not quarantine useful prose merely because it contains words such as invalid or error. This is structural execution-context containment, not semantic truth or source-quality judgment."
+  "boundary": "This adversarial test distinguishes terminal non-success executor-envelope context from ordinary semantic prose. On GUT v0.2.26, FAILED plus CANCELLED, TIMEOUT, TIMED_OUT, ABORTED, BLOCKED and SKIPPED ancestor statuses must quarantine descendant payload atoms before they can be routed as fresh claims/evidence/questions, while an EXECUTED ancestor must not quarantine useful prose merely because it discusses words such as invalid, error, timeout or skipped. This is structural execution-context containment, not semantic truth or source-quality judgment."
 }
