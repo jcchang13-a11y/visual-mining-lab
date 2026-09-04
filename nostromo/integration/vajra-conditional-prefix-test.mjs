@@ -28,12 +28,20 @@ const cases=[
   ['EVEN_THOUGH_PREFIX_REFUTE','Even though this evidence refutes the target claim, the sample remains incomplete.','UNSPECIFIED'],
   ['DESPITE_PREFIX_SUPPORT','Despite this evidence supporting the target claim, source quality remains unknown.','UNSPECIFIED'],
   ['ZH_CONCESSIVE_PREFIX','雖然這份證據支持目標命題，來源仍未核實。','UNSPECIFIED'],
+  ['WHILE_PREFIX_SUPPORT','While this evidence supports the target claim, provenance remains unaudited.','UNSPECIFIED'],
+  ['WHILST_PREFIX_REFUTE','Whilst this evidence refutes the target claim, the sample remains incomplete.','UNSPECIFIED'],
+  ['WHEREAS_PREFIX_SUPPORT','Whereas this evidence supports the target claim, source quality remains unknown.','UNSPECIFIED'],
+  ['ZH_SUISHUO_PREFIX','雖說這份證據支持目標命題，來源仍未核實。','UNSPECIFIED'],
+  ['ZH_GURAN_PREFIX','固然這份證據反駁目標命題，樣本仍不完整。','UNSPECIFIED'],
   ['SENTENCE_BOUNDARY_CONTROL','Only if retries remain disabled, logging behavior changes. This evidence supports the target claim.','SUPPORTS'],
   ['SEMICOLON_BOUNDARY_CONTROL','Provided that duplicate inputs are retained, logging behavior changes; this evidence refutes the target claim.','REFUTES'],
   ['UNLESS_SENTENCE_BOUNDARY_CONTROL','Unless retries are disabled, logging behavior changes. This evidence supports the target claim.','SUPPORTS'],
   ['EXCEPT_SEMICOLON_BOUNDARY_CONTROL','Except when duplicate inputs are retained, logging behavior changes; this evidence refutes the target claim.','REFUTES'],
   ['CONCESSIVE_MAIN_CLAUSE_SUPPORT','Although provenance is weak, this evidence supports the target claim.','SUPPORTS'],
-  ['ZH_CONCESSIVE_MAIN_CLAUSE_REFUTE','雖然樣本有限，這份證據反駁目標命題。','REFUTES']
+  ['ZH_CONCESSIVE_MAIN_CLAUSE_REFUTE','雖然樣本有限，這份證據反駁目標命題。','REFUTES'],
+  ['WHILE_MAIN_CLAUSE_SUPPORT','While provenance is weak, this evidence supports the target claim.','SUPPORTS'],
+  ['WHEREAS_MAIN_CLAUSE_REFUTE','Whereas the sample is incomplete, this evidence refutes the target claim.','REFUTES'],
+  ['ZH_GURAN_MAIN_CLAUSE_SUPPORT','固然來源有限，這份證據支持目標命題。','SUPPORTS']
 ];
 
 const observations=[];
@@ -45,13 +53,13 @@ for(const [name,relation,expected] of cases){
 }
 
 const result={
-  schema:'nostromo-vajra-conditional-prefix-test/v0.3',
+  schema:'nostromo-vajra-conditional-prefix-test/v0.4',
   status:failures.length?'FAIL':'PASS',
-  guard:'VAJRA ambiguity/conflict guard v0.5.4',
-  capability:'BOUNDED_ENGLISH_CHINESE_CONDITION_EXCEPTION_AND_CONCESSIVE_SCOPE_CONTAINMENT',
+  guard:'VAJRA ambiguity/conflict guard v0.5.5',
+  capability:'BOUNDED_ENGLISH_CHINESE_CONDITION_EXCEPTION_CONCESSIVE_AND_CONTRASTIVE_SCOPE_CONTAINMENT',
   observations,
   failures,
-  boundary:'This adversarial test covers bounded English/Chinese condition, exception and comma-delimited concessive-prefix forms around support/refute vocabulary. It verifies that subordinate concessive polarity cannot manufacture unconditional closure while a later main-clause directional statement remains visible. It is lexical/structural scope containment, not general logical parsing or semantic condition/exception/concession adjudication.'
+  boundary:'This adversarial test covers bounded English/Chinese condition, exception, concessive and contrastive comma-delimited prefix forms around support/refute vocabulary. It verifies that subordinate directional polarity cannot manufacture unconditional closure while a later main-clause directional statement remains visible. English contrastive coverage is bounded to while/whilst/whereas prefix forms and Chinese coverage to 雖說/固然; this is lexical/structural scope containment, not general logical parsing or semantic discourse adjudication.'
 };
 await fs.writeFile('nostromo/integration/vajra-conditional-prefix-last-result.json',JSON.stringify(result,null,2)+'\n');
 console.log(JSON.stringify(result,null,2));
