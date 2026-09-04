@@ -1,10 +1,15 @@
-// NOSTROMO SHROOMING feedback-conditioned reader v0.4
-// Deterministic thickening: explicit structured upstream signals compose, while conditioned rounds preserve bounded disagreement instead of collapsing every reader into one stance.
+// NOSTROMO SHROOMING feedback-conditioned reader v0.5
+// Deterministic thickening: explicit structured upstream signals compose in both lens priority and stance coverage, while conditioned rounds preserve bounded disagreement instead of collapsing every reader into one stance.
 import crypto from 'node:crypto';
 
 const compact=(s,n=600)=>String(s??'').replace(/\s+/g,' ').trim().slice(0,n);
 const hash=s=>crypto.createHash('sha256').update(String(s)).digest('hex').slice(0,16);
 const BASELINE=['structure','counterexample','position','otherness','evidence','language','boundary','memory','use','anomaly'];
+const SIGNAL_STANCES={
+  CONTRADICTION:['CHALLENGE','VERIFY','HOLD_UNRESOLVED','RECONSTRUCT'],
+  EVIDENCE:['VERIFY','CHALLENGE','HOLD_UNRESOLVED','RECONSTRUCT'],
+  QUESTION:['PROPOSE','CHALLENGE','HOLD_UNRESOLVED','REFRAME']
+};
 
 function feedbackSignals(text){
   const s=String(text??'');
@@ -30,6 +35,10 @@ function feedbackSignals(text){
   };
 }
 
+function activeClasses(signals){
+  return [signals.contradiction?'CONTRADICTION':null,(signals.external||signals.evidence)?'EVIDENCE':null,signals.question?'QUESTION':null].filter(Boolean);
+}
+
 function chooseLenses(signals){
   const scores=new Map(BASELINE.map((lens,i)=>[lens,(BASELINE.length-i)/100]));
   const contributions=[];
@@ -42,10 +51,7 @@ function chooseLenses(signals){
 }
 
 function adaptationMode(signals){
-  const classes=[];
-  if(signals.contradiction)classes.push('CONTRADICTION');
-  if(signals.external||signals.evidence)classes.push('EVIDENCE');
-  if(signals.question)classes.push('QUESTION');
+  const classes=activeClasses(signals);
   if(classes.length>1)return 'MIXED_CONDITIONED';
   if(classes[0]==='CONTRADICTION')return 'CONTRADICTION_CONDITIONED';
   if(classes[0]==='EVIDENCE')return 'EVIDENCE_CONDITIONED';
@@ -54,14 +60,24 @@ function adaptationMode(signals){
 }
 
 function stancePlan(signals,count){
-  const conditioned=Boolean(signals.contradiction||signals.external||signals.evidence||signals.question);
-  if(!conditioned)return Array.from({length:count},()=>({stance:'OBSERVE',closureAuthority:'NONE'}));
-  const cycle=signals.contradiction
-    ? ['CHALLENGE','VERIFY','HOLD_UNRESOLVED','RECONSTRUCT']
-    : signals.question
-      ? ['PROPOSE','CHALLENGE','HOLD_UNRESOLVED','REFRAME']
-      : ['VERIFY','CHALLENGE','HOLD_UNRESOLVED','RECONSTRUCT'];
-  return Array.from({length:count},(_,i)=>({stance:cycle[i%cycle.length],closureAuthority:'NONE'}));
+  const classes=activeClasses(signals);
+  if(!classes.length){
+    return {stances:Array.from({length:count},()=>({stance:'OBSERVE',closureAuthority:'NONE'})),pool:['OBSERVE'],signalCoverage:{}};
+  }
+  const pool=[];
+  const seen=new Set();
+  const coverage=Object.fromEntries(classes.map(c=>[c,[]]));
+  const depth=Math.max(...classes.map(c=>SIGNAL_STANCES[c].length));
+  for(let i=0;i<depth;i++){
+    for(const signalClass of classes){
+      const stance=SIGNAL_STANCES[signalClass][i];
+      if(!stance)continue;
+      coverage[signalClass].push(stance);
+      if(!seen.has(stance)){seen.add(stance);pool.push(stance);}
+    }
+  }
+  const stances=Array.from({length:count},(_,i)=>({stance:pool[i%pool.length],closureAuthority:'NONE'}));
+  return {stances,pool,signalCoverage:coverage};
 }
 
 function stanceInstruction(stance){
@@ -82,9 +98,10 @@ export async function shroomFeedbackReadingRound({text='',agents=10,round=1}={})
   const lenses=selected.order;
   const changedFromBaseline=lenses.some((lens,i)=>lens!==BASELINE[i]);
   const mode=adaptationMode(signals);
-  const activeSignalClasses=[signals.contradiction?'CONTRADICTION':null,(signals.external||signals.evidence)?'EVIDENCE':null,signals.question?'QUESTION':null].filter(Boolean);
+  const activeSignalClasses=activeClasses(signals);
   const signalFingerprintInput={external:signals.external,contradiction:signals.contradiction,evidence:signals.evidence,question:signals.question,activeSignalClasses};
-  const stances=stancePlan(signals,count);
+  const planned=stancePlan(signals,count);
+  const stances=planned.stances;
   const stanceCounts={};
   for(const item of stances)stanceCounts[item.stance]=(stanceCounts[item.stance]||0)+1;
   const reactions=Array.from({length:count},(_,i)=>({
@@ -104,7 +121,7 @@ export async function shroomFeedbackReadingRound({text='',agents=10,round=1}={})
       activeSignalClasses,
       lexicalMentions:signals.lexicalMentions,
       ignoredLexicalMentions:signals.ignoredLexicalMentions,
-      conditioningBasis:'STRUCTURED_FEEDBACK_COMPOSITION_WITH_BOUNDED_DISAGREEMENT',
+      conditioningBasis:'STRUCTURED_FEEDBACK_LENS_AND_STANCE_COMPOSITION_WITH_BOUNDED_DISAGREEMENT',
       lensOrder:lenses,
       lensScores:selected.scores,
       scoreContributions:selected.contributions,
@@ -112,13 +129,15 @@ export async function shroomFeedbackReadingRound({text='',agents=10,round=1}={})
       disagreement:{
         enabled:mode!=='BASELINE',
         stanceCounts,
+        stancePool:planned.pool,
+        signalCoverage:planned.signalCoverage,
         preservesHold:mode==='BASELINE'||Boolean(stanceCounts.HOLD_UNRESOLVED),
         closureAuthority:'NONE',
-        basis:'DETERMINISTIC_STANCE_DIVERSIFICATION'
+        basis:'DETERMINISTIC_SIGNAL_AWARE_STANCE_COMPOSITION'
       },
-      feedbackFingerprint:hash(JSON.stringify({...signalFingerprintInput,stanceCounts}))
+      feedbackFingerprint:hash(JSON.stringify({...signalFingerprintInput,stanceCounts,stancePool:planned.pool,signalCoverage:planned.signalCoverage}))
     },
     reactions,
-    boundary:'LOCAL DETERMINISTIC HEURISTIC READER. ONLY EXPLICIT STRUCTURED UPSTREAM MARKERS MAY CONDITION READING. WHEN MULTIPLE STRUCTURED SIGNAL CLASSES CO-OCCUR, THEIR BOUNDED LENS PRIORITIES COMPOSE. CONDITIONED ROUNDS ALSO PRESERVE A BOUNDED MIX OF VERIFY/CHALLENGE/HOLD/RECONSTRUCT OR PROPOSE/REFRAME STANCES SO ONE UPSTREAM SIGNAL CANNOT TURN ALL TEN TRACES INTO THE SAME CLOSURE-SEEKING REACTION. HOLD_UNRESOLVED HAS NO CLOSURE AUTHORITY AND ORDINARY PROSE MENTIONS STILL CANNOT HIJACK CONDITIONING. THIS IS DETERMINISTIC STRUCTURAL DIVERSIFICATION, NOT SEMANTIC UNDERSTANDING, LEARNED BELIEF CHANGE, INDEPENDENT AGENTS, OR REAL SOCIAL EMERGENCE.'
+    boundary:'LOCAL DETERMINISTIC HEURISTIC READER. ONLY EXPLICIT STRUCTURED UPSTREAM MARKERS MAY CONDITION READING. WHEN MULTIPLE STRUCTURED SIGNAL CLASSES CO-OCCUR, BOTH LENS PRIORITIES AND A BOUNDED SIGNAL-AWARE STANCE POOL COMPOSE, SO CONTRADICTION CANNOT SILENTLY ERASE QUESTION-SPECIFIC PROPOSE/REFRAME POSITIONS AND QUESTION CANNOT ERASE EVIDENCE-SPECIFIC VERIFY. CONDITIONED ROUNDS PRESERVE HOLD_UNRESOLVED AND EVERY REACTION KEEPS CLOSURE AUTHORITY NONE. ORDINARY PROSE MENTIONS STILL CANNOT HIJACK CONDITIONING. THIS IS DETERMINISTIC STRUCTURAL DIVERSIFICATION, NOT SEMANTIC UNDERSTANDING, LEARNED BELIEF CHANGE, INDEPENDENT AGENTS, OR REAL SOCIAL EMERGENCE.'
   };
 }
