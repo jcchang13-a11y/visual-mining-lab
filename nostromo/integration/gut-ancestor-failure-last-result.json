@@ -1,9 +1,14 @@
 {
-  "schema": "nostromo-gut-ancestor-failure-test/v0.3",
-  "completedAt": "2026-09-04T13:06:49.617Z",
+  "schema": "nostromo-gut-ancestor-failure-test/v0.4",
+  "completedAt": "2026-09-04T13:07:17.607Z",
   "engineVersion": "0.2.26",
   "status": "PASS",
   "promoted": true,
+  "regressionOrigin": {
+    "priorEngineBlob": "d6b9d1fbcfd97f69a0ec0526317ebb8d0c6a839f",
+    "defect": "Prior looksLikeFailureSignal treated any atom whose entire lexical value matched the terminal-status vocabulary as failure evidence, even outside status/result/outcome or failure/risk context.",
+    "repair": "Bare terminal-status vocabulary now requires machine-status context unless inherited failed provenance or an explicit status marker is present."
+  },
   "failedBundle": {
     "quarantined": 5,
     "routeCounts": {
@@ -453,9 +458,13 @@
       "MUTHER": 2,
       "DROPLET": 1,
       "VAJRA": 0,
-      "HOLD": 2
-    }
+      "HOLD": 4
+    },
+    "bareSemanticTokens": [
+      "timeout",
+      "skipped"
+    ]
   },
   "failures": [],
-  "boundary": "This adversarial test distinguishes terminal non-success executor-envelope context from ordinary semantic prose. On GUT v0.2.26, FAILED plus CANCELLED, TIMEOUT, TIMED_OUT, ABORTED, BLOCKED and SKIPPED ancestor statuses must quarantine descendant payload atoms before they can be routed as fresh claims/evidence/questions, while an EXECUTED ancestor must not quarantine useful prose merely because it discusses words such as invalid, error, timeout or skipped. This is structural execution-context containment, not semantic truth or source-quality judgment."
+  "boundary": "This adversarial test distinguishes terminal non-success executor-envelope context from ordinary semantic prose and bare lexical tokens. FAILED plus CANCELLED, TIMEOUT, TIMED_OUT, ABORTED, BLOCKED and SKIPPED ancestor statuses must quarantine descendant payload atoms before they can be routed as fresh claims/evidence/questions. Under an EXECUTED ancestor, ordinary prose and standalone semantic tokens such as timeout or skipped must remain non-quarantined unless they occupy an explicit status/result/outcome or dedicated failure/risk context. This is structural execution-context containment, not semantic truth or source-quality judgment."
 }
