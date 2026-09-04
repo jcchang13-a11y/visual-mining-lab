@@ -1,6 +1,6 @@
 {
-  "schema": "nostromo-organ-registry/v1.56",
-  "updatedAt": "2026-09-04T07:10:00+08:00",
+  "schema": "nostromo-organ-registry/v1.57",
+  "updatedAt": "2026-09-04T10:11:00+08:00",
   "truthRule": "DISPLAYED STATE MUST FOLLOW EVIDENCE",
   "evidence": "ci-last-result.json plus formal-round-last-result.json plus connector-last-result.json plus muther-falsify-last-result.json plus muther-repo-diversity-last-result.json plus droplet-claim-verify-last-result.json plus gut-metabolism-last-result.json plus gut-ancestor-failure-last-result.json plus gut-lineage-last-result.json plus vajra-dynamic-last-result.json plus vajra-ambiguity-last-result.json plus vajra-modality-last-result.json plus vajra-uncertainty-last-result.json plus vajra-conflict-escalation-last-result.json plus vajra-provenance-diversity-last-result.json plus shroom-feedback-last-result.json",
   "latestFormalRound": "greenhouse/r113-nostromo-formal-round.json",
@@ -29,19 +29,19 @@
     "boundary": "Isolated counterfactual executor only. It deliberately includes parent round ordinal in participant selection and has been CI-verified against R111 and R112. It does not write or advance formal greenhouse history and is engineering evidence that NOSTROMO can execute and audit a parent-sensitive transition, not evidence that the real SHROOMING population is causally path-dependent."
   },
   "latestThickening": {
-    "organ": "GUT",
-    "version": "GUT failed-ancestor execution-context quarantine on v0.2.25",
-    "status": "VERIFIED_FAILED_EXECUTOR_DESCENDANT_PAYLOAD_QUARANTINE",
-    "test": "gut-ancestor-failure-last-result.json v0.2 + NOSTROMO Integration Test run 335",
+    "organ": "VAJRA",
+    "version": "VAJRA branch-scoped conditional receipt ambiguity guard v0.5.1",
+    "status": "VERIFIED_CONDITIONAL_POLARITY_FALSE_CLOSURE_BLOCK",
+    "test": "vajra-ambiguity-last-result.json v0.5.1 + NOSTROMO Integration Test run 339",
     "capabilities": [
-      "FAILED executor-envelope status is propagated through existing provenance into descendant payload atoms",
-      "descendant claim, evidence and question fields under a FAILED ancestor are quarantined before semantic routing and cannot escape as fresh material to DROPLET, MUTHER or SHROOMING",
-      "the failed-bundle adversarial fixture quarantined all five descendant atoms and routed zero failed payload atoms to active semantic destinations",
-      "quarantined descendants retain the inherited FAILED status and input-source provenance for audit",
-      "an EXECUTED control envelope remains normally routable even when its semantic prose contains words such as invalid or error",
-      "existing GUT metabolism, lineage anti-echo, VAJRA, MUTHER, DROPLET, SHROOMING and 50-round integration tests remain successful after the containment change"
+      "explicitly conditional support/refute relations are conservatively classified UNSPECIFIED at branch level rather than promoted to unconditional directional evidence",
+      "bounded English patterns cover conditional/provisional support-refute plus only-if, provided-that, assuming-that, subject-to and under-the-condition-that forms",
+      "bounded Chinese patterns cover 只有在/僅在/只在/在特定條件下/有條件地 support-refute forms",
+      "conditional evidence from a second organ blocks preferred-organ first-receipt closure without being falsely escalated as a genuine opposite-polarity conflict",
+      "unconditional same-direction controls remain resolvable, while explicit opposite cross-organ polarity still becomes CONTESTED_BY_RECEIPTS and escalates through the existing DROPLET/MUTHER/SHROOMING conflict path",
+      "the full existing GUT, VAJRA, MUTHER, DROPLET, SHROOMING and 50-round integration suite remained successful after the change"
     ],
-    "boundary": "This is deterministic structural execution-context containment. It prevents a failed executor envelope from amplifying its sibling payload as if that payload were a fresh successful claim, evidence item or question. It does not determine whether the quarantined content is semantically false, whether an upstream executor should have failed, whether a source is trustworthy, or whether a healthy payload is true."
+    "boundary": "This is deterministic lexical/structural condition-scope containment. It prevents explicitly conditional evidence from masquerading as unconditional closure on a broader VAJRA branch. It intentionally prefers UNSPECIFIED when a bounded condition pattern is present. It does not semantically determine whether the condition actually narrows the target claim, parse arbitrary logical scope, judge truth, score evidence quality, or prove source independence."
   },
   "organs": {
     "shrooming": {
@@ -94,9 +94,9 @@
       "mode": "EXEC_CONNECTED_THICKENED",
       "source": "../vajra/vajra-engine.js + ../vajra/receipt-uncertainty-guard.js + ./vajra-conflict-escalation.mjs + ./vajra-provenance-diversity-guard.mjs + ./vajra-ambiguity-guard.mjs",
       "actions": {
-        "DISMANTLE": "VERIFIED_PROPOSITION_AWARE_DISMANTLER_WITH_RECEIPT_GUARDS_BRANCH_SCOPED_CROSS_ORGAN_EXPLICIT_CONFLICT_NEGATION_INSUFFICIENCY_AND_BOUNDED_MODALITY_AWARE_AMBIGUITY_MULTI_ORGAN_ESCALATION_CONTEXT_REPLAY_HISTORY_PROVENANCE_DIVERSITY_AND_OPERATOR_PROTECTION"
+        "DISMANTLE": "VERIFIED_PROPOSITION_AWARE_DISMANTLER_WITH_RECEIPT_GUARDS_BRANCH_SCOPED_CROSS_ORGAN_EXPLICIT_CONFLICT_NEGATION_INSUFFICIENCY_MODALITY_AND_CONDITIONALITY_AWARE_AMBIGUITY_MULTI_ORGAN_ESCALATION_CONTEXT_REPLAY_HISTORY_PROVENANCE_DIVERSITY_AND_OPERATOR_PROTECTION"
       },
-      "boundary": "VAJRA retains proposition-aware dismantling, uncertainty/provenance preservation, contest persistence, multi-organ conflict-context routing, replay containment, content-bound history attestation and semantic-operator-preserving replay identity. Its branch-scoped receipt ambiguity/conflict guard is now v0.5.0: qualifying executed returns that share targetRef + clauseRef + lens are audited together even when organ labels differ. When explicit opposite lexical polarity arrives from different organs, a preferred-organ return can no longer silently close the branch while the non-preferred return is discarded as an organ mismatch; the branch is promoted to CONTESTED_BY_RECEIPTS and is compatible with existing conflict escalation to DROPLET, MUTHER and SHROOMING. When at least one relation remains lexically UNSPECIFIED, branch ambiguity is preserved instead. Bounded English/Chinese negation, insufficiency and explicit modality masks remain active, and same-direction explicit cross-organ returns remain a control rather than a false contest. Its cross-organ provenance-diversity/content-replay guard remains v0.3.3, including comparison, equality, addition/subtraction, multiplication and division operator preservation. Distinct organ or canonical provenance labels still do not prove real-world source independence. These remain deterministic lexical/structural guards, not general semantic negation/modality scope resolution, semantic adjudication, factual truth, derivative-source detection or real-world source-independence proof."
+      "boundary": "VAJRA retains proposition-aware dismantling, uncertainty/provenance preservation, contest persistence, multi-organ conflict-context routing, replay containment, content-bound history attestation and semantic-operator-preserving replay identity. Its branch-scoped receipt ambiguity/conflict guard is now v0.5.1: qualifying executed returns that share targetRef + clauseRef + lens are audited together even when organ labels differ. Explicit opposite lexical polarity across organs still promotes the branch to CONTESTED_BY_RECEIPTS and remains compatible with conflict escalation to DROPLET, MUTHER and SHROOMING. When at least one relation is lexically UNSPECIFIED, branch ambiguity is preserved instead. Bounded English/Chinese negation, insufficiency, explicit modality and explicit conditionality masks are active; phrases such as supports only if, provided that, assuming that, subject to, under the condition that, 只有在, 僅在, 只在, 在特定條件下 and 有條件地 are conservatively prevented from creating unconditional closure. Conditional cross-organ returns block false closure without being mislabeled as an explicit contradiction. Same-direction unconditional controls remain resolvable. Its cross-organ provenance-diversity/content-replay guard remains v0.3.3, including comparison, equality, addition/subtraction, multiplication and division operator preservation. Distinct organ or canonical provenance labels still do not prove real-world source independence. These remain deterministic lexical/structural guards, not general semantic condition/negation/modality scope resolution, semantic adjudication, factual truth, derivative-source detection or real-world source-independence proof."
     }
   }
 }
