@@ -1,0 +1,23 @@
+{
+  "schema": "nostromo-vajra-prefx-finding/v0.1",
+  "observedAt": "2026-09-04T09:02:17+08:00",
+  "organ": "VAJRA",
+  "engineVersion": "0.3.2",
+  "classification": "BOUNDED_OPERATOR_CANONICALIZATION_GAP",
+  "status": "OPEN_NOT_PROMOTED",
+  "finding": "canonicalEvidenceMaterial preserves comparison/equality and context-marked plus/minus, but multiplication and division operators are currently removed by the final Unicode punctuation/symbol stripping stage.",
+  "adversarialPairs": [
+    {"a": "A * B", "b": "A / B", "risk": "both can canonicalize to the same alphanumeric material"},
+    {"a": "6×3", "b": "6÷3", "risk": "Unicode multiplication/division symbols can be stripped and collide"}
+  ],
+  "risk": "Distinct returned evidence can be assigned the same replay identity, causing a legitimate second branch return to be rejected as replayed evidence. This is false deduplication, not merely cosmetic normalization.",
+  "evidenceBasis": {
+    "enginePath": "nostromo/vajra/vajra-engine.js",
+    "currentGuard": "v0.3.2 explicitly preserves >/<, =/!=, >=/<= and context-marked +/- before stripping remaining punctuation/symbols",
+    "existingTestPath": "nostromo/integration/vajra-dynamic-test.mjs",
+    "existingOperatorCases": ["GT_LT", "PLUS_MINUS", "EQ_NE", "GE_LE", "NUMERIC_PLUS_MINUS"],
+    "missingCases": ["MULTIPLY_DIVIDE", "UNICODE_MULTIPLY_DIVIDE"]
+  },
+  "promotionRule": "Do not change displayed VAJRA/NOSTROMO status from this finding alone. Patch the canonicalizer, add adversarial cases, run VAJRA unit/adversarial tests plus NOSTROMO cross-organ regression, and promote only after GitHub Actions succeeds.",
+  "boundary": "This record preserves a code-inspection finding before repair. It is not a claim that a patched executor has been verified. DISPLAYED STATE MUST FOLLOW EVIDENCE."
+}
