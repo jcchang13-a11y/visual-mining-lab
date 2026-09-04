@@ -1,8 +1,9 @@
 {
-  "purpose": "single CI trigger for SHROOMING mixed structured-feedback composition verification",
+  "purpose": "single CI trigger for VAJRA bounded English condition-prefix containment verification",
   "stagedCommits": [
-    "a34c506c15141927ff43f8bd05579b3e4bc71823",
-    "a47acfad6ef48036f6212936094fef9a4aa2ec24"
+    "07a03b3fa8cf55160bf73c51294243e444827d84",
+    "df1a4b89e5204e05b3819641df27839b513b0ab1",
+    "9ed55052ffcda6f6e7e556388a3bd4cfa62fc762"
   ],
   "truthRule": "DISPLAYED STATE MUST FOLLOW EVIDENCE"
 }
