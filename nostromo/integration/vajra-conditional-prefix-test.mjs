@@ -33,6 +33,13 @@ const cases=[
   ['WHEREAS_PREFIX_SUPPORT','Whereas this evidence supports the target claim, source quality remains unknown.','UNSPECIFIED'],
   ['ZH_SUISHUO_PREFIX','雖說這份證據支持目標命題，來源仍未核實。','UNSPECIFIED'],
   ['ZH_GURAN_PREFIX','固然這份證據反駁目標命題，樣本仍不完整。','UNSPECIFIED'],
+  ['IF_PREFIX_SUPPORT','If this evidence supports the target claim, provenance still needs audit.','UNSPECIFIED'],
+  ['WHEN_PREFIX_REFUTE','When this evidence refutes the target claim, the bounded sample still needs replication.','UNSPECIFIED'],
+  ['AS_LONG_AS_PREFIX_SUPPORT','As long as this evidence supports the target claim, source independence remains unverified.','UNSPECIFIED'],
+  ['ZH_IF_PREFIX_SUPPORT','如果這份證據支持目標命題，來源仍需核實。','UNSPECIFIED'],
+  ['ZH_RUO_PREFIX_REFUTE','若這份證據反駁目標命題，樣本仍需重跑。','UNSPECIFIED'],
+  ['ZH_TANGRUO_PREFIX_SUPPORT','倘若這份證據支持目標命題，來源獨立性仍未知。','UNSPECIFIED'],
+  ['ZH_ZHIYAO_PREFIX_REFUTE','只要這份證據反駁目標命題，仍應保留未解條件。','UNSPECIFIED'],
   ['SENTENCE_BOUNDARY_CONTROL','Only if retries remain disabled, logging behavior changes. This evidence supports the target claim.','SUPPORTS'],
   ['SEMICOLON_BOUNDARY_CONTROL','Provided that duplicate inputs are retained, logging behavior changes; this evidence refutes the target claim.','REFUTES'],
   ['UNLESS_SENTENCE_BOUNDARY_CONTROL','Unless retries are disabled, logging behavior changes. This evidence supports the target claim.','SUPPORTS'],
@@ -41,7 +48,10 @@ const cases=[
   ['ZH_CONCESSIVE_MAIN_CLAUSE_REFUTE','雖然樣本有限，這份證據反駁目標命題。','REFUTES'],
   ['WHILE_MAIN_CLAUSE_SUPPORT','While provenance is weak, this evidence supports the target claim.','SUPPORTS'],
   ['WHEREAS_MAIN_CLAUSE_REFUTE','Whereas the sample is incomplete, this evidence refutes the target claim.','REFUTES'],
-  ['ZH_GURAN_MAIN_CLAUSE_SUPPORT','固然來源有限，這份證據支持目標命題。','SUPPORTS']
+  ['ZH_GURAN_MAIN_CLAUSE_SUPPORT','固然來源有限，這份證據支持目標命題。','SUPPORTS'],
+  ['IF_MAIN_CLAUSE_SUPPORT','If provenance is audited, logging behavior changes. This evidence supports the target claim.','SUPPORTS'],
+  ['WHEN_MAIN_CLAUSE_REFUTE','When the sample is complete, logging behavior changes. This evidence refutes the target claim.','REFUTES'],
+  ['ZH_IF_MAIN_CLAUSE_SUPPORT','如果來源完成核實，紀錄狀態改變。這份證據支持目標命題。','SUPPORTS']
 ];
 
 const observations=[];
@@ -53,13 +63,13 @@ for(const [name,relation,expected] of cases){
 }
 
 const result={
-  schema:'nostromo-vajra-conditional-prefix-test/v0.4',
+  schema:'nostromo-vajra-conditional-prefix-test/v0.5',
   status:failures.length?'FAIL':'PASS',
-  guard:'VAJRA ambiguity/conflict guard v0.5.5',
-  capability:'BOUNDED_ENGLISH_CHINESE_CONDITION_EXCEPTION_CONCESSIVE_AND_CONTRASTIVE_SCOPE_CONTAINMENT',
+  guard:'VAJRA ambiguity/conflict guard v0.5.6',
+  capability:'BOUNDED_ENGLISH_CHINESE_GENERIC_CONDITION_EXCEPTION_CONCESSIVE_AND_CONTRASTIVE_SCOPE_CONTAINMENT',
   observations,
   failures,
-  boundary:'This adversarial test covers bounded English/Chinese condition, exception, concessive and contrastive comma-delimited prefix forms around support/refute vocabulary. It verifies that subordinate directional polarity cannot manufacture unconditional closure while a later main-clause directional statement remains visible. English contrastive coverage is bounded to while/whilst/whereas prefix forms and Chinese coverage to 雖說/固然; this is lexical/structural scope containment, not general logical parsing or semantic discourse adjudication.'
+  boundary:'This adversarial test covers bounded English/Chinese condition, exception, concessive and contrastive comma-delimited prefix forms around support/refute vocabulary. Generic if/when/as-long-as and 如果/若/倘若/只要 prefixes are now included. It verifies that subordinate directional polarity cannot manufacture unconditional closure while a later main-clause directional statement remains visible. This is lexical/structural scope containment, not general logical parsing or semantic discourse adjudication.'
 };
 await fs.writeFile('nostromo/integration/vajra-conditional-prefix-last-result.json',JSON.stringify(result,null,2)+'\n');
 console.log(JSON.stringify(result,null,2));
