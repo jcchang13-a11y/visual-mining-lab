@@ -1,6 +1,6 @@
 {
-  "schema": "nostromo-shroom-feedback-test/v0.4",
-  "completedAt": "2026-09-04T07:10:24.059Z",
+  "schema": "nostromo-shroom-feedback-test/v0.5",
+  "completedAt": "2026-09-04T08:05:15.821Z",
   "status": "PASS",
   "baseline": {
     "mode": "BASELINE",
@@ -23,7 +23,11 @@
     "stanceCounts": {
       "OBSERVE": 10
     },
-    "feedbackFingerprint": "9f6928c26aa0cd01"
+    "stancePool": [
+      "OBSERVE"
+    ],
+    "signalCoverage": {},
+    "feedbackFingerprint": "0c0184706b06957c"
   },
   "lexicalNoise": {
     "mode": "BASELINE",
@@ -65,7 +69,21 @@
       "HOLD_UNRESOLVED": 2,
       "RECONSTRUCT": 2
     },
-    "feedbackFingerprint": "fbaea570d575eef6"
+    "stancePool": [
+      "VERIFY",
+      "CHALLENGE",
+      "HOLD_UNRESOLVED",
+      "RECONSTRUCT"
+    ],
+    "signalCoverage": {
+      "EVIDENCE": [
+        "VERIFY",
+        "CHALLENGE",
+        "HOLD_UNRESOLVED",
+        "RECONSTRUCT"
+      ]
+    },
+    "feedbackFingerprint": "7c4659a4ec3eeb2e"
   },
   "contradiction": {
     "mode": "CONTRADICTION_CONDITIONED",
@@ -94,7 +112,21 @@
       "HOLD_UNRESOLVED": 2,
       "RECONSTRUCT": 2
     },
-    "feedbackFingerprint": "2ac6ee75d93e0a58"
+    "stancePool": [
+      "CHALLENGE",
+      "VERIFY",
+      "HOLD_UNRESOLVED",
+      "RECONSTRUCT"
+    ],
+    "signalCoverage": {
+      "CONTRADICTION": [
+        "CHALLENGE",
+        "VERIFY",
+        "HOLD_UNRESOLVED",
+        "RECONSTRUCT"
+      ]
+    },
+    "feedbackFingerprint": "adea9fbbbe5b51ab"
   },
   "explicitQuestion": {
     "mode": "QUESTION_CONDITIONED",
@@ -123,7 +155,21 @@
       "HOLD_UNRESOLVED": 2,
       "REFRAME": 2
     },
-    "feedbackFingerprint": "9417e00c6cd0d349"
+    "stancePool": [
+      "PROPOSE",
+      "CHALLENGE",
+      "HOLD_UNRESOLVED",
+      "REFRAME"
+    ],
+    "signalCoverage": {
+      "QUESTION": [
+        "PROPOSE",
+        "CHALLENGE",
+        "HOLD_UNRESOLVED",
+        "REFRAME"
+      ]
+    },
+    "feedbackFingerprint": "32794aa57b2abb44"
   },
   "mixedEvidenceQuestion": {
     "mode": "MIXED_CONDITIONED",
@@ -141,18 +187,44 @@
       "anomaly"
     ],
     "stances": [
+      "VERIFY",
       "PROPOSE",
       "CHALLENGE",
       "HOLD_UNRESOLVED",
+      "RECONSTRUCT",
       "REFRAME"
     ],
     "stanceCounts": {
-      "PROPOSE": 3,
-      "CHALLENGE": 3,
+      "VERIFY": 2,
+      "PROPOSE": 2,
+      "CHALLENGE": 2,
       "HOLD_UNRESOLVED": 2,
-      "REFRAME": 2
+      "RECONSTRUCT": 1,
+      "REFRAME": 1
     },
-    "feedbackFingerprint": "68a083777c049468"
+    "stancePool": [
+      "VERIFY",
+      "PROPOSE",
+      "CHALLENGE",
+      "HOLD_UNRESOLVED",
+      "RECONSTRUCT",
+      "REFRAME"
+    ],
+    "signalCoverage": {
+      "EVIDENCE": [
+        "VERIFY",
+        "CHALLENGE",
+        "HOLD_UNRESOLVED",
+        "RECONSTRUCT"
+      ],
+      "QUESTION": [
+        "PROPOSE",
+        "CHALLENGE",
+        "HOLD_UNRESOLVED",
+        "REFRAME"
+      ]
+    },
+    "feedbackFingerprint": "bf6793330ffff5b8"
   },
   "mixedContradictionQuestion": {
     "mode": "MIXED_CONDITIONED",
@@ -171,20 +243,107 @@
     ],
     "stances": [
       "CHALLENGE",
+      "PROPOSE",
       "VERIFY",
       "HOLD_UNRESOLVED",
-      "RECONSTRUCT"
+      "RECONSTRUCT",
+      "REFRAME"
     ],
     "stanceCounts": {
-      "CHALLENGE": 3,
-      "VERIFY": 3,
+      "CHALLENGE": 2,
+      "PROPOSE": 2,
+      "VERIFY": 2,
       "HOLD_UNRESOLVED": 2,
-      "RECONSTRUCT": 2
+      "RECONSTRUCT": 1,
+      "REFRAME": 1
     },
-    "feedbackFingerprint": "538c06b3ffe4f9b2"
+    "stancePool": [
+      "CHALLENGE",
+      "PROPOSE",
+      "VERIFY",
+      "HOLD_UNRESOLVED",
+      "RECONSTRUCT",
+      "REFRAME"
+    ],
+    "signalCoverage": {
+      "CONTRADICTION": [
+        "CHALLENGE",
+        "VERIFY",
+        "HOLD_UNRESOLVED",
+        "RECONSTRUCT"
+      ],
+      "QUESTION": [
+        "PROPOSE",
+        "CHALLENGE",
+        "HOLD_UNRESOLVED",
+        "REFRAME"
+      ]
+    },
+    "feedbackFingerprint": "964f6d26b46b9f80"
+  },
+  "tripleMixed": {
+    "mode": "MIXED_CONDITIONED",
+    "firstLens": "counterexample",
+    "lensOrder": [
+      "counterexample",
+      "evidence",
+      "boundary",
+      "position",
+      "structure",
+      "memory",
+      "otherness",
+      "language",
+      "use",
+      "anomaly"
+    ],
+    "stances": [
+      "CHALLENGE",
+      "VERIFY",
+      "PROPOSE",
+      "HOLD_UNRESOLVED",
+      "RECONSTRUCT",
+      "REFRAME"
+    ],
+    "stanceCounts": {
+      "CHALLENGE": 2,
+      "VERIFY": 2,
+      "PROPOSE": 2,
+      "HOLD_UNRESOLVED": 2,
+      "RECONSTRUCT": 1,
+      "REFRAME": 1
+    },
+    "stancePool": [
+      "CHALLENGE",
+      "VERIFY",
+      "PROPOSE",
+      "HOLD_UNRESOLVED",
+      "RECONSTRUCT",
+      "REFRAME"
+    ],
+    "signalCoverage": {
+      "CONTRADICTION": [
+        "CHALLENGE",
+        "VERIFY",
+        "HOLD_UNRESOLVED",
+        "RECONSTRUCT"
+      ],
+      "EVIDENCE": [
+        "VERIFY",
+        "CHALLENGE",
+        "HOLD_UNRESOLVED",
+        "RECONSTRUCT"
+      ],
+      "QUESTION": [
+        "PROPOSE",
+        "CHALLENGE",
+        "HOLD_UNRESOLVED",
+        "REFRAME"
+      ]
+    },
+    "feedbackFingerprint": "c97585bb046b8c8b"
   },
   "deterministicReplay": true,
-  "mixedDeterministicReplay": true,
+  "tripleMixedDeterministicReplay": true,
   "failures": [],
-  "boundary": "PASS demonstrates deterministic structured multi-signal conditioning with lexical-contamination resistance plus bounded disagreement preservation. Conditioned rounds retain multiple audited stances, including HOLD_UNRESOLVED, while every reaction keeps closureAuthority NONE; therefore an upstream evidence/contradiction/question marker can change SHROOMING behavior without forcing all ten traces into one closure-seeking response. This does not demonstrate semantic learning, belief revision, independent agents, or real social emergence."
+  "boundary": "PASS demonstrates deterministic structured multi-signal conditioning in both lens ordering and bounded stance composition. Mixed evidence/question, contradiction/question, and triple-signal rounds preserve signal-specific audited positions instead of allowing the first-priority signal to silently erase another signal class; HOLD_UNRESOLVED remains present and every reaction keeps closureAuthority NONE. Ordinary lexical mentions still cannot hijack conditioning. This does not demonstrate semantic learning, belief revision, independent agents, or real social emergence."
 }
