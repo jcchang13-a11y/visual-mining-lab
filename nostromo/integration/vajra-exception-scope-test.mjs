@@ -19,7 +19,8 @@ const common={
   clauseRef:branch?.clauseRef,
   lens:branch?.lens,
   organ:'DROPLET',
-  status:'EXECUTED'
+  status:'EXECUTED',
+  material:'A bounded returned observation is present for branch-scope audit.'
 };
 const explicitSupport={...common,provenance:'support-control',material:'A bounded verified run reproduced the target pattern.',relation:'This evidence supports the target claim within the tested scope.'};
 const explicitRefute={...common,provenance:'refute-control',material:'A bounded adversarial run reproduced a failure condition.',relation:'This evidence refutes the target claim within the tested scope.'};
@@ -91,7 +92,7 @@ const result={
     ordinaryControlPolarity:ordinaryPolarity
   },
   failures,
-  boundary:'This adversarial test verifies bounded English and Chinese exception-scope masking in VAJRA receipt polarity. Relations containing explicit unless/except or 除非/除了 exception scope remain UNSPECIFIED and cannot manufacture unconditional support/refute closure or a false cross-organ contradiction. Ordinary prose that merely mentions an exception field remains directional when its relation is explicitly unconditional. This is deterministic lexical scope containment, not general semantic exception parsing, truth judgment, or evidence-quality scoring.'
+  boundary:'The first red dedicated run was a test-fixture qualification failure: exception receipts omitted the required non-empty material field and were correctly rejected as malformed before polarity analysis. This revision preserves that failure evidence and supplies structurally qualifying material so the test reaches the intended exception-scope logic. The adversarial test verifies bounded English and Chinese exception-scope masking in VAJRA receipt polarity. Relations containing explicit unless/except or 除非/除了 exception scope must remain UNSPECIFIED and cannot manufacture unconditional support/refute closure or a false cross-organ contradiction. Ordinary prose that merely mentions an exception field remains directional when its relation is explicitly unconditional. This is deterministic lexical scope containment, not general semantic exception parsing, truth judgment, or evidence-quality scoring.'
 };
 await fs.writeFile(path.join(root,'nostromo','integration','vajra-exception-scope-last-result.json'),JSON.stringify(result,null,2)+'\n','utf8');
 console.log(JSON.stringify(result,null,2));
