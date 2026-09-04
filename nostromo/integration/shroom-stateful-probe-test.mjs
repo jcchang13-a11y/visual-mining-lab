@@ -30,3 +30,4 @@ const result={schema:'nostromo-shroom-stateful-probe-test/v0.1',completedAt:new 
 await fs.writeFile(path.join(ROOT,'nostromo/integration/shroom-stateful-probe-last-result.json'),JSON.stringify(result,null,2)+'\n','utf8');
 console.log(JSON.stringify(result,null,2));
 if(failures.length)process.exit(1);
+// This test certifies deterministic history-conditioned routing only; it does not certify semantic learning or independent persistent agents.
