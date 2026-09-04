@@ -1,6 +1,6 @@
 {
-  "schema": "nostromo-organ-registry/v1.60",
-  "updatedAt": "2026-09-04T15:10:00+08:00",
+  "schema": "nostromo-organ-registry/v1.61",
+  "updatedAt": "2026-09-04T16:07:00+08:00",
   "truthRule": "DISPLAYED STATE MUST FOLLOW EVIDENCE",
   "evidence": "ci-last-result.json plus formal-round-last-result.json plus connector-last-result.json plus muther-falsify-last-result.json plus muther-repo-diversity-last-result.json plus droplet-claim-verify-last-result.json plus gut-metabolism-last-result.json plus gut-ancestor-failure-last-result.json plus gut-lineage-last-result.json plus vajra-dynamic-last-result.json plus vajra-ambiguity-last-result.json plus vajra-modality-last-result.json plus vajra-uncertainty-last-result.json plus vajra-conflict-escalation-last-result.json plus vajra-provenance-diversity-last-result.json plus shroom-feedback-last-result.json",
   "latestFormalRound": "greenhouse/r113-nostromo-formal-round.json",
@@ -29,19 +29,20 @@
     "boundary": "Isolated counterfactual executor only. It deliberately includes parent round ordinal in participant selection and has been CI-verified against R111 and R112. It does not write or advance formal greenhouse history and is engineering evidence that NOSTROMO can execute and audit a parent-sensitive transition, not evidence that the real SHROOMING population is causally path-dependent."
   },
   "latestThickening": {
-    "organ": "DROPLET",
-    "version": "DROPLET claim verify v1.6",
-    "status": "VERIFIED_FRESHNESS_SCOPED_DIRECTIONAL_CONFLICT",
-    "test": "droplet-claim-verify-last-result.json v1.6 + NOSTROMO Integration Test run 353",
+    "organ": "SHROOMING",
+    "version": "SHROOMING feedback-conditioned reader v0.5",
+    "status": "VERIFIED_SIGNAL_AWARE_LENS_AND_STANCE_COMPOSITION",
+    "test": "shroom-feedback-last-result.json v0.5 + NOSTROMO Integration Test run 355",
     "capabilities": [
-      "under an explicit freshness policy, only freshness-eligible support/refute directions may create or directionally block a current verdict",
-      "stale historical authoritative disagreement remains auditable as rawAuthoritativeConflict without automatically forcing a current fresh verdict to INDETERMINATE",
-      "fresh support plus only stale refutation can resolve SUPPORTED, while fresh refutation plus only stale support can resolve REFUTED",
-      "same-fingerprint opposite relations remain a global integrity conflict even when one side is stale, preventing freshness from masking contradictory reuse of one evidence identity",
-      "eligible directional counts and freshnessExcludedAuthoritativeConflict are preserved for audit",
-      "the full GUT, VAJRA, MU/TH/UR, DROPLET, SHROOMING and 50-round integration suite passed after dedicated adversarial coverage"
+      "explicit structured contradiction, evidence and question signals continue to compose bounded lens priorities",
+      "mixed upstream signals now also compose a bounded stance pool instead of allowing the highest-priority signal class to silently erase another signal class",
+      "evidence plus question retains VERIFY together with PROPOSE and REFRAME positions",
+      "contradiction plus question retains CHALLENGE and VERIFY together with PROPOSE and REFRAME positions",
+      "triple contradiction plus evidence plus question conditioning preserves CHALLENGE, VERIFY, PROPOSE, HOLD_UNRESOLVED, RECONSTRUCT and REFRAME in the same ten-trace round",
+      "signalCoverage, stancePool and stanceCounts remain auditable, deterministic replay passes, and every reaction retains closureAuthority NONE",
+      "ordinary lexical mentions remain unable to trigger structured conditioning"
     ],
-    "boundary": "This is deterministic freshness-scoped evidence gating over an explicit caller/connector evidence bundle. It does not infer whether a claim is time-sensitive, validate dates, search the web itself, prove source independence, detect derivative sources, score methodological quality, adjudicate semantic truth, or convert historical disagreement into evidence that the current state is settled."
+    "boundary": "This is deterministic signal-aware structural diversification over explicit upstream markers. It demonstrates that multiple organs can simultaneously alter SHROOMING inspection and stance allocation without one signal class silently overriding the others. It does not demonstrate semantic learning, belief revision, independent persistent agents, factual adjudication, or real social emergence."
   },
   "organs": {
     "shrooming": {
@@ -55,7 +56,7 @@
         "RUN_READING_ROUND": "FORMAL_ROUND_EXEC",
         "RUN_PARENT_SENSITIVE_CONTROL": "EXPERIMENTAL_EXEC_VERIFIED"
       },
-      "boundary": "Published-state inspection, sandbox reading, greenhouse question probing, and explicit formal greenhouse round advancement remain executable. In the verified active NOSTROMO loop, SHROOMING has a separate feedback-conditioned deterministic reader v0.4. Only explicit structured upstream markers can condition reading; when evidence, contradiction and question signal classes co-occur, their bounded lens priorities compose instead of one signal silently overriding the others. Ordinary lexical mentions remain auditable but cannot hijack conditioning. Conditioned rounds now also preserve bounded stance disagreement across VERIFY/CHALLENGE/HOLD_UNRESOLVED/RECONSTRUCT or PROPOSE/REFRAME roles, with no reaction receiving closure authority. The formal RUN_READING_ROUND baseline remains parent-invariant v0.9 and unchanged, preserving R111→R112→R113 reproducibility. Neither the feedback-conditioned active-loop reader nor the formal/experimental branches represent semantic learning, belief revision, ten independently persistent live LLM processes or real social emergence."
+      "boundary": "Published-state inspection, sandbox reading, greenhouse question probing, and explicit formal greenhouse round advancement remain executable. In the verified active NOSTROMO loop, SHROOMING has a separate feedback-conditioned deterministic reader v0.5. Only explicit structured upstream markers can condition reading; when evidence, contradiction and question signal classes co-occur, their bounded lens priorities and a signal-aware stance pool compose instead of one signal silently overriding the others. Mixed evidence/question retains VERIFY with PROPOSE/REFRAME; mixed contradiction/question retains CHALLENGE/VERIFY with PROPOSE/REFRAME; triple-signal rounds retain all six bounded stances CHALLENGE, VERIFY, PROPOSE, HOLD_UNRESOLVED, RECONSTRUCT and REFRAME across ten traces. Ordinary lexical mentions remain auditable but cannot hijack conditioning, every reaction keeps closureAuthority NONE, and signalCoverage/stancePool remain auditable. The formal RUN_READING_ROUND baseline remains parent-invariant v0.9 and unchanged, preserving R111→R112→R113 reproducibility. Neither the feedback-conditioned active-loop reader nor the formal/experimental branches represent semantic learning, belief revision, ten independently persistent live LLM processes or real social emergence."
     },
     "muther": {
       "mode": "PARTIAL_EXEC_THICKENED",
