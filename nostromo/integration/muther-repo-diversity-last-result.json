@@ -1,8 +1,8 @@
 {
-  "schema": "muther-repo-diversity-test/v0.2.2",
-  "completedAt": "2026-09-04T05:04:28.698Z",
+  "schema": "muther-repo-diversity-test/v0.2.3",
+  "completedAt": "2026-09-04T05:05:06.772Z",
   "status": "PASS",
-  "capability": "LEXICAL_NEAR_DUPLICATE_CONTAINMENT_PLUS_BOUNDED_MULTI_WINDOW_COVERAGE_PLUS_EXACT_REPLAY_PROVENANCE_RETENTION",
+  "capability": "LEXICAL_NEAR_DUPLICATE_CONTAINMENT_PLUS_BOUNDED_MULTI_WINDOW_COVERAGE_PLUS_EXACT_REPLAY_PROVENANCE_RETENTION_PLUS_QUERY_REMOVED_LEXICAL_VEIN_MAPPING",
   "unit": {
     "nearSimilarity": 0.9518,
     "distinctSimilarity": 0.105,
@@ -68,6 +68,51 @@
     "contentCountedOnce": true,
     "provenanceRetained": true
   },
+  "lexicalVeinMap": {
+    "veinAB": 0.5071,
+    "veinAC": 0.061,
+    "veinBC": 0.0544,
+    "threshold": 0.2841,
+    "retainedHitCount": 3,
+    "veinCount": 1,
+    "crossFamilyVeinCount": 1,
+    "unclusteredCount": 1,
+    "veins": [
+      {
+        "id": "lexical-vein-1",
+        "memberCount": 2,
+        "sourceFamilyCount": 2,
+        "crossFamily": true,
+        "sourceFamilies": [
+          "tmp-muther-vein-a",
+          "tmp-muther-vein-b"
+        ],
+        "paths": [
+          "tmp-muther-vein-a/vein-a.md",
+          "tmp-muther-vein-b/vein-b.md"
+        ],
+        "fingerprints": [
+          "d319aeaa5435e5e8",
+          "2c2e157de0819b30"
+        ],
+        "edgeCount": 1,
+        "maxAffinity": 0.5071,
+        "minAffinity": 0.5071
+      }
+    ],
+    "edgeAudit": [
+      {
+        "aFingerprint": "d319aeaa5435e5e8",
+        "bFingerprint": "2c2e157de0819b30",
+        "aPath": "tmp-muther-vein-a/vein-a.md",
+        "bPath": "tmp-muther-vein-b/vein-b.md",
+        "aSourceFamily": "tmp-muther-vein-a",
+        "bSourceFamily": "tmp-muther-vein-b",
+        "crossFamily": true,
+        "similarity": 0.5071
+      }
+    ]
+  },
   "provenance": {
     "selectedSourceFamilies": [
       "tmp-muther-near-a",
@@ -75,9 +120,10 @@
     ],
     "sourceFamilyCount": 3,
     "trueOccurrenceOrdinalPreserved": true,
-    "exactReplayCrossFamilyProvenanceRetained": true
+    "exactReplayCrossFamilyProvenanceRetained": true,
+    "lexicalVeinCrossFamilyProvenanceRetained": true
   },
-  "crossOrganRegression": "The main NOSTROMO integration test runs separately in the same workflow and must remain PASS before public promotion. Because the full MUTHER executor object is handed to GUT, the bounded exactDuplicateAudit remains available downstream without duplicating the suppressed material as an additional hit.",
-  "boundary": "PASS certifies conservative lexical near-duplicate containment, bounded extraction of separated query windows, preservation of each selected window’s true query-occurrence ordinal, and bounded provenance retention for exact content copies that are suppressed from material amplification. It does not certify semantic vein detection, semantic equivalence, exhaustive within-file coverage, source independence, source quality, novelty, factual truth, or Google Drive coverage.",
+  "crossOrganRegression": "The main NOSTROMO integration test runs separately in the same workflow and must remain PASS before public promotion. Because the full MUTHER executor object is handed to GUT, lexicalVeins and their source-family/path audit can travel downstream as bounded structural metadata while the original retained hits remain separate nutrients; a lexical vein is not closure authority and does not create extra evidence weight.",
+  "boundary": "PASS certifies conservative lexical near-duplicate containment, bounded extraction of separated query windows, preservation of each selected window’s true query-occurrence ordinal, bounded provenance retention for exact content copies suppressed from material amplification, and a bounded query-removed lexical co-context graph over retained hits. The vein graph does not merge hits, amplify evidence weight, or certify semantic vein detection, semantic equivalence, exhaustive within-file coverage, source independence, source quality, novelty, factual truth, or Google Drive coverage.",
   "failures": []
 }
