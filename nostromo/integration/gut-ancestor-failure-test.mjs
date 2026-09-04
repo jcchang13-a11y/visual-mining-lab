@@ -37,7 +37,9 @@ const healthyBundle={
   status:'EXECUTED',
   claim:'Claim: an invalid premise can still be a useful falsification target.',
   evidence:'Evidence: the measured error rate fell after the patch.',
-  note:'The timeout setting is 30 seconds and the skipped-item label is discussed only as ordinary prose.'
+  note:'The timeout setting is 30 seconds and the skipped-item label is discussed only as ordinary prose.',
+  semanticTimeoutToken:'timeout',
+  semanticSkippedToken:'skipped'
 };
 const healthyGut=globalThis.GutEngine.digest({healthyBundle},{source:'NOSTROMO/gut-ancestor-failure-control'});
 
@@ -62,21 +64,31 @@ if(promoted){
   check(healthyGut.routes?.DROPLET?.items?.some(x=>x.path==='root.healthyBundle.claim'),'HEALTHY_CLAIM_FALSELY_QUARANTINED',healthyGut);
   check(healthyGut.routes?.MUTHER?.items?.some(x=>x.path==='root.healthyBundle.evidence'),'HEALTHY_EVIDENCE_FALSELY_QUARANTINED',healthyGut);
   check(!healthyGut.quarantine?.some(x=>x.path==='root.healthyBundle.note'),'ORDINARY_TIMEOUT_PROSE_FALSELY_QUARANTINED',healthyGut.quarantine);
+  for(const field of ['semanticTimeoutToken','semanticSkippedToken']){
+    const p=`root.healthyBundle.${field}`;
+    check(!healthyGut.quarantine?.some(x=>x.path===p),'BARE_TERMINAL_WORD_FALSELY_QUARANTINED',{path:p,quarantine:healthyGut.quarantine});
+    check(healthyGut.nutrients?.some(x=>x.path===p),'BARE_TERMINAL_WORD_LOST_FROM_NUTRIENTS',{path:p,nutrients:healthyGut.nutrients});
+  }
 }else{
   failures.push({type:'UNEXPECTED_GUT_VERSION',detail:{expected:'0.2.26',actual:version}});
 }
 
 const result={
-  schema:'nostromo-gut-ancestor-failure-test/v0.3',
+  schema:'nostromo-gut-ancestor-failure-test/v0.4',
   completedAt:new Date().toISOString(),
   engineVersion:version,
   status:failures.length===0?'PASS':'FAIL',
   promoted,
+  regressionOrigin:{
+    priorEngineBlob:'d6b9d1fbcfd97f69a0ec0526317ebb8d0c6a839f',
+    defect:'Prior looksLikeFailureSignal treated any atom whose entire lexical value matched the terminal-status vocabulary as failure evidence, even outside status/result/outcome or failure/risk context.',
+    repair:'Bare terminal-status vocabulary now requires machine-status context unless inherited failed provenance or an explicit status marker is present.'
+  },
   failedBundle:{quarantined:failedGut.quarantined,routeCounts:Object.fromEntries(Object.entries(failedGut.routes||{}).map(([k,v])=>[k,v.count])),quarantine:failedGut.quarantine?.map(x=>({path:x.path,type:x.type,reason:x.reason,provenance:x.provenance}))},
   terminalNonSuccess:terminalNonSuccessResults.map(({status,gut})=>({status,quarantined:gut.quarantined,routeCounts:Object.fromEntries(Object.entries(gut.routes||{}).map(([k,v])=>[k,v.count])),quarantine:gut.quarantine?.map(x=>({path:x.path,type:x.type,reason:x.reason,provenance:x.provenance}))})),
-  healthyControl:{quarantined:healthyGut.quarantined,routeCounts:Object.fromEntries(Object.entries(healthyGut.routes||{}).map(([k,v])=>[k,v.count]))},
+  healthyControl:{quarantined:healthyGut.quarantined,routeCounts:Object.fromEntries(Object.entries(healthyGut.routes||{}).map(([k,v])=>[k,v.count])),bareSemanticTokens:['timeout','skipped']},
   failures,
-  boundary:'This adversarial test distinguishes terminal non-success executor-envelope context from ordinary semantic prose. On GUT v0.2.26, FAILED plus CANCELLED, TIMEOUT, TIMED_OUT, ABORTED, BLOCKED and SKIPPED ancestor statuses must quarantine descendant payload atoms before they can be routed as fresh claims/evidence/questions, while an EXECUTED ancestor must not quarantine useful prose merely because it discusses words such as invalid, error, timeout or skipped. This is structural execution-context containment, not semantic truth or source-quality judgment.'
+  boundary:'This adversarial test distinguishes terminal non-success executor-envelope context from ordinary semantic prose and bare lexical tokens. FAILED plus CANCELLED, TIMEOUT, TIMED_OUT, ABORTED, BLOCKED and SKIPPED ancestor statuses must quarantine descendant payload atoms before they can be routed as fresh claims/evidence/questions. Under an EXECUTED ancestor, ordinary prose and standalone semantic tokens such as timeout or skipped must remain non-quarantined unless they occupy an explicit status/result/outcome or dedicated failure/risk context. This is structural execution-context containment, not semantic truth or source-quality judgment.'
 };
 await fs.writeFile(path.join(root,'nostromo/integration/gut-ancestor-failure-last-result.json'),JSON.stringify(result,null,2)+'\n','utf8');
 console.log(JSON.stringify(result,null,2));
