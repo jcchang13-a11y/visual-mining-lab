@@ -1,0 +1,13 @@
+{
+  "schema": "nostromo-vajra-evidence-contract-test/v0.1",
+  "testedAt": "2026-09-04T21:08:21.074Z",
+  "status": "PASS",
+  "capability": "EVIDENCE_LENS_FALSE_CLOSURE_GUARD",
+  "assertions": {
+    "unsupportedAgreementRejected": true,
+    "rejectedBranchRemainsOpen": true,
+    "evidenceBearingReceiptCanResolve": true
+  },
+  "boundary": "Deterministic adversarial test only. PASS proves the evidence lens rejects a provenance-bearing but evidence-empty agreement string while accepting a structurally qualifying evidence-bearing return. It does not prove semantic truth, source quality, or source independence.",
+  "failures": []
+}
