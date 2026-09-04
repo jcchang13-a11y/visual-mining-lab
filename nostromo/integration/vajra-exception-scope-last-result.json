@@ -1,385 +1,46 @@
 {
   "schema": "nostromo-vajra-exception-scope-test/v0.1",
-  "completedAt": "2026-09-04T12:07:11.041Z",
+  "completedAt": "2026-09-04T12:08:53.245Z",
   "guardVersion": "0.5.3",
-  "status": "FAIL",
+  "status": "PASS",
   "finding": {
     "cases": [
       {
         "id": "EN_SUFFIX_UNLESS_SUPPORT",
-        "status": "NO_AMBIGUITY_FOUND",
-        "polarity": null,
+        "status": "AMBIGUITY_FOUND",
+        "polarity": "UNSPECIFIED",
         "contested": 0
       },
       {
         "id": "EN_PREFIX_UNLESS_REFUTE",
-        "status": "NO_AMBIGUITY_FOUND",
-        "polarity": null,
+        "status": "AMBIGUITY_FOUND",
+        "polarity": "UNSPECIFIED",
         "contested": 0
       },
       {
         "id": "EN_PREFIX_EXCEPT_IF_SUPPORT",
-        "status": "NO_AMBIGUITY_FOUND",
-        "polarity": null,
+        "status": "AMBIGUITY_FOUND",
+        "polarity": "UNSPECIFIED",
         "contested": 0
       },
       {
         "id": "ZH_PREFIX_UNLESS_SUPPORT",
-        "status": "NO_AMBIGUITY_FOUND",
-        "polarity": null,
+        "status": "AMBIGUITY_FOUND",
+        "polarity": "UNSPECIFIED",
         "contested": 0
       },
       {
         "id": "ZH_EXCEPTION_REFUTE",
-        "status": "NO_AMBIGUITY_FOUND",
-        "polarity": null,
+        "status": "AMBIGUITY_FOUND",
+        "polarity": "UNSPECIFIED",
         "contested": 0
       }
     ],
-    "crossOrganStatus": "NO_AMBIGUITY_FOUND",
-    "crossOrganBranchStatus": "RESOLVED_BY_RECEIPT",
+    "crossOrganStatus": "AMBIGUITY_FOUND",
+    "crossOrganBranchStatus": "AMBIGUOUS_BY_RECEIPTS",
     "ordinaryControlStatus": "NO_AMBIGUITY_FOUND",
     "ordinaryControlPolarity": "SUPPORTS"
   },
-  "failures": [
-    {
-      "type": "EXCEPTION_SCOPE_NOT_PRESERVED",
-      "detail": {
-        "id": "EN_SUFFIX_UNLESS_SUPPORT",
-        "audit": {
-          "status": "NO_AMBIGUITY_FOUND",
-          "ambiguous": [],
-          "contested": [],
-          "groupCount": 1,
-          "qualifyingReceiptCount": 1,
-          "rejectedReceiptCount": 1,
-          "rejectedReceipts": [
-            {
-              "targetRef": "521057cc",
-              "clauseRef": "a7b75f1d",
-              "lens": "counterexample",
-              "organ": "DROPLET",
-              "status": "EXECUTED",
-              "provenance": "en-unless-support",
-              "reasons": [
-                "EMPTY_MATERIAL"
-              ]
-            }
-          ],
-          "boundary": "Ambiguity/conflict is computed over branch-scoped structurally qualifying executed returns with provenance, material and an explicit relation-to-target field. Bounded English/Chinese negation, insufficiency, modality, conditionality and exception masks prevent obvious non-directional or scope-qualified support/refute phrases from creating false unconditional polarity. Prefix masking is sentence/semicolon-boundary limited. Explicit opposing polarity across organ labels is preserved as a contested branch. Qualification is necessary but not sufficient for semantic adequacy, source independence or source quality."
-        }
-      }
-    },
-    {
-      "type": "EXCEPTION_SCOPE_FALSE_DIRECTION",
-      "detail": {
-        "id": "EN_SUFFIX_UNLESS_SUPPORT",
-        "polarity": null,
-        "audit": {
-          "status": "NO_AMBIGUITY_FOUND",
-          "ambiguous": [],
-          "contested": [],
-          "groupCount": 1,
-          "qualifyingReceiptCount": 1,
-          "rejectedReceiptCount": 1,
-          "rejectedReceipts": [
-            {
-              "targetRef": "521057cc",
-              "clauseRef": "a7b75f1d",
-              "lens": "counterexample",
-              "organ": "DROPLET",
-              "status": "EXECUTED",
-              "provenance": "en-unless-support",
-              "reasons": [
-                "EMPTY_MATERIAL"
-              ]
-            }
-          ],
-          "boundary": "Ambiguity/conflict is computed over branch-scoped structurally qualifying executed returns with provenance, material and an explicit relation-to-target field. Bounded English/Chinese negation, insufficiency, modality, conditionality and exception masks prevent obvious non-directional or scope-qualified support/refute phrases from creating false unconditional polarity. Prefix masking is sentence/semicolon-boundary limited. Explicit opposing polarity across organ labels is preserved as a contested branch. Qualification is necessary but not sufficient for semantic adequacy, source independence or source quality."
-        }
-      }
-    },
-    {
-      "type": "EXCEPTION_SCOPE_NOT_PRESERVED",
-      "detail": {
-        "id": "EN_PREFIX_UNLESS_REFUTE",
-        "audit": {
-          "status": "NO_AMBIGUITY_FOUND",
-          "ambiguous": [],
-          "contested": [],
-          "groupCount": 1,
-          "qualifyingReceiptCount": 1,
-          "rejectedReceiptCount": 1,
-          "rejectedReceipts": [
-            {
-              "targetRef": "521057cc",
-              "clauseRef": "a7b75f1d",
-              "lens": "counterexample",
-              "organ": "DROPLET",
-              "status": "EXECUTED",
-              "provenance": "en-unless-refute",
-              "reasons": [
-                "EMPTY_MATERIAL"
-              ]
-            }
-          ],
-          "boundary": "Ambiguity/conflict is computed over branch-scoped structurally qualifying executed returns with provenance, material and an explicit relation-to-target field. Bounded English/Chinese negation, insufficiency, modality, conditionality and exception masks prevent obvious non-directional or scope-qualified support/refute phrases from creating false unconditional polarity. Prefix masking is sentence/semicolon-boundary limited. Explicit opposing polarity across organ labels is preserved as a contested branch. Qualification is necessary but not sufficient for semantic adequacy, source independence or source quality."
-        }
-      }
-    },
-    {
-      "type": "EXCEPTION_SCOPE_FALSE_DIRECTION",
-      "detail": {
-        "id": "EN_PREFIX_UNLESS_REFUTE",
-        "polarity": null,
-        "audit": {
-          "status": "NO_AMBIGUITY_FOUND",
-          "ambiguous": [],
-          "contested": [],
-          "groupCount": 1,
-          "qualifyingReceiptCount": 1,
-          "rejectedReceiptCount": 1,
-          "rejectedReceipts": [
-            {
-              "targetRef": "521057cc",
-              "clauseRef": "a7b75f1d",
-              "lens": "counterexample",
-              "organ": "DROPLET",
-              "status": "EXECUTED",
-              "provenance": "en-unless-refute",
-              "reasons": [
-                "EMPTY_MATERIAL"
-              ]
-            }
-          ],
-          "boundary": "Ambiguity/conflict is computed over branch-scoped structurally qualifying executed returns with provenance, material and an explicit relation-to-target field. Bounded English/Chinese negation, insufficiency, modality, conditionality and exception masks prevent obvious non-directional or scope-qualified support/refute phrases from creating false unconditional polarity. Prefix masking is sentence/semicolon-boundary limited. Explicit opposing polarity across organ labels is preserved as a contested branch. Qualification is necessary but not sufficient for semantic adequacy, source independence or source quality."
-        }
-      }
-    },
-    {
-      "type": "EXCEPTION_SCOPE_NOT_PRESERVED",
-      "detail": {
-        "id": "EN_PREFIX_EXCEPT_IF_SUPPORT",
-        "audit": {
-          "status": "NO_AMBIGUITY_FOUND",
-          "ambiguous": [],
-          "contested": [],
-          "groupCount": 1,
-          "qualifyingReceiptCount": 1,
-          "rejectedReceiptCount": 1,
-          "rejectedReceipts": [
-            {
-              "targetRef": "521057cc",
-              "clauseRef": "a7b75f1d",
-              "lens": "counterexample",
-              "organ": "DROPLET",
-              "status": "EXECUTED",
-              "provenance": "en-except-if-support",
-              "reasons": [
-                "EMPTY_MATERIAL"
-              ]
-            }
-          ],
-          "boundary": "Ambiguity/conflict is computed over branch-scoped structurally qualifying executed returns with provenance, material and an explicit relation-to-target field. Bounded English/Chinese negation, insufficiency, modality, conditionality and exception masks prevent obvious non-directional or scope-qualified support/refute phrases from creating false unconditional polarity. Prefix masking is sentence/semicolon-boundary limited. Explicit opposing polarity across organ labels is preserved as a contested branch. Qualification is necessary but not sufficient for semantic adequacy, source independence or source quality."
-        }
-      }
-    },
-    {
-      "type": "EXCEPTION_SCOPE_FALSE_DIRECTION",
-      "detail": {
-        "id": "EN_PREFIX_EXCEPT_IF_SUPPORT",
-        "polarity": null,
-        "audit": {
-          "status": "NO_AMBIGUITY_FOUND",
-          "ambiguous": [],
-          "contested": [],
-          "groupCount": 1,
-          "qualifyingReceiptCount": 1,
-          "rejectedReceiptCount": 1,
-          "rejectedReceipts": [
-            {
-              "targetRef": "521057cc",
-              "clauseRef": "a7b75f1d",
-              "lens": "counterexample",
-              "organ": "DROPLET",
-              "status": "EXECUTED",
-              "provenance": "en-except-if-support",
-              "reasons": [
-                "EMPTY_MATERIAL"
-              ]
-            }
-          ],
-          "boundary": "Ambiguity/conflict is computed over branch-scoped structurally qualifying executed returns with provenance, material and an explicit relation-to-target field. Bounded English/Chinese negation, insufficiency, modality, conditionality and exception masks prevent obvious non-directional or scope-qualified support/refute phrases from creating false unconditional polarity. Prefix masking is sentence/semicolon-boundary limited. Explicit opposing polarity across organ labels is preserved as a contested branch. Qualification is necessary but not sufficient for semantic adequacy, source independence or source quality."
-        }
-      }
-    },
-    {
-      "type": "EXCEPTION_SCOPE_NOT_PRESERVED",
-      "detail": {
-        "id": "ZH_PREFIX_UNLESS_SUPPORT",
-        "audit": {
-          "status": "NO_AMBIGUITY_FOUND",
-          "ambiguous": [],
-          "contested": [],
-          "groupCount": 1,
-          "qualifyingReceiptCount": 1,
-          "rejectedReceiptCount": 1,
-          "rejectedReceipts": [
-            {
-              "targetRef": "521057cc",
-              "clauseRef": "a7b75f1d",
-              "lens": "counterexample",
-              "organ": "DROPLET",
-              "status": "EXECUTED",
-              "provenance": "zh-unless-support",
-              "reasons": [
-                "EMPTY_MATERIAL"
-              ]
-            }
-          ],
-          "boundary": "Ambiguity/conflict is computed over branch-scoped structurally qualifying executed returns with provenance, material and an explicit relation-to-target field. Bounded English/Chinese negation, insufficiency, modality, conditionality and exception masks prevent obvious non-directional or scope-qualified support/refute phrases from creating false unconditional polarity. Prefix masking is sentence/semicolon-boundary limited. Explicit opposing polarity across organ labels is preserved as a contested branch. Qualification is necessary but not sufficient for semantic adequacy, source independence or source quality."
-        }
-      }
-    },
-    {
-      "type": "EXCEPTION_SCOPE_FALSE_DIRECTION",
-      "detail": {
-        "id": "ZH_PREFIX_UNLESS_SUPPORT",
-        "polarity": null,
-        "audit": {
-          "status": "NO_AMBIGUITY_FOUND",
-          "ambiguous": [],
-          "contested": [],
-          "groupCount": 1,
-          "qualifyingReceiptCount": 1,
-          "rejectedReceiptCount": 1,
-          "rejectedReceipts": [
-            {
-              "targetRef": "521057cc",
-              "clauseRef": "a7b75f1d",
-              "lens": "counterexample",
-              "organ": "DROPLET",
-              "status": "EXECUTED",
-              "provenance": "zh-unless-support",
-              "reasons": [
-                "EMPTY_MATERIAL"
-              ]
-            }
-          ],
-          "boundary": "Ambiguity/conflict is computed over branch-scoped structurally qualifying executed returns with provenance, material and an explicit relation-to-target field. Bounded English/Chinese negation, insufficiency, modality, conditionality and exception masks prevent obvious non-directional or scope-qualified support/refute phrases from creating false unconditional polarity. Prefix masking is sentence/semicolon-boundary limited. Explicit opposing polarity across organ labels is preserved as a contested branch. Qualification is necessary but not sufficient for semantic adequacy, source independence or source quality."
-        }
-      }
-    },
-    {
-      "type": "EXCEPTION_SCOPE_NOT_PRESERVED",
-      "detail": {
-        "id": "ZH_EXCEPTION_REFUTE",
-        "audit": {
-          "status": "NO_AMBIGUITY_FOUND",
-          "ambiguous": [],
-          "contested": [],
-          "groupCount": 1,
-          "qualifyingReceiptCount": 1,
-          "rejectedReceiptCount": 1,
-          "rejectedReceipts": [
-            {
-              "targetRef": "521057cc",
-              "clauseRef": "a7b75f1d",
-              "lens": "counterexample",
-              "organ": "DROPLET",
-              "status": "EXECUTED",
-              "provenance": "zh-exception-refute",
-              "reasons": [
-                "EMPTY_MATERIAL"
-              ]
-            }
-          ],
-          "boundary": "Ambiguity/conflict is computed over branch-scoped structurally qualifying executed returns with provenance, material and an explicit relation-to-target field. Bounded English/Chinese negation, insufficiency, modality, conditionality and exception masks prevent obvious non-directional or scope-qualified support/refute phrases from creating false unconditional polarity. Prefix masking is sentence/semicolon-boundary limited. Explicit opposing polarity across organ labels is preserved as a contested branch. Qualification is necessary but not sufficient for semantic adequacy, source independence or source quality."
-        }
-      }
-    },
-    {
-      "type": "EXCEPTION_SCOPE_FALSE_DIRECTION",
-      "detail": {
-        "id": "ZH_EXCEPTION_REFUTE",
-        "polarity": null,
-        "audit": {
-          "status": "NO_AMBIGUITY_FOUND",
-          "ambiguous": [],
-          "contested": [],
-          "groupCount": 1,
-          "qualifyingReceiptCount": 1,
-          "rejectedReceiptCount": 1,
-          "rejectedReceipts": [
-            {
-              "targetRef": "521057cc",
-              "clauseRef": "a7b75f1d",
-              "lens": "counterexample",
-              "organ": "DROPLET",
-              "status": "EXECUTED",
-              "provenance": "zh-exception-refute",
-              "reasons": [
-                "EMPTY_MATERIAL"
-              ]
-            }
-          ],
-          "boundary": "Ambiguity/conflict is computed over branch-scoped structurally qualifying executed returns with provenance, material and an explicit relation-to-target field. Bounded English/Chinese negation, insufficiency, modality, conditionality and exception masks prevent obvious non-directional or scope-qualified support/refute phrases from creating false unconditional polarity. Prefix masking is sentence/semicolon-boundary limited. Explicit opposing polarity across organ labels is preserved as a contested branch. Qualification is necessary but not sufficient for semantic adequacy, source independence or source quality."
-        }
-      }
-    },
-    {
-      "type": "CROSS_ORGAN_EXCEPTION_NOT_AMBIGUOUS",
-      "detail": {
-        "status": "NO_AMBIGUITY_FOUND",
-        "ambiguous": [],
-        "contested": [],
-        "groupCount": 1,
-        "qualifyingReceiptCount": 1,
-        "rejectedReceiptCount": 1,
-        "rejectedReceipts": [
-          {
-            "targetRef": "521057cc",
-            "clauseRef": "a7b75f1d",
-            "lens": "counterexample",
-            "organ": "MU/TH/UR",
-            "status": "EXECUTED",
-            "provenance": "muther-exception",
-            "reasons": [
-              "EMPTY_MATERIAL"
-            ]
-          }
-        ],
-        "boundary": "Ambiguity/conflict is computed over branch-scoped structurally qualifying executed returns with provenance, material and an explicit relation-to-target field. Bounded English/Chinese negation, insufficiency, modality, conditionality and exception masks prevent obvious non-directional or scope-qualified support/refute phrases from creating false unconditional polarity. Prefix masking is sentence/semicolon-boundary limited. Explicit opposing polarity across organ labels is preserved as a contested branch. Qualification is necessary but not sufficient for semantic adequacy, source independence or source quality."
-      }
-    },
-    {
-      "type": "CROSS_ORGAN_EXCEPTION_FALSE_CLOSURE",
-      "detail": {
-        "status": "RESOLVED_BY_RECEIPT",
-        "audit": {
-          "status": "NO_AMBIGUITY_FOUND",
-          "ambiguous": [],
-          "contested": [],
-          "groupCount": 1,
-          "qualifyingReceiptCount": 1,
-          "rejectedReceiptCount": 1,
-          "rejectedReceipts": [
-            {
-              "targetRef": "521057cc",
-              "clauseRef": "a7b75f1d",
-              "lens": "counterexample",
-              "organ": "MU/TH/UR",
-              "status": "EXECUTED",
-              "provenance": "muther-exception",
-              "reasons": [
-                "EMPTY_MATERIAL"
-              ]
-            }
-          ],
-          "boundary": "Ambiguity/conflict is computed over branch-scoped structurally qualifying executed returns with provenance, material and an explicit relation-to-target field. Bounded English/Chinese negation, insufficiency, modality, conditionality and exception masks prevent obvious non-directional or scope-qualified support/refute phrases from creating false unconditional polarity. Prefix masking is sentence/semicolon-boundary limited. Explicit opposing polarity across organ labels is preserved as a contested branch. Qualification is necessary but not sufficient for semantic adequacy, source independence or source quality."
-        }
-      }
-    }
-  ],
-  "boundary": "This adversarial test verifies bounded English and Chinese exception-scope masking in VAJRA receipt polarity. Relations containing explicit unless/except or 除非/除了 exception scope remain UNSPECIFIED and cannot manufacture unconditional support/refute closure or a false cross-organ contradiction. Ordinary prose that merely mentions an exception field remains directional when its relation is explicitly unconditional. This is deterministic lexical scope containment, not general semantic exception parsing, truth judgment, or evidence-quality scoring."
+  "failures": [],
+  "boundary": "The first red dedicated run was a test-fixture qualification failure: exception receipts omitted the required non-empty material field and were correctly rejected as malformed before polarity analysis. This revision preserves that failure evidence and supplies structurally qualifying material so the test reaches the intended exception-scope logic. The adversarial test verifies bounded English and Chinese exception-scope masking in VAJRA receipt polarity. Relations containing explicit unless/except or 除非/除了 exception scope must remain UNSPECIFIED and cannot manufacture unconditional support/refute closure or a false cross-organ contradiction. Ordinary prose that merely mentions an exception field remains directional when its relation is explicitly unconditional. This is deterministic lexical scope containment, not general semantic exception parsing, truth judgment, or evidence-quality scoring."
 }
