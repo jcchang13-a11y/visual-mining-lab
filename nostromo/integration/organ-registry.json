@@ -1,6 +1,6 @@
 {
-  "schema": "nostromo-organ-registry/v1.58",
-  "updatedAt": "2026-09-04T11:14:00+08:00",
+  "schema": "nostromo-organ-registry/v1.59",
+  "updatedAt": "2026-09-04T13:06:00+08:00",
   "truthRule": "DISPLAYED STATE MUST FOLLOW EVIDENCE",
   "evidence": "ci-last-result.json plus formal-round-last-result.json plus connector-last-result.json plus muther-falsify-last-result.json plus muther-repo-diversity-last-result.json plus droplet-claim-verify-last-result.json plus gut-metabolism-last-result.json plus gut-ancestor-failure-last-result.json plus gut-lineage-last-result.json plus vajra-dynamic-last-result.json plus vajra-ambiguity-last-result.json plus vajra-modality-last-result.json plus vajra-uncertainty-last-result.json plus vajra-conflict-escalation-last-result.json plus vajra-provenance-diversity-last-result.json plus shroom-feedback-last-result.json",
   "latestFormalRound": "greenhouse/r113-nostromo-formal-round.json",
@@ -29,19 +29,19 @@
     "boundary": "Isolated counterfactual executor only. It deliberately includes parent round ordinal in participant selection and has been CI-verified against R111 and R112. It does not write or advance formal greenhouse history and is engineering evidence that NOSTROMO can execute and audit a parent-sensitive transition, not evidence that the real SHROOMING population is causally path-dependent."
   },
   "latestThickening": {
-    "organ": "VAJRA",
-    "version": "VAJRA branch-scoped conditional receipt ambiguity guard v0.5.2",
-    "status": "VERIFIED_BOUNDED_ENGLISH_CONDITION_PREFIX_CONTAINMENT",
-    "test": "NOSTROMO Integration Test run 33832273954 + ci-last-result.json PASS at 2026-09-04T03:09:26.423Z",
+    "organ": "MU/TH/UR",
+    "version": "MU/TH/UR repository lexical vein map v0.2.3",
+    "status": "VERIFIED_QUERY_REMOVED_LEXICAL_CO_CONTEXT_VEIN_MAPPING",
+    "test": "muther-repo-diversity-last-result.json v0.2.3 + NOSTROMO Integration Test run 349",
     "capabilities": [
-      "bounded English condition-prefix forms before support/refute vocabulary are conservatively contained rather than promoted to unconditional directional evidence",
-      "only-if, provided-that, assuming-that, subject-to and under-the-condition-that prefix forms are classified UNSPECIFIED when their directional verb occurs within the bounded same-sentence scope",
-      "condition-prefix masking cannot cross sentence or semicolon boundaries, so a condition in an earlier sentence cannot suppress a later unconditional support/refute relation",
-      "conditional cross-organ returns therefore block premature preferred-organ closure without being falsely escalated as a genuine opposite-polarity conflict",
-      "prior negation, insufficiency, modality, conditional-suffix, Chinese conditionality, explicit conflict and same-direction unconditional controls remain intact",
+      "retained repository hits can now be mapped into bounded lexical co-context veins after exact and near-duplicate containment and source-family-balanced selection",
+      "the query token itself is removed before vein-affinity comparison so shared search vocabulary cannot by itself manufacture a vein",
+      "related retained hits remain separate materials while the vein graph preserves source family, path and fingerprint provenance",
+      "cross-family lexical veins are explicitly marked but are not upgraded to independent evidence",
+      "unrelated retained material remains visible as unclustered rather than being forced into a vein",
       "the full GUT, VAJRA, MU/TH/UR, DROPLET, SHROOMING and 50-round integration suite passed after the change"
     ],
-    "boundary": "This is deterministic lexical/structural condition-scope containment. It prevents a bounded class of English condition-prefix evidence from masquerading as unconditional closure on a broader VAJRA branch and deliberately stops at sentence/semicolon boundaries. It does not parse arbitrary logical scope, semantically decide whether a condition actually narrows the target claim, adjudicate truth, score evidence quality, or prove source independence."
+    "boundary": "This is deterministic lexical/structural co-context affinity mapping over already retained repository hits. It does not merge hits, amplify evidence weight, infer semantic topics or conceptual veins, prove source independence, detect derivative sources, score source quality, establish novelty, adjudicate truth, or extend Google Drive coverage."
   },
   "organs": {
     "shrooming": {
@@ -63,12 +63,12 @@
       "actions": {
         "READ_STATE": "EXEC_STATE",
         "AUDIT_STATE": "EXEC_STATE",
-        "MINE_REPO": "VERIFIED_DIVERSITY_PRESERVING_MULTI_WINDOW_REPO_MINE_WITH_TRUE_OCCURRENCE_AND_EXACT_REPLAY_PROVENANCE_RETENTION_PLUS_LEXICAL_NEAR_DUPLICATE_CONTAINMENT",
+        "MINE_REPO": "VERIFIED_DIVERSITY_PRESERVING_MULTI_WINDOW_REPO_MINE_WITH_TRUE_OCCURRENCE_EXACT_REPLAY_PROVENANCE_RETENTION_LEXICAL_NEAR_DUPLICATE_CONTAINMENT_AND_QUERY_REMOVED_LEXICAL_VEIN_MAPPING",
         "MINE_DRIVE_QUERY": "CONNECTOR_EXEC",
         "MINE_INTERNAL": "AUTHORIZED_CONNECTOR_EXEC",
         "FALSIFY": "REPO_COUNTEREVIDENCE_EXEC"
       },
-      "boundary": "Published mining-state audit and repository corpus mining are executable. MINE_REPO allows each matching repository file to contribute a bounded number of separated query windows before deduplication, preserving path, true source occurrence ordinal, occurrence offset, query-occurrence count and source-family provenance. The verified v0.2.2 adversarial suite preserves true ordinals when nearby occurrences are skipped and now also preserves a bounded provenance audit for exact normalized content copies that are suppressed from material amplification. Exact replay remains one material hit; suppressed copies retain kept/suppressed path, source-family, occurrence and fingerprint metadata, including an explicit cross-family flag. Cross-family copies are not upgraded to independent evidence. A conservative character-shingle lexical-overlap guard still contains near duplicates with an audit ledger, and bounded selection remains round-robin across path-derived source families. This is deterministic lexical/structural coverage and replay provenance retention, not semantic clustering or vein detection, exhaustive within-file coverage, derivative-source inference, source-independence proof, source-quality scoring, novelty proof or truth judgment. Query-scoped Google Drive mining is executed by the authorized external connector runtime and handed back as redacted evidence. MINE_INTERNAL remains limited to explicit authorized query-scoped connector sources; it does not grant exhaustive private-environment crawling or cross-source enumeration. FALSIFY remains repository-scoped and absence is never upgraded to truth."
+      "boundary": "Published mining-state audit and repository corpus mining are executable. MINE_REPO allows each matching repository file to contribute a bounded number of separated query windows before deduplication, preserving path, true source occurrence ordinal, occurrence offset, query-occurrence count and source-family provenance. The verified v0.2.3 adversarial suite preserves true ordinals when nearby occurrences are skipped, retains bounded provenance for exact normalized copies suppressed from amplification, contains lexical near duplicates, and after diversity-preserving selection builds a bounded query-removed lexical co-context graph over retained hits. The query token itself is removed before affinity comparison; mapped vein members remain separate hits, cross-family veins remain audit metadata rather than evidence-independence claims, and unrelated retained material can remain explicitly unclustered. This is deterministic lexical/structural coverage and affinity mapping, not semantic clustering or conceptual vein detection, exhaustive within-file coverage, derivative-source inference, source-independence proof, source-quality scoring, novelty proof or truth judgment. Query-scoped Google Drive mining is executed by the authorized external connector runtime and handed back as redacted evidence. MINE_INTERNAL remains limited to explicit authorized query-scoped connector sources; it does not grant exhaustive private-environment crawling or cross-source enumeration. FALSIFY remains repository-scoped and absence is never upgraded to truth."
     },
     "droplet": {
       "mode": "PARTIAL_EXEC_THICKENED",
