@@ -1,0 +1,45 @@
+name: NOSTROMO VAJRA Evidence Contract Test
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'nostromo/vajra/evidence-contract-guard.js'
+      - 'nostromo/integration/vajra-evidence-contract-test.mjs'
+      - '.github/workflows/nostromo-vajra-evidence-contract-test.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  test:
+    if: ${{ !contains(github.event.head_commit.message, '[nostromo-test]') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify VAJRA evidence-contract false-closure guard
+        run: node nostromo/integration/vajra-evidence-contract-test.mjs
+      - name: Commit evidence-contract test result
+        if: always()
+        run: |
+          git config user.name "nostromo-bot"
+          git config user.email "actions@users.noreply.github.com"
+          test -f nostromo/integration/vajra-evidence-contract-last-result.json && cp nostromo/integration/vajra-evidence-contract-last-result.json /tmp/nostromo-vajra-evidence-contract-last-result.json || true
+          git fetch origin main
+          git reset --hard origin/main
+          if [ -f /tmp/nostromo-vajra-evidence-contract-last-result.json ]; then
+            cp /tmp/nostromo-vajra-evidence-contract-last-result.json nostromo/integration/vajra-evidence-contract-last-result.json
+            git add nostromo/integration/vajra-evidence-contract-last-result.json
+          fi
+          if git diff --cached --quiet; then
+            echo "No result change"
+          else
+            git commit -m "[nostromo-test] record VAJRA evidence-contract result"
+            git push origin HEAD:main
+          fi
