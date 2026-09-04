@@ -1,8 +1,8 @@
 {
-  "schema": "nostromo-vajra-conditional-prefix-test/v0.4",
+  "schema": "nostromo-vajra-conditional-prefix-test/v0.5",
   "status": "PASS",
-  "guard": "VAJRA ambiguity/conflict guard v0.5.5",
-  "capability": "BOUNDED_ENGLISH_CHINESE_CONDITION_EXCEPTION_CONCESSIVE_AND_CONTRASTIVE_SCOPE_CONTAINMENT",
+  "guard": "VAJRA ambiguity/conflict guard v0.5.6",
+  "capability": "BOUNDED_ENGLISH_CHINESE_GENERIC_CONDITION_EXCEPTION_CONCESSIVE_AND_CONTRASTIVE_SCOPE_CONTAINMENT",
   "observations": [
     {
       "name": "ONLY_IF_PREFIX",
@@ -138,6 +138,55 @@
       "auditStatus": "AMBIGUITY_FOUND"
     },
     {
+      "name": "IF_PREFIX_SUPPORT",
+      "relation": "If this evidence supports the target claim, provenance still needs audit.",
+      "expected": "UNSPECIFIED",
+      "actual": "UNSPECIFIED",
+      "auditStatus": "AMBIGUITY_FOUND"
+    },
+    {
+      "name": "WHEN_PREFIX_REFUTE",
+      "relation": "When this evidence refutes the target claim, the bounded sample still needs replication.",
+      "expected": "UNSPECIFIED",
+      "actual": "UNSPECIFIED",
+      "auditStatus": "AMBIGUITY_FOUND"
+    },
+    {
+      "name": "AS_LONG_AS_PREFIX_SUPPORT",
+      "relation": "As long as this evidence supports the target claim, source independence remains unverified.",
+      "expected": "UNSPECIFIED",
+      "actual": "UNSPECIFIED",
+      "auditStatus": "AMBIGUITY_FOUND"
+    },
+    {
+      "name": "ZH_IF_PREFIX_SUPPORT",
+      "relation": "如果這份證據支持目標命題，來源仍需核實。",
+      "expected": "UNSPECIFIED",
+      "actual": "UNSPECIFIED",
+      "auditStatus": "AMBIGUITY_FOUND"
+    },
+    {
+      "name": "ZH_RUO_PREFIX_REFUTE",
+      "relation": "若這份證據反駁目標命題，樣本仍需重跑。",
+      "expected": "UNSPECIFIED",
+      "actual": "UNSPECIFIED",
+      "auditStatus": "AMBIGUITY_FOUND"
+    },
+    {
+      "name": "ZH_TANGRUO_PREFIX_SUPPORT",
+      "relation": "倘若這份證據支持目標命題，來源獨立性仍未知。",
+      "expected": "UNSPECIFIED",
+      "actual": "UNSPECIFIED",
+      "auditStatus": "AMBIGUITY_FOUND"
+    },
+    {
+      "name": "ZH_ZHIYAO_PREFIX_REFUTE",
+      "relation": "只要這份證據反駁目標命題，仍應保留未解條件。",
+      "expected": "UNSPECIFIED",
+      "actual": "UNSPECIFIED",
+      "auditStatus": "AMBIGUITY_FOUND"
+    },
+    {
       "name": "SENTENCE_BOUNDARY_CONTROL",
       "relation": "Only if retries remain disabled, logging behavior changes. This evidence supports the target claim.",
       "expected": "SUPPORTS",
@@ -199,8 +248,29 @@
       "expected": "SUPPORTS",
       "actual": "SUPPORTS",
       "auditStatus": "AMBIGUITY_FOUND"
+    },
+    {
+      "name": "IF_MAIN_CLAUSE_SUPPORT",
+      "relation": "If provenance is audited, logging behavior changes. This evidence supports the target claim.",
+      "expected": "SUPPORTS",
+      "actual": "SUPPORTS",
+      "auditStatus": "AMBIGUITY_FOUND"
+    },
+    {
+      "name": "WHEN_MAIN_CLAUSE_REFUTE",
+      "relation": "When the sample is complete, logging behavior changes. This evidence refutes the target claim.",
+      "expected": "REFUTES",
+      "actual": "REFUTES",
+      "auditStatus": "AMBIGUITY_FOUND"
+    },
+    {
+      "name": "ZH_IF_MAIN_CLAUSE_SUPPORT",
+      "relation": "如果來源完成核實，紀錄狀態改變。這份證據支持目標命題。",
+      "expected": "SUPPORTS",
+      "actual": "SUPPORTS",
+      "auditStatus": "AMBIGUITY_FOUND"
     }
   ],
   "failures": [],
-  "boundary": "This adversarial test covers bounded English/Chinese condition, exception, concessive and contrastive comma-delimited prefix forms around support/refute vocabulary. It verifies that subordinate directional polarity cannot manufacture unconditional closure while a later main-clause directional statement remains visible. English contrastive coverage is bounded to while/whilst/whereas prefix forms and Chinese coverage to 雖說/固然; this is lexical/structural scope containment, not general logical parsing or semantic discourse adjudication."
+  "boundary": "This adversarial test covers bounded English/Chinese condition, exception, concessive and contrastive comma-delimited prefix forms around support/refute vocabulary. Generic if/when/as-long-as and 如果/若/倘若/只要 prefixes are now included. It verifies that subordinate directional polarity cannot manufacture unconditional closure while a later main-clause directional statement remains visible. This is lexical/structural scope containment, not general logical parsing or semantic discourse adjudication."
 }
