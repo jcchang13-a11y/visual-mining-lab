@@ -1,4 +1,4 @@
-// DROPLET claim verification CI test v1.5
+// DROPLET claim verification CI test v1.6
 import fs from 'node:fs/promises';
 import {verifyClaim} from './droplet-claim-verify-executor.mjs';
 
@@ -98,6 +98,41 @@ try{
   if(cases.partialMonthOverlap.verdict!=='INDETERMINATE') failures.push({case:'partialMonthOverlap',type:'OVERLAPPING_DATE_RANGE_CREATED_CERTAINTY',verdict:cases.partialMonthOverlap.verdict});
   if(cases.partialMonthOverlap.counts.overlappingDateEvidence!==1||cases.partialMonthOverlap.counts.eligibleAuthoritativeSupports!==0) failures.push({case:'partialMonthOverlap',type:'OVERLAPPING_DATE_RANGE_NOT_QUARANTINED',counts:cases.partialMonthOverlap.counts});
 
+  cases.freshSupportStaleRefute=verifyClaim({
+    claim:'The service is currently available.',
+    freshnessPolicy:policy,
+    evidence:[
+      {id:'FS1',source:'Current official status',sourceFamily:'Official status',sourceClass:'OFFICIAL',relation:'SUPPORTS',date:'2026-09-01',fingerprint:'fresh-support'},
+      {id:'FS2',source:'Old primary outage record',sourceFamily:'Historical status',sourceClass:'PRIMARY',relation:'REFUTES',date:'2024-01-01',fingerprint:'stale-refute'}
+    ]
+  });
+  if(cases.freshSupportStaleRefute.verdict!=='SUPPORTED') failures.push({case:'freshSupportStaleRefute',type:'STALE_REFUTE_FALSELY_BLOCKED_FRESH_SUPPORT',verdict:cases.freshSupportStaleRefute.verdict});
+  if(!cases.freshSupportStaleRefute.conflicts.rawAuthoritativeConflict||cases.freshSupportStaleRefute.conflicts.authoritativeConflict||!cases.freshSupportStaleRefute.conflicts.freshnessExcludedAuthoritativeConflict) failures.push({case:'freshSupportStaleRefute',type:'FRESHNESS_SCOPED_CONFLICT_AUDIT_DRIFT',conflicts:cases.freshSupportStaleRefute.conflicts});
+  if(cases.freshSupportStaleRefute.counts.eligibleSupports!==1||cases.freshSupportStaleRefute.counts.eligibleRefutes!==0) failures.push({case:'freshSupportStaleRefute',type:'FRESHNESS_DIRECTION_COUNTS_DRIFT',counts:cases.freshSupportStaleRefute.counts});
+
+  cases.freshRefuteStaleSupport=verifyClaim({
+    claim:'The service is currently available.',
+    freshnessPolicy:policy,
+    evidence:[
+      {id:'FR1',source:'Current official outage status',sourceFamily:'Official status',sourceClass:'OFFICIAL',relation:'REFUTES',date:'2026-09-01',fingerprint:'fresh-refute'},
+      {id:'FR2',source:'Old primary availability record',sourceFamily:'Historical status',sourceClass:'PRIMARY',relation:'SUPPORTS',date:'2024-01-01',fingerprint:'stale-support'}
+    ]
+  });
+  if(cases.freshRefuteStaleSupport.verdict!=='REFUTED') failures.push({case:'freshRefuteStaleSupport',type:'STALE_SUPPORT_FALSELY_BLOCKED_FRESH_REFUTE',verdict:cases.freshRefuteStaleSupport.verdict});
+  if(!cases.freshRefuteStaleSupport.conflicts.rawAuthoritativeConflict||cases.freshRefuteStaleSupport.conflicts.authoritativeConflict||!cases.freshRefuteStaleSupport.conflicts.freshnessExcludedAuthoritativeConflict) failures.push({case:'freshRefuteStaleSupport',type:'FRESHNESS_SCOPED_CONFLICT_AUDIT_DRIFT',conflicts:cases.freshRefuteStaleSupport.conflicts});
+  if(cases.freshRefuteStaleSupport.counts.eligibleSupports!==0||cases.freshRefuteStaleSupport.counts.eligibleRefutes!==1) failures.push({case:'freshRefuteStaleSupport',type:'FRESHNESS_DIRECTION_COUNTS_DRIFT',counts:cases.freshRefuteStaleSupport.counts});
+
+  cases.sameFingerprintTemporalConflict=verifyClaim({
+    claim:'The service is currently available.',
+    freshnessPolicy:policy,
+    evidence:[
+      {id:'FI1',source:'Current official status',sourceFamily:'Official status',sourceClass:'OFFICIAL',relation:'SUPPORTS',date:'2026-09-01',fingerprint:'same-temporal-payload'},
+      {id:'FI2',source:'Historical mirror of same payload',sourceFamily:'Official status',sourceClass:'OFFICIAL',relation:'REFUTES',date:'2024-01-01',fingerprint:'same-temporal-payload'}
+    ]
+  });
+  if(cases.sameFingerprintTemporalConflict.verdict!=='INDETERMINATE') failures.push({case:'sameFingerprintTemporalConflict',type:'INTEGRITY_CONFLICT_WEAKENED_BY_FRESHNESS',verdict:cases.sameFingerprintTemporalConflict.verdict});
+  if(!cases.sameFingerprintTemporalConflict.conflicts.integrityConflict) failures.push({case:'sameFingerprintTemporalConflict',type:'GLOBAL_FINGERPRINT_INTEGRITY_NOT_PRESERVED',conflicts:cases.sameFingerprintTemporalConflict.conflicts});
+
   const diversityPolicy={minAuthoritativeFamilies:2};
   cases.singleFamilyCorroborationGate=verifyClaim({
     claim:'The project has independent authoritative corroboration.',
@@ -148,18 +183,18 @@ try{
   if(cases.undeclaredFamilyNamesDoNotSatisfy.counts.undeclaredEligibleAuthoritativeSupports!==2) failures.push({case:'undeclaredFamilyNamesDoNotSatisfy',type:'UNDECLARED_EVIDENCE_NOT_AUDITED',counts:cases.undeclaredFamilyNamesDoNotSatisfy.counts});
 
   const result={
-    schema:'nostromo-droplet-claim-verify-test/v1.5',
+    schema:'nostromo-droplet-claim-verify-test/v1.6',
     completedAt:new Date().toISOString(),
     status:failures.length?'FAIL':'PASS',
     cases,
     failures,
-    boundary:'This test validates deterministic claim verdict computation from explicit evidence, exact replay suppression, authoritative-direction and fingerprint-integrity conflict containment, opt-in temporal gating, and an opt-in minimum authoritative source-family corroboration gate. Only explicitly caller-declared sourceFamily/publisher labels may satisfy the diversity gate; different source display names without declared family identity remain auditable but cannot manufacture corroboration. The diversity gate still does not prove real-world source independence or derivative-source status. CI performs no web search and does not infer whether a claim is time-sensitive.'
+    boundary:'This test validates deterministic claim verdict computation from explicit evidence, exact replay suppression, authoritative-direction and fingerprint-integrity conflict containment, opt-in temporal gating, freshness-scoped directional conflict handling, and an opt-in minimum authoritative source-family corroboration gate. Under an active freshness policy, stale/undated/future/overlapping evidence remains auditable but cannot directionally block an otherwise fresh eligible verdict; raw historical authoritative conflict is preserved separately. Fingerprint-integrity conflict remains global across freshness because contradictory relations on the same explicit fingerprint indicate input-integrity failure rather than ordinary historical disagreement. Only explicitly caller-declared sourceFamily/publisher labels may satisfy the diversity gate; different source display names without declared family identity remain auditable but cannot manufacture corroboration. The diversity gate still does not prove real-world source independence or derivative-source status. CI performs no web search and does not infer whether a claim is time-sensitive.'
   };
   await fs.writeFile(outPath,JSON.stringify(result,null,2)+'\n','utf8');
   console.log(JSON.stringify(result,null,2));
   if(result.status!=='PASS') process.exitCode=1;
 }catch(error){
-  const result={schema:'nostromo-droplet-claim-verify-test/v1.5',completedAt:new Date().toISOString(),status:'FAIL',failures:[...failures,{type:'UNCAUGHT',message:String(error?.message||error)}]};
+  const result={schema:'nostromo-droplet-claim-verify-test/v1.6',completedAt:new Date().toISOString(),status:'FAIL',failures:[...failures,{type:'UNCAUGHT',message:String(error?.message||error)}]};
   await fs.writeFile(outPath,JSON.stringify(result,null,2)+'\n','utf8');
   console.log(JSON.stringify(result,null,2));
   process.exitCode=1;
