@@ -1,6 +1,6 @@
 {
-  "schema": "nostromo-organ-registry/v1.66",
-  "updatedAt": "2026-09-05T02:08:00+08:00",
+  "schema": "nostromo-organ-registry/v1.67",
+  "updatedAt": "2026-09-05T03:10:00+08:00",
   "truthRule": "DISPLAYED STATE MUST FOLLOW EVIDENCE",
   "evidence": "ci-last-result.json plus formal-round-last-result.json plus connector-last-result.json plus muther-falsify-last-result.json plus muther-repo-diversity-last-result.json plus droplet-claim-verify-last-result.json plus gut-metabolism-last-result.json plus gut-ancestor-failure-last-result.json plus gut-lineage-last-result.json plus vajra-dynamic-last-result.json plus vajra-ambiguity-last-result.json plus vajra-conditional-prefix-last-result.json plus vajra-modality-last-result.json plus vajra-uncertainty-last-result.json plus vajra-conflict-escalation-last-result.json plus vajra-provenance-diversity-last-result.json plus shroom-feedback-last-result.json",
   "latestFormalRound": "greenhouse/r113-nostromo-formal-round.json",
@@ -30,19 +30,19 @@
   },
   "latestThickening": {
     "organ": "VAJRA",
-    "version": "VAJRA ambiguity/conflict guard v0.5.6 bounded generic conditional-prefix scope containment",
-    "status": "VERIFIED_BOUNDED_ENGLISH_CHINESE_GENERIC_CONDITIONAL_PREFIX_SCOPE_CONTAINMENT",
-    "test": "vajra-conditional-prefix-last-result.json v0.5 + NOSTROMO Integration Test commit a7426518a0051ed1d70c88eb243d05351019fcd4",
+    "version": "VAJRA ambiguity/conflict guard v0.5.7 bounded generic conditional-sentence scope containment",
+    "status": "VERIFIED_BOUNDED_ENGLISH_CHINESE_GENERIC_CONDITIONAL_SENTENCE_SCOPE_CONTAINMENT",
+    "test": "vajra-conditional-prefix-last-result.json v0.6 + NOSTROMO Integration Test run 384 commit d4dedbca28faa564ecc3a6dd7f9b8ffd1bd81315",
     "capabilities": [
-      "bounded English if, when and as-long-as comma-delimited prefixes cannot manufacture unconditional support/refute closure from subordinate directional vocabulary",
-      "bounded Chinese 如果, 若, 倘若 and 只要 comma-delimited prefixes receive the same containment",
+      "bounded English if, when and as-long-as comma-delimited conditional sentences cannot manufacture unconditional support/refute closure from directional vocabulary in either the subordinate condition or its same-sentence main clause",
+      "bounded Chinese 如果, 若, 倘若 and 只要 comma-delimited conditional sentences receive the same containment",
       "existing only-if, provided-that, assuming-that, subject-to, exception, concessive and contrastive scope containment remains intact",
-      "generic conditional-prefix masking stops at the first comma and does not suppress a later main-clause directional support/refute statement",
-      "sentence and semicolon boundary controls preserve later unconditional polarity",
+      "a later separate sentence after a full sentence or semicolon boundary remains visible as directional support/refute evidence",
+      "concessive and contrastive main-clause polarity remains visible by design",
       "cross-organ ambiguity/conflict, provenance, replay, GUT feedback and SHROOMING regressions remain intact",
-      "50-round integration and all enforced organ tests pass for commit a7426518a0051ed1d70c88eb243d05351019fcd4"
+      "50-round integration and all enforced organ tests pass in NOSTROMO Integration Test run 384"
     ],
-    "boundary": "This is deterministic bounded lexical/structural conditional-prefix scope containment, verified by dedicated English/Chinese adversarial cases and the full integration suite. It does not perform general logical parsing, semantic conditional reasoning, discourse adjudication, factual truth judgment, source-independence proof or evidence-quality scoring."
+    "boundary": "This is deterministic bounded lexical/structural conditional-sentence scope containment, verified by dedicated English/Chinese adversarial cases and the full integration suite. It prevents a scoped same-sentence condition from being flattened into unconditional polarity, but does not perform general logical parsing, semantic conditional reasoning, discourse adjudication, factual truth judgment, source-independence proof or evidence-quality scoring."
   },
   "organs": {
     "shrooming": {
@@ -95,9 +95,9 @@
       "mode": "EXEC_CONNECTED_THICKENED",
       "source": "../vajra/vajra-engine.js + ../vajra/receipt-uncertainty-guard.js + ./vajra-conflict-escalation.mjs + ./vajra-provenance-diversity-guard.mjs + ./vajra-ambiguity-guard.mjs",
       "actions": {
-        "DISMANTLE": "VERIFIED_PROPOSITION_AWARE_DISMANTLER_WITH_RECEIPT_GUARDS_BRANCH_SCOPED_CROSS_ORGAN_EXPLICIT_CONFLICT_NEGATION_INSUFFICIENCY_MODALITY_CONDITIONALITY_EXCEPTION_CONCESSIVE_CONTRASTIVE_AND_GENERIC_CONDITIONAL_PREFIX_SCOPE_AMBIGUITY_MULTI_ORGAN_ESCALATION_CONTEXT_REPLAY_HISTORY_PROVENANCE_DIVERSITY_AND_OPERATOR_PROTECTION"
+        "DISMANTLE": "VERIFIED_PROPOSITION_AWARE_DISMANTLER_WITH_RECEIPT_GUARDS_BRANCH_SCOPED_CROSS_ORGAN_EXPLICIT_CONFLICT_NEGATION_INSUFFICIENCY_MODALITY_CONDITIONALITY_EXCEPTION_CONCESSIVE_CONTRASTIVE_AND_GENERIC_CONDITIONAL_SENTENCE_SCOPE_AMBIGUITY_MULTI_ORGAN_ESCALATION_CONTEXT_REPLAY_HISTORY_PROVENANCE_DIVERSITY_AND_OPERATOR_PROTECTION"
       },
-      "boundary": "VAJRA retains proposition-aware dismantling, uncertainty/provenance preservation, contest persistence, multi-organ conflict-context routing, replay containment, content-bound history attestation and semantic-operator-preserving replay identity. Its branch-scoped receipt ambiguity/conflict guard is now v0.5.6 with a persisted dedicated PASS record. Qualifying executed returns sharing targetRef + clauseRef + lens are audited together across organ labels. Explicit opposite polarity remains contestable and can escalate to DROPLET, MUTHER and SHROOMING; UNSPECIFIED relations preserve ambiguity. Bounded English/Chinese negation, insufficiency, modality, condition, exception, concessive and contrastive-scope masks remain active. Generic condition-prefix coverage now includes bounded English if/when/as-long-as and Chinese 如果/若/倘若/只要 comma-delimited prefixes; directional vocabulary inside the subordinate prefix is masked while a later main-clause directional statement remains visible. Its cross-organ provenance-diversity/content-replay guard remains v0.3.3, including comparison, equality, addition/subtraction, multiplication and division operator preservation. Distinct organ or canonical provenance labels still do not prove real-world source independence. These remain deterministic lexical/structural guards, not general semantic scope resolution, logical parsing, discourse parsing, semantic adjudication, factual truth, derivative-source detection or real-world source-independence proof."
+      "boundary": "VAJRA retains proposition-aware dismantling, uncertainty/provenance preservation, contest persistence, multi-organ conflict-context routing, replay containment, content-bound history attestation and semantic-operator-preserving replay identity. Its branch-scoped receipt ambiguity/conflict guard is now v0.5.7 with a persisted dedicated PASS record. Qualifying executed returns sharing targetRef + clauseRef + lens are audited together across organ labels. Explicit opposite polarity remains contestable and can escalate to DROPLET, MUTHER and SHROOMING; UNSPECIFIED relations preserve ambiguity. Bounded English/Chinese negation, insufficiency, modality, condition, exception, concessive and contrastive-scope masks remain active. Generic conditional-sentence coverage now includes bounded English if/when/as-long-as and Chinese 如果/若/倘若/只要 comma-delimited forms; directional vocabulary in the condition and in its same-sentence main clause is contained as scoped rather than unconditional polarity, while a later separate sentence after a sentence/semicolon boundary remains visible. Concessive/contrastive main-clause polarity remains visible by design. Its cross-organ provenance-diversity/content-replay guard remains v0.3.3, including comparison, equality, addition/subtraction, multiplication and division operator preservation. Distinct organ or canonical provenance labels still do not prove real-world source independence. These remain deterministic lexical/structural guards, not general semantic scope resolution, logical parsing, discourse parsing, semantic adjudication, factual truth, derivative-source detection or real-world source-independence proof."
     }
   }
 }
