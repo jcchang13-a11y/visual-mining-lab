@@ -1,11 +1,10 @@
 {
-  "purpose": "single CI trigger for VAJRA bounded English condition-prefix containment verification v0.5.2",
+  "purpose": "single CI trigger for GUT terminal non-success ancestor quarantine verification v0.2.26",
   "stagedCommits": [
-    "07a03b3fa8cf55160bf73c51294243e444827d84",
-    "df1a4b89e5204e05b3819641df27839b513b0ab1",
-    "9ed55052ffcda6f6e7e556388a3bd4cfa62fc762",
-    "2ec38c7590107dd6a075cb8be30ddf7473f2ba1a"
+    "427c5e5b53731326f5c90236f2dfedeeec429492",
+    "5af1be21b367565a109c8289f03dec3ec48082a9",
+    "d4f3944ebead5bdae4db9f2ef8e85e9e37b1b57f"
   ],
-  "priorFailedRun": 33831870085,
+  "priorFailedRun": 33856828532,
   "truthRule": "DISPLAYED STATE MUST FOLLOW EVIDENCE"
 }
