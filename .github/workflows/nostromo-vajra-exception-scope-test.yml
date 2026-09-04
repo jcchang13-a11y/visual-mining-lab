@@ -1,0 +1,45 @@
+name: NOSTROMO VAJRA Exception Scope Test
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'nostromo/integration/vajra-ambiguity-guard.mjs'
+      - 'nostromo/integration/vajra-exception-scope-test.mjs'
+      - '.github/workflows/nostromo-vajra-exception-scope-test.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  test:
+    if: ${{ !contains(github.event.head_commit.message, '[nostromo-test]') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify bounded exception-scope containment
+        run: node nostromo/integration/vajra-exception-scope-test.mjs
+      - name: Commit verified result
+        if: always()
+        run: |
+          git config user.name "nostromo-bot"
+          git config user.email "actions@users.noreply.github.com"
+          test -f nostromo/integration/vajra-exception-scope-last-result.json && cp nostromo/integration/vajra-exception-scope-last-result.json /tmp/vajra-exception-scope-last-result.json || true
+          git fetch origin main
+          git reset --hard origin/main
+          if [ -f /tmp/vajra-exception-scope-last-result.json ]; then
+            cp /tmp/vajra-exception-scope-last-result.json nostromo/integration/vajra-exception-scope-last-result.json
+            git add nostromo/integration/vajra-exception-scope-last-result.json
+          fi
+          if git diff --cached --quiet; then
+            echo "No result change"
+          else
+            git commit -m "[nostromo-test] record VAJRA exception-scope result"
+            git push origin HEAD:main
+          fi
