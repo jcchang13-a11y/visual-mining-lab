@@ -1,8 +1,8 @@
 {
-  "schema": "nostromo-organ-registry/v1.62",
-  "updatedAt": "2026-09-04T17:15:00+08:00",
+  "schema": "nostromo-organ-registry/v1.63",
+  "updatedAt": "2026-09-04T22:08:00+08:00",
   "truthRule": "DISPLAYED STATE MUST FOLLOW EVIDENCE",
-  "evidence": "ci-last-result.json plus formal-round-last-result.json plus connector-last-result.json plus muther-falsify-last-result.json plus muther-repo-diversity-last-result.json plus droplet-claim-verify-last-result.json plus gut-metabolism-last-result.json plus gut-ancestor-failure-last-result.json plus gut-lineage-last-result.json plus vajra-dynamic-last-result.json plus vajra-ambiguity-last-result.json plus vajra-modality-last-result.json plus vajra-uncertainty-last-result.json plus vajra-conflict-escalation-last-result.json plus vajra-provenance-diversity-last-result.json plus shroom-feedback-last-result.json",
+  "evidence": "ci-last-result.json plus formal-round-last-result.json plus connector-last-result.json plus muther-falsify-last-result.json plus muther-repo-diversity-last-result.json plus droplet-claim-verify-last-result.json plus gut-metabolism-last-result.json plus gut-ancestor-failure-last-result.json plus gut-lineage-last-result.json plus vajra-dynamic-last-result.json plus vajra-ambiguity-last-result.json plus vajra-conditional-prefix-last-result.json plus vajra-modality-last-result.json plus vajra-uncertainty-last-result.json plus vajra-conflict-escalation-last-result.json plus vajra-provenance-diversity-last-result.json plus shroom-feedback-last-result.json",
   "latestFormalRound": "greenhouse/r113-nostromo-formal-round.json",
   "latestFormalFinding": {
     "reference": "R111",
@@ -29,19 +29,19 @@
     "boundary": "Isolated counterfactual executor only. It deliberately includes parent round ordinal in participant selection and has been CI-verified against R111 and R112. It does not write or advance formal greenhouse history and is engineering evidence that NOSTROMO can execute and audit a parent-sensitive transition, not evidence that the real SHROOMING population is causally path-dependent."
   },
   "latestThickening": {
-    "organ": "GUT",
-    "version": "GUT v0.2.26 terminal non-success ancestor quarantine",
-    "status": "VERIFIED_TERMINAL_NON_SUCCESS_ANCESTOR_QUARANTINE",
-    "test": "gut-ancestor-failure-last-result.json v0.3 + gut-metabolism-last-result.json v0.2.26 + gut-lineage-last-result.json v0.2.26 + NOSTROMO Integration Test run 362",
+    "organ": "VAJRA",
+    "version": "VAJRA ambiguity/conflict guard v0.5.3 bounded condition and exception scope containment",
+    "status": "VERIFIED_BOUNDED_ENGLISH_CHINESE_CONDITION_AND_EXCEPTION_SCOPE_CONTAINMENT",
+    "test": "vajra-conditional-prefix-last-result.json v0.2 + NOSTROMO Integration Test run 370",
     "capabilities": [
-      "FAILED executor envelopes continue to quarantine descendant claim, evidence and question payloads before semantic routing",
-      "terminal non-success statuses CANCELLED, TIMEOUT, TIMED_OUT, ABORTED, BLOCKED and SKIPPED now propagate through provenance and quarantine descendant payload atoms instead of allowing them to masquerade as fresh successful material",
-      "the terminal status remains attached to quarantined provenance so downstream audit can distinguish why material was withheld",
-      "an EXECUTED control envelope remains routable even when ordinary prose discusses timeout, skipped, invalid or error lexemes",
-      "existing carry anti-echo, out-of-band carryRefs, scalar-scaffold containment and cross-organ feedback regressions remain intact",
-      "50-round integration, GUT metabolism, ancestor-failure and lineage regressions all pass after the upgrade"
+      "bounded only-if, provided-that, assuming-that, subject-to and under-the-condition-that forms remain non-directional for branch closure",
+      "bounded unless, except-when, except-if, except-under and except-where forms cannot manufacture unconditional support/refute closure",
+      "Chinese bounded 除非 and exception-scope forms are preserved as unresolved rather than promoted to directional certainty",
+      "sentence and semicolon boundaries stop condition/exception masking so an earlier scoped clause cannot suppress a later unconditional directional statement",
+      "cross-organ ambiguity/conflict, provenance, replay and GUT feedback regressions remain intact",
+      "50-round integration and all enforced organ tests pass in run 370"
     ],
-    "boundary": "This is deterministic structural execution-context containment. It recognizes an explicit bounded terminal non-success status vocabulary in machine-like envelope context; it does not infer failure semantically from arbitrary prose, determine whether a timeout was justified, judge source quality, or establish truth. The two intermediate red CI runs were preserved: they were stale version assertions in GUT metabolism and lineage tests, not hidden regressions; run 362 is the first full verified promotion record for v0.2.26."
+    "boundary": "This is deterministic lexical/structural scope containment, verified by dedicated adversarial cases and the full integration suite. It does not perform general logical parsing, semantic exception reasoning, factual adjudication, proof of source independence or evidence-quality judgment."
   },
   "organs": {
     "shrooming": {
@@ -94,9 +94,9 @@
       "mode": "EXEC_CONNECTED_THICKENED",
       "source": "../vajra/vajra-engine.js + ../vajra/receipt-uncertainty-guard.js + ./vajra-conflict-escalation.mjs + ./vajra-provenance-diversity-guard.mjs + ./vajra-ambiguity-guard.mjs",
       "actions": {
-        "DISMANTLE": "VERIFIED_PROPOSITION_AWARE_DISMANTLER_WITH_RECEIPT_GUARDS_BRANCH_SCOPED_CROSS_ORGAN_EXPLICIT_CONFLICT_NEGATION_INSUFFICIENCY_MODALITY_CONDITIONALITY_AND_BOUNDED_CONDITION_PREFIX_AWARE_AMBIGUITY_MULTI_ORGAN_ESCALATION_CONTEXT_REPLAY_HISTORY_PROVENANCE_DIVERSITY_AND_OPERATOR_PROTECTION"
+        "DISMANTLE": "VERIFIED_PROPOSITION_AWARE_DISMANTLER_WITH_RECEIPT_GUARDS_BRANCH_SCOPED_CROSS_ORGAN_EXPLICIT_CONFLICT_NEGATION_INSUFFICIENCY_MODALITY_CONDITIONALITY_EXCEPTION_SCOPE_AMBIGUITY_MULTI_ORGAN_ESCALATION_CONTEXT_REPLAY_HISTORY_PROVENANCE_DIVERSITY_AND_OPERATOR_PROTECTION"
       },
-      "boundary": "VAJRA retains proposition-aware dismantling, uncertainty/provenance preservation, contest persistence, multi-organ conflict-context routing, replay containment, content-bound history attestation and semantic-operator-preserving replay identity. Its branch-scoped receipt ambiguity/conflict guard is now v0.5.2: qualifying executed returns that share targetRef + clauseRef + lens are audited together even when organ labels differ. Explicit opposite lexical polarity across organs still promotes the branch to CONTESTED_BY_RECEIPTS and remains compatible with conflict escalation to DROPLET, MUTHER and SHROOMING. When at least one relation is lexically UNSPECIFIED, branch ambiguity is preserved instead. Bounded English/Chinese negation, insufficiency, explicit modality and explicit conditionality masks remain active. The new bounded English condition-prefix pass covers only-if, provided-that, assuming-that, subject-to and under-the-condition-that forms before the directional verb, without crossing sentence or semicolon boundaries; these forms therefore cannot manufacture unconditional support/refute closure merely because the directional vocabulary appears later in the same conditional clause. Conditional cross-organ returns block false closure without being mislabeled as an explicit contradiction. Same-direction unconditional controls remain resolvable. Its cross-organ provenance-diversity/content-replay guard remains v0.3.3, including comparison, equality, addition/subtraction, multiplication and division operator preservation. Distinct organ or canonical provenance labels still do not prove real-world source independence. These remain deterministic lexical/structural guards, not general semantic condition/negation/modality scope resolution, semantic adjudication, factual truth, derivative-source detection or real-world source-independence proof."
+      "boundary": "VAJRA retains proposition-aware dismantling, uncertainty/provenance preservation, contest persistence, multi-organ conflict-context routing, replay containment, content-bound history attestation and semantic-operator-preserving replay identity. Its branch-scoped receipt ambiguity/conflict guard is now v0.5.3 and has a persisted dedicated PASS record. Qualifying executed returns sharing targetRef + clauseRef + lens are audited together across organ labels. Explicit opposite polarity remains contestable and can escalate to DROPLET, MUTHER and SHROOMING; UNSPECIFIED relations preserve ambiguity. Bounded English/Chinese negation, insufficiency, modality, condition and exception-scope masks are active. Exception coverage includes unless, except-when, except-if, except-under, except-where and bounded Chinese 除非/例外 forms. Sentence and semicolon boundary controls verify that scope masking does not bleed into a later unconditional directional statement. Its cross-organ provenance-diversity/content-replay guard remains v0.3.3, including comparison, equality, addition/subtraction, multiplication and division operator preservation. Distinct organ or canonical provenance labels still do not prove real-world source independence. These remain deterministic lexical/structural guards, not general semantic scope resolution, semantic adjudication, factual truth, derivative-source detection or real-world source-independence proof."
     }
   }
 }
