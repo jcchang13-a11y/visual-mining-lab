@@ -65,7 +65,7 @@ jobs:
       - name: Verify VAJRA receipt ambiguity preservation
         id: vajra_ambiguity
         continue-on-error: true
-        run: node nostromo/integration/vajra-ambiguity-test.mjs
+        run: node nostromo/integration/vajra-ambiguity-test.mjs && node nostromo/integration/vajra-conditional-prefix-test.mjs
       - name: Verify VAJRA uncertainty-aware receipt closure
         id: vajra_uncertainty
         continue-on-error: true
