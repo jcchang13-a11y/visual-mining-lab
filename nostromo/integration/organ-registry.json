@@ -1,6 +1,6 @@
 {
-  "schema": "nostromo-organ-registry/v1.59",
-  "updatedAt": "2026-09-04T13:06:00+08:00",
+  "schema": "nostromo-organ-registry/v1.60",
+  "updatedAt": "2026-09-04T15:10:00+08:00",
   "truthRule": "DISPLAYED STATE MUST FOLLOW EVIDENCE",
   "evidence": "ci-last-result.json plus formal-round-last-result.json plus connector-last-result.json plus muther-falsify-last-result.json plus muther-repo-diversity-last-result.json plus droplet-claim-verify-last-result.json plus gut-metabolism-last-result.json plus gut-ancestor-failure-last-result.json plus gut-lineage-last-result.json plus vajra-dynamic-last-result.json plus vajra-ambiguity-last-result.json plus vajra-modality-last-result.json plus vajra-uncertainty-last-result.json plus vajra-conflict-escalation-last-result.json plus vajra-provenance-diversity-last-result.json plus shroom-feedback-last-result.json",
   "latestFormalRound": "greenhouse/r113-nostromo-formal-round.json",
@@ -29,19 +29,19 @@
     "boundary": "Isolated counterfactual executor only. It deliberately includes parent round ordinal in participant selection and has been CI-verified against R111 and R112. It does not write or advance formal greenhouse history and is engineering evidence that NOSTROMO can execute and audit a parent-sensitive transition, not evidence that the real SHROOMING population is causally path-dependent."
   },
   "latestThickening": {
-    "organ": "MU/TH/UR",
-    "version": "MU/TH/UR repository lexical vein map v0.2.3",
-    "status": "VERIFIED_QUERY_REMOVED_LEXICAL_CO_CONTEXT_VEIN_MAPPING",
-    "test": "muther-repo-diversity-last-result.json v0.2.3 + NOSTROMO Integration Test run 349",
+    "organ": "DROPLET",
+    "version": "DROPLET claim verify v1.6",
+    "status": "VERIFIED_FRESHNESS_SCOPED_DIRECTIONAL_CONFLICT",
+    "test": "droplet-claim-verify-last-result.json v1.6 + NOSTROMO Integration Test run 353",
     "capabilities": [
-      "retained repository hits can now be mapped into bounded lexical co-context veins after exact and near-duplicate containment and source-family-balanced selection",
-      "the query token itself is removed before vein-affinity comparison so shared search vocabulary cannot by itself manufacture a vein",
-      "related retained hits remain separate materials while the vein graph preserves source family, path and fingerprint provenance",
-      "cross-family lexical veins are explicitly marked but are not upgraded to independent evidence",
-      "unrelated retained material remains visible as unclustered rather than being forced into a vein",
-      "the full GUT, VAJRA, MU/TH/UR, DROPLET, SHROOMING and 50-round integration suite passed after the change"
+      "under an explicit freshness policy, only freshness-eligible support/refute directions may create or directionally block a current verdict",
+      "stale historical authoritative disagreement remains auditable as rawAuthoritativeConflict without automatically forcing a current fresh verdict to INDETERMINATE",
+      "fresh support plus only stale refutation can resolve SUPPORTED, while fresh refutation plus only stale support can resolve REFUTED",
+      "same-fingerprint opposite relations remain a global integrity conflict even when one side is stale, preventing freshness from masking contradictory reuse of one evidence identity",
+      "eligible directional counts and freshnessExcludedAuthoritativeConflict are preserved for audit",
+      "the full GUT, VAJRA, MU/TH/UR, DROPLET, SHROOMING and 50-round integration suite passed after dedicated adversarial coverage"
     ],
-    "boundary": "This is deterministic lexical/structural co-context affinity mapping over already retained repository hits. It does not merge hits, amplify evidence weight, infer semantic topics or conceptual veins, prove source independence, detect derivative sources, score source quality, establish novelty, adjudicate truth, or extend Google Drive coverage."
+    "boundary": "This is deterministic freshness-scoped evidence gating over an explicit caller/connector evidence bundle. It does not infer whether a claim is time-sensitive, validate dates, search the web itself, prove source independence, detect derivative sources, score methodological quality, adjudicate semantic truth, or convert historical disagreement into evidence that the current state is settled."
   },
   "organs": {
     "shrooming": {
@@ -78,9 +78,9 @@
         "AUDIT_EVIDENCE": "EXEC_STATE",
         "VERIFY_URL": "CLOSED_LOOP_EXEC",
         "SEARCH_EXTERNAL": "CONNECTOR_EXEC",
-        "VERIFY": "VERIFIED_DECLARED_FAMILY_DIVERSITY_DUPLICATE_CONFLICT_AND_OPT_IN_TEMPORAL_LEAKAGE_CONTAINING_CLAIM_VERIFY"
+        "VERIFY": "VERIFIED_DECLARED_FAMILY_DIVERSITY_DUPLICATE_INTEGRITY_CONFLICT_AND_FRESHNESS_SCOPED_DIRECTIONAL_CLAIM_VERIFY"
       },
-      "boundary": "Published evidence audit and explicit-URL verification are executable. Search-engine discovery is executed by the external web connector runtime. VERIFY v1.5 computes SUPPORTED, REFUTED or INDETERMINATE over an explicit evidence bundle while suppressing exact replay amplification, forcing INDETERMINATE on conflicting authoritative directions or contradictory use of one evidence fingerprint, optionally enforcing a caller-supplied freshness policy, and optionally enforcing a minimum authoritative source-family corroboration gate. Under the diversity gate, only explicitly caller-declared sourceFamily or publisher labels count toward corroboration; different source display names without declared family identity stay auditable but cannot manufacture independent-family certainty. Under an active freshness policy, stale, undated, future-dated and coarse date ranges that overlap the as-of boundary stay visible for audit but cannot create certainty. It does not infer whether a claim is time-sensitive, search the web by itself, validate timestamps, prove source independence, detect derivative sources, score methodological quality, or treat absence of refutation as global truth."
+      "boundary": "Published evidence audit and explicit-URL verification are executable. Search-engine discovery is executed by the external web connector runtime. VERIFY v1.6 computes SUPPORTED, REFUTED or INDETERMINATE over an explicit evidence bundle while suppressing exact replay amplification, preserving same-fingerprint opposite-relation integrity conflicts, optionally enforcing a caller-supplied freshness policy, and optionally enforcing a minimum authoritative source-family corroboration gate. Under an active freshness policy, only FRESH evidence may create or directionally block current certainty; stale, undated, future-dated and coarse date ranges overlapping the as-of boundary remain visible for audit. Historical authoritative disagreement outside the freshness-eligible set is preserved separately as rawAuthoritativeConflict and freshnessExcludedAuthoritativeConflict instead of automatically blocking a fresh current verdict. Same-fingerprint contradictory relations remain globally INDETERMINATE because they represent input-integrity failure rather than ordinary historical disagreement. Under the diversity gate, only explicitly caller-declared sourceFamily or publisher labels count toward corroboration; different source display names without declared family identity stay auditable but cannot manufacture independent-family certainty. It does not infer whether a claim is time-sensitive, search the web by itself, validate timestamps, prove source independence, detect derivative sources, score methodological quality, or treat absence of refutation as global truth."
     },
     "gut": {
       "mode": "EXEC_CONNECTED_THICKENED",
