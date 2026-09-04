@@ -105,6 +105,40 @@ const chineseInsufficientRefutePolarity=chineseInsufficientRefuteAudit.ambiguous
 if(chineseInsufficientRefuteAudit.status!=='AMBIGUITY_FOUND')failures.push({type:'ZH_INSUFFICIENT_REFUTE_FALSE_POLARITY',audit:chineseInsufficientRefuteAudit});
 if(chineseInsufficientRefutePolarity!=='UNSPECIFIED')failures.push({type:'ZH_INSUFFICIENT_REFUTE_NOT_UNSPECIFIED',actual:chineseInsufficientRefutePolarity});
 
+// Conditionality adversarial cases: a receipt that supports/refutes only under an
+// explicit condition must not be promoted to unconditional polarity for the branch.
+const conditionalSupport={...common,provenance:'source-conditional-support',material:'A bounded run observed the expected pattern only under a restricted configuration.',relation:'This evidence supports the target claim only if the retry policy remains disabled.'};
+const conditionalSupportAudit=auditReceiptAmbiguity([receiptA,conditionalSupport]);
+const conditionalSupportPolarity=conditionalSupportAudit.ambiguous?.[0]?.receipts?.find(x=>x.provenance==='source-conditional-support')?.polarity||null;
+if(conditionalSupportAudit.status!=='AMBIGUITY_FOUND')failures.push({type:'CONDITIONAL_SUPPORT_FALSE_POLARITY',audit:conditionalSupportAudit});
+if(conditionalSupportPolarity!=='UNSPECIFIED')failures.push({type:'CONDITIONAL_SUPPORT_NOT_UNSPECIFIED',actual:conditionalSupportPolarity});
+
+const conditionalRefute={...common,provenance:'source-conditional-refute',material:'A bounded run found the failure only under a restricted data condition.',relation:'This evidence refutes the target claim provided that duplicate inputs are retained.'};
+const conditionalRefuteAudit=auditReceiptAmbiguity([explicitRefute,conditionalRefute]);
+const conditionalRefutePolarity=conditionalRefuteAudit.ambiguous?.[0]?.receipts?.find(x=>x.provenance==='source-conditional-refute')?.polarity||null;
+if(conditionalRefuteAudit.status!=='AMBIGUITY_FOUND')failures.push({type:'CONDITIONAL_REFUTE_FALSE_POLARITY',audit:conditionalRefuteAudit});
+if(conditionalRefutePolarity!=='UNSPECIFIED')failures.push({type:'CONDITIONAL_REFUTE_NOT_UNSPECIFIED',actual:conditionalRefutePolarity});
+
+const chineseConditionalSupport={...common,provenance:'source-zh-conditional-support',material:'這份材料只覆蓋特定設定。',relation:'只有在重試機制關閉時，這份證據才支持目標命題。'};
+const chineseConditionalSupportAudit=auditReceiptAmbiguity([receiptA,chineseConditionalSupport]);
+const chineseConditionalSupportPolarity=chineseConditionalSupportAudit.ambiguous?.[0]?.receipts?.find(x=>x.provenance==='source-zh-conditional-support')?.polarity||null;
+if(chineseConditionalSupportAudit.status!=='AMBIGUITY_FOUND')failures.push({type:'ZH_CONDITIONAL_SUPPORT_FALSE_POLARITY',audit:chineseConditionalSupportAudit});
+if(chineseConditionalSupportPolarity!=='UNSPECIFIED')failures.push({type:'ZH_CONDITIONAL_SUPPORT_NOT_UNSPECIFIED',actual:chineseConditionalSupportPolarity});
+
+const chineseConditionalRefute={...common,provenance:'source-zh-conditional-refute',material:'這份材料只覆蓋特定資料條件。',relation:'在特定條件下，這份證據反駁目標命題。'};
+const chineseConditionalRefuteAudit=auditReceiptAmbiguity([explicitRefute,chineseConditionalRefute]);
+const chineseConditionalRefutePolarity=chineseConditionalRefuteAudit.ambiguous?.[0]?.receipts?.find(x=>x.provenance==='source-zh-conditional-refute')?.polarity||null;
+if(chineseConditionalRefuteAudit.status!=='AMBIGUITY_FOUND')failures.push({type:'ZH_CONDITIONAL_REFUTE_FALSE_POLARITY',audit:chineseConditionalRefuteAudit});
+if(chineseConditionalRefutePolarity!=='UNSPECIFIED')failures.push({type:'ZH_CONDITIONAL_REFUTE_NOT_UNSPECIFIED',actual:chineseConditionalRefutePolarity});
+
+const conditionalCrossOrgan={...conditionalRefute,organ:'MU/TH/UR',provenance:'muther-conditional-refute'};
+const conditionalCrossOrganAudit=auditReceiptAmbiguity([crossOrganA,conditionalCrossOrgan]);
+const conditionalCrossOrganGuarded=applyGuardedHandoffResults(base,[crossOrganA,conditionalCrossOrgan],V);
+const conditionalCrossOrganBranch=conditionalCrossOrganGuarded.unresolved.find(x=>x.targetRef===branch?.targetRef&&x.clauseRef===branch?.clauseRef&&x.lens===branch?.lens);
+if(conditionalCrossOrganAudit.status!=='AMBIGUITY_FOUND')failures.push({type:'CROSS_ORGAN_CONDITIONALITY_NOT_PRESERVED',audit:conditionalCrossOrganAudit});
+if(conditionalCrossOrganAudit.contested?.length)failures.push({type:'CROSS_ORGAN_CONDITIONALITY_FALSE_CONFLICT',audit:conditionalCrossOrganAudit});
+if(conditionalCrossOrganBranch?.status!=='AMBIGUOUS_BY_RECEIPTS')failures.push({type:'CROSS_ORGAN_CONDITIONAL_FALSE_CLOSURE_NOT_BLOCKED',actual:conditionalCrossOrganBranch?.status});
+
 // Cross-organ explicit conflict adversarial case. The base engine accepts only the
 // preferred-organ return and therefore exposes the exact arrival/scope gap this guard
 // is responsible for. A non-preferred but otherwise qualifying executed return with
@@ -144,7 +178,7 @@ for(const expected of ['MISSING_PROVENANCE','NO_EXECUTION_EVIDENCE','MISSING_REL
 }
 
 const result={
-  schema:'nostromo-vajra-ambiguity-test/v0.5.0',
+  schema:'nostromo-vajra-ambiguity-test/v0.5.1',
   completedAt:new Date().toISOString(),
   status:failures.length?'FAIL':'PASS',
   finding:{
@@ -170,6 +204,16 @@ const result={
     chineseInsufficientSupportPolarity,
     chineseInsufficientRefuteStatus:chineseInsufficientRefuteAudit.status,
     chineseInsufficientRefutePolarity,
+    conditionalSupportStatus:conditionalSupportAudit.status,
+    conditionalSupportPolarity,
+    conditionalRefuteStatus:conditionalRefuteAudit.status,
+    conditionalRefutePolarity,
+    chineseConditionalSupportStatus:chineseConditionalSupportAudit.status,
+    chineseConditionalSupportPolarity,
+    chineseConditionalRefuteStatus:chineseConditionalRefuteAudit.status,
+    chineseConditionalRefutePolarity,
+    conditionalCrossOrganStatus:conditionalCrossOrganBranch?.status||null,
+    conditionalCrossOrganAuditStatus:conditionalCrossOrganAudit.status,
     crossOrganExplicitBaselineStatus:crossOrganExplicitRawBranch?.status||null,
     crossOrganExplicitAuditStatus:crossOrganExplicitAudit.status,
     crossOrganExplicitGuardedStatus:crossOrganExplicitBranch?.status||null,
@@ -180,10 +224,10 @@ const result={
     poisonAuditStatus:poisonAudit.status,
     poisonRejected:poisonAudit.rejectedReceiptCount,
     poisonBranchStatus:poisonBranch?.status||null,
-    interpretation:'The guard preserves branch-scoped ambiguity and explicit conflict across organ boundaries, excludes malformed returns, masks bounded negated/insufficient/hedged support-refute phrases, and converts opposite explicit cross-organ polarity into a contested VAJRA branch that the existing conflict-escalation layer can route back to DROPLET, MUTHER and SHROOMING.'
+    interpretation:'The guard preserves branch-scoped ambiguity and explicit conflict across organ boundaries, excludes malformed returns, masks bounded negated/insufficient/hedged/conditional support-refute phrases, prevents conditional evidence from masquerading as unconditional closure, and converts genuinely opposite explicit cross-organ polarity into a contested VAJRA branch that the existing conflict-escalation layer can route back to DROPLET, MUTHER and SHROOMING.'
   },
   failures,
-  boundary:'This test demonstrates a deterministic structural/lexical false-certainty, ambiguity-poisoning and cross-organ explicit-conflict guard. A preferred-organ receipt cannot create closure when another structurally qualifying executed organ return on the same branch states the opposite explicit polarity; the branch becomes CONTESTED_BY_RECEIPTS and is compatible with VAJRA conflict escalation. UNSPECIFIED means the bounded polarity detector cannot safely classify the relation; qualification means only that minimum execution/provenance/material/relation fields exist. Distinct organ/provenance counts are audit metadata, not proof of source independence. Masking and polarity remain intentionally narrow and do not amount to general semantic negation/modality scope resolution, truth judgment or evidence-quality scoring.'
+  boundary:'This test demonstrates a deterministic structural/lexical false-certainty, ambiguity-poisoning, conditionality and cross-organ explicit-conflict guard. A preferred-organ receipt cannot create closure when another structurally qualifying executed organ return on the same branch is explicitly conditional or states the opposite explicit polarity. Conditional support/refute is conservatively treated as UNSPECIFIED at branch level; explicit opposite polarity becomes CONTESTED_BY_RECEIPTS. UNSPECIFIED means the bounded polarity detector cannot safely classify an unconditional relation. Distinct organ/provenance counts are audit metadata, not proof of source independence. Masking and polarity remain intentionally narrow and do not amount to general semantic condition scope resolution, negation/modality parsing, truth judgment or evidence-quality scoring.'
 };
 await fs.writeFile(resultPath,JSON.stringify(result,null,2)+'\n','utf8');
 console.log(JSON.stringify(result,null,2));
