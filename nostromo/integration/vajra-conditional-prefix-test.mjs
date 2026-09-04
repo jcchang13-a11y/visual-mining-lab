@@ -3,7 +3,7 @@ import {auditReceiptAmbiguity} from './vajra-ambiguity-guard.mjs';
 
 const failures=[];
 const base={targetRef:'t-condition-prefix',clauseRef:'c1',lens:'evidence',organ:'DROPLET',status:'EXECUTED',material:'bounded receipt'};
-const anchor={...base,provenance:'anchor',relation:'This evidence supports the target claim.'};
+const anchor={...base,provenance:'anchor',relation:'No directional conclusion is asserted.'};
 
 function polarity(relation,provenance='candidate'){
   const candidate={...base,organ:'MU/TH/UR',provenance,relation};
