@@ -1,0 +1,22 @@
+{
+  "schema": "muther-boilerplate-vein-defect/v0.1",
+  "observedAt": "2026-09-06T00:05:00+08:00",
+  "status": "OPEN_CONFIRMED_BY_REPRODUCTION",
+  "organ": "MU/TH/UR",
+  "executor": "MUTHER_REPOSITORY_MINE",
+  "scope": "LEXICAL_VEIN_MAPPING",
+  "currentVeinThreshold": 0.18,
+  "probe": {
+    "query": "MUTHER_BOILERPLATE_Q",
+    "sharedScaffold": "This repository observation preserves provenance, keeps all retained hits separate, and records bounded audit metadata for review.",
+    "materialA": "coastal erosion shoreline retreat sediment transport estuary morphology storm surge beach recovery",
+    "materialB": "manuscript typography paragraph rhythm annotation hierarchy line length page margin editorial apparatus",
+    "queryRemovedFiveCharacterShingleJaccard": 0.5451
+  },
+  "expected": "Unrelated substantive tails must not be promoted into one lexical vein solely because they share generic repository/audit scaffold.",
+  "observedDefect": "The current query-removed lexical affinity still gives generic shared scaffold enough weight to exceed the default vein threshold even when the substantive materials diverge strongly.",
+  "risk": "MUTHER can emit a structurally auditable but misleading lexical-vein grouping. The current executor does not merge the underlying hits or add evidence weight, so this is a grouping-quality defect rather than evidence amplification; downstream organs must not interpret the vein label as semantic relatedness or source independence.",
+  "nextRepairConstraint": "Add a bounded guard against boilerplate-dominated overlap without weakening provenance retention, exact/near-duplicate containment, complete-link bridge-risk containment, or legitimate multi-source lexical veins. Do not promote a repair until adversarial and full integration tests pass.",
+  "boundary": "This reproduction demonstrates a deterministic lexical false-positive mode under a deliberately constructed pair. It does not prove that every shared scaffold is boilerplate, that the two topics are semantically unrelated in every context, or that semantic clustering has been solved.",
+  "failures": []
+}
