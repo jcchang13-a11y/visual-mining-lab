@@ -1,0 +1,17 @@
+{
+  "schema": "nostromo-vajra-attribution-test/v0.1",
+  "completedAt": "2026-09-05T05:04:25.386Z",
+  "status": "PASS",
+  "guardVersion": "v0.5.11",
+  "cases": {
+    "directConflict": "CONFLICT_FOUND",
+    "attributedRefute": "AMBIGUITY_FOUND",
+    "attributedSupport": "AMBIGUITY_FOUND",
+    "chineseAttributedSupport": "AMBIGUITY_FOUND",
+    "chineseAccordingTo": "AMBIGUITY_FOUND",
+    "laterDirectRefute": "CONFLICT_FOUND",
+    "laterDirectSupport": "CONFLICT_FOUND"
+  },
+  "failures": [],
+  "boundary": "PASS means bounded English/Chinese reporting/attribution scopes cannot by themselves manufacture unconditional SUPPORTS/REFUTES polarity, while a later separate direct assessment remains visible. This is deterministic lexical/structural attribution containment, not quotation parsing, semantic source attribution, source-quality judgment, factual adjudication or proof of source independence."
+}
