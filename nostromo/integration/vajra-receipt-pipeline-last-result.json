@@ -1,6 +1,6 @@
 {
-  "schema": "nostromo-vajra-receipt-pipeline/v0.1.1",
-  "completedAt": "2026-09-05T21:09:38.240Z",
+  "schema": "nostromo-vajra-receipt-pipeline/v0.1.2",
+  "completedAt": "2026-09-05T21:10:00.640Z",
   "status": "PASS",
   "finding": {
     "canonicalPipelineStatus": "CANONICAL_EXEC",
@@ -17,12 +17,19 @@
     "multilineStatus": "AMBIGUITY_FOUND",
     "multilinePolarity": "UNSPECIFIED",
     "multilineBracketParserLimited": true,
-    "multilineBracketMaskedRanges": 0,
+    "hypotheticalEnglishStatus": "AMBIGUITY_FOUND",
+    "hypotheticalEnglishPolarity": "UNSPECIFIED",
+    "hypotheticalChineseStatus": "AMBIGUITY_FOUND",
+    "hypotheticalChinesePolarity": "UNSPECIFIED",
+    "directAfterHypotheticalStatus": "CONFLICT_FOUND",
+    "directAfterHypotheticalPolarity": "REFUTES",
+    "hypotheticalParserLimited": true,
+    "hypotheticalParserLimitedStatus": "CONFLICT_FOUND",
     "rawRelationPreserved": true,
     "crossOrganCovered": true,
     "provenancePreserved": true,
     "closureAuthority": "NONE"
   },
   "failures": [],
-  "boundary": "Canonical VAJRA receipt pipeline composes bounded editorial-bracket classification containment with the verified ambiguity/conflict guard. It preserves raw relation/provenance. Bracket parser-limit spans are explicitly exposed and not bracket-masked; other verified guards may still conservatively classify their wording. This is deterministic structural scope containment, not semantic quotation ownership, truth judgment, source-independence proof or evidence-quality scoring."
+  "boundary": "Canonical VAJRA receipt pipeline composes bounded editorial-bracket and explicit hypothetical/thought-experiment classification containment with the verified ambiguity/conflict guard. Hypothetical support/refute wording cannot become unconditional polarity inside a supported single-line sentence-bounded span, while a later direct assessment remains visible. Unsupported overlong hypothetical spans are exposed as parserLimited and left visible conservatively. Raw relation/provenance are preserved. This is deterministic structural scope containment, not semantic counterfactual reasoning, truth judgment, source-independence proof or evidence-quality scoring."
 }
