@@ -1,7 +1,10 @@
 {
-  "purpose": "single CI trigger for VAJRA bounded square/editorial bracket-scope containment verification inside full NOSTROMO integration",
+  "purpose": "single CI trigger for VAJRA canonical bracket-aware receipt pipeline v0.1.1 full NOSTROMO regression",
   "stagedCommits": [
-    "0709ca59c6fc5b809ddb4e29a1afedbda781e0fe"
+    "ae0758efeb9c9c22e7a8e682a736481962ba00ac",
+    "eb0ba5363b33f7754976b933b3ec034d49f21441"
   ],
+  "focusedWorkflowRun": 33989310210,
+  "focusedStatus": "PASS",
   "truthRule": "DISPLAYED STATE MUST FOLLOW EVIDENCE"
 }
