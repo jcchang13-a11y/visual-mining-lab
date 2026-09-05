@@ -4,7 +4,7 @@ import path from 'node:path';
 import {auditReceiptAmbiguity} from './vajra-ambiguity-guard.mjs';
 
 const root=process.cwd();
-const resultPath=path.join(root,'nostromo','integration','vajra-ambiguity-last-result.json');
+const resultPath=path.join(root,'nostromo','integration','vajra-nested-parenthetical-last-result.json');
 const failures=[];
 const common={targetRef:'vajra:nested-parenthetical:test',clauseRef:'clause:1',lens:'evidence',organ:'DROPLET',status:'EXECUTED'};
 const directSupport={...common,provenance:'direct-support',material:'A direct bounded assessment is available for the branch.',relation:'This evidence supports the target claim within the tested scope.'};
@@ -42,32 +42,26 @@ const unbalancedResult=polarityFor(unbalanced);
 if(unbalancedResult.polarity!=='REFUTES')failures.push({type:'UNBALANCED_SCOPE_SILENTLY_HIDDEN',actual:unbalancedResult.polarity});
 if(unbalancedResult.audit.status!=='CONFLICT_FOUND')failures.push({type:'UNBALANCED_SCOPE_NOT_CONSERVATIVE',actual:unbalancedResult.audit.status});
 
-let previous={};
-try{previous=JSON.parse(await fs.readFile(resultPath,'utf8'));}catch{}
 const result={
-  ...previous,
-  schema:'nostromo-vajra-ambiguity-test/v0.5.2',
+  schema:'nostromo-vajra-nested-parenthetical-test/v0.1',
   completedAt:new Date().toISOString(),
   status:failures.length?'FAIL':'PASS',
   finding:{
-    ...(previous.finding||{}),
-    nestedParenthetical:{
-      version:'v0.5.15',
-      englishNestedStatus:nestedEnglishResult.audit.status,
-      englishNestedPolarity:nestedEnglishResult.polarity,
-      chineseNestedStatus:nestedChineseResult.audit.status,
-      chineseNestedPolarity:nestedChineseResult.polarity,
-      directOutsideStatus:directOutsideResult.audit.status,
-      directOutsidePolarity:directOutsideResult.polarity,
-      tooDeepStatus:tooDeepResult.audit.status,
-      tooDeepPolarity:tooDeepResult.polarity,
-      unbalancedStatus:unbalancedResult.audit.status,
-      unbalancedPolarity:unbalancedResult.polarity,
-      interpretation:'Nested parenthetical-only polarity is contained up to the declared bounded depth, while direct assessments outside the parenthetical remain visible. Parser-limit cases are deliberately left visible rather than silently masked.'
-    }
+    version:'v0.5.15',
+    englishNestedStatus:nestedEnglishResult.audit.status,
+    englishNestedPolarity:nestedEnglishResult.polarity,
+    chineseNestedStatus:nestedChineseResult.audit.status,
+    chineseNestedPolarity:nestedChineseResult.polarity,
+    directOutsideStatus:directOutsideResult.audit.status,
+    directOutsidePolarity:directOutsideResult.polarity,
+    tooDeepStatus:tooDeepResult.audit.status,
+    tooDeepPolarity:tooDeepResult.polarity,
+    unbalancedStatus:unbalancedResult.audit.status,
+    unbalancedPolarity:unbalancedResult.polarity,
+    interpretation:'Nested parenthetical-only polarity is contained up to the declared bounded depth, while direct assessments outside the parenthetical remain visible. Parser-limit cases are deliberately left visible rather than silently masked.'
   },
-  failures:[...failures],
-  boundary:`${previous.boundary||''} Nested-parenthetical extension: NFKC-normalized ASCII/full-width parentheses are scanned with bounded depth <=3, bounded top-level span length <=362 characters and no newline. Directional support/refute wording inside a qualifying nested parenthetical is masked before lexical polarity classification. Too-deep, overlong, multiline or unbalanced spans are not masked, so parser limits cannot silently manufacture certainty. This remains deterministic structural containment, not general parenthesis parsing or semantic scope resolution.`.trim()
+  failures,
+  boundary:'NFKC-normalized ASCII/full-width parentheses are scanned with bounded depth <=3, bounded top-level span length <=362 characters and no newline. Directional support/refute wording inside a qualifying nested parenthetical is masked before lexical polarity classification. Too-deep, overlong, multiline or unbalanced spans are not masked, so parser limits cannot silently manufacture certainty. This remains deterministic structural containment, not general parenthesis parsing or semantic scope resolution.'
 };
 await fs.writeFile(resultPath,JSON.stringify(result,null,2)+'\n','utf8');
 console.log(JSON.stringify(result,null,2));
