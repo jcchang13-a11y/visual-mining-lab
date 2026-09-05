@@ -1,4 +1,5 @@
 // Focused adversarial coverage for VAJRA v0.5.15 nested-parenthetical containment.
+// Evidence artifact is intentionally separate from the shared ambiguity regression result.
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import {auditReceiptAmbiguity} from './vajra-ambiguity-guard.mjs';
