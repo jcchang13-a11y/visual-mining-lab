@@ -1,6 +1,6 @@
 {
-  "schema": "nostromo-organ-registry/v1.75",
-  "updatedAt": "2026-09-06T02:10:00+08:00",
+  "schema": "nostromo-organ-registry/v1.76",
+  "updatedAt": "2026-09-06T07:08:00+08:00",
   "truthRule": "DISPLAYED STATE MUST FOLLOW EVIDENCE",
   "evidence": "ci-last-result.json plus formal-round-last-result.json plus connector-last-result.json plus muther-falsify-last-result.json plus muther-repo-diversity-last-result.json plus droplet-claim-verify-last-result.json plus gut-metabolism-last-result.json plus gut-ancestor-failure-last-result.json plus gut-lineage-last-result.json plus vajra-dynamic-last-result.json plus vajra-ambiguity-last-result.json plus vajra-conditional-prefix-last-result.json plus vajra-attribution-last-result.json plus vajra-modality-last-result.json plus vajra-nested-parenthetical-last-result.json plus vajra-uncertainty-last-result.json plus vajra-conflict-escalation-last-result.json plus vajra-provenance-diversity-last-result.json plus shroom-feedback-last-result.json",
   "latestFormalRound": "greenhouse/r113-nostromo-formal-round.json",
@@ -29,19 +29,19 @@
     "boundary": "Isolated counterfactual executor only. It deliberately includes parent round ordinal in participant selection and has been CI-verified against R111 and R112. It does not write or advance formal greenhouse history and is engineering evidence that NOSTROMO can execute and audit a parent-sensitive transition, not evidence that the real SHROOMING population is causally path-dependent."
   },
   "latestThickening": {
-    "organ": "VAJRA",
-    "version": "VAJRA receipt ambiguity/conflict guard v0.5.16 newline-preserving parser-limit fidelity",
-    "status": "VERIFIED_NEWLINE_PARSER_LIMIT_PRESERVATION_WITH_CONSERVATIVE_MULTILINE_VISIBILITY",
-    "test": "vajra-nested-parenthetical-last-result.json v0.2 + focused workflow run 6 + NOSTROMO Integration Test run 428",
+    "organ": "GUT",
+    "version": "GUT v0.2.27 typed finite numeric scalar retention patch",
+    "status": "VERIFIED_SHORT_NUMERIC_SCALAR_PRESERVATION_BEFORE_LOW_SIGNAL_FILTERING",
+    "test": "gut-metabolism-last-result.json numericScalarPreservation + NOSTROMO Integration Test run 438",
     "capabilities": [
-      "relation normalization preserves newline boundaries until bounded parenthetical scope scanning",
-      "English and Chinese directional support/refute wording inside qualifying single-line nested parenthetical asides remains contained",
-      "multiline parser-limit spans remain visible, so an unsupported multiline scope cannot silently manufacture certainty by being collapsed into the single-line mask",
-      "direct assessments outside the parenthetical remain visible and can still create explicit branch conflict",
-      "too-deep and unbalanced parser-limit spans remain conservatively visible",
-      "full NOSTROMO integration remains PASS with failures empty"
+      "finite numeric primitives are classified before short-text low-signal filtering",
+      "metric/count/status-code style numeric paths route to MUTHER as NUMERIC_EVIDENCE even when the value is 0, 1, 4 or 10",
+      "other finite numeric primitives remain auditable as NUMERIC_MATERIAL in HOLD instead of being silently discarded because their string representation is short",
+      "one-character textual noise remains eligible for LOW_SIGNAL excretion, so numeric preservation does not disable the existing low-signal guard",
+      "numeric nutrient provenance remains preserved",
+      "full NOSTROMO Integration Test run 438 completed successfully"
     ],
-    "boundary": "This is deterministic structural/lexical parser-limit fidelity. Bounded parenthetical containment still applies only to NFKC-normalized spans with nesting depth <=3, top-level span length <=362 characters and no newline. Newline-bearing, too-deep, overlong or unbalanced spans remain visible rather than silently masked, which may preserve false positives but prevents unsupported parser scope from creating false certainty. This is not general parenthesis parsing, discourse parsing, semantic scope resolution, source attribution, truth judgment or evidence-quality scoring."
+    "boundary": "This is typed structural preservation, not semantic interpretation of numbers. The patch prevents finite numeric primitives from being silently excreted solely because String(value).length < 3. Metric-like path names receive a deterministic routing heuristic; arbitrary numeric fields are retained in HOLD rather than promoted to evidence. It does not infer units, measurement validity, statistical meaning, source quality or truth."
   },
   "organs": {
     "shrooming": {
@@ -86,9 +86,9 @@
       "mode": "EXEC_CONNECTED_THICKENED",
       "source": "../gut/gut-engine.js",
       "actions": {
-        "DIGEST": "VERIFIED_HEURISTIC_METABOLIC_ROUTER_TERMINAL_MACHINE_CONTEXT_PATH_AND_ANCESTOR_QUARANTINE_OUT_OF_BAND_REFERENTIAL_CARRY_WITH_SCALAR_SCAFFOLD_CONTAINMENT"
+        "DIGEST": "VERIFIED_HEURISTIC_METABOLIC_ROUTER_TYPED_NUMERIC_SCALAR_RETENTION_TERMINAL_MACHINE_CONTEXT_PATH_AND_ANCESTOR_QUARANTINE_OUT_OF_BAND_REFERENTIAL_CARRY_WITH_SCALAR_SCAFFOLD_CONTAINMENT"
       },
-      "boundary": "GUT v0.2.27 is a deterministic heuristic metabolic router, with active carry rendering v1.1.12. Risk quarantine is context-gated: dedicated failure/risk paths, explicit terminal non-success status values, explicit status/result/outcome terminal markers, descendant payload atoms carrying an inherited failed/failure/error/rejected/invalid/quarantine/quarantined/untrusted/cancelled/canceled/timeout/timed_out/aborted/blocked/skipped ancestor status in provenance, and terminal non-success path segments such as execution.timeout or job.blocked under bounded machine-execution context are quarantined before semantic routing. Verified adversarial coverage keeps ordinary semantic prose mentioning timeout, skipped, invalid, rejected or error routable when it is not itself in a failure/risk or machine-terminal context. It preserves nutrient atoms, routes and provenance while applying bounded carry-rendering containment for inherited substrate, intra-atom and cross-segment echoes, volatile lineage, nested clauses, repeated route metadata, delimiter collisions and exact bare true/false/null/undefined scaffolding. Machine-only hexadecimal ref/targetRef/clause/clauseRef identifiers are excluded from prose carry and preserved separately in a bounded carryRefs ledger with path, route, type and provenance. Bare scalar cleanup is carry-only: numeric evidence and substantive lexical phrases are retained, and source nutrients are not mutated. These are deterministic structural/contextual routing rules, not semantic deletion, truth judgment, semantic novelty detection, semantic identity, semantic risk understanding, source-quality judgment or proof that all metabolic echo or execution-context contamination is solved."
+      "boundary": "GUT v0.2.27 is a deterministic heuristic metabolic router, with active carry rendering v1.1.12. Finite numeric primitives are now classified before the generic short-text low-signal guard: metric/count/status-code style paths become NUMERIC_EVIDENCE routed to MUTHER, while other finite numeric values become NUMERIC_MATERIAL retained in HOLD. This prevents values such as 0, 1, 4 and 10 from disappearing solely because their string form is short; the routing remains path-heuristic and does not infer numeric meaning. Risk quarantine is context-gated: dedicated failure/risk paths, explicit terminal non-success status values, explicit status/result/outcome terminal markers, descendant payload atoms carrying an inherited failed/failure/error/rejected/invalid/quarantine/quarantined/untrusted/cancelled/canceled/timeout/timed_out/aborted/blocked/skipped ancestor status in provenance, and terminal non-success path segments such as execution.timeout or job.blocked under bounded machine-execution context are quarantined before semantic routing. Verified adversarial coverage keeps ordinary semantic prose mentioning timeout, skipped, invalid, rejected or error routable when it is not itself in a failure/risk or machine-terminal context. It preserves nutrient atoms, routes and provenance while applying bounded carry-rendering containment for inherited substrate, intra-atom and cross-segment echoes, volatile lineage, nested clauses, repeated route metadata, delimiter collisions and exact bare true/false/null/undefined scaffolding. Machine-only hexadecimal ref/targetRef/clause/clauseRef identifiers are excluded from prose carry and preserved separately in a bounded carryRefs ledger with path, route, type and provenance. Bare scalar cleanup is carry-only: numeric evidence and substantive lexical phrases are retained, and source nutrients are not mutated. These are deterministic structural/contextual routing rules, not semantic deletion, truth judgment, semantic novelty detection, semantic identity, semantic risk understanding, source-quality judgment or proof that all metabolic echo or execution-context contamination is solved."
     },
     "vajra": {
       "mode": "EXEC_CONNECTED_THICKENED",
