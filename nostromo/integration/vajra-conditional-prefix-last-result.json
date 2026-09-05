@@ -1,8 +1,8 @@
 {
-  "schema": "nostromo-vajra-conditional-prefix-test/v0.6",
+  "schema": "nostromo-vajra-conditional-prefix-test/v0.7",
   "status": "PASS",
-  "guard": "VAJRA ambiguity/conflict guard v0.5.7",
-  "capability": "BOUNDED_ENGLISH_CHINESE_GENERIC_CONDITIONAL_SENTENCE_EXCEPTION_CONCESSIVE_AND_CONTRASTIVE_SCOPE_CONTAINMENT",
+  "guard": "VAJRA ambiguity/conflict guard v0.5.8",
+  "capability": "BOUNDED_ENGLISH_CHINESE_GENERIC_COMMA_AND_EXPLICIT_THEN_CONDITIONAL_SENTENCE_EXCEPTION_CONCESSIVE_AND_CONTRASTIVE_SCOPE_CONTAINMENT",
   "observations": [
     {
       "name": "ONLY_IF_PREFIX",
@@ -229,6 +229,41 @@
       "auditStatus": "AMBIGUITY_FOUND"
     },
     {
+      "name": "IF_THEN_SUPPORT_NO_COMMA",
+      "relation": "If provenance is audited then this evidence supports the target claim.",
+      "expected": "UNSPECIFIED",
+      "actual": "UNSPECIFIED",
+      "auditStatus": "AMBIGUITY_FOUND"
+    },
+    {
+      "name": "IF_THEN_REFUTE_NO_COMMA",
+      "relation": "If the bounded sample is complete then this evidence refutes the target claim.",
+      "expected": "UNSPECIFIED",
+      "actual": "UNSPECIFIED",
+      "auditStatus": "AMBIGUITY_FOUND"
+    },
+    {
+      "name": "ZH_RUO_ZE_SUPPORT_NO_COMMA",
+      "relation": "若來源完成核實則這份證據支持目標命題。",
+      "expected": "UNSPECIFIED",
+      "actual": "UNSPECIFIED",
+      "auditStatus": "AMBIGUITY_FOUND"
+    },
+    {
+      "name": "ZH_IF_NAMO_REFUTE_NO_COMMA",
+      "relation": "如果樣本完成重跑那麼這份證據反駁目標命題。",
+      "expected": "UNSPECIFIED",
+      "actual": "UNSPECIFIED",
+      "auditStatus": "AMBIGUITY_FOUND"
+    },
+    {
+      "name": "ZH_TANGRUO_NAMO_SUPPORT_NO_COMMA",
+      "relation": "倘若來源彼此獨立那么這份證據佐證目標命題。",
+      "expected": "UNSPECIFIED",
+      "actual": "UNSPECIFIED",
+      "auditStatus": "AMBIGUITY_FOUND"
+    },
+    {
       "name": "SENTENCE_BOUNDARY_CONTROL",
       "relation": "Only if retries remain disabled, logging behavior changes. This evidence supports the target claim.",
       "expected": "SUPPORTS",
@@ -311,8 +346,22 @@
       "expected": "SUPPORTS",
       "actual": "SUPPORTS",
       "auditStatus": "AMBIGUITY_FOUND"
+    },
+    {
+      "name": "IF_THEN_BOUNDARY_CONTROL",
+      "relation": "If provenance is audited then logging behavior changes. This evidence supports the target claim.",
+      "expected": "SUPPORTS",
+      "actual": "SUPPORTS",
+      "auditStatus": "AMBIGUITY_FOUND"
+    },
+    {
+      "name": "ZH_RUO_ZE_BOUNDARY_CONTROL",
+      "relation": "若來源完成核實則紀錄狀態改變。這份證據支持目標命題。",
+      "expected": "SUPPORTS",
+      "actual": "SUPPORTS",
+      "auditStatus": "AMBIGUITY_FOUND"
     }
   ],
   "failures": [],
-  "boundary": "This adversarial test covers bounded English/Chinese condition, exception, concessive and contrastive scope forms around support/refute vocabulary. Generic if/when/as-long-as and 如果/若/倘若/只要 comma-delimited conditions now verify two separate protections: directional words inside the condition prefix cannot manufacture closure, and a directional main clause in the same conditional sentence also remains UNSPECIFIED rather than being flattened into unconditional support/refute. A later sentence after a full sentence boundary remains visible. Concessive/contrastive main clauses remain visible by design. This is lexical/structural scope containment, not general logical parsing or semantic discourse adjudication."
+  "boundary": "This adversarial test covers bounded English/Chinese condition, exception, concessive and contrastive scope forms around support/refute vocabulary. Generic if/when/as-long-as and 如果/若/倘若/只要 comma-delimited conditions verify that directional words inside a condition or its same-sentence main clause cannot manufacture unconditional closure. Explicit if...then and 如果/若/倘若/只要...則/那么/那麼 forms receive the same same-sentence containment even when no comma is present. A later sentence after a full sentence boundary remains visible. Concessive/contrastive main clauses remain visible by design. This is lexical/structural scope containment, not general logical parsing or semantic discourse adjudication."
 }
