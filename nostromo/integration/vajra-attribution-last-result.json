@@ -1,22 +1,26 @@
 {
-  "schema": "nostromo-vajra-attribution-test/v0.2",
-  "completedAt": "2026-09-05T07:01:33.885Z",
+  "schema": "nostromo-vajra-attribution-test/v0.3",
+  "completedAt": "2026-09-05T08:07:02.950Z",
   "status": "PASS",
-  "guardVersion": "v0.5.12",
+  "guardVersion": "v0.5.13",
   "cases": {
     "directConflict": "CONFLICT_FOUND",
     "attributedRefute": "AMBIGUITY_FOUND",
     "attributedSupport": "AMBIGUITY_FOUND",
+    "englishColonAccordingTo": "AMBIGUITY_FOUND",
     "chineseAttributedSupport": "AMBIGUITY_FOUND",
     "chineseAccordingTo": "AMBIGUITY_FOUND",
+    "chineseColonAccordingTo": "AMBIGUITY_FOUND",
+    "chineseColonAccordingToAscii": "AMBIGUITY_FOUND",
     "quotedRefute": "AMBIGUITY_FOUND",
     "quotedSupport": "AMBIGUITY_FOUND",
     "chineseQuotedRefute": "AMBIGUITY_FOUND",
     "laterDirectRefute": "CONFLICT_FOUND",
     "laterDirectSupport": "CONFLICT_FOUND",
+    "colonThenDirectSupport": "CONFLICT_FOUND",
     "quoteThenDirectRefute": "CONFLICT_FOUND",
     "zhQuoteThenDirectSupport": "CONFLICT_FOUND"
   },
   "failures": [],
-  "boundary": "PASS means bounded English/Chinese reporting/attribution scopes and bounded paired quoted excerpts cannot by themselves manufacture unconditional SUPPORTS/REFUTES polarity, while a later separate direct assessment outside the attribution/quote remains visible. Quote handling is bounded lexical containment, not quotation parsing, quote ownership inference, semantic source attribution, source-quality judgment, factual adjudication or proof of source independence."
+  "boundary": "PASS means bounded English/Chinese reporting/attribution scopes, including 根據/依據 comma and colon-delimited forms, and bounded paired quoted excerpts cannot by themselves manufacture unconditional SUPPORTS/REFUTES polarity, while a later separate direct assessment outside the attribution/quote remains visible. Attribution and quote handling are bounded lexical containment, not discourse parsing, semantic source attribution, quotation parsing, quote ownership inference, source-quality judgment, factual adjudication or proof of source independence."
 }
