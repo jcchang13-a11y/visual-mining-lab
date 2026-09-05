@@ -67,6 +67,21 @@ const chineseQuotedRefuteAudit=auditReceiptAmbiguity([directSupport,chineseQuote
 if(chineseQuotedRefuteAudit.status!=='AMBIGUITY_FOUND')failures.push({type:'ZH_QUOTED_REFUTE_FALSE_CONFLICT',audit:chineseQuotedRefuteAudit});
 if(polarity(chineseQuotedRefuteAudit,'zh-quoted-refute')!=='UNSPECIFIED')failures.push({type:'ZH_QUOTED_REFUTE_NOT_UNSPECIFIED',actual:polarity(chineseQuotedRefuteAudit,'zh-quoted-refute')});
 
+const parentheticalSupport=receipt('parenthetical-support','The measurement was recorded (the source says it supports the target claim).','SHROOMING');
+const parentheticalSupportAudit=auditReceiptAmbiguity([directRefute,parentheticalSupport]);
+if(parentheticalSupportAudit.status!=='AMBIGUITY_FOUND')failures.push({type:'PARENTHETICAL_SUPPORT_FALSE_CONFLICT',audit:parentheticalSupportAudit});
+if(polarity(parentheticalSupportAudit,'parenthetical-support')!=='UNSPECIFIED')failures.push({type:'PARENTHETICAL_SUPPORT_NOT_UNSPECIFIED',actual:polarity(parentheticalSupportAudit,'parenthetical-support')});
+
+const bareParentheticalSupport=receipt('bare-parenthetical-support','The measurement was recorded (supports the target claim).','SHROOMING');
+const bareParentheticalSupportAudit=auditReceiptAmbiguity([directRefute,bareParentheticalSupport]);
+if(bareParentheticalSupportAudit.status!=='AMBIGUITY_FOUND')failures.push({type:'BARE_PARENTHETICAL_SUPPORT_FALSE_CONFLICT',audit:bareParentheticalSupportAudit});
+if(polarity(bareParentheticalSupportAudit,'bare-parenthetical-support')!=='UNSPECIFIED')failures.push({type:'BARE_PARENTHETICAL_SUPPORT_NOT_UNSPECIFIED',actual:polarity(bareParentheticalSupportAudit,'bare-parenthetical-support')});
+
+const chineseParentheticalSupport=receipt('zh-parenthetical-support','量測已記錄（來源稱這支持目標命題）。','SHROOMING');
+const chineseParentheticalSupportAudit=auditReceiptAmbiguity([directRefute,chineseParentheticalSupport]);
+if(chineseParentheticalSupportAudit.status!=='AMBIGUITY_FOUND')failures.push({type:'ZH_PARENTHETICAL_SUPPORT_FALSE_CONFLICT',audit:chineseParentheticalSupportAudit});
+if(polarity(chineseParentheticalSupportAudit,'zh-parenthetical-support')!=='UNSPECIFIED')failures.push({type:'ZH_PARENTHETICAL_SUPPORT_NOT_UNSPECIFIED',actual:polarity(chineseParentheticalSupportAudit,'zh-parenthetical-support')});
+
 const laterDirectRefute=receipt('later-direct-refute','The paper claims that the observations support the target claim. Independent reproduction refutes the target claim.','MU/TH/UR');
 const laterDirectRefuteAudit=auditReceiptAmbiguity([directSupport,laterDirectRefute]);
 if(laterDirectRefuteAudit.status!=='CONFLICT_FOUND')failures.push({type:'LATER_DIRECT_REFUTE_HIDDEN',audit:laterDirectRefuteAudit});
@@ -92,11 +107,21 @@ const zhQuoteThenDirectSupportAudit=auditReceiptAmbiguity([directRefute,zhQuoteT
 if(zhQuoteThenDirectSupportAudit.status!=='CONFLICT_FOUND')failures.push({type:'ZH_QUOTE_THEN_DIRECT_SUPPORT_HIDDEN',audit:zhQuoteThenDirectSupportAudit});
 if(polarity(zhQuoteThenDirectSupportAudit,'zh-quote-then-direct-support')!=='SUPPORTS')failures.push({type:'ZH_QUOTE_THEN_DIRECT_SUPPORT_POLARITY_WRONG',actual:polarity(zhQuoteThenDirectSupportAudit,'zh-quote-then-direct-support')});
 
+const parentheticalThenDirectRefute=receipt('parenthetical-then-direct-refute','The measurement was recorded (the source says it supports the target claim). Independent reproduction refutes the target claim.','MU/TH/UR');
+const parentheticalThenDirectRefuteAudit=auditReceiptAmbiguity([directSupport,parentheticalThenDirectRefute]);
+if(parentheticalThenDirectRefuteAudit.status!=='CONFLICT_FOUND')failures.push({type:'PARENTHETICAL_THEN_DIRECT_REFUTE_HIDDEN',audit:parentheticalThenDirectRefuteAudit});
+if(polarity(parentheticalThenDirectRefuteAudit,'parenthetical-then-direct-refute')!=='REFUTES')failures.push({type:'PARENTHETICAL_THEN_DIRECT_REFUTE_POLARITY_WRONG',actual:polarity(parentheticalThenDirectRefuteAudit,'parenthetical-then-direct-refute')});
+
+const zhParentheticalThenDirectSupport=receipt('zh-parenthetical-then-direct-support','量測已記錄（來源稱這反駁目標命題）。重新執行的對照結果支持目標命題。','MU/TH/UR');
+const zhParentheticalThenDirectSupportAudit=auditReceiptAmbiguity([directRefute,zhParentheticalThenDirectSupport]);
+if(zhParentheticalThenDirectSupportAudit.status!=='CONFLICT_FOUND')failures.push({type:'ZH_PARENTHETICAL_THEN_DIRECT_SUPPORT_HIDDEN',audit:zhParentheticalThenDirectSupportAudit});
+if(polarity(zhParentheticalThenDirectSupportAudit,'zh-parenthetical-then-direct-support')!=='SUPPORTS')failures.push({type:'ZH_PARENTHETICAL_THEN_DIRECT_SUPPORT_POLARITY_WRONG',actual:polarity(zhParentheticalThenDirectSupportAudit,'zh-parenthetical-then-direct-support')});
+
 const result={
-  schema:'nostromo-vajra-attribution-test/v0.3',
+  schema:'nostromo-vajra-attribution-test/v0.4',
   completedAt:new Date().toISOString(),
   status:failures.length?'FAIL':'PASS',
-  guardVersion:'v0.5.13',
+  guardVersion:'v0.5.14',
   cases:{
     directConflict:directConflict.status,
     attributedRefute:attributedRefuteAudit.status,
@@ -109,14 +134,19 @@ const result={
     quotedRefute:quotedRefuteAudit.status,
     quotedSupport:quotedSupportAudit.status,
     chineseQuotedRefute:chineseQuotedRefuteAudit.status,
+    parentheticalSupport:parentheticalSupportAudit.status,
+    bareParentheticalSupport:bareParentheticalSupportAudit.status,
+    chineseParentheticalSupport:chineseParentheticalSupportAudit.status,
     laterDirectRefute:laterDirectRefuteAudit.status,
     laterDirectSupport:laterDirectSupportAudit.status,
     colonThenDirectSupport:colonThenDirectSupportAudit.status,
     quoteThenDirectRefute:quoteThenDirectRefuteAudit.status,
-    zhQuoteThenDirectSupport:zhQuoteThenDirectSupportAudit.status
+    zhQuoteThenDirectSupport:zhQuoteThenDirectSupportAudit.status,
+    parentheticalThenDirectRefute:parentheticalThenDirectRefuteAudit.status,
+    zhParentheticalThenDirectSupport:zhParentheticalThenDirectSupportAudit.status
   },
   failures,
-  boundary:'PASS means bounded English/Chinese reporting/attribution scopes, including 根據/依據 comma and colon-delimited forms, and bounded paired quoted excerpts cannot by themselves manufacture unconditional SUPPORTS/REFUTES polarity, while a later separate direct assessment outside the attribution/quote remains visible. Attribution and quote handling are bounded lexical containment, not discourse parsing, semantic source attribution, quotation parsing, quote ownership inference, source-quality judgment, factual adjudication or proof of source independence.'
+  boundary:'PASS means bounded English/Chinese reporting/attribution scopes, 根據/依據 comma and colon-delimited forms, paired quoted excerpts, and bounded non-nested parenthetical asides cannot by themselves manufacture unconditional SUPPORTS/REFUTES polarity, while a later separate direct assessment outside those scopes remains visible. Chinese full-width parentheses are protected through NFKC normalization before bounded parenthetical masking. These are bounded lexical containment rules, not discourse parsing, semantic source attribution, quotation/parenthesis parsing, nested-parenthesis parsing, source-quality judgment, factual adjudication or proof of source independence.'
 };
 await fs.writeFile(resultPath,JSON.stringify(result,null,2)+'\n','utf8');
 console.log(JSON.stringify(result,null,2));
