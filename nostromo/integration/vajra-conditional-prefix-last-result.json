@@ -1,8 +1,8 @@
 {
-  "schema": "nostromo-vajra-conditional-prefix-test/v0.8",
+  "schema": "nostromo-vajra-conditional-prefix-test/v0.9",
   "status": "PASS",
-  "guard": "VAJRA ambiguity/conflict guard v0.5.9",
-  "capability": "BOUNDED_ENGLISH_CHINESE_GENERIC_COMMA_EXPLICIT_THEN_EXCEPTION_CONCESSIVE_EVEN_IF_AND_CONTRASTIVE_SCOPE_CONTAINMENT",
+  "guard": "VAJRA ambiguity/conflict guard v0.5.10",
+  "capability": "BOUNDED_ENGLISH_CHINESE_CONDITION_EXCEPTION_CONCESSIVE_EVEN_IF_MAIN_CLAUSE_SEPARATION_AND_CONTRASTIVE_SCOPE_CONTAINMENT",
   "observations": [
     {
       "name": "ONLY_IF_PREFIX",
@@ -412,5 +412,5 @@
     }
   ],
   "failures": [],
-  "boundary": "This adversarial test covers bounded English/Chinese condition, exception, concessive and contrastive scope forms around support/refute vocabulary. Generic if/when/as-long-as and 如果/若/倘若/只要 comma-delimited conditions verify that directional words inside a condition or its same-sentence main clause cannot manufacture unconditional closure. Explicit if...then and 如果/若/倘若/只要...則/那么/那麼 forms receive the same same-sentence containment even when no comma is present. Comma-delimited concessive prefixes now explicitly cover English even if alongside Chinese 即使: directional vocabulary inside the concessive subordinate prefix is contained, while the later main clause and later sentence remain visible. This is lexical/structural scope containment, not general logical parsing or semantic discourse adjudication."
+  "boundary": "This adversarial test covers bounded English/Chinese condition, exception, concessive and contrastive scope forms around support/refute vocabulary. Generic if/when/as-long-as and 如果/若/倘若/只要 comma-delimited conditions verify that directional words inside a condition or its same-sentence main clause cannot manufacture unconditional closure. Explicit if...then and 如果/若/倘若/只要...則/那么/那麼 forms receive the same same-sentence containment even when no comma is present. English even if is explicitly separated from generic if matching: directional vocabulary inside the comma-delimited concessive subordinate prefix is contained, while an explicit directional main clause or later sentence remains visible. Chinese 即使 receives parallel adversarial coverage. This is lexical/structural scope containment, not general logical parsing or semantic discourse adjudication."
 }
