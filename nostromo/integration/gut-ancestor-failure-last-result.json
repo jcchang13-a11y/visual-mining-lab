@@ -1,13 +1,13 @@
 {
-  "schema": "nostromo-gut-ancestor-failure-test/v0.4",
-  "completedAt": "2026-09-05T01:05:59.057Z",
-  "engineVersion": "0.2.26",
+  "schema": "nostromo-gut-ancestor-failure-test/v0.5",
+  "completedAt": "2026-09-05T02:06:34.672Z",
+  "engineVersion": "0.2.27",
   "status": "PASS",
   "promoted": true,
   "regressionOrigin": {
-    "priorEngineBlob": "d6b9d1fbcfd97f69a0ec0526317ebb8d0c6a839f",
-    "defect": "Prior looksLikeFailureSignal treated any atom whose entire lexical value matched the terminal-status vocabulary as failure evidence, even outside status/result/outcome or failure/risk context.",
-    "repair": "Bare terminal-status vocabulary now requires machine-status context unless inherited failed provenance or an explicit status marker is present."
+    "priorEngineBlob": "d2bdd63540f1417c780aa180856b66aae70bd5a6",
+    "defect": "GUT v0.2.26 quarantined terminal non-success status values and inherited failed envelopes, but a machine-execution failure represented only by a bounded path such as execution.timeout or job.blocked could remain ordinary material when its value was descriptive prose rather than a status token.",
+    "repair": "GUT v0.2.27 recognizes terminal non-success path segments only under bounded machine-execution ancestors such as executor/execution/run/attempt/action/request/job/task. Configuration and documentation paths with the same lexical words remain non-quarantined controls."
   },
   "failedBundle": {
     "quarantined": 5,
@@ -451,6 +451,56 @@
       ]
     }
   ],
+  "machineContextPaths": [
+    {
+      "name": "execution-timeout",
+      "path": "root.execution.timeout",
+      "quarantined": true,
+      "routeCounts": {
+        "SHROOMING": 0,
+        "MUTHER": 0,
+        "DROPLET": 0,
+        "VAJRA": 0,
+        "HOLD": 1
+      }
+    },
+    {
+      "name": "job-blocked",
+      "path": "root.job.blocked",
+      "quarantined": true,
+      "routeCounts": {
+        "SHROOMING": 0,
+        "MUTHER": 0,
+        "DROPLET": 0,
+        "VAJRA": 0,
+        "HOLD": 1
+      }
+    },
+    {
+      "name": "attempt-cancelled",
+      "path": "root.attempt.cancelled",
+      "quarantined": true,
+      "routeCounts": {
+        "SHROOMING": 0,
+        "MUTHER": 0,
+        "DROPLET": 0,
+        "VAJRA": 0,
+        "HOLD": 1
+      }
+    },
+    {
+      "name": "request-timeout-reason",
+      "path": "root.request.phase.timeout.reason",
+      "quarantined": true,
+      "routeCounts": {
+        "SHROOMING": 0,
+        "MUTHER": 0,
+        "DROPLET": 0,
+        "VAJRA": 0,
+        "HOLD": 1
+      }
+    }
+  ],
   "healthyControl": {
     "quarantined": 0,
     "routeCounts": {
@@ -465,6 +515,14 @@
       "skipped"
     ]
   },
+  "nonMachinePathControl": {
+    "quarantined": 0,
+    "paths": [
+      "root.settings.timeout",
+      "root.documentation.blocked",
+      "root.vocabulary.cancelled"
+    ]
+  },
   "failures": [],
-  "boundary": "This adversarial test distinguishes terminal non-success executor-envelope context from ordinary semantic prose and bare lexical tokens. FAILED plus CANCELLED, TIMEOUT, TIMED_OUT, ABORTED, BLOCKED and SKIPPED ancestor statuses must quarantine descendant payload atoms before they can be routed as fresh claims/evidence/questions. Under an EXECUTED ancestor, ordinary prose and standalone semantic tokens such as timeout or skipped must remain non-quarantined unless they occupy an explicit status/result/outcome or dedicated failure/risk context. This is structural execution-context containment, not semantic truth or source-quality judgment."
+  "boundary": "This adversarial test distinguishes terminal non-success executor-envelope context and bounded machine-execution failure paths from ordinary semantic prose, vocabulary examples and configuration fields. FAILED plus CANCELLED, TIMEOUT, TIMED_OUT, ABORTED, BLOCKED and SKIPPED ancestor statuses must quarantine descendant payload atoms before they can be routed as fresh claims/evidence/questions. Descriptive terminal failure fields under executor/execution/run/attempt/action/request/job/task must also quarantine, even when their value is not itself a status token. Under an EXECUTED ancestor or outside machine-execution path context, ordinary prose and standalone semantic/configuration tokens such as timeout, blocked or cancelled remain non-quarantined. This is structural execution-context containment, not semantic truth or source-quality judgment."
 }
