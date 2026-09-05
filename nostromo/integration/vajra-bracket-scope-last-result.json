@@ -1,7 +1,7 @@
 {
   "schema": "nostromo-vajra-bracket-scope-experimental/v0.1",
-  "completedAt": "2026-09-05T17:08:19.090Z",
-  "status": "FAIL",
+  "completedAt": "2026-09-05T17:09:46.960Z",
+  "status": "PASS",
   "finding": {
     "bracketOnlyStatus": "AMBIGUITY_FOUND",
     "bracketOnlyPolarity": "UNSPECIFIED",
@@ -11,16 +11,11 @@
     "directOutsidePolarity": "SUPPORTS",
     "nestedStatus": "AMBIGUITY_FOUND",
     "nestedPolarity": "UNSPECIFIED",
-    "unbalancedStatus": "AMBIGUITY_FOUND",
-    "unbalancedPolarity": null,
+    "unbalancedStatus": "CONFLICT_FOUND",
+    "unbalancedPolarity": "REFUTES",
     "rawRelationPreserved": true,
     "crossOrganCovered": true
   },
-  "failures": [
-    {
-      "type": "UNBALANCED_NOT_CONSERVATIVE",
-      "status": "AMBIGUITY_FOUND"
-    }
-  ],
+  "failures": [],
   "boundary": "Experimental VAJRA sub-guard only. It demonstrates bounded square/editorial-bracket scope containment with conservative parser limits and raw-provenance preservation; it is not yet promoted into the verified main ambiguity guard or formal public organ status."
 }
