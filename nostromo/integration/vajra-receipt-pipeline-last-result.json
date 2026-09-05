@@ -1,0 +1,28 @@
+{
+  "schema": "nostromo-vajra-receipt-pipeline/v0.1.1",
+  "completedAt": "2026-09-05T20:10:39.027Z",
+  "status": "PASS",
+  "finding": {
+    "canonicalPipelineStatus": "CANONICAL_EXEC",
+    "bracketOnlyStatus": "AMBIGUITY_FOUND",
+    "bracketOnlyPolarity": "UNSPECIFIED",
+    "chineseBracketStatus": "AMBIGUITY_FOUND",
+    "chineseBracketPolarity": "UNSPECIFIED",
+    "directOutsideStatus": "CONFLICT_FOUND",
+    "directOutsidePolarity": "SUPPORTS",
+    "nestedStatus": "AMBIGUITY_FOUND",
+    "nestedPolarity": "UNSPECIFIED",
+    "unbalancedStatus": "CONFLICT_FOUND",
+    "unbalancedPolarity": "REFUTES",
+    "multilineStatus": "AMBIGUITY_FOUND",
+    "multilinePolarity": "UNSPECIFIED",
+    "multilineBracketParserLimited": true,
+    "multilineBracketMaskedRanges": 0,
+    "rawRelationPreserved": true,
+    "crossOrganCovered": true,
+    "provenancePreserved": true,
+    "closureAuthority": "NONE"
+  },
+  "failures": [],
+  "boundary": "Canonical VAJRA receipt pipeline composes bounded editorial-bracket classification containment with the verified ambiguity/conflict guard. It preserves raw relation/provenance. Bracket parser-limit spans are explicitly exposed and not bracket-masked; other verified guards may still conservatively classify their wording. This is deterministic structural scope containment, not semantic quotation ownership, truth judgment, source-independence proof or evidence-quality scoring."
+}
