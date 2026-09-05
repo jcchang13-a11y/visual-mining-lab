@@ -1,6 +1,6 @@
 {
   "schema": "nostromo-shroom-stateful-probe-test/v0.1",
-  "completedAt": "2026-09-05T02:10:18.591Z",
+  "completedAt": "2026-09-05T03:05:30.271Z",
   "status": "PASS",
   "sameHistoryDeterministic": true,
   "changedHistoryChangesBehavior": true,
@@ -15,6 +15,6 @@
     "SHROOMING"
   ],
   "historyFingerprintCount": 8,
-  "boundary": "ISOLATED DETERMINISTIC CANDIDATE. Behavior is changed by each trace’s recorded participation/silence history rather than assigning ten fixed lenses. It does not mutate formal greenhouse history, claim ten persistent LLMs, infer personality, or prove causal path dependence.",
+  "boundary": "ISOLATED DETERMINISTIC CANDIDATE. Behavior is conditioned by each trace’s recorded participation/silence history, including bounded recent streak and recent participation context, rather than assigning ten fixed lenses or collapsing history into lifetime totals. It does not mutate formal greenhouse history, claim ten persistent LLMs, infer personality, perform semantic learning, or prove causal path dependence.",
   "failures": []
 }
