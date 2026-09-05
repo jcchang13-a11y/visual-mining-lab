@@ -1,8 +1,8 @@
 {
-  "schema": "muther-repo-diversity-test/v0.2.3",
-  "completedAt": "2026-09-04T21:08:17.643Z",
+  "schema": "muther-repo-diversity-test/v0.2.4",
+  "completedAt": "2026-09-05T00:06:59.335Z",
   "status": "PASS",
-  "capability": "LEXICAL_NEAR_DUPLICATE_CONTAINMENT_PLUS_BOUNDED_MULTI_WINDOW_COVERAGE_PLUS_EXACT_REPLAY_PROVENANCE_RETENTION_PLUS_QUERY_REMOVED_LEXICAL_VEIN_MAPPING",
+  "capability": "LEXICAL_NEAR_DUPLICATE_CONTAINMENT_PLUS_BOUNDED_MULTI_WINDOW_COVERAGE_PLUS_EXACT_REPLAY_PROVENANCE_RETENTION_PLUS_QUERY_REMOVED_LEXICAL_VEIN_MAPPING_PLUS_SINGLE_LINK_BRIDGE_RISK_CONTAINMENT",
   "unit": {
     "nearSimilarity": 0.9518,
     "distinctSimilarity": 0.105,
@@ -76,6 +76,7 @@
     "retainedHitCount": 3,
     "veinCount": 1,
     "crossFamilyVeinCount": 1,
+    "bridgeRiskCount": 0,
     "unclusteredCount": 1,
     "veins": [
       {
@@ -97,9 +98,14 @@
         ],
         "edgeCount": 1,
         "maxAffinity": 0.5071,
-        "minAffinity": 0.5071
+        "minAffinity": 0.5071,
+        "minPairAffinity": 0.5071,
+        "maxPairAffinity": 0.5071,
+        "cohesive": true,
+        "bridgeRisk": false
       }
     ],
+    "bridgeRisks": [],
     "edgeAudit": [
       {
         "aFingerprint": "d319aeaa5435e5e8",
@@ -113,6 +119,46 @@
       }
     ]
   },
+  "bridgeRisk": {
+    "ab": 0.4765,
+    "bc": 0.4159,
+    "ac": 0.1787,
+    "threshold": 0.3,
+    "edgeCount": 2,
+    "veinCount": 0,
+    "bridgeRiskCount": 1,
+    "audit": [
+      {
+        "id": "lexical-bridge-risk-1",
+        "memberCount": 3,
+        "sourceFamilyCount": 3,
+        "crossFamily": true,
+        "sourceFamilies": [
+          "bridge/a",
+          "bridge/b",
+          "bridge/c"
+        ],
+        "paths": [
+          "bridge/a.md",
+          "bridge/b.md",
+          "bridge/c.md"
+        ],
+        "fingerprints": [
+          "ff4039c296d00125",
+          "01187f40a3b5a8d1",
+          "0b71932778524abc"
+        ],
+        "edgeCount": 2,
+        "maxAffinity": 0.4765,
+        "minAffinity": 0.4159,
+        "minPairAffinity": 0.1787,
+        "maxPairAffinity": 0.4765,
+        "cohesive": false,
+        "bridgeRisk": true
+      }
+    ],
+    "singleLinkChainNotPromoted": true
+  },
   "provenance": {
     "selectedSourceFamilies": [
       "tmp-muther-near-a",
@@ -121,9 +167,10 @@
     "sourceFamilyCount": 3,
     "trueOccurrenceOrdinalPreserved": true,
     "exactReplayCrossFamilyProvenanceRetained": true,
-    "lexicalVeinCrossFamilyProvenanceRetained": true
+    "lexicalVeinCrossFamilyProvenanceRetained": true,
+    "bridgeRiskMembersPreserved": true
   },
-  "crossOrganRegression": "The main NOSTROMO integration test runs separately in the same workflow and must remain PASS before public promotion. Because the full MUTHER executor object is handed to GUT, lexicalVeins and their source-family/path audit can travel downstream as bounded structural metadata while the original retained hits remain separate nutrients; a lexical vein is not closure authority and does not create extra evidence weight.",
-  "boundary": "PASS certifies conservative lexical near-duplicate containment, bounded extraction of separated query windows, preservation of each selected window’s true query-occurrence ordinal, bounded provenance retention for exact content copies suppressed from material amplification, and a bounded query-removed lexical co-context graph over retained hits. The vein graph does not merge hits, amplify evidence weight, or certify semantic vein detection, semantic equivalence, exhaustive within-file coverage, source independence, source quality, novelty, factual truth, or Google Drive coverage.",
+  "crossOrganRegression": "The main NOSTROMO integration test runs separately in the same workflow and must remain PASS before public promotion. Because the full MUTHER executor object is handed to GUT, cohesive lexicalVeins and non-cohesive lexicalVeinBridgeRisks can travel downstream as bounded structural metadata while the original retained hits remain separate nutrients; neither a lexical vein nor a bridge-risk component is closure authority or extra evidence weight.",
+  "boundary": "PASS certifies conservative lexical near-duplicate containment, bounded extraction of separated query windows, preservation of each selected window’s true query-occurrence ordinal, bounded provenance retention for exact content copies suppressed from material amplification, a bounded query-removed lexical co-context graph over retained hits, and containment of single-link chain bridging: connected components are promoted to lexical veins only when every member pair meets the same affinity threshold; otherwise all members remain visible in a bridge-risk audit rather than being mislabeled as a cohesive vein. The vein graph does not merge hits, amplify evidence weight, or certify semantic vein detection, semantic equivalence, exhaustive within-file coverage, source independence, source quality, novelty, factual truth, or Google Drive coverage.",
   "failures": []
 }
