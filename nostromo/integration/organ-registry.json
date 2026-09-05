@@ -1,6 +1,6 @@
 {
-  "schema": "nostromo-organ-registry/v1.70",
-  "updatedAt": "2026-09-05T13:06:00+08:00",
+  "schema": "nostromo-organ-registry/v1.71",
+  "updatedAt": "2026-09-05T14:07:00+08:00",
   "truthRule": "DISPLAYED STATE MUST FOLLOW EVIDENCE",
   "evidence": "ci-last-result.json plus formal-round-last-result.json plus connector-last-result.json plus muther-falsify-last-result.json plus muther-repo-diversity-last-result.json plus droplet-claim-verify-last-result.json plus gut-metabolism-last-result.json plus gut-ancestor-failure-last-result.json plus gut-lineage-last-result.json plus vajra-dynamic-last-result.json plus vajra-ambiguity-last-result.json plus vajra-conditional-prefix-last-result.json plus vajra-attribution-last-result.json plus vajra-modality-last-result.json plus vajra-uncertainty-last-result.json plus vajra-conflict-escalation-last-result.json plus vajra-provenance-diversity-last-result.json plus shroom-feedback-last-result.json",
   "latestFormalRound": "greenhouse/r113-nostromo-formal-round.json",
@@ -30,19 +30,18 @@
   },
   "latestThickening": {
     "organ": "VAJRA",
-    "version": "VAJRA ambiguity/conflict guard v0.5.11 attribution/reporting boundary",
-    "status": "VERIFIED_BOUNDED_ATTRIBUTION_SCOPE_WITH_LATER_DIRECT_ASSESSMENT_VISIBILITY",
-    "test": "vajra-attribution-last-result.json v0.1 + NOSTROMO Integration Test run 404 commit 2138a97edff914b0943955cce7900116047783c7",
+    "version": "VAJRA ambiguity/conflict guard v0.5.12 bounded quotation scope",
+    "status": "VERIFIED_BOUNDED_QUOTATION_SCOPE_WITH_OUTSIDE_DIRECT_ASSESSMENT_VISIBILITY",
+    "test": "vajra-attribution-last-result.json v0.2 + NOSTROMO Integration Test run 407 commit 54d41b0cca7fe6adc3f875bc7b7646347c961e58",
     "capabilities": [
-      "bounded English reporting verbs such as says/reports/claims/states/argues/asserts/suggests no longer allow a source's reported support/refute wording to manufacture VAJRA's unconditional branch polarity",
-      "bounded according-to attribution is contained in the same sentence",
-      "bounded Chinese 聲稱/宣稱/表示/報告指出/主張/認為/指出/寫道/據稱 and 根據/依據 attribution forms receive parallel containment",
-      "a later separate direct support/refute assessment remains visible after an attributed sentence",
-      "direct non-attributed support/refute controls remain directional and preserve genuine cross-organ conflict detection",
-      "existing negation, insufficiency, modality, condition, exception, concession, contrastive and even-if guards remain intact",
-      "full NOSTROMO Integration Test run 404 completed successfully"
+      "paired English curly/straight double and single quotes plus Chinese 「」/『』 can no longer let quoted support/refute wording manufacture VAJRA's unconditional branch polarity",
+      "quoted SUPPORT/REFUTE language is retained as auditable material but classified UNSPECIFIED for closure purposes",
+      "a later direct support/refute assessment outside the quote remains directional",
+      "English and Chinese quote-then-direct controls preserve genuine cross-organ conflict detection",
+      "existing reporting/attribution, negation, insufficiency, modality, condition, exception, concession, contrastive and even-if guards remain intact",
+      "full NOSTROMO Integration Test run 407 completed successfully with failures empty"
     ],
-    "boundary": "This is deterministic bounded lexical/structural attribution-scope containment. It prevents merely reported directional language from being silently promoted to VAJRA's own unconditional assessment while preserving later direct assessments. It is not quotation parsing, semantic source attribution, source-quality scoring, discourse parsing, factual adjudication, derivative-source detection or proof of source independence."
+    "boundary": "This is deterministic bounded lexical/structural paired-quotation containment. It prevents directional wording inside short paired quotes from silently becoming VAJRA's own unconditional assessment while preserving direct text outside the quote. It is not quotation parsing, quote ownership inference, nested-quote parsing, semantic source attribution, source-quality scoring, discourse parsing, factual adjudication, derivative-source detection or proof of source independence."
   },
   "organs": {
     "shrooming": {
@@ -95,9 +94,9 @@
       "mode": "EXEC_CONNECTED_THICKENED",
       "source": "../vajra/vajra-engine.js + ../vajra/receipt-uncertainty-guard.js + ./vajra-conflict-escalation.mjs + ./vajra-provenance-diversity-guard.mjs + ./vajra-ambiguity-guard.mjs",
       "actions": {
-        "DISMANTLE": "VERIFIED_PROPOSITION_AWARE_DISMANTLER_WITH_RECEIPT_GUARDS_BRANCH_SCOPED_CROSS_ORGAN_EXPLICIT_CONFLICT_NEGATION_INSUFFICIENCY_MODALITY_CONDITIONALITY_EXCEPTION_CONCESSIVE_CONTRASTIVE_ATTRIBUTION_GENERIC_CONDITIONAL_EXPLICIT_THEN_AND_EVEN_IF_SCOPE_AMBIGUITY_MULTI_ORGAN_ESCALATION_CONTEXT_REPLAY_HISTORY_PROVENANCE_DIVERSITY_AND_OPERATOR_PROTECTION"
+        "DISMANTLE": "VERIFIED_PROPOSITION_AWARE_DISMANTLER_WITH_RECEIPT_GUARDS_BRANCH_SCOPED_CROSS_ORGAN_EXPLICIT_CONFLICT_NEGATION_INSUFFICIENCY_MODALITY_CONDITIONALITY_EXCEPTION_CONCESSIVE_CONTRASTIVE_ATTRIBUTION_QUOTATION_GENERIC_CONDITIONAL_EXPLICIT_THEN_AND_EVEN_IF_SCOPE_AMBIGUITY_MULTI_ORGAN_ESCALATION_CONTEXT_REPLAY_HISTORY_PROVENANCE_DIVERSITY_AND_OPERATOR_PROTECTION"
       },
-      "boundary": "VAJRA retains proposition-aware dismantling, uncertainty/provenance preservation, contest persistence, multi-organ conflict-context routing, replay containment, content-bound history attestation and semantic-operator-preserving replay identity. Its branch-scoped receipt ambiguity/conflict guard is now v0.5.11 with a persisted attribution-specific PASS record and successful full integration run 404. Qualifying executed returns sharing targetRef + clauseRef + lens are audited together across organ labels. Explicit opposite polarity remains contestable and can escalate to DROPLET, MUTHER and SHROOMING; UNSPECIFIED relations preserve ambiguity. Bounded English/Chinese negation, insufficiency, modality, condition, exception, concessive, contrastive and attribution/reporting-scope masks remain active. Generic conditional-sentence coverage includes bounded English if/when/as-long-as and Chinese 如果/若/倘若/只要 comma-delimited forms; explicit English if...then and Chinese 如果/若/倘若/只要...則/那么/那麼 no-comma forms are also contained within the same sentence/semicolon boundary. English even if is explicitly excluded from generic if matching so its comma-delimited concessive subordinate clause can be contained without hiding an explicit directional main clause; Chinese 即使 has parallel adversarial coverage. Bounded English reporting verbs and according-to attribution, plus Chinese 聲稱/宣稱/表示/報告指出/主張/認為/指出/寫道/據稱 and 根據/依據 forms, prevent reported support/refute wording from silently becoming VAJRA's own unconditional polarity; a later separate direct assessment remains visible. Its cross-organ provenance-diversity/content-replay guard remains v0.3.3, including comparison, equality, addition/subtraction, multiplication and division operator preservation. Distinct organ or canonical provenance labels still do not prove real-world source independence. These remain deterministic lexical/structural guards, not general semantic scope resolution, quotation parsing, semantic source attribution, logical parsing, discourse parsing, semantic adjudication, factual truth, derivative-source detection or real-world source-independence proof."
+      "boundary": "VAJRA retains proposition-aware dismantling, uncertainty/provenance preservation, contest persistence, multi-organ conflict-context routing, replay containment, content-bound history attestation and semantic-operator-preserving replay identity. Its branch-scoped receipt ambiguity/conflict guard is now v0.5.12 with persisted attribution/quotation-specific PASS evidence and successful full integration run 407. Qualifying executed returns sharing targetRef + clauseRef + lens are audited together across organ labels. Explicit opposite polarity remains contestable and can escalate to DROPLET, MUTHER and SHROOMING; UNSPECIFIED relations preserve ambiguity. Bounded English/Chinese negation, insufficiency, modality, condition, exception, concessive, contrastive, attribution/reporting-scope and paired-quotation masks are active. Generic conditional-sentence coverage includes bounded English if/when/as-long-as and Chinese 如果/若/倘若/只要 comma-delimited forms; explicit English if...then and Chinese 如果/若/倘若/只要...則/那么/那麼 no-comma forms are also contained within the same sentence/semicolon boundary. English even if is explicitly excluded from generic if matching so its comma-delimited concessive subordinate clause can be contained without hiding an explicit directional main clause; Chinese 即使 has parallel adversarial coverage. Bounded English reporting verbs and according-to attribution, plus Chinese 聲稱/宣稱/表示/報告指出/主張/認為/指出/寫道/據稱 and 根據/依據 forms, prevent reported support/refute wording from silently becoming VAJRA's own unconditional polarity. Bounded paired English/Chinese quotation marks similarly keep support/refute wording inside short quoted excerpts from becoming unconditional branch polarity, while direct assessments outside the quote remain visible. Its cross-organ provenance-diversity/content-replay guard remains v0.3.3, including comparison, equality, addition/subtraction, multiplication and division operator preservation. Distinct organ or canonical provenance labels still do not prove real-world source independence. These remain deterministic lexical/structural guards, not general semantic scope resolution, full quotation parsing, quote ownership inference, semantic source attribution, logical parsing, discourse parsing, semantic adjudication, factual truth, derivative-source detection or real-world source-independence proof."
     }
   }
 }
