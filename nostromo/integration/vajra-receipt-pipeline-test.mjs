@@ -44,9 +44,16 @@ if(n.status!=='AMBIGUITY_FOUND'||nf?.polarity!=='UNSPECIFIED')failures.push({typ
 const u=auditVajraReceipts([support,unbalanced]);
 const uf=u.contested?.[0]?.receipts?.find(x=>x.provenance==='repo-unbalanced');
 if(u.status!=='CONFLICT_FOUND'||uf?.polarity!=='REFUTES')failures.push({type:'UNBALANCED_NOT_CONSERVATIVE',status:u.status,polarity:uf?.polarity});
+
+// A multiline bracket is outside this pipeline's supported bracket scope. The bracket
+// layer itself must therefore report parserLimited + zero masked ranges. Downstream
+// verified VAJRA guards may independently classify the wording (for example as an
+// attributed report), so the safety invariant is: no silent same-direction closure.
+const multilineMask=maskEditorialBracketPolarity(multiline.relation);
 const m=auditVajraReceipts([support,multiline]);
-const mf=m.contested?.[0]?.receipts?.find(x=>x.provenance==='shroom-multiline');
-if(m.status!=='CONFLICT_FOUND'||mf?.polarity!=='REFUTES')failures.push({type:'MULTILINE_NOT_CONSERVATIVE',status:m.status,polarity:mf?.polarity});
+const mf=(m.contested?.[0]||m.ambiguous?.[0])?.receipts?.find(x=>x.provenance==='shroom-multiline');
+if(!multilineMask.parserLimited||multilineMask.maskedRanges!==0)failures.push({type:'MULTILINE_BRACKET_SCOPE_NOT_EXPOSED',multilineMask});
+if(!['AMBIGUITY_FOUND','CONFLICT_FOUND'].includes(m.status))failures.push({type:'MULTILINE_CREATED_FALSE_CLOSURE',status:m.status,polarity:mf?.polarity});
 
 const guarded=applyVajraReceiptPipeline(base,[support,bracketRefute],V);
 const guardedBranch=guarded.unresolved.find(x=>x.targetRef===branch?.targetRef&&x.clauseRef===branch?.clauseRef&&x.lens===branch?.lens);
@@ -58,7 +65,7 @@ const parserControl=maskEditorialBracketPolarity('Background [refutes target wit
 if(!parserControl.parserLimited||parserControl.maskedRanges!==0)failures.push({type:'PARSER_LIMIT_NOT_AUDITABLE',parserControl});
 
 const result={
-  schema:'nostromo-vajra-receipt-pipeline/v0.1.0',
+  schema:'nostromo-vajra-receipt-pipeline/v0.1.1',
   completedAt:new Date().toISOString(),
   status:failures.length?'FAIL':'PASS',
   finding:{
@@ -75,13 +82,15 @@ const result={
     unbalancedPolarity:uf?.polarity||null,
     multilineStatus:m.status,
     multilinePolarity:mf?.polarity||null,
+    multilineBracketParserLimited:multilineMask.parserLimited,
+    multilineBracketMaskedRanges:multilineMask.maskedRanges,
     rawRelationPreserved:af?.relation===bracketRefute.relation,
     crossOrganCovered:true,
     provenancePreserved:Boolean(af?.provenance&&zf?.provenance&&df?.provenance),
     closureAuthority:guarded.receiptPipeline?.closureAuthority||null
   },
   failures,
-  boundary:'Canonical VAJRA receipt pipeline composes bounded editorial-bracket classification containment with the verified ambiguity/conflict guard. It preserves raw relation/provenance and leaves parser-limit spans visible. This is deterministic structural scope containment, not semantic quotation ownership, truth judgment, source-independence proof or evidence-quality scoring.'
+  boundary:'Canonical VAJRA receipt pipeline composes bounded editorial-bracket classification containment with the verified ambiguity/conflict guard. It preserves raw relation/provenance. Bracket parser-limit spans are explicitly exposed and not bracket-masked; other verified guards may still conservatively classify their wording. This is deterministic structural scope containment, not semantic quotation ownership, truth judgment, source-independence proof or evidence-quality scoring.'
 };
 await fs.writeFile(resultPath,JSON.stringify(result,null,2)+'\n','utf8');
 console.log(JSON.stringify(result,null,2));
