@@ -46,6 +46,11 @@ const cases=[
   ['ZH_IF_SAME_SENTENCE_MAIN_SUPPORT','如果來源完成核實，這份證據支持目標命題。','UNSPECIFIED'],
   ['ZH_RUO_SAME_SENTENCE_MAIN_REFUTE','若樣本完成重跑，這份證據反駁目標命題。','UNSPECIFIED'],
   ['ZH_ZHIYAO_SAME_SENTENCE_MAIN_SUPPORT','只要來源彼此獨立，這份證據佐證目標命題。','UNSPECIFIED'],
+  ['IF_THEN_SUPPORT_NO_COMMA','If provenance is audited then this evidence supports the target claim.','UNSPECIFIED'],
+  ['IF_THEN_REFUTE_NO_COMMA','If the bounded sample is complete then this evidence refutes the target claim.','UNSPECIFIED'],
+  ['ZH_RUO_ZE_SUPPORT_NO_COMMA','若來源完成核實則這份證據支持目標命題。','UNSPECIFIED'],
+  ['ZH_IF_NAMO_REFUTE_NO_COMMA','如果樣本完成重跑那麼這份證據反駁目標命題。','UNSPECIFIED'],
+  ['ZH_TANGRUO_NAMO_SUPPORT_NO_COMMA','倘若來源彼此獨立那么這份證據佐證目標命題。','UNSPECIFIED'],
   ['SENTENCE_BOUNDARY_CONTROL','Only if retries remain disabled, logging behavior changes. This evidence supports the target claim.','SUPPORTS'],
   ['SEMICOLON_BOUNDARY_CONTROL','Provided that duplicate inputs are retained, logging behavior changes; this evidence refutes the target claim.','REFUTES'],
   ['UNLESS_SENTENCE_BOUNDARY_CONTROL','Unless retries are disabled, logging behavior changes. This evidence supports the target claim.','SUPPORTS'],
@@ -57,7 +62,9 @@ const cases=[
   ['ZH_GURAN_MAIN_CLAUSE_SUPPORT','固然來源有限，這份證據支持目標命題。','SUPPORTS'],
   ['IF_MAIN_CLAUSE_SUPPORT','If provenance is audited, logging behavior changes. This evidence supports the target claim.','SUPPORTS'],
   ['WHEN_MAIN_CLAUSE_REFUTE','When the sample is complete, logging behavior changes. This evidence refutes the target claim.','REFUTES'],
-  ['ZH_IF_MAIN_CLAUSE_SUPPORT','如果來源完成核實，紀錄狀態改變。這份證據支持目標命題。','SUPPORTS']
+  ['ZH_IF_MAIN_CLAUSE_SUPPORT','如果來源完成核實，紀錄狀態改變。這份證據支持目標命題。','SUPPORTS'],
+  ['IF_THEN_BOUNDARY_CONTROL','If provenance is audited then logging behavior changes. This evidence supports the target claim.','SUPPORTS'],
+  ['ZH_RUO_ZE_BOUNDARY_CONTROL','若來源完成核實則紀錄狀態改變。這份證據支持目標命題。','SUPPORTS']
 ];
 
 const observations=[];
@@ -69,13 +76,13 @@ for(const [name,relation,expected] of cases){
 }
 
 const result={
-  schema:'nostromo-vajra-conditional-prefix-test/v0.6',
+  schema:'nostromo-vajra-conditional-prefix-test/v0.7',
   status:failures.length?'FAIL':'PASS',
-  guard:'VAJRA ambiguity/conflict guard v0.5.7',
-  capability:'BOUNDED_ENGLISH_CHINESE_GENERIC_CONDITIONAL_SENTENCE_EXCEPTION_CONCESSIVE_AND_CONTRASTIVE_SCOPE_CONTAINMENT',
+  guard:'VAJRA ambiguity/conflict guard v0.5.8',
+  capability:'BOUNDED_ENGLISH_CHINESE_GENERIC_COMMA_AND_EXPLICIT_THEN_CONDITIONAL_SENTENCE_EXCEPTION_CONCESSIVE_AND_CONTRASTIVE_SCOPE_CONTAINMENT',
   observations,
   failures,
-  boundary:'This adversarial test covers bounded English/Chinese condition, exception, concessive and contrastive scope forms around support/refute vocabulary. Generic if/when/as-long-as and 如果/若/倘若/只要 comma-delimited conditions now verify two separate protections: directional words inside the condition prefix cannot manufacture closure, and a directional main clause in the same conditional sentence also remains UNSPECIFIED rather than being flattened into unconditional support/refute. A later sentence after a full sentence boundary remains visible. Concessive/contrastive main clauses remain visible by design. This is lexical/structural scope containment, not general logical parsing or semantic discourse adjudication.'
+  boundary:'This adversarial test covers bounded English/Chinese condition, exception, concessive and contrastive scope forms around support/refute vocabulary. Generic if/when/as-long-as and 如果/若/倘若/只要 comma-delimited conditions verify that directional words inside a condition or its same-sentence main clause cannot manufacture unconditional closure. Explicit if...then and 如果/若/倘若/只要...則/那么/那麼 forms receive the same same-sentence containment even when no comma is present. A later sentence after a full sentence boundary remains visible. Concessive/contrastive main clauses remain visible by design. This is lexical/structural scope containment, not general logical parsing or semantic discourse adjudication.'
 };
 await fs.writeFile('nostromo/integration/vajra-conditional-prefix-last-result.json',JSON.stringify(result,null,2)+'\n');
 console.log(JSON.stringify(result,null,2));
