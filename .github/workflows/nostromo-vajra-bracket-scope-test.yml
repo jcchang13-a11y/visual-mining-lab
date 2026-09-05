@@ -1,0 +1,39 @@
+name: NOSTROMO VAJRA Bracket Scope Test
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'nostromo/integration/vajra-bracket-scope-guard.mjs'
+      - '.github/workflows/nostromo-vajra-bracket-scope-test.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Run focused bracket-scope adversarial test
+        run: node nostromo/integration/vajra-bracket-scope-guard.mjs
+      - name: Commit focused result
+        if: always()
+        run: |
+          git config user.name "nostromo-bot"
+          git config user.email "actions@users.noreply.github.com"
+          test -f nostromo/integration/vajra-bracket-scope-last-result.json && cp nostromo/integration/vajra-bracket-scope-last-result.json /tmp/vajra-bracket-scope-last-result.json || true
+          git fetch origin main
+          git reset --hard origin/main
+          if [ -f /tmp/vajra-bracket-scope-last-result.json ]; then
+            cp /tmp/vajra-bracket-scope-last-result.json nostromo/integration/vajra-bracket-scope-last-result.json
+            git add nostromo/integration/vajra-bracket-scope-last-result.json
+          fi
+          if ! git diff --cached --quiet; then
+            git commit -m "[nostromo-test] record VAJRA bracket-scope focused result"
+            git push origin HEAD:main
+          fi
