@@ -101,7 +101,7 @@ if(import.meta.url===new URL(`file://${process.argv[1]}`).href){
   const zhBracketOnly={...common,organ:'SHROOMING',provenance:'zh-bracket-only',material:'回傳只保留編輯註記。',relation:'背景註記【舊報告支持目標命題】但本回傳沒有自行背書。'};
   const directOutside={...common,organ:'MU/TH/UR',provenance:'outside-direct',material:'Background plus direct assessment.',relation:'Background [a prior report refutes the target claim]. This evidence supports the target claim within the tested scope.'};
   const nested={...common,organ:'SHROOMING',provenance:'nested',material:'Nested editorial aside.',relation:'Background [reviewer notes [a prior report supports the target claim] without endorsement] only.'};
-  const unbalanced={...common,organ:'MU/TH/UR',provenance:'unbalanced',material:'Parser-limit control.',relation:'Background [a prior report refutes the target claim without a closing bracket.'};
+  const unbalanced={...common,organ:'MU/TH/UR',provenance:'unbalanced',material:'Parser-limit control.',relation:'Background [refutes the target claim without a closing bracket.'};
 
   const a=auditBracketScopedReceipts([directSupport,bracketOnly]);
   const af=a.ambiguous?.[0]?.receipts?.find(x=>x.provenance==='bracket-only');
