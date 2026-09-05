@@ -25,7 +25,7 @@ jobs:
       - name: Persist focused evidence
         if: success()
         run: |
-          if git diff --quiet -- nostromo/integration/vajra-receipt-pipeline-last-result.json; then
+          if [ -z "$(git status --porcelain -- nostromo/integration/vajra-receipt-pipeline-last-result.json)" ]; then
             exit 0
           fi
           git config user.name 'github-actions[bot]'
