@@ -1,0 +1,36 @@
+name: NOSTROMO VAJRA Nested Parenthetical Test
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'nostromo/integration/vajra-ambiguity-guard.mjs'
+      - 'nostromo/integration/vajra-nested-parenthetical-test.mjs'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  test:
+    if: ${{ !contains(github.event.head_commit.message, '[nostromo-test]') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify bounded nested-parenthetical scope containment
+        run: node nostromo/integration/vajra-nested-parenthetical-test.mjs
+      - name: Commit updated ambiguity evidence
+        run: |
+          git config user.name "nostromo-bot"
+          git config user.email "actions@users.noreply.github.com"
+          if git diff --quiet -- nostromo/integration/vajra-ambiguity-last-result.json; then
+            echo "No result change"
+          else
+            git add nostromo/integration/vajra-ambiguity-last-result.json
+            git commit -m "[nostromo-test] record VAJRA nested-parenthetical evidence"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
