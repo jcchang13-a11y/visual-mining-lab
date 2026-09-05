@@ -9,6 +9,13 @@ vm.runInThisContext(code,{filename:'nostromo/gut/gut-engine.js'});
 
 const failures=[];
 const check=(ok,type,detail)=>{if(!ok)failures.push({type,detail});};
+const versionAtLeast=(value,minimum)=>{
+  const parse=v=>String(v||'').split('.').slice(0,3).map(x=>Number.parseInt(x,10));
+  const a=parse(value),b=parse(minimum);
+  if(a.some(Number.isNaN)||b.some(Number.isNaN)||a.length<3||b.length<3)return false;
+  for(let i=0;i<3;i++){if(a[i]>b[i])return true;if(a[i]<b[i])return false;}
+  return true;
+};
 const source='NOSTROMO/gut-lineage-adversarial-test';
 const template=(ref,clause,tail='哪個前提最可能先失效？')=>`以 structure 位置重讀：主動尋找最小反例與破壞條件：針對本輪 UNIVERSAL+EMPIRICAL 命題（ref:${ref}; clause:${clause}），${tail}這段故意拉長，模擬跨輪 carry 只有 volatile provenance token 改變、其餘代謝內容完全相同的情況。`;
 
@@ -16,7 +23,7 @@ const sameLineage=globalThis.GutEngine.digest({
   contradictionA:template('abcdef12','12345678'),
   contradictionB:template('fedcba98','87654321')
 },{source});
-check(sameLineage.version==='0.2.26','GUT_VERSION',sameLineage.version);
+check(versionAtLeast(sameLineage.version,'0.2.26'),'GUT_VERSION_BELOW_REQUIRED_BASELINE',sameLineage.version);
 check(sameLineage.nutrients.length===2,'SOURCE_NUTRIENTS_LOST',sameLineage.nutrients);
 check(sameLineage.nutrients.every(x=>x.provenance?.inputSource===source),'PROVENANCE_LOST',sameLineage.nutrients);
 check((sameLineage.antiEcho?.volatileLineageSuppressedCount||0)>=1,'VOLATILE_LINEAGE_NOT_SUPPRESSED',sameLineage.antiEcho);
@@ -135,7 +142,7 @@ check(delimiterCarry.inputSegments===1&&delimiterCarry.outputSegments===1,'CARRY
 check(delimiterCarry.text.includes(' ∙ '),'CARRY_DELIMITER_READABLE_SEPARATOR_LOST',delimiterCarry.text);
 
 const result={
-  schema:'nostromo-gut-lineage-test/v0.2.26-carry-scalar-guard',
+  schema:'nostromo-gut-lineage-test/v0.2.26+-carry-scalar-guard',
   completedAt:new Date().toISOString(),
   status:failures.length===0?'PASS':'FAIL',
   sameLineage:{summaryItemCount:sameLineage.summaryItemCount,antiEcho:sameLineage.antiEcho,summary:sameLineage.summary,carryRefs:sameLineage.carryRefs},
@@ -150,7 +157,7 @@ const result={
   scaffoldCarry,
   delimiterCollision:{summary:delimiterCollision.summary,sourceNutrient:delimiterCollision.nutrients[0]?.text||null,antiEcho:delimiterCollision.antiEcho,carry:delimiterCarry},
   failures,
-  boundary:'This adversarial test preserves source nutrients and provenance while checking cross-atom, intra-atom, short-CJK nested-clause, repeated machine-lineage signature, cross-segment volatile-lineage carry echo, recursive wrapper growth, repeated short ref/clause-only carry fragments, a replay derived from the previously observed malformed carry, bare boolean/null carry scaffold leakage, and top-level middle-dot delimiter collision inside a single nutrient. Bare true/false/null/undefined tokens may be removed only from carry rendering; numeric scalars and substantive phrases containing those words remain. v0.2.26 requires machine hexadecimal lineage identifiers to remain available through the bounded out-of-band carryRefs ledger with provenance while prose summary remains eligible for anti-echo cleanup. PASS does not certify semantic identity or truth.'
+  boundary:'This adversarial test preserves source nutrients and provenance while checking cross-atom, intra-atom, short-CJK nested-clause, repeated machine-lineage signature, cross-segment volatile-lineage carry echo, recursive wrapper growth, repeated short ref/clause-only carry fragments, a replay derived from the previously observed malformed carry, bare boolean/null carry scaffold leakage, and top-level middle-dot delimiter collision inside a single nutrient. Bare true/false/null/undefined tokens may be removed only from carry rendering; numeric scalars and substantive phrases containing those words remain. GUT v0.2.26 or a later compatible version must preserve machine hexadecimal lineage identifiers through the bounded out-of-band carryRefs ledger with provenance while prose summary remains eligible for anti-echo cleanup. The version gate is a minimum compatible baseline rather than an exact patch pin, so an independently thickened later GUT does not create a false regression when the audited behavior remains intact. PASS does not certify semantic identity or truth.'
 };
 await fs.writeFile(path.join(root,'nostromo/integration/gut-lineage-last-result.json'),JSON.stringify(result,null,2)+'\n','utf8');
 console.log(JSON.stringify(result,null,2));
