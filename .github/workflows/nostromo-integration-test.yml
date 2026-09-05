@@ -65,7 +65,7 @@ jobs:
       - name: Verify VAJRA receipt ambiguity preservation
         id: vajra_ambiguity
         continue-on-error: true
-        run: node nostromo/integration/vajra-ambiguity-test.mjs && node nostromo/integration/vajra-conditional-prefix-test.mjs
+        run: node nostromo/integration/vajra-ambiguity-test.mjs && node nostromo/integration/vajra-conditional-prefix-test.mjs && node nostromo/integration/vajra-attribution-test.mjs
       - name: Verify VAJRA uncertainty-aware receipt closure
         id: vajra_uncertainty
         continue-on-error: true
@@ -111,6 +111,7 @@ jobs:
           test -f nostromo/integration/vajra-conflict-last-result.json && cp nostromo/integration/vajra-conflict-last-result.json /tmp/nostromo-vajra-conflict-last-result.json || true
           test -f nostromo/integration/vajra-ambiguity-last-result.json && cp nostromo/integration/vajra-ambiguity-last-result.json /tmp/nostromo-vajra-ambiguity-last-result.json || true
           test -f nostromo/integration/vajra-conditional-prefix-last-result.json && cp nostromo/integration/vajra-conditional-prefix-last-result.json /tmp/nostromo-vajra-conditional-prefix-last-result.json || true
+          test -f nostromo/integration/vajra-attribution-last-result.json && cp nostromo/integration/vajra-attribution-last-result.json /tmp/nostromo-vajra-attribution-last-result.json || true
           test -f nostromo/integration/vajra-uncertainty-last-result.json && cp nostromo/integration/vajra-uncertainty-last-result.json /tmp/nostromo-vajra-uncertainty-last-result.json || true
           test -f nostromo/integration/vajra-conflict-escalation-last-result.json && cp nostromo/integration/vajra-conflict-escalation-last-result.json /tmp/nostromo-vajra-conflict-escalation-last-result.json || true
           test -f nostromo/integration/vajra-provenance-diversity-last-result.json && cp nostromo/integration/vajra-provenance-diversity-last-result.json /tmp/nostromo-vajra-provenance-diversity-last-result.json || true
@@ -131,6 +132,7 @@ jobs:
           if [ -f /tmp/nostromo-vajra-conflict-last-result.json ]; then cp /tmp/nostromo-vajra-conflict-last-result.json nostromo/integration/vajra-conflict-last-result.json; git add nostromo/integration/vajra-conflict-last-result.json; fi
           if [ -f /tmp/nostromo-vajra-ambiguity-last-result.json ]; then cp /tmp/nostromo-vajra-ambiguity-last-result.json nostromo/integration/vajra-ambiguity-last-result.json; git add nostromo/integration/vajra-ambiguity-last-result.json; fi
           if [ -f /tmp/nostromo-vajra-conditional-prefix-last-result.json ]; then cp /tmp/nostromo-vajra-conditional-prefix-last-result.json nostromo/integration/vajra-conditional-prefix-last-result.json; git add nostromo/integration/vajra-conditional-prefix-last-result.json; fi
+          if [ -f /tmp/nostromo-vajra-attribution-last-result.json ]; then cp /tmp/nostromo-vajra-attribution-last-result.json nostromo/integration/vajra-attribution-last-result.json; git add nostromo/integration/vajra-attribution-last-result.json; fi
           if [ -f /tmp/nostromo-vajra-uncertainty-last-result.json ]; then cp /tmp/nostromo-vajra-uncertainty-last-result.json nostromo/integration/vajra-uncertainty-last-result.json; git add nostromo/integration/vajra-uncertainty-last-result.json; fi
           if [ -f /tmp/nostromo-vajra-conflict-escalation-last-result.json ]; then cp /tmp/nostromo-vajra-conflict-escalation-last-result.json nostromo/integration/vajra-conflict-escalation-last-result.json; git add nostromo/integration/vajra-conflict-escalation-last-result.json; fi
           if [ -f /tmp/nostromo-vajra-provenance-diversity-last-result.json ]; then cp /tmp/nostromo-vajra-provenance-diversity-last-result.json nostromo/integration/vajra-provenance-diversity-last-result.json; git add nostromo/integration/vajra-provenance-diversity-last-result.json; fi
