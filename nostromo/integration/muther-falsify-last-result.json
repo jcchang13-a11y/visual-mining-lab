@@ -1,6 +1,6 @@
 {
   "schema": "muther-falsify-ci/v0.3",
-  "completedAt": "2026-09-05T12:07:47.416Z",
+  "completedAt": "2026-09-05T13:03:35.336Z",
   "status": "PASS",
   "executor": "MUTHER_REPO_FALSIFICATION_PROBE",
   "claimFingerprint": "870ac5316413c790",
@@ -22,13 +22,14 @@
     "status": "EXECUTED",
     "selection": "BOUNDED_MULTI_WINDOW_EXTRACTION_PLUS_SUPERFICIAL_EXACT_DUPLICATE_SUPPRESSION_WITH_PROVENANCE_AUDIT_PLUS_LEXICAL_NEAR_DUPLICATE_SUPPRESSION_PLUS_SOURCE_FAMILY_ROUND_ROBIN_PLUS_QUERY_REMOVED_LEXICAL_VEIN_MAP_PLUS_COMPLETE_LINK_COHESION_GATE",
     "hitCount": 8,
-    "candidateHitCount": 14,
-    "distinctCandidateCount": 14,
+    "candidateHitCount": 15,
+    "distinctCandidateCount": 15,
     "duplicateSuppressedCount": 0,
-    "sourceFamilyCount": 2,
+    "sourceFamilyCount": 3,
     "selectedSourceFamilies": [
       "nostromo/index.html",
-      "nostromo/integration"
+      "nostromo/integration",
+      "nostromo/vajra"
     ],
     "selectedFingerprintCount": 8,
     "superficialMutationCanonicalized": true
