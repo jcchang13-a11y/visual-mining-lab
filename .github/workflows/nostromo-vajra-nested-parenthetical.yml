@@ -25,7 +25,7 @@ jobs:
         run: |
           git config user.name "nostromo-bot"
           git config user.email "actions@users.noreply.github.com"
-          if git diff --quiet -- nostromo/integration/vajra-nested-parenthetical-last-result.json; then
+          if [ -z "$(git status --porcelain -- nostromo/integration/vajra-nested-parenthetical-last-result.json)" ]; then
             echo "No result change"
           else
             git add nostromo/integration/vajra-nested-parenthetical-last-result.json
