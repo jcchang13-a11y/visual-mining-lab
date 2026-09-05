@@ -45,6 +45,19 @@ check(riskContextGut.routes?.DROPLET?.items?.some(x=>x.path==='root.claim'),'INV
 check(riskContextGut.quarantine?.every(x=>x.path.startsWith('root.machineFailure.')),'TRUE_FAILURE_ESCAPED_CONTEXTUAL_QUARANTINE',riskContextGut.quarantine);
 check(riskContextGut.nutrients?.every(x=>x.provenance?.inputSource==='NOSTROMO/gut-risk-context-test'),'RISK_CONTEXT_PROVENANCE_LOST',riskContextGut.nutrients);
 
+const numericScalarGut=globalThis.GutEngine.digest({
+  metrics:{count:0,rate:1,score:4},
+  ordinal:2,
+  textualNoise:'x'
+},{source:'NOSTROMO/gut-numeric-scalar-test'});
+check(numericScalarGut.typeCounts?.NUMERIC_EVIDENCE===3,'SHORT_NUMERIC_EVIDENCE_LOST',numericScalarGut.typeCounts);
+check(numericScalarGut.typeCounts?.NUMERIC_MATERIAL===1,'SHORT_NUMERIC_MATERIAL_LOST',numericScalarGut.typeCounts);
+check(numericScalarGut.routes?.MUTHER?.items?.filter(x=>x.type==='NUMERIC_EVIDENCE').length===3,'SHORT_NUMERIC_EVIDENCE_NOT_ROUTED',numericScalarGut.routes?.MUTHER);
+check(numericScalarGut.routes?.HOLD?.items?.some(x=>x.type==='NUMERIC_MATERIAL'&&x.path==='root.ordinal'&&x.text==='2'),'SHORT_NUMERIC_MATERIAL_NOT_HELD',numericScalarGut.routes?.HOLD);
+check(!numericScalarGut.waste?.some(x=>['root.metrics.count','root.metrics.rate','root.metrics.score','root.ordinal'].includes(x.path)),'SHORT_NUMERIC_SCALAR_EXCRETED',numericScalarGut.waste);
+check(numericScalarGut.waste?.some(x=>x.path==='root.textualNoise'),'SHORT_TEXT_NOISE_NOT_EXCRETED',numericScalarGut.waste);
+check(numericScalarGut.nutrients?.filter(x=>x.type==='NUMERIC_EVIDENCE'||x.type==='NUMERIC_MATERIAL').every(x=>x.provenance?.inputSource==='NOSTROMO/gut-numeric-scalar-test'),'SHORT_NUMERIC_PROVENANCE_LOST',numericScalarGut.nutrients);
+
 const inherited='This inherited substrate is deliberately long enough to be recognized as prior-round material and must not be counted as novelty.';
 const inheritedGut=globalThis.GutEngine.digest({reaction:`new observation before ${inherited} new observation after`},{source:'NOSTROMO/gut-inherited-test',inheritedSubstrates:[inherited]});
 check(inheritedGut.antiEcho?.inheritedSubstrateStrippedCount>=1,'INHERITED_NOT_STRIPPED',inheritedGut.antiEcho);
@@ -139,11 +152,12 @@ const result={
   schema:'nostromo-gut-metabolism-test/v0.2.27',completedAt:new Date().toISOString(),status:failures.length===0?'PASS':'FAIL',
   gut:{version:gut.version,mode:gut.mode,typeCounts:gut.typeCounts,routeCounts:Object.fromEntries(Object.entries(gut.routes).map(([k,v])=>[k,v.count])),boundary:gut.boundary},
   riskContext:{status:riskContextGut.quarantined===2?'PASS':'FAIL',quarantined:riskContextGut.quarantined,routeCounts:Object.fromEntries(Object.entries(riskContextGut.routes).map(([k,v])=>[k,v.count])),boundary:'Ordinary semantic prose containing error/rejected/invalid lexemes must remain routable; only dedicated failure/risk paths or explicit machine-like failure status markers are quarantined.'},
+  numericScalarPreservation:{status:(numericScalarGut.typeCounts?.NUMERIC_EVIDENCE===3&&numericScalarGut.typeCounts?.NUMERIC_MATERIAL===1)?'PASS':'FAIL',typeCounts:numericScalarGut.typeCounts,routeCounts:Object.fromEntries(Object.entries(numericScalarGut.routes).map(([k,v])=>[k,v.count])),waste:numericScalarGut.waste.map(x=>({path:x.path,type:x.type,text:x.text})),boundary:'Finite numeric primitives must be classified before short-text low-signal filtering. Metric/count/status-code style paths are numeric evidence for MUTHER; other finite numeric primitives remain auditable material rather than being silently discarded because 0/1/4/10 have short string forms.'},
   antiEcho:{nested:nestedGut.antiEcho,taggedTail:taggedTailGut.antiEcho,shortAdjacent:shortGut.antiEcho,nearDuplicate:nearGut.antiEcho,sharedBodySummary:sharedBodyGut.antiEcho,nonAdjacentCarry:nonAdjacentGut.antiEcho,shortTokenCarry:shortTokenGut.antiEcho,machineMetadataCarry:metadataGut.antiEcho,inherited:inheritedGut.antiEcho,partialInherited:partialGut.antiEcho},
   carryRefLedger:{count:metadataGut.carryRefCount,refs:metadataGut.carryRefs},
   feedback:active?{status:active.status,completedRounds:active.completedRounds,feedback:active.feedback,lastCarry:active.trace?.at(-1)?.carryOut||null,roundAntiEcho:active.trace?.map(x=>x.gut?.antiEcho),boundary:active.boundary}:null,
   failures,
-  boundary:'PASS proves deterministic heuristic routing, provenance retention, contextual risk quarantine that does not discard ordinary semantic prose merely for mentioning error/rejected/invalid lexemes, conservative exact inherited-substrate removal, exact tagged-payload de-echoing, exact repeated tagged-tail suppression while retaining distinct heads, pre/post short exact adjacent intra-atom echo suppression, shared-body summary diversity, exact non-adjacent full-width-colon carry-clause compaction, consecutive exact 1–4 character carry-token run collapse, summary-only machine ref/clause metadata containment, and a bounded out-of-band carryRefs ledger that preserves referential identity and provenance without re-inserting machine IDs into prose carry. It also proves near-duplicate preservation, structured-snippet protection, and a 3-round cross-organ connector-feedback regression whose final prose carry contains no hexadecimal ref/clause metadata tokens. It does not prove semantic novelty, semantic correctness, reference truth, or source truth.'
+  boundary:'PASS proves deterministic heuristic routing, provenance retention, typed finite numeric scalar preservation before short-text low-signal filtering, contextual risk quarantine that does not discard ordinary semantic prose merely for mentioning error/rejected/invalid lexemes, conservative exact inherited-substrate removal, exact tagged-payload de-echoing, exact repeated tagged-tail suppression while retaining distinct heads, pre/post short exact adjacent intra-atom echo suppression, shared-body summary diversity, exact non-adjacent full-width-colon carry-clause compaction, consecutive exact 1–4 character carry-token run collapse, summary-only machine ref/clause metadata containment, and a bounded out-of-band carryRefs ledger that preserves referential identity and provenance without re-inserting machine IDs into prose carry. It also proves near-duplicate preservation, structured-snippet protection, and a 3-round cross-organ connector-feedback regression whose final prose carry contains no hexadecimal ref/clause metadata tokens. It does not prove semantic novelty, semantic correctness, reference truth, source truth, or semantic meaning of arbitrary numeric fields.'
 };
 await fs.writeFile(path.join(root,'nostromo/integration/gut-metabolism-last-result.json'),JSON.stringify(result,null,2)+'\n','utf8');
 console.log(JSON.stringify(result,null,2));
