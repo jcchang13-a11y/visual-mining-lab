@@ -1,9 +1,30 @@
 {
-  "schema": "nostromo-shroom-stateful-probe-test/v0.1",
-  "completedAt": "2026-09-05T03:05:30.271Z",
+  "schema": "nostromo-shroom-stateful-probe-test/v0.2",
+  "completedAt": "2026-09-05T03:05:49.845Z",
   "status": "PASS",
   "sameHistoryDeterministic": true,
   "changedHistoryChangesBehavior": true,
+  "sameAggregateDifferentOrderChangesBehavior": true,
+  "orderingControl": {
+    "trace": "01",
+    "visible": 3,
+    "silent": 1,
+    "participationRate": 0.75,
+    "historyA": {
+      "latestMode": "participant",
+      "currentStreak": 2,
+      "recentParticipationRate": 0.667,
+      "disposition": "DOMINANCE_CHECK",
+      "historyFingerprint": "c9516f88fad1e483"
+    },
+    "historyB": {
+      "latestMode": "silent",
+      "currentStreak": 1,
+      "recentParticipationRate": 0.667,
+      "disposition": "BALANCED_READING",
+      "historyFingerprint": "cfb14859b6d1fbea"
+    }
+  },
   "dispositions": [
     "DOMINANCE_CHECK",
     "BALANCED_READING",
