@@ -1,8 +1,9 @@
-// VAJRA canonical receipt pipeline v0.1.1
+// VAJRA canonical receipt pipeline v0.1.2
 // Production-facing composition layer for receipt adjudication. It adds bounded
-// square/editorial-bracket scope containment before the verified main ambiguity guard,
-// while restoring raw relation text and provenance in every audit/result surface.
-// Parser-limit cases remain visible rather than silently masked and are explicitly audited.
+// editorial-bracket and explicit hypothetical/thought-experiment scope containment
+// before the verified main ambiguity guard, while restoring raw relation text and
+// provenance in every audit/result surface. Parser-limit cases remain visible rather
+// than silently masked and are explicitly audited.
 
 import {auditReceiptAmbiguity,applyGuardedHandoffResults} from './vajra-ambiguity-guard.mjs';
 
@@ -11,12 +12,14 @@ const SUPPORT=/(?:\bsupport(?:s|ed|ing)?\b|\bconfirm(?:s|ed|ing)?\b|\bcorroborat
 const REFUTE=/(?:\brefut(?:e|es|ed|ing)?\b|\bcontradict(?:s|ed|ing)?\b|\boppose(?:s|d)?\b|\bcounterexample\b|\bfalsif(?:y|ies|ied|ying)\b|反駁|反證|否證|矛盾|相反)/gi;
 const PAIRS=new Map([['[',']'],['【','】'],['〔','〕']]);
 const CLOSE=new Set([...PAIRS.values()]);
+const HYPOTHETICAL_MARKER=/\b(?:suppose|assume|assuming|imagine|hypothetically|for\s+the\s+sake\s+of\s+argument|in\s+a\s+thought\s+experiment)\b|(?:假設|假定|姑且假定|設想|假想|思想實驗)/gi;
+const SENTENCE_END=/[.!?;；。！？]/;
 
 function receiptKey(r){
   return [clean(r?.targetRef),clean(r?.clauseRef),clean(r?.lens),clean(r?.organ||r?.sourceOrgan),clean(r?.provenance||r?.provenanceFingerprint||r?.sourceFingerprint||r?.fingerprint)].join('|');
 }
 function relationOf(r){return String(r?.relation||r?.relationToTarget||r?.assessment||'').normalize('NFKC').replace(/\r\n?/g,'\n').trim();}
-function maskDirectional(segment){return segment.replace(SUPPORT,' <bracket-pos> ').replace(REFUTE,' <bracket-neg> ');}
+function maskDirectional(segment,pos='<bracket-pos>',neg='<bracket-neg>'){return segment.replace(SUPPORT,` ${pos} `).replace(REFUTE,` ${neg} `);}
 
 export function maskEditorialBracketPolarity(text,{maxDepth=3,maxSpan=362}={}){
   const input=String(text??'').normalize('NFKC').replace(/\r\n?/g,'\n');
@@ -52,16 +55,40 @@ export function maskEditorialBracketPolarity(text,{maxDepth=3,maxSpan=362}={}){
   return {text:out,maskedRanges:ranges.length,parserLimited};
 }
 
+export function maskHypotheticalPolarity(text,{maxSpan=220}={}){
+  const input=String(text??'').normalize('NFKC').replace(/\r\n?/g,'\n');
+  const ranges=[];
+  let parserLimited=false;
+  HYPOTHETICAL_MARKER.lastIndex=0;
+  for(let match=HYPOTHETICAL_MARKER.exec(input);match;match=HYPOTHETICAL_MARKER.exec(input)){
+    const start=match.index;
+    if(ranges.some(([a,b])=>start>=a&&start<b))continue;
+    let end=input.length;
+    for(let i=start;i<input.length;i++){
+      if(SENTENCE_END.test(input[i])){end=i+1;break;}
+    }
+    const segment=input.slice(start,end);
+    if(segment.length<=maxSpan&&!segment.includes('\n'))ranges.push([start,end]);
+    else parserLimited=true;
+  }
+  if(!ranges.length)return {text:input,maskedRanges:0,parserLimited};
+  let out='',cursor=0;
+  for(const [start,end] of ranges){out+=input.slice(cursor,start);out+=maskDirectional(input.slice(start,end),'<hypothetical-pos>','<hypothetical-neg>');cursor=end;}
+  out+=input.slice(cursor);
+  return {text:out,maskedRanges:ranges.length,parserLimited};
+}
+
 function prepare(receipts=[]){
   const originals=new Map();
   const scope=[];
   const prepared=(Array.isArray(receipts)?receipts:[]).map(raw=>{
     const relation=relationOf(raw);
-    const masked=maskEditorialBracketPolarity(relation);
+    const bracket=maskEditorialBracketPolarity(relation);
+    const hypothetical=maskHypotheticalPolarity(bracket.text);
     const key=receiptKey(raw);
     if(key)originals.set(key,relation);
-    scope.push({key,maskedRanges:masked.maskedRanges,parserLimited:masked.parserLimited,relationChanged:masked.text!==relation});
-    return {...raw,relation:masked.text,relationToTarget:undefined,assessment:undefined};
+    scope.push({key,bracketMaskedRanges:bracket.maskedRanges,bracketParserLimited:bracket.parserLimited,hypotheticalMaskedRanges:hypothetical.maskedRanges,hypotheticalParserLimited:hypothetical.parserLimited,relationChanged:hypothetical.text!==relation});
+    return {...raw,relation:hypothetical.text,relationToTarget:undefined,assessment:undefined};
   });
   return {prepared,originals,scope};
 }
@@ -79,11 +106,11 @@ function restoreRawRelations(value,originals){
 export function auditVajraReceipts(receipts=[]){
   const {prepared,originals,scope}=prepare(receipts);
   const audit=restoreRawRelations(auditReceiptAmbiguity(prepared),originals);
-  return {...audit,receiptPipeline:{version:'0.1.1',status:'CANONICAL_EXEC',scope,closureAuthority:'NONE',boundary:'Bounded balanced single-line [] / 【】 / 〔〕 editorial-bracket spans are masked only for lexical polarity classification when nesting depth <=3 and span length <=362. Raw relation text and provenance are restored. Unbalanced, mismatched, too-deep, overlong or multiline spans remain visible and are explicitly marked parserLimited in the receipt scope audit. This is deterministic structural containment, not semantic scope parsing, citation ownership inference, source-independence proof or truth judgment.'}};
+  return {...audit,receiptPipeline:{version:'0.1.2',status:'CANONICAL_EXEC',scope,closureAuthority:'NONE',boundary:'Bounded balanced single-line [] / 【】 / 〔〕 editorial-bracket spans are masked for lexical polarity classification when nesting depth <=3 and span length <=362. Explicit English/Chinese hypothetical or thought-experiment markers are also sentence-bounded and masked when the span is single-line and <=220 characters, so assumed support/refute wording cannot manufacture unconditional certainty. Raw relation text and provenance are restored. Unsupported bracket or hypothetical parser-limit spans remain visible and are explicitly marked parserLimited. This is deterministic structural containment, not semantic scope parsing, counterfactual reasoning, citation ownership inference, source-independence proof or truth judgment.'}};
 }
 
 export function applyVajraReceiptPipeline(vajraResult,receipts=[],engine=globalThis.VajraEngine){
   const {prepared,originals,scope}=prepare(receipts);
   const guarded=restoreRawRelations(applyGuardedHandoffResults(vajraResult,prepared,engine),originals);
-  return {...guarded,version:`${guarded.version||'unknown'}+receipt-pipeline-v0.1.1`,receiptPipeline:{version:'0.1.1',status:'CANONICAL_EXEC',scope,closureAuthority:'NONE',boundary:'Canonical VAJRA receipt pathway: bracket classification containment composes with the verified branch-scoped ambiguity/conflict guard. Raw relations and provenance remain auditable; bracket parser-limit spans remain unmasked and are explicitly flagged. It cannot certify truth or source independence.'}};
+  return {...guarded,version:`${guarded.version||'unknown'}+receipt-pipeline-v0.1.2`,receiptPipeline:{version:'0.1.2',status:'CANONICAL_EXEC',scope,closureAuthority:'NONE',boundary:'Canonical VAJRA receipt pathway: editorial-bracket and explicit hypothetical/thought-experiment classification containment compose with the verified branch-scoped ambiguity/conflict guard. Raw relations and provenance remain auditable; parser-limit spans remain unmasked and are explicitly flagged. It cannot certify truth, perform semantic counterfactual reasoning or prove source independence.'}};
 }
