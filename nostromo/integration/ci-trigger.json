@@ -1,9 +1,7 @@
 {
-  "purpose": "single CI trigger for VAJRA v0.5.11 bounded attribution/reporting-scope containment verification with persisted evidence",
+  "purpose": "single CI trigger for VAJRA bounded square/editorial bracket-scope containment verification inside full NOSTROMO integration",
   "stagedCommits": [
-    "159afd878648bd9a74571db9f1b234b421e72380",
-    "c76ca333b179669ce5d60585ddd8063c8b77331d",
-    "c0a836dc5092d25b6a7a135c0c2aba275894a104"
+    "0709ca59c6fc5b809ddb4e29a1afedbda781e0fe"
   ],
   "truthRule": "DISPLAYED STATE MUST FOLLOW EVIDENCE"
 }
