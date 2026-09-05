@@ -1,7 +1,7 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import vm from 'node:vm';
-import {auditVajraReceipts,applyVajraReceiptPipeline,maskEditorialBracketPolarity} from './vajra-receipt-pipeline.mjs';
+import {auditVajraReceipts,applyVajraReceiptPipeline,maskEditorialBracketPolarity,maskHypotheticalPolarity} from './vajra-receipt-pipeline.mjs';
 
 const root=process.cwd();
 const resultPath=path.join(root,'nostromo','integration','vajra-receipt-pipeline-last-result.json');
@@ -22,6 +22,9 @@ const outsideSupport={...common,organ:'MU/TH/UR',provenance:'repo-outside-direct
 const nested={...common,organ:'SHROOMING',provenance:'shroom-nested-note',material:'Nested editorial aside.',relation:'Background [reviewer notes [a prior report supports the target claim] without endorsement] only.'};
 const unbalanced={...common,organ:'MU/TH/UR',provenance:'repo-unbalanced',material:'Parser-limit control.',relation:'Background [refutes the target claim without a closing bracket.'};
 const multiline={...common,organ:'SHROOMING',provenance:'shroom-multiline',material:'Multiline parser-limit control.',relation:'Background [a prior report\nrefutes the target claim] without endorsement.'};
+const hypotheticalSupport={...common,organ:'MU/TH/UR',provenance:'repo-hypothetical-support',material:'Thought-experiment context only.',relation:'Suppose for this thought experiment that the evidence supports the target claim.'};
+const hypotheticalRefuteZh={...common,organ:'SHROOMING',provenance:'shroom-hypothetical-refute',material:'只作假設性壓力測試。',relation:'姑且假定這份材料反駁目標命題，只作為思想實驗。'};
+const hypotheticalThenDirect={...common,organ:'MU/TH/UR',provenance:'repo-hypothetical-then-direct',material:'Hypothesis followed by a direct bounded assessment.',relation:'Suppose the legacy report supports the target claim. This evidence refutes the target claim within the tested scope.'};
 
 const a=auditVajraReceipts([support,bracketRefute]);
 const af=a.ambiguous?.[0]?.receipts?.find(x=>x.provenance==='repo-editorial-note');
@@ -45,17 +48,34 @@ const u=auditVajraReceipts([support,unbalanced]);
 const uf=u.contested?.[0]?.receipts?.find(x=>x.provenance==='repo-unbalanced');
 if(u.status!=='CONFLICT_FOUND'||uf?.polarity!=='REFUTES')failures.push({type:'UNBALANCED_NOT_CONSERVATIVE',status:u.status,polarity:uf?.polarity});
 
-// A multiline bracket is outside this pipeline's supported bracket scope. The bracket
-// layer itself must therefore report parserLimited + zero masked ranges. Downstream
-// verified VAJRA guards may independently classify the wording (for example as an
-// attributed report), so the safety invariant is: no silent same-direction closure.
 const multilineMask=maskEditorialBracketPolarity(multiline.relation);
 const m=auditVajraReceipts([support,multiline]);
 const mf=(m.contested?.[0]||m.ambiguous?.[0])?.receipts?.find(x=>x.provenance==='shroom-multiline');
 if(!multilineMask.parserLimited||multilineMask.maskedRanges!==0)failures.push({type:'MULTILINE_BRACKET_SCOPE_NOT_EXPOSED',multilineMask});
 if(!['AMBIGUITY_FOUND','CONFLICT_FOUND'].includes(m.status))failures.push({type:'MULTILINE_CREATED_FALSE_CLOSURE',status:m.status,polarity:mf?.polarity});
 
-const guarded=applyVajraReceiptPipeline(base,[support,bracketRefute],V);
+const hs=auditVajraReceipts([refute,hypotheticalSupport]);
+const hsf=hs.ambiguous?.[0]?.receipts?.find(x=>x.provenance==='repo-hypothetical-support');
+if(hs.status!=='AMBIGUITY_FOUND'||hsf?.polarity!=='UNSPECIFIED')failures.push({type:'HYPOTHETICAL_SUPPORT_FALSE_CERTAINTY',status:hs.status,polarity:hsf?.polarity});
+if(hsf?.relation!==hypotheticalSupport.relation)failures.push({type:'HYPOTHETICAL_RAW_RELATION_NOT_PRESERVED'});
+
+const hz=auditVajraReceipts([support,hypotheticalRefuteZh]);
+const hzf=hz.ambiguous?.[0]?.receipts?.find(x=>x.provenance==='shroom-hypothetical-refute');
+if(hz.status!=='AMBIGUITY_FOUND'||hzf?.polarity!=='UNSPECIFIED')failures.push({type:'ZH_HYPOTHETICAL_REFUTE_FALSE_CERTAINTY',status:hz.status,polarity:hzf?.polarity});
+
+const hd=auditVajraReceipts([support,hypotheticalThenDirect]);
+const hdf=hd.contested?.[0]?.receipts?.find(x=>x.provenance==='repo-hypothetical-then-direct');
+if(hd.status!=='CONFLICT_FOUND'||hdf?.polarity!=='REFUTES')failures.push({type:'DIRECT_AFTER_HYPOTHETICAL_HIDDEN',status:hd.status,polarity:hdf?.polarity});
+
+const overlongRelation=`Suppose ${'x'.repeat(230)} refutes the target claim.`;
+const overlongMask=maskHypotheticalPolarity(overlongRelation);
+const overlong={...common,organ:'SHROOMING',provenance:'shroom-hypothetical-overlong',material:'Overlong hypothetical parser-limit control.',relation:overlongRelation};
+const ho=auditVajraReceipts([support,overlong]);
+const hof=ho.contested?.[0]?.receipts?.find(x=>x.provenance==='shroom-hypothetical-overlong');
+if(!overlongMask.parserLimited||overlongMask.maskedRanges!==0)failures.push({type:'HYPOTHETICAL_PARSER_LIMIT_NOT_EXPOSED',overlongMask});
+if(ho.status!=='CONFLICT_FOUND'||hof?.polarity!=='REFUTES')failures.push({type:'HYPOTHETICAL_PARSER_LIMIT_SILENTLY_HIDDEN',status:ho.status,polarity:hof?.polarity});
+
+const guarded=applyVajraReceiptPipeline(base,[support,hypotheticalRefuteZh],V);
 const guardedBranch=guarded.unresolved.find(x=>x.targetRef===branch?.targetRef&&x.clauseRef===branch?.clauseRef&&x.lens===branch?.lens);
 if(guardedBranch?.status!=='AMBIGUOUS_BY_RECEIPTS')failures.push({type:'PIPELINE_FALSE_CLOSURE_NOT_BLOCKED',actual:guardedBranch?.status});
 if(guarded.receiptPipeline?.status!=='CANONICAL_EXEC')failures.push({type:'CANONICAL_PIPELINE_MARKER_MISSING'});
@@ -65,7 +85,7 @@ const parserControl=maskEditorialBracketPolarity('Background [refutes target wit
 if(!parserControl.parserLimited||parserControl.maskedRanges!==0)failures.push({type:'PARSER_LIMIT_NOT_AUDITABLE',parserControl});
 
 const result={
-  schema:'nostromo-vajra-receipt-pipeline/v0.1.1',
+  schema:'nostromo-vajra-receipt-pipeline/v0.1.2',
   completedAt:new Date().toISOString(),
   status:failures.length?'FAIL':'PASS',
   finding:{
@@ -83,14 +103,21 @@ const result={
     multilineStatus:m.status,
     multilinePolarity:mf?.polarity||null,
     multilineBracketParserLimited:multilineMask.parserLimited,
-    multilineBracketMaskedRanges:multilineMask.maskedRanges,
-    rawRelationPreserved:af?.relation===bracketRefute.relation,
+    hypotheticalEnglishStatus:hs.status,
+    hypotheticalEnglishPolarity:hsf?.polarity||null,
+    hypotheticalChineseStatus:hz.status,
+    hypotheticalChinesePolarity:hzf?.polarity||null,
+    directAfterHypotheticalStatus:hd.status,
+    directAfterHypotheticalPolarity:hdf?.polarity||null,
+    hypotheticalParserLimited:overlongMask.parserLimited,
+    hypotheticalParserLimitedStatus:ho.status,
+    rawRelationPreserved:af?.relation===bracketRefute.relation&&hsf?.relation===hypotheticalSupport.relation,
     crossOrganCovered:true,
-    provenancePreserved:Boolean(af?.provenance&&zf?.provenance&&df?.provenance),
+    provenancePreserved:Boolean(af?.provenance&&zf?.provenance&&hsf?.provenance&&hzf?.provenance&&hdf?.provenance),
     closureAuthority:guarded.receiptPipeline?.closureAuthority||null
   },
   failures,
-  boundary:'Canonical VAJRA receipt pipeline composes bounded editorial-bracket classification containment with the verified ambiguity/conflict guard. It preserves raw relation/provenance. Bracket parser-limit spans are explicitly exposed and not bracket-masked; other verified guards may still conservatively classify their wording. This is deterministic structural scope containment, not semantic quotation ownership, truth judgment, source-independence proof or evidence-quality scoring.'
+  boundary:'Canonical VAJRA receipt pipeline composes bounded editorial-bracket and explicit hypothetical/thought-experiment classification containment with the verified ambiguity/conflict guard. Hypothetical support/refute wording cannot become unconditional polarity inside a supported single-line sentence-bounded span, while a later direct assessment remains visible. Unsupported overlong hypothetical spans are exposed as parserLimited and left visible conservatively. Raw relation/provenance are preserved. This is deterministic structural scope containment, not semantic counterfactual reasoning, truth judgment, source-independence proof or evidence-quality scoring.'
 };
 await fs.writeFile(resultPath,JSON.stringify(result,null,2)+'\n','utf8');
 console.log(JSON.stringify(result,null,2));
