@@ -1,8 +1,8 @@
 {
-  "schema": "nostromo-vajra-conditional-prefix-test/v0.7",
-  "status": "PASS",
-  "guard": "VAJRA ambiguity/conflict guard v0.5.8",
-  "capability": "BOUNDED_ENGLISH_CHINESE_GENERIC_COMMA_AND_EXPLICIT_THEN_CONDITIONAL_SENTENCE_EXCEPTION_CONCESSIVE_AND_CONTRASTIVE_SCOPE_CONTAINMENT",
+  "schema": "nostromo-vajra-conditional-prefix-test/v0.8",
+  "status": "FAIL",
+  "guard": "VAJRA ambiguity/conflict guard v0.5.9",
+  "capability": "BOUNDED_ENGLISH_CHINESE_GENERIC_COMMA_EXPLICIT_THEN_EXCEPTION_CONCESSIVE_EVEN_IF_AND_CONTRASTIVE_SCOPE_CONTAINMENT",
   "observations": [
     {
       "name": "ONLY_IF_PREFIX",
@@ -89,6 +89,20 @@
       "auditStatus": "AMBIGUITY_FOUND"
     },
     {
+      "name": "EVEN_IF_PREFIX_SUPPORT",
+      "relation": "Even if this evidence supports the target claim, provenance remains unaudited.",
+      "expected": "UNSPECIFIED",
+      "actual": "UNSPECIFIED",
+      "auditStatus": "AMBIGUITY_FOUND"
+    },
+    {
+      "name": "EVEN_IF_PREFIX_REFUTE",
+      "relation": "Even if this evidence refutes the target claim, the sample remains incomplete.",
+      "expected": "UNSPECIFIED",
+      "actual": "UNSPECIFIED",
+      "auditStatus": "AMBIGUITY_FOUND"
+    },
+    {
       "name": "DESPITE_PREFIX_SUPPORT",
       "relation": "Despite this evidence supporting the target claim, source quality remains unknown.",
       "expected": "UNSPECIFIED",
@@ -98,6 +112,13 @@
     {
       "name": "ZH_CONCESSIVE_PREFIX",
       "relation": "雖然這份證據支持目標命題，來源仍未核實。",
+      "expected": "UNSPECIFIED",
+      "actual": "UNSPECIFIED",
+      "auditStatus": "AMBIGUITY_FOUND"
+    },
+    {
+      "name": "ZH_JISHI_PREFIX_SUPPORT",
+      "relation": "即使這份證據支持目標命題，來源仍未核實。",
       "expected": "UNSPECIFIED",
       "actual": "UNSPECIFIED",
       "auditStatus": "AMBIGUITY_FOUND"
@@ -299,10 +320,38 @@
       "auditStatus": "AMBIGUITY_FOUND"
     },
     {
+      "name": "EVEN_IF_MAIN_CLAUSE_SUPPORT",
+      "relation": "Even if provenance is weak, this evidence supports the target claim.",
+      "expected": "SUPPORTS",
+      "actual": "UNSPECIFIED",
+      "auditStatus": "AMBIGUITY_FOUND"
+    },
+    {
+      "name": "EVEN_IF_MAIN_CLAUSE_REFUTE",
+      "relation": "Even if the sample is incomplete, this evidence refutes the target claim.",
+      "expected": "REFUTES",
+      "actual": "UNSPECIFIED",
+      "auditStatus": "AMBIGUITY_FOUND"
+    },
+    {
+      "name": "EVEN_IF_SENTENCE_BOUNDARY_CONTROL",
+      "relation": "Even if this evidence supports the target claim, logging behavior changes. This evidence refutes the target claim.",
+      "expected": "REFUTES",
+      "actual": "REFUTES",
+      "auditStatus": "AMBIGUITY_FOUND"
+    },
+    {
       "name": "ZH_CONCESSIVE_MAIN_CLAUSE_REFUTE",
       "relation": "雖然樣本有限，這份證據反駁目標命題。",
       "expected": "REFUTES",
       "actual": "REFUTES",
+      "auditStatus": "AMBIGUITY_FOUND"
+    },
+    {
+      "name": "ZH_JISHI_MAIN_CLAUSE_SUPPORT",
+      "relation": "即使來源有限，這份證據支持目標命題。",
+      "expected": "SUPPORTS",
+      "actual": "SUPPORTS",
       "auditStatus": "AMBIGUITY_FOUND"
     },
     {
@@ -362,6 +411,21 @@
       "auditStatus": "AMBIGUITY_FOUND"
     }
   ],
-  "failures": [],
-  "boundary": "This adversarial test covers bounded English/Chinese condition, exception, concessive and contrastive scope forms around support/refute vocabulary. Generic if/when/as-long-as and 如果/若/倘若/只要 comma-delimited conditions verify that directional words inside a condition or its same-sentence main clause cannot manufacture unconditional closure. Explicit if...then and 如果/若/倘若/只要...則/那么/那麼 forms receive the same same-sentence containment even when no comma is present. A later sentence after a full sentence boundary remains visible. Concessive/contrastive main clauses remain visible by design. This is lexical/structural scope containment, not general logical parsing or semantic discourse adjudication."
+  "failures": [
+    {
+      "type": "POLARITY_MISMATCH",
+      "name": "EVEN_IF_MAIN_CLAUSE_SUPPORT",
+      "expected": "SUPPORTS",
+      "actual": "UNSPECIFIED",
+      "auditStatus": "AMBIGUITY_FOUND"
+    },
+    {
+      "type": "POLARITY_MISMATCH",
+      "name": "EVEN_IF_MAIN_CLAUSE_REFUTE",
+      "expected": "REFUTES",
+      "actual": "UNSPECIFIED",
+      "auditStatus": "AMBIGUITY_FOUND"
+    }
+  ],
+  "boundary": "This adversarial test covers bounded English/Chinese condition, exception, concessive and contrastive scope forms around support/refute vocabulary. Generic if/when/as-long-as and 如果/若/倘若/只要 comma-delimited conditions verify that directional words inside a condition or its same-sentence main clause cannot manufacture unconditional closure. Explicit if...then and 如果/若/倘若/只要...則/那么/那麼 forms receive the same same-sentence containment even when no comma is present. Comma-delimited concessive prefixes now explicitly cover English even if alongside Chinese 即使: directional vocabulary inside the concessive subordinate prefix is contained, while the later main clause and later sentence remain visible. This is lexical/structural scope containment, not general logical parsing or semantic discourse adjudication."
 }
