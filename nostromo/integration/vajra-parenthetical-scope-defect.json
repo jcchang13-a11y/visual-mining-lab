@@ -1,0 +1,26 @@
+{
+  "schema": "nostromo-vajra-defect-evidence/v0.1",
+  "observedAt": "2026-09-05T15:00:00+08:00",
+  "organ": "VAJRA",
+  "component": "receipt ambiguity/conflict guard v0.5.12",
+  "status": "OPEN_DEFECT",
+  "class": "PARENTHETICAL_SCOPE_FALSE_DIRECTION_RISK",
+  "evidence": {
+    "codePath": "nostromo/integration/vajra-ambiguity-guard.mjs::relationPolarity",
+    "observation": "Current bounded masks cover negation, hedging, conditions, exceptions, concessive/contrastive prefixes, attribution/reporting and paired quotations, but do not contain directional support/refute vocabulary occurring only inside a parenthetical aside.",
+    "adversarialExamples": [
+      {
+        "relation": "The measurement was recorded (the source says it supports the target claim).",
+        "risk": "support vocabulary inside the parenthetical can be promoted to unconditional SUPPORTS"
+      },
+      {
+        "relation": "量測已記錄（來源稱這支持目標命題）。",
+        "risk": "Chinese full-width parenthetical directional vocabulary can be promoted to unconditional SUPPORTS"
+      }
+    ],
+    "controlRequirement": "A direct assessment after the parenthetical, e.g. '(source says it supports...). Independent reproduction refutes the target claim.', must remain REFUTES rather than being hidden by the repair."
+  },
+  "impact": "A quoted or attributed statement is currently bounded, but equivalent source-language moved into parentheses can still manufacture branch polarity and therefore false cross-organ conflict or premature closure.",
+  "repairConstraint": "Add bounded English () and Chinese （） parenthetical containment without crossing line/sentence limits, preserve text outside the parenthetical, add direct-after-parenthetical controls, then run attribution/ambiguity tests plus full NOSTROMO CI before any registry/status promotion.",
+  "boundary": "This record preserves a code-audit defect hypothesis before repair. It is not a claim that a repaired capability exists, not a semantic parenthesis parser, and not CI evidence. DISPLAYED STATE MUST FOLLOW EVIDENCE."
+}
