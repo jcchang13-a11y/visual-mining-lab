@@ -37,6 +37,21 @@ const chineseAccordingToAudit=auditReceiptAmbiguity([directSupport,chineseAccord
 if(chineseAccordingToAudit.status!=='AMBIGUITY_FOUND')failures.push({type:'ZH_ACCORDING_TO_FALSE_CONFLICT',audit:chineseAccordingToAudit});
 if(polarity(chineseAccordingToAudit,'zh-according-to')!=='UNSPECIFIED')failures.push({type:'ZH_ACCORDING_TO_NOT_UNSPECIFIED',actual:polarity(chineseAccordingToAudit,'zh-according-to')});
 
+const quotedRefute=receipt('quoted-refute','Excerpt: “the evidence refutes the target claim.”','MU/TH/UR');
+const quotedRefuteAudit=auditReceiptAmbiguity([directSupport,quotedRefute]);
+if(quotedRefuteAudit.status!=='AMBIGUITY_FOUND')failures.push({type:'QUOTED_REFUTE_FALSE_CONFLICT',audit:quotedRefuteAudit});
+if(polarity(quotedRefuteAudit,'quoted-refute')!=='UNSPECIFIED')failures.push({type:'QUOTED_REFUTE_NOT_UNSPECIFIED',actual:polarity(quotedRefuteAudit,'quoted-refute')});
+
+const quotedSupport=receipt('quoted-support','Excerpt: "the evidence supports the target claim."');
+const quotedSupportAudit=auditReceiptAmbiguity([directRefute,quotedSupport]);
+if(quotedSupportAudit.status!=='AMBIGUITY_FOUND')failures.push({type:'QUOTED_SUPPORT_FALSE_CONFLICT',audit:quotedSupportAudit});
+if(polarity(quotedSupportAudit,'quoted-support')!=='UNSPECIFIED')failures.push({type:'QUOTED_SUPPORT_NOT_UNSPECIFIED',actual:polarity(quotedSupportAudit,'quoted-support')});
+
+const chineseQuotedRefute=receipt('zh-quoted-refute','摘錄：「這份材料反駁目標命題。」','MU/TH/UR');
+const chineseQuotedRefuteAudit=auditReceiptAmbiguity([directSupport,chineseQuotedRefute]);
+if(chineseQuotedRefuteAudit.status!=='AMBIGUITY_FOUND')failures.push({type:'ZH_QUOTED_REFUTE_FALSE_CONFLICT',audit:chineseQuotedRefuteAudit});
+if(polarity(chineseQuotedRefuteAudit,'zh-quoted-refute')!=='UNSPECIFIED')failures.push({type:'ZH_QUOTED_REFUTE_NOT_UNSPECIFIED',actual:polarity(chineseQuotedRefuteAudit,'zh-quoted-refute')});
+
 const laterDirectRefute=receipt('later-direct-refute','The paper claims that the observations support the target claim. Independent reproduction refutes the target claim.','MU/TH/UR');
 const laterDirectRefuteAudit=auditReceiptAmbiguity([directSupport,laterDirectRefute]);
 if(laterDirectRefuteAudit.status!=='CONFLICT_FOUND')failures.push({type:'LATER_DIRECT_REFUTE_HIDDEN',audit:laterDirectRefuteAudit});
@@ -47,22 +62,37 @@ const laterDirectSupportAudit=auditReceiptAmbiguity([directRefute,laterDirectSup
 if(laterDirectSupportAudit.status!=='CONFLICT_FOUND')failures.push({type:'ZH_LATER_DIRECT_SUPPORT_HIDDEN',audit:laterDirectSupportAudit});
 if(polarity(laterDirectSupportAudit,'later-direct-support')!=='SUPPORTS')failures.push({type:'ZH_LATER_DIRECT_SUPPORT_POLARITY_WRONG',actual:polarity(laterDirectSupportAudit,'later-direct-support')});
 
+const quoteThenDirectRefute=receipt('quote-then-direct-refute','Excerpt: “the evidence supports the target claim.” Independent reproduction refutes the target claim.','MU/TH/UR');
+const quoteThenDirectRefuteAudit=auditReceiptAmbiguity([directSupport,quoteThenDirectRefute]);
+if(quoteThenDirectRefuteAudit.status!=='CONFLICT_FOUND')failures.push({type:'QUOTE_THEN_DIRECT_REFUTE_HIDDEN',audit:quoteThenDirectRefuteAudit});
+if(polarity(quoteThenDirectRefuteAudit,'quote-then-direct-refute')!=='REFUTES')failures.push({type:'QUOTE_THEN_DIRECT_REFUTE_POLARITY_WRONG',actual:polarity(quoteThenDirectRefuteAudit,'quote-then-direct-refute')});
+
+const zhQuoteThenDirectSupport=receipt('zh-quote-then-direct-support','摘錄：「這份材料反駁目標命題。」重新執行的對照結果支持目標命題。');
+const zhQuoteThenDirectSupportAudit=auditReceiptAmbiguity([directRefute,zhQuoteThenDirectSupport]);
+if(zhQuoteThenDirectSupportAudit.status!=='CONFLICT_FOUND')failures.push({type:'ZH_QUOTE_THEN_DIRECT_SUPPORT_HIDDEN',audit:zhQuoteThenDirectSupportAudit});
+if(polarity(zhQuoteThenDirectSupportAudit,'zh-quote-then-direct-support')!=='SUPPORTS')failures.push({type:'ZH_QUOTE_THEN_DIRECT_SUPPORT_POLARITY_WRONG',actual:polarity(zhQuoteThenDirectSupportAudit,'zh-quote-then-direct-support')});
+
 const result={
-  schema:'nostromo-vajra-attribution-test/v0.1',
+  schema:'nostromo-vajra-attribution-test/v0.2',
   completedAt:new Date().toISOString(),
   status:failures.length?'FAIL':'PASS',
-  guardVersion:'v0.5.11',
+  guardVersion:'v0.5.12',
   cases:{
     directConflict:directConflict.status,
     attributedRefute:attributedRefuteAudit.status,
     attributedSupport:attributedSupportAudit.status,
     chineseAttributedSupport:chineseAttributedSupportAudit.status,
     chineseAccordingTo:chineseAccordingToAudit.status,
+    quotedRefute:quotedRefuteAudit.status,
+    quotedSupport:quotedSupportAudit.status,
+    chineseQuotedRefute:chineseQuotedRefuteAudit.status,
     laterDirectRefute:laterDirectRefuteAudit.status,
-    laterDirectSupport:laterDirectSupportAudit.status
+    laterDirectSupport:laterDirectSupportAudit.status,
+    quoteThenDirectRefute:quoteThenDirectRefuteAudit.status,
+    zhQuoteThenDirectSupport:zhQuoteThenDirectSupportAudit.status
   },
   failures,
-  boundary:'PASS means bounded English/Chinese reporting/attribution scopes cannot by themselves manufacture unconditional SUPPORTS/REFUTES polarity, while a later separate direct assessment remains visible. This is deterministic lexical/structural attribution containment, not quotation parsing, semantic source attribution, source-quality judgment, factual adjudication or proof of source independence.'
+  boundary:'PASS means bounded English/Chinese reporting/attribution scopes and bounded paired quoted excerpts cannot by themselves manufacture unconditional SUPPORTS/REFUTES polarity, while a later separate direct assessment outside the attribution/quote remains visible. Quote handling is bounded lexical containment, not quotation parsing, quote ownership inference, semantic source attribution, source-quality judgment, factual adjudication or proof of source independence.'
 };
 await fs.writeFile(resultPath,JSON.stringify(result,null,2)+'\n','utf8');
 console.log(JSON.stringify(result,null,2));
