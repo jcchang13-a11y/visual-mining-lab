@@ -1,3 +1,4 @@
+// Focused adversarial coverage for VAJRA v0.5.15 nested-parenthetical containment.
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import {auditReceiptAmbiguity} from './vajra-ambiguity-guard.mjs';
