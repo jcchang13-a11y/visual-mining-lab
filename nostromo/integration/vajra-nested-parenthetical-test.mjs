@@ -33,7 +33,7 @@ const directOutsideResult=polarityFor(directOutside,directRefute);
 if(directOutsideResult.polarity!=='SUPPORTS')failures.push({type:'DIRECT_OUTSIDE_PARENTHESES_HIDDEN',actual:directOutsideResult.polarity});
 if(directOutsideResult.audit.status!=='CONFLICT_FOUND')failures.push({type:'DIRECT_OUTSIDE_CONTROL_NOT_VISIBLE',actual:directOutsideResult.audit.status});
 
-const multiline={...common,provenance:'multiline-limit',material:'This deliberately crosses a line boundary inside a parenthetical.',relation:'Background note (the archived report\nrefutes the target claim) remains outside the bounded single-line parser guarantee.'};
+const multiline={...common,provenance:'multiline-limit',material:'This deliberately crosses a line boundary inside a parenthetical.',relation:'Background marker (legacy material\nrefutes the target claim) remains outside the bounded single-line parser guarantee.'};
 const multilineResult=polarityFor(multiline);
 if(multilineResult.polarity!=='REFUTES')failures.push({type:'MULTILINE_SCOPE_SILENTLY_HIDDEN',actual:multilineResult.polarity});
 if(multilineResult.audit.status!=='CONFLICT_FOUND')failures.push({type:'MULTILINE_SCOPE_NOT_CONSERVATIVE',actual:multilineResult.audit.status});
@@ -69,7 +69,7 @@ const result={
     interpretation:'Nested parenthetical-only polarity is contained up to the declared bounded depth, while direct assessments outside the parenthetical remain visible. Newline-bearing, too-deep and unbalanced parser-limit cases remain visible rather than being silently masked.'
   },
   failures,
-  boundary:'NFKC-normalized ASCII/full-width parentheses are scanned with bounded depth <=3, bounded top-level span length <=362 characters and no newline. Directional support/refute wording inside a qualifying single-line nested parenthetical is masked before lexical polarity classification. Newline-bearing, too-deep, overlong or unbalanced spans are not masked, so parser limits cannot silently manufacture certainty. This remains deterministic structural containment, not general parenthesis parsing or semantic scope resolution.'
+  boundary:'NFKC-normalized ASCII/full-width parentheses are scanned with bounded depth <=3, bounded top-level span length <=362 characters and no newline. Directional support/refute wording inside a qualifying single-line nested parenthetical is masked before lexical polarity classification. Newline-bearing, too-deep, overlong or unbalanced spans are not masked, so parser limits cannot silently manufacture certainty. The multiline adversarial case deliberately avoids attribution/reporting vocabulary so it isolates newline parser-limit behavior rather than source-attribution masking. This remains deterministic structural containment, not general parenthesis parsing or semantic scope resolution.'
 };
 await fs.writeFile(resultPath,JSON.stringify(result,null,2)+'\n','utf8');
 console.log(JSON.stringify(result,null,2));
