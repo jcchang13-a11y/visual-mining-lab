@@ -9,7 +9,7 @@ vm.runInThisContext(code,{filename:'nostromo/gut/gut-engine.js'});
 const failures=[];
 const check=(ok,type,detail)=>{if(!ok)failures.push({type,detail});};
 const version=String(globalThis.GutEngine?.digest?.({ping:'pong'},{source:'NOSTROMO/gut-ancestor-failure-version-probe'})?.version||'unknown');
-const promoted=version==='0.2.26';
+const promoted=version==='0.2.27';
 
 const failedBundle={
   organ:'DROPLET',
@@ -32,6 +32,13 @@ const terminalNonSuccessResults=terminalNonSuccessCases.map(status=>{
   return {status,gut:globalThis.GutEngine.digest({bundle},{source:`NOSTROMO/gut-terminal-nonsuccess-${status.toLowerCase()}`})};
 });
 
+const machineContextCases=[
+  {name:'execution-timeout',input:{execution:{timeout:'request exceeded 30 seconds'}},path:'root.execution.timeout'},
+  {name:'job-blocked',input:{job:{blocked:'policy gate prevented execution'}},path:'root.job.blocked'},
+  {name:'attempt-cancelled',input:{attempt:{cancelled:'upstream request cancelled externally'}},path:'root.attempt.cancelled'},
+  {name:'request-timeout-reason',input:{request:{phase:{timeout:{reason:'remote dependency exceeded deadline'}}}},path:'root.request.phase.timeout.reason'}
+].map(test=>({...test,gut:globalThis.GutEngine.digest(test.input,{source:`NOSTROMO/gut-machine-context-${test.name}`})}));
+
 const healthyBundle={
   organ:'DROPLET',
   status:'EXECUTED',
@@ -42,6 +49,13 @@ const healthyBundle={
   semanticSkippedToken:'skipped'
 };
 const healthyGut=globalThis.GutEngine.digest({healthyBundle},{source:'NOSTROMO/gut-ancestor-failure-control'});
+
+const nonMachinePathControl={
+  settings:{timeout:'30 seconds'},
+  documentation:{blocked:'blocked is a state described in the protocol'},
+  vocabulary:{cancelled:'cancelled is a lexical example rather than an execution result'}
+};
+const nonMachineGut=globalThis.GutEngine.digest(nonMachinePathControl,{source:'NOSTROMO/gut-machine-path-false-positive-control'});
 
 if(promoted){
   const failedPayloadPaths=['root.failedBundle.claim','root.failedBundle.evidence','root.failedBundle.question'];
@@ -61,6 +75,11 @@ if(promoted){
     check(gut.quarantine?.filter(x=>x.path.startsWith(prefix)).every(x=>x.provenance?.status===status),'TERMINAL_NON_SUCCESS_STATUS_PROVENANCE_LOST',{status,quarantine:gut.quarantine});
   }
 
+  for(const test of machineContextCases){
+    check(test.gut.quarantine?.some(x=>x.path===test.path),'MACHINE_CONTEXT_TERMINAL_FAILURE_PATH_ESCAPED',{name:test.name,path:test.path,quarantine:test.gut.quarantine,routes:test.gut.routes});
+    check(test.gut.routes?.HOLD?.items?.some(x=>x.path===test.path),'MACHINE_CONTEXT_FAILURE_NOT_HELD',{name:test.name,path:test.path,routes:test.gut.routes});
+  }
+
   check(healthyGut.routes?.DROPLET?.items?.some(x=>x.path==='root.healthyBundle.claim'),'HEALTHY_CLAIM_FALSELY_QUARANTINED',healthyGut);
   check(healthyGut.routes?.MUTHER?.items?.some(x=>x.path==='root.healthyBundle.evidence'),'HEALTHY_EVIDENCE_FALSELY_QUARANTINED',healthyGut);
   check(!healthyGut.quarantine?.some(x=>x.path==='root.healthyBundle.note'),'ORDINARY_TIMEOUT_PROSE_FALSELY_QUARANTINED',healthyGut.quarantine);
@@ -69,26 +88,32 @@ if(promoted){
     check(!healthyGut.quarantine?.some(x=>x.path===p),'BARE_TERMINAL_WORD_FALSELY_QUARANTINED',{path:p,quarantine:healthyGut.quarantine});
     check(healthyGut.nutrients?.some(x=>x.path===p),'BARE_TERMINAL_WORD_LOST_FROM_NUTRIENTS',{path:p,nutrients:healthyGut.nutrients});
   }
+  for(const p of ['root.settings.timeout','root.documentation.blocked','root.vocabulary.cancelled']){
+    check(!nonMachineGut.quarantine?.some(x=>x.path===p),'NON_MACHINE_TERMINAL_PATH_FALSELY_QUARANTINED',{path:p,quarantine:nonMachineGut.quarantine});
+    check(nonMachineGut.nutrients?.some(x=>x.path===p),'NON_MACHINE_TERMINAL_PATH_LOST',{path:p,nutrients:nonMachineGut.nutrients});
+  }
 }else{
-  failures.push({type:'UNEXPECTED_GUT_VERSION',detail:{expected:'0.2.26',actual:version}});
+  failures.push({type:'UNEXPECTED_GUT_VERSION',detail:{expected:'0.2.27',actual:version}});
 }
 
 const result={
-  schema:'nostromo-gut-ancestor-failure-test/v0.4',
+  schema:'nostromo-gut-ancestor-failure-test/v0.5',
   completedAt:new Date().toISOString(),
   engineVersion:version,
   status:failures.length===0?'PASS':'FAIL',
   promoted,
   regressionOrigin:{
-    priorEngineBlob:'d6b9d1fbcfd97f69a0ec0526317ebb8d0c6a839f',
-    defect:'Prior looksLikeFailureSignal treated any atom whose entire lexical value matched the terminal-status vocabulary as failure evidence, even outside status/result/outcome or failure/risk context.',
-    repair:'Bare terminal-status vocabulary now requires machine-status context unless inherited failed provenance or an explicit status marker is present.'
+    priorEngineBlob:'d2bdd63540f1417c780aa180856b66aae70bd5a6',
+    defect:'GUT v0.2.26 quarantined terminal non-success status values and inherited failed envelopes, but a machine-execution failure represented only by a bounded path such as execution.timeout or job.blocked could remain ordinary material when its value was descriptive prose rather than a status token.',
+    repair:'GUT v0.2.27 recognizes terminal non-success path segments only under bounded machine-execution ancestors such as executor/execution/run/attempt/action/request/job/task. Configuration and documentation paths with the same lexical words remain non-quarantined controls.'
   },
   failedBundle:{quarantined:failedGut.quarantined,routeCounts:Object.fromEntries(Object.entries(failedGut.routes||{}).map(([k,v])=>[k,v.count])),quarantine:failedGut.quarantine?.map(x=>({path:x.path,type:x.type,reason:x.reason,provenance:x.provenance}))},
   terminalNonSuccess:terminalNonSuccessResults.map(({status,gut})=>({status,quarantined:gut.quarantined,routeCounts:Object.fromEntries(Object.entries(gut.routes||{}).map(([k,v])=>[k,v.count])),quarantine:gut.quarantine?.map(x=>({path:x.path,type:x.type,reason:x.reason,provenance:x.provenance}))})),
+  machineContextPaths:machineContextCases.map(test=>({name:test.name,path:test.path,quarantined:test.gut.quarantine?.some(x=>x.path===test.path),routeCounts:Object.fromEntries(Object.entries(test.gut.routes||{}).map(([k,v])=>[k,v.count]))})),
   healthyControl:{quarantined:healthyGut.quarantined,routeCounts:Object.fromEntries(Object.entries(healthyGut.routes||{}).map(([k,v])=>[k,v.count])),bareSemanticTokens:['timeout','skipped']},
+  nonMachinePathControl:{quarantined:nonMachineGut.quarantined,paths:['root.settings.timeout','root.documentation.blocked','root.vocabulary.cancelled']},
   failures,
-  boundary:'This adversarial test distinguishes terminal non-success executor-envelope context from ordinary semantic prose and bare lexical tokens. FAILED plus CANCELLED, TIMEOUT, TIMED_OUT, ABORTED, BLOCKED and SKIPPED ancestor statuses must quarantine descendant payload atoms before they can be routed as fresh claims/evidence/questions. Under an EXECUTED ancestor, ordinary prose and standalone semantic tokens such as timeout or skipped must remain non-quarantined unless they occupy an explicit status/result/outcome or dedicated failure/risk context. This is structural execution-context containment, not semantic truth or source-quality judgment.'
+  boundary:'This adversarial test distinguishes terminal non-success executor-envelope context and bounded machine-execution failure paths from ordinary semantic prose, vocabulary examples and configuration fields. FAILED plus CANCELLED, TIMEOUT, TIMED_OUT, ABORTED, BLOCKED and SKIPPED ancestor statuses must quarantine descendant payload atoms before they can be routed as fresh claims/evidence/questions. Descriptive terminal failure fields under executor/execution/run/attempt/action/request/job/task must also quarantine, even when their value is not itself a status token. Under an EXECUTED ancestor or outside machine-execution path context, ordinary prose and standalone semantic/configuration tokens such as timeout, blocked or cancelled remain non-quarantined. This is structural execution-context containment, not semantic truth or source-quality judgment.'
 };
 await fs.writeFile(path.join(root,'nostromo/integration/gut-ancestor-failure-last-result.json'),JSON.stringify(result,null,2)+'\n','utf8');
 console.log(JSON.stringify(result,null,2));
