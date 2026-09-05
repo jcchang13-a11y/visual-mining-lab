@@ -1,6 +1,6 @@
 {
   "schema": "nostromo-vajra-conditional-prefix-test/v0.8",
-  "status": "FAIL",
+  "status": "PASS",
   "guard": "VAJRA ambiguity/conflict guard v0.5.9",
   "capability": "BOUNDED_ENGLISH_CHINESE_GENERIC_COMMA_EXPLICIT_THEN_EXCEPTION_CONCESSIVE_EVEN_IF_AND_CONTRASTIVE_SCOPE_CONTAINMENT",
   "observations": [
@@ -323,14 +323,14 @@
       "name": "EVEN_IF_MAIN_CLAUSE_SUPPORT",
       "relation": "Even if provenance is weak, this evidence supports the target claim.",
       "expected": "SUPPORTS",
-      "actual": "UNSPECIFIED",
+      "actual": "SUPPORTS",
       "auditStatus": "AMBIGUITY_FOUND"
     },
     {
       "name": "EVEN_IF_MAIN_CLAUSE_REFUTE",
       "relation": "Even if the sample is incomplete, this evidence refutes the target claim.",
       "expected": "REFUTES",
-      "actual": "UNSPECIFIED",
+      "actual": "REFUTES",
       "auditStatus": "AMBIGUITY_FOUND"
     },
     {
@@ -411,21 +411,6 @@
       "auditStatus": "AMBIGUITY_FOUND"
     }
   ],
-  "failures": [
-    {
-      "type": "POLARITY_MISMATCH",
-      "name": "EVEN_IF_MAIN_CLAUSE_SUPPORT",
-      "expected": "SUPPORTS",
-      "actual": "UNSPECIFIED",
-      "auditStatus": "AMBIGUITY_FOUND"
-    },
-    {
-      "type": "POLARITY_MISMATCH",
-      "name": "EVEN_IF_MAIN_CLAUSE_REFUTE",
-      "expected": "REFUTES",
-      "actual": "UNSPECIFIED",
-      "auditStatus": "AMBIGUITY_FOUND"
-    }
-  ],
+  "failures": [],
   "boundary": "This adversarial test covers bounded English/Chinese condition, exception, concessive and contrastive scope forms around support/refute vocabulary. Generic if/when/as-long-as and 如果/若/倘若/只要 comma-delimited conditions verify that directional words inside a condition or its same-sentence main clause cannot manufacture unconditional closure. Explicit if...then and 如果/若/倘若/只要...則/那么/那麼 forms receive the same same-sentence containment even when no comma is present. Comma-delimited concessive prefixes now explicitly cover English even if alongside Chinese 即使: directional vocabulary inside the concessive subordinate prefix is contained, while the later main clause and later sentence remain visible. This is lexical/structural scope containment, not general logical parsing or semantic discourse adjudication."
 }
