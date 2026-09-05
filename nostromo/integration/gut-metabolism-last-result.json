@@ -1,7 +1,7 @@
 {
-  "schema": "nostromo-gut-metabolism-test/v0.2.26",
-  "completedAt": "2026-09-05T02:06:34.605Z",
-  "status": "FAIL",
+  "schema": "nostromo-gut-metabolism-test/v0.2.27",
+  "completedAt": "2026-09-05T02:10:17.683Z",
+  "status": "PASS",
   "gut": {
     "version": "0.2.27",
     "mode": "DETERMINISTIC_HEURISTIC_ROUTER",
@@ -365,11 +365,6 @@
     ],
     "boundary": "Certifies the closed-loop executor path plus carry-layer metabolic containment, deterministic SHROOMING feedback-conditioned reading, and prior-round GUT→VAJRA branch reprioritization. From round 2 onward, redacted connector feedback can change SHROOMING inspection priority and source-preserving GUT metabolic atoms can change which unresolved VAJRA branch is inspected first. Neither mechanism gains closure authority or claims semantic learning. Recursive wrapper growth, ref/clause token fragmentation, embedded-token replay, repeated lineage-only carry fragments, and bare boolean/null machine scaffolding are contained only at carry rendering; GUT nutrient atoms, routes and provenance remain intact. GitHub Actions does not itself search private Drive or the web."
   },
-  "failures": [
-    {
-      "type": "GUT_VERSION",
-      "detail": "0.2.27"
-    }
-  ],
+  "failures": [],
   "boundary": "PASS proves deterministic heuristic routing, provenance retention, contextual risk quarantine that does not discard ordinary semantic prose merely for mentioning error/rejected/invalid lexemes, conservative exact inherited-substrate removal, exact tagged-payload de-echoing, exact repeated tagged-tail suppression while retaining distinct heads, pre/post short exact adjacent intra-atom echo suppression, shared-body summary diversity, exact non-adjacent full-width-colon carry-clause compaction, consecutive exact 1–4 character carry-token run collapse, summary-only machine ref/clause metadata containment, and a bounded out-of-band carryRefs ledger that preserves referential identity and provenance without re-inserting machine IDs into prose carry. It also proves near-duplicate preservation, structured-snippet protection, and a 3-round cross-organ connector-feedback regression whose final prose carry contains no hexadecimal ref/clause metadata tokens. It does not prove semantic novelty, semantic correctness, reference truth, or source truth."
 }
