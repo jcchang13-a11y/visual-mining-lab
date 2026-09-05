@@ -1,17 +1,22 @@
 {
-  "schema": "nostromo-vajra-attribution-test/v0.1",
-  "completedAt": "2026-09-05T06:05:49.600Z",
+  "schema": "nostromo-vajra-attribution-test/v0.2",
+  "completedAt": "2026-09-05T06:06:11.353Z",
   "status": "PASS",
-  "guardVersion": "v0.5.11",
+  "guardVersion": "v0.5.12",
   "cases": {
     "directConflict": "CONFLICT_FOUND",
     "attributedRefute": "AMBIGUITY_FOUND",
     "attributedSupport": "AMBIGUITY_FOUND",
     "chineseAttributedSupport": "AMBIGUITY_FOUND",
     "chineseAccordingTo": "AMBIGUITY_FOUND",
+    "quotedRefute": "AMBIGUITY_FOUND",
+    "quotedSupport": "AMBIGUITY_FOUND",
+    "chineseQuotedRefute": "AMBIGUITY_FOUND",
     "laterDirectRefute": "CONFLICT_FOUND",
-    "laterDirectSupport": "CONFLICT_FOUND"
+    "laterDirectSupport": "CONFLICT_FOUND",
+    "quoteThenDirectRefute": "CONFLICT_FOUND",
+    "zhQuoteThenDirectSupport": "CONFLICT_FOUND"
   },
   "failures": [],
-  "boundary": "PASS means bounded English/Chinese reporting/attribution scopes cannot by themselves manufacture unconditional SUPPORTS/REFUTES polarity, while a later separate direct assessment remains visible. This is deterministic lexical/structural attribution containment, not quotation parsing, semantic source attribution, source-quality judgment, factual adjudication or proof of source independence."
+  "boundary": "PASS means bounded English/Chinese reporting/attribution scopes and bounded paired quoted excerpts cannot by themselves manufacture unconditional SUPPORTS/REFUTES polarity, while a later separate direct assessment outside the attribution/quote remains visible. Quote handling is bounded lexical containment, not quotation parsing, quote ownership inference, semantic source attribution, source-quality judgment, factual adjudication or proof of source independence."
 }
