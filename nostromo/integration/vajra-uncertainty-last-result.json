@@ -1,6 +1,6 @@
 {
   "schema": "nostromo-vajra-uncertainty-test/v0.3.8",
-  "completedAt": "2026-09-05T21:10:13.646Z",
+  "completedAt": "2026-09-05T23:06:28.776Z",
   "status": "PASS",
   "guards": {
     "explicitUncertaintyCannotClose": true,
@@ -31,7 +31,7 @@
   "crossOrgan": {
     "gut": {
       "ingested": 1061,
-      "absorbed": 75,
+      "absorbed": 81,
       "quarantined": 0,
       "summarySample": "[CONTRADICTION->VAJRA] SAME_PROVENANCE_CONFLICT · [CONTRADICTION->VAJRA] This return refutes the target claim under the tested condition. · [CONTRADICTION->VAJRA] REFUTES · [CONTRADICTION->VAJRA] Handoff receipt matching is structural and auditable: targetRef, clauseRef, lens, preferred organ, explicit execution status, provenance, returned material and rela"
     }
