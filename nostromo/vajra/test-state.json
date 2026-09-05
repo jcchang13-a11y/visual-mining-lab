@@ -1,11 +1,37 @@
 {
-  "engine": "VAJRA ENGINE v0.1",
-  "status": "PROTOTYPE TESTING",
-  "testedAt": "2026-08-28",
-  "runs": 500,
-  "roundsPerRun": 6,
-  "completedToDepthBound": 500,
-  "crashes": 0,
-  "knownFailure": "Earlier naive reformulation collapsed into a repeated generic sentence after two rounds. v0.1 now rotates six attack lenses and enforces a depth bound, but this only proves the state machine runs; it does not yet prove semantic dismantling.",
-  "next": "Test semantic quality on real propositions; connect DROPLET only when evidence/counterexample lookup is required."
+  "engine": "VAJRA ENGINE v0.3.2",
+  "status": "VERIFIED_HEURISTIC_PROPOSITION_AWARE_DISMANTLER",
+  "displayedStateRule": "DISPLAYED STATE MUST FOLLOW EVIDENCE",
+  "evidence": {
+    "engineBlobSha": "abdd946c0e83374d4981dbb8ee3fd01164a33e80",
+    "engineCommit": "0db1c377f66e673598a564f3559e44b997be7f0a",
+    "latestIntegrationCI": {
+      "schema": "nostromo-integration-ci/v1.3.3",
+      "completedAt": "2026-09-05T12:08:29.072Z",
+      "status": "PASS",
+      "failures": []
+    }
+  },
+  "verifiedCapabilities": [
+    "deterministic proposition-type classification",
+    "bounded clause-scoped dismantling",
+    "dynamic lens set by detected proposition type",
+    "open handoff contracts to SHROOMING, MU/TH/UR, DROPLET and VAJRA",
+    "targetRef/clauseRef provenance continuity",
+    "conflict-preserving receipt guards",
+    "semantic-operator preservation in replay identity"
+  ],
+  "boundaries": [
+    "Classification and clause decomposition remain auditable syntactic heuristics, not semantic understanding.",
+    "A handoff contract is a routing request, not evidence that the target organ executed it.",
+    "Integration PASS proves the tested deterministic paths and regressions only; it does not prove general semantic dismantling quality.",
+    "Formal SHROOMING history remains distinct from deterministic repository-native probes and controls."
+  ],
+  "historicalEvidence": {
+    "prototypeRuns": 500,
+    "prototypeRoundsPerRun": 6,
+    "prototypeCrashes": 0,
+    "note": "The original v0.1 500-run state-machine result is retained as historical evidence only and no longer describes the current engine."
+  },
+  "next": "Continue VAJRA thickening with adversarial unfamiliar propositions and receipt-resolution quality tests; preserve unresolved uncertainty rather than converting missing evidence into closure."
 }
