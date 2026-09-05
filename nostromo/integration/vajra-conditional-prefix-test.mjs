@@ -26,8 +26,11 @@ const cases=[
   ['ZH_EXCEPT_PREFIX','除了快取失效的情況之外，這份證據反駁目標命題。','UNSPECIFIED'],
   ['ALTHOUGH_PREFIX_SUPPORT','Although this evidence supports the target claim, provenance remains unaudited.','UNSPECIFIED'],
   ['EVEN_THOUGH_PREFIX_REFUTE','Even though this evidence refutes the target claim, the sample remains incomplete.','UNSPECIFIED'],
+  ['EVEN_IF_PREFIX_SUPPORT','Even if this evidence supports the target claim, provenance remains unaudited.','UNSPECIFIED'],
+  ['EVEN_IF_PREFIX_REFUTE','Even if this evidence refutes the target claim, the sample remains incomplete.','UNSPECIFIED'],
   ['DESPITE_PREFIX_SUPPORT','Despite this evidence supporting the target claim, source quality remains unknown.','UNSPECIFIED'],
   ['ZH_CONCESSIVE_PREFIX','雖然這份證據支持目標命題，來源仍未核實。','UNSPECIFIED'],
+  ['ZH_JISHI_PREFIX_SUPPORT','即使這份證據支持目標命題，來源仍未核實。','UNSPECIFIED'],
   ['WHILE_PREFIX_SUPPORT','While this evidence supports the target claim, provenance remains unaudited.','UNSPECIFIED'],
   ['WHILST_PREFIX_REFUTE','Whilst this evidence refutes the target claim, the sample remains incomplete.','UNSPECIFIED'],
   ['WHEREAS_PREFIX_SUPPORT','Whereas this evidence supports the target claim, source quality remains unknown.','UNSPECIFIED'],
@@ -56,7 +59,11 @@ const cases=[
   ['UNLESS_SENTENCE_BOUNDARY_CONTROL','Unless retries are disabled, logging behavior changes. This evidence supports the target claim.','SUPPORTS'],
   ['EXCEPT_SEMICOLON_BOUNDARY_CONTROL','Except when duplicate inputs are retained, logging behavior changes; this evidence refutes the target claim.','REFUTES'],
   ['CONCESSIVE_MAIN_CLAUSE_SUPPORT','Although provenance is weak, this evidence supports the target claim.','SUPPORTS'],
+  ['EVEN_IF_MAIN_CLAUSE_SUPPORT','Even if provenance is weak, this evidence supports the target claim.','SUPPORTS'],
+  ['EVEN_IF_MAIN_CLAUSE_REFUTE','Even if the sample is incomplete, this evidence refutes the target claim.','REFUTES'],
+  ['EVEN_IF_SENTENCE_BOUNDARY_CONTROL','Even if this evidence supports the target claim, logging behavior changes. This evidence refutes the target claim.','REFUTES'],
   ['ZH_CONCESSIVE_MAIN_CLAUSE_REFUTE','雖然樣本有限，這份證據反駁目標命題。','REFUTES'],
+  ['ZH_JISHI_MAIN_CLAUSE_SUPPORT','即使來源有限，這份證據支持目標命題。','SUPPORTS'],
   ['WHILE_MAIN_CLAUSE_SUPPORT','While provenance is weak, this evidence supports the target claim.','SUPPORTS'],
   ['WHEREAS_MAIN_CLAUSE_REFUTE','Whereas the sample is incomplete, this evidence refutes the target claim.','REFUTES'],
   ['ZH_GURAN_MAIN_CLAUSE_SUPPORT','固然來源有限，這份證據支持目標命題。','SUPPORTS'],
@@ -76,13 +83,13 @@ for(const [name,relation,expected] of cases){
 }
 
 const result={
-  schema:'nostromo-vajra-conditional-prefix-test/v0.7',
+  schema:'nostromo-vajra-conditional-prefix-test/v0.8',
   status:failures.length?'FAIL':'PASS',
-  guard:'VAJRA ambiguity/conflict guard v0.5.8',
-  capability:'BOUNDED_ENGLISH_CHINESE_GENERIC_COMMA_AND_EXPLICIT_THEN_CONDITIONAL_SENTENCE_EXCEPTION_CONCESSIVE_AND_CONTRASTIVE_SCOPE_CONTAINMENT',
+  guard:'VAJRA ambiguity/conflict guard v0.5.9',
+  capability:'BOUNDED_ENGLISH_CHINESE_GENERIC_COMMA_EXPLICIT_THEN_EXCEPTION_CONCESSIVE_EVEN_IF_AND_CONTRASTIVE_SCOPE_CONTAINMENT',
   observations,
   failures,
-  boundary:'This adversarial test covers bounded English/Chinese condition, exception, concessive and contrastive scope forms around support/refute vocabulary. Generic if/when/as-long-as and 如果/若/倘若/只要 comma-delimited conditions verify that directional words inside a condition or its same-sentence main clause cannot manufacture unconditional closure. Explicit if...then and 如果/若/倘若/只要...則/那么/那麼 forms receive the same same-sentence containment even when no comma is present. A later sentence after a full sentence boundary remains visible. Concessive/contrastive main clauses remain visible by design. This is lexical/structural scope containment, not general logical parsing or semantic discourse adjudication.'
+  boundary:'This adversarial test covers bounded English/Chinese condition, exception, concessive and contrastive scope forms around support/refute vocabulary. Generic if/when/as-long-as and 如果/若/倘若/只要 comma-delimited conditions verify that directional words inside a condition or its same-sentence main clause cannot manufacture unconditional closure. Explicit if...then and 如果/若/倘若/只要...則/那么/那麼 forms receive the same same-sentence containment even when no comma is present. Comma-delimited concessive prefixes now explicitly cover English even if alongside Chinese 即使: directional vocabulary inside the concessive subordinate prefix is contained, while the later main clause and later sentence remain visible. This is lexical/structural scope containment, not general logical parsing or semantic discourse adjudication.'
 };
 await fs.writeFile('nostromo/integration/vajra-conditional-prefix-last-result.json',JSON.stringify(result,null,2)+'\n');
 console.log(JSON.stringify(result,null,2));
