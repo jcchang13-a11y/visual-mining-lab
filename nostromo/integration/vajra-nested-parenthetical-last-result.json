@@ -1,0 +1,21 @@
+{
+  "schema": "nostromo-vajra-nested-parenthetical-test/v0.1",
+  "completedAt": "2026-09-05T15:10:14.451Z",
+  "status": "PASS",
+  "finding": {
+    "version": "v0.5.15",
+    "englishNestedStatus": "AMBIGUITY_FOUND",
+    "englishNestedPolarity": "UNSPECIFIED",
+    "chineseNestedStatus": "AMBIGUITY_FOUND",
+    "chineseNestedPolarity": "UNSPECIFIED",
+    "directOutsideStatus": "CONFLICT_FOUND",
+    "directOutsidePolarity": "SUPPORTS",
+    "tooDeepStatus": "CONFLICT_FOUND",
+    "tooDeepPolarity": "REFUTES",
+    "unbalancedStatus": "CONFLICT_FOUND",
+    "unbalancedPolarity": "REFUTES",
+    "interpretation": "Nested parenthetical-only polarity is contained up to the declared bounded depth, while direct assessments outside the parenthetical remain visible. Parser-limit cases are deliberately left visible rather than silently masked."
+  },
+  "failures": [],
+  "boundary": "NFKC-normalized ASCII/full-width parentheses are scanned with bounded depth <=3, bounded top-level span length <=362 characters and no newline. Directional support/refute wording inside a qualifying nested parenthetical is masked before lexical polarity classification. Too-deep, overlong, multiline or unbalanced spans are not masked, so parser limits cannot silently manufacture certainty. This remains deterministic structural containment, not general parenthesis parsing or semantic scope resolution."
+}
