@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320" role="img" aria-labelledby="title desc">
+  <title id="title">第十分回溯第九分</title>
+  <desc id="desc">黑白極簡同心圓。中心為第十分，外圈標示第九分，表示第十分把第九分的得／我得問題推到如來得法與菩薩莊嚴佛土。</desc>
+  <rect width="320" height="320" fill="#fff"/>
+  <circle cx="160" cy="160" r="118" fill="none" stroke="#111" stroke-width="2"/>
+  <circle cx="160" cy="160" r="56" fill="none" stroke="#111" stroke-width="2"/>
+  <text x="160" y="167" text-anchor="middle" font-family="serif" font-size="26" fill="#111">10</text>
+  <text x="160" y="58" text-anchor="middle" font-family="serif" font-size="22" fill="#111">9</text>
+</svg>
