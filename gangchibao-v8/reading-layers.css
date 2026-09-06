@@ -95,6 +95,22 @@
   font-size:1.08em;
 }
 
+/* 正式基本式：只承接 formula-scaffold.js 高信心辨識出的獨立成行 S = ～S。 */
+.gcb-basic-formula{
+  display:block;
+  width:max-content;
+  max-width:100%;
+  margin:.8em auto;
+  padding:.16em .42em;
+  color:var(--gcb-code);
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  font-size:1.02em;
+  font-weight:600;
+  line-height:1.45;
+  letter-spacing:.03em;
+  white-space:nowrap;
+}
+
 /* 缺失既有圖形只留施工槽，不代畫。 */
 .figure-slot{
   display:block;
