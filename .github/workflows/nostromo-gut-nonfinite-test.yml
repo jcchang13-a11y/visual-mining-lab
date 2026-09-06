@@ -1,0 +1,24 @@
+name: NOSTROMO GUT Nonfinite Test
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'nostromo/gut/gut-engine.js'
+      - 'nostromo/integration/gut-nonfinite-scalar-test.mjs'
+      - '.github/workflows/nostromo-gut-nonfinite-test.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify typed non-finite numeric quarantine
+        run: node nostromo/integration/gut-nonfinite-scalar-test.mjs
