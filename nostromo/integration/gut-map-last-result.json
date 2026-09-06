@@ -1,6 +1,6 @@
 {
   "schema": "nostromo-gut-map-test/v0.1",
-  "completedAt": "2026-09-06T20:06:21.698Z",
+  "completedAt": "2026-09-06T21:04:10.588Z",
   "status": "PASS",
   "capability": "PATH_SCOPED_MAP_ENTRY_PRESERVATION_WITH_CONTAINER_PROVENANCE_AND_MAP_LOCAL_MULTIPLICITY",
   "mapItemCount": 9,
