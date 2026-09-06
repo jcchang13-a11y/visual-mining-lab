@@ -29,11 +29,6 @@ replaceOnce(
   "function dedupeKey(atom,text){if(atom?.provenance?.containerKind==='map')return `map|${String(atom?.path||'').toLowerCase()}|${String(text).toLowerCase()}`;if(atom?.provenance?.containerKind==='set')return `set|${String(atom?.path||'').toLowerCase()}|${String(text).toLowerCase()}`;if(atom?.scalarKind==='null'||atom?.scalarKind==='undefined'||atom?.scalarKind==='date'||atom?.scalarKind==='error')",
   'dedupe-set-members-by-path'
 );
-replaceOnce(
-  "JavaScript Map containers are expanded before generic object traversal into deterministic entry-index key/value paths with containerKind=map and mapEntry provenance; equal Map payload text at distinct entry paths remains separately auditable. This preserves structural multiplicity only and does not infer semantic key meaning, ontology, source independence, evidence quality, novelty or truth.",
-  "JavaScript Map containers are expanded before generic object traversal into deterministic entry-index key/value paths with containerKind=map and mapEntry provenance; equal Map payload text at distinct entry paths remains separately auditable. JavaScript Set containers are likewise expanded before generic enumerable-object traversal into deterministic member-index paths with containerKind=set and setMember provenance, preventing Set payloads from silently disappearing because Set has no enumerable own data fields. Distinct Set members remain separately auditable by member path. Map/Set container preservation is structural only and does not infer semantic key/member meaning, ontology, source independence, evidence quality, novelty or truth.",
-  'boundary-set-container-claim'
-);
 
 const oldVersionGate="check(['0.2.27','0.2.28','0.2.29','0.2.30','0.2.31','0.2.32','0.2.33'].includes(gut.version),'GUT_VERSION',gut.version);";
 const newVersionGate="check(['0.2.27','0.2.28','0.2.29','0.2.30','0.2.31','0.2.32','0.2.33','0.2.34'].includes(gut.version),'GUT_VERSION',gut.version);";
@@ -47,4 +42,4 @@ if(failures.length){
 }
 await fs.writeFile(enginePath,code,'utf8');
 await fs.writeFile(metabolismTestPath,metabolism,'utf8');
-console.log(JSON.stringify({status:'PATCHED',engine:'GUT v0.2.34',capability:'PATH_SCOPED_SET_MEMBER_PRESERVATION_WITH_CONTAINER_PROVENANCE',regressionGate:'0.2.27_THROUGH_0.2.34'},null,2));
+console.log(JSON.stringify({status:'PATCHED',engine:'GUT v0.2.34',capability:'PATH_SCOPED_SET_MEMBER_PRESERVATION_WITH_CONTAINER_PROVENANCE',regressionGate:'0.2.27_THROUGH_0.2.34',boundaryNote:'Engine behavior is patched and tested here; public boundary text is promoted only after focused and full integration success.'},null,2));
