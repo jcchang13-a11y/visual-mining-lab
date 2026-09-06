@@ -1,0 +1,16 @@
+{
+  "schema": "nostromo-gut-bigint-provenance-defect/v0.1",
+  "observedAt": "2026-09-06T17:01:00+08:00",
+  "status": "OPEN_BEFORE_PATCH",
+  "enginePath": "nostromo/gut/gut-engine.js",
+  "engineBlobSha": "e41d25df01dd74996c3b9ff31a7376874a43cc38",
+  "classification": "STATIC_EXECUTION_PATH_PROVENANCE_LOSS",
+  "evidence": {
+    "flattenAcceptedPrimitiveTypes": ["string", "number", "boolean"],
+    "missingPrimitiveType": "bigint",
+    "codeFact": "flatten() pushes string/number/boolean primitives, handles arrays and objects, and otherwise returns without adding an atom; JavaScript BigInt is therefore outside every retained branch in the recorded engine blob."
+  },
+  "risk": "A structured BigInt value can silently disappear before classification, routing, provenance retention and audit. This is source-material loss, not merely a display issue.",
+  "repairBoundary": "Preserve typed BigInt primitives as path-scoped auditable material in HOLD. Do not promote them to numeric evidence, counts, confidence or truth merely because they are integer-like machine values. Literal text that resembles BigInt syntax must remain text.",
+  "truthRule": "DISPLAYED STATE MUST FOLLOW EVIDENCE"
+}
