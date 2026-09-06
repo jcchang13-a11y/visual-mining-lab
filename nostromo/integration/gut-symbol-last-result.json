@@ -1,0 +1,57 @@
+{
+  "schema": "nostromo-gut-symbol-test/v0.1",
+  "completedAt": "2026-09-06T11:04:09.842Z",
+  "status": "PASS",
+  "capability": "PATH_SCOPED_TYPED_SYMBOL_PRESERVATION_WITHOUT_EVIDENCE_OR_CLAIM_PROMOTION",
+  "heldSymbols": [
+    {
+      "path": "root.opaque.shared",
+      "text": "Symbol(shared-audit-symbol)",
+      "type": "SYMBOL_MATERIAL",
+      "status": "HOLD",
+      "route": "HOLD",
+      "reason": "typed-symbol-material",
+      "provenance": {
+        "inputSource": "NOSTROMO/gut-symbol-test"
+      }
+    },
+    {
+      "path": "root.opaque.local",
+      "text": "Symbol(local-audit-symbol)",
+      "type": "SYMBOL_MATERIAL",
+      "status": "HOLD",
+      "route": "HOLD",
+      "reason": "typed-symbol-material",
+      "provenance": {
+        "inputSource": "NOSTROMO/gut-symbol-test"
+      }
+    },
+    {
+      "path": "root.repeats[0]",
+      "text": "Symbol(shared-audit-symbol)",
+      "type": "SYMBOL_MATERIAL",
+      "status": "HOLD",
+      "route": "HOLD",
+      "reason": "typed-symbol-material",
+      "provenance": {
+        "inputSource": "NOSTROMO/gut-symbol-test"
+      }
+    },
+    {
+      "path": "root.repeats[1]",
+      "text": "Symbol(shared-audit-symbol)",
+      "type": "SYMBOL_MATERIAL",
+      "status": "HOLD",
+      "route": "HOLD",
+      "reason": "typed-symbol-material",
+      "provenance": {
+        "inputSource": "NOSTROMO/gut-symbol-test"
+      }
+    }
+  ],
+  "finiteMetricStillEvidence": true,
+  "claimStillRoutedToDroplet": true,
+  "jsonSerializable": true,
+  "failures": [],
+  "boundary": "JavaScript Symbol primitives are retained as path-scoped SYMBOL_MATERIAL in HOLD. Their String(Symbol(...)) rendering is audit text only: it does not establish symbol identity, equality across paths, global Symbol registry membership, semantic meaning, evidence, confidence or truth."
+}
