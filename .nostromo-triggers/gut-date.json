@@ -1,5 +1,5 @@
 {
   "capability": "PATH_SCOPED_TYPED_DATE_PRESERVATION_WITH_INVALID_DATE_QUARANTINE",
-  "requestedAt": "2026-09-06T13:08:00Z",
-  "reason": "Date objects have no enumerable payload fields and can silently disappear under generic object flattening; preserve them before traversal without upgrading runtime timestamps into evidence or freshness."
+  "requestedAt": "2026-09-06T17:00:45Z",
+  "reason": "Date objects have no enumerable payload fields and can silently disappear under generic object flattening; preserve them before traversal without upgrading runtime timestamps into evidence or freshness. This rerun requests the existing focused Date thickening workflow after verifying the current published GUT is still v0.2.30 and Date preservation has not yet been promoted."
 }
