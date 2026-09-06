@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 420" role="img" aria-labelledby="title desc">
+  <title id="title">第八分回溯第七、第六、第四、第三分</title>
+  <desc id="desc">黑白極簡同心圓。中心為第八分，向外依序標示第七分、第六分、第四分與第三分，表示正文在進入第八分時回頭重建「法」這條施工線。</desc>
+  <rect width="420" height="420" fill="#fff"/>
+  <g fill="none" stroke="#111" stroke-width="2">
+    <circle cx="210" cy="210" r="42"/>
+    <circle cx="210" cy="210" r="79"/>
+    <circle cx="210" cy="210" r="116"/>
+    <circle cx="210" cy="210" r="153"/>
+    <circle cx="210" cy="210" r="190"/>
+  </g>
+  <g fill="#111" font-family="Arial, Helvetica, sans-serif" font-size="19" text-anchor="middle">
+    <text x="210" y="216">8</text>
+    <text x="210" y="151">7</text>
+    <text x="210" y="114">6</text>
+    <text x="210" y="77">4</text>
+    <text x="210" y="40">3</text>
+  </g>
+</svg>
