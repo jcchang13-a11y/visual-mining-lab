@@ -54,6 +54,7 @@
   font-size:.9em;
   line-height:1.65;
 }
+.work-note-line{white-space:pre-wrap}
 
 /* L4｜公式與結構代碼：技術層。 */
 .structure-code,
@@ -62,6 +63,15 @@
   font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
 }
 .structure-code{letter-spacing:.03em}
+.structure-line{
+  display:block;
+  margin:.7em 0;
+  padding:.1em 0 .1em .8em;
+  border-left:1px solid var(--gcb-rule);
+  white-space:pre-wrap;
+  font-size:.9em;
+  line-height:1.65;
+}
 .gcb-formula{
   display:inline-grid;
   grid-template-rows:auto 1px auto;
