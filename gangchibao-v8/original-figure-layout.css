@@ -1,0 +1,37 @@
+/* 《剛吃飽》第八版｜既有原圖閱讀位置鷹架
+ * 只控制容器、留白與列印行為；不裁切、不濾鏡、不重畫原圖。
+ */
+.existing-figure.original-figure{
+  display:block;
+  max-width:46rem;
+  margin:2.2rem auto;
+  padding:0;
+  text-align:center;
+  break-inside:avoid;
+}
+.existing-figure.original-figure img{
+  display:block;
+  max-width:100%;
+  width:auto;
+  height:auto;
+  margin:0 auto;
+  object-fit:contain;
+  filter:none;
+}
+.existing-figure.original-figure figcaption{
+  max-width:34rem;
+  margin:.7rem auto 0;
+  color:#6f6b64;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  font-size:.76rem;
+  line-height:1.55;
+  letter-spacing:.015em;
+}
+@media (max-width:640px){
+  .existing-figure.original-figure{margin:1.65rem auto}
+  .existing-figure.original-figure img{max-height:72vh}
+}
+@media print{
+  .existing-figure.original-figure{max-width:100%;margin:1.4em auto;break-inside:avoid;page-break-inside:avoid}
+  .existing-figure.original-figure img{max-width:100%;max-height:72vh}
+}
