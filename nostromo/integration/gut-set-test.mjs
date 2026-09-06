@@ -23,9 +23,10 @@ const setAtoms=gut.nutrients.filter(x=>x.provenance?.containerKind==='set');
 const setPaths=setAtoms.map(x=>x.path);
 const repeatedSetEvidence=setAtoms.filter(x=>x.text==='Evidence: repeated Set member text must retain its own member path.');
 const setQuarantine=gut.quarantine.filter(x=>x.provenance?.containerKind==='set');
+const allPreservedSetAtoms=[...setAtoms,...setQuarantine];
 
 check(gut.version==='0.2.34','GUT_SET_VERSION',gut.version);
-check(setAtoms.length>=5,'SET_MEMBERS_DISAPPEARED',{setAtoms,quarantine:setQuarantine});
+check(allPreservedSetAtoms.length===5,'SET_MEMBERS_DISAPPEARED',{nutrients:setAtoms,quarantine:setQuarantine});
 check(setPaths.some(p=>p==='root.evidenceSet<0>'),'SET_FIRST_MEMBER_PATH_LOST',setPaths);
 check(setPaths.some(p=>p==='root.evidenceSet<1>'),'SET_NUMERIC_MEMBER_PATH_LOST',setPaths);
 check(repeatedSetEvidence.length===2,'SET_DISTINCT_OBJECT_MEMBERS_COLLAPSED',repeatedSetEvidence);
@@ -34,17 +35,17 @@ check(gut.routes?.MUTHER?.items?.some(x=>x.path==='root.evidenceSet<0>'),'SET_EV
 check(gut.routes?.HOLD?.items?.some(x=>x.path==='root.evidenceSet<1>'&&x.type==='NUMERIC_MATERIAL'),'SET_NUMERIC_MEMBER_NOT_HELD',gut.routes?.HOLD);
 check(setQuarantine.some(x=>x.path==='root.evidenceSet<4>'&&x.type==='ERROR_OBJECT'),'SET_ERROR_MEMBER_NOT_QUARANTINED',setQuarantine);
 check(gut.waste?.some(x=>x.path==='root.ordinaryDuplicateB'&&x.type==='DUPLICATE'),'ORDINARY_DUPLICATE_GUARD_DISABLED',gut.waste);
-check(setAtoms.every(x=>x.provenance?.inputSource==='NOSTROMO/gut-set-test'),'SET_INPUT_PROVENANCE_LOST',setAtoms);
+check(allPreservedSetAtoms.every(x=>x.provenance?.inputSource==='NOSTROMO/gut-set-test'),'SET_INPUT_PROVENANCE_LOST',allPreservedSetAtoms);
 
 const result={
-  schema:'nostromo-gut-set-test/v0.1',
+  schema:'nostromo-gut-set-test/v0.2',
   completedAt:new Date().toISOString(),
   status:failures.length?'FAIL':'PASS',
   engineVersion:gut.version,
   capability:'PATH_SCOPED_SET_MEMBER_PRESERVATION_WITH_CONTAINER_PROVENANCE',
-  observations:{setNutrients:setAtoms.length,setQuarantined:setQuarantine.length,repeatedTextMembers:repeatedSetEvidence.length,ordinaryDuplicateStillSuppressed:gut.waste?.some(x=>x.path==='root.ordinaryDuplicateB'&&x.type==='DUPLICATE')||false},
+  observations:{setNutrients:setAtoms.length,setQuarantined:setQuarantine.length,totalPreservedSetMembers:allPreservedSetAtoms.length,repeatedTextMembers:repeatedSetEvidence.length,ordinaryDuplicateStillSuppressed:gut.waste?.some(x=>x.path==='root.ordinaryDuplicateB'&&x.type==='DUPLICATE')||false},
   failures,
-  boundary:'This test verifies deterministic structural preservation of JavaScript Set members, member-index provenance, path-scoped multiplicity, ordinary GUT routing, quarantine behavior and continued non-Set duplicate containment. It does not infer semantic set membership, ontology, source independence, evidence quality, novelty or factual truth.'
+  boundary:'This test verifies deterministic structural preservation of JavaScript Set members across absorbed and quarantined outputs, member-index provenance, path-scoped multiplicity, ordinary GUT routing, quarantine behavior and continued non-Set duplicate containment. It does not infer semantic set membership, ontology, source independence, evidence quality, novelty or factual truth.'
 };
 await fs.writeFile('nostromo/integration/gut-set-last-result.json',JSON.stringify(result,null,2)+'\n','utf8');
 console.log(JSON.stringify(result,null,2));
