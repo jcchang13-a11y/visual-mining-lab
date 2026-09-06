@@ -1,0 +1,39 @@
+name: NOSTROMO GUT Error Promotion
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - '.nostromo-triggers/gut-error-promote.json'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  promote:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify focused Error object receipt against current main
+        run: node nostromo/integration/gut-error-object-test.mjs
+      - name: Verify GUT metabolism regression
+        run: node nostromo/integration/gut-metabolism-test.mjs
+      - name: Verify full cross-organ integration
+        run: node nostromo/integration/ci-test.mjs
+      - name: Promote verified public state
+        run: node nostromo/integration/promote-gut-error.mjs
+      - name: Commit verified promotion
+        run: |
+          git config user.name "nostromo-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git restore nostromo/integration/gut-metabolism-last-result.json nostromo/integration/ci-last-result.json
+          git add nostromo/integration/gut-error-object-last-result.json nostromo/integration/organ-registry.json nostromo/index.html
+          git commit -m "NOSTROMO: promote verified GUT v0.2.32 Error object preservation"
+          git pull --rebase origin main
+          git push origin HEAD:main
