@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 420" role="img" aria-labelledby="title desc">
+  <title id="title">第二十五分回溯第十九至第二十四分</title>
+  <desc id="desc">中心為第二十五分，向外依序標示第二十四、二十三、二十二、二十一、二十與十九分，呈現第二十五至二十八分開始前對前一整組十九至二十四分的回收。</desc>
+  <rect width="420" height="420" fill="#fff"/>
+  <g fill="none" stroke="#111" stroke-width="2">
+    <circle cx="210" cy="210" r="28"/>
+    <circle cx="210" cy="210" r="54"/>
+    <circle cx="210" cy="210" r="80"/>
+    <circle cx="210" cy="210" r="106"/>
+    <circle cx="210" cy="210" r="132"/>
+    <circle cx="210" cy="210" r="158"/>
+    <circle cx="210" cy="210" r="184"/>
+  </g>
+  <g fill="#111" font-family="Arial, Helvetica, sans-serif" font-size="16" text-anchor="middle">
+    <text x="210" y="216">25</text>
+    <text x="210" y="170">24</text>
+    <text x="210" y="144">23</text>
+    <text x="210" y="118">22</text>
+    <text x="210" y="92">21</text>
+    <text x="210" y="66">20</text>
+    <text x="210" y="40">19</text>
+  </g>
+</svg>
