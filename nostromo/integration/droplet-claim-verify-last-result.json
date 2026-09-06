@@ -1,6 +1,6 @@
 {
   "schema": "nostromo-droplet-claim-verify-test/v1.6",
-  "completedAt": "2026-09-06T09:12:36.872Z",
+  "completedAt": "2026-09-06T09:12:46.992Z",
   "status": "PASS",
   "cases": {
     "baseline": {
