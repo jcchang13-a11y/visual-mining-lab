@@ -1,10 +1,9 @@
 {
-  "purpose": "single CI trigger for VAJRA canonical bracket-aware receipt pipeline v0.1.1 full NOSTROMO regression",
+  "purpose": "full NOSTROMO regression for verified GUT v0.2.29 path-scoped typed BigInt preservation",
   "stagedCommits": [
-    "ae0758efeb9c9c22e7a8e682a736481962ba00ac",
-    "eb0ba5363b33f7754976b933b3ec034d49f21441"
+    "712de4bc35c59399948bdc12c98c1e707919beee"
   ],
-  "focusedWorkflowRun": 33989310210,
+  "focusedWorkflowRun": 34026325713,
   "focusedStatus": "PASS",
   "truthRule": "DISPLAYED STATE MUST FOLLOW EVIDENCE"
 }
