@@ -140,6 +140,36 @@
 「須菩提，於意云何？可以三十二相見如來不？」
 
 「不也，世尊。不可以三十二相得見如來。何以故？如來說三十二相，即是非相，是名三十二相。」
+[[/SUTRA]]`,
+'30450':`[[SUTRA: 本單元涉及經文｜第二十九至第三十二分]]
+【威儀寂靜分第二十九】
+「須菩提，若有人言：如來若來若去，若坐若臥。是人不解我所說義。何以故？如來者，無所從來，亦無所去，故名如來。」
+
+【一合理相分第三十】
+「須菩提，若善男子、善女人，以三千大千世界碎為微塵，於意云何？是微塵眾，寧為多不？」
+
+須菩提言：「甚多，世尊。何以故？若是微塵眾實有者，佛即不說是微塵眾。所以者何？佛說微塵眾，即非微塵眾，是名微塵眾。
+
+世尊，如來所說三千大千世界，即非世界，是名世界。何以故？若世界實有者，即是一合相。如來說一合相，即非一合相，是名一合相。」
+
+「須菩提，一合相者，即是不可說，但凡夫之人貪著其事。」
+
+【知見不生分第三十一｜本單元實際處理段】
+「須菩提，若人言：佛說我見、人見、眾生見、壽者見。須菩提，於意云何？是人解我所說義不？」
+
+「不也，世尊。是人不解如來所說義。何以故？世尊說我見、人見、眾生見、壽者見，即非我見、人見、眾生見、壽者見，是名我見、人見、眾生見、壽者見。」
+
+【應化非真分第三十二】
+「須菩提，若有人以滿無量阿僧祇世界七寶，持用布施；若有善男子、善女人，發菩薩心者，持於此經，乃至四句偈等，受持讀誦，為人演說，其福勝彼。
+
+云何為人演說？不取於相，如如不動。何以故？
+
+一切有為法，
+如夢幻泡影，
+如露亦如電，
+應作如是觀。」
+
+佛說是經已，長老須菩提，及諸比丘、比丘尼、優婆塞、優婆夷，一切世間天、人、阿修羅，聞佛所說，皆大歡喜，信受奉行。
 [[/SUTRA]]`};const p=new URLSearchParams(location.search);let u=p.get('u')||units[0];let i=units.indexOf(u);if(i<0){i=0;u=units[0]}document.getElementById('unitTitle').textContent=u;document.getElementById('status').textContent=`單元 ${String(i+1).padStart(2,'0')} / 22`;const nav=document.getElementById('nav');if(i>0)nav.innerHTML+=`<a href="reader.html?u=${units[i-1]}">← ${units[i-1]}</a>`;if(i<units.length-1)nav.innerHTML+=`<a href="reader.html?u=${units[i+1]}">${units[i+1]} →</a>`;
 function makeFormula(label,block=false){const f=document.createElement('span');f.className='gcb-formula'+(block?' block':'');const n=document.createElement('span');n.className='gcb-name';n.textContent=`「${label}」`;const b=document.createElement('span');b.className='gcb-bar';const d=document.createElement('span');d.className='gcb-neg';d.textContent=`～${label}`;f.append(n,b,d);return f}
 function appendInline(parent,line){const re=/\{\{([^{}\n]+)\}\}/g;let last=0,m;while((m=re.exec(line))){if(m.index>last)parent.append(document.createTextNode(line.slice(last,m.index)));parent.append(makeFormula(m[1].trim(),line.trim()===m[0]));last=re.lastIndex}if(last<line.length)parent.append(document.createTextNode(line.slice(last)))}
