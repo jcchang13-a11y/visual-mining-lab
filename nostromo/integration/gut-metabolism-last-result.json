@@ -1,9 +1,9 @@
 {
   "schema": "nostromo-gut-metabolism-test/v0.2.27-numeric-multiplicity",
-  "completedAt": "2026-09-06T02:05:14.829Z",
-  "status": "FAIL",
+  "completedAt": "2026-09-06T02:06:40.460Z",
+  "status": "PASS",
   "gut": {
-    "version": "0.2.28",
+    "version": "0.2.27",
     "mode": "DETERMINISTIC_HEURISTIC_ROUTER",
     "typeCounts": {
       "CLAIM": 2,
@@ -442,11 +442,6 @@
     ],
     "boundary": "Certifies the closed-loop executor path plus carry-layer metabolic containment, deterministic SHROOMING feedback-conditioned reading, and prior-round GUT→VAJRA branch reprioritization. From round 2 onward, redacted connector feedback can change SHROOMING inspection priority and source-preserving GUT metabolic atoms can change which unresolved VAJRA branch is inspected first. Neither mechanism gains closure authority or claims semantic learning. Recursive wrapper growth, ref/clause token fragmentation, embedded-token replay, repeated lineage-only carry fragments, and bare boolean/null machine scaffolding are contained only at carry rendering; GUT nutrient atoms, routes and provenance remain intact. GitHub Actions does not itself search private Drive or the web."
   },
-  "failures": [
-    {
-      "type": "GUT_VERSION",
-      "detail": "0.2.28"
-    }
-  ],
+  "failures": [],
   "boundary": "PASS proves deterministic heuristic routing, provenance retention, typed finite numeric scalar preservation before short-text low-signal filtering, and path-aware typed numeric multiplicity preservation so equal numeric values in distinct fields or array positions are not silently collapsed as duplicate material. Ordinary textual duplicate suppression remains active. It also proves contextual risk quarantine, conservative exact inherited-substrate removal, exact tagged-payload de-echoing, exact repeated tagged-tail suppression while retaining distinct heads, pre/post short exact adjacent intra-atom echo suppression, shared-body summary diversity, exact non-adjacent full-width-colon carry-clause compaction, consecutive exact 1–4 character carry-token run collapse, summary-only machine ref/clause metadata containment, a bounded out-of-band carryRefs ledger, structured-snippet protection, and a 3-round cross-organ connector-feedback regression. It does not prove semantic novelty, semantic correctness, numeric measurement validity, reference truth, source truth, or source independence."
 }
