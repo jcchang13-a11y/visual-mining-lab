@@ -1,0 +1,43 @@
+name: NOSTROMO GUT Map Promote
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'nostromo/integration/promote-gut-map.mjs'
+      - '.github/workflows/nostromo-gut-map-promote.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  promote:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Re-verify focused GUT Map adversarial fixture
+        run: node nostromo/integration/gut-map-test.mjs
+      - name: Re-verify GUT metabolism regression
+        run: node nostromo/integration/gut-metabolism-test.mjs
+      - name: Re-verify full NOSTROMO integration before promotion
+        run: node nostromo/integration/ci-test.mjs
+      - name: Promote only from fresh PASS evidence
+        run: node nostromo/integration/promote-gut-map.mjs
+      - name: Record verified promotion without recursive CI noise
+        run: |
+          git config user.name "nostromo-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add nostromo/integration/gut-map-last-result.json nostromo/integration/gut-metabolism-last-result.json nostromo/integration/ci-last-result.json nostromo/integration/organ-registry.json nostromo/index.html
+          if git diff --cached --quiet; then
+            echo "No verified promotion changes to record"
+            exit 0
+          fi
+          git commit -m "[nostromo-test] promote verified GUT v0.2.33 Map preservation"
+          git pull --rebase origin main
+          git push origin HEAD:main
