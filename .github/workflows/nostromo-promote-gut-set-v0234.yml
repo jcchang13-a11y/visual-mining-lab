@@ -1,0 +1,37 @@
+name: NOSTROMO Promote GUT Set v0.2.34
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'promote-gut-set-v0234.mjs'
+      - '.github/workflows/nostromo-promote-gut-set-v0234.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  promote:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Promote only from focused PASS plus full CI PASS
+        run: node promote-gut-set-v0234.mjs
+      - name: Commit registry promotion
+        run: |
+          git config user.name "nostromo-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add nostromo/integration/organ-registry.json
+          if git diff --cached --quiet; then
+            echo "No registry promotion change"
+          else
+            git commit -m "[nostromo-test] publish verified GUT v0.2.34 Set preservation"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
