@@ -1,9 +1,9 @@
 {
   "schema": "nostromo-gut-metabolism-test/v0.2.27-numeric-multiplicity",
-  "completedAt": "2026-09-06T00:09:22.891Z",
-  "status": "PASS",
+  "completedAt": "2026-09-06T02:05:14.829Z",
+  "status": "FAIL",
   "gut": {
-    "version": "0.2.27",
+    "version": "0.2.28",
     "mode": "DETERMINISTIC_HEURISTIC_ROUTER",
     "typeCounts": {
       "CLAIM": 2,
@@ -22,7 +22,7 @@
       "VAJRA": 1,
       "HOLD": 4
     },
-    "boundary": "Deterministic heuristic metabolism only. Typed finite numeric primitives are preserved before short-text low-signal filtering; metric/count/status-code style numeric paths route to MUTHER as NUMERIC_EVIDENCE, while other finite numeric primitives remain auditable NUMERIC_MATERIAL in HOLD. Equal numeric scalar values at distinct structured paths are now kept as distinct auditable atoms instead of being collapsed by text-only duplicate detection; this preserves metric multiplicity and path provenance without disabling ordinary textual duplicate suppression. This prevents values such as 0, 1, 4 or 10 from being silently excreted merely because their string form is short or because another field carries the same number. Risk quarantine is context-gated: dedicated failure/risk paths, terminal non-success values only when they occupy explicit status/result/outcome fields, explicit terminal markers such as status=FAILED, descendant payload atoms carrying an inherited failed/rejected/invalid/quarantine/untrusted/cancelled/timeout/timed_out/aborted/blocked/skipped ancestor status in provenance, and terminal non-success path segments such as execution.timeout or job.blocked when they occur under bounded machine-execution context. A bare lexical token such as timeout or skipped in an ordinary semantic field or configuration path is not itself execution-failure evidence. This prevents a terminal non-success executor envelope or machine-execution failure field from leaking sibling claim/evidence/question payloads into downstream organs as fresh material, while ordinary semantic prose under a non-failed ancestor remains routable. This reduces execution-context contamination without treating surviving prose as true. Machine-only hexadecimal targetRef/ref/clauseRef/clause identifiers are removed from prose carry rendering so lineage metadata cannot masquerade as semantic novelty, while a separate carryRefs ledger preserves bounded out-of-band referential continuity with path, route, type and provenance. carryRefs are identifiers, not evidence, truth claims or semantic nutrients. Original nutrient atoms, routes and provenance remain untouched. Carry-summary lineage comparison neutralizes volatile ref:/clause: hexadecimal identifiers and long hash tokens before diversity selection so provenance-only identifier changes do not masquerade as new metabolic content. Script-aware carry compaction runs whenever at least two fullwidth-colon clauses are present and treats a clause as substantive when it has at least 12 normalized characters or at least 8 CJK characters, allowing short meaningful Chinese phrases nested inside longer clauses to collapse in carry rendering without mutating source nutrients. Summary carry collapses repeated standalone machine lineage signatures of 5–64 characters containing _ or - only in carry rendering; distinct prose clauses and source nutrients remain intact. Summary carry additionally collapses consecutive exact 1–4 character colon-delimited token runs while preserving a single token. The middle-dot separator ` · ` is reserved for top-level carry item boundaries; the same glyph found inside a nutrient is neutralized to ` ∙ ` only in summary rendering so recursive carry cannot manufacture false pseudo-items, while the source nutrient and provenance remain unchanged. Inherited substrate subtraction removes only exact full normalized substrates; truncated prefixes are never deletion candidates. These rules are auditable heuristics, not semantic truth."
+    "boundary": "Deterministic heuristic metabolism only. Typed finite numeric primitives are preserved before short-text low-signal filtering; metric/count/status-code style numeric paths route to MUTHER as NUMERIC_EVIDENCE, while other finite numeric primitives remain auditable NUMERIC_MATERIAL in HOLD. Typed boolean primitives are preserved as path-scoped BOOLEAN_MATERIAL in HOLD so repeated true/false values at distinct structured paths cannot collapse into one apparent fact; booleans are not promoted to evidence or truth. Equal numeric or boolean scalar values at distinct structured paths are kept as distinct auditable atoms instead of being collapsed by text-only duplicate detection, while ordinary textual duplicate suppression remains active. Risk quarantine is context-gated: dedicated failure/risk paths, terminal non-success values only when they occupy explicit status/result/outcome fields, explicit terminal markers such as status=FAILED, descendant payload atoms carrying an inherited failed/rejected/invalid/quarantine/untrusted/cancelled/timeout/timed_out/aborted/blocked/skipped ancestor status in provenance, and terminal non-success path segments such as execution.timeout or job.blocked when they occur under bounded machine-execution context. A bare lexical token such as timeout or skipped in an ordinary semantic field or configuration path is not itself execution-failure evidence. This prevents a terminal non-success executor envelope or machine-execution failure field from leaking sibling claim/evidence/question payloads into downstream organs as fresh material, while ordinary semantic prose under a non-failed ancestor remains routable. This reduces execution-context contamination without treating surviving prose as true. Machine-only hexadecimal targetRef/ref/clauseRef/clause identifiers are removed from prose carry rendering so lineage metadata cannot masquerade as semantic novelty, while a separate carryRefs ledger preserves bounded out-of-band referential continuity with path, route, type and provenance. carryRefs are identifiers, not evidence, truth claims or semantic nutrients. Original nutrient atoms, routes and provenance remain untouched. Carry-summary lineage comparison neutralizes volatile ref:/clause: hexadecimal identifiers and long hash tokens before diversity selection so provenance-only identifier changes do not masquerade as new metabolic content. Script-aware carry compaction runs whenever at least two fullwidth-colon clauses are present and treats a clause as substantive when it has at least 12 normalized characters or at least 8 CJK characters, allowing short meaningful Chinese phrases nested inside longer clauses to collapse in carry rendering without mutating source nutrients. Summary carry collapses repeated standalone machine lineage signatures of 5–64 characters containing _ or - only in carry rendering; distinct prose clauses and source nutrients remain intact. Summary carry additionally collapses consecutive exact 1–4 character colon-delimited token runs while preserving a single token. The middle-dot separator ` · ` is reserved for top-level carry item boundaries; the same glyph found inside a nutrient is neutralized to ` ∙ ` only in summary rendering so recursive carry cannot manufacture false pseudo-items, while the source nutrient and provenance remain unchanged. Inherited substrate subtraction removes only exact full normalized substrates; truncated prefixes are never deletion candidates. These rules are auditable heuristics, not semantic truth."
   },
   "riskContext": {
     "status": "PASS",
@@ -375,9 +375,9 @@
     "roundAntiEcho": [
       {
         "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PRE_POST_ADJACENT_SEGMENT_COLLAPSE_12+PREFIX_DIVERSITY_96+SHARED_BODY_SUMMARY_DIVERSITY_80_192+VOLATILE_REF_LINEAGE_NEUTRALIZATION+TAGGED_PAYLOAD_DEDUP+EXACT_TAGGED_TAIL_DEDUP_80+ROUTE_METADATA_STRIP+DELIMITED_LONG_SEGMENT_DEDUP+SUMMARY_EXACT_NONADJACENT_FULLWIDTH_COLON_CLAUSE_DEDUP+SUMMARY_SCRIPT_AWARE_NESTED_CLAUSE_COLLAPSE+SUMMARY_VOLATILE_LINEAGE_FULLWIDTH_COLON_CLAUSE_DEDUP+SUMMARY_CONSECUTIVE_SHORT_TOKEN_COLLAPSE_4+SUMMARY_REPEATED_LINEAGE_SIGNATURE_COLLAPSE_5_64+CARRY_MACHINE_METADATA_STRIP+OUT_OF_BAND_CARRY_REF_LEDGER+CARRY_DELIMITER_COLLISION_NEUTRALIZATION+CARRY_LINEAGE_SEPARATOR_NEUTRALIZATION",
-        "candidateCount": 348,
+        "candidateCount": 363,
         "selectedCount": 12,
-        "suppressedCount": 336,
+        "suppressedCount": 351,
         "sharedBodySuppressedCount": 0,
         "volatileLineageSuppressedCount": 0,
         "inheritedSubstrateStrippedCount": 0,
@@ -397,16 +397,16 @@
       },
       {
         "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PRE_POST_ADJACENT_SEGMENT_COLLAPSE_12+PREFIX_DIVERSITY_96+SHARED_BODY_SUMMARY_DIVERSITY_80_192+VOLATILE_REF_LINEAGE_NEUTRALIZATION+TAGGED_PAYLOAD_DEDUP+EXACT_TAGGED_TAIL_DEDUP_80+ROUTE_METADATA_STRIP+DELIMITED_LONG_SEGMENT_DEDUP+SUMMARY_EXACT_NONADJACENT_FULLWIDTH_COLON_CLAUSE_DEDUP+SUMMARY_SCRIPT_AWARE_NESTED_CLAUSE_COLLAPSE+SUMMARY_VOLATILE_LINEAGE_FULLWIDTH_COLON_CLAUSE_DEDUP+SUMMARY_CONSECUTIVE_SHORT_TOKEN_COLLAPSE_4+SUMMARY_REPEATED_LINEAGE_SIGNATURE_COLLAPSE_5_64+CARRY_MACHINE_METADATA_STRIP+OUT_OF_BAND_CARRY_REF_LEDGER+CARRY_DELIMITER_COLLISION_NEUTRALIZATION+CARRY_LINEAGE_SEPARATOR_NEUTRALIZATION",
-        "candidateCount": 1070,
+        "candidateCount": 1086,
         "selectedCount": 12,
-        "suppressedCount": 1058,
+        "suppressedCount": 1074,
         "sharedBodySuppressedCount": 9,
         "volatileLineageSuppressedCount": 0,
         "inheritedSubstrateStrippedCount": 10,
         "nestedEchoAffectedAtoms": 12,
         "nestedEchoSuppressedCount": 0,
         "taggedTailSuppressedCount": 0,
-        "routeTagsStripped": 28,
+        "routeTagsStripped": 29,
         "segmentEchoSuppressedCount": 0,
         "delimitedEchoSuppressedCount": 0,
         "carryClauseSuppressedCount": 0,
@@ -419,9 +419,9 @@
       },
       {
         "strategy": "EXACT_INHERITED_SUBSTRATE_SUBTRACTION+PRE_POST_ADJACENT_SEGMENT_COLLAPSE_12+PREFIX_DIVERSITY_96+SHARED_BODY_SUMMARY_DIVERSITY_80_192+VOLATILE_REF_LINEAGE_NEUTRALIZATION+TAGGED_PAYLOAD_DEDUP+EXACT_TAGGED_TAIL_DEDUP_80+ROUTE_METADATA_STRIP+DELIMITED_LONG_SEGMENT_DEDUP+SUMMARY_EXACT_NONADJACENT_FULLWIDTH_COLON_CLAUSE_DEDUP+SUMMARY_SCRIPT_AWARE_NESTED_CLAUSE_COLLAPSE+SUMMARY_VOLATILE_LINEAGE_FULLWIDTH_COLON_CLAUSE_DEDUP+SUMMARY_CONSECUTIVE_SHORT_TOKEN_COLLAPSE_4+SUMMARY_REPEATED_LINEAGE_SIGNATURE_COLLAPSE_5_64+CARRY_MACHINE_METADATA_STRIP+OUT_OF_BAND_CARRY_REF_LEDGER+CARRY_DELIMITER_COLLISION_NEUTRALIZATION+CARRY_LINEAGE_SEPARATOR_NEUTRALIZATION",
-        "candidateCount": 1028,
+        "candidateCount": 1045,
         "selectedCount": 12,
-        "suppressedCount": 1016,
+        "suppressedCount": 1033,
         "sharedBodySuppressedCount": 9,
         "volatileLineageSuppressedCount": 0,
         "inheritedSubstrateStrippedCount": 11,
@@ -442,6 +442,11 @@
     ],
     "boundary": "Certifies the closed-loop executor path plus carry-layer metabolic containment, deterministic SHROOMING feedback-conditioned reading, and prior-round GUT→VAJRA branch reprioritization. From round 2 onward, redacted connector feedback can change SHROOMING inspection priority and source-preserving GUT metabolic atoms can change which unresolved VAJRA branch is inspected first. Neither mechanism gains closure authority or claims semantic learning. Recursive wrapper growth, ref/clause token fragmentation, embedded-token replay, repeated lineage-only carry fragments, and bare boolean/null machine scaffolding are contained only at carry rendering; GUT nutrient atoms, routes and provenance remain intact. GitHub Actions does not itself search private Drive or the web."
   },
-  "failures": [],
+  "failures": [
+    {
+      "type": "GUT_VERSION",
+      "detail": "0.2.28"
+    }
+  ],
   "boundary": "PASS proves deterministic heuristic routing, provenance retention, typed finite numeric scalar preservation before short-text low-signal filtering, and path-aware typed numeric multiplicity preservation so equal numeric values in distinct fields or array positions are not silently collapsed as duplicate material. Ordinary textual duplicate suppression remains active. It also proves contextual risk quarantine, conservative exact inherited-substrate removal, exact tagged-payload de-echoing, exact repeated tagged-tail suppression while retaining distinct heads, pre/post short exact adjacent intra-atom echo suppression, shared-body summary diversity, exact non-adjacent full-width-colon carry-clause compaction, consecutive exact 1–4 character carry-token run collapse, summary-only machine ref/clause metadata containment, a bounded out-of-band carryRefs ledger, structured-snippet protection, and a 3-round cross-organ connector-feedback regression. It does not prove semantic novelty, semantic correctness, numeric measurement validity, reference truth, source truth, or source independence."
 }
