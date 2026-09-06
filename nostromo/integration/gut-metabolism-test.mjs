@@ -58,6 +58,20 @@ check(!numericScalarGut.waste?.some(x=>['root.metrics.count','root.metrics.rate'
 check(numericScalarGut.waste?.some(x=>x.path==='root.textualNoise'),'SHORT_TEXT_NOISE_NOT_EXCRETED',numericScalarGut.waste);
 check(numericScalarGut.nutrients?.filter(x=>x.type==='NUMERIC_EVIDENCE'||x.type==='NUMERIC_MATERIAL').every(x=>x.provenance?.inputSource==='NOSTROMO/gut-numeric-scalar-test'),'SHORT_NUMERIC_PROVENANCE_LOST',numericScalarGut.nutrients);
 
+const numericMultiplicityGut=globalThis.GutEngine.digest({
+  metrics:{count:1,score:1,rate:1},
+  samples:[1,1],
+  duplicateTextA:'same textual duplicate',
+  duplicateTextB:'same textual duplicate'
+},{source:'NOSTROMO/gut-numeric-multiplicity-test'});
+const numericMultiplicityPaths=['root.metrics.count','root.metrics.score','root.metrics.rate','root.samples[0]','root.samples[1]'];
+check(numericMultiplicityGut.typeCounts?.NUMERIC_EVIDENCE===3,'EQUAL_NUMERIC_METRICS_COLLAPSED',numericMultiplicityGut.typeCounts);
+check(numericMultiplicityGut.typeCounts?.NUMERIC_MATERIAL===2,'EQUAL_NUMERIC_SAMPLES_COLLAPSED',numericMultiplicityGut.typeCounts);
+check(numericMultiplicityPaths.every(p=>numericMultiplicityGut.nutrients?.some(x=>x.path===p&&x.text==='1')),'EQUAL_NUMERIC_PATH_PROVENANCE_LOST',numericMultiplicityGut.nutrients);
+check(!numericMultiplicityGut.waste?.some(x=>numericMultiplicityPaths.includes(x.path)),'EQUAL_NUMERIC_VALUE_FALSE_DUPLICATE',numericMultiplicityGut.waste);
+check(numericMultiplicityGut.waste?.some(x=>x.path==='root.duplicateTextB'&&x.type==='DUPLICATE'),'TEXT_DUPLICATE_GUARD_DISABLED',numericMultiplicityGut.waste);
+check(numericMultiplicityGut.nutrients?.filter(x=>numericMultiplicityPaths.includes(x.path)).every(x=>x.provenance?.inputSource==='NOSTROMO/gut-numeric-multiplicity-test'),'EQUAL_NUMERIC_INPUT_PROVENANCE_LOST',numericMultiplicityGut.nutrients);
+
 const inherited='This inherited substrate is deliberately long enough to be recognized as prior-round material and must not be counted as novelty.';
 const inheritedGut=globalThis.GutEngine.digest({reaction:`new observation before ${inherited} new observation after`},{source:'NOSTROMO/gut-inherited-test',inheritedSubstrates:[inherited]});
 check(inheritedGut.antiEcho?.inheritedSubstrateStrippedCount>=1,'INHERITED_NOT_STRIPPED',inheritedGut.antiEcho);
@@ -138,7 +152,7 @@ check(structuredGut.routes?.MUTHER?.count===1,'STRUCTURED_NOT_ROUTED_TO_MUTHER',
 
 let active=null;
 try{
-  active=await runActiveExecutorLoop({rounds:3,seed:'GUT v0.2.27 feedback validation',mineQuery:'NOSTROMO',verifyUrl:'https://github.com/jcchang13-a11y/visual-mining-lab'});
+  active=await runActiveExecutorLoop({rounds:3,seed:'GUT v0.2.27 numeric multiplicity validation',mineQuery:'NOSTROMO',verifyUrl:'https://github.com/jcchang13-a11y/visual-mining-lab'});
   check(active.status==='PASS','ACTIVE_LOOP_FAIL',{status:active.status,completedRounds:active.completedRounds});
   check(active.feedback?.appliedRounds===2,'FEEDBACK_APPLIED_ROUNDS',active.feedback);
   check(active.feedback?.firstAppliedRound===2,'FEEDBACK_FIRST_ROUND',active.feedback);
@@ -149,15 +163,16 @@ try{
 }catch(error){failures.push({type:'ACTIVE_LOOP_EXCEPTION',message:String(error?.message||error)});}
 
 const result={
-  schema:'nostromo-gut-metabolism-test/v0.2.27',completedAt:new Date().toISOString(),status:failures.length===0?'PASS':'FAIL',
+  schema:'nostromo-gut-metabolism-test/v0.2.27-numeric-multiplicity',completedAt:new Date().toISOString(),status:failures.length===0?'PASS':'FAIL',
   gut:{version:gut.version,mode:gut.mode,typeCounts:gut.typeCounts,routeCounts:Object.fromEntries(Object.entries(gut.routes).map(([k,v])=>[k,v.count])),boundary:gut.boundary},
   riskContext:{status:riskContextGut.quarantined===2?'PASS':'FAIL',quarantined:riskContextGut.quarantined,routeCounts:Object.fromEntries(Object.entries(riskContextGut.routes).map(([k,v])=>[k,v.count])),boundary:'Ordinary semantic prose containing error/rejected/invalid lexemes must remain routable; only dedicated failure/risk paths or explicit machine-like failure status markers are quarantined.'},
   numericScalarPreservation:{status:(numericScalarGut.typeCounts?.NUMERIC_EVIDENCE===3&&numericScalarGut.typeCounts?.NUMERIC_MATERIAL===1)?'PASS':'FAIL',typeCounts:numericScalarGut.typeCounts,routeCounts:Object.fromEntries(Object.entries(numericScalarGut.routes).map(([k,v])=>[k,v.count])),waste:numericScalarGut.waste.map(x=>({path:x.path,type:x.type,text:x.text})),boundary:'Finite numeric primitives must be classified before short-text low-signal filtering. Metric/count/status-code style paths are numeric evidence for MUTHER; other finite numeric primitives remain auditable material rather than being silently discarded because 0/1/4/10 have short string forms.'},
+  numericMultiplicityPreservation:{status:(numericMultiplicityGut.typeCounts?.NUMERIC_EVIDENCE===3&&numericMultiplicityGut.typeCounts?.NUMERIC_MATERIAL===2&&!numericMultiplicityGut.waste?.some(x=>numericMultiplicityPaths.includes(x.path)))?'PASS':'FAIL',paths:numericMultiplicityPaths,nutrients:numericMultiplicityGut.nutrients.filter(x=>numericMultiplicityPaths.includes(x.path)).map(x=>({path:x.path,type:x.type,text:x.text,provenance:x.provenance})),textDuplicateStillExcreted:numericMultiplicityGut.waste?.some(x=>x.path==='root.duplicateTextB'&&x.type==='DUPLICATE'),boundary:'Equal typed numeric values at distinct structured paths are not semantic duplicates. They must preserve multiplicity, route/type and provenance independently, while ordinary repeated textual material remains subject to the existing duplicate guard.'},
   antiEcho:{nested:nestedGut.antiEcho,taggedTail:taggedTailGut.antiEcho,shortAdjacent:shortGut.antiEcho,nearDuplicate:nearGut.antiEcho,sharedBodySummary:sharedBodyGut.antiEcho,nonAdjacentCarry:nonAdjacentGut.antiEcho,shortTokenCarry:shortTokenGut.antiEcho,machineMetadataCarry:metadataGut.antiEcho,inherited:inheritedGut.antiEcho,partialInherited:partialGut.antiEcho},
   carryRefLedger:{count:metadataGut.carryRefCount,refs:metadataGut.carryRefs},
   feedback:active?{status:active.status,completedRounds:active.completedRounds,feedback:active.feedback,lastCarry:active.trace?.at(-1)?.carryOut||null,roundAntiEcho:active.trace?.map(x=>x.gut?.antiEcho),boundary:active.boundary}:null,
   failures,
-  boundary:'PASS proves deterministic heuristic routing, provenance retention, typed finite numeric scalar preservation before short-text low-signal filtering, contextual risk quarantine that does not discard ordinary semantic prose merely for mentioning error/rejected/invalid lexemes, conservative exact inherited-substrate removal, exact tagged-payload de-echoing, exact repeated tagged-tail suppression while retaining distinct heads, pre/post short exact adjacent intra-atom echo suppression, shared-body summary diversity, exact non-adjacent full-width-colon carry-clause compaction, consecutive exact 1–4 character carry-token run collapse, summary-only machine ref/clause metadata containment, and a bounded out-of-band carryRefs ledger that preserves referential identity and provenance without re-inserting machine IDs into prose carry. It also proves near-duplicate preservation, structured-snippet protection, and a 3-round cross-organ connector-feedback regression whose final prose carry contains no hexadecimal ref/clause metadata tokens. It does not prove semantic novelty, semantic correctness, reference truth, source truth, or semantic meaning of arbitrary numeric fields.'
+  boundary:'PASS proves deterministic heuristic routing, provenance retention, typed finite numeric scalar preservation before short-text low-signal filtering, and path-aware typed numeric multiplicity preservation so equal numeric values in distinct fields or array positions are not silently collapsed as duplicate material. Ordinary textual duplicate suppression remains active. It also proves contextual risk quarantine, conservative exact inherited-substrate removal, exact tagged-payload de-echoing, exact repeated tagged-tail suppression while retaining distinct heads, pre/post short exact adjacent intra-atom echo suppression, shared-body summary diversity, exact non-adjacent full-width-colon carry-clause compaction, consecutive exact 1–4 character carry-token run collapse, summary-only machine ref/clause metadata containment, a bounded out-of-band carryRefs ledger, structured-snippet protection, and a 3-round cross-organ connector-feedback regression. It does not prove semantic novelty, semantic correctness, numeric measurement validity, reference truth, source truth, or source independence.'
 };
 await fs.writeFile(path.join(root,'nostromo/integration/gut-metabolism-last-result.json'),JSON.stringify(result,null,2)+'\n','utf8');
 console.log(JSON.stringify(result,null,2));
