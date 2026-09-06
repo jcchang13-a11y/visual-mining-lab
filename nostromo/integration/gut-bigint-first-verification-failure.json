@@ -1,0 +1,19 @@
+{
+  "schema": "nostromo-gut-bigint-verification-failure/v0.1",
+  "observedAt": "2026-09-06T17:05:20+08:00",
+  "status": "PRESERVED_FAILURE",
+  "workflow": "NOSTROMO GUT BigInt Scalar Test",
+  "runId": 34023644511,
+  "headCommit": "3ca32b3073cabb6452d9b76b6b9a519c899a6557",
+  "failedStep": "Verify typed BigInt provenance retention",
+  "patchStepStatus": "PASS",
+  "testStatus": "FAIL",
+  "failures": [
+    "BIGINT_MULTIPLICITY_LOST",
+    "BIGINT_PATH_PROVENANCE_LOST",
+    "EQUAL_BIGINT_PATHS_COLLAPSED"
+  ],
+  "diagnosis": "The first patch classified BigInt as status ABSORB with route HOLD. In GUT digest(), route HOLD under ABSORB remains auditable in nutrients/routes.HOLD but is not entered into the dedicated hold[] ledger, because hold[] is populated only for status HOLD. The focused test correctly rejected that mismatch against the declared repair boundary that BigInt material must be held rather than merely routed to HOLD.",
+  "repair": "Change BIGINT_MATERIAL classification from status ABSORB to status HOLD while retaining route HOLD and the no-evidence-promotion boundary. Do not weaken the focused test.",
+  "truthRule": "DISPLAYED STATE MUST FOLLOW EVIDENCE"
+}
