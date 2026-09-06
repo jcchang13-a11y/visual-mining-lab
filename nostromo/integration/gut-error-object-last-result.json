@@ -1,6 +1,6 @@
 {
   "schema": "nostromo-gut-error-object-test/v0.1",
-  "completedAt": "2026-09-06T18:08:50.250Z",
+  "completedAt": "2026-09-06T19:05:02.946Z",
   "status": "PASS",
   "capability": "PATH_SCOPED_TYPED_ERROR_OBJECT_PRESERVATION_WITH_QUARANTINE_WITHOUT_STACK_CAUSE_OR_SEMANTIC_PROMOTION",
   "quarantinedErrors": [
