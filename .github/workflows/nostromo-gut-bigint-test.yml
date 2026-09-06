@@ -7,6 +7,10 @@ on:
       - 'nostromo/integration/gut-bigint-provenance-defect.json'
       - 'nostromo/integration/apply-gut-bigint-thickening.mjs'
       - 'nostromo/integration/gut-bigint-scalar-test.mjs'
+      - 'nostromo/integration/gut-nonfinite-scalar-test.mjs'
+      - 'nostromo/integration/gut-boolean-scalar-test.mjs'
+      - 'nostromo/integration/gut-nullish-scalar-test.mjs'
+      - 'nostromo/integration/gut-metabolism-test.mjs'
       - '.github/workflows/nostromo-gut-bigint-test.yml'
   workflow_dispatch:
 
