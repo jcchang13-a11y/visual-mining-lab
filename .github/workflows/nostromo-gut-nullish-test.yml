@@ -7,6 +7,7 @@ on:
       - 'nostromo/gut/gut-engine.js'
       - 'nostromo/integration/apply-gut-nullish-thickening.mjs'
       - 'nostromo/integration/gut-nullish-scalar-test.mjs'
+      - 'nostromo/integration/gut-boolean-scalar-test.mjs'
       - '.github/workflows/nostromo-gut-nullish-test.yml'
   workflow_dispatch:
 
