@@ -44,6 +44,7 @@ registry.latestThickening={
   boundary:'This is deterministic scalar-type preservation. String(Symbol(...)) is audit rendering only; it does not prove JavaScript Symbol identity, equality, global registry membership, semantic meaning, evidence, confidence or factual truth.'
 };
 registry.organs.gut.actions.DIGEST='VERIFIED_HEURISTIC_METABOLIC_ROUTER_TYPED_FINITE_NONFINITE_BOOLEAN_NULLISH_BIGINT_AND_SYMBOL_SCALAR_HANDLING_TERMINAL_MACHINE_CONTEXT_PATH_AND_ANCESTOR_QUARANTINE_OUT_OF_BAND_REFERENTIAL_CARRY_WITH_SCALAR_SCAFFOLD_CONTAINMENT';
+registry.organs.gut.boundary=registry.organs.gut.boundary.replace('GUT v0.2.29','GUT v0.2.30');
 const symbolBoundary=' Typed JavaScript Symbol primitives are preserved as path-scoped SYMBOL_MATERIAL in HOLD; repeated readable descriptions at different paths remain separately auditable, and their rendered descriptions do not establish symbol identity, registry membership, semantic meaning, evidence, confidence or truth.';
 if(!registry.organs.gut.boundary.includes('SYMBOL_MATERIAL')) registry.organs.gut.boundary += symbolBoundary;
 
