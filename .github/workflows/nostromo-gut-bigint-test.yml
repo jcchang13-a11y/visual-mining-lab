@@ -1,0 +1,57 @@
+name: NOSTROMO GUT BigInt Scalar Test
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'nostromo/integration/gut-bigint-provenance-defect.json'
+      - 'nostromo/integration/apply-gut-bigint-thickening.mjs'
+      - 'nostromo/integration/gut-bigint-scalar-test.mjs'
+      - '.github/workflows/nostromo-gut-bigint-test.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  test:
+    if: ${{ !contains(github.event.head_commit.message, '[nostromo-test]') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Apply bounded BigInt thickening
+        run: node nostromo/integration/apply-gut-bigint-thickening.mjs
+      - name: Verify typed BigInt provenance retention
+        run: node nostromo/integration/gut-bigint-scalar-test.mjs
+      - name: Regression — non-finite numeric quarantine
+        run: node nostromo/integration/gut-nonfinite-scalar-test.mjs
+      - name: Regression — typed booleans remain preserved
+        run: node nostromo/integration/gut-boolean-scalar-test.mjs
+      - name: Regression — typed nullish values remain preserved
+        run: node nostromo/integration/gut-nullish-scalar-test.mjs
+      - name: Regression — GUT metabolism and cross-organ routing
+        run: node nostromo/integration/gut-metabolism-test.mjs
+      - name: Commit verified engine and focused result
+        run: |
+          git config user.name "nostromo-bot"
+          git config user.email "actions@users.noreply.github.com"
+          cp nostromo/gut/gut-engine.js /tmp/gut-engine.js
+          cp nostromo/integration/gut-metabolism-test.mjs /tmp/gut-metabolism-test.mjs
+          cp nostromo/integration/gut-bigint-scalar-last-result.json /tmp/gut-bigint-scalar-last-result.json
+          git fetch origin main
+          git reset --hard origin/main
+          cp /tmp/gut-engine.js nostromo/gut/gut-engine.js
+          cp /tmp/gut-metabolism-test.mjs nostromo/integration/gut-metabolism-test.mjs
+          cp /tmp/gut-bigint-scalar-last-result.json nostromo/integration/gut-bigint-scalar-last-result.json
+          git add nostromo/gut/gut-engine.js nostromo/integration/gut-metabolism-test.mjs nostromo/integration/gut-bigint-scalar-last-result.json
+          if git diff --cached --quiet; then
+            echo "No verified change"
+          else
+            git commit -m "[nostromo-test] verify GUT v0.2.29 BigInt provenance preservation"
+            git push origin HEAD:main
+          fi
