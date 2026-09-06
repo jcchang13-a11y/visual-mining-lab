@@ -1,0 +1,59 @@
+{
+  "schema": "nostromo-gut-date-test/v0.1",
+  "completedAt": "2026-09-06T17:01:53.465Z",
+  "status": "PASS",
+  "capability": "PATH_SCOPED_TYPED_DATE_PRESERVATION_WITH_INVALID_DATE_QUARANTINE_WITHOUT_EVIDENCE_FRESHNESS_OR_CLAIM_PROMOTION",
+  "heldDates": [
+    {
+      "path": "root.temporal.observedAt",
+      "text": "2026-09-06T12:34:56.000Z",
+      "type": "DATE_MATERIAL",
+      "status": "HOLD",
+      "route": "HOLD",
+      "reason": "typed-date-material",
+      "provenance": {
+        "inputSource": "NOSTROMO/gut-date-test"
+      }
+    },
+    {
+      "path": "root.repeats[0]",
+      "text": "2026-09-06T12:34:56.000Z",
+      "type": "DATE_MATERIAL",
+      "status": "HOLD",
+      "route": "HOLD",
+      "reason": "typed-date-material",
+      "provenance": {
+        "inputSource": "NOSTROMO/gut-date-test"
+      }
+    },
+    {
+      "path": "root.repeats[1]",
+      "text": "2026-09-06T12:34:56.000Z",
+      "type": "DATE_MATERIAL",
+      "status": "HOLD",
+      "route": "HOLD",
+      "reason": "typed-date-material",
+      "provenance": {
+        "inputSource": "NOSTROMO/gut-date-test"
+      }
+    }
+  ],
+  "quarantinedDates": [
+    {
+      "path": "root.temporal.invalidAt",
+      "text": "Invalid Date",
+      "type": "INVALID_DATE",
+      "status": "QUARANTINE",
+      "route": "HOLD",
+      "reason": "typed-invalid-date",
+      "provenance": {
+        "inputSource": "NOSTROMO/gut-date-test"
+      }
+    }
+  ],
+  "finiteMetricStillEvidence": true,
+  "claimStillRoutedToDroplet": true,
+  "jsonSerializable": true,
+  "failures": [],
+  "boundary": "JavaScript Date objects are retained before enumerable-object traversal. Valid Date values are rendered to ISO text only for audit and remain DATE_MATERIAL in HOLD. Invalid Date values are preserved as INVALID_DATE and quarantined. Neither representation establishes event time, source truth, freshness, temporal relevance, evidence, confidence or factual truth."
+}
