@@ -1,9 +1,9 @@
 {
-  "requestedAt": "2026-09-06T20:06:15+08:00",
+  "requestedAt": "2026-09-06T20:10:30+08:00",
   "capability": "PATH_SCOPED_TYPED_SYMBOL_PRESERVATION",
   "requires": [
     "gut-symbol-last-result.json PASS",
     "post-change ci-last-result.json PASS"
   ],
-  "purpose": "Promote only already-verified GUT v0.2.30 Symbol preservation into public registry/status."
+  "purpose": "Re-run evidence-gated promotion after correcting stale GUT boundary version text."
 }
