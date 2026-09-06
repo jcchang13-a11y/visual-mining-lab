@@ -1,0 +1,20 @@
+{
+  "schema": "nostromo-gut-nonfinite-scalar-test/v0.1",
+  "completedAt": "2026-09-06T08:06:08.597Z",
+  "status": "PASS",
+  "capability": "PATH_SCOPED_TYPED_NONFINITE_NUMERIC_QUARANTINE_WITHOUT_EVIDENCE_PROMOTION",
+  "quarantined": [
+    {"path":"root.metrics.score","text":"NaN","type":"NONFINITE_NUMERIC","status":"QUARANTINE","route":"HOLD","reason":"typed-nonfinite-numeric","provenance":{"inputSource":"NOSTROMO/gut-nonfinite-scalar-test"}},
+    {"path":"root.metrics.rate","text":"Infinity","type":"NONFINITE_NUMERIC","status":"QUARANTINE","route":"HOLD","reason":"typed-nonfinite-numeric","provenance":{"inputSource":"NOSTROMO/gut-nonfinite-scalar-test"}},
+    {"path":"root.metrics.count","text":"-Infinity","type":"NONFINITE_NUMERIC","status":"QUARANTINE","route":"HOLD","reason":"typed-nonfinite-numeric","provenance":{"inputSource":"NOSTROMO/gut-nonfinite-scalar-test"}},
+    {"path":"root.samples[0]","text":"NaN","type":"NONFINITE_NUMERIC","status":"QUARANTINE","route":"HOLD","reason":"typed-nonfinite-numeric","provenance":{"inputSource":"NOSTROMO/gut-nonfinite-scalar-test"}},
+    {"path":"root.samples[1]","text":"Infinity","type":"NONFINITE_NUMERIC","status":"QUARANTINE","route":"HOLD","reason":"typed-nonfinite-numeric","provenance":{"inputSource":"NOSTROMO/gut-nonfinite-scalar-test"}},
+    {"path":"root.samples[2]","text":"-Infinity","type":"NONFINITE_NUMERIC","status":"QUARANTINE","route":"HOLD","reason":"typed-nonfinite-numeric","provenance":{"inputSource":"NOSTROMO/gut-nonfinite-scalar-test"}}
+  ],
+  "finiteMetricStillEvidence": true,
+  "claimStillRoutedToDroplet": true,
+  "failures": [],
+  "focusedWorkflow": {"name":"NOSTROMO GUT Nonfinite Test","runNumber":2,"runId":34020916088,"conclusion":"success","headSha":"833baa226978ebb2133d72b47109c80845def390"},
+  "fullIntegration": {"name":"NOSTROMO Integration Test","runNumber":453,"runId":34020846215,"conclusion":"success","headSha":"d6b78b2add3e44fe59b73e2e46c188fdeff95ce8"},
+  "boundary": "JavaScript NaN, Infinity and -Infinity are retained as typed path-scoped NONFINITE_NUMERIC quarantine material. They remain auditable but cannot become evidence, counts, scores, confidence, truth or downstream claims merely because typeof value is number. Literal text NaN/Infinity remains ordinary textual material. This is a deterministic structural type guard, not semantic numeric validation or measurement interpretation."
+}
