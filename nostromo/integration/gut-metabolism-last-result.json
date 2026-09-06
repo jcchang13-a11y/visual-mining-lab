@@ -1,9 +1,9 @@
 {
   "schema": "nostromo-gut-metabolism-test/v0.2.27-numeric-multiplicity",
-  "completedAt": "2026-09-06T22:08:51.168Z",
+  "completedAt": "2026-09-06T22:10:00.495Z",
   "status": "PASS",
   "gut": {
-    "version": "0.2.33",
+    "version": "0.2.34",
     "mode": "DETERMINISTIC_HEURISTIC_ROUTER",
     "typeCounts": {
       "CLAIM": 2,
