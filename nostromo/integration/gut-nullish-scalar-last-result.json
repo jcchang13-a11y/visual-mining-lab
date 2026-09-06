@@ -1,0 +1,58 @@
+{
+  "schema": "nostromo-gut-nullish-scalar-test/v0.1",
+  "completedAt": "2026-09-06T04:09:44.080Z",
+  "status": "PASS",
+  "capability": "PATH_SCOPED_TYPED_NULL_AND_UNDEFINED_PRESERVATION_WITHOUT_SEMANTIC_PROMOTION",
+  "typedItems": [
+    {
+      "path": "root.state.explicitNull",
+      "text": "null",
+      "type": "NULL_MATERIAL",
+      "status": "ABSORB",
+      "route": "HOLD",
+      "reason": "typed-null-material",
+      "provenance": {
+        "inputSource": "NOSTROMO/gut-nullish-scalar-test"
+      }
+    },
+    {
+      "path": "root.state.missingValue",
+      "text": "undefined",
+      "type": "UNDEFINED_MATERIAL",
+      "status": "ABSORB",
+      "route": "HOLD",
+      "reason": "typed-undefined-material",
+      "provenance": {
+        "inputSource": "NOSTROMO/gut-nullish-scalar-test"
+      }
+    },
+    {
+      "path": "root.state.secondNull",
+      "text": "null",
+      "type": "NULL_MATERIAL",
+      "status": "ABSORB",
+      "route": "HOLD",
+      "reason": "typed-null-material",
+      "provenance": {
+        "inputSource": "NOSTROMO/gut-nullish-scalar-test"
+      }
+    },
+    {
+      "path": "root.state.secondUndefined",
+      "text": "undefined",
+      "type": "UNDEFINED_MATERIAL",
+      "status": "ABSORB",
+      "route": "HOLD",
+      "reason": "typed-undefined-material",
+      "provenance": {
+        "inputSource": "NOSTROMO/gut-nullish-scalar-test"
+      }
+    }
+  ],
+  "textualNullStillLowSignal": true,
+  "textualUndefinedStillLowSignal": true,
+  "textualDuplicateStillExcreted": true,
+  "claimStillRoutedToDroplet": true,
+  "failures": [],
+  "boundary": "Explicit structured null and JavaScript undefined are retained as distinct path-scoped substrate types in HOLD. This prevents silent null/undefined conflation and loss without treating either as evidence, truth, confidence, absence proof, or a semantic conclusion. Literal text \"null\" and \"undefined\" remain ordinary low-signal text under the existing policy."
+}
