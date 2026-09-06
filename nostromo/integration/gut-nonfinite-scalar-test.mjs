@@ -11,7 +11,7 @@ vm.runInThisContext(code,{filename:'nostromo/gut/gut-engine.js'});
 
 const source='NOSTROMO/gut-nonfinite-scalar-test';
 const input={
-  metrics:{score:NaN,rate:Infinity,count:-Infinity,valid:4},
+  metrics:{score:NaN,rate:Infinity,count:-Infinity,value:4},
   samples:[NaN,Infinity,-Infinity],
   textual:{nan:'NaN',infinity:'Infinity'},
   claim:'Claim: non-finite machine numerics must never become evidence merely because they are numeric.'
@@ -26,7 +26,7 @@ check(quarantined.every(x=>x.route==='HOLD'&&x.status==='QUARANTINE'),'NONFINITE
 check(quarantined.every(x=>x.provenance?.inputSource===source),'NONFINITE_INPUT_PROVENANCE_LOST',quarantined);
 check(!gut.nutrients.some(x=>paths.includes(x.path)),'NONFINITE_PROMOTED_TO_NUTRIENT',gut.nutrients);
 check(!gut.routes?.MUTHER?.items?.some(x=>paths.includes(x.path)),'NONFINITE_PROMOTED_TO_EVIDENCE',gut.routes?.MUTHER);
-check(gut.routes?.MUTHER?.items?.some(x=>x.path==='root.metrics.valid'&&x.type==='NUMERIC_EVIDENCE'),'FINITE_NUMERIC_EVIDENCE_REGRESSED',gut.routes?.MUTHER);
+check(gut.routes?.MUTHER?.items?.some(x=>x.path==='root.metrics.value'&&x.type==='NUMERIC_EVIDENCE'),'FINITE_NUMERIC_EVIDENCE_REGRESSED',gut.routes?.MUTHER);
 check(gut.routes?.DROPLET?.items?.some(x=>x.path==='root.claim'),'CLAIM_ROUTING_REGRESSED',gut.routes?.DROPLET);
 check(gut.nutrients.some(x=>x.path==='root.textual.nan'),'TEXT_NAN_WRONGLY_TYPED',gut.nutrients);
 check(gut.nutrients.some(x=>x.path==='root.textual.infinity'),'TEXT_INFINITY_WRONGLY_TYPED',gut.nutrients);
@@ -37,7 +37,7 @@ const result={
   status:failures.length?'FAIL':'PASS',
   capability:'PATH_SCOPED_TYPED_NONFINITE_NUMERIC_QUARANTINE_WITHOUT_EVIDENCE_PROMOTION',
   quarantined:quarantined.map(x=>({path:x.path,text:x.text,type:x.type,status:x.status,route:x.route,reason:x.reason,provenance:x.provenance})),
-  finiteMetricStillEvidence:gut.routes?.MUTHER?.items?.some(x=>x.path==='root.metrics.valid'&&x.type==='NUMERIC_EVIDENCE')||false,
+  finiteMetricStillEvidence:gut.routes?.MUTHER?.items?.some(x=>x.path==='root.metrics.value'&&x.type==='NUMERIC_EVIDENCE')||false,
   claimStillRoutedToDroplet:gut.routes?.DROPLET?.items?.some(x=>x.path==='root.claim')||false,
   failures,
   boundary:'JavaScript NaN, Infinity and -Infinity are retained as typed path-scoped NONFINITE_NUMERIC quarantine material. They remain auditable but cannot become evidence, counts, scores, confidence, truth or downstream claims merely because typeof value is number. Literal text NaN/Infinity remains ordinary textual material.'
