@@ -1,0 +1,57 @@
+{
+  "schema": "nostromo-gut-bigint-test/v0.1",
+  "completedAt": "2026-09-06T10:02:59.679Z",
+  "status": "PASS",
+  "capability": "PATH_SCOPED_TYPED_BIGINT_PRESERVATION_WITHOUT_NUMERIC_EVIDENCE_PROMOTION",
+  "heldBigInt": [
+    {
+      "path": "root.counters.huge",
+      "text": "9007199254740993",
+      "type": "BIGINT_MATERIAL",
+      "status": "HOLD",
+      "route": "HOLD",
+      "reason": "typed-bigint-material",
+      "provenance": {
+        "inputSource": "NOSTROMO/gut-bigint-test"
+      }
+    },
+    {
+      "path": "root.counters.negative",
+      "text": "-9007199254740993",
+      "type": "BIGINT_MATERIAL",
+      "status": "HOLD",
+      "route": "HOLD",
+      "reason": "typed-bigint-material",
+      "provenance": {
+        "inputSource": "NOSTROMO/gut-bigint-test"
+      }
+    },
+    {
+      "path": "root.replicas[0]",
+      "text": "42",
+      "type": "BIGINT_MATERIAL",
+      "status": "HOLD",
+      "route": "HOLD",
+      "reason": "typed-bigint-material",
+      "provenance": {
+        "inputSource": "NOSTROMO/gut-bigint-test"
+      }
+    },
+    {
+      "path": "root.replicas[1]",
+      "text": "42",
+      "type": "BIGINT_MATERIAL",
+      "status": "HOLD",
+      "route": "HOLD",
+      "reason": "typed-bigint-material",
+      "provenance": {
+        "inputSource": "NOSTROMO/gut-bigint-test"
+      }
+    }
+  ],
+  "finiteMetricStillEvidence": true,
+  "claimStillRoutedToDroplet": true,
+  "jsonSerializable": true,
+  "failures": [],
+  "boundary": "JavaScript BigInt primitives are retained as path-scoped BIGINT_MATERIAL in HOLD. They remain auditable but cannot become numeric evidence, counts, confidence, truth or downstream claims merely because they are integer-like machine values. Literal text ending in n remains ordinary textual material."
+}
