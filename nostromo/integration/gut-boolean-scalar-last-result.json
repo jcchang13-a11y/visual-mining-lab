@@ -1,0 +1,62 @@
+{
+  "schema": "nostromo-gut-boolean-scalar-test/v0.1",
+  "completedAt": "2026-09-06T02:07:22.924Z",
+  "status": "PASS",
+  "capability": "PATH_SCOPED_TYPED_BOOLEAN_MULTIPLICITY_WITHOUT_EVIDENCE_PROMOTION",
+  "booleanPaths": [
+    "root.audit.verified",
+    "root.audit.fresh",
+    "root.audit.complete",
+    "root.audit.independent"
+  ],
+  "booleanItems": [
+    {
+      "path": "root.audit.complete",
+      "text": "false",
+      "type": "BOOLEAN_MATERIAL",
+      "status": "ABSORB",
+      "route": "HOLD",
+      "reason": "typed-boolean-material",
+      "provenance": {
+        "inputSource": "NOSTROMO/gut-boolean-scalar-test"
+      }
+    },
+    {
+      "path": "root.audit.fresh",
+      "text": "true",
+      "type": "BOOLEAN_MATERIAL",
+      "status": "ABSORB",
+      "route": "HOLD",
+      "reason": "typed-boolean-material",
+      "provenance": {
+        "inputSource": "NOSTROMO/gut-boolean-scalar-test"
+      }
+    },
+    {
+      "path": "root.audit.independent",
+      "text": "false",
+      "type": "BOOLEAN_MATERIAL",
+      "status": "ABSORB",
+      "route": "HOLD",
+      "reason": "typed-boolean-material",
+      "provenance": {
+        "inputSource": "NOSTROMO/gut-boolean-scalar-test"
+      }
+    },
+    {
+      "path": "root.audit.verified",
+      "text": "true",
+      "type": "BOOLEAN_MATERIAL",
+      "status": "ABSORB",
+      "route": "HOLD",
+      "reason": "typed-boolean-material",
+      "provenance": {
+        "inputSource": "NOSTROMO/gut-boolean-scalar-test"
+      }
+    }
+  ],
+  "textualDuplicateStillExcreted": true,
+  "claimStillRoutedToDroplet": true,
+  "failures": [],
+  "boundary": "Typed booleans are retained as path-scoped BOOLEAN_MATERIAL in HOLD so repeated true/false values at different structured locations do not collapse into one atom. Boolean flags are not evidence, confidence, source-independence proof, truth, or semantic interpretation. Ordinary textual duplicate suppression remains active."
+}
