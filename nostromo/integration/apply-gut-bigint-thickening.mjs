@@ -19,7 +19,7 @@ replaceOnce(
 );
 replaceOnce(
   "if(atom?.scalarKind==='undefined')return {type:'UNDEFINED_MATERIAL',status:'ABSORB',route:'HOLD',priority:1,reason:'typed-undefined-material'};if(typeof atom.value==='number'&&!Number.isFinite(atom.value))",
-  "if(atom?.scalarKind==='undefined')return {type:'UNDEFINED_MATERIAL',status:'ABSORB',route:'HOLD',priority:1,reason:'typed-undefined-material'};if(typeof atom.value==='bigint')return {type:'BIGINT_MATERIAL',status:'ABSORB',route:'HOLD',priority:1,reason:'typed-bigint-material'};if(typeof atom.value==='number'&&!Number.isFinite(atom.value))",
+  "if(atom?.scalarKind==='undefined')return {type:'UNDEFINED_MATERIAL',status:'ABSORB',route:'HOLD',priority:1,reason:'typed-undefined-material'};if(typeof atom.value==='bigint')return {type:'BIGINT_MATERIAL',status:'HOLD',route:'HOLD',priority:1,reason:'typed-bigint-material'};if(typeof atom.value==='number'&&!Number.isFinite(atom.value))",
   'classify-bigint-before-numeric-routing'
 );
 replaceOnce(
@@ -29,7 +29,7 @@ replaceOnce(
 );
 replaceOnce(
   "booleans are not promoted to evidence or truth. Equal numeric or boolean scalar values at distinct structured paths are kept as distinct auditable atoms",
-  "booleans are not promoted to evidence or truth. Typed BigInt primitives are preserved as path-scoped BIGINT_MATERIAL in HOLD; they are not promoted to numeric evidence, counts, confidence or truth merely because they are integer-like machine values. Equal numeric, boolean or BigInt scalar values at distinct structured paths are kept as distinct auditable atoms",
+  "booleans are not promoted to evidence or truth. Typed BigInt primitives are preserved as path-scoped BIGINT_MATERIAL with status HOLD and route HOLD; they are not promoted to numeric evidence, counts, confidence or truth merely because they are integer-like machine values. Equal numeric, boolean or BigInt scalar values at distinct structured paths are kept as distinct auditable atoms",
   'boundary-bigint-claim'
 );
 
