@@ -107,8 +107,38 @@
   letter-spacing:.08em;
 }
 
+/* 已找回的使用者原圖：只提供閱讀框架，不改圖本身。 */
+.existing-figure,
+.original-figure{
+  display:block;
+  margin:1.65em auto;
+  max-width:100%;
+  text-align:center;
+  white-space:normal;
+}
+.existing-figure img,
+.original-figure img{
+  display:block;
+  width:auto;
+  max-width:100%;
+  max-height:78vh;
+  height:auto;
+  margin:0 auto;
+  object-fit:contain;
+}
+.existing-figure figcaption,
+.original-figure figcaption{
+  margin-top:.55em;
+  color:var(--gcb-muted);
+  font-family:system-ui,-apple-system,BlinkMacSystemFont,"Noto Sans TC",sans-serif;
+  font-size:.76rem;
+  line-height:1.55;
+  letter-spacing:.02em;
+}
+
 @media print{
-  .sutra-block,.work-note{break-inside:avoid}
+  .sutra-block,.work-note,.existing-figure,.original-figure{break-inside:avoid}
   .sutra-block{background:#f4f2ec}
   .work-note{background:#fff}
+  .existing-figure img,.original-figure img{max-height:none}
 }
