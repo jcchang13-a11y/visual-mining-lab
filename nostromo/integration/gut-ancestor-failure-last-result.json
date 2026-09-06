@@ -1,9 +1,9 @@
 {
   "schema": "nostromo-gut-ancestor-failure-test/v0.5",
-  "completedAt": "2026-09-06T04:09:53.563Z",
-  "engineVersion": "0.2.27",
-  "status": "PASS",
-  "promoted": true,
+  "completedAt": "2026-09-06T06:07:24.838Z",
+  "engineVersion": "0.2.28",
+  "status": "FAIL",
+  "promoted": false,
   "regressionOrigin": {
     "priorEngineBlob": "d2bdd63540f1417c780aa180856b66aae70bd5a6",
     "defect": "GUT v0.2.26 quarantined terminal non-success status values and inherited failed envelopes, but a machine-execution failure represented only by a bounded path such as execution.timeout or job.blocked could remain ordinary material when its value was descriptive prose rather than a status token.",
@@ -523,6 +523,14 @@
       "root.vocabulary.cancelled"
     ]
   },
-  "failures": [],
+  "failures": [
+    {
+      "type": "UNEXPECTED_GUT_VERSION",
+      "detail": {
+        "expected": "0.2.27",
+        "actual": "0.2.28"
+      }
+    }
+  ],
   "boundary": "This adversarial test distinguishes terminal non-success executor-envelope context and bounded machine-execution failure paths from ordinary semantic prose, vocabulary examples and configuration fields. FAILED plus CANCELLED, TIMEOUT, TIMED_OUT, ABORTED, BLOCKED and SKIPPED ancestor statuses must quarantine descendant payload atoms before they can be routed as fresh claims/evidence/questions. Descriptive terminal failure fields under executor/execution/run/attempt/action/request/job/task must also quarantine, even when their value is not itself a status token. Under an EXECUTED ancestor or outside machine-execution path context, ordinary prose and standalone semantic/configuration tokens such as timeout, blocked or cancelled remain non-quarantined. This is structural execution-context containment, not semantic truth or source-quality judgment."
 }
