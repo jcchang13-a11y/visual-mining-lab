@@ -38,12 +38,14 @@ jobs:
           git config user.name "nostromo-bot"
           git config user.email "actions@users.noreply.github.com"
           cp nostromo/gut/gut-engine.js /tmp/gut-engine.js
+          cp nostromo/integration/gut-metabolism-test.mjs /tmp/gut-metabolism-test.mjs
           cp nostromo/integration/gut-nullish-scalar-last-result.json /tmp/gut-nullish-scalar-last-result.json
           git fetch origin main
           git reset --hard origin/main
           cp /tmp/gut-engine.js nostromo/gut/gut-engine.js
+          cp /tmp/gut-metabolism-test.mjs nostromo/integration/gut-metabolism-test.mjs
           cp /tmp/gut-nullish-scalar-last-result.json nostromo/integration/gut-nullish-scalar-last-result.json
-          git add nostromo/gut/gut-engine.js nostromo/integration/gut-nullish-scalar-last-result.json
+          git add nostromo/gut/gut-engine.js nostromo/integration/gut-metabolism-test.mjs nostromo/integration/gut-nullish-scalar-last-result.json
           if git diff --cached --quiet; then
             echo "No verified change"
           else
