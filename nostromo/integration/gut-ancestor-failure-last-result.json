@@ -1,6 +1,6 @@
 {
   "schema": "nostromo-gut-ancestor-failure-test/v0.6",
-  "completedAt": "2026-09-06T10:04:06.199Z",
+  "completedAt": "2026-09-06T11:03:54.119Z",
   "engineVersion": "0.2.29",
   "status": "PASS",
   "contractMode": "VERSION_INDEPENDENT_CAPABILITY_ASSERTION",
