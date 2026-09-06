@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320" role="img" aria-labelledby="title desc">
+  <title id="title">第十一分回溯第八分</title>
+  <desc id="desc">黑白極簡同心圓。中心為第十一分，外圈標示第八分，表示第十一分把第八分的福德比較公式升級重演。</desc>
+  <rect width="320" height="320" fill="#fff"/>
+  <circle cx="160" cy="160" r="118" fill="none" stroke="#111" stroke-width="2"/>
+  <circle cx="160" cy="160" r="56" fill="none" stroke="#111" stroke-width="2"/>
+  <text x="160" y="167" text-anchor="middle" font-family="serif" font-size="26" fill="#111">11</text>
+  <text x="160" y="58" text-anchor="middle" font-family="serif" font-size="22" fill="#111">8</text>
+</svg>
