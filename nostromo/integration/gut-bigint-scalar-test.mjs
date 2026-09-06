@@ -23,7 +23,7 @@ const heldBigInts=gut.hold.filter(x=>x.type==='BIGINT_MATERIAL');
 check(gut.version==='0.2.29','GUT_COMPAT_VERSION_CHANGED',gut.version);
 check(heldBigInts.length===3,'BIGINT_MULTIPLICITY_LOST',heldBigInts);
 check(paths.every(p=>heldBigInts.some(x=>x.path===p)),'BIGINT_PATH_PROVENANCE_LOST',heldBigInts);
-check(heldBigInts.every(x=>x.route==='HOLD'&&x.status==='ABSORB'),'BIGINT_NOT_HELD',heldBigInts);
+check(heldBigInts.every(x=>x.route==='HOLD'&&x.status==='HOLD'),'BIGINT_NOT_HELD',heldBigInts);
 check(heldBigInts.every(x=>x.provenance?.inputSource===source),'BIGINT_INPUT_PROVENANCE_LOST',heldBigInts);
 check(gut.nutrients.filter(x=>x.type==='BIGINT_MATERIAL').length===3,'BIGINT_NOT_AUDITABLE_NUTRIENT',gut.nutrients);
 check(!gut.routes?.MUTHER?.items?.some(x=>paths.includes(x.path)),'BIGINT_PROMOTED_TO_NUMERIC_EVIDENCE',gut.routes?.MUTHER);
