@@ -1,0 +1,5 @@
+{
+  "requestedAt": "2026-09-06T19:02:06+08:00",
+  "capability": "PATH_SCOPED_TYPED_SYMBOL_PRESERVATION",
+  "reason": "Current GUT flattening silently drops JavaScript Symbol primitives, causing provenance loss before metabolism."
+}
