@@ -1,0 +1,44 @@
+name: NOSTROMO GUT Boolean Scalar Test
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'nostromo/gut/gut-engine.js'
+      - 'nostromo/integration/gut-boolean-scalar-test.mjs'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  test:
+    if: ${{ !contains(github.event.head_commit.message, '[nostromo-test]') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify path-scoped typed boolean retention
+        run: node nostromo/integration/gut-boolean-scalar-test.mjs
+      - name: Commit focused result
+        if: always()
+        run: |
+          git config user.name "nostromo-bot"
+          git config user.email "actions@users.noreply.github.com"
+          test -f nostromo/integration/gut-boolean-scalar-last-result.json && cp nostromo/integration/gut-boolean-scalar-last-result.json /tmp/gut-boolean-scalar-last-result.json || true
+          git fetch origin main
+          git reset --hard origin/main
+          if [ -f /tmp/gut-boolean-scalar-last-result.json ]; then
+            cp /tmp/gut-boolean-scalar-last-result.json nostromo/integration/gut-boolean-scalar-last-result.json
+            git add nostromo/integration/gut-boolean-scalar-last-result.json
+          fi
+          if git diff --cached --quiet; then
+            echo "No result change"
+          else
+            git commit -m "[nostromo-test] record GUT boolean scalar result"
+            git push origin HEAD:main
+          fi
