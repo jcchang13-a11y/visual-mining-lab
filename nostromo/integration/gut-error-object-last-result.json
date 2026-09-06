@@ -1,0 +1,38 @@
+{
+  "schema": "nostromo-gut-error-object-test/v0.1",
+  "completedAt": "2026-09-06T18:08:50.250Z",
+  "status": "PASS",
+  "capability": "PATH_SCOPED_TYPED_ERROR_OBJECT_PRESERVATION_WITH_QUARANTINE_WITHOUT_STACK_CAUSE_OR_SEMANTIC_PROMOTION",
+  "quarantinedErrors": [
+    {
+      "path": "root.failures.primary",
+      "text": "Error: authorized connector failed before returning evidence",
+      "type": "ERROR_OBJECT",
+      "status": "QUARANTINE",
+      "route": "HOLD",
+      "reason": "typed-error-object",
+      "errorName": "Error",
+      "provenance": {
+        "inputSource": "NOSTROMO/gut-error-object-test"
+      }
+    },
+    {
+      "path": "root.failures.secondary",
+      "text": "TypeError: authorized connector failed before returning evidence",
+      "type": "ERROR_OBJECT",
+      "status": "QUARANTINE",
+      "route": "HOLD",
+      "reason": "typed-error-object",
+      "errorName": "TypeError",
+      "provenance": {
+        "inputSource": "NOSTROMO/gut-error-object-test"
+      }
+    }
+  ],
+  "ordinaryClaimStillRoutedToDroplet": true,
+  "ordinaryEvidenceStillRoutedToMuther": true,
+  "finiteMetricStillEvidence": true,
+  "jsonSerializable": true,
+  "failures": [],
+  "boundary": "JavaScript Error objects are retained before generic enumerable-object traversal. Bounded Error name/message audit text becomes ERROR_OBJECT in QUARANTINE/HOLD. Stack and cause are intentionally not promoted by this capability. Diagnostic text does not establish root cause, factual truth, severity, source identity, retry policy or evidence quality."
+}
