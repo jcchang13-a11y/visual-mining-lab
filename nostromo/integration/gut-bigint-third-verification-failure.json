@@ -1,0 +1,14 @@
+{
+  "schema": "nostromo-gut-bigint-verification-failure/v0.3",
+  "observedAt": "2026-09-06T17:12:49+08:00",
+  "status": "PRESERVED_FAILURE",
+  "workflow": "NOSTROMO GUT BigInt Scalar Test",
+  "runId": 34024000625,
+  "headCommit": "47560afd27934cf36664ae04f1042b92d5167b65",
+  "focusedBigIntStep": "PASS",
+  "failedStep": "Regression — non-finite numeric quarantine",
+  "failure": {"type":"GUT_COMPAT_VERSION_CHANGED","detail":"0.2.29"},
+  "diagnosis": "The non-finite regression behavior itself remained correct: six non-finite values stayed path-scoped in QUARANTINE/HOLD, finite numeric evidence still routed correctly, and claim routing remained intact. The regression failed only because its version assertion still required exactly 0.2.28 after the BigInt patch intentionally advanced GUT to 0.2.29.",
+  "repair": "Extend only the compatibility version gate to accept 0.2.29; preserve all behavioral assertions unchanged.",
+  "truthRule": "DISPLAYED STATE MUST FOLLOW EVIDENCE"
+}
