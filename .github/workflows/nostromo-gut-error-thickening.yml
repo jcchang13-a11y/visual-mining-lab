@@ -1,0 +1,38 @@
+name: NOSTROMO GUT Error Object Thickening
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - '.nostromo-triggers/gut-error-object.json'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  thicken:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Apply GUT Error object preservation patch
+        run: node nostromo/integration/apply-gut-error-thickening.mjs
+      - name: Verify focused Error object adversarial case
+        run: node nostromo/integration/gut-error-object-test.mjs
+      - name: Verify existing GUT metabolism regression
+        run: node nostromo/integration/gut-metabolism-test.mjs
+      - name: Verify cross-organ integration regression
+        run: node nostromo/integration/ci-test.mjs
+      - name: Commit verified thickening
+        run: |
+          git config user.name "nostromo-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add nostromo/gut/gut-engine.js nostromo/integration/gut-metabolism-test.mjs nostromo/integration/gut-error-object-last-result.json nostromo/integration/gut-metabolism-last-result.json nostromo/integration/ci-last-result.json
+          git commit -m "NOSTROMO: apply verified GUT v0.2.32 Error object preservation"
+          git pull --rebase origin main
+          git push origin HEAD:main
