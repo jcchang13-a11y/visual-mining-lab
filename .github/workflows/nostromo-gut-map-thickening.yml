@@ -1,0 +1,44 @@
+name: NOSTROMO GUT Map Thickening
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'nostromo/integration/apply-gut-map-thickening.mjs'
+      - 'nostromo/integration/gut-map-test.mjs'
+      - '.github/workflows/nostromo-gut-map-thickening.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  thicken:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Apply bounded Map preservation patch
+        run: node nostromo/integration/apply-gut-map-thickening.mjs
+      - name: Verify Map preservation adversarial fixture
+        run: node nostromo/integration/gut-map-test.mjs
+      - name: Verify GUT metabolism regression
+        run: node nostromo/integration/gut-metabolism-test.mjs
+      - name: Verify 50-round cross-organ integration regression
+        run: node nostromo/integration/ci-test.mjs
+      - name: Record verified engine and evidence without recursive CI noise
+        run: |
+          git config user.name "nostromo-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add nostromo/gut/gut-engine.js nostromo/integration/gut-metabolism-test.mjs nostromo/integration/gut-map-last-result.json nostromo/integration/gut-metabolism-last-result.json nostromo/integration/ci-last-result.json
+          if git diff --cached --quiet; then
+            echo "No verified changes to record"
+            exit 0
+          fi
+          git commit -m "[nostromo-test] record verified GUT v0.2.33 Map preservation"
+          git pull --rebase origin main
+          git push origin HEAD:main
