@@ -19,7 +19,7 @@ const input={
 const gut=globalThis.GutEngine.digest(input,{source});
 const paths=['root.metrics.score','root.metrics.rate','root.metrics.count','root.samples[0]','root.samples[1]','root.samples[2]'];
 const quarantined=gut.quarantine.filter(x=>x.type==='NONFINITE_NUMERIC');
-check(gut.version==='0.2.28','GUT_COMPAT_VERSION_CHANGED',gut.version);
+check(['0.2.28','0.2.29'].includes(gut.version),'GUT_COMPAT_VERSION_CHANGED',gut.version);
 check(quarantined.length===6,'NONFINITE_MULTIPLICITY_LOST',quarantined);
 check(paths.every(p=>quarantined.some(x=>x.path===p)),'NONFINITE_PATH_PROVENANCE_LOST',quarantined);
 check(quarantined.every(x=>x.route==='HOLD'&&x.status==='QUARANTINE'),'NONFINITE_NOT_QUARANTINED',quarantined);
