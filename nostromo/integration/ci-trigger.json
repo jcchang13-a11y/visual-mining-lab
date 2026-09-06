@@ -1,9 +1,10 @@
 {
-  "purpose": "full NOSTROMO regression for verified GUT v0.2.29 path-scoped typed BigInt preservation",
+  "purpose": "full NOSTROMO regression for focused-verified GUT v0.2.34 path-scoped JavaScript Set member preservation",
   "stagedCommits": [
-    "712de4bc35c59399948bdc12c98c1e707919beee"
+    "5da61a7e25eb2e5e2517f39d8df54d14f9f8a387"
   ],
-  "focusedWorkflowRun": 34026325713,
+  "focusedWorkflowRun": 34063137885,
   "focusedStatus": "PASS",
+  "focusedResult": "nostromo/integration/gut-set-last-result.json",
   "truthRule": "DISPLAYED STATE MUST FOLLOW EVIDENCE"
 }
