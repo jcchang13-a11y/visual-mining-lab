@@ -1,6 +1,6 @@
 {
   "schema": "nostromo-gut-boolean-scalar-test/v0.1",
-  "completedAt": "2026-09-06T02:07:22.924Z",
+  "completedAt": "2026-09-06T04:08:38.436Z",
   "status": "PASS",
   "capability": "PATH_SCOPED_TYPED_BOOLEAN_MULTIPLICITY_WITHOUT_EVIDENCE_PROMOTION",
   "booleanPaths": [
