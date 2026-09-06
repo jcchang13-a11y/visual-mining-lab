@@ -1,0 +1,51 @@
+name: NOSTROMO GUT Nullish Scalar Test
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'nostromo/gut/gut-engine.js'
+      - 'nostromo/integration/apply-gut-nullish-thickening.mjs'
+      - 'nostromo/integration/gut-nullish-scalar-test.mjs'
+      - '.github/workflows/nostromo-gut-nullish-test.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  test:
+    if: ${{ !contains(github.event.head_commit.message, '[nostromo-test]') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Apply bounded nullish thickening
+        run: node nostromo/integration/apply-gut-nullish-thickening.mjs
+      - name: Verify typed null and undefined retention
+        run: node nostromo/integration/gut-nullish-scalar-test.mjs
+      - name: Regression — typed booleans remain preserved
+        run: node nostromo/integration/gut-boolean-scalar-test.mjs
+      - name: Regression — GUT metabolism
+        run: node nostromo/integration/gut-metabolism-test.mjs
+      - name: Commit verified engine and focused result
+        run: |
+          git config user.name "nostromo-bot"
+          git config user.email "actions@users.noreply.github.com"
+          cp nostromo/gut/gut-engine.js /tmp/gut-engine.js
+          cp nostromo/integration/gut-nullish-scalar-last-result.json /tmp/gut-nullish-scalar-last-result.json
+          git fetch origin main
+          git reset --hard origin/main
+          cp /tmp/gut-engine.js nostromo/gut/gut-engine.js
+          cp /tmp/gut-nullish-scalar-last-result.json nostromo/integration/gut-nullish-scalar-last-result.json
+          git add nostromo/gut/gut-engine.js nostromo/integration/gut-nullish-scalar-last-result.json
+          if git diff --cached --quiet; then
+            echo "No verified change"
+          else
+            git commit -m "[nostromo-test] verify GUT v0.2.28 nullish scalar preservation"
+            git push origin HEAD:main
+          fi
