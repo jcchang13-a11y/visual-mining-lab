@@ -1,0 +1,20 @@
+{
+  "schema": "nostromo-gut-map-test/v0.1",
+  "completedAt": "2026-09-06T20:06:21.698Z",
+  "status": "PASS",
+  "capability": "PATH_SCOPED_MAP_ENTRY_PRESERVATION_WITH_CONTAINER_PROVENANCE_AND_MAP_LOCAL_MULTIPLICITY",
+  "mapItemCount": 9,
+  "repeatedMapValueCount": 2,
+  "mapEntryIds": [
+    "0",
+    "1",
+    "2",
+    "3"
+  ],
+  "nestedEvidenceRouted": true,
+  "nestedNumericEvidenceRouted": true,
+  "mapErrorQuarantined": true,
+  "ordinaryTextDedupePreserved": true,
+  "failures": [],
+  "boundary": "JavaScript Map containers are expanded before generic enumerable-object traversal into deterministic entry-index key/value paths. Each emitted atom retains inputSource plus containerKind=map and mapEntry provenance. Equal Map text at distinct entry paths remains separately auditable; this preserves multiplicity but does not infer semantic key meaning, source independence, truth, evidence quality, ontology or relationship semantics."
+}
