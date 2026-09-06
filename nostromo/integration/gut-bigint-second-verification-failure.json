@@ -1,0 +1,13 @@
+{
+  "schema": "nostromo-gut-bigint-verification-failure/v0.2",
+  "observedAt": "2026-09-06T17:10:49+08:00",
+  "status": "PRESERVED_FAILURE",
+  "workflow": "NOSTROMO GUT BigInt Scalar Test",
+  "runId": 34023866958,
+  "headCommit": "ead89973253546780852164613e888d15ec0ecda",
+  "runConclusion": "failure",
+  "logAvailability": "GitHub run/job endpoint returned 404 when re-read; diagnosis below is therefore a code-path audit, not a reconstructed job log.",
+  "diagnosis": "The repaired patch correctly changed BIGINT_MATERIAL to status HOLD + route HOLD, matching the declared repair boundary. The focused test still asserted status ABSORB inside heldBigInts.every(...). In GUT, hold[] is populated only for status HOLD, so the stale assertion is internally contradictory and is a sufficient deterministic cause of focused-test failure after the repair.",
+  "repair": "Correct the focused assertion from status ABSORB to status HOLD. Keep multiplicity, path provenance, nutrient auditability, no-MUTHER-promotion, finite-numeric regression, claim routing and literal-text controls unchanged.",
+  "truthRule": "DISPLAYED STATE MUST FOLLOW EVIDENCE"
+}
