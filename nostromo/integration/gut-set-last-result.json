@@ -1,0 +1,16 @@
+{
+  "schema": "nostromo-gut-set-test/v0.2",
+  "completedAt": "2026-09-06T22:08:33.679Z",
+  "status": "PASS",
+  "engineVersion": "0.2.34",
+  "capability": "PATH_SCOPED_SET_MEMBER_PRESERVATION_WITH_CONTAINER_PROVENANCE",
+  "observations": {
+    "setNutrients": 4,
+    "setQuarantined": 1,
+    "totalPreservedSetMembers": 5,
+    "repeatedTextMembers": 2,
+    "ordinaryDuplicateStillSuppressed": true
+  },
+  "failures": [],
+  "boundary": "This test verifies deterministic structural preservation of JavaScript Set members across absorbed and quarantined outputs, member-index provenance, path-scoped multiplicity, ordinary GUT routing, quarantine behavior and continued non-Set duplicate containment. It does not infer semantic set membership, ontology, source independence, evidence quality, novelty or factual truth."
+}
