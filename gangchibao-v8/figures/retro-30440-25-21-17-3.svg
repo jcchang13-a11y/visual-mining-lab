@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 360" role="img" aria-labelledby="title desc">
+  <title id="title">第二十五分回溯第二十一、第十七、第三分</title>
+  <desc id="desc">中心為第二十五分，向外依序回溯第二十一分、第十七分與第三分。</desc>
+  <rect width="360" height="360" fill="#fff"/>
+  <g fill="none" stroke="#111" stroke-width="2">
+    <circle cx="180" cy="180" r="38"/>
+    <circle cx="180" cy="180" r="76"/>
+    <circle cx="180" cy="180" r="114"/>
+    <circle cx="180" cy="180" r="152"/>
+  </g>
+  <g fill="#111" font-family="Arial, Helvetica, sans-serif" font-size="18" text-anchor="middle">
+    <text x="180" y="186">25</text>
+    <text x="180" y="124">21</text>
+    <text x="180" y="86">17</text>
+    <text x="180" y="48">3</text>
+  </g>
+</svg>
