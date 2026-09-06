@@ -1,5 +1,7 @@
 {
-  "requestedAt": "2026-09-06T18:05:00Z",
+  "requestedAt": "2026-09-06T18:12:00Z",
   "capability": "GUT typed JavaScript Error object preservation",
-  "targetVersion": "0.2.32"
+  "targetVersion": "0.2.32",
+  "retry": 2,
+  "reason": "retry after conflict-resistant commit strategy update"
 }
