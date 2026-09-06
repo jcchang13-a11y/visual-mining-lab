@@ -21,7 +21,7 @@ const sample={
   duplicateA:'same useful material',duplicateB:'same useful material'
 };
 const gut=globalThis.GutEngine.digest(sample,{source:'NOSTROMO/gut-metabolism-test'});
-check(gut.version==='0.2.27','GUT_VERSION',gut.version);
+check(['0.2.27','0.2.28'].includes(gut.version),'GUT_VERSION',gut.version);
 check(gut.mode==='DETERMINISTIC_HEURISTIC_ROUTER','GUT_MODE',gut.mode);
 check(gut.routes?.DROPLET?.count>=1,'CLAIM_NOT_ROUTED_TO_DROPLET',gut.routes?.DROPLET);
 check(gut.routes?.SHROOMING?.count>=1,'QUESTION_NOT_ROUTED_TO_SHROOMING',gut.routes?.SHROOMING);

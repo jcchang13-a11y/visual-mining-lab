@@ -1,6 +1,6 @@
 {
   "schema": "nostromo-gut-nullish-scalar-test/v0.1",
-  "completedAt": "2026-09-06T04:09:44.080Z",
+  "completedAt": "2026-09-06T04:09:52.898Z",
   "status": "PASS",
   "capability": "PATH_SCOPED_TYPED_NULL_AND_UNDEFINED_PRESERVATION_WITHOUT_SEMANTIC_PROMOTION",
   "typedItems": [
