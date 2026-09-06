@@ -1,0 +1,36 @@
+name: NOSTROMO GUT BigInt Thickening
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - '.nostromo-triggers/gut-bigint.json'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  thicken:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Apply GUT BigInt preservation patch
+        run: node nostromo/integration/apply-gut-bigint-thickening.mjs
+      - name: Verify focused BigInt adversarial case
+        run: node nostromo/integration/gut-bigint-test.mjs
+      - name: Verify existing GUT metabolism regression
+        run: node nostromo/integration/gut-metabolism-test.mjs
+      - name: Commit verified thickening
+        run: |
+          git config user.name "nostromo-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add nostromo/gut/gut-engine.js nostromo/integration/gut-metabolism-test.mjs nostromo/integration/gut-bigint-last-result.json nostromo/integration/gut-metabolism-last-result.json
+          git commit -m "NOSTROMO: apply verified GUT v0.2.29 BigInt preservation"
+          git pull --rebase origin main
+          git push origin HEAD:main
