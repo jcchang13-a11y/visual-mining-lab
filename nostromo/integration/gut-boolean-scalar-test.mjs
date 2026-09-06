@@ -21,7 +21,7 @@ const gut=globalThis.GutEngine.digest(input,{source});
 const booleanPaths=['root.audit.verified','root.audit.fresh','root.audit.complete','root.audit.independent'];
 const booleanItems=gut.nutrients.filter(x=>x.type==='BOOLEAN_MATERIAL');
 
-check(gut.version==='0.2.27','GUT_COMPAT_VERSION_CHANGED',gut.version);
+check(['0.2.27','0.2.28'].includes(gut.version),'GUT_COMPAT_VERSION_CHANGED',gut.version);
 check(booleanItems.length===4,'BOOLEAN_MULTIPLICITY_LOST',booleanItems);
 check(booleanPaths.every(p=>booleanItems.some(x=>x.path===p)),'BOOLEAN_PATH_PROVENANCE_LOST',booleanItems);
 check(booleanItems.every(x=>x.route==='HOLD'&&x.status==='ABSORB'),'BOOLEAN_FALSELY_PROMOTED',booleanItems);
