@@ -1,0 +1,40 @@
+name: NOSTROMO GUT Set Thickening
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'nostromo/integration/apply-gut-set-thickening.mjs'
+      - 'nostromo/integration/gut-set-test.mjs'
+      - '.github/workflows/nostromo-gut-set-thickening.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  thicken-and-verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Apply GUT Set preservation patch
+        run: node nostromo/integration/apply-gut-set-thickening.mjs
+      - name: Verify GUT Set preservation adversarial cases
+        run: node nostromo/integration/gut-set-test.mjs
+      - name: Commit verified GUT Set thickening
+        run: |
+          git config user.name "nostromo-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add nostromo/gut/gut-engine.js nostromo/integration/gut-metabolism-test.mjs nostromo/integration/gut-set-last-result.json
+          if git diff --cached --quiet; then
+            echo "No verified thickening change"
+          else
+            git commit -m "[nostromo-test] promote verified GUT v0.2.34 Set preservation"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
