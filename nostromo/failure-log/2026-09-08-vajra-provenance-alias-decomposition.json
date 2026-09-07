@@ -1,0 +1,23 @@
+{
+  "schema": "zenomorph-failure-evidence/v1",
+  "date": "2026-09-08",
+  "organ": "VAJRA",
+  "status": "OPEN_NOT_PROMOTED",
+  "capability": "dynamic decomposition provenance identity",
+  "failure": "Two GUT contamination-triage receipts whose provenance strings differ only by canonicalization-insensitive punctuation, case, or spacing can be treated as different decomposition signatures. This can manufacture a conflicting-triage HOLD from one aliased provenance source.",
+  "mechanism": "nostromo/vajra/dynamic-decomposition.js v0.2 builds decomposition signatures from raw triage provenance instead of canonicalEvidenceProvenance(provenance), while VAJRA's provenance-independence contract already treats canonical provenance as the structural identity boundary.",
+  "adversarialFixture": {
+    "provenanceA": "gut-triage-evidence-001",
+    "provenanceAlias": "GUT Triage Evidence 001",
+    "classification": "PROVENANCE_COLLISION",
+    "expected": "DECOMPOSED once, with both receipts retained as equivalent qualifying evidence and the parent conflict remaining open",
+    "forbidden": [
+      "false conflicting-triage HOLD",
+      "extra facets",
+      "parent closure",
+      "DROPLET ping-pong"
+    ]
+  },
+  "provenance": "Synthetic de-identified fixture only. No private Drive name, ID, URL, or source text is stored.",
+  "promotionRule": "Do not promote until canonical source-alias adversarial coverage, existing conflicting-triage coverage, anti-ping-pong regression, and GitHub Actions all pass."
+}
