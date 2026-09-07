@@ -1,0 +1,19 @@
+{
+  "schema": "zenomorph-failure-evidence/v1",
+  "date": "2026-09-08",
+  "organ": "VAJRA",
+  "status": "OPEN_NOT_PROMOTED",
+  "capability": "dynamic decomposition conflicting-triage determinism",
+  "failure": "The dynamic decomposition conflict audit stores distinct qualifying triage signatures in Map insertion order. Reversing two genuinely conflicting GUT receipts can therefore reverse the emitted conflict.signatures array even though the structural conflict is identical.",
+  "observedBy": {
+    "workflow": "ZENOMORPH VAJRA dynamic decomposition",
+    "workflowRunId": 34162086550,
+    "headSha": "70bef91a661aab6f7815e40528d89bebd757aa6f",
+    "conclusion": "failure",
+    "failedStep": "Run VAJRA dynamic decomposition unit adversarial cross-organ regression"
+  },
+  "mechanism": "planConflictDecomposition() iterates the signatures Map in first-seen receipt order; the adversarial AB/BA regression requires an order-independent conflict envelope.",
+  "risk": "Downstream behavior or evidence fingerprints could vary only because receipt arrival order changed, creating false procedural significance even while VAJRA correctly remains on HOLD.",
+  "provenance": "Synthetic de-identified regression only. No private Drive name, ID, URL, or source text is stored.",
+  "promotionRule": "Do not promote until conflict signatures are deterministically ordered and alias, genuine-conflict, parent-open, anti-ping-pong, dynamic reinspection, and integration regressions pass in GitHub Actions."
+}
