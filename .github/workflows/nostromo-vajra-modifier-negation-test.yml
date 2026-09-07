@@ -1,0 +1,30 @@
+name: NOSTROMO VAJRA modifier negation test
+
+on:
+  push:
+    paths:
+      - 'nostromo/vajra/modifier-negation-guard.js'
+      - 'nostromo/vajra/receipt-uncertainty-guard.js'
+      - 'nostromo/vajra/vajra-engine.js'
+      - 'nostromo/gut/gut-engine.js'
+      - 'nostromo/integration/vajra-modifier-negation-test.mjs'
+      - 'nostromo/failure-log/2026-09-07-vajra-modifier-negation.json'
+      - '.github/workflows/nostromo-vajra-modifier-negation-test.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: VAJRA modifier-negation unit + adversarial + GUT regression
+        run: node nostromo/integration/vajra-modifier-negation-test.mjs
+      - name: Verify result evidence
+        run: |
+          node -e "const r=require('./nostromo/integration/vajra-modifier-negation-last-result.json'); if(r.status!=='PASS') process.exit(1); if(!r.audit?.every(x=>x.status==='UNRESOLVED'&&x.provenance)) process.exit(2); if(!(r.crossOrgan?.gut?.ingested>0)) process.exit(3);"
