@@ -37,6 +37,10 @@ jobs:
             echo "No verified thickening change"
           else
             git commit -m "[nostromo-test] promote verified GUT v0.2.35 cycle quarantine"
+            # Regression tests may refresh evidence files that are intentionally not part of this focused commit.
+            # Remove only post-test workspace residue so rebase can safely incorporate concurrent main changes.
+            git restore --worktree .
+            git clean -fd
             git pull --rebase origin main
             git push origin HEAD:main
           fi
