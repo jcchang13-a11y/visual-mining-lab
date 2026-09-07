@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320" role="img" aria-labelledby="title desc">
+  <title id="title">第二十八分福德線回溯</title>
+  <desc id="desc">第二十八分把福德重新叫回來，正文明確回扣第二十四、第十九與第十一分。</desc>
+  <rect width="320" height="320" fill="white"/>
+  <g fill="none" stroke="black" stroke-width="2">
+    <circle cx="160" cy="160" r="34"/>
+    <circle cx="160" cy="160" r="68"/>
+    <circle cx="160" cy="160" r="102"/>
+    <circle cx="160" cy="160" r="136"/>
+  </g>
+  <g fill="black" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Noto Sans TC', sans-serif" font-size="19" text-anchor="middle" dominant-baseline="middle">
+    <text x="160" y="160">28</text>
+    <text x="160" y="109">24</text>
+    <text x="160" y="75">19</text>
+    <text x="160" y="41">11</text>
+  </g>
+</svg>
