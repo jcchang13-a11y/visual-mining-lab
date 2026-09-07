@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 360" role="img" aria-labelledby="title desc">
+  <title id="title">第三十分回溯第十九分</title>
+  <desc id="desc">黑白同心圓，中心第三十分，外圈第十九分。</desc>
+  <rect width="360" height="360" fill="white"/>
+  <g fill="none" stroke="black" stroke-width="1.5">
+    <circle cx="180" cy="180" r="62"/>
+    <circle cx="180" cy="180" r="142"/>
+  </g>
+  <g fill="black" font-family="serif" font-size="22" text-anchor="middle">
+    <text x="180" y="188">30</text>
+    <text x="180" y="54">19</text>
+  </g>
+</svg>
