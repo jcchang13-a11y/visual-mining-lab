@@ -1,0 +1,26 @@
+{
+  "schema": "zenomorph-vajra-dynamic-reinspection-evidence/v0.1",
+  "status": "PASS",
+  "capabilityCommit": "800bdad3ff56a32d8b85def8b68d11020113f7ec",
+  "workflowRunId": 34121163727,
+  "workflowName": "NOSTROMO VAJRA dynamic reinspection",
+  "workflowConclusion": "success",
+  "verifiedAt": "2026-09-07T12:18:33Z",
+  "provenance": {
+    "repository": "jcchang13-a11y/visual-mining-lab",
+    "workflow": ".github/workflows/nostromo-vajra-dynamic-reinspection.yml",
+    "test": "nostromo/vajra/dynamic-reinspection-test.mjs",
+    "capability": "nostromo/vajra/dynamic-reinspection.js"
+  },
+  "verifiedClaims": [
+    "Two structurally qualifying opposing receipts preserve the VAJRA branch as contested.",
+    "A contested receipt set changes the next inspection priority to source_quality and routes that inspection to DROPLET while preserving targetRef and clauseRef.",
+    "A single qualifying receipt does not trigger conflict escalation.",
+    "A receipt rejected for missing provenance does not trigger conflict escalation and remains audited as rejected."
+  ],
+  "boundaries": [
+    "This is structural receipt-driven reprioritization, not semantic adjudication.",
+    "The evidence does not prove source truth, source independence, or that DROPLET executed the follow-up.",
+    "The capability is an additive VAJRA layer and does not rename or relocate the historical nostromo/ path."
+  ]
+}
