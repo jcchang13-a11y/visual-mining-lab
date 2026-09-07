@@ -10,9 +10,9 @@ await load('nostromo/gut/gut-engine.js');
 const failures=[];
 const check=(ok,type,detail)=>{if(!ok)failures.push({type,detail});};
 const target='目前測試資料顯示 GUT 可以隔離重複污染。';
-const base=globalThis.VajraEngine.run(target,6);
-const contract=base.handoffs.find(x=>x.lens==='evidence');
-check(Boolean(contract),'EVIDENCE_CONTRACT_MISSING',base.handoffs);
+const seed=globalThis.VajraEngine.run(target,6);
+const contract=seed.handoffs.find(x=>x.lens==='evidence');
+check(Boolean(contract),'EVIDENCE_CONTRACT_MISSING',seed.handoffs);
 check(globalThis.VajraEngine.receiptChineseModifierNegationGuardVersion==='0.1','MODIFIER_NEGATION_GUARD_VERSION_MISSING',globalThis.VajraEngine.receiptChineseModifierNegationGuardVersion);
 const common={targetRef:contract.targetRef,clauseRef:contract.clauseRef,lens:'evidence',organ:contract.preferredOrgan,status:'EXECUTED',material:'此回傳包含具來源標記的測試觀察，並明確說明與目標命題的關係。'};
 const adversarial=[
@@ -27,8 +27,9 @@ const adversarial=[
 const audit=[];
 for(let i=0;i<adversarial.length;i++){
   const [label,relation]=adversarial[i];
+  const caseBase=globalThis.VajraEngine.run(target,6);
   const receipt={...common,provenanceFingerprint:`zh-mod-neg-${i+1}`,relationToTarget:relation};
-  const applied=globalThis.VajraEngine.applyHandoffResults(base,[receipt]);
+  const applied=globalThis.VajraEngine.applyHandoffResults(caseBase,[receipt]);
   const branch=applied.unresolved.find(x=>x.lens==='evidence');
   const rejected=applied.handoffResolution.rejectedReceipts.find(x=>x.provenance===receipt.provenanceFingerprint);
   check(applied.handoffResolution.resolved===0,`${label}_FALSE_RESOLUTION`,applied.handoffResolution);
@@ -37,10 +38,12 @@ for(let i=0;i<adversarial.length;i++){
   check(rejected?.provenance===receipt.provenanceFingerprint,`${label}_PROVENANCE_LOST`,rejected);
   audit.push({label,status:branch?.status,classification:rejected?.relationClassification,reasons:rejected?.reasons||[],provenance:rejected?.provenance});
 }
+const positiveBase=globalThis.VajraEngine.run(target,6);
 const positive={...common,provenanceFingerprint:'zh-mod-positive',relationToTarget:'這份材料支持這個命題，且來源與觀察條件均已標記。'};
-const positiveApplied=globalThis.VajraEngine.applyHandoffResults(base,[positive]);
+const positiveApplied=globalThis.VajraEngine.applyHandoffResults(positiveBase,[positive]);
 check(positiveApplied.handoffResolution.resolved===1,'POSITIVE_SUPPORT_FALSELY_BLOCKED',positiveApplied.handoffResolution);
-const guarded=globalThis.VajraEngine.applyHandoffResults(base,[{...common,provenanceFingerprint:'zh-mod-gut-regression',relationToTarget:'這份材料並非支持這個命題，只能保持開放。'}]);
+const regressionBase=globalThis.VajraEngine.run(target,6);
+const guarded=globalThis.VajraEngine.applyHandoffResults(regressionBase,[{...common,provenanceFingerprint:'zh-mod-gut-regression',relationToTarget:'這份材料並非支持這個命題，只能保持開放。'}]);
 const gut=globalThis.GutEngine.digest({vajra:guarded},{source:'VAJRA_MODIFIER_NEGATION_GUT_REGRESSION',inheritedSubstrates:[target]});
 check(!gut.summary.includes(target),'GUT_TARGET_ECHO_AFTER_MODIFIER_NEGATION_GUARD',gut.summary);
 check(gut.ingested>0,'GUT_CROSS_ORGAN_REGRESSION_FAILED',{ingested:gut.ingested,absorbed:gut.absorbed,quarantined:gut.quarantined});
