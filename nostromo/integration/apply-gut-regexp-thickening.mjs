@@ -14,4 +14,13 @@ replaceOne("atom?.scalarKind==='opaque-container'||atom?.scalarKind==='callable'
 replaceOne("return {organ:'GUT',version:'0.2.36'", "return {organ:'GUT',version:'0.2.37'",'version');
 replaceOne("Callable presence does not establish action authorization, capability, safety, provenance truth, semantic meaning or factual truth. These rules are auditable heuristics, not semantic truth.", "Callable presence does not establish action authorization, capability, safety, provenance truth, semantic meaning or factual truth. JavaScript RegExp objects are preserved as path-scoped OPAQUE_REGEXP quarantine atoms before generic enumerable-object traversal, preventing silent disappearance of non-enumerable pattern objects. GUT does not execute the pattern, call exec/test, inspect pattern source or flags, or promote pattern presence into evidence, code intent, safety, provenance truth, semantic meaning or factual truth. These rules are auditable heuristics, not semantic truth.",'boundary');
 await fs.writeFile(enginePath,code,'utf8');
-console.log('Applied GUT v0.2.37 opaque RegExp containment.');
+
+const metabolismPath='nostromo/integration/gut-metabolism-test.mjs';
+let metabolism=await fs.readFile(metabolismPath,'utf8');
+const oldVersionCheck="check(['0.2.27','0.2.28','0.2.29','0.2.30','0.2.31','0.2.32','0.2.33','0.2.34','0.2.35','0.2.36'].includes(gut.version),'GUT_VERSION',gut.version);";
+const newVersionCheck="check(['0.2.27','0.2.28','0.2.29','0.2.30','0.2.31','0.2.32','0.2.33','0.2.34','0.2.35','0.2.36','0.2.37'].includes(gut.version),'GUT_VERSION',gut.version);";
+const versionCount=metabolism.split(oldVersionCheck).length-1;
+if(versionCount!==1)throw new Error(`metabolism version gate: expected exactly one match, got ${versionCount}`);
+metabolism=metabolism.replace(oldVersionCheck,newVersionCheck);
+await fs.writeFile(metabolismPath,metabolism,'utf8');
+console.log('Applied GUT v0.2.37 opaque RegExp containment and aligned the explicit version allow-list in its existing metabolism regression.');
