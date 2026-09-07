@@ -1,12 +1,12 @@
 {
   "schema": "xenomorph-gut-capability-admission-test/v0.1",
-  "completedAt": "2026-09-07T05:08:34.837Z",
+  "completedAt": "2026-09-07T08:04:52.230Z",
   "status": "PASS",
   "capability": "FOREIGN_CAPABILITY_PRE_ASSIMILATION_ADMISSION_BOUNDARY",
   "cases": {
     "ordinaryProse": {
-      "schema": "xenomorph-gut-capability-admission/v0.1",
-      "organism": "XENOMORPH",
+      "schema": "zenomorph-gut-capability-admission/v0.1",
+      "organism": "ZENOMORPH",
       "habitat": "NOSTROMO",
       "executed": false,
       "authorized": false,
@@ -17,8 +17,8 @@
       "reason": "no-structured-capability-identity"
     },
     "callable": {
-      "schema": "xenomorph-gut-capability-admission/v0.1",
-      "organism": "XENOMORPH",
+      "schema": "zenomorph-gut-capability-admission/v0.1",
+      "organism": "ZENOMORPH",
       "habitat": "NOSTROMO",
       "executed": false,
       "authorized": false,
@@ -29,8 +29,8 @@
       "reason": "callable-values-are-never-admission-descriptors"
     },
     "executablePayload": {
-      "schema": "xenomorph-gut-capability-admission/v0.1",
-      "organism": "XENOMORPH",
+      "schema": "zenomorph-gut-capability-admission/v0.1",
+      "organism": "ZENOMORPH",
       "habitat": "NOSTROMO",
       "executed": false,
       "authorized": false,
@@ -42,8 +42,8 @@
       "identity": "Foreign Search Adapter"
     },
     "missingProvenance": {
-      "schema": "xenomorph-gut-capability-admission/v0.1",
-      "organism": "XENOMORPH",
+      "schema": "zenomorph-gut-capability-admission/v0.1",
+      "organism": "ZENOMORPH",
       "habitat": "NOSTROMO",
       "executed": false,
       "authorized": false,
@@ -58,8 +58,8 @@
       "reason": "provenance-required-before-assimilation"
     },
     "missingPermissions": {
-      "schema": "xenomorph-gut-capability-admission/v0.1",
-      "organism": "XENOMORPH",
+      "schema": "zenomorph-gut-capability-admission/v0.1",
+      "organism": "ZENOMORPH",
       "habitat": "NOSTROMO",
       "executed": false,
       "authorized": false,
@@ -74,8 +74,8 @@
       "reason": "permission-boundary-required-before-assimilation"
     },
     "missingContract": {
-      "schema": "xenomorph-gut-capability-admission/v0.1",
-      "organism": "XENOMORPH",
+      "schema": "zenomorph-gut-capability-admission/v0.1",
+      "organism": "ZENOMORPH",
       "habitat": "NOSTROMO",
       "executed": false,
       "authorized": false,
@@ -90,8 +90,8 @@
       "reason": "input-output-or-interface-contract-required-before-assimilation"
     },
     "completeCandidate": {
-      "schema": "xenomorph-gut-capability-admission/v0.1",
-      "organism": "XENOMORPH",
+      "schema": "zenomorph-gut-capability-admission/v0.1",
+      "organism": "ZENOMORPH",
       "habitat": "NOSTROMO",
       "executed": false,
       "authorized": false,
