@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 260" role="img" aria-labelledby="title desc">
+  <title id="title">第三十一分回扣第三十分</title>
+  <desc id="desc">第三十一分由第三十分凡夫貪著一合相，轉到凡夫也貪著自己的見與診斷位置。</desc>
+  <rect width="260" height="260" fill="white"/>
+  <g fill="none" stroke="black" stroke-width="2">
+    <circle cx="130" cy="130" r="38"/>
+    <circle cx="130" cy="130" r="88"/>
+  </g>
+  <g fill="black" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Noto Sans TC', sans-serif" font-size="20" text-anchor="middle" dominant-baseline="middle">
+    <text x="130" y="130">31</text>
+    <text x="130" y="66">30</text>
+  </g>
+</svg>
