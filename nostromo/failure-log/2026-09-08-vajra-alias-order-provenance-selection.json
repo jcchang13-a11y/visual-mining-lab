@@ -1,0 +1,19 @@
+{
+  "schema": "zenomorph-failure/v1",
+  "date": "2026-09-08",
+  "organ": "VAJRA",
+  "status": "OPEN_PATCHED_NOT_PROMOTED",
+  "type": "CANONICAL_ALIAS_ARRIVAL_ORDER_PROVENANCE_SELECTION",
+  "observed": "When multiple qualifying GUT contamination-triage receipts canonicalize to one provenance signature, dynamic decomposition v0.3 selected qualified[0] as the raw provenance/receipt representative. Reversing equivalent alias receipt arrival order could therefore alter emitted provenance metadata even though decomposition behavior should be structurally identical.",
+  "risk": "Order-dependent provenance metadata can create false procedural significance, unstable replay/audit output, and downstream divergence despite equivalent canonical evidence.",
+  "patch": "dynamic-decomposition v0.4 removes first-arrival representative metadata from generated facets, retains a deterministic aliasAudit containing all qualifying receipt fingerprints/provenance surfaces, and verifies order-independent facets plus provenance audit.",
+  "requiredVerification": [
+    "VAJRA dynamic-decomposition unit test",
+    "canonical alias AB/BA adversarial comparison",
+    "genuine conflict AB/BA HOLD regression",
+    "cross-organ echo-break regression",
+    "GitHub Actions success before promotion"
+  ],
+  "provenance": "Synthetic de-identified receipt fixtures only. No private Drive names, IDs, URLs, or source text are stored.",
+  "boundary": "The patch stabilizes structural provenance audit ordering; it does not prove source truth, semantic alias equivalence, contamination-classification quality, or connector execution."
+}
