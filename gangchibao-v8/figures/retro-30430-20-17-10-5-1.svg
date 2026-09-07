@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 620" role="img" aria-labelledby="title desc">
+  <title id="title">第二十分回溯身體與見如來線</title>
+  <desc id="desc">中心為第二十分，向外依次回溯第十七、第十、第五、第一分。</desc>
+  <rect width="620" height="620" fill="white"/>
+  <g fill="none" stroke="black" stroke-width="2">
+    <circle cx="310" cy="310" r="54"/>
+    <circle cx="310" cy="310" r="108"/>
+    <circle cx="310" cy="310" r="162"/>
+    <circle cx="310" cy="310" r="216"/>
+    <circle cx="310" cy="310" r="270"/>
+  </g>
+  <g fill="black" font-family="system-ui, sans-serif" font-size="24" text-anchor="middle">
+    <text x="310" y="319">20</text>
+    <text x="310" y="235">17</text>
+    <text x="310" y="181">10</text>
+    <text x="310" y="127">5</text>
+    <text x="310" y="73">1</text>
+  </g>
+</svg>
