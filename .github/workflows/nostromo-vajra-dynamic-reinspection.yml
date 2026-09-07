@@ -1,0 +1,23 @@
+name: NOSTROMO VAJRA dynamic reinspection
+on:
+  push:
+    paths:
+      - 'nostromo/vajra/vajra-engine.js'
+      - 'nostromo/vajra/dynamic-reinspection.js'
+      - 'nostromo/vajra/dynamic-reinspection-test.mjs'
+      - '.github/workflows/nostromo-vajra-dynamic-reinspection.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Run VAJRA dynamic reinspection unit/adversarial regression
+        run: node nostromo/vajra/dynamic-reinspection-test.mjs
+      - name: Verify result contract
+        run: node -e "const r=require('./nostromo/vajra/dynamic-reinspection-last-result.json'); if(r.status!=='PASS'||r.tests?.nextInspection?.lens!=='source_quality'||r.tests?.singleTriggered!==false||r.tests?.rejectedTriggered!==false) process.exit(1)"
