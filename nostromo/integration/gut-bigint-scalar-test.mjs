@@ -8,6 +8,7 @@ const failures=[];
 const check=(ok,type,detail)=>{if(!ok)failures.push({type,detail});};
 const code=await fs.readFile(path.join(root,'nostromo','gut','gut-engine.js'),'utf8');
 vm.runInThisContext(code,{filename:'nostromo/gut/gut-engine.js'});
+const compatiblePatch=(version,floor)=>{const m=/^0\.2\.(\d+)$/.exec(String(version));return !!m&&Number(m[1])>=floor;};
 
 const source='NOSTROMO/gut-bigint-scalar-test';
 const large=9007199254740993n;
@@ -20,7 +21,7 @@ const input={
 const gut=globalThis.GutEngine.digest(input,{source});
 const paths=['root.counters.exact','root.samples[0]','root.samples[1]'];
 const heldBigInts=gut.hold.filter(x=>x.type==='BIGINT_MATERIAL');
-check(gut.version==='0.2.29','GUT_COMPAT_VERSION_CHANGED',gut.version);
+check(compatiblePatch(gut.version,29),'GUT_COMPAT_VERSION_CHANGED',gut.version);
 check(heldBigInts.length===3,'BIGINT_MULTIPLICITY_LOST',heldBigInts);
 check(paths.every(p=>heldBigInts.some(x=>x.path===p)),'BIGINT_PATH_PROVENANCE_LOST',heldBigInts);
 check(heldBigInts.every(x=>x.route==='HOLD'&&x.status==='HOLD'),'BIGINT_NOT_HELD',heldBigInts);
@@ -41,7 +42,7 @@ const result={
   finiteMetricStillEvidence:gut.routes?.MUTHER?.items?.some(x=>x.path==='root.counters.total'&&x.type==='NUMERIC_EVIDENCE')||false,
   claimStillRoutedToDroplet:gut.routes?.DROPLET?.items?.some(x=>x.path==='root.claim')||false,
   failures,
-  boundary:'JavaScript BigInt primitives are retained as typed path-scoped BIGINT_MATERIAL in HOLD. Equal values at distinct structured paths retain distinct provenance. They remain auditable but cannot become numeric evidence, counts, confidence or truth merely because they are integer-like machine values. Literal text resembling BigInt syntax remains text.'
+  boundary:'JavaScript BigInt primitives are retained as typed path-scoped BIGINT_MATERIAL in HOLD. Equal values at distinct structured paths retain distinct provenance. They remain auditable but cannot become numeric evidence, counts, confidence or truth merely because they are integer-like machine values. Literal text resembling BigInt syntax remains text. Compatibility gating accepts later 0.2.x patches while still rejecting a major/minor contract change.'
 };
 await fs.writeFile(resultPath,JSON.stringify(result,null,2)+'\n','utf8');
 console.log(JSON.stringify(result,null,2));
