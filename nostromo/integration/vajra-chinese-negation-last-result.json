@@ -1,0 +1,83 @@
+{
+  "schema": "zenomorph-vajra-chinese-negation-test/v0.1",
+  "completedAt": "2026-09-07T09:07:18.461Z",
+  "status": "PASS",
+  "capability": "BARE_CHINESE_NEGATED_POLARITY_PRESERVES_UNCERTAINTY",
+  "finding": {
+    "before": "Bare Chinese negation forms such as 不反駁 could fall through the uncertainty guard and be lexically misread by the core polarity detector as directional REFUTES evidence.",
+    "after": "The bounded guard now treats bare 不+polarity verbs as indeterminate, preventing those receipts from closing a VAJRA handoff while leaving explicit positive 支持/反駁 receipts eligible."
+  },
+  "audit": [
+    {
+      "label": "不反駁",
+      "status": "UNRESOLVED",
+      "classification": "INDETERMINATE",
+      "reasons": [
+        "INDETERMINATE_RELATION"
+      ]
+    },
+    {
+      "label": "不反證",
+      "status": "UNRESOLVED",
+      "classification": "INDETERMINATE",
+      "reasons": [
+        "INDETERMINATE_RELATION"
+      ]
+    },
+    {
+      "label": "不否證",
+      "status": "UNRESOLVED",
+      "classification": "INDETERMINATE",
+      "reasons": [
+        "INDETERMINATE_RELATION"
+      ]
+    },
+    {
+      "label": "不證明",
+      "status": "UNRESOLVED",
+      "classification": "INDETERMINATE",
+      "reasons": [
+        "INDETERMINATE_RELATION"
+      ]
+    },
+    {
+      "label": "不印證",
+      "status": "UNRESOLVED",
+      "classification": "INDETERMINATE",
+      "reasons": [
+        "INDETERMINATE_RELATION"
+      ]
+    },
+    {
+      "label": "不吻合",
+      "status": "UNRESOLVED",
+      "classification": "INDETERMINATE",
+      "reasons": [
+        "INDETERMINATE_RELATION"
+      ]
+    },
+    {
+      "label": "不一致",
+      "status": "UNRESOLVED",
+      "classification": "INDETERMINATE",
+      "reasons": [
+        "INDETERMINATE_RELATION"
+      ]
+    }
+  ],
+  "crossOrgan": {
+    "gut": {
+      "ingested": 259,
+      "absorbed": 75,
+      "quarantined": 0,
+      "summarySample": "[CONTRADICTION->VAJRA] Handoff receipt matching is structural and auditable: targetRef, clauseRef, lens, preferred organ, explicit execution status, provenance, returned material and relation-to-target are required. A receipt about one heuristic clause cannot close a branch scoped to another clause. Before closure, ret"
+    }
+  },
+  "provenance": {
+    "engine": "nostromo/vajra/vajra-engine.js",
+    "guard": "nostromo/vajra/receipt-uncertainty-guard.js",
+    "test": "nostromo/integration/vajra-chinese-negation-test.mjs"
+  },
+  "failures": [],
+  "boundary": "PASS proves only the listed bounded lexical Chinese negation cases and the tested GUT regression. It does not provide semantic negation understanding, truth adjudication, or complete Chinese grammar coverage."
+}
