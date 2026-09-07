@@ -14,12 +14,28 @@ check(contested.dynamicReinspection?.triggered===true,'DYNAMIC_REINSPECTION_NOT_
 check(contested.nextInspection?.trigger==='CONTESTED_RETURN','WRONG_TRIGGER',contested.nextInspection);
 check(contested.nextInspection?.lens==='source_quality'&&contested.nextInspection?.preferredOrgan==='DROPLET','CONFLICT_DID_NOT_CHANGE_BEHAVIOR',contested.nextInspection);
 check(contested.nextInspection?.targetRef===branch.targetRef&&contested.nextInspection?.clauseRef===branch.clauseRef,'TARGET_SCOPE_LOST',contested.nextInspection);
+
+// Adversarial echo test: once a contested branch is already in source-quality inspection,
+// VAJRA must not recursively send the same conflict back to DROPLET again.
+const repeatedSourceContest=V.selectNextInspection({unresolved:[{
+  status:'CONTESTED_BY_RECEIPTS',
+  targetRef:'t-source-quality',
+  clauseRef:'c-source-quality',
+  lens:'source_quality',
+  evidenceKeys:['receipt-A','receipt-B']
+}]});
+check(repeatedSourceContest?.trigger==='REPEATED_SOURCE_CONTEST','REPEATED_CONTEST_NOT_DETECTED',repeatedSourceContest);
+check(repeatedSourceContest?.preferredOrgan==='GUT','REPEATED_CONTEST_NOT_DIVERTED_TO_GUT',repeatedSourceContest);
+check(repeatedSourceContest?.lens==='metabolic_contamination','REPEATED_CONTEST_WRONG_LENS',repeatedSourceContest);
+check(repeatedSourceContest?.targetRef==='t-source-quality'&&repeatedSourceContest?.clauseRef==='c-source-quality','REPEATED_CONTEST_SCOPE_LOST',repeatedSourceContest);
+check(repeatedSourceContest?.preferredOrgan!=='DROPLET','METABOLIC_ECHO_NOT_BROKEN',repeatedSourceContest);
+
 const single=V.applyHandoffResults(base,[mk('supports the target claim','src-C')]);
 check(single.dynamicReinspection?.triggered===false,'SINGLE_RETURN_FALSE_ESCALATION',single.dynamicReinspection);
 check(single.nextInspection?.trigger!=='CONTESTED_RETURN','SINGLE_RETURN_WRONG_TRIGGER',single.nextInspection);
 const rejected=V.applyHandoffResults(base,[mk('supports the target claim','', {provenance:''})]);
 check(rejected.dynamicReinspection?.triggered===false,'REJECTED_RECEIPT_FALSE_ESCALATION',rejected.dynamicReinspection);
 check((rejected.handoffResolution?.rejected||0)>=1,'REJECTED_RECEIPT_NOT_AUDITED',rejected.handoffResolution);
-const result={schema:'nostromo-vajra-dynamic-reinspection/v0.1',completedAt:new Date().toISOString(),status:failures.length?'FAIL':'PASS',tests:{contestedStatus:contested.status,nextInspection:contested.nextInspection,singleTriggered:single.dynamicReinspection?.triggered,rejectedTriggered:rejected.dynamicReinspection?.triggered,rejectedCount:rejected.handoffResolution?.rejected},failures,boundary:'PASS proves a structurally qualifying cross-organ receipt conflict changes VAJRA next-step priority to clause-scoped source-quality inspection while preserving target/clause references and contest evidence. A lone qualifying receipt or rejected receipt does not trigger escalation. It does not prove semantic correctness, source truth, source independence, or that DROPLET actually executed the follow-up.'};
+const result={schema:'nostromo-vajra-dynamic-reinspection/v0.2',completedAt:new Date().toISOString(),status:failures.length?'FAIL':'PASS',tests:{contestedStatus:contested.status,nextInspection:contested.nextInspection,repeatedSourceContest,singleTriggered:single.dynamicReinspection?.triggered,rejectedTriggered:rejected.dynamicReinspection?.triggered,rejectedCount:rejected.handoffResolution?.rejected},failures,boundary:'PASS proves a structurally qualifying cross-organ receipt conflict changes VAJRA next-step priority to clause-scoped source-quality inspection while preserving target/clause references, and that a conflict already at source_quality is diverted to GUT metabolic-contamination triage rather than recursively echoing through DROPLET. A lone qualifying receipt or rejected receipt does not trigger escalation. It does not prove semantic correctness, source truth, source independence, contamination, or that DROPLET/GUT actually executed the follow-up.'};
 await fs.writeFile('nostromo/vajra/dynamic-reinspection-last-result.json',JSON.stringify(result,null,2)+'\n');
 console.log(JSON.stringify(result,null,2));if(failures.length)process.exitCode=1;
