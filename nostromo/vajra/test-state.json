@@ -1,13 +1,13 @@
 {
-  "engine": "VAJRA ENGINE v0.3.2 + dynamic reinspection v0.2 + provenance independence guard v0.1 + dynamic decomposition v0.1",
+  "engine": "VAJRA ENGINE v0.3.2 + dynamic reinspection v0.2 + provenance independence guard v0.1 + dynamic decomposition v0.3",
   "status": "VERIFIED_HEURISTIC_PROPOSITION_AWARE_DISMANTLER",
   "displayedStateRule": "DISPLAYED STATE MUST FOLLOW EVIDENCE",
   "evidence": {
     "engineBlobSha": "abdd946c0e83374d4981dbb8ee3fd01164a33e80",
     "engineCommit": "0db1c377f66e673598a564f3559e44b997be7f0a",
     "latestIntegrationCI": {
-      "schema": "nostromo-integration-ci/v1.3.3",
-      "completedAt": "2026-09-07T09:08:46.628Z",
+      "workflowRunId": 34162257101,
+      "headSha": "ec71f54aea2fdbbb5ae83ff066f3864aa87fd797",
       "status": "PASS",
       "failures": []
     },
@@ -22,7 +22,7 @@
       "evidenceRef": "nostromo/vajra/dynamic-reinspection-test.mjs",
       "status": "PASS",
       "capabilityVersion": "0.2",
-      "workflowRunId": 34128591039
+      "workflowRunId": 34162257107
     },
     "provenanceIndependence": {
       "schema": "zenomorph-vajra-provenance-independence/v0.1",
@@ -33,14 +33,20 @@
       "verifiedAt": "2026-09-07T15:07:43Z"
     },
     "dynamicDecomposition": {
-      "schema": "zenomorph-vajra-dynamic-decomposition-test/v0.1",
+      "schema": "zenomorph-vajra-dynamic-decomposition-test/v0.3",
       "evidenceRef": "nostromo/vajra/dynamic-decomposition-test.mjs",
       "status": "PASS",
-      "capabilityVersion": "0.1",
-      "workflowRunId": 34141690272,
-      "crossRegressionWorkflowRunId": 34141690254,
-      "integrationWorkflowRunId": 34141690239,
-      "verifiedAt": "2026-09-07T16:08:53Z"
+      "capabilityVersion": "0.3",
+      "implementationCommit": "ec71f54aea2fdbbb5ae83ff066f3864aa87fd797",
+      "workflowRunId": 34162257108,
+      "crossRegressionWorkflowRunId": 34162257107,
+      "triageConflictGuardWorkflowRunId": 34162257098,
+      "integrationWorkflowRunId": 34162257101,
+      "verifiedAt": "2026-09-07T21:14:07Z",
+      "resolvedFailureEvidence": [
+        "nostromo/failure-log/2026-09-08-vajra-provenance-alias-decomposition-resolution.json",
+        "nostromo/failure-log/2026-09-08-vajra-triage-conflict-order-dependence-resolution.json"
+      ]
     }
   },
   "verifiedCapabilities": [
@@ -55,13 +61,16 @@
     "receipt-driven dynamic reinspection: opposing qualifying cross-organ returns change the next VAJRA priority to clause-scoped source-quality inspection without adjudicating the conflict",
     "metabolic echo break: a repeated source-quality contest diverts to GUT contamination triage instead of recursively reusing the same DROPLET route",
     "provenance independence guard: same-canonical-provenance paraphrases cannot inflate evidence count or manufacture an inter-source conflict; same-source opposing returns are quarantined as source-internal contradiction",
-    "contamination-driven dynamic decomposition: a qualifying provenance-bearing GUT contamination-triage receipt changes VAJRA behavior by splitting a repeated source-quality conflict into source-identity (GUT) and claim-relation (MU/TH/UR) facets while preserving the open parent conflict and target/clause provenance"
+    "contamination-driven dynamic decomposition: a qualifying provenance-bearing GUT contamination-triage receipt changes VAJRA behavior by splitting a repeated source-quality conflict into source-identity (GUT) and claim-relation (MU/TH/UR) facets while preserving the open parent conflict and target/clause provenance",
+    "alias-safe decomposition agreement: surface-form provenance aliases that share one canonical provenance identity cannot manufacture a false conflicting-triage HOLD",
+    "deterministic conflict evidence: genuinely conflicting qualifying GUT triage receipts remain on HOLD and emit the same conflict signature ordering regardless of receipt arrival order"
   ],
   "boundaries": [
     "Classification and clause decomposition remain auditable syntactic heuristics, not semantic understanding.",
     "The Chinese negation guard is a bounded lexical safeguard, not general Chinese negation understanding or truth adjudication.",
     "Dynamic reinspection is structural reprioritization only; it does not decide which conflicting receipt is true.",
     "Canonical provenance equality blocks same-source false independence inside one clause-scoped handoff, but differently named provenance values are not thereby proven independent.",
+    "Canonical provenance equality is a structural identity heuristic; it can still over-collapse genuinely distinct sources whose labels normalize to the same key.",
     "Source-internal contradiction quarantine preserves uncertainty and prevents false escalation; it does not adjudicate which return is true.",
     "Contamination-triage classes are host-defined structural labels and do not by themselves prove contamination, source independence, or claim truth.",
     "Dynamic decomposition produces reversible open routing/inspection facets only; it does not close the parent conflict or claim that GUT or MU/TH/UR executed those facets.",
@@ -75,5 +84,5 @@
     "prototypeCrashes": 0,
     "note": "The original v0.1 500-run state-machine result is retained as historical evidence only and no longer describes the current engine."
   },
-  "next": "Continue VAJRA thickening with adversarial source-alias and canonical-provenance collision cases against the new decomposition receipt contract; require clean or ambiguous triage to preserve the parent conflict without false closure, over-splitting, or organ ping-pong."
+  "next": "Continue VAJRA thickening with adversarial canonicalization over-collapse cases: construct genuinely distinct provenance labels that collapse under the current punctuation-insensitive canonical key and require ambiguity/quarantine or stronger identity evidence rather than silently merging them. Preserve CLEAN or ambiguous triage as an open parent conflict without false closure, over-splitting, or organ ping-pong."
 }
