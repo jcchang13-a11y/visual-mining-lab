@@ -54,6 +54,10 @@ jobs:
         id: gut_lineage
         continue-on-error: true
         run: node nostromo/integration/gut-lineage-test.mjs
+      - name: Verify GUT opaque callable quarantine
+        id: gut_callable
+        continue-on-error: true
+        run: node nostromo/integration/gut-callable-test.mjs
       - name: Verify VAJRA proposition-aware dismantling
         id: vajra_dynamic
         continue-on-error: true
@@ -107,6 +111,7 @@ jobs:
           test -f nostromo/integration/gut-metabolism-last-result.json && cp nostromo/integration/gut-metabolism-last-result.json /tmp/nostromo-gut-metabolism-last-result.json || true
           test -f nostromo/integration/gut-ancestor-failure-last-result.json && cp nostromo/integration/gut-ancestor-failure-last-result.json /tmp/nostromo-gut-ancestor-failure-last-result.json || true
           test -f nostromo/integration/gut-lineage-last-result.json && cp nostromo/integration/gut-lineage-last-result.json /tmp/nostromo-gut-lineage-last-result.json || true
+          test -f nostromo/integration/gut-callable-last-result.json && cp nostromo/integration/gut-callable-last-result.json /tmp/nostromo-gut-callable-last-result.json || true
           test -f nostromo/integration/vajra-dynamic-last-result.json && cp nostromo/integration/vajra-dynamic-last-result.json /tmp/nostromo-vajra-dynamic-last-result.json || true
           test -f nostromo/integration/vajra-conflict-last-result.json && cp nostromo/integration/vajra-conflict-last-result.json /tmp/nostromo-vajra-conflict-last-result.json || true
           test -f nostromo/integration/vajra-ambiguity-last-result.json && cp nostromo/integration/vajra-ambiguity-last-result.json /tmp/nostromo-vajra-ambiguity-last-result.json || true
@@ -128,6 +133,7 @@ jobs:
           if [ -f /tmp/nostromo-gut-metabolism-last-result.json ]; then cp /tmp/nostromo-gut-metabolism-last-result.json nostromo/integration/gut-metabolism-last-result.json; git add nostromo/integration/gut-metabolism-last-result.json; fi
           if [ -f /tmp/nostromo-gut-ancestor-failure-last-result.json ]; then cp /tmp/nostromo-gut-ancestor-failure-last-result.json nostromo/integration/gut-ancestor-failure-last-result.json; git add nostromo/integration/gut-ancestor-failure-last-result.json; fi
           if [ -f /tmp/nostromo-gut-lineage-last-result.json ]; then cp /tmp/nostromo-gut-lineage-last-result.json nostromo/integration/gut-lineage-last-result.json; git add nostromo/integration/gut-lineage-last-result.json; fi
+          if [ -f /tmp/nostromo-gut-callable-last-result.json ]; then cp /tmp/nostromo-gut-callable-last-result.json nostromo/integration/gut-callable-last-result.json; git add nostromo/integration/gut-callable-last-result.json; fi
           if [ -f /tmp/nostromo-vajra-dynamic-last-result.json ]; then cp /tmp/nostromo-vajra-dynamic-last-result.json nostromo/integration/vajra-dynamic-last-result.json; git add nostromo/integration/vajra-dynamic-last-result.json; fi
           if [ -f /tmp/nostromo-vajra-conflict-last-result.json ]; then cp /tmp/nostromo-vajra-conflict-last-result.json nostromo/integration/vajra-conflict-last-result.json; git add nostromo/integration/vajra-conflict-last-result.json; fi
           if [ -f /tmp/nostromo-vajra-ambiguity-last-result.json ]; then cp /tmp/nostromo-vajra-ambiguity-last-result.json nostromo/integration/vajra-ambiguity-last-result.json; git add nostromo/integration/vajra-ambiguity-last-result.json; fi
@@ -162,6 +168,9 @@ jobs:
         run: exit 1
       - name: Enforce GUT lineage anti-echo conclusion
         if: steps.gut_lineage.outcome != 'success'
+        run: exit 1
+      - name: Enforce GUT callable quarantine conclusion
+        if: steps.gut_callable.outcome != 'success'
         run: exit 1
       - name: Enforce VAJRA dynamic dismantling conclusion
         if: steps.vajra_dynamic.outcome != 'success'
