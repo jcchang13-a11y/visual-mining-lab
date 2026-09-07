@@ -1,4 +1,4 @@
-/* VAJRA dynamic decomposition v0.1 — qualifying GUT contamination triage can split a repeated source-quality conflict into bounded follow-up facets without closing the parent conflict */
+/* VAJRA dynamic decomposition v0.2 — qualifying GUT contamination triage can split a repeated source-quality conflict into bounded follow-up facets; conflicting qualifying triage receipts force a HOLD instead of order-dependent false certainty */
 (function(root){
   const api=root.VajraEngine;
   if(!api||typeof api.selectNextInspection!=='function') throw new Error('VajraEngine + dynamic-reinspection must be loaded before dynamic-decomposition');
@@ -22,27 +22,51 @@
     const branches=Array.isArray(result?.unresolved)?result.unresolved:[];
     const parent=branches.find(b=>b?.status==='CONTESTED_BY_RECEIPTS'&&b?.lens==='source_quality');
     if(!parent) return {status:'NO_DECOMPOSITION',reason:'no-contested-source-quality-parent',facets:[],rejected:[]};
+
     const rejected=[];
-    let qualified=null;
+    const qualified=[];
     for(const receipt of Array.isArray(receipts)?receipts:[]){
       const q=qualifyTriageReceipt(parent,receipt);
-      if(q.ok){qualified={receipt,q};break;}
-      rejected.push({reason:q.reason,receiptFingerprint:fp(JSON.stringify(receipt||null))});
+      if(q.ok) qualified.push({receipt,q});
+      else rejected.push({reason:q.reason,receiptFingerprint:fp(JSON.stringify(receipt||null))});
     }
-    if(!qualified) return {status:'HOLD',reason:'qualifying-gut-contamination-triage-required',parent:{targetRef:parent.targetRef,clauseRef:parent.clauseRef,lens:parent.lens,status:parent.status},facets:[],rejected,boundary:'Absence or rejection of a GUT triage receipt cannot change VAJRA decomposition behavior.'};
+    if(!qualified.length) return {status:'HOLD',reason:'qualifying-gut-contamination-triage-required',parent:{targetRef:parent.targetRef,clauseRef:parent.clauseRef,lens:parent.lens,status:parent.status},facets:[],rejected,boundary:'Absence or rejection of a GUT triage receipt cannot change VAJRA decomposition behavior.'};
 
-    const shared={targetRef:parent.targetRef,clauseRef:parent.clauseRef,parentLens:parent.lens,parentStatus:parent.status,triageClassification:qualified.q.classification,triageProvenance:qualified.q.provenance,triageReceiptFingerprint:qualified.q.receiptFingerprint,status:'OPEN'};
+    const signatures=new Map();
+    for(const item of qualified){
+      const signature=`${item.q.classification}|${item.q.provenance}`;
+      if(!signatures.has(signature)) signatures.set(signature,[]);
+      signatures.get(signature).push(item.q.receiptFingerprint);
+    }
+    if(signatures.size>1){
+      return {
+        schema:'zenomorph-vajra-dynamic-decomposition/v0.2',
+        status:'HOLD',
+        reason:'conflicting-qualifying-gut-triage-receipts',
+        parent:{targetRef:parent.targetRef,clauseRef:parent.clauseRef,lens:parent.lens,status:parent.status,closed:false},
+        facets:[],
+        conflict:{
+          signatures:[...signatures.entries()].map(([signature,receiptFingerprints])=>({signatureFingerprint:fp(signature),receiptFingerprints:[...receiptFingerprints].sort()})),
+          qualifyingReceiptCount:qualified.length
+        },
+        rejected,
+        boundary:'Multiple qualifying GUT triage receipts that disagree on classification or provenance cannot be resolved by array order. VAJRA must preserve the parent conflict and request further inspection rather than manufacture certainty.'
+      };
+    }
+
+    const selected=qualified[0];
+    const shared={targetRef:parent.targetRef,clauseRef:parent.clauseRef,parentLens:parent.lens,parentStatus:parent.status,triageClassification:selected.q.classification,triageProvenance:selected.q.provenance,triageReceiptFingerprint:selected.q.receiptFingerprint,status:'OPEN'};
     const facets=[
       {...shared,facetId:`${parent.clauseRef}:identity`,lens:'source_identity',preferredOrgan:'GUT',need:'isolate duplicate/alias/provenance-collision structure without adjudicating claim truth',reason:'Contamination triage makes source identity a separate unresolved structural question.'},
       {...shared,facetId:`${parent.clauseRef}:relation`,lens:'claim_relation',preferredOrgan:'MUTHER',need:'re-evaluate how the surviving material relates to the clause after contaminated copies are not counted as independent support/opposition',reason:'Source contamination changes the evidential relation that must be reconstructed from retained provenance.'}
     ];
     return {
-      schema:'zenomorph-vajra-dynamic-decomposition/v0.1',
+      schema:'zenomorph-vajra-dynamic-decomposition/v0.2',
       status:'DECOMPOSED',
       reason:'qualifying-gut-contamination-triage-split-parent-conflict',
       parent:{targetRef:parent.targetRef,clauseRef:parent.clauseRef,lens:parent.lens,status:parent.status,closed:false},
       facets,
-      provenance:{triageProvenance:qualified.q.provenance,triageReceiptFingerprint:qualified.q.receiptFingerprint,preservedTargetRef:parent.targetRef,preservedClauseRef:parent.clauseRef},
+      provenance:{triageProvenance:selected.q.provenance,triageReceiptFingerprint:selected.q.receiptFingerprint,preservedTargetRef:parent.targetRef,preservedClauseRef:parent.clauseRef,qualifyingReceiptCount:qualified.length},
       rejected,
       boundary:'Dynamic decomposition is a reversible routing/inspection plan. It preserves the contested parent as open, does not decide which receipt is true, does not prove provenance independence, and does not claim GUT or MUTHER executed the generated facets.'
     };
