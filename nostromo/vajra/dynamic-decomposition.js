@@ -44,6 +44,9 @@
       signatures.get(signature).push(item.q.receiptFingerprint);
     }
     if(signatures.size>1){
+      const signatureAudit=[...signatures.entries()]
+        .map(([signature,receiptFingerprints])=>({signatureFingerprint:fp(signature),receiptFingerprints:[...receiptFingerprints].sort()}))
+        .sort((a,b)=>a.signatureFingerprint.localeCompare(b.signatureFingerprint)||JSON.stringify(a.receiptFingerprints).localeCompare(JSON.stringify(b.receiptFingerprints)));
       return {
         schema:'zenomorph-vajra-dynamic-decomposition/v0.3',
         status:'HOLD',
@@ -51,11 +54,11 @@
         parent:{targetRef:parent.targetRef,clauseRef:parent.clauseRef,lens:parent.lens,status:parent.status,closed:false},
         facets:[],
         conflict:{
-          signatures:[...signatures.entries()].map(([signature,receiptFingerprints])=>({signatureFingerprint:fp(signature),receiptFingerprints:[...receiptFingerprints].sort()})),
+          signatures:signatureAudit,
           qualifyingReceiptCount:qualified.length
         },
         rejected,
-        boundary:'Multiple qualifying GUT triage receipts that disagree on classification or canonical provenance cannot be resolved by array order. Surface-form aliases of one canonical provenance are not treated as independent disagreement. VAJRA must preserve the parent conflict and request further inspection rather than manufacture certainty.'
+        boundary:'Multiple qualifying GUT triage receipts that disagree on classification or canonical provenance cannot be resolved by array order. Surface-form aliases of one canonical provenance are not treated as independent disagreement. Conflict evidence is emitted in deterministic signature order so receipt arrival order cannot acquire false procedural significance. VAJRA must preserve the parent conflict and request further inspection rather than manufacture certainty.'
       };
     }
 
