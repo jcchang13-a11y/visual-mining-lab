@@ -1,0 +1,33 @@
+name: NOSTROMO VAJRA operator preservation
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'nostromo/vajra/operator-preservation-guard.js'
+      - 'nostromo/vajra/operator-preservation-test.mjs'
+      - 'nostromo/vajra/vajra-engine.js'
+      - 'nostromo/vajra/dynamic-reinspection.js'
+      - 'nostromo/vajra/provenance-independence-guard.js'
+      - 'nostromo/vajra/provenance-independence-test.mjs'
+      - 'nostromo/integration/ci-test.mjs'
+      - '.github/workflows/nostromo-vajra-operator-preservation-test.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: VAJRA operator unit and adversarial regression
+        run: node nostromo/vajra/operator-preservation-test.mjs
+      - name: VAJRA provenance independence regression
+        run: node nostromo/vajra/provenance-independence-test.mjs
+      - name: Cross-organ integration regression
+        run: node nostromo/integration/ci-test.mjs
