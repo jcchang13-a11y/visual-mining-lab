@@ -1,0 +1,14 @@
+{
+  "schema": "zenomorph-gut-test-contract-failure/v0.1",
+  "recordedAt": "2026-09-07T19:04:49+08:00",
+  "organ": "GUT",
+  "scope": "NOSTROMO incubation architecture",
+  "evidenceRef": "nostromo/integration/gut-metabolism-last-result.json",
+  "observedStatus": "FAIL",
+  "observedEngineVersion": "0.2.37",
+  "failingAssertion": "GUT_VERSION",
+  "diagnosis": "The metabolism suite's exact allow-list ends at 0.2.36, while the current engine reports 0.2.37. Behavioral routing, anti-echo, provenance, contextual quarantine, numeric preservation and cross-organ feedback assertions in the same run did not report failures.",
+  "risk": "An exact patch-version allow-list can manufacture false red evidence after a compatible engine thickening, causing displayed state to lag behavioral evidence and making version bookkeeping masquerade as a metabolic defect.",
+  "repairConstraint": "Preserve version-family compatibility checking, reject malformed or incompatible version families, and keep behavioral capability assertions authoritative.",
+  "privacy": "No private connector source text, names, IDs or URLs are recorded here."
+}
