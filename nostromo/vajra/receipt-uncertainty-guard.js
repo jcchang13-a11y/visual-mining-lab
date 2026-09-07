@@ -1,8 +1,8 @@
-/* VAJRA receipt uncertainty guard v0.3.8 + contest-persistence + contract-adequacy guard — prevents indeterminate, unspecified, internally mixed, negated-polarity, same-provenance opposing, historically contested, or lens-inadequate returns from creating false closure while allowing explicitly bounded null-search completion */
+/* VAJRA receipt uncertainty guard v0.3.8 + contest-persistence + contract-adequacy + Chinese bare-negation guard — prevents indeterminate, unspecified, internally mixed, negated-polarity, same-provenance opposing, historically contested, or lens-inadequate returns from creating false closure while allowing explicitly bounded null-search completion */
 (function(root){
   const engine=root.VajraEngine;
   if(!engine||typeof engine.applyHandoffResults!=='function') throw new Error('VAJRA_ENGINE_REQUIRED_BEFORE_UNCERTAINTY_GUARD');
-  if(engine.receiptUncertaintyGuardVersion==='0.3.8'&&engine.receiptContestPersistenceGuardVersion==='0.1'&&engine.receiptContractAdequacyGuardVersion==='0.2') return;
+  if(engine.receiptUncertaintyGuardVersion==='0.3.8'&&engine.receiptContestPersistenceGuardVersion==='0.1'&&engine.receiptContractAdequacyGuardVersion==='0.2'&&engine.receiptChineseNegationGuardVersion==='0.1') return;
 
   const baseApply=engine.applyHandoffResults.bind(engine);
   function clean(text){return String(text||'').normalize('NFKC').replace(/\s+/g,' ').trim();}
@@ -10,7 +10,7 @@
   function provenanceOf(r){return clean(r?.provenance||r?.provenanceFingerprint||r?.sourceFingerprint||r?.fingerprint);}
   function hasNegatedPolarity(text){
     const s=clean(text).toLowerCase();
-    return /\b(?:does|do|did|is|are|was|were|can|could|would|should|may|might)\s+not\s+(?:support|refute|contradict|falsif(?:y|ies)|confirm|corroborate|establish|prove)\b|\b(?:doesn['’]?t|don['’]?t|didn['’]?t|isn['’]?t|aren['’]?t|wasn['’]?t|weren['’]?t|can['’]?t|cannot|couldn['’]?t|wouldn['’]?t|shouldn['’]?t|mightn['’]?t)\s+(?:support|refute|contradict|falsif(?:y|ies)|confirm|corroborate|establish|prove)\b|\bfail(?:s|ed)?\s+to\s+(?:support|refute|contradict|falsif(?:y|ies)|confirm|corroborate|establish|prove)\b|\bnot\s+(?:consistent|inconsistent)\s+with\b|(?:並未|沒有|未曾|尚未)(?:能夠|能)?(?:支持|反駁|反證|否證|證明|印證)|未能(?:支持|反駁|反證|否證|證明|印證)|不構成(?:支持|反駁|反證|否證|證明|印證)/.test(s);
+    return /\b(?:does|do|did|is|are|was|were|can|could|would|should|may|might)\s+not\s+(?:support|refute|contradict|falsif(?:y|ies)|confirm|corroborate|establish|prove)\b|\b(?:doesn['’]?t|don['’]?t|didn['’]?t|isn['’]?t|aren['’]?t|wasn['’]?t|weren['’]?t|can['’]?t|cannot|couldn['’]?t|wouldn['’]?t|shouldn['’]?t|mightn['’]?t)\s+(?:support|refute|contradict|falsif(?:y|ies)|confirm|corroborate|establish|prove)\b|\bfail(?:s|ed)?\s+to\s+(?:support|refute|contradict|falsif(?:y|ies)|confirm|corroborate|establish|prove)\b|\bnot\s+(?:consistent|inconsistent)\s+with\b|(?:並未|沒有|未曾|尚未)(?:能夠|能)?(?:支持|反駁|反證|否證|證明|印證)|未能(?:支持|反駁|反證|否證|證明|印證)|不構成(?:支持|反駁|反證|否證|證明|印證)|不(?:支持|反駁|反證|否證|證明|印證|吻合|一致)/.test(s);
   }
   function isExplicitlyIndeterminate(text){
     const s=clean(text).toLowerCase();
@@ -149,7 +149,7 @@
 
     out.handoffResolution=hr;
     out.version='0.3.8';
-    out.boundary=`${out.boundary||''} Uncertainty/provenance/adequacy guard v0.3.8: ordinary structurally matching receipts cannot close a handoff unless their relation is unambiguously classified by the bounded polarity detector as SUPPORTS or REFUTES. Explicitly insufficient/uncertain relations, negated polarity wording, long noncommittal relations, and mixed polarity remain blocked. Opposing SUPPORTS/REFUTES returns carrying the same canonical provenance identity are audited as SAME_PROVENANCE_CONFLICT; prior independent-source contests persist until explicit adjudication exists. Contract-adequacy guard 0.2 requires bounded lens-specific evidence that the requested work was actually addressed. One deliberate exception separates task completion from claim certainty: a COUNTEREXAMPLE handoff may resolve as BOUNDED_NULL when the receipt explicitly says no counterexample was found, states bounded search scope/coverage, and explicitly disclaims that the null result proves the claim. BOUNDED_NULL closes only the search work contract; it never upgrades absence of a found counterexample into truth. These are conservative lexical/structural guards, not semantic adjudication, source-quality ranking, search completeness proof, or truth verification.`.trim();
+    out.boundary=`${out.boundary||''} Uncertainty/provenance/adequacy guard v0.3.8 + Chinese bare-negation guard 0.1: ordinary structurally matching receipts cannot close a handoff unless their relation is unambiguously classified by the bounded polarity detector as SUPPORTS or REFUTES. Explicitly insufficient/uncertain relations, negated polarity wording including bare Chinese forms such as 不反駁/不支持, long noncommittal relations, and mixed polarity remain blocked. Opposing SUPPORTS/REFUTES returns carrying the same canonical provenance identity are audited as SAME_PROVENANCE_CONFLICT; prior independent-source contests persist until explicit adjudication exists. Contract-adequacy guard 0.2 requires bounded lens-specific evidence that the requested work was actually addressed. One deliberate exception separates task completion from claim certainty: a COUNTEREXAMPLE handoff may resolve as BOUNDED_NULL when the receipt explicitly says no counterexample was found, states bounded search scope/coverage, and explicitly disclaims that the null result proves the claim. BOUNDED_NULL closes only the search work contract; it never upgrades absence of a found counterexample into truth. These are conservative lexical/structural guards, not semantic adjudication, source-quality ranking, search completeness proof, or truth verification.`.trim();
     return out;
   }
 
@@ -162,4 +162,5 @@
   engine.receiptUncertaintyGuardVersion='0.3.8';
   engine.receiptContestPersistenceGuardVersion='0.1';
   engine.receiptContractAdequacyGuardVersion='0.2';
+  engine.receiptChineseNegationGuardVersion='0.1';
 })(typeof window!=='undefined'?window:globalThis);
