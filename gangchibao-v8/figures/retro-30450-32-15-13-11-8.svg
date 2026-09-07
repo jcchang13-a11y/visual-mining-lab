@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 360" role="img" aria-labelledby="title desc">
+  <title id="title">第三十二分回溯第十五、第十三、第十一、第八分</title>
+  <desc id="desc">黑白同心圓，中心第三十二分，向外依序為第十五、第十三、第十一、第八分。</desc>
+  <rect width="360" height="360" fill="white"/>
+  <g fill="none" stroke="black" stroke-width="1.5">
+    <circle cx="180" cy="180" r="34"/>
+    <circle cx="180" cy="180" r="66"/>
+    <circle cx="180" cy="180" r="98"/>
+    <circle cx="180" cy="180" r="130"/>
+    <circle cx="180" cy="180" r="160"/>
+  </g>
+  <g fill="black" font-family="serif" font-size="20" text-anchor="middle">
+    <text x="180" y="187">32</text>
+    <text x="180" y="130">15</text>
+    <text x="180" y="98">13</text>
+    <text x="180" y="66">11</text>
+    <text x="180" y="36">8</text>
+  </g>
+</svg>
