@@ -1,3 +1,4 @@
+// Staged migration: apply active-ancestor cycle quarantine to verified GUT v0.2.34 only after focused and full regression checks.
 import fs from 'node:fs/promises';
 
 const enginePath='nostromo/gut/gut-engine.js';
