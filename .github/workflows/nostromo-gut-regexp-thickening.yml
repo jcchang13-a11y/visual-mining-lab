@@ -1,0 +1,53 @@
+name: NOSTROMO GUT RegExp Thickening
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'nostromo/integration/apply-gut-regexp-thickening.mjs'
+      - 'nostromo/integration/gut-regexp-test.mjs'
+      - 'nostromo/integration/promote-gut-regexp-registry.mjs'
+      - '.github/workflows/nostromo-gut-regexp-thickening.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  thicken:
+    if: ${{ !contains(github.event.head_commit.message, '[gut-regexp-applied]') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Apply GUT RegExp source-loss containment
+        run: node nostromo/integration/apply-gut-regexp-thickening.mjs
+      - name: Focused adversarial RegExp verification
+        run: node nostromo/integration/gut-regexp-test.mjs
+      - name: GUT metabolism regression
+        run: node nostromo/integration/gut-metabolism-test.mjs
+      - name: GUT lineage regression
+        run: node nostromo/integration/gut-lineage-test.mjs
+      - name: NOSTROMO 50-round cross-organ regression
+        run: node nostromo/integration/ci-test.mjs
+      - name: Promote registry only after successful tests
+        run: node nostromo/integration/promote-gut-regexp-registry.mjs
+      - name: Commit verified thickening and remove one-shot scaffolding
+        run: |
+          git config user.name "nostromo-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git rm -f .github/workflows/nostromo-gut-regexp-thickening.yml
+          git rm -f nostromo/integration/apply-gut-regexp-thickening.mjs
+          git rm -f nostromo/integration/promote-gut-regexp-registry.mjs
+          git add nostromo/gut/gut-engine.js
+          git add nostromo/integration/gut-regexp-test.mjs
+          git add nostromo/integration/gut-regexp-last-result.json
+          git add nostromo/integration/gut-metabolism-last-result.json
+          git add nostromo/integration/gut-lineage-last-result.json
+          git add nostromo/integration/ci-last-result.json
+          git add nostromo/integration/organ-registry.json
+          git commit -m "[nostromo-test] [gut-regexp-applied] verify GUT v0.2.37 opaque RegExp containment"
+          git push origin HEAD:main
