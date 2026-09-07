@@ -1,0 +1,20 @@
+{
+  "schema": "zenomorph-failure-evidence/v0.1",
+  "observedAt": "2026-09-07",
+  "organ": "VAJRA",
+  "capability": "CHINESE_MODIFIER_WRAPPED_NEGATION_SCOPE",
+  "status": "PRESERVED_BEFORE_FIX",
+  "failureMode": "FALSE_CERTAINTY_FROM_EMBEDDED_DIRECTION_TOKEN",
+  "mechanism": "The existing bounded Chinese guard recognizes bare forms such as 不支持 and 不反駁, but modifier-wrapped forms can leave 支持/反駁 visible to lexical polarity detection even though the modifier negates or weakens that direction.",
+  "adversarialCases": [
+    "並非支持這個命題",
+    "並不是反駁這個命題",
+    "稱不上支持這個命題",
+    "不能算反駁這個命題",
+    "難以支持這個命題",
+    "尚不足以支持這個命題"
+  ],
+  "risk": "A receipt can prematurely close a VAJRA branch, then downstream organs metabolize an artificial certainty.",
+  "repairBoundary": "Treat only the listed modifier-scoped direction constructions as indeterminate. Do not infer the opposite polarity and do not claim general Chinese semantic understanding.",
+  "privacy": "No private connector source text, identifiers, names, IDs, or URLs are included."
+}
