@@ -11,6 +11,8 @@ const parent={status:'CONTESTED_BY_RECEIPTS',targetRef:'target-001',clauseRef:'c
 const state={status:'CONTESTED_BY_RECEIPTS',unresolved:[parent]};
 const gutReceipt={targetRef:'target-001',clauseRef:'clause-001',lens:'metabolic_contamination',organ:'GUT',status:'COMPLETED',provenance:'gut-triage-evidence-001',triageClassification:'PROVENANCE_COLLISION',summary:'De-identified structural triage found source aliases that must not be counted as independent evidence.'};
 
+check(V.dynamicDecompositionVersion==='0.3','DYNAMIC_DECOMPOSITION_VERSION_NOT_PROMOTED',V.dynamicDecompositionVersion);
+
 // Unit: a structurally qualifying GUT triage must alter VAJRA behavior by decomposing one parent conflict.
 const decomposed=V.planConflictDecomposition(state,[gutReceipt]);
 check(decomposed.status==='DECOMPOSED','QUALIFYING_TRIAGE_DID_NOT_DECOMPOSE',decomposed);
@@ -19,7 +21,7 @@ check(decomposed.facets?.length===2,'WRONG_FACET_COUNT',decomposed.facets);
 check(decomposed.facets?.some(f=>f.lens==='source_identity'&&f.preferredOrgan==='GUT'),'SOURCE_IDENTITY_FACET_MISSING',decomposed.facets);
 check(decomposed.facets?.some(f=>f.lens==='claim_relation'&&f.preferredOrgan==='MUTHER'),'CLAIM_RELATION_FACET_MISSING',decomposed.facets);
 check(decomposed.facets?.every(f=>f.targetRef==='target-001'&&f.clauseRef==='clause-001'),'PROVENANCE_SCOPE_LOST',decomposed.facets);
-check(Boolean(decomposed.provenance?.triageProvenance&&decomposed.provenance?.triageReceiptFingerprint),'PROVENANCE_NOT_RETAINED',decomposed.provenance);
+check(Boolean(decomposed.provenance?.triageProvenance&&decomposed.provenance?.triageReceiptFingerprint&&decomposed.provenance?.triageProvenanceFingerprint),'PROVENANCE_NOT_RETAINED',decomposed.provenance);
 
 // Duplicate-equivalent qualifying receipts may coexist without changing behavior merely because of array order.
 const equivalentReceipt={...gutReceipt,summary:'Same structural finding restated by the same provenance-bearing triage artifact.'};
@@ -27,7 +29,21 @@ const equivalent=V.planConflictDecomposition(state,[gutReceipt,equivalentReceipt
 check(equivalent.status==='DECOMPOSED','EQUIVALENT_TRIAGE_FALSE_HOLD',equivalent);
 check(equivalent.provenance?.qualifyingReceiptCount===2,'EQUIVALENT_TRIAGE_COUNT_LOST',equivalent.provenance);
 
-// Adversarial: two individually qualifying but mutually inconsistent GUT triage receipts must HOLD rather than let the first array element decide VAJRA behavior.
+// Adversarial source alias: punctuation/case/spacing variants canonicalize to one structural provenance and must not manufacture disagreement.
+const provenanceAlias={...gutReceipt,provenance:'GUT Triage Evidence 001',summary:'Surface-form alias of the same de-identified structural triage provenance.'};
+const aliasAB=V.planConflictDecomposition(state,[gutReceipt,provenanceAlias]);
+const aliasBA=V.planConflictDecomposition(state,[provenanceAlias,gutReceipt]);
+for(const [label,alias] of [['AB',aliasAB],['BA',aliasBA]]){
+  check(alias.status==='DECOMPOSED',`CANONICAL_ALIAS_${label}_FALSE_HOLD`,alias);
+  check(alias.parent?.closed===false,`CANONICAL_ALIAS_${label}_PARENT_FALSELY_CLOSED`,alias.parent);
+  check(alias.facets?.length===2,`CANONICAL_ALIAS_${label}_OVER_SPLIT`,alias.facets);
+  check(alias.facets?.every(f=>f.preferredOrgan!=='DROPLET'),`CANONICAL_ALIAS_${label}_PING_PONG`,alias.facets);
+  check(alias.provenance?.qualifyingReceiptCount===2,`CANONICAL_ALIAS_${label}_COUNT_LOST`,alias.provenance);
+  check(alias.provenance?.canonicalAliasCount===2,`CANONICAL_ALIAS_${label}_NOT_RECOGNIZED`,alias.provenance);
+}
+check(aliasAB.provenance?.triageProvenanceFingerprint===aliasBA.provenance?.triageProvenanceFingerprint,'CANONICAL_ALIAS_FINGERPRINT_ORDER_DEPENDENT',{ab:aliasAB.provenance,ba:aliasBA.provenance});
+
+// Adversarial: two individually qualifying but genuinely inconsistent GUT triage receipts must HOLD rather than let the first array element decide VAJRA behavior.
 const conflictingReceipt={...gutReceipt,provenance:'gut-triage-evidence-002',triageClassification:'DUPLICATE_CONTAMINATION',summary:'A different completed GUT triage claims a different contamination structure.'};
 const conflictAB=V.planConflictDecomposition(state,[gutReceipt,conflictingReceipt]);
 const conflictBA=V.planConflictDecomposition(state,[conflictingReceipt,gutReceipt]);
@@ -64,15 +80,15 @@ check(echoBreak?.preferredOrgan==='GUT'&&echoBreak?.lens==='metabolic_contaminat
 check(decomposed.facets?.every(f=>f.preferredOrgan!=='DROPLET'),'ORGAN_PING_PONG_REINTRODUCED',decomposed.facets);
 
 const result={
-  schema:'zenomorph-vajra-dynamic-decomposition-test/v0.2',
+  schema:'zenomorph-vajra-dynamic-decomposition-test/v0.3',
   completedAt:new Date().toISOString(),
   status:failures.length?'FAIL':'PASS',
-  capability:'CONFLICTING_GUT_TRIAGE_CANNOT_CREATE_ORDER_DEPENDENT_VAJRA_CERTAINTY',
-  tests:{decomposed,equivalent,conflictAB,conflictBA,adversarialCases:adversarial.length,echoBreak},
+  capability:'CANONICAL_PROVENANCE_ALIASES_CANNOT_MANUFACTURE_DECOMPOSITION_DISAGREEMENT',
+  tests:{decomposed,equivalent,aliasAB,aliasBA,conflictAB,conflictBA,adversarialCases:adversarial.length,echoBreak},
   provenance:{fixture:'de-identified synthetic cross-organ receipt contract',sourceFiles:['nostromo/vajra/vajra-engine.js','nostromo/vajra/dynamic-reinspection.js','nostromo/vajra/dynamic-decomposition.js']},
   failures,
   failureLog:{count:failures.length,entries:failures},
-  boundary:'PASS proves only that qualifying GUT contamination triage can change VAJRA decomposition while contradictory qualifying GUT triage receipts cannot manufacture a decomposition through input ordering. It preserves the parent conflict, provenance scope, anti-ping-pong behavior and existing echo-break routing. It does not prove source truth, contamination detection quality, semantic adjudication, organ execution, or body admission.'
+  boundary:'PASS proves only that canonical provenance aliases in qualifying GUT contamination triage do not manufacture a false conflicting-triage HOLD, over-split the parent conflict, close it, or reintroduce DROPLET ping-pong. Genuinely different classification/canonical-provenance signatures must still HOLD independent of array order. This does not prove source truth, semantic alias resolution, contamination detection quality, organ execution, or body admission.'
 };
 await fs.writeFile('nostromo/vajra/dynamic-decomposition-last-result.json',JSON.stringify(result,null,2)+'\n');
 console.log(JSON.stringify(result,null,2));
