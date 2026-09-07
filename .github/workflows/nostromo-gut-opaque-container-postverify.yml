@@ -1,0 +1,45 @@
+name: NOSTROMO GUT Opaque Container Postverify
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'nostromo/integration/promote-gut-opaque-container-registry.mjs'
+      - '.github/workflows/nostromo-gut-opaque-container-postverify.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  full-verify-and-promote:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify current engine is GUT v0.2.36
+        run: node -e "const fs=require('fs');const vm=require('vm');vm.runInThisContext(fs.readFileSync('nostromo/gut/gut-engine.js','utf8'));const v=globalThis.GutEngine.digest({probe:'postverify'},{source:'postverify'}).version;if(v!=='0.2.36'){console.error('Expected 0.2.36, got '+v);process.exit(1)}"
+      - name: Re-run focused opaque-container adversarial test
+        run: node nostromo/integration/gut-opaque-container-test.mjs
+      - name: Run full NOSTROMO integration CI on v0.2.36
+        run: node nostromo/integration/ci-test.mjs
+      - name: Promote registry only after focused and full PASS
+        run: node nostromo/integration/promote-gut-opaque-container-registry.mjs
+      - name: Commit evidence-backed public promotion
+        run: |
+          git config user.name "nostromo-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add nostromo/integration/organ-registry.json nostromo/integration/ci-last-result.json nostromo/integration/gut-metabolism-last-result.json nostromo/integration/gut-opaque-container-last-result.json
+          if git diff --cached --quiet; then
+            echo "No promotion change"
+          else
+            git commit -m "[nostromo-test] publish verified GUT v0.2.36 opaque-container containment"
+            git restore --worktree .
+            git clean -fd
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
