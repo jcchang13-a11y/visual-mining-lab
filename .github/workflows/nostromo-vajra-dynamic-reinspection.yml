@@ -5,6 +5,8 @@ on:
       - 'nostromo/vajra/vajra-engine.js'
       - 'nostromo/vajra/dynamic-reinspection.js'
       - 'nostromo/vajra/dynamic-reinspection-test.mjs'
+      - 'nostromo/vajra/dynamic-decomposition.js'
+      - 'nostromo/vajra/dynamic-decomposition-test.mjs'
       - '.github/workflows/nostromo-vajra-dynamic-reinspection.yml'
   workflow_dispatch:
 permissions:
@@ -19,5 +21,9 @@ jobs:
           node-version: '22'
       - name: Run VAJRA dynamic reinspection unit/adversarial regression
         run: node nostromo/vajra/dynamic-reinspection-test.mjs
-      - name: Verify result contract
+      - name: Verify reinspection result contract
         run: node -e "const r=require('./nostromo/vajra/dynamic-reinspection-last-result.json'); if(r.status!=='PASS'||r.tests?.nextInspection?.lens!=='source_quality'||r.tests?.singleTriggered!==false||r.tests?.rejectedTriggered!==false) process.exit(1)"
+      - name: Run VAJRA contamination-driven dynamic decomposition regression
+        run: node nostromo/vajra/dynamic-decomposition-test.mjs
+      - name: Verify decomposition evidence contract
+        run: node -e "const r=require('./nostromo/vajra/dynamic-decomposition-last-result.json'); const d=r.tests?.decomposed; if(r.status!=='PASS'||r.failures?.length||d?.status!=='DECOMPOSED'||d?.parent?.closed!==false||d?.facets?.length!==2||!d?.provenance?.triageProvenance) process.exit(1)"
