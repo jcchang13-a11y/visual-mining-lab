@@ -25,6 +25,8 @@ jobs:
         run: node -e "const fs=require('fs');const vm=require('vm');vm.runInThisContext(fs.readFileSync('nostromo/gut/gut-engine.js','utf8'));const v=globalThis.GutEngine.digest({probe:'postverify'},{source:'postverify'}).version;if(v!=='0.2.36'){console.error('Expected 0.2.36, got '+v);process.exit(1)}"
       - name: Re-run focused opaque-container adversarial test
         run: node nostromo/integration/gut-opaque-container-test.mjs
+      - name: Refresh GUT metabolism evidence on v0.2.36
+        run: node nostromo/integration/gut-metabolism-test.mjs
       - name: Run full NOSTROMO integration CI on v0.2.36
         run: node nostromo/integration/ci-test.mjs
       - name: Promote registry only after focused and full PASS
