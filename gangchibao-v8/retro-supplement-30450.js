@@ -63,8 +63,16 @@
     return figure;
   }
 
+  function alreadyHasFigure(root,spec){
+    if(root.querySelector('[data-retro-key="'+spec.key+'"]')) return true;
+    return Array.from(root.querySelectorAll('.retro-figure__img')).some(img=>{
+      const raw=img.getAttribute('src')||'';
+      return raw===spec.src || raw.endsWith('/'+spec.src);
+    });
+  }
+
   function insert(root,spec){
-    if(!root||root.querySelector('[data-retro-key="'+spec.key+'"]')) return true;
+    if(!root||alreadyHasFigure(root,spec)) return true;
     const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);
     let node;
     while((node=walker.nextNode())){
