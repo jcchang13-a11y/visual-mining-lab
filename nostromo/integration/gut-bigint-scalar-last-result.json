@@ -1,0 +1,45 @@
+{
+  "schema": "nostromo-gut-bigint-scalar-test/v0.1",
+  "completedAt": "2026-09-07T03:16:37.295Z",
+  "status": "PASS",
+  "capability": "PATH_SCOPED_TYPED_BIGINT_PRESERVATION_WITHOUT_NUMERIC_EVIDENCE_PROMOTION",
+  "heldBigInts": [
+    {
+      "path": "root.counters.exact",
+      "text": "9007199254740993",
+      "type": "BIGINT_MATERIAL",
+      "status": "HOLD",
+      "route": "HOLD",
+      "reason": "typed-bigint-material",
+      "provenance": {
+        "inputSource": "NOSTROMO/gut-bigint-scalar-test"
+      }
+    },
+    {
+      "path": "root.samples[0]",
+      "text": "1",
+      "type": "BIGINT_MATERIAL",
+      "status": "HOLD",
+      "route": "HOLD",
+      "reason": "typed-bigint-material",
+      "provenance": {
+        "inputSource": "NOSTROMO/gut-bigint-scalar-test"
+      }
+    },
+    {
+      "path": "root.samples[1]",
+      "text": "1",
+      "type": "BIGINT_MATERIAL",
+      "status": "HOLD",
+      "route": "HOLD",
+      "reason": "typed-bigint-material",
+      "provenance": {
+        "inputSource": "NOSTROMO/gut-bigint-scalar-test"
+      }
+    }
+  ],
+  "finiteMetricStillEvidence": true,
+  "claimStillRoutedToDroplet": true,
+  "failures": [],
+  "boundary": "JavaScript BigInt primitives are retained as typed path-scoped BIGINT_MATERIAL in HOLD. Equal values at distinct structured paths retain distinct provenance. They remain auditable but cannot become numeric evidence, counts, confidence or truth merely because they are integer-like machine values. Literal text resembling BigInt syntax remains text. Compatibility gating accepts later 0.2.x patches while still rejecting a major/minor contract change."
+}
