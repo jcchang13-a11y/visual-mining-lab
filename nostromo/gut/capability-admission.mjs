@@ -1,4 +1,4 @@
-/* XENOMORPH / NOSTROMO GUT foreign-capability admission v0.1
+/* ZENOMORPH / NOSTROMO GUT foreign-capability admission v0.1
  * Deterministic, non-executing pre-assimilation boundary.
  * This module does not install, import, invoke, fetch, eval, or authorize foreign capabilities.
  */
@@ -49,8 +49,8 @@ function visibleIdentity(value){
 
 export function assessForeignCapability(candidate,context={}){
   const base={
-    schema:'xenomorph-gut-capability-admission/v0.1',
-    organism:'XENOMORPH',
+    schema:'zenomorph-gut-capability-admission/v0.1',
+    organism:'ZENOMORPH',
     habitat:'NOSTROMO',
     executed:false,
     authorized:false,
