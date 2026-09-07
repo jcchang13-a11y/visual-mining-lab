@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 280" role="img" aria-labelledby="title desc">
+  <title id="title">第二十八分忍辱線回溯</title>
+  <desc id="desc">第二十八分「知一切法無我，得成於忍」回接第十五、十四分的忍辱線。</desc>
+  <rect width="280" height="280" fill="white"/>
+  <g fill="none" stroke="black" stroke-width="2">
+    <circle cx="140" cy="140" r="36"/>
+    <circle cx="140" cy="140" r="76"/>
+    <circle cx="140" cy="140" r="116"/>
+  </g>
+  <g fill="black" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Noto Sans TC', sans-serif" font-size="19" text-anchor="middle" dominant-baseline="middle">
+    <text x="140" y="140">28</text>
+    <text x="140" y="82">15</text>
+    <text x="140" y="42">14</text>
+  </g>
+</svg>
