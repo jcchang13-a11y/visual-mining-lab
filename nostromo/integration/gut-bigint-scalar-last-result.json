@@ -1,6 +1,6 @@
 {
   "schema": "nostromo-gut-bigint-scalar-test/v0.1",
-  "completedAt": "2026-09-07T03:16:37.295Z",
+  "completedAt": "2026-09-07T11:10:25.566Z",
   "status": "PASS",
   "capability": "PATH_SCOPED_TYPED_BIGINT_PRESERVATION_WITHOUT_NUMERIC_EVIDENCE_PROMOTION",
   "heldBigInts": [
