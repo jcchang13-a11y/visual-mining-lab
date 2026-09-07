@@ -1,0 +1,37 @@
+name: ZENOMORPH VAJRA Chinese Negation Test
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'nostromo/vajra/receipt-uncertainty-guard.js'
+      - 'nostromo/vajra/vajra-engine.js'
+      - 'nostromo/gut/gut-engine.js'
+      - 'nostromo/integration/vajra-chinese-negation-test.mjs'
+      - '.github/workflows/zenomorph-vajra-chinese-negation-test.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify bare Chinese negated polarity preserves uncertainty
+        run: node nostromo/integration/vajra-chinese-negation-test.mjs
+      - name: Persist focused evidence
+        if: success()
+        run: |
+          if [ -z "$(git status --porcelain -- nostromo/integration/vajra-chinese-negation-last-result.json)" ]; then
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add nostromo/integration/vajra-chinese-negation-last-result.json
+          git commit -m '[nostromo-test] record VAJRA Chinese negation evidence'
+          git push
