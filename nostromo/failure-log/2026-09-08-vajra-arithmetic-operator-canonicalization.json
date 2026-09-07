@@ -1,0 +1,16 @@
+{
+  "schema": "zenomorph-failure-evidence/v0.1",
+  "recordedAt": "2026-09-08T04:03:49+08:00",
+  "organ": "VAJRA",
+  "status": "OPEN_NOT_PROMOTED",
+  "class": "PROVENANCE_CANONICALIZATION_COLLISION",
+  "finding": "VAJRA canonicalEvidenceMaterial preserves comparison, equality, plus and minus operators, but multiplication/division operators are still removed by the final Unicode punctuation/symbol stripping step. Evidence strings that differ materially by * versus / (or by Unicode × versus ÷) can therefore collapse to the same canonical material.",
+  "risk": [
+    "false duplicate detection",
+    "loss of arithmetic relation during replay/canonical comparison",
+    "false certainty caused by collapsing non-equivalent evidence"
+  ],
+  "requiredFix": "Preserve multiplication and division semantics for ASCII * and / and Unicode × and ÷ before generic symbol stripping; add adversarial collision tests plus cross-organ provenance regression before promotion.",
+  "provenance": "Derived from current public repository code inspection only. No private connector identifiers, names, URLs, or source text are included.",
+  "promotionBoundary": "This record remains OPEN_NOT_PROMOTED until the code patch and tests are committed and a relevant GitHub Actions run succeeds. A passing unit test alone must not erase this failure evidence."
+}
