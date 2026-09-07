@@ -1,0 +1,24 @@
+{
+  "schema": "zenomorph-failure-log/v0.1",
+  "date": "2026-09-07",
+  "organ": "VAJRA",
+  "status": "DEFECT_PRESERVED_AND_PATCHED_PENDING_CI",
+  "class": "FALSE_INDEPENDENCE_FROM_SAME_PROVENANCE",
+  "observedEvidence": {
+    "location": "nostromo/vajra/vajra-engine.js",
+    "mechanism": "evidence identity was canonical provenance plus canonical material, so the same provenance with differently worded material could produce distinct evidence keys and opposing relation polarities could be counted as an inter-source contest",
+    "risk": [
+      "duplicate pollution",
+      "false source independence",
+      "false conflict escalation",
+      "metabolic echo amplification"
+    ]
+  },
+  "patch": {
+    "location": "nostromo/vajra/provenance-independence-guard.js",
+    "policy": "within one clause-scoped handoff, canonical provenance is the independence boundary before material wording; same-source opposing relations are quarantined as source-internal contradiction; same-source same-direction paraphrases admit one receipt and audit the rest",
+    "privacy": "audit fingerprints provenance structurally and does not require persisting private source names, IDs, URLs, or source text"
+  },
+  "promotionRule": "Do not upgrade displayed capability state until the dedicated GitHub Actions provenance-independence test succeeds.",
+  "boundary": "This patch does not prove that differently named provenance values are actually independent, nor does it semantically decide which return is true."
+}
