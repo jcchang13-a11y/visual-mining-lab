@@ -2,7 +2,7 @@
   "schema": "zenomorph-failure-log/v0.1",
   "date": "2026-09-07",
   "organ": "VAJRA",
-  "status": "DEFECT_PRESERVED_AND_PATCHED_PENDING_CI",
+  "status": "VERIFIED_PATCH_CI_PASS",
   "class": "FALSE_INDEPENDENCE_FROM_SAME_PROVENANCE",
   "observedEvidence": {
     "location": "nostromo/vajra/vajra-engine.js",
@@ -19,6 +19,19 @@
     "policy": "within one clause-scoped handoff, canonical provenance is the independence boundary before material wording; same-source opposing relations are quarantined as source-internal contradiction; same-source same-direction paraphrases admit one receipt and audit the rest",
     "privacy": "audit fingerprints provenance structurally and does not require persisting private source names, IDs, URLs, or source text"
   },
-  "promotionRule": "Do not upgrade displayed capability state until the dedicated GitHub Actions provenance-independence test succeeds.",
+  "verification": {
+    "workflow": "ZENOMORPH VAJRA provenance independence",
+    "workflowRunId": 34136645206,
+    "headSha": "12d36c3c15a8e377b27a5935ef998c25725492c6",
+    "completedAt": "2026-09-07T15:07:43Z",
+    "conclusion": "success",
+    "coverage": [
+      "same-source opposing receipts do not create inter-source contest",
+      "same-source paraphrases do not inflate evidence count",
+      "independent-source conflict remains preserved",
+      "repeated source-quality conflict still diverts to GUT"
+    ]
+  },
+  "promotionRule": "Displayed capability may cite this guard only after the recorded CI success; nostromo/vajra/test-state.json was promoted after that evidence existed.",
   "boundary": "This patch does not prove that differently named provenance values are actually independent, nor does it semantically decide which return is true."
 }
