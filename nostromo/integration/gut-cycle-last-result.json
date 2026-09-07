@@ -1,0 +1,31 @@
+{
+  "schema": "nostromo-gut-cycle-test/v0.2",
+  "completedAt": "2026-09-07T01:08:10.872Z",
+  "status": "PASS",
+  "capability": "ACTIVE_ANCESTOR_CYCLE_QUARANTINE_WITH_ORIGIN_PATH_AND_NONCYCLIC_ALIAS_PRESERVATION",
+  "engineVersion": "0.2.35",
+  "cases": {
+    "selfCycle": {
+      "circular": 1,
+      "quarantined": 1
+    },
+    "mutualCycle": {
+      "circular": 1,
+      "quarantined": 1
+    },
+    "mapCycle": {
+      "circular": 1,
+      "quarantined": 1
+    },
+    "setCycle": {
+      "circular": 1,
+      "quarantined": 1
+    },
+    "noncyclicAlias": {
+      "circular": 0,
+      "rightDuplicateAudited": true
+    }
+  },
+  "failures": [],
+  "boundary": "This test verifies deterministic active-ancestor cycle detection, bounded quarantine markers, and that non-cyclic shared aliases are traversed before ordinary textual duplicate suppression. It does not infer semantic identity, object ownership, source independence, causality or truth from JavaScript reference identity."
+}
