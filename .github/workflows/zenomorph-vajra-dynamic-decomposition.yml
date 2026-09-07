@@ -21,4 +21,4 @@ jobs:
       - name: Run VAJRA dynamic decomposition unit adversarial cross-organ regression
         run: node nostromo/vajra/dynamic-decomposition-test.mjs
       - name: Verify evidence contract
-        run: node -e "const r=require('./nostromo/vajra/dynamic-decomposition-last-result.json'); const d=r.tests?.decomposed; if(r.status!=='PASS'||r.failures?.length||d?.status!=='DECOMPOSED'||d?.parent?.closed!==false||d?.facets?.length!==2||!d?.provenance?.triageProvenance) process.exit(1)"
+        run: node -e "const r=require('./nostromo/vajra/dynamic-decomposition-last-result.json'); const d=r.tests?.decomposed; if(r.status!=='PASS'||r.failures?.length||d?.status!=='DECOMPOSED'||d?.parent?.closed!==false||d?.facets?.length!==2||!d?.provenance?.triageProvenanceFingerprint||!Array.isArray(d?.provenance?.aliasAudit)||d.provenance.aliasAudit.length<1) process.exit(1)"
