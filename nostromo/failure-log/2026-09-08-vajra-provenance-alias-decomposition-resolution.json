@@ -1,0 +1,21 @@
+{
+  "schema": "zenomorph-failure-resolution/v1",
+  "date": "2026-09-08",
+  "organ": "VAJRA",
+  "status": "RESOLVED_VERIFIED",
+  "resolves": "nostromo/failure-log/2026-09-08-vajra-provenance-alias-decomposition.json",
+  "implementationCommit": "ec71f54aea2fdbbb5ae83ff066f3864aa87fd797",
+  "verifiedCapability": "Canonical-provenance surface aliases no longer manufacture a false conflicting-triage HOLD during dynamic decomposition. Genuine disagreement in classification or canonical provenance still preserves the parent conflict on HOLD.",
+  "verification": {
+    "dynamicDecompositionWorkflowRunId": 34162257108,
+    "dynamicDecompositionConclusion": "success",
+    "dynamicReinspectionWorkflowRunId": 34162257107,
+    "dynamicReinspectionConclusion": "success",
+    "triageConflictGuardWorkflowRunId": 34162257098,
+    "triageConflictGuardConclusion": "success",
+    "integrationWorkflowRunId": 34162257101,
+    "integrationConclusion": "success"
+  },
+  "provenance": "Synthetic de-identified fixtures only. No private Drive name, ID, URL, or source text is stored.",
+  "boundary": "This verifies bounded structural alias handling under the current canonicalEvidenceProvenance contract. It does not prove that two differently written provenance labels are semantically the same real-world source, nor that the canonicalizer cannot over-collapse genuinely distinct identities."
+}
