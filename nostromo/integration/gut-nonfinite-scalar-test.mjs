@@ -8,6 +8,7 @@ const failures=[];
 const check=(ok,type,detail)=>{if(!ok)failures.push({type,detail});};
 const code=await fs.readFile(path.join(root,'nostromo','gut','gut-engine.js'),'utf8');
 vm.runInThisContext(code,{filename:'nostromo/gut/gut-engine.js'});
+const compatiblePatch=(version,floor)=>{const m=/^0\.2\.(\d+)$/.exec(String(version));return !!m&&Number(m[1])>=floor;};
 
 const source='NOSTROMO/gut-nonfinite-scalar-test';
 const input={
@@ -19,7 +20,7 @@ const input={
 const gut=globalThis.GutEngine.digest(input,{source});
 const paths=['root.metrics.score','root.metrics.rate','root.metrics.count','root.samples[0]','root.samples[1]','root.samples[2]'];
 const quarantined=gut.quarantine.filter(x=>x.type==='NONFINITE_NUMERIC');
-check(['0.2.28','0.2.29'].includes(gut.version),'GUT_COMPAT_VERSION_CHANGED',gut.version);
+check(compatiblePatch(gut.version,29),'GUT_COMPAT_VERSION_CHANGED',gut.version);
 check(quarantined.length===6,'NONFINITE_MULTIPLICITY_LOST',quarantined);
 check(paths.every(p=>quarantined.some(x=>x.path===p)),'NONFINITE_PATH_PROVENANCE_LOST',quarantined);
 check(quarantined.every(x=>x.route==='HOLD'&&x.status==='QUARANTINE'),'NONFINITE_NOT_QUARANTINED',quarantined);
@@ -40,7 +41,7 @@ const result={
   finiteMetricStillEvidence:gut.routes?.MUTHER?.items?.some(x=>x.path==='root.metrics.value'&&x.type==='NUMERIC_EVIDENCE')||false,
   claimStillRoutedToDroplet:gut.routes?.DROPLET?.items?.some(x=>x.path==='root.claim')||false,
   failures,
-  boundary:'JavaScript NaN, Infinity and -Infinity are retained as typed path-scoped NONFINITE_NUMERIC quarantine material. They remain auditable but cannot become evidence, counts, scores, confidence, truth or downstream claims merely because typeof value is number. Literal text NaN/Infinity remains ordinary textual material.'
+  boundary:'JavaScript NaN, Infinity and -Infinity are retained as typed path-scoped NONFINITE_NUMERIC quarantine material. They remain auditable but cannot become evidence, counts, scores, confidence, truth or downstream claims merely because typeof value is number. Literal text NaN/Infinity remains ordinary textual material. Compatibility gating accepts later 0.2.x patches while still rejecting a major/minor contract change.'
 };
 await fs.writeFile(resultPath,JSON.stringify(result,null,2)+'\n','utf8');
 console.log(JSON.stringify(result,null,2));

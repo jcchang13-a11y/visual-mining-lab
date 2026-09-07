@@ -9,6 +9,7 @@ const failures=[];
 const check=(ok,type,detail)=>{if(!ok)failures.push({type,detail});};
 const code=await fs.readFile(path.join(root,'nostromo','gut','gut-engine.js'),'utf8');
 vm.runInThisContext(code,{filename:'nostromo/gut/gut-engine.js'});
+const compatiblePatch=(version,floor)=>{const m=/^0\.2\.(\d+)$/.exec(String(version));return !!m&&Number(m[1])>=floor;};
 
 const source='NOSTROMO/gut-boolean-scalar-test';
 const input={
@@ -21,7 +22,7 @@ const gut=globalThis.GutEngine.digest(input,{source});
 const booleanPaths=['root.audit.verified','root.audit.fresh','root.audit.complete','root.audit.independent'];
 const booleanItems=gut.nutrients.filter(x=>x.type==='BOOLEAN_MATERIAL');
 
-check(['0.2.27','0.2.28'].includes(gut.version),'GUT_COMPAT_VERSION_CHANGED',gut.version);
+check(compatiblePatch(gut.version,28),'GUT_COMPAT_VERSION_CHANGED',gut.version);
 check(booleanItems.length===4,'BOOLEAN_MULTIPLICITY_LOST',booleanItems);
 check(booleanPaths.every(p=>booleanItems.some(x=>x.path===p)),'BOOLEAN_PATH_PROVENANCE_LOST',booleanItems);
 check(booleanItems.every(x=>x.route==='HOLD'&&x.status==='ABSORB'),'BOOLEAN_FALSELY_PROMOTED',booleanItems);
@@ -41,7 +42,7 @@ const result={
   textualDuplicateStillExcreted:gut.waste.some(x=>x.path==='root.duplicateB'&&x.type==='DUPLICATE'),
   claimStillRoutedToDroplet:gut.routes?.DROPLET?.items?.some(x=>x.path==='root.semantic.claim')||false,
   failures,
-  boundary:'Typed booleans are retained as path-scoped BOOLEAN_MATERIAL in HOLD so repeated true/false values at different structured locations do not collapse into one atom. Boolean flags are not evidence, confidence, source-independence proof, truth, or semantic interpretation. Ordinary textual duplicate suppression remains active.'
+  boundary:'Typed booleans are retained as path-scoped BOOLEAN_MATERIAL in HOLD so repeated true/false values at different structured locations do not collapse into one atom. Boolean flags are not evidence, confidence, source-independence proof, truth, or semantic interpretation. Ordinary textual duplicate suppression remains active. Compatibility gating accepts later 0.2.x patches while still rejecting a major/minor contract change.'
 };
 await fs.writeFile(resultPath,JSON.stringify(result,null,2)+'\n','utf8');
 console.log(JSON.stringify(result,null,2));

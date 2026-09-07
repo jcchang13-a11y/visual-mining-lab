@@ -8,6 +8,7 @@ const failures=[];
 const check=(ok,type,detail)=>{if(!ok)failures.push({type,detail});};
 const code=await fs.readFile(path.join(root,'nostromo','gut','gut-engine.js'),'utf8');
 vm.runInThisContext(code,{filename:'nostromo/gut/gut-engine.js'});
+const compatiblePatch=(version,floor)=>{const m=/^0\.2\.(\d+)$/.exec(String(version));return !!m&&Number(m[1])>=floor;};
 
 const source='NOSTROMO/gut-nullish-scalar-test';
 const input={
@@ -26,7 +27,7 @@ const expected=[
 ];
 const typed=gut.nutrients.filter(x=>x.type==='NULL_MATERIAL'||x.type==='UNDEFINED_MATERIAL');
 
-check(gut.version==='0.2.28','GUT_COMPAT_VERSION_CHANGED',gut.version);
+check(compatiblePatch(gut.version,28),'GUT_COMPAT_VERSION_CHANGED',gut.version);
 check(typed.length===4,'NULLISH_MULTIPLICITY_LOST',typed);
 for(const [p,t,text] of expected){
   const item=typed.find(x=>x.path===p);
@@ -56,7 +57,7 @@ const result={
   textualDuplicateStillExcreted:gut.waste.some(x=>x.path==='root.duplicateB'&&x.type==='DUPLICATE'),
   claimStillRoutedToDroplet:gut.routes?.DROPLET?.items?.some(x=>x.path==='root.semantic.claim')||false,
   failures,
-  boundary:'Explicit structured null and JavaScript undefined are retained as distinct path-scoped substrate types in HOLD. This prevents silent null/undefined conflation and loss without treating either as evidence, truth, confidence, absence proof, or a semantic conclusion. Literal text "null" and "undefined" remain ordinary low-signal text under the existing policy.'
+  boundary:'Explicit structured null and JavaScript undefined are retained as distinct path-scoped substrate types in HOLD. This prevents silent null/undefined conflation and loss without treating either as evidence, truth, confidence, absence proof, or a semantic conclusion. Literal text "null" and "undefined" remain ordinary low-signal text under the existing policy. Compatibility gating accepts later 0.2.x patches while still rejecting a major/minor contract change.'
 };
 await fs.writeFile(resultPath,JSON.stringify(result,null,2)+'\n','utf8');
 console.log(JSON.stringify(result,null,2));
