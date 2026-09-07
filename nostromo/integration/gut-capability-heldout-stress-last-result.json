@@ -1,6 +1,6 @@
 {
   "schema": "zenomorph-capability-heldout-stress-test/v0.1",
-  "completedAt": "2026-09-07T07:07:56.476Z",
+  "completedAt": "2026-09-07T08:04:56.202Z",
   "status": "PASS",
   "capability": "EPHEMERAL_FOREIGN_CAPABILITY_DOWNSTREAM_BEHAVIOR_CHANGE",
   "cases": {
@@ -19,8 +19,8 @@
         "installed": false,
         "persistentMutation": false,
         "candidateAdmission": {
-          "schema": "xenomorph-gut-capability-admission/v0.1",
-          "organism": "XENOMORPH",
+          "schema": "zenomorph-gut-capability-admission/v0.1",
+          "organism": "ZENOMORPH",
           "habitat": "NOSTROMO",
           "executed": false,
           "authorized": false,
@@ -84,8 +84,8 @@
         "installed": false,
         "persistentMutation": false,
         "candidateAdmission": {
-          "schema": "xenomorph-gut-capability-admission/v0.1",
-          "organism": "XENOMORPH",
+          "schema": "zenomorph-gut-capability-admission/v0.1",
+          "organism": "ZENOMORPH",
           "habitat": "NOSTROMO",
           "executed": false,
           "authorized": false,
@@ -149,8 +149,8 @@
         "installed": false,
         "persistentMutation": false,
         "candidateAdmission": {
-          "schema": "xenomorph-gut-capability-admission/v0.1",
-          "organism": "XENOMORPH",
+          "schema": "zenomorph-gut-capability-admission/v0.1",
+          "organism": "ZENOMORPH",
           "habitat": "NOSTROMO",
           "executed": false,
           "authorized": false,
@@ -204,8 +204,8 @@
         "installed": false,
         "persistentMutation": false,
         "candidateAdmission": {
-          "schema": "xenomorph-gut-capability-admission/v0.1",
-          "organism": "XENOMORPH",
+          "schema": "zenomorph-gut-capability-admission/v0.1",
+          "organism": "ZENOMORPH",
           "habitat": "NOSTROMO",
           "executed": false,
           "authorized": false,
