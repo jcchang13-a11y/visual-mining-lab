@@ -1,0 +1,22 @@
+{
+  "schema": "nostromo-gut-opaque-container-test/v0.1",
+  "completedAt": "2026-09-07T02:08:27.011Z",
+  "status": "PASS",
+  "capability": "OPAQUE_WEAK_CONTAINER_QUARANTINE_WITH_PATH_PROVENANCE",
+  "engineVersion": "0.2.36",
+  "cases": {
+    "weakMap": {
+      "opaque": 1,
+      "quarantined": 1
+    },
+    "weakSet": {
+      "opaque": 1,
+      "quarantined": 1
+    },
+    "ordinaryMapSet": {
+      "opaque": 0
+    }
+  },
+  "failures": [],
+  "boundary": "This test verifies that non-enumerable WeakMap/WeakSet containers cannot silently disappear from GUT intake: they are preserved as explicit path-scoped quarantine atoms while inaccessible entries remain uninspected. It does not reveal weak-container contents or infer failure, source identity, evidence quality, semantic meaning or truth."
+}
