@@ -1,4 +1,4 @@
-/* VAJRA dynamic decomposition v0.3 — qualifying GUT contamination triage can split a repeated source-quality conflict into bounded follow-up facets; canonical provenance aliases cannot manufacture disagreement, while genuinely conflicting qualifying triage receipts force a HOLD */
+/* VAJRA dynamic decomposition v0.4 — qualifying GUT contamination triage can split a repeated source-quality conflict into bounded follow-up facets; canonical provenance aliases cannot manufacture disagreement or order-dependent provenance selection, while genuinely conflicting qualifying triage receipts force a HOLD */
 (function(root){
   const api=root.VajraEngine;
   if(!api||typeof api.selectNextInspection!=='function') throw new Error('VajraEngine + dynamic-reinspection must be loaded before dynamic-decomposition');
@@ -21,6 +21,16 @@
     const canonical=canonicalProvenance(provenance);
     if(!canonical) return {ok:false,reason:'canonical-provenance-empty'};
     return {ok:true,classification,provenance,canonicalProvenance:canonical,receiptFingerprint:fp(JSON.stringify(receipt))};
+  }
+
+  function auditQualifiedAliases(qualified){
+    return qualified
+      .map(item=>({
+        provenance:item.q.provenance,
+        provenanceFingerprint:fp(item.q.canonicalProvenance),
+        receiptFingerprint:item.q.receiptFingerprint
+      }))
+      .sort((a,b)=>a.provenanceFingerprint.localeCompare(b.provenanceFingerprint)||a.receiptFingerprint.localeCompare(b.receiptFingerprint)||a.provenance.localeCompare(b.provenance));
   }
 
   function planConflictDecomposition(result,receipts=[]){
@@ -48,7 +58,7 @@
         .map(([signature,receiptFingerprints])=>({signatureFingerprint:fp(signature),receiptFingerprints:[...receiptFingerprints].sort()}))
         .sort((a,b)=>a.signatureFingerprint.localeCompare(b.signatureFingerprint)||JSON.stringify(a.receiptFingerprints).localeCompare(JSON.stringify(b.receiptFingerprints)));
       return {
-        schema:'zenomorph-vajra-dynamic-decomposition/v0.3',
+        schema:'zenomorph-vajra-dynamic-decomposition/v0.4',
         status:'HOLD',
         reason:'conflicting-qualifying-gut-triage-receipts',
         parent:{targetRef:parent.targetRef,clauseRef:parent.clauseRef,lens:parent.lens,status:parent.status,closed:false},
@@ -62,25 +72,34 @@
       };
     }
 
-    const selected=qualified[0];
-    const shared={targetRef:parent.targetRef,clauseRef:parent.clauseRef,parentLens:parent.lens,parentStatus:parent.status,triageClassification:selected.q.classification,triageProvenance:selected.q.provenance,triageProvenanceFingerprint:fp(selected.q.canonicalProvenance),triageReceiptFingerprint:selected.q.receiptFingerprint,status:'OPEN'};
+    const canonicalRepresentative=[...qualified].sort((a,b)=>a.q.canonicalProvenance.localeCompare(b.q.canonicalProvenance)||a.q.classification.localeCompare(b.q.classification)||a.q.receiptFingerprint.localeCompare(b.q.receiptFingerprint))[0];
+    const aliasAudit=auditQualifiedAliases(qualified);
+    const shared={targetRef:parent.targetRef,clauseRef:parent.clauseRef,parentLens:parent.lens,parentStatus:parent.status,triageClassification:canonicalRepresentative.q.classification,triageProvenanceFingerprint:fp(canonicalRepresentative.q.canonicalProvenance),status:'OPEN'};
     const facets=[
       {...shared,facetId:`${parent.clauseRef}:identity`,lens:'source_identity',preferredOrgan:'GUT',need:'isolate duplicate/alias/provenance-collision structure without adjudicating claim truth',reason:'Contamination triage makes source identity a separate unresolved structural question.'},
       {...shared,facetId:`${parent.clauseRef}:relation`,lens:'claim_relation',preferredOrgan:'MUTHER',need:'re-evaluate how the surviving material relates to the clause after contaminated copies are not counted as independent support/opposition',reason:'Source contamination changes the evidential relation that must be reconstructed from retained provenance.'}
     ];
     return {
-      schema:'zenomorph-vajra-dynamic-decomposition/v0.3',
+      schema:'zenomorph-vajra-dynamic-decomposition/v0.4',
       status:'DECOMPOSED',
       reason:'qualifying-gut-contamination-triage-split-parent-conflict',
       parent:{targetRef:parent.targetRef,clauseRef:parent.clauseRef,lens:parent.lens,status:parent.status,closed:false},
       facets,
-      provenance:{triageProvenance:selected.q.provenance,triageProvenanceFingerprint:fp(selected.q.canonicalProvenance),triageReceiptFingerprint:selected.q.receiptFingerprint,preservedTargetRef:parent.targetRef,preservedClauseRef:parent.clauseRef,qualifyingReceiptCount:qualified.length,canonicalAliasCount:qualified.filter(x=>x.q.canonicalProvenance===selected.q.canonicalProvenance).length},
+      provenance:{
+        triageClassification:canonicalRepresentative.q.classification,
+        triageProvenanceFingerprint:fp(canonicalRepresentative.q.canonicalProvenance),
+        qualifyingReceiptCount:qualified.length,
+        canonicalAliasCount:qualified.filter(x=>x.q.canonicalProvenance===canonicalRepresentative.q.canonicalProvenance).length,
+        aliasAudit,
+        preservedTargetRef:parent.targetRef,
+        preservedClauseRef:parent.clauseRef
+      },
       rejected,
-      boundary:'Dynamic decomposition is a reversible routing/inspection plan. Canonical provenance aliases are treated as one structural source identity for decomposition agreement, while raw provenance is retained for caller-side traceability. The contested parent remains open; this does not decide which receipt is true, prove source independence, or claim GUT or MUTHER executed the generated facets.'
+      boundary:'Dynamic decomposition is a reversible routing/inspection plan. Canonical provenance aliases are treated as one structural source identity for decomposition agreement. All qualifying alias receipt fingerprints are retained in deterministic order rather than selecting whichever raw provenance arrived first. The contested parent remains open; this does not decide which receipt is true, prove source independence, or claim GUT or MUTHER executed the generated facets.'
     };
   }
 
   api.qualifyContaminationTriageReceipt=qualifyTriageReceipt;
   api.planConflictDecomposition=planConflictDecomposition;
-  api.dynamicDecompositionVersion='0.3';
+  api.dynamicDecompositionVersion='0.4';
 })(typeof window!=='undefined'?window:globalThis);
