@@ -1,0 +1,20 @@
+{
+  "schema": "zenomorph-failure-resolution-evidence/v0.1",
+  "resolves": "2026-09-08-vajra-arithmetic-operator-canonicalization.json",
+  "organ": "VAJRA",
+  "status": "RESOLVED_CI_VERIFIED",
+  "class": "PROVENANCE_CANONICALIZATION_COLLISION",
+  "repair": "Added bounded preservation of ASCII * and / and Unicode × and ÷ in arithmetic-looking evidence contexts before generic punctuation/symbol stripping, with explicit protection against treating ordinary slash-delimited path/URL punctuation as arithmetic.",
+  "verification": {
+    "workflow": "NOSTROMO VAJRA operator preservation",
+    "runId": 34158569767,
+    "headSha": "7d061a7f45e93afbc427681b5dc258ff98d2d82e",
+    "operatorUnitAndAdversarialRegression": "SUCCESS",
+    "provenanceIndependenceRegression": "SUCCESS",
+    "crossOrganIntegrationRegression": "SUCCESS"
+  },
+  "behavioralEffect": "Opposing same-provenance receipts whose arithmetic evidence differs by multiplication versus division remain distinct enough to preserve a contested branch, and the contest is exercised through the cross-organ integration regression rather than being accepted as a bookkeeping-only distinction.",
+  "provenance": "Public repository code and GitHub Actions evidence only. No private connector identifiers, names, URLs, or source text are included.",
+  "residualBoundary": "This verifies bounded operator preservation and replay-collision resistance, not semantic arithmetic understanding or complete semantic duplicate detection.",
+  "auditNote": "The original OPEN_NOT_PROMOTED failure record is intentionally retained unchanged as historical evidence. Resolution is appended rather than overwriting the failure after a concurrent/stale-SHA write conflict, preserving the evidence trail."
+}
