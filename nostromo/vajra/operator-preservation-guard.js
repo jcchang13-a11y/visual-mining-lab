@@ -1,0 +1,88 @@
+/* VAJRA arithmetic operator-preservation guard v0.1 — prevents replay identity from collapsing multiplication/division evidence */
+(function(root){
+  const api=root.VajraEngine;
+  if(!api||typeof api.applyHandoffResults!=='function'||typeof api.canonicalEvidenceMaterial!=='function'){
+    throw new Error('VAJRA_ENGINE_REQUIRED_BEFORE_OPERATOR_PRESERVATION_GUARD');
+  }
+  if(api.operatorPreservationGuardVersion==='0.1') return;
+
+  const baseApply=api.applyHandoffResults.bind(api);
+  const baseCanonical=api.canonicalEvidenceMaterial.bind(api);
+  const clean=v=>String(v??'').replace(/\s+/g,' ').trim();
+  const tokenFor=op=>(op==='*'||op==='×')?'opmul':'opdiv';
+
+  function protectArithmeticMaterial(text){
+    let s=String(text??'').normalize('NFKC');
+    // Match only explicit arithmetic-looking contexts: spaced symbolic operands or compact numeric operands.
+    s=s.replace(/([\p{L}\p{N}_])\s+([*\/×÷])\s+([\p{L}\p{N}_])/gu,(_,a,op,b)=>`${a} ${tokenFor(op)} ${b}`);
+    s=s.replace(/(\p{N})([*\/×÷])(\p{N})/gu,(_,a,op,b)=>`${a} ${tokenFor(op)} ${b}`);
+    return s;
+  }
+
+  function canonicalArithmeticMaterial(text){
+    return baseCanonical(protectArithmeticMaterial(text));
+  }
+
+  function fingerprint(text){
+    let h=2166136261;
+    for(const ch of clean(text)){h^=ch.codePointAt(0);h=Math.imul(h,16777619)>>>0;}
+    return h.toString(16).padStart(8,'0');
+  }
+
+  function canonicalProvenance(text){
+    if(typeof api.canonicalEvidenceProvenance==='function') return api.canonicalEvidenceProvenance(text);
+    return clean(text).normalize('NFKC').toLowerCase().replace(/[\p{P}\p{S}\s]+/gu,'');
+  }
+
+  function evidenceIdentity(provenance,material){
+    return fingerprint(`${canonicalProvenance(provenance)}|${canonicalArithmeticMaterial(material)}`);
+  }
+
+  function wrappedApply(vajraResult,receipts=[]){
+    const incoming=Array.isArray(receipts)?receipts:[];
+    const restoration=new Map();
+    const protectedReceipts=incoming.map(r=>{
+      if(!r||typeof r!=='object') return r;
+      const originalMaterial=r.material??r.summary??r.evidence??r.result;
+      if(originalMaterial==null) return r;
+      const clone={...r};
+      if('material' in r) clone.material=protectArithmeticMaterial(r.material);
+      else if('summary' in r) clone.summary=protectArithmeticMaterial(r.summary);
+      else if('evidence' in r) clone.evidence=protectArithmeticMaterial(r.evidence);
+      else clone.result=protectArithmeticMaterial(r.result);
+      restoration.set(fingerprint(JSON.stringify(clone)),r);
+      return clone;
+    });
+
+    const out=baseApply(vajraResult,protectedReceipts);
+    if(!out||typeof out!=='object') return out;
+    const hr=out.handoffResolution;
+    if(hr&&Array.isArray(hr.rejectedReceipts)){
+      hr.rejectedReceipts=hr.rejectedReceipts.map(x=>{
+        const original=restoration.get(String(x?.receiptFingerprint||''));
+        if(!original) return x;
+        const restored={...x};
+        if('material' in original) restored.material=original.material;
+        else if('summary' in original) restored.material=original.summary;
+        else if('evidence' in original) restored.material=original.evidence;
+        else if('result' in original) restored.material=original.result;
+        return restored;
+      });
+    }
+    return {
+      ...out,
+      operatorPreservation:{
+        version:'0.1',
+        protected:['*','/','×','÷'],
+        scope:'arithmetic-looking contexts only',
+        boundary:'The guard preserves multiplication/division semantics for replay identity when symbols occur between spaced alphanumeric operands or compact numeric operands. It does not claim semantic parsing and intentionally does not reinterpret arbitrary path or URL punctuation as arithmetic.'
+      }
+    };
+  }
+
+  wrappedApply.__operatorPreservationGuard=true;
+  api.applyHandoffResults=wrappedApply;
+  api.canonicalEvidenceMaterial=canonicalArithmeticMaterial;
+  api.evidenceIdentity=evidenceIdentity;
+  api.operatorPreservationGuardVersion='0.1';
+})(typeof window!=='undefined'?window:globalThis);
