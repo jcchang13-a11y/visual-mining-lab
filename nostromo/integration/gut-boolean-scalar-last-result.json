@@ -1,7 +1,7 @@
 {
   "schema": "nostromo-gut-boolean-scalar-test/v0.1",
-  "completedAt": "2026-09-07T03:08:47.938Z",
-  "status": "FAIL",
+  "completedAt": "2026-09-07T03:13:55.257Z",
+  "status": "PASS",
   "capability": "PATH_SCOPED_TYPED_BOOLEAN_MULTIPLICITY_WITHOUT_EVIDENCE_PROMOTION",
   "booleanPaths": [
     "root.audit.verified",
@@ -57,11 +57,6 @@
   ],
   "textualDuplicateStillExcreted": true,
   "claimStillRoutedToDroplet": true,
-  "failures": [
-    {
-      "type": "GUT_COMPAT_VERSION_CHANGED",
-      "detail": "0.2.36"
-    }
-  ],
-  "boundary": "Typed booleans are retained as path-scoped BOOLEAN_MATERIAL in HOLD so repeated true/false values at different structured locations do not collapse into one atom. Boolean flags are not evidence, confidence, source-independence proof, truth, or semantic interpretation. Ordinary textual duplicate suppression remains active."
+  "failures": [],
+  "boundary": "Typed booleans are retained as path-scoped BOOLEAN_MATERIAL in HOLD so repeated true/false values at different structured locations do not collapse into one atom. Boolean flags are not evidence, confidence, source-independence proof, truth, or semantic interpretation. Ordinary textual duplicate suppression remains active. Compatibility gating accepts later 0.2.x patches while still rejecting a major/minor contract change."
 }
