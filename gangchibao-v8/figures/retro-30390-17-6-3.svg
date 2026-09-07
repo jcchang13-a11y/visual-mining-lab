@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320" role="img" aria-labelledby="title desc">
+  <title id="title">第十七分回溯第六分與第三分</title>
+  <desc id="desc">黑白極簡同心圓。中心為第十七分，中圈為第六分，外圈為第三分，表示第十七分以「實無有法發心者」回到第六分取法相即著四相，再回到第三分的四相與度眾生問題。</desc>
+  <rect width="320" height="320" fill="#fff"/>
+  <circle cx="160" cy="160" r="124" fill="none" stroke="#111" stroke-width="1.5"/>
+  <circle cx="160" cy="160" r="88" fill="none" stroke="#111" stroke-width="1.5"/>
+  <circle cx="160" cy="160" r="48" fill="none" stroke="#111" stroke-width="1.5"/>
+  <text x="160" y="154" text-anchor="middle" font-family="serif" font-size="19" fill="#111">第十七分</text>
+  <text x="160" y="178" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#111">17</text>
+  <text x="160" y="94" text-anchor="middle" font-family="serif" font-size="16" fill="#111">第六分</text>
+  <text x="160" y="113" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#111">6</text>
+  <text x="160" y="52" text-anchor="middle" font-family="serif" font-size="16" fill="#111">第三分</text>
+  <text x="160" y="71" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#111">3</text>
+</svg>
