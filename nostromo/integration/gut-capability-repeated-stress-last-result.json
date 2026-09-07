@@ -1,0 +1,944 @@
+{
+  "schema": "zenomorph-capability-repeated-heldout-stress-test/v0.1",
+  "completedAt": "2026-09-07T08:04:08.602Z",
+  "status": "PASS",
+  "capability": "REPEATED_SELECTIVE_FOREIGN_CAPABILITY_BEHAVIOR_PROFILE",
+  "cases": {
+    "pass": {
+      "schema": "zenomorph-capability-repeated-heldout-stress/v0.1",
+      "organism": "ZENOMORPH",
+      "habitat": "NOSTROMO",
+      "bodyAdmission": false,
+      "installed": false,
+      "persistentMutation": false,
+      "assimilationStage": "REPEATED_HELDOUT_PROFILE_VERIFIED",
+      "status": "PASS",
+      "reason": "foreign-capability-survived-independent-positive-and-negative-heldout-profile",
+      "executedCases": 3,
+      "distinctInputs": true,
+      "expectationMatches": true,
+      "hasPositive": true,
+      "hasNegative": true,
+      "provenanceStable": true,
+      "provenanceFingerprint": "repeated-heldout-prov-001",
+      "results": [
+        {
+          "id": "positive-four",
+          "expectedChange": true,
+          "result": {
+            "schema": "zenomorph-capability-heldout-stress/v0.1",
+            "organism": "ZENOMORPH",
+            "habitat": "NOSTROMO",
+            "bodyAdmission": false,
+            "installed": false,
+            "persistentMutation": false,
+            "isolatedTrial": {
+              "schema": "zenomorph-gut-capability-sandbox/v0.1",
+              "organism": "ZENOMORPH",
+              "habitat": "NOSTROMO",
+              "bodyAdmission": false,
+              "installed": false,
+              "persistentMutation": false,
+              "candidateAdmission": {
+                "schema": "xenomorph-gut-capability-admission/v0.1",
+                "organism": "XENOMORPH",
+                "habitat": "NOSTROMO",
+                "executed": false,
+                "authorized": false,
+                "assimilationStage": "CANDIDATE_FOR_ISOLATED_TEST",
+                "route": "HOLD",
+                "identity": "Bounded Counter Adapter",
+                "hasProvenance": true,
+                "hasPermissionBoundary": true,
+                "hasContract": true,
+                "status": "HOLD",
+                "classification": "FOREIGN_CAPABILITY",
+                "reason": "metadata-complete-enough-for-sandbox-evaluation-not-body-admission"
+              },
+              "assimilationStage": "ISOLATED_TEST_PASSED",
+              "status": "PASS",
+              "reason": "isolated-host-registered-trial-passed",
+              "adapterId": "bounded-counter-v1",
+              "executed": true,
+              "executionBoundary": "HOST_REGISTERED_ONLY",
+              "deterministic": true,
+              "inputStable": true,
+              "contractCheck": {
+                "checked": true,
+                "ok": true,
+                "expected": "object",
+                "actual": "object"
+              },
+              "inputFingerprint": "89870ff0c4f89a975b5e02aed7360490cfe4735bd1fe1d8c56a427d24b40a059",
+              "outputFingerprint": "a5fb8eb97856970b61d9f466deb64f7659e835ee8ec5497003b78438fe888cad",
+              "replayOutputFingerprint": "a5fb8eb97856970b61d9f466deb64f7659e835ee8ec5497003b78438fe888cad",
+              "provenanceFingerprint": "repeated-heldout-prov-001",
+              "rollbackEvidence": "no installation; cloned frozen inputs; no body state mutation performed by sandbox"
+            },
+            "status": "PASS",
+            "assimilationStage": "HELDOUT_BEHAVIOR_CHANGE_VERIFIED",
+            "reason": "foreign-capability-changed-downstream-organ-behavior",
+            "downstreamOrganId": "vajra-profile-v1",
+            "downstreamExecuted": true,
+            "behaviorChanged": true,
+            "baselineDecision": {
+              "route": "HOLD"
+            },
+            "augmentedDecision": {
+              "route": "SPLIT"
+            },
+            "provenanceFingerprint": "repeated-heldout-prov-001",
+            "rollbackEvidence": "ephemeral replay only; no registry, body, or persistent state mutation performed"
+          }
+        },
+        {
+          "id": "negative-one",
+          "expectedChange": false,
+          "result": {
+            "schema": "zenomorph-capability-heldout-stress/v0.1",
+            "organism": "ZENOMORPH",
+            "habitat": "NOSTROMO",
+            "bodyAdmission": false,
+            "installed": false,
+            "persistentMutation": false,
+            "isolatedTrial": {
+              "schema": "zenomorph-gut-capability-sandbox/v0.1",
+              "organism": "ZENOMORPH",
+              "habitat": "NOSTROMO",
+              "bodyAdmission": false,
+              "installed": false,
+              "persistentMutation": false,
+              "candidateAdmission": {
+                "schema": "xenomorph-gut-capability-admission/v0.1",
+                "organism": "XENOMORPH",
+                "habitat": "NOSTROMO",
+                "executed": false,
+                "authorized": false,
+                "assimilationStage": "CANDIDATE_FOR_ISOLATED_TEST",
+                "route": "HOLD",
+                "identity": "Bounded Counter Adapter",
+                "hasProvenance": true,
+                "hasPermissionBoundary": true,
+                "hasContract": true,
+                "status": "HOLD",
+                "classification": "FOREIGN_CAPABILITY",
+                "reason": "metadata-complete-enough-for-sandbox-evaluation-not-body-admission"
+              },
+              "assimilationStage": "ISOLATED_TEST_PASSED",
+              "status": "PASS",
+              "reason": "isolated-host-registered-trial-passed",
+              "adapterId": "bounded-counter-v1",
+              "executed": true,
+              "executionBoundary": "HOST_REGISTERED_ONLY",
+              "deterministic": true,
+              "inputStable": true,
+              "contractCheck": {
+                "checked": true,
+                "ok": true,
+                "expected": "object",
+                "actual": "object"
+              },
+              "inputFingerprint": "d88d1b43ea77b198e6b31747e32d0abe164f7799d90c5f7b439b1b9743b98a7a",
+              "outputFingerprint": "6aea6dfe6561984cdc5c54ead84d47d2cf29e48253ae282aef237404adad4661",
+              "replayOutputFingerprint": "6aea6dfe6561984cdc5c54ead84d47d2cf29e48253ae282aef237404adad4661",
+              "provenanceFingerprint": "repeated-heldout-prov-001",
+              "rollbackEvidence": "no installation; cloned frozen inputs; no body state mutation performed by sandbox"
+            },
+            "status": "HOLD",
+            "assimilationStage": "HELDOUT_NO_BEHAVIOR_CHANGE",
+            "reason": "foreign-capability-produced-no-observed-downstream-change",
+            "downstreamOrganId": "vajra-profile-v1",
+            "downstreamExecuted": true,
+            "behaviorChanged": false,
+            "baselineDecision": {
+              "route": "HOLD"
+            },
+            "augmentedDecision": {
+              "route": "HOLD"
+            },
+            "provenanceFingerprint": "repeated-heldout-prov-001",
+            "rollbackEvidence": "ephemeral replay only; no registry, body, or persistent state mutation performed"
+          }
+        },
+        {
+          "id": "positive-three",
+          "expectedChange": true,
+          "result": {
+            "schema": "zenomorph-capability-heldout-stress/v0.1",
+            "organism": "ZENOMORPH",
+            "habitat": "NOSTROMO",
+            "bodyAdmission": false,
+            "installed": false,
+            "persistentMutation": false,
+            "isolatedTrial": {
+              "schema": "zenomorph-gut-capability-sandbox/v0.1",
+              "organism": "ZENOMORPH",
+              "habitat": "NOSTROMO",
+              "bodyAdmission": false,
+              "installed": false,
+              "persistentMutation": false,
+              "candidateAdmission": {
+                "schema": "xenomorph-gut-capability-admission/v0.1",
+                "organism": "XENOMORPH",
+                "habitat": "NOSTROMO",
+                "executed": false,
+                "authorized": false,
+                "assimilationStage": "CANDIDATE_FOR_ISOLATED_TEST",
+                "route": "HOLD",
+                "identity": "Bounded Counter Adapter",
+                "hasProvenance": true,
+                "hasPermissionBoundary": true,
+                "hasContract": true,
+                "status": "HOLD",
+                "classification": "FOREIGN_CAPABILITY",
+                "reason": "metadata-complete-enough-for-sandbox-evaluation-not-body-admission"
+              },
+              "assimilationStage": "ISOLATED_TEST_PASSED",
+              "status": "PASS",
+              "reason": "isolated-host-registered-trial-passed",
+              "adapterId": "bounded-counter-v1",
+              "executed": true,
+              "executionBoundary": "HOST_REGISTERED_ONLY",
+              "deterministic": true,
+              "inputStable": true,
+              "contractCheck": {
+                "checked": true,
+                "ok": true,
+                "expected": "object",
+                "actual": "object"
+              },
+              "inputFingerprint": "187d58fbe9c30e5a1ad8afbb4608ec5b69a1c15a801e7c164f79853dd4367714",
+              "outputFingerprint": "0c07187ea6d064441225b3cba26a7b1e8bc702fcf332b457dae8e26892ba68a6",
+              "replayOutputFingerprint": "0c07187ea6d064441225b3cba26a7b1e8bc702fcf332b457dae8e26892ba68a6",
+              "provenanceFingerprint": "repeated-heldout-prov-001",
+              "rollbackEvidence": "no installation; cloned frozen inputs; no body state mutation performed by sandbox"
+            },
+            "status": "PASS",
+            "assimilationStage": "HELDOUT_BEHAVIOR_CHANGE_VERIFIED",
+            "reason": "foreign-capability-changed-downstream-organ-behavior",
+            "downstreamOrganId": "vajra-profile-v1",
+            "downstreamExecuted": true,
+            "behaviorChanged": true,
+            "baselineDecision": {
+              "route": "HOLD"
+            },
+            "augmentedDecision": {
+              "route": "SPLIT"
+            },
+            "provenanceFingerprint": "repeated-heldout-prov-001",
+            "rollbackEvidence": "ephemeral replay only; no registry, body, or persistent state mutation performed"
+          }
+        }
+      ],
+      "rollbackEvidence": "all trials ephemeral; no capability installation, registry mutation, or persistent body-state mutation performed"
+    },
+    "duplicate": {
+      "schema": "zenomorph-capability-repeated-heldout-stress/v0.1",
+      "organism": "ZENOMORPH",
+      "habitat": "NOSTROMO",
+      "bodyAdmission": false,
+      "installed": false,
+      "persistentMutation": false,
+      "assimilationStage": "REPEATED_HELDOUT_INCONCLUSIVE",
+      "status": "HOLD",
+      "reason": "repeated-heldout-evidence-insufficient",
+      "executedCases": 3,
+      "distinctInputs": false,
+      "expectationMatches": true,
+      "hasPositive": true,
+      "hasNegative": true,
+      "provenanceStable": true,
+      "provenanceFingerprint": "repeated-heldout-prov-001",
+      "results": [
+        {
+          "id": "positive-four",
+          "expectedChange": true,
+          "result": {
+            "schema": "zenomorph-capability-heldout-stress/v0.1",
+            "organism": "ZENOMORPH",
+            "habitat": "NOSTROMO",
+            "bodyAdmission": false,
+            "installed": false,
+            "persistentMutation": false,
+            "isolatedTrial": {
+              "schema": "zenomorph-gut-capability-sandbox/v0.1",
+              "organism": "ZENOMORPH",
+              "habitat": "NOSTROMO",
+              "bodyAdmission": false,
+              "installed": false,
+              "persistentMutation": false,
+              "candidateAdmission": {
+                "schema": "xenomorph-gut-capability-admission/v0.1",
+                "organism": "XENOMORPH",
+                "habitat": "NOSTROMO",
+                "executed": false,
+                "authorized": false,
+                "assimilationStage": "CANDIDATE_FOR_ISOLATED_TEST",
+                "route": "HOLD",
+                "identity": "Bounded Counter Adapter",
+                "hasProvenance": true,
+                "hasPermissionBoundary": true,
+                "hasContract": true,
+                "status": "HOLD",
+                "classification": "FOREIGN_CAPABILITY",
+                "reason": "metadata-complete-enough-for-sandbox-evaluation-not-body-admission"
+              },
+              "assimilationStage": "ISOLATED_TEST_PASSED",
+              "status": "PASS",
+              "reason": "isolated-host-registered-trial-passed",
+              "adapterId": "bounded-counter-v1",
+              "executed": true,
+              "executionBoundary": "HOST_REGISTERED_ONLY",
+              "deterministic": true,
+              "inputStable": true,
+              "contractCheck": {
+                "checked": true,
+                "ok": true,
+                "expected": "object",
+                "actual": "object"
+              },
+              "inputFingerprint": "89870ff0c4f89a975b5e02aed7360490cfe4735bd1fe1d8c56a427d24b40a059",
+              "outputFingerprint": "a5fb8eb97856970b61d9f466deb64f7659e835ee8ec5497003b78438fe888cad",
+              "replayOutputFingerprint": "a5fb8eb97856970b61d9f466deb64f7659e835ee8ec5497003b78438fe888cad",
+              "provenanceFingerprint": "repeated-heldout-prov-001",
+              "rollbackEvidence": "no installation; cloned frozen inputs; no body state mutation performed by sandbox"
+            },
+            "status": "PASS",
+            "assimilationStage": "HELDOUT_BEHAVIOR_CHANGE_VERIFIED",
+            "reason": "foreign-capability-changed-downstream-organ-behavior",
+            "downstreamOrganId": "vajra-profile-v1",
+            "downstreamExecuted": true,
+            "behaviorChanged": true,
+            "baselineDecision": {
+              "route": "HOLD"
+            },
+            "augmentedDecision": {
+              "route": "SPLIT"
+            },
+            "provenanceFingerprint": "repeated-heldout-prov-001",
+            "rollbackEvidence": "ephemeral replay only; no registry, body, or persistent state mutation performed"
+          }
+        },
+        {
+          "id": "duplicate-four",
+          "expectedChange": true,
+          "result": {
+            "schema": "zenomorph-capability-heldout-stress/v0.1",
+            "organism": "ZENOMORPH",
+            "habitat": "NOSTROMO",
+            "bodyAdmission": false,
+            "installed": false,
+            "persistentMutation": false,
+            "isolatedTrial": {
+              "schema": "zenomorph-gut-capability-sandbox/v0.1",
+              "organism": "ZENOMORPH",
+              "habitat": "NOSTROMO",
+              "bodyAdmission": false,
+              "installed": false,
+              "persistentMutation": false,
+              "candidateAdmission": {
+                "schema": "xenomorph-gut-capability-admission/v0.1",
+                "organism": "XENOMORPH",
+                "habitat": "NOSTROMO",
+                "executed": false,
+                "authorized": false,
+                "assimilationStage": "CANDIDATE_FOR_ISOLATED_TEST",
+                "route": "HOLD",
+                "identity": "Bounded Counter Adapter",
+                "hasProvenance": true,
+                "hasPermissionBoundary": true,
+                "hasContract": true,
+                "status": "HOLD",
+                "classification": "FOREIGN_CAPABILITY",
+                "reason": "metadata-complete-enough-for-sandbox-evaluation-not-body-admission"
+              },
+              "assimilationStage": "ISOLATED_TEST_PASSED",
+              "status": "PASS",
+              "reason": "isolated-host-registered-trial-passed",
+              "adapterId": "bounded-counter-v1",
+              "executed": true,
+              "executionBoundary": "HOST_REGISTERED_ONLY",
+              "deterministic": true,
+              "inputStable": true,
+              "contractCheck": {
+                "checked": true,
+                "ok": true,
+                "expected": "object",
+                "actual": "object"
+              },
+              "inputFingerprint": "89870ff0c4f89a975b5e02aed7360490cfe4735bd1fe1d8c56a427d24b40a059",
+              "outputFingerprint": "a5fb8eb97856970b61d9f466deb64f7659e835ee8ec5497003b78438fe888cad",
+              "replayOutputFingerprint": "a5fb8eb97856970b61d9f466deb64f7659e835ee8ec5497003b78438fe888cad",
+              "provenanceFingerprint": "repeated-heldout-prov-001",
+              "rollbackEvidence": "no installation; cloned frozen inputs; no body state mutation performed by sandbox"
+            },
+            "status": "PASS",
+            "assimilationStage": "HELDOUT_BEHAVIOR_CHANGE_VERIFIED",
+            "reason": "foreign-capability-changed-downstream-organ-behavior",
+            "downstreamOrganId": "vajra-profile-v1",
+            "downstreamExecuted": true,
+            "behaviorChanged": true,
+            "baselineDecision": {
+              "route": "HOLD"
+            },
+            "augmentedDecision": {
+              "route": "SPLIT"
+            },
+            "provenanceFingerprint": "repeated-heldout-prov-001",
+            "rollbackEvidence": "ephemeral replay only; no registry, body, or persistent state mutation performed"
+          }
+        },
+        {
+          "id": "negative-one",
+          "expectedChange": false,
+          "result": {
+            "schema": "zenomorph-capability-heldout-stress/v0.1",
+            "organism": "ZENOMORPH",
+            "habitat": "NOSTROMO",
+            "bodyAdmission": false,
+            "installed": false,
+            "persistentMutation": false,
+            "isolatedTrial": {
+              "schema": "zenomorph-gut-capability-sandbox/v0.1",
+              "organism": "ZENOMORPH",
+              "habitat": "NOSTROMO",
+              "bodyAdmission": false,
+              "installed": false,
+              "persistentMutation": false,
+              "candidateAdmission": {
+                "schema": "xenomorph-gut-capability-admission/v0.1",
+                "organism": "XENOMORPH",
+                "habitat": "NOSTROMO",
+                "executed": false,
+                "authorized": false,
+                "assimilationStage": "CANDIDATE_FOR_ISOLATED_TEST",
+                "route": "HOLD",
+                "identity": "Bounded Counter Adapter",
+                "hasProvenance": true,
+                "hasPermissionBoundary": true,
+                "hasContract": true,
+                "status": "HOLD",
+                "classification": "FOREIGN_CAPABILITY",
+                "reason": "metadata-complete-enough-for-sandbox-evaluation-not-body-admission"
+              },
+              "assimilationStage": "ISOLATED_TEST_PASSED",
+              "status": "PASS",
+              "reason": "isolated-host-registered-trial-passed",
+              "adapterId": "bounded-counter-v1",
+              "executed": true,
+              "executionBoundary": "HOST_REGISTERED_ONLY",
+              "deterministic": true,
+              "inputStable": true,
+              "contractCheck": {
+                "checked": true,
+                "ok": true,
+                "expected": "object",
+                "actual": "object"
+              },
+              "inputFingerprint": "d88d1b43ea77b198e6b31747e32d0abe164f7799d90c5f7b439b1b9743b98a7a",
+              "outputFingerprint": "6aea6dfe6561984cdc5c54ead84d47d2cf29e48253ae282aef237404adad4661",
+              "replayOutputFingerprint": "6aea6dfe6561984cdc5c54ead84d47d2cf29e48253ae282aef237404adad4661",
+              "provenanceFingerprint": "repeated-heldout-prov-001",
+              "rollbackEvidence": "no installation; cloned frozen inputs; no body state mutation performed by sandbox"
+            },
+            "status": "HOLD",
+            "assimilationStage": "HELDOUT_NO_BEHAVIOR_CHANGE",
+            "reason": "foreign-capability-produced-no-observed-downstream-change",
+            "downstreamOrganId": "vajra-profile-v1",
+            "downstreamExecuted": true,
+            "behaviorChanged": false,
+            "baselineDecision": {
+              "route": "HOLD"
+            },
+            "augmentedDecision": {
+              "route": "HOLD"
+            },
+            "provenanceFingerprint": "repeated-heldout-prov-001",
+            "rollbackEvidence": "ephemeral replay only; no registry, body, or persistent state mutation performed"
+          }
+        }
+      ],
+      "rollbackEvidence": "all trials ephemeral; no capability installation, registry mutation, or persistent body-state mutation performed"
+    },
+    "allPositive": {
+      "schema": "zenomorph-capability-repeated-heldout-stress/v0.1",
+      "organism": "ZENOMORPH",
+      "habitat": "NOSTROMO",
+      "bodyAdmission": false,
+      "installed": false,
+      "persistentMutation": false,
+      "assimilationStage": "REPEATED_HELDOUT_INCONCLUSIVE",
+      "status": "HOLD",
+      "reason": "repeated-heldout-evidence-insufficient",
+      "executedCases": 3,
+      "distinctInputs": true,
+      "expectationMatches": true,
+      "hasPositive": true,
+      "hasNegative": false,
+      "provenanceStable": true,
+      "provenanceFingerprint": "repeated-heldout-prov-001",
+      "results": [
+        {
+          "id": "p1",
+          "expectedChange": true,
+          "result": {
+            "schema": "zenomorph-capability-heldout-stress/v0.1",
+            "organism": "ZENOMORPH",
+            "habitat": "NOSTROMO",
+            "bodyAdmission": false,
+            "installed": false,
+            "persistentMutation": false,
+            "isolatedTrial": {
+              "schema": "zenomorph-gut-capability-sandbox/v0.1",
+              "organism": "ZENOMORPH",
+              "habitat": "NOSTROMO",
+              "bodyAdmission": false,
+              "installed": false,
+              "persistentMutation": false,
+              "candidateAdmission": {
+                "schema": "xenomorph-gut-capability-admission/v0.1",
+                "organism": "XENOMORPH",
+                "habitat": "NOSTROMO",
+                "executed": false,
+                "authorized": false,
+                "assimilationStage": "CANDIDATE_FOR_ISOLATED_TEST",
+                "route": "HOLD",
+                "identity": "Bounded Counter Adapter",
+                "hasProvenance": true,
+                "hasPermissionBoundary": true,
+                "hasContract": true,
+                "status": "HOLD",
+                "classification": "FOREIGN_CAPABILITY",
+                "reason": "metadata-complete-enough-for-sandbox-evaluation-not-body-admission"
+              },
+              "assimilationStage": "ISOLATED_TEST_PASSED",
+              "status": "PASS",
+              "reason": "isolated-host-registered-trial-passed",
+              "adapterId": "bounded-counter-v1",
+              "executed": true,
+              "executionBoundary": "HOST_REGISTERED_ONLY",
+              "deterministic": true,
+              "inputStable": true,
+              "contractCheck": {
+                "checked": true,
+                "ok": true,
+                "expected": "object",
+                "actual": "object"
+              },
+              "inputFingerprint": "304e039bd3b865940748298c39694cf7ffdaee94bc5297c1e7acbcd413fed47d",
+              "outputFingerprint": "0c07187ea6d064441225b3cba26a7b1e8bc702fcf332b457dae8e26892ba68a6",
+              "replayOutputFingerprint": "0c07187ea6d064441225b3cba26a7b1e8bc702fcf332b457dae8e26892ba68a6",
+              "provenanceFingerprint": "repeated-heldout-prov-001",
+              "rollbackEvidence": "no installation; cloned frozen inputs; no body state mutation performed by sandbox"
+            },
+            "status": "PASS",
+            "assimilationStage": "HELDOUT_BEHAVIOR_CHANGE_VERIFIED",
+            "reason": "foreign-capability-changed-downstream-organ-behavior",
+            "downstreamOrganId": "vajra-profile-v1",
+            "downstreamExecuted": true,
+            "behaviorChanged": true,
+            "baselineDecision": {
+              "route": "HOLD"
+            },
+            "augmentedDecision": {
+              "route": "SPLIT"
+            },
+            "provenanceFingerprint": "repeated-heldout-prov-001",
+            "rollbackEvidence": "ephemeral replay only; no registry, body, or persistent state mutation performed"
+          }
+        },
+        {
+          "id": "p2",
+          "expectedChange": true,
+          "result": {
+            "schema": "zenomorph-capability-heldout-stress/v0.1",
+            "organism": "ZENOMORPH",
+            "habitat": "NOSTROMO",
+            "bodyAdmission": false,
+            "installed": false,
+            "persistentMutation": false,
+            "isolatedTrial": {
+              "schema": "zenomorph-gut-capability-sandbox/v0.1",
+              "organism": "ZENOMORPH",
+              "habitat": "NOSTROMO",
+              "bodyAdmission": false,
+              "installed": false,
+              "persistentMutation": false,
+              "candidateAdmission": {
+                "schema": "xenomorph-gut-capability-admission/v0.1",
+                "organism": "XENOMORPH",
+                "habitat": "NOSTROMO",
+                "executed": false,
+                "authorized": false,
+                "assimilationStage": "CANDIDATE_FOR_ISOLATED_TEST",
+                "route": "HOLD",
+                "identity": "Bounded Counter Adapter",
+                "hasProvenance": true,
+                "hasPermissionBoundary": true,
+                "hasContract": true,
+                "status": "HOLD",
+                "classification": "FOREIGN_CAPABILITY",
+                "reason": "metadata-complete-enough-for-sandbox-evaluation-not-body-admission"
+              },
+              "assimilationStage": "ISOLATED_TEST_PASSED",
+              "status": "PASS",
+              "reason": "isolated-host-registered-trial-passed",
+              "adapterId": "bounded-counter-v1",
+              "executed": true,
+              "executionBoundary": "HOST_REGISTERED_ONLY",
+              "deterministic": true,
+              "inputStable": true,
+              "contractCheck": {
+                "checked": true,
+                "ok": true,
+                "expected": "object",
+                "actual": "object"
+              },
+              "inputFingerprint": "8f2f12fc17fb2d113a5f1142e0eabb37f269862973429e7e13d910d619367e36",
+              "outputFingerprint": "a5fb8eb97856970b61d9f466deb64f7659e835ee8ec5497003b78438fe888cad",
+              "replayOutputFingerprint": "a5fb8eb97856970b61d9f466deb64f7659e835ee8ec5497003b78438fe888cad",
+              "provenanceFingerprint": "repeated-heldout-prov-001",
+              "rollbackEvidence": "no installation; cloned frozen inputs; no body state mutation performed by sandbox"
+            },
+            "status": "PASS",
+            "assimilationStage": "HELDOUT_BEHAVIOR_CHANGE_VERIFIED",
+            "reason": "foreign-capability-changed-downstream-organ-behavior",
+            "downstreamOrganId": "vajra-profile-v1",
+            "downstreamExecuted": true,
+            "behaviorChanged": true,
+            "baselineDecision": {
+              "route": "HOLD"
+            },
+            "augmentedDecision": {
+              "route": "SPLIT"
+            },
+            "provenanceFingerprint": "repeated-heldout-prov-001",
+            "rollbackEvidence": "ephemeral replay only; no registry, body, or persistent state mutation performed"
+          }
+        },
+        {
+          "id": "p3",
+          "expectedChange": true,
+          "result": {
+            "schema": "zenomorph-capability-heldout-stress/v0.1",
+            "organism": "ZENOMORPH",
+            "habitat": "NOSTROMO",
+            "bodyAdmission": false,
+            "installed": false,
+            "persistentMutation": false,
+            "isolatedTrial": {
+              "schema": "zenomorph-gut-capability-sandbox/v0.1",
+              "organism": "ZENOMORPH",
+              "habitat": "NOSTROMO",
+              "bodyAdmission": false,
+              "installed": false,
+              "persistentMutation": false,
+              "candidateAdmission": {
+                "schema": "xenomorph-gut-capability-admission/v0.1",
+                "organism": "XENOMORPH",
+                "habitat": "NOSTROMO",
+                "executed": false,
+                "authorized": false,
+                "assimilationStage": "CANDIDATE_FOR_ISOLATED_TEST",
+                "route": "HOLD",
+                "identity": "Bounded Counter Adapter",
+                "hasProvenance": true,
+                "hasPermissionBoundary": true,
+                "hasContract": true,
+                "status": "HOLD",
+                "classification": "FOREIGN_CAPABILITY",
+                "reason": "metadata-complete-enough-for-sandbox-evaluation-not-body-admission"
+              },
+              "assimilationStage": "ISOLATED_TEST_PASSED",
+              "status": "PASS",
+              "reason": "isolated-host-registered-trial-passed",
+              "adapterId": "bounded-counter-v1",
+              "executed": true,
+              "executionBoundary": "HOST_REGISTERED_ONLY",
+              "deterministic": true,
+              "inputStable": true,
+              "contractCheck": {
+                "checked": true,
+                "ok": true,
+                "expected": "object",
+                "actual": "object"
+              },
+              "inputFingerprint": "5c14b7e49f46d594743cd9a9b3adfe2a4fe460c1c5046e596c0c505683ce8a0a",
+              "outputFingerprint": "a7b59f14220279bf034e35863bb5c8f0e489b130e214b6eead2d04fe26f2ea8b",
+              "replayOutputFingerprint": "a7b59f14220279bf034e35863bb5c8f0e489b130e214b6eead2d04fe26f2ea8b",
+              "provenanceFingerprint": "repeated-heldout-prov-001",
+              "rollbackEvidence": "no installation; cloned frozen inputs; no body state mutation performed by sandbox"
+            },
+            "status": "PASS",
+            "assimilationStage": "HELDOUT_BEHAVIOR_CHANGE_VERIFIED",
+            "reason": "foreign-capability-changed-downstream-organ-behavior",
+            "downstreamOrganId": "vajra-profile-v1",
+            "downstreamExecuted": true,
+            "behaviorChanged": true,
+            "baselineDecision": {
+              "route": "HOLD"
+            },
+            "augmentedDecision": {
+              "route": "SPLIT"
+            },
+            "provenanceFingerprint": "repeated-heldout-prov-001",
+            "rollbackEvidence": "ephemeral replay only; no registry, body, or persistent state mutation performed"
+          }
+        }
+      ],
+      "rollbackEvidence": "all trials ephemeral; no capability installation, registry mutation, or persistent body-state mutation performed"
+    },
+    "wrongExpectation": {
+      "schema": "zenomorph-capability-repeated-heldout-stress/v0.1",
+      "organism": "ZENOMORPH",
+      "habitat": "NOSTROMO",
+      "bodyAdmission": false,
+      "installed": false,
+      "persistentMutation": false,
+      "assimilationStage": "REPEATED_HELDOUT_INCONCLUSIVE",
+      "status": "HOLD",
+      "reason": "repeated-heldout-evidence-insufficient",
+      "executedCases": 3,
+      "distinctInputs": true,
+      "expectationMatches": false,
+      "hasPositive": true,
+      "hasNegative": false,
+      "provenanceStable": true,
+      "provenanceFingerprint": "repeated-heldout-prov-001",
+      "results": [
+        {
+          "id": "positive-four",
+          "expectedChange": true,
+          "result": {
+            "schema": "zenomorph-capability-heldout-stress/v0.1",
+            "organism": "ZENOMORPH",
+            "habitat": "NOSTROMO",
+            "bodyAdmission": false,
+            "installed": false,
+            "persistentMutation": false,
+            "isolatedTrial": {
+              "schema": "zenomorph-gut-capability-sandbox/v0.1",
+              "organism": "ZENOMORPH",
+              "habitat": "NOSTROMO",
+              "bodyAdmission": false,
+              "installed": false,
+              "persistentMutation": false,
+              "candidateAdmission": {
+                "schema": "xenomorph-gut-capability-admission/v0.1",
+                "organism": "XENOMORPH",
+                "habitat": "NOSTROMO",
+                "executed": false,
+                "authorized": false,
+                "assimilationStage": "CANDIDATE_FOR_ISOLATED_TEST",
+                "route": "HOLD",
+                "identity": "Bounded Counter Adapter",
+                "hasProvenance": true,
+                "hasPermissionBoundary": true,
+                "hasContract": true,
+                "status": "HOLD",
+                "classification": "FOREIGN_CAPABILITY",
+                "reason": "metadata-complete-enough-for-sandbox-evaluation-not-body-admission"
+              },
+              "assimilationStage": "ISOLATED_TEST_PASSED",
+              "status": "PASS",
+              "reason": "isolated-host-registered-trial-passed",
+              "adapterId": "bounded-counter-v1",
+              "executed": true,
+              "executionBoundary": "HOST_REGISTERED_ONLY",
+              "deterministic": true,
+              "inputStable": true,
+              "contractCheck": {
+                "checked": true,
+                "ok": true,
+                "expected": "object",
+                "actual": "object"
+              },
+              "inputFingerprint": "89870ff0c4f89a975b5e02aed7360490cfe4735bd1fe1d8c56a427d24b40a059",
+              "outputFingerprint": "a5fb8eb97856970b61d9f466deb64f7659e835ee8ec5497003b78438fe888cad",
+              "replayOutputFingerprint": "a5fb8eb97856970b61d9f466deb64f7659e835ee8ec5497003b78438fe888cad",
+              "provenanceFingerprint": "repeated-heldout-prov-001",
+              "rollbackEvidence": "no installation; cloned frozen inputs; no body state mutation performed by sandbox"
+            },
+            "status": "PASS",
+            "assimilationStage": "HELDOUT_BEHAVIOR_CHANGE_VERIFIED",
+            "reason": "foreign-capability-changed-downstream-organ-behavior",
+            "downstreamOrganId": "vajra-profile-v1",
+            "downstreamExecuted": true,
+            "behaviorChanged": true,
+            "baselineDecision": {
+              "route": "HOLD"
+            },
+            "augmentedDecision": {
+              "route": "SPLIT"
+            },
+            "provenanceFingerprint": "repeated-heldout-prov-001",
+            "rollbackEvidence": "ephemeral replay only; no registry, body, or persistent state mutation performed"
+          }
+        },
+        {
+          "id": "negative-one",
+          "expectedChange": true,
+          "result": {
+            "schema": "zenomorph-capability-heldout-stress/v0.1",
+            "organism": "ZENOMORPH",
+            "habitat": "NOSTROMO",
+            "bodyAdmission": false,
+            "installed": false,
+            "persistentMutation": false,
+            "isolatedTrial": {
+              "schema": "zenomorph-gut-capability-sandbox/v0.1",
+              "organism": "ZENOMORPH",
+              "habitat": "NOSTROMO",
+              "bodyAdmission": false,
+              "installed": false,
+              "persistentMutation": false,
+              "candidateAdmission": {
+                "schema": "xenomorph-gut-capability-admission/v0.1",
+                "organism": "XENOMORPH",
+                "habitat": "NOSTROMO",
+                "executed": false,
+                "authorized": false,
+                "assimilationStage": "CANDIDATE_FOR_ISOLATED_TEST",
+                "route": "HOLD",
+                "identity": "Bounded Counter Adapter",
+                "hasProvenance": true,
+                "hasPermissionBoundary": true,
+                "hasContract": true,
+                "status": "HOLD",
+                "classification": "FOREIGN_CAPABILITY",
+                "reason": "metadata-complete-enough-for-sandbox-evaluation-not-body-admission"
+              },
+              "assimilationStage": "ISOLATED_TEST_PASSED",
+              "status": "PASS",
+              "reason": "isolated-host-registered-trial-passed",
+              "adapterId": "bounded-counter-v1",
+              "executed": true,
+              "executionBoundary": "HOST_REGISTERED_ONLY",
+              "deterministic": true,
+              "inputStable": true,
+              "contractCheck": {
+                "checked": true,
+                "ok": true,
+                "expected": "object",
+                "actual": "object"
+              },
+              "inputFingerprint": "d88d1b43ea77b198e6b31747e32d0abe164f7799d90c5f7b439b1b9743b98a7a",
+              "outputFingerprint": "6aea6dfe6561984cdc5c54ead84d47d2cf29e48253ae282aef237404adad4661",
+              "replayOutputFingerprint": "6aea6dfe6561984cdc5c54ead84d47d2cf29e48253ae282aef237404adad4661",
+              "provenanceFingerprint": "repeated-heldout-prov-001",
+              "rollbackEvidence": "no installation; cloned frozen inputs; no body state mutation performed by sandbox"
+            },
+            "status": "HOLD",
+            "assimilationStage": "HELDOUT_NO_BEHAVIOR_CHANGE",
+            "reason": "foreign-capability-produced-no-observed-downstream-change",
+            "downstreamOrganId": "vajra-profile-v1",
+            "downstreamExecuted": true,
+            "behaviorChanged": false,
+            "baselineDecision": {
+              "route": "HOLD"
+            },
+            "augmentedDecision": {
+              "route": "HOLD"
+            },
+            "provenanceFingerprint": "repeated-heldout-prov-001",
+            "rollbackEvidence": "ephemeral replay only; no registry, body, or persistent state mutation performed"
+          }
+        },
+        {
+          "id": "positive-three",
+          "expectedChange": true,
+          "result": {
+            "schema": "zenomorph-capability-heldout-stress/v0.1",
+            "organism": "ZENOMORPH",
+            "habitat": "NOSTROMO",
+            "bodyAdmission": false,
+            "installed": false,
+            "persistentMutation": false,
+            "isolatedTrial": {
+              "schema": "zenomorph-gut-capability-sandbox/v0.1",
+              "organism": "ZENOMORPH",
+              "habitat": "NOSTROMO",
+              "bodyAdmission": false,
+              "installed": false,
+              "persistentMutation": false,
+              "candidateAdmission": {
+                "schema": "xenomorph-gut-capability-admission/v0.1",
+                "organism": "XENOMORPH",
+                "habitat": "NOSTROMO",
+                "executed": false,
+                "authorized": false,
+                "assimilationStage": "CANDIDATE_FOR_ISOLATED_TEST",
+                "route": "HOLD",
+                "identity": "Bounded Counter Adapter",
+                "hasProvenance": true,
+                "hasPermissionBoundary": true,
+                "hasContract": true,
+                "status": "HOLD",
+                "classification": "FOREIGN_CAPABILITY",
+                "reason": "metadata-complete-enough-for-sandbox-evaluation-not-body-admission"
+              },
+              "assimilationStage": "ISOLATED_TEST_PASSED",
+              "status": "PASS",
+              "reason": "isolated-host-registered-trial-passed",
+              "adapterId": "bounded-counter-v1",
+              "executed": true,
+              "executionBoundary": "HOST_REGISTERED_ONLY",
+              "deterministic": true,
+              "inputStable": true,
+              "contractCheck": {
+                "checked": true,
+                "ok": true,
+                "expected": "object",
+                "actual": "object"
+              },
+              "inputFingerprint": "187d58fbe9c30e5a1ad8afbb4608ec5b69a1c15a801e7c164f79853dd4367714",
+              "outputFingerprint": "0c07187ea6d064441225b3cba26a7b1e8bc702fcf332b457dae8e26892ba68a6",
+              "replayOutputFingerprint": "0c07187ea6d064441225b3cba26a7b1e8bc702fcf332b457dae8e26892ba68a6",
+              "provenanceFingerprint": "repeated-heldout-prov-001",
+              "rollbackEvidence": "no installation; cloned frozen inputs; no body state mutation performed by sandbox"
+            },
+            "status": "PASS",
+            "assimilationStage": "HELDOUT_BEHAVIOR_CHANGE_VERIFIED",
+            "reason": "foreign-capability-changed-downstream-organ-behavior",
+            "downstreamOrganId": "vajra-profile-v1",
+            "downstreamExecuted": true,
+            "behaviorChanged": true,
+            "baselineDecision": {
+              "route": "HOLD"
+            },
+            "augmentedDecision": {
+              "route": "SPLIT"
+            },
+            "provenanceFingerprint": "repeated-heldout-prov-001",
+            "rollbackEvidence": "ephemeral replay only; no registry, body, or persistent state mutation performed"
+          }
+        }
+      ],
+      "rollbackEvidence": "all trials ephemeral; no capability installation, registry mutation, or persistent body-state mutation performed"
+    },
+    "tooFew": {
+      "schema": "zenomorph-capability-repeated-heldout-stress/v0.1",
+      "organism": "ZENOMORPH",
+      "habitat": "NOSTROMO",
+      "bodyAdmission": false,
+      "installed": false,
+      "persistentMutation": false,
+      "assimilationStage": "REPEATED_HELDOUT_BLOCKED",
+      "status": "BLOCKED",
+      "reason": "at-least-three-independent-heldout-cases-required",
+      "executedCases": 0
+    }
+  },
+  "boundary": {
+    "version": "0.1",
+    "minimumCases": 3,
+    "requiresDistinctInputs": true,
+    "requiresPositiveAndNegativeCases": true,
+    "requiresStableProvenance": true,
+    "requiresExpectedBehaviorProfile": true,
+    "persistentMutation": false,
+    "bodyAdmissionOnPass": false,
+    "nextStage": "explicit incorporation candidate with reversible body-state trial"
+  },
+  "failures": []
+}
