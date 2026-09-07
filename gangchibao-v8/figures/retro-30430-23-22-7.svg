@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 620" role="img" aria-labelledby="title desc">
+  <title id="title">第二十三分回溯無所得與差別線</title>
+  <desc id="desc">中心為第二十三分，向外依次回溯第二十二、第七分。</desc>
+  <rect width="620" height="620" fill="white"/>
+  <g fill="none" stroke="black" stroke-width="2">
+    <circle cx="310" cy="310" r="90"/>
+    <circle cx="310" cy="310" r="180"/>
+    <circle cx="310" cy="310" r="270"/>
+  </g>
+  <g fill="black" font-family="system-ui, sans-serif" font-size="24" text-anchor="middle">
+    <text x="310" y="319">23</text>
+    <text x="310" y="205">22</text>
+    <text x="310" y="115">7</text>
+  </g>
+</svg>
