@@ -1,0 +1,26 @@
+name: ZENOMORPH VAJRA provenance independence
+on:
+  push:
+    paths:
+      - 'nostromo/vajra/vajra-engine.js'
+      - 'nostromo/vajra/provenance-independence-guard.js'
+      - 'nostromo/vajra/provenance-independence-test.mjs'
+      - 'nostromo/vajra/dynamic-reinspection.js'
+      - '.github/workflows/zenomorph-vajra-provenance-independence.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Run VAJRA provenance independence unit adversarial cross-organ regression
+        run: node nostromo/vajra/provenance-independence-test.mjs
+      - name: Verify result contract
+        run: >-
+          node -e "const r=require('./nostromo/vajra/provenance-independence-last-result.json');
+          if(r.status!=='PASS'||r.tests?.sameSourceConflict?.dynamicTriggered!==false||r.tests?.sameSourceConflict?.sourceContradictions!==1||r.tests?.sameSourceDuplicate?.duplicateProvenance!==1||!String(r.tests?.independentConflict?.status||'').includes('CONTESTED')||r.tests?.independentConflict?.nextInspection?.preferredOrgan!=='DROPLET'||r.tests?.echoBreak?.preferredOrgan!=='GUT') process.exit(1)"
