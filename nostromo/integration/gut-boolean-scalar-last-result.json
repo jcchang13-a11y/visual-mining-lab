@@ -1,7 +1,7 @@
 {
   "schema": "nostromo-gut-boolean-scalar-test/v0.1",
-  "completedAt": "2026-09-06T08:04:25.534Z",
-  "status": "PASS",
+  "completedAt": "2026-09-07T03:08:47.938Z",
+  "status": "FAIL",
   "capability": "PATH_SCOPED_TYPED_BOOLEAN_MULTIPLICITY_WITHOUT_EVIDENCE_PROMOTION",
   "booleanPaths": [
     "root.audit.verified",
@@ -57,6 +57,11 @@
   ],
   "textualDuplicateStillExcreted": true,
   "claimStillRoutedToDroplet": true,
-  "failures": [],
+  "failures": [
+    {
+      "type": "GUT_COMPAT_VERSION_CHANGED",
+      "detail": "0.2.36"
+    }
+  ],
   "boundary": "Typed booleans are retained as path-scoped BOOLEAN_MATERIAL in HOLD so repeated true/false values at different structured locations do not collapse into one atom. Boolean flags are not evidence, confidence, source-independence proof, truth, or semantic interpretation. Ordinary textual duplicate suppression remains active."
 }
