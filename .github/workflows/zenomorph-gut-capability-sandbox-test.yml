@@ -1,0 +1,46 @@
+name: ZENOMORPH GUT Capability Sandbox Test
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'nostromo/gut/capability-admission.mjs'
+      - 'nostromo/gut/capability-sandbox.mjs'
+      - 'nostromo/integration/gut-capability-sandbox-test.mjs'
+      - '.github/workflows/zenomorph-gut-capability-sandbox-test.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  test:
+    if: ${{ !contains(github.event.head_commit.message, '[nostromo-test]') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify controlled foreign-capability sandbox
+        run: node nostromo/integration/gut-capability-sandbox-test.mjs
+      - name: Commit focused result
+        if: always()
+        run: |
+          git config user.name "nostromo-bot"
+          git config user.email "actions@users.noreply.github.com"
+          test -f nostromo/integration/gut-capability-sandbox-last-result.json && cp nostromo/integration/gut-capability-sandbox-last-result.json /tmp/gut-capability-sandbox-last-result.json || true
+          git fetch origin main
+          git reset --hard origin/main
+          if [ -f /tmp/gut-capability-sandbox-last-result.json ]; then
+            cp /tmp/gut-capability-sandbox-last-result.json nostromo/integration/gut-capability-sandbox-last-result.json
+            git add nostromo/integration/gut-capability-sandbox-last-result.json
+          fi
+          if git diff --cached --quiet; then
+            echo "No result change"
+          else
+            git commit -m "[nostromo-test] record ZENOMORPH GUT capability sandbox result"
+            git push origin HEAD:main
+          fi
