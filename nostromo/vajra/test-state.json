@@ -1,5 +1,5 @@
 {
-  "engine": "VAJRA ENGINE v0.3.2",
+  "engine": "VAJRA ENGINE v0.3.2 + dynamic reinspection v0.1",
   "status": "VERIFIED_HEURISTIC_PROPOSITION_AWARE_DISMANTLER",
   "displayedStateRule": "DISPLAYED STATE MUST FOLLOW EVIDENCE",
   "evidence": {
@@ -16,6 +16,13 @@
       "evidenceRef": "nostromo/integration/vajra-chinese-negation-last-result.json",
       "status": "PASS",
       "guardVersion": "0.1"
+    },
+    "dynamicReinspection": {
+      "schema": "zenomorph-vajra-dynamic-reinspection-evidence/v0.1",
+      "evidenceRef": "nostromo/vajra/dynamic-reinspection-ci-evidence.json",
+      "status": "PASS",
+      "capabilityVersion": "0.1",
+      "workflowRunId": 34121163727
     }
   },
   "verifiedCapabilities": [
@@ -26,11 +33,13 @@
     "targetRef/clauseRef provenance continuity",
     "conflict-preserving receipt guards",
     "semantic-operator preservation in replay identity",
-    "bare Chinese negated polarity preserves uncertainty in the tested lexical forms"
+    "bare Chinese negated polarity preserves uncertainty in the tested lexical forms",
+    "receipt-driven dynamic reinspection: opposing qualifying cross-organ returns change the next VAJRA priority to clause-scoped source-quality inspection without adjudicating the conflict"
   ],
   "boundaries": [
     "Classification and clause decomposition remain auditable syntactic heuristics, not semantic understanding.",
     "The Chinese negation guard is a bounded lexical safeguard, not general Chinese negation understanding or truth adjudication.",
+    "Dynamic reinspection is structural reprioritization only; it does not decide which conflicting receipt is true or prove source independence.",
     "A handoff contract is a routing request, not evidence that the target organ executed it.",
     "Integration PASS proves the tested deterministic paths and regressions only; it does not prove general semantic dismantling quality.",
     "Formal SHROOMING history remains distinct from deterministic repository-native probes and controls."
@@ -41,5 +50,5 @@
     "prototypeCrashes": 0,
     "note": "The original v0.1 500-run state-machine result is retained as historical evidence only and no longer describes the current engine."
   },
-  "next": "Continue VAJRA thickening with adversarial unfamiliar propositions and receipt-resolution quality tests; preserve unresolved uncertainty rather than converting missing evidence into closure."
+  "next": "Continue VAJRA thickening with adversarial unfamiliar propositions and receipt-resolution quality tests; preserve unresolved uncertainty and test whether reinspection results can alter later lens choice without creating false closure."
 }
