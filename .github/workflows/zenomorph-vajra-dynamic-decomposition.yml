@@ -1,0 +1,24 @@
+name: ZENOMORPH VAJRA dynamic decomposition
+on:
+  push:
+    paths:
+      - 'nostromo/vajra/vajra-engine.js'
+      - 'nostromo/vajra/dynamic-reinspection.js'
+      - 'nostromo/vajra/dynamic-decomposition.js'
+      - 'nostromo/vajra/dynamic-decomposition-test.mjs'
+      - '.github/workflows/zenomorph-vajra-dynamic-decomposition.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Run VAJRA dynamic decomposition unit adversarial cross-organ regression
+        run: node nostromo/vajra/dynamic-decomposition-test.mjs
+      - name: Verify evidence contract
+        run: node -e "const r=require('./nostromo/vajra/dynamic-decomposition-last-result.json'); const d=r.tests?.decomposed; if(r.status!=='PASS'||r.failures?.length||d?.status!=='DECOMPOSED'||d?.parent?.closed!==false||d?.facets?.length!==2||!d?.provenance?.triageProvenance) process.exit(1)"
