@@ -1,0 +1,21 @@
+{
+  "schema": "zenomorph-failure-resolution/v1",
+  "date": "2026-09-08",
+  "organ": "VAJRA",
+  "status": "RESOLVED_VERIFIED",
+  "resolves": "nostromo/failure-log/2026-09-08-vajra-triage-conflict-order-dependence.json",
+  "implementationCommit": "ec71f54aea2fdbbb5ae83ff066f3864aa87fd797",
+  "verifiedCapability": "Genuinely conflicting qualifying GUT triage receipts produce an order-independent HOLD evidence envelope; receipt arrival order no longer changes the emitted conflict signature ordering.",
+  "verification": {
+    "dynamicDecompositionWorkflowRunId": 34162257108,
+    "dynamicDecompositionConclusion": "success",
+    "dynamicReinspectionWorkflowRunId": 34162257107,
+    "dynamicReinspectionConclusion": "success",
+    "triageConflictGuardWorkflowRunId": 34162257098,
+    "triageConflictGuardConclusion": "success",
+    "integrationWorkflowRunId": 34162257101,
+    "integrationConclusion": "success"
+  },
+  "provenance": "Synthetic de-identified fixtures only. No private Drive name, ID, URL, or source text is stored.",
+  "boundary": "This verifies deterministic structural conflict evidence for the tested receipt contract. It does not adjudicate receipt truth or prove provenance independence."
+}
