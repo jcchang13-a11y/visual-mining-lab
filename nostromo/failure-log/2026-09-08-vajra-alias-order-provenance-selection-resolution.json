@@ -1,0 +1,29 @@
+{
+  "schema": "zenomorph-failure-resolution/v1",
+  "date": "2026-09-08",
+  "organ": "VAJRA",
+  "status": "RESOLVED_VERIFIED",
+  "resolves": "2026-09-08-vajra-alias-order-provenance-selection.json",
+  "capability": "CANONICAL_PROVENANCE_ALIAS_SETS_DECOMPOSE_WITH_ORDER_INDEPENDENT_BEHAVIOR_AND_AUDIT",
+  "implementation": {
+    "file": "nostromo/vajra/dynamic-decomposition.js",
+    "version": "0.4",
+    "test": "nostromo/vajra/dynamic-decomposition-test.mjs"
+  },
+  "verification": {
+    "unitAdversarialCrossOrgan": "PASS",
+    "canonicalAliasABBA": "PASS",
+    "genuineConflictABBAHold": "PASS",
+    "echoBreakRegression": "PASS",
+    "githubActions": {
+      "workflow": "ZENOMORPH VAJRA dynamic decomposition",
+      "runId": 34169047273,
+      "jobId": 101885693625,
+      "headSha": "0a35443a72098fe016066d76ae57cc7ea52306f4",
+      "conclusion": "success"
+    }
+  },
+  "effect": "Equivalent surface aliases of one canonical GUT contamination-triage provenance no longer acquire procedural significance from receipt arrival order. VAJRA retains all qualifying alias receipt fingerprints in a deterministic audit while genuine classification/canonical-provenance disagreement remains HOLD.",
+  "provenance": "Synthetic de-identified cross-organ receipt fixtures plus public GitHub Actions verification only. No private Drive names, IDs, URLs, or source text are stored.",
+  "promotionBoundary": "This promotes only the verified alias-order provenance stability of VAJRA dynamic decomposition. It does not prove source truth, semantic alias equivalence, contamination-classification quality, connector execution, or unrestricted organism self-modification."
+}
