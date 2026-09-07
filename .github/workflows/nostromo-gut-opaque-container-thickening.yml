@@ -1,0 +1,44 @@
+name: NOSTROMO GUT Opaque Container Thickening
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'nostromo/integration/apply-gut-opaque-container-thickening.mjs'
+      - 'nostromo/integration/gut-opaque-container-test.mjs'
+      - '.github/workflows/nostromo-gut-opaque-container-thickening.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  thicken-and-verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Apply GUT opaque-container containment patch
+        run: node nostromo/integration/apply-gut-opaque-container-thickening.mjs
+      - name: Verify GUT opaque-container adversarial cases
+        run: node nostromo/integration/gut-opaque-container-test.mjs
+      - name: Run GUT metabolism regression
+        run: node nostromo/integration/gut-metabolism-test.mjs
+      - name: Commit verified GUT opaque-container thickening
+        run: |
+          git config user.name "nostromo-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add nostromo/gut/gut-engine.js nostromo/integration/gut-metabolism-test.mjs nostromo/integration/gut-opaque-container-last-result.json
+          if git diff --cached --quiet; then
+            echo "No verified thickening change"
+          else
+            git commit -m "[nostromo-test] promote verified GUT v0.2.36 opaque weak-container quarantine"
+            git restore --worktree .
+            git clean -fd
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
