@@ -162,8 +162,23 @@
   letter-spacing:.02em;
 }
 
+/* 列印層只防止鷹架被紙張切斷；不隱藏施工語、不合併段落、不重排正文。 */
 @media print{
-  .sutra-block,.work-note,.existing-figure,.original-figure{break-inside:avoid}
+  .article{
+    widows:3;
+    orphans:3;
+  }
+  .sutra-block,
+  .work-note,
+  .structure-line,
+  .gcb-formula.block,
+  .gcb-basic-formula,
+  .figure-slot,
+  .existing-figure,
+  .original-figure{
+    break-inside:avoid;
+    page-break-inside:avoid;
+  }
   .sutra-block{background:#f4f2ec}
   .work-note{background:#fff}
   .existing-figure img,.original-figure img{max-height:none}
