@@ -21,6 +21,25 @@ check(decomposed.facets?.some(f=>f.lens==='claim_relation'&&f.preferredOrgan==='
 check(decomposed.facets?.every(f=>f.targetRef==='target-001'&&f.clauseRef==='clause-001'),'PROVENANCE_SCOPE_LOST',decomposed.facets);
 check(Boolean(decomposed.provenance?.triageProvenance&&decomposed.provenance?.triageReceiptFingerprint),'PROVENANCE_NOT_RETAINED',decomposed.provenance);
 
+// Duplicate-equivalent qualifying receipts may coexist without changing behavior merely because of array order.
+const equivalentReceipt={...gutReceipt,summary:'Same structural finding restated by the same provenance-bearing triage artifact.'};
+const equivalent=V.planConflictDecomposition(state,[gutReceipt,equivalentReceipt]);
+check(equivalent.status==='DECOMPOSED','EQUIVALENT_TRIAGE_FALSE_HOLD',equivalent);
+check(equivalent.provenance?.qualifyingReceiptCount===2,'EQUIVALENT_TRIAGE_COUNT_LOST',equivalent.provenance);
+
+// Adversarial: two individually qualifying but mutually inconsistent GUT triage receipts must HOLD rather than let the first array element decide VAJRA behavior.
+const conflictingReceipt={...gutReceipt,provenance:'gut-triage-evidence-002',triageClassification:'DUPLICATE_CONTAMINATION',summary:'A different completed GUT triage claims a different contamination structure.'};
+const conflictAB=V.planConflictDecomposition(state,[gutReceipt,conflictingReceipt]);
+const conflictBA=V.planConflictDecomposition(state,[conflictingReceipt,gutReceipt]);
+for(const [label,held] of [['AB',conflictAB],['BA',conflictBA]]){
+  check(held.status==='HOLD',`CONFLICT_${label}_DID_NOT_HOLD`,held);
+  check(held.reason==='conflicting-qualifying-gut-triage-receipts',`CONFLICT_${label}_WRONG_REASON`,held);
+  check((held.facets||[]).length===0,`CONFLICT_${label}_FACET_LEAK`,held.facets);
+  check(held.parent?.closed===false,`CONFLICT_${label}_PARENT_FALSELY_CLOSED`,held.parent);
+  check(held.conflict?.qualifyingReceiptCount===2,`CONFLICT_${label}_COUNT_LOST`,held.conflict);
+}
+check(JSON.stringify(conflictAB.conflict)===JSON.stringify(conflictBA.conflict),'CONFLICT_RESULT_ORDER_DEPENDENT',{conflictAB:conflictAB.conflict,conflictBA:conflictBA.conflict});
+
 // Adversarial: malformed, wrong-organ, scope-shifted, missing-provenance and non-decomposing receipts must not alter behavior.
 const adversarial=[
   {...gutReceipt,organ:'DROPLET'},
@@ -45,15 +64,15 @@ check(echoBreak?.preferredOrgan==='GUT'&&echoBreak?.lens==='metabolic_contaminat
 check(decomposed.facets?.every(f=>f.preferredOrgan!=='DROPLET'),'ORGAN_PING_PONG_REINTRODUCED',decomposed.facets);
 
 const result={
-  schema:'zenomorph-vajra-dynamic-decomposition-test/v0.1',
+  schema:'zenomorph-vajra-dynamic-decomposition-test/v0.2',
   completedAt:new Date().toISOString(),
   status:failures.length?'FAIL':'PASS',
-  capability:'GUT_CONTAMINATION_TRIAGE_CHANGES_VAJRA_DECOMPOSITION',
-  tests:{decomposed,adversarialCases:adversarial.length,echoBreak},
+  capability:'CONFLICTING_GUT_TRIAGE_CANNOT_CREATE_ORDER_DEPENDENT_VAJRA_CERTAINTY',
+  tests:{decomposed,equivalent,conflictAB,conflictBA,adversarialCases:adversarial.length,echoBreak},
   provenance:{fixture:'de-identified synthetic cross-organ receipt contract',sourceFiles:['nostromo/vajra/vajra-engine.js','nostromo/vajra/dynamic-reinspection.js','nostromo/vajra/dynamic-decomposition.js']},
   failures,
   failureLog:{count:failures.length,entries:failures},
-  boundary:'PASS proves only that one explicit, provenance-bearing, clause-scoped GUT contamination triage class changes VAJRA from a single repeated source-quality conflict into two bounded open inspection facets while preserving the parent conflict, provenance and existing echo-break behavior. It does not prove source truth, semantic decomposition, contamination detection quality, organ execution, or body admission.'
+  boundary:'PASS proves only that qualifying GUT contamination triage can change VAJRA decomposition while contradictory qualifying GUT triage receipts cannot manufacture a decomposition through input ordering. It preserves the parent conflict, provenance scope, anti-ping-pong behavior and existing echo-break routing. It does not prove source truth, contamination detection quality, semantic adjudication, organ execution, or body admission.'
 };
 await fs.writeFile('nostromo/vajra/dynamic-decomposition-last-result.json',JSON.stringify(result,null,2)+'\n');
 console.log(JSON.stringify(result,null,2));
