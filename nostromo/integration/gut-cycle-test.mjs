@@ -42,11 +42,15 @@ check(setGut.nutrients?.some(x=>x.path==='root.set<0>'&&x.text==='set-member-sur
 const shared={material:'shared alias remains traversable outside the active ancestor chain'};
 const aliasGut=globalThis.GutEngine.digest({left:shared,right:shared},{source:'NOSTROMO/gut-cycle-alias-test'});
 check(!aliasGut.quarantine?.some(x=>x.type==='CIRCULAR_REFERENCE'),'SHARED_ALIAS_FALSELY_CLASSIFIED_AS_CYCLE',aliasGut.quarantine);
-check(aliasGut.items?.some(x=>x.path==='root.left.material'),'SHARED_ALIAS_LEFT_NOT_TRAVERSED',aliasGut.items);
-check(aliasGut.items?.some(x=>x.path==='root.right.material'),'SHARED_ALIAS_RIGHT_NOT_TRAVERSED',aliasGut.items);
+// Traversal is distinct from downstream textual deduplication: the first alias can remain a nutrient
+// while the second is legitimately recorded as DUPLICATE waste. Both paths must remain auditable.
+const aliasAuditable=[...(aliasGut.nutrients||[]),...(aliasGut.waste||[]),...(aliasGut.quarantine||[]),...(aliasGut.hold||[])];
+check(aliasAuditable.some(x=>x.path==='root.left.material'),'SHARED_ALIAS_LEFT_NOT_TRAVERSED',aliasAuditable);
+check(aliasAuditable.some(x=>x.path==='root.right.material'),'SHARED_ALIAS_RIGHT_NOT_TRAVERSED',aliasAuditable);
+check(aliasGut.waste?.some(x=>x.path==='root.right.material'&&x.type==='DUPLICATE'),'SHARED_ALIAS_DEDUPE_NOT_AUDITABLE',aliasGut.waste);
 
 const result={
-  schema:'nostromo-gut-cycle-test/v0.1',
+  schema:'nostromo-gut-cycle-test/v0.2',
   completedAt:new Date().toISOString(),
   status:failures.length?'FAIL':'PASS',
   capability:'ACTIVE_ANCESTOR_CYCLE_QUARANTINE_WITH_ORIGIN_PATH_AND_NONCYCLIC_ALIAS_PRESERVATION',
@@ -56,10 +60,10 @@ const result={
     mutualCycle:{circular:mutualGut.typeCounts?.CIRCULAR_REFERENCE||0,quarantined:mutualGut.quarantined},
     mapCycle:{circular:mapGut.typeCounts?.CIRCULAR_REFERENCE||0,quarantined:mapGut.quarantined},
     setCycle:{circular:setGut.typeCounts?.CIRCULAR_REFERENCE||0,quarantined:setGut.quarantined},
-    noncyclicAlias:{circular:aliasGut.typeCounts?.CIRCULAR_REFERENCE||0}
+    noncyclicAlias:{circular:aliasGut.typeCounts?.CIRCULAR_REFERENCE||0,rightDuplicateAudited:!!aliasGut.waste?.some(x=>x.path==='root.right.material'&&x.type==='DUPLICATE')}
   },
   failures,
-  boundary:'This test verifies deterministic active-ancestor cycle detection and bounded quarantine markers. It does not infer semantic identity, object ownership, source independence, causality or truth from JavaScript reference identity.'
+  boundary:'This test verifies deterministic active-ancestor cycle detection, bounded quarantine markers, and that non-cyclic shared aliases are traversed before ordinary textual duplicate suppression. It does not infer semantic identity, object ownership, source independence, causality or truth from JavaScript reference identity.'
 };
 await fs.writeFile('nostromo/integration/gut-cycle-last-result.json',JSON.stringify(result,null,2)+'\n','utf8');
 console.log(JSON.stringify(result,null,2));
