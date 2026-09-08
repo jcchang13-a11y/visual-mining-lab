@@ -1,0 +1,11 @@
+{
+  "schema": "zenomorph-failure-evidence/v1",
+  "date": "2026-09-09",
+  "organ": "VAJRA",
+  "status": "OPEN_NOT_PROMOTED",
+  "failureClass": "QUARANTINE_PRIORITY_STARVATION",
+  "observation": "dynamic reinspection v0.4 always ranks metabolic_contamination above source_quality and generic contested branches. Because repeated metabolic contest returns a terminal HOLD/quarantine without mutating the underlying contested branch, repeated scheduler passes can keep selecting the same quarantined branch and prevent other runnable contested branches from progressing.",
+  "risk": "A correctly contained toxic or irreducibly contested branch can become a global scheduling sink. This converts quarantine from local containment into cross-branch starvation and makes the organism appear safely cautious while silently blocking unrelated metabolism.",
+  "requiredFix": "Treat repeated metabolic contest as locally quarantined but non-runnable when other contested work exists. Preserve the quarantined branch and provenance, but allow the highest-priority runnable source_quality or generic contested branch to become nextInspection. If quarantine is the only contested work, retain HOLD/quarantine exactly as before.",
+  "promotionGate": "Add adversarial mixed-branch tests proving a lone metabolic contest still HOLDs, a quarantined metabolic branch cannot starve runnable source_quality/generic branches, source_quality still outranks generic runnable work, stable tie ordering is preserved, and existing receipt/provenance regression remains intact. Require focused VAJRA and full integration CI success before closing evidence or promoting displayed state."
+}
