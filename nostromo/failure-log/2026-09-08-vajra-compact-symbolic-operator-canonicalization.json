@@ -12,12 +12,20 @@
     "fake certainty from collapsed symbolic evidence"
   ],
   "requiredBoundary": "Do not solve this by preserving every compact slash or hyphen. ASCII slash remains ambiguous with paths such as a/b, and ASCII hyphen remains ambiguous with lexical compounds. Promotion must be bounded to compact variable forms with a restricted operator set while retaining path/non-arithmetic negative controls.",
+  "failedVerification": {
+    "githubActionsRunId": 34242777463,
+    "conclusion": "failure",
+    "failedCheck": "OVERLONG_IDENTIFIER_FALSELY_PROMOTED",
+    "observedBehavior": "The initial bounded-identifier regex could start matching inside the tail of an overlong identifier, so abcdefghijklmnopq*y was partially promoted despite the intended 16-character boundary.",
+    "disposition": "Failure retained as evidence; no public-state promotion. Repair must enforce identifier token boundaries rather than only limiting captured substring length."
+  },
   "requiredVerification": [
     "VAJRA unit identity test",
     "adversarial opposing-receipt contest test",
     "cross-organ next-inspection regression",
     "provenance replay regression",
     "compact slash/path negative control",
+    "overlong identifier negative control",
     "full integration regression"
   ],
   "provenance": "Public repository code and synthetic de-identified fixtures only. No private connector source text, file name, ID, or URL is included.",
