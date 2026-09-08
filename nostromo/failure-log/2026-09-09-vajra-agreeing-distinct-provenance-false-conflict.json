@@ -1,0 +1,21 @@
+{
+  "schema": "zenomorph-failure-evidence/v1",
+  "recordedAt": "2026-09-09T00:01:28+08:00",
+  "organ": "VAJRA",
+  "component": "dynamic-decomposition",
+  "status": "OPEN_NOT_PROMOTED",
+  "failureClass": "AGREEING_DISTINCT_PROVENANCE_FALSE_CONFLICT",
+  "observedVersion": "0.9",
+  "observation": "Two unique completed GUT contamination-triage receipts scoped to the same contested parent, carrying the same supported triage classification but different canonical provenance, are currently placed on HOLD because dynamic decomposition treats classification+provenance as one conflict signature.",
+  "qualityRisk": "Distinct provenance is evidence-significant and must remain visible, but provenance diversity alone does not imply classification disagreement. Treating it as a conflict can block an otherwise identical bounded decomposition profile and makes downstream behavior depend on provenance identity rather than on the metabolic diagnosis that is supposed to regulate VAJRA.",
+  "requiredFix": "Separate classification agreement from provenance identity. Multiple unique qualifying receipts may select one bounded profile only when all supported classifications agree; all distinct provenance must remain auditable and must not be claimed independent merely because canonical strings differ. Any classification disagreement must continue to HOLD with no facets.",
+  "promotionGate": [
+    "same classification + distinct canonical provenance => same bounded profile",
+    "classification disagreement => HOLD with zero facets",
+    "replays do not inflate receipt counts",
+    "distinct provenance remains fully auditable",
+    "cross-organ GUT and VAJRA regressions pass"
+  ],
+  "privacy": "Synthetic de-identified evidence only; no private connector content, names, IDs, or URLs are stored.",
+  "displayRule": "DISPLAYED STATE MUST FOLLOW EVIDENCE"
+}
