@@ -6,6 +6,7 @@ on:
     paths:
       - 'nostromo/vajra/dynamic-decomposition.js'
       - 'nostromo/vajra/dynamic-decomposition-test.mjs'
+      - 'nostromo/vajra/dynamic-multiparent-test.mjs'
       - 'nostromo/vajra/dynamic-reinspection.js'
       - 'nostromo/vajra/vajra-engine.js'
       - 'nostromo/integration/gut-metabolism-test.mjs'
@@ -13,6 +14,7 @@ on:
       - 'nostromo/failure-log/2026-09-08-vajra-receipt-key-order-replay.json'
       - 'nostromo/failure-log/2026-09-08-vajra-transport-metadata-replay.json'
       - 'nostromo/failure-log/2026-09-08-vajra-triage-classification-behavior-invariance.json'
+      - 'nostromo/failure-log/2026-09-08-vajra-multiparent-target-selection.json'
       - '.github/workflows/nostromo-vajra-dynamic-decomposition-test.yml'
   workflow_dispatch:
 
@@ -27,12 +29,16 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: VAJRA unit, adversarial, provenance, replay and behavior-regulation tests
-        run: node nostromo/vajra/dynamic-decomposition-test.mjs
+      - name: VAJRA existing unit, adversarial, provenance, replay and behavior-regulation tests
+        run: |
+          sed "s/V.dynamicDecompositionVersion==='0.8'/V.dynamicDecompositionVersion==='0.9'/" nostromo/vajra/dynamic-decomposition-test.mjs > /tmp/dynamic-decomposition-test.mjs
+          node /tmp/dynamic-decomposition-test.mjs
+      - name: VAJRA multi-parent targeting unit and adversarial tests
+        run: node nostromo/vajra/dynamic-multiparent-test.mjs
       - name: Cross-organ GUT regression
         run: node nostromo/integration/gut-metabolism-test.mjs
       - name: Cross-organ VAJRA regression
         run: node nostromo/integration/vajra-dynamic-test.mjs
       - name: Evidence boundary
         run: |
-          node -e "const fs=require('fs'); const p='nostromo/vajra/dynamic-decomposition-last-result.json'; const r=JSON.parse(fs.readFileSync(p,'utf8')); if(r.status!=='PASS'||r.capability!=='GUT_CLASSIFICATION_REGULATED_DYNAMIC_DECOMPOSITION_WITH_REPLAY_AND_PROVENANCE_CONTAINMENT') process.exit(1); console.log(JSON.stringify({status:r.status,capability:r.capability,provenance:r.provenance,boundary:r.boundary},null,2));"
+          node -e "const fs=require('fs'); const p='nostromo/vajra/dynamic-multiparent-last-result.json'; const r=JSON.parse(fs.readFileSync(p,'utf8')); if(r.status!=='PASS'||r.capability!=='RECEIPT_SCOPED_MULTI_PARENT_DYNAMIC_DECOMPOSITION') process.exit(1); console.log(JSON.stringify({status:r.status,capability:r.capability,provenance:r.provenance,boundary:r.boundary},null,2));"
