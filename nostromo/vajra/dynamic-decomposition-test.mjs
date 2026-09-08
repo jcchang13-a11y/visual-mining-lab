@@ -11,7 +11,7 @@ const parent={status:'CONTESTED_BY_RECEIPTS',targetRef:'target-001',clauseRef:'c
 const state={status:'CONTESTED_BY_RECEIPTS',unresolved:[parent]};
 const gutReceipt={targetRef:'target-001',clauseRef:'clause-001',lens:'metabolic_contamination',organ:'GUT',status:'COMPLETED',provenance:'gut-triage-evidence-001',triageClassification:'PROVENANCE_COLLISION',summary:'De-identified structural triage found source aliases that must not be counted as independent evidence.'};
 
-check(V.dynamicDecompositionVersion==='0.7','DYNAMIC_DECOMPOSITION_VERSION_NOT_PROMOTED',V.dynamicDecompositionVersion);
+check(V.dynamicDecompositionVersion==='0.8','DYNAMIC_DECOMPOSITION_VERSION_NOT_PROMOTED',V.dynamicDecompositionVersion);
 
 const decomposed=V.planConflictDecomposition(state,[gutReceipt]);
 check(decomposed.status==='DECOMPOSED','QUALIFYING_TRIAGE_DID_NOT_DECOMPOSE',decomposed);
@@ -21,6 +21,24 @@ check(decomposed.facets?.some(f=>f.lens==='source_identity'&&f.preferredOrgan===
 check(decomposed.facets?.some(f=>f.lens==='claim_relation'&&f.preferredOrgan==='MUTHER'),'CLAIM_RELATION_FACET_MISSING',decomposed.facets);
 check(decomposed.facets?.every(f=>f.targetRef==='target-001'&&f.clauseRef==='clause-001'),'PROVENANCE_SCOPE_LOST',decomposed.facets);
 check(Boolean(decomposed.provenance?.triageProvenanceFingerprint&&decomposed.provenance?.aliasAudit?.length===1),'PROVENANCE_AUDIT_NOT_RETAINED',decomposed.provenance);
+check(decomposed.behaviorRegulation?.classification==='PROVENANCE_COLLISION','PROVENANCE_PROFILE_NOT_AUDITED',decomposed.behaviorRegulation);
+
+const duplicateReceipt={...gutReceipt,triageClassification:'DUPLICATE_CONTAMINATION',summary:'De-identified structural triage found repeated copies that must be clustered before evidential reconstruction.'};
+const duplicatePlan=V.planConflictDecomposition(state,[duplicateReceipt]);
+check(duplicatePlan.status==='DECOMPOSED','DUPLICATE_TRIAGE_DID_NOT_DECOMPOSE',duplicatePlan);
+check(duplicatePlan.facets?.length===2,'DUPLICATE_PROFILE_WRONG_FACET_COUNT',duplicatePlan.facets);
+check(duplicatePlan.facets?.some(f=>f.lens==='duplicate_cluster'&&f.preferredOrgan==='GUT'),'DUPLICATE_PROFILE_CLUSTER_FACET_MISSING',duplicatePlan.facets);
+check(!duplicatePlan.facets?.some(f=>f.lens==='source_identity'),'DUPLICATE_PROFILE_FALSE_SOURCE_IDENTITY_FACET',duplicatePlan.facets);
+
+const mixedReceipt={...gutReceipt,triageClassification:'MIXED_CONTAMINATION',summary:'De-identified structural triage found both provenance collision and repeated-copy contamination.'};
+const mixedPlan=V.planConflictDecomposition(state,[mixedReceipt]);
+check(mixedPlan.status==='DECOMPOSED','MIXED_TRIAGE_DID_NOT_DECOMPOSE',mixedPlan);
+check(mixedPlan.facets?.length===3,'MIXED_PROFILE_WRONG_FACET_COUNT',mixedPlan.facets);
+check(mixedPlan.facets?.some(f=>f.lens==='source_identity'&&f.preferredOrgan==='GUT'),'MIXED_PROFILE_SOURCE_IDENTITY_MISSING',mixedPlan.facets);
+check(mixedPlan.facets?.some(f=>f.lens==='duplicate_cluster'&&f.preferredOrgan==='GUT'),'MIXED_PROFILE_DUPLICATE_CLUSTER_MISSING',mixedPlan.facets);
+check(mixedPlan.facets?.some(f=>f.lens==='claim_relation'&&f.preferredOrgan==='MUTHER'),'MIXED_PROFILE_CLAIM_RELATION_MISSING',mixedPlan.facets);
+check(decomposed.behaviorRegulation?.profileFingerprint!==duplicatePlan.behaviorRegulation?.profileFingerprint,'CLASSIFICATION_DID_NOT_CHANGE_PROFILE',{provenance:decomposed.behaviorRegulation,duplicate:duplicatePlan.behaviorRegulation});
+check(duplicatePlan.behaviorRegulation?.profileFingerprint!==mixedPlan.behaviorRegulation?.profileFingerprint,'MIXED_CLASSIFICATION_DID_NOT_CHANGE_PROFILE',{duplicate:duplicatePlan.behaviorRegulation,mixed:mixedPlan.behaviorRegulation});
 
 const replayTriple=V.planConflictDecomposition(state,[gutReceipt,gutReceipt,gutReceipt]);
 check(replayTriple.status==='DECOMPOSED','EXACT_REPLAY_BLOCKED_DECOMPOSITION',replayTriple);
@@ -110,17 +128,18 @@ const echoBreak=V.selectNextInspection({unresolved:[parent]});
 check(echoBreak?.trigger==='REPEATED_SOURCE_CONTEST','CROSS_REGRESSION_TRIGGER_CHANGED',echoBreak);
 check(echoBreak?.preferredOrgan==='GUT'&&echoBreak?.lens==='metabolic_contamination','CROSS_REGRESSION_ECHO_BREAK_LOST',echoBreak);
 check(decomposed.facets?.every(f=>f.preferredOrgan!=='DROPLET'),'ORGAN_PING_PONG_REINTRODUCED',decomposed.facets);
+check(duplicatePlan.facets?.every(f=>f.preferredOrgan!=='DROPLET')&&mixedPlan.facets?.every(f=>f.preferredOrgan!=='DROPLET'),'CLASSIFICATION_PROFILE_REINTRODUCED_PING_PONG',{duplicate:duplicatePlan.facets,mixed:mixedPlan.facets});
 
 const result={
-  schema:'zenomorph-vajra-dynamic-decomposition-test/v0.7',
+  schema:'zenomorph-vajra-dynamic-decomposition-test/v0.8',
   completedAt:new Date().toISOString(),
   status:failures.length?'FAIL':'PASS',
-  capability:'TRANSPORT_RESILIENT_STRUCTURED_TRIAGE_REPLAY_SUPPRESSION_WITH_EVIDENCE_BOUNDARY_PRESERVATION',
-  tests:{decomposed,replayTriple,reorderedReplay,transportSuppressed,equivalent,nestedDistinct,aliasAB,aliasBA,conflictAB,conflictBA,conflictWithReplay,adversarialCases:adversarial.length,echoBreak},
-  provenance:{fixture:'de-identified synthetic cross-organ receipt contract',sourceFiles:['nostromo/vajra/vajra-engine.js','nostromo/vajra/dynamic-reinspection.js','nostromo/vajra/dynamic-decomposition.js']},
+  capability:'GUT_CLASSIFICATION_REGULATED_DYNAMIC_DECOMPOSITION_WITH_REPLAY_AND_PROVENANCE_CONTAINMENT',
+  tests:{decomposed,duplicatePlan,mixedPlan,replayTriple,reorderedReplay,transportSuppressed,equivalent,nestedDistinct,aliasAB,aliasBA,conflictAB,conflictBA,conflictWithReplay,adversarialCases:adversarial.length,echoBreak},
+  provenance:{fixture:'de-identified synthetic cross-organ receipt contract',sourceFiles:['nostromo/vajra/vajra-engine.js','nostromo/vajra/dynamic-reinspection.js','nostromo/vajra/dynamic-decomposition.js'],failureEvidence:'nostromo/failure-log/2026-09-08-vajra-triage-classification-behavior-invariance.json'},
   failures,
   failureLog:{count:failures.length,entries:failures},
-  boundary:'PASS proves only that explicitly declared top-level delivery metadata cannot inflate qualifying GUT triage evidence counts or alias audit in VAJRA dynamic decomposition. Object-key order remains irrelevant, while evidence-bearing summary/provenance/classification/scope/status and nested values remain significant. Genuine conflicts still HOLD, the contested parent remains open, and cross-organ GUT echo-break routing is regression-checked. This does not prove source truth, semantic contamination detection, connector integrity, organ execution, or body admission.'
+  boundary:'PASS proves only that the three already-authorized completed GUT contamination classifications select distinct bounded VAJRA decomposition profiles while preserving replay suppression, provenance audit, conflict HOLD behavior, the open contested parent, and the existing GUT echo-break regression. It does not prove semantic contamination detection, source truth, connector integrity, generated-facet execution, autonomous organ creation, or body admission.'
 };
 await fs.writeFile('nostromo/vajra/dynamic-decomposition-last-result.json',JSON.stringify(result,null,2)+'\n');
 console.log(JSON.stringify(result,null,2));
