@@ -1,4 +1,4 @@
-/* VAJRA dynamic decomposition v0.8 — qualifying GUT contamination triage now changes the bounded decomposition profile by classification; qualifying receipt replays are suppressed by deterministic structured identity so object-key serialization order and explicitly declared top-level transport metadata cannot masquerade as evidence multiplicity; canonical provenance aliases cannot manufacture disagreement or order-dependent provenance selection, while genuinely conflicting qualifying triage receipts force a HOLD */
+/* VAJRA dynamic decomposition v0.9 — qualifying GUT contamination triage now targets the exact contested parent by targetRef+clauseRef; multiple targeted parents HOLD rather than depending on branch order. Existing classification-regulated decomposition, replay suppression, provenance containment, and conflict HOLD behavior remain bounded. */
 (function(root){
   const api=root.VajraEngine;
   if(!api||typeof api.selectNextInspection!=='function') throw new Error('VajraEngine + dynamic-reinspection must be loaded before dynamic-decomposition');
@@ -62,10 +62,47 @@
     return [];
   }
 
+  function selectTargetParent(branches,receipts){
+    const parents=branches.filter(b=>b?.status==='CONTESTED_BY_RECEIPTS'&&b?.lens==='source_quality');
+    if(!parents.length) return {status:'NONE',parents:[]};
+    if(parents.length===1) return {status:'SELECTED',parent:parents[0],parents};
+
+    const matched=new Map();
+    for(const receipt of Array.isArray(receipts)?receipts:[]){
+      if(!receipt||typeof receipt!=='object') continue;
+      const targetRef=clean(receipt.targetRef),clauseRef=clean(receipt.clauseRef);
+      if(!targetRef||!clauseRef) continue;
+      const parent=parents.find(p=>clean(p.targetRef)===targetRef&&clean(p.clauseRef)===clauseRef);
+      if(parent) matched.set(`${targetRef}\u0000${clauseRef}`,parent);
+    }
+    if(matched.size===1) return {status:'SELECTED',parent:[...matched.values()][0],parents};
+    if(matched.size>1) return {status:'MULTIPLE',parents:[...matched.values()]};
+    return {status:'AMBIGUOUS',parents};
+  }
+
   function planConflictDecomposition(result,receipts=[]){
     const branches=Array.isArray(result?.unresolved)?result.unresolved:[];
-    const parent=branches.find(b=>b?.status==='CONTESTED_BY_RECEIPTS'&&b?.lens==='source_quality');
-    if(!parent) return {status:'NO_DECOMPOSITION',reason:'no-contested-source-quality-parent',facets:[],rejected:[]};
+    const targetSelection=selectTargetParent(branches,receipts);
+    if(targetSelection.status==='NONE') return {status:'NO_DECOMPOSITION',reason:'no-contested-source-quality-parent',facets:[],rejected:[]};
+    if(targetSelection.status==='MULTIPLE') return {
+      schema:'zenomorph-vajra-dynamic-decomposition/v0.9',
+      status:'HOLD',
+      reason:'multiple-contested-parents-targeted',
+      parents:targetSelection.parents.map(p=>({targetRef:p.targetRef,clauseRef:p.clauseRef,lens:p.lens,status:p.status,closed:false})),
+      facets:[],
+      rejected:[],
+      boundary:'One bounded decomposition call may regulate only one contested parent. Receipts targeting more than one parent cannot be collapsed by branch order or arrival order; VAJRA must HOLD and require separate parent-scoped decomposition passes.'
+    };
+    if(targetSelection.status==='AMBIGUOUS') return {
+      schema:'zenomorph-vajra-dynamic-decomposition/v0.9',
+      status:'HOLD',
+      reason:'targeted-contested-source-quality-parent-required',
+      parents:targetSelection.parents.map(p=>({targetRef:p.targetRef,clauseRef:p.clauseRef,lens:p.lens,status:p.status,closed:false})),
+      facets:[],
+      rejected:[],
+      boundary:'When more than one contested source-quality parent is open, receipt scope must identify exactly one targetRef+clauseRef pair. VAJRA does not choose the first branch as an implicit parent.'
+    };
+    const parent=targetSelection.parent;
 
     const rejected=[];
     const qualified=[];
@@ -96,7 +133,7 @@
         .map(([signature,receiptFingerprints])=>({signatureFingerprint:fp(signature),receiptFingerprints:[...receiptFingerprints].sort()}))
         .sort((a,b)=>a.signatureFingerprint.localeCompare(b.signatureFingerprint)||JSON.stringify(a.receiptFingerprints).localeCompare(JSON.stringify(b.receiptFingerprints)));
       return {
-        schema:'zenomorph-vajra-dynamic-decomposition/v0.8',
+        schema:'zenomorph-vajra-dynamic-decomposition/v0.9',
         status:'HOLD',
         reason:'conflicting-qualifying-gut-triage-receipts',
         parent:{targetRef:parent.targetRef,clauseRef:parent.clauseRef,lens:parent.lens,status:parent.status,closed:false},
@@ -113,10 +150,10 @@
     const shared={targetRef:parent.targetRef,clauseRef:parent.clauseRef,parentLens:parent.lens,parentStatus:parent.status,triageClassification:canonicalRepresentative.q.classification,triageProvenanceFingerprint:fp(canonicalRepresentative.q.canonicalProvenance),status:'OPEN'};
     const facets=facetsForClassification(parent,canonicalRepresentative.q.classification,shared);
     if(!facets.length){
-      return {schema:'zenomorph-vajra-dynamic-decomposition/v0.8',status:'HOLD',reason:'no-bounded-profile-for-qualified-classification',parent:{targetRef:parent.targetRef,clauseRef:parent.clauseRef,lens:parent.lens,status:parent.status,closed:false},facets:[],replaySuppression:replayAudit(duplicateReplayCount),rejected,boundary:'A qualifying receipt may not create downstream behavior unless VAJRA has an explicit bounded decomposition profile for that classification.'};
+      return {schema:'zenomorph-vajra-dynamic-decomposition/v0.9',status:'HOLD',reason:'no-bounded-profile-for-qualified-classification',parent:{targetRef:parent.targetRef,clauseRef:parent.clauseRef,lens:parent.lens,status:parent.status,closed:false},facets:[],replaySuppression:replayAudit(duplicateReplayCount),rejected,boundary:'A qualifying receipt may not create downstream behavior unless VAJRA has an explicit bounded decomposition profile for that classification.'};
     }
     return {
-      schema:'zenomorph-vajra-dynamic-decomposition/v0.8',
+      schema:'zenomorph-vajra-dynamic-decomposition/v0.9',
       status:'DECOMPOSED',
       reason:'qualifying-gut-contamination-triage-selected-bounded-profile',
       parent:{targetRef:parent.targetRef,clauseRef:parent.clauseRef,lens:parent.lens,status:parent.status,closed:false},
@@ -134,11 +171,11 @@
       },
       replaySuppression:replayAudit(duplicateReplayCount),
       rejected,
-      boundary:'Dynamic decomposition is a reversible routing/inspection plan. A completed qualifying GUT contamination classification now selects one explicit bounded VAJRA decomposition profile, so upstream metabolic diagnosis changes downstream behavior without adding certainty. Replay identity recursively sorts object keys and ignores only a bounded allowlist of top-level transport metadata. Replays remain explicit rejected audit entries, canonical provenance aliases remain traceable, the contested parent remains open, and this does not decide source truth, prove source independence, or claim any generated facet was executed.'
+      boundary:'Dynamic decomposition is a reversible routing/inspection plan. A completed qualifying GUT contamination classification selects one explicit bounded VAJRA decomposition profile for exactly one receipt-scoped contested parent, so upstream metabolic diagnosis changes downstream behavior without adding certainty. Replay identity recursively sorts object keys and ignores only a bounded allowlist of top-level transport metadata. Replays remain explicit rejected audit entries, canonical provenance aliases remain traceable, the contested parent remains open, and this does not decide source truth, prove source independence, or claim any generated facet was executed.'
     };
   }
 
   api.qualifyContaminationTriageReceipt=qualifyTriageReceipt;
   api.planConflictDecomposition=planConflictDecomposition;
-  api.dynamicDecompositionVersion='0.8';
+  api.dynamicDecompositionVersion='0.9';
 })(typeof window!=='undefined'?window:globalThis);
