@@ -1,0 +1,18 @@
+{
+  "schema": "zenomorph-failure-evidence/v0.1",
+  "organ": "VAJRA",
+  "status": "OPEN_NOT_PROMOTED",
+  "class": "UNICODE_ARITHMETIC_OPERATOR_CANONICALIZATION_GAP",
+  "observedAt": "2026-09-08T20:06:18+08:00",
+  "finding": "The current operator-preservation guard protects ASCII multiplication/division and the ×/÷ glyphs in bounded arithmetic-looking contexts, but does not explicitly protect the Unicode mathematical minus sign U+2212 (−) or division slash U+2215 (∕). The downstream canonicalizer strips unprotected symbol/punctuation distinctions, so scientific or mathematical evidence using these glyphs can lose operator identity during replay canonicalization.",
+  "risk": "Distinct returned evidence can be collapsed into the same replay identity, creating false duplicate suppression or hiding a genuine support/refutation contest. This is a provenance and false-certainty risk rather than a claim-truth bug.",
+  "scope": "Bounded arithmetic-looking contexts only. This record does not claim that every mathematical symbol should be interpreted semantically, and it does not reinterpret arbitrary path punctuation as arithmetic.",
+  "requiredRepair": [
+    "Preserve U+2212 minus as subtraction identity in bounded arithmetic contexts.",
+    "Preserve U+2215 division slash as division identity in bounded arithmetic contexts.",
+    "Retain existing ASCII */ and Unicode ×/÷ behavior.",
+    "Add unit, adversarial replay/contest, cross-organ next-inspection, provenance and non-arithmetic boundary regressions.",
+    "Do not promote displayed state until GitHub Actions verifies the repair."
+  ],
+  "provenance": "Public repository source inspection and de-identified synthetic operator fixtures only. No private Drive identifiers, URLs, names, or source text are included."
+}
