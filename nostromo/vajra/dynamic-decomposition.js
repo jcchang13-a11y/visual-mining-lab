@@ -97,6 +97,7 @@
       facets,
       provenance:{
         triageClassification:canonicalRepresentative.q.classification,
+        triageProvenance:canonicalRepresentative.q.provenance,
         triageProvenanceFingerprint:fp(canonicalRepresentative.q.canonicalProvenance),
         qualifyingReceiptCount:qualified.length,
         canonicalAliasCount:qualified.filter(x=>x.q.canonicalProvenance===canonicalRepresentative.q.canonicalProvenance).length,
@@ -106,7 +107,7 @@
       },
       replaySuppression:{duplicateReplayCount},
       rejected,
-      boundary:'Dynamic decomposition is a reversible routing/inspection plan. Exact qualifying receipt replays are suppressed before evidence counting and retained as explicit rejected replay audit entries, preventing metabolic echo from masquerading as evidence multiplicity. Canonical provenance aliases with distinct receipt fingerprints remain traceable as one structural source identity for decomposition agreement. The contested parent remains open; this does not decide which receipt is true, prove source independence, or claim GUT or MUTHER executed the generated facets.'
+      boundary:'Dynamic decomposition is a reversible routing/inspection plan. Exact qualifying receipt replays are suppressed before evidence counting and retained as explicit rejected replay audit entries, preventing metabolic echo from masquerading as evidence multiplicity. The legacy triageProvenance field remains present for contract compatibility while fingerprint and alias audit provide stable replay-resistant evidence identity. Canonical provenance aliases with distinct receipt fingerprints remain traceable as one structural source identity for decomposition agreement. The contested parent remains open; this does not decide which receipt is true, prove source independence, or claim GUT or MUTHER executed the generated facets.'
     };
   }
 
