@@ -2,10 +2,17 @@
   "schema": "zenomorph-failure-evidence/v1",
   "date": "2026-09-09",
   "organ": "VAJRA",
-  "status": "OPEN_NOT_PROMOTED",
+  "status": "RESOLVED_CI_VERIFIED",
   "failureClass": "NONQUALIFYING_RECEIPT_TARGET_POISONING",
-  "observation": "In multi-parent dynamic decomposition, selectTargetParent currently counts any receipt carrying a matching targetRef+clauseRef before checking organ, completion status, provenance, or authorized triage classification. An irrelevant, incomplete, or non-GUT receipt aimed at a second contested parent can therefore convert an otherwise valid single-parent decomposition into multiple-contested-parents-targeted HOLD.",
-  "risk": "A non-qualifying receipt can alter routing behavior without being admissible metabolic evidence, creating a denial-of-metabolism / false ambiguity path and violating the rule that only qualified evidence may regulate downstream organ behavior.",
-  "requiredFix": "Multi-parent target selection must be regulated only by receipts that are at least target-eligible for GUT contamination triage; non-qualifying receipts must remain auditable but must not manufacture target multiplicity. Preserve HOLD for two genuinely qualifying receipts targeting two distinct parents.",
-  "promotionGate": "Add adversarial tests for non-GUT, incomplete, missing-provenance, and unauthorized-classification receipts targeting a second parent; retain genuine multi-target HOLD and single-parent scope rejection; pass focused VAJRA and cross-organ/integration CI before closing this evidence or changing displayed state."
+  "observation": "In multi-parent dynamic decomposition, selectTargetParent previously allowed any receipt carrying a matching targetRef+clauseRef to influence target multiplicity before checking organ, completion status, provenance, or authorized triage classification. An irrelevant, incomplete, or non-GUT receipt aimed at a second contested parent could therefore convert an otherwise valid single-parent decomposition into multiple-contested-parents-targeted HOLD.",
+  "risk": "A non-qualifying receipt could alter routing behavior without being admissible metabolic evidence, creating a denial-of-metabolism / false ambiguity path and violating the rule that only qualified evidence may regulate downstream organ behavior.",
+  "resolution": "VAJRA dynamic decomposition v1.1 now makes multi-parent target selection depend on qualifyTriageReceipt. Only completed GUT receipts with matching targetRef+clauseRef, non-empty provenance, and an authorized contamination classification can establish parent targeting or target multiplicity. Non-qualifying receipts remain auditable later in the parent-scoped pass but cannot manufacture multi-parent ambiguity.",
+  "verification": {
+    "focusedCapability": "QUALIFICATION_GATED_DYNAMIC_DECOMPOSITION_CORE",
+    "focusedWorkflowRun": 34278580529,
+    "integrationWorkflowRun": 34278580524,
+    "integrationConclusion": "success",
+    "verifiedHeadSha": "a850784256fb8750de899e66867ca762edb437bb"
+  },
+  "boundary": "This resolves only routing influence from non-qualifying receipts. It does not establish source truth, prove provenance independence, execute generated facets, admit a capability into persistent body state, or authorize self-modification."
 }
