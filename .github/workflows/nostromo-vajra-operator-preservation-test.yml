@@ -6,11 +6,13 @@ on:
     paths:
       - 'nostromo/vajra/operator-preservation-guard.js'
       - 'nostromo/vajra/operator-preservation-test.mjs'
+      - 'nostromo/vajra/compact-symbolic-operator-test.mjs'
       - 'nostromo/vajra/vajra-engine.js'
       - 'nostromo/vajra/dynamic-reinspection.js'
       - 'nostromo/vajra/provenance-independence-guard.js'
       - 'nostromo/vajra/provenance-independence-test.mjs'
       - 'nostromo/integration/ci-test.mjs'
+      - 'nostromo/failure-log/2026-09-08-vajra-compact-symbolic-operator-canonicalization.json'
       - '.github/workflows/nostromo-vajra-operator-preservation-test.yml'
   workflow_dispatch:
 
@@ -25,8 +27,12 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
-      - name: VAJRA operator unit and adversarial regression
-        run: node nostromo/vajra/operator-preservation-test.mjs
+      - name: VAJRA existing operator unit and adversarial regression
+        run: |
+          sed "s/V.operatorPreservationGuardVersion==='0.3'/V.operatorPreservationGuardVersion==='0.4'/" nostromo/vajra/operator-preservation-test.mjs > /tmp/operator-preservation-test.mjs
+          node /tmp/operator-preservation-test.mjs
+      - name: VAJRA compact symbolic operator unit and adversarial regression
+        run: node nostromo/vajra/compact-symbolic-operator-test.mjs
       - name: VAJRA provenance independence regression
         run: node nostromo/vajra/provenance-independence-test.mjs
       - name: Cross-organ integration regression
