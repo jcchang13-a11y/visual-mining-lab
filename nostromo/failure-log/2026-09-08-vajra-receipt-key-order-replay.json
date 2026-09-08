@@ -1,0 +1,23 @@
+{
+  "schema": "zenomorph-failure-evidence/v1",
+  "recordedAt": "2026-09-08T02:04:41Z",
+  "organ": "VAJRA",
+  "component": "dynamic-decomposition",
+  "status": "OPEN_NOT_PROMOTED",
+  "failureClass": "SERIALIZATION_ORDER_REPLAY_INFLATION",
+  "observation": "dynamic-decomposition v0.5 fingerprints qualifying GUT receipts with fp(JSON.stringify(receipt)). Two semantically identical receipts with identical values but different object key insertion order therefore receive different fingerprints and can be counted as two unique qualifying receipts.",
+  "risk": "Transport or serializer key-order changes can manufacture false evidence multiplicity, inflate aliasAudit/qualifyingReceiptCount, and turn metabolic replay into apparent independent evidence.",
+  "reproduction": {
+    "baseline": "one qualifying GUT contamination-triage receipt",
+    "variant": "same fields and values reconstructed in a different key order",
+    "expected": "variant is audited as duplicate-qualifying-receipt-replay and does not change downstream facets",
+    "current_v0_5": "variant is not byte-identical under JSON.stringify and is therefore treated as distinct"
+  },
+  "requiredFix": "Fingerprint receipt structure with deterministic recursive key ordering before replay identity hashing; preserve array order and values; add adversarial regression plus GUT and VAJRA cross-organ regression before promotion.",
+  "provenance": {
+    "source": "de-identified synthetic structural inspection of current repository code",
+    "sourceFile": "nostromo/vajra/dynamic-decomposition.js",
+    "privateConnectorMaterialIncluded": false
+  },
+  "boundary": "This evidence identifies a replay-identity defect only. It does not assert source truth, GUT triage correctness, or semantic equivalence beyond identical structured receipt values with object-key order changed."
+}
