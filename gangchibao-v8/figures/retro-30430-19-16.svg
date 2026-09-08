@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320" role="img" aria-labelledby="title desc">
+  <title id="title">第十九分回溯第十六分</title>
+  <desc id="desc">黑白極簡同心圓。中心為第十九分，外圈為第十六分，表示第十九分解釋「以是因緣」時，明確回到第十六分跨過先世、今世、後末世與過去無量阿僧祇劫的因果時間網。</desc>
+  <rect width="320" height="320" fill="#fff"/>
+  <circle cx="160" cy="160" r="118" fill="none" stroke="#111" stroke-width="1.5"/>
+  <circle cx="160" cy="160" r="52" fill="none" stroke="#111" stroke-width="1.5"/>
+  <text x="160" y="154" text-anchor="middle" font-family="serif" font-size="20" fill="#111">第十九分</text>
+  <text x="160" y="181" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#111">19</text>
+  <text x="160" y="64" text-anchor="middle" font-family="serif" font-size="18" fill="#111">第十六分</text>
+  <text x="160" y="86" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#111">16</text>
+</svg>
