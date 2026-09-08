@@ -20,6 +20,7 @@ const incompleteA={targetRef:'target-A',clauseRef:'clause-A',organ:'GUT',status:
 const unsupportedA={targetRef:'target-A',clauseRef:'clause-A',organ:'GUT',status:'COMPLETED',provenance:'gut-unsupported-A',triageClassification:'SOURCE_TRUTH_DECISION',summary:'Synthetic unsupported classification'};
 
 check(V.dynamicTargetQualificationGuardVersion==='0.3','TARGET_QUALIFICATION_GUARD_VERSION_MISSING',V.dynamicTargetQualificationGuardVersion);
+check(V.dynamicDecompositionVersion==='1.0','DYNAMIC_DECOMPOSITION_VERSION_NOT_10',V.dynamicDecompositionVersion);
 
 for(const [label,state,receipts] of [
   ['NON_GUT_AB',stateAB,[nonGutA,validB]],
@@ -51,13 +52,13 @@ const single={status:'CONTESTED_BY_RECEIPTS',unresolved:[parentB]};
 const singleOut=V.planConflictDecomposition(single,[validB]);
 check(singleOut.status==='DECOMPOSED','SINGLE_PARENT_REGRESSION',singleOut);
 
-const agreeingB={...validB,provenance:'gut-triage-B-distinct-provenance',summary:'A second unique completed GUT receipt independently carries the same bounded contamination classification; independence itself is not asserted.'};
+const agreeingB={...validB,provenance:'gut-triage-B-distinct-provenance',summary:'A second unique completed GUT receipt carries the same bounded contamination classification; independence itself is not asserted.'};
 const consensus=V.planConflictDecomposition(single,[validB,agreeingB]);
 check(consensus.status==='DECOMPOSED','AGREEING_DISTINCT_PROVENANCE_FALSE_HOLD',consensus);
-check(consensus.reason==='agreeing-gut-triage-classification-with-distinct-provenance-selected-bounded-profile','AGREEING_DISTINCT_PROVENANCE_WRONG_REASON',consensus.reason);
-check(consensus.provenanceConsensusGuard?.classification==='DUPLICATE_CONTAMINATION','CONSENSUS_CLASSIFICATION_NOT_AUDITED',consensus.provenanceConsensusGuard);
-check(consensus.provenanceConsensusGuard?.distinctCanonicalProvenanceCount===2,'DISTINCT_PROVENANCE_COUNT_LOST',consensus.provenanceConsensusGuard);
-check(consensus.provenanceConsensusGuard?.independenceClaim===false,'DISTINCT_PROVENANCE_FALSE_INDEPENDENCE_CLAIM',consensus.provenanceConsensusGuard);
+check(consensus.reason==='qualifying-gut-contamination-diagnostic-agreement-selected-bounded-profile','AGREEING_DISTINCT_PROVENANCE_WRONG_REASON',consensus.reason);
+check(consensus.provenance?.triageClassification==='DUPLICATE_CONTAMINATION','CONSENSUS_CLASSIFICATION_NOT_AUDITED',consensus.provenance);
+check(consensus.provenance?.distinctProvenanceCount===2,'DISTINCT_PROVENANCE_COUNT_LOST',consensus.provenance);
+check(consensus.provenance?.independenceClaimed===false,'DISTINCT_PROVENANCE_FALSE_INDEPENDENCE_CLAIM',consensus.provenance);
 check(consensus.provenance?.qualifyingReceiptCount===2,'CONSENSUS_RECEIPT_COUNT_LOST',consensus.provenance);
 check(consensus.provenance?.aliasAudit?.length===2,'CONSENSUS_PROVENANCE_AUDIT_LOST',consensus.provenance);
 check(consensus.facets?.some(f=>f.lens==='duplicate_cluster'&&f.preferredOrgan==='GUT'),'CONSENSUS_GUT_PROFILE_LOST',consensus.facets);
@@ -66,13 +67,15 @@ check(consensus.facets?.some(f=>f.lens==='claim_relation'&&f.preferredOrgan==='M
 const disagreeingB={...agreeingB,provenance:'gut-triage-B-disagreement',triageClassification:'MIXED_CONTAMINATION',summary:'A second unique completed GUT receipt disagrees on contamination classification.'};
 const disagreement=V.planConflictDecomposition(single,[validB,disagreeingB]);
 check(disagreement.status==='HOLD','CLASSIFICATION_DISAGREEMENT_FALSELY_RESOLVED',disagreement);
-check(disagreement.reason==='conflicting-qualifying-gut-triage-receipts','CLASSIFICATION_DISAGREEMENT_WRONG_REASON',disagreement.reason);
+check(disagreement.reason==='conflicting-qualifying-gut-triage-classifications','CLASSIFICATION_DISAGREEMENT_WRONG_REASON',disagreement.reason);
 check((disagreement.facets||[]).length===0,'CLASSIFICATION_DISAGREEMENT_FACET_LEAK',disagreement.facets);
+check(disagreement.conflict?.classifications?.length===2,'CLASSIFICATION_DISAGREEMENT_AUDIT_LOST',disagreement.conflict);
 
 const replayConsensus=V.planConflictDecomposition(single,[validB,{...validB,traceId:'retry-only'},agreeingB]);
 check(replayConsensus.status==='DECOMPOSED','CONSENSUS_WITH_REPLAY_FALSE_HOLD',replayConsensus);
 check(replayConsensus.provenance?.qualifyingReceiptCount===2,'CONSENSUS_REPLAY_INFLATED_COUNT',replayConsensus.provenance);
-check(replayConsensus.provenanceConsensusGuard?.distinctCanonicalProvenanceCount===2,'CONSENSUS_REPLAY_CHANGED_PROVENANCE_DIVERSITY',replayConsensus.provenanceConsensusGuard);
+check(replayConsensus.provenance?.distinctProvenanceCount===2,'CONSENSUS_REPLAY_CHANGED_PROVENANCE_DIVERSITY',replayConsensus.provenance);
+check(replayConsensus.replaySuppression?.duplicateReplayCount===1,'CONSENSUS_REPLAY_SUPPRESSION_LOST',replayConsensus.replaySuppression);
 
 const crossOrgan=V.planConflictDecomposition(stateAB,[
   {...nonGutA,organ:'DROPLET',summary:'Synthetic external verification traffic unrelated to triage'},
@@ -85,14 +88,14 @@ check(crossOrgan.facets?.some(f=>f.lens==='duplicate_cluster'&&f.preferredOrgan=
 check(crossOrgan.facets?.some(f=>f.lens==='claim_relation'&&f.preferredOrgan==='MUTHER'),'CROSS_ORGAN_MUTHER_ROUTING_NOT_PRESERVED',crossOrgan.facets);
 
 const result={
-  schema:'zenomorph-vajra-target-qualification-guard-test/v0.3',
+  schema:'zenomorph-vajra-target-qualification-guard-test/v0.4',
   completedAt:new Date().toISOString(),
   status:failures.length?'FAIL':'PASS',
   capability:'QUALIFICATION_GATED_MULTI_PARENT_TARGET_SELECTION_WITH_PROVENANCE_DIVERSITY_CONTAINMENT',
   tests:{both,none,singleOut,consensus,disagreement,replayConsensus,crossOrgan},
   failures,
-  provenance:{fixture:'synthetic de-identified contested-parent and cross-organ receipt fixtures',failureEvidence:['nostromo/failure-log/2026-09-08-vajra-nonqualifying-receipt-target-pollution.json','nostromo/failure-log/2026-09-09-vajra-agreeing-distinct-provenance-false-conflict.json']},
-  boundary:'PASS proves only that nonqualifying traffic cannot nominate a parent, that multiple unique completed GUT receipts scoped to one contested parent may select the same already-bounded decomposition profile when their supported contamination classification is unanimous even when canonical provenance differs, and that classification disagreement still HOLDs with zero facets. Distinct provenance remains auditable but is not asserted independent. It does not decide source truth, execute generated facets, install capabilities, or mutate persistent body state.'
+  provenance:{fixture:'synthetic de-identified contested-parent and cross-organ receipt fixtures',failureEvidence:['nostromo/failure-log/2026-09-08-vajra-nonqualifying-receipt-target-pollution.json','nostromo/failure-log/2026-09-09-vajra-provenance-diagnostic-conflation.json']},
+  boundary:'PASS proves only that nonqualifying traffic cannot nominate a parent, that core VAJRA v1.0 permits multiple unique completed GUT receipts scoped to one contested parent to select the same already-bounded decomposition profile when their supported contamination classification is unanimous even when canonical provenance differs, and that classification disagreement still HOLDs with zero facets. Distinct provenance remains auditable but is not asserted independent. It does not decide source truth, execute generated facets, install capabilities, or mutate persistent body state.'
 };
 await fs.writeFile('nostromo/vajra/target-qualification-guard-last-result.json',JSON.stringify(result,null,2)+'\n');
 console.log(JSON.stringify(result,null,2));
