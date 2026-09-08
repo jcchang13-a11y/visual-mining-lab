@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 620" role="img" aria-labelledby="title desc">
+  <title id="title">第二十三分回溯第二十二、二十一與第十九分公式</title>
+  <desc id="desc">中心為第二十三分，向外依次回溯第二十二、二十一與第十九分：善法仍不能逃過由第十九分展開的公式測試。</desc>
+  <rect width="620" height="620" fill="white"/>
+  <g fill="none" stroke="black" stroke-width="2">
+    <circle cx="310" cy="310" r="70"/>
+    <circle cx="310" cy="310" r="135"/>
+    <circle cx="310" cy="310" r="200"/>
+    <circle cx="310" cy="310" r="265"/>
+  </g>
+  <g fill="black" font-family="system-ui, sans-serif" font-size="23" text-anchor="middle">
+    <text x="310" y="318">23</text>
+    <text x="310" y="232">22</text>
+    <text x="310" y="167">21</text>
+    <text x="310" y="102">19</text>
+  </g>
+</svg>
