@@ -1,4 +1,4 @@
-/* VAJRA dynamic decomposition v0.9 — qualifying GUT contamination triage now targets the exact contested parent by targetRef+clauseRef; multiple targeted parents HOLD rather than depending on branch order. Existing classification-regulated decomposition, replay suppression, provenance containment, and conflict HOLD behavior remain bounded. */
+/* VAJRA dynamic decomposition v1.0 — qualifying GUT contamination triage targets the exact contested parent by targetRef+clauseRef; diagnostic disagreement is separated from provenance difference, while multiple targeted parents HOLD rather than depending on branch order. Existing classification-regulated decomposition, replay suppression, provenance containment, and conflict HOLD behavior remain bounded. */
 (function(root){
   const api=root.VajraEngine;
   if(!api||typeof api.selectNextInspection!=='function') throw new Error('VajraEngine + dynamic-reinspection must be loaded before dynamic-decomposition');
@@ -85,7 +85,7 @@
     const targetSelection=selectTargetParent(branches,receipts);
     if(targetSelection.status==='NONE') return {status:'NO_DECOMPOSITION',reason:'no-contested-source-quality-parent',facets:[],rejected:[]};
     if(targetSelection.status==='MULTIPLE') return {
-      schema:'zenomorph-vajra-dynamic-decomposition/v0.9',
+      schema:'zenomorph-vajra-dynamic-decomposition/v1.0',
       status:'HOLD',
       reason:'multiple-contested-parents-targeted',
       parents:targetSelection.parents.map(p=>({targetRef:p.targetRef,clauseRef:p.clauseRef,lens:p.lens,status:p.status,closed:false})),
@@ -94,7 +94,7 @@
       boundary:'One bounded decomposition call may regulate only one contested parent. Receipts targeting more than one parent cannot be collapsed by branch order or arrival order; VAJRA must HOLD and require separate parent-scoped decomposition passes.'
     };
     if(targetSelection.status==='AMBIGUOUS') return {
-      schema:'zenomorph-vajra-dynamic-decomposition/v0.9',
+      schema:'zenomorph-vajra-dynamic-decomposition/v1.0',
       status:'HOLD',
       reason:'targeted-contested-source-quality-parent-required',
       parents:targetSelection.parents.map(p=>({targetRef:p.targetRef,clauseRef:p.clauseRef,lens:p.lens,status:p.status,closed:false})),
@@ -122,40 +122,43 @@
     }
     if(!qualified.length) return {status:'HOLD',reason:'qualifying-gut-contamination-triage-required',parent:{targetRef:parent.targetRef,clauseRef:parent.clauseRef,lens:parent.lens,status:parent.status},facets:[],rejected,replaySuppression:replayAudit(duplicateReplayCount),boundary:'Absence or rejection of a GUT triage receipt cannot change VAJRA decomposition behavior. Structured replay suppression cannot create qualifying evidence when no unique qualifying receipt remains. Only explicitly declared top-level transport metadata is ignored for replay identity; nested fields remain evidence-significant.'};
 
-    const signatures=new Map();
+    const classifications=new Map();
     for(const item of qualified){
-      const signature=`${item.q.classification}|${item.q.canonicalProvenance}`;
-      if(!signatures.has(signature)) signatures.set(signature,[]);
-      signatures.get(signature).push(item.q.receiptFingerprint);
+      if(!classifications.has(item.q.classification)) classifications.set(item.q.classification,[]);
+      classifications.get(item.q.classification).push({
+        provenanceFingerprint:fp(item.q.canonicalProvenance),
+        receiptFingerprint:item.q.receiptFingerprint
+      });
     }
-    if(signatures.size>1){
-      const signatureAudit=[...signatures.entries()]
-        .map(([signature,receiptFingerprints])=>({signatureFingerprint:fp(signature),receiptFingerprints:[...receiptFingerprints].sort()}))
-        .sort((a,b)=>a.signatureFingerprint.localeCompare(b.signatureFingerprint)||JSON.stringify(a.receiptFingerprints).localeCompare(JSON.stringify(b.receiptFingerprints)));
+    if(classifications.size>1){
+      const classificationAudit=[...classifications.entries()]
+        .map(([classification,items])=>({classification,items:[...items].sort((a,b)=>a.provenanceFingerprint.localeCompare(b.provenanceFingerprint)||a.receiptFingerprint.localeCompare(b.receiptFingerprint))}))
+        .sort((a,b)=>a.classification.localeCompare(b.classification));
       return {
-        schema:'zenomorph-vajra-dynamic-decomposition/v0.9',
+        schema:'zenomorph-vajra-dynamic-decomposition/v1.0',
         status:'HOLD',
-        reason:'conflicting-qualifying-gut-triage-receipts',
+        reason:'conflicting-qualifying-gut-triage-classifications',
         parent:{targetRef:parent.targetRef,clauseRef:parent.clauseRef,lens:parent.lens,status:parent.status,closed:false},
         facets:[],
-        conflict:{signatures:signatureAudit,qualifyingReceiptCount:qualified.length},
+        conflict:{classifications:classificationAudit,qualifyingReceiptCount:qualified.length},
         replaySuppression:replayAudit(duplicateReplayCount),
         rejected,
-        boundary:'Multiple unique qualifying GUT triage receipts that disagree on classification or canonical provenance cannot be resolved by arrival order. Classification disagreement cannot manufacture a decomposition profile. Replay identity recursively sorts object keys and removes only a bounded allowlist of top-level transport-only fields before fingerprinting; evidence-bearing values, arrays, nested objects, summary, provenance, classification, scope, organ and status remain significant. Conflict evidence is emitted deterministically and VAJRA must preserve the parent conflict rather than manufacture certainty.'
+        boundary:'Multiple unique qualifying GUT triage receipts HOLD only when their contamination classifications disagree. Provenance inequality alone is not diagnostic disagreement and must not manufacture a conflict. Classification conflict cannot manufacture a decomposition profile. Replay identity recursively sorts object keys and removes only a bounded allowlist of top-level transport-only fields before fingerprinting; evidence-bearing values, arrays, nested objects, summary, provenance, classification, scope, organ and status remain significant.'
       };
     }
 
     const canonicalRepresentative=[...qualified].sort((a,b)=>a.q.canonicalProvenance.localeCompare(b.q.canonicalProvenance)||a.q.classification.localeCompare(b.q.classification)||a.q.receiptFingerprint.localeCompare(b.q.receiptFingerprint))[0];
     const aliasAudit=auditQualifiedAliases(qualified);
+    const distinctProvenanceCount=new Set(qualified.map(x=>x.q.canonicalProvenance)).size;
     const shared={targetRef:parent.targetRef,clauseRef:parent.clauseRef,parentLens:parent.lens,parentStatus:parent.status,triageClassification:canonicalRepresentative.q.classification,triageProvenanceFingerprint:fp(canonicalRepresentative.q.canonicalProvenance),status:'OPEN'};
     const facets=facetsForClassification(parent,canonicalRepresentative.q.classification,shared);
     if(!facets.length){
-      return {schema:'zenomorph-vajra-dynamic-decomposition/v0.9',status:'HOLD',reason:'no-bounded-profile-for-qualified-classification',parent:{targetRef:parent.targetRef,clauseRef:parent.clauseRef,lens:parent.lens,status:parent.status,closed:false},facets:[],replaySuppression:replayAudit(duplicateReplayCount),rejected,boundary:'A qualifying receipt may not create downstream behavior unless VAJRA has an explicit bounded decomposition profile for that classification.'};
+      return {schema:'zenomorph-vajra-dynamic-decomposition/v1.0',status:'HOLD',reason:'no-bounded-profile-for-qualified-classification',parent:{targetRef:parent.targetRef,clauseRef:parent.clauseRef,lens:parent.lens,status:parent.status,closed:false},facets:[],replaySuppression:replayAudit(duplicateReplayCount),rejected,boundary:'A qualifying receipt may not create downstream behavior unless VAJRA has an explicit bounded decomposition profile for that classification.'};
     }
     return {
-      schema:'zenomorph-vajra-dynamic-decomposition/v0.9',
+      schema:'zenomorph-vajra-dynamic-decomposition/v1.0',
       status:'DECOMPOSED',
-      reason:'qualifying-gut-contamination-triage-selected-bounded-profile',
+      reason:'qualifying-gut-contamination-diagnostic-agreement-selected-bounded-profile',
       parent:{targetRef:parent.targetRef,clauseRef:parent.clauseRef,lens:parent.lens,status:parent.status,closed:false},
       facets,
       behaviorRegulation:{classification:canonicalRepresentative.q.classification,profileFingerprint:fp(facets.map(f=>`${f.lens}:${f.preferredOrgan}`).join('|')),facetCount:facets.length},
@@ -164,18 +167,20 @@
         triageProvenance:canonicalRepresentative.q.provenance,
         triageProvenanceFingerprint:fp(canonicalRepresentative.q.canonicalProvenance),
         qualifyingReceiptCount:qualified.length,
+        distinctProvenanceCount,
         canonicalAliasCount:qualified.filter(x=>x.q.canonicalProvenance===canonicalRepresentative.q.canonicalProvenance).length,
         aliasAudit,
         preservedTargetRef:parent.targetRef,
-        preservedClauseRef:parent.clauseRef
+        preservedClauseRef:parent.clauseRef,
+        independenceClaimed:false
       },
       replaySuppression:replayAudit(duplicateReplayCount),
       rejected,
-      boundary:'Dynamic decomposition is a reversible routing/inspection plan. A completed qualifying GUT contamination classification selects one explicit bounded VAJRA decomposition profile for exactly one receipt-scoped contested parent, so upstream metabolic diagnosis changes downstream behavior without adding certainty. Replay identity recursively sorts object keys and ignores only a bounded allowlist of top-level transport metadata. Replays remain explicit rejected audit entries, canonical provenance aliases remain traceable, the contested parent remains open, and this does not decide source truth, prove source independence, or claim any generated facet was executed.'
+      boundary:'Dynamic decomposition is a reversible routing/inspection plan. Completed qualifying GUT receipts that agree on one authorized contamination classification may jointly select that bounded VAJRA decomposition profile even when their provenance differs; provenance differences remain fully audited and are never promoted as proof of source independence. Classification disagreement still HOLDs with zero facets. The contested parent remains open, and this does not decide source truth, prove source independence, or claim any generated facet was executed.'
     };
   }
 
   api.qualifyContaminationTriageReceipt=qualifyTriageReceipt;
   api.planConflictDecomposition=planConflictDecomposition;
-  api.dynamicDecompositionVersion='0.9';
+  api.dynamicDecompositionVersion='1.0';
 })(typeof window!=='undefined'?window:globalThis);
