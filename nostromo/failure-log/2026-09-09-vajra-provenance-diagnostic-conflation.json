@@ -1,0 +1,19 @@
+{
+  "schema": "zenomorph-failure/v1",
+  "date": "2026-09-09",
+  "organ": "VAJRA",
+  "capability": "GUT_TRIAGE_DIAGNOSTIC_AGREEMENT",
+  "status": "OPEN_NOT_PROMOTED",
+  "failureClass": "PROVENANCE_DIAGNOSTIC_CONFLATION",
+  "observed": "dynamic-decomposition v0.9 builds conflict signatures from classification plus canonical provenance, so two unique GUT receipts with the same contamination classification but different provenance are forced into HOLD.",
+  "risk": "Source difference is incorrectly treated as diagnostic disagreement. This creates false uncertainty, blocks a valid bounded decomposition profile, and can make cross-organ regulation appear more cautious while actually discarding agreement information.",
+  "requiredFix": "Conflict must be driven by incompatible triage classifications, not provenance inequality alone. Distinct provenance must remain fully audited and must never be promoted as proof of source independence.",
+  "requiredTests": [
+    "same classification + distinct provenance => DECOMPOSED",
+    "different classification + distinct provenance => HOLD with zero facets",
+    "arrival order does not alter behavior",
+    "distinct provenance remains visible in provenance audit",
+    "existing replay suppression and GUT echo-break regression remain intact"
+  ],
+  "promotionRule": "Do not change public status until focused CI and NOSTROMO integration both pass."
+}
