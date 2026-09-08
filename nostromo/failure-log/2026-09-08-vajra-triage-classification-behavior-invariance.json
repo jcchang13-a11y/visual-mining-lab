@@ -1,0 +1,17 @@
+{
+  "schema": "zenomorph-failure-evidence/v1",
+  "observedAt": "2026-09-08T07:06:00Z",
+  "organ": "VAJRA",
+  "status": "OPEN_NOT_PROMOTED",
+  "failureClass": "CROSS_ORGAN_BEHAVIOR_INVARIANCE",
+  "capabilityArea": "dynamic decomposition after GUT contamination triage",
+  "observation": "VAJRA dynamic decomposition accepts three distinct completed GUT triage classifications (PROVENANCE_COLLISION, DUPLICATE_CONTAMINATION, MIXED_CONTAMINATION), but after qualification all three classifications flow through one shared facet constructor and therefore produce the same two downstream facets. The upstream metabolic diagnosis is preserved as metadata but does not alter the downstream decomposition behavior.",
+  "risk": "The system can appear cross-organ because GUT produces a classification and VAJRA records it, while the classification is behaviorally inert. This is an organ-rotation failure mode: one organ speaks and the next organ proceeds with an invariant plan rather than being regulated by the upstream result.",
+  "requiredResolution": "Make the accepted GUT classification select a bounded, auditable decomposition profile; preserve the contested parent; reject unknown/non-qualifying classifications; retain provenance; prove that duplicate and mixed contamination produce different downstream plans without adding certainty or claiming semantic truth.",
+  "provenance": {
+    "publicRepoOnly": true,
+    "source": "nostromo/vajra/dynamic-decomposition.js v0.7",
+    "privateConnectorData": false
+  },
+  "promotionRule": "Do not promote public VAJRA state until unit, adversarial, cross-organ regression and GitHub Actions evidence all pass."
+}
