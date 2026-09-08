@@ -11,7 +11,7 @@ const parent={status:'CONTESTED_BY_RECEIPTS',targetRef:'target-001',clauseRef:'c
 const state={status:'CONTESTED_BY_RECEIPTS',unresolved:[parent]};
 const gutReceipt={targetRef:'target-001',clauseRef:'clause-001',lens:'metabolic_contamination',organ:'GUT',status:'COMPLETED',provenance:'gut-triage-evidence-001',triageClassification:'PROVENANCE_COLLISION',summary:'De-identified structural triage found source aliases that must not be counted as independent evidence.'};
 
-check(V.dynamicDecompositionVersion==='0.5','DYNAMIC_DECOMPOSITION_VERSION_NOT_PROMOTED',V.dynamicDecompositionVersion);
+check(V.dynamicDecompositionVersion==='0.6','DYNAMIC_DECOMPOSITION_VERSION_NOT_PROMOTED',V.dynamicDecompositionVersion);
 
 const decomposed=V.planConflictDecomposition(state,[gutReceipt]);
 check(decomposed.status==='DECOMPOSED','QUALIFYING_TRIAGE_DID_NOT_DECOMPOSE',decomposed);
@@ -29,6 +29,17 @@ check(replayTriple.provenance?.aliasAudit?.length===1,'EXACT_REPLAY_INFLATED_ALI
 check(replayTriple.replaySuppression?.duplicateReplayCount===2,'EXACT_REPLAY_SUPPRESSION_COUNT_WRONG',replayTriple.replaySuppression);
 check(replayTriple.rejected?.filter(x=>x.reason==='duplicate-qualifying-receipt-replay').length===2,'EXACT_REPLAY_REJECTION_AUDIT_LOST',replayTriple.rejected);
 check(JSON.stringify(replayTriple.facets)===JSON.stringify(decomposed.facets),'EXACT_REPLAY_CHANGED_DOWNSTREAM_BEHAVIOR',{baseline:decomposed.facets,replay:replayTriple.facets});
+
+const reorderedReceipt={summary:gutReceipt.summary,triageClassification:gutReceipt.triageClassification,provenance:gutReceipt.provenance,status:gutReceipt.status,organ:gutReceipt.organ,lens:gutReceipt.lens,clauseRef:gutReceipt.clauseRef,targetRef:gutReceipt.targetRef};
+check(JSON.stringify(reorderedReceipt)!==JSON.stringify(gutReceipt),'KEY_ORDER_FIXTURE_NOT_ACTUALLY_REORDERED',{gutReceipt,reorderedReceipt});
+const reorderedReplay=V.planConflictDecomposition(state,[gutReceipt,reorderedReceipt]);
+check(reorderedReplay.status==='DECOMPOSED','KEY_ORDER_REPLAY_BLOCKED_DECOMPOSITION',reorderedReplay);
+check(reorderedReplay.provenance?.qualifyingReceiptCount===1,'KEY_ORDER_REPLAY_INFLATED_QUALIFYING_COUNT',reorderedReplay.provenance);
+check(reorderedReplay.provenance?.aliasAudit?.length===1,'KEY_ORDER_REPLAY_INFLATED_ALIAS_AUDIT',reorderedReplay.provenance);
+check(reorderedReplay.replaySuppression?.duplicateReplayCount===1,'KEY_ORDER_REPLAY_SUPPRESSION_COUNT_WRONG',reorderedReplay.replaySuppression);
+check(reorderedReplay.replaySuppression?.identity==='stable-recursive-object-key-order','KEY_ORDER_REPLAY_IDENTITY_NOT_EXPLICIT',reorderedReplay.replaySuppression);
+check(reorderedReplay.rejected?.filter(x=>x.reason==='duplicate-qualifying-receipt-replay').length===1,'KEY_ORDER_REPLAY_REJECTION_AUDIT_LOST',reorderedReplay.rejected);
+check(JSON.stringify(reorderedReplay.facets)===JSON.stringify(decomposed.facets),'KEY_ORDER_REPLAY_CHANGED_DOWNSTREAM_BEHAVIOR',{baseline:decomposed.facets,reordered:reorderedReplay.facets});
 
 const equivalentReceipt={...gutReceipt,summary:'Same structural finding restated by the same provenance-bearing triage artifact.'};
 const equivalent=V.planConflictDecomposition(state,[gutReceipt,equivalentReceipt]);
@@ -88,15 +99,15 @@ check(echoBreak?.preferredOrgan==='GUT'&&echoBreak?.lens==='metabolic_contaminat
 check(decomposed.facets?.every(f=>f.preferredOrgan!=='DROPLET'),'ORGAN_PING_PONG_REINTRODUCED',decomposed.facets);
 
 const result={
-  schema:'zenomorph-vajra-dynamic-decomposition-test/v0.5',
+  schema:'zenomorph-vajra-dynamic-decomposition-test/v0.6',
   completedAt:new Date().toISOString(),
   status:failures.length?'FAIL':'PASS',
-  capability:'EXACT_TRIAGE_REPLAY_SUPPRESSION_WITH_ALIAS_AND_CONFLICT_PRESERVATION',
-  tests:{decomposed,replayTriple,equivalent,aliasAB,aliasBA,conflictAB,conflictBA,conflictWithReplay,adversarialCases:adversarial.length,echoBreak},
+  capability:'STRUCTURED_TRIAGE_REPLAY_SUPPRESSION_WITH_KEY_ORDER_INVARIANCE_ALIAS_AND_CONFLICT_PRESERVATION',
+  tests:{decomposed,replayTriple,reorderedReplay,equivalent,aliasAB,aliasBA,conflictAB,conflictBA,conflictWithReplay,adversarialCases:adversarial.length,echoBreak},
   provenance:{fixture:'de-identified synthetic cross-organ receipt contract',sourceFiles:['nostromo/vajra/vajra-engine.js','nostromo/vajra/dynamic-reinspection.js','nostromo/vajra/dynamic-decomposition.js']},
   failures,
   failureLog:{count:failures.length,entries:failures},
-  boundary:'PASS proves only that byte-identical qualifying GUT triage receipt replays cannot inflate VAJRA dynamic-decomposition evidence counts or alias audit, while distinct alias-bearing receipts remain traceable and genuine conflicting receipts still HOLD. Replay suppression is audited explicitly and does not close the contested parent. This does not prove source truth, semantic alias resolution, contamination detection quality, organ execution, or body admission.'
+  boundary:'PASS proves only that qualifying GUT triage receipt replays cannot inflate VAJRA dynamic-decomposition evidence counts merely because object keys were serialized in a different order. Byte-identical replay suppression, distinct alias-bearing receipt traceability, genuine conflict HOLD behavior, provenance scope, GUT echo-break routing, and non-DROPLET decomposition routing remain regression-checked. Arrays and values remain significant. This does not prove source truth, semantic alias resolution, contamination detection quality, organ execution, or body admission.'
 };
 await fs.writeFile('nostromo/vajra/dynamic-decomposition-last-result.json',JSON.stringify(result,null,2)+'\n');
 console.log(JSON.stringify(result,null,2));
