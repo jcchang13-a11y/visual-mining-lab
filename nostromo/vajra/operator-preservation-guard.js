@@ -1,10 +1,10 @@
-/* VAJRA arithmetic operator-preservation guard v0.3 — prevents replay identity from collapsing bounded arithmetic evidence, including common Unicode mathematical glyphs plus caret/percent operator forms */
+/* VAJRA arithmetic operator-preservation guard v0.4 — prevents replay identity from collapsing bounded arithmetic evidence, including common Unicode mathematical glyphs, caret/percent forms, and compact symbolic-variable expressions without promoting ambiguous compact slash/hyphen paths */
 (function(root){
   const api=root.VajraEngine;
   if(!api||typeof api.applyHandoffResults!=='function'||typeof api.canonicalEvidenceMaterial!=='function'){
     throw new Error('VAJRA_ENGINE_REQUIRED_BEFORE_OPERATOR_PRESERVATION_GUARD');
   }
-  if(api.operatorPreservationGuardVersion==='0.3') return;
+  if(api.operatorPreservationGuardVersion==='0.4') return;
 
   const baseApply=api.applyHandoffResults.bind(api);
   const baseCanonical=api.canonicalEvidenceMaterial.bind(api);
@@ -20,11 +20,15 @@
 
   function protectArithmeticMaterial(text){
     let s=String(text??'').normalize('NFKC');
-    // Match only explicit arithmetic-looking contexts: spaced symbolic operands or compact numeric operands.
+    // Existing bounded forms: spaced symbolic operands or compact numeric operands.
     // U+2212 (−) and U+2215 (∕) are common in scientific/mathematical text and otherwise risk symbol stripping.
-    // Caret and percent are preserved structurally, not interpreted semantically: 2^8 / 17%5 qualify; trailing 95% does not.
     s=s.replace(/([\p{L}\p{N}_])\s+([*\/×÷−∕^%])\s+([\p{L}\p{N}_])/gu,(_,a,op,b)=>`${a} ${tokenFor(op)} ${b}`);
     s=s.replace(/(\p{N})([*\/×÷−∕^%])(\p{N})/gu,(_,a,op,b)=>`${a} ${tokenFor(op)} ${b}`);
+
+    // v0.4: compact symbolic-variable forms are also evidence-significant when the operator itself is comparatively unambiguous.
+    // ASCII slash and ASCII hyphen are intentionally excluded here because compact a/b and a-b are common path/lexical forms.
+    // Bounded identifier length prevents this structural guard from turning arbitrary long punctuation-bearing text into formulas.
+    s=s.replace(/([\p{L}_][\p{L}\p{N}_]{0,15})([*×÷−∕^%])([\p{L}_][\p{L}\p{N}_]{0,15})/gu,(_,a,op,b)=>`${a} ${tokenFor(op)} ${b}`);
     return s;
   }
 
@@ -81,10 +85,10 @@
     return {
       ...out,
       operatorPreservation:{
-        version:'0.3',
+        version:'0.4',
         protected:['*','/','×','÷','−','∕','^','%'],
-        scope:'arithmetic-looking contexts only',
-        boundary:'The guard preserves multiplication/division, common Unicode mathematical minus/division-slash glyphs, and caret/percent operator identity only when symbols occur between spaced alphanumeric operands or compact numeric operands. It does not claim semantic parsing; trailing percentages and arbitrary path/URL punctuation are intentionally not promoted to arithmetic.'
+        scope:'spaced alphanumeric operands, compact numeric operands, and bounded compact symbolic-variable operands for non-ambiguous operators',
+        boundary:'The guard preserves multiplication/division, common Unicode mathematical minus/division-slash glyphs, caret/percent operator identity in bounded arithmetic-looking contexts. Compact symbolic-variable forms are promoted only for *, ×, ÷, −, ∕, ^ and %. Compact ASCII slash and ASCII hyphen remain unpromoted because path and lexical ambiguity would otherwise create false arithmetic identity. The guard does not claim semantic parsing.'
       }
     };
   }
@@ -93,5 +97,5 @@
   api.applyHandoffResults=wrappedApply;
   api.canonicalEvidenceMaterial=canonicalArithmeticMaterial;
   api.evidenceIdentity=evidenceIdentity;
-  api.operatorPreservationGuardVersion='0.3';
+  api.operatorPreservationGuardVersion='0.4';
 })(typeof window!=='undefined'?window:globalThis);
