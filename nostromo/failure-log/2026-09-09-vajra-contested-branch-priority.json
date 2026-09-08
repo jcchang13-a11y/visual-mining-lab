@@ -1,0 +1,12 @@
+{
+  "schema": "nostromo-failure/v1",
+  "date": "2026-09-09",
+  "organ": "VAJRA",
+  "capability": "dynamic-reinspection",
+  "status": "OPEN_NOT_PROMOTED",
+  "failure": "CONTESTED_BRANCH_PRIORITY_INVERSION",
+  "observation": "selectNextInspection chooses the first CONTESTED_BY_RECEIPTS branch by array order. When multiple contested branches coexist, a lower-severity generic or source_quality contest can therefore be selected before a metabolic_contamination contest that should enter quarantine/HOLD.",
+  "risk": "The system can continue routing work to DROPLET or GUT while a more severe repeated metabolic contest is already present, making cross-organ activity order-dependent and weakening the echo-break containment policy.",
+  "requiredFix": "Select among contested branches by containment severity before emitting the next inspection: metabolic_contamination > source_quality > other contested lenses. Preserve stable order within equal severity. Add adversarial permutation tests proving that branch order cannot suppress quarantine.",
+  "promotionBoundary": "Do not promote this capability until focused VAJRA tests and full NOSTROMO integration pass after the fix. This failure record must remain as evidence even after resolution."
+}
