@@ -1,0 +1,23 @@
+{
+  "schema": "zenomorph-failure-evidence/v1",
+  "organ": "VAJRA",
+  "status": "OPEN_NOT_PROMOTED",
+  "failure": "TRANSPORT_METADATA_REPLAY_INFLATION",
+  "observedAt": "2026-09-08T03:10:00Z",
+  "evidence": {
+    "component": "nostromo/vajra/dynamic-decomposition.js",
+    "currentVersion": "0.6",
+    "mechanism": "qualifying receipt replay identity fingerprints the complete recursively key-sorted receipt object",
+    "risk": "the same evidential GUT triage receipt can evade replay suppression if a connector or transport layer adds or changes top-level delivery metadata such as receivedAt, attempt, traceId, or deliveryId; this can inflate qualifyingReceiptCount and aliasAudit without adding new evidence"
+  },
+  "requiredFix": "Use a bounded replay-identity projection that removes only explicitly declared top-level non-evidential transport fields before stable structural fingerprinting. Evidence-bearing fields, nested values, arrays, provenance, classification, summary, scope, organ and status must remain significant.",
+  "adversarialRequirements": [
+    "same evidence plus different top-level transport metadata must collapse as replay",
+    "changed summary must remain distinct",
+    "changed provenance or classification must remain distinct/conflicting",
+    "nested fields with transport-like names must remain significant",
+    "cross-organ routing and contested-parent behavior must not regress"
+  ],
+  "privacy": "Synthetic de-identified evidence only. No private Drive name, ID, URL, or source text is included.",
+  "promotionRule": "Do not promote public state until VAJRA unit/adversarial tests and cross-organ GUT/VAJRA regression pass in GitHub Actions."
+}
