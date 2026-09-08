@@ -1,21 +1,27 @@
-/* VAJRA arithmetic operator-preservation guard v0.1 — prevents replay identity from collapsing multiplication/division evidence */
+/* VAJRA arithmetic operator-preservation guard v0.2 — prevents replay identity from collapsing bounded arithmetic evidence, including common Unicode mathematical glyphs */
 (function(root){
   const api=root.VajraEngine;
   if(!api||typeof api.applyHandoffResults!=='function'||typeof api.canonicalEvidenceMaterial!=='function'){
     throw new Error('VAJRA_ENGINE_REQUIRED_BEFORE_OPERATOR_PRESERVATION_GUARD');
   }
-  if(api.operatorPreservationGuardVersion==='0.1') return;
+  if(api.operatorPreservationGuardVersion==='0.2') return;
 
   const baseApply=api.applyHandoffResults.bind(api);
   const baseCanonical=api.canonicalEvidenceMaterial.bind(api);
   const clean=v=>String(v??'').replace(/\s+/g,' ').trim();
-  const tokenFor=op=>(op==='*'||op==='×')?'opmul':'opdiv';
+  const tokenFor=op=>{
+    if(op==='*'||op==='×') return 'opmul';
+    if(op==='/'||op==='÷'||op==='∕') return 'opdiv';
+    if(op==='−') return 'opsub';
+    return `op${op.codePointAt(0).toString(16)}`;
+  };
 
   function protectArithmeticMaterial(text){
     let s=String(text??'').normalize('NFKC');
     // Match only explicit arithmetic-looking contexts: spaced symbolic operands or compact numeric operands.
-    s=s.replace(/([\p{L}\p{N}_])\s+([*\/×÷])\s+([\p{L}\p{N}_])/gu,(_,a,op,b)=>`${a} ${tokenFor(op)} ${b}`);
-    s=s.replace(/(\p{N})([*\/×÷])(\p{N})/gu,(_,a,op,b)=>`${a} ${tokenFor(op)} ${b}`);
+    // U+2212 (−) and U+2215 (∕) are common in scientific/mathematical text and otherwise risk symbol stripping.
+    s=s.replace(/([\p{L}\p{N}_])\s+([*\/×÷−∕])\s+([\p{L}\p{N}_])/gu,(_,a,op,b)=>`${a} ${tokenFor(op)} ${b}`);
+    s=s.replace(/(\p{N})([*\/×÷−∕])(\p{N})/gu,(_,a,op,b)=>`${a} ${tokenFor(op)} ${b}`);
     return s;
   }
 
@@ -72,10 +78,10 @@
     return {
       ...out,
       operatorPreservation:{
-        version:'0.1',
-        protected:['*','/','×','÷'],
+        version:'0.2',
+        protected:['*','/','×','÷','−','∕'],
         scope:'arithmetic-looking contexts only',
-        boundary:'The guard preserves multiplication/division semantics for replay identity when symbols occur between spaced alphanumeric operands or compact numeric operands. It does not claim semantic parsing and intentionally does not reinterpret arbitrary path or URL punctuation as arithmetic.'
+        boundary:'The guard preserves multiplication/division plus the common Unicode mathematical minus and division-slash glyphs for replay identity only when symbols occur between spaced alphanumeric operands or compact numeric operands. It does not claim semantic parsing and intentionally does not reinterpret arbitrary path or URL punctuation as arithmetic.'
       }
     };
   }
@@ -84,5 +90,5 @@
   api.applyHandoffResults=wrappedApply;
   api.canonicalEvidenceMaterial=canonicalArithmeticMaterial;
   api.evidenceIdentity=evidenceIdentity;
-  api.operatorPreservationGuardVersion='0.1';
+  api.operatorPreservationGuardVersion='0.2';
 })(typeof window!=='undefined'?window:globalThis);
