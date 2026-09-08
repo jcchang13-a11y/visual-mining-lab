@@ -3,10 +3,23 @@
   "date": "2026-09-09",
   "organ": "VAJRA",
   "capability": "dynamic-reinspection",
-  "status": "OPEN_NOT_PROMOTED",
+  "status": "RESOLVED_CI_VERIFIED",
   "failure": "CONTESTED_BRANCH_PRIORITY_INVERSION",
-  "observation": "selectNextInspection chooses the first CONTESTED_BY_RECEIPTS branch by array order. When multiple contested branches coexist, a lower-severity generic or source_quality contest can therefore be selected before a metabolic_contamination contest that should enter quarantine/HOLD.",
-  "risk": "The system can continue routing work to DROPLET or GUT while a more severe repeated metabolic contest is already present, making cross-organ activity order-dependent and weakening the echo-break containment policy.",
+  "observation": "selectNextInspection chose the first CONTESTED_BY_RECEIPTS branch by array order. When multiple contested branches coexisted, a lower-severity generic or source_quality contest could therefore be selected before a metabolic_contamination contest that should enter quarantine/HOLD.",
+  "risk": "The system could continue routing work to DROPLET or GUT while a more severe repeated metabolic contest was already present, making cross-organ activity order-dependent and weakening the echo-break containment policy.",
   "requiredFix": "Select among contested branches by containment severity before emitting the next inspection: metabolic_contamination > source_quality > other contested lenses. Preserve stable order within equal severity. Add adversarial permutation tests proving that branch order cannot suppress quarantine.",
-  "promotionBoundary": "Do not promote this capability until focused VAJRA tests and full NOSTROMO integration pass after the fix. This failure record must remain as evidence even after resolution."
+  "resolution": "dynamic-reinspection v0.4 now arbitrates simultaneous contested branches by containment priority: metabolic_contamination first, then source_quality, then other contested lenses; equal-severity branches retain stable source order. Adversarial permutation tests confirm that a repeated metabolic contest always enters provenance-preserving quarantine/HOLD regardless of array order, and source_quality contests outrank generic contests without erasing their provenance.",
+  "ciEvidence": {
+    "focusedWorkflow": "NOSTROMO VAJRA dynamic reinspection",
+    "focusedRun": 34261107004,
+    "focusedConclusion": "success",
+    "integrationWorkflow": "NOSTROMO Integration Test",
+    "integrationRun": 34261106965,
+    "integrationConclusion": "success",
+    "pagesRun": 34261106820,
+    "pagesConclusion": "success",
+    "verifiedHeadSha": "8dca0be1f0839a58318bba6a1a9b8002b9fb56b1"
+  },
+  "boundary": "Resolution proves deterministic containment-priority arbitration and stable tie ordering for structurally qualifying contested branches. It does not prove semantic correctness, source truth, source independence, contamination, autonomous connector execution, capability incorporation, or unrestricted self-modification.",
+  "promotionBoundary": "Satisfied for this bounded capability by focused VAJRA and full NOSTROMO integration success. Failure evidence is retained after resolution."
 }
