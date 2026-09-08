@@ -11,6 +11,7 @@ on:
       - 'nostromo/integration/gut-metabolism-test.mjs'
       - 'nostromo/integration/vajra-dynamic-test.mjs'
       - 'nostromo/failure-log/2026-09-08-vajra-receipt-key-order-replay.json'
+      - 'nostromo/failure-log/2026-09-08-vajra-transport-metadata-replay.json'
       - '.github/workflows/nostromo-vajra-dynamic-decomposition-test.yml'
   workflow_dispatch:
 
@@ -33,4 +34,4 @@ jobs:
         run: node nostromo/integration/vajra-dynamic-test.mjs
       - name: Evidence boundary
         run: |
-          node -e "const fs=require('fs'); const p='nostromo/vajra/dynamic-decomposition-last-result.json'; const r=JSON.parse(fs.readFileSync(p,'utf8')); if(r.status!=='PASS'||r.capability!=='STRUCTURED_TRIAGE_REPLAY_SUPPRESSION_WITH_KEY_ORDER_INVARIANCE_ALIAS_AND_CONFLICT_PRESERVATION') process.exit(1); console.log(JSON.stringify({status:r.status,capability:r.capability,provenance:r.provenance,boundary:r.boundary},null,2));"
+          node -e "const fs=require('fs'); const p='nostromo/vajra/dynamic-decomposition-last-result.json'; const r=JSON.parse(fs.readFileSync(p,'utf8')); if(r.status!=='PASS'||r.capability!=='TRANSPORT_RESILIENT_STRUCTURED_TRIAGE_REPLAY_SUPPRESSION_WITH_EVIDENCE_BOUNDARY_PRESERVATION') process.exit(1); console.log(JSON.stringify({status:r.status,capability:r.capability,provenance:r.provenance,boundary:r.boundary},null,2));"
