@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 460" role="img" aria-labelledby="title desc">
+  <title id="title">第十六分回溯第十分</title>
+  <desc id="desc">中心為第十六分，向外回溯第十分的然燈佛與過去時間線。</desc>
+  <rect width="460" height="460" fill="#fff"/>
+  <g fill="none" stroke="#111" stroke-width="2">
+    <circle cx="230" cy="230" r="76"/>
+    <circle cx="230" cy="230" r="164"/>
+  </g>
+  <g fill="#111" font-family="Arial, Helvetica, sans-serif" font-size="20" text-anchor="middle">
+    <text x="230" y="236">16</text>
+    <text x="230" y="78">10</text>
+  </g>
+</svg>
