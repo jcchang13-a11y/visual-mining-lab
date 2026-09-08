@@ -5,50 +5,49 @@ await load('nostromo/vajra/vajra-engine.js');
 await load('nostromo/vajra/dynamic-reinspection.js');
 const V=globalThis.VajraEngine;
 const failures=[];const check=(ok,type,detail)=>{if(!ok)failures.push({type,detail});};
+
 const base=V.run('研究資料顯示所有這類系統一定可靠。',6);
 const branch=base.unresolved.find(b=>b.lens==='evidence')||base.unresolved[0];
 const mk=(relation,provenance,overrides={})=>({targetRef:branch.targetRef,clauseRef:branch.clauseRef,lens:branch.lens,organ:branch.handoff.preferredOrgan,status:'COMPLETED',provenance,material:`Independent returned material ${provenance} with enough substance for structural qualification.`,relation,...overrides});
 const contested=V.applyHandoffResults(base,[mk('supports the target claim','src-A'),mk('refutes the target claim','src-B')]);
 check(contested.status.includes('CONTESTED'),'CONFLICT_NOT_PRESERVED',contested.status);
 check(contested.dynamicReinspection?.triggered===true,'DYNAMIC_REINSPECTION_NOT_TRIGGERED',contested.dynamicReinspection);
-check(contested.dynamicReinspection?.version==='0.4','DYNAMIC_REINSPECTION_VERSION_NOT_UPDATED',contested.dynamicReinspection);
+check(contested.dynamicReinspection?.version==='0.5','DYNAMIC_REINSPECTION_VERSION_NOT_UPDATED',contested.dynamicReinspection);
 check(contested.nextInspection?.trigger==='CONTESTED_RETURN','WRONG_TRIGGER',contested.nextInspection);
 check(contested.nextInspection?.lens==='source_quality'&&contested.nextInspection?.preferredOrgan==='DROPLET','CONFLICT_DID_NOT_CHANGE_BEHAVIOR',contested.nextInspection);
 check(contested.nextInspection?.targetRef===branch.targetRef&&contested.nextInspection?.clauseRef===branch.clauseRef,'TARGET_SCOPE_LOST',contested.nextInspection);
 
-// Adversarial echo test 1: once a contested branch is already in source-quality inspection,
-// VAJRA must not recursively send the same conflict back to DROPLET again.
 const sourceBranch={status:'CONTESTED_BY_RECEIPTS',targetRef:'t-source-quality',clauseRef:'c-source-quality',lens:'source_quality',evidenceKeys:['receipt-A','receipt-B']};
 const repeatedSourceContest=V.selectNextInspection({unresolved:[sourceBranch]});
 check(repeatedSourceContest?.trigger==='REPEATED_SOURCE_CONTEST','REPEATED_CONTEST_NOT_DETECTED',repeatedSourceContest);
-check(repeatedSourceContest?.preferredOrgan==='GUT','REPEATED_CONTEST_NOT_DIVERTED_TO_GUT',repeatedSourceContest);
-check(repeatedSourceContest?.lens==='metabolic_contamination','REPEATED_CONTEST_WRONG_LENS',repeatedSourceContest);
+check(repeatedSourceContest?.preferredOrgan==='GUT'&&repeatedSourceContest?.lens==='metabolic_contamination','REPEATED_CONTEST_NOT_DIVERTED_TO_GUT',repeatedSourceContest);
 check(repeatedSourceContest?.targetRef==='t-source-quality'&&repeatedSourceContest?.clauseRef==='c-source-quality','REPEATED_CONTEST_SCOPE_LOST',repeatedSourceContest);
 check(repeatedSourceContest?.preferredOrgan!=='DROPLET','METABOLIC_ECHO_NOT_BROKEN',repeatedSourceContest);
 
-// Adversarial echo test 2: if GUT contamination triage also returns a qualifying contest,
-// VAJRA must not bounce the same branch back to DROPLET or GUT. It enters HOLD/quarantine.
 const metabolicBranch={status:'CONTESTED_BY_RECEIPTS',targetRef:'t-metabolic',clauseRef:'c-metabolic',lens:'metabolic_contamination',evidenceKeys:['receipt-A','receipt-B','gut-triage-A','gut-triage-B']};
 const repeatedMetabolicContest=V.selectNextInspection({unresolved:[metabolicBranch]});
 check(repeatedMetabolicContest?.trigger==='REPEATED_METABOLIC_CONTEST','METABOLIC_REPEAT_NOT_DETECTED',repeatedMetabolicContest);
-check(repeatedMetabolicContest?.status==='HOLD','METABOLIC_REPEAT_NOT_HELD',repeatedMetabolicContest);
-check(repeatedMetabolicContest?.lens==='quarantine_review','METABOLIC_REPEAT_WRONG_LENS',repeatedMetabolicContest);
+check(repeatedMetabolicContest?.status==='HOLD'&&repeatedMetabolicContest?.lens==='quarantine_review','METABOLIC_REPEAT_NOT_QUARANTINED',repeatedMetabolicContest);
 check(repeatedMetabolicContest?.preferredOrgan===null,'METABOLIC_REPEAT_STILL_ROUTED',repeatedMetabolicContest);
 check(repeatedMetabolicContest?.targetRef==='t-metabolic'&&repeatedMetabolicContest?.clauseRef==='c-metabolic','METABOLIC_REPEAT_SCOPE_LOST',repeatedMetabolicContest);
-check(!['DROPLET','GUT'].includes(repeatedMetabolicContest?.preferredOrgan),'TWO_ORGAN_ECHO_NOT_BROKEN',repeatedMetabolicContest);
 check(/Preserve every contest evidence key/.test(repeatedMetabolicContest?.provenancePolicy||''),'QUARANTINE_PROVENANCE_POLICY_MISSING',repeatedMetabolicContest);
 
-// Adversarial priority test: array order must not let a lower-severity contested branch
-// suppress an already repeated metabolic contest that requires quarantine.
 const genericBranch={status:'CONTESTED_BY_RECEIPTS',targetRef:'t-generic',clauseRef:'c-generic',lens:'evidence',evidenceKeys:['g-A','g-B']};
+// Quarantine is local containment, not global scheduling priority. A terminal metabolic HOLD
+// must not repeatedly occupy nextInspection while unrelated contested work can still progress.
 for(const unresolved of [
   [genericBranch,sourceBranch,metabolicBranch],
   [sourceBranch,metabolicBranch,genericBranch],
   [metabolicBranch,genericBranch,sourceBranch]
 ]){
   const selected=V.selectNextInspection({unresolved});
-  check(selected?.trigger==='REPEATED_METABOLIC_CONTEST','CONTAINMENT_PRIORITY_INVERTED',{order:unresolved.map(x=>x.lens),selected});
-  check(selected?.targetRef==='t-metabolic'&&selected?.status==='HOLD','QUARANTINE_SUPPRESSED_BY_ARRAY_ORDER',{order:unresolved.map(x=>x.lens),selected});
+  check(selected?.trigger==='REPEATED_SOURCE_CONTEST','QUARANTINE_STARVED_RUNNABLE_SOURCE_CONTEST',{order:unresolved.map(x=>x.lens),selected});
+  check(selected?.targetRef==='t-source-quality'&&selected?.preferredOrgan==='GUT','RUNNABLE_SOURCE_CONTEST_MISROUTED',{order:unresolved.map(x=>x.lens),selected});
+}
+for(const unresolved of [[metabolicBranch,genericBranch],[genericBranch,metabolicBranch]]){
+  const selected=V.selectNextInspection({unresolved});
+  check(selected?.trigger==='CONTESTED_RETURN','QUARANTINE_STARVED_GENERIC_CONTEST',{order:unresolved.map(x=>x.lens),selected});
+  check(selected?.targetRef==='t-generic'&&selected?.preferredOrgan==='DROPLET','GENERIC_CONTEST_MISROUTED',{order:unresolved.map(x=>x.lens),selected});
 }
 const sourceOverGeneric=V.selectNextInspection({unresolved:[genericBranch,sourceBranch]});
 check(sourceOverGeneric?.trigger==='REPEATED_SOURCE_CONTEST'&&sourceOverGeneric?.preferredOrgan==='GUT','SOURCE_CONTEST_PRIORITY_INVERTED',sourceOverGeneric);
@@ -57,12 +56,15 @@ const genericSameSeverityB={...genericBranch,targetRef:'t-generic-B',clauseRef:'
 const stableTie=V.selectNextInspection({unresolved:[genericSameSeverityB,genericSameSeverityA]});
 check(stableTie?.targetRef==='t-generic-B','EQUAL_SEVERITY_ORDER_NOT_STABLE',stableTie);
 
-const single=V.applyHandoffResults(base,[mk('supports the target claim','src-C')]);
+const wrappedMixed=V.applyHandoffResults(base,[mk('supports the target claim','src-C')]);
+check(Array.isArray(wrappedMixed.dynamicReinspection?.quarantineDeferred),'QUARANTINE_AUDIT_CHANNEL_MISSING',wrappedMixed.dynamicReinspection);
+const single=V.applyHandoffResults(base,[mk('supports the target claim','src-D')]);
 check(single.dynamicReinspection?.triggered===false,'SINGLE_RETURN_FALSE_ESCALATION',single.dynamicReinspection);
 check(single.nextInspection?.trigger!=='CONTESTED_RETURN','SINGLE_RETURN_WRONG_TRIGGER',single.nextInspection);
 const rejected=V.applyHandoffResults(base,[mk('supports the target claim','', {provenance:''})]);
 check(rejected.dynamicReinspection?.triggered===false,'REJECTED_RECEIPT_FALSE_ESCALATION',rejected.dynamicReinspection);
 check((rejected.handoffResolution?.rejected||0)>=1,'REJECTED_RECEIPT_NOT_AUDITED',rejected.handoffResolution);
-const result={schema:'nostromo-vajra-dynamic-reinspection/v0.4',completedAt:new Date().toISOString(),status:failures.length?'FAIL':'PASS',tests:{contestedStatus:contested.status,nextInspection:contested.nextInspection,repeatedSourceContest,repeatedMetabolicContest,sourceOverGeneric,stableTie,singleTriggered:single.dynamicReinspection?.triggered,rejectedTriggered:rejected.dynamicReinspection?.triggered,rejectedCount:rejected.handoffResolution?.rejected},failures,boundary:'PASS proves a structurally qualifying cross-organ receipt conflict changes VAJRA next-step priority to clause-scoped source-quality inspection; simultaneous contested branches are selected by containment severity rather than array position, with metabolic_contamination quarantine outranking source_quality and generic contests and equal-severity order remaining stable; a conflict already at source_quality diverts to GUT metabolic-contamination triage; and a conflict still unresolved at metabolic_contamination enters a provenance-preserving HOLD/quarantine rather than echoing between DROPLET and GUT. A lone qualifying receipt or rejected receipt does not trigger escalation. It does not prove semantic correctness, source truth, source independence, contamination, or that DROPLET/GUT actually executed the follow-up.'};
+
+const result={schema:'nostromo-vajra-dynamic-reinspection/v0.5',completedAt:new Date().toISOString(),status:failures.length?'FAIL':'PASS',capability:'LOCAL_QUARANTINE_WITH_NONSTARVING_RUNNABLE_CONFLICT_SCHEDULING',tests:{contestedStatus:contested.status,nextInspection:contested.nextInspection,repeatedSourceContest,repeatedMetabolicContest,sourceOverGeneric,stableTie,singleTriggered:single.dynamicReinspection?.triggered,rejectedTriggered:rejected.dynamicReinspection?.triggered,rejectedCount:rejected.handoffResolution?.rejected},provenance:{fixture:'synthetic de-identified branch/receipt fixtures',failureEvidence:'nostromo/failure-log/2026-09-09-vajra-quarantine-starvation.json'},failures,boundary:'PASS proves only that a repeated metabolic-contamination conflict remains locally quarantined and provenance-preserving when it is the only contested work, while that terminal HOLD cannot starve unrelated runnable contested branches. Among runnable conflicts, source_quality still outranks generic contested lenses and equal-priority source order remains stable. Existing first-conflict DROPLET routing, repeated-source GUT diversion, rejected-receipt containment, and echo breaking remain bounded. It does not decide source truth, execute follow-up organs, clear quarantine, install capabilities, or mutate persistent body state.'};
 await fs.writeFile('nostromo/vajra/dynamic-reinspection-last-result.json',JSON.stringify(result,null,2)+'\n');
 console.log(JSON.stringify(result,null,2));if(failures.length)process.exitCode=1;
