@@ -1,19 +1,29 @@
 {
   "schema": "zenomorph-failure-evidence/v1",
   "recordedAt": "2026-09-09T00:01:28+08:00",
+  "resolvedAt": "2026-09-09T00:07:43+08:00",
   "organ": "VAJRA",
   "component": "dynamic-decomposition",
-  "status": "OPEN_NOT_PROMOTED",
+  "status": "RESOLVED_CI_VERIFIED",
   "failureClass": "AGREEING_DISTINCT_PROVENANCE_FALSE_CONFLICT",
   "observedVersion": "0.9",
-  "observation": "Two unique completed GUT contamination-triage receipts scoped to the same contested parent, carrying the same supported triage classification but different canonical provenance, are currently placed on HOLD because dynamic decomposition treats classification+provenance as one conflict signature.",
-  "qualityRisk": "Distinct provenance is evidence-significant and must remain visible, but provenance diversity alone does not imply classification disagreement. Treating it as a conflict can block an otherwise identical bounded decomposition profile and makes downstream behavior depend on provenance identity rather than on the metabolic diagnosis that is supposed to regulate VAJRA.",
-  "requiredFix": "Separate classification agreement from provenance identity. Multiple unique qualifying receipts may select one bounded profile only when all supported classifications agree; all distinct provenance must remain auditable and must not be claimed independent merely because canonical strings differ. Any classification disagreement must continue to HOLD with no facets.",
-  "promotionGate": [
+  "resolvedBy": "target-qualification-guard v0.3",
+  "observation": "Two unique completed GUT contamination-triage receipts scoped to the same contested parent, carrying the same supported triage classification but different canonical provenance, were previously placed on HOLD because dynamic decomposition treated classification+provenance as one conflict signature.",
+  "qualityRisk": "Distinct provenance is evidence-significant and must remain visible, but provenance diversity alone does not imply classification disagreement. Treating it as a conflict blocked an otherwise identical bounded decomposition profile and made downstream behavior depend on provenance identity rather than on the metabolic diagnosis that is supposed to regulate VAJRA.",
+  "resolution": "Target qualification guard v0.3 now separates classification agreement from provenance identity. Multiple unique qualifying receipts scoped to the same contested parent may select one already-bounded decomposition profile only when all supported classifications agree. Distinct provenance remains fingerprint-audited and is explicitly not promoted to an independence claim. Any classification disagreement still HOLDs with zero facets.",
+  "verification": {
+    "unitAdversarialCrossOrganCommit": "16f8a2ac22f23294ef1ce8f9b3ef5b8809be96d5",
+    "integrationRun": 34248902437,
+    "integrationConclusion": "success",
+    "focusedWorkflowCommit": "170adf1d473ad3ce3c8866265545da14ce5737f8",
+    "focusedRun": 34249015352,
+    "focusedConclusion": "success"
+  },
+  "verifiedGates": [
     "same classification + distinct canonical provenance => same bounded profile",
     "classification disagreement => HOLD with zero facets",
     "replays do not inflate receipt counts",
-    "distinct provenance remains fully auditable",
+    "distinct provenance remains auditable without asserting independence",
     "cross-organ GUT and VAJRA regressions pass"
   ],
   "privacy": "Synthetic de-identified evidence only; no private connector content, names, IDs, or URLs are stored.",
