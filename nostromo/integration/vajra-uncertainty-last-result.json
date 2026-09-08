@@ -1,6 +1,6 @@
 {
   "schema": "nostromo-vajra-uncertainty-test/v0.3.8",
-  "completedAt": "2026-09-08T17:06:16.606Z",
+  "completedAt": "2026-09-08T17:06:37.965Z",
   "status": "PASS",
   "guards": {
     "explicitUncertaintyCannotClose": true,
