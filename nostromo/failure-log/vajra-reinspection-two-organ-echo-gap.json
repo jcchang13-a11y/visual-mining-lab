@@ -1,0 +1,12 @@
+{
+  "schema": "zenomorph-failure-log/v1",
+  "organ": "VAJRA",
+  "capability": "dynamic-reinspection",
+  "status": "OPEN_NOT_PROMOTED",
+  "failureClass": "CROSS_ORGAN_METABOLIC_ECHO",
+  "observedBehavior": "A contested branch first routes to DROPLET source_quality, then a repeated source_quality contest diverts to GUT metabolic_contamination. If the metabolic_contamination branch remains contested, the current fallback routes it back to source_quality/DROPLET, creating a bounded-looking but behaviorally circular DROPLET↔GUT loop.",
+  "risk": "Repeated organ handoff can be mistaken for deeper cognition while no new diagnostic state is created. It also increases duplicate contamination and error-amplification risk.",
+  "requiredFix": "A repeated contest already at metabolic_contamination must not return to source_quality. It must enter a distinct quarantine/hold state that preserves provenance and requires new evidence or an explicit later review policy before routing resumes.",
+  "promotionRule": "Do not promote until unit/adversarial tests prove the third-stage contest breaks the two-organ echo, preserves target/clause scope and provenance policy, and existing dynamic reinspection regressions remain green.",
+  "privacy": "No private connector content, identifiers, names, or URLs are included."
+}
