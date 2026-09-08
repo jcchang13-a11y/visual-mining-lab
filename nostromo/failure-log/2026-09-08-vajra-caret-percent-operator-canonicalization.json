@@ -1,0 +1,18 @@
+{
+  "schema": "zenomorph-failure-evidence/v0.1",
+  "organ": "VAJRA",
+  "status": "OPEN_NOT_PROMOTED",
+  "observedAt": "2026-09-08",
+  "capability": "BOUNDED_OPERATOR_PRESERVATION",
+  "failure": "VAJRA canonicalEvidenceMaterial preserves several comparison and arithmetic operators but currently strips caret (^) and percent (%) symbols. In explicit arithmetic-looking contexts such as 2^8 and 17%5, materially distinct receipts can therefore collapse onto the same canonical replay identity as symbol-free text.",
+  "risk": [
+    "false replay deduplication",
+    "loss of opposing evidence distinction",
+    "downstream contest suppression",
+    "false certainty through material collapse"
+  ],
+  "boundedScope": "Only explicit arithmetic-looking contexts are in scope: operators between spaced alphanumeric operands or compact numeric operands. A trailing percentage such as 95% and arbitrary punctuation are not to be promoted into arithmetic semantics.",
+  "requiredFix": "Preserve caret and percent identity in the bounded operator guard without claiming semantic arithmetic understanding; add unit, adversarial, provenance, non-arithmetic-boundary, and cross-organ regression tests before promotion.",
+  "provenance": "Derived from public repository implementation inspection and synthetic de-identified examples only. No private Drive content, names, IDs, or URLs were used or written.",
+  "promotion": "Blocked until GitHub Actions verifies the focused guard plus existing VAJRA provenance and cross-organ integration regressions."
+}
