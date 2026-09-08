@@ -19,7 +19,7 @@ const nonGutA={targetRef:'target-A',clauseRef:'clause-A',organ:'MUTHER',status:'
 const incompleteA={targetRef:'target-A',clauseRef:'clause-A',organ:'GUT',status:'PENDING',provenance:'gut-pending-A',triageClassification:'MIXED_CONTAMINATION',summary:'Synthetic incomplete GUT noise'};
 const unsupportedA={targetRef:'target-A',clauseRef:'clause-A',organ:'GUT',status:'COMPLETED',provenance:'gut-unsupported-A',triageClassification:'SOURCE_TRUTH_DECISION',summary:'Synthetic unsupported classification'};
 
-check(V.dynamicTargetQualificationGuardVersion==='0.1','TARGET_QUALIFICATION_GUARD_VERSION_MISSING',V.dynamicTargetQualificationGuardVersion);
+check(V.dynamicTargetQualificationGuardVersion==='0.2','TARGET_QUALIFICATION_GUARD_VERSION_MISSING',V.dynamicTargetQualificationGuardVersion);
 
 for(const [label,state,receipts] of [
   ['NON_GUT_AB',stateAB,[nonGutA,validB]],
@@ -34,6 +34,7 @@ for(const [label,state,receipts] of [
   check(out.targetQualificationGuard?.eligibleTargetCount===1,`${label}_GUARD_AUDIT_MISSING`,out.targetQualificationGuard);
   check((out.rejected||[]).length>=1,`${label}_NOISE_REJECTION_AUDIT_LOST`,out.rejected);
   check(out.rejected?.some(x=>x.reason==='scope-mismatch'),`${label}_SCOPED_NOISE_NOT_EXPLICITLY_REJECTED`,out.rejected);
+  check((out.targetQualificationGuard?.preselectionRejected||[]).length>=1,`${label}_PRESELECTION_REJECTION_AUDIT_LOST`,out.targetQualificationGuard);
 }
 
 const both=V.planConflictDecomposition(stateAB,[validA,validB]);
@@ -42,7 +43,9 @@ check(both.reason==='multiple-contested-parents-targeted','TWO_QUALIFYING_TARGET
 
 const none=V.planConflictDecomposition(stateAB,[nonGutA]);
 check(none.status==='HOLD','NO_QUALIFYING_TARGET_FALSE_DECOMPOSITION',none);
-check(none.reason==='targeted-contested-source-quality-parent-required','NO_QUALIFYING_TARGET_WRONG_REASON',none.reason);
+check(none.reason==='qualifying-targeted-contested-source-quality-parent-required','NO_QUALIFYING_TARGET_WRONG_REASON',none.reason);
+check(none.rejected?.some(x=>x.reason==='gut-receipt-required'),'NO_QUALIFYING_TARGET_REJECTION_AUDIT_LOST',none.rejected);
+check(none.targetQualificationGuard?.eligibleTargetCount===0,'NO_QUALIFYING_TARGET_GUARD_AUDIT_MISSING',none.targetQualificationGuard);
 
 const single={status:'CONTESTED_BY_RECEIPTS',unresolved:[parentB]};
 const singleOut=V.planConflictDecomposition(single,[validB]);
@@ -54,18 +57,19 @@ const crossOrgan=V.planConflictDecomposition(stateAB,[
 ]);
 check(crossOrgan.status==='DECOMPOSED','CROSS_ORGAN_NOISE_BLOCKED_GUT_REGULATION',crossOrgan);
 check(crossOrgan.rejected?.some(x=>x.reason==='scope-mismatch'),'CROSS_ORGAN_NOISE_REJECTION_AUDIT_LOST',crossOrgan.rejected);
+check(crossOrgan.targetQualificationGuard?.preselectionRejected?.some(x=>x.reason==='gut-receipt-required'),'CROSS_ORGAN_PRESELECTION_AUDIT_LOST',crossOrgan.targetQualificationGuard);
 check(crossOrgan.facets?.some(f=>f.lens==='duplicate_cluster'&&f.preferredOrgan==='GUT'),'CROSS_ORGAN_GUT_PROFILE_NOT_PRESERVED',crossOrgan.facets);
 check(crossOrgan.facets?.some(f=>f.lens==='claim_relation'&&f.preferredOrgan==='MUTHER'),'CROSS_ORGAN_MUTHER_ROUTING_NOT_PRESERVED',crossOrgan.facets);
 
 const result={
-  schema:'zenomorph-vajra-target-qualification-guard-test/v0.1',
+  schema:'zenomorph-vajra-target-qualification-guard-test/v0.2',
   completedAt:new Date().toISOString(),
   status:failures.length?'FAIL':'PASS',
   capability:'QUALIFICATION_GATED_MULTI_PARENT_TARGET_SELECTION',
   tests:{both,none,singleOut,crossOrgan},
   failures,
   provenance:{fixture:'synthetic de-identified contested-parent and cross-organ receipt fixtures',failureEvidence:'nostromo/failure-log/2026-09-08-vajra-nonqualifying-receipt-target-pollution.json'},
-  boundary:'PASS proves only that nonqualifying cross-organ or incomplete receipt traffic cannot add a competing multi-parent target when exactly one completed supported GUT contamination-triage receipt identifies a parent; rejected noise remains auditable as scope mismatch after the valid parent is selected, two genuinely qualifying parent targets still HOLD, and GUT diagnosis can continue to alter downstream VAJRA/MUTHER routing. It does not decide source truth or execute generated facets.'
+  boundary:'PASS proves only that nonqualifying cross-organ or incomplete receipt traffic cannot nominate or add a competing multi-parent target; zero qualifying target candidates remain HOLD with explicit preselection rejection audit, one qualifying completed supported GUT contamination-triage target may regulate downstream VAJRA/MUTHER routing, and two genuinely qualifying parent targets still HOLD. It does not decide source truth or execute generated facets.'
 };
 await fs.writeFile('nostromo/vajra/target-qualification-guard-last-result.json',JSON.stringify(result,null,2)+'\n');
 console.log(JSON.stringify(result,null,2));
