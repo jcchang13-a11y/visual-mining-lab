@@ -11,7 +11,7 @@ const parent={status:'CONTESTED_BY_RECEIPTS',targetRef:'target-001',clauseRef:'c
 const state={status:'CONTESTED_BY_RECEIPTS',unresolved:[parent]};
 const gutReceipt={targetRef:'target-001',clauseRef:'clause-001',lens:'metabolic_contamination',organ:'GUT',status:'COMPLETED',provenance:'gut-triage-evidence-001',triageClassification:'PROVENANCE_COLLISION',summary:'De-identified structural triage found source aliases that must not be counted as independent evidence.'};
 
-check(V.dynamicDecompositionVersion==='0.8','DYNAMIC_DECOMPOSITION_VERSION_NOT_PROMOTED',V.dynamicDecompositionVersion);
+check(V.dynamicDecompositionVersion==='0.9','DYNAMIC_DECOMPOSITION_VERSION_BASELINE_MISMATCH',V.dynamicDecompositionVersion);
 
 const decomposed=V.planConflictDecomposition(state,[gutReceipt]);
 check(decomposed.status==='DECOMPOSED','QUALIFYING_TRIAGE_DID_NOT_DECOMPOSE',decomposed);
