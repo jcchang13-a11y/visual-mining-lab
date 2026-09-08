@@ -1,0 +1,27 @@
+{
+  "schema": "zenomorph-failure-resolution/v1",
+  "resolvedAt": "2026-09-08T07:09:52Z",
+  "organ": "VAJRA",
+  "resolves": "nostromo/failure-log/2026-09-08-vajra-triage-classification-behavior-invariance.json",
+  "status": "RESOLVED_AND_CI_VERIFIED",
+  "resolution": "VAJRA dynamic decomposition v0.8 now maps each already-authorized completed GUT contamination classification to a distinct bounded downstream profile. PROVENANCE_COLLISION selects source_identity + claim_relation; DUPLICATE_CONTAMINATION selects duplicate_cluster + claim_relation; MIXED_CONTAMINATION selects source_identity + duplicate_cluster + claim_relation. The contested parent remains open and classification disagreement still forces HOLD.",
+  "behavioralClaim": "GUT's metabolic classification now changes VAJRA's next decomposition behavior rather than being preserved only as inert metadata.",
+  "tests": {
+    "unitAdversarialProvenanceReplayBehaviorRegulation": "PASS",
+    "crossOrganGutRegression": "PASS",
+    "crossOrganVajraRegression": "PASS",
+    "evidenceBoundary": "PASS"
+  },
+  "githubActions": {
+    "workflow": "NOSTROMO VAJRA Dynamic Decomposition Test",
+    "runId": 34197937040,
+    "jobId": 101969772489,
+    "conclusion": "success",
+    "headSha": "8213845ac20fc5b7afce8b564d7f87e2d38a996b"
+  },
+  "provenance": {
+    "publicRepoOnly": true,
+    "privateConnectorData": false
+  },
+  "boundary": "This verifies bounded cross-organ behavioral regulation only. It does not prove semantic contamination detection, source truth, connector integrity, autonomous execution of generated facets, self-modification, or body admission."
+}
