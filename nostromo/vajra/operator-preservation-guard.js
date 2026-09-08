@@ -25,10 +25,10 @@
     s=s.replace(/([\p{L}\p{N}_])\s+([*\/×÷−∕^%])\s+([\p{L}\p{N}_])/gu,(_,a,op,b)=>`${a} ${tokenFor(op)} ${b}`);
     s=s.replace(/(\p{N})([*\/×÷−∕^%])(\p{N})/gu,(_,a,op,b)=>`${a} ${tokenFor(op)} ${b}`);
 
-    // v0.4: compact symbolic-variable forms are also evidence-significant when the operator itself is comparatively unambiguous.
-    // ASCII slash and ASCII hyphen are intentionally excluded here because compact a/b and a-b are common path/lexical forms.
-    // Bounded identifier length prevents this structural guard from turning arbitrary long punctuation-bearing text into formulas.
-    s=s.replace(/([\p{L}_][\p{L}\p{N}_]{0,15})([*×÷−∕^%])([\p{L}_][\p{L}\p{N}_]{0,15})/gu,(_,a,op,b)=>`${a} ${tokenFor(op)} ${b}`);
+    // v0.4: compact symbolic-variable forms are evidence-significant only when both operands are whole bounded identifiers.
+    // Token boundaries prevent matching a short suffix/prefix inside an overlong identifier.
+    // ASCII slash and ASCII hyphen are intentionally excluded because compact a/b and a-b are common path/lexical forms.
+    s=s.replace(/(?<![\p{L}\p{N}_])([\p{L}_][\p{L}\p{N}_]{0,15})([*×÷−∕^%])([\p{L}_][\p{L}\p{N}_]{0,15})(?![\p{L}\p{N}_])/gu,(_,a,op,b)=>`${a} ${tokenFor(op)} ${b}`);
     return s;
   }
 
@@ -87,8 +87,8 @@
       operatorPreservation:{
         version:'0.4',
         protected:['*','/','×','÷','−','∕','^','%'],
-        scope:'spaced alphanumeric operands, compact numeric operands, and bounded compact symbolic-variable operands for non-ambiguous operators',
-        boundary:'The guard preserves multiplication/division, common Unicode mathematical minus/division-slash glyphs, caret/percent operator identity in bounded arithmetic-looking contexts. Compact symbolic-variable forms are promoted only for *, ×, ÷, −, ∕, ^ and %. Compact ASCII slash and ASCII hyphen remain unpromoted because path and lexical ambiguity would otherwise create false arithmetic identity. The guard does not claim semantic parsing.'
+        scope:'spaced alphanumeric operands, compact numeric operands, and whole bounded compact symbolic-variable operands for non-ambiguous operators',
+        boundary:'The guard preserves multiplication/division, common Unicode mathematical minus/division-slash glyphs, caret/percent operator identity in bounded arithmetic-looking contexts. Compact symbolic-variable forms are promoted only for *, ×, ÷, −, ∕, ^ and %, and only when both operands are whole identifiers of at most 16 code points in the accepted identifier class. Compact ASCII slash and ASCII hyphen remain unpromoted because path and lexical ambiguity would otherwise create false arithmetic identity. The guard does not claim semantic parsing.'
       }
     };
   }
