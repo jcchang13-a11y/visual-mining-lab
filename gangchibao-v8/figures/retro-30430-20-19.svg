@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 620" role="img" aria-labelledby="title desc">
+  <title id="title">第二十分回溯第十九分公式</title>
+  <desc id="desc">中心為第二十分，向外回溯第十九分：把福德可以說但不能有實的公式換到具足色身。</desc>
+  <rect width="620" height="620" fill="white"/>
+  <g fill="none" stroke="black" stroke-width="2">
+    <circle cx="310" cy="310" r="120"/>
+    <circle cx="310" cy="310" r="260"/>
+  </g>
+  <g fill="black" font-family="system-ui, sans-serif" font-size="24" text-anchor="middle">
+    <text x="310" y="319">20</text>
+    <text x="310" y="168">19</text>
+  </g>
+</svg>
