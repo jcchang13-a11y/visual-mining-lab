@@ -1,12 +1,16 @@
-/* VAJRA dynamic reinspection capability v0.3 — receipt feedback changes next inspection priority without altering source evidence */
+/* VAJRA dynamic reinspection capability v0.4 — receipt feedback changes next inspection priority without altering source evidence */
 (function(root){
   const api=root.VajraEngine;
   if(!api||typeof api.applyHandoffResults!=='function') throw new Error('VajraEngine must be loaded before dynamic-reinspection');
   if(api.applyHandoffResults.__dynamicReinspection) return;
   const baseApply=api.applyHandoffResults;
+  const contestPriority=lens=>lens==='metabolic_contamination'?3:lens==='source_quality'?2:1;
   function selectNextInspection(result){
     const branches=Array.isArray(result?.unresolved)?result.unresolved:[];
-    const contested=branches.find(b=>b?.status==='CONTESTED_BY_RECEIPTS');
+    const contested=branches
+      .map((branch,index)=>({branch,index,priority:branch?.status==='CONTESTED_BY_RECEIPTS'?contestPriority(branch?.lens):0}))
+      .filter(x=>x.priority>0)
+      .sort((a,b)=>b.priority-a.priority||a.index-b.index)[0]?.branch;
     if(contested){
       if(contested.lens==='metabolic_contamination'){
         return {
@@ -68,7 +72,7 @@
   function wrapped(vajraResult,receipts=[]){
     const out=baseApply(vajraResult,receipts);
     const nextInspection=selectNextInspection(out);
-    return {...out,nextInspection,dynamicReinspection:{version:'0.3',triggered:['CONTESTED_RETURN','REPEATED_SOURCE_CONTEST','REPEATED_METABOLIC_CONTEST'].includes(nextInspection?.trigger),policy:'CONFLICT_FIRST_WITH_ECHO_BREAK_AND_QUARANTINE',boundary:'A qualifying inter-organ receipt conflict changes VAJRA next-step behavior. First conflict routes to clause-scoped source-quality inspection; a conflict already at source_quality is diverted to GUT contamination triage; a conflict still unresolved at metabolic_contamination enters a provenance-preserving HOLD instead of echoing back to DROPLET or GUT. Missing, malformed, replayed, or otherwise rejected receipts cannot trigger escalation.'}};
+    return {...out,nextInspection,dynamicReinspection:{version:'0.4',triggered:['CONTESTED_RETURN','REPEATED_SOURCE_CONTEST','REPEATED_METABOLIC_CONTEST'].includes(nextInspection?.trigger),policy:'CONFLICT_FIRST_WITH_CONTAINMENT_PRIORITY_ECHO_BREAK_AND_QUARANTINE',boundary:'A qualifying inter-organ receipt conflict changes VAJRA next-step behavior. Across simultaneous contested branches, the highest containment severity is selected first: metabolic_contamination, then source_quality, then other contested lenses, while equal-severity branches retain stable source order. First conflict routes to clause-scoped source-quality inspection; a conflict already at source_quality is diverted to GUT contamination triage; a conflict still unresolved at metabolic_contamination enters a provenance-preserving HOLD instead of echoing back to DROPLET or GUT. Missing, malformed, replayed, or otherwise rejected receipts cannot trigger escalation.'}};
   }
   wrapped.__dynamicReinspection=true;
   api.applyHandoffResults=wrapped;
