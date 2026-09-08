@@ -1,0 +1,32 @@
+{
+  "schema": "zenomorph-failure-resolution/v0.1",
+  "organ": "VAJRA",
+  "status": "RESOLVED_CI_VERIFIED",
+  "resolvedAt": "2026-09-08",
+  "resolves": "nostromo/failure-log/2026-09-08-vajra-caret-percent-operator-canonicalization.json",
+  "capability": "BOUNDED_OPERATOR_PRESERVATION",
+  "implementation": {
+    "path": "nostromo/vajra/operator-preservation-guard.js",
+    "version": "0.3",
+    "test": "nostromo/vajra/operator-preservation-test.mjs"
+  },
+  "verifiedCommit": "444be12fbfdb9a113ad4bd6991937696aa7fcc87",
+  "githubActions": {
+    "workflow": "NOSTROMO VAJRA operator preservation",
+    "runId": 34236267310,
+    "conclusion": "success",
+    "verifiedSteps": [
+      "VAJRA operator unit and adversarial regression",
+      "VAJRA provenance independence regression",
+      "Cross-organ integration regression"
+    ],
+    "integration": {
+      "status": "PASS",
+      "rounds": 50,
+      "activeClosedLoopRounds": 10
+    }
+  },
+  "behaviorChange": "Caret (^) and percent (%) now survive replay identity only in bounded arithmetic-looking contexts: between spaced alphanumeric operands or compact numeric operands. Distinct operator-bearing receipts remain independently auditable and can preserve a contested branch; trailing percentages such as 95% and arbitrary slash paths remain outside this promotion.",
+  "provenance": "Public repository code and synthetic de-identified fixtures only. No private connector source text, file name, ID, or URL was used or written.",
+  "boundary": "This proves bounded structural operator preservation and downstream contest routing, not arithmetic semantics, source truth, or unrestricted self-modification."
+}
