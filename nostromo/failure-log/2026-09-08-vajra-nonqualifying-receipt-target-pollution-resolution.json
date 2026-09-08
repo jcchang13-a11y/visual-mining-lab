@@ -1,0 +1,30 @@
+{
+  "schema": "zenomorph-failure-resolution/v0.1",
+  "organ": "VAJRA",
+  "status": "RESOLVED_CI_VERIFIED",
+  "resolvedAt": "2026-09-08",
+  "resolves": "nostromo/failure-log/2026-09-08-vajra-nonqualifying-receipt-target-pollution.json",
+  "capability": "QUALIFICATION_GATED_MULTI_PARENT_TARGET_SELECTION",
+  "implementation": {
+    "path": "nostromo/vajra/target-qualification-guard.js",
+    "version": "0.2",
+    "test": "nostromo/vajra/target-qualification-guard-test.mjs"
+  },
+  "verifiedCommit": "69bdb2dfafb213c146d9a63f94357f16ade75183",
+  "githubActions": {
+    "workflow": "NOSTROMO VAJRA Dynamic Decomposition Test",
+    "runId": 34214445127,
+    "conclusion": "success",
+    "verifiedSteps": [
+      "existing VAJRA unit/adversarial/provenance/replay/behavior-regulation tests",
+      "existing multi-parent targeting regression",
+      "qualification-gated multi-parent target-selection adversarial test",
+      "cross-organ GUT regression",
+      "cross-organ VAJRA regression",
+      "evidence boundary"
+    ]
+  },
+  "behaviorChange": "When multiple contested source-quality parents are open, only completed GUT contamination-triage receipts with explicit scope, supported classification, and nonempty canonical provenance may nominate a parent for VAJRA decomposition. Non-GUT, incomplete, provenance-empty, unsupported, or unscoped traffic remains auditable but cannot create a competing target. Zero qualifying target candidates HOLD; two genuinely qualifying parent targets still HOLD; exactly one qualifying target may regulate the downstream decomposition profile.",
+  "provenance": "Public repository code plus synthetic de-identified fixtures only. No private connector source text, file name, ID, or URL was used or written to the repository.",
+  "boundary": "This resolution proves bounded target-selection behavior and cross-organ regression only. It does not adjudicate source truth, execute generated facets, install new capabilities, or claim unrestricted self-modification."
+}
