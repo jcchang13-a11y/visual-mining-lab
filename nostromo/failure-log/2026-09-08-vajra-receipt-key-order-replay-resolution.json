@@ -1,0 +1,23 @@
+{
+  "schema": "zenomorph-failure-resolution-evidence/v0.1",
+  "resolves": "2026-09-08-vajra-receipt-key-order-replay.json",
+  "organ": "VAJRA",
+  "status": "RESOLVED_CI_VERIFIED",
+  "class": "SERIALIZATION_ORDER_REPLAY_INFLATION",
+  "repair": "Replay identity now recursively canonicalizes object key order before hashing while preserving array order and scalar values. A bounded top-level transport-metadata projection is applied separately, so serializer key ordering cannot manufacture independent qualifying receipts.",
+  "verification": {
+    "workflow": "NOSTROMO VAJRA Dynamic Decomposition Test",
+    "runId": 34214445127,
+    "integrationWorkflow": "NOSTROMO Integration Test",
+    "integrationRunId": 34214444991,
+    "headSha": "69bdb2dfafb213c146d9a63f94357f16ade75183",
+    "reorderedReceiptReplayRegression": "SUCCESS",
+    "valueAndArrayIdentityRegression": "SUCCESS",
+    "nestedFieldEvidenceSignificanceRegression": "SUCCESS",
+    "gutVajraCrossOrganRegression": "SUCCESS"
+  },
+  "behavioralEffect": "Two qualifying GUT receipts that differ only by object key insertion order collapse to the same replay identity and cannot inflate qualifyingReceiptCount or aliasAudit. Evidence-significant value changes and array ordering remain distinguishable, preserving provenance-bearing structural differences.",
+  "provenance": "Public repository code, de-identified synthetic adversarial fixtures, and GitHub Actions evidence only. No private connector identifiers, names, URLs, or source text are included.",
+  "residualBoundary": "This verifies structural serialization-order invariance for replay identity. It does not establish generic semantic equivalence, source truth, connector integrity, or unrestricted semantic duplicate detection. The bounded transport-metadata projection remains a separate explicitly scoped rule rather than a claim of semantic sameness.",
+  "auditNote": "The original OPEN_NOT_PROMOTED failure record is retained unchanged as historical evidence. This resolution closes the stale evidence state only after the repair and cross-organ regressions are verified at the cited commit."
+}
