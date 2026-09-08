@@ -19,6 +19,7 @@ on:
       - 'nostromo/failure-log/2026-09-08-vajra-multiparent-target-selection.json'
       - 'nostromo/failure-log/2026-09-08-vajra-nonqualifying-receipt-target-pollution.json'
       - 'nostromo/failure-log/2026-09-09-vajra-agreeing-distinct-provenance-false-conflict.json'
+      - 'nostromo/failure-log/2026-09-09-vajra-nonqualifying-receipt-target-poisoning.json'
       - '.github/workflows/nostromo-vajra-dynamic-decomposition-test.yml'
   workflow_dispatch:
 
@@ -33,13 +34,11 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: VAJRA existing unit, adversarial, provenance, replay and behavior-regulation tests
-        run: |
-          sed "s/V.dynamicDecompositionVersion==='0.8'/V.dynamicDecompositionVersion==='0.9'/" nostromo/vajra/dynamic-decomposition-test.mjs > /tmp/dynamic-decomposition-test.mjs
-          node /tmp/dynamic-decomposition-test.mjs
-      - name: VAJRA existing multi-parent targeting regression
+      - name: VAJRA unit, adversarial, provenance, replay and behavior-regulation tests
+        run: node nostromo/vajra/dynamic-decomposition-test.mjs
+      - name: VAJRA multi-parent qualification and target-poisoning regression
         run: node nostromo/vajra/dynamic-multiparent-test.mjs
-      - name: VAJRA qualification-gated multi-parent target selection adversarial test
+      - name: VAJRA qualification-guard compatibility regression
         run: node nostromo/vajra/target-qualification-guard-test.mjs
       - name: Cross-organ GUT regression
         run: node nostromo/integration/gut-metabolism-test.mjs
@@ -47,4 +46,4 @@ jobs:
         run: node nostromo/integration/vajra-dynamic-test.mjs
       - name: Evidence boundary
         run: |
-          node -e "const fs=require('fs'); const a=JSON.parse(fs.readFileSync('nostromo/vajra/dynamic-multiparent-last-result.json','utf8')); const b=JSON.parse(fs.readFileSync('nostromo/vajra/target-qualification-guard-last-result.json','utf8')); if(a.status!=='PASS'||a.capability!=='RECEIPT_SCOPED_MULTI_PARENT_DYNAMIC_DECOMPOSITION'||b.status!=='PASS'||b.capability!=='QUALIFICATION_GATED_MULTI_PARENT_TARGET_SELECTION_WITH_PROVENANCE_DIVERSITY_CONTAINMENT') process.exit(1); console.log(JSON.stringify({status:'PASS',capabilities:[a.capability,b.capability],provenance:b.provenance,boundary:b.boundary},null,2));"
+          node -e "const fs=require('fs'); const u=JSON.parse(fs.readFileSync('nostromo/vajra/dynamic-decomposition-last-result.json','utf8')); const a=JSON.parse(fs.readFileSync('nostromo/vajra/dynamic-multiparent-last-result.json','utf8')); const b=JSON.parse(fs.readFileSync('nostromo/vajra/target-qualification-guard-last-result.json','utf8')); if(u.status!=='PASS'||u.capability!=='QUALIFICATION_GATED_DYNAMIC_DECOMPOSITION_CORE'||a.status!=='PASS'||a.capability!=='QUALIFYING_RECEIPT_SCOPED_MULTI_PARENT_DYNAMIC_DECOMPOSITION'||b.status!=='PASS'||b.capability!=='QUALIFICATION_GATED_MULTI_PARENT_TARGET_SELECTION_WITH_PROVENANCE_DIVERSITY_CONTAINMENT') process.exit(1); console.log(JSON.stringify({status:'PASS',capabilities:[u.capability,a.capability,b.capability],provenance:b.provenance,boundary:'CI verifies qualification gating in the core decomposition path plus compatibility with the existing wrapper guard. It does not claim source truth, facet execution, or persistent self-modification.'},null,2));"
