@@ -11,7 +11,7 @@ const parent={status:'CONTESTED_BY_RECEIPTS',targetRef:'target-001',clauseRef:'c
 const state={status:'CONTESTED_BY_RECEIPTS',unresolved:[parent]};
 const gutReceipt={targetRef:'target-001',clauseRef:'clause-001',lens:'metabolic_contamination',organ:'GUT',status:'COMPLETED',provenance:'gut-triage-evidence-001',triageClassification:'PROVENANCE_COLLISION',summary:'De-identified structural triage found source aliases that must not be counted as independent evidence.'};
 
-check(V.dynamicDecompositionVersion==='0.9','DYNAMIC_DECOMPOSITION_VERSION_BASELINE_MISMATCH',V.dynamicDecompositionVersion);
+check(V.dynamicDecompositionVersion==='1.0','DYNAMIC_DECOMPOSITION_VERSION_BASELINE_MISMATCH',V.dynamicDecompositionVersion);
 
 const decomposed=V.planConflictDecomposition(state,[gutReceipt]);
 check(decomposed.status==='DECOMPOSED','QUALIFYING_TRIAGE_DID_NOT_DECOMPOSE',decomposed);
@@ -22,6 +22,7 @@ check(decomposed.facets?.some(f=>f.lens==='claim_relation'&&f.preferredOrgan==='
 check(decomposed.facets?.every(f=>f.targetRef==='target-001'&&f.clauseRef==='clause-001'),'PROVENANCE_SCOPE_LOST',decomposed.facets);
 check(Boolean(decomposed.provenance?.triageProvenanceFingerprint&&decomposed.provenance?.aliasAudit?.length===1),'PROVENANCE_AUDIT_NOT_RETAINED',decomposed.provenance);
 check(decomposed.behaviorRegulation?.classification==='PROVENANCE_COLLISION','PROVENANCE_PROFILE_NOT_AUDITED',decomposed.behaviorRegulation);
+check(decomposed.provenance?.independenceClaimed===false,'BASELINE_FALSE_INDEPENDENCE_CLAIM',decomposed.provenance);
 
 const duplicateReceipt={...gutReceipt,triageClassification:'DUPLICATE_CONTAMINATION',summary:'De-identified structural triage found repeated copies that must be clustered before evidential reconstruction.'};
 const duplicatePlan=V.planConflictDecomposition(state,[duplicateReceipt]);
@@ -88,20 +89,37 @@ for(const [label,alias] of [['AB',aliasAB],['BA',aliasBA]]){
   check(alias.provenance?.qualifyingReceiptCount===2,`CANONICAL_ALIAS_${label}_COUNT_LOST`,alias.provenance);
   check(alias.provenance?.canonicalAliasCount===2,`CANONICAL_ALIAS_${label}_NOT_RECOGNIZED`,alias.provenance);
   check(alias.provenance?.aliasAudit?.length===2,`CANONICAL_ALIAS_${label}_AUDIT_LOST`,alias.provenance);
+  check(alias.provenance?.distinctProvenanceCount===1,`CANONICAL_ALIAS_${label}_FALSE_DISTINCT_PROVENANCE`,alias.provenance);
 }
 check(aliasAB.provenance?.triageProvenanceFingerprint===aliasBA.provenance?.triageProvenanceFingerprint,'CANONICAL_ALIAS_FINGERPRINT_ORDER_DEPENDENT',{ab:aliasAB.provenance,ba:aliasBA.provenance});
 check(JSON.stringify(aliasAB.provenance?.aliasAudit)===JSON.stringify(aliasBA.provenance?.aliasAudit),'CANONICAL_ALIAS_AUDIT_ORDER_DEPENDENT',{ab:aliasAB.provenance,ba:aliasBA.provenance});
 check(JSON.stringify(aliasAB.facets)===JSON.stringify(aliasBA.facets),'CANONICAL_ALIAS_FACET_ORDER_DEPENDENT',{ab:aliasAB.facets,ba:aliasBA.facets});
+
+const agreeingDistinct={...gutReceipt,provenance:'gut-triage-evidence-777',summary:'A separately provenance-tagged completed GUT triage reaches the same contamination classification.'};
+const agreeAB=V.planConflictDecomposition(state,[gutReceipt,agreeingDistinct]);
+const agreeBA=V.planConflictDecomposition(state,[agreeingDistinct,gutReceipt]);
+for(const [label,plan] of [['AB',agreeAB],['BA',agreeBA]]){
+  check(plan.status==='DECOMPOSED',`DIAGNOSTIC_AGREEMENT_${label}_FALSE_HOLD`,plan);
+  check(plan.behaviorRegulation?.classification==='PROVENANCE_COLLISION',`DIAGNOSTIC_AGREEMENT_${label}_CLASSIFICATION_LOST`,plan.behaviorRegulation);
+  check(plan.provenance?.qualifyingReceiptCount===2,`DIAGNOSTIC_AGREEMENT_${label}_COUNT_LOST`,plan.provenance);
+  check(plan.provenance?.distinctProvenanceCount===2,`DIAGNOSTIC_AGREEMENT_${label}_PROVENANCE_COLLAPSED`,plan.provenance);
+  check(plan.provenance?.aliasAudit?.length===2,`DIAGNOSTIC_AGREEMENT_${label}_AUDIT_LOST`,plan.provenance);
+  check(plan.provenance?.independenceClaimed===false,`DIAGNOSTIC_AGREEMENT_${label}_FALSE_INDEPENDENCE_CLAIM`,plan.provenance);
+  check(plan.facets?.every(f=>f.preferredOrgan!=='DROPLET'),`DIAGNOSTIC_AGREEMENT_${label}_PING_PONG`,plan.facets);
+}
+check(JSON.stringify(agreeAB.facets)===JSON.stringify(agreeBA.facets),'DIAGNOSTIC_AGREEMENT_FACET_ORDER_DEPENDENT',{ab:agreeAB.facets,ba:agreeBA.facets});
+check(JSON.stringify(agreeAB.provenance?.aliasAudit)===JSON.stringify(agreeBA.provenance?.aliasAudit),'DIAGNOSTIC_AGREEMENT_AUDIT_ORDER_DEPENDENT',{ab:agreeAB.provenance,ba:agreeBA.provenance});
 
 const conflictingReceipt={...gutReceipt,provenance:'gut-triage-evidence-002',triageClassification:'DUPLICATE_CONTAMINATION',summary:'A different completed GUT triage claims a different contamination structure.'};
 const conflictAB=V.planConflictDecomposition(state,[gutReceipt,conflictingReceipt]);
 const conflictBA=V.planConflictDecomposition(state,[conflictingReceipt,gutReceipt]);
 for(const [label,held] of [['AB',conflictAB],['BA',conflictBA]]){
   check(held.status==='HOLD',`CONFLICT_${label}_DID_NOT_HOLD`,held);
-  check(held.reason==='conflicting-qualifying-gut-triage-receipts',`CONFLICT_${label}_WRONG_REASON`,held);
+  check(held.reason==='conflicting-qualifying-gut-triage-classifications',`CONFLICT_${label}_WRONG_REASON`,held);
   check((held.facets||[]).length===0,`CONFLICT_${label}_FACET_LEAK`,held.facets);
   check(held.parent?.closed===false,`CONFLICT_${label}_PARENT_FALSELY_CLOSED`,held.parent);
   check(held.conflict?.qualifyingReceiptCount===2,`CONFLICT_${label}_COUNT_LOST`,held.conflict);
+  check(held.conflict?.classifications?.length===2,`CONFLICT_${label}_CLASSIFICATION_AUDIT_LOST`,held.conflict);
 }
 check(JSON.stringify(conflictAB.conflict)===JSON.stringify(conflictBA.conflict),'CONFLICT_RESULT_ORDER_DEPENDENT',{conflictAB:conflictAB.conflict,conflictBA:conflictBA.conflict});
 
@@ -131,15 +149,15 @@ check(decomposed.facets?.every(f=>f.preferredOrgan!=='DROPLET'),'ORGAN_PING_PONG
 check(duplicatePlan.facets?.every(f=>f.preferredOrgan!=='DROPLET')&&mixedPlan.facets?.every(f=>f.preferredOrgan!=='DROPLET'),'CLASSIFICATION_PROFILE_REINTRODUCED_PING_PONG',{duplicate:duplicatePlan.facets,mixed:mixedPlan.facets});
 
 const result={
-  schema:'zenomorph-vajra-dynamic-decomposition-test/v0.8',
+  schema:'zenomorph-vajra-dynamic-decomposition-test/v1.0',
   completedAt:new Date().toISOString(),
   status:failures.length?'FAIL':'PASS',
-  capability:'GUT_CLASSIFICATION_REGULATED_DYNAMIC_DECOMPOSITION_WITH_REPLAY_AND_PROVENANCE_CONTAINMENT',
-  tests:{decomposed,duplicatePlan,mixedPlan,replayTriple,reorderedReplay,transportSuppressed,equivalent,nestedDistinct,aliasAB,aliasBA,conflictAB,conflictBA,conflictWithReplay,adversarialCases:adversarial.length,echoBreak},
-  provenance:{fixture:'de-identified synthetic cross-organ receipt contract',sourceFiles:['nostromo/vajra/vajra-engine.js','nostromo/vajra/dynamic-reinspection.js','nostromo/vajra/dynamic-decomposition.js'],failureEvidence:'nostromo/failure-log/2026-09-08-vajra-triage-classification-behavior-invariance.json'},
+  capability:'GUT_DIAGNOSTIC_AGREEMENT_REGULATED_DYNAMIC_DECOMPOSITION_WITH_REPLAY_AND_PROVENANCE_CONTAINMENT',
+  tests:{decomposed,duplicatePlan,mixedPlan,replayTriple,reorderedReplay,transportSuppressed,equivalent,nestedDistinct,aliasAB,aliasBA,agreeAB,agreeBA,conflictAB,conflictBA,conflictWithReplay,adversarialCases:adversarial.length,echoBreak},
+  provenance:{fixture:'de-identified synthetic cross-organ receipt contract',sourceFiles:['nostromo/vajra/vajra-engine.js','nostromo/vajra/dynamic-reinspection.js','nostromo/vajra/dynamic-decomposition.js'],failureEvidence:'nostromo/failure-log/2026-09-09-vajra-provenance-diagnostic-conflation.json'},
   failures,
   failureLog:{count:failures.length,entries:failures},
-  boundary:'PASS proves only that the three already-authorized completed GUT contamination classifications select distinct bounded VAJRA decomposition profiles while preserving replay suppression, provenance audit, conflict HOLD behavior, the open contested parent, and the existing GUT echo-break regression. It does not prove semantic contamination detection, source truth, connector integrity, generated-facet execution, autonomous organ creation, or body admission.'
+  boundary:'PASS proves only that distinct provenance no longer creates false diagnostic conflict when qualifying GUT receipts agree on one authorized contamination classification, while classification disagreement still HOLDs with zero facets, replay suppression and provenance audit remain intact, no source-independence claim is manufactured, the contested parent remains open, and the existing GUT echo-break regression holds. It does not prove semantic contamination detection, source truth, source independence, connector integrity, generated-facet execution, autonomous organ creation, or body admission.'
 };
 await fs.writeFile('nostromo/vajra/dynamic-decomposition-last-result.json',JSON.stringify(result,null,2)+'\n');
 console.log(JSON.stringify(result,null,2));
