@@ -18,6 +18,7 @@ on:
       - 'nostromo/failure-log/2026-09-08-vajra-triage-classification-behavior-invariance.json'
       - 'nostromo/failure-log/2026-09-08-vajra-multiparent-target-selection.json'
       - 'nostromo/failure-log/2026-09-08-vajra-nonqualifying-receipt-target-pollution.json'
+      - 'nostromo/failure-log/2026-09-09-vajra-agreeing-distinct-provenance-false-conflict.json'
       - '.github/workflows/nostromo-vajra-dynamic-decomposition-test.yml'
   workflow_dispatch:
 
@@ -46,4 +47,4 @@ jobs:
         run: node nostromo/integration/vajra-dynamic-test.mjs
       - name: Evidence boundary
         run: |
-          node -e "const fs=require('fs'); const a=JSON.parse(fs.readFileSync('nostromo/vajra/dynamic-multiparent-last-result.json','utf8')); const b=JSON.parse(fs.readFileSync('nostromo/vajra/target-qualification-guard-last-result.json','utf8')); if(a.status!=='PASS'||a.capability!=='RECEIPT_SCOPED_MULTI_PARENT_DYNAMIC_DECOMPOSITION'||b.status!=='PASS'||b.capability!=='QUALIFICATION_GATED_MULTI_PARENT_TARGET_SELECTION') process.exit(1); console.log(JSON.stringify({status:'PASS',capabilities:[a.capability,b.capability],provenance:b.provenance,boundary:b.boundary},null,2));"
+          node -e "const fs=require('fs'); const a=JSON.parse(fs.readFileSync('nostromo/vajra/dynamic-multiparent-last-result.json','utf8')); const b=JSON.parse(fs.readFileSync('nostromo/vajra/target-qualification-guard-last-result.json','utf8')); if(a.status!=='PASS'||a.capability!=='RECEIPT_SCOPED_MULTI_PARENT_DYNAMIC_DECOMPOSITION'||b.status!=='PASS'||b.capability!=='QUALIFICATION_GATED_MULTI_PARENT_TARGET_SELECTION_WITH_PROVENANCE_DIVERSITY_CONTAINMENT') process.exit(1); console.log(JSON.stringify({status:'PASS',capabilities:[a.capability,b.capability],provenance:b.provenance,boundary:b.boundary},null,2));"
