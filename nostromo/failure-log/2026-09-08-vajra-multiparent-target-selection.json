@@ -1,0 +1,18 @@
+{
+  "schema": "zenomorph-failure-evidence/v1",
+  "observedAt": "2026-09-08T09:04:00Z",
+  "organ": "VAJRA",
+  "capability": "dynamic-decomposition",
+  "status": "OPEN_NOT_PROMOTED",
+  "failure": "FIRST_PARENT_SELECTION_CAN_MISROUTE_VALID_GUT_TRIAGE",
+  "description": "planConflictDecomposition currently selects the first unresolved CONTESTED_BY_RECEIPTS/source_quality branch before qualifying receipts. In a state with multiple contested source-quality parents, a valid completed GUT contamination triage scoped to a later parent is rejected as scope-mismatch against the first parent, so downstream decomposition can depend on branch ordering rather than receipt scope.",
+  "risk": [
+    "valid metabolic diagnosis can be ignored",
+    "branch ordering can alter downstream organ routing",
+    "multiple simultaneous conflicts are not independently decomposable",
+    "arrival/order artifacts can masquerade as a cognitive decision"
+  ],
+  "requiredResolution": "Select a contested parent by exact targetRef+clauseRef evidence scope. If receipts target more than one contested parent in one bounded decomposition call, HOLD explicitly instead of choosing by order. Preserve existing single-parent behavior and all provenance/replay containment.",
+  "provenance": "Derived only from current public repository code structure and synthetic de-identified fixtures. No private Drive names, IDs, URLs, or source text are included.",
+  "promotionRule": "Do not promote until a dedicated multi-parent unit/adversarial test and existing cross-organ regressions pass in GitHub Actions."
+}
