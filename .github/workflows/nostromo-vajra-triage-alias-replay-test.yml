@@ -1,0 +1,37 @@
+name: NOSTROMO VAJRA Triage Alias Replay Test
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'nostromo/vajra/triage-alias-replay-guard.js'
+      - 'nostromo/vajra/triage-alias-replay-test.mjs'
+      - 'nostromo/vajra/dynamic-decomposition.js'
+      - 'nostromo/vajra/dynamic-reinspection.js'
+      - 'nostromo/vajra/vajra-engine.js'
+      - 'nostromo/integration/gut-metabolism-test.mjs'
+      - 'nostromo/integration/vajra-dynamic-test.mjs'
+      - 'nostromo/failure-log/2026-09-08-vajra-triage-schema-alias-replay.json'
+      - '.github/workflows/nostromo-vajra-triage-alias-replay-test.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  triage-alias-replay-containment:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: VAJRA alias replay unit, adversarial, provenance and cross-organ behavior test
+        run: node nostromo/vajra/triage-alias-replay-test.mjs
+      - name: Existing GUT cross-organ regression
+        run: node nostromo/integration/gut-metabolism-test.mjs
+      - name: Existing VAJRA cross-organ regression
+        run: node nostromo/integration/vajra-dynamic-test.mjs
+      - name: Evidence boundary
+        run: |
+          node -e "const fs=require('fs'); const p='nostromo/vajra/triage-alias-replay-last-result.json'; const r=JSON.parse(fs.readFileSync(p,'utf8')); if(r.status!=='PASS'||r.capability!=='GUT_TRIAGE_SCHEMA_ALIAS_REPLAY_CONTAINMENT') process.exit(1); console.log(JSON.stringify({status:r.status,capability:r.capability,provenance:r.provenance,boundary:r.boundary},null,2));"
