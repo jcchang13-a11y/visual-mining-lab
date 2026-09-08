@@ -1,0 +1,21 @@
+{
+  "schema": "zenomorph-failure-evidence/v0.1",
+  "organ": "VAJRA",
+  "status": "OPEN_NOT_PROMOTED",
+  "class": "NONQUALIFYING_RECEIPT_TARGET_POLLUTION",
+  "observedAt": "2026-09-08",
+  "surface": "dynamic decomposition multi-parent target selection",
+  "failure": "When more than one source-quality parent is contested, selectTargetParent currently counts any receipt carrying a matching targetRef+clauseRef before checking whether that receipt is a completed GUT contamination-triage receipt. A non-GUT, incomplete, provenance-empty, or non-decomposing receipt can therefore add a second matched parent and force MULTIPLE/HOLD, suppressing an otherwise valid single-parent GUT decomposition.",
+  "risk": "Cross-organ noise can regulate VAJRA behavior without passing the same qualification boundary required to create decomposition. This is a denial/pollution path: an irrelevant receipt does not manufacture certainty, but it can block a valid behavior change and make routing depend on unrelated traffic.",
+  "requiredRepair": "Multi-parent target selection must derive target candidates only from receipts that satisfy the bounded preconditions for GUT contamination triage, then run full parent-scoped qualification after selecting exactly one parent. Rejected noise must remain auditable and must not silently disappear.",
+  "requiredTests": [
+    "valid GUT receipt for parent B plus non-GUT scoped noise for parent A still decomposes B",
+    "valid GUT receipt plus incomplete GUT noise on another parent still decomposes the valid parent",
+    "two genuinely qualifying GUT receipts targeting two parents still HOLD",
+    "no qualifying scoped target among multiple parents still HOLD",
+    "branch order and receipt order do not change the result",
+    "existing single-parent qualification and provenance/replay regressions remain PASS"
+  ],
+  "provenance": "Derived from public repository code inspection only; synthetic de-identified fixtures are sufficient to reproduce. No private connector data is involved.",
+  "promotion": "Do not promote until focused unit/adversarial tests and cross-organ integration regression pass in GitHub Actions."
+}
