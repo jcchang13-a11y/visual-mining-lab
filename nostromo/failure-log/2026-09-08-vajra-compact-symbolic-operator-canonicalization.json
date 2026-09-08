@@ -1,0 +1,25 @@
+{
+  "schema": "zenomorph-failure-evidence/v0.1",
+  "organ": "VAJRA",
+  "status": "OPEN_NOT_PROMOTED",
+  "observedAt": "2026-09-08",
+  "capabilityCandidate": "COMPACT_SYMBOLIC_OPERATOR_PRESERVATION",
+  "problem": "Operator-preservation v0.3 protects spaced alphanumeric operands and compact numeric operands, but compact symbolic-variable forms such as x*y, x^y, x÷y, x−y and x%y can still lose their operator during replay canonicalization and collapse toward the same material identity as xy. This can create false replay suppression and erase a genuine contested branch.",
+  "risk": [
+    "false replay deduplication",
+    "operator-bearing evidence contamination",
+    "loss of downstream contest routing",
+    "fake certainty from collapsed symbolic evidence"
+  ],
+  "requiredBoundary": "Do not solve this by preserving every compact slash or hyphen. ASCII slash remains ambiguous with paths such as a/b, and ASCII hyphen remains ambiguous with lexical compounds. Promotion must be bounded to compact variable forms with a restricted operator set while retaining path/non-arithmetic negative controls.",
+  "requiredVerification": [
+    "VAJRA unit identity test",
+    "adversarial opposing-receipt contest test",
+    "cross-organ next-inspection regression",
+    "provenance replay regression",
+    "compact slash/path negative control",
+    "full integration regression"
+  ],
+  "provenance": "Public repository code and synthetic de-identified fixtures only. No private connector source text, file name, ID, or URL is included.",
+  "promotionRule": "Remain OPEN_NOT_PROMOTED until GitHub Actions verifies the implementation and cross-organ regression."
+}
