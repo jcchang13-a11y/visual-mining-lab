@@ -1,0 +1,17 @@
+{
+  "schema": "zenomorph-failure-evidence/v1",
+  "date": "2026-09-08",
+  "organ": "VAJRA",
+  "status": "OPEN_NOT_PROMOTED",
+  "capability": "DYNAMIC_DECOMPOSITION_REPLAY_RESISTANCE",
+  "observed": "VAJRA dynamic decomposition v0.4 qualifies every matching completed GUT contamination-triage receipt independently. Byte-identical receipt replays therefore inflate qualifyingReceiptCount and aliasAudit even though they carry no new provenance or structural evidence.",
+  "risk": [
+    "metabolic echo can masquerade as evidence multiplicity",
+    "duplicate transport/retry events can pollute provenance audit counts",
+    "conflict audit counts can be inflated without any new independent triage evidence",
+    "downstream observers may mistake replay volume for evidential weight"
+  ],
+  "requiredFix": "Suppress exact qualifying receipt replays by receipt fingerprint before decomposition/conflict counting, retain an explicit rejected replay audit, preserve genuine alias variants and genuinely conflicting receipts, and keep parent conflict open.",
+  "provenance": "Static inspection of public repository code and de-identified synthetic receipt contract only. No private Drive names, IDs, URLs, or source text are stored.",
+  "promotionBoundary": "Do not promote until unit, adversarial, cross-organ regression and GitHub Actions verify exact replay suppression without collapsing distinct aliases or genuine conflict."
+}
