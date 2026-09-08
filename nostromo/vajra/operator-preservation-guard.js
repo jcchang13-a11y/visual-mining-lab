@@ -1,10 +1,10 @@
-/* VAJRA arithmetic operator-preservation guard v0.2 — prevents replay identity from collapsing bounded arithmetic evidence, including common Unicode mathematical glyphs */
+/* VAJRA arithmetic operator-preservation guard v0.3 — prevents replay identity from collapsing bounded arithmetic evidence, including common Unicode mathematical glyphs plus caret/percent operator forms */
 (function(root){
   const api=root.VajraEngine;
   if(!api||typeof api.applyHandoffResults!=='function'||typeof api.canonicalEvidenceMaterial!=='function'){
     throw new Error('VAJRA_ENGINE_REQUIRED_BEFORE_OPERATOR_PRESERVATION_GUARD');
   }
-  if(api.operatorPreservationGuardVersion==='0.2') return;
+  if(api.operatorPreservationGuardVersion==='0.3') return;
 
   const baseApply=api.applyHandoffResults.bind(api);
   const baseCanonical=api.canonicalEvidenceMaterial.bind(api);
@@ -13,6 +13,8 @@
     if(op==='*'||op==='×') return 'opmul';
     if(op==='/'||op==='÷'||op==='∕') return 'opdiv';
     if(op==='−') return 'opsub';
+    if(op==='^') return 'opcaret';
+    if(op==='%') return 'oppercent';
     return `op${op.codePointAt(0).toString(16)}`;
   };
 
@@ -20,8 +22,9 @@
     let s=String(text??'').normalize('NFKC');
     // Match only explicit arithmetic-looking contexts: spaced symbolic operands or compact numeric operands.
     // U+2212 (−) and U+2215 (∕) are common in scientific/mathematical text and otherwise risk symbol stripping.
-    s=s.replace(/([\p{L}\p{N}_])\s+([*\/×÷−∕])\s+([\p{L}\p{N}_])/gu,(_,a,op,b)=>`${a} ${tokenFor(op)} ${b}`);
-    s=s.replace(/(\p{N})([*\/×÷−∕])(\p{N})/gu,(_,a,op,b)=>`${a} ${tokenFor(op)} ${b}`);
+    // Caret and percent are preserved structurally, not interpreted semantically: 2^8 / 17%5 qualify; trailing 95% does not.
+    s=s.replace(/([\p{L}\p{N}_])\s+([*\/×÷−∕^%])\s+([\p{L}\p{N}_])/gu,(_,a,op,b)=>`${a} ${tokenFor(op)} ${b}`);
+    s=s.replace(/(\p{N})([*\/×÷−∕^%])(\p{N})/gu,(_,a,op,b)=>`${a} ${tokenFor(op)} ${b}`);
     return s;
   }
 
@@ -78,10 +81,10 @@
     return {
       ...out,
       operatorPreservation:{
-        version:'0.2',
-        protected:['*','/','×','÷','−','∕'],
+        version:'0.3',
+        protected:['*','/','×','÷','−','∕','^','%'],
         scope:'arithmetic-looking contexts only',
-        boundary:'The guard preserves multiplication/division plus the common Unicode mathematical minus and division-slash glyphs for replay identity only when symbols occur between spaced alphanumeric operands or compact numeric operands. It does not claim semantic parsing and intentionally does not reinterpret arbitrary path or URL punctuation as arithmetic.'
+        boundary:'The guard preserves multiplication/division, common Unicode mathematical minus/division-slash glyphs, and caret/percent operator identity only when symbols occur between spaced alphanumeric operands or compact numeric operands. It does not claim semantic parsing; trailing percentages and arbitrary path/URL punctuation are intentionally not promoted to arithmetic.'
       }
     };
   }
@@ -90,5 +93,5 @@
   api.applyHandoffResults=wrappedApply;
   api.canonicalEvidenceMaterial=canonicalArithmeticMaterial;
   api.evidenceIdentity=evidenceIdentity;
-  api.operatorPreservationGuardVersion='0.2';
+  api.operatorPreservationGuardVersion='0.3';
 })(typeof window!=='undefined'?window:globalThis);
