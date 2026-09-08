@@ -1,0 +1,21 @@
+{
+  "schema": "zenomorph-ci-evidence/v1",
+  "organ": "VAJRA",
+  "capability": "GUT_TRIAGE_SCHEMA_ALIAS_REPLAY_CONTAINMENT",
+  "status": "PASS",
+  "workflow": "NOSTROMO VAJRA Triage Alias Replay Test",
+  "runId": 34202635933,
+  "headSha": "067a050fa1c0a1bcb26cab36d1315360b09d9cc3",
+  "conclusion": "success",
+  "completedAt": "2026-09-08T08:06:03Z",
+  "verifiedChecks": [
+    "focused alias-equivalence replay suppression",
+    "conflicting alias HOLD behavior",
+    "raw conflict-value non-leakage",
+    "existing GUT cross-organ regression",
+    "existing VAJRA cross-organ regression",
+    "evidence boundary"
+  ],
+  "provenance": "Public GitHub Actions metadata only. No private Drive names, IDs, URLs, or source text are included.",
+  "boundary": "PASS establishes only the tested schema-alias replay containment behavior. It does not establish semantic equivalence beyond the explicit alias allowlist, source truth, capability installation, autonomous self-modification, or organism-level assimilation."
+}
