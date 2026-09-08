@@ -9,11 +9,14 @@
   if(!article) return;
 
   const structureLine=/^\s*(?:PLS|P|L|S|N|F)\s*[：:]/;
+  const bracketStructureLine=/^\s*\[\[(?!\/?(?:SUTRA|WORK|FIGURE)\b)[^\]\n]+\]\]\s*$/i;
+  const sectionLabelLine=/^\s*［(?:正文|註釋|經文)］\s*$/;
+  const pageCounterLine=/^\s*\d+\/\d+\s*$/;
   const workLine=/^\s*(?:施工註記|工作註記|暫記|待查|未決|停工|死路)\s*[：:]/;
   const excluded='.sutra-block,.gcb-formula,.structure-code,.work-note,.figure-slot,figure,figcaption,script,style';
 
   function classify(line){
-    if(structureLine.test(line)) return 'structure-code structure-line';
+    if(structureLine.test(line)||bracketStructureLine.test(line)||sectionLabelLine.test(line)||pageCounterLine.test(line)) return 'structure-code structure-line';
     if(workLine.test(line)) return 'work-note work-note-line';
     return '';
   }
@@ -21,7 +24,7 @@
   function markTextNode(node){
     if(!node?.nodeValue || node.parentElement?.closest(excluded)) return false;
     const value=node.nodeValue;
-    if(!/[：:]/.test(value)) return false;
+    if(!/[：:\[\]［］\/]/.test(value)) return false;
     const lines=value.split('\n');
     if(!lines.some(line=>classify(line))) return false;
 
