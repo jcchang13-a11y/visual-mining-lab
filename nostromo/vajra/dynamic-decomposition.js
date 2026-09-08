@@ -1,4 +1,4 @@
-/* VAJRA dynamic decomposition v0.7 — qualifying GUT contamination triage can split a repeated source-quality conflict into bounded follow-up facets; qualifying receipt replays are suppressed by deterministic structured identity so object-key serialization order and explicitly declared top-level transport metadata cannot masquerade as evidence multiplicity; canonical provenance aliases cannot manufacture disagreement or order-dependent provenance selection, while genuinely conflicting qualifying triage receipts force a HOLD */
+/* VAJRA dynamic decomposition v0.8 — qualifying GUT contamination triage now changes the bounded decomposition profile by classification; qualifying receipt replays are suppressed by deterministic structured identity so object-key serialization order and explicitly declared top-level transport metadata cannot masquerade as evidence multiplicity; canonical provenance aliases cannot manufacture disagreement or order-dependent provenance selection, while genuinely conflicting qualifying triage receipts force a HOLD */
 (function(root){
   const api=root.VajraEngine;
   if(!api||typeof api.selectNextInspection!=='function') throw new Error('VajraEngine + dynamic-reinspection must be loaded before dynamic-decomposition');
@@ -52,6 +52,16 @@
     };
   }
 
+  function facetsForClassification(parent,classification,shared){
+    const sourceIdentity={...shared,facetId:`${parent.clauseRef}:identity`,lens:'source_identity',preferredOrgan:'GUT',need:'isolate alias/provenance-collision structure without adjudicating claim truth',reason:'Provenance collision keeps source identity as a separate unresolved structural question.'};
+    const duplicateCluster={...shared,facetId:`${parent.clauseRef}:duplicates`,lens:'duplicate_cluster',preferredOrgan:'GUT',need:'isolate replay/duplication structure and determine which copies must not count as independent evidence',reason:'Duplicate contamination requires explicit duplicate clustering before evidential relations are reconstructed.'};
+    const claimRelation={...shared,facetId:`${parent.clauseRef}:relation`,lens:'claim_relation',preferredOrgan:'MUTHER',need:'re-evaluate how surviving material relates to the clause after contaminated copies are not counted as independent support/opposition',reason:'Source contamination changes the evidential relation that must be reconstructed from retained provenance.'};
+    if(classification==='PROVENANCE_COLLISION') return [sourceIdentity,claimRelation];
+    if(classification==='DUPLICATE_CONTAMINATION') return [duplicateCluster,claimRelation];
+    if(classification==='MIXED_CONTAMINATION') return [sourceIdentity,duplicateCluster,claimRelation];
+    return [];
+  }
+
   function planConflictDecomposition(result,receipts=[]){
     const branches=Array.isArray(result?.unresolved)?result.unresolved:[];
     const parent=branches.find(b=>b?.status==='CONTESTED_BY_RECEIPTS'&&b?.lens==='source_quality');
@@ -86,7 +96,7 @@
         .map(([signature,receiptFingerprints])=>({signatureFingerprint:fp(signature),receiptFingerprints:[...receiptFingerprints].sort()}))
         .sort((a,b)=>a.signatureFingerprint.localeCompare(b.signatureFingerprint)||JSON.stringify(a.receiptFingerprints).localeCompare(JSON.stringify(b.receiptFingerprints)));
       return {
-        schema:'zenomorph-vajra-dynamic-decomposition/v0.7',
+        schema:'zenomorph-vajra-dynamic-decomposition/v0.8',
         status:'HOLD',
         reason:'conflicting-qualifying-gut-triage-receipts',
         parent:{targetRef:parent.targetRef,clauseRef:parent.clauseRef,lens:parent.lens,status:parent.status,closed:false},
@@ -94,23 +104,24 @@
         conflict:{signatures:signatureAudit,qualifyingReceiptCount:qualified.length},
         replaySuppression:replayAudit(duplicateReplayCount),
         rejected,
-        boundary:'Multiple unique qualifying GUT triage receipts that disagree on classification or canonical provenance cannot be resolved by arrival order. Replay identity recursively sorts object keys and removes only a bounded allowlist of top-level transport-only fields before fingerprinting; evidence-bearing values, arrays, nested objects, summary, provenance, classification, scope, organ and status remain significant. Conflict evidence is emitted deterministically and VAJRA must preserve the parent conflict rather than manufacture certainty.'
+        boundary:'Multiple unique qualifying GUT triage receipts that disagree on classification or canonical provenance cannot be resolved by arrival order. Classification disagreement cannot manufacture a decomposition profile. Replay identity recursively sorts object keys and removes only a bounded allowlist of top-level transport-only fields before fingerprinting; evidence-bearing values, arrays, nested objects, summary, provenance, classification, scope, organ and status remain significant. Conflict evidence is emitted deterministically and VAJRA must preserve the parent conflict rather than manufacture certainty.'
       };
     }
 
     const canonicalRepresentative=[...qualified].sort((a,b)=>a.q.canonicalProvenance.localeCompare(b.q.canonicalProvenance)||a.q.classification.localeCompare(b.q.classification)||a.q.receiptFingerprint.localeCompare(b.q.receiptFingerprint))[0];
     const aliasAudit=auditQualifiedAliases(qualified);
     const shared={targetRef:parent.targetRef,clauseRef:parent.clauseRef,parentLens:parent.lens,parentStatus:parent.status,triageClassification:canonicalRepresentative.q.classification,triageProvenanceFingerprint:fp(canonicalRepresentative.q.canonicalProvenance),status:'OPEN'};
-    const facets=[
-      {...shared,facetId:`${parent.clauseRef}:identity`,lens:'source_identity',preferredOrgan:'GUT',need:'isolate duplicate/alias/provenance-collision structure without adjudicating claim truth',reason:'Contamination triage makes source identity a separate unresolved structural question.'},
-      {...shared,facetId:`${parent.clauseRef}:relation`,lens:'claim_relation',preferredOrgan:'MUTHER',need:'re-evaluate how the surviving material relates to the clause after contaminated copies are not counted as independent support/opposition',reason:'Source contamination changes the evidential relation that must be reconstructed from retained provenance.'}
-    ];
+    const facets=facetsForClassification(parent,canonicalRepresentative.q.classification,shared);
+    if(!facets.length){
+      return {schema:'zenomorph-vajra-dynamic-decomposition/v0.8',status:'HOLD',reason:'no-bounded-profile-for-qualified-classification',parent:{targetRef:parent.targetRef,clauseRef:parent.clauseRef,lens:parent.lens,status:parent.status,closed:false},facets:[],replaySuppression:replayAudit(duplicateReplayCount),rejected,boundary:'A qualifying receipt may not create downstream behavior unless VAJRA has an explicit bounded decomposition profile for that classification.'};
+    }
     return {
-      schema:'zenomorph-vajra-dynamic-decomposition/v0.7',
+      schema:'zenomorph-vajra-dynamic-decomposition/v0.8',
       status:'DECOMPOSED',
-      reason:'qualifying-gut-contamination-triage-split-parent-conflict',
+      reason:'qualifying-gut-contamination-triage-selected-bounded-profile',
       parent:{targetRef:parent.targetRef,clauseRef:parent.clauseRef,lens:parent.lens,status:parent.status,closed:false},
       facets,
+      behaviorRegulation:{classification:canonicalRepresentative.q.classification,profileFingerprint:fp(facets.map(f=>`${f.lens}:${f.preferredOrgan}`).join('|')),facetCount:facets.length},
       provenance:{
         triageClassification:canonicalRepresentative.q.classification,
         triageProvenance:canonicalRepresentative.q.provenance,
@@ -123,11 +134,11 @@
       },
       replaySuppression:replayAudit(duplicateReplayCount),
       rejected,
-      boundary:'Dynamic decomposition is a reversible routing/inspection plan. Qualifying GUT receipt replay identity recursively sorts object keys and ignores only a bounded allowlist of top-level transport metadata, preventing delivery wrappers from manufacturing evidential multiplicity. Nested values and all evidence-bearing fields remain significant. Replays are retained as explicit rejected audit entries. Canonical provenance aliases remain traceable, the contested parent remains open, and this does not decide source truth, prove source independence, or claim GUT or MUTHER executed the generated facets.'
+      boundary:'Dynamic decomposition is a reversible routing/inspection plan. A completed qualifying GUT contamination classification now selects one explicit bounded VAJRA decomposition profile, so upstream metabolic diagnosis changes downstream behavior without adding certainty. Replay identity recursively sorts object keys and ignores only a bounded allowlist of top-level transport metadata. Replays remain explicit rejected audit entries, canonical provenance aliases remain traceable, the contested parent remains open, and this does not decide source truth, prove source independence, or claim any generated facet was executed.'
     };
   }
 
   api.qualifyContaminationTriageReceipt=qualifyTriageReceipt;
   api.planConflictDecomposition=planConflictDecomposition;
-  api.dynamicDecompositionVersion='0.7';
+  api.dynamicDecompositionVersion='0.8';
 })(typeof window!=='undefined'?window:globalThis);
