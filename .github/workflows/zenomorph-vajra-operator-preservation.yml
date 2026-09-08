@@ -1,0 +1,29 @@
+name: ZENOMORPH VAJRA Operator Preservation
+
+on:
+  push:
+    paths:
+      - 'nostromo/vajra/operator-preservation-guard.js'
+      - 'nostromo/vajra/operator-preservation-test.mjs'
+      - '.github/workflows/zenomorph-vajra-operator-preservation.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: VAJRA operator-preservation unit adversarial provenance and cross-organ regression
+        run: node nostromo/vajra/operator-preservation-test.mjs
+      - name: Preserve generated evidence as CI artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: vajra-operator-preservation-evidence
+          path: nostromo/vajra/operator-preservation-last-result.json
+          if-no-files-found: error
