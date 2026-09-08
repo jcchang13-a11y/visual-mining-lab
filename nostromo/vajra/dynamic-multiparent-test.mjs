@@ -15,7 +15,7 @@ const stateBA={status:'CONTESTED_BY_RECEIPTS',unresolved:[parentB,parentA]};
 const receiptA={targetRef:'target-A',clauseRef:'clause-A',lens:'metabolic_contamination',organ:'GUT',status:'COMPLETED',provenance:'gut-triage-A',triageClassification:'PROVENANCE_COLLISION',summary:'Synthetic triage A'};
 const receiptB={targetRef:'target-B',clauseRef:'clause-B',lens:'metabolic_contamination',organ:'GUT',status:'COMPLETED',provenance:'gut-triage-B',triageClassification:'DUPLICATE_CONTAMINATION',summary:'Synthetic triage B'};
 
-check(V.dynamicDecompositionVersion==='0.9','DYNAMIC_DECOMPOSITION_VERSION_NOT_09',V.dynamicDecompositionVersion);
+check(V.dynamicDecompositionVersion==='1.0','DYNAMIC_DECOMPOSITION_VERSION_NOT_10',V.dynamicDecompositionVersion);
 
 const bFromAB=V.planConflictDecomposition(stateAB,[receiptB]);
 const bFromBA=V.planConflictDecomposition(stateBA,[receiptB]);
@@ -54,14 +54,14 @@ check(wrongScope.reason==='qualifying-gut-contamination-triage-required','SINGLE
 check(wrongScope.rejected?.some(x=>x.reason==='scope-mismatch'),'SINGLE_PARENT_SCOPE_REJECTION_AUDIT_LOST',wrongScope.rejected);
 
 const result={
-  schema:'zenomorph-vajra-dynamic-multiparent-test/v0.1',
+  schema:'zenomorph-vajra-dynamic-multiparent-test/v0.2',
   completedAt:new Date().toISOString(),
   status:failures.length?'FAIL':'PASS',
   capability:'RECEIPT_SCOPED_MULTI_PARENT_DYNAMIC_DECOMPOSITION',
   tests:{bFromAB,bFromBA,aFromAB,multiAB,multiBA,unscoped,wrongScope},
   provenance:{fixture:'synthetic de-identified multi-parent contested state',failureEvidence:'nostromo/failure-log/2026-09-08-vajra-multiparent-target-selection.json'},
   failures,
-  boundary:'PASS proves only that VAJRA can select exactly one contested source-quality parent by receipt targetRef+clauseRef independent of branch order, and HOLD when one bounded call targets multiple parents or leaves a multi-parent target ambiguous. It does not execute generated facets, decide source truth, or admit a capability into persistent body state.'
+  boundary:'PASS proves only that VAJRA v1.0 can select exactly one contested source-quality parent by receipt targetRef+clauseRef independent of branch order, and HOLD when one bounded call targets multiple parents or leaves a multi-parent target ambiguous. It does not execute generated facets, decide source truth, or admit a capability into persistent body state.'
 };
 await fs.writeFile('nostromo/vajra/dynamic-multiparent-last-result.json',JSON.stringify(result,null,2)+'\n');
 console.log(JSON.stringify(result,null,2));
