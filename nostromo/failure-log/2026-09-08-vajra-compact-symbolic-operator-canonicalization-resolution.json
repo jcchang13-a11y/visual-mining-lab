@@ -1,0 +1,34 @@
+{
+  "schema": "zenomorph-failure-resolution/v0.1",
+  "organ": "VAJRA",
+  "status": "RESOLVED_CI_VERIFIED",
+  "resolvedAt": "2026-09-08",
+  "resolves": "nostromo/failure-log/2026-09-08-vajra-compact-symbolic-operator-canonicalization.json",
+  "capability": "BOUNDED_COMPACT_SYMBOLIC_OPERATOR_PRESERVATION",
+  "implementation": {
+    "path": "nostromo/vajra/operator-preservation-guard.js",
+    "version": "0.4",
+    "test": "nostromo/vajra/compact-symbolic-operator-test.mjs"
+  },
+  "failedAttemptRetained": {
+    "githubActionsRunId": 34242777463,
+    "conclusion": "failure",
+    "failure": "OVERLONG_IDENTIFIER_FALSELY_PROMOTED"
+  },
+  "verifiedCommit": "13fb901f4e3c28a3b6365a9a78b77a99c3223490",
+  "githubActions": {
+    "workflow": "NOSTROMO VAJRA operator preservation",
+    "runId": 34242913048,
+    "conclusion": "success",
+    "verifiedSteps": [
+      "VAJRA existing operator unit and adversarial regression",
+      "VAJRA compact symbolic operator unit and adversarial regression",
+      "VAJRA provenance independence regression",
+      "Cross-organ integration regression"
+    ]
+  },
+  "behaviorChange": "Compact symbolic-variable receipts using *, ×, ÷, −, ∕, ^ and % can now preserve operator-bearing replay identity when both operands are whole bounded identifiers. This prevents those receipts from collapsing toward operator-stripped material and allows genuine opposing evidence to preserve a contested branch that changes subsequent inspection routing.",
+  "negativeControls": "Compact ASCII slash and ASCII hyphen remain deliberately unpromoted because a/b and a-b are structurally ambiguous with paths and lexical compounds. Overlong identifiers are also not partially promoted: whole-token boundaries are required.",
+  "provenance": "Public repository code and synthetic de-identified fixtures only. No private connector source text, file name, ID, or URL was used or written.",
+  "boundary": "This proves bounded structural operator preservation and downstream contest routing, not arithmetic semantics, source truth, unrestricted formula parsing, or autonomous self-modification."
+}
