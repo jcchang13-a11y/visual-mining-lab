@@ -1,0 +1,18 @@
+{
+  "schema": "zenomorph-failure-evidence/v1",
+  "recordedAt": "2026-09-09T04:05:00Z",
+  "organ": "VAJRA",
+  "status": "OPEN_NOT_PROMOTED",
+  "failureClass": "SCHEMA_ALIAS_FALSE_CONFLICT",
+  "capability": "GUT_TRIAGE_ORGAN_ALIAS_IDENTITY",
+  "observation": "triage-alias-replay-guard v0.3 compares organ/sourceOrgan with whitespace cleaning only. Therefore canonical organ=GUT and alias sourceOrgan=gut are treated as contradictory schema fields even though downstream qualification uses the declared organ identity GUT. A transport-level case variation can manufacture HOLD without any diagnostic disagreement.",
+  "risk": "Formatting-only schema variation can create false uncertainty and stop cross-organ decomposition. This is a false-HOLD path rather than a truth-preserving conservative hold because the disagreement is representational, not evidential.",
+  "requiredFix": [
+    "Define a bounded canonical identity for declared organ aliases that is case-insensitive after whitespace normalization.",
+    "Do not collapse genuinely different organ names such as GUT and DROPLET.",
+    "Add adversarial coverage showing GUT/gut equivalence does not HOLD while GUT/DROPLET still HOLDs.",
+    "Run the existing VAJRA and cross-organ regression before public promotion."
+  ],
+  "provenance": "Derived only from public repository code and synthetic receipt reasoning. No private Drive names, IDs, URLs, or source text are included.",
+  "boundary": "This evidence records a deterministic schema-normalization defect. It does not claim semantic equivalence for arbitrary organ labels and does not change public displayed state until CI evidence passes."
+}
