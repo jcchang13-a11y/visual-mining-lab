@@ -1,0 +1,18 @@
+{
+  "schema": "zenomorph-failure-evidence/v1",
+  "observedAt": "2026-09-09T15:03:46+08:00",
+  "organ": "VAJRA",
+  "status": "OPEN_NOT_PROMOTED",
+  "failureClass": "SCHEMA_ALIAS_FALSE_REJECTION",
+  "capabilityUnderTest": "GUT_TRIAGE_ORGAN_IDENTITY_CANONICALIZATION",
+  "observation": "VAJRA dynamic decomposition v1.1 compares the selected organ field to the literal string GUT. A semantically equivalent GUT receipt expressed as sourceOrgan:'gut' is rejected as gut-receipt-required, while dual organ/sourceOrgan declarations are not cross-checked for disagreement.",
+  "risk": "Schema spelling/case can create false uncertainty or hide a real cross-organ identity conflict. That makes downstream behavior depend on transport representation instead of evidence semantics.",
+  "requiredRepair": [
+    "Canonicalize bounded organ identity case-insensitively after trimming/NFKC.",
+    "When both organ and sourceOrgan are present, require their canonical identities to agree.",
+    "Preserve disagreement as an explicit rejection rather than silently preferring one alias.",
+    "Add adversarial tests for GUT/gut equivalence and GUT/DROPLET disagreement.",
+    "Run cross-organ GUT and VAJRA regressions before promotion."
+  ],
+  "boundary": "This evidence records a representational identity defect only. It does not establish source truth, semantic understanding, or persistent capability assimilation."
+}
