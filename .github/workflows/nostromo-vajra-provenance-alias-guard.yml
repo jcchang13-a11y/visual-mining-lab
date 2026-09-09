@@ -1,0 +1,37 @@
+name: NOSTROMO VAJRA Provenance Alias Guard
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'nostromo/vajra/dynamic-decomposition.js'
+      - 'nostromo/vajra/classification-alias-guard.js'
+      - 'nostromo/vajra/provenance-alias-guard-test.mjs'
+      - 'nostromo/failure-log/2026-09-09-vajra-provenance-alias-conflict.json'
+      - '.github/workflows/nostromo-vajra-provenance-alias-guard.yml'
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Provenance alias adversarial test
+        run: node nostromo/vajra/provenance-alias-guard-test.mjs
+      - name: Dynamic decomposition regression
+        run: node nostromo/vajra/dynamic-decomposition-test.mjs
+      - name: Classification alias regression
+        run: node nostromo/vajra/classification-alias-guard-test.mjs
+      - name: Preserve evidence boundary
+        run: |
+          node - <<'NODE'
+          const fs=require('fs');
+          const failure=JSON.parse(fs.readFileSync('nostromo/failure-log/2026-09-09-vajra-provenance-alias-conflict.json','utf8'));
+          if(!['OPEN_NOT_PROMOTED','RESOLVED_CI_VERIFIED'].includes(failure.status)) throw new Error('invalid failure lifecycle state');
+          const result=JSON.parse(fs.readFileSync('nostromo/vajra/provenance-alias-guard-last-result.json','utf8'));
+          if(result.status!=='PASS') throw new Error('provenance alias guard result not PASS');
+          if(result.provenance?.privateConnectorMaterialIncluded!==false) throw new Error('private connector boundary missing');
+          NODE
