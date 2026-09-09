@@ -3,6 +3,7 @@ on:
   push:
     paths:
       - 'nostromo/vajra/dynamic-reinspection.js'
+      - 'nostromo/vajra/dynamic-reinspection-test.mjs'
       - 'nostromo/vajra/quarantine-provenance-tuple-adversarial.mjs'
       - 'nostromo/failure-log/2026-09-10-vajra-quarantine-provenance-tuple-laundering.json'
       - '.github/workflows/nostromo-vajra-quarantine-provenance-tuple.yml'
