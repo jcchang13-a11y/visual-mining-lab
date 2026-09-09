@@ -1,0 +1,16 @@
+{
+  "schema": "zenomorph-failure-evidence/v1",
+  "recordedAt": "2026-09-10T00:08:00+08:00",
+  "organ": "VAJRA",
+  "failureType": "QUARANTINE_NOVELTY_PAIRING_LAUNDERING",
+  "status": "OPEN_NOT_PROMOTED",
+  "observed": "dynamic reinspection v0.6 tests novelty by asking whether any evidence key is new and whether any evidence fingerprint is new, but it does not prove that the new key and new fingerprint belong to the same evidence item. A split novelty pattern can therefore reopen quarantine without one jointly novel evidence return.",
+  "risk": ["false information gain", "quarantine escape", "provenance/content decoupling", "metabolic echo reactivation", "false certainty"],
+  "requiredBehavior": "Quarantine reactivation must require at least one aligned evidence item whose key and fingerprint are both novel relative to the explicit quarantine baseline. A new key paired only with an old fingerprint plus an old key paired with a new fingerprint must remain HOLD. Missing or misaligned pairing data must fail closed.",
+  "provenance": {
+    "source": "public repository code inspection plus de-identified synthetic adversarial fixture",
+    "privateConnectorMaterialIncluded": false,
+    "publicRepoOnly": true
+  },
+  "promotionBoundary": "Remain OPEN_NOT_PROMOTED until the adversarial split-novelty case fails closed, genuine paired novelty still reopens, existing source-quality/GUT echo-breaking regressions pass, and GitHub Actions succeeds."
+}
