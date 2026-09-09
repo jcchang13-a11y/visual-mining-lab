@@ -1,12 +1,19 @@
 {
   "schema": "zenomorph-failure-evidence/v1",
   "organ": "VAJRA",
-  "status": "OPEN_NOT_PROMOTED",
+  "status": "RESOLVED_CI_VERIFIED",
   "failureClass": "DECORATED_RECEIPT_ECHO",
   "observedIn": "dynamic-decomposition v1.2",
-  "description": "Receipt replay identity currently fingerprints the full non-transport receipt structure. A second receipt with the same targetRef, clauseRef, canonical GUT identity, canonical provenance and triage classification but a changed summary or other decorative field can therefore qualify as a second receipt and inflate qualifyingReceiptCount/aliasAudit without adding a new metabolic diagnosis.",
+  "resolvedIn": "dynamic-decomposition v1.3",
+  "description": "Receipt replay identity in v1.2 fingerprinted the full non-transport receipt structure. A second receipt with the same targetRef, clauseRef, canonical GUT identity, canonical provenance and triage classification but a changed summary or other decorative field could therefore qualify as a second receipt and inflate qualifyingReceiptCount/aliasAudit without adding a new metabolic diagnosis.",
   "risk": ["duplicate pollution", "metabolic echo", "false evidence multiplicity"],
-  "requiredFix": "Deduplicate qualifying GUT triage receipts by bounded diagnostic identity while retaining structural receipt fingerprints for audit. Same provenance with a genuinely different classification must remain a conflict rather than being suppressed.",
-  "promotion": "Blocked until focused adversarial tests and cross-organ/integration regression pass in GitHub Actions.",
+  "resolution": "v1.3 deduplicates qualifying GUT triage receipts by bounded diagnostic identity: targetRef + clauseRef + canonical organ + canonical provenance + triage classification. Structural receipt fingerprints remain available for audit, while the same provenance with a genuinely different classification remains a conflict and is not suppressed as replay.",
+  "verification": {
+    "workflow": "NOSTROMO Integration Test",
+    "runId": 34338529311,
+    "headSha": "3f388a1ecbafa6d0c7ae717c704ce15a64ddecd9",
+    "conclusion": "success"
+  },
+  "promotion": "Eligible after CI success; public display may advance to dynamic decomposition v1.3 without implying source truth, capability installation, persistent assimilation or autonomous morphogenesis.",
   "privacy": "Synthetic/de-identified evidence only; no private connector identifiers or source text."
 }
