@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320" role="img" aria-labelledby="title desc">
+  <title id="title">第十七分回溯第七分</title>
+  <desc id="desc">黑白極簡同心圓。中心為第十七分，外圈為第七分，表示第十七分的實無有法發心、得菩提與名為菩薩，回接第七分無有定法的線。</desc>
+  <rect width="320" height="320" fill="#fff"/>
+  <circle cx="160" cy="160" r="118" fill="none" stroke="#111" stroke-width="1.5"/>
+  <circle cx="160" cy="160" r="52" fill="none" stroke="#111" stroke-width="1.5"/>
+  <text x="160" y="154" text-anchor="middle" font-family="serif" font-size="20" fill="#111">第十七分</text>
+  <text x="160" y="181" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#111">17</text>
+  <text x="160" y="64" text-anchor="middle" font-family="serif" font-size="18" fill="#111">第七分</text>
+  <text x="160" y="86" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#111">7</text>
+</svg>
