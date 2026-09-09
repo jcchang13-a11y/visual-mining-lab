@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 360" role="img" aria-labelledby="title desc">
+  <title id="title">第二十八分直接回扣第二十四分</title>
+  <desc id="desc">第二十八分處理菩薩不受福德，直接回扣第二十四分受持讀誦、為人說經的高級功德比較：28 → 24。</desc>
+  <rect width="360" height="360" fill="white"/>
+  <g fill="none" stroke="black" stroke-width="2">
+    <circle cx="180" cy="180" r="58"/>
+    <circle cx="180" cy="180" r="118"/>
+  </g>
+  <g fill="black" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Noto Sans TC', sans-serif" font-size="22" text-anchor="middle" dominant-baseline="middle">
+    <text x="180" y="180">28</text>
+    <text x="180" y="72">24</text>
+  </g>
+</svg>
