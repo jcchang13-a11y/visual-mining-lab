@@ -1,0 +1,12 @@
+{
+  "schema": "zenomorph-failure-log/v1",
+  "date": "2026-09-09",
+  "organ": "VAJRA",
+  "status": "OPEN_NOT_PROMOTED",
+  "failureClass": "PROVENANCE_ALIAS_FALSE_CONFLICT",
+  "observation": "The triage schema-alias guard compares provenance/provenanceFingerprint alias values with raw trimmed strings before canonical provenance normalization. Two syntactically different values that canonicalize to the same provenance identity can therefore trigger HOLD as a schema conflict even though downstream replay identity treats them as equivalent.",
+  "risk": "False diagnostic HOLD caused by formatting-only provenance variation; this can block valid GUT-to-VAJRA regulation and make schema decoration alter organ behavior.",
+  "requiredFix": "Compare provenance alias pairs using the same canonical provenance function used for receipt identity, while retaining fingerprint-only conflict evidence for genuinely distinct provenance values.",
+  "promotionRule": "Do not promote until unit/adversarial tests prove canonical-equivalent provenance aliases pass, genuinely distinct aliases still HOLD, same-provenance echo suppression remains intact, and GUT/VAJRA cross-organ regressions pass in GitHub Actions.",
+  "privacy": "Synthetic de-identified evidence only; no private Drive names, IDs, URLs, or source text."
+}
