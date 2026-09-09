@@ -4,11 +4,19 @@
   "organ": "VAJRA",
   "capability": "DYNAMIC_REINSPECTION",
   "failureType": "QUARANTINE_TUPLE_COMPACTION_LAUNDERING",
-  "status": "OPEN_NOT_PROMOTED",
+  "status": "RESOLVED_CI_VERIFIED",
   "observedIn": "nostromo/vajra/dynamic-reinspection.js v0.8",
-  "mechanism": "Evidence key, fingerprint, and provenance arrays are independently filtered before positional pairing. Malformed or empty entries at different original indices can therefore be removed independently and compact surviving values into a synthetic aligned tuple that never existed as one evidence item.",
-  "risk": "A quarantined branch could be reactivated by positional laundering: separately positioned novel key, content fingerprint, and provenance values may collapse into one apparent provenance-bound novelty tuple, creating false information gain and changing VAJRA routing.",
-  "requiredInvariant": "Tuple alignment must be evaluated against original array positions. Invalid members must invalidate that position rather than compact arrays independently. Only one originally co-indexed, fully valid key/fingerprint/provenance tuple may qualify for quarantine reactivation.",
-  "promotionBoundary": "Keep public state at verified v0.8 until an adversarial regression reproduces the laundering case, the core preserves positional identity, focused tests pass, and full cross-organ integration passes.",
+  "mechanism": "Evidence key, fingerprint, and provenance arrays were independently filtered before positional pairing. Malformed or empty entries at different original indices could therefore be removed independently and compact surviving values into a synthetic aligned tuple that never existed as one evidence item.",
+  "risk": "A quarantined branch could be reactivated by positional laundering: separately positioned novel key, content fingerprint, and provenance values could collapse into one apparent provenance-bound novelty tuple, creating false information gain and changing VAJRA routing.",
+  "requiredInvariant": "Tuple alignment is evaluated against original array positions. Invalid members invalidate that position rather than compact arrays independently. Only one originally co-indexed, fully valid key/fingerprint/provenance tuple may qualify for quarantine reactivation.",
+  "fixedByCommit": "e045714213ce149195e58d6fc295e362f263c3b6",
+  "verification": {
+    "focusedDynamicReinspectionRun": 34404965420,
+    "quarantineProvenanceTupleRun": 34404964754,
+    "fullIntegrationRun": 34404965174,
+    "integrationRounds": 50,
+    "result": "PASS"
+  },
+  "promotionBoundary": "Resolved only after the v0.9 positional-preservation fix, aligned adversarial regressions, focused quarantine provenance-tuple gate, and full cross-organ NOSTROMO integration including 50-round stress all passed.",
   "privacy": "Synthetic de-identified fixtures only; no private connector content, names, IDs, or URLs are recorded."
 }
