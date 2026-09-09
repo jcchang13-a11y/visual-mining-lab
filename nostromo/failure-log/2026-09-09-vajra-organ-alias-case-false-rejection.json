@@ -1,18 +1,26 @@
 {
   "schema": "zenomorph-failure-evidence/v1",
   "observedAt": "2026-09-09T15:03:46+08:00",
+  "resolvedAt": "2026-09-09T16:05:46+08:00",
   "organ": "VAJRA",
-  "status": "OPEN_NOT_PROMOTED",
+  "status": "RESOLVED_CI_VERIFIED",
   "failureClass": "SCHEMA_ALIAS_FALSE_REJECTION",
   "capabilityUnderTest": "GUT_TRIAGE_ORGAN_IDENTITY_CANONICALIZATION",
-  "observation": "VAJRA dynamic decomposition v1.1 compares the selected organ field to the literal string GUT. A semantically equivalent GUT receipt expressed as sourceOrgan:'gut' is rejected as gut-receipt-required, while dual organ/sourceOrgan declarations are not cross-checked for disagreement.",
-  "risk": "Schema spelling/case can create false uncertainty or hide a real cross-organ identity conflict. That makes downstream behavior depend on transport representation instead of evidence semantics.",
-  "requiredRepair": [
+  "observation": "VAJRA dynamic decomposition previously compared the selected organ field to the literal string GUT. A semantically equivalent GUT receipt expressed as sourceOrgan:'gut' could be rejected as gut-receipt-required, while dual organ/sourceOrgan declarations were not cross-checked for disagreement.",
+  "risk": "Schema spelling/case could create false uncertainty or hide a real cross-organ identity conflict, making downstream behavior depend on transport representation instead of bounded evidence identity.",
+  "repair": [
     "Canonicalize bounded organ identity case-insensitively after trimming/NFKC.",
     "When both organ and sourceOrgan are present, require their canonical identities to agree.",
     "Preserve disagreement as an explicit rejection rather than silently preferring one alias.",
-    "Add adversarial tests for GUT/gut equivalence and GUT/DROPLET disagreement.",
-    "Run cross-organ GUT and VAJRA regressions before promotion."
+    "Adversarial coverage verifies GUT/gut equivalence and GUT/DROPLET disagreement.",
+    "Cross-organ GUT and VAJRA regressions remain PASS in the latest recorded integration evidence."
   ],
-  "boundary": "This evidence records a representational identity defect only. It does not establish source truth, semantic understanding, or persistent capability assimilation."
+  "verification": {
+    "dynamicDecompositionVersion": "1.2",
+    "capability": "GUT_TRIAGE_ORGAN_IDENTITY_CANONICALIZATION",
+    "unitAndAdversarial": "PASS",
+    "latestRecordedIntegration": "PASS",
+    "evidenceCommit": "d55e8871dcfecd48ae5b28893496351c09c97352"
+  },
+  "boundary": "Resolution proves bounded representational identity repair only. It does not establish source truth, semantic understanding, facet execution, persistent capability assimilation, or autonomous self-modification."
 }
