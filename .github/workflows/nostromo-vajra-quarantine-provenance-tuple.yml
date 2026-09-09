@@ -1,0 +1,24 @@
+name: NOSTROMO VAJRA quarantine provenance tuple
+on:
+  push:
+    paths:
+      - 'nostromo/vajra/dynamic-reinspection.js'
+      - 'nostromo/vajra/quarantine-provenance-tuple-adversarial.mjs'
+      - 'nostromo/failure-log/2026-09-10-vajra-quarantine-provenance-tuple-laundering.json'
+      - '.github/workflows/nostromo-vajra-quarantine-provenance-tuple.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Run provenance tuple adversarial test
+        run: node nostromo/vajra/quarantine-provenance-tuple-adversarial.mjs
+      - name: Run existing dynamic reinspection regression
+        if: always()
+        run: node nostromo/vajra/dynamic-reinspection-test.mjs
