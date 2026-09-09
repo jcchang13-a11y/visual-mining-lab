@@ -1,0 +1,34 @@
+name: NOSTROMO VAJRA Blank Identity Guard
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'nostromo/vajra/dynamic-reinspection.js'
+      - 'nostromo/vajra/dynamic-reinspection-test.mjs'
+      - 'nostromo/vajra/blank-identity-guard-test.mjs'
+      - 'nostromo/failure-log/2026-09-10-vajra-quarantine-blank-identity-laundering.json'
+      - '.github/workflows/nostromo-vajra-blank-identity-guard.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Focused adversarial blank identity guard
+        run: node nostromo/vajra/blank-identity-guard-test.mjs
+      - name: Dynamic reinspection regression
+        run: node nostromo/vajra/dynamic-reinspection-test.mjs
+      - name: Cross-organ GUT metabolism regression
+        run: node nostromo/integration/gut-metabolism-test.mjs
+      - name: Cross-organ VAJRA context-conditioning regression
+        run: node nostromo/integration/vajra-context-conditioning-test.mjs
+      - name: Failure evidence remains open before promotion
+        run: node -e "const f=require('./nostromo/failure-log/2026-09-10-vajra-quarantine-blank-identity-laundering.json'); if(f.status!=='OPEN_NOT_PROMOTED') process.exit(1);"
