@@ -7,6 +7,7 @@ on:
       - 'nostromo/vajra/dynamic-reinspection-test.mjs'
       - 'nostromo/vajra/dynamic-decomposition.js'
       - 'nostromo/vajra/dynamic-decomposition-test.mjs'
+      - 'nostromo/failure-log/2026-09-10-vajra-quarantine-novelty-pairing-laundering.json'
       - '.github/workflows/nostromo-vajra-dynamic-reinspection.yml'
   workflow_dispatch:
 permissions:
@@ -22,7 +23,7 @@ jobs:
       - name: Run VAJRA dynamic reinspection unit/adversarial regression
         run: node nostromo/vajra/dynamic-reinspection-test.mjs
       - name: Verify reinspection result contract
-        run: node -e "const r=require('./nostromo/vajra/dynamic-reinspection-last-result.json'); if(r.status!=='PASS'||r.tests?.nextInspection?.lens!=='source_quality'||r.tests?.singleTriggered!==false||r.tests?.rejectedTriggered!==false) process.exit(1)"
+        run: node -e "const r=require('./nostromo/vajra/dynamic-reinspection-last-result.json'); const s=r.tests?.splitNoveltyResult; const m=r.tests?.misalignedResult; if(r.status!=='PASS'||r.tests?.nextInspection?.lens!=='source_quality'||r.tests?.singleTriggered!==false||r.tests?.rejectedTriggered!==false||s?.trigger!=='REPEATED_METABOLIC_CONTEST'||s?.status!=='HOLD'||m?.trigger!=='REPEATED_METABOLIC_CONTEST'||m?.status!=='HOLD') process.exit(1)"
       - name: Run VAJRA contamination-driven dynamic decomposition regression
         run: node nostromo/vajra/dynamic-decomposition-test.mjs
       - name: Verify decomposition evidence contract
