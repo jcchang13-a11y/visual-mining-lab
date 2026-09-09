@@ -1,6 +1,6 @@
 {
   "schema": "nostromo-gut-callable-test/v0.1",
-  "completedAt": "2026-09-09T07:06:41.565Z",
+  "completedAt": "2026-09-09T08:08:36.465Z",
   "status": "PASS",
   "capability": "OPAQUE_CALLABLE_QUARANTINE_WITH_PATH_PROVENANCE_AND_NO_EXECUTION",
   "engineVersion": "0.2.37",
