@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 220" role="img" aria-labelledby="title desc">
+  <title id="title">第三十分回扣第十分</title>
+  <desc id="desc">第三十分把前文以世界、佛土與尺度展開的空間問題回扣第十分。</desc>
+  <rect width="220" height="220" fill="white"/>
+  <g fill="none" stroke="black" stroke-width="2"><circle cx="110" cy="110" r="36"/><circle cx="110" cy="110" r="72"/></g>
+  <g fill="black" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Noto Sans TC', sans-serif" font-size="20" text-anchor="middle" dominant-baseline="middle"><text x="110" y="110">30</text><text x="110" y="56">10</text></g>
+</svg>
