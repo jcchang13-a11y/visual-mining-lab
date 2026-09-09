@@ -1,16 +1,28 @@
 {
   "schema": "zenomorph-failure-evidence/v0.1",
   "recordedAt": "2026-09-09T13:10:00+08:00",
+  "resolvedAt": "2026-09-09T13:18:00+08:00",
   "organ": "VAJRA",
-  "status": "OPEN_NOT_PROMOTED",
+  "status": "RESOLVED_CI_VERIFIED",
   "class": "OUT_OF_SCOPE_SCHEMA_ALIAS_CONFLICT_POISONING",
-  "finding": "VAJRA triage schema-alias replay guard v0.4 evaluates alias conflicts before parent scope qualification. A malformed or contradictory receipt targeting a different targetRef/clauseRef can therefore force the active decomposition call into HOLD even though that receipt is non-qualifying for the contested parent.",
+  "finding": "VAJRA triage schema-alias replay guard v0.4 evaluated alias conflicts before parent scope qualification, allowing a malformed or contradictory receipt targeting a different targetRef/clauseRef to force the active decomposition call into HOLD even though that receipt was non-qualifying for the contested parent.",
   "risk": [
-    "unrelated evidence can manufacture uncertainty in another contested branch",
-    "cross-organ contamination can alter behavior without target-scope relevance",
+    "unrelated evidence could manufacture uncertainty in another contested branch",
+    "cross-organ contamination could alter behavior without target-scope relevance",
     "failure amplification by malformed transport or schema-alias noise"
   ],
-  "requiredFix": "Scope alias-conflict authority to contested source-quality parents before allowing a conflict to change decomposition status. Preserve unrelated alias conflicts as fingerprinted rejected/audit evidence, but do not let them manufacture HOLD, target selection, multiplicity, or facets. Add adversarial tests plus existing GUT and VAJRA cross-organ regressions before promotion.",
-  "provenance": "Derived from current public repository code inspection only. No private connector identifiers, names, URLs, or source text are included.",
-  "promotionBoundary": "This record remains OPEN_NOT_PROMOTED until the guard, adversarial test, cross-organ regressions, evidence boundary, and relevant GitHub Actions run all succeed. Passing a focused unit assertion alone does not close the failure."
+  "resolution": "Guard v0.5 now scopes alias-conflict authority to active contested source-quality parents by targetRef+clauseRef. Out-of-scope and scope-missing conflicts remain fingerprinted audit evidence but cannot manufacture HOLD, target selection, multiplicity, qualifying evidence, or facets. Genuine scoped alias disagreement remains HOLD.",
+  "verification": {
+    "workflow": "NOSTROMO VAJRA Triage Alias Replay Test",
+    "runId": 34313466332,
+    "result": "SUCCESS",
+    "verifiedSteps": [
+      "focused unit and adversarial alias replay test",
+      "existing GUT cross-organ regression",
+      "existing VAJRA cross-organ regression",
+      "capability evidence boundary"
+    ]
+  },
+  "provenance": "Synthetic public-repo tests only. No private connector identifiers, names, URLs, or source text are included.",
+  "promotionBoundary": "Resolution proves bounded parent-scoped conflict authority and preservation of out-of-scope conflict audit evidence. It does not adjudicate source truth, infer semantic equivalence, install capabilities, or authorize autonomous structural mutation."
 }
