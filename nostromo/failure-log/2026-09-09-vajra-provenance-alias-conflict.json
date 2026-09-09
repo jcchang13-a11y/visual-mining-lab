@@ -1,0 +1,16 @@
+{
+  "schema": "zenomorph-failure-evidence/v1",
+  "recordedAt": "2026-09-09T22:04:00+08:00",
+  "organ": "VAJRA",
+  "failureType": "PROVENANCE_ALIAS_CONFLICT_LAUNDERING",
+  "status": "OPEN_NOT_PROMOTED",
+  "observed": "dynamic decomposition v1.3 selected receipt.provenance before receipt.provenanceFingerprint, so contradictory dual provenance declarations could silently collapse to the primary field and regulate decomposition.",
+  "risk": ["source identity loss", "false certainty", "provenance laundering", "metabolic contamination"],
+  "requiredBehavior": "A same-scope receipt with contradictory provenance/provenanceFingerprint declarations must HOLD with zero facets; bounded canonical equivalents may pass; unrelated-scope conflicts must not poison the selected parent.",
+  "provenance": {
+    "source": "repository code inspection plus synthetic adversarial fixture",
+    "privateConnectorMaterialIncluded": false,
+    "publicRepoOnly": true
+  },
+  "promotionBoundary": "Remain OPEN_NOT_PROMOTED until focused unit/adversarial/cross-organ regressions and full NOSTROMO integration succeed on the repaired head."
+}
