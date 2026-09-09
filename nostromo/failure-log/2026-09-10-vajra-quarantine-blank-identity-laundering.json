@@ -1,0 +1,27 @@
+{
+  "schema": "nostromo-failure-evidence/v1",
+  "failureId": "QUARANTINE_BLANK_IDENTITY_LAUNDERING",
+  "organ": "VAJRA",
+  "capability": "dynamic-reinspection",
+  "observedVersion": "0.9",
+  "status": "OPEN_NOT_PROMOTED",
+  "observedAt": "2026-09-10T07:04:31+08:00",
+  "summary": "Dynamic reinspection v0.9 treats any non-empty string as a valid evidence key, content fingerprint, or provenance identity. Whitespace-only or control-only strings can therefore satisfy tuple validity and, when previously unseen, can contribute to quarantine reactivation despite carrying no usable identity.",
+  "risk": [
+    "false information gain",
+    "provenance loss disguised as novelty",
+    "quarantine reactivation from malformed identity material",
+    "false certainty in cross-organ routing"
+  ],
+  "evidence": {
+    "source": "nostromo/vajra/dynamic-reinspection.js",
+    "predicate": "validIdentity(v) => typeof v === 'string' && v.length > 0",
+    "adversarialCases": [
+      "whitespace-only provenance",
+      "tab/newline-only evidence identity",
+      "blank-looking fingerprint"
+    ]
+  },
+  "requiredFix": "Reject identity strings that are empty after trimming or consist only of control/format whitespace, preserve tuple positions, and prove valid ordinary identities still reactivate without canonicalizing unrelated identifiers.",
+  "promotionBoundary": "Do not promote a new public VAJRA version until focused adversarial tests and the existing cross-organ/integration regression path pass."
+}
