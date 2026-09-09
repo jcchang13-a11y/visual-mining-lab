@@ -1,13 +1,15 @@
 {
   "schema": "zenomorph-failure-evidence/v1",
   "recordedAt": "2026-09-09T12:03:00Z",
+  "resolvedAt": "2026-09-09T12:38:00Z",
   "organ": "VAJRA",
   "capabilityArea": "dynamic-decomposition",
-  "status": "OPEN_NOT_PROMOTED",
+  "status": "RESOLVED_CI_VERIFIED",
   "failureType": "CLASSIFICATION_ALIAS_CONFLICT_SUPPRESSION",
   "observedAtVersion": "1.3",
-  "observation": "A completed GUT receipt may declare both triageClassification and classification. Current qualification selects triageClassification with an OR fallback and does not compare the two declarations. If both are present and disagree, the contradictory alias is silently discarded and the receipt can still select a bounded decomposition profile.",
-  "risk": "A self-contradictory metabolic diagnosis can be converted into false certainty, changing downstream VAJRA routing instead of remaining quarantined/HOLD.",
+  "resolvedBy": "GUT_TRIAGE_CLASSIFICATION_ALIAS_CONFLICT_CONTAINMENT v0.2",
+  "observation": "A completed GUT receipt may declare both triageClassification and classification. The pre-fix qualifier selected triageClassification with an OR fallback and did not compare the two declarations, so a contradictory alias could be silently discarded and still select a bounded decomposition profile.",
+  "risk": "A self-contradictory metabolic diagnosis could be converted into false certainty, changing downstream VAJRA routing instead of remaining visible as conflict evidence.",
   "reproduction": {
     "targetRef": "target-001",
     "clauseRef": "clause-001",
@@ -16,14 +18,27 @@
     "provenance": "deidentified-gut-triage-evidence",
     "triageClassification": "PROVENANCE_COLLISION",
     "classification": "DUPLICATE_CONTAMINATION",
-    "expected": "receipt rejected as classification-alias-conflict; zero facets; no target selection when it is the only purported qualifier",
-    "current": "triageClassification wins and receipt qualifies as PROVENANCE_COLLISION"
+    "expected": "contradictory dual declarations remain zero-facet HOLD conflict evidence and cannot select a decomposition profile",
+    "preFix": "triageClassification won and the receipt qualified as PROVENANCE_COLLISION",
+    "postFix": "direct qualification rejects the contradictory alias pair; planning preserves both same-provenance declarations as conflict evidence, including when a clean qualifying receipt is also present"
+  },
+  "verifiedBehavior": {
+    "contradictoryDualAlias": "HOLD_ZERO_FACETS",
+    "mixedCleanPlusContradictory": "HOLD_ZERO_FACETS",
+    "equivalentCaseOrUnicodeAlias": "CANONICALIZED_AND_USABLE",
+    "unrelatedTargetConflict": "DOES_NOT_POISON_SELECTED_TARGET",
+    "genuineCrossReceiptDisagreement": "HOLD_ZERO_FACETS",
+    "sourceIndependenceClaimed": false
   },
   "provenance": {
-    "source": "static inspection of nostromo/vajra/dynamic-decomposition.js plus synthetic de-identified adversarial fixture",
+    "source": "static inspection plus synthetic de-identified adversarial fixtures and GitHub Actions",
     "priorIntegrationRun": 34338529311,
-    "priorIntegrationConclusion": "success",
+    "focusedVerificationRun": 34349961048,
+    "focusedVerificationConclusion": "success",
+    "fullIntegrationRun": 34349961006,
+    "fullIntegrationConclusion": "success",
+    "verifiedHeadSha": "9bb3de530e080077c242ef8d9bce58559b6612b2",
     "privateConnectorMaterialIncluded": false
   },
-  "promotionBoundary": "Do not promote a classification-alias guard until a failing adversarial case is added, the receipt qualifier rejects contradictory dual classification declarations without suppressing genuine cross-receipt disagreement, existing replay/provenance/multiparent regressions pass, and GitHub Actions integration succeeds."
+  "promotionBoundary": "Satisfied: contradictory classification aliases are preserved as conflict evidence; equivalent bounded aliases remain usable; genuine cross-receipt disagreement remains visible; VAJRA dynamic decomposition, multiparent, GUT cross-organ and VAJRA cross-organ regressions passed in focused CI; full five-organ plus 50-round NOSTROMO integration passed on the same head."
 }
