@@ -183,3 +183,73 @@
   .work-note{background:#fff}
   .existing-figure img,.original-figure img{max-height:none}
 }
+
+/* PRINT SCAFFOLD｜110 × 190 mm 窄幅書身。
+   只建立紙張、邊界與跨頁保護；不把網頁正文改寫成另一套出版稿。 */
+@page{
+  size:110mm 190mm;
+  margin:13mm 11mm 15mm 11mm;
+}
+@media print{
+  html,body{
+    width:auto;
+    min-width:0;
+    background:#fff !important;
+  }
+  body{
+    font-size:10.5pt;
+    print-color-adjust:exact;
+    -webkit-print-color-adjust:exact;
+  }
+  .wrap{
+    max-width:none !important;
+    margin:0 !important;
+    padding:0 !important;
+  }
+  .article{
+    border:0 !important;
+    background:#fff !important;
+    padding:0 !important;
+    line-height:1.72;
+    overflow:visible;
+  }
+  .back,
+  .nav{
+    display:none !important;
+  }
+  .top{
+    margin:0 0 8mm;
+    padding:0 0 4mm;
+  }
+  .top h1{
+    font-size:20pt;
+    line-height:1.15;
+  }
+  .status,
+  .eyebrow,
+  .footer{
+    font-size:7.5pt;
+  }
+  .sutra-block,
+  .work-note,
+  .structure-line,
+  .figure-slot,
+  .existing-figure,
+  .original-figure{
+    max-width:100%;
+  }
+  .existing-figure img,
+  .original-figure img{
+    max-width:100%;
+    max-height:148mm;
+  }
+  .existing-figure figcaption,
+  .original-figure figcaption{
+    break-before:avoid;
+    page-break-before:avoid;
+  }
+  .gcb-formula,
+  .gcb-basic-formula{
+    max-width:100%;
+  }
+}
