@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 360" role="img" aria-labelledby="title desc">
+  <title id="title">第二十九分回溯第二十一分</title>
+  <desc id="desc">第二十九分在拆除以來去坐臥定位如來時，明確重新叫回第二十一分不能把如來所說法實體化的問題。</desc>
+  <rect width="360" height="360" fill="white"/>
+  <g fill="none" stroke="black" stroke-width="2">
+    <circle cx="180" cy="180" r="62"/>
+    <circle cx="180" cy="180" r="132"/>
+  </g>
+  <g fill="black" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Noto Sans TC', sans-serif" font-size="24" text-anchor="middle" dominant-baseline="middle">
+    <text x="180" y="180">29</text>
+    <text x="180" y="68">21</text>
+  </g>
+</svg>
