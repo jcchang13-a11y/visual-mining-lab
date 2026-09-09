@@ -33,6 +33,16 @@ jobs:
         run: node nostromo/integration/gut-metabolism-test.mjs
       - name: Verify VAJRA cross-organ regression
         run: node nostromo/integration/vajra-dynamic-test.mjs
-      - name: Verify failure evidence remains open before promotion
+      - name: Verify failure evidence lifecycle
         run: |
-          node -e "const f=require('./nostromo/failure-log/2026-09-09-vajra-classification-alias-conflict-suppression.json'); if(f.status!=='OPEN_NOT_PROMOTED') process.exit(1); if(f.failureType!=='CLASSIFICATION_ALIAS_CONFLICT_SUPPRESSION') process.exit(1);"
+          node - <<'NODE'
+          const f=require('./nostromo/failure-log/2026-09-09-vajra-classification-alias-conflict-suppression.json');
+          if(f.failureType!=='CLASSIFICATION_ALIAS_CONFLICT_SUPPRESSION') process.exit(1);
+          if(f.status==='OPEN_NOT_PROMOTED') process.exit(0);
+          if(f.status!=='RESOLVED_CI_VERIFIED') process.exit(1);
+          if(f.provenance?.focusedVerificationRun!==34349961048) process.exit(1);
+          if(f.provenance?.focusedVerificationConclusion!=='success') process.exit(1);
+          if(f.provenance?.fullIntegrationRun!==34349961006) process.exit(1);
+          if(f.provenance?.fullIntegrationConclusion!=='success') process.exit(1);
+          if(f.provenance?.privateConnectorMaterialIncluded!==false) process.exit(1);
+          NODE
