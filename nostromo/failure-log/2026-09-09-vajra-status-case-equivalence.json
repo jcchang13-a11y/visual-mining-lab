@@ -1,0 +1,16 @@
+{
+  "schema": "zenomorph-failure-evidence/v1",
+  "date": "2026-09-09",
+  "organ": "VAJRA",
+  "status": "OPEN_NOT_PROMOTED",
+  "failure": "GUT_RECEIPT_STATUS_CASE_EQUIVALENCE_GAP",
+  "observed": "The current triage alias replay guard canonicalizes organ and classification case, but leaves receipt status case-sensitive. A semantically equivalent completed GUT receipt expressed as status=completed can therefore fail qualification or evade same-diagnosis replay identity while status=COMPLETED succeeds.",
+  "risk": [
+    "false absence of qualifying metabolic evidence",
+    "representation-dependent replay counting",
+    "cross-organ behavior changing because of casing rather than evidence"
+  ],
+  "required_fix": "Boundedly canonicalize declared receipt status identity before replay qualification, without accepting unknown statuses or weakening target/clause/provenance/classification guards.",
+  "promotion_gate": "Unit + adversarial + existing GUT cross-organ + existing VAJRA cross-organ regression + CI evidence boundary must all PASS before public promotion.",
+  "privacy": "Synthetic evidence only; no private Drive names, IDs, URLs, or source text."
+}
