@@ -5,12 +5,16 @@ on:
     paths:
       - 'nostromo/vajra/triage-alias-replay-guard.js'
       - 'nostromo/vajra/status-case-equivalence-test.mjs'
+      - 'nostromo/vajra/triage-alias-replay-test.mjs'
       - 'nostromo/vajra/dynamic-decomposition.js'
       - 'nostromo/integration/vajra-dynamic-test.mjs'
-      - 'nostromo/integration/gut-vajra-cross-organ-test.mjs'
+      - 'nostromo/integration/gut-metabolism-test.mjs'
       - 'nostromo/failure-log/2026-09-09-vajra-status-case-equivalence.json'
       - '.github/workflows/nostromo-vajra-status-case-equivalence-test.yml'
   workflow_dispatch:
+
+permissions:
+  contents: read
 
 jobs:
   status-case-equivalence:
@@ -23,9 +27,11 @@ jobs:
       - name: VAJRA bounded status case-equivalence unit and adversarial test
         run: node nostromo/vajra/status-case-equivalence-test.mjs
       - name: Existing GUT cross-organ regression
-        run: node nostromo/integration/gut-vajra-cross-organ-test.mjs
+        run: node nostromo/integration/gut-metabolism-test.mjs
       - name: Existing VAJRA cross-organ regression
         run: node nostromo/integration/vajra-dynamic-test.mjs
+      - name: Existing triage alias replay regression
+        run: node nostromo/vajra/triage-alias-replay-test.mjs
       - name: Evidence boundary
         run: |
           node -e "const fs=require('fs'); const p='nostromo/vajra/status-case-equivalence-last-result.json'; const r=JSON.parse(fs.readFileSync(p,'utf8')); if(r.status!=='PASS'||r.capability!=='BOUNDED_GUT_RECEIPT_STATUS_CASE_EQUIVALENCE') process.exit(1); console.log(JSON.stringify({status:r.status,capability:r.capability,provenance:r.provenance,boundary:r.boundary},null,2));"
