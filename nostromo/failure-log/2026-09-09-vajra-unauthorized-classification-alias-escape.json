@@ -1,13 +1,15 @@
 {
   "schema": "zenomorph-failure-evidence/v1",
   "recordedAt": "2026-09-09T13:00:54Z",
+  "resolvedAt": "2026-09-09T13:06:03Z",
   "organ": "VAJRA",
   "capabilityArea": "dynamic-decomposition",
-  "status": "OPEN_NOT_PROMOTED",
+  "status": "RESOLVED_CI_VERIFIED",
   "failureType": "UNAUTHORIZED_CLASSIFICATION_ALIAS_ESCAPE",
   "observedAtVersion": "dynamic-decomposition v1.3 + classification-alias-guard v0.2",
-  "observation": "A same-receipt contradiction between one authorized GUT triage classification and one unknown or unauthorized classification is rejected by direct qualification, but planning expands both declarations and lets the authorized declaration qualify while the unknown declaration is discarded. The plan can therefore become DECOMPOSED instead of remaining HOLD.",
-  "risk": "A self-contradictory metabolic diagnosis with one unknown half can be laundered into false certainty, allowing downstream VAJRA behavior regulation from incomplete or malformed diagnostic identity.",
+  "resolvedAtVersion": "dynamic-decomposition v1.3 + classification-alias-guard v0.3",
+  "observation": "A same-receipt contradiction between one authorized GUT triage classification and one unknown or unauthorized classification was rejected by direct qualification, but planning expanded both declarations and let the authorized declaration qualify while the unknown declaration was discarded. The plan could therefore become DECOMPOSED instead of remaining HOLD.",
+  "risk": "A self-contradictory metabolic diagnosis with one unknown half could be laundered into false certainty, allowing downstream VAJRA behavior regulation from incomplete or malformed diagnostic identity.",
   "reproduction": {
     "targetRef": "target-001",
     "clauseRef": "clause-001",
@@ -17,11 +19,17 @@
     "triageClassification": "PROVENANCE_COLLISION",
     "classification": "UNKNOWN_CONTAMINATION",
     "expected": "same-scope contradictory dual declarations remain zero-facet HOLD even when only one side is an authorized decomposition class",
-    "preFixMechanism": "classification-alias-guard v0.2 expands both declarations; dynamic-decomposition accepts PROVENANCE_COLLISION and rejects UNKNOWN_CONTAMINATION, leaving one qualifying diagnosis that may select a bounded profile"
+    "preFixMechanism": "classification-alias-guard v0.2 expanded both declarations; dynamic-decomposition accepted PROVENANCE_COLLISION and rejected UNKNOWN_CONTAMINATION, leaving one qualifying diagnosis that could select a bounded profile"
   },
+  "resolution": "classification-alias-guard v0.3 preserves contradictory same-receipt declarations as target-scoped HOLD evidence even when one or both declarations are unknown or unauthorized. It suppresses provisional behavior regulation and facets when discarding the unknown half would manufacture certainty, while preserving equivalent case/Unicode aliases, unrelated-target isolation, genuine cross-receipt disagreement, and non-independence provenance boundaries.",
   "provenance": {
     "source": "static inspection of public repo plus synthetic de-identified adversarial fixture",
+    "focusedVerificationRun": 34354717540,
+    "focusedVerificationConclusion": "success",
+    "fullIntegrationRun": 34354717426,
+    "fullIntegrationConclusion": "success",
+    "verifiedHeadSha": "744eb7c77b392ec05e87cd741eb99b0e0fd9c85f",
     "privateConnectorMaterialIncluded": false
   },
-  "promotionBoundary": "Do not promote until authorized-vs-unknown and unknown-vs-unknown same-receipt contradictions are target-scoped HOLD with zero facets; equivalent aliases remain usable; unrelated conflicts do not poison the selected target; genuine authorized cross-receipt disagreement remains HOLD; and focused plus full integration CI succeed."
+  "promotionBoundary": "Satisfied: authorized-vs-unknown and unknown-vs-unknown same-receipt contradictions are target-scoped HOLD with zero facets; equivalent aliases remain usable; unrelated conflicts do not poison the selected target; genuine authorized cross-receipt disagreement remains HOLD; focused VAJRA CI and full 50-round integration CI succeeded."
 }
