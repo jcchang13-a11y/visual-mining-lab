@@ -1,0 +1,19 @@
+{
+  "schema": "zenomorph-failure-evidence/v1",
+  "recordedAt": "2026-09-09T02:05:00Z",
+  "organ": "VAJRA",
+  "status": "OPEN_NOT_PROMOTED",
+  "classification": "SAME_PROVENANCE_RECEIPT_ECHO",
+  "finding": "Dynamic decomposition v1.1 suppresses byte-structural receipt replays, but two qualifying GUT receipts can still carry the same canonical provenance and same triage classification while differing only in non-authoritative descriptive fields such as summary. Those echoes are counted as multiple qualifying receipts and multiple aliases even though they do not represent independent metabolic evidence.",
+  "risk": "Repeated or decorated delivery of one GUT diagnosis can inflate qualifyingReceiptCount and aliasAudit, creating apparent evidential multiplicity. Current behaviorRegulation does not change, but the audit surface can overstate how much distinct metabolic evidence participated in decomposition.",
+  "requiredFix": "Collapse qualifying receipts that share targetRef, clauseRef, canonical provenance, and normalized triage classification before dynamic-decomposition counting, while preserving an explicit echo audit. Do not collapse same-provenance receipts whose classifications disagree; those must remain visible and HOLD.",
+  "verificationRequired": [
+    "unit: same provenance + same classification + decorated summary counts once",
+    "adversarial: same provenance + different classification remains conflict HOLD",
+    "schema-alias replay regression",
+    "GUT cross-organ regression",
+    "VAJRA cross-organ regression",
+    "GitHub Actions PASS before public promotion"
+  ],
+  "privacy": "Synthetic de-identified evidence only. No private Drive names, IDs, URLs, or source text."
+}
