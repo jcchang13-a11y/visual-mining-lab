@@ -12,7 +12,7 @@ const mk=(relation,provenance,overrides={})=>({targetRef:branch.targetRef,clause
 const contested=V.applyHandoffResults(base,[mk('supports the target claim','src-A'),mk('refutes the target claim','src-B')]);
 check(contested.status.includes('CONTESTED'),'CONFLICT_NOT_PRESERVED',contested.status);
 check(contested.dynamicReinspection?.triggered===true,'DYNAMIC_REINSPECTION_NOT_TRIGGERED',contested.dynamicReinspection);
-check(contested.dynamicReinspection?.version==='0.6','DYNAMIC_REINSPECTION_VERSION_NOT_UPDATED',contested.dynamicReinspection);
+check(contested.dynamicReinspection?.version==='0.7','DYNAMIC_REINSPECTION_VERSION_NOT_UPDATED',contested.dynamicReinspection);
 check(contested.nextInspection?.trigger==='CONTESTED_RETURN','WRONG_TRIGGER',contested.nextInspection);
 check(contested.nextInspection?.lens==='source_quality'&&contested.nextInspection?.preferredOrgan==='DROPLET','CONFLICT_DID_NOT_CHANGE_BEHAVIOR',contested.nextInspection);
 check(contested.nextInspection?.targetRef===branch.targetRef&&contested.nextInspection?.clauseRef===branch.clauseRef,'TARGET_SCOPE_LOST',contested.nextInspection);
@@ -39,6 +39,7 @@ check(reactivated?.trigger==='NOVEL_POST_QUARANTINE_EVIDENCE','GENUINE_NOVELTY_D
 check(reactivated?.status==='OPEN'&&reactivated?.preferredOrgan==='DROPLET'&&reactivated?.lens==='source_quality','REACTIVATION_WRONG_ROUTE',reactivated);
 check(reactivated?.targetRef==='t-metabolic'&&reactivated?.clauseRef==='c-metabolic','REACTIVATION_SCOPE_LOST',reactivated);
 check(reactivated?.novelty?.novelEvidenceKeys?.includes('receipt-C')&&reactivated?.novelty?.novelEvidenceFingerprints?.includes('fp-C'),'REACTIVATION_NOVELTY_AUDIT_MISSING',reactivated);
+check(reactivated?.novelty?.novelEvidencePairs?.some(p=>p.key==='receipt-C'&&p.fingerprint==='fp-C'),'REACTIVATION_PAIR_AUDIT_MISSING',reactivated);
 
 const keyAliasReplay={...quarantinedBaseline,evidenceKeys:[...quarantinedBaseline.evidenceKeys,'receipt-alias'],evidenceFingerprints:[...quarantinedBaseline.evidenceFingerprints]};
 const keyAliasResult=V.selectNextInspection({unresolved:[keyAliasReplay]});
@@ -46,12 +47,20 @@ check(keyAliasResult?.trigger==='REPEATED_METABOLIC_CONTEST'&&keyAliasResult?.st
 const fingerprintOnlyDrift={...quarantinedBaseline,evidenceKeys:[...quarantinedBaseline.evidenceKeys],evidenceFingerprints:[...quarantinedBaseline.evidenceFingerprints,'fp-drift']};
 const fingerprintOnlyResult=V.selectNextInspection({unresolved:[fingerprintOnlyDrift]});
 check(fingerprintOnlyResult?.trigger==='REPEATED_METABOLIC_CONTEST'&&fingerprintOnlyResult?.status==='HOLD','FINGERPRINT_ONLY_FALSE_REACTIVATION',fingerprintOnlyResult);
+const splitNoveltyLaundering={...quarantinedBaseline,evidenceKeys:[...quarantinedBaseline.evidenceKeys,'receipt-C','receipt-A'],evidenceFingerprints:[...quarantinedBaseline.evidenceFingerprints,'fp-A','fp-C']};
+const splitNoveltyResult=V.selectNextInspection({unresolved:[splitNoveltyLaundering]});
+check(splitNoveltyResult?.trigger==='REPEATED_METABOLIC_CONTEST'&&splitNoveltyResult?.status==='HOLD','SPLIT_NOVELTY_FALSE_REACTIVATION',splitNoveltyResult);
+check(V.quarantineNovelty(splitNoveltyLaundering)?.qualifies===false,'SPLIT_NOVELTY_PROBE_FALSE_POSITIVE',V.quarantineNovelty(splitNoveltyLaundering));
+const misalignedPairing={...quarantinedBaseline,evidenceKeys:[...quarantinedBaseline.evidenceKeys,'receipt-C'],evidenceFingerprints:[...quarantinedBaseline.evidenceFingerprints,'fp-C','fp-extra']};
+const misalignedResult=V.selectNextInspection({unresolved:[misalignedPairing]});
+check(misalignedResult?.trigger==='REPEATED_METABOLIC_CONTEST'&&misalignedResult?.status==='HOLD','MISALIGNED_PAIRING_FALSE_REACTIVATION',misalignedResult);
+check(V.quarantineNovelty(misalignedPairing)?.pairingValid===false,'MISALIGNED_PAIRING_NOT_AUDITED',V.quarantineNovelty(misalignedPairing));
 const missingBaseline={...metabolicBranch,evidenceKeys:[...metabolicBranch.evidenceKeys,'receipt-C'],evidenceFingerprints:[...metabolicBranch.evidenceFingerprints,'fp-C']};
 const missingBaselineResult=V.selectNextInspection({unresolved:[missingBaseline]});
 check(missingBaselineResult?.trigger==='REPEATED_METABOLIC_CONTEST'&&missingBaselineResult?.status==='HOLD','MISSING_BASELINE_FALSE_REACTIVATION',missingBaselineResult);
 
 const noveltyProbe=V.quarantineNovelty(novelPostQuarantine);
-check(noveltyProbe?.qualifies===true&&noveltyProbe?.novelKeys?.length===1&&noveltyProbe?.novelFingerprints?.length===1,'NOVELTY_PROBE_CONTRACT_BROKEN',noveltyProbe);
+check(noveltyProbe?.qualifies===true&&noveltyProbe?.pairingValid===true&&noveltyProbe?.novelPairs?.length===1,'NOVELTY_PROBE_CONTRACT_BROKEN',noveltyProbe);
 check(V.quarantineNovelty(keyAliasReplay)?.qualifies===false,'REPLAY_ALIAS_QUALIFIED_AS_NOVEL',V.quarantineNovelty(keyAliasReplay));
 
 const genericBranch={status:'CONTESTED_BY_RECEIPTS',targetRef:'t-generic',clauseRef:'c-generic',lens:'evidence',evidenceKeys:['g-A','g-B']};
@@ -85,6 +94,6 @@ const rejected=V.applyHandoffResults(base,[mk('supports the target claim','', {p
 check(rejected.dynamicReinspection?.triggered===false,'REJECTED_RECEIPT_FALSE_ESCALATION',rejected.dynamicReinspection);
 check((rejected.handoffResolution?.rejected||0)>=1,'REJECTED_RECEIPT_NOT_AUDITED',rejected.handoffResolution);
 
-const result={schema:'nostromo-vajra-dynamic-reinspection/v0.6',completedAt:new Date().toISOString(),status:failures.length?'FAIL':'PASS',capability:'PROVENANCE_GATED_QUARANTINE_REACTIVATION',tests:{contestedStatus:contested.status,nextInspection:contested.nextInspection,repeatedSourceContest,repeatedMetabolicContest,reactivated,keyAliasResult,fingerprintOnlyResult,missingBaselineResult,noveltyProbe,sourceOverGeneric,stableTie,singleTriggered:single.dynamicReinspection?.triggered,rejectedTriggered:rejected.dynamicReinspection?.triggered,rejectedCount:rejected.handoffResolution?.rejected},provenance:{fixture:'synthetic de-identified branch/receipt fixtures',failureEvidence:'nostromo/failure-log/2026-09-09-vajra-quarantine-reactivation-gap.json'},failures,boundary:'PASS proves only that an explicitly baselined quarantined metabolic-contamination branch can become runnable again when both a new evidence identity and a new content fingerprint are present; key-only aliases, fingerprint-only drift, replay-like cases, and missing baselines remain HOLD. Reactivation is clause-scoped and returns only to DROPLET source-quality inspection while preserving prior quarantine/provenance. Existing non-starvation, first-conflict DROPLET routing, repeated-source GUT diversion, rejected-receipt containment, and echo breaking remain bounded. It does not decide source truth, infer semantic novelty, execute follow-up organs, install capabilities, clear historical quarantine evidence, or mutate persistent body state.'};
+const result={schema:'nostromo-vajra-dynamic-reinspection/v0.7',completedAt:new Date().toISOString(),status:failures.length?'FAIL':'PASS',capability:'PAIR_BOUND_PROVENANCE_GATED_QUARANTINE_REACTIVATION',tests:{contestedStatus:contested.status,nextInspection:contested.nextInspection,repeatedSourceContest,repeatedMetabolicContest,reactivated,keyAliasResult,fingerprintOnlyResult,splitNoveltyResult,misalignedResult,missingBaselineResult,noveltyProbe,sourceOverGeneric,stableTie,singleTriggered:single.dynamicReinspection?.triggered,rejectedTriggered:rejected.dynamicReinspection?.triggered,rejectedCount:rejected.handoffResolution?.rejected},provenance:{fixture:'synthetic de-identified branch/receipt fixtures',failureEvidence:'nostromo/failure-log/2026-09-10-vajra-quarantine-novelty-pairing-laundering.json'},failures,boundary:'PASS proves only that an explicitly baselined quarantined metabolic-contamination branch can become runnable again when one aligned evidence item has both a new evidence identity and a new content fingerprint. Split novelty across separate items, key-only aliases, fingerprint-only drift, replay-like cases, missing baselines, and misaligned pairing data remain HOLD. Reactivation is clause-scoped and returns only to DROPLET source-quality inspection while preserving prior quarantine/provenance. Existing non-starvation, first-conflict DROPLET routing, repeated-source GUT diversion, rejected-receipt containment, and echo breaking remain bounded. It does not decide source truth, infer semantic novelty, execute follow-up organs, install capabilities, clear historical quarantine evidence, or mutate persistent body state.'};
 await fs.writeFile('nostromo/vajra/dynamic-reinspection-last-result.json',JSON.stringify(result,null,2)+'\n');
 console.log(JSON.stringify(result,null,2));if(failures.length)process.exitCode=1;
