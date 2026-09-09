@@ -1,16 +1,27 @@
 {
   "schema": "zenomorph-failure-evidence/v1",
   "recordedAt": "2026-09-09T22:04:00+08:00",
+  "resolvedAt": "2026-09-09T23:22:00+08:00",
   "organ": "VAJRA",
   "failureType": "PROVENANCE_ALIAS_CONFLICT_LAUNDERING",
-  "status": "OPEN_NOT_PROMOTED",
-  "observed": "dynamic decomposition v1.3 selected receipt.provenance before receipt.provenanceFingerprint, so contradictory dual provenance declarations could silently collapse to the primary field and regulate decomposition.",
-  "risk": ["source identity loss", "false certainty", "provenance laundering", "metabolic contamination"],
-  "requiredBehavior": "A same-scope receipt with contradictory provenance/provenanceFingerprint declarations must HOLD with zero facets; bounded canonical equivalents may pass; unrelated-scope conflicts must not poison the selected parent.",
+  "status": "RESOLVED_CI_VERIFIED",
+  "observed": "Raw dynamic decomposition v1.3 contains a provenance fallback, but system-level execution is already protected by the canonical classification/provenance alias guard. A temporary second wrapper was found to duplicate that regulation and was removed rather than layering two guards over the same metabolic event.",
+  "risk": ["source identity loss", "false certainty", "provenance laundering", "duplicate regulation pollution"],
+  "verifiedBehavior": "A same-scope receipt with contradictory provenance/provenanceFingerprint declarations HOLDs with zero facets; bounded canonical equivalents remain admissible; unrelated-scope conflicts do not poison the selected parent. The protection is enforced as an independent CI invariant without a duplicate runtime wrapper.",
+  "evidence": {
+    "focusedRunId": 34368409513,
+    "focusedHead": "f6240c1135cfd3c11ad46c3b165e23ac8d5091b5",
+    "focusedConclusion": "success",
+    "postCleanupIntegrationEvidenceCommit": "ab3582516ccd700502b57d1ad37b4934f552466a",
+    "postCleanupIntegrationStatus": "PASS",
+    "postCleanupIntegrationRounds": 50,
+    "redundantWrapperRemovalCommit": "c9f32c8b8000ea1330833d45d486aa45d7206e36"
+  },
   "provenance": {
-    "source": "repository code inspection plus synthetic adversarial fixture",
+    "source": "repository code inspection plus synthetic adversarial fixture and GitHub Actions evidence",
     "privateConnectorMaterialIncluded": false,
     "publicRepoOnly": true
   },
-  "promotionBoundary": "Remain OPEN_NOT_PROMOTED until focused unit/adversarial/cross-organ regressions and full NOSTROMO integration succeed on the repaired head."
+  "promotionBoundary": "Closed only after focused adversarial/regression CI succeeded and the post-cleanup full integration evidence recorded PASS. This closure does not claim semantic source truth, source independence, assimilation, or autonomous morphogenesis.",
+  "displayDecision": "NO_PUBLIC_VERSION_BUMP: defensive invariant and duplicate-layer cleanup only; existing VAJRA displayed capability version remains authoritative."
 }
