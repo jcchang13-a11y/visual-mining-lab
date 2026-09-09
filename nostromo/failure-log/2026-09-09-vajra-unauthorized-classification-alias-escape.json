@@ -1,0 +1,27 @@
+{
+  "schema": "zenomorph-failure-evidence/v1",
+  "recordedAt": "2026-09-09T13:00:54Z",
+  "organ": "VAJRA",
+  "capabilityArea": "dynamic-decomposition",
+  "status": "OPEN_NOT_PROMOTED",
+  "failureType": "UNAUTHORIZED_CLASSIFICATION_ALIAS_ESCAPE",
+  "observedAtVersion": "dynamic-decomposition v1.3 + classification-alias-guard v0.2",
+  "observation": "A same-receipt contradiction between one authorized GUT triage classification and one unknown or unauthorized classification is rejected by direct qualification, but planning expands both declarations and lets the authorized declaration qualify while the unknown declaration is discarded. The plan can therefore become DECOMPOSED instead of remaining HOLD.",
+  "risk": "A self-contradictory metabolic diagnosis with one unknown half can be laundered into false certainty, allowing downstream VAJRA behavior regulation from incomplete or malformed diagnostic identity.",
+  "reproduction": {
+    "targetRef": "target-001",
+    "clauseRef": "clause-001",
+    "organ": "GUT",
+    "status": "COMPLETED",
+    "provenance": "deidentified-gut-triage-unauthorized-alias",
+    "triageClassification": "PROVENANCE_COLLISION",
+    "classification": "UNKNOWN_CONTAMINATION",
+    "expected": "same-scope contradictory dual declarations remain zero-facet HOLD even when only one side is an authorized decomposition class",
+    "preFixMechanism": "classification-alias-guard v0.2 expands both declarations; dynamic-decomposition accepts PROVENANCE_COLLISION and rejects UNKNOWN_CONTAMINATION, leaving one qualifying diagnosis that may select a bounded profile"
+  },
+  "provenance": {
+    "source": "static inspection of public repo plus synthetic de-identified adversarial fixture",
+    "privateConnectorMaterialIncluded": false
+  },
+  "promotionBoundary": "Do not promote until authorized-vs-unknown and unknown-vs-unknown same-receipt contradictions are target-scoped HOLD with zero facets; equivalent aliases remain usable; unrelated conflicts do not poison the selected target; genuine authorized cross-receipt disagreement remains HOLD; and focused plus full integration CI succeed."
+}
