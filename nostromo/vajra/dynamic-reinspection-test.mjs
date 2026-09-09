@@ -12,7 +12,7 @@ const mk=(relation,provenance,overrides={})=>({targetRef:branch.targetRef,clause
 const contested=V.applyHandoffResults(base,[mk('supports the target claim','src-A'),mk('refutes the target claim','src-B')]);
 check(contested.status.includes('CONTESTED'),'CONFLICT_NOT_PRESERVED',contested.status);
 check(contested.dynamicReinspection?.triggered===true,'DYNAMIC_REINSPECTION_NOT_TRIGGERED',contested.dynamicReinspection);
-check(contested.dynamicReinspection?.version==='0.8','DYNAMIC_REINSPECTION_VERSION_NOT_UPDATED',contested.dynamicReinspection);
+check(contested.dynamicReinspection?.version==='0.9','DYNAMIC_REINSPECTION_VERSION_NOT_UPDATED',contested.dynamicReinspection);
 check(contested.nextInspection?.trigger==='CONTESTED_RETURN','WRONG_TRIGGER',contested.nextInspection);
 check(contested.nextInspection?.lens==='source_quality'&&contested.nextInspection?.preferredOrgan==='DROPLET','CONFLICT_DID_NOT_CHANGE_BEHAVIOR',contested.nextInspection);
 check(contested.nextInspection?.targetRef===branch.targetRef&&contested.nextInspection?.clauseRef===branch.clauseRef,'TARGET_SCOPE_LOST',contested.nextInspection);
@@ -67,6 +67,15 @@ check(noveltyProbe?.qualifies===true&&noveltyProbe?.tuplePairingValid===true&&no
 check(V.quarantineNovelty(keyAliasReplay)?.qualifies===false,'REPLAY_ALIAS_QUALIFIED_AS_NOVEL',V.quarantineNovelty(keyAliasReplay));
 check(V.quarantineNovelty(borrowedProvenance)?.qualifies===false,'BORROWED_PROVENANCE_QUALIFIED_AS_NOVEL',V.quarantineNovelty(borrowedProvenance));
 
+const compactedLaundering={...quarantinedBaseline,
+  evidenceKeys:[...quarantinedBaseline.evidenceKeys,'receipt-C','',''],
+  evidenceFingerprints:[...quarantinedBaseline.evidenceFingerprints,'','fp-C',''],
+  evidenceProvenances:[...quarantinedBaseline.evidenceProvenances,'','','src-C']
+};
+const compactedLaunderingResult=V.selectNextInspection({unresolved:[compactedLaundering]});
+check(compactedLaunderingResult?.trigger==='REPEATED_METABOLIC_CONTEST'&&compactedLaunderingResult?.status==='HOLD','COMPACTED_POSITIONAL_TUPLE_FALSE_REACTIVATION',compactedLaunderingResult);
+check(V.quarantineNovelty(compactedLaundering)?.qualifies===false,'COMPACTED_POSITIONAL_TUPLE_PROBE_FALSE_POSITIVE',V.quarantineNovelty(compactedLaundering));
+
 const genericBranch={status:'CONTESTED_BY_RECEIPTS',targetRef:'t-generic',clauseRef:'c-generic',lens:'evidence',evidenceKeys:['g-A','g-B']};
 for(const unresolved of [
   [genericBranch,sourceBranch,metabolicBranch],
@@ -98,6 +107,6 @@ const rejected=V.applyHandoffResults(base,[mk('supports the target claim','', {p
 check(rejected.dynamicReinspection?.triggered===false,'REJECTED_RECEIPT_FALSE_ESCALATION',rejected.dynamicReinspection);
 check((rejected.handoffResolution?.rejected||0)>=1,'REJECTED_RECEIPT_NOT_AUDITED',rejected.handoffResolution);
 
-const result={schema:'nostromo-vajra-dynamic-reinspection/v0.8',completedAt:new Date().toISOString(),status:failures.length?'FAIL':'PASS',capability:'PROVENANCE_BOUND_TUPLE_GATED_QUARANTINE_REACTIVATION',tests:{contestedStatus:contested.status,nextInspection:contested.nextInspection,repeatedSourceContest,repeatedMetabolicContest,reactivated,keyAliasResult,fingerprintOnlyResult,splitNoveltyResult,borrowedProvenanceResult,misalignedResult,missingBaselineResult,noveltyProbe,sourceOverGeneric,stableTie,singleTriggered:single.dynamicReinspection?.triggered,rejectedTriggered:rejected.dynamicReinspection?.triggered,rejectedCount:rejected.handoffResolution?.rejected},provenance:{fixture:'synthetic de-identified branch/receipt fixtures',failureEvidence:'nostromo/failure-log/2026-09-10-vajra-quarantine-provenance-tuple-laundering.json'},failures,boundary:'PASS proves only that an explicitly baselined quarantined metabolic-contamination branch can become runnable again when one aligned evidence item has a new evidence identity, new content fingerprint, and new provenance identity bound to the same item. Split novelty, borrowed baseline provenance, missing provenance, missing baselines, and tuple misalignment remain HOLD. Reactivation is clause-scoped and returns only to DROPLET source-quality inspection while preserving prior quarantine/provenance. Existing non-starvation, first-conflict DROPLET routing, repeated-source GUT diversion, rejected-receipt containment, and echo breaking remain bounded. It does not decide source truth, infer semantic novelty, execute follow-up organs, install capabilities, clear historical quarantine evidence, or mutate persistent body state.'};
+const result={schema:'nostromo-vajra-dynamic-reinspection/v0.9',completedAt:new Date().toISOString(),status:failures.length?'FAIL':'PASS',capability:'PROVENANCE_BOUND_POSITION_PRESERVING_QUARANTINE_REACTIVATION',tests:{contestedStatus:contested.status,nextInspection:contested.nextInspection,repeatedSourceContest,repeatedMetabolicContest,reactivated,keyAliasResult,fingerprintOnlyResult,splitNoveltyResult,borrowedProvenanceResult,misalignedResult,missingBaselineResult,compactedLaunderingResult,noveltyProbe,sourceOverGeneric,stableTie,singleTriggered:single.dynamicReinspection?.triggered,rejectedTriggered:rejected.dynamicReinspection?.triggered,rejectedCount:rejected.handoffResolution?.rejected},provenance:{fixture:'synthetic de-identified branch/receipt fixtures',failureEvidence:['nostromo/failure-log/2026-09-10-vajra-quarantine-provenance-tuple-laundering.json','nostromo/failure-log/2026-09-10-vajra-quarantine-tuple-compaction-laundering.json']},failures,boundary:'PASS proves only that an explicitly baselined quarantined metabolic-contamination branch can become runnable again when one originally co-indexed evidence item has a valid new evidence identity, new content fingerprint, and new provenance identity at the same preserved array position. Split novelty, borrowed baseline provenance, missing provenance, malformed members, independent compaction, missing baselines, and tuple misalignment remain HOLD. Reactivation is clause-scoped and returns only to DROPLET source-quality inspection while preserving prior quarantine/provenance. Existing non-starvation, first-conflict DROPLET routing, repeated-source GUT diversion, rejected-receipt containment, and echo breaking remain bounded. It does not decide source truth, infer semantic novelty, execute follow-up organs, install capabilities, clear historical quarantine evidence, or mutate persistent body state.'};
 await fs.writeFile('nostromo/vajra/dynamic-reinspection-last-result.json',JSON.stringify(result,null,2)+'\n');
 console.log(JSON.stringify(result,null,2));if(failures.length)process.exitCode=1;
