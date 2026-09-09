@@ -1,0 +1,12 @@
+{
+  "schema": "zenomorph-failure-evidence/v1",
+  "organ": "VAJRA",
+  "status": "OPEN_NOT_PROMOTED",
+  "failureClass": "DECORATED_RECEIPT_ECHO",
+  "observedIn": "dynamic-decomposition v1.2",
+  "description": "Receipt replay identity currently fingerprints the full non-transport receipt structure. A second receipt with the same targetRef, clauseRef, canonical GUT identity, canonical provenance and triage classification but a changed summary or other decorative field can therefore qualify as a second receipt and inflate qualifyingReceiptCount/aliasAudit without adding a new metabolic diagnosis.",
+  "risk": ["duplicate pollution", "metabolic echo", "false evidence multiplicity"],
+  "requiredFix": "Deduplicate qualifying GUT triage receipts by bounded diagnostic identity while retaining structural receipt fingerprints for audit. Same provenance with a genuinely different classification must remain a conflict rather than being suppressed.",
+  "promotion": "Blocked until focused adversarial tests and cross-organ/integration regression pass in GitHub Actions.",
+  "privacy": "Synthetic/de-identified evidence only; no private connector identifiers or source text."
+}
