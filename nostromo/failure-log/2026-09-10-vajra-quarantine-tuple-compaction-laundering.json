@@ -1,0 +1,14 @@
+{
+  "schema": "nostromo-failure-evidence/v0.1",
+  "recordedAt": "2026-09-10T04:01:48+08:00",
+  "organ": "VAJRA",
+  "capability": "DYNAMIC_REINSPECTION",
+  "failureType": "QUARANTINE_TUPLE_COMPACTION_LAUNDERING",
+  "status": "OPEN_NOT_PROMOTED",
+  "observedIn": "nostromo/vajra/dynamic-reinspection.js v0.8",
+  "mechanism": "Evidence key, fingerprint, and provenance arrays are independently filtered before positional pairing. Malformed or empty entries at different original indices can therefore be removed independently and compact surviving values into a synthetic aligned tuple that never existed as one evidence item.",
+  "risk": "A quarantined branch could be reactivated by positional laundering: separately positioned novel key, content fingerprint, and provenance values may collapse into one apparent provenance-bound novelty tuple, creating false information gain and changing VAJRA routing.",
+  "requiredInvariant": "Tuple alignment must be evaluated against original array positions. Invalid members must invalidate that position rather than compact arrays independently. Only one originally co-indexed, fully valid key/fingerprint/provenance tuple may qualify for quarantine reactivation.",
+  "promotionBoundary": "Keep public state at verified v0.8 until an adversarial regression reproduces the laundering case, the core preserves positional identity, focused tests pass, and full cross-organ integration passes.",
+  "privacy": "Synthetic de-identified fixtures only; no private connector content, names, IDs, or URLs are recorded."
+}
