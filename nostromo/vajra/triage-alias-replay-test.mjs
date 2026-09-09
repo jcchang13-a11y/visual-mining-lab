@@ -13,12 +13,12 @@ const result={unresolved:[{targetRef:'target-1',clauseRef:'clause-1',lens:'sourc
 const canonical={targetRef:'target-1',clauseRef:'clause-1',organ:'GUT',status:'COMPLETED',provenance:'synthetic-source-a',triageClassification:'PROVENANCE_COLLISION'};
 const aliases={targetRef:'target-1',clauseRef:'clause-1',sourceOrgan:'GUT',status:'COMPLETED',provenanceFingerprint:'synthetic-source-a',classification:'provenance_collision'};
 
-check(V.triageAliasReplayGuardVersion==='0.4','ALIAS_REPLAY_GUARD_VERSION_MISMATCH',V.triageAliasReplayGuardVersion);
+check(V.triageAliasReplayGuardVersion==='0.5','ALIAS_REPLAY_GUARD_VERSION_MISMATCH',V.triageAliasReplayGuardVersion);
 const aliasReplay=V.planConflictDecomposition(result,[canonical,aliases]);
 check(aliasReplay.status==='DECOMPOSED','ALIAS_REPLAY_CHANGED_STATUS',aliasReplay);
 check(aliasReplay.replaySuppression?.duplicateReplayCount===1,'ALIAS_REPLAY_NOT_SUPPRESSED',aliasReplay.replaySuppression);
 check(aliasReplay.provenance?.qualifyingReceiptCount===1,'ALIAS_REPLAY_INFLATED_QUALIFYING_COUNT',aliasReplay.provenance);
-check(aliasReplay.schemaAliasReplayGuard?.version==='0.4','ALIAS_GUARD_METADATA_MISSING',aliasReplay.schemaAliasReplayGuard);
+check(aliasReplay.schemaAliasReplayGuard?.version==='0.5','ALIAS_GUARD_METADATA_MISSING',aliasReplay.schemaAliasReplayGuard);
 check(aliasReplay.facets?.some(f=>f.lens==='source_identity'&&f.preferredOrgan==='GUT'),'GUT_FACET_MISSING',aliasReplay.facets);
 check(aliasReplay.facets?.some(f=>f.lens==='claim_relation'&&f.preferredOrgan==='MUTHER'),'CROSS_ORGAN_BEHAVIOR_MISSING',aliasReplay.facets);
 
@@ -63,11 +63,28 @@ const provenanceConflict=V.planConflictDecomposition(result,[{...canonical,prove
 check(provenanceConflict.status==='HOLD'&&provenanceConflict.reason==='conflicting-schema-alias-fields','CONFLICTING_PROVENANCE_ALIAS_NOT_HELD',provenanceConflict);
 check((provenanceConflict.aliasConflicts||[]).every(x=>!('canonicalValue' in x)&&!('aliasValue' in x)),'RAW_CONFLICT_VALUE_LEAKED',provenanceConflict.aliasConflicts);
 
+const unrelatedTargetConflict={targetRef:'target-unrelated',clauseRef:'clause-unrelated',organ:'GUT',sourceOrgan:'DROPLET',status:'COMPLETED',provenance:'synthetic-noise-a',triageClassification:'PROVENANCE_COLLISION'};
+const unrelatedTargetResult=V.planConflictDecomposition(result,[canonical,unrelatedTargetConflict]);
+check(unrelatedTargetResult.status==='DECOMPOSED','OUT_OF_SCOPE_TARGET_ALIAS_CONFLICT_POISONED_ACTIVE_BRANCH',unrelatedTargetResult);
+check(unrelatedTargetResult.provenance?.qualifyingReceiptCount===1,'OUT_OF_SCOPE_TARGET_ALIAS_CONFLICT_CHANGED_QUALIFYING_COUNT',unrelatedTargetResult.provenance);
+check(unrelatedTargetResult.schemaAliasReplayGuard?.rejectedOutOfScopeAliasConflictCount===1,'OUT_OF_SCOPE_TARGET_ALIAS_CONFLICT_NOT_AUDITED',unrelatedTargetResult.schemaAliasReplayGuard);
+check((unrelatedTargetResult.facets||[]).length===2,'OUT_OF_SCOPE_TARGET_ALIAS_CONFLICT_CHANGED_FACETS',unrelatedTargetResult.facets);
+
+const unrelatedClauseConflict={targetRef:'target-1',clauseRef:'clause-unrelated',organ:'GUT',sourceOrgan:'DROPLET',status:'COMPLETED',provenance:'synthetic-noise-b',triageClassification:'PROVENANCE_COLLISION'};
+const unrelatedClauseResult=V.planConflictDecomposition(result,[canonical,unrelatedClauseConflict]);
+check(unrelatedClauseResult.status==='DECOMPOSED','OUT_OF_SCOPE_CLAUSE_ALIAS_CONFLICT_POISONED_ACTIVE_BRANCH',unrelatedClauseResult);
+check(unrelatedClauseResult.schemaAliasReplayGuard?.rejectedOutOfScopeAliasConflictCount===1,'OUT_OF_SCOPE_CLAUSE_ALIAS_CONFLICT_NOT_AUDITED',unrelatedClauseResult.schemaAliasReplayGuard);
+
+const missingScopeConflict={organ:'GUT',sourceOrgan:'DROPLET',status:'COMPLETED',provenance:'synthetic-noise-c',triageClassification:'PROVENANCE_COLLISION'};
+const missingScopeResult=V.planConflictDecomposition(result,[canonical,missingScopeConflict]);
+check(missingScopeResult.status==='DECOMPOSED','MISSING_SCOPE_ALIAS_CONFLICT_POISONED_ACTIVE_BRANCH',missingScopeResult);
+check(missingScopeResult.schemaAliasReplayGuard?.rejectedOutOfScopeAliasConflictCount===1,'MISSING_SCOPE_ALIAS_CONFLICT_NOT_AUDITED',missingScopeResult.schemaAliasReplayGuard);
+
 const out={
-  schema:'zenomorph-vajra-triage-alias-replay-test/v0.4',
+  schema:'zenomorph-vajra-triage-alias-replay-test/v0.5',
   completedAt:new Date().toISOString(),
   status:failures.length?'FAIL':'PASS',
-  capability:'GUT_TRIAGE_SCHEMA_ALIAS_REPLAY_CONTAINMENT_WITH_DECLARED_ORGAN_IDENTITY',
+  capability:'GUT_TRIAGE_SCHEMA_ALIAS_REPLAY_CONTAINMENT_WITH_PARENT_SCOPED_CONFLICT_AUTHORITY',
   tests:{
     aliasReplayStatus:aliasReplay.status,
     duplicateReplayCount:aliasReplay.replaySuppression?.duplicateReplayCount,
@@ -80,11 +97,12 @@ const out={
     crossOrganFacets:(aliasReplay.facets||[]).map(f=>({lens:f.lens,preferredOrgan:f.preferredOrgan})),
     organConflict:organConflict.status,
     classConflict:classConflict.status,
-    provenanceConflict:provenanceConflict.status
+    provenanceConflict:provenanceConflict.status,
+    outOfScopeConflictContainment:{unrelatedTargetStatus:unrelatedTargetResult.status,unrelatedClauseStatus:unrelatedClauseResult.status,missingScopeStatus:missingScopeResult.status,rejectedTargetConflicts:unrelatedTargetResult.schemaAliasReplayGuard?.rejectedOutOfScopeAliasConflictCount,rejectedClauseConflicts:unrelatedClauseResult.schemaAliasReplayGuard?.rejectedOutOfScopeAliasConflictCount,rejectedMissingScopeConflicts:missingScopeResult.schemaAliasReplayGuard?.rejectedOutOfScopeAliasConflictCount}
   },
   failures,
   provenance:'Synthetic receipts only. No private Drive names, IDs, URLs, or source text are written by this test.',
-  boundary:'PASS proves only that equivalent declared GUT organ aliases are matched case-insensitively after bounded whitespace normalization, equivalent provenance aliases use canonical provenance identity, and repeated same-provenance/same-classification receipt echoes cannot manufacture evidential multiplicity or false schema conflict. Genuinely different organ aliases, genuinely distinct provenance aliases, and same-provenance diagnostic disagreement remain visible as HOLD. It does not infer semantic equivalence beyond these explicit identity rules, adjudicate source truth, or install capability state.'
+  boundary:'PASS proves only that equivalent GUT receipt aliases remain bounded, same-provenance/same-classification echoes cannot manufacture evidential multiplicity, and contradictory alias fields can change decomposition behavior only when targetRef+clauseRef scope matches an active contested source-quality parent. Out-of-scope or scope-missing alias conflicts remain fingerprinted audit evidence but cannot manufacture HOLD, target selection, multiplicity, or facets. Genuine scoped alias disagreement and same-provenance diagnostic disagreement remain HOLD. It does not adjudicate source truth or install capability state.'
 };
 await fs.writeFile('nostromo/vajra/triage-alias-replay-last-result.json',JSON.stringify(out,null,2)+'\n');
 console.log(JSON.stringify(out,null,2));
