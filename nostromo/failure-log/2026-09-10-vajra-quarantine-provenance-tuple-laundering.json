@@ -4,8 +4,9 @@
   "organ": "VAJRA",
   "capability": "DYNAMIC_REINSPECTION",
   "failureClass": "QUARANTINE_PROVENANCE_TUPLE_LAUNDERING",
-  "status": "OPEN_NOT_PROMOTED",
+  "status": "RESOLVED_CI_VERIFIED",
   "observedIn": "dynamic reinspection v0.7",
+  "resolvedIn": "dynamic reinspection v0.8",
   "problem": "Quarantine reactivation binds novelty to an aligned evidence key + content fingerprint pair, but provenance identity is not part of the same aligned novelty tuple. A new key/fingerprint pair can therefore trigger reinspection while provenance is missing, replayed from the quarantine baseline, or otherwise not demonstrably new/bound to that item.",
   "risk": [
     "source identity drift can be mistaken for information gain",
@@ -17,9 +18,27 @@
     "hold": "Missing provenance, provenance-array misalignment, or a novelty pair whose provenance cannot be bound to the same item must remain REPEATED_METABOLIC_CONTEST / HOLD.",
     "boundary": "This does not claim semantic novelty, source independence, truth, or capability assimilation. It only prevents provenance-free novelty from changing VAJRA routing."
   },
+  "resolutionEvidence": {
+    "focusedProvenanceTupleGate": {
+      "runId": 34380937725,
+      "conclusion": "SUCCESS"
+    },
+    "dynamicReinspectionRegression": {
+      "runId": 34380783216,
+      "conclusion": "SUCCESS"
+    },
+    "fullNostromoIntegration": {
+      "runId": 34380783136,
+      "conclusion": "SUCCESS"
+    },
+    "postGateDeployment": {
+      "runId": 34380937870,
+      "conclusion": "SUCCESS"
+    }
+  },
   "provenance": {
     "fixture": "synthetic de-identified quarantine branch fixtures only",
     "privateConnectorData": false
   },
-  "promotion": "FORBIDDEN_UNTIL_ADVERSARIAL_AND_CROSS_ORGAN_CI_PASS"
+  "promotion": "ALLOWED_AFTER_CI_VERIFIED_RESOLUTION"
 }
