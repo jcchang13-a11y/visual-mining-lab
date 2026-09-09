@@ -40,6 +40,16 @@ const misalignedProvenance={...baseline,
 const misalignedResult=V.selectNextInspection({unresolved:[misalignedProvenance]});
 check(misalignedResult?.trigger==='REPEATED_METABOLIC_CONTEST'&&misalignedResult?.status==='HOLD','MISALIGNED_PROVENANCE_FALSE_REACTIVATION',misalignedResult);
 
+// Adversarial positional laundering: each novel component exists at a different original index.
+// Independent filtering must never compact these into one synthetic tuple.
+const compactedLaundering={...baseline,
+  evidenceKeys:[...baseline.evidenceKeys,'receipt-C','', ''],
+  evidenceFingerprints:[...baseline.evidenceFingerprints,'','fp-C',''],
+  evidenceProvenances:[...baseline.evidenceProvenances,'','','src-C']
+};
+const compactedResult=V.selectNextInspection({unresolved:[compactedLaundering]});
+check(compactedResult?.trigger==='REPEATED_METABOLIC_CONTEST'&&compactedResult?.status==='HOLD','COMPACTED_POSITIONAL_TUPLE_FALSE_REACTIVATION',compactedResult);
+
 const provenanceBoundNovelty={...baseline,
   evidenceKeys:[...baseline.evidenceKeys,'receipt-C'],
   evidenceFingerprints:[...baseline.evidenceFingerprints,'fp-C'],
@@ -49,14 +59,14 @@ const validResult=V.selectNextInspection({unresolved:[provenanceBoundNovelty]});
 check(validResult?.trigger==='NOVEL_POST_QUARANTINE_EVIDENCE'&&validResult?.status==='OPEN','PROVENANCE_BOUND_NOVELTY_NOT_REACTIVATED',validResult);
 
 const result={
-  schema:'nostromo-vajra-quarantine-provenance-tuple-adversarial/v0.1',
+  schema:'nostromo-vajra-quarantine-provenance-tuple-adversarial/v0.2',
   completedAt:new Date().toISOString(),
   status:failures.length?'FAIL':'PASS',
-  capability:'PROVENANCE_BOUND_QUARANTINE_REACTIVATION',
-  tests:{missingResult,replayedResult,misalignedResult,validResult},
-  provenance:{fixture:'synthetic de-identified quarantine fixtures',failureEvidence:'nostromo/failure-log/2026-09-10-vajra-quarantine-provenance-tuple-laundering.json'},
+  capability:'PROVENANCE_BOUND_POSITION_PRESERVING_QUARANTINE_REACTIVATION',
+  tests:{missingResult,replayedResult,misalignedResult,compactedResult,validResult},
+  provenance:{fixture:'synthetic de-identified quarantine fixtures',failureEvidence:['nostromo/failure-log/2026-09-10-vajra-quarantine-provenance-tuple-laundering.json','nostromo/failure-log/2026-09-10-vajra-quarantine-tuple-compaction-laundering.json']},
   failures,
-  boundary:'PASS requires provenance identity to be aligned with the same post-quarantine evidence item before novelty may alter VAJRA routing. Missing, replayed, or misaligned provenance must remain HOLD. This test does not establish source truth, independence, semantic novelty, assimilation, or persistent body mutation.'
+  boundary:'PASS requires provenance identity to be aligned with the same original post-quarantine evidence position before novelty may alter VAJRA routing. Missing, replayed, misaligned, or independently compacted tuple members must remain HOLD. This test does not establish source truth, independence, semantic novelty, assimilation, or persistent body mutation.'
 };
 await fs.writeFile('nostromo/vajra/quarantine-provenance-tuple-last-result.json',JSON.stringify(result,null,2)+'\n');
 console.log(JSON.stringify(result,null,2));
