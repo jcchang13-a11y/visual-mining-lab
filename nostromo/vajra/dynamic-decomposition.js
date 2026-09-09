@@ -1,4 +1,4 @@
-/* VAJRA dynamic decomposition v1.1 — qualifying GUT contamination triage targets the exact contested parent by targetRef+clauseRef; non-qualifying receipts cannot manufacture multi-parent ambiguity; diagnostic disagreement is separated from provenance difference. Existing classification-regulated decomposition, replay suppression, provenance containment, and conflict HOLD behavior remain bounded. */
+/* VAJRA dynamic decomposition v1.2 — bounded organ-identity canonicalization prevents schema alias case from changing GUT receipt qualification; dual organ/sourceOrgan disagreement is explicitly rejected. Existing target qualification, classification-regulated decomposition, replay suppression, provenance containment, and conflict HOLD behavior remain bounded. */
 (function(root){
   const api=root.VajraEngine;
   if(!api||typeof api.selectNextInspection!=='function') throw new Error('VajraEngine + dynamic-reinspection must be loaded before dynamic-decomposition');
@@ -7,6 +7,7 @@
   const NON_EVIDENTIAL_TRANSPORT_KEYS=new Set(['receivedAt','received_at','attempt','retry','traceId','trace_id','transportId','transport_id','deliveryId','delivery_id']);
   const clean=v=>String(v??'').replace(/\s+/g,' ').trim();
   const fp=v=>{let h=2166136261;for(const ch of clean(v)){h^=ch.codePointAt(0);h=Math.imul(h,16777619)>>>0;}return h.toString(16).padStart(8,'0');};
+  const canonicalOrgan=v=>clean(v).normalize('NFKC').toUpperCase();
   const stableStructure=v=>{
     if(Array.isArray(v)) return v.map(stableStructure);
     if(v&&typeof v==='object') return Object.fromEntries(Object.keys(v).sort().map(k=>[k,stableStructure(v[k])]));
@@ -21,21 +22,34 @@
     ? api.canonicalEvidenceProvenance(clean(v))
     : clean(v).normalize('NFKC').toLowerCase().replace(/[\p{P}\p{S}\s]+/gu,'');
 
+  function organIdentity(receipt){
+    const primary=clean(receipt?.organ),alias=clean(receipt?.sourceOrgan);
+    const primaryCanonical=canonicalOrgan(primary),aliasCanonical=canonicalOrgan(alias);
+    if(primaryCanonical&&aliasCanonical&&primaryCanonical!==aliasCanonical){
+      return {ok:false,reason:'organ-alias-conflict',declared:{organ:primary,sourceOrgan:alias},canonical:{organ:primaryCanonical,sourceOrgan:aliasCanonical}};
+    }
+    const canonical=primaryCanonical||aliasCanonical;
+    if(!canonical) return {ok:false,reason:'organ-required'};
+    return {ok:true,canonical,declared:{organ:primary||null,sourceOrgan:alias||null}};
+  }
+
   function qualifyTriageReceipt(branch,receipt){
     if(!branch||!receipt||typeof receipt!=='object') return {ok:false,reason:'missing-branch-or-receipt'};
-    const targetRef=clean(receipt.targetRef),clauseRef=clean(receipt.clauseRef),organ=clean(receipt.organ||receipt.sourceOrgan),status=clean(receipt.status),provenance=clean(receipt.provenance||receipt.provenanceFingerprint),classification=clean(receipt.triageClassification||receipt.classification).toUpperCase();
+    const targetRef=clean(receipt.targetRef),clauseRef=clean(receipt.clauseRef),status=clean(receipt.status),provenance=clean(receipt.provenance||receipt.provenanceFingerprint),classification=clean(receipt.triageClassification||receipt.classification).toUpperCase();
     if(targetRef!==clean(branch.targetRef)||clauseRef!==clean(branch.clauseRef)) return {ok:false,reason:'scope-mismatch'};
-    if(organ!=='GUT') return {ok:false,reason:'gut-receipt-required'};
+    const organ=organIdentity(receipt);
+    if(!organ.ok) return {ok:false,reason:organ.reason,organIdentity:organ};
+    if(organ.canonical!=='GUT') return {ok:false,reason:'gut-receipt-required',organIdentity:organ};
     if(status!=='COMPLETED') return {ok:false,reason:'completed-receipt-required'};
     if(!provenance) return {ok:false,reason:'provenance-required'};
     if(!TRIAGE_CLASSES.has(classification)) return {ok:false,reason:'non-decomposing-triage-class'};
     const canonical=canonicalProvenance(provenance);
     if(!canonical) return {ok:false,reason:'canonical-provenance-empty'};
-    return {ok:true,classification,provenance,canonicalProvenance:canonical,receiptFingerprint:receiptFingerprint(receipt)};
+    return {ok:true,classification,provenance,canonicalProvenance:canonical,receiptFingerprint:receiptFingerprint(receipt),organIdentity:organ};
   }
 
   function auditQualifiedAliases(qualified){
-    return qualified.map(item=>({provenance:item.q.provenance,provenanceFingerprint:fp(item.q.canonicalProvenance),receiptFingerprint:item.q.receiptFingerprint})).sort((a,b)=>a.provenanceFingerprint.localeCompare(b.provenanceFingerprint)||a.receiptFingerprint.localeCompare(b.receiptFingerprint)||a.provenance.localeCompare(b.provenance));
+    return qualified.map(item=>({provenance:item.q.provenance,provenanceFingerprint:fp(item.q.canonicalProvenance),receiptFingerprint:item.q.receiptFingerprint,organIdentity:item.q.organIdentity.canonical})).sort((a,b)=>a.provenanceFingerprint.localeCompare(b.provenanceFingerprint)||a.receiptFingerprint.localeCompare(b.receiptFingerprint)||a.provenance.localeCompare(b.provenance));
   }
   function replayAudit(duplicateReplayCount){return {duplicateReplayCount,identity:'stable-recursive-object-key-order+bounded-top-level-transport-projection',ignoredTopLevelTransportKeys:[...NON_EVIDENTIAL_TRANSPORT_KEYS].sort()};}
 
@@ -69,8 +83,8 @@
     const branches=Array.isArray(result?.unresolved)?result.unresolved:[];
     const targetSelection=selectTargetParent(branches,receipts);
     if(targetSelection.status==='NONE') return {status:'NO_DECOMPOSITION',reason:'no-contested-source-quality-parent',facets:[],rejected:[]};
-    if(targetSelection.status==='MULTIPLE') return {schema:'zenomorph-vajra-dynamic-decomposition/v1.1',status:'HOLD',reason:'multiple-contested-parents-targeted',parents:targetSelection.parents.map(p=>({targetRef:p.targetRef,clauseRef:p.clauseRef,lens:p.lens,status:p.status,closed:false})),facets:[],rejected:[],boundary:'One bounded decomposition call may regulate only one contested parent. Only qualifying completed GUT contamination-triage receipts can establish target multiplicity; receipts targeting more than one parent then HOLD and require separate parent-scoped decomposition passes.'};
-    if(targetSelection.status==='AMBIGUOUS') return {schema:'zenomorph-vajra-dynamic-decomposition/v1.1',status:'HOLD',reason:'targeted-contested-source-quality-parent-required',parents:targetSelection.parents.map(p=>({targetRef:p.targetRef,clauseRef:p.clauseRef,lens:p.lens,status:p.status,closed:false})),facets:[],rejected:[],boundary:'When more than one contested source-quality parent is open, exactly one parent must be identified by qualifying completed GUT contamination-triage evidence. Non-GUT, incomplete, provenance-empty, or unauthorized-classification receipts cannot manufacture target selection or multiplicity.'};
+    if(targetSelection.status==='MULTIPLE') return {schema:'zenomorph-vajra-dynamic-decomposition/v1.2',status:'HOLD',reason:'multiple-contested-parents-targeted',parents:targetSelection.parents.map(p=>({targetRef:p.targetRef,clauseRef:p.clauseRef,lens:p.lens,status:p.status,closed:false})),facets:[],rejected:[],boundary:'One bounded decomposition call may regulate only one contested parent. Only qualifying completed GUT contamination-triage receipts can establish target multiplicity; receipts targeting more than one parent then HOLD and require separate parent-scoped decomposition passes.'};
+    if(targetSelection.status==='AMBIGUOUS') return {schema:'zenomorph-vajra-dynamic-decomposition/v1.2',status:'HOLD',reason:'targeted-contested-source-quality-parent-required',parents:targetSelection.parents.map(p=>({targetRef:p.targetRef,clauseRef:p.clauseRef,lens:p.lens,status:p.status,closed:false})),facets:[],rejected:[],boundary:'When more than one contested source-quality parent is open, exactly one parent must be identified by qualifying completed GUT contamination-triage evidence. Non-GUT, incomplete, provenance-empty, unauthorized-classification, or organ-alias-conflicted receipts cannot manufacture target selection or multiplicity.'};
     const parent=targetSelection.parent;
 
     const rejected=[],qualified=[],seenQualifiedReceiptFingerprints=new Set(); let duplicateReplayCount=0;
@@ -79,26 +93,26 @@
       if(q.ok){
         if(seenQualifiedReceiptFingerprints.has(q.receiptFingerprint)){duplicateReplayCount++;rejected.push({reason:'duplicate-qualifying-receipt-replay',receiptFingerprint:q.receiptFingerprint,provenanceFingerprint:fp(q.canonicalProvenance)});continue;}
         seenQualifiedReceiptFingerprints.add(q.receiptFingerprint);qualified.push({receipt,q});
-      } else rejected.push({reason:q.reason,receiptFingerprint:receiptFingerprint(receipt||null)});
+      } else rejected.push({reason:q.reason,receiptFingerprint:receiptFingerprint(receipt||null),organIdentity:q.organIdentity});
     }
-    if(!qualified.length) return {status:'HOLD',reason:'qualifying-gut-contamination-triage-required',parent:{targetRef:parent.targetRef,clauseRef:parent.clauseRef,lens:parent.lens,status:parent.status},facets:[],rejected,replaySuppression:replayAudit(duplicateReplayCount),boundary:'Absence or rejection of a GUT triage receipt cannot change VAJRA decomposition behavior. Structured replay suppression cannot create qualifying evidence when no unique qualifying receipt remains. Only explicitly declared top-level transport metadata is ignored for replay identity; nested fields remain evidence-significant.'};
+    if(!qualified.length) return {schema:'zenomorph-vajra-dynamic-decomposition/v1.2',status:'HOLD',reason:'qualifying-gut-contamination-triage-required',parent:{targetRef:parent.targetRef,clauseRef:parent.clauseRef,lens:parent.lens,status:parent.status},facets:[],rejected,replaySuppression:replayAudit(duplicateReplayCount),boundary:'Absence or rejection of a GUT triage receipt cannot change VAJRA decomposition behavior. Bounded organ identity canonicalization accepts case/Unicode-equivalent GUT aliases but rejects contradictory organ/sourceOrgan declarations. Structured replay suppression cannot create qualifying evidence when no unique qualifying receipt remains.'};
 
     const classifications=new Map();
     for(const item of qualified){if(!classifications.has(item.q.classification)) classifications.set(item.q.classification,[]);classifications.get(item.q.classification).push({provenanceFingerprint:fp(item.q.canonicalProvenance),receiptFingerprint:item.q.receiptFingerprint});}
     if(classifications.size>1){
       const classificationAudit=[...classifications.entries()].map(([classification,items])=>({classification,items:[...items].sort((a,b)=>a.provenanceFingerprint.localeCompare(b.provenanceFingerprint)||a.receiptFingerprint.localeCompare(b.receiptFingerprint))})).sort((a,b)=>a.classification.localeCompare(b.classification));
-      return {schema:'zenomorph-vajra-dynamic-decomposition/v1.1',status:'HOLD',reason:'conflicting-qualifying-gut-triage-classifications',parent:{targetRef:parent.targetRef,clauseRef:parent.clauseRef,lens:parent.lens,status:parent.status,closed:false},facets:[],conflict:{classifications:classificationAudit,qualifyingReceiptCount:qualified.length},replaySuppression:replayAudit(duplicateReplayCount),rejected,boundary:'Multiple unique qualifying GUT triage receipts HOLD only when their contamination classifications disagree. Provenance inequality alone is not diagnostic disagreement and must not manufacture a conflict. Classification conflict cannot manufacture a decomposition profile.'};
+      return {schema:'zenomorph-vajra-dynamic-decomposition/v1.2',status:'HOLD',reason:'conflicting-qualifying-gut-triage-classifications',parent:{targetRef:parent.targetRef,clauseRef:parent.clauseRef,lens:parent.lens,status:parent.status,closed:false},facets:[],conflict:{classifications:classificationAudit,qualifyingReceiptCount:qualified.length},replaySuppression:replayAudit(duplicateReplayCount),rejected,boundary:'Multiple unique qualifying GUT triage receipts HOLD only when their contamination classifications disagree. Provenance inequality alone is not diagnostic disagreement and must not manufacture a conflict. Classification conflict cannot manufacture a decomposition profile.'};
     }
 
     const canonicalRepresentative=[...qualified].sort((a,b)=>a.q.canonicalProvenance.localeCompare(b.q.canonicalProvenance)||a.q.classification.localeCompare(b.q.classification)||a.q.receiptFingerprint.localeCompare(b.q.receiptFingerprint))[0];
     const aliasAudit=auditQualifiedAliases(qualified),distinctProvenanceCount=new Set(qualified.map(x=>x.q.canonicalProvenance)).size;
     const shared={targetRef:parent.targetRef,clauseRef:parent.clauseRef,parentLens:parent.lens,parentStatus:parent.status,triageClassification:canonicalRepresentative.q.classification,triageProvenanceFingerprint:fp(canonicalRepresentative.q.canonicalProvenance),status:'OPEN'};
     const facets=facetsForClassification(parent,canonicalRepresentative.q.classification,shared);
-    if(!facets.length) return {schema:'zenomorph-vajra-dynamic-decomposition/v1.1',status:'HOLD',reason:'no-bounded-profile-for-qualified-classification',parent:{targetRef:parent.targetRef,clauseRef:parent.clauseRef,lens:parent.lens,status:parent.status,closed:false},facets:[],replaySuppression:replayAudit(duplicateReplayCount),rejected,boundary:'A qualifying receipt may not create downstream behavior unless VAJRA has an explicit bounded decomposition profile for that classification.'};
-    return {schema:'zenomorph-vajra-dynamic-decomposition/v1.1',status:'DECOMPOSED',reason:'qualifying-gut-contamination-diagnostic-agreement-selected-bounded-profile',parent:{targetRef:parent.targetRef,clauseRef:parent.clauseRef,lens:parent.lens,status:parent.status,closed:false},facets,behaviorRegulation:{classification:canonicalRepresentative.q.classification,profileFingerprint:fp(facets.map(f=>`${f.lens}:${f.preferredOrgan}`).join('|')),facetCount:facets.length},provenance:{triageClassification:canonicalRepresentative.q.classification,triageProvenance:canonicalRepresentative.q.provenance,triageProvenanceFingerprint:fp(canonicalRepresentative.q.canonicalProvenance),qualifyingReceiptCount:qualified.length,distinctProvenanceCount,canonicalAliasCount:qualified.filter(x=>x.q.canonicalProvenance===canonicalRepresentative.q.canonicalProvenance).length,aliasAudit,preservedTargetRef:parent.targetRef,preservedClauseRef:parent.clauseRef,independenceClaimed:false},replaySuppression:replayAudit(duplicateReplayCount),rejected,boundary:'Dynamic decomposition is a reversible routing/inspection plan. Completed qualifying GUT receipts that agree on one authorized contamination classification may jointly select that bounded VAJRA decomposition profile even when their provenance differs; provenance differences remain fully audited and are never promoted as proof of source independence. Classification disagreement still HOLDs with zero facets. The contested parent remains open, and this does not decide source truth, prove source independence, or claim any generated facet was executed.'};
+    if(!facets.length) return {schema:'zenomorph-vajra-dynamic-decomposition/v1.2',status:'HOLD',reason:'no-bounded-profile-for-qualified-classification',parent:{targetRef:parent.targetRef,clauseRef:parent.clauseRef,lens:parent.lens,status:parent.status,closed:false},facets:[],replaySuppression:replayAudit(duplicateReplayCount),rejected,boundary:'A qualifying receipt may not create downstream behavior unless VAJRA has an explicit bounded decomposition profile for that classification.'};
+    return {schema:'zenomorph-vajra-dynamic-decomposition/v1.2',status:'DECOMPOSED',reason:'qualifying-gut-contamination-diagnostic-agreement-selected-bounded-profile',parent:{targetRef:parent.targetRef,clauseRef:parent.clauseRef,lens:parent.lens,status:parent.status,closed:false},facets,behaviorRegulation:{classification:canonicalRepresentative.q.classification,profileFingerprint:fp(facets.map(f=>`${f.lens}:${f.preferredOrgan}`).join('|')),facetCount:facets.length},provenance:{triageClassification:canonicalRepresentative.q.classification,triageProvenance:canonicalRepresentative.q.provenance,triageProvenanceFingerprint:fp(canonicalRepresentative.q.canonicalProvenance),qualifyingReceiptCount:qualified.length,distinctProvenanceCount,canonicalAliasCount:qualified.filter(x=>x.q.canonicalProvenance===canonicalRepresentative.q.canonicalProvenance).length,aliasAudit,preservedTargetRef:parent.targetRef,preservedClauseRef:parent.clauseRef,organIdentity:canonicalRepresentative.q.organIdentity.canonical,independenceClaimed:false},replaySuppression:replayAudit(duplicateReplayCount),rejected,boundary:'Dynamic decomposition is a reversible routing/inspection plan. Completed qualifying GUT receipts that agree on one authorized contamination classification may jointly select that bounded VAJRA decomposition profile even when their provenance differs. Organ/sourceOrgan spelling or case may not change qualification when canonical identity agrees; contradictory dual declarations are rejected. Provenance differences remain audited and are never promoted as proof of source independence. The contested parent remains open, and this does not decide source truth, prove source independence, or claim any generated facet was executed.'};
   }
 
   api.qualifyContaminationTriageReceipt=qualifyTriageReceipt;
   api.planConflictDecomposition=planConflictDecomposition;
-  api.dynamicDecompositionVersion='1.1';
+  api.dynamicDecompositionVersion='1.2';
 })(typeof window!=='undefined'?window:globalThis);
