@@ -10,6 +10,7 @@ on:
       - 'nostromo/vajra/dynamic-decomposition.js'
       - 'nostromo/vajra/dynamic-decomposition-test.mjs'
       - 'nostromo/failure-log/2026-09-09-vajra-classification-alias-conflict-suppression.json'
+      - 'nostromo/failure-log/2026-09-09-vajra-unauthorized-classification-alias-escape.json'
       - '.github/workflows/nostromo-vajra-classification-alias-test.yml'
   workflow_dispatch:
 
@@ -37,13 +38,26 @@ jobs:
       - name: Verify failure evidence lifecycle
         run: |
           node - <<'NODE'
-          const f=require('./nostromo/failure-log/2026-09-09-vajra-classification-alias-conflict-suppression.json');
-          if(f.failureType!=='CLASSIFICATION_ALIAS_CONFLICT_SUPPRESSION') process.exit(1);
-          if(f.status==='OPEN_NOT_PROMOTED') process.exit(0);
-          if(f.status!=='RESOLVED_CI_VERIFIED') process.exit(1);
-          if(f.provenance?.focusedVerificationRun!==34349961048) process.exit(1);
-          if(f.provenance?.focusedVerificationConclusion!=='success') process.exit(1);
-          if(f.provenance?.fullIntegrationRun!==34349961006) process.exit(1);
-          if(f.provenance?.fullIntegrationConclusion!=='success') process.exit(1);
-          if(f.provenance?.privateConnectorMaterialIncluded!==false) process.exit(1);
+          const prior=require('./nostromo/failure-log/2026-09-09-vajra-classification-alias-conflict-suppression.json');
+          if(prior.failureType!=='CLASSIFICATION_ALIAS_CONFLICT_SUPPRESSION') process.exit(1);
+          if(prior.status!=='OPEN_NOT_PROMOTED'&&prior.status!=='RESOLVED_CI_VERIFIED') process.exit(1);
+          if(prior.status==='RESOLVED_CI_VERIFIED') {
+            if(prior.provenance?.focusedVerificationRun!==34349961048) process.exit(1);
+            if(prior.provenance?.focusedVerificationConclusion!=='success') process.exit(1);
+            if(prior.provenance?.fullIntegrationRun!==34349961006) process.exit(1);
+            if(prior.provenance?.fullIntegrationConclusion!=='success') process.exit(1);
+          }
+          if(prior.provenance?.privateConnectorMaterialIncluded!==false) process.exit(1);
+
+          const current=require('./nostromo/failure-log/2026-09-09-vajra-unauthorized-classification-alias-escape.json');
+          if(current.failureType!=='UNAUTHORIZED_CLASSIFICATION_ALIAS_ESCAPE') process.exit(1);
+          if(current.status!=='OPEN_NOT_PROMOTED'&&current.status!=='RESOLVED_CI_VERIFIED') process.exit(1);
+          if(current.status==='RESOLVED_CI_VERIFIED') {
+            if(current.provenance?.focusedVerificationRun!==34354717540) process.exit(1);
+            if(current.provenance?.focusedVerificationConclusion!=='success') process.exit(1);
+            if(current.provenance?.fullIntegrationRun!==34354717426) process.exit(1);
+            if(current.provenance?.fullIntegrationConclusion!=='success') process.exit(1);
+            if(current.provenance?.verifiedHeadSha!=='744eb7c77b392ec05e87cd741eb99b0e0fd9c85f') process.exit(1);
+          }
+          if(current.provenance?.privateConnectorMaterialIncluded!==false) process.exit(1);
           NODE
