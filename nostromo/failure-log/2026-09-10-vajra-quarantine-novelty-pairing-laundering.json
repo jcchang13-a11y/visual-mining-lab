@@ -1,16 +1,41 @@
 {
   "schema": "zenomorph-failure-evidence/v1",
   "recordedAt": "2026-09-10T00:08:00+08:00",
+  "resolvedAt": "2026-09-10T00:11:00+08:00",
   "organ": "VAJRA",
   "failureType": "QUARANTINE_NOVELTY_PAIRING_LAUNDERING",
-  "status": "OPEN_NOT_PROMOTED",
-  "observed": "dynamic reinspection v0.6 tests novelty by asking whether any evidence key is new and whether any evidence fingerprint is new, but it does not prove that the new key and new fingerprint belong to the same evidence item. A split novelty pattern can therefore reopen quarantine without one jointly novel evidence return.",
+  "status": "RESOLVED_CI_VERIFIED",
+  "observed": "dynamic reinspection v0.6 tested novelty by asking whether any evidence key was new and whether any evidence fingerprint was new, but did not prove that the new key and new fingerprint belonged to the same evidence item. A split novelty pattern could therefore reopen quarantine without one jointly novel evidence return.",
   "risk": ["false information gain", "quarantine escape", "provenance/content decoupling", "metabolic echo reactivation", "false certainty"],
-  "requiredBehavior": "Quarantine reactivation must require at least one aligned evidence item whose key and fingerprint are both novel relative to the explicit quarantine baseline. A new key paired only with an old fingerprint plus an old key paired with a new fingerprint must remain HOLD. Missing or misaligned pairing data must fail closed.",
+  "requiredBehavior": "Quarantine reactivation requires at least one aligned evidence item whose key and fingerprint are both novel relative to the explicit quarantine baseline. A new key paired only with an old fingerprint plus an old key paired with a new fingerprint remains HOLD. Missing or misaligned pairing data fails closed.",
+  "resolution": {
+    "capability": "VAJRA dynamic reinspection v0.7 / PAIR_BOUND_PROVENANCE_GATED_QUARANTINE_REACTIVATION",
+    "codeCommit": "7f6561b22dee2b0f02c58ece4af39b357cf7f35e",
+    "adversarialTestCommit": "7caeaae548d11a8f26abcc6cb44b177596c0c43c",
+    "focusedRun": {
+      "id": 34374653954,
+      "headSha": "9516ddd8d67e9bb8ec27be067063f8e1b0ba17e8",
+      "conclusion": "success"
+    },
+    "integrationRun": {
+      "id": 34374585244,
+      "headSha": "7caeaae548d11a8f26abcc6cb44b177596c0c43c",
+      "conclusion": "success"
+    },
+    "verifiedBehavior": [
+      "one aligned evidence item with both novel key and novel fingerprint can reopen clause-scoped source-quality inspection",
+      "split novelty across different evidence items remains HOLD",
+      "key-only novelty remains HOLD",
+      "fingerprint-only novelty remains HOLD",
+      "missing or misaligned pairing data remains HOLD",
+      "existing source-quality to GUT metabolic-echo diversion and cross-organ integration regressions remain passing"
+    ],
+    "boundary": "This verifies structural provenance-bound information gain only. It does not prove semantic novelty, source truth, assimilation, capability incorporation, or morphogenesis."
+  },
   "provenance": {
-    "source": "public repository code inspection plus de-identified synthetic adversarial fixture",
+    "source": "public repository code inspection plus de-identified synthetic adversarial fixture and GitHub Actions evidence",
     "privateConnectorMaterialIncluded": false,
     "publicRepoOnly": true
   },
-  "promotionBoundary": "Remain OPEN_NOT_PROMOTED until the adversarial split-novelty case fails closed, genuine paired novelty still reopens, existing source-quality/GUT echo-breaking regressions pass, and GitHub Actions succeeds."
+  "promotionBoundary": "Satisfied for dynamic reinspection v0.7 after adversarial and full integration GitHub Actions success. Public display may describe only the bounded pair-bound quarantine-reactivation behavior verified here."
 }
