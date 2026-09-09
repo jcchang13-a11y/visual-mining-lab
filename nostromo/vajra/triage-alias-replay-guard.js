@@ -1,8 +1,8 @@
-/* VAJRA triage schema-alias replay guard v0.2 — canonicalizes equivalent GUT triage receipt field aliases, suppresses same-provenance/same-classification receipt echoes before dynamic-decomposition counting, and HOLDs contradictory aliases. */
+/* VAJRA triage schema-alias replay guard v0.3 — canonicalizes equivalent GUT triage receipt field aliases, suppresses same-provenance/same-classification receipt echoes before dynamic-decomposition counting, HOLDs contradictory aliases, and uses canonical provenance identity for provenance alias equivalence. */
 (function(root){
   const api=root.VajraEngine;
   if(!api||typeof api.planConflictDecomposition!=='function') throw new Error('VAJRA_DYNAMIC_DECOMPOSITION_REQUIRED_BEFORE_TRIAGE_ALIAS_REPLAY_GUARD');
-  if(api.triageAliasReplayGuardVersion==='0.2') return;
+  if(api.triageAliasReplayGuardVersion==='0.3') return;
 
   const basePlan=api.planConflictDecomposition.bind(api);
   const clean=v=>String(v??'').replace(/\s+/g,' ').trim();
@@ -13,7 +13,7 @@
 
   const pairs=[
     {canonical:'organ',alias:'sourceOrgan',normalize:v=>clean(v)},
-    {canonical:'provenance',alias:'provenanceFingerprint',normalize:v=>clean(v)},
+    {canonical:'provenance',alias:'provenanceFingerprint',normalize:v=>canonicalProv(v)},
     {canonical:'triageClassification',alias:'classification',normalize:v=>clean(v).toUpperCase()}
   ];
 
@@ -34,7 +34,7 @@
       }
       if(!hasCanonical&&hasAlias) out[pair.canonical]=out[pair.alias];
       if(hasAlias) delete out[pair.alias];
-      if(pair.canonical==='triageClassification'&&Object.prototype.hasOwnProperty.call(out,pair.canonical)) out[pair.canonical]=pair.normalize(out[pair.canonical]);
+      if(pair.canonical==='triageClassification'&&Object.prototype.hasOwnProperty.call(out,pair.canonical)) out[pair.canonical]=clean(out[pair.canonical]).toUpperCase();
     }
     return {receipt:out,conflicts};
   }
@@ -60,13 +60,13 @@
     if(conflicts.length){
       const parent=(Array.isArray(result?.unresolved)?result.unresolved:[]).find(b=>b?.status==='CONTESTED_BY_RECEIPTS'&&b?.lens==='source_quality');
       return {
-        schema:'zenomorph-vajra-triage-alias-replay-guard/v0.2',
+        schema:'zenomorph-vajra-triage-alias-replay-guard/v0.3',
         status:'HOLD',
         reason:'conflicting-schema-alias-fields',
         parent:parent?{targetRef:parent.targetRef,clauseRef:parent.clauseRef,lens:parent.lens,status:parent.status,closed:false}:null,
         facets:[],
         aliasConflicts:conflicts,
-        boundary:'Equivalent receipt field aliases may be canonicalized only when their values agree. Conflicting aliases are not resolved by field preference or arrival order; VAJRA preserves the parent conflict and emits only fingerprinted conflict evidence.'
+        boundary:'Equivalent receipt field aliases may be canonicalized only when their values agree under the field-specific identity rule. Provenance aliases use canonical provenance identity; genuinely distinct aliases are not resolved by field preference or arrival order. VAJRA preserves the parent conflict and emits only fingerprinted conflict evidence.'
       };
     }
 
@@ -104,18 +104,18 @@
         sameProvenanceReceiptEchoCount:receiptEchoes.length
       },
       schemaAliasReplayGuard:{
-        version:'0.2',
+        version:'0.3',
         canonicalPairs:['organ/sourceOrgan','provenance/provenanceFingerprint','triageClassification/classification'],
         normalizedReceiptCount:normalized.length,
         forwardedReceiptCount:deduped.length,
         sameProvenanceReceiptEchoCount:receiptEchoes.length,
         receiptEchoes,
-        boundary:'Schema aliases are normalized only for replay identity and qualification equivalence. Completed GUT receipts with the same target, clause, canonical provenance, and triage classification are treated as one metabolic diagnosis for counting even if descriptive fields differ. Same-provenance receipts with different classifications are not collapsed and remain eligible to trigger diagnostic conflict HOLD. This guard does not infer missing evidence, adjudicate source truth, or install capability state.'
+        boundary:'Schema aliases are normalized only for replay identity and qualification equivalence. Provenance/provenanceFingerprint values are compared with canonical provenance identity, so formatting-only variants cannot manufacture HOLD. Completed GUT receipts with the same target, clause, canonical provenance, and triage classification are treated as one metabolic diagnosis for counting even if descriptive fields differ. Same-provenance receipts with different classifications are not collapsed and remain eligible to trigger diagnostic conflict HOLD. This guard does not infer missing evidence, adjudicate source truth, or install capability state.'
       }
     };
   }
 
   api.normalizeTriageReceiptAliases=normalizeReceipt;
   api.planConflictDecomposition=wrappedPlan;
-  api.triageAliasReplayGuardVersion='0.2';
+  api.triageAliasReplayGuardVersion='0.3';
 })(typeof window!=='undefined'?window:globalThis);
