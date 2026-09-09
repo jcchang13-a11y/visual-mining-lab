@@ -13,6 +13,7 @@ on:
       - 'nostromo/integration/vajra-dynamic-test.mjs'
       - 'nostromo/failure-log/2026-09-08-vajra-triage-schema-alias-replay.json'
       - 'nostromo/failure-log/2026-09-09-vajra-organ-alias-case-equivalence.json'
+      - 'nostromo/failure-log/2026-09-09-vajra-out-of-scope-alias-conflict-poisoning.json'
       - '.github/workflows/nostromo-vajra-triage-alias-replay-test.yml'
   workflow_dispatch:
 
@@ -35,4 +36,4 @@ jobs:
         run: node nostromo/integration/vajra-dynamic-test.mjs
       - name: Evidence boundary
         run: |
-          node -e "const fs=require('fs'); const p='nostromo/vajra/triage-alias-replay-last-result.json'; const r=JSON.parse(fs.readFileSync(p,'utf8')); if(r.status!=='PASS'||r.capability!=='GUT_TRIAGE_SCHEMA_ALIAS_REPLAY_CONTAINMENT_WITH_DECLARED_ORGAN_IDENTITY') process.exit(1); console.log(JSON.stringify({status:r.status,capability:r.capability,provenance:r.provenance,boundary:r.boundary},null,2));"
+          node -e "const fs=require('fs'); const p='nostromo/vajra/triage-alias-replay-last-result.json'; const r=JSON.parse(fs.readFileSync(p,'utf8')); if(r.status!=='PASS'||r.capability!=='GUT_TRIAGE_SCHEMA_ALIAS_REPLAY_CONTAINMENT_WITH_PARENT_SCOPED_CONFLICT_AUTHORITY') process.exit(1); console.log(JSON.stringify({status:r.status,capability:r.capability,provenance:r.provenance,boundary:r.boundary},null,2));"
