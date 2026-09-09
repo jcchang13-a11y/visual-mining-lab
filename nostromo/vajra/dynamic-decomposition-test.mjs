@@ -41,7 +41,22 @@ const nonGutResult=V.planConflictDecomposition(state,[nonGutAlias]);
 check(nonGutResult.status==='HOLD','NON_GUT_ALIAS_WRONGLY_QUALIFIED',nonGutResult);
 check(nonGutResult.rejected?.some(r=>r.reason==='gut-receipt-required'),'NON_GUT_ALIAS_REJECTION_NOT_AUDITED',nonGutResult.rejected);
 
-const result={schema:'zenomorph-vajra-dynamic-decomposition-test/v1.2',completedAt:new Date().toISOString(),status:failures.length?'FAIL':'PASS',capability:'GUT_TRIAGE_ORGAN_IDENTITY_CANONICALIZATION',tests:{decomposed,aliasResult,agreeingDualResult,conflictingDualResult,nonGutResult},provenance:{fixture:'synthetic de-identified contested source-quality parent and GUT schema aliases'},failures,boundary:'PASS proves bounded organ identity canonicalization for GUT triage qualification under VAJRA dynamic decomposition v1.2: case/Unicode-equivalent GUT aliases behave alike, while contradictory dual organ declarations are rejected with zero facets. It does not decide source truth, execute generated facets, or install persistent capability state.'};
+// Adversarial regression: decorative/schema payload changes must not manufacture a second metabolic diagnosis.
+const decoratedReplay={...gutReceipt,summary:'Same diagnosis, rewritten summary only.',note:'non-diagnostic decoration'};
+const decoratedReplayResult=V.planConflictDecomposition(state,[gutReceipt,decoratedReplay]);
+check(decoratedReplayResult.status==='DECOMPOSED','DECORATED_REPLAY_CHANGED_STATUS',decoratedReplayResult);
+check(decoratedReplayResult.provenance?.qualifyingReceiptCount===1,'DECORATED_REPLAY_INFLATED_QUALIFYING_COUNT',decoratedReplayResult.provenance);
+check(decoratedReplayResult.provenance?.aliasAudit?.length===1,'DECORATED_REPLAY_INFLATED_ALIAS_AUDIT',decoratedReplayResult.provenance);
+check(decoratedReplayResult.rejected?.some(r=>r.reason==='duplicate-diagnostic-receipt-replay'),'DECORATED_REPLAY_NOT_AUDITED_AS_DIAGNOSTIC_DUPLICATE',decoratedReplayResult.rejected);
+
+// Counter-adversarial boundary: same provenance with a genuinely different classification must remain visible as conflict.
+const changedDiagnosis={...gutReceipt,summary:'Same source, genuinely different diagnosis.',triageClassification:'DUPLICATE_CONTAMINATION'};
+const changedDiagnosisResult=V.planConflictDecomposition(state,[gutReceipt,changedDiagnosis]);
+check(changedDiagnosisResult.status==='HOLD','DIAGNOSTIC_DISAGREEMENT_WAS_SUPPRESSED',changedDiagnosisResult);
+check(changedDiagnosisResult.reason==='conflicting-qualifying-gut-triage-classifications','DIAGNOSTIC_DISAGREEMENT_REASON_LOST',changedDiagnosisResult);
+check(changedDiagnosisResult.facets?.length===0,'DIAGNOSTIC_DISAGREEMENT_MANUFACTURED_FACETS',changedDiagnosisResult.facets);
+
+const result={schema:'zenomorph-vajra-dynamic-decomposition-test/v1.2-adversarial-echo',completedAt:new Date().toISOString(),status:failures.length?'FAIL':'PASS',capability:'GUT_TRIAGE_DIAGNOSTIC_REPLAY_CONTAINMENT',tests:{decomposed,aliasResult,agreeingDualResult,conflictingDualResult,nonGutResult,decoratedReplayResult,changedDiagnosisResult},provenance:{fixture:'synthetic de-identified contested source-quality parent, GUT schema aliases, decorated replay, and diagnostic disagreement'},failures,boundary:'PASS requires bounded organ identity canonicalization plus diagnostic replay containment: decorative receipt changes may not inflate metabolic evidence multiplicity, while a genuine classification disagreement from the same provenance must remain a zero-facet HOLD. It does not decide source truth, execute generated facets, or install persistent capability state.'};
 await fs.writeFile('nostromo/vajra/dynamic-decomposition-last-result.json',JSON.stringify(result,null,2)+'\n');
 console.log(JSON.stringify(result,null,2));
 if(failures.length) process.exitCode=1;
