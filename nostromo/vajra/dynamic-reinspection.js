@@ -1,14 +1,10 @@
-/* VAJRA dynamic reinspection capability v0.7 — receipt feedback changes next inspection priority without altering source evidence; terminal quarantine cannot starve unrelated runnable contested branches; quarantine may reopen only on explicit post-quarantine novelty proven by one aligned evidence item whose key and fingerprint are both novel */
+/* VAJRA dynamic reinspection capability v0.8 — receipt feedback changes next inspection priority without altering source evidence; terminal quarantine cannot starve unrelated runnable contested branches; quarantine may reopen only on explicit post-quarantine novelty proven by one aligned evidence item whose key, fingerprint, and provenance are all novel */
 (function(root){
   const api=root.VajraEngine;
   if(!api||typeof api.applyHandoffResults!=='function') throw new Error('VajraEngine must be loaded before dynamic-reinspection');
   if(api.applyHandoffResults.__dynamicReinspection) return;
   const baseApply=api.applyHandoffResults;
   const runnableContestPriority=lens=>lens==='source_quality'?2:1;
-
-  function normalizedSet(values){
-    return new Set((Array.isArray(values)?values:[]).filter(v=>typeof v==='string'&&v.length));
-  }
 
   function normalizedArray(values){
     return (Array.isArray(values)?values:[]).filter(v=>typeof v==='string'&&v.length);
@@ -17,28 +13,39 @@
   function quarantineNovelty(branch){
     const baselineKeyList=normalizedArray(branch?.quarantineBaselineEvidenceKeys);
     const baselineFingerprintList=normalizedArray(branch?.quarantineBaselineFingerprints);
+    const baselineProvenanceList=normalizedArray(branch?.quarantineBaselineProvenances);
     const currentKeyList=normalizedArray(branch?.evidenceKeys);
     const currentFingerprintList=normalizedArray(branch?.evidenceFingerprints);
+    const currentProvenanceList=normalizedArray(branch?.evidenceProvenances);
     const baselineKeys=new Set(baselineKeyList);
     const baselineFingerprints=new Set(baselineFingerprintList);
-    const hasExplicitBaseline=baselineKeyList.length>0&&baselineFingerprintList.length>0;
-    const pairingValid=hasExplicitBaseline&&baselineKeyList.length===baselineFingerprintList.length&&currentKeyList.length===currentFingerprintList.length;
+    const baselineProvenances=new Set(baselineProvenanceList);
+    const hasExplicitBaseline=baselineKeyList.length>0&&baselineFingerprintList.length>0&&baselineProvenanceList.length>0;
+    const baselineTupleAligned=hasExplicitBaseline&&baselineKeyList.length===baselineFingerprintList.length&&baselineKeyList.length===baselineProvenanceList.length;
+    const currentTupleAligned=currentKeyList.length===currentFingerprintList.length&&currentKeyList.length===currentProvenanceList.length;
+    const tuplePairingValid=baselineTupleAligned&&currentTupleAligned;
     const novelKeys=currentKeyList.filter(v=>!baselineKeys.has(v));
     const novelFingerprints=currentFingerprintList.filter(v=>!baselineFingerprints.has(v));
-    const novelPairs=[];
-    if(pairingValid){
+    const novelProvenances=currentProvenanceList.filter(v=>!baselineProvenances.has(v));
+    const novelTuples=[];
+    if(tuplePairingValid){
       for(let i=0;i<currentKeyList.length;i++){
-        const key=currentKeyList[i],fingerprint=currentFingerprintList[i];
-        if(!baselineKeys.has(key)&&!baselineFingerprints.has(fingerprint)) novelPairs.push({key,fingerprint,index:i});
+        const key=currentKeyList[i],fingerprint=currentFingerprintList[i],provenance=currentProvenanceList[i];
+        if(!baselineKeys.has(key)&&!baselineFingerprints.has(fingerprint)&&!baselineProvenances.has(provenance)) novelTuples.push({key,fingerprint,provenance,index:i});
       }
     }
     return {
       hasExplicitBaseline,
-      pairingValid,
+      baselineTupleAligned,
+      currentTupleAligned,
+      pairingValid:tuplePairingValid,
+      tuplePairingValid,
       novelKeys,
       novelFingerprints,
-      novelPairs,
-      qualifies:pairingValid&&novelPairs.length>0
+      novelProvenances,
+      novelPairs:novelTuples.map(({key,fingerprint,index})=>({key,fingerprint,index})),
+      novelTuples,
+      qualifies:tuplePairingValid&&novelTuples.length>0
     };
   }
 
@@ -51,8 +58,8 @@
       lens:'quarantine_review',
       preferredOrgan:null,
       status:'HOLD',
-      reason:'A branch remains contested after both source-quality inspection and GUT metabolic-contamination triage. Routing it back to DROPLET or GUT would create a two-organ echo without adding a new diagnostic state, so VAJRA quarantines the branch until genuinely new evidence or an explicit later review policy is available.',
-      provenancePolicy:'Preserve every contest evidence key, evidence fingerprint, receipt provenance, source-quality inspection record, and metabolic-contamination triage record. Quarantine is a containment state, not adjudication. Any later reactivation must compare aligned evidence key/fingerprint pairs against an explicit quarantine baseline.',
+      reason:'A branch remains contested after both source-quality inspection and GUT metabolic-contamination triage. Routing it back to DROPLET or GUT would create a two-organ echo without adding a new diagnostic state, so VAJRA quarantines the branch until genuinely new provenance-bound evidence or an explicit later review policy is available.',
+      provenancePolicy:'Preserve every contest evidence key, evidence fingerprint, receipt provenance, source-quality inspection record, and metabolic-contamination triage record. Quarantine is a containment state, not adjudication. Any later reactivation must compare aligned evidence key/fingerprint/provenance tuples against an explicit quarantine baseline.',
       boundary:'Repeated metabolic contest must not automatically route back to DROPLET or GUT. HOLD does not decide which receipt is true, does not discard either side, and does not authorize capability incorporation. A quarantined branch is locally contained and must not starve unrelated runnable contested branches.'
     };
   }
@@ -66,10 +73,10 @@
       lens:'source_quality',
       preferredOrgan:'DROPLET',
       status:'OPEN',
-      reason:'A previously quarantined metabolic contest now contains at least one aligned evidence item whose identity and content fingerprint are both novel relative to the explicit quarantine baseline. VAJRA reopens only clause-scoped source-quality inspection so the new material can be checked without treating novelty as truth.',
-      provenancePolicy:'Preserve the quarantine baseline, every prior contest/triage record, and the newly observed aligned evidence key/fingerprint pairs. Reactivation records information gain but does not claim source independence, correctness, or resolution.',
-      novelty:{novelEvidenceKeys:novelty.novelKeys,novelEvidenceFingerprints:novelty.novelFingerprints,novelEvidencePairs:novelty.novelPairs},
-      boundary:'Reactivation requires one aligned evidence item with both a new evidence key and a new evidence fingerprint relative to explicit aligned baseline arrays. Split novelty across different items, a new key with an old fingerprint, a new fingerprint with an old key, replay, duplicate aliases, missing baseline, or misaligned pairing data stays quarantined. Reopening does not erase the prior HOLD and does not authorize capability incorporation.'
+      reason:'A previously quarantined metabolic contest now contains at least one aligned evidence item whose identity, content fingerprint, and provenance identity are all novel relative to the explicit quarantine baseline. VAJRA reopens only clause-scoped source-quality inspection so the new material can be checked without treating novelty as truth.',
+      provenancePolicy:'Preserve the quarantine baseline, every prior contest/triage record, and the newly observed aligned evidence key/fingerprint/provenance tuples. Reactivation records provenance-bound information gain but does not claim source independence, correctness, semantic novelty, or resolution.',
+      novelty:{novelEvidenceKeys:novelty.novelKeys,novelEvidenceFingerprints:novelty.novelFingerprints,novelEvidenceProvenances:novelty.novelProvenances,novelEvidencePairs:novelty.novelPairs,novelEvidenceTuples:novelty.novelTuples},
+      boundary:'Reactivation requires one aligned evidence item with a new evidence key, new content fingerprint, and new provenance identity relative to explicit aligned baseline arrays. Split novelty across different items, a new key/fingerprint borrowing baseline provenance, missing provenance, tuple misalignment, replay, duplicate aliases, or missing baseline stays quarantined. Reopening does not erase the prior HOLD and does not authorize capability incorporation.'
     };
   }
 
@@ -143,7 +150,7 @@
     const nextInspection=selectNextInspection(out);
     const unresolved=Array.isArray(out?.unresolved)?out.unresolved:[];
     const quarantineDeferred=unresolved.filter(b=>b?.status==='CONTESTED_BY_RECEIPTS'&&b?.lens==='metabolic_contamination').map(b=>({targetRef:b.targetRef,clauseRef:b.clauseRef,lens:b.lens,status:'HOLD'}));
-    return {...out,nextInspection,dynamicReinspection:{version:'0.7',triggered:['CONTESTED_RETURN','REPEATED_SOURCE_CONTEST','REPEATED_METABOLIC_CONTEST','NOVEL_POST_QUARANTINE_EVIDENCE'].includes(nextInspection?.trigger),quarantineDeferred,policy:'RUNNABLE_CONFLICT_FIRST_WITH_PAIR_BOUND_PROVENANCE_GATED_QUARANTINE_REACTIVATION',boundary:'A qualifying inter-organ receipt conflict changes VAJRA next-step behavior. Repeated metabolic_contamination conflict is locally quarantined and preserved. Quarantine can become runnable again only when explicit aligned baseline comparison proves at least one evidence item whose key and content fingerprint are both previously unseen. Split novelty across different items, key-only aliases, fingerprint-only drift, replay, duplicate pollution, missing baseline, or misaligned pairing data cannot reopen it. Reactivation returns only to clause-scoped DROPLET source-quality inspection and does not treat novelty as truth. Terminal quarantine cannot starve unrelated contested branches. Missing, malformed, replayed, or otherwise rejected receipts cannot trigger escalation.'}};
+    return {...out,nextInspection,dynamicReinspection:{version:'0.8',triggered:['CONTESTED_RETURN','REPEATED_SOURCE_CONTEST','REPEATED_METABOLIC_CONTEST','NOVEL_POST_QUARANTINE_EVIDENCE'].includes(nextInspection?.trigger),quarantineDeferred,policy:'RUNNABLE_CONFLICT_FIRST_WITH_PROVENANCE_BOUND_TUPLE_GATED_QUARANTINE_REACTIVATION',boundary:'A qualifying inter-organ receipt conflict changes VAJRA next-step behavior. Repeated metabolic_contamination conflict is locally quarantined and preserved. Quarantine can become runnable again only when explicit aligned baseline comparison proves at least one evidence item whose key, content fingerprint, and provenance identity are all previously unseen and bound to the same item. Split novelty, borrowed baseline provenance, missing provenance, tuple misalignment, replay, duplicate pollution, or missing baseline cannot reopen it. Reactivation returns only to clause-scoped DROPLET source-quality inspection and does not treat novelty as truth. Terminal quarantine cannot starve unrelated contested branches. Missing, malformed, replayed, or otherwise rejected receipts cannot trigger escalation.'}};
   }
   wrapped.__dynamicReinspection=true;
   api.applyHandoffResults=wrapped;
