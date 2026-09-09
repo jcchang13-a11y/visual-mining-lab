@@ -13,12 +13,12 @@ const result={unresolved:[{targetRef:'target-1',clauseRef:'clause-1',lens:'sourc
 const canonical={targetRef:'target-1',clauseRef:'clause-1',organ:'GUT',status:'COMPLETED',provenance:'synthetic-source-a',triageClassification:'PROVENANCE_COLLISION'};
 const aliases={targetRef:'target-1',clauseRef:'clause-1',sourceOrgan:'GUT',status:'COMPLETED',provenanceFingerprint:'synthetic-source-a',classification:'provenance_collision'};
 
-check(V.triageAliasReplayGuardVersion==='0.2','ALIAS_REPLAY_GUARD_VERSION_MISMATCH',V.triageAliasReplayGuardVersion);
+check(V.triageAliasReplayGuardVersion==='0.3','ALIAS_REPLAY_GUARD_VERSION_MISMATCH',V.triageAliasReplayGuardVersion);
 const aliasReplay=V.planConflictDecomposition(result,[canonical,aliases]);
 check(aliasReplay.status==='DECOMPOSED','ALIAS_REPLAY_CHANGED_STATUS',aliasReplay);
 check(aliasReplay.replaySuppression?.duplicateReplayCount===1,'ALIAS_REPLAY_NOT_SUPPRESSED',aliasReplay.replaySuppression);
 check(aliasReplay.provenance?.qualifyingReceiptCount===1,'ALIAS_REPLAY_INFLATED_QUALIFYING_COUNT',aliasReplay.provenance);
-check(aliasReplay.schemaAliasReplayGuard?.version==='0.2','ALIAS_GUARD_METADATA_MISSING',aliasReplay.schemaAliasReplayGuard);
+check(aliasReplay.schemaAliasReplayGuard?.version==='0.3','ALIAS_GUARD_METADATA_MISSING',aliasReplay.schemaAliasReplayGuard);
 check(aliasReplay.facets?.some(f=>f.lens==='source_identity'&&f.preferredOrgan==='GUT'),'GUT_FACET_MISSING',aliasReplay.facets);
 check(aliasReplay.facets?.some(f=>f.lens==='claim_relation'&&f.preferredOrgan==='MUTHER'),'CROSS_ORGAN_BEHAVIOR_MISSING',aliasReplay.facets);
 
@@ -29,6 +29,12 @@ check(decoratedReplay.provenance?.qualifyingReceiptCount===1,'DECORATED_ECHO_INF
 check(decoratedReplay.provenance?.aliasAudit?.length===1,'DECORATED_ECHO_INFLATED_ALIAS_AUDIT',decoratedReplay.provenance);
 check(decoratedReplay.schemaAliasReplayGuard?.sameProvenanceReceiptEchoCount===1,'DECORATED_ECHO_NOT_AUDITED',decoratedReplay.schemaAliasReplayGuard);
 check(decoratedReplay.replaySuppression?.sameProvenanceReceiptEchoCount===1,'DECORATED_ECHO_REPLAY_COUNT_MISSING',decoratedReplay.replaySuppression);
+
+const canonicalEquivalentProvenanceAlias={...canonical,provenance:'Synthetic Source A',provenanceFingerprint:'synthetic-source-a'};
+const equivalentAliasResult=V.planConflictDecomposition(result,[canonicalEquivalentProvenanceAlias]);
+check(equivalentAliasResult.status==='DECOMPOSED','CANONICAL_EQUIVALENT_PROVENANCE_ALIAS_FALSELY_HELD',equivalentAliasResult);
+check((equivalentAliasResult.aliasConflicts||[]).length===0,'CANONICAL_EQUIVALENT_PROVENANCE_ALIAS_CONFLICT_EMITTED',equivalentAliasResult.aliasConflicts);
+check(equivalentAliasResult.provenance?.qualifyingReceiptCount===1,'CANONICAL_EQUIVALENT_ALIAS_COUNT_WRONG',equivalentAliasResult.provenance);
 
 const sameProvDiagnosticConflict=V.planConflictDecomposition(result,[canonical,{...canonical,triageClassification:'DUPLICATE_CONTAMINATION',summary:'Same provenance, genuinely different GUT diagnosis.'}]);
 check(sameProvDiagnosticConflict.status==='HOLD'&&sameProvDiagnosticConflict.reason==='conflicting-qualifying-gut-triage-classifications','SAME_PROVENANCE_DIAGNOSTIC_CONFLICT_COLLAPSED',sameProvDiagnosticConflict);
@@ -46,7 +52,7 @@ check(provenanceConflict.status==='HOLD'&&provenanceConflict.reason==='conflicti
 check((provenanceConflict.aliasConflicts||[]).every(x=>!('canonicalValue' in x)&&!('aliasValue' in x)),'RAW_CONFLICT_VALUE_LEAKED',provenanceConflict.aliasConflicts);
 
 const out={
-  schema:'zenomorph-vajra-triage-alias-replay-test/v0.2',
+  schema:'zenomorph-vajra-triage-alias-replay-test/v0.3',
   completedAt:new Date().toISOString(),
   status:failures.length?'FAIL':'PASS',
   capability:'GUT_TRIAGE_SCHEMA_ALIAS_REPLAY_CONTAINMENT',
@@ -55,6 +61,7 @@ const out={
     duplicateReplayCount:aliasReplay.replaySuppression?.duplicateReplayCount,
     qualifyingReceiptCount:aliasReplay.provenance?.qualifyingReceiptCount,
     decoratedEcho:{status:decoratedReplay.status,qualifyingReceiptCount:decoratedReplay.provenance?.qualifyingReceiptCount,aliasAuditCount:decoratedReplay.provenance?.aliasAudit?.length,echoCount:decoratedReplay.schemaAliasReplayGuard?.sameProvenanceReceiptEchoCount},
+    canonicalEquivalentProvenanceAlias:{status:equivalentAliasResult.status,qualifyingReceiptCount:equivalentAliasResult.provenance?.qualifyingReceiptCount,aliasConflictCount:(equivalentAliasResult.aliasConflicts||[]).length},
     sameProvenanceDiagnosticConflict:{status:sameProvDiagnosticConflict.status,reason:sameProvDiagnosticConflict.reason},
     crossOrganFacets:(aliasReplay.facets||[]).map(f=>({lens:f.lens,preferredOrgan:f.preferredOrgan})),
     organConflict:organConflict.status,
@@ -63,7 +70,7 @@ const out={
   },
   failures,
   provenance:'Synthetic receipts only. No private Drive names, IDs, URLs, or source text are written by this test.',
-  boundary:'PASS proves only that equivalent declared GUT triage schema aliases and repeated same-provenance/same-classification receipt echoes cannot manufacture evidential multiplicity, while same-provenance diagnostic disagreement remains visible as HOLD. It does not infer semantic equivalence beyond the explicit identity key, adjudicate source truth, or install capability state.'
+  boundary:'PASS proves only that equivalent declared GUT triage schema aliases, canonical-equivalent provenance aliases, and repeated same-provenance/same-classification receipt echoes cannot manufacture evidential multiplicity or false schema conflict, while genuinely distinct provenance aliases and same-provenance diagnostic disagreement remain visible as HOLD. It does not infer semantic equivalence beyond the explicit canonical provenance identity rule, adjudicate source truth, or install capability state.'
 };
 await fs.writeFile('nostromo/vajra/triage-alias-replay-last-result.json',JSON.stringify(out,null,2)+'\n');
 console.log(JSON.stringify(out,null,2));
