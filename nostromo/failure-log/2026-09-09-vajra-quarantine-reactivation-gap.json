@@ -1,0 +1,12 @@
+{
+  "schema": "zenomorph-failure-evidence/v1",
+  "observedAt": "2026-09-09T00:04:11Z",
+  "organ": "VAJRA",
+  "status": "OPEN_NOT_PROMOTED",
+  "failureClass": "QUARANTINE_PERMANENCE_WITHOUT_NOVEL_EVIDENCE_GATE",
+  "summary": "Repeated metabolic contest is correctly quarantined, but the current scheduler has no bounded mechanism to distinguish genuinely novel post-quarantine evidence from replay and reopen the branch. The stated boundary says quarantine may be revisited when genuinely new evidence arrives, yet no executable gate implements that condition.",
+  "risk": "A containment mechanism can become an accidental permanent dead zone. Conversely, a naive reopen-on-any-new-key rule would permit replay or duplicate pollution to create false information gain and restart the DROPLET→GUT echo.",
+  "requiredFix": "Add a bounded post-quarantine novelty gate that requires both a previously unseen evidence key and a previously unseen evidence fingerprint relative to an explicit quarantine baseline. Only then may the branch become runnable again; key-only novelty, fingerprint-only novelty, replay, or missing baseline must remain HOLD.",
+  "promotionRule": "Do not promote until unit/adversarial tests prove genuine novel evidence reopens clause-scoped source-quality inspection, replay aliases remain quarantined, provenance baseline is preserved, existing non-starvation/echo-break behavior remains intact, and cross-organ integration succeeds.",
+  "privacy": "Synthetic de-identified evidence only; no private connector identifiers or source text are included."
+}
