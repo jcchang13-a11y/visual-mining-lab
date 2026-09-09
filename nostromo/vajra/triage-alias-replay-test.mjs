@@ -13,12 +13,12 @@ const result={unresolved:[{targetRef:'target-1',clauseRef:'clause-1',lens:'sourc
 const canonical={targetRef:'target-1',clauseRef:'clause-1',organ:'GUT',status:'COMPLETED',provenance:'synthetic-source-a',triageClassification:'PROVENANCE_COLLISION'};
 const aliases={targetRef:'target-1',clauseRef:'clause-1',sourceOrgan:'GUT',status:'COMPLETED',provenanceFingerprint:'synthetic-source-a',classification:'provenance_collision'};
 
-check(V.triageAliasReplayGuardVersion==='0.5','ALIAS_REPLAY_GUARD_VERSION_MISMATCH',V.triageAliasReplayGuardVersion);
+check(V.triageAliasReplayGuardVersion==='0.6','ALIAS_REPLAY_GUARD_VERSION_MISMATCH',V.triageAliasReplayGuardVersion);
 const aliasReplay=V.planConflictDecomposition(result,[canonical,aliases]);
 check(aliasReplay.status==='DECOMPOSED','ALIAS_REPLAY_CHANGED_STATUS',aliasReplay);
 check(aliasReplay.replaySuppression?.duplicateReplayCount===1,'ALIAS_REPLAY_NOT_SUPPRESSED',aliasReplay.replaySuppression);
 check(aliasReplay.provenance?.qualifyingReceiptCount===1,'ALIAS_REPLAY_INFLATED_QUALIFYING_COUNT',aliasReplay.provenance);
-check(aliasReplay.schemaAliasReplayGuard?.version==='0.5','ALIAS_GUARD_METADATA_MISSING',aliasReplay.schemaAliasReplayGuard);
+check(aliasReplay.schemaAliasReplayGuard?.version==='0.6','ALIAS_GUARD_METADATA_MISSING',aliasReplay.schemaAliasReplayGuard);
 check(aliasReplay.facets?.some(f=>f.lens==='source_identity'&&f.preferredOrgan==='GUT'),'GUT_FACET_MISSING',aliasReplay.facets);
 check(aliasReplay.facets?.some(f=>f.lens==='claim_relation'&&f.preferredOrgan==='MUTHER'),'CROSS_ORGAN_BEHAVIOR_MISSING',aliasReplay.facets);
 
@@ -81,7 +81,7 @@ check(missingScopeResult.status==='DECOMPOSED','MISSING_SCOPE_ALIAS_CONFLICT_POI
 check(missingScopeResult.schemaAliasReplayGuard?.rejectedOutOfScopeAliasConflictCount===1,'MISSING_SCOPE_ALIAS_CONFLICT_NOT_AUDITED',missingScopeResult.schemaAliasReplayGuard);
 
 const out={
-  schema:'zenomorph-vajra-triage-alias-replay-test/v0.5',
+  schema:'zenomorph-vajra-triage-alias-replay-test/v0.6',
   completedAt:new Date().toISOString(),
   status:failures.length?'FAIL':'PASS',
   capability:'GUT_TRIAGE_SCHEMA_ALIAS_REPLAY_CONTAINMENT_WITH_PARENT_SCOPED_CONFLICT_AUTHORITY',
