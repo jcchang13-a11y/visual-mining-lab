@@ -1,4 +1,4 @@
-/* VAJRA classification alias guard v0.1 — contradictory triageClassification/classification declarations cannot silently select a decomposition profile. */
+/* VAJRA classification alias guard v0.2 — contradictory triageClassification/classification declarations remain visible as conflict evidence instead of becoming certainty. */
 (function(root){
   const api=root.VajraEngine;
   if(!api||typeof api.qualifyContaminationTriageReceipt!=='function'||typeof api.planConflictDecomposition!=='function') throw new Error('VAJRA dynamic decomposition must be loaded before classification-alias-guard');
@@ -25,21 +25,35 @@
   function rejection(receipt,identity){
     return {reason:'classification-alias-conflict',classificationIdentity:identity,targetRef:clean(receipt?.targetRef)||null,clauseRef:clean(receipt?.clauseRef)||null};
   }
+  function expandConflict(receipt,identity){
+    const shared={...receipt};
+    delete shared.classification;
+    delete shared.triageClassification;
+    return [
+      {...shared,triageClassification:identity.canonical.triageClassification},
+      {...shared,triageClassification:identity.canonical.classification}
+    ];
+  }
   api.qualifyContaminationTriageReceipt=function(branch,receipt){
     const identity=classificationIdentity(receipt);
     if(!identity.ok) return {ok:false,reason:identity.reason,classificationIdentity:identity};
     return baseQualify(branch,normalizedReceipt(receipt,identity));
   };
   api.planConflictDecomposition=function(result,receipts=[]){
-    const safe=[],blocked=[];
+    const candidates=[],blocked=[];
     for(const receipt of Array.isArray(receipts)?receipts:[]){
       const identity=classificationIdentity(receipt);
-      if(!identity.ok){blocked.push(rejection(receipt,identity));continue;}
-      safe.push(normalizedReceipt(receipt,identity));
+      if(!identity.ok){
+        blocked.push(rejection(receipt,identity));
+        candidates.push(...expandConflict(receipt,identity));
+        continue;
+      }
+      candidates.push(normalizedReceipt(receipt,identity));
     }
-    const planned=basePlan(result,safe);
+    const planned=basePlan(result,candidates);
     if(!blocked.length) return planned;
-    return {...planned,rejected:[...(Array.isArray(planned?.rejected)?planned.rejected:[]),...blocked],classificationAliasGuard:{version:'0.1',blockedCount:blocked.length,boundary:'Contradictory dual classification declarations are non-qualifying. Equivalent case/Unicode aliases are canonicalized only within the bounded authorized classification field pair; no source truth or independence is inferred.'}};
+    const relevantConflictVisible=planned.status==='HOLD'&&planned.reason==='conflicting-qualifying-gut-triage-classifications';
+    return {...planned,rejected:[...(Array.isArray(planned?.rejected)?planned.rejected:[]),...blocked],classificationAliasGuard:{version:'0.2',blockedCount:blocked.length,conflictPreserved:relevantConflictVisible,boundary:'Contradictory dual classification declarations are rejected by direct qualification and expanded only inside planning as two same-provenance diagnostic declarations so a relevant contradiction remains HOLD evidence even when a clean receipt is also present. Unrelated target/clause conflicts remain subject to the existing target qualification boundary. Equivalent case/Unicode aliases are canonicalized only within the bounded authorized classification field pair; no source truth or independence is inferred.'}};
   };
-  api.classificationAliasGuardVersion='0.1';
+  api.classificationAliasGuardVersion='0.2';
 })(typeof window!=='undefined'?window:globalThis);
