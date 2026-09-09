@@ -1,0 +1,38 @@
+name: NOSTROMO VAJRA Classification Alias Test
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'nostromo/vajra/classification-alias-guard.js'
+      - 'nostromo/vajra/classification-alias-guard-test.mjs'
+      - 'nostromo/vajra/dynamic-decomposition.js'
+      - 'nostromo/vajra/dynamic-decomposition-test.mjs'
+      - 'nostromo/failure-log/2026-09-09-vajra-classification-alias-conflict-suppression.json'
+      - '.github/workflows/nostromo-vajra-classification-alias-test.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify classification alias conflict containment
+        run: node nostromo/vajra/classification-alias-guard-test.mjs
+      - name: Verify VAJRA dynamic decomposition regression
+        run: node nostromo/vajra/dynamic-decomposition-test.mjs
+      - name: Verify VAJRA multiparent regression
+        run: node nostromo/vajra/dynamic-multiparent-test.mjs
+      - name: Verify GUT cross-organ regression
+        run: node nostromo/integration/gut-metabolism-test.mjs
+      - name: Verify VAJRA cross-organ regression
+        run: node nostromo/integration/vajra-dynamic-test.mjs
+      - name: Verify failure evidence remains open before promotion
+        run: |
+          node -e "const f=require('./nostromo/failure-log/2026-09-09-vajra-classification-alias-conflict-suppression.json'); if(f.status!=='OPEN_NOT_PROMOTED') process.exit(1); if(f.failureType!=='CLASSIFICATION_ALIAS_CONFLICT_SUPPRESSION') process.exit(1);"
