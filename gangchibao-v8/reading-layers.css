@@ -95,7 +95,7 @@
   font-size:1.08em;
 }
 
-/* 正式基本式：只承接 formula-scaffold.js 高信心辨識出的獨立成行 S = ～S。 */
+/* 正式基本式：只承接 formula-scaffold.js 高信心辨識出的現行 "S"/~S；施工史中的 S = ～S 不清除。 */
 .gcb-basic-formula{
   display:block;
   width:max-content;
