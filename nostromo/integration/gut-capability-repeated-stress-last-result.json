@@ -1,6 +1,6 @@
 {
   "schema": "zenomorph-capability-repeated-heldout-stress-test/v0.1",
-  "completedAt": "2026-09-10T01:49:28.794Z",
+  "completedAt": "2026-09-10T03:00:30.398Z",
   "status": "PASS",
   "capability": "REPEATED_SELECTIVE_FOREIGN_CAPABILITY_BEHAVIOR_PROFILE",
   "cases": {
@@ -40,7 +40,7 @@
               "installed": false,
               "persistentMutation": false,
               "candidateAdmission": {
-                "schema": "zenomorph-gut-capability-admission/v0.2",
+                "schema": "zenomorph-gut-capability-admission/v0.3",
                 "organism": "ZENOMORPH",
                 "habitat": "NOSTROMO",
                 "executed": false,
@@ -109,7 +109,7 @@
               "installed": false,
               "persistentMutation": false,
               "candidateAdmission": {
-                "schema": "zenomorph-gut-capability-admission/v0.2",
+                "schema": "zenomorph-gut-capability-admission/v0.3",
                 "organism": "ZENOMORPH",
                 "habitat": "NOSTROMO",
                 "executed": false,
@@ -178,7 +178,7 @@
               "installed": false,
               "persistentMutation": false,
               "candidateAdmission": {
-                "schema": "zenomorph-gut-capability-admission/v0.2",
+                "schema": "zenomorph-gut-capability-admission/v0.3",
                 "organism": "ZENOMORPH",
                 "habitat": "NOSTROMO",
                 "executed": false,
@@ -268,7 +268,7 @@
               "installed": false,
               "persistentMutation": false,
               "candidateAdmission": {
-                "schema": "zenomorph-gut-capability-admission/v0.2",
+                "schema": "zenomorph-gut-capability-admission/v0.3",
                 "organism": "ZENOMORPH",
                 "habitat": "NOSTROMO",
                 "executed": false,
@@ -337,7 +337,7 @@
               "installed": false,
               "persistentMutation": false,
               "candidateAdmission": {
-                "schema": "zenomorph-gut-capability-admission/v0.2",
+                "schema": "zenomorph-gut-capability-admission/v0.3",
                 "organism": "ZENOMORPH",
                 "habitat": "NOSTROMO",
                 "executed": false,
@@ -406,7 +406,7 @@
               "installed": false,
               "persistentMutation": false,
               "candidateAdmission": {
-                "schema": "zenomorph-gut-capability-admission/v0.2",
+                "schema": "zenomorph-gut-capability-admission/v0.3",
                 "organism": "ZENOMORPH",
                 "habitat": "NOSTROMO",
                 "executed": false,
@@ -496,7 +496,7 @@
               "installed": false,
               "persistentMutation": false,
               "candidateAdmission": {
-                "schema": "zenomorph-gut-capability-admission/v0.2",
+                "schema": "zenomorph-gut-capability-admission/v0.3",
                 "organism": "ZENOMORPH",
                 "habitat": "NOSTROMO",
                 "executed": false,
@@ -565,7 +565,7 @@
               "installed": false,
               "persistentMutation": false,
               "candidateAdmission": {
-                "schema": "zenomorph-gut-capability-admission/v0.2",
+                "schema": "zenomorph-gut-capability-admission/v0.3",
                 "organism": "ZENOMORPH",
                 "habitat": "NOSTROMO",
                 "executed": false,
@@ -634,7 +634,7 @@
               "installed": false,
               "persistentMutation": false,
               "candidateAdmission": {
-                "schema": "zenomorph-gut-capability-admission/v0.2",
+                "schema": "zenomorph-gut-capability-admission/v0.3",
                 "organism": "ZENOMORPH",
                 "habitat": "NOSTROMO",
                 "executed": false,
@@ -724,7 +724,7 @@
               "installed": false,
               "persistentMutation": false,
               "candidateAdmission": {
-                "schema": "zenomorph-gut-capability-admission/v0.2",
+                "schema": "zenomorph-gut-capability-admission/v0.3",
                 "organism": "ZENOMORPH",
                 "habitat": "NOSTROMO",
                 "executed": false,
@@ -793,7 +793,7 @@
               "installed": false,
               "persistentMutation": false,
               "candidateAdmission": {
-                "schema": "zenomorph-gut-capability-admission/v0.2",
+                "schema": "zenomorph-gut-capability-admission/v0.3",
                 "organism": "ZENOMORPH",
                 "habitat": "NOSTROMO",
                 "executed": false,
@@ -862,7 +862,7 @@
               "installed": false,
               "persistentMutation": false,
               "candidateAdmission": {
-                "schema": "zenomorph-gut-capability-admission/v0.2",
+                "schema": "zenomorph-gut-capability-admission/v0.3",
                 "organism": "ZENOMORPH",
                 "habitat": "NOSTROMO",
                 "executed": false,
