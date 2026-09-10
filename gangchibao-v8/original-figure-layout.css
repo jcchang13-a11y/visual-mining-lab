@@ -1,6 +1,4 @@
-/* 《剛吃飽》第八版｜既有原圖閱讀位置鷹架
- * 只控制容器、留白與列印行為；不裁切、不濾鏡、不重畫原圖。
- */
+/* 《剛吃飽》第八版｜既有原圖＋SET01 攝影組閱讀位置鷹架 */
 .existing-figure.original-figure{
   display:block;
   max-width:46rem;
@@ -27,11 +25,49 @@
   line-height:1.55;
   letter-spacing:.015em;
 }
+
+.set01-photo{
+  display:block;
+  width:min(100%,32rem);
+  margin:4rem auto 2.5rem;
+  padding:0;
+  break-inside:avoid;
+  page-break-inside:avoid;
+}
+.set01-photo__frame{
+  display:block;
+  width:100%;
+  aspect-ratio:184/332;
+  background-repeat:no-repeat;
+  background-color:#f7f5ef;
+}
+.set01-eva-note,
+.set01-rongzhe-note{
+  max-width:38rem;
+  margin:3.5rem auto 0;
+  white-space:normal;
+  line-height:1.9;
+}
+.set01-eva-note{border-top:1px solid #aaa;padding-top:2rem}
+.set01-eva-note p,
+.set01-rongzhe-note p{margin:0 0 1.25em}
+.set01-rongzhe-note{
+  margin-top:2.5rem;
+  padding:1.15rem 1.25rem;
+  border:1px dashed #999;
+  background:#faf8f1;
+  font-size:.92em;
+}
+
 @media (max-width:640px){
   .existing-figure.original-figure{margin:1.65rem auto}
   .existing-figure.original-figure img{max-height:72vh}
+  .set01-photo{width:min(100%,28rem);margin:3rem auto 2rem}
 }
 @media print{
   .existing-figure.original-figure{max-width:100%;margin:1.4em auto;break-inside:avoid;page-break-inside:avoid}
   .existing-figure.original-figure img{max-width:100%;max-height:72vh}
+  .set01-photo{width:100%;max-width:110mm;margin:0 auto;break-before:page;page-break-before:always;break-inside:avoid;page-break-inside:avoid}
+  .set01-photo__frame{width:100%;height:auto;aspect-ratio:184/332}
+  .set01-eva-note,.set01-rongzhe-note{break-before:page;page-break-before:always;max-width:none}
 }
