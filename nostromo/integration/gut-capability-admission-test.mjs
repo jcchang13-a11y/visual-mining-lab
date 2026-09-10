@@ -22,6 +22,41 @@ const payload=assessForeignCapability({
   code:'console.log("must never run")'
 });
 check(payload.classification==='EXECUTABLE_PAYLOAD_PRESENT'&&payload.status==='QUARANTINE','EXECUTABLE_PAYLOAD_NOT_QUARANTINED',payload);
+
+const nestedPayload=assessForeignCapability({
+  capabilityName:'Nested Payload Adapter',
+  provider:'provider-nested',
+  permissions:['read'],
+  inputSchema:{query:'string'},
+  outputSchema:{items:'array'},
+  metadata:{transport:{script:'console.log("must stay inert")'}}
+});
+check(nestedPayload.classification==='EXECUTABLE_PAYLOAD_PRESENT'&&nestedPayload.status==='QUARANTINE','NESTED_EXECUTABLE_PAYLOAD_NOT_QUARANTINED',nestedPayload);
+check(typeof nestedPayload.unsafePath==='string'&&nestedPayload.unsafePath.includes('metadata.transport.script'),'NESTED_EXECUTABLE_PATH_NOT_RECORDED',nestedPayload);
+
+const nestedCallable=assessForeignCapability({
+  capabilityName:'Nested Callable Adapter',
+  provider:'provider-callable',
+  permissions:['read'],
+  inputSchema:{query:'string'},
+  outputSchema:{items:'array'},
+  metadata:{transform:dangerous}
+});
+check(nestedCallable.classification==='CALLABLE_PAYLOAD_PRESENT'&&nestedCallable.status==='QUARANTINE','NESTED_CALLABLE_NOT_QUARANTINED',nestedCallable);
+check(executionCount===0,'NESTED_CALLABLE_EXECUTED',{executionCount});
+
+let getterExecutionCount=0;
+const accessorCandidate={
+  capabilityName:'Accessor Adapter',
+  provider:'provider-accessor',
+  permissions:['read'],
+  inputSchema:{query:'string'},
+  outputSchema:{items:'array'}
+};
+Object.defineProperty(accessorCandidate,'metadata',{enumerable:true,get(){getterExecutionCount++;return {safe:true};}});
+const accessor=assessForeignCapability(accessorCandidate);
+check(accessor.classification==='ACCESSOR_PAYLOAD_PRESENT'&&accessor.status==='QUARANTINE','ACCESSOR_NOT_QUARANTINED',accessor);
+check(getterExecutionCount===0,'ACCESSOR_EXECUTED_DURING_INSPECTION',{getterExecutionCount});
 check(executionCount===0,'PAYLOAD_SIDE_EFFECT',{executionCount});
 
 const missingProvenance=assessForeignCapability({
@@ -62,9 +97,10 @@ check(candidate.assimilationStage==='CANDIDATE_FOR_ISOLATED_TEST','COMPLETE_DESC
 check(candidate.authorized===false&&candidate.executed===false,'ADMISSION_GRANTED_EXECUTION_OR_AUTHORIZATION',candidate);
 check(candidate.hasProvenance&&candidate.hasPermissionBoundary&&candidate.hasContract,'ADMISSION_AUDIT_FLAGS_INCOMPLETE',candidate);
 check(capabilityAdmissionBoundary.executesForeignCode===false&&capabilityAdmissionBoundary.installsCapability===false,'BOUNDARY_ALLOWS_EXECUTION',capabilityAdmissionBoundary);
+check(capabilityAdmissionBoundary.recursivelyRejectsExecutableMetadata===true&&capabilityAdmissionBoundary.rejectsAccessorPropertiesWithoutInvokingThem===true,'BOUNDARY_DEEP_SCAN_FLAGS_MISSING',capabilityAdmissionBoundary);
 
 const result={
-  schema:'xenomorph-gut-capability-admission-test/v0.1',
+  schema:'xenomorph-gut-capability-admission-test/v0.2',
   completedAt:new Date().toISOString(),
   status:failures.length?'FAIL':'PASS',
   capability:'FOREIGN_CAPABILITY_PRE_ASSIMILATION_ADMISSION_BOUNDARY',
@@ -72,13 +108,17 @@ const result={
     ordinaryProse:prose,
     callable,
     executablePayload:payload,
+    nestedExecutablePayload:nestedPayload,
+    nestedCallable,
+    accessor,
     missingProvenance,
     missingPermissions,
     missingContract,
     completeCandidate:candidate
   },
   executionCount,
-  boundary:'This test verifies only deterministic pre-assimilation admission judgment. A structured foreign capability may become a candidate for isolated testing only when provenance, a permission boundary, and an interface/input-output contract are visible. Nothing in this layer executes, imports, installs, authorizes, fetches or absorbs the candidate into the XENOMORPH body. Plain prose mentioning tools/plugins is not a capability descriptor; executable payloads and callables are quarantined.' ,
+  getterExecutionCount,
+  boundary:'This test verifies deterministic pre-assimilation admission judgment, including bounded recursive inspection of nested metadata. Executable-key payloads, callable values, and accessor properties are quarantined without invocation; accessors are inspected by descriptor only. A structured foreign capability may become a candidate for isolated testing only when provenance, a permission boundary, and an interface/input-output contract are visible. Nothing in this layer executes, imports, installs, authorizes, fetches or absorbs the candidate into the XENOMORPH body.',
   failures
 };
 await fs.writeFile('nostromo/integration/gut-capability-admission-last-result.json',JSON.stringify(result,null,2)+'\n','utf8');

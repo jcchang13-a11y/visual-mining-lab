@@ -1,4 +1,4 @@
-/* ZENOMORPH / NOSTROMO GUT foreign-capability admission v0.1
+/* ZENOMORPH / NOSTROMO GUT foreign-capability admission v0.2
  * Deterministic, non-executing pre-assimilation boundary.
  * This module does not install, import, invoke, fetch, eval, or authorize foreign capabilities.
  */
@@ -34,9 +34,9 @@ function compact(value,max=240){
 }
 function firstScalar(value,names){
   for(const name of names){
-    for(const [key,v] of Object.entries(value||{})){
-      if(String(key).toLowerCase()===name){
-        const c=compact(v);
+    for(const [key,descriptor] of Object.entries(Object.getOwnPropertyDescriptors(value||{}))){
+      if(String(key).toLowerCase()===name&&Object.prototype.hasOwnProperty.call(descriptor,'value')){
+        const c=compact(descriptor.value);
         if(c)return c;
       }
     }
@@ -46,10 +46,41 @@ function firstScalar(value,names){
 function visibleIdentity(value){
   return firstScalar(value,['capabilityname','toolname','pluginname','adaptername','modulename','interfacename','capability','tool','plugin','adapter','module','interface','name']);
 }
+function findUnsafeDescriptor(root,{maxDepth=8,maxNodes=256}={}){
+  const seen=new WeakSet();
+  const queue=[{value:root,path:'$',depth:0}];
+  let nodes=0;
+  while(queue.length){
+    const current=queue.shift();
+    const value=current.value;
+    if(value===null||(typeof value!=='object'&&typeof value!=='function'))continue;
+    if(typeof value==='function')return {classification:'CALLABLE_PAYLOAD_PRESENT',reason:'callable-values-are-never-admission-metadata',path:current.path};
+    if(seen.has(value))continue;
+    seen.add(value);
+    nodes++;
+    if(nodes>maxNodes)return {classification:'DESCRIPTOR_COMPLEXITY_LIMIT',reason:'descriptor-node-limit-exceeded',path:current.path};
+    if(current.depth>maxDepth)return {classification:'DESCRIPTOR_COMPLEXITY_LIMIT',reason:'descriptor-depth-limit-exceeded',path:current.path};
+    const descriptors=Object.getOwnPropertyDescriptors(value);
+    for(const [key,descriptor] of Object.entries(descriptors)){
+      const lower=String(key).toLowerCase();
+      const path=`${current.path}.${String(key).slice(0,80)}`;
+      if(!Object.prototype.hasOwnProperty.call(descriptor,'value')){
+        return {classification:'ACCESSOR_PAYLOAD_PRESENT',reason:'accessor-properties-are-never-admission-metadata',path};
+      }
+      if(EXECUTABLE_KEYS.has(lower)){
+        return {classification:'EXECUTABLE_PAYLOAD_PRESENT',reason:'admission-metadata-must-not-carry-executable-payload',path};
+      }
+      const child=descriptor.value;
+      if(typeof child==='function')return {classification:'CALLABLE_PAYLOAD_PRESENT',reason:'callable-values-are-never-admission-metadata',path};
+      if(child&&typeof child==='object')queue.push({value:child,path,depth:current.depth+1});
+    }
+  }
+  return null;
+}
 
 export function assessForeignCapability(candidate,context={}){
   const base={
-    schema:'zenomorph-gut-capability-admission/v0.1',
+    schema:'zenomorph-gut-capability-admission/v0.2',
     organism:'ZENOMORPH',
     habitat:'NOSTROMO',
     executed:false,
@@ -65,17 +96,19 @@ export function assessForeignCapability(candidate,context={}){
     return {...base,status:'IGNORE',classification:'NOT_CAPABILITY_DESCRIPTOR',reason:'structured-object-required'};
   }
 
-  const keys=ownKeysLower(candidate);
-  if(hasAny(keys,EXECUTABLE_KEYS)){
+  const unsafe=findUnsafeDescriptor(candidate);
+  if(unsafe){
     return {
       ...base,
       status:'QUARANTINE',
-      classification:'EXECUTABLE_PAYLOAD_PRESENT',
-      reason:'admission-metadata-must-not-carry-executable-payload',
+      classification:unsafe.classification,
+      reason:unsafe.reason,
+      unsafePath:unsafe.path,
       identity:visibleIdentity(candidate)
     };
   }
 
+  const keys=ownKeysLower(candidate);
   const explicitKind=firstScalar(candidate,['kind','type','class']);
   const kindLooksCapability=!!explicitKind&&/(capabilit|tool|plugin|adapter|module|interface|connector)/i.test(explicitKind);
   const identityMarked=hasAny(keys,IDENTITY_KEYS);
@@ -110,10 +143,13 @@ export function assessForeignCapability(candidate,context={}){
 }
 
 export const capabilityAdmissionBoundary = Object.freeze({
-  version:'0.1',
+  version:'0.2',
   executesForeignCode:false,
   grantsAuthorization:false,
   installsCapability:false,
+  recursivelyRejectsExecutableMetadata:true,
+  rejectsAccessorPropertiesWithoutInvokingThem:true,
+  descriptorScanLimits:{maxDepth:8,maxNodes:256},
   admissionRequires:['structured identity','provenance','permission boundary','interface or input/output contract'],
   nextStage:'isolated sandbox test with provenance and rollback evidence'
 });
