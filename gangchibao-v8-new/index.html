@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>《剛吃飽》第八版｜純文字閱讀器</title>
+<style>
+:root{color-scheme:light;--paper:#f4f0e7;--ink:#171717;--muted:#706b63;--line:#cfc8bb;--card:#fbf8f1}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--paper);color:var(--ink);font-family:"Noto Serif TC","PingFang TC","Microsoft JhengHei",serif}
+body{min-height:100vh}
+header{position:sticky;top:0;z-index:10;background:rgba(244,240,231,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.top{max-width:820px;margin:auto;padding:14px 18px 10px}
+h1{font-size:20px;font-weight:500;margin:0 0 4px;letter-spacing:.05em}.sub{font-size:12px;color:var(--muted)}
+nav{display:flex;gap:6px;overflow-x:auto;padding:8px 0 2px;scrollbar-width:none}nav::-webkit-scrollbar{display:none}
+nav button,.pager button{border:1px solid var(--line);background:transparent;color:var(--ink);padding:7px 10px;border-radius:999px;font:inherit;font-size:12px;white-space:nowrap}
+nav button[aria-current="page"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+main{max-width:700px;margin:0 auto;padding:38px 20px 80px}
+.status{color:var(--muted);font-size:14px;padding:20px 0}
+article{font-size:18px;line-height:1.95;letter-spacing:.02em;word-break:break-word}
+article h2{font-size:24px;font-weight:500;line-height:1.5;margin:2.8em 0 1.2em}article p{margin:0 0 1.35em}
+article hr{border:0;border-top:1px solid var(--line);margin:3em 0}
+.marker{font-size:13px;color:var(--muted);font-family:ui-monospace,SFMono-Regular,Menlo,monospace;white-space:pre-wrap}
+.sutra{margin:2.2em 0;padding:1.2em 1.3em;border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);background:var(--card)}
+.pager{display:flex;justify-content:space-between;gap:12px;margin-top:56px;padding-top:24px;border-top:1px solid var(--line)}
+.error{border:1px solid #9b8d7a;padding:18px;line-height:1.7;background:var(--card)}
+@media(max-width:600px){main{padding:28px 18px 64px}article{font-size:17px;line-height:1.9}.top{padding-left:14px;padding-right:14px}}
+@media print{header,.pager{display:none}body{background:#fff}main{max-width:110mm;padding:12mm 9mm}article{font-size:10.5pt;line-height:1.75}.sutra{background:transparent}}
+</style>
+</head>
+<body>
+<header><div class="top"><h1>《剛吃飽》第八版</h1><div class="sub">乾淨純文字閱讀器｜直接讀取 V8 原始單元，不載入舊站腳本與圖片</div><nav id="nav" aria-label="單元"></nav></div></header>
+<main>
+<div id="status" class="status">讀取中……</div>
+<article id="article" hidden></article>
+<div class="pager" id="pager" hidden><button id="prev">← 上一篇</button><button id="next">下一篇 →</button></div>
+</main>
+<script>
+const units=['30000','30210','30220','30230','30240B','30250','30260B','30270B','30280B','30310B','30320','30330','30340','30350A','30360','30370','30380','30390','30410A','30430','30440','30450'];
+const nav=document.getElementById('nav'), article=document.getElementById('article'), statusEl=document.getElementById('status'), pager=document.getElementById('pager');
+const esc=s=>s.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+function render(md){
+  const lines=md.replace(/\r/g,'').split('\n'); let html='',buf=[],inSutra=false;
+  const flush=()=>{if(!buf.length)return; const t=buf.join('\n').trim(); if(t) html+=`<p>${esc(t).replace(/\n/g,'<br>')}</p>`; buf=[]};
+  for(const raw of lines){const line=raw.trim();
+    if(/^\[\[SUTRA:/.test(line)){flush();inSutra=true;html+='<div class="sutra">';continue}
+    if(line==='[[/SUTRA]]'){flush();if(inSutra)html+='</div>';inSutra=false;continue}
+    if(line==='---'){flush();html+='<hr>';continue}
+    if(/^\[\[.*\]\]$/.test(line)){flush();html+=`<h2>${esc(line.slice(2,-2))}</h2>`;continue}
+    if(!line){flush();continue}
+    if(/^【.*】$/.test(line)){flush();html+=`<p class="marker">${esc(line)}</p>`;continue}
+    buf.push(raw)
+  }
+  flush();if(inSutra)html+='</div>';return html;
+}
+function unitFromURL(){const u=new URLSearchParams(location.search).get('u');return units.includes(u)?u:units[0]}
+function buildNav(current){nav.innerHTML='';units.forEach((u,i)=>{const b=document.createElement('button');b.textContent=String(i+1).padStart(2,'0');if(u===current)b.setAttribute('aria-current','page');b.onclick=()=>load(u,true);nav.appendChild(b)})}
+async function load(u,push=false){
+  if(!units.includes(u))u=units[0]; if(push)history.pushState({u},'',`?u=${encodeURIComponent(u)}`);
+  buildNav(u);statusEl.hidden=false;statusEl.textContent='讀取中……';article.hidden=true;pager.hidden=true;
+  try{const r=await fetch(`../gangchibao-v8/unit-${u}.md?v=20260910-clean-reader`,{cache:'no-store'});if(!r.ok)throw new Error(`HTTP ${r.status}`);const md=await r.text();article.innerHTML=render(md);article.hidden=false;statusEl.hidden=true;pager.hidden=false;const i=units.indexOf(u);document.getElementById('prev').disabled=i===0;document.getElementById('next').disabled=i===units.length-1;document.getElementById('prev').onclick=()=>i>0&&load(units[i-1],true);document.getElementById('next').onclick=()=>i<units.length-1&&load(units[i+1],true);window.scrollTo(0,0)}catch(e){statusEl.innerHTML=`<div class="error">這個單元目前讀取失敗：${esc(String(e.message||e))}<br>原始檔：gangchibao-v8/unit-${esc(u)}.md</div>`;statusEl.hidden=false}
+}
+window.addEventListener('popstate',()=>load(unitFromURL(),false));load(unitFromURL(),false);
+</script>
+</body>
+</html>
