@@ -28,7 +28,7 @@ jobs:
             {id:'negative',input:{flag:false,n:2},expectedChange:false},
             {id:'positive-b',input:{flag:true,n:3},expectedChange:true}
           ];
-          const run=body=>runReversibleIncorporationCandidate(candidate,cases,body,{capabilityRegistry,organRegistry,downstreamOrganId:'VAJRA',context:{source:'fixture'}});
+          const run=body=>runReversibleIncorporationCandidate(candidate,cases,body,{capabilityRegistry,organRegistry,downstreamOrganId:'VAJRA',context:{source:'fixture',provenanceFingerprint:'fixture-provenance-v1'}});
           const body={organs:{GUT:{status:'ACTIVE',metabolism:{echoGuard:true,threshold:2}},VAJRA:{status:'ACTIVE'}},capabilities:{},history:[{round:1,status:'PASS'}]};
           const snapshot=JSON.stringify(body);
           const out=run(body);
