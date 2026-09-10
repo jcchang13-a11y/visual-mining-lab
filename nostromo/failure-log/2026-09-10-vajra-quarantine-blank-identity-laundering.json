@@ -4,9 +4,10 @@
   "organ": "VAJRA",
   "capability": "dynamic-reinspection",
   "observedVersion": "0.9",
-  "status": "OPEN_NOT_PROMOTED",
+  "status": "RESOLVED_CI_VERIFIED",
   "observedAt": "2026-09-10T07:04:31+08:00",
-  "summary": "Dynamic reinspection v0.9 treats any non-empty string as a valid evidence key, content fingerprint, or provenance identity. Whitespace-only or control-only strings can therefore satisfy tuple validity and, when previously unseen, can contribute to quarantine reactivation despite carrying no usable identity.",
+  "resolvedAt": "2026-09-10T08:05:42+08:00",
+  "summary": "Dynamic reinspection v0.9 treated any non-empty string as a valid evidence key, content fingerprint, or provenance identity. Whitespace-only or control-only strings could therefore satisfy tuple validity and, when previously unseen, contribute to quarantine reactivation despite carrying no usable identity.",
   "risk": [
     "false information gain",
     "provenance loss disguised as novelty",
@@ -15,13 +16,30 @@
   ],
   "evidence": {
     "source": "nostromo/vajra/dynamic-reinspection.js",
-    "predicate": "validIdentity(v) => typeof v === 'string' && v.length > 0",
+    "originalPredicate": "validIdentity(v) => typeof v === 'string' && v.length > 0",
     "adversarialCases": [
       "whitespace-only provenance",
       "tab/newline-only evidence identity",
-      "blank-looking fingerprint"
+      "blank-looking fingerprint",
+      "ASCII control characters in key/fingerprint/provenance"
+    ],
+    "verification": [
+      {
+        "kind": "focused-adversarial-ci",
+        "runId": 34415452066,
+        "workflow": "NOSTROMO VAJRA Blank Identity Guard",
+        "headSha": "2d1ed7592e78189db4f265bea81d616b09c6bf05",
+        "conclusion": "success"
+      },
+      {
+        "kind": "full-cross-organ-integration",
+        "runId": 34415425625,
+        "workflow": "NOSTROMO Integration Test",
+        "headSha": "868e63a583eab7a3b2631745653436a3c9350ecc",
+        "conclusion": "success"
+      }
     ]
   },
-  "requiredFix": "Reject identity strings that are empty after trimming or consist only of control/format whitespace, preserve tuple positions, and prove valid ordinary identities still reactivate without canonicalizing unrelated identifiers.",
-  "promotionBoundary": "Do not promote a new public VAJRA version until focused adversarial tests and the existing cross-organ/integration regression path pass."
+  "resolution": "Identity tuple members must remain non-empty after trimming and reject ASCII control characters while preserving original tuple positions. Ordinary valid identities remain eligible for provenance-bound reinspection; malformed identity material cannot reactivate quarantine.",
+  "promotionBoundary": "Resolved only after focused adversarial CI and the full cross-organ integration path succeeded. Public display remains separately gated by post-resolution CI/deployment evidence."
 }
