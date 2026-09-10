@@ -66,7 +66,8 @@
 }
 @media print{
   .existing-figure.original-figure{max-width:100%;margin:1.4em auto;break-inside:avoid;page-break-inside:avoid}
-  .existing-figure.original-figure img{max-width:100%;max-height:72vh}
+  .existing-figure.original-figure img{max-width:100%;max-height:148mm}
+  .existing-figure.original-figure figcaption{break-before:avoid;page-break-before:avoid}
   .set01-photo{width:100%;max-width:110mm;margin:0 auto;break-before:page;page-break-before:always;break-inside:avoid;page-break-inside:avoid}
   .set01-photo__frame{width:100%;height:auto;aspect-ratio:184/332}
   .set01-eva-note,.set01-rongzhe-note{break-before:page;page-break-before:always;max-width:none}
