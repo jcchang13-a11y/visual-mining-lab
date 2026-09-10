@@ -9,7 +9,7 @@ const failures=[];const check=(ok,type,detail)=>{if(!ok)failures.push({type,deta
 const parent={status:'CONTESTED_BY_RECEIPTS',targetRef:'target-001',clauseRef:'clause-001',lens:'source_quality',evidenceKeys:['receipt-A','receipt-B']};
 const state={status:'CONTESTED_BY_RECEIPTS',unresolved:[parent]};
 const gutReceipt={targetRef:'target-001',clauseRef:'clause-001',lens:'metabolic_contamination',organ:'GUT',status:'COMPLETED',provenance:'gut-triage-evidence-001',triageClassification:'PROVENANCE_COLLISION',summary:'De-identified structural triage found source aliases that must not be counted as independent evidence.'};
-check(V.dynamicDecompositionVersion==='1.3','DYNAMIC_DECOMPOSITION_VERSION_BASELINE_MISMATCH',V.dynamicDecompositionVersion);
+check(V.dynamicDecompositionVersion==='1.4','DYNAMIC_DECOMPOSITION_VERSION_BASELINE_MISMATCH',V.dynamicDecompositionVersion);
 const decomposed=V.planConflictDecomposition(state,[gutReceipt]);
 check(decomposed.status==='DECOMPOSED','QUALIFYING_TRIAGE_DID_NOT_DECOMPOSE',decomposed);
 check(decomposed.parent?.closed===false,'PARENT_FALSELY_CLOSED',decomposed.parent);
@@ -69,7 +69,28 @@ check(changedDiagnosisResult.reason==='conflicting-qualifying-gut-triage-classif
 check(changedDiagnosisResult.facets?.length===0,'DIAGNOSTIC_DISAGREEMENT_MANUFACTURED_FACETS',changedDiagnosisResult.facets);
 check(changedDiagnosisResult.conflict?.qualifyingReceiptCount===2,'DIAGNOSTIC_DISAGREEMENT_FALSELY_DEDUPED',changedDiagnosisResult.conflict);
 
-const result={schema:'zenomorph-vajra-dynamic-decomposition-test/v1.3-diagnostic-replay',completedAt:new Date().toISOString(),status:failures.length?'FAIL':'PASS',capability:'GUT_TRIAGE_DIAGNOSTIC_REPLAY_CONTAINMENT',tests:{decomposed,aliasResult,agreeingDualResult,conflictingDualResult,nonGutResult,decoratedReplayResult,multiProvenanceResult,changedDiagnosisResult},provenance:{fixture:'synthetic de-identified contested source-quality parent, GUT schema aliases, decorated replay, agreeing distinct provenance, and diagnostic disagreement'},failures,boundary:'PASS requires bounded organ identity canonicalization plus diagnostic replay containment and cross-organ contributor-provenance propagation: decorative receipt changes may not inflate metabolic evidence multiplicity; all distinct qualifying GUT contributors that change VAJRA decomposition must travel with every generated facet; provenance diversity is not source-independence proof; and a genuine classification disagreement from the same provenance must remain a zero-facet HOLD. It does not decide source truth, execute generated facets, or install persistent capability state.'};
+// GUT -> VAJRA exotic-boundary regression: receipt audit metadata may be structurally hostile without being allowed to crash decomposition.
+const cyclic={label:'bounded-cycle'};cyclic.self=cyclic;
+Object.defineProperty(cyclic,'blocked',{enumerable:true,get(){throw new Error('synthetic getter must not escape audit containment');}});
+const boundedFn=function boundedReceiptFunction(a,b){return a+b;};
+const exoticReceipt={...gutReceipt,provenance:'gut-triage-evidence-exotic-010',auditPayload:{big:123n,nan:NaN,posInf:Infinity,negInf:-Infinity,negZero:-0,symbol:Symbol.for('zenomorph-audit'),fn:boundedFn,cyclic}};
+let exoticResult=null,exoticReplayResult=null,exoticChangedResult=null;
+try{
+  exoticResult=V.planConflictDecomposition(state,[exoticReceipt]);
+  exoticReplayResult=V.planConflictDecomposition(state,[exoticReceipt]);
+  const changedPayload={...exoticReceipt.auditPayload,big:124n};
+  exoticChangedResult=V.planConflictDecomposition(state,[{...exoticReceipt,auditPayload:changedPayload}]);
+}catch(error){failures.push({type:'EXOTIC_RECEIPT_ESCAPED_CONTAINMENT',detail:String(error?.stack||error)});}
+check(exoticResult?.status==='DECOMPOSED','EXOTIC_RECEIPT_DID_NOT_DECOMPOSE',exoticResult);
+check(exoticReplayResult?.status==='DECOMPOSED','EXOTIC_RECEIPT_REPLAY_DID_NOT_DECOMPOSE',exoticReplayResult);
+const exoticFingerprint=exoticResult?.provenance?.aliasAudit?.[0]?.receiptFingerprint;
+const exoticReplayFingerprint=exoticReplayResult?.provenance?.aliasAudit?.[0]?.receiptFingerprint;
+const exoticChangedFingerprint=exoticChangedResult?.provenance?.aliasAudit?.[0]?.receiptFingerprint;
+check(Boolean(exoticFingerprint&&exoticFingerprint===exoticReplayFingerprint),'EXOTIC_RECEIPT_FINGERPRINT_NOT_STABLE',{exoticFingerprint,exoticReplayFingerprint});
+check(Boolean(exoticFingerprint&&exoticChangedFingerprint&&exoticFingerprint!==exoticChangedFingerprint),'BIGINT_AUDIT_CHANGE_FALSELY_COLLAPSED',{exoticFingerprint,exoticChangedFingerprint});
+check(exoticResult?.replaySuppression?.rawReceiptAudit?.includes('cycle-and-inaccessible-property-containment'),'EXOTIC_CONTAINMENT_NOT_DECLARED',exoticResult?.replaySuppression);
+
+const result={schema:'zenomorph-vajra-dynamic-decomposition-test/v1.4-exotic-receipt-containment',completedAt:new Date().toISOString(),status:failures.length?'FAIL':'PASS',capability:'GUT_TO_VAJRA_EXOTIC_RECEIPT_CONTAINMENT',tests:{decomposed,aliasResult,agreeingDualResult,conflictingDualResult,nonGutResult,decoratedReplayResult,multiProvenanceResult,changedDiagnosisResult,exoticResult,exoticReplayResult,exoticChangedResult},provenance:{fixture:'synthetic de-identified contested source-quality parent, GUT schema aliases, decorated replay, agreeing distinct provenance, diagnostic disagreement, and exotic/cyclic receipt audit payloads'},failures,boundary:'PASS requires bounded organ identity canonicalization, diagnostic replay containment, cross-organ contributor-provenance propagation, and deterministic non-crashing audit fingerprints for exotic GUT-to-VAJRA receipt values. BigInt changes must remain distinguishable; cycles and inaccessible decorative properties must be contained; decorative receipt changes may not inflate metabolic evidence multiplicity; provenance diversity is not source-independence proof; and genuine classification disagreement must remain a zero-facet HOLD. It does not decide source truth, execute generated facets, execute receipt functions, or install persistent capability state.'};
 await fs.writeFile('nostromo/vajra/dynamic-decomposition-last-result.json',JSON.stringify(result,null,2)+'\n');
 console.log(JSON.stringify(result,null,2));
 if(failures.length) process.exitCode=1;
