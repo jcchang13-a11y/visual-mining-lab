@@ -1,7 +1,9 @@
-/* ZENOMORPH / NOSTROMO held-out cross-organ capability stress gate v0.2
+/* ZENOMORPH / NOSTROMO held-out cross-organ capability stress gate v0.3
  * Proves an isolated foreign capability can alter a downstream organ decision under a host-controlled ephemeral trial.
  * This is NOT body admission, installation, or persistent mutation.
  * Capability and organ registries are own-data-property only: inherited entries and accessors fail closed.
+ * Decision comparison is canonical and fail-closed: BigInt/non-finite/nullish values are representable;
+ * cycles, accessors, functions and symbols quarantine instead of escaping the metabolic boundary.
  */
 import { runIsolatedCapabilityTrial } from './capability-sandbox.mjs';
 
@@ -25,9 +27,48 @@ function registeredCallable(registry,id,kind){
   return {ok:true,callable:descriptor.value};
 }
 
+function canonicalDecision(value){
+  const seen=new WeakSet();
+  function walk(node,path='$'){
+    if(node===null)return ['null'];
+    if(node===undefined)return ['undefined'];
+    const type=typeof node;
+    if(type==='string'||type==='boolean')return [type,node];
+    if(type==='number'){
+      if(Number.isNaN(node))return ['number','NaN'];
+      if(node===Infinity)return ['number','Infinity'];
+      if(node===-Infinity)return ['number','-Infinity'];
+      if(Object.is(node,-0))return ['number','-0'];
+      return ['number',node];
+    }
+    if(type==='bigint')return ['bigint',node.toString()];
+    if(type==='function'||type==='symbol')throw new Error(`unsupported-decision-${type}-at-${path}`);
+    if(type!=='object')return [type,String(node)];
+    if(seen.has(node))throw new Error(`cyclic-decision-at-${path}`);
+    seen.add(node);
+    if(Array.isArray(node)){
+      const out=['array',node.map((item,index)=>walk(item,`${path}[${index}]`))];
+      seen.delete(node);
+      return out;
+    }
+    const descriptors=Object.getOwnPropertyDescriptors(node);
+    const keys=Reflect.ownKeys(descriptors);
+    if(keys.some(key=>typeof key==='symbol'))throw new Error(`symbol-keyed-decision-at-${path}`);
+    const entries=[];
+    for(const key of keys.sort()){
+      const descriptor=descriptors[key];
+      if(!Object.prototype.hasOwnProperty.call(descriptor,'value'))throw new Error(`accessor-decision-at-${path}.${key}`);
+      entries.push([key,walk(descriptor.value,`${path}.${key}`)]);
+    }
+    seen.delete(node);
+    return ['object',entries];
+  }
+  return JSON.stringify(walk(value));
+}
+
 export function runHeldoutCrossOrganStress(candidate,input,{capabilityRegistry={},organRegistry={},downstreamOrganId,baselineSignal=null,context={}}={}){
   const isolated=runIsolatedCapabilityTrial(candidate,input,{registry:capabilityRegistry,context});
-  const base={schema:'zenomorph-capability-heldout-stress/v0.2',organism:'ZENOMORPH',habitat:'NOSTROMO',bodyAdmission:false,installed:false,persistentMutation:false,isolatedTrial:isolated,registryLookup:'OWN_DATA_PROPERTY_ONLY'};
+  const base={schema:'zenomorph-capability-heldout-stress/v0.3',organism:'ZENOMORPH',habitat:'NOSTROMO',bodyAdmission:false,installed:false,persistentMutation:false,isolatedTrial:isolated,registryLookup:'OWN_DATA_PROPERTY_ONLY',decisionComparison:'CANONICAL_FAIL_CLOSED'};
   if(isolated.status!=='PASS')return {...base,status:'BLOCKED',assimilationStage:'HELDOUT_STRESS_BLOCKED',reason:'isolated-trial-must-pass-first',downstreamExecuted:false};
 
   const organId=cleanId(downstreamOrganId);
@@ -52,10 +93,16 @@ export function runHeldoutCrossOrganStress(candidate,input,{capabilityRegistry={
   }catch(error){
     return {...base,status:'FAILED',assimilationStage:'HELDOUT_STRESS_FAILED',reason:'heldout-cross-organ-execution-threw',downstreamExecuted:true,error:String(error?.message||error).slice(0,240)};
   }
-  const before=JSON.stringify(baselineDecision);
-  const after=JSON.stringify(augmentedDecision);
+
+  let before,after;
+  try{
+    before=canonicalDecision(baselineDecision);
+    after=canonicalDecision(augmentedDecision);
+  }catch(error){
+    return {...base,status:'QUARANTINE',assimilationStage:'HELDOUT_STRESS_BLOCKED',reason:'downstream-decision-not-safely-comparable',downstreamOrganId:organId,downstreamExecuted:true,error:String(error?.message||error).slice(0,240),provenanceFingerprint:isolated.provenanceFingerprint||null,rollbackEvidence:'ephemeral replay only; malformed decision was quarantined before evidence comparison or body mutation'};
+  }
   const behaviorChanged=before!==after;
-  return {...base,status:behaviorChanged?'PASS':'HOLD',assimilationStage:behaviorChanged?'HELDOUT_BEHAVIOR_CHANGE_VERIFIED':'HELDOUT_NO_BEHAVIOR_CHANGE',reason:behaviorChanged?'foreign-capability-changed-downstream-organ-behavior':'foreign-capability-produced-no-observed-downstream-change',downstreamOrganId:organId,downstreamExecuted:true,behaviorChanged,baselineDecision,augmentedDecision,provenanceFingerprint:isolated.provenanceFingerprint||null,rollbackEvidence:'ephemeral replay only; no registry, body, or persistent state mutation performed'};
+  return {...base,status:behaviorChanged?'PASS':'HOLD',assimilationStage:behaviorChanged?'HELDOUT_BEHAVIOR_CHANGE_VERIFIED':'HELDOUT_NO_BEHAVIOR_CHANGE',reason:behaviorChanged?'foreign-capability-changed-downstream-organ-behavior':'foreign-capability-produced-no-observed-downstream-change',downstreamOrganId:organId,downstreamExecuted:true,behaviorChanged,baselineDecision,augmentedDecision,decisionFingerprintBefore:before,decisionFingerprintAfter:after,provenanceFingerprint:isolated.provenanceFingerprint||null,rollbackEvidence:'ephemeral replay only; no registry, body, or persistent state mutation performed'};
 }
 
-export const heldoutStressBoundary=Object.freeze({version:'0.2',requiresIsolatedPass:true,hostRegisteredCapabilityOnly:true,hostRegisteredDownstreamOrganOnly:true,registryLookup:'own data property only',inheritedRegistryEntries:false,accessorRegistryEntries:false,persistentMutation:false,bodyAdmissionOnPass:false,nextStage:'repeat across independent held-out inputs and explicit incorporation decision'});
+export const heldoutStressBoundary=Object.freeze({version:'0.3',requiresIsolatedPass:true,hostRegisteredCapabilityOnly:true,hostRegisteredDownstreamOrganOnly:true,registryLookup:'own data property only',decisionComparison:'canonical fail-closed',supportsComparableDecisionTypes:['null','undefined','string','boolean','finite/non-finite number','bigint','arrays','plain data objects'],quarantinesDecisionTypes:['cycles','functions','symbols','symbol keys','accessors'],inheritedRegistryEntries:false,accessorRegistryEntries:false,persistentMutation:false,bodyAdmissionOnPass:false,nextStage:'repeat across independent held-out inputs and explicit incorporation decision'});
