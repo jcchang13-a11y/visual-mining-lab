@@ -1,0 +1,38 @@
+name: NOSTROMO VAJRA receipt integrity
+
+on:
+  push:
+    paths:
+      - 'nostromo/vajra/dynamic-receipt-integrity.js'
+      - 'nostromo/vajra/dynamic-receipt-integrity-test.mjs'
+      - 'nostromo/vajra/dynamic-decomposition.js'
+      - 'nostromo/vajra/dynamic-reinspection.js'
+      - 'nostromo/vajra/vajra-engine.js'
+      - '.github/workflows/nostromo-vajra-receipt-integrity-test.yml'
+  pull_request:
+    paths:
+      - 'nostromo/vajra/dynamic-receipt-integrity.js'
+      - 'nostromo/vajra/dynamic-receipt-integrity-test.mjs'
+      - 'nostromo/vajra/dynamic-decomposition.js'
+      - 'nostromo/vajra/dynamic-reinspection.js'
+      - 'nostromo/vajra/vajra-engine.js'
+      - '.github/workflows/nostromo-vajra-receipt-integrity-test.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  receipt-integrity:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Run VAJRA cross-organ receipt integrity test
+        run: node nostromo/vajra/dynamic-receipt-integrity-test.mjs
+      - name: Run existing VAJRA dynamic decomposition regression
+        run: node nostromo/vajra/dynamic-decomposition-test.mjs
+      - name: Run existing VAJRA dynamic reinspection regression
+        run: node nostromo/vajra/dynamic-reinspection-test.mjs
