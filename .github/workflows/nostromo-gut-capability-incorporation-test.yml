@@ -1,0 +1,41 @@
+name: NOSTROMO GUT capability incorporation test
+on:
+  push:
+    paths:
+      - 'nostromo/gut/capability-incorporation.mjs'
+      - 'nostromo/gut/capability-repeated-stress.mjs'
+      - 'nostromo/gut/capability-heldout-stress.mjs'
+      - 'nostromo/gut/capability-sandbox.mjs'
+      - '.github/workflows/nostromo-gut-capability-incorporation-test.yml'
+  workflow_dispatch:
+jobs:
+  reversible-incorporation:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify reversible candidate and rollback boundary
+        run: |
+          node --input-type=module <<'EOF'
+          import {runReversibleIncorporationCandidate} from './nostromo/gut/capability-incorporation.mjs';
+          const candidate={adapterId:'foreign.signal',source:'fixture',permissions:['read'],interface:'signal'};
+          const capabilityRegistry={'foreign.signal': input=>({flag:input.flag===true})};
+          const organRegistry={VAJRA:({foreignSignal})=>({route:foreignSignal?.flag?'challenge':'hold'})};
+          const cases=[
+            {id:'positive-a',input:{flag:true,n:1},expectedChange:true},
+            {id:'negative',input:{flag:false,n:2},expectedChange:false},
+            {id:'positive-b',input:{flag:true,n:3},expectedChange:true}
+          ];
+          const body={organs:{GUT:{status:'ACTIVE'}},capabilities:{}};
+          const snapshot=JSON.stringify(body);
+          const out=runReversibleIncorporationCandidate(candidate,cases,body,{capabilityRegistry,organRegistry,downstreamOrganId:'VAJRA',context:{source:'fixture'}});
+          if(out.status!=='PASS')throw new Error(JSON.stringify(out));
+          if(out.assimilationStage!=='REVERSIBLE_BODY_CANDIDATE_CREATED')throw new Error('wrong stage');
+          if(out.persistentMutation!==false||out.bodyAdmission!==false||out.installed!==false)throw new Error('boundary lied');
+          if(JSON.stringify(body)!==snapshot||out.originalBodyUnchanged!==true)throw new Error('source body mutated');
+          if(out.candidateBody.capabilities['foreign.signal']?.status!=='REVERSIBLE_TRIAL_ONLY')throw new Error('candidate missing');
+          if(out.rollback?.restoresFingerprint!==out.beforeFingerprint)throw new Error('rollback evidence missing');
+          console.log('PASS reversible incorporation boundary',out.beforeFingerprint,out.candidateFingerprint);
+          EOF
