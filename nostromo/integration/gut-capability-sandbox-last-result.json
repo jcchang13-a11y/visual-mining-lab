@@ -1,6 +1,6 @@
 {
   "schema": "zenomorph-gut-capability-sandbox-test/v0.1",
-  "completedAt": "2026-09-07T06:06:26.942Z",
+  "completedAt": "2026-09-10T03:00:25.335Z",
   "status": "PASS",
   "capability": "CONTROLLED_HOST_REGISTERED_FOREIGN_CAPABILITY_ISOLATED_TRIAL",
   "cases": {
@@ -12,8 +12,8 @@
       "installed": false,
       "persistentMutation": false,
       "candidateAdmission": {
-        "schema": "xenomorph-gut-capability-admission/v0.1",
-        "organism": "XENOMORPH",
+        "schema": "zenomorph-gut-capability-admission/v0.3",
+        "organism": "ZENOMORPH",
         "habitat": "NOSTROMO",
         "executed": false,
         "authorized": false,
@@ -55,8 +55,8 @@
       "installed": false,
       "persistentMutation": false,
       "candidateAdmission": {
-        "schema": "xenomorph-gut-capability-admission/v0.1",
-        "organism": "XENOMORPH",
+        "schema": "zenomorph-gut-capability-admission/v0.3",
+        "organism": "ZENOMORPH",
         "habitat": "NOSTROMO",
         "executed": false,
         "authorized": false,
@@ -84,8 +84,8 @@
       "installed": false,
       "persistentMutation": false,
       "candidateAdmission": {
-        "schema": "xenomorph-gut-capability-admission/v0.1",
-        "organism": "XENOMORPH",
+        "schema": "zenomorph-gut-capability-admission/v0.3",
+        "organism": "ZENOMORPH",
         "habitat": "NOSTROMO",
         "executed": false,
         "authorized": false,
@@ -114,8 +114,8 @@
         "actual": "object"
       },
       "inputFingerprint": "1ef7a7f832aa621bd3593c3548e6d9bdc35e72c736930ced4e8e337b7b091012",
-      "outputFingerprint": "091397d06e8e7898b054124c30f8e983a6b737e5cf58de6652ae3ea67378855b",
-      "replayOutputFingerprint": "2aaacf69dac3d99f60aca8f6b3d04522f2cc7946a2561d0876abf164f256c1a5",
+      "outputFingerprint": "ab59cf2f62e001184d0144ae58c6d1f2629d51f8954c0c176cb54c0b5ef060e1",
+      "replayOutputFingerprint": "54da064071cf26fab99efac5b6c6a5e37a6b71037fc72d5498897edff8f7fd3e",
       "provenanceFingerprint": "sandbox-fixture-prov-001",
       "rollbackEvidence": "no installation; cloned frozen inputs; no body state mutation performed by sandbox"
     },
@@ -127,8 +127,8 @@
       "installed": false,
       "persistentMutation": false,
       "candidateAdmission": {
-        "schema": "xenomorph-gut-capability-admission/v0.1",
-        "organism": "XENOMORPH",
+        "schema": "zenomorph-gut-capability-admission/v0.3",
+        "organism": "ZENOMORPH",
         "habitat": "NOSTROMO",
         "executed": false,
         "authorized": false,
@@ -156,8 +156,8 @@
       "installed": false,
       "persistentMutation": false,
       "candidateAdmission": {
-        "schema": "xenomorph-gut-capability-admission/v0.1",
-        "organism": "XENOMORPH",
+        "schema": "zenomorph-gut-capability-admission/v0.3",
+        "organism": "ZENOMORPH",
         "habitat": "NOSTROMO",
         "executed": false,
         "authorized": false,
@@ -186,8 +186,8 @@
       "installed": false,
       "persistentMutation": false,
       "candidateAdmission": {
-        "schema": "xenomorph-gut-capability-admission/v0.1",
-        "organism": "XENOMORPH",
+        "schema": "zenomorph-gut-capability-admission/v0.3",
+        "organism": "ZENOMORPH",
         "habitat": "NOSTROMO",
         "executed": false,
         "authorized": false,
@@ -196,6 +196,7 @@
         "status": "QUARANTINE",
         "classification": "EXECUTABLE_PAYLOAD_PRESENT",
         "reason": "admission-metadata-must-not-carry-executable-payload",
+        "unsafePath": "$.command",
         "identity": "Bounded Counter Adapter"
       },
       "assimilationStage": "ISOLATED_TEST_BLOCKED",
