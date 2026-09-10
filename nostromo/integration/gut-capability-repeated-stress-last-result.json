@@ -1,6 +1,6 @@
 {
   "schema": "zenomorph-capability-repeated-heldout-stress-test/v0.1",
-  "completedAt": "2026-09-10T09:07:30.705Z",
+  "completedAt": "2026-09-10T09:18:40.320Z",
   "status": "PASS",
   "capability": "REPEATED_SELECTIVE_FOREIGN_CAPABILITY_BEHAVIOR_PROFILE",
   "cases": {
@@ -26,7 +26,7 @@
           "id": "positive-four",
           "expectedChange": true,
           "result": {
-            "schema": "zenomorph-capability-heldout-stress/v0.3",
+            "schema": "zenomorph-capability-heldout-stress/v0.4",
             "organism": "ZENOMORPH",
             "habitat": "NOSTROMO",
             "bodyAdmission": false,
@@ -101,7 +101,7 @@
           "id": "negative-one",
           "expectedChange": false,
           "result": {
-            "schema": "zenomorph-capability-heldout-stress/v0.3",
+            "schema": "zenomorph-capability-heldout-stress/v0.4",
             "organism": "ZENOMORPH",
             "habitat": "NOSTROMO",
             "bodyAdmission": false,
@@ -176,7 +176,7 @@
           "id": "positive-three",
           "expectedChange": true,
           "result": {
-            "schema": "zenomorph-capability-heldout-stress/v0.3",
+            "schema": "zenomorph-capability-heldout-stress/v0.4",
             "organism": "ZENOMORPH",
             "habitat": "NOSTROMO",
             "bodyAdmission": false,
@@ -272,7 +272,7 @@
           "id": "positive-four",
           "expectedChange": true,
           "result": {
-            "schema": "zenomorph-capability-heldout-stress/v0.3",
+            "schema": "zenomorph-capability-heldout-stress/v0.4",
             "organism": "ZENOMORPH",
             "habitat": "NOSTROMO",
             "bodyAdmission": false,
@@ -347,7 +347,7 @@
           "id": "duplicate-four",
           "expectedChange": true,
           "result": {
-            "schema": "zenomorph-capability-heldout-stress/v0.3",
+            "schema": "zenomorph-capability-heldout-stress/v0.4",
             "organism": "ZENOMORPH",
             "habitat": "NOSTROMO",
             "bodyAdmission": false,
@@ -422,7 +422,7 @@
           "id": "negative-one",
           "expectedChange": false,
           "result": {
-            "schema": "zenomorph-capability-heldout-stress/v0.3",
+            "schema": "zenomorph-capability-heldout-stress/v0.4",
             "organism": "ZENOMORPH",
             "habitat": "NOSTROMO",
             "bodyAdmission": false,
@@ -518,7 +518,7 @@
           "id": "p1",
           "expectedChange": true,
           "result": {
-            "schema": "zenomorph-capability-heldout-stress/v0.3",
+            "schema": "zenomorph-capability-heldout-stress/v0.4",
             "organism": "ZENOMORPH",
             "habitat": "NOSTROMO",
             "bodyAdmission": false,
@@ -593,7 +593,7 @@
           "id": "p2",
           "expectedChange": true,
           "result": {
-            "schema": "zenomorph-capability-heldout-stress/v0.3",
+            "schema": "zenomorph-capability-heldout-stress/v0.4",
             "organism": "ZENOMORPH",
             "habitat": "NOSTROMO",
             "bodyAdmission": false,
@@ -668,7 +668,7 @@
           "id": "p3",
           "expectedChange": true,
           "result": {
-            "schema": "zenomorph-capability-heldout-stress/v0.3",
+            "schema": "zenomorph-capability-heldout-stress/v0.4",
             "organism": "ZENOMORPH",
             "habitat": "NOSTROMO",
             "bodyAdmission": false,
@@ -764,7 +764,7 @@
           "id": "positive-four",
           "expectedChange": true,
           "result": {
-            "schema": "zenomorph-capability-heldout-stress/v0.3",
+            "schema": "zenomorph-capability-heldout-stress/v0.4",
             "organism": "ZENOMORPH",
             "habitat": "NOSTROMO",
             "bodyAdmission": false,
@@ -839,7 +839,7 @@
           "id": "negative-one",
           "expectedChange": true,
           "result": {
-            "schema": "zenomorph-capability-heldout-stress/v0.3",
+            "schema": "zenomorph-capability-heldout-stress/v0.4",
             "organism": "ZENOMORPH",
             "habitat": "NOSTROMO",
             "bodyAdmission": false,
@@ -914,7 +914,7 @@
           "id": "positive-three",
           "expectedChange": true,
           "result": {
-            "schema": "zenomorph-capability-heldout-stress/v0.3",
+            "schema": "zenomorph-capability-heldout-stress/v0.4",
             "organism": "ZENOMORPH",
             "habitat": "NOSTROMO",
             "bodyAdmission": false,
