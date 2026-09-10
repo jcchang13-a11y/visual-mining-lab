@@ -29,6 +29,7 @@ jobs:
           if(changed.assimilationStage!=='HELDOUT_BEHAVIOR_CHANGE_VERIFIED')throw new Error('wrong held-out stage');
           if(changed.bodyAdmission!==false||changed.installed!==false||changed.persistentMutation!==false)throw new Error('held-out gate lied about mutation boundary');
           if(changed.downstreamOrganId!=='VAJRA'||changed.downstreamExecuted!==true)throw new Error('downstream evidence missing');
+          if(changed.registryLookup!=='OWN_DATA_PROPERTY_ONLY')throw new Error('registry lookup boundary missing');
           if(!changed.provenanceFingerprint)throw new Error('provenance fingerprint missing');
           if(typeof changed.rollbackEvidence!=='string'||changed.rollbackEvidence.length<10)throw new Error('rollback evidence missing');
 
@@ -36,10 +37,28 @@ jobs:
           if(noChange.status!=='HOLD'||noChange.behaviorChanged!==false||noChange.assimilationStage!=='HELDOUT_NO_BEHAVIOR_CHANGE')throw new Error('no-change control must HOLD');
 
           const missingOrgan=runHeldoutCrossOrganStress(candidate,{flag:true},{...opts,downstreamOrganId:'MISSING'});
-          if(missingOrgan.status!=='BLOCKED'||missingOrgan.reason!=='host-registered-downstream-organ-required'||missingOrgan.downstreamExecuted!==false)throw new Error('missing organ must fail closed');
+          if(missingOrgan.status!=='BLOCKED'||missingOrgan.downstreamExecuted!==false)throw new Error('missing organ must fail closed');
 
           const missingAdapter=runHeldoutCrossOrganStress({adapterId:'missing.signal',source:'fixture'},{flag:true},opts);
           if(missingAdapter.status!=='BLOCKED')throw new Error('missing adapter must fail closed');
+
+          const inheritedCapability=Object.create({'foreign.signal': input=>({flag:true})});
+          const inheritedCapabilityResult=runHeldoutCrossOrganStress(candidate,{flag:true},{...opts,capabilityRegistry:inheritedCapability});
+          if(inheritedCapabilityResult.status!=='BLOCKED')throw new Error('inherited capability must fail closed');
+
+          const inheritedOrgan=Object.create({VAJRA:({foreignSignal})=>({route:foreignSignal?.flag?'challenge':'hold'})});
+          const inheritedOrganResult=runHeldoutCrossOrganStress(candidate,{flag:true},{...opts,organRegistry:inheritedOrgan});
+          if(inheritedOrganResult.status!=='BLOCKED'||inheritedOrganResult.reason!=='host-registered-downstream-organ-own-data-property-required')throw new Error('inherited organ must fail closed');
+
+          const accessorCapability={};
+          Object.defineProperty(accessorCapability,'foreign.signal',{get(){throw new Error('capability getter executed');},enumerable:true});
+          const accessorCapabilityResult=runHeldoutCrossOrganStress(candidate,{flag:true},{...opts,capabilityRegistry:accessorCapability});
+          if(accessorCapabilityResult.status!=='BLOCKED')throw new Error('capability accessor must fail closed');
+
+          const accessorOrgan={};
+          Object.defineProperty(accessorOrgan,'VAJRA',{get(){throw new Error('organ getter executed');},enumerable:true});
+          const accessorOrganResult=runHeldoutCrossOrganStress(candidate,{flag:true},{...opts,organRegistry:accessorOrgan});
+          if(accessorOrganResult.status!=='BLOCKED'||accessorOrganResult.reason!=='host-registered-downstream-organ-accessor-not-allowed')throw new Error('organ accessor must fail closed');
 
           const asyncCapabilityRegistry={'foreign.signal': async input=>({flag:input.flag===true})};
           const asyncCapability=runHeldoutCrossOrganStress(candidate,{flag:true},{...opts,capabilityRegistry:asyncCapabilityRegistry});
