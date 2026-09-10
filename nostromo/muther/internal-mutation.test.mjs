@@ -60,6 +60,7 @@ const valid = evaluateInternalMutation({
   }
 });
 assert.equal(valid.status, 'SANDBOX_CANDIDATE');
+assert.equal(valid.sourceMode, 'MULTI_SPECIMEN_RECOMBINATION');
 assert.equal(valid.incorporationAuthorized, false);
 assert.equal(valid.bodyMutationApplied, false);
 assert.equal(valid.provenancePreserved, true);
@@ -68,18 +69,47 @@ assert.equal(valid.crossModalPressureDemonstrated, true);
 assert.deepEqual(new Set(valid.sourceSpecimenIds), new Set(['theme-01', 'text-01', 'failure-01']));
 assert.equal(valid.transformationHistory.length, 3);
 
-const singleSource = evaluateInternalMutation({
-  specimens,
+const singleSourceBetrayal = evaluateInternalMutation({
+  specimens: [specimens[0]],
   proposal: {
-    candidateId: 'renamed-copy',
+    candidateId: 'theme-01-betrayed',
     traits: [
-      { dimension: 'typography', value: 'compressed-sans-x', operation: 'distort', derivedFrom: [{ specimenId: 'theme-01', sourceDimension: 'typography' }] },
-      { dimension: 'layout', value: 'dense-grid-x', operation: 'distort', derivedFrom: [{ specimenId: 'theme-01', sourceDimension: 'layout' }] }
+      { dimension: 'typography', value: 'anti-compressed-discontinuous-type', operation: 'invert', derivedFrom: [{ specimenId: 'theme-01', sourceDimension: 'typography' }] },
+      { dimension: 'layout', value: 'broken-asymmetric-fields', operation: 'distort', derivedFrom: [{ specimenId: 'theme-01', sourceDimension: 'layout' }] }
     ]
   }
 });
-assert.equal(singleSource.status, 'HOLD');
-assert.equal(singleSource.reason, 'MUTHER_SINGLE_SOURCE_RENAME_OR_REWRITE');
+assert.equal(singleSourceBetrayal.status, 'SANDBOX_CANDIDATE');
+assert.equal(singleSourceBetrayal.sourceMode, 'SINGLE_SPECIMEN_MUTATION');
+assert.deepEqual(singleSourceBetrayal.sourceSpecimenIds, ['theme-01']);
+assert.equal(singleSourceBetrayal.crossModal, false);
+assert.equal(singleSourceBetrayal.provenancePreserved, true);
+
+const singleSourceCopy = evaluateInternalMutation({
+  specimens: [specimens[0]],
+  proposal: {
+    candidateId: 'theme-01-copy',
+    traits: [
+      { dimension: 'typography', value: 'compressed-sans', operation: 'copy', derivedFrom: [{ specimenId: 'theme-01', sourceDimension: 'typography' }] },
+      { dimension: 'layout', value: 'dense-grid', operation: 'inherit', derivedFrom: [{ specimenId: 'theme-01', sourceDimension: 'layout' }] }
+    ]
+  }
+});
+assert.equal(singleSourceCopy.status, 'HOLD');
+assert.equal(singleSourceCopy.reason, 'MUTHER_RECOMBINATION_WITHOUT_MUTATION');
+
+const renamedCopyWithFakeMutationLabel = evaluateInternalMutation({
+  specimens: [specimens[0]],
+  proposal: {
+    candidateId: 'theme-01-renamed',
+    traits: [
+      { dimension: 'typography', value: 'compressed-sans', operation: 'distort', derivedFrom: [{ specimenId: 'theme-01', sourceDimension: 'typography' }] },
+      { dimension: 'layout', value: 'dense-grid', operation: 'invert', derivedFrom: [{ specimenId: 'theme-01', sourceDimension: 'layout' }] }
+    ]
+  }
+});
+assert.equal(renamedCopyWithFakeMutationLabel.status, 'HOLD');
+assert.equal(renamedCopyWithFakeMutationLabel.reason, 'MUTHER_RENAMED_COPY_DETECTED');
 
 const collageOnly = evaluateInternalMutation({
   specimens,
