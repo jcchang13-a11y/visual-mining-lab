@@ -30,6 +30,8 @@ jobs:
           if(changed.bodyAdmission!==false||changed.installed!==false||changed.persistentMutation!==false)throw new Error('held-out gate lied about mutation boundary');
           if(changed.downstreamOrganId!=='VAJRA'||changed.downstreamExecuted!==true)throw new Error('downstream evidence missing');
           if(changed.registryLookup!=='OWN_DATA_PROPERTY_ONLY')throw new Error('registry lookup boundary missing');
+          if(changed.decisionComparison!=='CANONICAL_FAIL_CLOSED')throw new Error('canonical decision boundary missing');
+          if(!changed.decisionFingerprintBefore||!changed.decisionFingerprintAfter)throw new Error('decision fingerprints missing');
           if(!changed.provenanceFingerprint)throw new Error('provenance fingerprint missing');
           if(typeof changed.rollbackEvidence!=='string'||changed.rollbackEvidence.length<10)throw new Error('rollback evidence missing');
 
@@ -67,6 +69,27 @@ jobs:
           const asyncOrganRegistry={VAJRA:async ({foreignSignal})=>({route:foreignSignal?.flag?'challenge':'hold'})};
           const asyncOrgan=runHeldoutCrossOrganStress(candidate,{flag:true},{...opts,organRegistry:asyncOrganRegistry});
           if(asyncOrgan.status!=='QUARANTINE'||asyncOrgan.reason!=='async-downstream-organ-not-supported')throw new Error('async downstream organ must quarantine');
+
+          const bigintOrganRegistry={VAJRA:({foreignSignal})=>({route:foreignSignal?.flag?'challenge':'hold',weight:foreignSignal?.flag?2n:1n})};
+          const bigintResult=runHeldoutCrossOrganStress(candidate,{flag:true},{...opts,organRegistry:bigintOrganRegistry});
+          if(bigintResult.status!=='PASS'||bigintResult.behaviorChanged!==true)throw new Error('BigInt decisions must remain comparable');
+          if(!bigintResult.decisionFingerprintAfter.includes('bigint'))throw new Error('BigInt type evidence missing');
+
+          let reorderFlip=false;
+          const reorderOrganRegistry={VAJRA:({trial})=>{
+            reorderFlip=!reorderFlip;
+            return reorderFlip?{a:1,b:2}:{b:2,a:1};
+          }};
+          const reorderResult=runHeldoutCrossOrganStress(candidate,{flag:true},{...opts,organRegistry:reorderOrganRegistry});
+          if(reorderResult.status!=='HOLD'||reorderResult.behaviorChanged!==false)throw new Error('object key order must not create false behavior change');
+
+          const cyclicOrganRegistry={VAJRA:()=>{const x={route:'hold'};x.self=x;return x;}};
+          const cyclicResult=runHeldoutCrossOrganStress(candidate,{flag:true},{...opts,organRegistry:cyclicOrganRegistry});
+          if(cyclicResult.status!=='QUARANTINE'||cyclicResult.reason!=='downstream-decision-not-safely-comparable')throw new Error('cyclic decisions must quarantine instead of escaping');
+
+          const decisionAccessorOrgan={VAJRA:()=>{const x={route:'hold'};Object.defineProperty(x,'trap',{get(){throw new Error('decision getter executed');},enumerable:true});return x;}};
+          const accessorDecision=runHeldoutCrossOrganStress(candidate,{flag:true},{...opts,organRegistry:decisionAccessorOrgan});
+          if(accessorDecision.status!=='QUARANTINE'||accessorDecision.reason!=='downstream-decision-not-safely-comparable')throw new Error('decision accessors must quarantine without execution');
 
           console.log('PASS held-out cross-organ stress evidence gate',changed.provenanceFingerprint);
           EOF
