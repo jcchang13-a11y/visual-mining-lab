@@ -1,9 +1,11 @@
-// MUTHER internal mutation sandbox v0.3
+// MUTHER internal mutation sandbox v0.4
 // Internal artifacts are ore. This module does not install candidates into ZENOMORPH.
 // It validates whether a proposed mutation is traceable and materially transformed rather than a renamed copy.
 
 const NON_MUTATING = new Set(['inherit', 'copy']);
 const MUTATING = new Set(['hybridize', 'synthesize', 'invert', 'distort', 'cross-pressure', 'transpose']);
+const LINGUISTIC_KINDS = new Set(['text', 'dialogue']);
+const VISUAL_KINDS = new Set(['visual', 'theme']);
 
 function text(v) {
   return typeof v === 'string' ? v.trim() : '';
@@ -11,6 +13,11 @@ function text(v) {
 
 function canonical(v) {
   return text(v).normalize('NFKC');
+}
+
+function spansPhenotypeFamilies(kinds) {
+  const values = kinds instanceof Set ? kinds : new Set(kinds || []);
+  return [...values].some(kind => LINGUISTIC_KINDS.has(kind)) && [...values].some(kind => VISUAL_KINDS.has(kind));
 }
 
 function specimenIndex(specimens) {
@@ -107,6 +114,7 @@ export function evaluateInternalMutation({ specimens, proposal } = {}) {
   const candidateTraits = [];
   let hasMutation = false;
   let hasCrossPressure = false;
+  let hasPhenotypePressure = false;
 
   try {
     for (let i = 0; i < proposedTraits.length; i++) {
@@ -125,7 +133,10 @@ export function evaluateInternalMutation({ specimens, proposal } = {}) {
 
       const resolved = contributions.map(c => resolveContribution(c, byId));
       const localKinds = new Set(resolved.map(r => r.specimenKind));
-      if (operation === 'cross-pressure' && localKinds.size >= 2) hasCrossPressure = true;
+      if (operation === 'cross-pressure' && localKinds.size >= 2) {
+        hasCrossPressure = true;
+        if (spansPhenotypeFamilies(localKinds)) hasPhenotypePressure = true;
+      }
       for (const r of resolved) {
         sourceSpecimens.add(r.specimenId);
         sourceKinds.add(r.specimenKind);
@@ -137,7 +148,8 @@ export function evaluateInternalMutation({ specimens, proposal } = {}) {
         operation,
         outputDimension: dimension,
         outputValue: value,
-        inputs: resolved
+        inputs: resolved,
+        phenotypePressure: operation === 'cross-pressure' && spansPhenotypeFamilies(localKinds)
       });
     }
   } catch (error) {
@@ -157,8 +169,10 @@ export function evaluateInternalMutation({ specimens, proposal } = {}) {
   if (semanticFailure) return hold(semanticFailure);
 
   const crossModal = sourceKinds.size >= 2;
+  const phenotypeCoupling = spansPhenotypeFamilies(sourceKinds);
   const sourceMode = sourceSpecimens.size === 1 ? 'SINGLE_SPECIMEN_MUTATION' : 'MULTI_SPECIMEN_RECOMBINATION';
   return {
+    schema: 'zenomorph-muther-internal-mutation/v0.4',
     status: 'SANDBOX_CANDIDATE',
     candidateId,
     operation: 'READ_DECOMPOSE_RECOMBINE_MUTATE',
@@ -168,18 +182,21 @@ export function evaluateInternalMutation({ specimens, proposal } = {}) {
     sourceKinds: [...sourceKinds],
     crossModal,
     crossModalPressureDemonstrated: crossModal && hasCrossPressure,
+    phenotypeCoupling,
+    phenotypePressureDemonstrated: phenotypeCoupling && hasPhenotypePressure,
     transformationHistory,
     operationSemanticsVerified: true,
     provenancePreserved: true,
     incorporationAuthorized: false,
     bodyMutationApplied: false,
     nextRequiredGate: 'GUT_VAJRA_CROSS_ORGAN_STRESS_AND_REGRESSION',
-    boundary: 'A sandbox mutation candidate is evidence of traceable transformation only. Mutation labels must correspond to material output change, while inherit/copy operations must preserve exactly one source value. A single specimen may be inverted, distorted, or otherwise betrayed without requiring artificial collage. This is not evidence of autonomous aesthetic judgment, successful assimilation, organ growth, or authorization to modify the persistent body.'
+    boundary: 'A sandbox mutation candidate is evidence of traceable transformation only. Generic multi-kind recombination is not automatically text-visual phenotype coupling: phenotypePressureDemonstrated requires a cross-pressure step that directly combines at least one linguistic specimen (text/dialogue) with at least one visual specimen (visual/theme). Mutation labels must correspond to material output change, while inherit/copy operations must preserve exactly one source value. This is not evidence of autonomous aesthetic judgment, successful assimilation, organ growth, or authorization to modify the persistent body.'
   };
 }
 
 function hold(reason) {
   return {
+    schema: 'zenomorph-muther-internal-mutation/v0.4',
     status: 'HOLD',
     reason,
     incorporationAuthorized: false,
