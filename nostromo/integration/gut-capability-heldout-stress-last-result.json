@@ -1,6 +1,6 @@
 {
   "schema": "zenomorph-capability-heldout-stress-test/v0.1",
-  "completedAt": "2026-09-07T08:04:56.202Z",
+  "completedAt": "2026-09-10T01:49:27.433Z",
   "status": "PASS",
   "capability": "EPHEMERAL_FOREIGN_CAPABILITY_DOWNSTREAM_BEHAVIOR_CHANGE",
   "cases": {
@@ -19,7 +19,7 @@
         "installed": false,
         "persistentMutation": false,
         "candidateAdmission": {
-          "schema": "zenomorph-gut-capability-admission/v0.1",
+          "schema": "zenomorph-gut-capability-admission/v0.2",
           "organism": "ZENOMORPH",
           "habitat": "NOSTROMO",
           "executed": false,
@@ -84,7 +84,7 @@
         "installed": false,
         "persistentMutation": false,
         "candidateAdmission": {
-          "schema": "zenomorph-gut-capability-admission/v0.1",
+          "schema": "zenomorph-gut-capability-admission/v0.2",
           "organism": "ZENOMORPH",
           "habitat": "NOSTROMO",
           "executed": false,
@@ -149,7 +149,7 @@
         "installed": false,
         "persistentMutation": false,
         "candidateAdmission": {
-          "schema": "zenomorph-gut-capability-admission/v0.1",
+          "schema": "zenomorph-gut-capability-admission/v0.2",
           "organism": "ZENOMORPH",
           "habitat": "NOSTROMO",
           "executed": false,
@@ -204,7 +204,7 @@
         "installed": false,
         "persistentMutation": false,
         "candidateAdmission": {
-          "schema": "zenomorph-gut-capability-admission/v0.1",
+          "schema": "zenomorph-gut-capability-admission/v0.2",
           "organism": "ZENOMORPH",
           "habitat": "NOSTROMO",
           "executed": false,
@@ -214,6 +214,7 @@
           "status": "QUARANTINE",
           "classification": "EXECUTABLE_PAYLOAD_PRESENT",
           "reason": "admission-metadata-must-not-carry-executable-payload",
+          "unsafePath": "$.command",
           "identity": "Bounded Counter Adapter"
         },
         "assimilationStage": "ISOLATED_TEST_BLOCKED",
