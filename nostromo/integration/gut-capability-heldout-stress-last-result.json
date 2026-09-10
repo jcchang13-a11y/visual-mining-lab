@@ -1,6 +1,6 @@
 {
   "schema": "zenomorph-capability-heldout-stress-test/v0.1",
-  "completedAt": "2026-09-10T03:40:02.305Z",
+  "completedAt": "2026-09-10T05:19:53.869Z",
   "status": "PASS",
   "capability": "EPHEMERAL_FOREIGN_CAPABILITY_DOWNSTREAM_BEHAVIOR_CHANGE",
   "cases": {
@@ -12,7 +12,7 @@
       "installed": false,
       "persistentMutation": false,
       "isolatedTrial": {
-        "schema": "zenomorph-gut-capability-sandbox/v0.1",
+        "schema": "zenomorph-gut-capability-sandbox/v0.2",
         "organism": "ZENOMORPH",
         "habitat": "NOSTROMO",
         "bodyAdmission": false,
@@ -40,7 +40,8 @@
         "reason": "isolated-host-registered-trial-passed",
         "adapterId": "bounded-counter-v1",
         "executed": true,
-        "executionBoundary": "HOST_REGISTERED_ONLY",
+        "executionBoundary": "HOST_REGISTERED_OWN_DATA_PROPERTY_ONLY",
+        "registryLookup": "OWN_DATA_PROPERTY_ONLY",
         "deterministic": true,
         "inputStable": true,
         "contractCheck": {
@@ -78,7 +79,7 @@
       "installed": false,
       "persistentMutation": false,
       "isolatedTrial": {
-        "schema": "zenomorph-gut-capability-sandbox/v0.1",
+        "schema": "zenomorph-gut-capability-sandbox/v0.2",
         "organism": "ZENOMORPH",
         "habitat": "NOSTROMO",
         "bodyAdmission": false,
@@ -106,7 +107,8 @@
         "reason": "isolated-host-registered-trial-passed",
         "adapterId": "bounded-counter-v1",
         "executed": true,
-        "executionBoundary": "HOST_REGISTERED_ONLY",
+        "executionBoundary": "HOST_REGISTERED_OWN_DATA_PROPERTY_ONLY",
+        "registryLookup": "OWN_DATA_PROPERTY_ONLY",
         "deterministic": true,
         "inputStable": true,
         "contractCheck": {
@@ -144,7 +146,7 @@
       "installed": false,
       "persistentMutation": false,
       "isolatedTrial": {
-        "schema": "zenomorph-gut-capability-sandbox/v0.1",
+        "schema": "zenomorph-gut-capability-sandbox/v0.2",
         "organism": "ZENOMORPH",
         "habitat": "NOSTROMO",
         "bodyAdmission": false,
@@ -172,7 +174,8 @@
         "reason": "isolated-host-registered-trial-passed",
         "adapterId": "bounded-counter-v1",
         "executed": true,
-        "executionBoundary": "HOST_REGISTERED_ONLY",
+        "executionBoundary": "HOST_REGISTERED_OWN_DATA_PROPERTY_ONLY",
+        "registryLookup": "OWN_DATA_PROPERTY_ONLY",
         "deterministic": true,
         "inputStable": true,
         "contractCheck": {
@@ -200,7 +203,7 @@
       "installed": false,
       "persistentMutation": false,
       "isolatedTrial": {
-        "schema": "zenomorph-gut-capability-sandbox/v0.1",
+        "schema": "zenomorph-gut-capability-sandbox/v0.2",
         "organism": "ZENOMORPH",
         "habitat": "NOSTROMO",
         "bodyAdmission": false,
