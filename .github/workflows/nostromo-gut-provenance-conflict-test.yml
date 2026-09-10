@@ -1,0 +1,33 @@
+name: ZENOMORPH GUT Provenance Conflict Gate
+
+on:
+  pull_request:
+    paths:
+      - 'nostromo/gut/capability-admission.mjs'
+      - 'nostromo/gut/capability-sandbox.mjs'
+      - 'nostromo/gut/capability-heldout-stress.mjs'
+      - 'nostromo/integration/gut-provenance-conflict-test.mjs'
+      - '.github/workflows/nostromo-gut-provenance-conflict-test.yml'
+  push:
+    branches: [ main ]
+    paths:
+      - 'nostromo/gut/capability-admission.mjs'
+      - 'nostromo/gut/capability-sandbox.mjs'
+      - 'nostromo/gut/capability-heldout-stress.mjs'
+      - 'nostromo/integration/gut-provenance-conflict-test.mjs'
+      - '.github/workflows/nostromo-gut-provenance-conflict-test.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Unit, adversarial, and cross-organ provenance checks
+        run: node nostromo/integration/gut-provenance-conflict-test.mjs
