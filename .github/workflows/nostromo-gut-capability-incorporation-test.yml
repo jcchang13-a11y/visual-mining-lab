@@ -28,13 +28,14 @@ jobs:
             {id:'negative',input:{flag:false,n:2},expectedChange:false},
             {id:'positive-b',input:{flag:true,n:3},expectedChange:true}
           ];
-          const run=body=>runReversibleIncorporationCandidate(candidate,cases,body,{capabilityRegistry,organRegistry,downstreamOrganId:'VAJRA',context:{source:'fixture',provenanceFingerprint:'fixture-provenance-v1'}});
+          const run=(body,registry=capabilityRegistry)=>runReversibleIncorporationCandidate(candidate,cases,body,{capabilityRegistry:registry,organRegistry,downstreamOrganId:'VAJRA',context:{source:'fixture',provenanceFingerprint:'fixture-provenance-v1'}});
           const body={organs:{GUT:{status:'ACTIVE',metabolism:{echoGuard:true,threshold:2}},VAJRA:{status:'ACTIVE'}},capabilities:{},history:[{round:1,status:'PASS'}]};
           const snapshot=JSON.stringify(body);
           const out=run(body);
           if(out.status!=='PASS')throw new Error(JSON.stringify(out));
           if(out.assimilationStage!=='REVERSIBLE_BODY_CANDIDATE_CREATED')throw new Error('wrong stage');
           if(out.persistentMutation!==false||out.bodyAdmission!==false||out.installed!==false)throw new Error('boundary lied');
+          if(out.registryLookup!=='OWN_DATA_PROPERTY_ONLY')throw new Error('registry lookup boundary not declared');
           if(JSON.stringify(body)!==snapshot||out.originalBodyUnchanged!==true)throw new Error('source body mutated');
           if(out.candidateBody.capabilities['foreign.signal']?.status!=='REVERSIBLE_TRIAL_ONLY')throw new Error('candidate missing');
           if(out.rollback?.restoresFingerprint!==out.beforeFingerprint)throw new Error('rollback evidence missing');
@@ -56,5 +57,16 @@ jobs:
           const cyclicOut=run(cyclic);
           if(cyclicOut.status!=='BLOCKED'||cyclicOut.reason!=='fingerprintable-acyclic-host-body-state-required')throw new Error('cyclic body state must fail closed before trial');
 
-          console.log('PASS reversible incorporation boundary with nested-state-bound rollback fingerprint',out.beforeFingerprint,out.candidateFingerprint);
+          const inheritedRegistry=Object.create({'foreign.signal': input=>({flag:input.flag===true})});
+          const inheritedOut=run(body,inheritedRegistry);
+          if(inheritedOut.status==='PASS'||inheritedOut.stress?.status==='PASS')throw new Error('inherited capability registry entry crossed the incorporation boundary');
+
+          let getterExecuted=false;
+          const accessorRegistry={};
+          Object.defineProperty(accessorRegistry,'foreign.signal',{enumerable:true,get(){getterExecuted=true;return input=>({flag:input.flag===true});}});
+          const accessorOut=run(body,accessorRegistry);
+          if(getterExecuted)throw new Error('capability registry getter executed');
+          if(accessorOut.status==='PASS'||accessorOut.stress?.status==='PASS')throw new Error('accessor capability registry entry crossed the incorporation boundary');
+
+          console.log('PASS reversible incorporation boundary with nested-state-bound rollback fingerprint and own-data-property-only registry containment',out.beforeFingerprint,out.candidateFingerprint);
           EOF

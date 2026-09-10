@@ -1,9 +1,11 @@
-/* ZENOMORPH / NOSTROMO reversible capability incorporation candidate gate v0.2
+/* ZENOMORPH / NOSTROMO reversible capability incorporation candidate gate v0.3
  * A repeated-heldout PASS may enter a host-controlled reversible body-state trial.
  * This module never mutates the supplied body. It returns a candidate body copy plus
  * explicit rollback evidence. Permanent admission remains a separate decision.
  * v0.2 binds rollback evidence to a recursively canonicalized body fingerprint so
  * nested organ/capability state changes cannot disappear from identity evidence.
+ * v0.3 keeps incorporation registry lookup aligned with the held-out boundary:
+ * inherited entries and accessors fail closed and are never executed.
  */
 import { runRepeatedHeldoutStress } from './capability-repeated-stress.mjs';
 
@@ -12,6 +14,21 @@ function cleanId(value){
 }
 function plainBody(value){
   return value&&typeof value==='object'&&!Array.isArray(value)?value:null;
+}
+function registeredCapability(registry,id){
+  if(registry===null||(typeof registry!=='object'&&typeof registry!=='function')){
+    return {ok:false,reason:'host-capability-registry-object-required'};
+  }
+  let descriptor;
+  try{
+    descriptor=Object.getOwnPropertyDescriptor(registry,id);
+  }catch(error){
+    return {ok:false,reason:'host-capability-registry-inspection-failed',error:String(error?.message||error).slice(0,240)};
+  }
+  if(!descriptor)return {ok:false,reason:'host-registered-capability-own-data-property-required'};
+  if(!Object.prototype.hasOwnProperty.call(descriptor,'value'))return {ok:false,reason:'host-registered-capability-accessor-not-allowed'};
+  if(typeof descriptor.value!=='function')return {ok:false,reason:'host-registered-capability-must-be-callable'};
+  return {ok:true,callable:descriptor.value};
 }
 function stableStructure(value,seen=new WeakSet()){
   if(value===null||typeof value!=='object')return value;
@@ -34,7 +51,7 @@ function fingerprint(value){
 }
 
 export function runReversibleIncorporationCandidate(candidate,cases,bodyState,{capabilityRegistry={},organRegistry={},downstreamOrganId,context={}}={}){
-  const base={schema:'zenomorph-capability-incorporation/v0.2',organism:'ZENOMORPH',habitat:'NOSTROMO',installed:false,persistentMutation:false,bodyAdmission:false};
+  const base={schema:'zenomorph-capability-incorporation/v0.3',organism:'ZENOMORPH',habitat:'NOSTROMO',installed:false,persistentMutation:false,bodyAdmission:false,registryLookup:'OWN_DATA_PROPERTY_ONLY'};
   const body=plainBody(bodyState);
   if(!body)return {...base,status:'BLOCKED',assimilationStage:'INCORPORATION_BLOCKED',reason:'plain-host-body-state-required'};
   let beforeFingerprint;
@@ -42,7 +59,9 @@ export function runReversibleIncorporationCandidate(candidate,cases,bodyState,{c
   const stress=runRepeatedHeldoutStress(candidate,cases,{capabilityRegistry,organRegistry,downstreamOrganId,context});
   if(stress.status!=='PASS')return {...base,status:'HOLD',assimilationStage:'INCORPORATION_BLOCKED',reason:'repeated-heldout-pass-required',stress};
   const capabilityId=cleanId(candidate?.adapterId||candidate?.capabilityId||candidate?.toolId||candidate?.moduleId);
-  if(!capabilityId||typeof capabilityRegistry[capabilityId]!=='function')return {...base,status:'BLOCKED',assimilationStage:'INCORPORATION_BLOCKED',reason:'host-registered-capability-required',stress};
+  if(!capabilityId)return {...base,status:'BLOCKED',assimilationStage:'INCORPORATION_BLOCKED',reason:'host-registered-capability-id-required',stress};
+  const registration=registeredCapability(capabilityRegistry,capabilityId);
+  if(!registration.ok)return {...base,status:'BLOCKED',assimilationStage:'INCORPORATION_BLOCKED',reason:registration.reason,stress,...(registration.error?{registryError:registration.error}:{})};
   const before=structuredClone(body);
   const candidateBody=structuredClone(body);
   const organs=plainBody(candidateBody.organs)?candidateBody.organs:{};
@@ -53,4 +72,4 @@ export function runReversibleIncorporationCandidate(candidate,cases,bodyState,{c
   return {...base,status:'PASS',assimilationStage:'REVERSIBLE_BODY_CANDIDATE_CREATED',reason:'heldout-profile-verified-and-reversible-copy-created',capabilityId,stress,originalBodyUnchanged:fingerprint(body)===beforeFingerprint,beforeFingerprint,candidateFingerprint,candidateBody,rollback:{method:'discard-candidate-body-copy',restoresFingerprint:beforeFingerprint},fingerprintBoundary:{canonicalization:'recursive-object-key-sort-array-order-preserved',nestedStateBound:true,cyclicStateAccepted:false},nextStage:'run whole-body regression against candidateBody; permanent admission requires separate explicit gate'};
 }
 
-export const incorporationBoundary=Object.freeze({version:'0.2',requiresRepeatedHeldoutPass:true,mutatesSuppliedBody:false,persistentMutation:false,permanentAdmissionOnPass:false,rollbackRequired:true,recursiveCanonicalFingerprint:true,cyclicBodyStateAccepted:false,nextStage:'whole-body regression on reversible candidate copy'});
+export const incorporationBoundary=Object.freeze({version:'0.3',requiresRepeatedHeldoutPass:true,mutatesSuppliedBody:false,persistentMutation:false,permanentAdmissionOnPass:false,rollbackRequired:true,recursiveCanonicalFingerprint:true,cyclicBodyStateAccepted:false,registryLookup:'own data property only',inheritedRegistryEntries:false,accessorRegistryEntries:false,nextStage:'whole-body regression on reversible candidate copy'});
