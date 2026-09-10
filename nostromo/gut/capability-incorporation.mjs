@@ -1,4 +1,4 @@
-/* ZENOMORPH / NOSTROMO reversible capability incorporation candidate gate v0.3
+/* ZENOMORPH / NOSTROMO reversible capability incorporation candidate gate v0.4
  * A repeated-heldout PASS may enter a host-controlled reversible body-state trial.
  * This module never mutates the supplied body. It returns a candidate body copy plus
  * explicit rollback evidence. Permanent admission remains a separate decision.
@@ -6,6 +6,8 @@
  * nested organ/capability state changes cannot disappear from identity evidence.
  * v0.3 keeps incorporation registry lookup aligned with the held-out boundary:
  * inherited entries and accessors fail closed and are never executed.
+ * v0.4 makes body-copy failure an explicit fail-closed incorporation boundary rather
+ * than allowing an uncloneable host state to escape as an uncaught exception.
  */
 import { runRepeatedHeldoutStress } from './capability-repeated-stress.mjs';
 
@@ -51,7 +53,7 @@ function fingerprint(value){
 }
 
 export function runReversibleIncorporationCandidate(candidate,cases,bodyState,{capabilityRegistry={},organRegistry={},downstreamOrganId,context={}}={}){
-  const base={schema:'zenomorph-capability-incorporation/v0.3',organism:'ZENOMORPH',habitat:'NOSTROMO',installed:false,persistentMutation:false,bodyAdmission:false,registryLookup:'OWN_DATA_PROPERTY_ONLY'};
+  const base={schema:'zenomorph-capability-incorporation/v0.4',organism:'ZENOMORPH',habitat:'NOSTROMO',installed:false,persistentMutation:false,bodyAdmission:false,registryLookup:'OWN_DATA_PROPERTY_ONLY',bodyCopyBoundary:'STRUCTURED_CLONE_FAIL_CLOSED'};
   const body=plainBody(bodyState);
   if(!body)return {...base,status:'BLOCKED',assimilationStage:'INCORPORATION_BLOCKED',reason:'plain-host-body-state-required'};
   let beforeFingerprint;
@@ -62,8 +64,13 @@ export function runReversibleIncorporationCandidate(candidate,cases,bodyState,{c
   if(!capabilityId)return {...base,status:'BLOCKED',assimilationStage:'INCORPORATION_BLOCKED',reason:'host-registered-capability-id-required',stress};
   const registration=registeredCapability(capabilityRegistry,capabilityId);
   if(!registration.ok)return {...base,status:'BLOCKED',assimilationStage:'INCORPORATION_BLOCKED',reason:registration.reason,stress,...(registration.error?{registryError:registration.error}:{})};
-  const before=structuredClone(body);
-  const candidateBody=structuredClone(body);
+  let before,candidateBody;
+  try{
+    before=structuredClone(body);
+    candidateBody=structuredClone(body);
+  }catch(error){
+    return {...base,status:'BLOCKED',assimilationStage:'INCORPORATION_BLOCKED',reason:'structured-cloneable-host-body-state-required',stress,beforeFingerprint,cloneError:String(error?.message||error).slice(0,240)};
+  }
   const organs=plainBody(candidateBody.organs)?candidateBody.organs:{};
   candidateBody.organs={...organs};
   const existing=plainBody(candidateBody.capabilities)?candidateBody.capabilities:{};
@@ -72,4 +79,4 @@ export function runReversibleIncorporationCandidate(candidate,cases,bodyState,{c
   return {...base,status:'PASS',assimilationStage:'REVERSIBLE_BODY_CANDIDATE_CREATED',reason:'heldout-profile-verified-and-reversible-copy-created',capabilityId,stress,originalBodyUnchanged:fingerprint(body)===beforeFingerprint,beforeFingerprint,candidateFingerprint,candidateBody,rollback:{method:'discard-candidate-body-copy',restoresFingerprint:beforeFingerprint},fingerprintBoundary:{canonicalization:'recursive-object-key-sort-array-order-preserved',nestedStateBound:true,cyclicStateAccepted:false},nextStage:'run whole-body regression against candidateBody; permanent admission requires separate explicit gate'};
 }
 
-export const incorporationBoundary=Object.freeze({version:'0.3',requiresRepeatedHeldoutPass:true,mutatesSuppliedBody:false,persistentMutation:false,permanentAdmissionOnPass:false,rollbackRequired:true,recursiveCanonicalFingerprint:true,cyclicBodyStateAccepted:false,registryLookup:'own data property only',inheritedRegistryEntries:false,accessorRegistryEntries:false,nextStage:'whole-body regression on reversible candidate copy'});
+export const incorporationBoundary=Object.freeze({version:'0.4',requiresRepeatedHeldoutPass:true,mutatesSuppliedBody:false,persistentMutation:false,permanentAdmissionOnPass:false,rollbackRequired:true,recursiveCanonicalFingerprint:true,cyclicBodyStateAccepted:false,registryLookup:'own data property only',inheritedRegistryEntries:false,accessorRegistryEntries:false,bodyCopyBoundary:'structuredClone fail closed',uncloneableBodyStateAccepted:false,nextStage:'whole-body regression on reversible candidate copy'});
