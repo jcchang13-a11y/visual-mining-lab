@@ -1,0 +1,57 @@
+name: NOSTROMO GUT thenable guard candidate test
+on:
+  push:
+    paths:
+      - 'nostromo/gut/thenable-guard.mjs'
+      - '.github/workflows/nostromo-gut-thenable-guard-test.yml'
+  workflow_dispatch:
+jobs:
+  adversarial-thenable-boundary:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify non-executing async-like classification
+        run: |
+          node --input-type=module <<'EOF'
+          import {inspectThenableBoundary,thenableBoundary} from './nostromo/gut/thenable-guard.mjs';
+
+          const expect=(condition,message)=>{if(!condition)throw new Error(message)};
+          expect(thenableBoundary.candidateOnly===true&&thenableBoundary.bodyAdmissionOnPass===false,'candidate boundary lied');
+          expect(inspectThenableBoundary(null).status==='SYNC','null must be sync');
+          expect(inspectThenableBoundary(7).status==='SYNC','primitive must be sync');
+          expect(inspectThenableBoundary(Promise.resolve(1)).status==='ASYNC_LIKE','native Promise must be async-like');
+          expect(inspectThenableBoundary({then(){}}).status==='ASYNC_LIKE','own callable then must be async-like');
+          expect(inspectThenableBoundary({then:3}).status==='SYNC','non-callable then data must remain sync');
+
+          let ownGetterRuns=0;
+          const ownAccessor={};
+          Object.defineProperty(ownAccessor,'then',{get(){ownGetterRuns++;throw new Error('must never execute');}});
+          const ownResult=inspectThenableBoundary(ownAccessor);
+          expect(ownResult.status==='QUARANTINE'&&ownResult.reason==='then-accessor-not-executed','own accessor must quarantine');
+          expect(ownGetterRuns===0,'own then getter executed');
+
+          let protoGetterRuns=0;
+          const proto={};
+          Object.defineProperty(proto,'then',{get(){protoGetterRuns++;throw new Error('must never execute');}});
+          const inheritedAccessor=Object.create(proto);
+          const protoResult=inspectThenableBoundary(inheritedAccessor);
+          expect(protoResult.status==='QUARANTINE'&&protoResult.reason==='then-accessor-not-executed','prototype accessor must quarantine');
+          expect(protoGetterRuns===0,'prototype then getter executed');
+
+          const inheritedCallable=Object.create({then(){}});
+          expect(inspectThenableBoundary(inheritedCallable).status==='ASYNC_LIKE','prototype callable then must be async-like');
+
+          const nullProto=Object.assign(Object.create(null),{value:1});
+          expect(inspectThenableBoundary(nullProto).status==='SYNC','null-prototype data object must be sync');
+
+          let proxyGets=0;
+          const proxy=new Proxy({}, {get(target,key,receiver){proxyGets++;return Reflect.get(target,key,receiver);}});
+          const proxyResult=inspectThenableBoundary(proxy);
+          expect(['SYNC','QUARANTINE'].includes(proxyResult.status),'proxy must not escape classification');
+          expect(proxyGets===0,'guard performed a direct property get');
+
+          console.log('PASS isolated thenable guard candidate',thenableBoundary.version);
+          EOF
