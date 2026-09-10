@@ -1,9 +1,10 @@
-/* ZENOMORPH / NOSTROMO held-out cross-organ capability stress gate v0.3
+/* ZENOMORPH / NOSTROMO held-out cross-organ capability stress gate v0.4
  * Proves an isolated foreign capability can alter a downstream organ decision under a host-controlled ephemeral trial.
  * This is NOT body admission, installation, or persistent mutation.
  * Capability and organ registries are own-data-property only: inherited entries and accessors fail closed.
  * Decision comparison is canonical and fail-closed: BigInt/non-finite/nullish values are representable;
- * cycles, accessors, functions and symbols quarantine instead of escaping the metabolic boundary.
+ * cycles, accessors, functions, symbols and exotic object prototypes quarantine instead of escaping
+ * or collapsing into false equality.
  */
 import { runIsolatedCapabilityTrial } from './capability-sandbox.mjs';
 
@@ -51,6 +52,16 @@ function canonicalDecision(value){
       seen.delete(node);
       return out;
     }
+    let proto;
+    try{
+      proto=Object.getPrototypeOf(node);
+    }catch(error){
+      throw new Error(`decision-prototype-inspection-failed-at-${path}`);
+    }
+    if(proto!==Object.prototype&&proto!==null){
+      const name=typeof proto?.constructor?.name==='string'?proto.constructor.name:'unknown';
+      throw new Error(`exotic-decision-object-${name}-at-${path}`);
+    }
     const descriptors=Object.getOwnPropertyDescriptors(node);
     const keys=Reflect.ownKeys(descriptors);
     if(keys.some(key=>typeof key==='symbol'))throw new Error(`symbol-keyed-decision-at-${path}`);
@@ -68,7 +79,7 @@ function canonicalDecision(value){
 
 export function runHeldoutCrossOrganStress(candidate,input,{capabilityRegistry={},organRegistry={},downstreamOrganId,baselineSignal=null,context={}}={}){
   const isolated=runIsolatedCapabilityTrial(candidate,input,{registry:capabilityRegistry,context});
-  const base={schema:'zenomorph-capability-heldout-stress/v0.3',organism:'ZENOMORPH',habitat:'NOSTROMO',bodyAdmission:false,installed:false,persistentMutation:false,isolatedTrial:isolated,registryLookup:'OWN_DATA_PROPERTY_ONLY',decisionComparison:'CANONICAL_FAIL_CLOSED'};
+  const base={schema:'zenomorph-capability-heldout-stress/v0.4',organism:'ZENOMORPH',habitat:'NOSTROMO',bodyAdmission:false,installed:false,persistentMutation:false,isolatedTrial:isolated,registryLookup:'OWN_DATA_PROPERTY_ONLY',decisionComparison:'CANONICAL_FAIL_CLOSED'};
   if(isolated.status!=='PASS')return {...base,status:'BLOCKED',assimilationStage:'HELDOUT_STRESS_BLOCKED',reason:'isolated-trial-must-pass-first',downstreamExecuted:false};
 
   const organId=cleanId(downstreamOrganId);
@@ -99,10 +110,10 @@ export function runHeldoutCrossOrganStress(candidate,input,{capabilityRegistry={
     before=canonicalDecision(baselineDecision);
     after=canonicalDecision(augmentedDecision);
   }catch(error){
-    return {...base,status:'QUARANTINE',assimilationStage:'HELDOUT_STRESS_BLOCKED',reason:'downstream-decision-not-safely-comparable',downstreamOrganId:organId,downstreamExecuted:true,error:String(error?.message||error).slice(0,240),provenanceFingerprint:isolated.provenanceFingerprint||null,rollbackEvidence:'ephemeral replay only; malformed decision was quarantined before evidence comparison or body mutation'};
+    return {...base,status:'QUARANTINE',assimilationStage:'HELDOUT_STRESS_BLOCKED',reason:'downstream-decision-not-safely-comparable',downstreamOrganId:organId,downstreamExecuted:true,error:String(error?.message||error).slice(0,240),provenanceFingerprint:isolated.provenanceFingerprint||null,rollbackEvidence:'ephemeral replay only; malformed or unsupported decision was quarantined before evidence comparison or body mutation'};
   }
   const behaviorChanged=before!==after;
   return {...base,status:behaviorChanged?'PASS':'HOLD',assimilationStage:behaviorChanged?'HELDOUT_BEHAVIOR_CHANGE_VERIFIED':'HELDOUT_NO_BEHAVIOR_CHANGE',reason:behaviorChanged?'foreign-capability-changed-downstream-organ-behavior':'foreign-capability-produced-no-observed-downstream-change',downstreamOrganId:organId,downstreamExecuted:true,behaviorChanged,baselineDecision,augmentedDecision,decisionFingerprintBefore:before,decisionFingerprintAfter:after,provenanceFingerprint:isolated.provenanceFingerprint||null,rollbackEvidence:'ephemeral replay only; no registry, body, or persistent state mutation performed'};
 }
 
-export const heldoutStressBoundary=Object.freeze({version:'0.3',requiresIsolatedPass:true,hostRegisteredCapabilityOnly:true,hostRegisteredDownstreamOrganOnly:true,registryLookup:'own data property only',decisionComparison:'canonical fail-closed',supportsComparableDecisionTypes:['null','undefined','string','boolean','finite/non-finite number','bigint','arrays','plain data objects'],quarantinesDecisionTypes:['cycles','functions','symbols','symbol keys','accessors'],inheritedRegistryEntries:false,accessorRegistryEntries:false,persistentMutation:false,bodyAdmissionOnPass:false,nextStage:'repeat across independent held-out inputs and explicit incorporation decision'});
+export const heldoutStressBoundary=Object.freeze({version:'0.4',requiresIsolatedPass:true,hostRegisteredCapabilityOnly:true,hostRegisteredDownstreamOrganOnly:true,registryLookup:'own data property only',decisionComparison:'canonical fail-closed',supportsComparableDecisionTypes:['null','undefined','string','boolean','finite/non-finite number','bigint','arrays','plain data objects','null-prototype data objects'],quarantinesDecisionTypes:['cycles','functions','symbols','symbol keys','accessors','Date','Map','Set','RegExp','typed arrays','class instances','other exotic object prototypes'],inheritedRegistryEntries:false,accessorRegistryEntries:false,persistentMutation:false,bodyAdmissionOnPass:false,nextStage:'repeat across independent held-out inputs and explicit incorporation decision'});
