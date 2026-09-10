@@ -1,6 +1,6 @@
 {
   "schema": "zenomorph-capability-repeated-heldout-stress-test/v0.1",
-  "completedAt": "2026-09-10T03:40:05.489Z",
+  "completedAt": "2026-09-10T05:19:49.646Z",
   "status": "PASS",
   "capability": "REPEATED_SELECTIVE_FOREIGN_CAPABILITY_BEHAVIOR_PROFILE",
   "cases": {
@@ -33,7 +33,7 @@
             "installed": false,
             "persistentMutation": false,
             "isolatedTrial": {
-              "schema": "zenomorph-gut-capability-sandbox/v0.1",
+              "schema": "zenomorph-gut-capability-sandbox/v0.2",
               "organism": "ZENOMORPH",
               "habitat": "NOSTROMO",
               "bodyAdmission": false,
@@ -61,7 +61,8 @@
               "reason": "isolated-host-registered-trial-passed",
               "adapterId": "bounded-counter-v1",
               "executed": true,
-              "executionBoundary": "HOST_REGISTERED_ONLY",
+              "executionBoundary": "HOST_REGISTERED_OWN_DATA_PROPERTY_ONLY",
+              "registryLookup": "OWN_DATA_PROPERTY_ONLY",
               "deterministic": true,
               "inputStable": true,
               "contractCheck": {
@@ -103,7 +104,7 @@
             "installed": false,
             "persistentMutation": false,
             "isolatedTrial": {
-              "schema": "zenomorph-gut-capability-sandbox/v0.1",
+              "schema": "zenomorph-gut-capability-sandbox/v0.2",
               "organism": "ZENOMORPH",
               "habitat": "NOSTROMO",
               "bodyAdmission": false,
@@ -131,7 +132,8 @@
               "reason": "isolated-host-registered-trial-passed",
               "adapterId": "bounded-counter-v1",
               "executed": true,
-              "executionBoundary": "HOST_REGISTERED_ONLY",
+              "executionBoundary": "HOST_REGISTERED_OWN_DATA_PROPERTY_ONLY",
+              "registryLookup": "OWN_DATA_PROPERTY_ONLY",
               "deterministic": true,
               "inputStable": true,
               "contractCheck": {
@@ -173,7 +175,7 @@
             "installed": false,
             "persistentMutation": false,
             "isolatedTrial": {
-              "schema": "zenomorph-gut-capability-sandbox/v0.1",
+              "schema": "zenomorph-gut-capability-sandbox/v0.2",
               "organism": "ZENOMORPH",
               "habitat": "NOSTROMO",
               "bodyAdmission": false,
@@ -201,7 +203,8 @@
               "reason": "isolated-host-registered-trial-passed",
               "adapterId": "bounded-counter-v1",
               "executed": true,
-              "executionBoundary": "HOST_REGISTERED_ONLY",
+              "executionBoundary": "HOST_REGISTERED_OWN_DATA_PROPERTY_ONLY",
+              "registryLookup": "OWN_DATA_PROPERTY_ONLY",
               "deterministic": true,
               "inputStable": true,
               "contractCheck": {
@@ -264,7 +267,7 @@
             "installed": false,
             "persistentMutation": false,
             "isolatedTrial": {
-              "schema": "zenomorph-gut-capability-sandbox/v0.1",
+              "schema": "zenomorph-gut-capability-sandbox/v0.2",
               "organism": "ZENOMORPH",
               "habitat": "NOSTROMO",
               "bodyAdmission": false,
@@ -292,7 +295,8 @@
               "reason": "isolated-host-registered-trial-passed",
               "adapterId": "bounded-counter-v1",
               "executed": true,
-              "executionBoundary": "HOST_REGISTERED_ONLY",
+              "executionBoundary": "HOST_REGISTERED_OWN_DATA_PROPERTY_ONLY",
+              "registryLookup": "OWN_DATA_PROPERTY_ONLY",
               "deterministic": true,
               "inputStable": true,
               "contractCheck": {
@@ -334,7 +338,7 @@
             "installed": false,
             "persistentMutation": false,
             "isolatedTrial": {
-              "schema": "zenomorph-gut-capability-sandbox/v0.1",
+              "schema": "zenomorph-gut-capability-sandbox/v0.2",
               "organism": "ZENOMORPH",
               "habitat": "NOSTROMO",
               "bodyAdmission": false,
@@ -362,7 +366,8 @@
               "reason": "isolated-host-registered-trial-passed",
               "adapterId": "bounded-counter-v1",
               "executed": true,
-              "executionBoundary": "HOST_REGISTERED_ONLY",
+              "executionBoundary": "HOST_REGISTERED_OWN_DATA_PROPERTY_ONLY",
+              "registryLookup": "OWN_DATA_PROPERTY_ONLY",
               "deterministic": true,
               "inputStable": true,
               "contractCheck": {
@@ -404,7 +409,7 @@
             "installed": false,
             "persistentMutation": false,
             "isolatedTrial": {
-              "schema": "zenomorph-gut-capability-sandbox/v0.1",
+              "schema": "zenomorph-gut-capability-sandbox/v0.2",
               "organism": "ZENOMORPH",
               "habitat": "NOSTROMO",
               "bodyAdmission": false,
@@ -432,7 +437,8 @@
               "reason": "isolated-host-registered-trial-passed",
               "adapterId": "bounded-counter-v1",
               "executed": true,
-              "executionBoundary": "HOST_REGISTERED_ONLY",
+              "executionBoundary": "HOST_REGISTERED_OWN_DATA_PROPERTY_ONLY",
+              "registryLookup": "OWN_DATA_PROPERTY_ONLY",
               "deterministic": true,
               "inputStable": true,
               "contractCheck": {
@@ -495,7 +501,7 @@
             "installed": false,
             "persistentMutation": false,
             "isolatedTrial": {
-              "schema": "zenomorph-gut-capability-sandbox/v0.1",
+              "schema": "zenomorph-gut-capability-sandbox/v0.2",
               "organism": "ZENOMORPH",
               "habitat": "NOSTROMO",
               "bodyAdmission": false,
@@ -523,7 +529,8 @@
               "reason": "isolated-host-registered-trial-passed",
               "adapterId": "bounded-counter-v1",
               "executed": true,
-              "executionBoundary": "HOST_REGISTERED_ONLY",
+              "executionBoundary": "HOST_REGISTERED_OWN_DATA_PROPERTY_ONLY",
+              "registryLookup": "OWN_DATA_PROPERTY_ONLY",
               "deterministic": true,
               "inputStable": true,
               "contractCheck": {
@@ -565,7 +572,7 @@
             "installed": false,
             "persistentMutation": false,
             "isolatedTrial": {
-              "schema": "zenomorph-gut-capability-sandbox/v0.1",
+              "schema": "zenomorph-gut-capability-sandbox/v0.2",
               "organism": "ZENOMORPH",
               "habitat": "NOSTROMO",
               "bodyAdmission": false,
@@ -593,7 +600,8 @@
               "reason": "isolated-host-registered-trial-passed",
               "adapterId": "bounded-counter-v1",
               "executed": true,
-              "executionBoundary": "HOST_REGISTERED_ONLY",
+              "executionBoundary": "HOST_REGISTERED_OWN_DATA_PROPERTY_ONLY",
+              "registryLookup": "OWN_DATA_PROPERTY_ONLY",
               "deterministic": true,
               "inputStable": true,
               "contractCheck": {
@@ -635,7 +643,7 @@
             "installed": false,
             "persistentMutation": false,
             "isolatedTrial": {
-              "schema": "zenomorph-gut-capability-sandbox/v0.1",
+              "schema": "zenomorph-gut-capability-sandbox/v0.2",
               "organism": "ZENOMORPH",
               "habitat": "NOSTROMO",
               "bodyAdmission": false,
@@ -663,7 +671,8 @@
               "reason": "isolated-host-registered-trial-passed",
               "adapterId": "bounded-counter-v1",
               "executed": true,
-              "executionBoundary": "HOST_REGISTERED_ONLY",
+              "executionBoundary": "HOST_REGISTERED_OWN_DATA_PROPERTY_ONLY",
+              "registryLookup": "OWN_DATA_PROPERTY_ONLY",
               "deterministic": true,
               "inputStable": true,
               "contractCheck": {
@@ -726,7 +735,7 @@
             "installed": false,
             "persistentMutation": false,
             "isolatedTrial": {
-              "schema": "zenomorph-gut-capability-sandbox/v0.1",
+              "schema": "zenomorph-gut-capability-sandbox/v0.2",
               "organism": "ZENOMORPH",
               "habitat": "NOSTROMO",
               "bodyAdmission": false,
@@ -754,7 +763,8 @@
               "reason": "isolated-host-registered-trial-passed",
               "adapterId": "bounded-counter-v1",
               "executed": true,
-              "executionBoundary": "HOST_REGISTERED_ONLY",
+              "executionBoundary": "HOST_REGISTERED_OWN_DATA_PROPERTY_ONLY",
+              "registryLookup": "OWN_DATA_PROPERTY_ONLY",
               "deterministic": true,
               "inputStable": true,
               "contractCheck": {
@@ -796,7 +806,7 @@
             "installed": false,
             "persistentMutation": false,
             "isolatedTrial": {
-              "schema": "zenomorph-gut-capability-sandbox/v0.1",
+              "schema": "zenomorph-gut-capability-sandbox/v0.2",
               "organism": "ZENOMORPH",
               "habitat": "NOSTROMO",
               "bodyAdmission": false,
@@ -824,7 +834,8 @@
               "reason": "isolated-host-registered-trial-passed",
               "adapterId": "bounded-counter-v1",
               "executed": true,
-              "executionBoundary": "HOST_REGISTERED_ONLY",
+              "executionBoundary": "HOST_REGISTERED_OWN_DATA_PROPERTY_ONLY",
+              "registryLookup": "OWN_DATA_PROPERTY_ONLY",
               "deterministic": true,
               "inputStable": true,
               "contractCheck": {
@@ -866,7 +877,7 @@
             "installed": false,
             "persistentMutation": false,
             "isolatedTrial": {
-              "schema": "zenomorph-gut-capability-sandbox/v0.1",
+              "schema": "zenomorph-gut-capability-sandbox/v0.2",
               "organism": "ZENOMORPH",
               "habitat": "NOSTROMO",
               "bodyAdmission": false,
@@ -894,7 +905,8 @@
               "reason": "isolated-host-registered-trial-passed",
               "adapterId": "bounded-counter-v1",
               "executed": true,
-              "executionBoundary": "HOST_REGISTERED_ONLY",
+              "executionBoundary": "HOST_REGISTERED_OWN_DATA_PROPERTY_ONLY",
+              "registryLookup": "OWN_DATA_PROPERTY_ONLY",
               "deterministic": true,
               "inputStable": true,
               "contractCheck": {
