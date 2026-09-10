@@ -50,6 +50,17 @@ check(decoratedReplayResult.provenance?.aliasAudit?.length===1,'DECORATED_REPLAY
 check(decoratedReplayResult.replaySuppression?.duplicateReplayCount===1,'DECORATED_REPLAY_DUPLICATE_COUNT_WRONG',decoratedReplayResult.replaySuppression);
 check(decoratedReplayResult.rejected?.some(r=>r.reason==='duplicate-diagnostic-receipt-replay'),'DECORATED_REPLAY_NOT_AUDITED_AS_DIAGNOSTIC_DUPLICATE',decoratedReplayResult.rejected);
 
+// Cross-organ provenance regression: all distinct qualifying GUT contributors that change VAJRA behavior must travel with every generated facet.
+const agreeingDistinctProvenance={...gutReceipt,provenance:'gut-triage-evidence-009',summary:'A second de-identified triage path independently records the same bounded contamination classification.'};
+const multiProvenanceResult=V.planConflictDecomposition(state,[gutReceipt,agreeingDistinctProvenance]);
+check(multiProvenanceResult.status==='DECOMPOSED','AGREEING_DISTINCT_PROVENANCE_DID_NOT_DECOMPOSE',multiProvenanceResult);
+check(multiProvenanceResult.provenance?.distinctProvenanceCount===2,'DISTINCT_PROVENANCE_COUNT_WRONG',multiProvenanceResult.provenance);
+check(Array.isArray(multiProvenanceResult.provenance?.triageProvenanceFingerprints)&&multiProvenanceResult.provenance.triageProvenanceFingerprints.length===2&&new Set(multiProvenanceResult.provenance.triageProvenanceFingerprints).size===2,'TOP_LEVEL_PROVENANCE_SET_NOT_PRESERVED',multiProvenanceResult.provenance);
+check(multiProvenanceResult.facets?.every(f=>Array.isArray(f.triageProvenanceFingerprints)&&f.triageProvenanceFingerprints.length===2&&new Set(f.triageProvenanceFingerprints).size===2),'DISTINCT_PROVENANCE_NOT_PROPAGATED_TO_FACETS',multiProvenanceResult.facets);
+check(multiProvenanceResult.facets?.every(f=>Array.isArray(f.triageDiagnosticFingerprints)&&f.triageDiagnosticFingerprints.length===2&&f.triageProvenanceContributorCount===2&&f.triageDistinctProvenanceCount===2),'CONTRIBUTOR_AUDIT_NOT_PROPAGATED_TO_FACETS',multiProvenanceResult.facets);
+check(multiProvenanceResult.facets?.every(f=>f.triageProvenanceFingerprints.includes(f.triageProvenanceFingerprint)),'REPRESENTATIVE_PROVENANCE_NOT_CONTAINED_IN_PROPAGATED_SET',multiProvenanceResult.facets);
+check(multiProvenanceResult.provenance?.independenceClaimed===false,'MULTI_PROVENANCE_FALSE_INDEPENDENCE_CLAIM',multiProvenanceResult.provenance);
+
 // Counter-adversarial boundary: same provenance with a genuinely different classification must remain visible as conflict.
 const changedDiagnosis={...gutReceipt,summary:'Same source, genuinely different diagnosis.',triageClassification:'DUPLICATE_CONTAMINATION'};
 const changedDiagnosisResult=V.planConflictDecomposition(state,[gutReceipt,changedDiagnosis]);
@@ -58,7 +69,7 @@ check(changedDiagnosisResult.reason==='conflicting-qualifying-gut-triage-classif
 check(changedDiagnosisResult.facets?.length===0,'DIAGNOSTIC_DISAGREEMENT_MANUFACTURED_FACETS',changedDiagnosisResult.facets);
 check(changedDiagnosisResult.conflict?.qualifyingReceiptCount===2,'DIAGNOSTIC_DISAGREEMENT_FALSELY_DEDUPED',changedDiagnosisResult.conflict);
 
-const result={schema:'zenomorph-vajra-dynamic-decomposition-test/v1.3-diagnostic-replay',completedAt:new Date().toISOString(),status:failures.length?'FAIL':'PASS',capability:'GUT_TRIAGE_DIAGNOSTIC_REPLAY_CONTAINMENT',tests:{decomposed,aliasResult,agreeingDualResult,conflictingDualResult,nonGutResult,decoratedReplayResult,changedDiagnosisResult},provenance:{fixture:'synthetic de-identified contested source-quality parent, GUT schema aliases, decorated replay, and diagnostic disagreement'},failures,boundary:'PASS requires bounded organ identity canonicalization plus diagnostic replay containment: decorative receipt changes may not inflate metabolic evidence multiplicity, while a genuine classification disagreement from the same provenance must remain a zero-facet HOLD. It does not decide source truth, execute generated facets, or install persistent capability state.'};
+const result={schema:'zenomorph-vajra-dynamic-decomposition-test/v1.3-diagnostic-replay',completedAt:new Date().toISOString(),status:failures.length?'FAIL':'PASS',capability:'GUT_TRIAGE_DIAGNOSTIC_REPLAY_CONTAINMENT',tests:{decomposed,aliasResult,agreeingDualResult,conflictingDualResult,nonGutResult,decoratedReplayResult,multiProvenanceResult,changedDiagnosisResult},provenance:{fixture:'synthetic de-identified contested source-quality parent, GUT schema aliases, decorated replay, agreeing distinct provenance, and diagnostic disagreement'},failures,boundary:'PASS requires bounded organ identity canonicalization plus diagnostic replay containment and cross-organ contributor-provenance propagation: decorative receipt changes may not inflate metabolic evidence multiplicity; all distinct qualifying GUT contributors that change VAJRA decomposition must travel with every generated facet; provenance diversity is not source-independence proof; and a genuine classification disagreement from the same provenance must remain a zero-facet HOLD. It does not decide source truth, execute generated facets, or install persistent capability state.'};
 await fs.writeFile('nostromo/vajra/dynamic-decomposition-last-result.json',JSON.stringify(result,null,2)+'\n');
 console.log(JSON.stringify(result,null,2));
 if(failures.length) process.exitCode=1;
