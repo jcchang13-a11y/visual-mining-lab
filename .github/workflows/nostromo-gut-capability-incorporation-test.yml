@@ -28,14 +28,33 @@ jobs:
             {id:'negative',input:{flag:false,n:2},expectedChange:false},
             {id:'positive-b',input:{flag:true,n:3},expectedChange:true}
           ];
-          const body={organs:{GUT:{status:'ACTIVE'}},capabilities:{}};
+          const run=body=>runReversibleIncorporationCandidate(candidate,cases,body,{capabilityRegistry,organRegistry,downstreamOrganId:'VAJRA',context:{source:'fixture'}});
+          const body={organs:{GUT:{status:'ACTIVE',metabolism:{echoGuard:true,threshold:2}},VAJRA:{status:'ACTIVE'}},capabilities:{},history:[{round:1,status:'PASS'}]};
           const snapshot=JSON.stringify(body);
-          const out=runReversibleIncorporationCandidate(candidate,cases,body,{capabilityRegistry,organRegistry,downstreamOrganId:'VAJRA',context:{source:'fixture'}});
+          const out=run(body);
           if(out.status!=='PASS')throw new Error(JSON.stringify(out));
           if(out.assimilationStage!=='REVERSIBLE_BODY_CANDIDATE_CREATED')throw new Error('wrong stage');
           if(out.persistentMutation!==false||out.bodyAdmission!==false||out.installed!==false)throw new Error('boundary lied');
           if(JSON.stringify(body)!==snapshot||out.originalBodyUnchanged!==true)throw new Error('source body mutated');
           if(out.candidateBody.capabilities['foreign.signal']?.status!=='REVERSIBLE_TRIAL_ONLY')throw new Error('candidate missing');
           if(out.rollback?.restoresFingerprint!==out.beforeFingerprint)throw new Error('rollback evidence missing');
-          console.log('PASS reversible incorporation boundary',out.beforeFingerprint,out.candidateFingerprint);
+          if(out.fingerprintBoundary?.nestedStateBound!==true)throw new Error('nested fingerprint boundary not declared');
+
+          const nestedChanged=structuredClone(body);
+          nestedChanged.organs.GUT.metabolism.threshold=3;
+          const nestedOut=run(nestedChanged);
+          if(nestedOut.status!=='PASS')throw new Error('nested-change control failed');
+          if(nestedOut.beforeFingerprint===out.beforeFingerprint)throw new Error('nested body-state collision: rollback provenance cannot distinguish metabolic state');
+
+          const reordered={history:[{status:'PASS',round:1}],capabilities:{},organs:{VAJRA:{status:'ACTIVE'},GUT:{metabolism:{threshold:2,echoGuard:true},status:'ACTIVE'}}};
+          const reorderedOut=run(reordered);
+          if(reorderedOut.status!=='PASS')throw new Error('reordered control failed');
+          if(reorderedOut.beforeFingerprint!==out.beforeFingerprint)throw new Error('object key order changed canonical body fingerprint');
+
+          const cyclic={organs:{GUT:{status:'ACTIVE'}},capabilities:{}};
+          cyclic.self=cyclic;
+          const cyclicOut=run(cyclic);
+          if(cyclicOut.status!=='BLOCKED'||cyclicOut.reason!=='fingerprintable-acyclic-host-body-state-required')throw new Error('cyclic body state must fail closed before trial');
+
+          console.log('PASS reversible incorporation boundary with nested-state-bound rollback fingerprint',out.beforeFingerprint,out.candidateFingerprint);
           EOF
