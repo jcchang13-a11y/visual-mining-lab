@@ -1,0 +1,27 @@
+{
+  "schema": "nostromo-failure-evidence/v1",
+  "failureId": "QUARANTINE_IDENTITY_ALIAS_LAUNDERING",
+  "organ": "VAJRA",
+  "capability": "dynamic-reinspection",
+  "observedVersion": "0.9",
+  "status": "OPEN_NOT_PROMOTED",
+  "observedAt": "2026-09-10T09:02:19+08:00",
+  "summary": "Dynamic reinspection v0.9 validates nonblank/control-free identity members but compares novelty using raw strings. Presentation-only identity mutations such as leading/trailing whitespace or Unicode compatibility forms can therefore be counted as previously unseen evidence key, fingerprint, and provenance identities and falsely reactivate quarantine.",
+  "risk": [
+    "false information gain",
+    "duplicate pollution disguised as novelty",
+    "provenance alias laundering",
+    "quarantine reactivation without materially new evidence"
+  ],
+  "evidence": {
+    "source": "nostromo/vajra/dynamic-reinspection.js",
+    "predicate": "novelty sets compare raw identity strings after validity checks",
+    "adversarialCases": [
+      "leading/trailing whitespace aliases",
+      "Unicode NFKC compatibility aliases such as full-width forms",
+      "mixed raw aliases across evidence key, fingerprint, and provenance"
+    ]
+  },
+  "requiredFix": "Preserve raw provenance values and original tuple positions, but compare quarantine novelty through a bounded canonical identity used only for duplicate/novelty detection: trim outer whitespace and Unicode NFKC-normalize. Do not lowercase or perform broad semantic aliasing. Prove ordinary genuinely new identities still reactivate while presentation-only aliases remain quarantined.",
+  "promotionBoundary": "Do not promote a new public VAJRA capability state until focused adversarial tests and the existing cross-organ/integration regression path pass."
+}
