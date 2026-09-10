@@ -20,18 +20,40 @@
         "index_sha": "f5b3ffcb0b6d6d9059c600c883e289789c23de42",
         "asset_path": "gangchibao-image-test/assets/test.svg",
         "known_successful_pages_run": 34454895988,
-        "latest_pages_run_seen": 34456304692,
         "browser_confirmation": "User-provided Chrome screenshot on 2026-09-10 showed the public page, loaded local SVG, and fallback for intentionally missing image."
+      }
+    },
+    {
+      "round": 2,
+      "name": "raster-png-jpg",
+      "status": "pending_deployment_and_visual_confirmation",
+      "checks": {
+        "png_source_exists_on_main": true,
+        "jpg_source_exists_on_main": true,
+        "root_path_png_added_to_test_page": true,
+        "relative_path_jpg_added_to_test_page": true,
+        "responsive_css_added": true,
+        "broken_image_fallback_preserved": true,
+        "pages_deployment_success": false,
+        "public_page_visual_confirmation": false,
+        "png_visible_in_browser": false,
+        "jpg_visible_in_browser": false
       },
-      "notes": "Round 1 is complete. Do not repeat unless a later regression requires it. V8/V8-new/V9 are out of scope."
+      "evidence": {
+        "test_page_commit": "f5c762384a087c860b35011a73dfcd74f194e891",
+        "test_page_blob": "9c62deaa7fd45b1a301898c96df3c51e079754ad",
+        "png_path": "image-pipeline-test/test.png",
+        "png_sha": "8b2a2bae9ffa977ec55e591a8277c7cac6ee6171",
+        "jpg_path": "media-lab/generated.jpg",
+        "jpg_sha": "750a47c8f9d4d720c3694fdadf4f1855ce7234ea",
+        "pages_run": 34458755860,
+        "pages_run_last_seen_status": "in_progress"
+      },
+      "notes": "Do not advance to round 3 until this Pages run succeeds and PNG/JPG rendering is actually confirmed."
     }
   ],
   "constraints": {
-    "do_not_modify": [
-      "gangchibao-v8",
-      "gangchibao-v8-new",
-      "gangchibao-v9"
-    ],
-    "next": "Round 2: real raster PNG/JPG image test in gangchibao-image-test only."
+    "do_not_modify": ["gangchibao-v8", "gangchibao-v8-new", "gangchibao-v9"],
+    "next": "Recheck Pages run 34458755860. After success, obtain actual browser evidence for PNG/JPG display and mobile scaling before marking round 2 passed."
   }
 }
