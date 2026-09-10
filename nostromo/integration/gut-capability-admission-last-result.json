@@ -1,11 +1,11 @@
 {
-  "schema": "xenomorph-gut-capability-admission-test/v0.1",
-  "completedAt": "2026-09-07T08:04:52.230Z",
+  "schema": "xenomorph-gut-capability-admission-test/v0.2",
+  "completedAt": "2026-09-10T03:00:26.379Z",
   "status": "PASS",
   "capability": "FOREIGN_CAPABILITY_PRE_ASSIMILATION_ADMISSION_BOUNDARY",
   "cases": {
     "ordinaryProse": {
-      "schema": "zenomorph-gut-capability-admission/v0.1",
+      "schema": "zenomorph-gut-capability-admission/v0.3",
       "organism": "ZENOMORPH",
       "habitat": "NOSTROMO",
       "executed": false,
@@ -17,7 +17,7 @@
       "reason": "no-structured-capability-identity"
     },
     "callable": {
-      "schema": "zenomorph-gut-capability-admission/v0.1",
+      "schema": "zenomorph-gut-capability-admission/v0.3",
       "organism": "ZENOMORPH",
       "habitat": "NOSTROMO",
       "executed": false,
@@ -29,7 +29,7 @@
       "reason": "callable-values-are-never-admission-descriptors"
     },
     "executablePayload": {
-      "schema": "zenomorph-gut-capability-admission/v0.1",
+      "schema": "zenomorph-gut-capability-admission/v0.3",
       "organism": "ZENOMORPH",
       "habitat": "NOSTROMO",
       "executed": false,
@@ -39,10 +39,53 @@
       "status": "QUARANTINE",
       "classification": "EXECUTABLE_PAYLOAD_PRESENT",
       "reason": "admission-metadata-must-not-carry-executable-payload",
+      "unsafePath": "$.code",
       "identity": "Foreign Search Adapter"
     },
+    "nestedExecutablePayload": {
+      "schema": "zenomorph-gut-capability-admission/v0.3",
+      "organism": "ZENOMORPH",
+      "habitat": "NOSTROMO",
+      "executed": false,
+      "authorized": false,
+      "assimilationStage": "NONE",
+      "route": "HOLD",
+      "status": "QUARANTINE",
+      "classification": "EXECUTABLE_PAYLOAD_PRESENT",
+      "reason": "admission-metadata-must-not-carry-executable-payload",
+      "unsafePath": "$.metadata.transport.script",
+      "identity": "Nested Payload Adapter"
+    },
+    "nestedCallable": {
+      "schema": "zenomorph-gut-capability-admission/v0.3",
+      "organism": "ZENOMORPH",
+      "habitat": "NOSTROMO",
+      "executed": false,
+      "authorized": false,
+      "assimilationStage": "NONE",
+      "route": "HOLD",
+      "status": "QUARANTINE",
+      "classification": "CALLABLE_PAYLOAD_PRESENT",
+      "reason": "callable-values-are-never-admission-metadata",
+      "unsafePath": "$.metadata.transform",
+      "identity": "Nested Callable Adapter"
+    },
+    "accessor": {
+      "schema": "zenomorph-gut-capability-admission/v0.3",
+      "organism": "ZENOMORPH",
+      "habitat": "NOSTROMO",
+      "executed": false,
+      "authorized": false,
+      "assimilationStage": "NONE",
+      "route": "HOLD",
+      "status": "QUARANTINE",
+      "classification": "ACCESSOR_PAYLOAD_PRESENT",
+      "reason": "accessor-properties-are-never-admission-metadata",
+      "unsafePath": "$.metadata",
+      "identity": "Accessor Adapter"
+    },
     "missingProvenance": {
-      "schema": "zenomorph-gut-capability-admission/v0.1",
+      "schema": "zenomorph-gut-capability-admission/v0.3",
       "organism": "ZENOMORPH",
       "habitat": "NOSTROMO",
       "executed": false,
@@ -58,7 +101,7 @@
       "reason": "provenance-required-before-assimilation"
     },
     "missingPermissions": {
-      "schema": "zenomorph-gut-capability-admission/v0.1",
+      "schema": "zenomorph-gut-capability-admission/v0.3",
       "organism": "ZENOMORPH",
       "habitat": "NOSTROMO",
       "executed": false,
@@ -74,7 +117,7 @@
       "reason": "permission-boundary-required-before-assimilation"
     },
     "missingContract": {
-      "schema": "zenomorph-gut-capability-admission/v0.1",
+      "schema": "zenomorph-gut-capability-admission/v0.3",
       "organism": "ZENOMORPH",
       "habitat": "NOSTROMO",
       "executed": false,
@@ -90,7 +133,7 @@
       "reason": "input-output-or-interface-contract-required-before-assimilation"
     },
     "completeCandidate": {
-      "schema": "zenomorph-gut-capability-admission/v0.1",
+      "schema": "zenomorph-gut-capability-admission/v0.3",
       "organism": "ZENOMORPH",
       "habitat": "NOSTROMO",
       "executed": false,
@@ -107,6 +150,7 @@
     }
   },
   "executionCount": 0,
-  "boundary": "This test verifies only deterministic pre-assimilation admission judgment. A structured foreign capability may become a candidate for isolated testing only when provenance, a permission boundary, and an interface/input-output contract are visible. Nothing in this layer executes, imports, installs, authorizes, fetches or absorbs the candidate into the XENOMORPH body. Plain prose mentioning tools/plugins is not a capability descriptor; executable payloads and callables are quarantined.",
+  "getterExecutionCount": 0,
+  "boundary": "This test verifies deterministic pre-assimilation admission judgment, including bounded recursive inspection of nested metadata. Executable-key payloads, callable values, and accessor properties are quarantined without invocation; accessors are inspected by descriptor only. A structured foreign capability may become a candidate for isolated testing only when provenance, a permission boundary, and an interface/input-output contract are visible. Nothing in this layer executes, imports, installs, authorizes, fetches or absorbs the candidate into the XENOMORPH body.",
   "failures": []
 }
