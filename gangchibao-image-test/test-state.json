@@ -26,7 +26,7 @@
     {
       "round": 2,
       "name": "raster-png-jpg",
-      "status": "pending_deployment_and_visual_confirmation",
+      "status": "pending_visual_confirmation",
       "checks": {
         "png_source_exists_on_main": true,
         "jpg_source_exists_on_main": true,
@@ -34,7 +34,7 @@
         "relative_path_jpg_added_to_test_page": true,
         "responsive_css_added": true,
         "broken_image_fallback_preserved": true,
-        "pages_deployment_success": false,
+        "pages_deployment_success": true,
         "public_page_visual_confirmation": false,
         "png_visible_in_browser": false,
         "jpg_visible_in_browser": false
@@ -47,13 +47,14 @@
         "jpg_path": "media-lab/generated.jpg",
         "jpg_sha": "750a47c8f9d4d720c3694fdadf4f1855ce7234ea",
         "pages_run": 34458755860,
-        "pages_run_last_seen_status": "in_progress"
+        "pages_run_last_seen_status": "completed",
+        "pages_run_conclusion": "success"
       },
-      "notes": "Do not advance to round 3 until this Pages run succeeds and PNG/JPG rendering is actually confirmed."
+      "notes": "Pages deployment is confirmed successful. Do not advance to round 3 until actual browser rendering of both PNG and JPG plus responsive scaling is confirmed. Automated external fetch could not be used in this run because the runtime had no DNS access to github.io; this is not evidence of site failure."
     }
   ],
   "constraints": {
     "do_not_modify": ["gangchibao-v8", "gangchibao-v8-new", "gangchibao-v9"],
-    "next": "Recheck Pages run 34458755860. After success, obtain actual browser evidence for PNG/JPG display and mobile scaling before marking round 2 passed."
+    "next": "Obtain actual browser evidence for PNG/JPG display and mobile scaling. After that, mark round 2 passed and proceed to round 3 multi-image test."
   }
 }
