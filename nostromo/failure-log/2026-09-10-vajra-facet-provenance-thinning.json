@@ -1,0 +1,34 @@
+{
+  "schema": "zenomorph-failure-evidence/v1",
+  "recordedAt": "2026-09-10T07:18:00Z",
+  "organ": "VAJRA",
+  "capability": "dynamic-decomposition",
+  "status": "OPEN",
+  "failureClass": "CROSS_ORGAN_PROVENANCE_THINNING",
+  "summary": "When multiple distinct qualifying GUT triage provenances agree on one contamination classification, VAJRA correctly audits all qualifying receipts at the top-level decomposition result but generated downstream facets inherit only the canonical representative triageProvenanceFingerprint. A facet routed independently can therefore lose the full set of contributors that caused the behavioral change.",
+  "observedContract": {
+    "topLevel": [
+      "qualifyingReceiptCount",
+      "distinctProvenanceCount",
+      "aliasAudit"
+    ],
+    "facetLevel": [
+      "triageProvenanceFingerprint"
+    ]
+  },
+  "expectedRepair": "Every generated facet must carry a deterministic de-identified set of all qualifying contributor provenance fingerprints, while retaining the representative fingerprint for backward compatibility. Provenance diversity must remain an audit fact and must not be promoted into a claim of source independence or truth.",
+  "risk": [
+    "provenance loss across GUT -> VAJRA -> downstream organ routing",
+    "later organ may treat a multi-source behavioral regulation as if it came from one representative source",
+    "auditability becomes dependent on retaining the parent envelope rather than traveling with the metabolized branch"
+  ],
+  "evidence": {
+    "source": "repository static inspection",
+    "files": [
+      "nostromo/vajra/dynamic-decomposition.js",
+      "nostromo/vajra/dynamic-decomposition-test.mjs"
+    ],
+    "privacy": "de-identified repository evidence only; no private connector identifiers or source text"
+  },
+  "boundary": "This record does not claim any source is independent or true. It records a structural provenance-propagation defect before repair and must remain as historical failure evidence after the code is fixed."
+}
