@@ -8,6 +8,7 @@ on:
       - 'nostromo/vajra/dynamic-reinspection-test.mjs'
       - 'nostromo/vajra/blank-identity-guard-test.mjs'
       - 'nostromo/failure-log/2026-09-10-vajra-quarantine-blank-identity-laundering.json'
+      - 'nostromo/failure-log/2026-09-10-vajra-quarantine-identity-alias-laundering.json'
       - '.github/workflows/nostromo-vajra-blank-identity-guard.yml'
   workflow_dispatch:
 
@@ -30,5 +31,5 @@ jobs:
         run: node nostromo/integration/gut-metabolism-test.mjs
       - name: Cross-organ VAJRA context-conditioning regression
         run: node nostromo/integration/vajra-context-conditioning-test.mjs
-      - name: Failure evidence remains open before promotion
-        run: node -e "const f=require('./nostromo/failure-log/2026-09-10-vajra-quarantine-blank-identity-laundering.json'); if(f.status!=='OPEN_NOT_PROMOTED') process.exit(1);"
+      - name: Failure evidence lifecycle consistency
+        run: node -e "const blank=require('./nostromo/failure-log/2026-09-10-vajra-quarantine-blank-identity-laundering.json'); const alias=require('./nostromo/failure-log/2026-09-10-vajra-quarantine-identity-alias-laundering.json'); if(blank.status!=='RESOLVED_CI_VERIFIED') process.exit(1); if(!['OPEN_NOT_PROMOTED','RESOLVED_CI_VERIFIED'].includes(alias.status)) process.exit(1);"
