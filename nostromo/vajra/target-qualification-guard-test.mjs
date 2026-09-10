@@ -20,7 +20,7 @@ const incompleteA={targetRef:'target-A',clauseRef:'clause-A',organ:'GUT',status:
 const unsupportedA={targetRef:'target-A',clauseRef:'clause-A',organ:'GUT',status:'COMPLETED',provenance:'gut-unsupported-A',triageClassification:'SOURCE_TRUTH_DECISION',summary:'Synthetic unsupported classification'};
 
 check(V.dynamicTargetQualificationGuardVersion==='0.3','TARGET_QUALIFICATION_GUARD_VERSION_MISSING',V.dynamicTargetQualificationGuardVersion);
-check(V.dynamicDecompositionVersion==='1.3','DYNAMIC_DECOMPOSITION_VERSION_NOT_13',V.dynamicDecompositionVersion);
+check(V.dynamicDecompositionVersion==='1.4','DYNAMIC_DECOMPOSITION_VERSION_NOT_14',V.dynamicDecompositionVersion);
 
 for(const [label,state,receipts] of [
   ['NON_GUT_AB',stateAB,[nonGutA,validB]],
@@ -88,14 +88,14 @@ check(crossOrgan.facets?.some(f=>f.lens==='duplicate_cluster'&&f.preferredOrgan=
 check(crossOrgan.facets?.some(f=>f.lens==='claim_relation'&&f.preferredOrgan==='MUTHER'),'CROSS_ORGAN_MUTHER_ROUTING_NOT_PRESERVED',crossOrgan.facets);
 
 const result={
-  schema:'zenomorph-vajra-target-qualification-guard-test/v0.6',
+  schema:'zenomorph-vajra-target-qualification-guard-test/v0.7',
   completedAt:new Date().toISOString(),
   status:failures.length?'FAIL':'PASS',
   capability:'QUALIFICATION_GATED_MULTI_PARENT_TARGET_SELECTION_WITH_PROVENANCE_DIVERSITY_CONTAINMENT',
   tests:{both,none,singleOut,consensus,disagreement,replayConsensus,crossOrgan},
   failures,
   provenance:{fixture:'synthetic de-identified contested-parent and cross-organ receipt fixtures',failureEvidence:['nostromo/failure-log/2026-09-08-vajra-nonqualifying-receipt-target-pollution.json','nostromo/failure-log/2026-09-09-vajra-provenance-diagnostic-conflation.json','nostromo/failure-log/2026-09-09-vajra-nonqualifying-receipt-target-poisoning.json']},
-  boundary:'PASS proves that the existing target-qualification wrapper remains compatible with current core VAJRA v1.3, including tightened diagnostic replay containment. Nonqualifying traffic cannot manufacture multi-parent target multiplicity. Multiple unique completed GUT receipts scoped to one parent may select the same bounded profile only when their supported contamination classification is unanimous; classification disagreement still HOLDs. It does not decide source truth, execute facets, install capabilities, or mutate persistent body state.'
+  boundary:'PASS proves that the existing target-qualification wrapper remains compatible with current core VAJRA v1.4, including tightened diagnostic replay and exotic receipt audit containment. Nonqualifying traffic cannot manufacture multi-parent target multiplicity. Multiple unique completed GUT receipts scoped to one parent may select the same bounded profile only when their supported contamination classification is unanimous; classification disagreement still HOLDs. It does not decide source truth, execute facets, install capabilities, or mutate persistent body state.'
 };
 await fs.writeFile('nostromo/vajra/target-qualification-guard-last-result.json',JSON.stringify(result,null,2)+'\n');
 console.log(JSON.stringify(result,null,2));
