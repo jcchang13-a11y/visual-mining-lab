@@ -1,6 +1,6 @@
-// MUTHER internal mutation sandbox v0.1
+// MUTHER internal mutation sandbox v0.2
 // Internal artifacts are ore. This module does not install candidates into ZENOMORPH.
-// It validates whether a proposed recombination is a traceable mutation rather than a renamed copy.
+// It validates whether a proposed mutation is traceable and materially transformed rather than a renamed copy.
 
 const NON_MUTATING = new Set(['inherit', 'copy']);
 const MUTATING = new Set(['hybridize', 'synthesize', 'invert', 'distort', 'cross-pressure', 'transpose']);
@@ -14,8 +14,8 @@ function canonical(v) {
 }
 
 function specimenIndex(specimens) {
-  if (!Array.isArray(specimens) || specimens.length < 2) {
-    throw new Error('MUTHER_INTERNAL_MUTATION_REQUIRES_AT_LEAST_TWO_SPECIMENS');
+  if (!Array.isArray(specimens) || specimens.length < 1) {
+    throw new Error('MUTHER_INTERNAL_MUTATION_REQUIRES_AT_LEAST_ONE_SPECIMEN');
   }
   const byId = new Map();
   for (const specimen of specimens) {
@@ -128,7 +128,6 @@ export function evaluateInternalMutation({ specimens, proposal } = {}) {
     return hold(error.message || 'MUTHER_MUTATION_SOURCE_RESOLUTION_FAILED');
   }
 
-  if (sourceSpecimens.size < 2) return hold('MUTHER_SINGLE_SOURCE_RENAME_OR_REWRITE');
   if (!hasMutation) return hold('MUTHER_RECOMBINATION_WITHOUT_MUTATION');
 
   const signature = candidateSignature(candidateTraits);
@@ -139,10 +138,12 @@ export function evaluateInternalMutation({ specimens, proposal } = {}) {
   }
 
   const crossModal = sourceKinds.size >= 2;
+  const sourceMode = sourceSpecimens.size === 1 ? 'SINGLE_SPECIMEN_MUTATION' : 'MULTI_SPECIMEN_RECOMBINATION';
   return {
     status: 'SANDBOX_CANDIDATE',
     candidateId,
     operation: 'READ_DECOMPOSE_RECOMBINE_MUTATE',
+    sourceMode,
     candidateTraits,
     sourceSpecimenIds: [...sourceSpecimens],
     sourceKinds: [...sourceKinds],
@@ -153,7 +154,7 @@ export function evaluateInternalMutation({ specimens, proposal } = {}) {
     incorporationAuthorized: false,
     bodyMutationApplied: false,
     nextRequiredGate: 'GUT_VAJRA_CROSS_ORGAN_STRESS_AND_REGRESSION',
-    boundary: 'A sandbox mutation candidate is evidence of traceable recombination/mutation only. It is not evidence of autonomous aesthetic judgment, successful assimilation, organ growth, or authorization to modify the persistent body.'
+    boundary: 'A sandbox mutation candidate is evidence of traceable transformation only. A single specimen may be inverted, distorted, or otherwise betrayed without requiring artificial collage. This is not evidence of autonomous aesthetic judgment, successful assimilation, organ growth, or authorization to modify the persistent body.'
   };
 }
 
