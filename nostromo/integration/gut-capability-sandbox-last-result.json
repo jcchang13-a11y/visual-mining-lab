@@ -1,11 +1,11 @@
 {
   "schema": "zenomorph-gut-capability-sandbox-test/v0.1",
-  "completedAt": "2026-09-10T03:40:26.535Z",
+  "completedAt": "2026-09-10T05:19:52.138Z",
   "status": "PASS",
   "capability": "CONTROLLED_HOST_REGISTERED_FOREIGN_CAPABILITY_ISOLATED_TRIAL",
   "cases": {
     "pass": {
-      "schema": "zenomorph-gut-capability-sandbox/v0.1",
+      "schema": "zenomorph-gut-capability-sandbox/v0.2",
       "organism": "ZENOMORPH",
       "habitat": "NOSTROMO",
       "bodyAdmission": false,
@@ -33,7 +33,8 @@
       "reason": "isolated-host-registered-trial-passed",
       "adapterId": "bounded-counter-v1",
       "executed": true,
-      "executionBoundary": "HOST_REGISTERED_ONLY",
+      "executionBoundary": "HOST_REGISTERED_OWN_DATA_PROPERTY_ONLY",
+      "registryLookup": "OWN_DATA_PROPERTY_ONLY",
       "deterministic": true,
       "inputStable": true,
       "contractCheck": {
@@ -49,7 +50,7 @@
       "rollbackEvidence": "no installation; cloned frozen inputs; no body state mutation performed by sandbox"
     },
     "missing": {
-      "schema": "zenomorph-gut-capability-sandbox/v0.1",
+      "schema": "zenomorph-gut-capability-sandbox/v0.2",
       "organism": "ZENOMORPH",
       "habitat": "NOSTROMO",
       "bodyAdmission": false,
@@ -74,12 +75,13 @@
       },
       "assimilationStage": "ISOLATED_TEST_BLOCKED",
       "status": "BLOCKED",
-      "reason": "adapter-not-present-in-host-registry",
+      "reason": "adapter-not-present-as-own-host-registration",
       "adapterId": "missing-v1",
-      "executed": false
+      "executed": false,
+      "registryLookup": "OWN_DATA_PROPERTY_ONLY"
     },
     "nondeterministic": {
-      "schema": "zenomorph-gut-capability-sandbox/v0.1",
+      "schema": "zenomorph-gut-capability-sandbox/v0.2",
       "organism": "ZENOMORPH",
       "habitat": "NOSTROMO",
       "bodyAdmission": false,
@@ -107,7 +109,8 @@
       "reason": "isolated-trial-evidence-insufficient",
       "adapterId": "nondeterministic-v1",
       "executed": true,
-      "executionBoundary": "HOST_REGISTERED_ONLY",
+      "executionBoundary": "HOST_REGISTERED_OWN_DATA_PROPERTY_ONLY",
+      "registryLookup": "OWN_DATA_PROPERTY_ONLY",
       "deterministic": false,
       "inputStable": true,
       "contractCheck": {
@@ -117,13 +120,13 @@
         "actual": "object"
       },
       "inputFingerprint": "1ef7a7f832aa621bd3593c3548e6d9bdc35e72c736930ced4e8e337b7b091012",
-      "outputFingerprint": "5ac88f0c28dd14c4d0bf4022860e567cd3fe1665ac8fc2ac70b5cb0c9a13d0d8",
-      "replayOutputFingerprint": "482f639eedd24d4b789271b1352a84137d8e876bf5f7f3a76c54604ff44a9ba0",
+      "outputFingerprint": "007ebaf3a9ed3b37fa0c8d2f9c81c58502e2a72c407a0a768f6ee22ead51871b",
+      "replayOutputFingerprint": "35484b0adee31b32fba92b5e7a48f2c3e30e40deceee1e90d99887615311614c",
       "provenanceFingerprint": "sandbox-fixture-prov-001",
       "rollbackEvidence": "no installation; cloned frozen inputs; no body state mutation performed by sandbox"
     },
     "asyncTrial": {
-      "schema": "zenomorph-gut-capability-sandbox/v0.1",
+      "schema": "zenomorph-gut-capability-sandbox/v0.2",
       "organism": "ZENOMORPH",
       "habitat": "NOSTROMO",
       "bodyAdmission": false,
@@ -148,12 +151,12 @@
       },
       "assimilationStage": "ISOLATED_TEST_BLOCKED",
       "status": "QUARANTINE",
-      "reason": "async-adapter-not-supported-by-v0.1-sandbox",
+      "reason": "async-adapter-not-supported-by-v0.2-sandbox",
       "adapterId": "async-v1",
       "executed": true
     },
     "mutator": {
-      "schema": "zenomorph-gut-capability-sandbox/v0.1",
+      "schema": "zenomorph-gut-capability-sandbox/v0.2",
       "organism": "ZENOMORPH",
       "habitat": "NOSTROMO",
       "bodyAdmission": false,
@@ -184,7 +187,7 @@
       "error": "Cannot add property changed, object is not extensible"
     },
     "executableDescriptor": {
-      "schema": "zenomorph-gut-capability-sandbox/v0.1",
+      "schema": "zenomorph-gut-capability-sandbox/v0.2",
       "organism": "ZENOMORPH",
       "habitat": "NOSTROMO",
       "bodyAdmission": false,
@@ -212,9 +215,12 @@
     }
   },
   "boundary": {
-    "version": "0.1",
+    "version": "0.2",
     "candidateCodeExecution": false,
     "hostRegisteredAdapterExecution": true,
+    "registryLookup": "own data property only",
+    "inheritedRegistryEntries": false,
+    "accessorRegistryEntries": false,
     "asyncAdapters": false,
     "installsCapability": false,
     "mutatesBody": false,
