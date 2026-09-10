@@ -1,8 +1,8 @@
 {
-  "schema": "xenomorph-gut-capability-admission-test/v0.2",
-  "completedAt": "2026-09-10T03:00:26.379Z",
+  "schema": "xenomorph-gut-capability-admission-test/v0.3",
+  "completedAt": "2026-09-10T03:00:47.250Z",
   "status": "PASS",
-  "capability": "FOREIGN_CAPABILITY_PRE_ASSIMILATION_ADMISSION_BOUNDARY",
+  "capability": "FOREIGN_CAPABILITY_PRE_ASSIMILATION_ADMISSION_BOUNDARY_WITH_SYMBOL_KEY_QUARANTINE",
   "cases": {
     "ordinaryProse": {
       "schema": "zenomorph-gut-capability-admission/v0.3",
@@ -84,6 +84,34 @@
       "unsafePath": "$.metadata",
       "identity": "Accessor Adapter"
     },
+    "symbolMetadata": {
+      "schema": "zenomorph-gut-capability-admission/v0.3",
+      "organism": "ZENOMORPH",
+      "habitat": "NOSTROMO",
+      "executed": false,
+      "authorized": false,
+      "assimilationStage": "NONE",
+      "route": "HOLD",
+      "status": "QUARANTINE",
+      "classification": "SYMBOL_KEY_METADATA_PRESENT",
+      "reason": "symbol-keyed-properties-are-not-admission-metadata",
+      "unsafePath": "$.[Symbol(hidden-metadata)]",
+      "identity": "Symbol-Key Adapter"
+    },
+    "nestedSymbolMetadata": {
+      "schema": "zenomorph-gut-capability-admission/v0.3",
+      "organism": "ZENOMORPH",
+      "habitat": "NOSTROMO",
+      "executed": false,
+      "authorized": false,
+      "assimilationStage": "NONE",
+      "route": "HOLD",
+      "status": "QUARANTINE",
+      "classification": "SYMBOL_KEY_METADATA_PRESENT",
+      "reason": "symbol-keyed-properties-are-not-admission-metadata",
+      "unsafePath": "$.metadata.[Symbol(nested-hidden)]",
+      "identity": "Nested Symbol-Key Adapter"
+    },
     "missingProvenance": {
       "schema": "zenomorph-gut-capability-admission/v0.3",
       "organism": "ZENOMORPH",
@@ -151,6 +179,6 @@
   },
   "executionCount": 0,
   "getterExecutionCount": 0,
-  "boundary": "This test verifies deterministic pre-assimilation admission judgment, including bounded recursive inspection of nested metadata. Executable-key payloads, callable values, and accessor properties are quarantined without invocation; accessors are inspected by descriptor only. A structured foreign capability may become a candidate for isolated testing only when provenance, a permission boundary, and an interface/input-output contract are visible. Nothing in this layer executes, imports, installs, authorizes, fetches or absorbs the candidate into the XENOMORPH body.",
+  "boundary": "This test verifies deterministic pre-assimilation admission judgment, including bounded recursive inspection of nested metadata. Executable-key payloads, callable values, accessor properties, and symbol-keyed properties are quarantined without invocation; accessors are inspected by descriptor only. A structured foreign capability may become a candidate for isolated testing only when provenance, a permission boundary, and an interface/input-output contract are visible. Nothing in this layer executes, imports, installs, authorizes, fetches or absorbs the candidate into the XENOMORPH body.",
   "failures": []
 }
