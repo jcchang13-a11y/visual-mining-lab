@@ -1,11 +1,11 @@
 {
   "schema": "zenomorph-capability-heldout-stress-test/v0.1",
-  "completedAt": "2026-09-10T09:07:29.041Z",
+  "completedAt": "2026-09-10T09:18:35.779Z",
   "status": "PASS",
   "capability": "EPHEMERAL_FOREIGN_CAPABILITY_DOWNSTREAM_BEHAVIOR_CHANGE",
   "cases": {
     "pass": {
-      "schema": "zenomorph-capability-heldout-stress/v0.3",
+      "schema": "zenomorph-capability-heldout-stress/v0.4",
       "organism": "ZENOMORPH",
       "habitat": "NOSTROMO",
       "bodyAdmission": false,
@@ -76,7 +76,7 @@
       "rollbackEvidence": "ephemeral replay only; no registry, body, or persistent state mutation performed"
     },
     "noChange": {
-      "schema": "zenomorph-capability-heldout-stress/v0.3",
+      "schema": "zenomorph-capability-heldout-stress/v0.4",
       "organism": "ZENOMORPH",
       "habitat": "NOSTROMO",
       "bodyAdmission": false,
@@ -147,7 +147,7 @@
       "rollbackEvidence": "ephemeral replay only; no registry, body, or persistent state mutation performed"
     },
     "missingOrgan": {
-      "schema": "zenomorph-capability-heldout-stress/v0.3",
+      "schema": "zenomorph-capability-heldout-stress/v0.4",
       "organism": "ZENOMORPH",
       "habitat": "NOSTROMO",
       "bodyAdmission": false,
@@ -206,7 +206,7 @@
       "downstreamExecuted": false
     },
     "badCandidate": {
-      "schema": "zenomorph-capability-heldout-stress/v0.3",
+      "schema": "zenomorph-capability-heldout-stress/v0.4",
       "organism": "ZENOMORPH",
       "habitat": "NOSTROMO",
       "bodyAdmission": false,
@@ -248,7 +248,7 @@
     }
   },
   "boundary": {
-    "version": "0.3",
+    "version": "0.4",
     "requiresIsolatedPass": true,
     "hostRegisteredCapabilityOnly": true,
     "hostRegisteredDownstreamOrganOnly": true,
@@ -262,14 +262,22 @@
       "finite/non-finite number",
       "bigint",
       "arrays",
-      "plain data objects"
+      "plain data objects",
+      "null-prototype data objects"
     ],
     "quarantinesDecisionTypes": [
       "cycles",
       "functions",
       "symbols",
       "symbol keys",
-      "accessors"
+      "accessors",
+      "Date",
+      "Map",
+      "Set",
+      "RegExp",
+      "typed arrays",
+      "class instances",
+      "other exotic object prototypes"
     ],
     "inheritedRegistryEntries": false,
     "accessorRegistryEntries": false,
