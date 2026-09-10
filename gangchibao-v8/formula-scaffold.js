@@ -15,6 +15,11 @@
   const currentBase=/^\s*["“”]S["“”]\s*\/\s*[~〜～]\s*S\s*$/;
   const inlineOld=/S\s*=\s*[~〜～]\s*S/g;
   const inlineQuoted=/["“”]S["“”]\s*\/\s*[~〜～]\s*S/g;
+  const labelToken='[A-Za-z0-9_\u3400-\u9FFF]+';
+  const namedOld=new RegExp(`(${labelToken})\\s*=\\s*[~〜～]\\s*\\1`,'g');
+  const namedQuoted=new RegExp(`["“”](${labelToken})["“”]\\s*\\/\\s*[~〜～]\\s*\\1`,'g');
+  const namedOldWhole=new RegExp(`^\\s*(${labelToken})\\s*=\\s*[~〜～]\\s*\\1\\s*$`);
+  const namedCurrentWhole=new RegExp(`^\\s*["“”](${labelToken})["“”]\\s*\\/\\s*[~〜～]\\s*\\1\\s*$`);
 
   function official(label){
     const s=String(label||'').trim();
@@ -51,6 +56,11 @@
       frag.append(makeOfficialSpan('S'));
       return true;
     }
+    let match=line.match(namedOldWhole)||line.match(namedCurrentWhole);
+    if(match){
+      frag.append(makeOfficialSpan(match[1]));
+      return true;
+    }
     return false;
   }
 
@@ -70,6 +80,8 @@
         changed=true;
       }else{
         const normalized=line
+          .replace(namedQuoted,(_m,label)=>official(label))
+          .replace(namedOld,(_m,label)=>official(label))
           .replace(inlineQuoted,'"S"/~S')
           .replace(inlineOld,'"S"/~S');
         if(normalized!==line) changed=true;
