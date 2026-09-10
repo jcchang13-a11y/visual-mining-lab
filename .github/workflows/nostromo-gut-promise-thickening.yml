@@ -1,0 +1,64 @@
+name: NOSTROMO GUT Promise Thickening
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'nostromo/gut/promise-guard.mjs'
+      - '.github/workflows/nostromo-gut-promise-thickening.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  promise-guard:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify opaque Promise quarantine without execution
+        shell: bash
+        run: |
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import { inspectPromiseMaterial, isOpaqueAsyncAtom } from './nostromo/gut/promise-guard.mjs';
+
+          let executed = false;
+          const pending = new Promise(() => { executed = true; });
+          const resolved = Promise.resolve({ claim: 'must remain opaque' });
+
+          const pendingAtom = inspectPromiseMaterial(pending, 'root.pending', { organ: 'GUT', sourceClass: 'test' });
+          const resolvedAtom = inspectPromiseMaterial(resolved, 'root.resolved', { organ: 'GUT', sourceClass: 'test' });
+
+          assert.equal(executed, true, 'Promise constructor executes synchronously; guard must not add execution');
+          assert.equal(isOpaqueAsyncAtom(pendingAtom), true);
+          assert.equal(isOpaqueAsyncAtom(resolvedAtom), true);
+          assert.equal(pendingAtom.reason, 'promise-not-awaited-or-inspected');
+          assert.equal(pendingAtom.provenance.organ, 'GUT');
+          assert.equal(resolvedAtom.value, 'Promise opaque async material');
+          assert.equal(inspectPromiseMaterial({ then() {} }), null, 'thenables are not silently promoted to native Promise');
+          assert.equal(inspectPromiseMaterial({ ordinary: true }), null);
+
+          const before = Date.now();
+          inspectPromiseMaterial(new Promise(() => {}), 'root.never');
+          assert.ok(Date.now() - before < 100, 'guard must not await pending material');
+          NODE
+      - name: Record candidate evidence
+        run: |
+          mkdir -p evidence
+          cat > evidence/gut-promise-guard.json <<'JSON'
+          {
+            "organ": "GUT",
+            "candidate": "promise-guard",
+            "status": "tested-not-promoted",
+            "policy": "opaque async material is quarantined and never awaited during inspection",
+            "displayedStatePromotion": false
+          }
+          JSON
+      - uses: actions/upload-artifact@v4
+        with:
+          name: gut-promise-guard-evidence
+          path: evidence/gut-promise-guard.json
