@@ -1,4 +1,4 @@
-// MUTHER internal mutation sandbox v0.2
+// MUTHER internal mutation sandbox v0.3
 // Internal artifacts are ore. This module does not install candidates into ZENOMORPH.
 // It validates whether a proposed mutation is traceable and materially transformed rather than a renamed copy.
 
@@ -76,6 +76,22 @@ function candidateSignature(traits) {
     .join('|');
 }
 
+function operationSemantics(candidateTraits) {
+  for (const trait of candidateTraits) {
+    const output = canonical(trait.value);
+    const inputs = trait.derivedFrom.map(source => canonical(source.sourceValue));
+    if (NON_MUTATING.has(trait.operation)) {
+      if (trait.derivedFrom.length !== 1 || output !== inputs[0]) {
+        return 'MUTHER_NON_MUTATING_OPERATION_CHANGED_VALUE';
+      }
+    }
+    if (MUTATING.has(trait.operation) && inputs.some(input => output === input)) {
+      return 'MUTHER_MUTATION_LABEL_WITHOUT_MATERIAL_CHANGE';
+    }
+  }
+  return null;
+}
+
 export function evaluateInternalMutation({ specimens, proposal } = {}) {
   const byId = specimenIndex(specimens);
   const candidateId = text(proposal?.candidateId);
@@ -137,6 +153,9 @@ export function evaluateInternalMutation({ specimens, proposal } = {}) {
     }
   }
 
+  const semanticFailure = operationSemantics(candidateTraits);
+  if (semanticFailure) return hold(semanticFailure);
+
   const crossModal = sourceKinds.size >= 2;
   const sourceMode = sourceSpecimens.size === 1 ? 'SINGLE_SPECIMEN_MUTATION' : 'MULTI_SPECIMEN_RECOMBINATION';
   return {
@@ -150,11 +169,12 @@ export function evaluateInternalMutation({ specimens, proposal } = {}) {
     crossModal,
     crossModalPressureDemonstrated: crossModal && hasCrossPressure,
     transformationHistory,
+    operationSemanticsVerified: true,
     provenancePreserved: true,
     incorporationAuthorized: false,
     bodyMutationApplied: false,
     nextRequiredGate: 'GUT_VAJRA_CROSS_ORGAN_STRESS_AND_REGRESSION',
-    boundary: 'A sandbox mutation candidate is evidence of traceable transformation only. A single specimen may be inverted, distorted, or otherwise betrayed without requiring artificial collage. This is not evidence of autonomous aesthetic judgment, successful assimilation, organ growth, or authorization to modify the persistent body.'
+    boundary: 'A sandbox mutation candidate is evidence of traceable transformation only. Mutation labels must correspond to material output change, while inherit/copy operations must preserve exactly one source value. A single specimen may be inverted, distorted, or otherwise betrayed without requiring artificial collage. This is not evidence of autonomous aesthetic judgment, successful assimilation, organ growth, or authorization to modify the persistent body.'
   };
 }
 

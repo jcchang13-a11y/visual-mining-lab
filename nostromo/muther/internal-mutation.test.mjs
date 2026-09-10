@@ -66,6 +66,7 @@ assert.equal(valid.bodyMutationApplied, false);
 assert.equal(valid.provenancePreserved, true);
 assert.equal(valid.crossModal, true);
 assert.equal(valid.crossModalPressureDemonstrated, true);
+assert.equal(valid.operationSemanticsVerified, true);
 assert.deepEqual(new Set(valid.sourceSpecimenIds), new Set(['theme-01', 'text-01', 'failure-01']));
 assert.equal(valid.transformationHistory.length, 3);
 
@@ -110,6 +111,48 @@ const renamedCopyWithFakeMutationLabel = evaluateInternalMutation({
 });
 assert.equal(renamedCopyWithFakeMutationLabel.status, 'HOLD');
 assert.equal(renamedCopyWithFakeMutationLabel.reason, 'MUTHER_RENAMED_COPY_DETECTED');
+
+const partialFakeMutationLabel = evaluateInternalMutation({
+  specimens: [specimens[0]],
+  proposal: {
+    candidateId: 'partial-fake-mutation',
+    traits: [
+      { dimension: 'typography', value: 'compressed-sans', operation: 'distort', derivedFrom: [{ specimenId: 'theme-01', sourceDimension: 'typography' }] },
+      { dimension: 'layout', value: 'broken-asymmetric-fields', operation: 'distort', derivedFrom: [{ specimenId: 'theme-01', sourceDimension: 'layout' }] }
+    ]
+  }
+});
+assert.equal(partialFakeMutationLabel.status, 'HOLD');
+assert.equal(partialFakeMutationLabel.reason, 'MUTHER_MUTATION_LABEL_WITHOUT_MATERIAL_CHANGE');
+
+const mutationHiddenAsInheritance = evaluateInternalMutation({
+  specimens: [specimens[0]],
+  proposal: {
+    candidateId: 'hidden-mutation',
+    traits: [
+      { dimension: 'typography', value: 'new-type-system', operation: 'inherit', derivedFrom: [{ specimenId: 'theme-01', sourceDimension: 'typography' }] },
+      { dimension: 'layout', value: 'broken-asymmetric-fields', operation: 'distort', derivedFrom: [{ specimenId: 'theme-01', sourceDimension: 'layout' }] }
+    ]
+  }
+});
+assert.equal(mutationHiddenAsInheritance.status, 'HOLD');
+assert.equal(mutationHiddenAsInheritance.reason, 'MUTHER_NON_MUTATING_OPERATION_CHANGED_VALUE');
+
+const copiedValueWithMultipleSources = evaluateInternalMutation({
+  specimens,
+  proposal: {
+    candidateId: 'fake-inherit-multi-source',
+    traits: [
+      { dimension: 'cadence-copy', value: 'abrupt-fragment', operation: 'inherit', derivedFrom: [
+        { specimenId: 'text-01', sourceDimension: 'cadence' },
+        { specimenId: 'theme-01', sourceDimension: 'layout' }
+      ] },
+      { dimension: 'layout', value: 'broken-asymmetric-fields', operation: 'distort', derivedFrom: [{ specimenId: 'theme-01', sourceDimension: 'layout' }] }
+    ]
+  }
+});
+assert.equal(copiedValueWithMultipleSources.status, 'HOLD');
+assert.equal(copiedValueWithMultipleSources.reason, 'MUTHER_NON_MUTATING_OPERATION_CHANGED_VALUE');
 
 const collageOnly = evaluateInternalMutation({
   specimens,
@@ -156,5 +199,18 @@ const compatibilityAlias = evaluateInternalMutation({
 });
 assert.equal(compatibilityAlias.status, 'SANDBOX_CANDIDATE');
 assert.equal(compatibilityAlias.sourceSpecimenIds.length, 2);
+
+const compatibilityValueAliasIsNotMutation = evaluateInternalMutation({
+  specimens: [specimens[0]],
+  proposal: {
+    candidateId: 'compatibility-value-alias',
+    traits: [
+      { dimension: 'typography', value: 'ｃｏｍｐｒｅｓｓｅｄ－ｓａｎｓ', operation: 'distort', derivedFrom: [{ specimenId: 'theme-01', sourceDimension: 'typography' }] },
+      { dimension: 'layout', value: 'broken-asymmetric-fields', operation: 'distort', derivedFrom: [{ specimenId: 'theme-01', sourceDimension: 'layout' }] }
+    ]
+  }
+});
+assert.equal(compatibilityValueAliasIsNotMutation.status, 'HOLD');
+assert.equal(compatibilityValueAliasIsNotMutation.reason, 'MUTHER_MUTATION_LABEL_WITHOUT_MATERIAL_CHANGE');
 
 console.log('MUTHER internal mutation sandbox: PASS');
