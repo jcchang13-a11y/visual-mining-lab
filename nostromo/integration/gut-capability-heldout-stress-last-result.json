@@ -1,11 +1,11 @@
 {
   "schema": "zenomorph-capability-heldout-stress-test/v0.1",
-  "completedAt": "2026-09-10T08:03:02.810Z",
+  "completedAt": "2026-09-10T09:07:29.041Z",
   "status": "PASS",
   "capability": "EPHEMERAL_FOREIGN_CAPABILITY_DOWNSTREAM_BEHAVIOR_CHANGE",
   "cases": {
     "pass": {
-      "schema": "zenomorph-capability-heldout-stress/v0.2",
+      "schema": "zenomorph-capability-heldout-stress/v0.3",
       "organism": "ZENOMORPH",
       "habitat": "NOSTROMO",
       "bodyAdmission": false,
@@ -57,6 +57,7 @@
         "rollbackEvidence": "no installation; cloned frozen inputs; no body state mutation performed by sandbox"
       },
       "registryLookup": "OWN_DATA_PROPERTY_ONLY",
+      "decisionComparison": "CANONICAL_FAIL_CLOSED",
       "status": "PASS",
       "assimilationStage": "HELDOUT_BEHAVIOR_CHANGE_VERIFIED",
       "reason": "foreign-capability-changed-downstream-organ-behavior",
@@ -69,11 +70,13 @@
       "augmentedDecision": {
         "route": "SPLIT"
       },
+      "decisionFingerprintBefore": "[\"object\",[[\"route\",[\"string\",\"HOLD\"]]]]",
+      "decisionFingerprintAfter": "[\"object\",[[\"route\",[\"string\",\"SPLIT\"]]]]",
       "provenanceFingerprint": "heldout-prov-001",
       "rollbackEvidence": "ephemeral replay only; no registry, body, or persistent state mutation performed"
     },
     "noChange": {
-      "schema": "zenomorph-capability-heldout-stress/v0.2",
+      "schema": "zenomorph-capability-heldout-stress/v0.3",
       "organism": "ZENOMORPH",
       "habitat": "NOSTROMO",
       "bodyAdmission": false,
@@ -125,6 +128,7 @@
         "rollbackEvidence": "no installation; cloned frozen inputs; no body state mutation performed by sandbox"
       },
       "registryLookup": "OWN_DATA_PROPERTY_ONLY",
+      "decisionComparison": "CANONICAL_FAIL_CLOSED",
       "status": "HOLD",
       "assimilationStage": "HELDOUT_NO_BEHAVIOR_CHANGE",
       "reason": "foreign-capability-produced-no-observed-downstream-change",
@@ -137,11 +141,13 @@
       "augmentedDecision": {
         "route": "HOLD"
       },
+      "decisionFingerprintBefore": "[\"object\",[[\"route\",[\"string\",\"HOLD\"]]]]",
+      "decisionFingerprintAfter": "[\"object\",[[\"route\",[\"string\",\"HOLD\"]]]]",
       "provenanceFingerprint": "heldout-prov-001",
       "rollbackEvidence": "ephemeral replay only; no registry, body, or persistent state mutation performed"
     },
     "missingOrgan": {
-      "schema": "zenomorph-capability-heldout-stress/v0.2",
+      "schema": "zenomorph-capability-heldout-stress/v0.3",
       "organism": "ZENOMORPH",
       "habitat": "NOSTROMO",
       "bodyAdmission": false,
@@ -193,13 +199,14 @@
         "rollbackEvidence": "no installation; cloned frozen inputs; no body state mutation performed by sandbox"
       },
       "registryLookup": "OWN_DATA_PROPERTY_ONLY",
+      "decisionComparison": "CANONICAL_FAIL_CLOSED",
       "status": "BLOCKED",
       "assimilationStage": "HELDOUT_STRESS_BLOCKED",
       "reason": "host-registered-downstream-organ-own-data-property-required",
       "downstreamExecuted": false
     },
     "badCandidate": {
-      "schema": "zenomorph-capability-heldout-stress/v0.2",
+      "schema": "zenomorph-capability-heldout-stress/v0.3",
       "organism": "ZENOMORPH",
       "habitat": "NOSTROMO",
       "bodyAdmission": false,
@@ -233,6 +240,7 @@
         "executed": false
       },
       "registryLookup": "OWN_DATA_PROPERTY_ONLY",
+      "decisionComparison": "CANONICAL_FAIL_CLOSED",
       "status": "BLOCKED",
       "assimilationStage": "HELDOUT_STRESS_BLOCKED",
       "reason": "isolated-trial-must-pass-first",
@@ -240,11 +248,29 @@
     }
   },
   "boundary": {
-    "version": "0.2",
+    "version": "0.3",
     "requiresIsolatedPass": true,
     "hostRegisteredCapabilityOnly": true,
     "hostRegisteredDownstreamOrganOnly": true,
     "registryLookup": "own data property only",
+    "decisionComparison": "canonical fail-closed",
+    "supportsComparableDecisionTypes": [
+      "null",
+      "undefined",
+      "string",
+      "boolean",
+      "finite/non-finite number",
+      "bigint",
+      "arrays",
+      "plain data objects"
+    ],
+    "quarantinesDecisionTypes": [
+      "cycles",
+      "functions",
+      "symbols",
+      "symbol keys",
+      "accessors"
+    ],
     "inheritedRegistryEntries": false,
     "accessorRegistryEntries": false,
     "persistentMutation": false,
