@@ -37,13 +37,14 @@ assert.equal(candidate.status, 'SANDBOX_CANDIDATE');
 
 const lineageFingerprint = deriveMutationLineageFingerprint(candidate);
 assert.match(lineageFingerprint, /^mut-lineage-v1:[0-9a-f]{16}$/);
-const gut = { organ: 'GUT', status: 'PASS', candidateId: candidate.candidateId, lineageFingerprint, provenance: 'gut/stress-run-01' };
-const vajra = { organ: 'VAJRA', status: 'PASS', candidateId: candidate.candidateId, lineageFingerprint, provenance: 'vajra/adversarial-run-01' };
+const gut = { organ: 'GUT', status: 'PASS', candidateId: candidate.candidateId, lineageFingerprint, provenance: 'gut/stress-run-01', reviewRunId: 'gut-review-run-01' };
+const vajra = { organ: 'VAJRA', status: 'PASS', candidateId: candidate.candidateId, lineageFingerprint, provenance: 'vajra/adversarial-run-01', reviewRunId: 'vajra-review-run-01' };
 
 const eligible = evaluateMutationCrossOrganGate({ candidate, lineageFingerprint, gutReceipt: gut, vajraReceipt: vajra });
 assert.equal(eligible.status, 'ELIGIBLE_FOR_CONTROLLED_INCORPORATION_STAGE');
 assert.equal(eligible.crossOrganAgreement, true);
 assert.equal(eligible.candidateLineageBound, true);
+assert.deepEqual(eligible.independentReviewRunIds, ['gut-review-run-01', 'vajra-review-run-01']);
 assert.equal(eligible.incorporationAuthorized, false);
 assert.equal(eligible.bodyMutationApplied, false);
 
@@ -54,6 +55,23 @@ assert.equal(noGut.reason, 'GUT_RECEIPT_REQUIRED');
 const noVajra = evaluateMutationCrossOrganGate({ candidate, lineageFingerprint, gutReceipt: gut });
 assert.equal(noVajra.status, 'HOLD');
 assert.equal(noVajra.reason, 'VAJRA_RECEIPT_REQUIRED');
+
+const noGutRun = evaluateMutationCrossOrganGate({ candidate, lineageFingerprint, gutReceipt: { ...gut, reviewRunId: '' }, vajraReceipt: vajra });
+assert.equal(noGutRun.status, 'HOLD');
+assert.equal(noGutRun.reason, 'GUT_REVIEW_RUN_ID_REQUIRED');
+
+const noVajraRun = evaluateMutationCrossOrganGate({ candidate, lineageFingerprint, gutReceipt: gut, vajraReceipt: { ...vajra, reviewRunId: '' } });
+assert.equal(noVajraRun.status, 'HOLD');
+assert.equal(noVajraRun.reason, 'VAJRA_REVIEW_RUN_ID_REQUIRED');
+
+const sharedRunDisguised = evaluateMutationCrossOrganGate({
+  candidate,
+  lineageFingerprint,
+  gutReceipt: { ...gut, reviewRunId: ' shared-run ' },
+  vajraReceipt: { ...vajra, reviewRunId: 'ｓｈａｒｅｄ－ｒｕｎ' }
+});
+assert.equal(sharedRunDisguised.status, 'HOLD');
+assert.equal(sharedRunDisguised.reason, 'CROSS_ORGAN_REVIEW_RUN_INDEPENDENCE_NOT_DEMONSTRATED');
 
 const callerInventedLineage = evaluateMutationCrossOrganGate({
   candidate,
@@ -66,12 +84,7 @@ assert.equal(callerInventedLineage.reason, 'MUTHER_CALLER_LINEAGE_NOT_BOUND_TO_C
 
 const tamperedCandidate = structuredClone(candidate);
 tamperedCandidate.candidateTraits[0].value = 'post-review-unseen-typography';
-const staleReceiptReplay = evaluateMutationCrossOrganGate({
-  candidate: tamperedCandidate,
-  lineageFingerprint,
-  gutReceipt: gut,
-  vajraReceipt: vajra
-});
+const staleReceiptReplay = evaluateMutationCrossOrganGate({ candidate: tamperedCandidate, lineageFingerprint, gutReceipt: gut, vajraReceipt: vajra });
 assert.equal(staleReceiptReplay.status, 'HOLD');
 assert.equal(staleReceiptReplay.reason, 'MUTHER_CALLER_LINEAGE_NOT_BOUND_TO_CANDIDATE');
 assert.notEqual(deriveMutationLineageFingerprint(tamperedCandidate), lineageFingerprint);
@@ -85,21 +98,11 @@ reorderedEquivalent.candidateTraits.reverse();
 reorderedEquivalent.candidateTraits[0].derivedFrom.reverse();
 assert.equal(deriveMutationLineageFingerprint(reorderedEquivalent), lineageFingerprint);
 
-const gutMismatch = evaluateMutationCrossOrganGate({
-  candidate,
-  lineageFingerprint,
-  gutReceipt: { ...gut, lineageFingerprint: 'other-lineage' },
-  vajraReceipt: vajra
-});
+const gutMismatch = evaluateMutationCrossOrganGate({ candidate, lineageFingerprint, gutReceipt: { ...gut, lineageFingerprint: 'other-lineage' }, vajraReceipt: vajra });
 assert.equal(gutMismatch.status, 'HOLD');
 assert.equal(gutMismatch.reason, 'GUT_LINEAGE_MISMATCH');
 
-const vajraMismatch = evaluateMutationCrossOrganGate({
-  candidate,
-  lineageFingerprint,
-  gutReceipt: gut,
-  vajraReceipt: { ...vajra, candidateId: 'theme-12-candidate' }
-});
+const vajraMismatch = evaluateMutationCrossOrganGate({ candidate, lineageFingerprint, gutReceipt: gut, vajraReceipt: { ...vajra, candidateId: 'theme-12-candidate' } });
 assert.equal(vajraMismatch.status, 'HOLD');
 assert.equal(vajraMismatch.reason, 'VAJRA_CANDIDATE_MISMATCH');
 
@@ -112,29 +115,18 @@ const sameReviewerDisguised = evaluateMutationCrossOrganGate({
 assert.equal(sameReviewerDisguised.status, 'HOLD');
 assert.equal(sameReviewerDisguised.reason, 'CROSS_ORGAN_REVIEW_INDEPENDENCE_NOT_DEMONSTRATED');
 
-const underivedCandidate = {
-  status: 'SANDBOX_CANDIDATE',
-  candidateId: 'label-only',
-  provenancePreserved: true,
-  incorporationAuthorized: false,
-  bodyMutationApplied: false
-};
+const underivedCandidate = { status: 'SANDBOX_CANDIDATE', candidateId: 'label-only', provenancePreserved: true, incorporationAuthorized: false, bodyMutationApplied: false };
 const underived = evaluateMutationCrossOrganGate({ candidate: underivedCandidate, lineageFingerprint: 'anything', gutReceipt: gut, vajraReceipt: vajra });
 assert.equal(underived.status, 'HOLD');
 assert.equal(underived.reason, 'MUTHER_CANDIDATE_LINEAGE_UNDERIVED');
 
-const selfAuthorized = evaluateMutationCrossOrganGate({
-  candidate: { ...candidate, incorporationAuthorized: true },
-  lineageFingerprint,
-  gutReceipt: gut,
-  vajraReceipt: vajra
-});
+const selfAuthorized = evaluateMutationCrossOrganGate({ candidate: { ...candidate, incorporationAuthorized: true }, lineageFingerprint, gutReceipt: gut, vajraReceipt: vajra });
 assert.equal(selfAuthorized.status, 'HOLD');
 assert.equal(selfAuthorized.reason, 'MUTHER_CANDIDATE_ALREADY_CLAIMS_BODY_AUTHORITY');
 
 console.log(JSON.stringify({
-  schema: 'zenomorph-muther-internal-mutation-cross-organ-gate-test/v0.2',
+  schema: 'zenomorph-muther-internal-mutation-cross-organ-gate-test/v0.3',
   status: 'PASS',
-  capability: 'MUTHER_MUTATION_REVIEWS_ARE_BOUND_TO_EXACT_CANDIDATE_LINEAGE',
-  boundary: 'PASS proves protocol containment only: old or invented lineage receipts cannot be replayed onto a changed mutation candidate that merely reuses the same candidateId. No persistent body mutation occurs.'
+  capability: 'MUTHER_MUTATION_REVIEWS_REQUIRE_TRACEABLE_INDEPENDENT_RUNS_BOUND_TO_EXACT_LINEAGE',
+  boundary: 'PASS proves protocol containment only: different labels do not prove independent review; each qualifying GUT/VAJRA receipt must identify a distinct traceable review run bound to the exact mutation lineage. No persistent body mutation occurs.'
 }, null, 2));
