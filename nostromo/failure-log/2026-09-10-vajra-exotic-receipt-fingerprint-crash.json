@@ -1,0 +1,30 @@
+{
+  "schema": "zenomorph-failure-evidence/v1",
+  "observedAt": "2026-09-10T19:00:41+08:00",
+  "organ": "VAJRA",
+  "status": "OPEN_OBSERVED",
+  "failureClass": "EXOTIC_RECEIPT_FINGERPRINT_CRASH_OR_COLLISION",
+  "capabilityUnderTest": "GUT_TO_VAJRA_EXOTIC_RECEIPT_CONTAINMENT",
+  "observation": "VAJRA dynamic decomposition v1.3 fingerprints qualifying and rejected receipts by recursively sorting ordinary object keys and then calling JSON.stringify. BigInt values throw during JSON serialization; circular objects recurse without containment; non-finite numbers, symbols, functions, and objects with inaccessible properties can collapse, disappear, or throw rather than yielding a bounded deterministic audit fingerprint.",
+  "risk": "A receipt that GUT can safely preserve at the metabolic boundary may crash VAJRA or lose audit distinctions during downstream decomposition. This breaks cross-organ containment and lets transport representation determine whether the organism can continue inspecting evidence.",
+  "preFixEvidence": {
+    "dynamicDecompositionVersion": "1.3",
+    "dynamicDecompositionBlob": "7c49ce125b9b2905447974317c2351abb8bb2ecd",
+    "mechanism": "receiptFingerprint -> JSON.stringify(stableStructure(replayIdentityProjection(receipt)))",
+    "knownAdversarialClasses": [
+      "BigInt",
+      "circular-reference",
+      "non-finite-number",
+      "symbol",
+      "function",
+      "throwing-getter-or-uninspectable-object"
+    ]
+  },
+  "requiredRepair": [
+    "Canonicalize exotic scalar values into deterministic tagged audit forms without executing function bodies or leaking stacks.",
+    "Contain cycles and inaccessible object properties rather than crashing the decomposition pass.",
+    "Keep transport-only metadata projection bounded while preserving deterministic fingerprints for retained receipt evidence.",
+    "Add adversarial replay tests proving same exotic receipt is stable, meaningful exotic value changes remain distinguishable, and baseline/cross-organ regressions still pass."
+  ],
+  "boundary": "This record preserves a serializer/fingerprint robustness defect. It does not claim the receipt is true, safe in every external runtime, or assimilated into persistent capability state."
+}
