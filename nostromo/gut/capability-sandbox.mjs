@@ -1,18 +1,69 @@
-/* ZENOMORPH / NOSTROMO GUT controlled capability sandbox v0.2
+/* ZENOMORPH / NOSTROMO GUT controlled capability sandbox v0.3
  * Executes only host-registered adapters selected by inert candidate metadata.
  * Candidate descriptors may not carry code/callbacks/commands. Passing this stage is NOT body admission.
  * Registry lookup is own-data-property only: prototype inheritance and accessors never count as registration.
+ * Fingerprinting is canonical/fail-closed: exotic values may not collapse into false deterministic equality.
  */
 import crypto from 'node:crypto';
 import { assessForeignCapability } from './capability-admission.mjs';
 
-function stable(value){
-  if(value===undefined)return 'undefined';
-  if(typeof value==='bigint')return JSON.stringify({$bigint:String(value)});
-  if(value===null||typeof value!=='object')return JSON.stringify(value);
-  if(Array.isArray(value))return '['+value.map(stable).join(',')+']';
-  const keys=Object.keys(value).sort();
-  return '{'+keys.map(k=>JSON.stringify(k)+':'+stable(value[k])).join(',')+'}';
+function stable(value,seen=new WeakSet(),path='$'){
+  if(value===undefined)return '["undefined"]';
+  if(value===null)return 'null';
+  const type=typeof value;
+  if(type==='string'||type==='boolean')return JSON.stringify(value);
+  if(type==='number'){
+    if(Number.isNaN(value))return '["number","NaN"]';
+    if(value===Infinity)return '["number","Infinity"]';
+    if(value===-Infinity)return '["number","-Infinity"]';
+    if(Object.is(value,-0))return '["number","-0"]';
+    return JSON.stringify(value);
+  }
+  if(type==='bigint')return JSON.stringify({$bigint:String(value)});
+  if(type==='function'||type==='symbol')throw new Error(`unsupported-fingerprint-${type}-at-${path}`);
+  if(type!=='object')return JSON.stringify([type,String(value)]);
+  if(seen.has(value))throw new Error(`cyclic-fingerprint-at-${path}`);
+  seen.add(value);
+  try{
+    if(value instanceof Date){
+      const ms=value.getTime();
+      if(!Number.isFinite(ms))throw new Error(`invalid-date-at-${path}`);
+      return JSON.stringify({$date:value.toISOString()});
+    }
+    if(value instanceof RegExp)return JSON.stringify({$regexp:value.source,$flags:value.flags});
+    if(value instanceof Map){
+      const entries=[];
+      let i=0;
+      for(const [key,item] of value.entries())entries.push([stable(key,seen,`${path}{${i}}.key`),stable(item,seen,`${path}{${i}}.value`)]),i++;
+      entries.sort((a,b)=>a[0].localeCompare(b[0])||a[1].localeCompare(b[1]));
+      return JSON.stringify({$map:entries});
+    }
+    if(value instanceof Set){
+      const items=[];
+      let i=0;
+      for(const item of value.values())items.push(stable(item,seen,`${path}<${i++}>`));
+      items.sort();
+      return JSON.stringify({$set:items});
+    }
+    if(ArrayBuffer.isView(value))return JSON.stringify({$view:value.constructor?.name||'TypedArray',$values:Array.from(new Uint8Array(value.buffer,value.byteOffset,value.byteLength))});
+    if(value instanceof ArrayBuffer)return JSON.stringify({$arrayBuffer:Array.from(new Uint8Array(value))});
+    if(Array.isArray(value))return '['+value.map((item,index)=>stable(item,seen,`${path}[${index}]`)).join(',')+']';
+    const proto=Object.getPrototypeOf(value);
+    if(proto!==Object.prototype&&proto!==null){
+      const name=typeof proto?.constructor?.name==='string'?proto.constructor.name:'unknown';
+      throw new Error(`unsupported-fingerprint-object-${name}-at-${path}`);
+    }
+    const descriptors=Object.getOwnPropertyDescriptors(value);
+    const keys=Reflect.ownKeys(descriptors);
+    if(keys.some(key=>typeof key==='symbol'))throw new Error(`symbol-keyed-fingerprint-at-${path}`);
+    return '{'+keys.sort().map(key=>{
+      const descriptor=descriptors[key];
+      if(!Object.prototype.hasOwnProperty.call(descriptor,'value'))throw new Error(`accessor-fingerprint-at-${path}.${key}`);
+      return JSON.stringify(key)+':'+stable(descriptor.value,seen,`${path}.${key}`);
+    }).join(',')+'}';
+  }finally{
+    seen.delete(value);
+  }
 }
 function fingerprint(value){
   return crypto.createHash('sha256').update(stable(value)).digest('hex');
@@ -70,7 +121,7 @@ function registeredAdapter(registry,adapterId){
 export function runIsolatedCapabilityTrial(candidate,input,{registry={},context={}}={}){
   const admission=assessForeignCapability(candidate,context);
   const base={
-    schema:'zenomorph-gut-capability-sandbox/v0.2',
+    schema:'zenomorph-gut-capability-sandbox/v0.3',
     organism:'ZENOMORPH',
     habitat:'NOSTROMO',
     bodyAdmission:false,
@@ -100,26 +151,37 @@ export function runIsolatedCapabilityTrial(candidate,input,{registry={},context=
   }
   const adapter=registration.adapter;
 
-  const inputBefore=fingerprint(input);
+  let inputBefore;
+  try{
+    inputBefore=fingerprint(input);
+  }catch(error){
+    return {...base,status:'QUARANTINE',reason:'input-not-safely-fingerprintable',adapterId,executed:false,error:String(error?.message||error).slice(0,240)};
+  }
+
   let firstOutput,secondOutput;
   try{
     const one=deepFreeze(clone(input));
     const two=deepFreeze(clone(input));
     firstOutput=adapter(one);
     if(firstOutput&&typeof firstOutput.then==='function'){
-      return {...base,status:'QUARANTINE',reason:'async-adapter-not-supported-by-v0.2-sandbox',adapterId,executed:true};
+      return {...base,status:'QUARANTINE',reason:'async-adapter-not-supported-by-v0.3-sandbox',adapterId,executed:true};
     }
     secondOutput=adapter(two);
     if(secondOutput&&typeof secondOutput.then==='function'){
-      return {...base,status:'QUARANTINE',reason:'async-adapter-not-supported-by-v0.2-sandbox',adapterId,executed:true};
+      return {...base,status:'QUARANTINE',reason:'async-adapter-not-supported-by-v0.3-sandbox',adapterId,executed:true};
     }
   }catch(error){
     return {...base,status:'FAILED',reason:'isolated-adapter-threw',adapterId,executed:true,error:String(error?.message||error).slice(0,240)};
   }
 
-  const inputAfter=fingerprint(input);
-  const firstFingerprint=fingerprint(firstOutput);
-  const secondFingerprint=fingerprint(secondOutput);
+  let inputAfter,firstFingerprint,secondFingerprint;
+  try{
+    inputAfter=fingerprint(input);
+    firstFingerprint=fingerprint(firstOutput);
+    secondFingerprint=fingerprint(secondOutput);
+  }catch(error){
+    return {...base,status:'QUARANTINE',reason:'trial-material-not-safely-fingerprintable',adapterId,executed:true,error:String(error?.message||error).slice(0,240),rollbackEvidence:'no installation; unsafe fingerprint material quarantined before any body admission'};
+  }
   const deterministic=firstFingerprint===secondFingerprint;
   const inputStable=inputBefore===inputAfter;
   const contract=candidate?.contract&&typeof candidate.contract==='object'?candidate.contract:candidate;
@@ -147,10 +209,11 @@ export function runIsolatedCapabilityTrial(candidate,input,{registry={},context=
 }
 
 export const capabilitySandboxBoundary=Object.freeze({
-  version:'0.2',
+  version:'0.3',
   candidateCodeExecution:false,
   hostRegisteredAdapterExecution:true,
   registryLookup:'own data property only',
+  fingerprinting:'canonical fail-closed across maps/sets/dates/regexps/buffers and plain data; unsafe accessors/functions/symbols/cycles/exotic objects quarantine',
   inheritedRegistryEntries:false,
   accessorRegistryEntries:false,
   asyncAdapters:false,
