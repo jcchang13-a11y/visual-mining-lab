@@ -3,17 +3,24 @@
   "recordedAt": "2026-09-10T07:18:00Z",
   "organ": "VAJRA",
   "capability": "dynamic-decomposition",
-  "status": "OPEN",
+  "status": "RESOLVED",
   "failureClass": "CROSS_ORGAN_PROVENANCE_THINNING",
-  "summary": "When multiple distinct qualifying GUT triage provenances agree on one contamination classification, VAJRA correctly audits all qualifying receipts at the top-level decomposition result but generated downstream facets inherit only the canonical representative triageProvenanceFingerprint. A facet routed independently can therefore lose the full set of contributors that caused the behavioral change.",
+  "summary": "When multiple distinct qualifying GUT triage provenances agree on one contamination classification, VAJRA correctly audited all qualifying receipts at the top-level decomposition result but generated downstream facets inherited only the canonical representative triageProvenanceFingerprint. A facet routed independently could therefore lose the full set of contributors that caused the behavioral change.",
   "observedContract": {
     "topLevel": [
       "qualifyingReceiptCount",
       "distinctProvenanceCount",
       "aliasAudit"
     ],
-    "facetLevel": [
+    "facetLevelBeforeRepair": [
       "triageProvenanceFingerprint"
+    ],
+    "facetLevelAfterRepair": [
+      "triageProvenanceFingerprint",
+      "triageProvenanceFingerprints",
+      "triageDiagnosticFingerprints",
+      "triageProvenanceContributorCount",
+      "triageDistinctProvenanceCount"
     ]
   },
   "expectedRepair": "Every generated facet must carry a deterministic de-identified set of all qualifying contributor provenance fingerprints, while retaining the representative fingerprint for backward compatibility. Provenance diversity must remain an audit fact and must not be promoted into a claim of source independence or truth.",
@@ -23,12 +30,40 @@
     "auditability becomes dependent on retaining the parent envelope rather than traveling with the metabolized branch"
   ],
   "evidence": {
-    "source": "repository static inspection",
+    "source": "repository static inspection plus CI verification",
     "files": [
       "nostromo/vajra/dynamic-decomposition.js",
       "nostromo/vajra/dynamic-decomposition-test.mjs"
     ],
     "privacy": "de-identified repository evidence only; no private connector identifiers or source text"
   },
-  "boundary": "This record does not claim any source is independent or true. It records a structural provenance-propagation defect before repair and must remain as historical failure evidence after the code is fixed."
+  "repairHistory": {
+    "repairCommit": "d19abaf223bbe545518494a7b96f36b5bc2cade0",
+    "testCommit": "016301154e1bf3b2cd380cb12d66d7bd72088b41",
+    "compatibilityRepairCommit": "8be38de482cf745270ca579a68eab61a2e1945dd",
+    "preservedRedRun": {
+      "runId": 34448748119,
+      "conclusion": "failure",
+      "reason": "the initial repair accidentally removed the pre-existing singular top-level diagnosticFingerprint field; the failure was retained and fixed rather than hidden"
+    },
+    "verifiedGreenRuns": [
+      {
+        "runId": 34448849377,
+        "workflow": "NOSTROMO VAJRA Dynamic Decomposition Test",
+        "conclusion": "success"
+      },
+      {
+        "runId": 34448849418,
+        "workflow": "ZENOMORPH VAJRA dynamic decomposition",
+        "conclusion": "success"
+      },
+      {
+        "runId": 34448849428,
+        "workflow": "NOSTROMO Integration Test",
+        "conclusion": "success"
+      }
+    ]
+  },
+  "resolution": "All distinct qualifying GUT contributor provenance and diagnostic fingerprints that jointly regulate one VAJRA decomposition now travel with every generated facet. The canonical representative fingerprint is retained for backward compatibility. Contributor diversity remains explicitly non-evidential with respect to independence or truth.",
+  "boundary": "This historical record remains in the repository after resolution. It does not claim any source is independent or true, and the green verification does not erase the earlier failed repair run."
 }
