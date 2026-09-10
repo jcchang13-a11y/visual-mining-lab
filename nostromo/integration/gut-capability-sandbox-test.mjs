@@ -27,16 +27,37 @@ expect(pass.deterministic===true,'bounded adapter should replay deterministicall
 expect(pass.inputStable===true&&input.changed===undefined,'sandbox must not mutate caller input');
 expect(pass.contractCheck?.ok===true,'declared output contract should pass');
 expect(pass.provenanceFingerprint==='sandbox-fixture-prov-001','provenance fingerprint should survive trial');
+expect(pass.registryLookup==='OWN_DATA_PROPERTY_ONLY','successful execution must attest own-data-property registry lookup');
 
 const missing=runIsolatedCapabilityTrial({...baseCandidate,adapterId:'missing-v1'},input,{registry});
 expect(missing.status==='BLOCKED'&&missing.executed===false,'unregistered adapter must be blocked without execution');
+
+let inheritedExecuted=false;
+const inheritedRegistry=Object.create({'inherited-v1':()=>{inheritedExecuted=true;return {bad:true};}});
+const inherited=runIsolatedCapabilityTrial({...baseCandidate,adapterId:'inherited-v1',adapterName:'Inherited Adapter'},input,{registry:inheritedRegistry});
+expect(inherited.status==='BLOCKED'&&inherited.executed===false,'prototype-inherited adapter must not count as host registration');
+expect(inheritedExecuted===false,'prototype-inherited adapter must never execute');
+
+let getterTouched=false;
+const accessorRegistry={};
+Object.defineProperty(accessorRegistry,'accessor-v1',{enumerable:true,get(){getterTouched=true;return ()=>({bad:true});}});
+const accessor=runIsolatedCapabilityTrial({...baseCandidate,adapterId:'accessor-v1',adapterName:'Accessor Adapter'},input,{registry:accessorRegistry});
+expect(accessor.status==='BLOCKED'&&accessor.executed===false,'accessor-backed registry entry must be blocked');
+expect(getterTouched===false,'registry getter must not be invoked during lookup');
+
+let constructorExecuted=false;
+const constructorCandidate={...baseCandidate,adapterId:'constructor',adapterName:'Prototype Constructor'};
+const constructorProbe=runIsolatedCapabilityTrial(constructorCandidate,input,{registry:{}});
+if(constructorProbe.executed)constructorExecuted=true;
+expect(constructorProbe.status==='BLOCKED'&&constructorProbe.executed===false,'Object.prototype constructor must not be reachable as an adapter');
+expect(constructorExecuted===false,'prototype constructor must never execute');
 
 const nondeterministic=runIsolatedCapabilityTrial({...baseCandidate,adapterId:'nondeterministic-v1',adapterName:'Nondeterministic Adapter'},input,{registry});
 expect(nondeterministic.status==='HOLD'&&nondeterministic.deterministic===false,'non-deterministic replay must not pass');
 expect(nondeterministic.bodyAdmission===false,'non-deterministic candidate must not enter body');
 
 const asyncTrial=runIsolatedCapabilityTrial({...baseCandidate,adapterId:'async-v1',adapterName:'Async Adapter'},input,{registry});
-expect(asyncTrial.status==='QUARANTINE','async adapter must be quarantined by v0.1 sandbox');
+expect(asyncTrial.status==='QUARANTINE','async adapter must be quarantined by sandbox');
 
 const mutator=runIsolatedCapabilityTrial({...baseCandidate,adapterId:'mutator-v1',adapterName:'Mutating Adapter'},input,{registry});
 expect(mutator.status==='FAILED','adapter attempting to mutate frozen input must fail');
@@ -46,11 +67,11 @@ const executableDescriptor=runIsolatedCapabilityTrial({...baseCandidate,command:
 expect(executableDescriptor.status==='BLOCKED'&&executableDescriptor.executed===false,'candidate carrying executable payload must be blocked before sandbox execution');
 
 const result={
-  schema:'zenomorph-gut-capability-sandbox-test/v0.1',
+  schema:'zenomorph-gut-capability-sandbox-test/v0.2',
   completedAt:new Date().toISOString(),
   status:failures.length?'FAIL':'PASS',
   capability:'CONTROLLED_HOST_REGISTERED_FOREIGN_CAPABILITY_ISOLATED_TRIAL',
-  cases:{pass,missing,nondeterministic,asyncTrial,mutator,executableDescriptor},
+  cases:{pass,missing,inherited,accessor,constructorProbe,nondeterministic,asyncTrial,mutator,executableDescriptor},
   boundary:capabilitySandboxBoundary,
   failures
 };
