@@ -69,6 +69,17 @@
   .existing-figure.original-figure img{max-width:100%;max-height:148mm}
   .existing-figure.original-figure figcaption{break-before:avoid;page-break-before:avoid}
   .set01-photo{width:100%;max-width:110mm;margin:0 auto;break-before:page;page-break-before:always;break-inside:avoid;page-break-inside:avoid}
-  .set01-photo__frame{width:100%;height:auto;aspect-ratio:184/332}
+  /* SET01 現階段仍以 master sprite 的 background-position 裁切。
+     列印層先強制要求瀏覽器保留背景；不改圖、不拆 sprite、不另造出版圖。
+     若輸出器仍關閉 background graphics，保留此處作可追查的出版層接口，後續再接實體 img 裁切鷹架。 */
+  .set01-photo__frame{
+    width:100%;
+    height:auto;
+    aspect-ratio:184/332;
+    -webkit-print-color-adjust:exact;
+    print-color-adjust:exact;
+    forced-color-adjust:none;
+    background-color:transparent;
+  }
   .set01-eva-note,.set01-rongzhe-note{break-before:page;page-break-before:always;max-width:none}
 }
