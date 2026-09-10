@@ -91,5 +91,23 @@ jobs:
           const accessorDecision=runHeldoutCrossOrganStress(candidate,{flag:true},{...opts,organRegistry:decisionAccessorOrgan});
           if(accessorDecision.status!=='QUARANTINE'||accessorDecision.reason!=='downstream-decision-not-safely-comparable')throw new Error('decision accessors must quarantine without execution');
 
+          const exoticFactories=[
+            ()=>new Date('2026-01-01T00:00:00Z'),
+            ()=>new Map([['route','hold']]),
+            ()=>new Set(['hold']),
+            ()=>/hold/i,
+            ()=>new Uint8Array([1,2,3]),
+            ()=>new (class Decision{constructor(){this.route='hold';}})()
+          ];
+          for(const makeDecision of exoticFactories){
+            const exoticOrgan={VAJRA:()=>makeDecision()};
+            const exoticResult=runHeldoutCrossOrganStress(candidate,{flag:true},{...opts,organRegistry:exoticOrgan});
+            if(exoticResult.status!=='QUARANTINE'||exoticResult.reason!=='downstream-decision-not-safely-comparable')throw new Error('exotic decision object must quarantine');
+          }
+
+          const nullProtoOrgan={VAJRA:({foreignSignal})=>Object.assign(Object.create(null),{route:foreignSignal?.flag?'challenge':'hold'})};
+          const nullProtoResult=runHeldoutCrossOrganStress(candidate,{flag:true},{...opts,organRegistry:nullProtoOrgan});
+          if(nullProtoResult.status!=='PASS'||nullProtoResult.behaviorChanged!==true)throw new Error('null-prototype data objects must remain comparable');
+
           console.log('PASS held-out cross-organ stress evidence gate',changed.provenanceFingerprint);
           EOF
