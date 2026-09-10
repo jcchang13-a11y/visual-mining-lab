@@ -1,4 +1,4 @@
-/* ZENOMORPH / NOSTROMO GUT foreign-capability admission v0.2
+/* ZENOMORPH / NOSTROMO GUT foreign-capability admission v0.3
  * Deterministic, non-executing pre-assimilation boundary.
  * This module does not install, import, invoke, fetch, eval, or authorize foreign capabilities.
  */
@@ -34,7 +34,10 @@ function compact(value,max=240){
 }
 function firstScalar(value,names){
   for(const name of names){
-    for(const [key,descriptor] of Object.entries(Object.getOwnPropertyDescriptors(value||{}))){
+    const descriptors=Object.getOwnPropertyDescriptors(value||{});
+    for(const key of Reflect.ownKeys(descriptors)){
+      if(typeof key!=='string')continue;
+      const descriptor=descriptors[key];
       if(String(key).toLowerCase()===name&&Object.prototype.hasOwnProperty.call(descriptor,'value')){
         const c=compact(descriptor.value);
         if(c)return c;
@@ -45,6 +48,13 @@ function firstScalar(value,names){
 }
 function visibleIdentity(value){
   return firstScalar(value,['capabilityname','toolname','pluginname','adaptername','modulename','interfacename','capability','tool','plugin','adapter','module','interface','name']);
+}
+function safePathKey(key){
+  if(typeof key==='symbol'){
+    const description=key.description===undefined?'':String(key.description).slice(0,80);
+    return `[Symbol(${description})]`;
+  }
+  return String(key).slice(0,80);
 }
 function findUnsafeDescriptor(root,{maxDepth=8,maxNodes=256}={}){
   const seen=new WeakSet();
@@ -61,9 +71,13 @@ function findUnsafeDescriptor(root,{maxDepth=8,maxNodes=256}={}){
     if(nodes>maxNodes)return {classification:'DESCRIPTOR_COMPLEXITY_LIMIT',reason:'descriptor-node-limit-exceeded',path:current.path};
     if(current.depth>maxDepth)return {classification:'DESCRIPTOR_COMPLEXITY_LIMIT',reason:'descriptor-depth-limit-exceeded',path:current.path};
     const descriptors=Object.getOwnPropertyDescriptors(value);
-    for(const [key,descriptor] of Object.entries(descriptors)){
+    for(const key of Reflect.ownKeys(descriptors)){
+      const descriptor=descriptors[key];
+      const path=`${current.path}.${safePathKey(key)}`;
+      if(typeof key==='symbol'){
+        return {classification:'SYMBOL_KEY_METADATA_PRESENT',reason:'symbol-keyed-properties-are-not-admission-metadata',path};
+      }
       const lower=String(key).toLowerCase();
-      const path=`${current.path}.${String(key).slice(0,80)}`;
       if(!Object.prototype.hasOwnProperty.call(descriptor,'value')){
         return {classification:'ACCESSOR_PAYLOAD_PRESENT',reason:'accessor-properties-are-never-admission-metadata',path};
       }
@@ -80,7 +94,7 @@ function findUnsafeDescriptor(root,{maxDepth=8,maxNodes=256}={}){
 
 export function assessForeignCapability(candidate,context={}){
   const base={
-    schema:'zenomorph-gut-capability-admission/v0.2',
+    schema:'zenomorph-gut-capability-admission/v0.3',
     organism:'ZENOMORPH',
     habitat:'NOSTROMO',
     executed:false,
@@ -143,12 +157,13 @@ export function assessForeignCapability(candidate,context={}){
 }
 
 export const capabilityAdmissionBoundary = Object.freeze({
-  version:'0.2',
+  version:'0.3',
   executesForeignCode:false,
   grantsAuthorization:false,
   installsCapability:false,
   recursivelyRejectsExecutableMetadata:true,
   rejectsAccessorPropertiesWithoutInvokingThem:true,
+  rejectsSymbolKeyedMetadata:true,
   descriptorScanLimits:{maxDepth:8,maxNodes:256},
   admissionRequires:['structured identity','provenance','permission boundary','interface or input/output contract'],
   nextStage:'isolated sandbox test with provenance and rollback evidence'
