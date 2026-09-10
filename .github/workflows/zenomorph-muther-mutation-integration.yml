@@ -1,0 +1,34 @@
+name: ZENOMORPH MUTHER Mutation Integration
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'nostromo/muther/**'
+      - 'nostromo/integration/**'
+      - '.github/workflows/zenomorph-muther-mutation-integration.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  integration:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify MUTHER internal mutation semantics
+        run: node nostromo/muther/internal-mutation.test.mjs
+      - name: Verify exact-lineage GUT-VAJRA mutation gate
+        run: node nostromo/muther/internal-mutation-cross-organ-gate.test.mjs
+      - name: Regression check GUT metabolism
+        run: node nostromo/integration/gut-metabolism-test.mjs
+      - name: Regression check VAJRA dynamic dismantling
+        run: node nostromo/integration/vajra-dynamic-test.mjs
+      - name: Regression check SHROOMING feedback conditioning
+        run: node nostromo/integration/shroom-feedback-test.mjs
+      - name: Run full 50-round NOSTROMO integration regression
+        run: node nostromo/integration/ci-test.mjs
