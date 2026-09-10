@@ -1,6 +1,6 @@
 {
   "schema": "zenomorph-capability-repeated-heldout-stress-test/v0.1",
-  "completedAt": "2026-09-10T09:18:40.320Z",
+  "completedAt": "2026-09-10T10:08:47.281Z",
   "status": "PASS",
   "capability": "REPEATED_SELECTIVE_FOREIGN_CAPABILITY_BEHAVIOR_PROFILE",
   "cases": {
@@ -33,7 +33,7 @@
             "installed": false,
             "persistentMutation": false,
             "isolatedTrial": {
-              "schema": "zenomorph-gut-capability-sandbox/v0.2",
+              "schema": "zenomorph-gut-capability-sandbox/v0.3",
               "organism": "ZENOMORPH",
               "habitat": "NOSTROMO",
               "bodyAdmission": false,
@@ -108,7 +108,7 @@
             "installed": false,
             "persistentMutation": false,
             "isolatedTrial": {
-              "schema": "zenomorph-gut-capability-sandbox/v0.2",
+              "schema": "zenomorph-gut-capability-sandbox/v0.3",
               "organism": "ZENOMORPH",
               "habitat": "NOSTROMO",
               "bodyAdmission": false,
@@ -183,7 +183,7 @@
             "installed": false,
             "persistentMutation": false,
             "isolatedTrial": {
-              "schema": "zenomorph-gut-capability-sandbox/v0.2",
+              "schema": "zenomorph-gut-capability-sandbox/v0.3",
               "organism": "ZENOMORPH",
               "habitat": "NOSTROMO",
               "bodyAdmission": false,
@@ -279,7 +279,7 @@
             "installed": false,
             "persistentMutation": false,
             "isolatedTrial": {
-              "schema": "zenomorph-gut-capability-sandbox/v0.2",
+              "schema": "zenomorph-gut-capability-sandbox/v0.3",
               "organism": "ZENOMORPH",
               "habitat": "NOSTROMO",
               "bodyAdmission": false,
@@ -354,7 +354,7 @@
             "installed": false,
             "persistentMutation": false,
             "isolatedTrial": {
-              "schema": "zenomorph-gut-capability-sandbox/v0.2",
+              "schema": "zenomorph-gut-capability-sandbox/v0.3",
               "organism": "ZENOMORPH",
               "habitat": "NOSTROMO",
               "bodyAdmission": false,
@@ -429,7 +429,7 @@
             "installed": false,
             "persistentMutation": false,
             "isolatedTrial": {
-              "schema": "zenomorph-gut-capability-sandbox/v0.2",
+              "schema": "zenomorph-gut-capability-sandbox/v0.3",
               "organism": "ZENOMORPH",
               "habitat": "NOSTROMO",
               "bodyAdmission": false,
@@ -525,7 +525,7 @@
             "installed": false,
             "persistentMutation": false,
             "isolatedTrial": {
-              "schema": "zenomorph-gut-capability-sandbox/v0.2",
+              "schema": "zenomorph-gut-capability-sandbox/v0.3",
               "organism": "ZENOMORPH",
               "habitat": "NOSTROMO",
               "bodyAdmission": false,
@@ -600,7 +600,7 @@
             "installed": false,
             "persistentMutation": false,
             "isolatedTrial": {
-              "schema": "zenomorph-gut-capability-sandbox/v0.2",
+              "schema": "zenomorph-gut-capability-sandbox/v0.3",
               "organism": "ZENOMORPH",
               "habitat": "NOSTROMO",
               "bodyAdmission": false,
@@ -675,7 +675,7 @@
             "installed": false,
             "persistentMutation": false,
             "isolatedTrial": {
-              "schema": "zenomorph-gut-capability-sandbox/v0.2",
+              "schema": "zenomorph-gut-capability-sandbox/v0.3",
               "organism": "ZENOMORPH",
               "habitat": "NOSTROMO",
               "bodyAdmission": false,
@@ -771,7 +771,7 @@
             "installed": false,
             "persistentMutation": false,
             "isolatedTrial": {
-              "schema": "zenomorph-gut-capability-sandbox/v0.2",
+              "schema": "zenomorph-gut-capability-sandbox/v0.3",
               "organism": "ZENOMORPH",
               "habitat": "NOSTROMO",
               "bodyAdmission": false,
@@ -846,7 +846,7 @@
             "installed": false,
             "persistentMutation": false,
             "isolatedTrial": {
-              "schema": "zenomorph-gut-capability-sandbox/v0.2",
+              "schema": "zenomorph-gut-capability-sandbox/v0.3",
               "organism": "ZENOMORPH",
               "habitat": "NOSTROMO",
               "bodyAdmission": false,
@@ -921,7 +921,7 @@
             "installed": false,
             "persistentMutation": false,
             "isolatedTrial": {
-              "schema": "zenomorph-gut-capability-sandbox/v0.2",
+              "schema": "zenomorph-gut-capability-sandbox/v0.3",
               "organism": "ZENOMORPH",
               "habitat": "NOSTROMO",
               "bodyAdmission": false,
