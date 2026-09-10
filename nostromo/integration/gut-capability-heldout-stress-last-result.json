@@ -1,11 +1,11 @@
 {
   "schema": "zenomorph-capability-heldout-stress-test/v0.1",
-  "completedAt": "2026-09-10T05:19:53.869Z",
+  "completedAt": "2026-09-10T08:03:02.810Z",
   "status": "PASS",
   "capability": "EPHEMERAL_FOREIGN_CAPABILITY_DOWNSTREAM_BEHAVIOR_CHANGE",
   "cases": {
     "pass": {
-      "schema": "zenomorph-capability-heldout-stress/v0.1",
+      "schema": "zenomorph-capability-heldout-stress/v0.2",
       "organism": "ZENOMORPH",
       "habitat": "NOSTROMO",
       "bodyAdmission": false,
@@ -56,6 +56,7 @@
         "provenanceFingerprint": "heldout-prov-001",
         "rollbackEvidence": "no installation; cloned frozen inputs; no body state mutation performed by sandbox"
       },
+      "registryLookup": "OWN_DATA_PROPERTY_ONLY",
       "status": "PASS",
       "assimilationStage": "HELDOUT_BEHAVIOR_CHANGE_VERIFIED",
       "reason": "foreign-capability-changed-downstream-organ-behavior",
@@ -72,7 +73,7 @@
       "rollbackEvidence": "ephemeral replay only; no registry, body, or persistent state mutation performed"
     },
     "noChange": {
-      "schema": "zenomorph-capability-heldout-stress/v0.1",
+      "schema": "zenomorph-capability-heldout-stress/v0.2",
       "organism": "ZENOMORPH",
       "habitat": "NOSTROMO",
       "bodyAdmission": false,
@@ -123,6 +124,7 @@
         "provenanceFingerprint": "heldout-prov-001",
         "rollbackEvidence": "no installation; cloned frozen inputs; no body state mutation performed by sandbox"
       },
+      "registryLookup": "OWN_DATA_PROPERTY_ONLY",
       "status": "HOLD",
       "assimilationStage": "HELDOUT_NO_BEHAVIOR_CHANGE",
       "reason": "foreign-capability-produced-no-observed-downstream-change",
@@ -139,7 +141,7 @@
       "rollbackEvidence": "ephemeral replay only; no registry, body, or persistent state mutation performed"
     },
     "missingOrgan": {
-      "schema": "zenomorph-capability-heldout-stress/v0.1",
+      "schema": "zenomorph-capability-heldout-stress/v0.2",
       "organism": "ZENOMORPH",
       "habitat": "NOSTROMO",
       "bodyAdmission": false,
@@ -190,13 +192,14 @@
         "provenanceFingerprint": "heldout-prov-001",
         "rollbackEvidence": "no installation; cloned frozen inputs; no body state mutation performed by sandbox"
       },
+      "registryLookup": "OWN_DATA_PROPERTY_ONLY",
       "status": "BLOCKED",
       "assimilationStage": "HELDOUT_STRESS_BLOCKED",
-      "reason": "host-registered-downstream-organ-required",
+      "reason": "host-registered-downstream-organ-own-data-property-required",
       "downstreamExecuted": false
     },
     "badCandidate": {
-      "schema": "zenomorph-capability-heldout-stress/v0.1",
+      "schema": "zenomorph-capability-heldout-stress/v0.2",
       "organism": "ZENOMORPH",
       "habitat": "NOSTROMO",
       "bodyAdmission": false,
@@ -229,6 +232,7 @@
         "reason": "candidate-not-admitted-to-isolated-test",
         "executed": false
       },
+      "registryLookup": "OWN_DATA_PROPERTY_ONLY",
       "status": "BLOCKED",
       "assimilationStage": "HELDOUT_STRESS_BLOCKED",
       "reason": "isolated-trial-must-pass-first",
@@ -236,10 +240,13 @@
     }
   },
   "boundary": {
-    "version": "0.1",
+    "version": "0.2",
     "requiresIsolatedPass": true,
     "hostRegisteredCapabilityOnly": true,
     "hostRegisteredDownstreamOrganOnly": true,
+    "registryLookup": "own data property only",
+    "inheritedRegistryEntries": false,
+    "accessorRegistryEntries": false,
     "persistentMutation": false,
     "bodyAdmissionOnPass": false,
     "nextStage": "repeat across independent held-out inputs and explicit incorporation decision"
