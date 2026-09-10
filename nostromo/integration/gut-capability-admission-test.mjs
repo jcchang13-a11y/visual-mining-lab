@@ -1,5 +1,5 @@
 import fs from 'node:fs/promises';
-import {assessForeignCapability,capabilityAdmissionBoundary} from '../gut/capability-admission.mjs';
+import {assessForeignCapability,assessForeignCapabilityJson,capabilityAdmissionBoundary} from '../gut/capability-admission.mjs';
 
 const failures=[];
 const check=(ok,type,detail)=>{if(!ok)failures.push({type,detail});};
@@ -109,7 +109,7 @@ const missingContract=assessForeignCapability({
 });
 check(missingContract.reason==='input-output-or-interface-contract-required-before-assimilation','MISSING_CONTRACT_NOT_HELD',missingContract);
 
-const candidate=assessForeignCapability({
+const completeDescriptor={
   capabilityName:'Bounded Evidence Adapter',
   type:'connector capability',
   provider:'provider-c',
@@ -117,20 +117,49 @@ const candidate=assessForeignCapability({
   permissions:['public-read-only'],
   inputSchema:{claim:'string'},
   outputSchema:{evidence:'array',provenance:'array'}
-});
+};
+const candidate=assessForeignCapability(completeDescriptor);
 check(candidate.classification==='FOREIGN_CAPABILITY','COMPLETE_DESCRIPTOR_NOT_RECOGNIZED',candidate);
 check(candidate.status==='HOLD','COMPLETE_DESCRIPTOR_PREMATURELY_ABSORBED',candidate);
 check(candidate.assimilationStage==='CANDIDATE_FOR_ISOLATED_TEST','COMPLETE_DESCRIPTOR_WRONG_STAGE',candidate);
 check(candidate.authorized===false&&candidate.executed===false,'ADMISSION_GRANTED_EXECUTION_OR_AUTHORIZATION',candidate);
 check(candidate.hasProvenance&&candidate.hasPermissionBoundary&&candidate.hasContract,'ADMISSION_AUDIT_FLAGS_INCOMPLETE',candidate);
-check(capabilityAdmissionBoundary.executesForeignCode===false&&capabilityAdmissionBoundary.installsCapability===false,'BOUNDARY_ALLOWS_EXECUTION',capabilityAdmissionBoundary);
+check(candidate.trustBoundary==='TRUSTED_IN_PROCESS_OBJECT_METADATA','OBJECT_API_TRUST_BOUNDARY_MISSING',candidate);
+
+const serializedCandidate=assessForeignCapabilityJson(JSON.stringify(completeDescriptor));
+check(serializedCandidate.classification==='FOREIGN_CAPABILITY'&&serializedCandidate.status==='HOLD','SERIALIZED_COMPLETE_DESCRIPTOR_NOT_RECOGNIZED',serializedCandidate);
+check(serializedCandidate.assimilationStage==='CANDIDATE_FOR_ISOLATED_TEST','SERIALIZED_COMPLETE_DESCRIPTOR_WRONG_STAGE',serializedCandidate);
+check(serializedCandidate.trustBoundary==='UNTRUSTED_SERIALIZED_JSON'&&serializedCandidate.transport==='SERIALIZED_JSON'&&serializedCandidate.proxyTrapExposure===false,'SERIALIZED_TRUST_BOUNDARY_MISSING',serializedCandidate);
+
+const serializedExecutable=assessForeignCapabilityJson(JSON.stringify({
+  capabilityName:'Serialized Executable Adapter',
+  provider:'provider-json-exec',
+  permissions:['read'],
+  inputSchema:{q:'string'},
+  outputSchema:{r:'array'},
+  code:'must remain inert'
+}));
+check(serializedExecutable.classification==='EXECUTABLE_PAYLOAD_PRESENT'&&serializedExecutable.status==='QUARANTINE','SERIALIZED_EXECUTABLE_NOT_QUARANTINED',serializedExecutable);
+check(executionCount===0,'SERIALIZED_EXECUTABLE_SIDE_EFFECT',{executionCount});
+
+const malformedSerialized=assessForeignCapabilityJson('{"capabilityName":');
+check(malformedSerialized.classification==='INVALID_SERIALIZED_DESCRIPTOR'&&malformedSerialized.status==='QUARANTINE','MALFORMED_SERIALIZED_INPUT_NOT_QUARANTINED',malformedSerialized);
+
+const unsafeTransport=assessForeignCapabilityJson(completeDescriptor);
+check(unsafeTransport.classification==='UNSAFE_TRANSPORT_TYPE'&&unsafeTransport.status==='QUARANTINE','NON_STRING_UNTRUSTED_TRANSPORT_NOT_QUARANTINED',unsafeTransport);
+
+const oversizedSerialized=assessForeignCapabilityJson('x'.repeat(capabilityAdmissionBoundary.maxSerializedChars+1));
+check(oversizedSerialized.classification==='TRANSPORT_SIZE_LIMIT'&&oversizedSerialized.status==='QUARANTINE','OVERSIZED_SERIALIZED_INPUT_NOT_QUARANTINED',oversizedSerialized);
+
+check(capabilityAdmissionBoundary.serializedBoundaryMayExecuteForeignCode===false&&capabilityAdmissionBoundary.objectInspectionMayTriggerProxyTraps===true,'BOUNDARY_PROXY_SEMANTICS_INCORRECT',capabilityAdmissionBoundary);
+check(capabilityAdmissionBoundary.grantsAuthorization===false&&capabilityAdmissionBoundary.installsCapability===false,'BOUNDARY_ALLOWS_AUTHORIZATION_OR_INSTALLATION',capabilityAdmissionBoundary);
 check(capabilityAdmissionBoundary.recursivelyRejectsExecutableMetadata===true&&capabilityAdmissionBoundary.rejectsAccessorPropertiesWithoutInvokingThem===true&&capabilityAdmissionBoundary.rejectsSymbolKeyedMetadata===true,'BOUNDARY_DEEP_SCAN_FLAGS_MISSING',capabilityAdmissionBoundary);
 
 const result={
-  schema:'xenomorph-gut-capability-admission-test/v0.3',
+  schema:'zenomorph-gut-capability-admission-test/v0.4',
   completedAt:new Date().toISOString(),
   status:failures.length?'FAIL':'PASS',
-  capability:'FOREIGN_CAPABILITY_PRE_ASSIMILATION_ADMISSION_BOUNDARY_WITH_SYMBOL_KEY_QUARANTINE',
+  capability:'FOREIGN_CAPABILITY_PRE_ASSIMILATION_ADMISSION_WITH_SERIALIZED_UNTRUSTED_BOUNDARY',
   cases:{
     ordinaryProse:prose,
     callable,
@@ -143,11 +172,16 @@ const result={
     missingProvenance,
     missingPermissions,
     missingContract,
-    completeCandidate:candidate
+    completeCandidate:candidate,
+    serializedCandidate,
+    serializedExecutable,
+    malformedSerialized,
+    unsafeTransport,
+    oversizedSerialized
   },
   executionCount,
   getterExecutionCount,
-  boundary:'This test verifies deterministic pre-assimilation admission judgment, including bounded recursive inspection of nested metadata. Executable-key payloads, callable values, accessor properties, and symbol-keyed properties are quarantined without invocation; accessors are inspected by descriptor only. A structured foreign capability may become a candidate for isolated testing only when provenance, a permission boundary, and an interface/input-output contract are visible. Nothing in this layer executes, imports, installs, authorizes, fetches or absorbs the candidate into the XENOMORPH body.',
+  boundary:'ZENOMORPH now distinguishes trusted in-process object inspection from the untrusted transport boundary. Arbitrary JavaScript object reflection cannot truthfully promise proxy-trap safety, so untrusted foreign capability descriptors must arrive as bounded serialized JSON text. JSON is parsed inside GUT and only then inspected. The serialized path does not execute, import, install, authorize, fetch or absorb the candidate; malformed, oversized and non-string transports are quarantined. The legacy object API remains available only for trusted in-process metadata.',
   failures
 };
 await fs.writeFile('nostromo/integration/gut-capability-admission-last-result.json',JSON.stringify(result,null,2)+'\n','utf8');

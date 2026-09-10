@@ -1,6 +1,8 @@
-/* ZENOMORPH / NOSTROMO GUT foreign-capability admission v0.3
- * Deterministic, non-executing pre-assimilation boundary.
- * This module does not install, import, invoke, fetch, eval, or authorize foreign capabilities.
+/* ZENOMORPH / NOSTROMO GUT foreign-capability admission v0.4
+ * Deterministic pre-assimilation boundary.
+ * Untrusted inputs must enter through assessForeignCapabilityJson(serialized,...).
+ * The object API is retained for trusted in-process metadata only because arbitrary
+ * JavaScript object reflection can invoke Proxy traps.
  */
 
 const EXECUTABLE_KEYS = new Set([
@@ -18,7 +20,19 @@ const PERMISSION_KEYS = new Set([
 const CONTRACT_KEYS = new Set([
   'interface','interfacename','inputschema','outputschema','inputs','outputs','contract','api'
 ]);
+const MAX_SERIALIZED_CHARS = 262144;
 
+function admissionBase(){
+  return {
+    schema:'zenomorph-gut-capability-admission/v0.4',
+    organism:'ZENOMORPH',
+    habitat:'NOSTROMO',
+    executed:false,
+    authorized:false,
+    assimilationStage:'NONE',
+    route:'HOLD'
+  };
+}
 function ownKeysLower(value){
   return Object.keys(value||{}).map(k=>String(k).toLowerCase());
 }
@@ -93,15 +107,7 @@ function findUnsafeDescriptor(root,{maxDepth=8,maxNodes=256}={}){
 }
 
 export function assessForeignCapability(candidate,context={}){
-  const base={
-    schema:'zenomorph-gut-capability-admission/v0.3',
-    organism:'ZENOMORPH',
-    habitat:'NOSTROMO',
-    executed:false,
-    authorized:false,
-    assimilationStage:'NONE',
-    route:'HOLD'
-  };
+  const base={...admissionBase(),trustBoundary:'TRUSTED_IN_PROCESS_OBJECT_METADATA'};
 
   if(typeof candidate==='function'){
     return {...base,status:'QUARANTINE',classification:'OPAQUE_CALLABLE',reason:'callable-values-are-never-admission-descriptors'};
@@ -156,15 +162,46 @@ export function assessForeignCapability(candidate,context={}){
   };
 }
 
+export function assessForeignCapabilityJson(serialized,context={}){
+  const base={...admissionBase(),trustBoundary:'UNTRUSTED_SERIALIZED_JSON'};
+  if(typeof serialized!=='string'){
+    return {...base,status:'QUARANTINE',classification:'UNSAFE_TRANSPORT_TYPE',reason:'serialized-json-string-required-for-untrusted-boundary'};
+  }
+  if(serialized.length>MAX_SERIALIZED_CHARS){
+    return {...base,status:'QUARANTINE',classification:'TRANSPORT_SIZE_LIMIT',reason:'serialized-descriptor-char-limit-exceeded',serializedChars:serialized.length,maxSerializedChars:MAX_SERIALIZED_CHARS};
+  }
+  let parsed;
+  try{
+    parsed=JSON.parse(serialized);
+  }catch{
+    return {...base,status:'QUARANTINE',classification:'INVALID_SERIALIZED_DESCRIPTOR',reason:'valid-json-required-for-untrusted-boundary'};
+  }
+  const assessed=assessForeignCapability(parsed,context);
+  return {
+    ...assessed,
+    schema:'zenomorph-gut-capability-admission/v0.4',
+    trustBoundary:'UNTRUSTED_SERIALIZED_JSON',
+    transport:'SERIALIZED_JSON',
+    transportParsed:true,
+    proxyTrapExposure:false
+  };
+}
+
 export const capabilityAdmissionBoundary = Object.freeze({
-  version:'0.3',
-  executesForeignCode:false,
+  version:'0.4',
+  organism:'ZENOMORPH',
+  habitat:'NOSTROMO',
+  untrustedInputContract:'serialized JSON string only',
+  trustedObjectApi:'assessForeignCapability is for trusted in-process metadata only',
+  objectInspectionMayTriggerProxyTraps:true,
+  serializedBoundaryMayExecuteForeignCode:false,
   grantsAuthorization:false,
   installsCapability:false,
   recursivelyRejectsExecutableMetadata:true,
   rejectsAccessorPropertiesWithoutInvokingThem:true,
   rejectsSymbolKeyedMetadata:true,
   descriptorScanLimits:{maxDepth:8,maxNodes:256},
+  maxSerializedChars:MAX_SERIALIZED_CHARS,
   admissionRequires:['structured identity','provenance','permission boundary','interface or input/output contract'],
   nextStage:'isolated sandbox test with provenance and rollback evidence'
 });
