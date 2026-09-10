@@ -22,6 +22,8 @@ jobs:
           node-version: '22'
       - name: Verify MUTHER internal mutation semantics
         run: node nostromo/muther/internal-mutation.test.mjs
+      - name: Verify MUTHER text-visual phenotype pressure
+        run: node nostromo/muther/internal-mutation-phenotype-pressure.test.mjs
       - name: Verify exact-lineage GUT-VAJRA mutation gate
         run: node nostromo/muther/internal-mutation-cross-organ-gate.test.mjs
       - name: Regression check GUT metabolism
