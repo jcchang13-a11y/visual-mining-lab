@@ -13,27 +13,30 @@
   const sectionLabelLine=/^\s*［(?:正文|註釋|經文)］\s*$/;
   const pageCounterLine=/^\s*\d+\/\d+\s*$/;
   const workLine=/^\s*(?:施工註記|工作註記|暫記|待查|未決|停工|死路)\s*[：:]/;
+  /* 只抓明確的排版／製作指令；一般【章名】與經文標題不碰。經文區本來也在 excluded 內。 */
+  const productionDirectiveLine=/^\s*【(?=[^】]*(?:換頁|字體|排版|版面|插圖|待接|圖位|圖檔|印刷|列印|跨頁|留白))[^】]+】\s*$/;
   const excluded='.sutra-block,.gcb-formula,.structure-code,.work-note,.figure-slot,figure,figcaption,script,style';
 
   function classify(line){
-    if(structureLine.test(line)||bracketStructureLine.test(line)||sectionLabelLine.test(line)||pageCounterLine.test(line)) return 'structure-code structure-line';
-    if(workLine.test(line)) return 'work-note work-note-line';
-    return '';
+    if(structureLine.test(line)||bracketStructureLine.test(line)||sectionLabelLine.test(line)||pageCounterLine.test(line)) return {cls:'structure-code structure-line',layer:'L4'};
+    if(workLine.test(line)||productionDirectiveLine.test(line)) return {cls:'work-note work-note-line',layer:'L3'};
+    return null;
   }
 
   function markTextNode(node){
     if(!node?.nodeValue || node.parentElement?.closest(excluded)) return false;
     const value=node.nodeValue;
-    if(!/[：:\[\]［］\/]/.test(value)) return false;
+    if(!/[：:\[\]［］\/【】]/.test(value)) return false;
     const lines=value.split('\n');
     if(!lines.some(line=>classify(line))) return false;
 
     const frag=document.createDocumentFragment();
     lines.forEach((line,index)=>{
-      const cls=classify(line);
-      if(cls){
+      const mark=classify(line);
+      if(mark){
         const span=document.createElement('span');
-        span.className=cls;
+        span.className=mark.cls;
+        span.dataset.gcbLayer=mark.layer;
         span.textContent=line;
         frag.append(span);
       }else{
