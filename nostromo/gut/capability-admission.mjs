@@ -1,4 +1,4 @@
-/* ZENOMORPH / NOSTROMO GUT foreign-capability admission v0.4
+/* ZENOMORPH / NOSTROMO GUT foreign-capability admission v0.5
  * Deterministic pre-assimilation boundary.
  * Untrusted inputs must enter through assessForeignCapabilityJson(serialized,...).
  * The object API is retained for trusted in-process metadata only because arbitrary
@@ -24,7 +24,7 @@ const MAX_SERIALIZED_CHARS = 262144;
 
 function admissionBase(){
   return {
-    schema:'zenomorph-gut-capability-admission/v0.4',
+    schema:'zenomorph-gut-capability-admission/v0.5',
     organism:'ZENOMORPH',
     habitat:'NOSTROMO',
     executed:false,
@@ -105,6 +105,24 @@ function findUnsafeDescriptor(root,{maxDepth=8,maxNodes=256}={}){
   }
   return null;
 }
+function provenanceConflict(candidate,context={}){
+  const declared={
+    source:firstScalar(candidate,['source']),
+    sourceFingerprint:firstScalar(candidate,['sourcefingerprint']),
+    provenanceFingerprint:firstScalar(candidate,['provenancefingerprint'])
+  };
+  const host={
+    source:compact(context.source),
+    sourceFingerprint:compact(context.sourceFingerprint),
+    provenanceFingerprint:compact(context.provenanceFingerprint)
+  };
+  for(const field of ['source','sourceFingerprint','provenanceFingerprint']){
+    if(declared[field]&&host[field]&&declared[field]!==host[field]){
+      return {field,declared:declared[field],host:host[field]};
+    }
+  }
+  return null;
+}
 
 export function assessForeignCapability(candidate,context={}){
   const base={...admissionBase(),trustBoundary:'TRUSTED_IN_PROCESS_OBJECT_METADATA'};
@@ -140,8 +158,22 @@ export function assessForeignCapability(candidate,context={}){
   const hasProvenance=hasAny(keys,PROVENANCE_KEYS)||!!compact(context.source)||!!compact(context.provenanceFingerprint);
   const hasPermissionBoundary=hasAny(keys,PERMISSION_KEYS);
   const hasContract=hasAny(keys,CONTRACT_KEYS);
+  const conflict=provenanceConflict(candidate,context);
 
   const audit={identity:identity||null,hasProvenance,hasPermissionBoundary,hasContract};
+  if(conflict){
+    return {
+      ...base,
+      ...audit,
+      status:'QUARANTINE',
+      classification:'PROVENANCE_CONFLICT',
+      assimilationStage:'CANDIDATE_QUARANTINED',
+      reason:'candidate-provenance-conflicts-with-host-context',
+      conflictField:conflict.field,
+      declaredProvenance:conflict.declared,
+      hostProvenance:conflict.host
+    };
+  }
   if(!hasProvenance){
     return {...base,...audit,status:'HOLD',classification:'FOREIGN_CAPABILITY',assimilationStage:'CANDIDATE_UNVERIFIED',reason:'provenance-required-before-assimilation'};
   }
@@ -179,7 +211,7 @@ export function assessForeignCapabilityJson(serialized,context={}){
   const assessed=assessForeignCapability(parsed,context);
   return {
     ...assessed,
-    schema:'zenomorph-gut-capability-admission/v0.4',
+    schema:'zenomorph-gut-capability-admission/v0.5',
     trustBoundary:'UNTRUSTED_SERIALIZED_JSON',
     transport:'SERIALIZED_JSON',
     transportParsed:true,
@@ -188,7 +220,7 @@ export function assessForeignCapabilityJson(serialized,context={}){
 }
 
 export const capabilityAdmissionBoundary = Object.freeze({
-  version:'0.4',
+  version:'0.5',
   organism:'ZENOMORPH',
   habitat:'NOSTROMO',
   untrustedInputContract:'serialized JSON string only',
@@ -200,8 +232,9 @@ export const capabilityAdmissionBoundary = Object.freeze({
   recursivelyRejectsExecutableMetadata:true,
   rejectsAccessorPropertiesWithoutInvokingThem:true,
   rejectsSymbolKeyedMetadata:true,
+  quarantinesConflictingHostAndCandidateProvenance:true,
   descriptorScanLimits:{maxDepth:8,maxNodes:256},
   maxSerializedChars:MAX_SERIALIZED_CHARS,
-  admissionRequires:['structured identity','provenance','permission boundary','interface or input/output contract'],
+  admissionRequires:['structured identity','provenance','permission boundary','interface or input/output contract','no conflict with host provenance context'],
   nextStage:'isolated sandbox test with provenance and rollback evidence'
 });
