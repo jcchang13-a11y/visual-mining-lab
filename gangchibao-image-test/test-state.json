@@ -1,0 +1,37 @@
+{
+  "experiment": "gangchibao-image-test",
+  "completed_rounds": 1,
+  "current_round": 2,
+  "rounds": [
+    {
+      "round": 1,
+      "name": "baseline",
+      "status": "passed",
+      "checks": {
+        "index_exists_on_main": true,
+        "svg_asset_exists_on_main": true,
+        "pages_deployment_success": true,
+        "public_page_visual_confirmation": true,
+        "svg_visible_in_browser": true,
+        "broken_image_fallback_visible": true,
+        "body_not_blocked_by_broken_image": true
+      },
+      "evidence": {
+        "index_sha": "f5b3ffcb0b6d6d9059c600c883e289789c23de42",
+        "asset_path": "gangchibao-image-test/assets/test.svg",
+        "known_successful_pages_run": 34454895988,
+        "latest_pages_run_seen": 34456304692,
+        "browser_confirmation": "User-provided Chrome screenshot on 2026-09-10 showed the public page, loaded local SVG, and fallback for intentionally missing image."
+      },
+      "notes": "Round 1 is complete. Do not repeat unless a later regression requires it. V8/V8-new/V9 are out of scope."
+    }
+  ],
+  "constraints": {
+    "do_not_modify": [
+      "gangchibao-v8",
+      "gangchibao-v8-new",
+      "gangchibao-v9"
+    ],
+    "next": "Round 2: real raster PNG/JPG image test in gangchibao-image-test only."
+  }
+}
