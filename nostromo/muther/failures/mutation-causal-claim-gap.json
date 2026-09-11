@@ -1,16 +1,21 @@
 {
   "schema": "zenomorph-failure/v0.1",
   "failureId": "MUTHER_MUTATION_CAUSAL_CLAIM_GAP",
-  "status": "OPEN_NOT_PROMOTED",
+  "status": "MITIGATED_PENDING_CROSS_ORGAN_REVIEW",
   "organ": "MU/TH/UR",
-  "observedCapability": "internal-mutation v0.4 verifies traceable source references, operation labels, provenance preservation, and that mutated outputs are not exact source-value copies",
-  "gap": "A proposal can cite two valid source traits and emit an arbitrary third value under a mutating operation. Current structural checks can prove traceability and non-copying, but cannot prove that the output was causally produced by decomposing and recombining the cited sources.",
-  "risk": "ZENOMORPH could mistake decorative provenance for genuine mining: a candidate may look cross-modal or phenotype-coupled because its metadata names text and visual ore even when the output was not materially derived from them.",
-  "requiredNextEvidence": [
-    "Add an isolated derivation witness or transformation trace that binds output features to source features without pretending to solve semantic causality generally.",
-    "Adversarially test arbitrary-output laundering, source-label swapping, and provenance-only cross-pressure claims.",
-    "Require GUT/VAJRA review to distinguish traceable transformation evidence from unsupported causal derivation claims.",
-    "Run MUTHER unit tests and cross-organ regression before any public capability promotion."
+  "observedCapability": "internal-mutation v0.4 plus bounded derivation-witness v0.1 now distinguishes traceable non-copy transformation from a narrower class of source-bound reconstructable derivations",
+  "gap": "The original arbitrary-third-value laundering path is now blocked for derivations claiming bounded reconstructability: a mutating output must be exactly reconstructable from cited source slices plus punctuation-only separators. This still does not prove semantic causality, aesthetic derivation, creativity, or general recombination quality.",
+  "risk": "Without an explicit downstream review, ZENOMORPH could still overread a verified reconstruction witness as proof of meaningful cross-modal derivation or successful phenotype change. A mechanically reconstructable output can be trivial, ugly, semantically empty, or causally uninteresting.",
+  "evidence": [
+    "nostromo/muther/internal-mutation-derivation-witness.mjs",
+    "nostromo/muther/internal-mutation-derivation-witness.test.mjs",
+    "GitHub Actions run 34577536607 completed successfully",
+    "Adversarial coverage includes arbitrary-output laundering, source-label swapping, provenance-only cross-pressure claims, and expressive-literal injection"
   ],
-  "boundary": "This failure record does not invalidate the existing sandbox. It narrows the claim: current evidence supports traceable non-copy transformation, not verified causal recombination or autonomous aesthetic judgment."
+  "requiredNextEvidence": [
+    "Add a GUT/VAJRA review layer that explicitly distinguishes bounded reconstructability from unsupported semantic or aesthetic causal claims.",
+    "Run focused GUT/VAJRA tests plus cross-organ regression on the new review layer.",
+    "Only after that review passes may the public capability wording advance beyond traceable bounded derivation."
+  ],
+  "boundary": "The current evidence supports a bounded derivation witness, not verified semantic causality, autonomous aesthetic judgment, successful assimilation, organ growth, or permission to modify the persistent body. Public state must remain conservative until the downstream GUT/VAJRA review is verified."
 }
