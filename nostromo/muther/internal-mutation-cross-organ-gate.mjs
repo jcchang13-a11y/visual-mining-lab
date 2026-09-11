@@ -1,8 +1,11 @@
-// MUTHER internal mutation cross-organ gate v0.5
-// Cross-organ PASS is not enough: each organ must attach a machine-checkable review witness
-// bound to the exact candidate lineage, derivation fingerprint and review run.
+// MUTHER internal mutation cross-organ gate v0.6
+// Cross-organ PASS is not enough: GUT and VAJRA must issue module-bound review receipts
+// for the exact candidate lineage and derivation witness. Module binding is protocol provenance,
+// not cryptographic identity, truth certification, or authority to mutate the persistent body.
 
 import { deriveMutationDerivationFingerprint } from './internal-mutation-derivation-witness.mjs';
+import { verifyGutMutationReviewReceipt } from '../gut/mutation-review-receipt.mjs';
+import { verifyVajraMutationReviewReceipt } from '../vajra/mutation-review-receipt.mjs';
 
 const clean = value => typeof value === 'string' ? value.trim() : '';
 const canonical = value => clean(value).normalize('NFKC');
@@ -53,7 +56,7 @@ export function deriveMutationLineageFingerprint(candidate) {
 }
 
 function hold(reason, audit = {}) {
-  return { schema: 'zenomorph-muther-internal-mutation-cross-organ-gate/v0.5', status: 'HOLD', reason, incorporationAuthorized: false, bodyMutationApplied: false, ...audit };
+  return { schema: 'zenomorph-muther-internal-mutation-cross-organ-gate/v0.6', status: 'HOLD', reason, incorporationAuthorized: false, bodyMutationApplied: false, ...audit };
 }
 
 function normalizeEvidenceRefs(refs) {
@@ -94,6 +97,8 @@ export function deriveOrganReviewWitnessFingerprint(witness) {
 
 function qualifyReceipt(receipt, expectedOrgan, candidateId, lineageFingerprint, derivationFingerprint) {
   if (!receipt || typeof receipt !== 'object' || Array.isArray(receipt)) return { ok:false, reason:`${expectedOrgan}_RECEIPT_REQUIRED` };
+  const issuer = expectedOrgan === 'GUT' ? verifyGutMutationReviewReceipt(receipt) : verifyVajraMutationReviewReceipt(receipt);
+  if (!issuer.ok) return issuer;
   const organ = canonical(receipt.organ).toUpperCase();
   const status = canonical(receipt.status).toUpperCase();
   const provenance = clean(receipt.provenance);
@@ -108,7 +113,7 @@ function qualifyReceipt(receipt, expectedOrgan, candidateId, lineageFingerprint,
   if (canonical(receipt.derivationFingerprint) !== derivationFingerprint) return { ok:false, reason:`${expectedOrgan}_DERIVATION_MISMATCH` };
   const witness = qualifyReviewWitness(receipt.reviewWitness, expectedOrgan, candidateId, lineageFingerprint, derivationFingerprint, reviewRunId);
   if (!witness.ok) return witness;
-  return { ok:true, organ, provenance, reviewRunId, reviewWitnessFingerprint:witness.reviewWitnessFingerprint };
+  return { ok:true, organ, provenance, reviewRunId, reviewWitnessFingerprint:witness.reviewWitnessFingerprint, issuerModule:issuer.issuerModule, issuerFingerprint:issuer.issuerFingerprint };
 }
 
 export function evaluateMutationCrossOrganGate({ candidate, lineageFingerprint, derivationWitness, gutReceipt, vajraReceipt } = {}) {
@@ -125,10 +130,10 @@ export function evaluateMutationCrossOrganGate({ candidate, lineageFingerprint, 
   if (!derivedDerivationFingerprint || canonical(derivationWitness?.derivationFingerprint) !== derivedDerivationFingerprint) return hold('MUTHER_DERIVATION_WITNESS_FINGERPRINT_INVALID', { candidateId, lineageFingerprint:derivedLineage, derivedDerivationFingerprint });
   const gut = qualifyReceipt(gutReceipt, 'GUT', candidateId, derivedLineage, derivedDerivationFingerprint);
   const vajra = qualifyReceipt(vajraReceipt, 'VAJRA', candidateId, derivedLineage, derivedDerivationFingerprint);
-  const audit = { candidateId, lineageFingerprint:derivedLineage, derivationFingerprint:derivedDerivationFingerprint, candidateLineageBound:true, derivationWitnessBound:true, reviews:{ GUT:{qualified:gut.ok,reason:gut.reason||null,provenance:gut.provenance||null,reviewRunId:gut.reviewRunId||null,reviewWitnessFingerprint:gut.reviewWitnessFingerprint||null}, VAJRA:{qualified:vajra.ok,reason:vajra.reason||null,provenance:vajra.provenance||null,reviewRunId:vajra.reviewRunId||null,reviewWitnessFingerprint:vajra.reviewWitnessFingerprint||null} } };
+  const audit = { candidateId, lineageFingerprint:derivedLineage, derivationFingerprint:derivedDerivationFingerprint, candidateLineageBound:true, derivationWitnessBound:true, reviews:{ GUT:{qualified:gut.ok,reason:gut.reason||null,provenance:gut.provenance||null,reviewRunId:gut.reviewRunId||null,reviewWitnessFingerprint:gut.reviewWitnessFingerprint||null,issuerModule:gut.issuerModule||null,issuerFingerprint:gut.issuerFingerprint||null}, VAJRA:{qualified:vajra.ok,reason:vajra.reason||null,provenance:vajra.provenance||null,reviewRunId:vajra.reviewRunId||null,reviewWitnessFingerprint:vajra.reviewWitnessFingerprint||null,issuerModule:vajra.issuerModule||null,issuerFingerprint:vajra.issuerFingerprint||null} } };
   if (!gut.ok) return hold(gut.reason, audit);
   if (!vajra.ok) return hold(vajra.reason, audit);
   if (canonical(gut.provenance) === canonical(vajra.provenance)) return hold('CROSS_ORGAN_REVIEW_INDEPENDENCE_NOT_DEMONSTRATED', audit);
   if (canonical(gut.reviewRunId) === canonical(vajra.reviewRunId)) return hold('CROSS_ORGAN_REVIEW_RUN_INDEPENDENCE_NOT_DEMONSTRATED', audit);
-  return { schema:'zenomorph-muther-internal-mutation-cross-organ-gate/v0.5', status:'ELIGIBLE_FOR_CONTROLLED_INCORPORATION_STAGE', candidateId, lineageFingerprint:derivedLineage, derivationFingerprint:derivedDerivationFingerprint, candidateLineageBound:true, derivationWitnessBound:true, crossOrganAgreement:true, independentReviewProvenance:[gut.provenance,vajra.provenance], independentReviewRunIds:[gut.reviewRunId,vajra.reviewRunId], reviewWitnessFingerprints:[gut.reviewWitnessFingerprint,vajra.reviewWitnessFingerprint], incorporationAuthorized:false, bodyMutationApplied:false, nextRequiredGate:'CONTROLLED_MORPHOGENESIS_INCORPORATION_WITH_ROLLBACK', boundary:'Eligibility now requires evidence-bound organ-specific review witnesses, not bare PASS labels. This gate still never installs, executes, or mutates the persistent body.' };
+  return { schema:'zenomorph-muther-internal-mutation-cross-organ-gate/v0.6', status:'ELIGIBLE_FOR_CONTROLLED_INCORPORATION_STAGE', candidateId, lineageFingerprint:derivedLineage, derivationFingerprint:derivedDerivationFingerprint, candidateLineageBound:true, derivationWitnessBound:true, crossOrganAgreement:true, organIssuedReviewReceipts:true, independentReviewProvenance:[gut.provenance,vajra.provenance], independentReviewRunIds:[gut.reviewRunId,vajra.reviewRunId], reviewWitnessFingerprints:[gut.reviewWitnessFingerprint,vajra.reviewWitnessFingerprint], issuerModules:[gut.issuerModule,vajra.issuerModule], issuerFingerprints:[gut.issuerFingerprint,vajra.issuerFingerprint], incorporationAuthorized:false, bodyMutationApplied:false, nextRequiredGate:'CONTROLLED_MORPHOGENESIS_INCORPORATION_WITH_ROLLBACK', boundary:'Eligibility requires module-bound GUT and VAJRA receipts plus evidence-bound organ-specific review witnesses. Module binding is protocol provenance, not cryptographic identity or proof of truth. This gate never installs, executes, or mutates the persistent body.' };
 }
