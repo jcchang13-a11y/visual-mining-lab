@@ -36,6 +36,11 @@ const gutFinding = kind => ({
   DUPLICATE_SCAN:{verdict:'CLEAR',observation:'No uncontained duplicate candidate contribution detected in the bounded candidate review.'},
   PROVENANCE_SCAN:{verdict:'TRACEABLE',observation:'All reviewed candidate contributions retain candidate, lineage, derivation and source references.'}
 }[kind]);
+const vajraFinding = kind => ({
+  CONTRADICTION_SCAN:'No internal contradiction was found between the two bounded transformed traits and their declared derivation recipes.',
+  COUNTEREXAMPLE_SCAN:'The bounded counterexample probe did not produce a case that reverses either declared transformed trait under the reviewed scope.',
+  PROVENANCE_SCAN:'Each reviewed transformed trait remains bound to the current candidate, lineage fingerprint and derivation fingerprint.'
+}[kind]);
 
 const boundEvidence = (organ, reviewRunId) => {
   const kinds = organ === 'GUT' ? ['ECHO_SCAN','DUPLICATE_SCAN','PROVENANCE_SCAN'] : ['CONTRADICTION_SCAN','COUNTEREXAMPLE_SCAN','PROVENANCE_SCAN'];
@@ -45,7 +50,7 @@ const boundEvidence = (organ, reviewRunId) => {
     candidateId:candidate.candidateId,
     lineageFingerprint,
     derivationFingerprint:derivationWitness.derivationFingerprint,
-    ...(organ==='GUT' ? gutFinding(kind) : {})
+    ...(organ==='GUT' ? gutFinding(kind) : {finding:vajraFinding(kind)})
   }));
 };
 function issuedReceipt(organ, provenance, reviewRunId) {
@@ -68,39 +73,36 @@ assert.equal(eligible.issuerFingerprints.length,2);
 assert.equal(eligible.incorporationAuthorized,false);
 assert.equal(eligible.bodyMutationApplied,false);
 
-// Direct caller assertions can no longer mint PASS without an organ-generated review artifact.
 const callerMint = issueGutMutationReviewReceipt({candidateId:candidate.candidateId,lineageFingerprint,derivationFingerprint:derivationWitness.derivationFingerprint,provenance:'gut/fake',reviewRunId:'fake',evidenceRefs:['fake'],reviewWitnessFingerprint:'fake'});
 assert.equal(callerMint.status,'HOLD');
 assert.equal(callerMint.reason,'GUT_REVIEW_ARTIFACT_REQUIRED');
 
-// Merely naming the three GUT scan kinds is no longer evidence that the scans produced usable findings.
-const labelOnlyGut = reviewGutMutationCandidate({
-  candidateId:candidate.candidateId,
-  lineageFingerprint,
-  derivationFingerprint:derivationWitness.derivationFingerprint,
-  reviewRunId:'gut-label-only',
-  evidence:boundEvidence('GUT','gut-label-only').map(({verdict,observation,...item})=>item)
-});
+const labelOnlyGut = reviewGutMutationCandidate({candidateId:candidate.candidateId,lineageFingerprint,derivationFingerprint:derivationWitness.derivationFingerprint,reviewRunId:'gut-label-only',evidence:boundEvidence('GUT','gut-label-only').map(({verdict,observation,...item})=>item)});
 assert.equal(labelOnlyGut.status,'HOLD');
 assert.equal(labelOnlyGut.reason,'GUT_REVIEW_EVIDENCE_INCOMPLETE_OR_UNBOUND');
 
-// A substantive finding that reports unresolved contamination blocks PASS instead of being hidden by the scan label.
+const labelOnlyVajra = reviewVajraMutationCandidate({candidateId:candidate.candidateId,lineageFingerprint,derivationFingerprint:derivationWitness.derivationFingerprint,reviewRunId:'vajra-label-only',evidence:boundEvidence('VAJRA','vajra-label-only').map(({finding,...item})=>item)});
+assert.equal(labelOnlyVajra.status,'HOLD');
+assert.equal(labelOnlyVajra.reason,'VAJRA_MUTATION_REVIEW_RUBBER_STAMP');
+
+const replayedVajraEvidence = boundEvidence('VAJRA','vajra-replayed').map((item,index)=>({...item,finding:index===1?'  Ｓａｍｅ　ｆｉｎｄｉｎｇ  ':'Same finding'}));
+const replayedVajra = reviewVajraMutationCandidate({candidateId:candidate.candidateId,lineageFingerprint,derivationFingerprint:derivationWitness.derivationFingerprint,reviewRunId:'vajra-replayed',evidence:replayedVajraEvidence});
+assert.equal(replayedVajra.status,'HOLD');
+assert.equal(replayedVajra.reason,'VAJRA_MUTATION_REVIEW_RUBBER_STAMP');
+
 const contaminatedEvidence = boundEvidence('GUT','gut-contaminated').map(item=>item.kind==='ECHO_SCAN' ? {...item,verdict:'DETECTED',observation:'Repeated inherited output remains uncontained.'} : item);
 const contaminatedGut = reviewGutMutationCandidate({candidateId:candidate.candidateId,lineageFingerprint,derivationFingerprint:derivationWitness.derivationFingerprint,reviewRunId:'gut-contaminated',evidence:contaminatedEvidence});
 assert.equal(contaminatedGut.status,'HOLD');
 assert.equal(contaminatedGut.reason,'GUT_REVIEW_FINDING_BLOCKS_PASS');
 
-// Missing one required organ computation stays HOLD even with otherwise valid bindings.
 const incompleteGut = reviewGutMutationCandidate({candidateId:candidate.candidateId,lineageFingerprint,derivationFingerprint:derivationWitness.derivationFingerprint,reviewRunId:'gut-incomplete',evidence:boundEvidence('GUT','gut-incomplete').filter(x=>x.kind!=='PROVENANCE_SCAN')});
 assert.equal(incompleteGut.status,'HOLD');
 assert.equal(incompleteGut.reason,'GUT_REVIEW_EVIDENCE_INCOMPLETE_OR_UNBOUND');
 
-// An artifact bound to a different candidate cannot be wrapped into a valid receipt.
 const wrongEvidence=boundEvidence('VAJRA','vajra-wrong').map(x=>({...x,candidateId:'other-candidate'}));
 const wrongArtifact=reviewVajraMutationCandidate({candidateId:candidate.candidateId,lineageFingerprint,derivationFingerprint:derivationWitness.derivationFingerprint,reviewRunId:'vajra-wrong',evidence:wrongEvidence});
 assert.equal(wrongArtifact.status,'HOLD');
 
-// Post-review artifact tampering invalidates the receipt path.
 const gutArtifact=reviewGutMutationCandidate({candidateId:candidate.candidateId,lineageFingerprint,derivationFingerprint:derivationWitness.derivationFingerprint,reviewRunId:'gut-tamper',evidence:boundEvidence('GUT','gut-tamper')});
 const tamperedArtifact=structuredClone(gutArtifact);
 tamperedArtifact.evidence[0].ref='gut:injected:after-review';
@@ -108,14 +110,12 @@ const tamperedReceipt=issueGutMutationReviewReceipt({reviewArtifact:tamperedArti
 assert.equal(tamperedReceipt.status,'HOLD');
 assert.equal(tamperedReceipt.reason,'GUT_REVIEW_ARTIFACT_FINGERPRINT_INVALID');
 
-// Post-issuance editing still invalidates the organ receipt.
 const tamperedGut = structuredClone(gut);
 tamperedGut.reviewWitness.evidenceRefs.push('gut:evidence:post-issue-injection');
 const tampered = evaluateMutationCrossOrganGate({candidate,lineageFingerprint,derivationWitness,gutReceipt:tamperedGut,vajraReceipt:vajra});
 assert.equal(tampered.status,'HOLD');
 assert.equal(tampered.reason,'GUT_ISSUER_FINGERPRINT_INVALID');
 
-// Unicode/whitespace aliases still cannot manufacture review-run independence.
 const sharedGut = issuedReceipt('GUT','gut/shared',' shared-run ');
 const sharedVajra = issuedReceipt('VAJRA','vajra/shared','ｓｈａｒｅｄ－ｒｕｎ');
 const sharedRun = evaluateMutationCrossOrganGate({candidate,lineageFingerprint,derivationWitness,gutReceipt:sharedGut,vajraReceipt:sharedVajra});
@@ -129,8 +129,8 @@ assert.equal(stale.status,'HOLD');
 assert.equal(stale.reason,'MUTHER_CALLER_LINEAGE_NOT_BOUND_TO_CANDIDATE');
 
 console.log(JSON.stringify({
-  schema:'zenomorph-muther-internal-mutation-cross-organ-gate-test/v0.8',
+  schema:'zenomorph-muther-internal-mutation-cross-organ-gate-test/v0.9',
   status:'PASS',
-  capability:'MUTHER_MUTATION_REQUIRES_SUBSTANTIVE_GUT_FINDINGS_PLUS_MACHINE_DERIVED_GUT_AND_VAJRA_REVIEW_ARTIFACTS_BEFORE_RECEIPTS',
-  boundary:'PASS proves GUT review labels alone cannot satisfy the mutation gate: each required GUT scan must carry a bounded acceptable finding, while organ review artifacts remain candidate-bound and module-derived. It does not prove truth, cryptographic organ identity, or authority to mutate the persistent body.'
+  capability:'MUTHER_MUTATION_REQUIRES_SUBSTANTIVE_DISTINCT_GUT_AND_VAJRA_FINDINGS_PLUS_MACHINE_DERIVED_REVIEW_ARTIFACTS_BEFORE_RECEIPTS',
+  boundary:'PASS proves neither GUT nor VAJRA can satisfy the mutation gate with review labels alone, and VAJRA cannot replay one canonicalized finding across all three required scans. It does not prove truth, semantic quality, cryptographic organ identity, or authority to mutate the persistent body.'
 },null,2));
