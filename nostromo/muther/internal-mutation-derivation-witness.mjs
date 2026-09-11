@@ -1,4 +1,4 @@
-// MUTHER derivation witness gate v0.2
+// MUTHER derivation witness gate v0.3
 // Bounded proof that a mutated output was reconstructed from cited source material.
 // This does not claim semantic causality, aesthetic quality, assimilation, or body incorporation.
 
@@ -6,6 +6,15 @@ const MUTATING = new Set(['hybridize', 'synthesize', 'invert', 'distort', 'cross
 
 const text = v => typeof v === 'string' ? v : '';
 const canonical = v => text(v).normalize('NFKC');
+
+function fnv1a32(value, seed = 0x811c9dc5) {
+  let hash = seed >>> 0;
+  for (let i = 0; i < value.length; i++) {
+    hash ^= value.charCodeAt(i);
+    hash = Math.imul(hash, 0x01000193) >>> 0;
+  }
+  return hash.toString(16).padStart(8, '0');
+}
 
 function specimenIndex(specimens) {
   const byId = new Map();
@@ -79,6 +88,27 @@ function sameSourceSet(declared, used) {
   return true;
 }
 
+export function deriveMutationDerivationFingerprint(result) {
+  if (result?.status !== 'DERIVATION_WITNESS_VERIFIED') return '';
+  const candidateId = canonical(result?.candidateId).trim();
+  const traits = Array.isArray(result?.verifiedTraits) ? result.verifiedTraits : [];
+  if (!candidateId || !traits.length) return '';
+  const normalized = [];
+  for (const trait of traits) {
+    const outputDimension = canonical(trait?.outputDimension).trim();
+    const operation = canonical(trait?.operation).trim();
+    const reconstructedOutput = canonical(trait?.reconstructedOutput);
+    const sourceParts = Array.isArray(trait?.sourceParts) ? trait.sourceParts : [];
+    if (!outputDimension || !operation || !reconstructedOutput || !sourceParts.length) return '';
+    const sources = sourceParts.map(source => [canonical(source?.specimenId).trim(), canonical(source?.sourceDimension).trim()]);
+    if (sources.some(([specimenId, sourceDimension]) => !specimenId || !sourceDimension)) return '';
+    normalized.push([outputDimension, operation, reconstructedOutput, sources]);
+  }
+  normalized.sort((a, b) => JSON.stringify(a).localeCompare(JSON.stringify(b)));
+  const payload = JSON.stringify({ candidateId, traits: normalized });
+  return `mut-derivation-v1:${fnv1a32(payload, 0x811c9dc5)}${fnv1a32(payload, 0x9e3779b9)}`;
+}
+
 export function verifyMutationDerivation({ specimens, candidate, witnesses } = {}) {
   if (candidate?.status !== 'SANDBOX_CANDIDATE') return hold('MUTHER_DERIVATION_REQUIRES_SANDBOX_CANDIDATE');
   let byId;
@@ -124,8 +154,8 @@ export function verifyMutationDerivation({ specimens, candidate, witnesses } = {
   }
 
   if (!verified.length) return hold('MUTHER_DERIVATION_NO_MUTATING_TRAITS');
-  return {
-    schema: 'zenomorph-muther-derivation-witness/v0.2',
+  const result = {
+    schema: 'zenomorph-muther-derivation-witness/v0.3',
     status: 'DERIVATION_WITNESS_VERIFIED',
     candidateId: candidate.candidateId,
     verifiedTraits: verified,
@@ -137,11 +167,13 @@ export function verifyMutationDerivation({ specimens, candidate, witnesses } = {
     nextRequiredGate: 'GUT_VAJRA_REVIEW_OF_DERIVATION_AND_CROSS_ORGAN_REGRESSION',
     boundary: 'This gate proves only bounded reconstructability: the declared output can be exactly reconstructed from cited source slices plus punctuation-only separators, and every declared source must materially appear in the reconstruction. It rejects arbitrary-output laundering, source-label swapping, unused provenance inflation, and duplicate declared-source padding, but it does not prove semantic causality, creativity, aesthetic value, assimilation, organ growth, or permission to modify the persistent body.'
   };
+  result.derivationFingerprint = deriveMutationDerivationFingerprint(result);
+  return result;
 }
 
 function hold(reason) {
   return {
-    schema: 'zenomorph-muther-derivation-witness/v0.2',
+    schema: 'zenomorph-muther-derivation-witness/v0.3',
     status: 'HOLD',
     reason,
     provenancePreserved: true,
