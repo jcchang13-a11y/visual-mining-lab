@@ -1,7 +1,9 @@
-// MUTHER internal mutation cross-organ gate v0.3
+// MUTHER internal mutation cross-organ gate v0.4
 // A mutation candidate cannot enter the persistent ZENOMORPH body on MUTHER's own authority.
-// GUT and VAJRA review receipts must independently agree on the exact candidate lineage.
+// GUT and VAJRA review receipts must independently agree on the exact candidate lineage AND the exact verified derivation witness.
 // Different receipt labels are not evidence of independent review: each review must carry a distinct traceable run identity.
+
+import { deriveMutationDerivationFingerprint } from './internal-mutation-derivation-witness.mjs';
 
 const clean = value => typeof value === 'string' ? value.trim() : '';
 const canonical = value => clean(value).normalize('NFKC');
@@ -51,7 +53,7 @@ export function deriveMutationLineageFingerprint(candidate) {
 
 function hold(reason, audit = {}) {
   return {
-    schema: 'zenomorph-muther-internal-mutation-cross-organ-gate/v0.3',
+    schema: 'zenomorph-muther-internal-mutation-cross-organ-gate/v0.4',
     status: 'HOLD',
     reason,
     incorporationAuthorized: false,
@@ -60,7 +62,7 @@ function hold(reason, audit = {}) {
   };
 }
 
-function qualifyReceipt(receipt, expectedOrgan, candidateId, lineageFingerprint) {
+function qualifyReceipt(receipt, expectedOrgan, candidateId, lineageFingerprint, derivationFingerprint) {
   if (!receipt || typeof receipt !== 'object' || Array.isArray(receipt)) {
     return { ok: false, reason: `${expectedOrgan}_RECEIPT_REQUIRED` };
   }
@@ -68,6 +70,7 @@ function qualifyReceipt(receipt, expectedOrgan, candidateId, lineageFingerprint)
   const status = canonical(receipt.status).toUpperCase();
   const reviewedCandidateId = canonical(receipt.candidateId);
   const reviewedLineage = canonical(receipt.lineageFingerprint);
+  const reviewedDerivation = canonical(receipt.derivationFingerprint);
   const provenance = clean(receipt.provenance);
   const reviewRunId = clean(receipt.reviewRunId);
   if (organ !== expectedOrgan) return { ok: false, reason: `${expectedOrgan}_ORGAN_IDENTITY_REQUIRED` };
@@ -76,10 +79,12 @@ function qualifyReceipt(receipt, expectedOrgan, candidateId, lineageFingerprint)
   if (!reviewRunId) return { ok: false, reason: `${expectedOrgan}_REVIEW_RUN_ID_REQUIRED` };
   if (reviewedCandidateId !== candidateId) return { ok: false, reason: `${expectedOrgan}_CANDIDATE_MISMATCH` };
   if (reviewedLineage !== lineageFingerprint) return { ok: false, reason: `${expectedOrgan}_LINEAGE_MISMATCH` };
-  return { ok: true, organ, provenance, reviewRunId };
+  if (!reviewedDerivation) return { ok: false, reason: `${expectedOrgan}_DERIVATION_FINGERPRINT_REQUIRED` };
+  if (reviewedDerivation !== derivationFingerprint) return { ok: false, reason: `${expectedOrgan}_DERIVATION_MISMATCH` };
+  return { ok: true, organ, provenance, reviewRunId, derivationFingerprint: reviewedDerivation };
 }
 
-export function evaluateMutationCrossOrganGate({ candidate, lineageFingerprint, gutReceipt, vajraReceipt } = {}) {
+export function evaluateMutationCrossOrganGate({ candidate, lineageFingerprint, derivationWitness, gutReceipt, vajraReceipt } = {}) {
   const candidateId = canonical(candidate?.candidateId);
   if (!candidate || candidate.status !== 'SANDBOX_CANDIDATE' || !candidateId) {
     return hold('MUTHER_SANDBOX_CANDIDATE_REQUIRED');
@@ -101,12 +106,30 @@ export function evaluateMutationCrossOrganGate({ candidate, lineageFingerprint, 
     });
   }
 
-  const gut = qualifyReceipt(gutReceipt, 'GUT', candidateId, derivedLineage);
-  const vajra = qualifyReceipt(vajraReceipt, 'VAJRA', candidateId, derivedLineage);
+  if (derivationWitness?.status !== 'DERIVATION_WITNESS_VERIFIED') {
+    return hold('MUTHER_VERIFIED_DERIVATION_WITNESS_REQUIRED', { candidateId, lineageFingerprint: derivedLineage });
+  }
+  if (canonical(derivationWitness?.candidateId) !== candidateId) {
+    return hold('MUTHER_DERIVATION_WITNESS_CANDIDATE_MISMATCH', { candidateId, lineageFingerprint: derivedLineage });
+  }
+  const derivedDerivationFingerprint = deriveMutationDerivationFingerprint(derivationWitness);
+  const suppliedDerivationFingerprint = canonical(derivationWitness?.derivationFingerprint);
+  if (!derivedDerivationFingerprint || suppliedDerivationFingerprint !== derivedDerivationFingerprint) {
+    return hold('MUTHER_DERIVATION_WITNESS_FINGERPRINT_INVALID', {
+      candidateId,
+      lineageFingerprint: derivedLineage,
+      derivedDerivationFingerprint
+    });
+  }
+
+  const gut = qualifyReceipt(gutReceipt, 'GUT', candidateId, derivedLineage, derivedDerivationFingerprint);
+  const vajra = qualifyReceipt(vajraReceipt, 'VAJRA', candidateId, derivedLineage, derivedDerivationFingerprint);
   const audit = {
     candidateId,
     lineageFingerprint: derivedLineage,
+    derivationFingerprint: derivedDerivationFingerprint,
     candidateLineageBound: true,
+    derivationWitnessBound: true,
     reviews: {
       GUT: { qualified: gut.ok, reason: gut.reason || null, provenance: gut.provenance || null, reviewRunId: gut.reviewRunId || null },
       VAJRA: { qualified: vajra.ok, reason: vajra.reason || null, provenance: vajra.provenance || null, reviewRunId: vajra.reviewRunId || null }
@@ -122,17 +145,19 @@ export function evaluateMutationCrossOrganGate({ candidate, lineageFingerprint, 
   }
 
   return {
-    schema: 'zenomorph-muther-internal-mutation-cross-organ-gate/v0.3',
+    schema: 'zenomorph-muther-internal-mutation-cross-organ-gate/v0.4',
     status: 'ELIGIBLE_FOR_CONTROLLED_INCORPORATION_STAGE',
     candidateId,
     lineageFingerprint: derivedLineage,
+    derivationFingerprint: derivedDerivationFingerprint,
     candidateLineageBound: true,
+    derivationWitnessBound: true,
     crossOrganAgreement: true,
     independentReviewProvenance: [gut.provenance, vajra.provenance],
     independentReviewRunIds: [gut.reviewRunId, vajra.reviewRunId],
     incorporationAuthorized: false,
     bodyMutationApplied: false,
     nextRequiredGate: 'CONTROLLED_MORPHOGENESIS_INCORPORATION_WITH_ROLLBACK',
-    boundary: 'GUT+VAJRA agreement only makes the exact traceable MUTHER mutation eligible for the next controlled incorporation stage. The reviewed lineage is deterministically derived from candidate traits, operations, source identities, source values, and source provenance. Each receipt must also identify a distinct traceable review run; merely changing a provenance label cannot demonstrate independent review. This gate never installs, executes, or mutates the persistent body.'
+    boundary: 'GUT+VAJRA agreement only makes the exact traceable MUTHER mutation eligible for the next controlled incorporation stage. Reviews are bound both to the deterministic candidate lineage and to the exact verified derivation witness that proves bounded reconstruction from cited source material. A caller cannot skip or swap the derivation witness, and each organ must review the same derivation fingerprint in a distinct traceable run. This gate never installs, executes, or mutates the persistent body.'
   };
 }
