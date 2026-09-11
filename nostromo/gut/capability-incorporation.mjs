@@ -1,4 +1,4 @@
-/* ZENOMORPH / NOSTROMO reversible capability incorporation candidate gate v0.5
+/* ZENOMORPH / NOSTROMO reversible capability incorporation candidate gate v0.6
  * A repeated-heldout PASS may enter a host-controlled reversible body-state trial.
  * This module never mutates the supplied body. It returns a candidate body copy plus
  * explicit rollback evidence. Permanent admission remains a separate decision.
@@ -10,6 +10,9 @@
  * than allowing an uncloneable host state to escape as an uncaught exception.
  * v0.5 makes body fingerprinting descriptor-safe: enumerable accessors in host body
  * state fail closed without executing getters before reversible trial creation.
+ * v0.6 closes hidden-state fingerprint gaps: symbols, non-enumerable object fields,
+ * exotic nested objects, and custom array properties fail closed instead of being
+ * omitted from rollback identity evidence or silently changed by structuredClone.
  */
 import { runRepeatedHeldoutStress } from './capability-repeated-stress.mjs';
 
@@ -17,7 +20,9 @@ function cleanId(value){
   return typeof value==='string'&&/^[a-z0-9][a-z0-9._-]{0,79}$/i.test(value)?value:null;
 }
 function plainBody(value){
-  return value&&typeof value==='object'&&!Array.isArray(value)?value:null;
+  if(!value||typeof value!=='object'||Array.isArray(value))return null;
+  const proto=Object.getPrototypeOf(value);
+  return proto===Object.prototype||proto===null?value:null;
 }
 function registeredCapability(registry,id){
   if(registry===null||(typeof registry!=='object'&&typeof registry!=='function')){
@@ -40,19 +45,30 @@ function stableStructure(value,seen=new WeakSet()){
   seen.add(value);
   try{
     if(Array.isArray(value)){
+      const keys=Reflect.ownKeys(value);
+      if(keys.some(key=>typeof key==='symbol'))throw new TypeError('body-state-symbol-property-not-supported');
       const out=new Array(value.length);
-      for(let i=0;i<value.length;i++){
-        const descriptor=Object.getOwnPropertyDescriptor(value,String(i));
-        if(!descriptor)continue;
-        if(!Object.prototype.hasOwnProperty.call(descriptor,'value'))throw new TypeError('body-state-accessor-not-supported');
-        out[i]=stableStructure(descriptor.value,seen);
+      for(const key of keys){
+        if(key==='length')continue;
+        if(!/^(0|[1-9]\d*)$/.test(key))throw new TypeError('body-state-array-custom-property-not-supported');
+        const index=Number(key);
+        if(!Number.isSafeInteger(index)||index<0||index>=value.length)throw new TypeError('body-state-array-index-not-supported');
+        const descriptor=Object.getOwnPropertyDescriptor(value,key);
+        if(!descriptor||!Object.prototype.hasOwnProperty.call(descriptor,'value'))throw new TypeError('body-state-accessor-not-supported');
+        if(descriptor.enumerable!==true)throw new TypeError('body-state-nonenumerable-property-not-supported');
+        out[index]=stableStructure(descriptor.value,seen);
       }
       return out;
     }
+    const proto=Object.getPrototypeOf(value);
+    if(proto!==Object.prototype&&proto!==null)throw new TypeError('non-plain-body-state-not-supported');
     const out={};
-    for(const key of Object.keys(value).sort()){
+    const keys=Reflect.ownKeys(value);
+    if(keys.some(key=>typeof key==='symbol'))throw new TypeError('body-state-symbol-property-not-supported');
+    for(const key of keys.sort()){
       const descriptor=Object.getOwnPropertyDescriptor(value,key);
       if(!descriptor||!Object.prototype.hasOwnProperty.call(descriptor,'value'))throw new TypeError('body-state-accessor-not-supported');
+      if(descriptor.enumerable!==true)throw new TypeError('body-state-nonenumerable-property-not-supported');
       out[key]=stableStructure(descriptor.value,seen);
     }
     return out;
@@ -68,7 +84,7 @@ function fingerprint(value){
 }
 
 export function runReversibleIncorporationCandidate(candidate,cases,bodyState,{capabilityRegistry={},organRegistry={},downstreamOrganId,context={}}={}){
-  const base={schema:'zenomorph-capability-incorporation/v0.5',organism:'ZENOMORPH',habitat:'NOSTROMO',installed:false,persistentMutation:false,bodyAdmission:false,registryLookup:'OWN_DATA_PROPERTY_ONLY',bodyCopyBoundary:'STRUCTURED_CLONE_FAIL_CLOSED',bodyPropertyRead:'OWN_DATA_PROPERTY_DESCRIPTOR_ONLY'};
+  const base={schema:'zenomorph-capability-incorporation/v0.6',organism:'ZENOMORPH',habitat:'NOSTROMO',installed:false,persistentMutation:false,bodyAdmission:false,registryLookup:'OWN_DATA_PROPERTY_ONLY',bodyCopyBoundary:'STRUCTURED_CLONE_FAIL_CLOSED',bodyPropertyRead:'COMPLETE_OWN_DATA_PROPERTY_DESCRIPTOR_SET_ONLY'};
   const body=plainBody(bodyState);
   if(!body)return {...base,status:'BLOCKED',assimilationStage:'INCORPORATION_BLOCKED',reason:'plain-host-body-state-required'};
   let beforeFingerprint;
@@ -91,7 +107,7 @@ export function runReversibleIncorporationCandidate(candidate,cases,bodyState,{c
   const existing=plainBody(candidateBody.capabilities)?candidateBody.capabilities:{};
   candidateBody.capabilities={...existing,[capabilityId]:{status:'REVERSIBLE_TRIAL_ONLY',provenanceFingerprint:stress.provenanceFingerprint||null,downstreamOrganId:cleanId(downstreamOrganId),admittedAt:null}};
   const candidateFingerprint=fingerprint(candidateBody);
-  return {...base,status:'PASS',assimilationStage:'REVERSIBLE_BODY_CANDIDATE_CREATED',reason:'heldout-profile-verified-and-reversible-copy-created',capabilityId,stress,originalBodyUnchanged:fingerprint(body)===beforeFingerprint,beforeFingerprint,candidateFingerprint,candidateBody,rollback:{method:'discard-candidate-body-copy',restoresFingerprint:beforeFingerprint},fingerprintBoundary:{canonicalization:'recursive-object-key-sort-array-order-preserved',nestedStateBound:true,cyclicStateAccepted:false,accessorStateAccepted:false,propertyRead:'own data property descriptor only'},nextStage:'run whole-body regression against candidateBody; permanent admission requires separate explicit gate'};
+  return {...base,status:'PASS',assimilationStage:'REVERSIBLE_BODY_CANDIDATE_CREATED',reason:'heldout-profile-verified-and-reversible-copy-created',capabilityId,stress,originalBodyUnchanged:fingerprint(body)===beforeFingerprint,beforeFingerprint,candidateFingerprint,candidateBody,rollback:{method:'discard-candidate-body-copy',restoresFingerprint:beforeFingerprint},fingerprintBoundary:{canonicalization:'recursive-object-key-sort-array-order-preserved',nestedStateBound:true,cyclicStateAccepted:false,accessorStateAccepted:false,symbolStateAccepted:false,nonEnumerableStateAccepted:false,exoticObjectStateAccepted:false,arrayCustomPropertyAccepted:false,propertyRead:'complete own data property descriptor set only'},nextStage:'run whole-body regression against candidateBody; permanent admission requires separate explicit gate'};
 }
 
-export const incorporationBoundary=Object.freeze({version:'0.5',requiresRepeatedHeldoutPass:true,mutatesSuppliedBody:false,persistentMutation:false,permanentAdmissionOnPass:false,rollbackRequired:true,recursiveCanonicalFingerprint:true,cyclicBodyStateAccepted:false,accessorBodyStateAccepted:false,bodyPropertyRead:'own data property descriptor only',registryLookup:'own data property only',inheritedRegistryEntries:false,accessorRegistryEntries:false,bodyCopyBoundary:'structuredClone fail closed',uncloneableBodyStateAccepted:false,nextStage:'whole-body regression on reversible candidate copy'});
+export const incorporationBoundary=Object.freeze({version:'0.6',requiresRepeatedHeldoutPass:true,mutatesSuppliedBody:false,persistentMutation:false,permanentAdmissionOnPass:false,rollbackRequired:true,recursiveCanonicalFingerprint:true,cyclicBodyStateAccepted:false,accessorBodyStateAccepted:false,symbolBodyStateAccepted:false,nonEnumerableBodyStateAccepted:false,exoticObjectBodyStateAccepted:false,arrayCustomPropertyAccepted:false,bodyPropertyRead:'complete own data property descriptor set only',registryLookup:'own data property only',inheritedRegistryEntries:false,accessorRegistryEntries:false,bodyCopyBoundary:'structuredClone fail closed',uncloneableBodyStateAccepted:false,nextStage:'whole-body regression on reversible candidate copy'});
