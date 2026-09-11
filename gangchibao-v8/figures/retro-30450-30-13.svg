@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 360" role="img" aria-labelledby="title desc">
+  <title id="title">第三十分回溯第十三分</title>
+  <desc id="desc">第三十分世界與微塵的最大整體／最小單位拆解，回扣第十三分後半已明說將由後文三千大千世界與微塵直接推出的大／小尺度對稱。</desc>
+  <rect width="360" height="360" fill="white"/>
+  <g fill="none" stroke="black" stroke-width="2">
+    <circle cx="180" cy="180" r="62"/>
+    <circle cx="180" cy="180" r="132"/>
+  </g>
+  <g fill="black" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Noto Sans TC', sans-serif" font-size="24" text-anchor="middle" dominant-baseline="middle">
+    <text x="180" y="180">30</text>
+    <text x="180" y="68">13</text>
+  </g>
+</svg>
