@@ -78,11 +78,17 @@
     return fig;
   }
 
+  /* 歷史函式名保留，但不再清場。舊圖位與早期出版標記都屬施工地層；
+     只加 preservation 註記，避免後來的原圖接線把它們從 LIVE DOM 偷偷刪掉。 */
   function removeLegacySlots(spec){
     if(spec?.slotKey){
-      document.querySelectorAll('[data-figure-slot="'+CSS.escape(spec.slotKey)+'"]').forEach(el=>el.remove());
+      document.querySelectorAll('[data-figure-slot="'+CSS.escape(spec.slotKey)+'"]').forEach(el=>{
+        el.dataset.gcbLegacyPreserved='1';
+      });
     }
-    document.querySelectorAll('[data-publication-mark="diploma-mill"]').forEach(el=>el.remove());
+    document.querySelectorAll('[data-publication-mark="diploma-mill"]').forEach(el=>{
+      el.dataset.gcbLegacyPreserved='1';
+    });
   }
 
   function insertAtAnchor(article,spec){
