@@ -1,7 +1,8 @@
-// MUTHER bidirectional text-visual phenotype pressure gate v0.2
+// MUTHER bidirectional text-visual phenotype pressure gate v0.3
 // A cross-modal mutation is not yet bidirectional merely because text and visual ore both participate.
 // This wrapper requires traceable pressure in both directions while keeping the candidate sandboxed.
-// v0.2 blocks label-only bidirectionality: opposite targets must be grounded in distinct resolved source traces, not the same ore relation relabelled twice.
+// v0.2 blocked label-only bidirectionality by requiring opposite targets to use distinct resolved source traces.
+// v0.3 also collapses duplicate resolved contributions before trace comparison, so repeating the same ore relation cannot manufacture a second causal route.
 
 import { evaluateInternalMutation } from './internal-mutation.mjs';
 
@@ -21,7 +22,7 @@ function canonical(v) {
 
 function hold(reason, details = {}) {
   return {
-    schema: 'zenomorph-muther-bidirectional-pressure/v0.2',
+    schema: 'zenomorph-muther-bidirectional-pressure/v0.3',
     status: 'HOLD',
     reason,
     ...details,
@@ -33,9 +34,9 @@ function hold(reason, details = {}) {
 }
 
 function sourceTraceSignature(trait) {
-  return JSON.stringify((trait.derivedFrom || [])
-    .map(source => `${canonical(source?.specimenId)}::${canonical(source?.sourceDimension)}::${canonical(source?.sourceValue)}::${canonical(source?.provenance?.artifactRef)}::${canonical(source?.provenance?.versionRef)}`)
-    .sort());
+  const traces = (trait.derivedFrom || [])
+    .map(source => `${canonical(source?.specimenId)}::${canonical(source?.sourceDimension)}::${canonical(source?.sourceValue)}::${canonical(source?.provenance?.artifactRef)}::${canonical(source?.provenance?.versionRef)}`);
+  return JSON.stringify([...new Set(traces)].sort());
 }
 
 export function evaluateBidirectionalPhenotypePressure({ specimens, proposal } = {}) {
@@ -99,19 +100,19 @@ export function evaluateBidirectionalPhenotypePressure({ specimens, proposal } =
   if (!hasDistinctSourceTracePair) {
     return hold('MUTHER_BIDIRECTIONAL_PRESSURE_LABEL_ONLY_ECHO', {
       pressureSteps: directions,
-      boundary: 'Changing phenotypeTarget, output dimension, or output wording alone does not demonstrate reciprocal pressure. At least one visual-targeting step and one linguistic-targeting step must be grounded in different resolved source-dimension/provenance traces.'
+      boundary: 'Changing phenotypeTarget, output dimension, output wording, or duplicate contribution count alone does not demonstrate reciprocal pressure. At least one visual-targeting step and one linguistic-targeting step must be grounded in different unique resolved source-dimension/provenance traces.'
     });
   }
 
   return {
     ...base,
-    schema: 'zenomorph-muther-bidirectional-pressure/v0.2',
+    schema: 'zenomorph-muther-bidirectional-pressure/v0.3',
     bidirectionalPhenotypePressureDemonstrated: true,
     visualPhenotypePressureSteps: visualPressure,
     linguisticPhenotypePressureSteps: linguisticPressure,
     distinctSourceTracePairDemonstrated: true,
     incorporationAuthorized: false,
     bodyMutationApplied: false,
-    boundary: `${base.boundary} Bidirectional pressure is demonstrated only structurally: at least one text↔visual cross-pressure step explicitly targets visual phenotype and at least one separately targets linguistic phenotype, with both source families traceable in each step and at least one distinct resolved source trace across the two directions. Merely relabelling the same ore relation with another phenotypeTarget or output name is held as an echo. This does not prove aesthetic merit, semantic improvement, autonomous authorship, assimilation, or permission to modify the persistent body.`
+    boundary: `${base.boundary} Bidirectional pressure is demonstrated only structurally: at least one text↔visual cross-pressure step explicitly targets visual phenotype and at least one separately targets linguistic phenotype, with both source families traceable in each step and at least one distinct unique resolved source trace across the two directions. Merely relabelling the same ore relation, changing output names, or repeating identical contributions is held as an echo. This does not prove aesthetic merit, semantic improvement, autonomous authorship, assimilation, or permission to modify the persistent body.`
   };
 }
