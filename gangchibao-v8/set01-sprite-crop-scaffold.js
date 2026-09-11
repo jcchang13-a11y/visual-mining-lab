@@ -22,7 +22,13 @@
   }
 
   function upgrade(frameEl){
-    if(!frameEl||frameEl.dataset.set01ImageCrop==='svg') return true;
+    if(!frameEl) return false;
+    /* original-figures.js 可能在較晚的 DOM mutation 再把舊 background 寫回來。
+       SVG 已成功接上時只壓掉「顯示中的」重疊背景；原設定與舊施工法仍完整留在原檔。 */
+    if(frameEl.dataset.set01ImageCrop==='svg'){
+      if(frameEl.style.backgroundImage && frameEl.style.backgroundImage!=='none') frameEl.style.backgroundImage='none';
+      return true;
+    }
     const fig=frameEl.closest('[data-set01-frame]');
     if(!fig) return false;
     const frameNumber=Number(fig.dataset.set01Frame);
