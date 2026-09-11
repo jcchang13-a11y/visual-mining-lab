@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { evaluateInternalMutation } from './internal-mutation.mjs';
-import { verifyMutationDerivation } from './internal-mutation-derivation-witness.mjs';
+import { deriveMutationDerivationFingerprint, verifyMutationDerivation } from './internal-mutation-derivation-witness.mjs';
 
 const specimens = [
   {
@@ -75,7 +75,17 @@ assert.equal(valid.aestheticJudgmentClaimed, false);
 assert.equal(valid.incorporationAuthorized, false);
 assert.equal(valid.bodyMutationApplied, false);
 assert.equal(valid.verifiedTraits.length, 2);
-assert.equal(valid.schema, 'zenomorph-muther-derivation-witness/v0.2');
+assert.equal(valid.schema, 'zenomorph-muther-derivation-witness/v0.3');
+assert.match(valid.derivationFingerprint, /^mut-derivation-v1:[0-9a-f]{16}$/);
+assert.equal(valid.derivationFingerprint, deriveMutationDerivationFingerprint(valid));
+
+const reorderedWitnessResult = structuredClone(valid);
+reorderedWitnessResult.verifiedTraits.reverse();
+assert.equal(deriveMutationDerivationFingerprint(reorderedWitnessResult), valid.derivationFingerprint);
+
+const tamperedWitnessResult = structuredClone(valid);
+tamperedWitnessResult.verifiedTraits[0].reconstructedOutput = 'tampered-output';
+assert.notEqual(deriveMutationDerivationFingerprint(tamperedWitnessResult), valid.derivationFingerprint);
 
 const arbitraryOutput = structuredClone(candidate);
 arbitraryOutput.candidateTraits[0].value = 'totally-unrelated-third-value';
@@ -146,19 +156,16 @@ const expressiveLiteral = verifyMutationDerivation({
 assert.equal(expressiveLiteral.status, 'HOLD');
 assert.equal(expressiveLiteral.reason, 'MUTHER_DERIVATION_LITERAL_TOO_EXPRESSIVE');
 
-// Adversarial: provenance inflation. A candidate must not cite a source that did not
-// materially participate in the reconstructable output.
 const inflated = structuredClone(candidate);
 inflated.candidateTraits[0].derivedFrom.push({ specimenId: 'theme-01', sourceDimension: 'typography' });
 const provenanceInflation = verifyMutationDerivation({ specimens, candidate: inflated, witnesses });
 assert.equal(provenanceInflation.status, 'HOLD');
 assert.equal(provenanceInflation.reason, 'MUTHER_DERIVATION_SOURCE_LABEL_MISMATCH');
 
-// Adversarial: duplicate citation padding must not masquerade as richer provenance.
 const duplicateDeclared = structuredClone(candidate);
 duplicateDeclared.candidateTraits[0].derivedFrom.push({ specimenId: 'theme-01', sourceDimension: 'layout' });
 const duplicatePadding = verifyMutationDerivation({ specimens, candidate: duplicateDeclared, witnesses });
 assert.equal(duplicatePadding.status, 'HOLD');
 assert.equal(duplicatePadding.reason, 'MUTHER_DERIVATION_DUPLICATE_DECLARED_SOURCE');
 
-console.log('MUTHER bounded derivation witness v0.2: PASS');
+console.log('MUTHER bounded derivation witness v0.3: PASS');
