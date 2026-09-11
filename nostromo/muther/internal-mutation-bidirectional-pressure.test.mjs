@@ -142,9 +142,36 @@ assert.equal(labelOnlyEcho.status, 'HOLD');
 assert.equal(labelOnlyEcho.reason, 'MUTHER_BIDIRECTIONAL_PRESSURE_LABEL_ONLY_ECHO');
 assert.equal(labelOnlyEcho.bidirectionalPhenotypePressureDemonstrated, false);
 
+const duplicateContributionEcho = evaluateBidirectionalPhenotypePressure({
+  specimens: [theme, text],
+  proposal: {
+    candidateId: 'duplicate-contribution-echo-01',
+    traits: [
+      {
+        dimension: 'shell-rhythm-dup-a', value: 'grid-breaks-under-duplicate-pressure-a', operation: 'cross-pressure', phenotypeTarget: 'visual',
+        derivedFrom: [
+          { specimenId: 'theme-01', sourceDimension: 'layout' },
+          { specimenId: 'text-01', sourceDimension: 'cadence' }
+        ]
+      },
+      {
+        dimension: 'narrative-breath-dup-b', value: 'sentences-shift-under-duplicate-pressure-b', operation: 'cross-pressure', phenotypeTarget: 'linguistic',
+        derivedFrom: [
+          { specimenId: 'theme-01', sourceDimension: 'layout' },
+          { specimenId: 'text-01', sourceDimension: 'cadence' },
+          { specimenId: 'theme-01', sourceDimension: 'layout' }
+        ]
+      }
+    ]
+  }
+});
+assert.equal(duplicateContributionEcho.status, 'HOLD');
+assert.equal(duplicateContributionEcho.reason, 'MUTHER_BIDIRECTIONAL_PRESSURE_LABEL_ONLY_ECHO');
+assert.equal(duplicateContributionEcho.bidirectionalPhenotypePressureDemonstrated, false);
+
 console.log(JSON.stringify({
-  schema: 'zenomorph-muther-bidirectional-pressure-test/v0.2',
+  schema: 'zenomorph-muther-bidirectional-pressure-test/v0.3',
   status: 'PASS',
-  capability: 'TEXT_VISUAL_RECIPROCAL_PRESSURE_REQUIRES_SEPARATE_TARGETS_AND_DISTINCT_RESOLVED_SOURCE_TRACES',
-  boundary: 'PASS proves a structural bidirectional pressure gate with anti-relabel protection only. It does not prove aesthetic quality, semantic improvement, autonomous approval, assimilation, or body mutation.'
+  capability: 'TEXT_VISUAL_RECIPROCAL_PRESSURE_REQUIRES_SEPARATE_TARGETS_AND_DISTINCT_UNIQUE_RESOLVED_SOURCE_TRACES',
+  boundary: 'PASS proves a structural bidirectional pressure gate with anti-relabel and anti-duplicate-contribution protection only. It does not prove aesthetic quality, semantic improvement, autonomous approval, assimilation, or body mutation.'
 }, null, 2));
