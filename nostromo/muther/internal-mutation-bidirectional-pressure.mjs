@@ -1,6 +1,7 @@
-// MUTHER bidirectional text-visual phenotype pressure gate v0.1
+// MUTHER bidirectional text-visual phenotype pressure gate v0.2
 // A cross-modal mutation is not yet bidirectional merely because text and visual ore both participate.
 // This wrapper requires traceable pressure in both directions while keeping the candidate sandboxed.
+// v0.2 blocks label-only bidirectionality: two directions must carry distinct causal traces, not the same mutation relabelled with a different phenotypeTarget.
 
 import { evaluateInternalMutation } from './internal-mutation.mjs';
 
@@ -14,9 +15,13 @@ function familyOf(kind) {
   return null;
 }
 
+function canonical(v) {
+  return typeof v === 'string' ? v.trim().normalize('NFKC') : '';
+}
+
 function hold(reason, details = {}) {
   return {
-    schema: 'zenomorph-muther-bidirectional-pressure/v0.1',
+    schema: 'zenomorph-muther-bidirectional-pressure/v0.2',
     status: 'HOLD',
     reason,
     ...details,
@@ -25,6 +30,17 @@ function hold(reason, details = {}) {
     bodyMutationApplied: false,
     provenancePreserved: true
   };
+}
+
+function causalSignature(trait) {
+  const sources = (trait.derivedFrom || [])
+    .map(source => `${canonical(source?.specimenId)}::${canonical(source?.sourceDimension)}::${canonical(source?.sourceValue)}`)
+    .sort();
+  return JSON.stringify({
+    outputDimension: canonical(trait?.dimension),
+    outputValue: canonical(trait?.value),
+    sources
+  });
 }
 
 export function evaluateBidirectionalPhenotypePressure({ specimens, proposal } = {}) {
@@ -65,6 +81,8 @@ export function evaluateBidirectionalPhenotypePressure({ specimens, proposal } =
       step: i + 1,
       phenotypeTarget,
       outputDimension: trait.dimension,
+      outputValue: trait.value,
+      causalSignature: causalSignature(trait),
       sourceSpecimenIds: [...new Set((trait.derivedFrom || []).map(source => source.specimenId).filter(Boolean))],
       sourceKinds: [...new Set((trait.derivedFrom || []).map(source => source.specimenKind).filter(Boolean))]
     });
@@ -80,14 +98,25 @@ export function evaluateBidirectionalPhenotypePressure({ specimens, proposal } =
     });
   }
 
+  const hasDistinctCausalPair = visualPressure.some(visual =>
+    linguisticPressure.some(linguistic => visual.causalSignature !== linguistic.causalSignature)
+  );
+  if (!hasDistinctCausalPair) {
+    return hold('MUTHER_BIDIRECTIONAL_PRESSURE_LABEL_ONLY_ECHO', {
+      pressureSteps: directions,
+      boundary: 'Changing phenotypeTarget alone does not demonstrate reciprocal pressure. At least one visual-targeting step and one linguistic-targeting step must differ in output dimension/value or resolved source trace.'
+    });
+  }
+
   return {
     ...base,
-    schema: 'zenomorph-muther-bidirectional-pressure/v0.1',
+    schema: 'zenomorph-muther-bidirectional-pressure/v0.2',
     bidirectionalPhenotypePressureDemonstrated: true,
     visualPhenotypePressureSteps: visualPressure,
     linguisticPhenotypePressureSteps: linguisticPressure,
+    distinctCausalPressurePairDemonstrated: true,
     incorporationAuthorized: false,
     bodyMutationApplied: false,
-    boundary: `${base.boundary} Bidirectional pressure is demonstrated only structurally: at least one text↔visual cross-pressure step explicitly targets visual phenotype and at least one separately targets linguistic phenotype, with both source families traceable in each step. This does not prove aesthetic merit, semantic improvement, autonomous authorship, assimilation, or permission to modify the persistent body.`
+    boundary: `${base.boundary} Bidirectional pressure is demonstrated only structurally: at least one text↔visual cross-pressure step explicitly targets visual phenotype and at least one separately targets linguistic phenotype, with both source families traceable in each step and at least one distinct causal trace across the two directions. Merely relabelling the same transformation with another phenotypeTarget is held as an echo. This does not prove aesthetic merit, semantic improvement, autonomous authorship, assimilation, or permission to modify the persistent body.`
   };
 }
