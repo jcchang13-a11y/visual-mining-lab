@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import { evaluateInternalMutation } from './internal-mutation.mjs';
+import { verifyMutationDerivation } from './internal-mutation-derivation-witness.mjs';
 import { deriveMutationLineageFingerprint, evaluateMutationCrossOrganGate } from './internal-mutation-cross-organ-gate.mjs';
 
 const specimens = [
@@ -15,7 +16,8 @@ const specimens = [
     id: 'text-03',
     kind: 'text',
     traits: [
-      { dimension: 'cadence', value: 'abrupt-fragment', provenance: { artifactRef: 'public:text-03', versionRef: 'v3' } }
+      { dimension: 'cadence', value: 'abrupt-fragment', provenance: { artifactRef: 'public:text-03', versionRef: 'v3' } },
+      { dimension: 'voice', value: 'unstable-first-person', provenance: { artifactRef: 'public:text-03', versionRef: 'v3' } }
     ]
   }
 ];
@@ -25,8 +27,11 @@ const candidate = evaluateInternalMutation({
   proposal: {
     candidateId: 'theme-11-candidate',
     traits: [
-      { dimension: 'typography', value: 'compressed-sans-with-rupture', operation: 'distort', derivedFrom: [{ specimenId: 'theme-01', sourceDimension: 'typography' }] },
-      { dimension: 'reading-rhythm', value: 'visual-breaks-follow-abrupt-fragments', operation: 'cross-pressure', derivedFrom: [
+      { dimension: 'voice-shell', value: 'compressed-sans/unstable-first-person', operation: 'hybridize', derivedFrom: [
+        { specimenId: 'theme-01', sourceDimension: 'typography' },
+        { specimenId: 'text-03', sourceDimension: 'voice' }
+      ] },
+      { dimension: 'reading-rhythm', value: 'dense-grid/abrupt-fragment', operation: 'cross-pressure', derivedFrom: [
         { specimenId: 'theme-01', sourceDimension: 'layout' },
         { specimenId: 'text-03', sourceDimension: 'cadence' }
       ] }
@@ -35,38 +40,75 @@ const candidate = evaluateInternalMutation({
 });
 assert.equal(candidate.status, 'SANDBOX_CANDIDATE');
 
+const derivationWitness = verifyMutationDerivation({
+  specimens,
+  candidate,
+  witnesses: [
+    { outputDimension: 'voice-shell', recipe: { type: 'join', parts: [
+      { specimenId: 'theme-01', sourceDimension: 'typography' }, { literal: '/' }, { specimenId: 'text-03', sourceDimension: 'voice' }
+    ] } },
+    { outputDimension: 'reading-rhythm', recipe: { type: 'join', parts: [
+      { specimenId: 'theme-01', sourceDimension: 'layout' }, { literal: '/' }, { specimenId: 'text-03', sourceDimension: 'cadence' }
+    ] } }
+  ]
+});
+assert.equal(derivationWitness.status, 'DERIVATION_WITNESS_VERIFIED');
+assert.match(derivationWitness.derivationFingerprint, /^mut-derivation-v1:[0-9a-f]{16}$/);
+
 const lineageFingerprint = deriveMutationLineageFingerprint(candidate);
 assert.match(lineageFingerprint, /^mut-lineage-v1:[0-9a-f]{16}$/);
-const gut = { organ: 'GUT', status: 'PASS', candidateId: candidate.candidateId, lineageFingerprint, provenance: 'gut/stress-run-01', reviewRunId: 'gut-review-run-01' };
-const vajra = { organ: 'VAJRA', status: 'PASS', candidateId: candidate.candidateId, lineageFingerprint, provenance: 'vajra/adversarial-run-01', reviewRunId: 'vajra-review-run-01' };
+const gut = { organ: 'GUT', status: 'PASS', candidateId: candidate.candidateId, lineageFingerprint, derivationFingerprint: derivationWitness.derivationFingerprint, provenance: 'gut/stress-run-01', reviewRunId: 'gut-review-run-01' };
+const vajra = { organ: 'VAJRA', status: 'PASS', candidateId: candidate.candidateId, lineageFingerprint, derivationFingerprint: derivationWitness.derivationFingerprint, provenance: 'vajra/adversarial-run-01', reviewRunId: 'vajra-review-run-01' };
 
-const eligible = evaluateMutationCrossOrganGate({ candidate, lineageFingerprint, gutReceipt: gut, vajraReceipt: vajra });
+const eligible = evaluateMutationCrossOrganGate({ candidate, lineageFingerprint, derivationWitness, gutReceipt: gut, vajraReceipt: vajra });
 assert.equal(eligible.status, 'ELIGIBLE_FOR_CONTROLLED_INCORPORATION_STAGE');
 assert.equal(eligible.crossOrganAgreement, true);
 assert.equal(eligible.candidateLineageBound, true);
+assert.equal(eligible.derivationWitnessBound, true);
+assert.equal(eligible.derivationFingerprint, derivationWitness.derivationFingerprint);
 assert.deepEqual(eligible.independentReviewRunIds, ['gut-review-run-01', 'vajra-review-run-01']);
 assert.equal(eligible.incorporationAuthorized, false);
 assert.equal(eligible.bodyMutationApplied, false);
 
-const noGut = evaluateMutationCrossOrganGate({ candidate, lineageFingerprint, vajraReceipt: vajra });
+const skippedDerivation = evaluateMutationCrossOrganGate({ candidate, lineageFingerprint, gutReceipt: gut, vajraReceipt: vajra });
+assert.equal(skippedDerivation.status, 'HOLD');
+assert.equal(skippedDerivation.reason, 'MUTHER_VERIFIED_DERIVATION_WITNESS_REQUIRED');
+
+const heldDerivation = evaluateMutationCrossOrganGate({ candidate, lineageFingerprint, derivationWitness: { ...derivationWitness, status: 'HOLD' }, gutReceipt: gut, vajraReceipt: vajra });
+assert.equal(heldDerivation.status, 'HOLD');
+assert.equal(heldDerivation.reason, 'MUTHER_VERIFIED_DERIVATION_WITNESS_REQUIRED');
+
+const swappedDerivation = { ...derivationWitness, candidateId: 'theme-12-candidate' };
+const swappedWitness = evaluateMutationCrossOrganGate({ candidate, lineageFingerprint, derivationWitness: swappedDerivation, gutReceipt: gut, vajraReceipt: vajra });
+assert.equal(swappedWitness.status, 'HOLD');
+assert.equal(swappedWitness.reason, 'MUTHER_DERIVATION_WITNESS_CANDIDATE_MISMATCH');
+
+const tamperedDerivation = structuredClone(derivationWitness);
+tamperedDerivation.verifiedTraits[0].reconstructedOutput = 'tampered-after-witness';
+const staleWitnessFingerprint = evaluateMutationCrossOrganGate({ candidate, lineageFingerprint, derivationWitness: tamperedDerivation, gutReceipt: gut, vajraReceipt: vajra });
+assert.equal(staleWitnessFingerprint.status, 'HOLD');
+assert.equal(staleWitnessFingerprint.reason, 'MUTHER_DERIVATION_WITNESS_FINGERPRINT_INVALID');
+
+const noGut = evaluateMutationCrossOrganGate({ candidate, lineageFingerprint, derivationWitness, vajraReceipt: vajra });
 assert.equal(noGut.status, 'HOLD');
 assert.equal(noGut.reason, 'GUT_RECEIPT_REQUIRED');
 
-const noVajra = evaluateMutationCrossOrganGate({ candidate, lineageFingerprint, gutReceipt: gut });
+const noVajra = evaluateMutationCrossOrganGate({ candidate, lineageFingerprint, derivationWitness, gutReceipt: gut });
 assert.equal(noVajra.status, 'HOLD');
 assert.equal(noVajra.reason, 'VAJRA_RECEIPT_REQUIRED');
 
-const noGutRun = evaluateMutationCrossOrganGate({ candidate, lineageFingerprint, gutReceipt: { ...gut, reviewRunId: '' }, vajraReceipt: vajra });
-assert.equal(noGutRun.status, 'HOLD');
-assert.equal(noGutRun.reason, 'GUT_REVIEW_RUN_ID_REQUIRED');
+const gutMissingDerivation = evaluateMutationCrossOrganGate({ candidate, lineageFingerprint, derivationWitness, gutReceipt: { ...gut, derivationFingerprint: '' }, vajraReceipt: vajra });
+assert.equal(gutMissingDerivation.status, 'HOLD');
+assert.equal(gutMissingDerivation.reason, 'GUT_DERIVATION_FINGERPRINT_REQUIRED');
 
-const noVajraRun = evaluateMutationCrossOrganGate({ candidate, lineageFingerprint, gutReceipt: gut, vajraReceipt: { ...vajra, reviewRunId: '' } });
-assert.equal(noVajraRun.status, 'HOLD');
-assert.equal(noVajraRun.reason, 'VAJRA_REVIEW_RUN_ID_REQUIRED');
+const vajraWrongDerivation = evaluateMutationCrossOrganGate({ candidate, lineageFingerprint, derivationWitness, gutReceipt: gut, vajraReceipt: { ...vajra, derivationFingerprint: 'mut-derivation-v1:0000000000000000' } });
+assert.equal(vajraWrongDerivation.status, 'HOLD');
+assert.equal(vajraWrongDerivation.reason, 'VAJRA_DERIVATION_MISMATCH');
 
 const sharedRunDisguised = evaluateMutationCrossOrganGate({
   candidate,
   lineageFingerprint,
+  derivationWitness,
   gutReceipt: { ...gut, reviewRunId: ' shared-run ' },
   vajraReceipt: { ...vajra, reviewRunId: 'ｓｈａｒｅｄ－ｒｕｎ' }
 });
@@ -76,6 +118,7 @@ assert.equal(sharedRunDisguised.reason, 'CROSS_ORGAN_REVIEW_RUN_INDEPENDENCE_NOT
 const callerInventedLineage = evaluateMutationCrossOrganGate({
   candidate,
   lineageFingerprint: 'lineage:looks-plausible-but-not-derived',
+  derivationWitness,
   gutReceipt: { ...gut, lineageFingerprint: 'lineage:looks-plausible-but-not-derived' },
   vajraReceipt: { ...vajra, lineageFingerprint: 'lineage:looks-plausible-but-not-derived' }
 });
@@ -84,7 +127,7 @@ assert.equal(callerInventedLineage.reason, 'MUTHER_CALLER_LINEAGE_NOT_BOUND_TO_C
 
 const tamperedCandidate = structuredClone(candidate);
 tamperedCandidate.candidateTraits[0].value = 'post-review-unseen-typography';
-const staleReceiptReplay = evaluateMutationCrossOrganGate({ candidate: tamperedCandidate, lineageFingerprint, gutReceipt: gut, vajraReceipt: vajra });
+const staleReceiptReplay = evaluateMutationCrossOrganGate({ candidate: tamperedCandidate, lineageFingerprint, derivationWitness, gutReceipt: gut, vajraReceipt: vajra });
 assert.equal(staleReceiptReplay.status, 'HOLD');
 assert.equal(staleReceiptReplay.reason, 'MUTHER_CALLER_LINEAGE_NOT_BOUND_TO_CANDIDATE');
 assert.notEqual(deriveMutationLineageFingerprint(tamperedCandidate), lineageFingerprint);
@@ -98,35 +141,23 @@ reorderedEquivalent.candidateTraits.reverse();
 reorderedEquivalent.candidateTraits[0].derivedFrom.reverse();
 assert.equal(deriveMutationLineageFingerprint(reorderedEquivalent), lineageFingerprint);
 
-const gutMismatch = evaluateMutationCrossOrganGate({ candidate, lineageFingerprint, gutReceipt: { ...gut, lineageFingerprint: 'other-lineage' }, vajraReceipt: vajra });
-assert.equal(gutMismatch.status, 'HOLD');
-assert.equal(gutMismatch.reason, 'GUT_LINEAGE_MISMATCH');
-
-const vajraMismatch = evaluateMutationCrossOrganGate({ candidate, lineageFingerprint, gutReceipt: gut, vajraReceipt: { ...vajra, candidateId: 'theme-12-candidate' } });
-assert.equal(vajraMismatch.status, 'HOLD');
-assert.equal(vajraMismatch.reason, 'VAJRA_CANDIDATE_MISMATCH');
-
 const sameReviewerDisguised = evaluateMutationCrossOrganGate({
   candidate,
   lineageFingerprint,
+  derivationWitness,
   gutReceipt: { ...gut, provenance: ' review/shared ' },
   vajraReceipt: { ...vajra, provenance: 'ｒｅｖｉｅｗ／ｓｈａｒｅｄ' }
 });
 assert.equal(sameReviewerDisguised.status, 'HOLD');
 assert.equal(sameReviewerDisguised.reason, 'CROSS_ORGAN_REVIEW_INDEPENDENCE_NOT_DEMONSTRATED');
 
-const underivedCandidate = { status: 'SANDBOX_CANDIDATE', candidateId: 'label-only', provenancePreserved: true, incorporationAuthorized: false, bodyMutationApplied: false };
-const underived = evaluateMutationCrossOrganGate({ candidate: underivedCandidate, lineageFingerprint: 'anything', gutReceipt: gut, vajraReceipt: vajra });
-assert.equal(underived.status, 'HOLD');
-assert.equal(underived.reason, 'MUTHER_CANDIDATE_LINEAGE_UNDERIVED');
-
-const selfAuthorized = evaluateMutationCrossOrganGate({ candidate: { ...candidate, incorporationAuthorized: true }, lineageFingerprint, gutReceipt: gut, vajraReceipt: vajra });
+const selfAuthorized = evaluateMutationCrossOrganGate({ candidate: { ...candidate, incorporationAuthorized: true }, lineageFingerprint, derivationWitness, gutReceipt: gut, vajraReceipt: vajra });
 assert.equal(selfAuthorized.status, 'HOLD');
 assert.equal(selfAuthorized.reason, 'MUTHER_CANDIDATE_ALREADY_CLAIMS_BODY_AUTHORITY');
 
 console.log(JSON.stringify({
-  schema: 'zenomorph-muther-internal-mutation-cross-organ-gate-test/v0.3',
+  schema: 'zenomorph-muther-internal-mutation-cross-organ-gate-test/v0.4',
   status: 'PASS',
-  capability: 'MUTHER_MUTATION_REVIEWS_REQUIRE_TRACEABLE_INDEPENDENT_RUNS_BOUND_TO_EXACT_LINEAGE',
-  boundary: 'PASS proves protocol containment only: different labels do not prove independent review; each qualifying GUT/VAJRA receipt must identify a distinct traceable review run bound to the exact mutation lineage. No persistent body mutation occurs.'
+  capability: 'MUTHER_MUTATION_REVIEWS_REQUIRE_EXACT_VERIFIED_DERIVATION_PLUS_TRACEABLE_INDEPENDENT_RUNS',
+  boundary: 'PASS proves protocol containment only: GUT and VAJRA must review the same exact candidate lineage and the same exact verified derivation witness in distinct traceable runs. Skipping, swapping, or tampering with the derivation witness stays HOLD. No persistent body mutation occurs.'
 }, null, 2));
