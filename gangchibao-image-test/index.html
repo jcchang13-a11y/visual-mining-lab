@@ -13,5 +13,5 @@
 <section class="card"><div class="ok">第 2 輪｜PNG / JPG</div><div class="status">已通過。</div></section>
 <section class="card"><div class="ok">第 3 輪｜同頁五圖、手機單欄</div><div class="status">已由手機實機截圖驗收通過。</div></section>
 <section class="card"><div class="ok">第 4 輪｜缺圖與錯路徑</div><div class="status">已由手機實機截圖驗收通過：A、B、C fallback 正常；D 正常圖片與哨兵正文不受影響。</div></section>
-<section class="card"><div class="ok">第 5 輪｜快取／更新</div><p class="status">基準階段 A：先發布同名資產 <code>assets/cache-target.svg</code>，目前圖片內應顯示「CACHE A」。下一階段將不改檔名，只替換這個檔案內容為「CACHE B」，並更新版本參數，再確認公開頁取得新內容。</p><div class="cachebox"><img src="/visual-mining-lab/gangchibao-image-test/assets/cache-target.svg?v=20260911-r5a" alt="第5輪快取基準圖"><div class="status">目前版本參數：r5a｜預期畫面：CACHE A</div></div><div class="sentinel">第 5 輪哨兵正文：圖片快取測試不可以阻塞正文。</div></section>
+<section class="card"><div class="ok">第 5 輪｜快取／更新</div><p class="status">階段 B：檔名仍然是 <code>assets/cache-target.svg</code>，但內容已由「CACHE A」改為「CACHE B」，並把版本參數由 r5a 更新為 r5b。公開頁若取得新資產，圖片內應清楚顯示「CACHE B」。</p><div class="cachebox"><img src="/visual-mining-lab/gangchibao-image-test/assets/cache-target.svg?v=20260911-r5b" alt="第5輪快取更新圖"><div class="status">目前版本參數：r5b｜預期畫面：CACHE B</div></div><div class="sentinel">第 5 輪哨兵正文：圖片更新與快取測試不可以阻塞正文。</div></section>
 </main></body></html>
