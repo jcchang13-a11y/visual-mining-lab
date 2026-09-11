@@ -1,7 +1,7 @@
 // MUTHER bidirectional text-visual phenotype pressure gate v0.2
 // A cross-modal mutation is not yet bidirectional merely because text and visual ore both participate.
 // This wrapper requires traceable pressure in both directions while keeping the candidate sandboxed.
-// v0.2 blocks label-only bidirectionality: two directions must carry distinct causal traces, not the same mutation relabelled with a different phenotypeTarget.
+// v0.2 blocks label-only bidirectionality: opposite targets must be grounded in distinct resolved source traces, not the same ore relation relabelled twice.
 
 import { evaluateInternalMutation } from './internal-mutation.mjs';
 
@@ -32,15 +32,10 @@ function hold(reason, details = {}) {
   };
 }
 
-function causalSignature(trait) {
-  const sources = (trait.derivedFrom || [])
-    .map(source => `${canonical(source?.specimenId)}::${canonical(source?.sourceDimension)}::${canonical(source?.sourceValue)}`)
-    .sort();
-  return JSON.stringify({
-    outputDimension: canonical(trait?.dimension),
-    outputValue: canonical(trait?.value),
-    sources
-  });
+function sourceTraceSignature(trait) {
+  return JSON.stringify((trait.derivedFrom || [])
+    .map(source => `${canonical(source?.specimenId)}::${canonical(source?.sourceDimension)}::${canonical(source?.sourceValue)}::${canonical(source?.provenance?.artifactRef)}::${canonical(source?.provenance?.versionRef)}`)
+    .sort());
 }
 
 export function evaluateBidirectionalPhenotypePressure({ specimens, proposal } = {}) {
@@ -82,7 +77,7 @@ export function evaluateBidirectionalPhenotypePressure({ specimens, proposal } =
       phenotypeTarget,
       outputDimension: trait.dimension,
       outputValue: trait.value,
-      causalSignature: causalSignature(trait),
+      sourceTraceSignature: sourceTraceSignature(trait),
       sourceSpecimenIds: [...new Set((trait.derivedFrom || []).map(source => source.specimenId).filter(Boolean))],
       sourceKinds: [...new Set((trait.derivedFrom || []).map(source => source.specimenKind).filter(Boolean))]
     });
@@ -98,13 +93,13 @@ export function evaluateBidirectionalPhenotypePressure({ specimens, proposal } =
     });
   }
 
-  const hasDistinctCausalPair = visualPressure.some(visual =>
-    linguisticPressure.some(linguistic => visual.causalSignature !== linguistic.causalSignature)
+  const hasDistinctSourceTracePair = visualPressure.some(visual =>
+    linguisticPressure.some(linguistic => visual.sourceTraceSignature !== linguistic.sourceTraceSignature)
   );
-  if (!hasDistinctCausalPair) {
+  if (!hasDistinctSourceTracePair) {
     return hold('MUTHER_BIDIRECTIONAL_PRESSURE_LABEL_ONLY_ECHO', {
       pressureSteps: directions,
-      boundary: 'Changing phenotypeTarget alone does not demonstrate reciprocal pressure. At least one visual-targeting step and one linguistic-targeting step must differ in output dimension/value or resolved source trace.'
+      boundary: 'Changing phenotypeTarget, output dimension, or output wording alone does not demonstrate reciprocal pressure. At least one visual-targeting step and one linguistic-targeting step must be grounded in different resolved source-dimension/provenance traces.'
     });
   }
 
@@ -114,9 +109,9 @@ export function evaluateBidirectionalPhenotypePressure({ specimens, proposal } =
     bidirectionalPhenotypePressureDemonstrated: true,
     visualPhenotypePressureSteps: visualPressure,
     linguisticPhenotypePressureSteps: linguisticPressure,
-    distinctCausalPressurePairDemonstrated: true,
+    distinctSourceTracePairDemonstrated: true,
     incorporationAuthorized: false,
     bodyMutationApplied: false,
-    boundary: `${base.boundary} Bidirectional pressure is demonstrated only structurally: at least one text↔visual cross-pressure step explicitly targets visual phenotype and at least one separately targets linguistic phenotype, with both source families traceable in each step and at least one distinct causal trace across the two directions. Merely relabelling the same transformation with another phenotypeTarget is held as an echo. This does not prove aesthetic merit, semantic improvement, autonomous authorship, assimilation, or permission to modify the persistent body.`
+    boundary: `${base.boundary} Bidirectional pressure is demonstrated only structurally: at least one text↔visual cross-pressure step explicitly targets visual phenotype and at least one separately targets linguistic phenotype, with both source families traceable in each step and at least one distinct resolved source trace across the two directions. Merely relabelling the same ore relation with another phenotypeTarget or output name is held as an echo. This does not prove aesthetic merit, semantic improvement, autonomous authorship, assimilation, or permission to modify the persistent body.`
   };
 }
