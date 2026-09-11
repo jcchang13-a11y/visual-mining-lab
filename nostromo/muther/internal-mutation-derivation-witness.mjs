@@ -1,4 +1,4 @@
-// MUTHER derivation witness gate v0.1
+// MUTHER derivation witness gate v0.2
 // Bounded proof that a mutated output was reconstructed from cited source material.
 // This does not claim semantic causality, aesthetic quality, assimilation, or body incorporation.
 
@@ -73,6 +73,12 @@ function sourceKey(source) {
   return `${canonical(source?.specimenId).trim()}::${canonical(source?.sourceDimension).trim()}`;
 }
 
+function sameSourceSet(declared, used) {
+  if (declared.size !== used.size) return false;
+  for (const key of declared) if (!used.has(key)) return false;
+  return true;
+}
+
 export function verifyMutationDerivation({ specimens, candidate, witnesses } = {}) {
   if (candidate?.status !== 'SANDBOX_CANDIDATE') return hold('MUTHER_DERIVATION_REQUIRES_SANDBOX_CANDIDATE');
   let byId;
@@ -101,9 +107,11 @@ export function verifyMutationDerivation({ specimens, candidate, witnesses } = {
     if (built.error) return hold(built.error);
     if (canonical(built.output) !== canonical(trait.value)) return hold('MUTHER_DERIVATION_OUTPUT_MISMATCH');
 
-    const declared = new Set((Array.isArray(trait.derivedFrom) ? trait.derivedFrom : []).map(sourceKey));
+    const declaredList = Array.isArray(trait.derivedFrom) ? trait.derivedFrom : [];
+    const declared = new Set(declaredList.map(sourceKey));
     const used = new Set(built.sources.map(sourceKey));
-    if (used.size < 1 || [...used].some(key => !declared.has(key))) return hold('MUTHER_DERIVATION_SOURCE_LABEL_MISMATCH');
+    if (declared.size !== declaredList.length) return hold('MUTHER_DERIVATION_DUPLICATE_DECLARED_SOURCE');
+    if (!sameSourceSet(declared, used)) return hold('MUTHER_DERIVATION_SOURCE_LABEL_MISMATCH');
 
     if (trait.operation === 'cross-pressure' && used.size < 2) return hold('MUTHER_DERIVATION_CROSS_PRESSURE_NOT_MATERIAL');
 
@@ -117,7 +125,7 @@ export function verifyMutationDerivation({ specimens, candidate, witnesses } = {
 
   if (!verified.length) return hold('MUTHER_DERIVATION_NO_MUTATING_TRAITS');
   return {
-    schema: 'zenomorph-muther-derivation-witness/v0.1',
+    schema: 'zenomorph-muther-derivation-witness/v0.2',
     status: 'DERIVATION_WITNESS_VERIFIED',
     candidateId: candidate.candidateId,
     verifiedTraits: verified,
@@ -127,13 +135,13 @@ export function verifyMutationDerivation({ specimens, candidate, witnesses } = {
     incorporationAuthorized: false,
     bodyMutationApplied: false,
     nextRequiredGate: 'GUT_VAJRA_REVIEW_OF_DERIVATION_AND_CROSS_ORGAN_REGRESSION',
-    boundary: 'This gate proves only bounded reconstructability: the declared output can be exactly reconstructed from cited source slices plus punctuation-only separators. It rejects arbitrary-output laundering and source-label swapping, but it does not prove semantic causality, creativity, aesthetic value, assimilation, organ growth, or permission to modify the persistent body.'
+    boundary: 'This gate proves only bounded reconstructability: the declared output can be exactly reconstructed from cited source slices plus punctuation-only separators, and every declared source must materially appear in the reconstruction. It rejects arbitrary-output laundering, source-label swapping, unused provenance inflation, and duplicate declared-source padding, but it does not prove semantic causality, creativity, aesthetic value, assimilation, organ growth, or permission to modify the persistent body.'
   };
 }
 
 function hold(reason) {
   return {
-    schema: 'zenomorph-muther-derivation-witness/v0.1',
+    schema: 'zenomorph-muther-derivation-witness/v0.2',
     status: 'HOLD',
     reason,
     provenancePreserved: true,
