@@ -37,12 +37,13 @@ jobs:
           if(out.persistentMutation!==false||out.bodyAdmission!==false||out.installed!==false)throw new Error('boundary lied');
           if(out.registryLookup!=='OWN_DATA_PROPERTY_ONLY')throw new Error('registry lookup boundary not declared');
           if(out.bodyCopyBoundary!=='STRUCTURED_CLONE_FAIL_CLOSED')throw new Error('body clone boundary not declared');
-          if(out.bodyPropertyRead!=='OWN_DATA_PROPERTY_DESCRIPTOR_ONLY')throw new Error('body property read boundary not declared');
+          if(out.bodyPropertyRead!=='COMPLETE_OWN_DATA_PROPERTY_DESCRIPTOR_SET_ONLY')throw new Error('body property read boundary not declared');
           if(JSON.stringify(body)!==snapshot||out.originalBodyUnchanged!==true)throw new Error('source body mutated');
           if(out.candidateBody.capabilities['foreign.signal']?.status!=='REVERSIBLE_TRIAL_ONLY')throw new Error('candidate missing');
           if(out.rollback?.restoresFingerprint!==out.beforeFingerprint)throw new Error('rollback evidence missing');
           if(out.fingerprintBoundary?.nestedStateBound!==true)throw new Error('nested fingerprint boundary not declared');
           if(out.fingerprintBoundary?.accessorStateAccepted!==false)throw new Error('accessor fingerprint boundary not declared');
+          if(out.fingerprintBoundary?.symbolStateAccepted!==false||out.fingerprintBoundary?.nonEnumerableStateAccepted!==false||out.fingerprintBoundary?.exoticObjectStateAccepted!==false||out.fingerprintBoundary?.arrayCustomPropertyAccepted!==false)throw new Error('hidden-state fingerprint boundary not declared');
 
           const nestedChanged=structuredClone(body);
           nestedChanged.organs.GUT.metabolism.threshold=3;
@@ -85,10 +86,30 @@ jobs:
           if(nestedBodyGetterExecuted)throw new Error('nested body getter executed during fingerprinting');
           if(nestedAccessorOut.status!=='BLOCKED'||nestedAccessorOut.reason!=='fingerprintable-acyclic-data-property-host-body-state-required')throw new Error('nested body accessor must fail closed');
 
+          const nonEnumerableBody=structuredClone(body);
+          Object.defineProperty(nonEnumerableBody.organs.GUT.metabolism,'hiddenThreshold',{value:99,enumerable:false});
+          const nonEnumerableOut=run(nonEnumerableBody);
+          if(nonEnumerableOut.status!=='BLOCKED'||nonEnumerableOut.reason!=='fingerprintable-acyclic-data-property-host-body-state-required')throw new Error('non-enumerable body state must fail closed instead of disappearing from rollback identity');
+
+          const symbolBody=structuredClone(body);
+          symbolBody.organs.GUT.metabolism[Symbol('hidden')]='mutation';
+          const symbolOut=run(symbolBody);
+          if(symbolOut.status!=='BLOCKED'||symbolOut.reason!=='fingerprintable-acyclic-data-property-host-body-state-required')throw new Error('symbol body state must fail closed instead of disappearing from rollback identity');
+
+          const exoticBody=structuredClone(body);
+          exoticBody.organs.GUT.metabolism.window=new Map([['threshold',2]]);
+          const exoticOut=run(exoticBody);
+          if(exoticOut.status!=='BLOCKED'||exoticOut.reason!=='fingerprintable-acyclic-data-property-host-body-state-required')throw new Error('exotic nested body object must fail closed instead of fingerprinting as empty object');
+
+          const arrayPropertyBody=structuredClone(body);
+          arrayPropertyBody.history.note='hidden-array-property';
+          const arrayPropertyOut=run(arrayPropertyBody);
+          if(arrayPropertyOut.status!=='BLOCKED'||arrayPropertyOut.reason!=='fingerprintable-acyclic-data-property-host-body-state-required')throw new Error('custom array property must fail closed instead of disappearing from rollback identity');
+
           const uncloneable={organs:{GUT:{status:'ACTIVE'},VAJRA:{status:'ACTIVE'}},capabilities:{},ephemeral:()=>true};
           const uncloneableOut=run(uncloneable);
           if(uncloneableOut.status!=='BLOCKED'||uncloneableOut.reason!=='structured-cloneable-host-body-state-required')throw new Error('uncloneable body state must fail closed');
           if(uncloneableOut.bodyAdmission!==false||uncloneableOut.persistentMutation!==false)throw new Error('uncloneable body crossed admission boundary');
 
-          console.log('PASS reversible incorporation boundary with descriptor-safe body fingerprinting, nested rollback fingerprint, registry containment, and fail-closed host-body cloning',out.beforeFingerprint,out.candidateFingerprint);
+          console.log('PASS reversible incorporation boundary with complete hidden-state rejection, descriptor-safe body fingerprinting, nested rollback fingerprint, registry containment, and fail-closed host-body cloning',out.beforeFingerprint,out.candidateFingerprint);
           EOF
