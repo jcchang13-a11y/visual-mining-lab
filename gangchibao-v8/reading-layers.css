@@ -179,6 +179,11 @@
     break-inside:avoid;
     page-break-inside:avoid;
   }
+  /* 結構標牌本身也是施工痕跡，但不應孤零零留在頁尾；只把它和下一塊既有內容黏住，不改正文順序。 */
+  .structure-line{
+    break-after:avoid;
+    page-break-after:avoid;
+  }
   .sutra-block{background:#f4f2ec}
   .work-note{background:#fff}
   .existing-figure img,.original-figure img{max-height:none}
