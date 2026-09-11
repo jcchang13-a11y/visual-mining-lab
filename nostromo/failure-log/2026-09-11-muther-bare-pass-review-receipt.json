@@ -1,0 +1,29 @@
+{
+  "failureId": "MUTHER_BARE_PASS_REVIEW_RECEIPT",
+  "date": "2026-09-11",
+  "status": "OPEN_NOT_PROMOTED",
+  "organ": "MUTHER",
+  "surface": "nostromo/muther/internal-mutation-cross-organ-gate.mjs",
+  "summary": "The current cross-organ gate binds GUT and VAJRA receipts to the exact candidate lineage and verified derivation fingerprint, but it can still accept a bare self-asserted PASS receipt that carries no machine-checkable organ-specific review evidence beyond identity, provenance and run identifiers.",
+  "evidence": {
+    "currentGateSchema": "zenomorph-muther-internal-mutation-cross-organ-gate/v0.4",
+    "verifiedStrength": [
+      "candidate lineage is deterministically derived",
+      "derivation witness fingerprint is recomputed and checked",
+      "GUT and VAJRA receipts must bind to the same candidate and derivation",
+      "review provenance and run identities must be distinct"
+    ],
+    "remainingGap": "qualifyReceipt() currently treats status=PASS plus matching identifiers as sufficient. It does not require a stable review-evidence witness proving what GUT checked for metabolic contamination/echo or what VAJRA checked for contradiction/counterexample pressure. Therefore protocol identity is stronger than before, but substantive review cannot yet be distinguished from a well-formed assertion."
+  },
+  "risk": "A caller could manufacture two syntactically independent receipts that both say PASS without demonstrating that either organ actually performed its required inspection. This would create false cross-organ agreement and could advance a mutation candidate toward controlled incorporation on metadata alone.",
+  "requiredFix": [
+    "introduce an evidence-bound review witness for each organ rather than accepting bare PASS",
+    "bind each review witness to candidateId, lineageFingerprint, derivationFingerprint and reviewRunId",
+    "require organ-specific machine-checkable inspection outputs instead of only labels",
+    "fingerprint the review witness and reject post-review tampering, replay or swapped evidence",
+    "retain current independence checks and keep incorporationAuthorized/bodyMutationApplied false",
+    "add adversarial tests showing two fabricated PASS receipts remain HOLD"
+  ],
+  "promotionRule": "Do not upgrade public MUTHER cross-organ review claims until the new witness requirement passes focused tests, adversarial tests, cross-organ regression and GitHub Actions.",
+  "boundary": "This log records a protocol weakness; it does not claim that any existing GUT or VAJRA implementation is fraudulent, and it does not authorize body mutation."
+}
