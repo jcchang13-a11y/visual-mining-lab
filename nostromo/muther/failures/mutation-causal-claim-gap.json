@@ -1,0 +1,16 @@
+{
+  "schema": "zenomorph-failure/v0.1",
+  "failureId": "MUTHER_MUTATION_CAUSAL_CLAIM_GAP",
+  "status": "OPEN_NOT_PROMOTED",
+  "organ": "MU/TH/UR",
+  "observedCapability": "internal-mutation v0.4 verifies traceable source references, operation labels, provenance preservation, and that mutated outputs are not exact source-value copies",
+  "gap": "A proposal can cite two valid source traits and emit an arbitrary third value under a mutating operation. Current structural checks can prove traceability and non-copying, but cannot prove that the output was causally produced by decomposing and recombining the cited sources.",
+  "risk": "ZENOMORPH could mistake decorative provenance for genuine mining: a candidate may look cross-modal or phenotype-coupled because its metadata names text and visual ore even when the output was not materially derived from them.",
+  "requiredNextEvidence": [
+    "Add an isolated derivation witness or transformation trace that binds output features to source features without pretending to solve semantic causality generally.",
+    "Adversarially test arbitrary-output laundering, source-label swapping, and provenance-only cross-pressure claims.",
+    "Require GUT/VAJRA review to distinguish traceable transformation evidence from unsupported causal derivation claims.",
+    "Run MUTHER unit tests and cross-organ regression before any public capability promotion."
+  ],
+  "boundary": "This failure record does not invalidate the existing sandbox. It narrows the claim: current evidence supports traceable non-copy transformation, not verified causal recombination or autonomous aesthetic judgment."
+}
