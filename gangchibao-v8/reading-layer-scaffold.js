@@ -1,6 +1,6 @@
 /* 《剛吃飽》第八版｜爛尾樓版｜閱讀地層自動鷹架
  * 不改單元 Markdown；只在 reader DOM 中標記高信心的施工語與結構代碼。
- * 經文、正文、公式沿用既有 renderer；這裡只補 L3／L4 的可逆辨識層。
+ * 經文、正文、公式沿用既有 renderer；這裡只補 L2／L3／L4 的可逆辨識層。
  */
 (function(){
   'use strict';
@@ -48,12 +48,42 @@
     return true;
   }
 
+  /* 單元 Markdown 大量使用「［經文］→［正文］／［註釋］」而不是 [[SUTRA]]。
+     以前只有「［經文］」標籤被辨識成 L4，真正經文仍落在 L1。
+     這裡只在 DOM 把兩個標籤之間的既有內容包成 L2；不改原檔、不重排字句。 */
+  function bindChineseSutraRanges(){
+    const labels=Array.from(article.querySelectorAll('.structure-line')).filter(el=>
+      el.textContent.trim()==='［經文］' && el.dataset.gcbSutraBound!=='1'
+    );
+
+    labels.forEach(label=>{
+      label.dataset.gcbSutraBound='1';
+      let cursor=label.nextSibling;
+      while(cursor && cursor.nodeType===Node.TEXT_NODE && !(cursor.nodeValue||'').trim()) cursor=cursor.nextSibling;
+      if(cursor?.nodeType===Node.ELEMENT_NODE && cursor.classList.contains('sutra-block')) return;
+
+      const section=document.createElement('section');
+      section.className='sutra-block sutra-range';
+      section.dataset.gcbLayer='L2';
+      cursor=label.nextSibling;
+      while(cursor){
+        const next=cursor.nextSibling;
+        const boundary=cursor.nodeType===Node.ELEMENT_NODE && cursor.classList.contains('structure-line') && /^［(?:正文|註釋|經文)］$/.test(cursor.textContent.trim());
+        if(boundary) break;
+        section.append(cursor);
+        cursor=next;
+      }
+      if((section.textContent||'').trim()) label.parentNode.insertBefore(section,cursor);
+    });
+  }
+
   function apply(){
     const walker=document.createTreeWalker(article,NodeFilter.SHOW_TEXT);
     const nodes=[];
     let node;
     while((node=walker.nextNode())) nodes.push(node);
     nodes.forEach(markTextNode);
+    bindChineseSutraRanges();
   }
 
   apply();
