@@ -38,7 +38,7 @@ const bidirectional = evaluateBidirectionalPhenotypePressure({
 });
 assert.equal(bidirectional.status, 'SANDBOX_CANDIDATE');
 assert.equal(bidirectional.bidirectionalPhenotypePressureDemonstrated, true);
-assert.equal(bidirectional.distinctCausalPressurePairDemonstrated, true);
+assert.equal(bidirectional.distinctSourceTracePairDemonstrated, true);
 assert.equal(bidirectional.visualPhenotypePressureSteps.length, 1);
 assert.equal(bidirectional.linguisticPhenotypePressureSteps.length, 1);
 assert.equal(bidirectional.incorporationAuthorized, false);
@@ -122,14 +122,14 @@ const labelOnlyEcho = evaluateBidirectionalPhenotypePressure({
     candidateId: 'label-only-echo-01',
     traits: [
       {
-        dimension: 'shared-output', value: 'same-cross-modal-result', operation: 'cross-pressure', phenotypeTarget: 'visual',
+        dimension: 'shell-rhythm-a', value: 'grid-breaks-triggered-by-fragment-cadence-a', operation: 'cross-pressure', phenotypeTarget: 'visual',
         derivedFrom: [
           { specimenId: 'theme-01', sourceDimension: 'layout' },
           { specimenId: 'text-01', sourceDimension: 'cadence' }
         ]
       },
       {
-        dimension: 'shared-output-2', value: 'same-cross-modal-result-2', operation: 'cross-pressure', phenotypeTarget: 'linguistic',
+        dimension: 'narrative-breath-b', value: 'sentences-lengthen-where-grid-opens-b', operation: 'cross-pressure', phenotypeTarget: 'linguistic',
         derivedFrom: [
           { specimenId: 'theme-01', sourceDimension: 'layout' },
           { specimenId: 'text-01', sourceDimension: 'cadence' }
@@ -138,61 +138,13 @@ const labelOnlyEcho = evaluateBidirectionalPhenotypePressure({
     ]
   }
 });
-// This is still a distinct causal pair because the output dimension/value materially differ.
-assert.equal(labelOnlyEcho.status, 'SANDBOX_CANDIDATE');
-
-const exactRelabelEcho = evaluateBidirectionalPhenotypePressure({
-  specimens: [theme, text],
-  proposal: {
-    candidateId: 'exact-relabel-echo-01',
-    traits: [
-      {
-        dimension: 'shared-output', value: 'same-cross-modal-result', operation: 'cross-pressure', phenotypeTarget: 'visual',
-        derivedFrom: [
-          { specimenId: 'theme-01', sourceDimension: 'layout' },
-          { specimenId: 'text-01', sourceDimension: 'cadence' }
-        ]
-      },
-      {
-        dimension: 'shared-output-compat', value: 'same-cross-modal-result-compat', operation: 'cross-pressure', phenotypeTarget: 'linguistic',
-        derivedFrom: [
-          { specimenId: 'theme-01', sourceDimension: 'layout' },
-          { specimenId: 'text-01', sourceDimension: 'cadence' }
-        ]
-      }
-    ]
-  }
-});
-// The base mutation layer requires unique output dimensions, so exact duplicate traits cannot survive that gate.
-// Verify the anti-echo rule through a controlled pair whose raw strings collapse only after NFKC canonicalization.
-const canonicalRelabelEcho = evaluateBidirectionalPhenotypePressure({
-  specimens: [theme, text],
-  proposal: {
-    candidateId: 'canonical-relabel-echo-01',
-    traits: [
-      {
-        dimension: 'shell-rhythm-A', value: 'visual-result-A', operation: 'cross-pressure', phenotypeTarget: 'visual',
-        derivedFrom: [
-          { specimenId: 'theme-01', sourceDimension: 'layout' },
-          { specimenId: 'text-01', sourceDimension: 'cadence' }
-        ]
-      },
-      {
-        dimension: 'shell-rhythm-Ｂ', value: 'visual-result-Ｂ', operation: 'cross-pressure', phenotypeTarget: 'linguistic',
-        derivedFrom: [
-          { specimenId: 'theme-01', sourceDimension: 'layout' },
-          { specimenId: 'text-01', sourceDimension: 'cadence' }
-        ]
-      }
-    ]
-  }
-});
-assert.equal(exactRelabelEcho.status, 'SANDBOX_CANDIDATE');
-assert.equal(canonicalRelabelEcho.status, 'SANDBOX_CANDIDATE');
+assert.equal(labelOnlyEcho.status, 'HOLD');
+assert.equal(labelOnlyEcho.reason, 'MUTHER_BIDIRECTIONAL_PRESSURE_LABEL_ONLY_ECHO');
+assert.equal(labelOnlyEcho.bidirectionalPhenotypePressureDemonstrated, false);
 
 console.log(JSON.stringify({
   schema: 'zenomorph-muther-bidirectional-pressure-test/v0.2',
   status: 'PASS',
-  capability: 'TEXT_VISUAL_RECIPROCAL_PRESSURE_REQUIRES_SEPARATE_TARGETS_AND_DISTINCT_CAUSAL_TRACES',
+  capability: 'TEXT_VISUAL_RECIPROCAL_PRESSURE_REQUIRES_SEPARATE_TARGETS_AND_DISTINCT_RESOLVED_SOURCE_TRACES',
   boundary: 'PASS proves a structural bidirectional pressure gate with anti-relabel protection only. It does not prove aesthetic quality, semantic improvement, autonomous approval, assimilation, or body mutation.'
 }, null, 2));
