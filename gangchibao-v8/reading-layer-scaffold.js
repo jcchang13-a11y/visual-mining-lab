@@ -12,8 +12,9 @@
   const bracketStructureLine=/^\s*\[\[(?!\/?(?:SUTRA|WORK|FIGURE)\b)[^\]\n]+\]\]\s*$/i;
   const sectionLabelLine=/^\s*［(?:正文|註釋|經文)］\s*$/;
   /* 早期單元還沒統一成［經文］／［正文］，直接裸寫「經文」「經文範圍」「正文」「公式」等。
+     後來又出現「幹話區｜拆到最小，就比較真嗎？」這種「舊標牌＋小標題」混合寫法。
      這些舊標牌不改字，只補回閱讀層；它們本身就是施工史。 */
-  const legacySectionLabelLine=/^\s*(?:經文(?:範圍)?|正文|公式|幹話區|短註)\s*$/;
+  const legacySectionLabelLine=/^\s*(?:經文(?:範圍)?|正文|公式|幹話區|短註)(?:\s*[｜|：:]\s*.+)?\s*$/;
   const legacyDividerLine=/^\s*---\s*$/;
   const pageCounterLine=/^\s*\d+\/\d+\s*$/;
   const workLine=/^\s*(?:施工註記|工作註記|暫記|待查|未決|停工|死路)\s*[：:]/;
@@ -30,7 +31,7 @@
   function markTextNode(node){
     if(!node?.nodeValue || node.parentElement?.closest(excluded)) return false;
     const value=node.nodeValue;
-    if(!/[：:\[\]［］\/【】\-]|經文|正文|公式|幹話|短註/.test(value)) return false;
+    if(!/[：:\[\]［］\/【】\-｜|]|經文|正文|公式|幹話|短註/.test(value)) return false;
     const lines=value.split('\n');
     if(!lines.some(line=>classify(line))) return false;
 
@@ -86,11 +87,12 @@
        ……經文……
        ---
        正文
+     也有「幹話區｜……」「短註｜……」這種後來長出小標題的混合標牌。
      這些內容此前全落在 L1。現在只把「經文」標牌之後、第一個 --- 或下一個舊段落標牌之前包成 L2。
      不改舊標題、不替它們統一格式，也不碰已有 [[SUTRA]] 的單元。 */
   function bindLegacySutraRanges(){
     const labels=Array.from(article.querySelectorAll('.structure-line')).filter(el=>
-      /^(?:經文|經文範圍)$/.test(el.textContent.trim()) && el.dataset.gcbLegacySutraBound!=='1'
+      /^(?:經文|經文範圍)(?:\s*[｜|：:]\s*.+)?$/.test(el.textContent.trim()) && el.dataset.gcbLegacySutraBound!=='1'
     );
 
     labels.forEach(label=>{
@@ -107,7 +109,7 @@
       while(cursor){
         const next=cursor.nextSibling;
         const text=cursor.nodeType===Node.ELEMENT_NODE ? cursor.textContent.trim() : '';
-        const boundary=cursor.nodeType===Node.ELEMENT_NODE && cursor.classList.contains('structure-line') && (text==='---' || /^(?:正文|公式|幹話區|短註|經文|經文範圍)$/.test(text));
+        const boundary=cursor.nodeType===Node.ELEMENT_NODE && cursor.classList.contains('structure-line') && (text==='---' || /^(?:正文|公式|幹話區|短註|經文|經文範圍)(?:\s*[｜|：:]\s*.+)?$/.test(text));
         if(boundary) break;
         section.append(cursor);
         cursor=next;
