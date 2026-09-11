@@ -5,6 +5,10 @@ on:
     branches: [ main ]
     paths:
       - 'nostromo/muther/**'
+      - 'nostromo/gut/mutation-review-artifact.mjs'
+      - 'nostromo/gut/mutation-review-receipt.mjs'
+      - 'nostromo/vajra/mutation-review-artifact.mjs'
+      - 'nostromo/vajra/mutation-review-receipt.mjs'
       - 'nostromo/integration/**'
       - '.github/workflows/zenomorph-muther-mutation-integration.yml'
   workflow_dispatch:
