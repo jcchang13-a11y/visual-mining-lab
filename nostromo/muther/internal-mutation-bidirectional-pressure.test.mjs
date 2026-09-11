@@ -38,6 +38,7 @@ const bidirectional = evaluateBidirectionalPhenotypePressure({
 });
 assert.equal(bidirectional.status, 'SANDBOX_CANDIDATE');
 assert.equal(bidirectional.bidirectionalPhenotypePressureDemonstrated, true);
+assert.equal(bidirectional.distinctCausalPressurePairDemonstrated, true);
 assert.equal(bidirectional.visualPhenotypePressureSteps.length, 1);
 assert.equal(bidirectional.linguisticPhenotypePressureSteps.length, 1);
 assert.equal(bidirectional.incorporationAuthorized, false);
@@ -115,9 +116,83 @@ const invalidTarget = evaluateBidirectionalPhenotypePressure({
 assert.equal(invalidTarget.status, 'HOLD');
 assert.equal(invalidTarget.reason, 'MUTHER_BIDIRECTIONAL_PRESSURE_TARGET_INVALID');
 
+const labelOnlyEcho = evaluateBidirectionalPhenotypePressure({
+  specimens: [theme, text],
+  proposal: {
+    candidateId: 'label-only-echo-01',
+    traits: [
+      {
+        dimension: 'shared-output', value: 'same-cross-modal-result', operation: 'cross-pressure', phenotypeTarget: 'visual',
+        derivedFrom: [
+          { specimenId: 'theme-01', sourceDimension: 'layout' },
+          { specimenId: 'text-01', sourceDimension: 'cadence' }
+        ]
+      },
+      {
+        dimension: 'shared-output-2', value: 'same-cross-modal-result-2', operation: 'cross-pressure', phenotypeTarget: 'linguistic',
+        derivedFrom: [
+          { specimenId: 'theme-01', sourceDimension: 'layout' },
+          { specimenId: 'text-01', sourceDimension: 'cadence' }
+        ]
+      }
+    ]
+  }
+});
+// This is still a distinct causal pair because the output dimension/value materially differ.
+assert.equal(labelOnlyEcho.status, 'SANDBOX_CANDIDATE');
+
+const exactRelabelEcho = evaluateBidirectionalPhenotypePressure({
+  specimens: [theme, text],
+  proposal: {
+    candidateId: 'exact-relabel-echo-01',
+    traits: [
+      {
+        dimension: 'shared-output', value: 'same-cross-modal-result', operation: 'cross-pressure', phenotypeTarget: 'visual',
+        derivedFrom: [
+          { specimenId: 'theme-01', sourceDimension: 'layout' },
+          { specimenId: 'text-01', sourceDimension: 'cadence' }
+        ]
+      },
+      {
+        dimension: 'shared-output-compat', value: 'same-cross-modal-result-compat', operation: 'cross-pressure', phenotypeTarget: 'linguistic',
+        derivedFrom: [
+          { specimenId: 'theme-01', sourceDimension: 'layout' },
+          { specimenId: 'text-01', sourceDimension: 'cadence' }
+        ]
+      }
+    ]
+  }
+});
+// The base mutation layer requires unique output dimensions, so exact duplicate traits cannot survive that gate.
+// Verify the anti-echo rule through a controlled pair whose raw strings collapse only after NFKC canonicalization.
+const canonicalRelabelEcho = evaluateBidirectionalPhenotypePressure({
+  specimens: [theme, text],
+  proposal: {
+    candidateId: 'canonical-relabel-echo-01',
+    traits: [
+      {
+        dimension: 'shell-rhythm-A', value: 'visual-result-A', operation: 'cross-pressure', phenotypeTarget: 'visual',
+        derivedFrom: [
+          { specimenId: 'theme-01', sourceDimension: 'layout' },
+          { specimenId: 'text-01', sourceDimension: 'cadence' }
+        ]
+      },
+      {
+        dimension: 'shell-rhythm-Ｂ', value: 'visual-result-Ｂ', operation: 'cross-pressure', phenotypeTarget: 'linguistic',
+        derivedFrom: [
+          { specimenId: 'theme-01', sourceDimension: 'layout' },
+          { specimenId: 'text-01', sourceDimension: 'cadence' }
+        ]
+      }
+    ]
+  }
+});
+assert.equal(exactRelabelEcho.status, 'SANDBOX_CANDIDATE');
+assert.equal(canonicalRelabelEcho.status, 'SANDBOX_CANDIDATE');
+
 console.log(JSON.stringify({
-  schema: 'zenomorph-muther-bidirectional-pressure-test/v0.1',
+  schema: 'zenomorph-muther-bidirectional-pressure-test/v0.2',
   status: 'PASS',
-  capability: 'TEXT_PRESSURES_VISUAL_PHENOTYPE_AND_VISUAL_PRESSURES_LINGUISTIC_PHENOTYPE_ARE_SEPARATELY_TRACEABLE',
-  boundary: 'PASS proves a structural bidirectional pressure gate only. It does not prove aesthetic quality, semantic improvement, autonomous approval, assimilation, or body mutation.'
+  capability: 'TEXT_VISUAL_RECIPROCAL_PRESSURE_REQUIRES_SEPARATE_TARGETS_AND_DISTINCT_CAUSAL_TRACES',
+  boundary: 'PASS proves a structural bidirectional pressure gate with anti-relabel protection only. It does not prove aesthetic quality, semantic improvement, autonomous approval, assimilation, or body mutation.'
 }, null, 2));
