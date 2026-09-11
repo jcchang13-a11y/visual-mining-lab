@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 460" role="img" aria-labelledby="title desc">
+  <title id="title">第十九分回溯第十八、第十七分</title>
+  <desc id="desc">中心為第十九分，向外依序回溯第十八分與第十七分；對應發心者、所發之心，再到福德的連續拆解。</desc>
+  <rect width="460" height="460" fill="#fff"/>
+  <g fill="none" stroke="#111" stroke-width="2">
+    <circle cx="230" cy="230" r="62"/>
+    <circle cx="230" cy="230" r="124"/>
+    <circle cx="230" cy="230" r="186"/>
+  </g>
+  <g fill="#111" font-family="Arial, Helvetica, sans-serif" font-size="18" text-anchor="middle">
+    <text x="230" y="236">19</text>
+    <text x="230" y="124">18</text>
+    <text x="230" y="62">17</text>
+  </g>
+</svg>
