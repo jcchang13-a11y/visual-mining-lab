@@ -1,0 +1,25 @@
+name: NOSTROMO GUT Mutation Receipt Identity Guard
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'nostromo/gut/mutation-review-receipt.mjs'
+      - 'nostromo/gut/mutation-review-artifact.mjs'
+      - 'nostromo/gut/mutation-review-receipt-identity-test.mjs'
+      - '.github/workflows/nostromo-gut-mutation-receipt-identity-test.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  identity-binding:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Run GUT mutation review receipt identity adversarial test
+        run: node nostromo/gut/mutation-review-receipt-identity-test.mjs
