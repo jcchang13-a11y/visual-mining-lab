@@ -1,0 +1,38 @@
+{
+  "schema": "zenomorph-failure-log/v0.1",
+  "date": "2026-09-11",
+  "organ": "MUTHER/GUT/VAJRA",
+  "status": "OPEN_NOT_PROMOTED",
+  "class": "ORGAN_REVIEW_RECEIPT_SELF_MINTING",
+  "observedEvidence": {
+    "locations": [
+      "nostromo/gut/mutation-review-receipt.mjs",
+      "nostromo/vajra/mutation-review-receipt.mjs",
+      "nostromo/muther/internal-mutation-cross-organ-gate.test.mjs"
+    ],
+    "mechanism": "The current GUT and VAJRA receipt issuer functions can be called directly with caller-supplied candidate identity, provenance, run id, evidence references and a caller-supplied review-witness fingerprint. The issuer then hard-codes the organ-specific review checks to true and mints a module-bound fingerprint. The cross-organ gate correctly verifies module/schema/tamper binding, but module issuance by itself does not demonstrate that the organ actually executed metabolic-contamination or contradiction/counterexample review logic over the cited evidence.",
+    "risk": [
+      "protocol provenance can be mistaken for executed organ review",
+      "a mutation candidate can receive syntactically valid GUT and VAJRA receipts without machine-verifiable evidence that the underlying review computations occurred",
+      "cross-organ agreement can collapse into two independently named minting calls",
+      "false progress toward controlled morphogenesis"
+    ]
+  },
+  "currentContainment": {
+    "strength": "Post-issuance tampering, module/schema mismatch, candidate-lineage mismatch, derivation mismatch, shared provenance aliases and shared review-run aliases remain blocked by existing gates.",
+    "boundary": "Existing v0.6 evidence proves protocol binding and tamper containment only. It must not be described as proof that GUT or VAJRA actually performed their semantic review computations."
+  },
+  "requiredPatchDirection": {
+    "policy": "Receipt issuance must consume an organ-generated review result whose own machine-checkable derivation binds the candidate, evidence set and actual organ review computation. The receipt issuer must not manufacture review checks from caller assertions. GUT and VAJRA should expose bounded review functions that return review artifacts; only those artifacts may be wrapped into MUTHER mutation-review receipts.",
+    "verificationNeeded": [
+      "direct caller attempts to mint PASS without an organ review artifact stay HOLD",
+      "fabricated review-check booleans stay HOLD",
+      "review artifact for a different candidate or derivation stays HOLD",
+      "review artifact with altered evidence refs stays HOLD",
+      "genuine GUT and VAJRA review artifacts can still independently advance a candidate to the controlled-incorporation eligibility stage",
+      "full cross-organ regression remains green"
+    ]
+  },
+  "promotionRule": "Do not promote the current organ-issued receipt mechanism as semantic cross-organ review. Public status may state only module-bound protocol provenance until a real organ-review artifact path passes focused, adversarial and cross-organ regression tests.",
+  "boundary": "This failure does not imply current persistent-body mutation is possible; incorporationAuthorized and bodyMutationApplied remain false. It identifies an evidence gap between 'receipt was minted by the expected module' and 'the organ actually performed the claimed review'."
+}
