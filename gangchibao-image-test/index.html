@@ -5,13 +5,14 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>《剛吃飽》圖片裝配實驗</title>
 <style>
-*{box-sizing:border-box}body{margin:0;background:#f4f0e7;color:#171717;font-family:system-ui,-apple-system,"Noto Sans TC",sans-serif;overflow-wrap:anywhere}.wrap{max-width:820px;margin:auto;padding:32px 20px 64px}h1{font-size:32px;margin-bottom:8px}.note{color:#6f6a62;line-height:1.7}.card{margin-top:28px;padding:20px;background:#fffdf6;border:1px solid #cfc8bb;min-width:0;overflow:hidden}.card img{display:block;max-width:100%;height:auto;margin:14px auto 0}.ok{font-weight:700}.status{margin-top:8px;font-size:14px;line-height:1.6;color:#6f6a62}.cachebox{border:1px solid #d8d0c3;background:#faf7ef;padding:14px;margin-top:16px}.cachebox img{width:100%;max-width:520px}.sentinel{padding:14px;margin-top:16px;border-left:4px solid #171717;background:#f3eee4;line-height:1.7}@media(max-width:560px){.wrap{padding:24px 14px 48px}h1{font-size:27px}.card{padding:16px}}
+*{box-sizing:border-box}body{margin:0;background:#f4f0e7;color:#171717;font-family:system-ui,-apple-system,"Noto Sans TC",sans-serif;overflow-wrap:anywhere}.wrap{max-width:820px;margin:auto;padding:32px 20px 64px}h1{font-size:32px;margin-bottom:8px}.note{color:#6f6a62;line-height:1.7}.card{margin-top:28px;padding:20px;background:#fffdf6;border:1px solid #cfc8bb;min-width:0;overflow:hidden}.ok{font-weight:700}.status{margin-top:8px;font-size:14px;line-height:1.6;color:#6f6a62}.sentinel{padding:14px;margin-top:16px;border-left:4px solid #171717;background:#f3eee4;line-height:1.7}a{color:#171717}@media(max-width:560px){.wrap{padding:24px 14px 48px}h1{font-size:27px}.card{padding:16px}}
 </style>
 </head>
-<body><main class="wrap"><h1>《剛吃飽》圖片裝配實驗區</h1><p class="note">獨立測試區。只驗證 GitHub Pages 圖片裝配；不碰 V8、V8-new、V9。第 1～4 輪已通過；目前進行第 5 輪快取／更新測試。</p>
+<body><main class="wrap"><h1>《剛吃飽》圖片裝配實驗區</h1><p class="note">獨立測試區。只驗證 GitHub Pages 圖片裝配；不碰 V8、V8-new、V9。第 1～5 輪已通過；目前進行第 6 輪路徑層級測試。</p>
 <section class="card"><div class="ok">第 1 輪｜SVG 基準</div><div class="status">已通過。</div></section>
 <section class="card"><div class="ok">第 2 輪｜PNG / JPG</div><div class="status">已通過。</div></section>
 <section class="card"><div class="ok">第 3 輪｜同頁五圖、手機單欄</div><div class="status">已由手機實機截圖驗收通過。</div></section>
-<section class="card"><div class="ok">第 4 輪｜缺圖與錯路徑</div><div class="status">已由手機實機截圖驗收通過：A、B、C fallback 正常；D 正常圖片與哨兵正文不受影響。</div></section>
-<section class="card"><div class="ok">第 5 輪｜快取／更新</div><p class="status">階段 B：檔名仍然是 <code>assets/cache-target.svg</code>，但內容已由「CACHE A」改為「CACHE B」，並把版本參數由 r5a 更新為 r5b。公開頁若取得新資產，圖片內應清楚顯示「CACHE B」。</p><div class="cachebox"><img src="/visual-mining-lab/gangchibao-image-test/assets/cache-target.svg?v=20260911-r5b" alt="第5輪快取更新圖"><div class="status">目前版本參數：r5b｜預期畫面：CACHE B</div></div><div class="sentinel">第 5 輪哨兵正文：圖片更新與快取測試不可以阻塞正文。</div></section>
+<section class="card"><div class="ok">第 4 輪｜缺圖與錯路徑</div><div class="status">已由手機實機截圖驗收通過。</div></section>
+<section class="card"><div class="ok">第 5 輪｜快取／更新</div><div class="status">已由手機實機截圖驗收通過：同名資產成功由 CACHE A 更新為 CACHE B，公開頁取得 r5b 新版。</div></section>
+<section class="card"><div class="ok">第 6 輪｜路徑層級</div><p class="status">新增深層頁面 <code>deep/level2/</code>，同頁以相對路徑與站點根路徑引用兩張既有圖片。必須兩張都正常，而且哨兵正文存在，才算通過。</p><p><a href="deep/level2/">開啟第 6 輪深層頁面</a></p><div class="sentinel">第 6 輪主頁哨兵正文：深層頁面的測試不可以影響主測試頁。</div></section>
 </main></body></html>
