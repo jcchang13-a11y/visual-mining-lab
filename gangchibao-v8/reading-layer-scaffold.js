@@ -136,12 +136,13 @@
   setTimeout(()=>observer.disconnect(),15000);
 })();
 
-/* 施工接線：30440 的結構性回扣另掛可逆鷹架，不改正文，也不塞回既有 direct/complete 檔。 */
+/* 施工接線：30440 的結構性回扣另掛可逆鷹架，不改正文，也不塞回既有 direct/complete 檔。
+   LIVE reader 後來已把同一檔納入 supplementMap；保留這條舊接線，但若頁面上已有同檔 script，就不再重複通電。 */
 (function(){
   'use strict';
   const unit=new URLSearchParams(location.search).get('u');
   if(unit!=='30440') return;
-  if(document.querySelector('script[data-gcb-retro-30440-structural]')) return;
+  if(document.querySelector('script[data-gcb-retro-30440-structural],script[src*="retro-supplement-30440-structural.js"]')) return;
   const script=document.createElement('script');
   script.src='retro-supplement-30440-structural.js?v=20260911-1';
   script.dataset.gcbRetro30440Structural='1';
