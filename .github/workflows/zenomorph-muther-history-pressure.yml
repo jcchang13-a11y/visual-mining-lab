@@ -1,0 +1,37 @@
+name: ZENOMORPH MUTHER Historical Ore Pressure
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'nostromo/muther/internal-mutation-history-pressure.mjs'
+      - 'nostromo/muther/internal-mutation-history-pressure.test.mjs'
+      - 'nostromo/muther/internal-mutation.mjs'
+      - '.github/workflows/zenomorph-muther-history-pressure.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  history-pressure:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify historical ore mutation pressure
+        run: node nostromo/muther/internal-mutation-history-pressure.test.mjs
+      - name: Regression check MUTHER internal mutation semantics
+        run: node nostromo/muther/internal-mutation.test.mjs
+      - name: Regression check MUTHER text-visual phenotype pressure
+        run: node nostromo/muther/internal-mutation-phenotype-pressure.test.mjs
+      - name: Regression check exact-lineage GUT-VAJRA gate
+        run: node nostromo/muther/internal-mutation-cross-organ-gate.test.mjs
+      - name: Regression check GUT metabolism
+        run: node nostromo/integration/gut-metabolism-test.mjs
+      - name: Regression check VAJRA dynamic dismantling
+        run: node nostromo/integration/vajra-dynamic-test.mjs
+      - name: Run full 50-round NOSTROMO integration regression
+        run: node nostromo/integration/ci-test.mjs
