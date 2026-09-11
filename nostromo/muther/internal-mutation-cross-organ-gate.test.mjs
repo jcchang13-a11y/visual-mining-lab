@@ -31,6 +31,12 @@ const derivationWitness = verifyMutationDerivation({ specimens, candidate, witne
 assert.equal(derivationWitness.status,'DERIVATION_WITNESS_VERIFIED');
 const lineageFingerprint = deriveMutationLineageFingerprint(candidate);
 
+const gutFinding = kind => ({
+  ECHO_SCAN:{verdict:'CLEAR',observation:'No uncontained inherited-output echo detected in the bounded candidate review.'},
+  DUPLICATE_SCAN:{verdict:'CLEAR',observation:'No uncontained duplicate candidate contribution detected in the bounded candidate review.'},
+  PROVENANCE_SCAN:{verdict:'TRACEABLE',observation:'All reviewed candidate contributions retain candidate, lineage, derivation and source references.'}
+}[kind]);
+
 const boundEvidence = (organ, reviewRunId) => {
   const kinds = organ === 'GUT' ? ['ECHO_SCAN','DUPLICATE_SCAN','PROVENANCE_SCAN'] : ['CONTRADICTION_SCAN','COUNTEREXAMPLE_SCAN','PROVENANCE_SCAN'];
   return kinds.map((kind,index)=>({
@@ -38,7 +44,8 @@ const boundEvidence = (organ, reviewRunId) => {
     kind,
     candidateId:candidate.candidateId,
     lineageFingerprint,
-    derivationFingerprint:derivationWitness.derivationFingerprint
+    derivationFingerprint:derivationWitness.derivationFingerprint,
+    ...(organ==='GUT' ? gutFinding(kind) : {})
   }));
 };
 function issuedReceipt(organ, provenance, reviewRunId) {
@@ -65,6 +72,23 @@ assert.equal(eligible.bodyMutationApplied,false);
 const callerMint = issueGutMutationReviewReceipt({candidateId:candidate.candidateId,lineageFingerprint,derivationFingerprint:derivationWitness.derivationFingerprint,provenance:'gut/fake',reviewRunId:'fake',evidenceRefs:['fake'],reviewWitnessFingerprint:'fake'});
 assert.equal(callerMint.status,'HOLD');
 assert.equal(callerMint.reason,'GUT_REVIEW_ARTIFACT_REQUIRED');
+
+// Merely naming the three GUT scan kinds is no longer evidence that the scans produced usable findings.
+const labelOnlyGut = reviewGutMutationCandidate({
+  candidateId:candidate.candidateId,
+  lineageFingerprint,
+  derivationFingerprint:derivationWitness.derivationFingerprint,
+  reviewRunId:'gut-label-only',
+  evidence:boundEvidence('GUT','gut-label-only').map(({verdict,observation,...item})=>item)
+});
+assert.equal(labelOnlyGut.status,'HOLD');
+assert.equal(labelOnlyGut.reason,'GUT_REVIEW_EVIDENCE_INCOMPLETE_OR_UNBOUND');
+
+// A substantive finding that reports unresolved contamination blocks PASS instead of being hidden by the scan label.
+const contaminatedEvidence = boundEvidence('GUT','gut-contaminated').map(item=>item.kind==='ECHO_SCAN' ? {...item,verdict:'DETECTED',observation:'Repeated inherited output remains uncontained.'} : item);
+const contaminatedGut = reviewGutMutationCandidate({candidateId:candidate.candidateId,lineageFingerprint,derivationFingerprint:derivationWitness.derivationFingerprint,reviewRunId:'gut-contaminated',evidence:contaminatedEvidence});
+assert.equal(contaminatedGut.status,'HOLD');
+assert.equal(contaminatedGut.reason,'GUT_REVIEW_FINDING_BLOCKS_PASS');
 
 // Missing one required organ computation stays HOLD even with otherwise valid bindings.
 const incompleteGut = reviewGutMutationCandidate({candidateId:candidate.candidateId,lineageFingerprint,derivationFingerprint:derivationWitness.derivationFingerprint,reviewRunId:'gut-incomplete',evidence:boundEvidence('GUT','gut-incomplete').filter(x=>x.kind!=='PROVENANCE_SCAN')});
@@ -105,8 +129,8 @@ assert.equal(stale.status,'HOLD');
 assert.equal(stale.reason,'MUTHER_CALLER_LINEAGE_NOT_BOUND_TO_CANDIDATE');
 
 console.log(JSON.stringify({
-  schema:'zenomorph-muther-internal-mutation-cross-organ-gate-test/v0.7',
+  schema:'zenomorph-muther-internal-mutation-cross-organ-gate-test/v0.8',
   status:'PASS',
-  capability:'MUTHER_MUTATION_REQUIRES_MACHINE_DERIVED_GUT_AND_VAJRA_REVIEW_ARTIFACTS_BEFORE_RECEIPTS',
-  boundary:'PASS proves bounded organ review computations were derived from structured candidate-bound evidence before receipt issuance. It does not prove truth, semantic quality, cryptographic organ identity, or authority to mutate the persistent body.'
+  capability:'MUTHER_MUTATION_REQUIRES_SUBSTANTIVE_GUT_FINDINGS_PLUS_MACHINE_DERIVED_GUT_AND_VAJRA_REVIEW_ARTIFACTS_BEFORE_RECEIPTS',
+  boundary:'PASS proves GUT review labels alone cannot satisfy the mutation gate: each required GUT scan must carry a bounded acceptable finding, while organ review artifacts remain candidate-bound and module-derived. It does not prove truth, cryptographic organ identity, or authority to mutate the persistent body.'
 },null,2));
