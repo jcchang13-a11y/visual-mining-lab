@@ -1,0 +1,30 @@
+name: NOSTROMO MUTHER Derivation Witness Test
+
+on:
+  push:
+    paths:
+      - 'nostromo/muther/internal-mutation.mjs'
+      - 'nostromo/muther/internal-mutation-derivation-witness.mjs'
+      - 'nostromo/muther/internal-mutation-derivation-witness.test.mjs'
+      - '.github/workflows/nostromo-muther-derivation-witness-test.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  derivation-witness:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Run bounded derivation witness tests
+        run: node nostromo/muther/internal-mutation-derivation-witness.test.mjs
+      - name: Run base MUTHER mutation regression
+        run: node nostromo/muther/internal-mutation.test.mjs
+      - name: Run cross-organ gate regression
+        run: node nostromo/muther/internal-mutation-cross-organ-gate.test.mjs
