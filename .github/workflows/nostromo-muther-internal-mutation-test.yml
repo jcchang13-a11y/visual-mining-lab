@@ -20,5 +20,7 @@ jobs:
           node-version: '20'
       - name: Test provenance-bound internal mutation sandbox
         run: node nostromo/muther/internal-mutation.test.mjs
+      - name: Test failure-history ore activation
+        run: node nostromo/muther/internal-mutation-failure-ore.test.mjs
       - name: Test independent GUT-VAJRA mutation agreement gate
         run: node nostromo/muther/internal-mutation-cross-organ-gate.test.mjs
