@@ -1,0 +1,45 @@
+name: ZENOMORPH GUT capability evidence quality test
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'nostromo/gut/capability-evidence-quality.mjs'
+      - 'nostromo/integration/gut-capability-evidence-quality-test.mjs'
+      - '.github/workflows/nostromo-gut-capability-evidence-quality-test.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  test:
+    if: ${{ !contains(github.event.head_commit.message, '[nostromo-test]') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify semantic evidence anti-laundering gate
+        run: node nostromo/integration/gut-capability-evidence-quality-test.mjs
+      - name: Commit focused result
+        if: always()
+        run: |
+          git config user.name "nostromo-bot"
+          git config user.email "actions@users.noreply.github.com"
+          test -f nostromo/integration/gut-capability-evidence-quality-last-result.json && cp nostromo/integration/gut-capability-evidence-quality-last-result.json /tmp/gut-capability-evidence-quality-last-result.json || true
+          git fetch origin main
+          git reset --hard origin/main
+          if [ -f /tmp/gut-capability-evidence-quality-last-result.json ]; then
+            cp /tmp/gut-capability-evidence-quality-last-result.json nostromo/integration/gut-capability-evidence-quality-last-result.json
+            git add nostromo/integration/gut-capability-evidence-quality-last-result.json
+          fi
+          if git diff --cached --quiet; then
+            echo "No result change"
+          else
+            git commit -m "[nostromo-test] record GUT evidence quality result"
+            git push origin HEAD:main
+          fi
