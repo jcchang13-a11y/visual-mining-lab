@@ -1,8 +1,10 @@
-/* ZENOMORPH / NOSTROMO GUT foreign-capability admission v0.5
+/* ZENOMORPH / NOSTROMO GUT foreign-capability admission v0.6
  * Deterministic pre-assimilation boundary.
  * Untrusted inputs must enter through assessForeignCapabilityJson(serialized,...).
  * The object API is retained for trusted in-process metadata only because arbitrary
  * JavaScript object reflection can invoke Proxy traps.
+ * v0.6 closes empty-metadata laundering: field presence alone is not evidence that
+ * identity, provenance, permission boundaries, or contracts actually contain data.
  */
 
 const EXECUTABLE_KEYS = new Set([
@@ -24,7 +26,7 @@ const MAX_SERIALIZED_CHARS = 262144;
 
 function admissionBase(){
   return {
-    schema:'zenomorph-gut-capability-admission/v0.5',
+    schema:'zenomorph-gut-capability-admission/v0.6',
     organism:'ZENOMORPH',
     habitat:'NOSTROMO',
     executed:false,
@@ -47,8 +49,8 @@ function compact(value,max=240){
   return null;
 }
 function firstScalar(value,names){
+  const descriptors=Object.getOwnPropertyDescriptors(value||{});
   for(const name of names){
-    const descriptors=Object.getOwnPropertyDescriptors(value||{});
     for(const key of Reflect.ownKeys(descriptors)){
       if(typeof key!=='string')continue;
       const descriptor=descriptors[key];
@@ -62,6 +64,38 @@ function firstScalar(value,names){
 }
 function visibleIdentity(value){
   return firstScalar(value,['capabilityname','toolname','pluginname','adaptername','modulename','interfacename','capability','tool','plugin','adapter','module','interface','name']);
+}
+function meaningfulValue(value,seen=new WeakSet(),depth=0){
+  if(depth>8)return false;
+  if(value===null||value===undefined)return false;
+  const scalar=compact(value);
+  if(scalar!==null)return true;
+  if(typeof value!=='object')return false;
+  if(seen.has(value))return false;
+  seen.add(value);
+  try{
+    if(Array.isArray(value))return value.some(item=>meaningfulValue(item,seen,depth+1));
+    const descriptors=Object.getOwnPropertyDescriptors(value);
+    for(const key of Reflect.ownKeys(descriptors)){
+      if(typeof key!=='string')continue;
+      const descriptor=descriptors[key];
+      if(!Object.prototype.hasOwnProperty.call(descriptor,'value'))continue;
+      if(meaningfulValue(descriptor.value,seen,depth+1))return true;
+    }
+    return false;
+  } finally {
+    seen.delete(value);
+  }
+}
+function hasMeaningfulField(value,names){
+  const descriptors=Object.getOwnPropertyDescriptors(value||{});
+  for(const key of Reflect.ownKeys(descriptors)){
+    if(typeof key!=='string')continue;
+    if(!names.has(String(key).toLowerCase()))continue;
+    const descriptor=descriptors[key];
+    if(Object.prototype.hasOwnProperty.call(descriptor,'value')&&meaningfulValue(descriptor.value))return true;
+  }
+  return false;
 }
 function safePathKey(key){
   if(typeof key==='symbol'){
@@ -155,12 +189,12 @@ export function assessForeignCapability(candidate,context={}){
   }
 
   const identity=visibleIdentity(candidate);
-  const hasProvenance=hasAny(keys,PROVENANCE_KEYS)||!!compact(context.source)||!!compact(context.provenanceFingerprint);
-  const hasPermissionBoundary=hasAny(keys,PERMISSION_KEYS);
-  const hasContract=hasAny(keys,CONTRACT_KEYS);
+  const hasProvenance=hasMeaningfulField(candidate,PROVENANCE_KEYS)||!!compact(context.source)||!!compact(context.sourceFingerprint)||!!compact(context.provenanceFingerprint);
+  const hasPermissionBoundary=hasMeaningfulField(candidate,PERMISSION_KEYS);
+  const hasContract=hasMeaningfulField(candidate,CONTRACT_KEYS);
   const conflict=provenanceConflict(candidate,context);
 
-  const audit={identity:identity||null,hasProvenance,hasPermissionBoundary,hasContract};
+  const audit={identity:identity||null,hasProvenance,hasPermissionBoundary,hasContract,metadataCompleteness:'MEANINGFUL_VALUES_REQUIRED'};
   if(conflict){
     return {
       ...base,
@@ -173,6 +207,9 @@ export function assessForeignCapability(candidate,context={}){
       declaredProvenance:conflict.declared,
       hostProvenance:conflict.host
     };
+  }
+  if(!identity){
+    return {...base,...audit,status:'HOLD',classification:'FOREIGN_CAPABILITY',assimilationStage:'CANDIDATE_UNVERIFIED',reason:'nonempty-identity-required-before-assimilation'};
   }
   if(!hasProvenance){
     return {...base,...audit,status:'HOLD',classification:'FOREIGN_CAPABILITY',assimilationStage:'CANDIDATE_UNVERIFIED',reason:'provenance-required-before-assimilation'};
@@ -211,7 +248,7 @@ export function assessForeignCapabilityJson(serialized,context={}){
   const assessed=assessForeignCapability(parsed,context);
   return {
     ...assessed,
-    schema:'zenomorph-gut-capability-admission/v0.5',
+    schema:'zenomorph-gut-capability-admission/v0.6',
     trustBoundary:'UNTRUSTED_SERIALIZED_JSON',
     transport:'SERIALIZED_JSON',
     transportParsed:true,
@@ -220,7 +257,7 @@ export function assessForeignCapabilityJson(serialized,context={}){
 }
 
 export const capabilityAdmissionBoundary = Object.freeze({
-  version:'0.5',
+  version:'0.6',
   organism:'ZENOMORPH',
   habitat:'NOSTROMO',
   untrustedInputContract:'serialized JSON string only',
@@ -233,8 +270,10 @@ export const capabilityAdmissionBoundary = Object.freeze({
   rejectsAccessorPropertiesWithoutInvokingThem:true,
   rejectsSymbolKeyedMetadata:true,
   quarantinesConflictingHostAndCandidateProvenance:true,
+  requiresMeaningfulMetadataValues:true,
+  emptyFieldPresenceCountsAsEvidence:false,
   descriptorScanLimits:{maxDepth:8,maxNodes:256},
   maxSerializedChars:MAX_SERIALIZED_CHARS,
-  admissionRequires:['structured identity','provenance','permission boundary','interface or input/output contract','no conflict with host provenance context'],
+  admissionRequires:['nonempty structured identity','nonempty provenance','nonempty permission boundary','nonempty interface or input/output contract','no conflict with host provenance context'],
   nextStage:'isolated sandbox test with provenance and rollback evidence'
 });
