@@ -63,7 +63,9 @@
   function apply(){
     const root=document.getElementById('article');
     if(!root) return false;
-    return specs.every(spec=>insert(root,spec));
+    /* 同一 anchor 連續補多張圖時，splitText 會把後插者放到前面。
+       倒序施工只校準可見次序，讓 19→20→21→22→23 依正文列舉順序落下；不動任何正文或既有圖。 */
+    return specs.slice().reverse().every(spec=>insert(root,spec));
   }
 
   const article=document.getElementById('article');
