@@ -1,0 +1,29 @@
+{
+  "id": "GUT_SCALAR_FINGERPRINT_COLLISION",
+  "organ": "GUT",
+  "date": "2026-09-12",
+  "status": "MITIGATED_FOCUSED_CI_SUCCESS_PENDING_INTEGRATION",
+  "summary": "Rollback fingerprinting previously delegated scalar identity to JSON.stringify semantics. Distinct body states could therefore collapse to the same canonical text: undefined could disappear, sparse array holes could collapse with undefined/null-like JSON output, NaN and infinities could collapse to null, and -0 could collapse to 0. A rollback identity collision would make two materially different reversible body candidates appear identical.",
+  "evidence": {
+    "affected_module": "nostromo/gut/capability-incorporation.mjs",
+    "pre_fix_version": "0.6",
+    "fix_commit": "a6b6b01e8217e0edfcda139b77f9eddb5e43915b",
+    "test_commit": "2305d3a0e6ef18ec603f173f0bf4e32299cb0a61",
+    "focused_workflow_run": 34663687391,
+    "focused_workflow_conclusion": "success",
+    "integration_workflow_run": 34663661566,
+    "integration_workflow_state_at_record": "in_progress"
+  },
+  "fix": "Replaced raw JSON-scalar canonicalization with typed recursive canonical nodes. The fingerprint now distinguishes undefined, null, NaN, positive/negative infinity, -0, 0, bigint, booleans, strings, ordinary finite numbers, and sparse-array holes while retaining sorted object-key identity and array position. Function and symbol values fail closed.",
+  "adversarial_cases": [
+    "undefined vs null",
+    "NaN vs null",
+    "+Infinity vs -Infinity vs null",
+    "-0 vs 0",
+    "0n vs 0",
+    "false vs empty string",
+    "sparse array hole vs explicit undefined"
+  ],
+  "promotion_policy": "Do not promote public GUT incorporation state from this failure record alone. Focused CI has succeeded, but integration must complete successfully before displayed state is upgraded.",
+  "boundary": "This fix strengthens rollback identity evidence only. It does not grant permanent body admission, self-modification authority, or evidence that a candidate capability is semantically beneficial."
+}
