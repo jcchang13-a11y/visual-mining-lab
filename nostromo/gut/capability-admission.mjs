@@ -1,10 +1,12 @@
-/* ZENOMORPH / NOSTROMO GUT foreign-capability admission v0.6
+/* ZENOMORPH / NOSTROMO GUT foreign-capability admission v0.7
  * Deterministic pre-assimilation boundary.
  * Untrusted inputs must enter through assessForeignCapabilityJson(serialized,...).
  * The object API is retained for trusted in-process metadata only because arbitrary
  * JavaScript object reflection can invoke Proxy traps.
- * v0.6 closes empty-metadata laundering: field presence alone is not evidence that
- * identity, provenance, permission boundaries, or contracts actually contain data.
+ * v0.6 closed empty-metadata laundering.
+ * v0.7 closes scalar-placeholder laundering: false/true/0/1 and other non-string
+ * primitive placeholders do not count as capability identity, provenance,
+ * permission boundaries, or interface/contract evidence.
  */
 
 const EXECUTABLE_KEYS = new Set([
@@ -26,7 +28,7 @@ const MAX_SERIALIZED_CHARS = 262144;
 
 function admissionBase(){
   return {
-    schema:'zenomorph-gut-capability-admission/v0.6',
+    schema:'zenomorph-gut-capability-admission/v0.7',
     organism:'ZENOMORPH',
     habitat:'NOSTROMO',
     executed:false,
@@ -48,6 +50,10 @@ function compact(value,max=240){
   }
   return null;
 }
+function compactString(value,max=240){
+  if(typeof value!=='string')return null;
+  return value.replace(/\s+/g,' ').trim().slice(0,max)||null;
+}
 function firstScalar(value,names){
   const descriptors=Object.getOwnPropertyDescriptors(value||{});
   for(const name of names){
@@ -62,14 +68,28 @@ function firstScalar(value,names){
   }
   return null;
 }
+function firstString(value,names){
+  const descriptors=Object.getOwnPropertyDescriptors(value||{});
+  for(const name of names){
+    for(const key of Reflect.ownKeys(descriptors)){
+      if(typeof key!=='string')continue;
+      const descriptor=descriptors[key];
+      if(String(key).toLowerCase()===name&&Object.prototype.hasOwnProperty.call(descriptor,'value')){
+        const c=compactString(descriptor.value);
+        if(c)return c;
+      }
+    }
+  }
+  return null;
+}
 function visibleIdentity(value){
-  return firstScalar(value,['capabilityname','toolname','pluginname','adaptername','modulename','interfacename','capability','tool','plugin','adapter','module','interface','name']);
+  return firstString(value,['capabilityname','toolname','pluginname','adaptername','modulename','interfacename','capability','tool','plugin','adapter','module','interface','name']);
 }
 function meaningfulValue(value,seen=new WeakSet(),depth=0){
   if(depth>8)return false;
   if(value===null||value===undefined)return false;
-  const scalar=compact(value);
-  if(scalar!==null)return true;
+  if(typeof value==='string')return compactString(value)!==null;
+  if(typeof value==='number'||typeof value==='boolean'||typeof value==='bigint'||typeof value==='symbol'||typeof value==='function')return false;
   if(typeof value!=='object')return false;
   if(seen.has(value))return false;
   seen.add(value);
@@ -181,7 +201,7 @@ export function assessForeignCapability(candidate,context={}){
   }
 
   const keys=ownKeysLower(candidate);
-  const explicitKind=firstScalar(candidate,['kind','type','class']);
+  const explicitKind=firstString(candidate,['kind','type','class']);
   const kindLooksCapability=!!explicitKind&&/(capabilit|tool|plugin|adapter|module|interface|connector)/i.test(explicitKind);
   const identityMarked=hasAny(keys,IDENTITY_KEYS);
   if(!identityMarked&&!kindLooksCapability){
@@ -189,12 +209,12 @@ export function assessForeignCapability(candidate,context={}){
   }
 
   const identity=visibleIdentity(candidate);
-  const hasProvenance=hasMeaningfulField(candidate,PROVENANCE_KEYS)||!!compact(context.source)||!!compact(context.sourceFingerprint)||!!compact(context.provenanceFingerprint);
+  const hasProvenance=hasMeaningfulField(candidate,PROVENANCE_KEYS)||!!compactString(context.source)||!!compactString(context.sourceFingerprint)||!!compactString(context.provenanceFingerprint);
   const hasPermissionBoundary=hasMeaningfulField(candidate,PERMISSION_KEYS);
   const hasContract=hasMeaningfulField(candidate,CONTRACT_KEYS);
   const conflict=provenanceConflict(candidate,context);
 
-  const audit={identity:identity||null,hasProvenance,hasPermissionBoundary,hasContract,metadataCompleteness:'MEANINGFUL_VALUES_REQUIRED'};
+  const audit={identity:identity||null,hasProvenance,hasPermissionBoundary,hasContract,metadataCompleteness:'MEANINGFUL_NON_PLACEHOLDER_VALUES_REQUIRED'};
   if(conflict){
     return {
       ...base,
@@ -209,7 +229,7 @@ export function assessForeignCapability(candidate,context={}){
     };
   }
   if(!identity){
-    return {...base,...audit,status:'HOLD',classification:'FOREIGN_CAPABILITY',assimilationStage:'CANDIDATE_UNVERIFIED',reason:'nonempty-identity-required-before-assimilation'};
+    return {...base,...audit,status:'HOLD',classification:'FOREIGN_CAPABILITY',assimilationStage:'CANDIDATE_UNVERIFIED',reason:'nonempty-string-identity-required-before-assimilation'};
   }
   if(!hasProvenance){
     return {...base,...audit,status:'HOLD',classification:'FOREIGN_CAPABILITY',assimilationStage:'CANDIDATE_UNVERIFIED',reason:'provenance-required-before-assimilation'};
@@ -248,7 +268,7 @@ export function assessForeignCapabilityJson(serialized,context={}){
   const assessed=assessForeignCapability(parsed,context);
   return {
     ...assessed,
-    schema:'zenomorph-gut-capability-admission/v0.6',
+    schema:'zenomorph-gut-capability-admission/v0.7',
     trustBoundary:'UNTRUSTED_SERIALIZED_JSON',
     transport:'SERIALIZED_JSON',
     transportParsed:true,
@@ -257,7 +277,7 @@ export function assessForeignCapabilityJson(serialized,context={}){
 }
 
 export const capabilityAdmissionBoundary = Object.freeze({
-  version:'0.6',
+  version:'0.7',
   organism:'ZENOMORPH',
   habitat:'NOSTROMO',
   untrustedInputContract:'serialized JSON string only',
@@ -271,9 +291,11 @@ export const capabilityAdmissionBoundary = Object.freeze({
   rejectsSymbolKeyedMetadata:true,
   quarantinesConflictingHostAndCandidateProvenance:true,
   requiresMeaningfulMetadataValues:true,
+  rejectsScalarPlaceholderMetadata:true,
+  identityMustBeNonemptyString:true,
   emptyFieldPresenceCountsAsEvidence:false,
   descriptorScanLimits:{maxDepth:8,maxNodes:256},
   maxSerializedChars:MAX_SERIALIZED_CHARS,
-  admissionRequires:['nonempty structured identity','nonempty provenance','nonempty permission boundary','nonempty interface or input/output contract','no conflict with host provenance context'],
+  admissionRequires:['nonempty string identity','nonempty provenance evidence','nonempty permission boundary evidence','nonempty interface or input/output contract evidence','no conflict with host provenance context'],
   nextStage:'isolated sandbox test with provenance and rollback evidence'
 });
