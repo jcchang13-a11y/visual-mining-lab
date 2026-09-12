@@ -1,0 +1,51 @@
+{
+  "schema": "zenomorph-level1-unfamiliar-specimen-route/v0.1",
+  "organism": "ZENOMORPH",
+  "habitat": "NOSTROMO",
+  "status": "SMALL_PUBLIC_SAMPLE_ROUTE_VERIFIED_NOT_YET_INGESTED",
+  "foodClass": "acellular-dynamic-network",
+  "experiment": "Physarum polycephalum bounded-sample acquisition route v0.1",
+  "source": {
+    "provider": "Dryad / University of Graz",
+    "title": "A mathematical model to predict network growth in Physarum polycephalum as a function of extracellular matrix viscosity, measured by a novel viscometer",
+    "doi": "10.5061/dryad.0k6djhb9m",
+    "published": "2025-01-27",
+    "officialRecord": "https://datadryad.org/dataset/doi:10.5061/dryad.0k6djhb9m",
+    "datasetSize": "730.04 MB",
+    "selectedArchive": "GrowthFractalDimension.zip",
+    "selectedArchiveSize": "2.04 MB",
+    "selectedArchiveContents": [
+      "FractalDimension/*/FractalDimension.csv: timestep, fractal dimension, slope, R2, intercept, StdError",
+      "Growth/*/growthResults.csv: time in minutes, network area in mm2"
+    ],
+    "reasonForSelection": "This is a small, public, relation-to-time bearing specimen that can test temporal structure without downloading the much larger microscopy collections first."
+  },
+  "provenance": {
+    "verifiedFromPublicRepositoryRecord": true,
+    "privateConnectorData": false,
+    "credentialsRequired": false,
+    "downloadAttemptState": "Dryad file endpoint identified; ingestion remains blocked until bytes are successfully retrieved and locally hashed.",
+    "identityRule": "Before organ ingestion record exact download URL, retrieval timestamp, byte size, archive member list, and SHA-256 of the retrieved archive and extracted specimen files."
+  },
+  "blindIngestionInstruction": "Treat the extracted time-series specimen as unfamiliar external material. Do not provide an analogy or target lesson.",
+  "candidateQuestionsForbiddenAtIngestion": [
+    "Do not tell the organs to learn adaptation, decentralization, memory, routing, or self-organization.",
+    "Do not preclassify temporal change as a ZENOMORPH architectural lesson.",
+    "Do not equate fractal dimension, area growth, or slime-mold morphology with any named organ."
+  ],
+  "gates": {
+    "A_provenance": "FAIL until actual archive bytes are retrieved and hashed",
+    "B_new_candidate": "NOT_RUN",
+    "C_cross_food_behavior_change": "NOT_RUN",
+    "D_delayed_held_out_retention": "NOT_RUN"
+  },
+  "crossFoodCounterexample": {
+    "urban": "A street edge is a contemporaneous topological relation; a Physarum growth row is a time-indexed measurement and must not be promoted to an edge merely because both describe networks.",
+    "maleCNS": "A SWC parent-child relation is explicit morphology topology; a Physarum time series may describe changing geometry without encoding pairwise edges.",
+    "hca": "Sample-donor membership is typed membership; Physarum measurements add a temporal dimension that must remain distinct from both membership and topology."
+  },
+  "nextGate": "Retrieve GrowthFractalDimension.zip or a smaller official archive member through a public endpoint, hash bytes, extract a deterministic bounded subset, then run relation-type plus time-validity classification before five-organ metabolism.",
+  "promotion": "NONE",
+  "bodyAdmission": false,
+  "evidencePolicy": "DISPLAYED STATE MUST FOLLOW EVIDENCE"
+}
