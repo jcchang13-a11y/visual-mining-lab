@@ -43,13 +43,13 @@ const distinct=assessCapabilityEvidenceRoleSeparation({
 if(distinct.status!=='PASS')throw new Error(`distinct format-bearing evidence falsely collided: ${JSON.stringify(distinct)}`);
 
 for(const held of [zeroWidthSpace,zeroWidthJoiner,bidiIsolate]){
-  if(held.bodyAdmissionGranted!==false||held.authorized!==false||held.executed!==false){
+  if(held.bodyAdmission!==false||held.authorized!==false||held.executed!==false){
     throw new Error(`guard leaked authority: ${JSON.stringify(held)}`);
   }
 }
 
 const result={
-  schema:'zenomorph-gut-capability-evidence-format-control-laundering-test/v0.1',
+  schema:'zenomorph-gut-capability-evidence-format-control-laundering-test/v0.2',
   status:'PASS',
   zeroWidthSpaceRejected:true,
   zeroWidthJoinerRejected:true,
