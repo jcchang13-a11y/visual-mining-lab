@@ -4,9 +4,12 @@ on:
   push:
     paths:
       - 'nostromo/research/level1-urban-osm-specimen-v0.1.json'
+      - 'nostromo/research/level1-hca-immune-specimen-v0.1.json'
       - 'nostromo/integration/foreign-relation-specimen-gate.mjs'
       - 'nostromo/integration/foreign-relation-specimen-gate-test.mjs'
       - 'nostromo/integration/malecns-swc-relation-gate-test.mjs'
+      - 'nostromo/integration/foreign-relation-semantic-gate.mjs'
+      - 'nostromo/integration/hca-relation-semantic-gate-test.mjs'
       - '.github/workflows/nostromo-foreign-relation-specimen-gate.yml'
   workflow_dispatch:
 
@@ -25,3 +28,5 @@ jobs:
         run: node nostromo/integration/foreign-relation-specimen-gate-test.mjs
       - name: Challenge gate with real MaleCNS SWC relation specimen
         run: node nostromo/integration/malecns-swc-relation-gate-test.mjs
+      - name: Challenge relation semantics with real HCA immune metadata
+        run: node nostromo/integration/hca-relation-semantic-gate-test.mjs
