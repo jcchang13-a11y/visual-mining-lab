@@ -19,20 +19,22 @@
   const legacyDividerLine=/^\s*---\s*$/;
   const pageCounterLine=/^\s*\d+\/\d+\s*$/;
   const workLine=/^\s*(?:施工註記|工作註記|暫記|待查|未決|停工|死路)\s*[：:]/;
+  /* 30450 主體結束後原檔自己留下這句施工指令；它是後續補塊的高信心分界，不改字，只標成工作語。 */
+  const latePatchDirectiveLine=/^\s*補這四塊就好，不要再大補正文。\s*$/;
   /* 只抓明確的排版／製作指令；一般【章名】與經文標題不碰。經文區本來也在 excluded 內。 */
   const productionDirectiveLine=/^\s*【(?=[^】]*(?:換頁|字體|排版|版面|插圖|待接|圖位|圖檔|印刷|列印|跨頁|留白))[^】]+】\s*$/;
   const excluded='.sutra-block,.gcb-formula,.structure-code,.work-note,.figure-slot,figure,figcaption,script,style';
 
   function classify(line){
     if(structureLine.test(line)||bracketStructureLine.test(line)||sectionLabelLine.test(line)||legacySectionLabelLine.test(line)||legacyDividerLine.test(line)||pageCounterLine.test(line)) return {cls:'structure-code structure-line',layer:'L4'};
-    if(workLine.test(line)||productionDirectiveLine.test(line)) return {cls:'work-note work-note-line',layer:'L3'};
+    if(workLine.test(line)||latePatchDirectiveLine.test(line)||productionDirectiveLine.test(line)) return {cls:'work-note work-note-line',layer:'L3'};
     return null;
   }
 
   function markTextNode(node){
     if(!node?.nodeValue || node.parentElement?.closest(excluded)) return false;
     const value=node.nodeValue;
-    if(!/[：:\[\]［］\/【】\-｜|]|經文|正文|公式|幹話|短註|書後補註/.test(value)) return false;
+    if(!/[：:\[\]［］\/【】\-｜|]|經文|正文|公式|幹話|短註|書後補註|補這四塊/.test(value)) return false;
     const lines=value.split('\n');
     if(!lines.some(line=>classify(line))) return false;
 
@@ -120,6 +122,35 @@
     });
   }
 
+  /* 30450 的第三十二分正式註釋後，原檔明寫「補這四塊就好，不要再大補正文。」
+     這句之後直到 EOF 都是後加施工補塊／統一補記；先前只有 [[...]] 標牌是 L4，塊內文字卻誤落 L1，讀起來像正式正文。
+     不改 Markdown、不刪補塊；只把每個後續 [[...]] 標牌到下一個標牌之間包成 L3。 */
+  function bind30450LatePatchRanges(){
+    const unit=new URLSearchParams(location.search).get('u');
+    if(unit!=='30450') return;
+    const marker=Array.from(article.querySelectorAll('.work-note-line')).find(el=>latePatchDirectiveLine.test(el.textContent));
+    if(!marker || marker.dataset.gcbLatePatchBoundary==='1') return;
+    marker.dataset.gcbLatePatchBoundary='1';
+
+    let active=false;
+    Array.from(article.childNodes).forEach(node=>{
+      if(node===marker){ active=true; return; }
+      if(!active) return;
+      if(node.nodeType===Node.ELEMENT_NODE && node.classList.contains('structure-line')){
+        node.dataset.gcbLatePatchHeading='1';
+        return;
+      }
+      if(node.nodeType===Node.ELEMENT_NODE && node.closest('.work-note')) return;
+      if(node.nodeType===Node.TEXT_NODE && !(node.nodeValue||'').trim()) return;
+      const box=document.createElement('div');
+      box.className='work-note late-patch-range';
+      box.dataset.gcbLayer='L3';
+      box.dataset.gcbLatePatch='1';
+      node.parentNode.insertBefore(box,node);
+      box.append(node);
+    });
+  }
+
   function apply(){
     const walker=document.createTreeWalker(article,NodeFilter.SHOW_TEXT);
     const nodes=[];
@@ -128,6 +159,7 @@
     nodes.forEach(markTextNode);
     bindChineseSutraRanges();
     bindLegacySutraRanges();
+    bind30450LatePatchRanges();
   }
 
   apply();
