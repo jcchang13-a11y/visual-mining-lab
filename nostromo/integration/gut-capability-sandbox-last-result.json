@@ -1,6 +1,6 @@
 {
   "schema": "zenomorph-gut-capability-sandbox-test/v0.2",
-  "completedAt": "2026-09-10T10:08:48.962Z",
+  "completedAt": "2026-09-12T05:07:31.094Z",
   "status": "PASS",
   "capability": "CONTROLLED_HOST_REGISTERED_FOREIGN_CAPABILITY_ISOLATED_TRIAL",
   "cases": {
@@ -12,7 +12,7 @@
       "installed": false,
       "persistentMutation": false,
       "candidateAdmission": {
-        "schema": "zenomorph-gut-capability-admission/v0.5",
+        "schema": "zenomorph-gut-capability-admission/v0.7",
         "organism": "ZENOMORPH",
         "habitat": "NOSTROMO",
         "executed": false,
@@ -24,6 +24,7 @@
         "hasProvenance": true,
         "hasPermissionBoundary": true,
         "hasContract": true,
+        "metadataCompleteness": "MEANINGFUL_NON_PLACEHOLDER_VALUES_REQUIRED",
         "status": "HOLD",
         "classification": "FOREIGN_CAPABILITY",
         "reason": "metadata-complete-enough-for-sandbox-evaluation-not-body-admission"
@@ -57,7 +58,7 @@
       "installed": false,
       "persistentMutation": false,
       "candidateAdmission": {
-        "schema": "zenomorph-gut-capability-admission/v0.5",
+        "schema": "zenomorph-gut-capability-admission/v0.7",
         "organism": "ZENOMORPH",
         "habitat": "NOSTROMO",
         "executed": false,
@@ -69,6 +70,7 @@
         "hasProvenance": true,
         "hasPermissionBoundary": true,
         "hasContract": true,
+        "metadataCompleteness": "MEANINGFUL_NON_PLACEHOLDER_VALUES_REQUIRED",
         "status": "HOLD",
         "classification": "FOREIGN_CAPABILITY",
         "reason": "metadata-complete-enough-for-sandbox-evaluation-not-body-admission"
@@ -88,7 +90,7 @@
       "installed": false,
       "persistentMutation": false,
       "candidateAdmission": {
-        "schema": "zenomorph-gut-capability-admission/v0.5",
+        "schema": "zenomorph-gut-capability-admission/v0.7",
         "organism": "ZENOMORPH",
         "habitat": "NOSTROMO",
         "executed": false,
@@ -100,6 +102,7 @@
         "hasProvenance": true,
         "hasPermissionBoundary": true,
         "hasContract": true,
+        "metadataCompleteness": "MEANINGFUL_NON_PLACEHOLDER_VALUES_REQUIRED",
         "status": "HOLD",
         "classification": "FOREIGN_CAPABILITY",
         "reason": "metadata-complete-enough-for-sandbox-evaluation-not-body-admission"
@@ -119,7 +122,7 @@
       "installed": false,
       "persistentMutation": false,
       "candidateAdmission": {
-        "schema": "zenomorph-gut-capability-admission/v0.5",
+        "schema": "zenomorph-gut-capability-admission/v0.7",
         "organism": "ZENOMORPH",
         "habitat": "NOSTROMO",
         "executed": false,
@@ -131,6 +134,7 @@
         "hasProvenance": true,
         "hasPermissionBoundary": true,
         "hasContract": true,
+        "metadataCompleteness": "MEANINGFUL_NON_PLACEHOLDER_VALUES_REQUIRED",
         "status": "HOLD",
         "classification": "FOREIGN_CAPABILITY",
         "reason": "metadata-complete-enough-for-sandbox-evaluation-not-body-admission"
@@ -150,7 +154,7 @@
       "installed": false,
       "persistentMutation": false,
       "candidateAdmission": {
-        "schema": "zenomorph-gut-capability-admission/v0.5",
+        "schema": "zenomorph-gut-capability-admission/v0.7",
         "organism": "ZENOMORPH",
         "habitat": "NOSTROMO",
         "executed": false,
@@ -162,6 +166,7 @@
         "hasProvenance": true,
         "hasPermissionBoundary": true,
         "hasContract": true,
+        "metadataCompleteness": "MEANINGFUL_NON_PLACEHOLDER_VALUES_REQUIRED",
         "status": "HOLD",
         "classification": "FOREIGN_CAPABILITY",
         "reason": "metadata-complete-enough-for-sandbox-evaluation-not-body-admission"
@@ -181,7 +186,7 @@
       "installed": false,
       "persistentMutation": false,
       "candidateAdmission": {
-        "schema": "zenomorph-gut-capability-admission/v0.5",
+        "schema": "zenomorph-gut-capability-admission/v0.7",
         "organism": "ZENOMORPH",
         "habitat": "NOSTROMO",
         "executed": false,
@@ -193,6 +198,7 @@
         "hasProvenance": true,
         "hasPermissionBoundary": true,
         "hasContract": true,
+        "metadataCompleteness": "MEANINGFUL_NON_PLACEHOLDER_VALUES_REQUIRED",
         "status": "HOLD",
         "classification": "FOREIGN_CAPABILITY",
         "reason": "metadata-complete-enough-for-sandbox-evaluation-not-body-admission"
@@ -213,8 +219,8 @@
         "actual": "object"
       },
       "inputFingerprint": "1ef7a7f832aa621bd3593c3548e6d9bdc35e72c736930ced4e8e337b7b091012",
-      "outputFingerprint": "2246fad1ccc984c19806bb61ca3d20133438ccb66a9e1ce86d523526c2387ab0",
-      "replayOutputFingerprint": "3dbaed9a6745d7943b96e3cd3eabbf411b4a601a321c763dbf4c5a7fb6de9cd1",
+      "outputFingerprint": "81ca9586abdc8199649ef01c8434f828cdc473a3b351f2fce65715ca003b62ae",
+      "replayOutputFingerprint": "a27c6ebd5e988c73942b667336419455d8745c10118666edb391202acba53b13",
       "provenanceFingerprint": "sandbox-fixture-prov-001",
       "rollbackEvidence": "no installation; cloned frozen inputs; no body state mutation performed by sandbox"
     },
@@ -226,7 +232,7 @@
       "installed": false,
       "persistentMutation": false,
       "candidateAdmission": {
-        "schema": "zenomorph-gut-capability-admission/v0.5",
+        "schema": "zenomorph-gut-capability-admission/v0.7",
         "organism": "ZENOMORPH",
         "habitat": "NOSTROMO",
         "executed": false,
@@ -238,6 +244,7 @@
         "hasProvenance": true,
         "hasPermissionBoundary": true,
         "hasContract": true,
+        "metadataCompleteness": "MEANINGFUL_NON_PLACEHOLDER_VALUES_REQUIRED",
         "status": "HOLD",
         "classification": "FOREIGN_CAPABILITY",
         "reason": "metadata-complete-enough-for-sandbox-evaluation-not-body-admission"
@@ -256,7 +263,7 @@
       "installed": false,
       "persistentMutation": false,
       "candidateAdmission": {
-        "schema": "zenomorph-gut-capability-admission/v0.5",
+        "schema": "zenomorph-gut-capability-admission/v0.7",
         "organism": "ZENOMORPH",
         "habitat": "NOSTROMO",
         "executed": false,
@@ -268,6 +275,7 @@
         "hasProvenance": true,
         "hasPermissionBoundary": true,
         "hasContract": true,
+        "metadataCompleteness": "MEANINGFUL_NON_PLACEHOLDER_VALUES_REQUIRED",
         "status": "HOLD",
         "classification": "FOREIGN_CAPABILITY",
         "reason": "metadata-complete-enough-for-sandbox-evaluation-not-body-admission"
@@ -287,7 +295,7 @@
       "installed": false,
       "persistentMutation": false,
       "candidateAdmission": {
-        "schema": "zenomorph-gut-capability-admission/v0.5",
+        "schema": "zenomorph-gut-capability-admission/v0.7",
         "organism": "ZENOMORPH",
         "habitat": "NOSTROMO",
         "executed": false,
