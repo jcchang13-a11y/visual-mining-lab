@@ -1,0 +1,29 @@
+{
+  "schema": "zenomorph-failure-evidence/v0.1",
+  "organism": "ZENOMORPH",
+  "habitat": "NOSTROMO",
+  "organ": "GUT",
+  "observedAt": "2026-09-12T18:02:35+08:00",
+  "status": "OPEN",
+  "classification": "FORMAT_CONTROL_EVIDENCE_LAUNDERING_GAP",
+  "scope": "capability evidence role separation v0.3",
+  "observationType": "static-code-audit-with-adversarial-specimen",
+  "finding": "The current semantic skeleton strips Unicode punctuation, symbols, and whitespace but does not strip Unicode format controls (General_Category=Cf). A substantive evidence token can therefore be visually fragmented with zero-width or bidi-format controls and evade the bounded cross-role collision check.",
+  "adversarialExamples": [
+    "ZERO WIDTH SPACE U+200B inserted inside a provenance token reused as authorization evidence",
+    "ZERO WIDTH JOINER U+200D inserted inside a reused token",
+    "bidirectional isolate/control characters inserted inside a reused token"
+  ],
+  "risk": "A single substantive evidence token could be presented as if it independently satisfied provenance, permission, or interface roles, creating false evidentiary separation and fake certainty.",
+  "constraints": [
+    "Do not reinterpret this observation as executed capability admission.",
+    "Do not broaden normalization to erase general combining marks or language-significant characters.",
+    "Preserve original observed atoms for audit; hardening should affect collision comparison only."
+  ],
+  "provenance": {
+    "sourcePath": "nostromo/gut/capability-evidence-role-separation.mjs",
+    "sourceVersion": "v0.3",
+    "sourceBlob": "08bafde3bab37f89ddd605e8dd80eeabb23af731"
+  },
+  "resolution": null
+}
