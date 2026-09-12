@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320" role="img" aria-labelledby="title desc">
+  <title id="title">第三十一分沿四相歷次出現往前回溯</title>
+  <desc id="desc">第三十一分正文明列第三、第六、第十四、第十七、第二十五分都曾談我相、人相、眾生相、壽者相；圖以同心圓按由近到遠的閱讀回溯次序排列。</desc>
+  <rect width="320" height="320" fill="white"/>
+  <g fill="none" stroke="black" stroke-width="2">
+    <circle cx="160" cy="160" r="28"/>
+    <circle cx="160" cy="160" r="54"/>
+    <circle cx="160" cy="160" r="80"/>
+    <circle cx="160" cy="160" r="106"/>
+    <circle cx="160" cy="160" r="132"/>
+    <circle cx="160" cy="160" r="154"/>
+  </g>
+  <g fill="black" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Noto Sans TC', sans-serif" font-size="18" text-anchor="middle" dominant-baseline="middle">
+    <text x="160" y="160">31</text>
+    <text x="160" y="119">25</text>
+    <text x="160" y="93">17</text>
+    <text x="160" y="67">14</text>
+    <text x="160" y="41">6</text>
+    <text x="160" y="17">3</text>
+  </g>
+</svg>
