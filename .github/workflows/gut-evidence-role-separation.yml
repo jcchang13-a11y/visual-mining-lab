@@ -1,0 +1,24 @@
+name: GUT Evidence Role Separation
+
+on:
+  push:
+    paths:
+      - 'nostromo/gut/capability-evidence-role-separation.mjs'
+      - 'nostromo/gut/capability-evidence-quality.mjs'
+      - 'nostromo/integration/gut-capability-evidence-role-separation-test.mjs'
+      - '.github/workflows/gut-evidence-role-separation.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Run GUT evidence role-separation gate
+        run: node nostromo/integration/gut-capability-evidence-role-separation-test.mjs
