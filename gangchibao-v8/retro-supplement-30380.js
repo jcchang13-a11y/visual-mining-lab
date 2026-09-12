@@ -1,5 +1,6 @@
 /* 《剛吃飽》第八版｜爛尾樓版｜30380 第十六分回溯增補
  * 不清正文，只把正文已能支持的時間回溯線接成閱讀層。
+ * 2026-09-12 校準：同一句經文在 L2 經文塊與 L1 正文重複時，回溯圖不搶進經文原材料層；保留兩份文字，只把圖接在正文閱讀層。
  */
 (function(){
   'use strict';
@@ -52,6 +53,10 @@
     const walker=document.createTreeWalker(article,NodeFilter.SHOW_TEXT);
     let node;
     while((node=walker.nextNode())){
+      /* 經文在單元頂端另有 L2 原材料複本。若 anchor 同時出現在 L2 與正文，
+         舊 walker 會先命中 L2，讓回溯圖看起來像經文本身的一部分。
+         不刪 L2、不改 anchor，只略過經文塊，繼續找正文中的同句。 */
+      if(node.parentElement && node.parentElement.closest('.sutra-block')) continue;
       const at=(node.nodeValue||'').indexOf(spec.anchor);
       if(at<0) continue;
       const tail=node.splitText(at+spec.anchor.length);
