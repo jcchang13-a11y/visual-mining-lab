@@ -1,6 +1,6 @@
 /* 《剛吃飽》第八版｜爛尾樓版｜30450 第三十一分四相直接回扣增補層
  * 正文已逐一點名第三、六、十四、十七、二十五分；既有長鏈 31 → 25 → 17 → 14 → 6 → 3 保留。
- * 本層只補長鏈中尚未獨立呈現的直接回扣；不改正文，不改主 renderer。
+ * 本層把每一個正文點名位置都拆成獨立直接回扣；不改正文，不改主 renderer。
  */
 (function(){
   'use strict';
@@ -12,7 +12,8 @@
     {key:'retro-30450-31-3',src:'figures/retro-30450-31-3.svg',caption:'第三十一分逐一回看四相施工史，直接點名第三分：31 → 3',anchor},
     {key:'retro-30450-31-6',src:'figures/retro-30450-31-6.svg',caption:'第三十一分逐一回看四相施工史，直接點名第六分：31 → 6',anchor},
     {key:'retro-30450-31-14',src:'figures/retro-30450-31-14.svg',caption:'第三十一分逐一回看四相施工史，直接點名第十四分：31 → 14',anchor},
-    {key:'retro-30450-31-17',src:'figures/retro-30450-31-17.svg',caption:'第三十一分逐一回看四相施工史，直接點名第十七分：31 → 17',anchor}
+    {key:'retro-30450-31-17',src:'figures/retro-30450-31-17.svg',caption:'第三十一分逐一回看四相施工史，直接點名第十七分：31 → 17',anchor},
+    {key:'retro-30450-31-25',src:'figures/retro-30450-31-25.svg',caption:'第三十一分逐一回看四相施工史，直接點名第二十五分：31 → 25',anchor}
   ];
 
   function makeFigure(spec){
