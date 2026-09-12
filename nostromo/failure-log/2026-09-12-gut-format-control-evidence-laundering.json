@@ -1,14 +1,14 @@
 {
-  "schema": "zenomorph-failure-evidence/v0.1",
+  "schema": "zenomorph-failure-evidence/v0.2",
   "organism": "ZENOMORPH",
   "habitat": "NOSTROMO",
   "organ": "GUT",
   "observedAt": "2026-09-12T18:02:35+08:00",
-  "status": "OPEN",
+  "status": "RESOLVED_FOCUSED_CI",
   "classification": "FORMAT_CONTROL_EVIDENCE_LAUNDERING_GAP",
-  "scope": "capability evidence role separation v0.3",
+  "scope": "capability evidence role separation v0.3 -> v0.4",
   "observationType": "static-code-audit-with-adversarial-specimen",
-  "finding": "The current semantic skeleton strips Unicode punctuation, symbols, and whitespace but does not strip Unicode format controls (General_Category=Cf). A substantive evidence token can therefore be visually fragmented with zero-width or bidi-format controls and evade the bounded cross-role collision check.",
+  "finding": "The v0.3 semantic skeleton stripped Unicode punctuation, symbols, and whitespace but did not strip Unicode format controls (General_Category=Cf). A substantive evidence token could therefore be visually fragmented with zero-width or bidi-format controls and evade the bounded cross-role collision check.",
   "adversarialExamples": [
     "ZERO WIDTH SPACE U+200B inserted inside a provenance token reused as authorization evidence",
     "ZERO WIDTH JOINER U+200D inserted inside a reused token",
@@ -16,14 +16,36 @@
   ],
   "risk": "A single substantive evidence token could be presented as if it independently satisfied provenance, permission, or interface roles, creating false evidentiary separation and fake certainty.",
   "constraints": [
-    "Do not reinterpret this observation as executed capability admission.",
+    "Do not reinterpret this resolution as capability admission, authorization, execution, installation, or factual truth.",
     "Do not broaden normalization to erase general combining marks or language-significant characters.",
-    "Preserve original observed atoms for audit; hardening should affect collision comparison only."
+    "Preserve original observed atoms for audit; hardening affects collision comparison only."
   ],
   "provenance": {
     "sourcePath": "nostromo/gut/capability-evidence-role-separation.mjs",
-    "sourceVersion": "v0.3",
-    "sourceBlob": "08bafde3bab37f89ddd605e8dd80eeabb23af731"
+    "sourceVersionBefore": "v0.3",
+    "sourceBlobBefore": "08bafde3bab37f89ddd605e8dd80eeabb23af731",
+    "hardenedVersion": "v0.4",
+    "hardenedCommit": "7ca93eb65ed1b1fea49c21a8e964a9f8cf6dfca4",
+    "adversarialTestCommit": "48a2f55dcb0c9ec82cb898941a9ca6ee5f5619bc",
+    "testAssertionFixCommit": "5237029d190fb0cdae92039a43ba98e40dc90461"
   },
-  "resolution": null
+  "resolution": {
+    "mechanism": "The bounded semantic collision skeleton now removes Unicode format controls (Cf) in addition to punctuation, symbols, and whitespace while retaining the original observed atoms. Format-control collisions receive a distinct diagnostic reason.",
+    "focusedWorkflow": "GUT Evidence Role Separation",
+    "focusedWorkflowRun": 34687580377,
+    "focusedWorkflowConclusion": "success",
+    "covered": [
+      "baseline role separation regression",
+      "separator laundering adversarial regression",
+      "zero-width-space laundering",
+      "zero-width-joiner laundering",
+      "bidi-format-control laundering",
+      "distinct evidence false-positive preservation",
+      "VAJRA evidence-contract regression",
+      "MU/TH/UR falsification regression",
+      "SHROOMING stateful-probe regression"
+    ],
+    "publicPromotion": false,
+    "promotionBoundary": "Focused CI success resolves this failure specimen. Public organism/registry state remains unchanged until broader evidence is complete; no body-admission authority is created by this guard."
+  }
 }
