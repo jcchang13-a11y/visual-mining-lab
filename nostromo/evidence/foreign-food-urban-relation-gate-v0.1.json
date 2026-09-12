@@ -1,0 +1,38 @@
+{
+  "schema": "zenomorph-unfamiliar-food-evidence/v0.1",
+  "organism": "ZENOMORPH",
+  "habitat": "NOSTROMO",
+  "food": "urban-network / OSM specimen",
+  "sourceSpecimen": "nostromo/research/level1-urban-osm-specimen-v0.1.json",
+  "sourceBlobSha": "58a9755b70c8cc42fe486e09a6cce12eb7a89cc0",
+  "route": ["DROPLET/provenance acquisition", "MUTHER structural extraction", "GUT candidate gate", "VAJRA adversarial case", "cross-domain held-out check"],
+  "observed": {
+    "explicitRelations": 15,
+    "degenerateHighwayTaggedWay": "25216934",
+    "degenerateWayRelations": 0,
+    "candidateBehavior": "NETWORK_LABELS_DO_NOT_COUNT_AS_NETWORK_EVIDENCE"
+  },
+  "heldOut": {
+    "domain": "MaleCNS documentation metadata",
+    "material": "two real DNge104 neuron IDs/types without connectivity edges",
+    "expected": "HOLD rather than infer network structure from the fact that the source is a connectome",
+    "result": "HOLD",
+    "persistentAcrossDomain": true
+  },
+  "adversarial": {
+    "case": "self-loop-only synthetic relation payload",
+    "result": "HOLD",
+    "reason": "self-relations do not satisfy the relation-bearing threshold"
+  },
+  "ci": {
+    "workflow": "NOSTROMO foreign relation specimen gate",
+    "runId": 34690129238,
+    "headSha": "0dd8d1fda9e52c28f25662ae892c2e4967db5a8f",
+    "conclusion": "success",
+    "completedAt": "2026-09-12T11:05:36Z"
+  },
+  "interpretation": "This is not a claim that ZENOMORPH learned urbanism. The surviving candidate is narrower: after exposure to a real external relational dataset, a network-like label is no longer accepted as structural evidence unless the specimen itself contains traceable usable relations. The same rule held when immediately challenged with MaleCNS metadata lacking actual connectivity.",
+  "bodyAdmission": false,
+  "promotion": "NONE",
+  "next": "Acquire an actual MaleCNS relation-bearing subgraph or skeleton-parent specimen and test whether the candidate remains useful without blocking legitimate sparse biological structure."
+}
