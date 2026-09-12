@@ -1,60 +1,19 @@
 {
   "experiment": "gangchibao-image-test",
-  "completed_rounds": 1,
-  "current_round": 2,
+  "completed_rounds": 7,
+  "current_round": 8,
   "rounds": [
-    {
-      "round": 1,
-      "name": "baseline",
-      "status": "passed",
-      "checks": {
-        "index_exists_on_main": true,
-        "svg_asset_exists_on_main": true,
-        "pages_deployment_success": true,
-        "public_page_visual_confirmation": true,
-        "svg_visible_in_browser": true,
-        "broken_image_fallback_visible": true,
-        "body_not_blocked_by_broken_image": true
-      },
-      "evidence": {
-        "index_sha": "f5b3ffcb0b6d6d9059c600c883e289789c23de42",
-        "asset_path": "gangchibao-image-test/assets/test.svg",
-        "known_successful_pages_run": 34454895988,
-        "browser_confirmation": "User-provided Chrome screenshot on 2026-09-10 showed the public page, loaded local SVG, and fallback for intentionally missing image."
-      }
-    },
-    {
-      "round": 2,
-      "name": "raster-png-jpg",
-      "status": "pending_visual_confirmation",
-      "checks": {
-        "png_source_exists_on_main": true,
-        "jpg_source_exists_on_main": true,
-        "root_path_png_added_to_test_page": true,
-        "relative_path_jpg_added_to_test_page": true,
-        "responsive_css_added": true,
-        "broken_image_fallback_preserved": true,
-        "pages_deployment_success": true,
-        "public_page_visual_confirmation": false,
-        "png_visible_in_browser": false,
-        "jpg_visible_in_browser": false
-      },
-      "evidence": {
-        "test_page_commit": "f5c762384a087c860b35011a73dfcd74f194e891",
-        "test_page_blob": "9c62deaa7fd45b1a301898c96df3c51e079754ad",
-        "png_path": "image-pipeline-test/test.png",
-        "png_sha": "8b2a2bae9ffa977ec55e591a8277c7cac6ee6171",
-        "jpg_path": "media-lab/generated.jpg",
-        "jpg_sha": "750a47c8f9d4d720c3694fdadf4f1855ce7234ea",
-        "pages_run": 34458755860,
-        "pages_run_last_seen_status": "completed",
-        "pages_run_conclusion": "success"
-      },
-      "notes": "Pages deployment is confirmed successful. Do not advance to round 3 until actual browser rendering of both PNG and JPG plus responsive scaling is confirmed. Automated external fetch could not be used in this run because the runtime had no DNS access to github.io; this is not evidence of site failure."
-    }
+    {"round":1,"name":"baseline","status":"passed","evidence":{"browser_confirmation":"User mobile screenshot confirmed public page, local SVG, broken-image fallback, and continuing body text."}},
+    {"round":2,"name":"raster-png-jpg","status":"passed","evidence":{"browser_confirmation":"User mobile screenshot confirmed visible real PNG and JPG plus responsive sizing; earlier 1x1 white PNG source was replaced for a visible raster check."}},
+    {"round":3,"name":"multi-image","status":"passed","evidence":{"browser_confirmation":"After fixing mobile layout to one column and removing cropping behavior, user screenshot confirmed five images complete with no overlap, crop, or horizontal overflow."}},
+    {"round":4,"name":"broken-path-fallback","status":"passed","evidence":{"browser_confirmation":"User screenshot confirmed nonexistent file, wrong extension/name, and wrong folder path each fell back while the normal raster image and sentinel body remained visible."}},
+    {"round":5,"name":"cache-update","status":"passed","evidence":{"browser_confirmation":"User screenshot confirmed same cache-target.svg updated from CACHE A to CACHE B with version parameter and sentinel body visible."}},
+    {"round":6,"name":"path-depth","status":"passed","evidence":{"browser_confirmation":"User screenshot confirmed deep relative path loaded CACHE B, site-root path loaded IMAGE TEST, and sentinel body remained visible."}},
+    {"round":7,"name":"mobile-reader","status":"passed","evidence":{"browser_confirmation":"User long mobile screenshot confirmed SVG near the front, PNG in the middle, JPG near the end, continuous long-page scrolling, no horizontal overflow, and final sentinel body."}},
+    {"round":8,"name":"mixed-formats","status":"pending_visual_confirmation","checks":{"format_test_file_exists":true,"svg_reference_present":true,"png_reference_present":true,"jpg_reference_present":true,"intentional_missing_webp_fallback_present":true,"responsive_image_css_present":true,"included_in_later_successful_pages_deployment":true,"public_page_visual_confirmation":false},"evidence":{"page_path":"gangchibao-image-test/format-test/index.html","page_blob":"9252590c1fab10710ffc1840e375759e319a5240","page_commit":"2b4557e40b0e85afd9cee9670fa13ac743c8ecfd","original_commit_pages_run":34664286342,"original_commit_pages_conclusion":"cancelled by subsequent repo activity","later_pages_success_run":34684843358,"later_pages_success_head":"d21ee016c15f695050150553a074126414de29e3","note":"The mixed-format page remains on main and is included in later successful Pages deployments. Browser rendering still requires user visual confirmation before advancing."}}
   ],
   "constraints": {
     "do_not_modify": ["gangchibao-v8", "gangchibao-v8-new", "gangchibao-v9"],
-    "next": "Obtain actual browser evidence for PNG/JPG display and mobile scaling. After that, mark round 2 passed and proceed to round 3 multi-image test."
+    "next": "Obtain mobile/browser visual evidence for round 8 at /gangchibao-image-test/format-test/: SVG, PNG and JPG visible; intentional missing WebP shows fallback; sentinel body visible. Do not advance to round 9 before this confirmation."
   }
 }
