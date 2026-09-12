@@ -1,0 +1,19 @@
+{
+  "schema": "zenomorph-gut-capability-evidence-quality-test/v0.1",
+  "status": "PASS",
+  "goodCase": "EVIDENCE_TEXT_SUBSTANTIVE",
+  "rejectedSemanticPlaceholders": [
+    "unknown",
+    "N/A",
+    "ｔｏｄｏ",
+    " TBD ",
+    "pending",
+    "not provided",
+    "placeholder",
+    "changeme"
+  ],
+  "nestedPlaceholderRejected": true,
+  "scalarPlaceholderRejected": true,
+  "accessorExecuted": false,
+  "bodyAdmissionGranted": false
+}
