@@ -1,0 +1,24 @@
+name: NOSTROMO foreign relation specimen gate
+
+on:
+  push:
+    paths:
+      - 'nostromo/research/level1-urban-osm-specimen-v0.1.json'
+      - 'nostromo/integration/foreign-relation-specimen-gate.mjs'
+      - 'nostromo/integration/foreign-relation-specimen-gate-test.mjs'
+      - '.github/workflows/nostromo-foreign-relation-specimen-gate.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Run isolated unfamiliar-material relation test
+        run: node nostromo/integration/foreign-relation-specimen-gate-test.mjs
