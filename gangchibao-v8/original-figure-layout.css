@@ -81,5 +81,17 @@
     forced-color-adjust:none;
     background-color:transparent;
   }
+  /* 2026-09-12 覆層：上面的 background-only 說明保留作施工斷面。
+     LIVE 現已由 set01-sprite-crop-scaffold.js 用同一 master sprite 疊接真正的 SVG <image> 裁切；
+     這裡只替已接上的新層補列印尺寸，不刪舊 fallback，也不改任何圖像內容。 */
+  .set01-photo__svg-crop{
+    display:block!important;
+    width:100%!important;
+    height:100%!important;
+    overflow:hidden!important;
+  }
+  .set01-photo__svg-crop image{
+    image-rendering:auto;
+  }
   .set01-eva-note,.set01-rongzhe-note{break-before:page;page-break-before:always;max-width:none}
 }
