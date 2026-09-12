@@ -6,6 +6,7 @@ on:
     paths:
       - 'nostromo/gut/capability-admission.mjs'
       - 'nostromo/integration/gut-capability-admission-test.mjs'
+      - 'nostromo/integration/gut-capability-admission-empty-metadata-test.mjs'
       - '.github/workflows/nostromo-gut-capability-admission-test.yml'
   workflow_dispatch:
 
@@ -24,7 +25,9 @@ jobs:
         with:
           node-version: '22'
       - name: Verify guarded foreign-capability admission
-        run: node nostromo/integration/gut-capability-admission-test.mjs
+        run: |
+          node nostromo/integration/gut-capability-admission-test.mjs
+          node nostromo/integration/gut-capability-admission-empty-metadata-test.mjs
       - name: Commit focused result
         if: always()
         run: |
