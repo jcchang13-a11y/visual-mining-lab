@@ -1,6 +1,6 @@
 {
   "schema": "zenomorph-gut-capability-admission-test/v0.4",
-  "completedAt": "2026-09-12T05:07:32.857Z",
+  "completedAt": "2026-09-12T05:07:46.402Z",
   "status": "PASS",
   "capability": "FOREIGN_CAPABILITY_PRE_ASSIMILATION_ADMISSION_WITH_SERIALIZED_UNTRUSTED_BOUNDARY",
   "cases": {
