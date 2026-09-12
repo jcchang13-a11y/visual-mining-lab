@@ -1,0 +1,53 @@
+{
+  "experiment": "ZENOMORPH Level-1 unfamiliar-material ingestion / MaleCNS v0.1",
+  "status": "CANDIDATE_NOT_PROMOTED",
+  "purpose": "Introduce a real unfamiliar external graph specimen into the existing five-organ metabolism without instructing ZENOMORPH to imitate a fly brain or redesign itself.",
+  "source": {
+    "provider": "HHMI Janelia FlyEM",
+    "dataset": "MaleCNS v1.0",
+    "scope": "adult male Drosophila brain + ventral nerve cord connectome",
+    "license": "CC-BY",
+    "official_download": "https://male-cns.janelia.org/download/",
+    "official_project": "https://www.janelia.org/project-team/flyem/male-cns-connectome",
+    "programmatic_dataset": "male-cns:v1.0",
+    "bulk_graph": "connectome-weights-male-cns-v1.0-minconf-0.5.feather"
+  },
+  "blind_ingestion_rule": {
+    "instruction_to_organs": "Treat this as unfamiliar external material. Inspect and metabolize it under existing organ rules.",
+    "forbidden_hint": "Do not tell the organs that the connectome should be copied, mapped onto ZENOMORPH, or used to create a new organ.",
+    "reason": "Any structural analogy or morphogenetic candidate must arise from the metabolism rather than from the experiment prompt."
+  },
+  "initial_specimen_policy": {
+    "full_dataset_ingestion": false,
+    "reason": "The full connection graph is approximately 1.1 GB and synapse tables are much larger; first prove bounded end-to-end metabolism on a traceable subgraph.",
+    "sample_requirements": [
+      "preserve original neuron/body identifiers and edge weights",
+      "preserve source and dataset version",
+      "include enough connected structure to test topology rather than isolated rows",
+      "record extraction query or deterministic selection rule",
+      "do not write credentials or private connector data to the repository"
+    ]
+  },
+  "organ_route": [
+    "DROPLET: acquire and provenance-bind the public specimen",
+    "MUTHER: read, decompose and recombine structural observations without preassigned biological analogy",
+    "GUT: classify what is absorbable, uncertain, waste, or a candidate for further metabolism",
+    "VAJRA: attack false analogy, duplicated evidence, provenance loss and unjustified structural claims",
+    "SHROOMING: generate a subsequent interpretation only after upstream metabolic effects are available"
+  ],
+  "success_evidence": [
+    "later organ routing or behavior changes in a traceable way because of the ingested specimen",
+    "the change survives a delayed return test on held-out material",
+    "any structural candidate preserves derivation/provenance and remains rollbackable",
+    "cross-organ regression does not show echo amplification or duplicate pollution"
+  ],
+  "non_success": [
+    "a summary of fruit-fly neuroanatomy",
+    "a generic statement that brains are networks",
+    "renaming existing ZENOMORPH organs after biological structures",
+    "a proposed self-change that merely repeats an experimenter hint",
+    "passing tests without persistent downstream behavioral change"
+  ],
+  "promotion_gate": "No public capability/state promotion until a bounded specimen is actually acquired, run through the five-organ path, adversarially tested, provenance-closed, regression-tested, and GitHub Actions succeeds.",
+  "evidence_policy": "DISPLAYED STATE MUST FOLLOW EVIDENCE"
+}
