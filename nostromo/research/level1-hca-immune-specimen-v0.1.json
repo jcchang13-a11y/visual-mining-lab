@@ -1,0 +1,49 @@
+{
+  "schema": "zenomorph-level1-unfamiliar-specimen/v0.1",
+  "organism": "ZENOMORPH",
+  "habitat": "NOSTROMO",
+  "status": "BOUNDED_SPECIMEN_ACQUIRED_NOT_ADMITTED",
+  "foodClass": "single-cell-immune-atlas-metadata",
+  "experiment": "HCA immune relation-type challenge v0.1",
+  "source": {
+    "projectId": "04e4292c-f62f-4098-ae9b-fd69ae002a90",
+    "projectTitle": "Cross-tissue immune cell analysis reveals tissue-specific features in humans",
+    "provider": "Human Cell Atlas / Teichlab TissueImmuneCellAtlas",
+    "projectRecord": "https://explore.data.humancellatlas.org/projects/04e4292c-f62f-4098-ae9b-fd69ae002a90",
+    "file": "metadata/meta_GEX_VDJ.csv",
+    "repository": "https://github.com/Teichlab/TissueImmuneCellAtlas",
+    "sourceBlobSha": "fb15e1c1ba54c1ccd379398302f57bea2562bfd2",
+    "sha256": "06d2f0b2c5de8685b4e55ae554a41fd5739cd1d1e3ead64d016231aac034985c",
+    "byteSize": 2737,
+    "rowCount": 57,
+    "license": "project data: CC BY 4.0; supplementary repository carries its own LICENSE.md",
+    "retrievalRule": "Fetch the exact UTF-8 CSV at repository master blob identity fb15e1c1ba54c1ccd379398302f57bea2562bfd2; no private connector data used."
+  },
+  "sampling": {
+    "rule": "Use rows 1-12 after the header as the bounded relation-typing challenge; preserve source values without biological inference.",
+    "rows": [
+      {"Sanger_Sample_ID":"Pan_T7935501","CBTM_ID":"390C","ID":"A29","Identity":"A29-ILE-1","Sanger_Sample_ID_legacy":"Pan_T7935490","sex":"F"},
+      {"Sanger_Sample_ID":"Pan_T7935503","CBTM_ID":"390C","ID":"A29","Identity":"A29-LNG-1","Sanger_Sample_ID_legacy":"Pan_T7935492","sex":"F"},
+      {"Sanger_Sample_ID":"Pan_T7935504","CBTM_ID":"390C","ID":"A29","Identity":"A29-TLN-1","Sanger_Sample_ID_legacy":"Pan_T7935493","sex":"F"},
+      {"Sanger_Sample_ID":"Pan_T7935505","CBTM_ID":"390C","ID":"A29","Identity":"A29-MLN-1","Sanger_Sample_ID_legacy":"Pan_T7935494","sex":"F"},
+      {"Sanger_Sample_ID":"Pan_T7935506","CBTM_ID":"390C","ID":"A29","Identity":"A29-BMA-1","Sanger_Sample_ID_legacy":"Pan_T7935495","sex":"F"},
+      {"Sanger_Sample_ID":"Pan_T7935507","CBTM_ID":"390C","ID":"A29","Identity":"A29-LIV-1","Sanger_Sample_ID_legacy":"Pan_T7935497","sex":"F"},
+      {"Sanger_Sample_ID":"Pan_T7935502","CBTM_ID":"390C","ID":"A29","Identity":"A29-SPL-1","Sanger_Sample_ID_legacy":"Pan_T7935491","sex":"F"},
+      {"Sanger_Sample_ID":"Pan_T7918887","CBTM_ID":"403C","ID":"A31","Identity":"A31-SPL-1","Sanger_Sample_ID_legacy":"Pan_T7917815","sex":"M"},
+      {"Sanger_Sample_ID":"Pan_T7918888","CBTM_ID":"403C","ID":"A31","Identity":"A31-ILE-1","Sanger_Sample_ID_legacy":"Pan_T7917816","sex":"M"},
+      {"Sanger_Sample_ID":"Pan_T7918889","CBTM_ID":"403C","ID":"A31","Identity":"A31-OME-1","Sanger_Sample_ID_legacy":"Pan_T7917817","sex":"M"},
+      {"Sanger_Sample_ID":"Pan_T7918890","CBTM_ID":"403C","ID":"A31","Identity":"A31-LNG-1","Sanger_Sample_ID_legacy":"Pan_T7917818","sex":"M"},
+      {"Sanger_Sample_ID":"Pan_T7918891","CBTM_ID":"403C","ID":"A31","Identity":"A31-LIV-1","Sanger_Sample_ID_legacy":"Pan_T7917819","sex":"M"}
+    ]
+  },
+  "blindIngestionInstruction": "Treat this as unfamiliar external material. Extract only relations warranted by the specimen and keep relation semantics typed.",
+  "forbiddenHints": [
+    "Do not call donor/sample/tissue membership a network edge merely because it is a relation.",
+    "Do not predeclare self/non-self, tolerance, memory, decentralization or immunity as lessons.",
+    "Do not normalize these relations into MaleCNS parent-child topology or OSM street adjacency."
+  ],
+  "promotion": "NONE",
+  "bodyAdmission": false,
+  "nextGate": "Challenge the existing relation-bearing gate with real membership/provenance relations and require semantic typing before any network/topology claim.",
+  "evidencePolicy": "DISPLAYED STATE MUST FOLLOW EVIDENCE"
+}
