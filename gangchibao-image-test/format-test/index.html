@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>第 8 輪｜格式混合</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f4f0e7;color:#171717;font-family:system-ui,-apple-system,"Noto Sans TC",sans-serif}.wrap{max-width:760px;margin:auto;padding:24px 14px 56px}h1{font-size:28px}.card{margin:18px 0;padding:16px;border:1px solid #cfc8bb;background:#fffdf6;overflow:hidden}.card img{display:block;width:100%;max-width:100%;height:auto;margin:12px auto 0;object-fit:contain}.fallback{display:none;padding:14px;border:1px dashed #8c8173;color:#6f6a62;margin-top:12px}.sentinel{padding:14px;border-left:4px solid #171717;background:#f3eee4;line-height:1.7}.status{line-height:1.7;color:#6f6a62}
+</style>
+</head>
+<body><main class="wrap">
+<h1>第 8 輪｜格式混合</h1>
+<p class="status">同頁混合 SVG、PNG、JPG，並故意放入一個不存在的 WebP 作為失敗格式測試。安全格式必須正常顯示；失敗項目必須只出現 fallback，不得阻塞其他圖片與正文。</p>
+<section class="card"><strong>A｜SVG</strong><img src="../assets/test.svg?v=r8" alt="SVG format test"></section>
+<section class="card"><strong>B｜PNG</strong><img src="/visual-mining-lab/image-pipeline-test/test.png?v=r8" alt="PNG format test"></section>
+<section class="card"><strong>C｜JPG</strong><img src="../../media-lab/generated.jpg?v=r8" alt="JPG format test"></section>
+<section class="card"><strong>D｜故意失敗的 WebP</strong><img src="../assets/this-format-does-not-exist.webp?v=r8" alt="broken WebP test" onerror="this.style.display='none';document.getElementById('r8fallback').style.display='block'"><div id="r8fallback" class="fallback">D 已隔離：WebP 測試檔不存在，但頁面繼續。</div></section>
+<div class="sentinel">第 8 輪哨兵正文：如果你看得到這段，而且上面 SVG、PNG、JPG 正常、D 顯示 fallback，就代表格式混合沒有拖死正文。</div>
+</main></body></html>
