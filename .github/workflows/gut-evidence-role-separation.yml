@@ -6,6 +6,8 @@ on:
       - 'nostromo/gut/capability-evidence-role-separation.mjs'
       - 'nostromo/gut/capability-evidence-quality.mjs'
       - 'nostromo/integration/gut-capability-evidence-role-separation-test.mjs'
+      - 'nostromo/integration/gut-capability-evidence-separator-laundering-test.mjs'
+      - 'nostromo/integration/gut-capability-evidence-format-control-laundering-test.mjs'
       - '.github/workflows/gut-evidence-role-separation.yml'
   workflow_dispatch:
 
@@ -20,5 +22,14 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Run GUT evidence role-separation gate
+      - name: Run GUT evidence role-separation baseline
         run: node nostromo/integration/gut-capability-evidence-role-separation-test.mjs
+      - name: Run GUT separator laundering adversarial regression
+        run: node nostromo/integration/gut-capability-evidence-separator-laundering-test.mjs
+      - name: Run GUT format-control laundering adversarial regression
+        run: node nostromo/integration/gut-capability-evidence-format-control-laundering-test.mjs
+      - name: Run cross-organ regression
+        run: |
+          node nostromo/integration/vajra-evidence-contract-test.mjs
+          node nostromo/integration/muther-falsify-test.mjs
+          node nostromo/integration/shroom-stateful-probe-test.mjs
