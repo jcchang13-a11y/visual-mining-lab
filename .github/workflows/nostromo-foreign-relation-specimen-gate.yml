@@ -6,6 +6,7 @@ on:
       - 'nostromo/research/level1-urban-osm-specimen-v0.1.json'
       - 'nostromo/integration/foreign-relation-specimen-gate.mjs'
       - 'nostromo/integration/foreign-relation-specimen-gate-test.mjs'
+      - 'nostromo/integration/malecns-swc-relation-gate-test.mjs'
       - '.github/workflows/nostromo-foreign-relation-specimen-gate.yml'
   workflow_dispatch:
 
@@ -22,3 +23,5 @@ jobs:
           node-version: '22'
       - name: Run isolated unfamiliar-material relation test
         run: node nostromo/integration/foreign-relation-specimen-gate-test.mjs
+      - name: Challenge gate with real MaleCNS SWC relation specimen
+        run: node nostromo/integration/malecns-swc-relation-gate-test.mjs
