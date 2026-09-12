@@ -1,7 +1,7 @@
-/* ZENOMORPH / NOSTROMO GUT capability evidence role-separation gate v0.2
+/* ZENOMORPH / NOSTROMO GUT capability evidence role-separation gate v0.3
  * Prevents semantic evidence laundering by reusing the same substantive token
  * as provenance, permission, and interface/contract evidence, including trivial
- * wrapper/prefix/suffix laundering around a substantive token.
+ * wrapper/prefix/suffix laundering and separator/punctuation fragmentation.
  * This gate is additive: evidence-quality, admission, sandbox, and incorporation
  * remain authoritative. Passing this gate grants no execution or body admission.
  */
@@ -11,9 +11,17 @@ const SOURCE_KEYS=new Set(['source','provider','publisher','provenance','sourcef
 const PERMISSION_KEYS=new Set(['permissions','permission','scopes','scope','access','authorization','authorisation']);
 const INTERFACE_KEYS=new Set(['interface','interfacename','inputschema','outputschema','inputs','outputs','contract','api']);
 const MIN_SUBSTANTIVE_LENGTH=12;
+const MIN_SKELETON_LENGTH=12;
 
 function normalizeText(value){
   return typeof value==='string'?value.normalize('NFKC').replace(/\s+/g,' ').trim().toLowerCase():null;
+}
+
+function semanticSkeleton(value){
+  const normalized=normalizeText(value);
+  if(!normalized)return null;
+  const skeleton=normalized.replace(/[\p{P}\p{S}\s]+/gu,'');
+  return skeleton.length>=MIN_SKELETON_LENGTH?skeleton:null;
 }
 
 function collectAtoms(value,seen=new WeakSet(),depth=0,out=new Set()){
@@ -58,14 +66,32 @@ function collisionBetween(atomsA,atomsB){
       if(shorter.length>=MIN_SUBSTANTIVE_LENGTH&&longer.includes(shorter)){
         return {kind:'wrapped',substantive:shorter,atomA,atomB};
       }
+      const skeletonA=semanticSkeleton(atomA);
+      const skeletonB=semanticSkeleton(atomB);
+      if(skeletonA&&skeletonB){
+        if(skeletonA===skeletonB){
+          return {kind:'separator-fragmented',substantive:skeletonA,atomA,atomB};
+        }
+        const skeletonShorter=skeletonA.length<=skeletonB.length?skeletonA:skeletonB;
+        const skeletonLonger=skeletonA.length<=skeletonB.length?skeletonB:skeletonA;
+        if(skeletonShorter.length>=MIN_SKELETON_LENGTH&&skeletonLonger.includes(skeletonShorter)){
+          return {kind:'separator-wrapped',substantive:skeletonShorter,atomA,atomB};
+        }
+      }
     }
   }
   return null;
 }
 
+function reasonForCollision(kind){
+  if(kind==='exact')return 'cross-role-evidence-reuse';
+  if(kind==='wrapped')return 'cross-role-evidence-wrapped-reuse';
+  return 'cross-role-evidence-separator-laundering';
+}
+
 export function assessCapabilityEvidenceRoleSeparation(candidate){
   const base={
-    schema:'zenomorph-gut-capability-evidence-role-separation/v0.2',
+    schema:'zenomorph-gut-capability-evidence-role-separation/v0.3',
     organism:'ZENOMORPH',habitat:'NOSTROMO',authorized:false,executed:false,installed:false,bodyAdmission:false,route:'HOLD'
   };
   const quality=assessCapabilityEvidenceQuality(candidate);
@@ -91,13 +117,13 @@ export function assessCapabilityEvidenceRoleSeparation(candidate){
       const [roleA,atomsA]=active[i], [roleB,atomsB]=active[j];
       const collision=collisionBetween(atomsA,atomsB);
       if(collision){
-        return {...base,status:'HOLD',classification:'EVIDENCE_ROLE_COLLISION',reason:collision.kind==='wrapped'?'cross-role-evidence-wrapped-reuse':'cross-role-evidence-reuse',roles:[roleA,roleB],collisionKind:collision.kind,reusedAtom:collision.substantive.slice(0,160),observedAtoms:[collision.atomA.slice(0,160),collision.atomB.slice(0,160)]};
+        return {...base,status:'HOLD',classification:'EVIDENCE_ROLE_COLLISION',reason:reasonForCollision(collision.kind),roles:[roleA,roleB],collisionKind:collision.kind,reusedAtom:collision.substantive.slice(0,160),observedAtoms:[collision.atomA.slice(0,160),collision.atomB.slice(0,160)]};
       }
     }
   }
-  return {...base,status:'PASS',classification:'EVIDENCE_ROLES_SEPARATED',reason:'no-substantive-evidence-token-is-reused-or-trivially-wrapped-across-source-permission-interface-roles',roleAtomCounts:Object.fromEntries(Object.entries(roles).map(([k,v])=>[k,v.size])),nextStage:'capability admission / sandbox gates remain authoritative'};
+  return {...base,status:'PASS',classification:'EVIDENCE_ROLES_SEPARATED',reason:'no-substantive-evidence-token-is-reused, trivially wrapped, or separator-laundered across source-permission-interface roles',roleAtomCounts:Object.fromEntries(Object.entries(roles).map(([k,v])=>[k,v.size])),nextStage:'capability admission / sandbox gates remain authoritative'};
 }
 
 export const capabilityEvidenceRoleSeparationBoundary=Object.freeze({
-  version:'0.2',normalization:'Unicode NFKC + whitespace collapse + lowercase',rejectsCrossRoleTokenReuse:true,rejectsTrivialWrappedReuse:true,minWrappedReuseLength:MIN_SUBSTANTIVE_LENGTH,authorizationGranted:false,executionGranted:false,installationGranted:false,bodyAdmissionGranted:false
+  version:'0.3',normalization:'Unicode NFKC + whitespace collapse + lowercase',separatorSkeleton:'strip Unicode punctuation, symbols, and whitespace for bounded cross-role collision checks',rejectsCrossRoleTokenReuse:true,rejectsTrivialWrappedReuse:true,rejectsSeparatorLaundering:true,minWrappedReuseLength:MIN_SUBSTANTIVE_LENGTH,minSkeletonLength:MIN_SKELETON_LENGTH,authorizationGranted:false,executionGranted:false,installationGranted:false,bodyAdmissionGranted:false
 });
