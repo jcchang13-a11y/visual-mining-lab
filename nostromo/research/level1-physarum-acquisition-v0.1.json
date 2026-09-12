@@ -1,0 +1,59 @@
+{
+  "schema": "zenomorph-level1-unfamiliar-specimen/v0.1",
+  "organism": "ZENOMORPH",
+  "habitat": "NOSTROMO",
+  "status": "SOURCE_VERIFIED_SAMPLE_NOT_YET_INGESTED",
+  "foodClass": "acellular-transport-network",
+  "experiment": "Physarum polycephalum unfamiliar-material acquisition v0.1",
+  "source": {
+    "provider": "Technical University of Munich / Max Planck Institute for Dynamics and Self-Organization",
+    "title": "Data underlying the publication: Network topology enables efficient response to environment in Physarum polycephalum",
+    "record": "mediaTUM 1703653",
+    "doi": "10.14459/2023mp1703653",
+    "publicationDate": "2023-05-02",
+    "dataTypes": ["microscopy images", "analysis code", "text metadata"],
+    "totalSize": "approximately 255 GB / 144 files",
+    "license": "CC BY-SA 4.0",
+    "officialRecord": "https://mediatum.ub.tum.de/1703653",
+    "scientificScope": "Raw microscopy and code underlying experiments on transport-network topology and environmental response in the acellular slime mold Physarum polycephalum."
+  },
+  "provenance": {
+    "verification": "Official university research-data repository record checked before admission to specimen queue.",
+    "privateConnectorData": false,
+    "credentialsRequiredForInitialVerification": false,
+    "identityRule": "When a concrete file is selected, record repository filename, repository-provided identity/checksum when available, retrieval date, byte size, and a locally computed content hash before five-organ ingestion."
+  },
+  "boundedSamplePolicy": {
+    "fullDatasetIngestion": false,
+    "reason": "The source archive is approximately 255 GB. ZENOMORPH Level-1 requires a small traceable specimen before any bulk acquisition.",
+    "selectionRequirements": [
+      "select a source file or bounded excerpt that contains actual time-varying network/microscopy information rather than only prose metadata",
+      "preserve source filename and experiment context",
+      "prefer a specimen that permits extraction of explicit relations or temporal network change",
+      "do not pre-label the material as a model for ZENOMORPH",
+      "record deterministic extraction or sampling rule",
+      "retain rollback and re-fetch information"
+    ]
+  },
+  "blindIngestionInstruction": "Treat this as unfamiliar external material. Inspect and metabolize it under existing organ rules.",
+  "forbiddenHints": [
+    "Do not tell organs that slime-mold transport should be copied into ZENOMORPH.",
+    "Do not predeclare that decentralization, adaptation, routing, memory, or self-organization are the lesson.",
+    "Do not map Physarum tubes onto named ZENOMORPH organs before metabolism produces such a candidate independently."
+  ],
+  "organRoute": [
+    "DROPLET: bind source/version/license and acquire one bounded public specimen",
+    "MUTHER: read/decompose/recombine observations without supplied analogy",
+    "GUT: classify absorbable structure, uncertainty, waste and candidate metabolic effect",
+    "VAJRA: attack anthropomorphic/network analogy, provenance leakage and topology claims unsupported by specimen structure",
+    "SHROOMING: expose downstream interpretation only after upstream effects exist"
+  ],
+  "crossFoodRole": {
+    "urbanCounterexample": "A highway/network label without actual relations must remain structurally empty; Physarum material must likewise earn relation claims from observed structure, not biological naming.",
+    "maleCNSCounterexample": "Unlike a connectome, Physarum may express changing transport geometry without neurons; ingestion must not assume that every persistent relation is a synaptic-style edge."
+  },
+  "promotion": "NONE",
+  "bodyAdmission": false,
+  "nextGate": "Acquire and hash one bounded microscopy/network specimen, then run the existing five-organ path and held-out cross-food regression before any structural candidate can enter isolated morphogenesis.",
+  "evidencePolicy": "DISPLAYED STATE MUST FOLLOW EVIDENCE"
+}
