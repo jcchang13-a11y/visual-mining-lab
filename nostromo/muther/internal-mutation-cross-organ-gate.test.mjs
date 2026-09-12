@@ -133,7 +133,13 @@ const tamperedGut = structuredClone(gut);
 tamperedGut.reviewWitness.evidenceRefs.push('gut:evidence:post-issue-injection');
 const tampered = evaluateMutationCrossOrganGate({candidate,lineageFingerprint,derivationWitness,gutReceipt:tamperedGut,vajraReceipt:vajra});
 assert.equal(tampered.status,'HOLD');
-assert.equal(tampered.reason,'GUT_ISSUER_FINGERPRINT_INVALID');
+assert.equal(tampered.reason,'GUT_REVIEW_RECEIPT_WITNESS_FINGERPRINT_INVALID');
+
+const outerTamperedGut = structuredClone(gut);
+outerTamperedGut.provenance='gut/tampered-after-issue';
+const outerTampered = evaluateMutationCrossOrganGate({candidate,lineageFingerprint,derivationWitness,gutReceipt:outerTamperedGut,vajraReceipt:vajra});
+assert.equal(outerTampered.status,'HOLD');
+assert.equal(outerTampered.reason,'GUT_ISSUER_FINGERPRINT_INVALID');
 
 const sharedGut = issuedReceipt('GUT','gut/shared',' shared-run ');
 const sharedVajra = issuedReceipt('VAJRA','vajra/shared','ｓｈａｒｅｄ－ｒｕｎ');
@@ -148,8 +154,8 @@ assert.equal(stale.status,'HOLD');
 assert.equal(stale.reason,'MUTHER_CALLER_LINEAGE_NOT_BOUND_TO_CANDIDATE');
 
 console.log(JSON.stringify({
-  schema:'zenomorph-muther-internal-mutation-cross-organ-gate-test/v0.10',
+  schema:'zenomorph-muther-internal-mutation-cross-organ-gate-test/v0.11',
   status:'PASS',
-  capability:'MUTHER_MUTATION_REQUIRES_EXPLICIT_VAJRA_DIAGNOSTIC_VERDICTS_AND_BLOCKING_FINDINGS_CANNOT_BE_OVERRIDDEN_BY_PROSE',
-  boundary:'PASS proves the mutation gate requires structured VAJRA contradiction, counterexample and provenance outcomes tied to exact lineage. It does not prove truth, semantic understanding, cryptographic organ identity, or authority to mutate the persistent body.'
+  capability:'MUTHER_MUTATION_REQUIRES_EXPLICIT_VAJRA_DIAGNOSTIC_VERDICTS_AND_GUT_WITNESS_IDENTITY_TAMPER_IS_SEPARATED_FROM_OUTER_RECEIPT_TAMPER',
+  boundary:'PASS proves the mutation gate requires structured VAJRA contradiction, counterexample and provenance outcomes tied to exact lineage, and distinguishes nested GUT witness tamper from outer receipt tamper. It does not prove truth, semantic understanding, cryptographic organ identity, or authority to mutate the persistent body.'
 },null,2));
