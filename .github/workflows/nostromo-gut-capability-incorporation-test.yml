@@ -42,6 +42,7 @@ jobs:
           if(out.candidateBody.capabilities['foreign.signal']?.status!=='REVERSIBLE_TRIAL_ONLY')throw new Error('candidate missing');
           if(out.rollback?.restoresFingerprint!==out.beforeFingerprint)throw new Error('rollback evidence missing');
           if(out.fingerprintBoundary?.nestedStateBound!==true)throw new Error('nested fingerprint boundary not declared');
+          if(out.fingerprintBoundary?.scalarIdentityTagged!==true||out.fingerprintBoundary?.sparseArrayHoleIdentityBound!==true)throw new Error('scalar-lossless fingerprint boundary not declared');
           if(out.fingerprintBoundary?.accessorStateAccepted!==false)throw new Error('accessor fingerprint boundary not declared');
           if(out.fingerprintBoundary?.symbolStateAccepted!==false||out.fingerprintBoundary?.nonEnumerableStateAccepted!==false||out.fingerprintBoundary?.exoticObjectStateAccepted!==false||out.fingerprintBoundary?.arrayCustomPropertyAccepted!==false)throw new Error('hidden-state fingerprint boundary not declared');
 
@@ -55,6 +56,35 @@ jobs:
           const reorderedOut=run(reordered);
           if(reorderedOut.status!=='PASS')throw new Error('reordered control failed');
           if(reorderedOut.beforeFingerprint!==out.beforeFingerprint)throw new Error('object key order changed canonical body fingerprint');
+
+          const fp=(marker)=>{
+            const b=structuredClone(body);
+            b.scalarProbe=marker;
+            const r=run(b);
+            if(r.status!=='PASS')throw new Error(`scalar probe failed: ${r.reason}`);
+            return r.beforeFingerprint;
+          };
+          const pairwiseDistinct=(entries,label)=>{
+            const seen=new Map();
+            for(const [name,value] of entries){
+              const f=fp(value);
+              if(seen.has(f))throw new Error(`${label} collision: ${name} collides with ${seen.get(f)}`);
+              seen.set(f,name);
+            }
+          };
+          pairwiseDistinct([
+            ['undefined',undefined],['null',null],['NaN',NaN],['positive-infinity',Infinity],['negative-infinity',-Infinity],['negative-zero',-0],['zero',0],['false',false],['empty-string',''],['bigint-zero',0n]
+          ],'scalar rollback identity');
+
+          const sparseBody=structuredClone(body);
+          sparseBody.history=[, {round:1,status:'PASS'}];
+          const sparseOut=run(sparseBody);
+          if(sparseOut.status!=='PASS')throw new Error('sparse-array probe failed');
+          const undefinedBody=structuredClone(body);
+          undefinedBody.history=[undefined,{round:1,status:'PASS'}];
+          const undefinedOut=run(undefinedBody);
+          if(undefinedOut.status!=='PASS')throw new Error('undefined-array probe failed');
+          if(sparseOut.beforeFingerprint===undefinedOut.beforeFingerprint)throw new Error('sparse array hole collided with explicit undefined');
 
           const cyclic={organs:{GUT:{status:'ACTIVE'}},capabilities:{}};
           cyclic.self=cyclic;
@@ -108,8 +138,8 @@ jobs:
 
           const uncloneable={organs:{GUT:{status:'ACTIVE'},VAJRA:{status:'ACTIVE'}},capabilities:{},ephemeral:()=>true};
           const uncloneableOut=run(uncloneable);
-          if(uncloneableOut.status!=='BLOCKED'||uncloneableOut.reason!=='structured-cloneable-host-body-state-required')throw new Error('uncloneable body state must fail closed');
+          if(uncloneableOut.status!=='BLOCKED'||uncloneableOut.reason!=='fingerprintable-acyclic-data-property-host-body-state-required')throw new Error('function-valued body state must fail closed before clone instead of collapsing in rollback identity');
           if(uncloneableOut.bodyAdmission!==false||uncloneableOut.persistentMutation!==false)throw new Error('uncloneable body crossed admission boundary');
 
-          console.log('PASS reversible incorporation boundary with complete hidden-state rejection, descriptor-safe body fingerprinting, nested rollback fingerprint, registry containment, and fail-closed host-body cloning',out.beforeFingerprint,out.candidateFingerprint);
+          console.log('PASS reversible incorporation boundary with scalar-lossless typed rollback fingerprinting, sparse-array identity, complete hidden-state rejection, descriptor-safe traversal, registry containment, and fail-closed cloning',out.beforeFingerprint,out.candidateFingerprint);
           EOF
