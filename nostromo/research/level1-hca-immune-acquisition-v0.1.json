@@ -1,0 +1,72 @@
+{
+  "schema": "zenomorph-level1-unfamiliar-specimen/v0.1",
+  "organism": "ZENOMORPH",
+  "habitat": "NOSTROMO",
+  "status": "SOURCE_VERIFIED_SAMPLE_NOT_YET_INGESTED",
+  "foodClass": "single-cell-immune-atlas",
+  "experiment": "Human Cell Atlas immune unfamiliar-material acquisition v0.1",
+  "source": {
+    "provider": "Human Cell Atlas Data Portal",
+    "projectTitle": "Cross-tissue immune cell analysis reveals tissue-specific features in humans",
+    "projectId": "04e4292c-f62f-4098-ae9b-fd69ae002a90",
+    "officialRecord": "https://explore.data.humancellatlas.org/projects/04e4292c-f62f-4098-ae9b-fd69ae002a90",
+    "supplementaryCode": "https://github.com/Teichlab/TissueImmuneCellAtlas",
+    "supplementaryAtlas": "https://www.tissueimmunecellatlas.org/",
+    "accessions": {
+      "INSDCProject": "ERP136281",
+      "ArrayExpress": "E-MTAB-11536"
+    },
+    "projectScope": {
+      "species": "Homo sapiens",
+      "sampleType": "specimens",
+      "anatomicalEntities": 10,
+      "organParts": 11,
+      "estimatedCells": 357200,
+      "donors": 12,
+      "analysisProtocols": ["downstream_analysis", "scrna_seq_processing", "tcr_bcr_processing"],
+      "fileCounts": {"fastq.gz": 820, "h5ad": 11, "xlsx": 1}
+    },
+    "license": "CC BY 4.0",
+    "dataAccessPolicy": "HCA Data Release Policy"
+  },
+  "provenance": {
+    "verification": "Official HCA Data Explorer project record checked before admission to specimen queue.",
+    "privateConnectorData": false,
+    "credentialsRequiredForInitialVerification": false,
+    "identityRule": "For the selected public specimen, retain HCA project UUID, source filename/object identity, retrieval date, byte size, source-provided checksum when available, and locally computed content hash before five-organ ingestion."
+  },
+  "boundedSamplePolicy": {
+    "fullDatasetIngestion": false,
+    "reason": "The project contains hundreds of sequencing files and multiple matrices; Level-1 requires one bounded public specimen before any bulk acquisition.",
+    "selectionRequirements": [
+      "select one openly downloadable processed matrix or metadata-bearing object rather than managed-access material",
+      "prefer a specimen that preserves cell-to-donor, cell-to-tissue, cell-type or receptor/clone relations without assuming these are graph edges",
+      "retain project UUID, file identity and experiment context",
+      "record deterministic extraction or sampling rule",
+      "do not pre-label self/non-self, tolerance, exclusion or distributed immunity as lessons for ZENOMORPH",
+      "retain rollback and re-fetch information"
+    ]
+  },
+  "blindIngestionInstruction": "Treat this as unfamiliar external material. Inspect and metabolize it under existing organ rules.",
+  "forbiddenHints": [
+    "Do not tell organs that immune-system organization should be copied into ZENOMORPH.",
+    "Do not equate cell annotation, tissue membership, clonotype, receptor sequence or sample provenance with network edges unless the specimen explicitly supports that relation type.",
+    "Do not predeclare self/non-self, tolerance, exclusion, memory or decentralization as the lesson."
+  ],
+  "organRoute": [
+    "DROPLET: bind project/version/license and acquire one bounded public specimen",
+    "MUTHER: read/decompose/recombine observations without supplied analogy",
+    "GUT: classify absorbable relation types, uncertainty, waste and candidate metabolic effect",
+    "VAJRA: attack category-to-edge collapse, biological analogy and provenance leakage",
+    "SHROOMING: expose downstream interpretation only after upstream effects exist"
+  ],
+  "crossFoodRole": {
+    "urbanCounterexample": "A street feature without actual node relations remains structurally empty; HCA labels likewise cannot earn graph-edge status by name alone.",
+    "maleCNSCounterexample": "MaleCNS SWC parent-child relations are explicit geometry/topology; HCA cell annotations and tissue membership may be relations of a different type and must not be collapsed into the same edge semantics.",
+    "physarumCounterexample": "Time-varying transport geometry and single-cell atlas relations are heterogeneous; persistence or biological naming is not enough to normalize them into one network representation."
+  },
+  "promotion": "NONE",
+  "bodyAdmission": false,
+  "nextGate": "Acquire and hash one bounded openly downloadable HCA immune specimen, type its relations without graph-edge collapse, then run the five-organ path and cross-food regression before any structural candidate can enter isolated morphogenesis.",
+  "evidencePolicy": "DISPLAYED STATE MUST FOLLOW EVIDENCE"
+}
