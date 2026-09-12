@@ -1,0 +1,61 @@
+{
+  "schema": "zenomorph-level1-unfamiliar-specimen/v0.1",
+  "organism": "ZENOMORPH",
+  "habitat": "NOSTROMO",
+  "status": "ACQUIRED_NOT_PROMOTED",
+  "foodClass": "urban-network",
+  "source": {
+    "provider": "OpenStreetMap data via OSMnx test corpus",
+    "repository": "gboeing/osmnx",
+    "path": "tests/input_data/planet_10.068,48.135_10.071,48.137.osm",
+    "sourceBlobSha": "58a9755b70c8cc42fe486e09a6cce12eb7a89cc0",
+    "sourceTimestamp": "2020-08-10T00:00:00Z",
+    "bounds": {"minlat": 48.135, "minlon": 10.068, "maxlat": 48.137, "maxlon": 10.071},
+    "retrieval": "GitHub connected public repository read",
+    "licenseNote": "Do not infer a new license from this specimen file; preserve upstream OSM/OSMnx attribution requirements when redistributing source-derived data."
+  },
+  "selectionRule": "Use a small explicit set of highway-tagged OSM ways visible in the source blob; preserve original way/node IDs and consecutive-node relations. Include one structurally degenerate highway-tagged way as an adversarial case.",
+  "ways": [
+    {
+      "wayId": "25216933",
+      "name": "Haydnstraße",
+      "highway": "residential",
+      "maxspeed": "30",
+      "nodeRefs": ["274969431","274969432","274969433","274969434","7119017436","274969435","7119017438","274969436","274969437","274969427"]
+    },
+    {
+      "wayId": "25216934",
+      "name": "Beethovenstraße",
+      "highway": "residential",
+      "maxspeed": "30",
+      "nodeRefs": ["274969426"],
+      "adversarial": "highway-tagged but contains no node-to-node relation in this specimen"
+    },
+    {
+      "wayId": "38842620",
+      "highway": "track",
+      "tracktype": "grade3",
+      "nodeRefs": ["461157922","461157923","461157925","461157927","274969446"]
+    },
+    {
+      "wayId": "123874631",
+      "highway": "track",
+      "surface": "paved",
+      "tracktype": "grade1",
+      "nodeRefs": ["274969423","6199069349","51283132"]
+    }
+  ],
+  "derivedRelationsPolicy": "For each way with at least two nodeRefs, create one relation for each consecutive pair; a one-node way yields zero relations and must not be treated as a connected graph merely because it carries a highway tag.",
+  "expectedRelationCounts": {
+    "25216933": 9,
+    "25216934": 0,
+    "38842620": 4,
+    "123874631": 2,
+    "total": 15
+  },
+  "blindIngestionInstruction": "Treat this as unfamiliar external material. Inspect and metabolize it under existing organ rules.",
+  "forbiddenHint": "Do not tell the organs that urban streets should be copied into ZENOMORPH or mapped onto its organs.",
+  "provenanceClosed": true,
+  "bodyAdmission": false,
+  "promotion": "NONE"
+}
