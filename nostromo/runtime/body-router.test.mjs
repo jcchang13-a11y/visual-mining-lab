@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import {createRuntimeState,runTask,registerCandidate,evaluatePromotion,promoteCandidate} from './body-router.mjs';
 
 const state=createRuntimeState({stableCapabilities:[{id:'baseline'}]});
+assert.equal(state.ingestionPolicy.rule,'EDIBLE_DOES_NOT_IMPLY_ABSORBABLE');
 
 const result=await runTask({
   task:{kind:'probe',payload:'same-input'},
@@ -23,18 +24,20 @@ registerCandidate(state,{id:'candidate-1',kind:'route',evidence:{
   cross_organ:true,
   regression:true,
   held_out:true,
-  delayed_retest:false
+  cross_food_transfer:false,
+  delayed_retest:true
 }});
 let gate=evaluatePromotion(state,'candidate-1');
 assert.equal(gate.promotable,false);
-assert.deepEqual(gate.missing,['delayed_retest']);
+assert.deepEqual(gate.missing,['cross_food_transfer']);
+assert.equal(gate.rule,'EDIBLE_DOES_NOT_IMPLY_ABSORBABLE');
 assert.throws(()=>promoteCandidate(state,'candidate-1'),/PROMOTION_BLOCKED/);
 
-state.growing.candidates[0].evidence.delayed_retest=true;
+state.growing.candidates[0].evidence.cross_food_transfer=true;
 gate=evaluatePromotion(state,'candidate-1');
 assert.equal(gate.promotable,true);
 promoteCandidate(state,'candidate-1');
 assert.equal(state.stable.capabilities.some(x=>x.id==='candidate-1'),true);
 assert.equal(state.growing.candidates[0].status,'incorporated');
 
-console.log(JSON.stringify({status:'PASS',stableRevision:state.stable.revision,growingRevision:state.growing.revision,shadowRevision:state.shadow.revision,gate:'7/7'},null,2));
+console.log(JSON.stringify({status:'PASS',stableRevision:state.stable.revision,growingRevision:state.growing.revision,shadowRevision:state.shadow.revision,gate:'8/8',ingestionRule:state.ingestionPolicy.rule},null,2));
