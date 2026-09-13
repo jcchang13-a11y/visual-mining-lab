@@ -1,0 +1,37 @@
+name: ZENOMORPH held-out big meal
+
+on:
+  push:
+    paths:
+      - 'nostromo/integration/big-meal-runner.mjs'
+      - 'nostromo/integration/heldout-big-meal-runner.mjs'
+      - 'nostromo/research/big-meals/heldout-concrete-sulfate-2024.json'
+      - 'nostromo/gut/**'
+      - 'nostromo/vajra/**'
+      - 'nostromo/integration/shroom-feedback-executor.mjs'
+      - '.github/workflows/zenomorph-heldout-big-meal.yml'
+  workflow_dispatch:
+
+jobs:
+  ingest-orthogonal-heldout-food:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Ensure PDF text extractor
+        run: |
+          if ! command -v pdftotext >/dev/null 2>&1; then
+            sudo apt-get update -qq
+            sudo apt-get install -y poppler-utils
+          fi
+      - name: Ingest orthogonal held-out article through same five-organ boundary
+        run: node nostromo/integration/heldout-big-meal-runner.mjs --output=zenomorph-heldout-big-meal-result.json
+      - name: Upload held-out metabolic receipt
+        uses: actions/upload-artifact@v4
+        with:
+          name: zenomorph-heldout-big-meal-result
+          path: zenomorph-heldout-big-meal-result.json
+          if-no-files-found: error
