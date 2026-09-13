@@ -20,6 +20,12 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+      - name: Ensure PDF text extractor
+        run: |
+          if ! command -v pdftotext >/dev/null 2>&1; then
+            sudo apt-get update -qq
+            sudo apt-get install -y poppler-utils
+          fi
       - name: Ingest complete article through five-organ boundary
         run: node nostromo/integration/big-meal-runner.mjs --output=zenomorph-big-meal-result.json
       - name: Upload metabolic receipt
