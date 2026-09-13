@@ -1,7 +1,7 @@
 # Theme Engine Round 2｜獨立 V8 唯讀測試站
 
 狀態：IMPLEMENTED / PUBLIC SELF-CHECK ADDED / BROWSER VERIFICATION PENDING
-日期：2026-09-13
+日期：2026-09-14
 
 ## 實裝
 - `gangchibao-theme-test/index.html`：Theme 001 獨立目次與宿主前置頁。
@@ -13,7 +13,12 @@
 - 本輪所有 GitHub 寫入路徑均位於 `gangchibao-theme-test/`。
 - 未更新 `gangchibao-v8/`、`gangchibao-v8-new/`、`gangchibao-v9/` 的任何檔案。
 - reader 明示 `data-source-mode="readonly-v8"` 僅在成功讀取後設定；讀取失敗時改為 `failed`，不得把部署成功冒充正文成功。
-- 2026-09-13 本輪建立 self-check 的 commit：`27e0b0dc27ee1a052585800634ffc0e24c8f2504`。
+- 建立 self-check 的 commit：`27e0b0dc27ee1a052585800634ffc0e24c8f2504`（2026-09-13T15:01:56Z）。
+
+## 部署鏈補強（2026-09-14）
+- GitHub compare 已確認 self-check commit `27e0b0d...` 是目前後續 main 歷史的祖先；截至檢查時，後續 head `65cbd9be2cb6483d06253f6c8ad9db3287fcf56a` 為 `ahead`，`behind_by: 0`。
+- `Deploy Visual Mining Lab` 對 head `65cbd9be2cb6483d06253f6c8ad9db3287fcf56a` 的 run `34778125056` 已 `completed / success`（2026-09-13T19:35:21Z）。因此可以確認：包含 self-check commit 的後續 main 已經成功通過站點部署流程。
+- 但此證據仍只證明「包含該檔的後續版本已部署成功」，不能取代公開瀏覽器內 JavaScript 實際 fetch 三個 Markdown 後顯示的 3/3 PASS。Round 2 仍不得提前宣告 PASS。
 
 ## 正文來源
 22 單元沿用正式 V8 的既有 unit Markdown：30000、30210、30220、30230、30240B、30250、30260B、30270B、30280B、30310B、30320、30330、30340、30350A、30360、30370、30380、30390、30410A、30430、30440、30450。
@@ -24,6 +29,10 @@
 - `unit-30450.md` blob `23dc3fd77b690ec67afabe163ab14ac7a7019d76`
 
 以上只能證明 repo 來源存在，不能取代公開部署端的瀏覽器 fetch 驗證。
+
+## 作者自薦 source of truth
+- 2026-09-14 已重新讀取 Google Drive 原生文件《作者自薦｜張榮哲 × EVA》，revision：`ANLCKQmdSGQwKt49sg6oKHxwvHuY2APjzt5-nWpl1-FYz4ofwswsNeNwcI_QWNpAfoVTagXjfDWlSYW1TvmX8DLNglW-EZbZINd0QJtoE7k`。
+- 目前沒有看到比既有五句固定必選規則更新的狀態變更；正式進 Round 3 前仍須再次比對 revision。
 
 ## Theme 001 寄生層
 Round 2 只建立宿主殼與唯讀接線，不提前宣告污染驗收成功。目次、字體、版心、經名式前置頁、低成本黑白紙本語法已由獨立 CSS 接管；作者自薦與完整出版前置系統留待 Round 3。
