@@ -1,0 +1,37 @@
+{
+  "schema": "zenomorph-big-meal/v1.0",
+  "id": "pasquinelli-2026-machine-organism-language",
+  "status": "DECLARED",
+  "kind": "complete-scholarly-article",
+  "title": "Machine, organism and language: a comparative epistemology of AI models",
+  "author": "Matteo Pasquinelli",
+  "journal": "AI & Society",
+  "volume": 41,
+  "pages": "7833-7845",
+  "year": 2026,
+  "doi": "10.1007/s00146-026-03094-7",
+  "versionOfRecordDate": "2026-06-05",
+  "license": "CC BY 4.0",
+  "source": {
+    "primary": "https://link.springer.com/article/10.1007/s00146-026-03094-7",
+    "doi": "https://doi.org/10.1007/s00146-026-03094-7"
+  },
+  "ingestionLaw": "WHOLE_ARTICLE_IS_ONE_FOOD_BODY",
+  "humanPreselection": false,
+  "humanSummaryBeforeIngestion": false,
+  "humanThemeHints": false,
+  "requirements": {
+    "preserveSourceIdentity": true,
+    "hashFetchedRepresentation": true,
+    "allowTechnicalChunkingWithoutSemanticPreselection": true,
+    "dropletAcquireAndVerify": true,
+    "mutherReadDecomposeRecomposeMutate": true,
+    "gutAbsorbQuarantineExcrete": true,
+    "vajraAttackAnalogyAndSelfProjection": true,
+    "shroomingReceivePostDigestMaterial": true,
+    "noPromotionFromThisMealAlone": true,
+    "heldOutCrossFoodRequired": true,
+    "delayedRetestRequired": true
+  },
+  "successBoundary": "Summary, classification, restatement, or resemblance to ZENOMORPH is not success. Only later cross-food and delayed behavioral change can support incorporation."
+}
