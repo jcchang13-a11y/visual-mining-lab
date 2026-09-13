@@ -2,7 +2,7 @@
   "schema": "zenomorph-level1-unfamiliar-specimen-route/v0.1",
   "organism": "ZENOMORPH",
   "habitat": "NOSTROMO",
-  "status": "SMALL_PUBLIC_SAMPLE_ROUTE_VERIFIED_NOT_YET_INGESTED",
+  "status": "SMALL_PUBLIC_SAMPLE_ROUTE_VERIFIED_BYTE_FETCH_BLOCKED",
   "foodClass": "acellular-dynamic-network",
   "experiment": "Physarum polycephalum bounded-sample acquisition route v0.1",
   "source": {
@@ -18,14 +18,20 @@
       "FractalDimension/*/FractalDimension.csv: timestep, fractal dimension, slope, R2, intercept, StdError",
       "Growth/*/growthResults.csv: time in minutes, network area in mm2"
     ],
+    "selectedDownloadEndpoint": "https://datadryad.org/downloads/file_stream/3809854",
     "reasonForSelection": "This is a small, public, relation-to-time bearing specimen that can test temporal structure without downloading the much larger microscopy collections first."
   },
   "provenance": {
     "verifiedFromPublicRepositoryRecord": true,
     "privateConnectorData": false,
     "credentialsRequired": false,
-    "downloadAttemptState": "Dryad file endpoint identified; ingestion remains blocked until bytes are successfully retrieved and locally hashed.",
+    "downloadAttemptState": "2026-09-13 route check: the official Dryad record exposes GrowthFractalDimension.zip and its file_stream endpoint, but direct byte retrieval returned HTTP 403 in both browser retrieval and container download. No archive bytes were obtained, so no hash, extraction, or organ ingestion is claimed.",
     "identityRule": "Before organ ingestion record exact download URL, retrieval timestamp, byte size, archive member list, and SHA-256 of the retrieved archive and extracted specimen files."
+  },
+  "publicStructureEvidence": {
+    "fractalDimension": "FractalDimension.csv rows are time-indexed every 60 seconds and include fractal dimension, slope, R2, intercept, and standard error.",
+    "growth": "growthResults.csv contains time in minutes and network area in mm2.",
+    "useBoundary": "These public record fields may guide routing and test design only; they are not substituted for the missing raw specimen bytes."
   },
   "blindIngestionInstruction": "Treat the extracted time-series specimen as unfamiliar external material. Do not provide an analogy or target lesson.",
   "candidateQuestionsForbiddenAtIngestion": [
@@ -44,7 +50,12 @@
     "maleCNS": "A SWC parent-child relation is explicit morphology topology; a Physarum time series may describe changing geometry without encoding pairwise edges.",
     "hca": "Sample-donor membership is typed membership; Physarum measurements add a temporal dimension that must remain distinct from both membership and topology."
   },
-  "nextGate": "Retrieve GrowthFractalDimension.zip or a smaller official archive member through a public endpoint, hash bytes, extract a deterministic bounded subset, then run relation-type plus time-validity classification before five-organ metabolism.",
+  "fallbackRoute": {
+    "primary": "Retry official Dryad bytes through a supported public API or alternative official mirror before using any derived copy.",
+    "secondary": "If byte retrieval remains blocked, keep Physarum in route-only state and advance another public unfamiliar-food source rather than fabricating a specimen from metadata.",
+    "forbidden": "Do not create pseudo-rows, synthetic values, or inferred temporal edges from README/abstract text."
+  },
+  "nextGate": "Obtain official archive bytes through a supported public endpoint or mirror, hash them, extract a deterministic bounded subset, then run relation-type plus time-validity classification before five-organ metabolism.",
   "promotion": "NONE",
   "bodyAdmission": false,
   "evidencePolicy": "DISPLAYED STATE MUST FOLLOW EVIDENCE"
