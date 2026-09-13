@@ -9,6 +9,7 @@ on:
       - 'nostromo/integration/big-meal-runner.mjs'
       - 'nostromo/integration/big-meal-ablation-probe.mjs'
       - 'nostromo/integration/big-meal-ablation-probe.test.mjs'
+      - 'nostromo/integration/big-meal-causal-runner.mjs'
       - 'nostromo/runtime/body-router.mjs'
       - '.github/workflows/nostromo-big-meal-acquire.yml'
   workflow_dispatch:
@@ -19,7 +20,7 @@ permissions:
 jobs:
   acquisition-gate:
     runs-on: ubuntu-latest
-    timeout-minutes: 8
+    timeout-minutes: 12
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -35,3 +36,13 @@ jobs:
         run: |
           node nostromo/integration/big-meal-runner.mjs --output=/tmp/pasquinelli-meal.json > /tmp/pasquinelli-meal.stdout
           node -e "const x=require('/tmp/pasquinelli-meal.json'); if(x.status!=='INGESTED_NOT_PROMOTED'||!x.provenance?.sourceSha256||x.promotion?.allowed!==false) process.exit(1); console.log(JSON.stringify({status:x.status,mealId:x.mealId,source:x.provenance.url,format:x.provenance.format,sourceSha256:x.provenance.sourceSha256,mutherChunkCount:x.muther?.chunkCount,promotion:x.promotion},null,2))"
+      - name: Run live Pasquinelli to RFC 9110 causal ablation
+        run: |
+          node nostromo/integration/big-meal-causal-runner.mjs --output=/tmp/live-cross-food-causal.json > /tmp/live-cross-food-causal.stdout
+          node -e "const x=require('/tmp/live-cross-food-causal.json'); if(x.stableUnchanged!==true||x.promotion?.promotable!==false||!x.receipt?.candidateId) process.exit(1); console.log(JSON.stringify({status:x.status,prior:x.prior,heldout:x.heldout,candidate:x.candidate,controlRoute:x.controlRoute,exposedRoute:x.exposedRoute,receipt:x.receipt,stableUnchanged:x.stableUnchanged,promotion:x.promotion},null,2))"
+      - name: Preserve live causal receipt
+        uses: actions/upload-artifact@v4
+        with:
+          name: zenomorph-live-cross-food-causal
+          path: /tmp/live-cross-food-causal.json
+          retention-days: 30
