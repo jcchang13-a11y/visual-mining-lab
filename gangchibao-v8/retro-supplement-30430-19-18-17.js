@@ -1,6 +1,7 @@
 /* 《剛吃飽》第八版｜爛尾樓版｜30430 發心者／心／福德回溯增補
  * 不改正文。補第十九分正文已明說、但既有回溯圖尚未接上的結構鏈：
  * 19 → 18 → 17：第十七分拆發心者，第十八分拆所發之心，第十九分再拆福德。
+ * 2026-09-14：附加 30430 全單元 L2 逃生鷹架；不改舊 anchor，只防止同句經文把回溯圖吞進經文層。
  */
 (function(){
   'use strict';
@@ -29,13 +30,26 @@
     figure.append(img,cap);
     return figure;
   }
+  function escapeSutraFigures(root){
+    let moved=0;
+    root.querySelectorAll('.sutra-block .retro-figure').forEach(figure=>{
+      const sutra=figure.closest('.sutra-block');
+      if(!sutra) return;
+      figure.dataset.gcbEscapedFrom='L2-sutra';
+      sutra.insertAdjacentElement('afterend',figure);
+      moved++;
+    });
+    return moved;
+  }
   function apply(){
     const root=document.getElementById('article');
     if(!root) return false;
+    escapeSutraFigures(root);
     if(root.querySelector('[data-retro-key="'+spec.key+'"]')) return true;
     const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);
     let node;
     while((node=walker.nextNode())){
+      if(node.parentElement?.closest('.sutra-block')) continue;
       const at=(node.nodeValue||'').indexOf(spec.anchor);
       if(at<0) continue;
       const tail=node.splitText(at+spec.anchor.length);
@@ -48,6 +62,13 @@
   }
   const article=document.getElementById('article');
   if(!article) return;
+
+  /* 其他 30430 supplement 與本檔平行載入；短時監看，讓後插入的舊圖也能逃出 L2。 */
+  escapeSutraFigures(article);
+  const escapeObserver=new MutationObserver(()=>escapeSutraFigures(article));
+  escapeObserver.observe(article,{childList:true,subtree:true});
+  setTimeout(()=>escapeObserver.disconnect(),15000);
+
   if(apply()) return;
   const observer=new MutationObserver(()=>{if(apply()) observer.disconnect()});
   observer.observe(article,{childList:true,subtree:true,characterData:true});
