@@ -6,6 +6,9 @@ on:
       - 'nostromo/research/big-meals/**'
       - 'nostromo/integration/big-meal-acquire.mjs'
       - 'nostromo/integration/big-meal-acquire.test.mjs'
+      - 'nostromo/integration/big-meal-ablation-probe.mjs'
+      - 'nostromo/integration/big-meal-ablation-probe.test.mjs'
+      - 'nostromo/runtime/body-router.mjs'
       - '.github/workflows/nostromo-big-meal-acquire.yml'
   workflow_dispatch:
 
@@ -23,6 +26,8 @@ jobs:
           node-version: '22'
       - name: Unit-test whole-food boundary
         run: node --test nostromo/integration/big-meal-acquire.test.mjs
+      - name: Unit-test causal ablation bridge
+        run: node --test nostromo/integration/big-meal-ablation-probe.test.mjs
       - name: Acquire and verify Pasquinelli article representation
         run: |
           node nostromo/integration/big-meal-acquire.mjs nostromo/research/big-meals/pasquinelli-2026.json > /tmp/pasquinelli-acquisition.json
