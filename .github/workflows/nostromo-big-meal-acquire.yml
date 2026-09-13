@@ -6,6 +6,7 @@ on:
       - 'nostromo/research/big-meals/**'
       - 'nostromo/integration/big-meal-acquire.mjs'
       - 'nostromo/integration/big-meal-acquire.test.mjs'
+      - 'nostromo/integration/big-meal-runner.mjs'
       - 'nostromo/integration/big-meal-ablation-probe.mjs'
       - 'nostromo/integration/big-meal-ablation-probe.test.mjs'
       - 'nostromo/runtime/body-router.mjs'
@@ -28,7 +29,7 @@ jobs:
         run: node --test nostromo/integration/big-meal-acquire.test.mjs
       - name: Unit-test causal ablation bridge
         run: node --test nostromo/integration/big-meal-ablation-probe.test.mjs
-      - name: Acquire and verify Pasquinelli article representation
+      - name: Acquire, verify, and digest Pasquinelli through robust fallback path
         run: |
-          node nostromo/integration/big-meal-acquire.mjs nostromo/research/big-meals/pasquinelli-2026.json > /tmp/pasquinelli-acquisition.json
-          node -e "const x=require('/tmp/pasquinelli-acquisition.json'); if(x.status!=='ACQUIRED_VERIFIED_NOT_YET_ABSORBED') process.exit(1); console.log(JSON.stringify({status:x.status,mealId:x.mealId,wholeFoodIdentity:x.wholeFoodIdentity,rawBytes:x.rawBytes,visibleChars:x.visibleChars,mechanicalChunkCount:x.mechanicalChunkCount,provenanceChecks:x.provenanceChecks},null,2))"
+          node nostromo/integration/big-meal-runner.mjs --output=/tmp/pasquinelli-meal.json > /tmp/pasquinelli-meal.stdout
+          node -e "const x=require('/tmp/pasquinelli-meal.json'); if(x.status!=='INGESTED_NOT_PROMOTED'||!x.provenance?.sourceSha256||x.promotion?.allowed!==false) process.exit(1); console.log(JSON.stringify({status:x.status,mealId:x.mealId,source:x.provenance.url,format:x.provenance.format,sourceSha256:x.provenance.sourceSha256,mutherChunkCount:x.muther?.chunkCount,promotion:x.promotion},null,2))"
