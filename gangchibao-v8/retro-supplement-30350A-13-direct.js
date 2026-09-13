@@ -59,8 +59,19 @@
     return false;
   }
 
-  if(apply()) return;
-  const observer=new MutationObserver(()=>{if(apply())observer.disconnect()});
-  observer.observe(article,{childList:true,subtree:true,characterData:true});
-  setTimeout(()=>observer.disconnect(),15000);
+  if(!apply()){
+    const observer=new MutationObserver(()=>{if(apply())observer.disconnect()});
+    observer.observe(article,{childList:true,subtree:true,characterData:true});
+    setTimeout(()=>observer.disconnect(),15000);
+  }
+
+  /* 2026-09-14：第十四分正文另明說第八／十一分的「大布施 vs 四句偈為人說」比較史。
+   * 不改 reader 主幹，不清既有 14→13；用 sidecar 讓那兩條直接回溯自己長出來。
+   */
+  if(!document.querySelector('script[data-gcb-sidecar="30350A-merit-history"]')){
+    const sidecar=document.createElement('script');
+    sidecar.src='retro-supplement-30350A-merit-history.js?v=20260914';
+    sidecar.dataset.gcbSidecar='30350A-merit-history';
+    document.head.appendChild(sidecar);
+  }
 })();
