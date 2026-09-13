@@ -1,0 +1,27 @@
+name: ZENOMORPH live task gateway
+
+on:
+  push:
+    paths:
+      - 'nostromo/runtime/live-task-gateway.mjs'
+      - 'nostromo/runtime/live-task-gateway.test.mjs'
+      - 'nostromo/runtime/body-router.mjs'
+      - 'nostromo/integration/active-orchestrator.mjs'
+      - '.github/workflows/zenomorph-live-task-gateway.yml'
+  pull_request:
+    paths:
+      - 'nostromo/runtime/**'
+      - 'nostromo/integration/**'
+      - '.github/workflows/zenomorph-live-task-gateway.yml'
+  workflow_dispatch:
+
+jobs:
+  verify-live-task-boundary:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Verify live task gateway boundary
+        run: node nostromo/runtime/live-task-gateway.test.mjs
