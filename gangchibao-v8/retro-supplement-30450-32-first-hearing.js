@@ -64,3 +64,18 @@
   observer.observe(article,{childList:true,subtree:true,characterData:true});
   setTimeout(()=>observer.disconnect(),15000);
 })();
+
+/*
+ * 30450 後補區閱讀地層修補另放獨立檔：不改原 reading-layer-scaffold，
+ * 只確保後插入的同心圓圖不會被 L3 work-note 外盒吞掉。
+ * 這條 loader 本身也保留為施工接線痕跡。
+ */
+(function(){
+  'use strict';
+  if(new URLSearchParams(location.search).get('u')!=='30450') return;
+  if(document.querySelector('script[data-gcb-30450-figure-escape],script[src*="reading-layer-30450-figure-escape.js"]')) return;
+  const script=document.createElement('script');
+  script.src='reading-layer-30450-figure-escape.js?v=20260913-1';
+  script.dataset.gcb30450FigureEscape='1';
+  document.head.appendChild(script);
+})();
