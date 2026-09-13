@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Theme Engine Round 2 Self-check</title>
+<link rel="stylesheet" href="theme-001.css?v=20260913-r2check">
+<style>
+.selfcheck{max-width:46rem;margin:3rem auto;padding:0 1.25rem}.check-row{padding:.85rem 0;border-bottom:1px solid #bbb}.ok{font-weight:700}.bad{font-weight:700}.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}.summary{margin:1.5rem 0;padding:1rem;border:1px solid #888}
+</style>
+</head>
+<body>
+<main class="selfcheck">
+<p class="host-kicker">THEME ENGINE · ROUND 2</p>
+<h1>唯讀正文接線自檢</h1>
+<p>此頁只檢查 Theme 測試站能否從公開部署環境讀到三個正式 V8 Markdown；不寫回 V8。</p>
+<div id="summary" class="summary">檢查中……</div>
+<div id="checks"></div>
+<p><a href="index.html">返回 Theme 001 測試站</a></p>
+</main>
+<script>
+const units=['30000','30390','30450'];
+const checks=document.getElementById('checks');
+const summary=document.getElementById('summary');
+Promise.all(units.map(async u=>{
+  const row=document.createElement('div'); row.className='check-row'; row.id='u-'+u; row.innerHTML='<span class="mono">'+u+'</span>：讀取中……'; checks.append(row);
+  try{
+    const r=await fetch('../gangchibao-v8/unit-'+u+'.md?round2-selfcheck=20260913',{cache:'no-store'});
+    if(!r.ok) throw new Error('HTTP '+r.status);
+    const t=await r.text();
+    const meaningful=t.replace(/^\uFEFF/,'').trim().length>100;
+    if(!meaningful) throw new Error('內容過短');
+    row.classList.add('ok'); row.textContent=u+'：PASS · HTTP '+r.status+' · '+t.length+' chars';
+    return {u,ok:true,status:r.status,length:t.length};
+  }catch(e){
+    row.classList.add('bad'); row.textContent=u+'：FAIL · '+e.message;
+    return {u,ok:false,error:e.message};
+  }
+})).then(results=>{
+  const pass=results.filter(x=>x.ok).length;
+  const all=pass===units.length;
+  document.body.dataset.round2Selfcheck=all?'pass':'fail';
+  summary.className='summary '+(all?'ok':'bad');
+  summary.textContent=all?'ROUND 2 SELF-CHECK PASS · 3/3 正文可公開唯讀載入':'ROUND 2 SELF-CHECK FAIL · '+pass+'/3；不得宣告 Round 2 PASS';
+});
+</script>
+</body>
+</html>
