@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>《剛吃飽》圖片裝配｜第 10 輪最終回歸</title>
+<style>
+:root{color-scheme:light;background:#f3efe5;color:#191919;font-family:system-ui,-apple-system,"Noto Sans TC",sans-serif}
+*{box-sizing:border-box} body{margin:0;background:#f3efe5;color:#191919} main{width:min(100%,720px);margin:0 auto;padding:24px 16px 64px} h1{font-size:1.55rem;line-height:1.35;margin:0 0 8px} h2{font-size:1.05rem;margin:32px 0 10px} p{font-size:1rem;line-height:1.9;margin:0 0 1.1em} .note{color:#68645d;font-size:.92rem}.figure{margin:18px 0 28px;padding:12px;border:1px solid #cfc8bc;background:#faf7f0}.figure img{display:block;max-width:100%;height:auto;margin:0 auto}.fallback{display:none;border:1px dashed #8e877c;padding:14px;line-height:1.6;background:#fffdf8}.sentinel{border-left:4px solid #191919;padding:8px 12px;margin-top:28px}.wide-check{overflow-wrap:anywhere} @media(max-width:480px){main{padding:20px 14px 52px}.figure{padding:10px}h1{font-size:1.4rem}}
+</style>
+</head>
+<body>
+<main>
+<h1>第 10 輪｜最終回歸</h1>
+<p class="note">ROUND 10 REGRESSION A · raster / multi-image / fallback / cache / deep path / long text / mobile / redeploy</p>
+
+<h2>A｜站內 SVG（相對路徑）</h2>
+<div class="figure"><img src="../assets/test.svg?r10a" alt="IMAGE TEST SVG"></div>
+
+<p>這一頁故意把前九輪的關鍵條件放回同一個長頁面裡。圖片不是正文的前置條件；任何一張圖失敗，文字都必須繼續。手機版維持單欄自然流動，不使用裁切式 object-fit，不讓圖片造成水平溢出，也不讓固定高度卡住閱讀。</p>
+<p>這段是長文滾動測試。真正接入《剛吃飽》時，圖片可能出現在章首、段落之間、公式之後或章尾。裝配機制必須把圖視為可失敗的獨立元件，而不是讓正文依賴某個外部圖床、某個暫時網址或某次快取狀態。</p>
+
+<h2>B｜真實 PNG（站點根路徑）</h2>
+<div class="figure"><img src="/visual-mining-lab/image-pipeline-test/test.png?r10a" alt="PNG raster"></div>
+
+<p>PNG 用來確認真正點陣資產能從同一 GitHub Pages 專案穩定載入。這裡刻意使用站點根路徑，與上面的相對路徑形成對照；未來即使閱讀器搬進較深的目錄，站點根路徑仍不應因頁面深度而失效。</p>
+
+<h2>C｜快取目標（同名檔＋版本參數）</h2>
+<div class="figure"><img src="../assets/cache-target.svg?r10-final-a" alt="CACHE B"></div>
+
+<p>快取測試沿用同名檔案，以版本參數明確要求新資產。這不是要求瀏覽器完全不用快取，而是要求部署後有可靠方式讓新版資產被取得，避免讀者長期卡在舊圖。</p>
+
+<h2>D｜真實 JPG（跨資料夾相對路徑）</h2>
+<div class="figure"><img src="../../media-lab/generated.jpg?r10a" alt="Generated JPG"></div>
+
+<p>這張 JPG 從另一個專案資料夾載入，用來確認不同路徑層級仍可以在正常文件流中顯示。頁面本身位於 <span class="wide-check">gangchibao-image-test/final-regression/</span>，因此它也同時是一個較深層頁面的路徑測試。</p>
+
+<h2>E｜故障圖 fallback</h2>
+<div class="figure">
+<img src="../assets/intentionally-missing-r10.webp" alt="故障測試" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+<div class="fallback">E 已隔離：故意不存在的圖片沒有載入，但頁面與正文繼續。</div>
+</div>
+
+<p>下面再放第二批圖片，確認多圖環境中單一故障不會污染其他項目。正常圖應各自載入，故障圖只在自己的容器中降級。</p>
+
+<h2>F｜第二張 SVG</h2>
+<div class="figure"><img src="../assets/cache-target.svg?r10b" alt="CACHE B second load"></div>
+
+<h2>G｜第二張 PNG</h2>
+<div class="figure"><img src="/visual-mining-lab/image-pipeline-test/test.png?r10b" alt="PNG second load"></div>
+
+<h2>H｜第二張 JPG</h2>
+<div class="figure"><img src="../../media-lab/generated.jpg?r10b" alt="JPG second load"></div>
+
+<p>長頁面的後段仍然必須可以正常捲動。文字尺寸、行距與圖片寬度都只依容器寬度收縮，不應出現兩欄擠壓、圖片裁切、文字壓在圖上或因圖片尺寸造成整頁橫向捲動。</p>
+<p>這個測試不是在驗證任何特定美術風格；它只驗證裝配骨架。通過之後，下一階段才把同一套機制裝進完全獨立的 V8 複製測試站，再讓主題工廠的封面、扉頁、內頁影像與版式真正接進來。</p>
+
+<div class="sentinel"><strong>第 10 輪哨兵正文</strong><br>如果你看到這一段，而且 A、B、C、D、F、G、H 的正常圖片都完整顯示，E 顯示 fallback，頁面可一路捲到底且沒有橫向溢出，就代表最終回歸的瀏覽器端條件成立。</div>
+</main>
+</body>
+</html>
