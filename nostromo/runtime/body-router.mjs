@@ -1,5 +1,6 @@
-// ZENOMORPH three-body runtime boundary v0.1.0
+// ZENOMORPH three-body runtime boundary v0.1.1
 // Stable body may answer. Growing body may mutate. Shadow body may compare but never control output.
+// Ingestion law: edible != absorbable. A candidate must transfer across unlike foods before promotion.
 import crypto from 'node:crypto';
 
 const hash=value=>crypto.createHash('sha256').update(JSON.stringify(value)).digest('hex');
@@ -7,17 +8,21 @@ const clone=value=>JSON.parse(JSON.stringify(value));
 
 export function createRuntimeState({stableCapabilities=[],candidates=[]}={}){
   return {
-    schema:'zenomorph-three-body-runtime/v0.1.0',
+    schema:'zenomorph-three-body-runtime/v0.1.1',
     policy:'DISPLAYED STATE MUST FOLLOW EVIDENCE',
+    ingestionPolicy:{
+      rule:'EDIBLE_DOES_NOT_IMPLY_ABSORBABLE',
+      meaning:'DROPLET may acquire and MUTHER may decompose unfamiliar material; GUT/VAJRA must prevent admission unless effects survive provenance, counterexample, cross-food, held-out and delayed tests.'
+    },
     stable:{capabilities:[...stableCapabilities],revision:1},
     growing:{candidates:clone(candidates),revision:1},
     shadow:{observations:[],revision:1},
-    promotionGate:{required:['isolated_generation','stress','provenance','cross_organ','regression','held_out','delayed_retest']}
+    promotionGate:{required:['isolated_generation','stress','provenance','cross_organ','regression','held_out','cross_food_transfer','delayed_retest']}
   };
 }
 
 export async function runTask({task,state,stableExecutor,growingExecutor}={}){
-  if(!state||state.schema!=='zenomorph-three-body-runtime/v0.1.0') throw new Error('INVALID_RUNTIME_STATE');
+  if(!state||state.schema!=='zenomorph-three-body-runtime/v0.1.1') throw new Error('INVALID_RUNTIME_STATE');
   if(typeof stableExecutor!=='function'||typeof growingExecutor!=='function') throw new Error('EXECUTOR_REQUIRED');
 
   const taskId=hash(task).slice(0,16);
@@ -53,7 +58,7 @@ export function evaluatePromotion(state,candidateId){
   const candidate=state.growing.candidates.find(x=>x.id===candidateId);
   if(!candidate) return {promotable:false,reason:'CANDIDATE_NOT_FOUND'};
   const missing=state.promotionGate.required.filter(k=>candidate.evidence?.[k]!==true);
-  return {promotable:missing.length===0,missing,candidateId};
+  return {promotable:missing.length===0,missing,candidateId,rule:state.ingestionPolicy.rule};
 }
 
 export function promoteCandidate(state,candidateId){
