@@ -1,0 +1,23 @@
+name: ZENOMORPH three-body runtime
+
+on:
+  push:
+    paths:
+      - 'nostromo/runtime/**'
+      - '.github/workflows/zenomorph-three-body-runtime.yml'
+  pull_request:
+    paths:
+      - 'nostromo/runtime/**'
+      - '.github/workflows/zenomorph-three-body-runtime.yml'
+  workflow_dispatch:
+
+jobs:
+  verify-runtime-boundary:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Verify stable/growing/shadow isolation and promotion gate
+        run: node nostromo/runtime/body-router.test.mjs
