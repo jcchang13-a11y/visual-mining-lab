@@ -1,0 +1,30 @@
+name: ZENOMORPH big meal
+
+on:
+  push:
+    paths:
+      - 'nostromo/integration/big-meal-runner.mjs'
+      - 'nostromo/research/big-meals/**'
+      - 'nostromo/gut/**'
+      - 'nostromo/vajra/**'
+      - 'nostromo/integration/shroom-feedback-executor.mjs'
+      - '.github/workflows/zenomorph-big-meal.yml'
+  workflow_dispatch:
+
+jobs:
+  ingest-first-big-meal:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Ingest complete article through five-organ boundary
+        run: node nostromo/integration/big-meal-runner.mjs --output=zenomorph-big-meal-result.json
+      - name: Upload metabolic receipt
+        uses: actions/upload-artifact@v4
+        with:
+          name: zenomorph-big-meal-result
+          path: zenomorph-big-meal-result.json
+          if-no-files-found: error
