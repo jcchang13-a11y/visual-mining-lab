@@ -10,10 +10,11 @@
     {"round":5,"name":"cache-update","status":"passed","evidence":{"browser_confirmation":"User screenshot confirmed same cache-target.svg updated from CACHE A to CACHE B with version parameter and sentinel body visible."}},
     {"round":6,"name":"path-depth","status":"passed","evidence":{"browser_confirmation":"User screenshot confirmed deep relative path loaded CACHE B, site-root path loaded IMAGE TEST, and sentinel body remained visible."}},
     {"round":7,"name":"mobile-reader","status":"passed","evidence":{"browser_confirmation":"User long mobile screenshot confirmed SVG near the front, PNG in the middle, JPG near the end, continuous long-page scrolling, no horizontal overflow, and final sentinel body."}},
-    {"round":8,"name":"mixed-formats","status":"passed","evidence":{"browser_confirmation":"User mobile screenshot confirmed SVG, PNG and JPG all rendered; intentional missing WebP showed fallback; sentinel body remained visible.","page_path":"gangchibao-image-test/format-test/index.html","page_blob":"9252590c1fab10710ffc1840e375759e319a5240"}}
+    {"round":8,"name":"mixed-formats","status":"passed","evidence":{"browser_confirmation":"User mobile screenshot confirmed SVG, PNG and JPG all rendered; intentional missing WebP showed fallback; sentinel body remained visible.","page_path":"gangchibao-image-test/format-test/index.html","page_blob":"9252590c1fab10710ffc1840e375759e319a5240"}},
+    {"round":9,"name":"repeated-deployments","status":"awaiting_browser_confirmation","evidence":{"marker_path":"gangchibao-image-test/deploy-round9.txt","deployment_a":{"commit":"9e0b7e79d00b92701f829d1631db7fc110f5fc19","workflow_run":34735069359,"result":"success","marker":"r9-a"},"deployment_b":{"commit":"cc54ba52980247b327921ee16def3f065fd860f5","workflow_run":34735117350,"result":"success","marker":"r9-b"},"github_file_latest":"ROUND 9 DEPLOYMENT B / marker=r9-b","remaining":"Need browser/public-page confirmation that deployed Pages URL opens and shows latest marker r9-b before round 9 can pass."}}
   ],
   "constraints": {
     "do_not_modify": ["gangchibao-v8", "gangchibao-v8-new", "gangchibao-v9"],
-    "next": "Run round 9 repeated deployment/update test entirely inside gangchibao-image-test; require multiple sequential successful Pages deployments and public page reflecting the latest marker before advancing."
+    "next": "Do not advance to round 10 until the public Pages marker is browser-confirmed as ROUND 9 DEPLOYMENT B / r9-b."
   }
 }
