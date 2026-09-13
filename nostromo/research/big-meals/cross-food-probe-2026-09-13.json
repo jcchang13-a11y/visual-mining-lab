@@ -1,0 +1,48 @@
+{
+  "schema": "zenomorph-cross-food-probe/v0.1",
+  "date": "2026-09-13",
+  "status": "NO_TRANSFER_EVIDENCE_YET",
+  "priorMeal": {
+    "id": "pasquinelli-2026-machine-organism-language",
+    "sourceSha256": "f21717db8b1d43ccce72cd702322b393c2e54094dbbcff034afc7de85c480a79",
+    "textCharCount": 84171,
+    "mutherChunkCount": 15,
+    "mutherRecombinationCount": 12,
+    "gutSummaryFingerprint": "bcb916f843f5340cadaeebbcaba118f0934700011f899379433b1de4d4668e01",
+    "gutNutrientCount": 80,
+    "gutWasteCount": 11,
+    "vajraTraceLength": 8,
+    "shroomingCount": 10
+  },
+  "heldOutMeal": {
+    "id": "heldout-rfc9110-http-semantics-2022",
+    "sourceSha256": "21c1cdce6ab0e5509b04d84a28000836c7a087cf786efe6f04877ebfff47232a",
+    "textCharCount": 454876,
+    "mutherChunkCount": 148,
+    "mutherRecombinationCount": 12,
+    "gutSummaryFingerprint": "bb28e5808a9982c6b9fa416b53b87e94a9c2cc7ec10c11042108134883b197b8",
+    "gutNutrientCount": 80,
+    "gutWasteCount": 11,
+    "vajraTraceLength": 8,
+    "shroomingCount": 10
+  },
+  "observations": [
+    "Both complete foods were independently acquired, identity-checked, hashed, and passed through the same five-organ boundary.",
+    "The foods are strongly orthogonal in domain and differ greatly in size; MUTHER chunk count changed from 15 to 148 and content fingerprints changed.",
+    "Downstream envelope counts remained exactly 80 nutrients, 11 waste items, VAJRA depth 8, 10 SHROOMING agents, and 12 recombinations. These invariant counts are treated as pipeline/scaffold behavior, not evidence of learning or transfer.",
+    "No retained candidate machinery from the first meal has yet been causally shown to alter routing or behavior on the held-out meal.",
+    "Stable admission remains forbidden. Delayed retest remains required."
+  ],
+  "failureHistory": {
+    "heldout-concrete-sulfate-2024": "Acquisition failed in CI twice through the MDPI source boundary; preserved as a source/acquisition failure rather than reclassified as digestion success. The orthogonal probe was rerouted to RFC 9110 rather than weakening identity verification."
+  },
+  "decision": {
+    "promotionAllowed": false,
+    "reason": "Cross-food execution succeeded, but transfer has not been demonstrated. Identical envelope counts across very different foods suggest current fixed scaffold constraints rather than retained adaptive behavior.",
+    "next": [
+      "measure routing/content-level deltas rather than fixed envelope counts",
+      "test whether any first-meal candidate changes held-out decisions under an ablation/control comparison",
+      "perform delayed retest in a later run before any incorporation"
+    ]
+  }
+}
