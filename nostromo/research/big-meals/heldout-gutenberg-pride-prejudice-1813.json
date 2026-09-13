@@ -1,0 +1,42 @@
+{
+  "schema": "zenomorph-big-meal/v1.0",
+  "id": "heldout-gutenberg-pride-prejudice-1813",
+  "status": "SOURCE_VERIFIED_READY_FOR_ACQUISITION",
+  "kind": "complete-public-domain-novel",
+  "title": "Pride and Prejudice",
+  "author": "Jane Austen",
+  "year": 1813,
+  "identifier": "Project Gutenberg eBook 1342",
+  "doi": "",
+  "versionOfRecordDate": "Project Gutenberg current text representation",
+  "license": "Public domain in the USA / Project Gutenberg terms apply to distribution",
+  "source": {
+    "primary": "https://www.gutenberg.org/files/1342/1342-0.txt",
+    "landing": "https://www.gutenberg.org/ebooks/1342",
+    "publisherVerification": {
+      "publisher": "Project Gutenberg",
+      "ebookNumber": 1342,
+      "language": "English",
+      "originalPublicationYear": 1813
+    }
+  },
+  "ingestionLaw": "WHOLE_ARTICLE_IS_ONE_FOOD_BODY",
+  "humanPreselection": false,
+  "humanSummaryBeforeIngestion": false,
+  "humanThemeHints": false,
+  "heldOutRole": "SECOND_ORTHOGONAL_CROSS_FOOD_PROBE",
+  "requirements": {
+    "preserveSourceIdentity": true,
+    "hashFetchedRepresentation": true,
+    "allowTechnicalChunkingWithoutSemanticPreselection": true,
+    "dropletAcquireAndVerify": true,
+    "mutherReadDecomposeRecomposeMutate": true,
+    "gutAbsorbQuarantineExcrete": true,
+    "vajraAttackAnalogyAndSelfProjection": true,
+    "shroomingReceivePostDigestMaterial": true,
+    "noPromotionFromThisMealAlone": true,
+    "crossFoodComparisonRequired": true,
+    "delayedRetestRequired": true
+  },
+  "successBoundary": "This complete public-domain novel is a second orthogonal held-out food. Plot knowledge, vocabulary reuse, literary interpretation, or generic structural similarity are not transfer evidence. Only reproducible candidate-caused behavioral or routing changes across unlike foods, followed by delayed retest, may support incorporation."
+}
