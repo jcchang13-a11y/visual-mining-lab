@@ -9,32 +9,51 @@
   const article=document.getElementById('article');
   if(!article) return;
 
-  const anchor='前面才剛剛把此經吹到非常大。須彌山、恆河沙、三千大千世界、恆河沙數三千大千世界、七寶布施、佛塔廟、經典所在之處則為有佛，全部都被搬出來。';
-  const figures=[
+  const groups=[
     {
-      key:'retro-30330-13-12-11-10-8',
-      src:'figures/retro-30330-13-12-11-10-8.svg',
-      caption:'第十三分世界／微塵的尺度插題回看此前一路放大的經典現場與宇宙尺度：13 → 12 → 11 → 10 → 8'
+      anchor:'前面才剛剛把此經吹到非常大。須彌山、恆河沙、三千大千世界、恆河沙數三千大千世界、七寶布施、佛塔廟、經典所在之處則為有佛，全部都被搬出來。',
+      figures:[
+        {
+          key:'retro-30330-13-12-11-10-8',
+          src:'figures/retro-30330-13-12-11-10-8.svg',
+          caption:'第十三分世界／微塵的尺度插題回看此前一路放大的經典現場與宇宙尺度：13 → 12 → 11 → 10 → 8'
+        },
+        {
+          key:'retro-30330-13-12',
+          src:'figures/retro-30330-13-12.svg',
+          caption:'第十三分尺度收縮直接回看第十二分的經典所在／佛塔廟現場：13 → 12'
+        },
+        {
+          key:'retro-30330-13-11',
+          src:'figures/retro-30330-13-11.svg',
+          caption:'第十三分尺度收縮直接回看第十一分的恆河沙數世界與七寶布施：13 → 11'
+        },
+        {
+          key:'retro-30330-13-10',
+          src:'figures/retro-30330-13-10.svg',
+          caption:'第十三分世界／微塵直接回看第十分此前推大的世界尺度：13 → 10'
+        },
+        {
+          key:'retro-30330-13-8',
+          src:'figures/retro-30330-13-8.svg',
+          caption:'第十三分尺度插題直接回看第八分七寶布施與經典價值的放大起點：13 → 8'
+        }
+      ]
     },
     {
-      key:'retro-30330-13-12',
-      src:'figures/retro-30330-13-12.svg',
-      caption:'第十三分尺度收縮直接回看第十二分的經典所在／佛塔廟現場：13 → 12'
-    },
-    {
-      key:'retro-30330-13-11',
-      src:'figures/retro-30330-13-11.svg',
-      caption:'第十三分尺度收縮直接回看第十一分的恆河沙數世界與七寶布施：13 → 11'
-    },
-    {
-      key:'retro-30330-13-10',
-      src:'figures/retro-30330-13-10.svg',
-      caption:'第十三分世界／微塵直接回看第十分此前推大的世界尺度：13 → 10'
-    },
-    {
-      key:'retro-30330-13-8',
-      src:'figures/retro-30330-13-8.svg',
-      caption:'第十三分尺度插題直接回看第八分七寶布施與經典價值的放大起點：13 → 8'
+      anchor:'因為前面我們一直在拆「我在做」「我在修」「我在布施」「我在度眾生」。',
+      figures:[
+        {
+          key:'retro-30330-13-3',
+          src:'figures/retro-30330-13-3.svg',
+          caption:'第十三分把尺度觀看者這個更細的「我」回接第三分「我在度眾生」與四相主體：13 → 3'
+        },
+        {
+          key:'retro-30330-13-4',
+          src:'figures/retro-30330-13-4.svg',
+          caption:'第十三分把尺度觀看者這個更細的「我」回接第四分「我在布施」／不住相布施的行動主體：13 → 4'
+        }
+      ]
     }
   ];
 
@@ -56,15 +75,15 @@
     return figure;
   }
 
-  function apply(){
-    const missing=figures.filter(spec=>!article.querySelector('[data-retro-key="'+spec.key+'"]'));
+  function applyGroup(group){
+    const missing=group.figures.filter(spec=>!article.querySelector('[data-retro-key="'+spec.key+'"]'));
     if(!missing.length) return true;
     const walker=document.createTreeWalker(article,NodeFilter.SHOW_TEXT);
     let node;
     while((node=walker.nextNode())){
-      const at=(node.nodeValue||'').indexOf(anchor);
+      const at=(node.nodeValue||'').indexOf(group.anchor);
       if(at<0) continue;
-      const tail=node.splitText(at+anchor.length);
+      const tail=node.splitText(at+group.anchor.length);
       for(const spec of missing){
         tail.parentNode.insertBefore(document.createTextNode('\n'),tail);
         tail.parentNode.insertBefore(makeFigure(spec),tail);
@@ -73,6 +92,12 @@
       return true;
     }
     return false;
+  }
+
+  function apply(){
+    let complete=true;
+    groups.forEach(group=>{if(!applyGroup(group)) complete=false;});
+    return complete;
   }
 
   if(apply()) return;
