@@ -66,6 +66,7 @@
     const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);
     let node;
     while((node=walker.nextNode())){
+      if(node.parentElement?.closest('.sutra-block')) continue;
       const at=(node.nodeValue||'').indexOf(spec.anchor);
       if(at<0) continue;
       const tail=node.splitText(at+spec.anchor.length);
@@ -80,7 +81,7 @@
   function apply(){
     const root=document.getElementById('article');
     if(!root) return false;
-    return specs.every(spec=>insert(root,spec));
+    return specs.map(spec=>insert(root,spec)).every(Boolean);
   }
 
   const article=document.getElementById('article');
