@@ -1,0 +1,70 @@
+{
+  "schema": "zenomorph-level1-unfamiliar-specimen-route/v0.1",
+  "organism": "ZENOMORPH",
+  "habitat": "NOSTROMO",
+  "status": "PUBLIC_STRUCTURE_VERIFIED_LICENSE_UNRESOLVED_QUARANTINED",
+  "foodClass": "fungal-temporal-network",
+  "experiment": "Neurospora empirically-derived fungal network bounded route v0.1",
+  "source": {
+    "provider": "GitHub / synosys",
+    "repository": "synosys/animated-fungal-network-growth",
+    "repositoryVisibility": "public",
+    "sourceDescription": "Interactive timelapse visualization project using empirically derived fungal structural data; README states that per-frame CSV datasets include vertices, edges, and spatial coordinates for multiple fungal species.",
+    "selectedSpecies": "Neurospora",
+    "selectedFile": "data/neurospora/edges_745A6193-results.csv",
+    "selectedBlobSHA": "ce6647c14f7dd3b81af047c9cc36ec9c00b34e93",
+    "selectedFileSizeBytes": 17659,
+    "retrievalMode": "GitHub connector UTF-8 file read",
+    "retrievedStructure": "CSV header plus bounded row sample",
+    "license": "UNRESOLVED: repository metadata exposed through the current connector did not establish a dataset license; do not admit specimen into metabolism until reuse rights are verified or an upstream licensed source is identified."
+  },
+  "observedColumns": [
+    "EndNodes_1",
+    "EndNodes_2",
+    "name",
+    "edge_id",
+    "Weight",
+    "Length",
+    "Width",
+    "Volume",
+    "Type",
+    "Distance"
+  ],
+  "publicStructureEvidence": {
+    "edgeReality": "Rows contain explicit endpoint pairs such as 1-9, 2-21, 3-5 and edge_id values, so this is not a network-label-only specimen.",
+    "edgeAttributes": "The bounded sample also carries quantitative Weight, Length, Width, Volume, Type and Distance fields.",
+    "temporalRouteEvidence": "README describes per-frame CSV datasets and chronological network emergence, but this single selected file alone is not yet treated as proof of a complete time axis. Adjacent frame files exist in the same public directory, but cross-frame ingestion has not been run.",
+    "useBoundary": "These fields establish a candidate route only. No analogy to ZENOMORPH organs and no architectural lesson is supplied at ingestion."
+  },
+  "provenance": {
+    "privateConnectorData": false,
+    "credentialsRequired": false,
+    "exactRepositoryPathRecorded": true,
+    "blobIdentityRecorded": true,
+    "localSHA256": "NOT_COMPUTED_IN_THIS_ROUTE_ONLY_PASS",
+    "licenseVerified": false,
+    "identityRule": "Before organ ingestion preserve repository, commit/ref, exact file path, blob SHA, retrieval timestamp, local SHA-256, and verified reuse license/upstream dataset citation."
+  },
+  "blindIngestionInstruction": "If this route becomes license-clear, treat the bounded fungal edge specimen as unfamiliar external material. Do not tell the organs what it should teach them.",
+  "candidateQuestionsForbiddenAtIngestion": [
+    "Do not equate fungal hyphae with neurons, streets, GUT, SHROOMING, or any other named ZENOMORPH component.",
+    "Do not preclassify network growth as adaptation, intelligence, memory, decentralization, or self-organization.",
+    "Do not convert chronological frame labels into temporal causality without explicit cross-frame evidence."
+  ],
+  "gates": {
+    "A_provenance": "FAIL because license/reuse rights are unresolved even though public bytes and blob identity are accessible",
+    "B_new_candidate": "NOT_RUN",
+    "C_cross_food_behavior_change": "NOT_RUN",
+    "D_delayed_held_out_retention": "NOT_RUN"
+  },
+  "relationTypingPressure": {
+    "urban": "street adjacency",
+    "malecns": "SWC parent-child morphology",
+    "hca": "sample-donor membership",
+    "fungal": "explicit biological network endpoints with quantitative edge attributes; temporal validity remains unproven in the bounded single-frame specimen"
+  },
+  "nextGate": "Resolve dataset license or upstream scientific dataset citation first; then fetch a deterministic pair or short sequence of adjacent frames, hash locally, and test whether topology changes can be represented without collapsing identity, edge type, quantitative attributes, and time into one generic relation.",
+  "promotion": "NONE",
+  "bodyAdmission": false,
+  "evidencePolicy": "DISPLAYED STATE MUST FOLLOW EVIDENCE"
+}
