@@ -1,0 +1,47 @@
+{
+  "schema": "zenomorph-level1-unfamiliar-specimen/v0.1",
+  "organism": "ZENOMORPH",
+  "habitat": "NOSTROMO",
+  "status": "ACQUIRED_NOT_PROMOTED",
+  "foodClass": "seismic-event-catalog",
+  "source": {
+    "provider": "U.S. Geological Survey (USGS)",
+    "feed": "Magnitude 4.5+ Earthquakes, Past Day",
+    "url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/4.5_day.geojson",
+    "apiVersion": "2.7.0",
+    "generated": 1789277879000,
+    "retrieval": "Public USGS GeoJSON feed",
+    "licenseNote": "Preserve USGS source identity and attribution; do not infer facts beyond the retrieved feed."
+  },
+  "selectionRule": "Take the first five reviewed earthquake features in feed order; preserve event IDs, magnitude, time, place, hypocenter coordinates, depth, station count, azimuthal gap, RMS, significance, magnitude type, and product markers.",
+  "events": [
+    {"id":"us7000th3a","mag":4.9,"place":"Bonin Islands, Japan region","time":1789271432298,"updated":1789272535040,"coordinates":[142.2525,26.3045,10],"nst":50,"dmin":9.928,"rms":0.82,"gap":127,"sig":369,"magType":"mb","types":["origin","phase-data"]},
+    {"id":"us7000th1q","mag":5.1,"place":"101 km S of Yudomari, Japan","time":1789245178910,"updated":1789248296469,"coordinates":[130.3787,29.3244,45.513],"nst":95,"dmin":2.179,"rms":0.72,"gap":118,"sig":400,"magType":"mww","types":["dyfi","moment-tensor","origin","phase-data"]},
+    {"id":"us7000th16","mag":4.8,"place":"17 km WSW of Lixoúri, Greece","time":1789235505718,"updated":1789276259748,"coordinates":[20.2555,38.1387,33.956],"nst":80,"dmin":1.635,"rms":0.89,"gap":48,"sig":361,"magType":"mww","types":["dyfi","moment-tensor","origin","phase-data"]},
+    {"id":"us7000th0h","mag":4.7,"place":"46 km NNE of Port-Olry, Vanuatu","time":1789228569138,"updated":1789229592040,"coordinates":[167.2217,-14.6467,188.104],"nst":27,"dmin":6.504,"rms":0.76,"gap":90,"sig":340,"magType":"mb","types":["origin","phase-data"]},
+    {"id":"us7000tgyx","mag":4.7,"place":"32 km SW of Sipí, Colombia","time":1789211772244,"updated":1789225258437,"coordinates":[-76.809,4.4114,77.309],"nst":49,"dmin":2.179,"rms":1.16,"gap":97,"sig":340,"magType":"mb","types":["dyfi","origin","phase-data"]}
+  ],
+  "sampleIdentity": {
+    "algorithm": "sha256",
+    "canonicalScope": "events",
+    "sha256": "0404c720dca85d2ddac2e496a0dbc8c84774d4517e0fa24a91b79a2d6312ceb4"
+  },
+  "blindIngestionInstruction": "Treat this as unfamiliar external material. Inspect and metabolize it under existing organ rules.",
+  "forbiddenHint": "Do not tell the organs that earthquake catalogs should be copied into ZENOMORPH or mapped onto its organs.",
+  "crossFoodCounterexamples": {
+    "urban": "Spatial proximity among earthquake events is not a street edge and must not be converted into topology without an explicit relation in the source.",
+    "maleCNS": "Event order in time is not a parent-child morphology relation.",
+    "hca": "Shared product markers or magnitude type are attributes, not typed biological membership.",
+    "physarum": "A catalog snapshot contains events and measurements but does not itself encode an adaptive transport network."
+  },
+  "gates": {
+    "A_provenance": "PASS",
+    "B_new_candidate": "NOT_RUN",
+    "C_cross_food_behavior_change": "NOT_RUN",
+    "D_delayed_held_out_retention": "NOT_RUN"
+  },
+  "provenanceClosed": true,
+  "bodyAdmission": false,
+  "promotion": "NONE",
+  "evidencePolicy": "DISPLAYED STATE MUST FOLLOW EVIDENCE"
+}
