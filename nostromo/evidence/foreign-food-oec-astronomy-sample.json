@@ -1,0 +1,30 @@
+{
+  "food_id": "oec-astronomy-11-com-v0.1",
+  "status": "TRACEABLE_SMALL_SAMPLE",
+  "source_repository": "OpenExoplanetCatalogue/open_exoplanet_catalogue",
+  "source_branch": "master",
+  "source_repository_commit_observed": "b0e27e5deed742d7925b647d7154b58b19652816",
+  "source_path": "systems/11 Com.xml",
+  "source_blob_sha": "814c01f58ad2c8784c1cac6feaa14096272d2f4d",
+  "source_url": "https://raw.githubusercontent.com/OpenExoplanetCatalogue/open_exoplanet_catalogue/master/systems/11%20Com.xml",
+  "license": "MIT",
+  "retrieval_method": "GitHub public repository raw file through authenticated GitHub connector",
+  "retrieved_observation_date": "2026-09-13",
+  "sample_scope": "one complete planetary-system XML record",
+  "neutral_observations": {
+    "system_name": "11 Com",
+    "system_has_position_fields": ["rightascension", "declination", "distance"],
+    "explicit_hierarchy": [
+      "system contains star",
+      "star contains planet"
+    ],
+    "planet_name": "11 Com b",
+    "explicit_cross_system_edges_in_sample": false,
+    "derived_cross_system_proximity_allowed_as_source_topology": false
+  },
+  "identity_policy": {
+    "primary_identity": "Git blob SHA for exact source file",
+    "repository_snapshot_identity": "observed repository commit",
+    "provenance_note": "Coordinates may support later derived similarity/proximity calculations, but those relations are not source-explicit topology. XML containment is source-explicit hierarchical membership/hosting structure."
+  }
+}
