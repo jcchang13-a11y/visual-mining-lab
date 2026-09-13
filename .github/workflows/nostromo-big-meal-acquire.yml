@@ -11,6 +11,8 @@ on:
       - 'nostromo/integration/big-meal-ablation-probe.test.mjs'
       - 'nostromo/integration/big-meal-causal-runner.mjs'
       - 'nostromo/integration/big-meal-cross-food-robustness-runner.mjs'
+      - 'nostromo/integration/big-meal-delayed-retest-runner.mjs'
+      - 'nostromo/integration/big-meal-delayed-retest-runner.test.mjs'
       - 'nostromo/runtime/body-router.mjs'
       - '.github/workflows/nostromo-big-meal-acquire.yml'
   workflow_dispatch:
@@ -31,6 +33,8 @@ jobs:
         run: node --test nostromo/integration/big-meal-acquire.test.mjs
       - name: Unit-test causal ablation bridge
         run: node --test nostromo/integration/big-meal-ablation-probe.test.mjs
+      - name: Unit-test delayed retention identity gate
+        run: node --test nostromo/integration/big-meal-delayed-retest-runner.test.mjs
       - name: Install PDF text extractor
         run: sudo apt-get update -qq && sudo apt-get install -y -qq poppler-utils
       - name: Acquire, verify, and digest Pasquinelli through robust fallback path
