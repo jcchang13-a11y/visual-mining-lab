@@ -1,7 +1,7 @@
 {
   "experiment": "gangchibao-image-test",
-  "completed_rounds": 7,
-  "current_round": 8,
+  "completed_rounds": 8,
+  "current_round": 9,
   "rounds": [
     {"round":1,"name":"baseline","status":"passed","evidence":{"browser_confirmation":"User mobile screenshot confirmed public page, local SVG, broken-image fallback, and continuing body text."}},
     {"round":2,"name":"raster-png-jpg","status":"passed","evidence":{"browser_confirmation":"User mobile screenshot confirmed visible real PNG and JPG plus responsive sizing; earlier 1x1 white PNG source was replaced for a visible raster check."}},
@@ -10,10 +10,10 @@
     {"round":5,"name":"cache-update","status":"passed","evidence":{"browser_confirmation":"User screenshot confirmed same cache-target.svg updated from CACHE A to CACHE B with version parameter and sentinel body visible."}},
     {"round":6,"name":"path-depth","status":"passed","evidence":{"browser_confirmation":"User screenshot confirmed deep relative path loaded CACHE B, site-root path loaded IMAGE TEST, and sentinel body remained visible."}},
     {"round":7,"name":"mobile-reader","status":"passed","evidence":{"browser_confirmation":"User long mobile screenshot confirmed SVG near the front, PNG in the middle, JPG near the end, continuous long-page scrolling, no horizontal overflow, and final sentinel body."}},
-    {"round":8,"name":"mixed-formats","status":"pending_visual_confirmation","checks":{"format_test_file_exists":true,"svg_reference_present":true,"png_reference_present":true,"jpg_reference_present":true,"intentional_missing_webp_fallback_present":true,"responsive_image_css_present":true,"included_in_later_successful_pages_deployment":true,"public_page_visual_confirmation":false},"evidence":{"page_path":"gangchibao-image-test/format-test/index.html","page_blob":"9252590c1fab10710ffc1840e375759e319a5240","page_commit":"2b4557e40b0e85afd9cee9670fa13ac743c8ecfd","original_commit_pages_run":34664286342,"original_commit_pages_conclusion":"cancelled by subsequent repo activity","later_pages_success_run":34684843358,"later_pages_success_head":"d21ee016c15f695050150553a074126414de29e3","note":"The mixed-format page remains on main and is included in later successful Pages deployments. Browser rendering still requires user visual confirmation before advancing."}}
+    {"round":8,"name":"mixed-formats","status":"passed","evidence":{"browser_confirmation":"User mobile screenshot confirmed SVG, PNG and JPG all rendered; intentional missing WebP showed fallback; sentinel body remained visible.","page_path":"gangchibao-image-test/format-test/index.html","page_blob":"9252590c1fab10710ffc1840e375759e319a5240"}}
   ],
   "constraints": {
     "do_not_modify": ["gangchibao-v8", "gangchibao-v8-new", "gangchibao-v9"],
-    "next": "Obtain mobile/browser visual evidence for round 8 at /gangchibao-image-test/format-test/: SVG, PNG and JPG visible; intentional missing WebP shows fallback; sentinel body visible. Do not advance to round 9 before this confirmation."
+    "next": "Run round 9 repeated deployment/update test entirely inside gangchibao-image-test; require multiple sequential successful Pages deployments and public page reflecting the latest marker before advancing."
   }
 }
