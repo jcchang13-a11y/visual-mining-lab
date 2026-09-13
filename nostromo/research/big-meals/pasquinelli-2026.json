@@ -1,7 +1,7 @@
 {
   "schema": "zenomorph-big-meal/v1.0",
   "id": "pasquinelli-2026-machine-organism-language",
-  "status": "DECLARED",
+  "status": "SOURCE_VERIFIED_READY_FOR_ACQUISITION",
   "kind": "complete-scholarly-article",
   "title": "Machine, organism and language: a comparative epistemology of AI models",
   "author": "Matteo Pasquinelli",
@@ -13,8 +13,23 @@
   "versionOfRecordDate": "2026-06-05",
   "license": "CC BY 4.0",
   "source": {
-    "primary": "https://link.springer.com/article/10.1007/s00146-026-03094-7",
-    "doi": "https://doi.org/10.1007/s00146-026-03094-7"
+    "primaryHtml": "https://link.springer.com/article/10.1007/s00146-026-03094-7",
+    "publisherPdf": "https://link.springer.com/content/pdf/10.1007/s00146-026-03094-7.pdf",
+    "repositoryLanding": "https://iris.unive.it/handle/10278/5117168",
+    "repositoryPdf": "https://iris.unive.it/retrieve/6c3fb9c8-0fc2-46a0-9d20-464de46ce4c7/Pasquinelli-Machine-Organism-Language.pdf",
+    "doi": "https://doi.org/10.1007/s00146-026-03094-7",
+    "publisherVerification": {
+      "openAccess": true,
+      "published": "2026-06-05",
+      "versionOfRecord": "2026-06-05",
+      "license": "Creative Commons Attribution 4.0 International"
+    },
+    "repositoryVerification": {
+      "fileType": "publisher version",
+      "access": "open",
+      "license": "Creative commons",
+      "reportedPdfSize": "1.22 MB"
+    }
   },
   "ingestionLaw": "WHOLE_ARTICLE_IS_ONE_FOOD_BODY",
   "humanPreselection": false,
