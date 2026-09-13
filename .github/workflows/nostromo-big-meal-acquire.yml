@@ -49,6 +49,13 @@ jobs:
         run: |
           node nostromo/integration/big-meal-cross-food-robustness-runner.mjs --output=/tmp/cross-food-robustness.json > /tmp/cross-food-robustness.stdout
           node -e "const x=require('/tmp/cross-food-robustness.json'); if(x.stableUnchanged!==true||x.promotion?.promotable!==false||x.heldoutCount<2||!x.candidateId||x.sameCandidate!==true) process.exit(1); console.log(JSON.stringify({status:x.status,prior:x.prior,candidateId:x.candidateId,causalEffects:x.causalEffects,heldoutCount:x.heldoutCount,crossFoodCausalRobustness:x.crossFoodCausalRobustness,stableUnchanged:x.stableUnchanged,promotion:x.promotion,heldouts:x.heldouts.map(h=>({mealId:h.mealId,sourceSha256:h.sourceSha256,mutherChunkCount:h.mutherChunkCount,causalEffectObserved:h.receipt?.causalEffectObserved,stableUnchanged:h.stableUnchanged}))},null,2))"
+      - name: Run delayed cross-food retention retest against frozen prior identity
+        run: |
+          node nostromo/integration/big-meal-delayed-retest-runner.mjs \
+            --expected-candidate=meal-topology-pasquinelli-2026-machine-organism-language-6fea27273abb \
+            --expected-prior-sha256=f21717db8b1d43ccce72cd702322b393c2e54094dbbcff034afc7de85c480a79 \
+            --output=/tmp/delayed-cross-food-retest.json > /tmp/delayed-cross-food-retest.stdout
+          node -e "const x=require('/tmp/delayed-cross-food-retest.json'); if(x.stableUnchanged!==true||x.promotion?.promotable!==false||x.priorIdentityMatches!==true||x.candidateIdentityMatches!==true||x.heldouts?.length<2) process.exit(1); console.log(JSON.stringify({status:x.status,observedAt:x.observedAt,prior:x.prior,candidate:x.candidate,priorIdentityMatches:x.priorIdentityMatches,candidateIdentityMatches:x.candidateIdentityMatches,sameCandidateAcrossHeldouts:x.sameCandidateAcrossHeldouts,causalEffectRetained:x.causalEffectRetained,delayedRetentionPassed:x.delayedRetentionPassed,stableUnchanged:x.stableUnchanged,promotion:x.promotion,heldouts:x.heldouts},null,2))"
       - name: Preserve live causal receipts
         uses: actions/upload-artifact@v4
         with:
@@ -56,4 +63,5 @@ jobs:
           path: |
             /tmp/live-cross-food-causal.json
             /tmp/cross-food-robustness.json
+            /tmp/delayed-cross-food-retest.json
           retention-days: 30
