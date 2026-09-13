@@ -82,6 +82,10 @@
     const walker=document.createTreeWalker(article,NodeFilter.SHOW_TEXT);
     let node;
     while((node=walker.nextNode())){
+      /* 同一句經文常在上方 SUTRA 區與下方正文各出現一次。
+       * 保留原 anchor，不改舊規格；只避免同心圓被第一個經文副本吞進 L2。
+       */
+      if(node.parentElement?.closest('.sutra-block')) continue;
       const at=(node.nodeValue||'').indexOf(spec.anchor);
       if(at<0) continue;
       const tail=node.splitText(at+spec.anchor.length);
