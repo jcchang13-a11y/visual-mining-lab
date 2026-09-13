@@ -6,7 +6,7 @@ const outputArg=process.argv.find(x=>x.startsWith('--output='));
 const outputPath=outputArg?outputArg.slice(9):'zenomorph-heldout-big-meal-result.json';
 
 const result=await runBigMeal({
-  manifestPath:'nostromo/research/big-meals/heldout-concrete-sulfate-2024.json',
+  manifestPath:'nostromo/research/big-meals/heldout-rfc9110-http-semantics-2022.json',
   outputPath
 });
 
@@ -17,7 +17,7 @@ const wrapped={
   comparisonBoundary:{
     priorMeal:'pasquinelli-2026-machine-organism-language',
     purpose:'CROSS_FOOD_BEHAVIOR_PROBE',
-    evidenceAllowed:'Only behavioral/routing differences attributable to retained candidate machinery; topical overlap, summary similarity, shared vocabulary, and generic structural resemblance are not transfer evidence.',
+    evidenceAllowed:'Only behavioral/routing differences attributable to retained candidate machinery; topical overlap, summary similarity, shared vocabulary, protocol knowledge, and generic structural resemblance are not transfer evidence.',
     stableAdmission:false,
     delayedRetestRequired:true
   }
