@@ -46,8 +46,18 @@
     return false;
   }
 
-  if(apply()) return;
-  const observer=new MutationObserver(()=>{if(apply())observer.disconnect()});
-  observer.observe(article,{childList:true,subtree:true,characterData:true});
-  setTimeout(()=>observer.disconnect(),15000);
+  if(!apply()){
+    const observer=new MutationObserver(()=>{if(apply())observer.disconnect()});
+    observer.observe(article,{childList:true,subtree:true,characterData:true});
+    setTimeout(()=>observer.disconnect(),15000);
+  }
+
+  /* 同一單元檔首保留了一段明確的編修指令。它不是要刪掉的垃圾，
+   * 但也不該冒充正式正文；另掛 L3 鷹架，維持「不清場，只加鷹架」。 */
+  if(!document.querySelector('script[data-gcb-reading-30340],script[src*="reading-layer-supplement-30340.js"]')){
+    const script=document.createElement('script');
+    script.src='reading-layer-supplement-30340.js?v=20260913-1';
+    script.dataset.gcbReading30340='1';
+    document.head.appendChild(script);
+  }
 })();
