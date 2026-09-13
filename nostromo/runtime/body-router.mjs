@@ -1,4 +1,4 @@
-// ZENOMORPH three-body runtime boundary v0.1.1
+// ZENOMORPH three-body runtime boundary v0.1.2
 // Stable body may answer. Growing body may mutate. Shadow body may compare but never control output.
 // Ingestion law: edible != absorbable. A candidate must transfer across unlike foods before promotion.
 import crypto from 'node:crypto';
@@ -8,7 +8,7 @@ const clone=value=>JSON.parse(JSON.stringify(value));
 
 export function createRuntimeState({stableCapabilities=[],candidates=[]}={}){
   return {
-    schema:'zenomorph-three-body-runtime/v0.1.1',
+    schema:'zenomorph-three-body-runtime/v0.1.2',
     policy:'DISPLAYED STATE MUST FOLLOW EVIDENCE',
     ingestionPolicy:{
       rule:'EDIBLE_DOES_NOT_IMPLY_ABSORBABLE',
@@ -16,13 +16,13 @@ export function createRuntimeState({stableCapabilities=[],candidates=[]}={}){
     },
     stable:{capabilities:[...stableCapabilities],revision:1},
     growing:{candidates:clone(candidates),revision:1},
-    shadow:{observations:[],revision:1},
+    shadow:{observations:[],ablationReceipts:[],revision:1},
     promotionGate:{required:['isolated_generation','stress','provenance','cross_organ','regression','held_out','cross_food_transfer','delayed_retest']}
   };
 }
 
 export async function runTask({task,state,stableExecutor,growingExecutor}={}){
-  if(!state||state.schema!=='zenomorph-three-body-runtime/v0.1.1') throw new Error('INVALID_RUNTIME_STATE');
+  if(!state||state.schema!=='zenomorph-three-body-runtime/v0.1.2') throw new Error('INVALID_RUNTIME_STATE');
   if(typeof stableExecutor!=='function'||typeof growingExecutor!=='function') throw new Error('EXECUTOR_REQUIRED');
 
   const taskId=hash(task).slice(0,16);
@@ -44,6 +44,40 @@ export async function runTask({task,state,stableExecutor,growingExecutor}={}){
   state.shadow.observations.push(comparison);
   state.shadow.revision+=1;
   return {official:stableResult,shadow:shadowResult,comparison,state};
+}
+
+// Causal transfer probe: same held-out task, same executor family, candidate absent vs present.
+// This measures whether a retained candidate changes behavior; a mere difference is evidence of effect,
+// not proof that the effect is useful or promotable.
+export async function runAblationPair({task,state,candidateId,executor}={}){
+  if(!state||state.schema!=='zenomorph-three-body-runtime/v0.1.2') throw new Error('INVALID_RUNTIME_STATE');
+  if(typeof executor!=='function') throw new Error('EXECUTOR_REQUIRED');
+  const candidate=state.growing.candidates.find(x=>x.id===candidateId);
+  if(!candidate) throw new Error('CANDIDATE_NOT_FOUND');
+
+  const controlBody=clone(state.growing);
+  controlBody.candidates=controlBody.candidates.filter(x=>x.id!==candidateId);
+  const exposedBody=clone(state.growing);
+  const taskSnapshot=clone(task);
+
+  const control=await executor({task:clone(taskSnapshot),body:controlBody,mode:'ablation-control',candidate:null});
+  const exposed=await executor({task:clone(taskSnapshot),body:exposedBody,mode:'ablation-exposed',candidate:clone(candidate)});
+  const controlFingerprint=hash(control);
+  const exposedFingerprint=hash(exposed);
+  const receipt={
+    taskId:hash(taskSnapshot).slice(0,16),
+    candidateId,
+    candidateFingerprint:hash(candidate),
+    controlFingerprint,
+    exposedFingerprint,
+    causalEffectObserved:controlFingerprint!==exposedFingerprint,
+    interpretation:'DIFFERENCE_IS_CAUSAL_EFFECT_EVIDENCE_NOT_PROMOTION_EVIDENCE',
+    authority:'ABLATION_HAS_NO_STABLE_OUTPUT_AUTHORITY',
+    observedAt:new Date().toISOString()
+  };
+  state.shadow.ablationReceipts.push(receipt);
+  state.shadow.revision+=1;
+  return {control,exposed,receipt,state};
 }
 
 export function registerCandidate(state,candidate){
