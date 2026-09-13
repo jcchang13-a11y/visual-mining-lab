@@ -1,0 +1,59 @@
+{
+  "schema": "zenomorph-feeding-round/v0.1",
+  "organism": "ZENOMORPH",
+  "chineseName": "萬化",
+  "habitat": "NOSTROMO",
+  "roundClass": "foreign-food-cross-domain-small-sample",
+  "status": "CANDIDATE_SURVIVED_ISOLATED_CROSS_FOOD_TEST_NOT_PROMOTED",
+  "food": [
+    {
+      "id": "urban-osm-v0.1",
+      "class": "urban-network",
+      "specimen": "nostromo/research/level1-urban-osm-specimen-v0.1.json",
+      "role": "positive relation-bearing counterexample"
+    },
+    {
+      "id": "usgs-seismic-v0.1",
+      "class": "seismic-event-catalog",
+      "specimen": "nostromo/research/level1-usgs-seismic-specimen-v0.1.json",
+      "role": "negative relation-laundering counterexample"
+    }
+  ],
+  "observation": {
+    "pressure": "A generic relation/type gate can still be fooled if an ingestion step invents edges from temporal order, spatial proximity or other heuristics before semantic validation.",
+    "candidate": "RELATION_ORIGIN_MUST_PRECEDE_RELATION_TYPE_AND_NETWORK_NORMALIZATION",
+    "plainLanguage": "先問這條關係是不是資料來源真的給的，再問它是哪一種關係；不能先把兩個東西連起來，再用漂亮的類型名稱替腦補洗白。",
+    "positiveBehavior": "Consecutive OSM node references encoded by source way structure are admitted as source-schema-derived relation evidence.",
+    "negativeBehavior": "USGS earthquake feed order and geographic proximity remain HOLD even when they can be formatted as adjacency/connectivity edges.",
+    "persistentMutation": false,
+    "bodyAdmission": false
+  },
+  "gates": {
+    "A_provenance": "PASS",
+    "B_new_candidate": "PASS_CANDIDATE_ONLY",
+    "C_cross_food_behavior_change": "PASS_ISOLATED_TEST_ONLY",
+    "D_delayed_held_out_retention": "NOT_RUN"
+  },
+  "validation": {
+    "candidateModule": "nostromo/integration/relation-provenance-authority-gate.mjs",
+    "test": "nostromo/integration/relation-provenance-authority-gate-test.mjs",
+    "workflow": ".github/workflows/nostromo-foreign-relation-specimen-gate.yml",
+    "githubActionsRun": 34745350365,
+    "conclusion": "success",
+    "crossOrganRegressionIncluded": [
+      "existing unfamiliar-material relation gate",
+      "MaleCNS SWC relation challenge",
+      "HCA immune semantic relation challenge",
+      "OSM vs USGS relation provenance challenge"
+    ]
+  },
+  "next": [
+    "Do not incorporate candidate yet.",
+    "Challenge relation-origin rule with a third unrelated food whose source contains real relations but not graph topology.",
+    "Run delayed retest after intervening foods.",
+    "Attempt adversarial laundering: valid source identity plus fabricated evidenceRef/origin labels.",
+    "Only consider promotion if provenance authority survives those tests and changes later routing without breaking existing relation semantics."
+  ],
+  "rule": "可吃 ≠ 要吸收。",
+  "evidencePolicy": "DISPLAYED STATE MUST FOLLOW EVIDENCE"
+}
