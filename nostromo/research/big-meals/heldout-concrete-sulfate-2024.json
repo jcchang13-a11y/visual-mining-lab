@@ -1,0 +1,44 @@
+{
+  "schema": "zenomorph-big-meal/v1.0",
+  "id": "heldout-concrete-sulfate-2024",
+  "status": "SOURCE_VERIFIED_READY_FOR_ACQUISITION",
+  "kind": "complete-scholarly-article",
+  "title": "Experimental Study on Mechanical Properties and Compressive Constitutive Model of Recycled Concrete under Sulfate Attack Considering the Effects of Multiple Factors",
+  "author": "Rui Gu",
+  "journal": "Buildings",
+  "volume": 14,
+  "issue": 9,
+  "articleNumber": 2761,
+  "year": 2024,
+  "doi": "10.3390/buildings14092761",
+  "versionOfRecordDate": "2024-09-03",
+  "license": "CC BY 4.0",
+  "source": {
+    "primaryHtml": "https://www.mdpi.com/2075-5309/14/9/2761",
+    "doi": "https://doi.org/10.3390/buildings14092761",
+    "publisherVerification": {
+      "openAccess": true,
+      "published": "2024-09-03",
+      "license": "Creative Commons Attribution 4.0 International"
+    }
+  },
+  "ingestionLaw": "WHOLE_ARTICLE_IS_ONE_FOOD_BODY",
+  "humanPreselection": false,
+  "humanSummaryBeforeIngestion": false,
+  "humanThemeHints": false,
+  "heldOutRole": "ORTHOGONAL_CROSS_FOOD_PROBE",
+  "requirements": {
+    "preserveSourceIdentity": true,
+    "hashFetchedRepresentation": true,
+    "allowTechnicalChunkingWithoutSemanticPreselection": true,
+    "dropletAcquireAndVerify": true,
+    "mutherReadDecomposeRecomposeMutate": true,
+    "gutAbsorbQuarantineExcrete": true,
+    "vajraAttackAnalogyAndSelfProjection": true,
+    "shroomingReceivePostDigestMaterial": true,
+    "noPromotionFromThisMealAlone": true,
+    "crossFoodComparisonRequired": true,
+    "delayedRetestRequired": true
+  },
+  "successBoundary": "This source is a held-out food. Summary, classification, resemblance, or topic transfer is not success. Only behavior retained across this orthogonal food and later delayed retest may support incorporation."
+}
