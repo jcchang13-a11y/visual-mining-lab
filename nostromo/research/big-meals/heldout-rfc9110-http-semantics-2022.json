@@ -1,0 +1,43 @@
+{
+  "schema": "zenomorph-big-meal/v1.0",
+  "id": "heldout-rfc9110-http-semantics-2022",
+  "status": "SOURCE_VERIFIED_READY_FOR_ACQUISITION",
+  "kind": "complete-standards-document",
+  "title": "HTTP Semantics",
+  "author": "R. Fielding",
+  "year": 2022,
+  "identifier": "RFC 9110",
+  "doi": "",
+  "versionOfRecordDate": "2022-06",
+  "license": "IETF Trust Legal Provisions / BCP 78",
+  "source": {
+    "primary": "https://www.rfc-editor.org/rfc/rfc9110.txt",
+    "landing": "https://www.rfc-editor.org/info/rfc9110",
+    "publisherVerification": {
+      "publisher": "RFC Editor / IETF",
+      "standardsTrack": true,
+      "published": "2022-06",
+      "identifier": "RFC 9110",
+      "issn": "2070-1721"
+    }
+  },
+  "ingestionLaw": "WHOLE_ARTICLE_IS_ONE_FOOD_BODY",
+  "humanPreselection": false,
+  "humanSummaryBeforeIngestion": false,
+  "humanThemeHints": false,
+  "heldOutRole": "ORTHOGONAL_CROSS_FOOD_PROBE",
+  "requirements": {
+    "preserveSourceIdentity": true,
+    "hashFetchedRepresentation": true,
+    "allowTechnicalChunkingWithoutSemanticPreselection": true,
+    "dropletAcquireAndVerify": true,
+    "mutherReadDecomposeRecomposeMutate": true,
+    "gutAbsorbQuarantineExcrete": true,
+    "vajraAttackAnalogyAndSelfProjection": true,
+    "shroomingReceivePostDigestMaterial": true,
+    "noPromotionFromThisMealAlone": true,
+    "crossFoodComparisonRequired": true,
+    "delayedRetestRequired": true
+  },
+  "successBoundary": "This standards document is an orthogonal held-out food. Summary, protocol knowledge, vocabulary reuse, or generic structural similarity are not transfer evidence. Only retained behavioral or routing changes across this food and a later delayed retest may support incorporation."
+}
