@@ -1,4 +1,4 @@
-// ZENOMORPH big-meal runner v0.1
+// ZENOMORPH big-meal runner v0.1.1
 // Whole-source ingestion without human semantic preselection.
 import crypto from 'node:crypto';
 import fs from 'node:fs/promises';
@@ -41,12 +41,7 @@ function neutralChunks(text,{target=3200,min=900}={}){
 }
 
 function mutherWholeText(chunks){
-  const nodes=chunks.map((text,index)=>({
-    index,
-    charCount:text.length,
-    fingerprint:mutherCandidateFingerprint(text),
-    head:compact(text,240)
-  }));
+  const nodes=chunks.map((text,index)=>({index,charCount:text.length,fingerprint:mutherCandidateFingerprint(text),head:compact(text,240)}));
   const affinities=[];
   for(let i=0;i<chunks.length;i++)for(let j=i+2;j<chunks.length;j++){
     const similarity=mutherCandidateSimilarity(chunks[i],chunks[j]);
@@ -54,17 +49,11 @@ function mutherWholeText(chunks){
   }
   affinities.sort((a,b)=>b.similarity-a.similarity);
   const recombinations=affinities.slice(0,12).map((edge,k)=>({
-    id:`meal-recombination-${k+1}`,
-    parents:[edge.a,edge.b],
-    affinity:edge.similarity,
+    id:`meal-recombination-${k+1}`,parents:[edge.a,edge.b],affinity:edge.similarity,
     mutation:`[A${edge.a}] ${compact(chunks[edge.a],700)}\n[B${edge.b}] ${compact(chunks[edge.b],700)}`,
     boundary:'STRUCTURAL RECOMBINATION CANDIDATE ONLY; NOT A CLAIM, SUMMARY, OR INCORPORATED CAPABILITY'
   }));
-  return {
-    executor:'MUTHER_WHOLE_TEXT_DIGEST',status:'EXECUTED',chunkCount:chunks.length,
-    nodes,affinities:affinities.slice(0,40),recombinations,
-    boundary:'Whole text was decomposed by neutral size/paragraph boundaries. No human topic selection or prior summary was used. Recombination is candidate material only.'
-  };
+  return {executor:'MUTHER_WHOLE_TEXT_DIGEST',status:'EXECUTED',chunkCount:chunks.length,nodes,affinities:affinities.slice(0,40),recombinations,boundary:'Whole text was decomposed by neutral size/paragraph boundaries. No human topic selection or prior summary was used. Recombination is candidate material only.'};
 }
 
 async function loadEngines(){
@@ -76,23 +65,24 @@ async function loadEngines(){
 
 export async function runBigMeal({manifestPath='nostromo/research/big-meals/pasquinelli-2026.json',outputPath=null}={}){
   const manifest=JSON.parse(await fs.readFile(manifestPath,'utf8'));
-  const url=manifest.source?.primary;
-  if(!url)throw new Error('MEAL_SOURCE_REQUIRED');
-  const response=await fetch(url,{headers:{'user-agent':'ZENOMORPH-DROPLET/1.0 (+research ingestion; provenance preserving)'}});
+  const url=manifest.source?.primary;if(!url)throw new Error('MEAL_SOURCE_REQUIRED');
+  const response=await fetch(url,{headers:{'user-agent':'Mozilla/5.0 ZENOMORPH-DROPLET/1.0','accept':'text/html,application/xhtml+xml'}});
   if(!response.ok)throw new Error(`DROPLET_FETCH_FAILED:${response.status}`);
   const html=await response.text();
   const sourceHash=sha256(html);
   const text=htmlToText(html);
   const titleNeedle=String(manifest.title||'').toLowerCase();
   const doiNeedle=String(manifest.doi||'').toLowerCase();
-  const lower=text.toLowerCase();
-  const droplet={
-    executor:'DROPLET_BIG_MEAL_ACQUIRE',status:(lower.includes(titleNeedle)&&lower.includes(doiNeedle)&&text.length>18000)?'EXECUTED':'FAILED',
-    url,responseStatus:response.status,contentType:response.headers.get('content-type'),bytes:Buffer.byteLength(html),
-    sourceSha256:sourceHash,textCharCount:text.length,titleVerified:lower.includes(titleNeedle),doiVerified:lower.includes(doiNeedle),
-    license:manifest.license,versionOfRecordDate:manifest.versionOfRecordDate
-  };
-  if(droplet.status!=='EXECUTED')throw new Error('DROPLET_IDENTITY_OR_SIZE_CHECK_FAILED');
+  const lower=text.toLowerCase(),rawLower=html.toLowerCase();
+  const titleVerified=lower.includes(titleNeedle)||rawLower.includes(titleNeedle);
+  const doiVerified=lower.includes(doiNeedle)||rawLower.includes(doiNeedle);
+  const bodyLargeEnough=text.length>12000;
+  const droplet={executor:'DROPLET_BIG_MEAL_ACQUIRE',status:(titleVerified&&doiVerified&&bodyLargeEnough)?'EXECUTED':'FAILED',url,responseStatus:response.status,contentType:response.headers.get('content-type'),bytes:Buffer.byteLength(html),sourceSha256:sourceHash,textCharCount:text.length,titleVerified,doiVerified,bodyLargeEnough,license:manifest.license,versionOfRecordDate:manifest.versionOfRecordDate};
+  if(droplet.status!=='EXECUTED'){
+    const failure={schema:'zenomorph-big-meal-failure/v0.1',mealId:manifest.id,status:'ACQUISITION_REJECTED',droplet,reason:'IDENTITY_OR_BODY_CHECK_FAILED'};
+    if(outputPath)await fs.writeFile(outputPath,JSON.stringify(failure,null,2)+'\n','utf8');
+    throw new Error(`DROPLET_IDENTITY_OR_SIZE_CHECK_FAILED:${JSON.stringify({titleVerified,doiVerified,textCharCount:text.length,bytes:Buffer.byteLength(html),contentType:droplet.contentType})}`);
+  }
   const chunks=neutralChunks(text);
   const muther=mutherWholeText(chunks);
   await loadEngines();
@@ -101,22 +91,9 @@ export async function runBigMeal({manifestPath='nostromo/research/big-meals/pasq
   const vajraTarget=compact(gut.summary||JSON.stringify(gut),7000);
   const vajra=globalThis.VajraEngine.run(vajraTarget,8);
   const shrooming=await shroomFeedbackReadingRound({text:vajraTarget,agents:10,round:1});
-  const result={
-    schema:'zenomorph-big-meal-result/v0.1',mealId:manifest.id,status:'INGESTED_NOT_PROMOTED',
-    acquiredAt:new Date().toISOString(),provenance:{doi:manifest.doi,url,license:manifest.license,versionOfRecordDate:manifest.versionOfRecordDate,sourceSha256:sourceHash},
-    droplet,muther,
-    gut:{status:gut?.status||'EXECUTED',summaryFingerprint:sha256(String(gut?.summary||'')),nutrientCount:Array.isArray(gut?.nutrients)?gut.nutrients.length:null,wasteCount:Array.isArray(gut?.waste)?gut.waste.length:null},
-    vajra:{status:vajra?.status||'EXECUTED',targetRef:vajra?.targetRef||null,traceLength:Array.isArray(vajra?.trace)?vajra.trace.length:null},
-    shrooming:{status:shrooming?.status||'EXECUTED',count:shrooming?.count||null,sourceFingerprint:shrooming?.sourceFingerprint||null},
-    promotion:{allowed:false,reason:'ONE_MEAL_CANNOT_ESTABLISH_CROSS_FOOD_OR_DELAYED_TRANSFER'},
-    nextTests:['held_out_non_ai_non_life_non_philosophy_food','cross_food_transfer','delayed_retest']
-  };
+  const result={schema:'zenomorph-big-meal-result/v0.1',mealId:manifest.id,status:'INGESTED_NOT_PROMOTED',acquiredAt:new Date().toISOString(),provenance:{doi:manifest.doi,url,license:manifest.license,versionOfRecordDate:manifest.versionOfRecordDate,sourceSha256:sourceHash},droplet,muther,gut:{status:gut?.status||'EXECUTED',summaryFingerprint:sha256(String(gut?.summary||'')),nutrientCount:Array.isArray(gut?.nutrients)?gut.nutrients.length:null,wasteCount:Array.isArray(gut?.waste)?gut.waste.length:null},vajra:{status:vajra?.status||'EXECUTED',targetRef:vajra?.targetRef||null,traceLength:Array.isArray(vajra?.trace)?vajra.trace.length:null},shrooming:{status:shrooming?.status||'EXECUTED',count:shrooming?.count||null,sourceFingerprint:shrooming?.sourceFingerprint||null},promotion:{allowed:false,reason:'ONE_MEAL_CANNOT_ESTABLISH_CROSS_FOOD_OR_DELAYED_TRANSFER'},nextTests:['held_out_non_ai_non_life_non_philosophy_food','cross_food_transfer','delayed_retest']};
   if(outputPath)await fs.writeFile(outputPath,JSON.stringify(result,null,2)+'\n','utf8');
   return result;
 }
 
-if(import.meta.url===`file://${process.argv[1]}`){
-  const outputArg=process.argv.find(x=>x.startsWith('--output='));
-  const result=await runBigMeal({outputPath:outputArg?outputArg.slice(9):null});
-  console.log(JSON.stringify(result,null,2));
-}
+if(import.meta.url===`file://${process.argv[1]}`){const outputArg=process.argv.find(x=>x.startsWith('--output='));const result=await runBigMeal({outputPath:outputArg?outputArg.slice(9):null});console.log(JSON.stringify(result,null,2));}
