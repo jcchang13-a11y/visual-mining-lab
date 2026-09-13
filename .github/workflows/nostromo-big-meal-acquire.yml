@@ -10,6 +10,7 @@ on:
       - 'nostromo/integration/big-meal-ablation-probe.mjs'
       - 'nostromo/integration/big-meal-ablation-probe.test.mjs'
       - 'nostromo/integration/big-meal-causal-runner.mjs'
+      - 'nostromo/integration/big-meal-cross-food-robustness-runner.mjs'
       - 'nostromo/runtime/body-router.mjs'
       - '.github/workflows/nostromo-big-meal-acquire.yml'
   workflow_dispatch:
@@ -20,7 +21,7 @@ permissions:
 jobs:
   acquisition-gate:
     runs-on: ubuntu-latest
-    timeout-minutes: 12
+    timeout-minutes: 18
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -40,9 +41,15 @@ jobs:
         run: |
           node nostromo/integration/big-meal-causal-runner.mjs --output=/tmp/live-cross-food-causal.json > /tmp/live-cross-food-causal.stdout
           node -e "const x=require('/tmp/live-cross-food-causal.json'); if(x.stableUnchanged!==true||x.promotion?.promotable!==false||!x.receipt?.candidateId) process.exit(1); console.log(JSON.stringify({status:x.status,prior:x.prior,heldout:x.heldout,candidate:x.candidate,controlRoute:x.controlRoute,exposedRoute:x.exposedRoute,receipt:x.receipt,stableUnchanged:x.stableUnchanged,promotion:x.promotion},null,2))"
-      - name: Preserve live causal receipt
+      - name: Run multi-food causal robustness probe
+        run: |
+          node nostromo/integration/big-meal-cross-food-robustness-runner.mjs --output=/tmp/cross-food-robustness.json > /tmp/cross-food-robustness.stdout
+          node -e "const x=require('/tmp/cross-food-robustness.json'); if(x.stableUnchanged!==true||x.promotion?.promotable!==false||x.heldoutCount<2||!x.candidateId||x.sameCandidate!==true) process.exit(1); console.log(JSON.stringify({status:x.status,prior:x.prior,candidateId:x.candidateId,causalEffects:x.causalEffects,heldoutCount:x.heldoutCount,crossFoodCausalRobustness:x.crossFoodCausalRobustness,stableUnchanged:x.stableUnchanged,promotion:x.promotion,heldouts:x.heldouts.map(h=>({mealId:h.mealId,sourceSha256:h.sourceSha256,mutherChunkCount:h.mutherChunkCount,causalEffectObserved:h.receipt?.causalEffectObserved,stableUnchanged:h.stableUnchanged}))},null,2))"
+      - name: Preserve live causal receipts
         uses: actions/upload-artifact@v4
         with:
           name: zenomorph-live-cross-food-causal
-          path: /tmp/live-cross-food-causal.json
+          path: |
+            /tmp/live-cross-food-causal.json
+            /tmp/cross-food-robustness.json
           retention-days: 30
