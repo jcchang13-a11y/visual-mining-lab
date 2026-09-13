@@ -1,0 +1,29 @@
+name: NOSTROMO Big Meal Acquisition Gate
+
+on:
+  push:
+    paths:
+      - 'nostromo/research/big-meals/**'
+      - 'nostromo/integration/big-meal-acquire.mjs'
+      - 'nostromo/integration/big-meal-acquire.test.mjs'
+      - '.github/workflows/nostromo-big-meal-acquire.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  acquisition-gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Unit-test whole-food boundary
+        run: node --test nostromo/integration/big-meal-acquire.test.mjs
+      - name: Acquire and verify Pasquinelli article representation
+        run: |
+          node nostromo/integration/big-meal-acquire.mjs nostromo/research/big-meals/pasquinelli-2026.json > /tmp/pasquinelli-acquisition.json
+          node -e "const x=require('/tmp/pasquinelli-acquisition.json'); if(x.status!=='ACQUIRED_VERIFIED_NOT_YET_ABSORBED') process.exit(1); console.log(JSON.stringify({status:x.status,mealId:x.mealId,wholeFoodIdentity:x.wholeFoodIdentity,rawBytes:x.rawBytes,visibleChars:x.visibleChars,mechanicalChunkCount:x.mechanicalChunkCount,provenanceChecks:x.provenanceChecks},null,2))"
