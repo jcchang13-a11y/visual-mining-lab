@@ -1,0 +1,49 @@
+{
+  "schema": "zenomorph-meal-manifest/v1.0",
+  "mealId": "pasquinelli-2026-machine-organism-language",
+  "kind": "whole-article",
+  "status": "READY_FOR_INGESTION",
+  "citation": {
+    "author": "Matteo Pasquinelli",
+    "title": "Machine, organism and language: a comparative epistemology of AI models",
+    "journal": "AI & Society",
+    "volume": 41,
+    "pages": "7833-7845",
+    "year": 2026,
+    "doi": "10.1007/s00146-026-03094-7",
+    "versionOfRecordDate": "2026-06-05"
+  },
+  "source": {
+    "canonicalUrl": "https://link.springer.com/article/10.1007/s00146-026-03094-7",
+    "doiUrl": "https://doi.org/10.1007/s00146-026-03094-7",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "access": "open-access-version-of-record"
+  },
+  "ingestionLaw": {
+    "wholeFoodIdentity": true,
+    "technicalChunkingAllowed": true,
+    "humanPreSummaryForbidden": true,
+    "humanTopicSelectionForbidden": true,
+    "analogyPromptingForbidden": true,
+    "successIsNotSummary": true
+  },
+  "organs": {
+    "DROPLET": "acquire and verify whole source plus provenance",
+    "MUTHER": "read-decompose-recombine-mutate without human thesis hints",
+    "GUT": "absorb-isolate-excrete while preserving source identity",
+    "VAJRA": "attack seductive organism-machine analogy and self-projection",
+    "SHROOMING": "receive digestion products and expose downstream behavior change"
+  },
+  "validation": {
+    "required": [
+      "provenance",
+      "whole_food_coverage",
+      "cross_organ",
+      "held_out",
+      "cross_food_transfer",
+      "delayed_retest"
+    ],
+    "promotionForbiddenBeforeAllRequired": true
+  }
+}
