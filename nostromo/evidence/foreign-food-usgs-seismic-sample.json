@@ -1,0 +1,34 @@
+{
+  "specimen_id": "usgs-comcat-2014-01-01-first10",
+  "source": {
+    "provider": "U.S. Geological Survey Earthquake Hazards Program",
+    "service": "FDSN Event Web Service / ANSS Comprehensive Earthquake Catalog",
+    "query_url": "https://earthquake.usgs.gov/fdsnws/event/1/query?endtime=2014-01-02&format=geojson&starttime=2014-01-01",
+    "query_response_count": 325,
+    "sample_rule": "first 10 features in returned GeoJSON order",
+    "retrieval_format": "GeoJSON",
+    "api_version_observed": "2.7.0",
+    "license_note": "USGS-authored/produced data and information are generally U.S. public domain; preserve USGS attribution and source identity.",
+    "retrieved_via": "public USGS web service",
+    "sample_sha256_canonical_json": "ebe08c57945a062a262e08f24ab90833fb28b1856a521885c6458f7076389dbb"
+  },
+  "records": [
+    {"id":"ci11408890","time":1388620296020,"mag":1.29,"coordinates":[-116.7776667,33.6633333,11.008]},
+    {"id":"ak01421ig3u","time":1388620046501,"mag":1.1,"coordinates":[-151.6459,63.102,14.1]},
+    {"id":"ak01421i2zj","time":1388619956476,"mag":1.2,"coordinates":[-150.0165,61.4581,44.6]},
+    {"id":"ak01421heui","time":1388619763623,"mag":1.4,"coordinates":[-150.8276,62.7884,87.6]},
+    {"id":"usc000mnnn","time":1388619735000,"mag":4.0,"coordinates":[-71.621,-29.888,40]},
+    {"id":"nc72134466","time":1388619644020,"mag":0.53,"coordinates":[-122.7839966,38.8071671,0.013]},
+    {"id":"nc72134461","time":1388619483870,"mag":0.7,"coordinates":[-118.8948333,37.6433333,-0.446]},
+    {"id":"ci11408882","time":1388619402290,"mag":0.47,"coordinates":[-116.562,33.5175,8.148]},
+    {"id":"nn00557597","time":1388619146923,"mag":0.6,"coordinates":[-118.4646,38.5678,8.7]},
+    {"id":"usb000m2w9","time":1388619137530,"mag":4.2,"coordinates":[-176.8207,-23.9576,219.29]}
+  ],
+  "source_relations": [],
+  "ingest_assertions": {
+    "coordinates_are_event_attributes": true,
+    "timestamps_are_event_attributes": true,
+    "event_event_edges_explicitly_present_in_specimen": false,
+    "spatial_or_temporal_nearness_must_not_be_promoted_to_source_topology": true
+  }
+}
