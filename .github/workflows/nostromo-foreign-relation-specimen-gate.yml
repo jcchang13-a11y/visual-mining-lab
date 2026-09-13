@@ -6,6 +6,7 @@ on:
       - 'nostromo/research/level1-urban-osm-specimen-v0.1.json'
       - 'nostromo/research/level1-hca-immune-specimen-v0.1.json'
       - 'nostromo/research/level1-usgs-seismic-specimen-v0.1.json'
+      - 'nostromo/research/level1-express-dependency-specimen-v0.1.json'
       - 'nostromo/integration/foreign-relation-specimen-gate.mjs'
       - 'nostromo/integration/foreign-relation-specimen-gate-test.mjs'
       - 'nostromo/integration/malecns-swc-relation-gate-test.mjs'
@@ -13,6 +14,7 @@ on:
       - 'nostromo/integration/hca-relation-semantic-gate-test.mjs'
       - 'nostromo/integration/relation-provenance-authority-gate.mjs'
       - 'nostromo/integration/relation-provenance-authority-gate-test.mjs'
+      - 'nostromo/integration/relation-provenance-authority-delayed-crossfood-test.mjs'
       - '.github/workflows/nostromo-foreign-relation-specimen-gate.yml'
   workflow_dispatch:
 
@@ -35,3 +37,5 @@ jobs:
         run: node nostromo/integration/hca-relation-semantic-gate-test.mjs
       - name: Challenge relation provenance with OSM and USGS cross-food counterexample
         run: node nostromo/integration/relation-provenance-authority-gate-test.mjs
+      - name: Delayed third-food challenge with public Express dependency metadata
+        run: node nostromo/integration/relation-provenance-authority-delayed-crossfood-test.mjs
