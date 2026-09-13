@@ -34,6 +34,18 @@
       anchor:'世界如夢幻泡影，不是世界不存在，而是世界即非世界，是名世界。'
     },
     {
+      key:'retro-30450-32-20-direct',
+      src:'figures/retro-30450-32-20.svg',
+      caption:'第三十二分末段把「身相」重新叫回第二十分具足色身／諸相具足的拆解：32 → 20',
+      anchor:finalChairAnchor
+    },
+    {
+      key:'retro-30450-32-25-direct',
+      src:'figures/retro-30450-32-25.svg',
+      caption:'第三十二分末段把「度眾生」重新叫回第二十五分「我當度眾生」的救世主體拆解：32 → 25',
+      anchor:finalChairAnchor
+    },
+    {
       key:'retro-30450-32-27-direct',
       src:'figures/retro-30450-32-27.svg',
       caption:'第三十二分末段把「斷滅相」重新叫回第二十七分：32 → 27',
@@ -99,7 +111,7 @@
     const root=document.getElementById('article');
     if(!root) return false;
     let complete=true;
-    /* 同一總結句接三張直接回返時倒序施工，讓可見次序維持 27→28→29。 */
+    /* 同一總結句接多張直接回返時倒序施工，讓可見次序維持 20→25→27→28→29。 */
     const regular=specs.filter(spec=>spec.anchor!==finalChairAnchor);
     const finalChair=specs.filter(spec=>spec.anchor===finalChairAnchor).reverse();
     regular.concat(finalChair).forEach(spec=>{if(!insertAfterText(root,spec)) complete=false;});
