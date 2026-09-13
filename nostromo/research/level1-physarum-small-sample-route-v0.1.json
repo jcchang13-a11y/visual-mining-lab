@@ -2,7 +2,7 @@
   "schema": "zenomorph-level1-unfamiliar-specimen-route/v0.1",
   "organism": "ZENOMORPH",
   "habitat": "NOSTROMO",
-  "status": "SMALL_PUBLIC_SAMPLE_ROUTE_VERIFIED_BYTE_FETCH_BLOCKED",
+  "status": "ALTERNATE_PUBLIC_ROUTE_VERIFIED_BYTE_FETCH_STILL_PENDING",
   "foodClass": "acellular-dynamic-network",
   "experiment": "Physarum polycephalum bounded-sample acquisition route v0.1",
   "source": {
@@ -21,26 +21,43 @@
     "selectedDownloadEndpoint": "https://datadryad.org/downloads/file_stream/3809854",
     "reasonForSelection": "This is a small, public, relation-to-time bearing specimen that can test temporal structure without downloading the much larger microscopy collections first."
   },
+  "alternateSource": {
+    "provider": "Zenodo / BOKU University",
+    "title": "Raw datasets and R scripts for polyxenic cultivation of Didymium and Physarum species: germination, purification, growth dynamics, sclerotia viability, and sporocarp production",
+    "record": "https://zenodo.org/records/16964064",
+    "doi": "10.5281/zenodo.16964064",
+    "published": "2025-08-27",
+    "recordType": "open dataset",
+    "recordSize": "216.2 kB",
+    "selectedFile": "04_Data_Plasmodial_growth_by_feed_area.xlsx",
+    "selectedFileSize": "38.4 kB",
+    "selectedFileMD5": "0775c0de39ae91458e1deb3d3ece551a",
+    "recordEvidence": "Zenodo public record explicitly lists six Excel datasets plus R scripts and identifies plasmodial growth models as a supported analysis target.",
+    "reasonForSelection": "The file is small, directly relevant to growth dynamics, versioned by DOI, and suitable as a bounded unfamiliar specimen without importing the larger image stacks first.",
+    "byteFetchState": "The web retrieval layer could resolve the binary download target but could not decode the XLSX as text; the execution container has no outbound DNS, so bytes were not independently materialized in this run. No specimen ingestion or hash conversion is claimed beyond the MD5 published by Zenodo."
+  },
   "provenance": {
     "verifiedFromPublicRepositoryRecord": true,
     "privateConnectorData": false,
     "credentialsRequired": false,
-    "downloadAttemptState": "2026-09-13 route check: the official Dryad record exposes GrowthFractalDimension.zip and its file_stream endpoint, but direct byte retrieval returned HTTP 403 in both browser retrieval and container download. No archive bytes were obtained, so no hash, extraction, or organ ingestion is claimed.",
-    "identityRule": "Before organ ingestion record exact download URL, retrieval timestamp, byte size, archive member list, and SHA-256 of the retrieved archive and extracted specimen files."
+    "dryadDownloadAttemptState": "Official Dryad file_stream endpoint returned HTTP 403 in prior retrieval attempts. No archive bytes were obtained.",
+    "zenodoRouteState": "Open public record and exact bounded file are verified; actual local byte materialization remains pending because the available execution environment cannot fetch the binary directly.",
+    "identityRule": "Before organ ingestion record exact download URL, retrieval timestamp, byte size, archive/member list when applicable, and SHA-256 of the retrieved specimen. Published repository checksums may be retained as upstream identity evidence but do not replace local SHA-256."
   },
   "publicStructureEvidence": {
-    "fractalDimension": "FractalDimension.csv rows are time-indexed every 60 seconds and include fractal dimension, slope, R2, intercept, and standard error.",
-    "growth": "growthResults.csv contains time in minutes and network area in mm2.",
-    "useBoundary": "These public record fields may guide routing and test design only; they are not substituted for the missing raw specimen bytes."
+    "dryadFractalDimension": "FractalDimension.csv rows are time-indexed every 60 seconds and include fractal dimension, slope, R2, intercept, and standard error.",
+    "dryadGrowth": "growthResults.csv contains time in minutes and network area in mm2.",
+    "zenodoGrowth": "Zenodo describes the selected workbook as plasmodial growth by feed area and pairs the dataset collection with reproducible R analysis scripts.",
+    "useBoundary": "Public record fields may guide routing and test design only; they are not substituted for missing specimen bytes."
   },
-  "blindIngestionInstruction": "Treat the extracted time-series specimen as unfamiliar external material. Do not provide an analogy or target lesson.",
+  "blindIngestionInstruction": "Treat any retrieved bounded specimen as unfamiliar external material. Do not provide an analogy or target lesson.",
   "candidateQuestionsForbiddenAtIngestion": [
     "Do not tell the organs to learn adaptation, decentralization, memory, routing, or self-organization.",
     "Do not preclassify temporal change as a ZENOMORPH architectural lesson.",
-    "Do not equate fractal dimension, area growth, or slime-mold morphology with any named organ."
+    "Do not equate growth dynamics, fractal dimension, area, or slime-mold morphology with any named organ."
   ],
   "gates": {
-    "A_provenance": "FAIL until actual archive bytes are retrieved and hashed",
+    "A_provenance": "FAIL until actual specimen bytes are retrieved and locally hashed",
     "B_new_candidate": "NOT_RUN",
     "C_cross_food_behavior_change": "NOT_RUN",
     "D_delayed_held_out_retention": "NOT_RUN"
@@ -51,11 +68,12 @@
     "hca": "Sample-donor membership is typed membership; Physarum measurements add a temporal dimension that must remain distinct from both membership and topology."
   },
   "fallbackRoute": {
-    "primary": "Retry official Dryad bytes through a supported public API or alternative official mirror before using any derived copy.",
-    "secondary": "If byte retrieval remains blocked, keep Physarum in route-only state and advance another public unfamiliar-food source rather than fabricating a specimen from metadata.",
+    "primary": "Retry official Dryad bytes through a supported public API or official mirror.",
+    "secondary": "Use the verified Zenodo bounded growth workbook once binary retrieval is available; preserve DOI, exact file name, published MD5, local SHA-256, and retrieval timestamp.",
+    "tertiary": "If both remain byte-blocked, advance another public unfamiliar-food source rather than fabricating a specimen from metadata.",
     "forbidden": "Do not create pseudo-rows, synthetic values, or inferred temporal edges from README/abstract text."
   },
-  "nextGate": "Obtain official archive bytes through a supported public endpoint or mirror, hash them, extract a deterministic bounded subset, then run relation-type plus time-validity classification before five-organ metabolism.",
+  "nextGate": "Materialize either official Physarum bounded specimen, hash locally, extract a deterministic subset, then run relation-type plus time-validity classification before five-organ metabolism.",
   "promotion": "NONE",
   "bodyAdmission": false,
   "evidencePolicy": "DISPLAYED STATE MUST FOLLOW EVIDENCE"
