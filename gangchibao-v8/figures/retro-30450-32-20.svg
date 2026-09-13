@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 360" role="img" aria-labelledby="title desc">
+  <title id="title">第三十二分直接回扣第二十分</title>
+  <desc id="desc">第三十二分末段把身相重新叫回第二十分具足色身／諸相具足的拆解：32 → 20。</desc>
+  <rect width="360" height="360" fill="white"/>
+  <g fill="none" stroke="black" stroke-width="2">
+    <circle cx="180" cy="180" r="58"/>
+    <circle cx="180" cy="180" r="118"/>
+  </g>
+  <g fill="black" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Noto Sans TC', sans-serif" font-size="22" text-anchor="middle" dominant-baseline="middle">
+    <text x="180" y="180">32</text>
+    <text x="180" y="72">20</text>
+  </g>
+</svg>
