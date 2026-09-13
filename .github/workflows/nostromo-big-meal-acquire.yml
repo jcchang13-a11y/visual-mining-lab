@@ -29,6 +29,8 @@ jobs:
         run: node --test nostromo/integration/big-meal-acquire.test.mjs
       - name: Unit-test causal ablation bridge
         run: node --test nostromo/integration/big-meal-ablation-probe.test.mjs
+      - name: Install PDF text extractor
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq poppler-utils
       - name: Acquire, verify, and digest Pasquinelli through robust fallback path
         run: |
           node nostromo/integration/big-meal-runner.mjs --output=/tmp/pasquinelli-meal.json > /tmp/pasquinelli-meal.stdout
