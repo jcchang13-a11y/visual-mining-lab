@@ -1,7 +1,7 @@
 {
   "experiment": "gangchibao-image-test",
-  "completed_rounds": 8,
-  "current_round": 9,
+  "completed_rounds": 9,
+  "current_round": 10,
   "rounds": [
     {"round":1,"name":"baseline","status":"passed","evidence":{"browser_confirmation":"User mobile screenshot confirmed public page, local SVG, broken-image fallback, and continuing body text."}},
     {"round":2,"name":"raster-png-jpg","status":"passed","evidence":{"browser_confirmation":"User mobile screenshot confirmed visible real PNG and JPG plus responsive sizing; earlier 1x1 white PNG source was replaced for a visible raster check."}},
@@ -11,10 +11,11 @@
     {"round":6,"name":"path-depth","status":"passed","evidence":{"browser_confirmation":"User screenshot confirmed deep relative path loaded CACHE B, site-root path loaded IMAGE TEST, and sentinel body remained visible."}},
     {"round":7,"name":"mobile-reader","status":"passed","evidence":{"browser_confirmation":"User long mobile screenshot confirmed SVG near the front, PNG in the middle, JPG near the end, continuous long-page scrolling, no horizontal overflow, and final sentinel body."}},
     {"round":8,"name":"mixed-formats","status":"passed","evidence":{"browser_confirmation":"User mobile screenshot confirmed SVG, PNG and JPG all rendered; intentional missing WebP showed fallback; sentinel body remained visible.","page_path":"gangchibao-image-test/format-test/index.html","page_blob":"9252590c1fab10710ffc1840e375759e319a5240"}},
-    {"round":9,"name":"repeated-deployments","status":"awaiting_browser_confirmation","evidence":{"marker_path":"gangchibao-image-test/deploy-round9.txt","deployment_a":{"commit":"9e0b7e79d00b92701f829d1631db7fc110f5fc19","workflow_run":34735069359,"result":"success","marker":"r9-a"},"deployment_b":{"commit":"cc54ba52980247b327921ee16def3f065fd860f5","workflow_run":34735117350,"result":"success","marker":"r9-b"},"github_file_latest":"ROUND 9 DEPLOYMENT B / marker=r9-b","remaining":"Need browser/public-page confirmation that deployed Pages URL opens and shows latest marker r9-b before round 9 can pass."}}
+    {"round":9,"name":"repeated-deployments","status":"passed","evidence":{"marker_path":"gangchibao-image-test/deploy-round9.txt","deployment_a":{"commit":"9e0b7e79d00b92701f829d1631db7fc110f5fc19","workflow_run":34735069359,"result":"success","marker":"r9-a"},"deployment_b":{"commit":"cc54ba52980247b327921ee16def3f065fd860f5","workflow_run":34735117350,"result":"success","marker":"r9-b"},"browser_confirmation":"User mobile screenshot confirmed public Pages showed ROUND 9 DEPLOYMENT B and marker=r9-b."}},
+    {"round":10,"name":"final-regression","status":"awaiting_browser_confirmation","evidence":{"page_path":"gangchibao-image-test/final-regression/index.html","deployment_a":{"commit":"3b3fc8d90046811513f032e2d9bcee8ecc4a711a","workflow_run":34738870955,"result":"success","marker":"ROUND 10 REGRESSION A"},"deployment_b":{"commit":"a3d961636690efce6f99a083efe72a77ca8b6b7b","workflow_run":34738912389,"result":"success","marker":"ROUND 10 REGRESSION B"},"github_file_latest":"ROUND 10 REGRESSION B","checks_in_page":["site-local SVG via relative path","real PNG via site-root path","same-name cache target with version parameter","real JPG via deep relative path","intentional missing WebP fallback","multiple repeated images","long text flow","mobile single-column responsive layout","deep directory","repeat deployment"],"remaining":"Need one user mobile-browser screenshot/visual confirmation that the public final-regression page actually renders REGRESSION B, normal images, fallback, and final sentinel without overflow before round 10 can pass."}}
   ],
   "constraints": {
     "do_not_modify": ["gangchibao-v8", "gangchibao-v8-new", "gangchibao-v9"],
-    "next": "Do not advance to round 10 until the public Pages marker is browser-confirmed as ROUND 9 DEPLOYMENT B / r9-b."
+    "next": "Do not create the independent V8 clone until round 10 browser confirmation passes."
   }
 }
