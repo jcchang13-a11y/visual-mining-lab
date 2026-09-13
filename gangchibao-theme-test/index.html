@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>剛吃飽｜Theme 001｜佛教文庫測試站</title>
+<link rel="stylesheet" href="theme-001.css?v=20260913-r2">
+</head>
+<body>
+<main class="book-shell">
+<header class="frontmatter index-frontmatter">
+<p class="host-kicker">結緣流通本 · THEME 001 TEST HOST</p>
+<h1>剛吃飽</h1>
+<p class="sutra-name">佛教文庫｜DHARMA LIBRARY</p>
+<p class="distribution-note">此頁為獨立 Theme Engine 測試站。正文只讀正式第八版 unit Markdown；本測試站不得反向修改 V8／V8-new／V9。</p>
+<div class="publisher-mark">
+<img src="https://i.ibb.co/MDkQHdwg/file-00000000885c8209b54d64a278dba006.png" alt="DIPLOMA／文憑工廠／MILL 圓形印章">
+<p>文憑工廠</p>
+</div>
+</header>
+<section class="catalogue" aria-label="二十二單元">
+<h2>目次</h2>
+<div id="units" class="unit-list"></div>
+</section>
+<footer class="colophon-mini">
+<p>仿冒不可恥，仿得不像才可恥。</p>
+<p>文憑只能當做廁紙／知識可以改造世界</p>
+</footer>
+</main>
+<script>
+const units=['30000','30210','30220','30230','30240B','30250','30260B','30270B','30280B','30310B','30320','30330','30340','30350A','30360','30370','30380','30390','30410A','30430','30440','30450'];
+const box=document.getElementById('units');
+units.forEach((u,i)=>{const a=document.createElement('a');a.className='unit-row';a.href='reader.html?u='+encodeURIComponent(u);a.innerHTML='<span class="unit-no">'+String(i+1).padStart(2,'0')+'</span><span class="unit-code">'+u+'</span><span class="unit-label">正文</span>';box.append(a)});
+</script>
+</body>
+</html>
