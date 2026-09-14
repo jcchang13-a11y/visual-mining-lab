@@ -26,6 +26,7 @@
 - 以上仍只證明「包含 self-check 的後續 main 已通過站點部署流程」，不能取代公開瀏覽器內 JavaScript 實際 fetch 三個 Markdown 後顯示的 3/3 PASS。Round 2 仍不得提前宣告 PASS。
 - 2026-09-14 17:41 Asia/Taipei 本輪再次從執行環境直接請求 `https://jcchang13-a11y.github.io/visual-mining-lab/gangchibao-theme-test/round2-selfcheck.html`，仍因執行環境 DNS 無法解析 `jcchang13-a11y.github.io` 而失敗。這是外部驗證通道限制，不記網站 FAIL，也不記 PASS。
 - 2026-09-14 21:40 Asia/Taipei 再次以執行環境 HTTP client 請求同一公開 self-check URL，仍是 DNS name resolution failure；因此本輪仍無新增瀏覽器 PASS/FAIL 證據。
+- 2026-09-15 00:32 Asia/Taipei 再次由獨立執行環境直接請求同一公開 self-check URL，DNS 仍無法解析 `jcchang13-a11y.github.io`；因此本輪繼續維持 BROWSER VERIFICATION PENDING，不把此環境限制誤記為網站失敗。
 
 ## Self-check 程式邏輯核對
 - `round2-selfcheck.html` 目前仍以相對路徑 `../gangchibao-v8/unit-<id>.md` 對 30000、30390、30450 做 `fetch(..., {cache:'no-store'})`。
@@ -44,8 +45,9 @@
 
 ## 作者自薦 source of truth
 - 2026-09-14 21:40 Asia/Taipei 本輪再次直接讀取 Google Drive 原生文件《作者自薦｜張榮哲 × EVA》，revision：`ANLCKQmdSGQwKt49sg6oKHxwvHuY2APjzt5-nWpl1-FYz4ofwswsNeNwcI_QWNpAfoVTagXjfDWlSYW1TvmX8DLNglW-EZbZINd0QJtoE7k`。
+- 2026-09-15 00:32 Asia/Taipei 再次直接讀取同一 Drive 原生主檔，revision 仍為 `ANLCKQmdSGQwKt49sg6oKHxwvHuY2APjzt5-nWpl1-FYz4ofwswsNeNwcI_QWNpAfoVTagXjfDWlSYW1TvmX8DLNglW-EZbZINd0QJtoE7k`，沒有新的升級／降級標記。
 - 最新主檔仍明示：下載版固定保留原先兩句；另有「在理論與實踐之間，我選擇了躺平。」與 EVA 的「AI 可能會犯錯……本書所有的資訊都不重要。」標為固定出現；「我長期走入底層……最後都通往我的作者簡介。」已由隨機池升級為固定出現。合併工程規則後，目前五句固定必選沒有出現新的升級／降級狀態。
-- revision 與先前記錄一致。正式啟動 Round 3 前仍須再次比對 revision；若主檔更新，以 Drive 最新狀態覆蓋舊清單。
+- 正式啟動 Round 3 前仍須再次比對 revision；若主檔更新，以 Drive 最新狀態覆蓋舊清單。
 
 ## Theme 001 寄生層
 Round 2 只建立宿主殼與唯讀接線，不提前宣告污染驗收成功。目次、字體、版心、經名式前置頁、低成本黑白紙本語法已由獨立 CSS 接管；作者自薦與完整出版前置系統留待 Round 3。
