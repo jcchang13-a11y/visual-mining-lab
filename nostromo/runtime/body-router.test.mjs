@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import {createRuntimeState,runTask,runAblationPair,registerCandidate,evaluatePromotion,promoteCandidate} from './body-router.mjs';
+import {createRuntimeState,runTask,runAblationPair,registerCandidate,evaluatePromotion,promoteCandidate,behavioralProjection} from './body-router.mjs';
 
 const state=createRuntimeState({stableCapabilities:[{id:'baseline'}]});
 assert.equal(state.ingestionPolicy.rule,'EDIBLE_DOES_NOT_IMPLY_ABSORBABLE');
@@ -16,6 +16,21 @@ assert.equal(state.stable.capabilities.length,1,'shadow must not mutate stable b
 assert.equal(state.growing.candidates.length,0,'shadow works on a clone, not live growing state');
 assert.equal(result.comparison.differs,true);
 assert.equal(result.comparison.authority,'SHADOW_HAS_NO_OUTPUT_AUTHORITY');
+assert.match(result.comparison.interpretation,/BEHAVIORAL_PAYLOAD_DIFFERENCE/);
+
+// Runtime mode/authority metadata are guaranteed to differ and therefore must never count as
+// behavioral evidence. Equal executor payloads with different envelopes must compare as equal.
+const envelopeOnlyState=createRuntimeState({stableCapabilities:[{id:'baseline'}]});
+const envelopeOnly=await runTask({
+  task:{kind:'probe',payload:'identical-behavior'},
+  state:envelopeOnlyState,
+  stableExecutor:async({mode})=>({schema:'envelope',mode,authority:'OFFICIAL_STABLE_OUTPUT',result:{answer:'same',route:['a','b']}}),
+  growingExecutor:async({mode})=>({schema:'envelope',mode,authority:'SHADOW_ONLY_NO_OUTPUT_AUTHORITY',result:{answer:'same',route:['a','b']}})
+});
+assert.notEqual(envelopeOnly.comparison.stableEnvelopeFingerprint,envelopeOnly.comparison.shadowEnvelopeFingerprint,'test precondition: envelopes differ');
+assert.equal(envelopeOnly.comparison.stableBehaviorFingerprint,envelopeOnly.comparison.shadowBehaviorFingerprint);
+assert.equal(envelopeOnly.comparison.differs,false,'envelope-only difference must not be displayed as behavioral divergence');
+assert.deepEqual(behavioralProjection(envelopeOnly.official),{answer:'same',route:['a','b']});
 
 registerCandidate(state,{id:'candidate-1',kind:'route',payload:{routeBias:'retain-provenance'},evidence:{
   isolated_generation:true,
@@ -56,4 +71,4 @@ assert.throws(()=>promoteCandidate(state,'candidate-1'),/DIRECT_PROMOTION_DISABL
 assert.equal(state.stable.capabilities.some(x=>x.id==='candidate-1'),false,'qualified candidate cannot enter Stable through legacy runtime helper');
 assert.equal(state.growing.candidates[0].status,'candidate');
 
-console.log(JSON.stringify({status:'PASS',stableRevision:state.stable.revision,growingRevision:state.growing.revision,shadowRevision:state.shadow.revision,ablationReceipts:state.shadow.ablationReceipts.length,gate:'8/8_QUALIFICATION_ONLY',directPromotion:'DISABLED',ingestionRule:state.ingestionPolicy.rule},null,2));
+console.log(JSON.stringify({status:'PASS',stableRevision:state.stable.revision,growingRevision:state.growing.revision,shadowRevision:state.shadow.revision,ablationReceipts:state.shadow.ablationReceipts.length,envelopeOnlyDifferenceRejected:!envelopeOnly.comparison.differs,gate:'8/8_QUALIFICATION_ONLY',directPromotion:'DISABLED',ingestionRule:state.ingestionPolicy.rule},null,2));
