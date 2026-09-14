@@ -17,8 +17,10 @@
 
 ## 部署鏈補強（2026-09-14）
 - self-check 建立 commit `27e0b0d...` 對應的當次 `Deploy Visual Mining Lab` run `34764373668` 結論是 **cancelled**。因此不能把「建立 self-check」那一筆 commit 本身說成已成功部署。
-- 但 self-check 檔案其後持續存在於 main；最新核對到的站點部署 run `34793301027` 對 head `616ff9417872ce5a85e39168620c318e8cd92899` 已於 2026-09-14T00:38:09Z `completed / success`。該 head 晚於 self-check 建立 commit，因此目前部署鏈已包含此檔。
+- self-check 檔案其後持續存在於 main。2026-09-14 重新核對，較新的站點部署 run `34800385786` 對 head `02cd9a505f15fb94d9c9ab195fa3313774b05524` 已 `completed / success`。
+- GitHub compare 顯示 `02cd9a5...` 相對 `27e0b0d...` 為 `ahead`，且 self-check 建立 commit 是共同歷史的一部分；因此目前成功部署的 main 世代已包含 self-check 檔案，而不是停留在其之前。
 - 這仍只證明「包含 self-check 的後續 main 已通過站點部署流程」，不能取代公開瀏覽器內 JavaScript 實際 fetch 三個 Markdown 後顯示的 3/3 PASS。Round 2 仍不得提前宣告 PASS。
+- 本輪另嘗試從執行環境直接解析 `jcchang13-a11y.github.io` 以取得公開頁，但環境 DNS 解析暫時失敗；此為外部驗證通道限制，不能被記為網站 FAIL，也不能被拿來當 PASS。
 
 ## 正文來源
 22 單元沿用正式 V8 的既有 unit Markdown：30000、30210、30220、30230、30240B、30250、30260B、30270B、30280B、30310B、30320、30330、30340、30350A、30360、30370、30380、30390、30410A、30430、30440、30450。
@@ -36,6 +38,10 @@
 
 ## Theme 001 寄生層
 Round 2 只建立宿主殼與唯讀接線，不提前宣告污染驗收成功。目次、字體、版心、經名式前置頁、低成本黑白紙本語法已由獨立 CSS 接管；作者自薦與完整出版前置系統留待 Round 3。
+
+## Round 3 預備狀態
+- `round3-preflight.md`、`round3-frontmatter-preview.html`、`round3-frontmatter.css`、`round3-prepared-evidence.md` 已存在，但明確維持 PREPARED / NOT ACTIVATED。
+- 這些檔案只是把前置出版系統與五句固定作者自薦先做宿主映射，不得視為跳過 Round 2。
 
 ## 驗收門檻
 Round 2 只有在公開頁實際載入，且 `round2-selfcheck.html` 顯示 3/3 PASS（30000、30390、30450 三單元皆可由部署端唯讀載入）後，才可標記 PASS 並進 Round 3。GitHub commit / Pages deployment / repo 原檔存在本身都不等於 PASS。
