@@ -16,9 +16,9 @@
 - 建立 self-check 的 commit：`27e0b0dc27ee1a052585800634ffc0e24c8f2504`（2026-09-13T15:01:56Z）。
 
 ## 部署鏈補強（2026-09-14）
-- GitHub compare 已確認 self-check commit `27e0b0d...` 是目前後續 main 歷史的祖先；截至檢查時，後續 head `65cbd9be2cb6483d06253f6c8ad9db3287fcf56a` 為 `ahead`，`behind_by: 0`。
-- `Deploy Visual Mining Lab` 對 head `65cbd9be2cb6483d06253f6c8ad9db3287fcf56a` 的 run `34778125056` 已 `completed / success`（2026-09-13T19:35:21Z）。因此可以確認：包含 self-check commit 的後續 main 已經成功通過站點部署流程。
-- 但此證據仍只證明「包含該檔的後續版本已部署成功」，不能取代公開瀏覽器內 JavaScript 實際 fetch 三個 Markdown 後顯示的 3/3 PASS。Round 2 仍不得提前宣告 PASS。
+- self-check 建立 commit `27e0b0d...` 對應的當次 `Deploy Visual Mining Lab` run `34764373668` 結論是 **cancelled**。因此不能把「建立 self-check」那一筆 commit 本身說成已成功部署。
+- 但 self-check 檔案其後持續存在於 main；最新核對到的站點部署 run `34793301027` 對 head `616ff9417872ce5a85e39168620c318e8cd92899` 已於 2026-09-14T00:38:09Z `completed / success`。該 head 晚於 self-check 建立 commit，因此目前部署鏈已包含此檔。
+- 這仍只證明「包含 self-check 的後續 main 已通過站點部署流程」，不能取代公開瀏覽器內 JavaScript 實際 fetch 三個 Markdown 後顯示的 3/3 PASS。Round 2 仍不得提前宣告 PASS。
 
 ## 正文來源
 22 單元沿用正式 V8 的既有 unit Markdown：30000、30210、30220、30230、30240B、30250、30260B、30270B、30280B、30310B、30320、30330、30340、30350A、30360、30370、30380、30390、30410A、30430、30440、30450。
