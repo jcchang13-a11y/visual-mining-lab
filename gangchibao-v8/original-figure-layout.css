@@ -95,3 +95,13 @@
   }
   .set01-eva-note,.set01-rongzhe-note{break-before:page;page-break-before:always;max-width:none}
 }
+
+/* 2026-09-15｜110×190mm 原圖落頁幾何校準鷹架。
+   148mm 舊上限保留；在 162mm 實際版心裡，figure margin 與 caption 仍需佔高度，
+   因此追加 132mm 出版上限，避免 break-inside:avoid 面對一個物理上放不進單頁的 figure。
+   只縮放既有原圖，不裁切、不仿畫、不改閱讀位置。 */
+@media print{
+  .existing-figure.original-figure img{
+    max-height:132mm;
+  }
+}
