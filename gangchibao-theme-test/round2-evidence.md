@@ -23,7 +23,7 @@
 - 2026-09-14 15:13 Asia/Taipei 再核對，更新的 `Deploy Visual Mining Lab` run `34814585954`，head `03665d7f730dd4e735ec94e7ba7a4a8ec9dad38b`，建立時間 2026-09-14T06:42:26Z，結論仍為 **completed / success**。因此部署鏈持續健康，且成功世代明顯晚於 self-check 建立 commit。
 - GitHub compare／歷史關係顯示後續成功部署 head 位於 self-check 建立 commit 之後；因此目前成功部署的 main 世代已包含 self-check 檔案，而不是停留在其之前。
 - 以上仍只證明「包含 self-check 的後續 main 已通過站點部署流程」，不能取代公開瀏覽器內 JavaScript 實際 fetch 三個 Markdown 後顯示的 3/3 PASS。Round 2 仍不得提前宣告 PASS。
-- 本輪再次嘗試從執行環境直接解析 `jcchang13-a11y.github.io` 取得公開頁，DNS 解析仍失敗；此為外部驗證通道限制，不能被記為網站 FAIL，也不能被拿來當 PASS。
+- 2026-09-14 17:41 Asia/Taipei 本輪再次從執行環境直接請求 `https://jcchang13-a11y.github.io/visual-mining-lab/gangchibao-theme-test/round2-selfcheck.html`，仍因執行環境 DNS 無法解析 `jcchang13-a11y.github.io` 而失敗。這是外部驗證通道限制，不記網站 FAIL，也不記 PASS。
 
 ## Self-check 程式邏輯核對
 - `round2-selfcheck.html` 目前仍以相對路徑 `../gangchibao-v8/unit-<id>.md` 對 30000、30390、30450 做 `fetch(..., {cache:'no-store'})`。
