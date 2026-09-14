@@ -21,6 +21,12 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+      - name: Require canonical main authority
+        run: |
+          if [ "$GITHUB_REF" != "refs/heads/main" ]; then
+            echo "Guarded Stable incorporation is authoritative only on refs/heads/main; got $GITHUB_REF" >&2
+            exit 1
+          fi
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
@@ -59,9 +65,29 @@ jobs:
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add nostromo/runtime/stable-structural-capabilities.json nostromo/research/big-meals/offspring-incorporation-latest.json
-          git diff --cached --quiet && exit 0
+          if git diff --cached --quiet; then
+            echo "Incorporation was expected to change canonical Stable, but no staged repository change exists." >&2
+            exit 1
+          fi
           git commit -m 'ZENOMORPH: incorporate qualified p0.5 structural offspring into Stable'
-          git push
+          git push origin HEAD:main
+      - name: Verify canonical main persistence
+        run: |
+          git fetch origin main
+          git show origin/main:nostromo/runtime/stable-structural-capabilities.json > /tmp/canonical-stable.json
+          git show origin/main:nostromo/research/big-meals/offspring-incorporation-latest.json > /tmp/canonical-incorporation.json
+          node - <<'NODE'
+          const fs=require('fs');
+          const staged=JSON.parse(fs.readFileSync('/tmp/incorporation-staged.json'));
+          const stable=JSON.parse(fs.readFileSync('/tmp/canonical-stable.json'));
+          const receipt=JSON.parse(fs.readFileSync('/tmp/canonical-incorporation.json'));
+          const exact=(stable.capabilities||[]).filter(x=>x.id===staged.candidateId);
+          if(receipt.incorporated!==true||receipt.status!=='INCORPORATED_POSTCHECKS_PASSED') throw new Error('CANONICAL_RECEIPT_NOT_INCORPORATED');
+          if(receipt.candidateId!==staged.candidateId) throw new Error('CANONICAL_RECEIPT_CANDIDATE_MISMATCH');
+          if(exact.length!==1||exact[0].authority!=='STABLE') throw new Error('CANONICAL_STABLE_CAPABILITY_MISSING');
+          if(exact[0].promotionReceiptFingerprint!==receipt.promotionReceiptFingerprint) throw new Error('CANONICAL_PROMOTION_RECEIPT_MISMATCH');
+          console.log(JSON.stringify({candidateId:staged.candidateId,stableRevision:stable.revision,status:receipt.status,canonicalMainVerified:true},null,2));
+          NODE
       - name: Preserve incorporation evidence
         if: always()
         uses: actions/upload-artifact@v4
@@ -74,5 +100,7 @@ jobs:
             /tmp/post-incorporation-qualification.json
             /tmp/post-incorporation-qualification.stdout
             /tmp/runtime-regression.stdout
+            /tmp/canonical-stable.json
+            /tmp/canonical-incorporation.json
             nostromo/research/big-meals/offspring-incorporation-latest.json
           retention-days: 30
