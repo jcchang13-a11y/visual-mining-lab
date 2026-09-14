@@ -1,4 +1,4 @@
-// ZENOMORPH three-body runtime boundary v0.1.3
+// ZENOMORPH three-body runtime boundary v0.1.4
 // Stable body may answer. Growing body may mutate. Shadow body may compare but never control output.
 // Ingestion law: edible != absorbable. A candidate must transfer across unlike foods before promotion.
 import crypto from 'node:crypto';
@@ -17,7 +17,7 @@ export function getRegisteredStableCapabilities(){
 export function createRuntimeState({stableCapabilities=null,candidates=[]}={}){
   const authoritativeStable=stableCapabilities===null?getRegisteredStableCapabilities():stableCapabilities;
   return {
-    schema:'zenomorph-three-body-runtime/v0.1.3',
+    schema:'zenomorph-three-body-runtime/v0.1.4',
     policy:'DISPLAYED STATE MUST FOLLOW EVIDENCE',
     ingestionPolicy:{
       rule:'EDIBLE_DOES_NOT_IMPLY_ABSORBABLE',
@@ -31,7 +31,7 @@ export function createRuntimeState({stableCapabilities=null,candidates=[]}={}){
 }
 
 export async function runTask({task,state,stableExecutor,growingExecutor}={}){
-  if(!state||state.schema!=='zenomorph-three-body-runtime/v0.1.3') throw new Error('INVALID_RUNTIME_STATE');
+  if(!state||state.schema!=='zenomorph-three-body-runtime/v0.1.4') throw new Error('INVALID_RUNTIME_STATE');
   if(typeof stableExecutor!=='function'||typeof growingExecutor!=='function') throw new Error('EXECUTOR_REQUIRED');
 
   const taskId=hash(task).slice(0,16);
@@ -59,7 +59,7 @@ export async function runTask({task,state,stableExecutor,growingExecutor}={}){
 // This measures whether a retained candidate changes behavior; a mere difference is evidence of effect,
 // not proof that the effect is useful or promotable.
 export async function runAblationPair({task,state,candidateId,executor}={}){
-  if(!state||state.schema!=='zenomorph-three-body-runtime/v0.1.3') throw new Error('INVALID_RUNTIME_STATE');
+  if(!state||state.schema!=='zenomorph-three-body-runtime/v0.1.4') throw new Error('INVALID_RUNTIME_STATE');
   if(typeof executor!=='function') throw new Error('EXECUTOR_REQUIRED');
   const candidate=state.growing.candidates.find(x=>x.id===candidateId);
   if(!candidate) throw new Error('CANDIDATE_NOT_FOUND');
@@ -104,14 +104,10 @@ export function evaluatePromotion(state,candidateId){
   return {promotable:missing.length===0,missing,candidateId,rule:state.ingestionPolicy.rule};
 }
 
-export function promoteCandidate(state,candidateId){
-  const gate=evaluatePromotion(state,candidateId);
-  if(!gate.promotable) throw new Error(`PROMOTION_BLOCKED:${gate.missing.join(',')}`);
-  const idx=state.growing.candidates.findIndex(x=>x.id===candidateId);
-  const candidate=state.growing.candidates[idx];
-  state.stable.capabilities.push({id:candidate.id,kind:candidate.kind||'unknown',promotedAt:new Date().toISOString(),sourceCandidateFingerprint:hash(candidate)});
-  state.stable.revision+=1;
-  state.growing.candidates[idx]={...candidate,status:'incorporated'};
-  state.growing.revision+=1;
-  return state;
+// Legacy in-memory promotion is deliberately disabled. Passing eight boolean gates is qualification
+// evidence only; it is not repository authority. Stable incorporation must go through the guarded
+// incorporation path, which binds a fresh promotion receipt, canonical registry identity and
+// post-incorporation regression before persistence to main.
+export function promoteCandidate(){
+  throw new Error('DIRECT_PROMOTION_DISABLED:USE_GUARDED_INCORPORATION');
 }
