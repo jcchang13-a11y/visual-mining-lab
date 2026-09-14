@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320" role="img" aria-labelledby="title desc">
+  <title id="title">最後清場總覽由第三十二分回看受持讀誦與演說福德史</title>
+  <desc id="desc">總覽第四個藏身處在解釋第三十二分最後偈之前，明確把受持讀誦、為人演說的福德重新叫回來，沿第三十二、第二十四、第十九、第十六、第十五、第十一與第八分形成回溯鏈。</desc>
+  <rect width="320" height="320" fill="white"/>
+  <g fill="none" stroke="black" stroke-width="2">
+    <circle cx="160" cy="160" r="28"/>
+    <circle cx="160" cy="160" r="48"/>
+    <circle cx="160" cy="160" r="68"/>
+    <circle cx="160" cy="160" r="88"/>
+    <circle cx="160" cy="160" r="108"/>
+    <circle cx="160" cy="160" r="128"/>
+    <circle cx="160" cy="160" r="148"/>
+  </g>
+  <g fill="black" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Noto Sans TC', sans-serif" font-size="16" text-anchor="middle" dominant-baseline="middle">
+    <text x="160" y="160">32</text>
+    <text x="160" y="122">24</text>
+    <text x="160" y="102">19</text>
+    <text x="160" y="82">16</text>
+    <text x="160" y="62">15</text>
+    <text x="160" y="42">11</text>
+    <text x="160" y="22">8</text>
+  </g>
+</svg>
