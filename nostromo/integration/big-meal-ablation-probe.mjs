@@ -1,6 +1,7 @@
-// ZENOMORPH big-meal causal bridge v0.1.0
+// ZENOMORPH big-meal causal bridge v0.2.0
 // Converts only content-agnostic MUTHER topology from a prior meal into a Growing candidate,
 // then tests that candidate absent vs present on the same held-out meal. No Stable authority.
+// v0.2 adds bounded candidate overrides so rejected phenotypes can spawn isolated failure-ore offspring.
 import crypto from 'node:crypto';
 import {
   createRuntimeState,
@@ -32,7 +33,8 @@ export function deriveStructuralRoutingCandidate(priorMealResult){
     parameters:{
       similarityMedian:Number(median(similarities).toFixed(6)),
       spanMedian:Number(median(spans).toFixed(6)),
-      affinityCount:affinities.length
+      affinityCount:affinities.length,
+      pressureScale:1
     },
     boundary:'CONTENT_AGNOSTIC STRUCTURAL PRIOR ONLY. NO SOURCE TEXT, TOPIC LABEL, CLAIM, SUMMARY OR SEMANTIC HINT IS RETAINED.',
     evidence:{
@@ -49,6 +51,22 @@ export function deriveStructuralRoutingCandidate(priorMealResult){
   return candidate;
 }
 
+function boundedCandidate(priorMealResult,override){
+  const base=deriveStructuralRoutingCandidate(priorMealResult);
+  if(!override) return base;
+  if(override.kind!==base.kind) throw new Error('CANDIDATE_OVERRIDE_KIND_MISMATCH');
+  if(override.sourceMealId!==base.sourceMealId||override.sourceSha256!==base.sourceSha256) throw new Error('CANDIDATE_OVERRIDE_SOURCE_MISMATCH');
+  const pressureScale=Number(override?.parameters?.pressureScale);
+  if(!Number.isFinite(pressureScale)||pressureScale<0||pressureScale>2) throw new Error('CANDIDATE_OVERRIDE_PRESSURE_SCALE_OUT_OF_BOUNDS');
+  return {
+    ...base,
+    ...override,
+    parameters:{...base.parameters,...override.parameters,pressureScale},
+    evidence:{...base.evidence,...override.evidence,incorporated:false},
+    boundary:`${base.boundary} FAILURE-ORE OFFSPRING MAY ALTER ONLY BOUNDED STRUCTURAL ROUTING PRESSURE; IT HAS NO STABLE AUTHORITY.`
+  };
+}
+
 function defaultRoute(affinities,limit=12){
   return [...affinities]
     .sort((a,b)=>Number(b.similarity)-Number(a.similarity)||Number(a.a)-Number(b.a)||Number(a.b)-Number(b.b))
@@ -58,14 +76,17 @@ function defaultRoute(affinities,limit=12){
 function candidateRoute(affinities,candidate,limit=12){
   const simTarget=Number(candidate.parameters.similarityMedian)||0;
   const spanTarget=Math.max(1,Number(candidate.parameters.spanMedian)||1);
+  const pressureScale=Number.isFinite(Number(candidate.parameters.pressureScale))?Number(candidate.parameters.pressureScale):1;
   return [...affinities]
     .map(edge=>{
       const similarity=Number(edge.similarity)||0;
       const span=Math.abs(Number(edge.b)-Number(edge.a));
       // Similarity still dominates; prior topology only changes the secondary routing pressure.
+      // pressureScale is deliberately bounded by boundedCandidate() so failure-derived offspring
+      // can weaken/strengthen the same content-agnostic pressure without importing semantic hints.
       const spanPenalty=Math.abs(span-spanTarget)/(spanTarget+1);
       const simPenalty=Math.abs(similarity-simTarget);
-      const routingScore=similarity-(0.08*spanPenalty)-(0.04*simPenalty);
+      const routingScore=similarity-(pressureScale*0.08*spanPenalty)-(pressureScale*0.04*simPenalty);
       return {...edge,routingScore:Number(routingScore.toFixed(8))};
     })
     .sort((a,b)=>b.routingScore-a.routingScore||Number(b.similarity)-Number(a.similarity)||Number(a.a)-Number(b.a))
@@ -86,10 +107,10 @@ function routeSummary(edges){
   };
 }
 
-export async function runMealTopologyAblation({priorMealResult,heldoutMealResult,state=null}={}){
+export async function runMealTopologyAblation({priorMealResult,heldoutMealResult,state=null,candidateOverride=null}={}){
   const heldAffinities=heldoutMealResult?.muther?.affinities;
   if(!Array.isArray(heldAffinities)||!heldAffinities.length) throw new Error('HELDOUT_MEAL_AFFINITIES_REQUIRED');
-  const candidate=deriveStructuralRoutingCandidate(priorMealResult);
+  const candidate=boundedCandidate(priorMealResult,candidateOverride);
   const runtime=state||createRuntimeState();
   registerCandidate(runtime,candidate);
   const stableBefore=sha(runtime.stable);
@@ -113,7 +134,7 @@ export async function runMealTopologyAblation({priorMealResult,heldoutMealResult
   const stableAfter=sha(runtime.stable);
   const promotion=evaluatePromotion(runtime,candidate.id);
   return {
-    schema:'zenomorph-big-meal-ablation/v0.1',
+    schema:'zenomorph-big-meal-ablation/v0.2',
     status:pair.receipt.causalEffectObserved?'CAUSAL_ROUTING_EFFECT_OBSERVED_NOT_TRANSFER_PROOF':'NO_CAUSAL_ROUTING_EFFECT_OBSERVED',
     candidate:{...candidate,evidence:{...candidate.evidence}},
     control:pair.control,
@@ -121,6 +142,6 @@ export async function runMealTopologyAblation({priorMealResult,heldoutMealResult
     receipt:pair.receipt,
     stableUnchanged:stableBefore===stableAfter,
     promotion,
-    interpretation:'A route difference proves only that the retained first-meal structural prior can causally alter held-out routing. It does NOT prove usefulness, learning, cross-food transfer, or promotion. cross_food_transfer remains false until independent robustness/usefulness criteria and delayed retest pass.'
+    interpretation:'A route difference proves only that the retained first-meal structural prior or bounded failure-ore offspring can causally alter held-out routing. It does NOT prove usefulness, learning, cross-food transfer, or promotion. cross_food_transfer remains false until independent robustness/usefulness criteria and delayed retest pass.'
   };
 }
