@@ -1,0 +1,43 @@
+{
+  "schema": "zenomorph-big-meal/v1.0",
+  "id": "heldout-gutenberg-boston-cooking-school-1896",
+  "status": "SOURCE_VERIFIED_READY_FOR_ACQUISITION",
+  "kind": "complete-public-domain-procedural-cookbook",
+  "title": "The Boston cooking-school cook book",
+  "author": "Fannie Merritt Farmer",
+  "year": 1896,
+  "identifier": "Project Gutenberg eBook 65061",
+  "doi": "",
+  "versionOfRecordDate": "Project Gutenberg current text representation; last update 2024-10-18",
+  "license": "Public domain in the USA / Project Gutenberg terms apply to distribution",
+  "source": {
+    "primary": "https://www.gutenberg.org/files/65061/65061-0.txt",
+    "landing": "https://www.gutenberg.org/ebooks/65061",
+    "publisherVerification": {
+      "publisher": "Project Gutenberg",
+      "ebookNumber": 65061,
+      "language": "English",
+      "originalPublicationYear": 1896,
+      "lastUpdate": "2024-10-18"
+    }
+  },
+  "ingestionLaw": "WHOLE_ARTICLE_IS_ONE_FOOD_BODY",
+  "humanPreselection": false,
+  "humanSummaryBeforeIngestion": false,
+  "humanThemeHints": false,
+  "heldOutRole": "THIRD_ORTHOGONAL_CROSS_FOOD_PROBE_PROCEDURAL_REFERENCE",
+  "requirements": {
+    "preserveSourceIdentity": true,
+    "hashFetchedRepresentation": true,
+    "allowTechnicalChunkingWithoutSemanticPreselection": true,
+    "dropletAcquireAndVerify": true,
+    "mutherReadDecomposeRecomposeMutate": true,
+    "gutAbsorbQuarantineExcrete": true,
+    "vajraAttackAnalogyAndSelfProjection": true,
+    "shroomingReceivePostDigestMaterial": true,
+    "noPromotionFromThisMealAlone": true,
+    "crossFoodComparisonRequired": true,
+    "delayedRetestRequired": true
+  },
+  "successBoundary": "This complete public-domain procedural cookbook is a third orthogonal held-out food. Recipe vocabulary, food-domain overlap, generic section structure, or mere routing difference are not usefulness or transfer evidence. It is used to test whether the same frozen content-agnostic candidate survives a non-narrative reference/procedural text without Stable modification."
+}
