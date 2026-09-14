@@ -20,3 +20,13 @@
     page-break-before:avoid;
   }
 }
+
+/* 2026-09-15｜110×190mm 幾何校準鷹架。
+   上面的 148mm 保留作前一層施工斷面；但書身扣除 13/15mm 頁邊後只剩 162mm 高，
+   若再加 figure 上下 margin 與 2–3 行 caption，148mm 圖身本身已沒有完整落頁空間。
+   LIVE 出版層因此追加較保守的 132mm 上限，只縮放、不裁圖、不移位、不改 caption。 */
+@media print{
+  .retro-figure__img{
+    max-height:132mm;
+  }
+}
