@@ -57,7 +57,7 @@ jobs:
       - name: Evaluate whether the cross-food effect is useful rather than merely different
         run: |
           node nostromo/integration/big-meal-usefulness-runner.mjs --input=/tmp/cross-food-robustness.json --output=/tmp/cross-food-usefulness.json > /tmp/cross-food-usefulness.stdout
-          node -e "const x=require('/tmp/cross-food-usefulness.json'); if(x.stableUnchanged!==true||x.promotion?.promotable!==false||x.heldoutCount<2) process.exit(1); console.log(JSON.stringify({candidateId:x.candidateId,crossFoodUsefulnessPassed:x.crossFoodUsefulnessPassed,passedCount:x.passedCount,heldoutCount:x.heldoutCount,results:x.results,promotion:x.promotion},null,2))"
+          node -e "const x=require('/tmp/cross-food-usefulness.json'); if(x.stableUnchanged!==true||x.promotion?.promotable!==false||x.heldoutCount<2||x.crossFoodUsefulnessPassed!==true||x.passedCount!==x.heldoutCount) process.exit(1); console.log(JSON.stringify({candidateId:x.candidateId,crossFoodUsefulnessPassed:x.crossFoodUsefulnessPassed,passedCount:x.passedCount,heldoutCount:x.heldoutCount,results:x.results,promotion:x.promotion},null,2))"
       - name: Run delayed cross-food retention retest against frozen prior identity
         run: |
           node nostromo/integration/big-meal-delayed-retest-runner.mjs \
