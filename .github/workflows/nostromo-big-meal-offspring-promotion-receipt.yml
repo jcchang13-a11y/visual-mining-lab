@@ -1,0 +1,52 @@
+name: NOSTROMO Big Meal Offspring Promotion Receipt
+
+on:
+  push:
+    paths:
+      - 'nostromo/integration/big-meal-offspring-promotion-receipt.mjs'
+      - 'nostromo/integration/big-meal-offspring-qualification-runner.mjs'
+      - 'nostromo/integration/big-meal-ablation-probe.mjs'
+      - 'nostromo/integration/big-meal-failure-ore-offspring.mjs'
+      - 'nostromo/integration/big-meal-usefulness-gate.mjs'
+      - 'nostromo/integration/big-meal-runner.mjs'
+      - 'nostromo/integration/connector-queue.json'
+      - 'nostromo/gut/**'
+      - 'nostromo/vajra/**'
+      - 'nostromo/research/big-meals/**'
+      - '.github/workflows/nostromo-big-meal-offspring-promotion-receipt.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  issue-promotion-receipt:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install PDF text extractor
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq poppler-utils
+      - name: Issue evidence-only promotion receipt
+        id: receipt
+        continue-on-error: true
+        run: |
+          node nostromo/integration/big-meal-offspring-promotion-receipt.mjs --output=/tmp/offspring-promotion-receipt.json > /tmp/offspring-promotion-receipt.stdout
+          node -e "const x=require('/tmp/offspring-promotion-receipt.json'); console.log(JSON.stringify(x,null,2)); const e=x.evidence||{}; const required=['stress','provenance','cross_organ','regression','held_out','usefulness_validated','cross_food_transfer','delayed_retest']; if(x.promotion?.promotable!==true||x.promotion?.incorporated!==false||x.stableUnchanged!==true||x.qualification?.passed!==true||x.qualification?.crossFoodExplicit!==true||required.some(k=>e[k]!==true)) process.exit(1)"
+      - name: Preserve promotion receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: zenomorph-offspring-promotion-receipt
+          path: |
+            /tmp/offspring-promotion-receipt.json
+            /tmp/offspring-promotion-receipt.stdout
+          retention-days: 30
+      - name: Enforce incorporation boundary
+        if: steps.receipt.outcome != 'success'
+        run: |
+          echo 'Promotion receipt refused or incomplete. Candidate remains in Growing/Shadow; Stable incorporation is forbidden.'
+          exit 1
