@@ -19,10 +19,11 @@
 - self-check 建立 commit `27e0b0d...` 對應的當次 `Deploy Visual Mining Lab` run `34764373668` 結論是 **cancelled**。因此不能把「建立 self-check」那一筆 commit 本身說成已成功部署。
 - self-check 檔案其後持續存在於 main。較新的站點部署 run `34800385786` 對 head `02cd9a505f15fb94d9c9ab195fa3313774b05524` 已 `completed / success`。
 - 再次核對較晚的站點部署 run `34806659196`，head `b167ec78bfc5d07aa6eb5870f6ef7599889f4f88`，建立時間 2026-09-14T04:36:05Z，結論同樣為 **completed / success**。
-- 2026-09-14 13:46 Asia/Taipei 後再次核對，最新可見的 `Deploy Visual Mining Lab` run `34810045291`，head `2d5387598e236e404d6486f35c124121e4b6baba`，建立時間 2026-09-14T05:33:09Z，結論仍為 **completed / success**。這是目前更晚於 self-check 建立 commit 的成功部署世代。
+- 2026-09-14 13:46 Asia/Taipei 後再次核對，`Deploy Visual Mining Lab` run `34810045291`，head `2d5387598e236e404d6486f35c124121e4b6baba`，建立時間 2026-09-14T05:33:09Z，結論為 **completed / success**。
+- 2026-09-14 15:13 Asia/Taipei 再核對，更新的 `Deploy Visual Mining Lab` run `34814585954`，head `03665d7f730dd4e735ec94e7ba7a4a8ec9dad38b`，建立時間 2026-09-14T06:42:26Z，結論仍為 **completed / success**。因此部署鏈持續健康，且成功世代明顯晚於 self-check 建立 commit。
 - GitHub compare／歷史關係顯示後續成功部署 head 位於 self-check 建立 commit 之後；因此目前成功部署的 main 世代已包含 self-check 檔案，而不是停留在其之前。
 - 以上仍只證明「包含 self-check 的後續 main 已通過站點部署流程」，不能取代公開瀏覽器內 JavaScript 實際 fetch 三個 Markdown 後顯示的 3/3 PASS。Round 2 仍不得提前宣告 PASS。
-- 本輪再次嘗試從執行環境直接解析 `jcchang13-a11y.github.io` 取得公開頁，DNS 解析仍暫時失敗；此為外部驗證通道限制，不能被記為網站 FAIL，也不能被拿來當 PASS。
+- 本輪再次嘗試從執行環境直接解析 `jcchang13-a11y.github.io` 取得公開頁，DNS 解析仍失敗；此為外部驗證通道限制，不能被記為網站 FAIL，也不能被拿來當 PASS。
 
 ## Self-check 程式邏輯核對
 - `round2-selfcheck.html` 目前仍以相對路徑 `../gangchibao-v8/unit-<id>.md` 對 30000、30390、30450 做 `fetch(..., {cache:'no-store'})`。
