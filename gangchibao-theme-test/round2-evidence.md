@@ -17,16 +17,22 @@
 
 ## 部署鏈補強（2026-09-14）
 - self-check 建立 commit `27e0b0d...` 對應的當次 `Deploy Visual Mining Lab` run `34764373668` 結論是 **cancelled**。因此不能把「建立 self-check」那一筆 commit 本身說成已成功部署。
-- self-check 檔案其後持續存在於 main。2026-09-14 重新核對，較新的站點部署 run `34800385786` 對 head `02cd9a505f15fb94d9c9ab195fa3313774b05524` 已 `completed / success`。
-- 再次核對目前更晚的站點部署：`Deploy Visual Mining Lab` run `34806659196`，head `b167ec78bfc5d07aa6eb5870f6ef7599889f4f88`，建立時間 2026-09-14T04:36:05Z，結論同樣為 **completed / success**。這證明目前成功部署世代仍持續位於 self-check 建立 commit 之後，沒有退回到 self-check 之前的站點版本。
+- self-check 檔案其後持續存在於 main。較新的站點部署 run `34800385786` 對 head `02cd9a505f15fb94d9c9ab195fa3313774b05524` 已 `completed / success`。
+- 再次核對較晚的站點部署 run `34806659196`，head `b167ec78bfc5d07aa6eb5870f6ef7599889f4f88`，建立時間 2026-09-14T04:36:05Z，結論同樣為 **completed / success**。
+- 2026-09-14 13:46 Asia/Taipei 後再次核對，最新可見的 `Deploy Visual Mining Lab` run `34810045291`，head `2d5387598e236e404d6486f35c124121e4b6baba`，建立時間 2026-09-14T05:33:09Z，結論仍為 **completed / success**。這是目前更晚於 self-check 建立 commit 的成功部署世代。
 - GitHub compare／歷史關係顯示後續成功部署 head 位於 self-check 建立 commit 之後；因此目前成功部署的 main 世代已包含 self-check 檔案，而不是停留在其之前。
 - 以上仍只證明「包含 self-check 的後續 main 已通過站點部署流程」，不能取代公開瀏覽器內 JavaScript 實際 fetch 三個 Markdown 後顯示的 3/3 PASS。Round 2 仍不得提前宣告 PASS。
 - 本輪再次嘗試從執行環境直接解析 `jcchang13-a11y.github.io` 取得公開頁，DNS 解析仍暫時失敗；此為外部驗證通道限制，不能被記為網站 FAIL，也不能被拿來當 PASS。
 
+## Self-check 程式邏輯核對
+- `round2-selfcheck.html` 目前仍以相對路徑 `../gangchibao-v8/unit-<id>.md` 對 30000、30390、30450 做 `fetch(..., {cache:'no-store'})`。
+- 每一項必須同時滿足 HTTP `ok` 與去 BOM／trim 後正文長度 > 100；最後只有 3/3 才設定 `data-round2-selfcheck="pass"` 並顯示 `ROUND 2 SELF-CHECK PASS`。
+- 因此自檢頁本身沒有把部署成功、檔案存在或短空白回應誤算成 PASS；目前缺的仍是公開瀏覽器執行後的實際結果。
+
 ## 正文來源
 22 單元沿用正式 V8 的既有 unit Markdown：30000、30210、30220、30230、30240B、30250、30260B、30270B、30280B、30310B、30320、30330、30340、30350A、30360、30370、30380、30390、30410A、30430、30440、30450。
 
-本輪以 GitHub contents API 再核對三個抽驗來源存在且可讀：
+先前以 GitHub contents API 抽驗三個來源存在且可讀：
 - `unit-30000.md` blob `f7d4984faf1bcf1962fbf24389ac87ee1c6baf4e`
 - `unit-30390.md` blob `90bc93dd7425fa23f217498a392826044fcee823`
 - `unit-30450.md` blob `23dc3fd77b690ec67afabe163ab14ac7a7019d76`
@@ -35,7 +41,8 @@
 
 ## 作者自薦 source of truth
 - 2026-09-14 本輪再次直接讀取 Google Drive 原生文件《作者自薦｜張榮哲 × EVA》，revision：`ANLCKQmdSGQwKt49sg6oKHxwvHuY2APjzt5-nWpl1-FYz4ofwswsNeNwcI_QWNpAfoVTagXjfDWlSYW1TvmX8DLNglW-EZbZINd0QJtoE7k`。
-- revision 與先前記錄一致；目前沒有看到比既有五句固定必選規則更新的狀態變更。正式進 Round 3 前仍須再次比對 revision。
+- 最新主檔仍明示：下載版固定保留原先兩句；另有「在理論與實踐之間，我選擇了躺平。」與 EVA 的「AI 可能會犯錯……本書所有的資訊都不重要。」標為固定出現；「我長期走入底層……最後都通往我的作者簡介。」已由隨機池升級為固定出現。合併工程規則後，目前五句固定必選沒有出現新的升級／降級狀態。
+- revision 與先前記錄一致。正式啟動 Round 3 前仍須再次比對 revision；若主檔更新，以 Drive 最新狀態覆蓋舊清單。
 
 ## Theme 001 寄生層
 Round 2 只建立宿主殼與唯讀接線，不提前宣告污染驗收成功。目次、字體、版心、經名式前置頁、低成本黑白紙本語法已由獨立 CSS 接管；作者自薦與完整出版前置系統留待 Round 3。
