@@ -1,0 +1,51 @@
+name: NOSTROMO Big Meal Offspring Qualification Gauntlet
+
+on:
+  push:
+    paths:
+      - 'nostromo/integration/big-meal-offspring-qualification-runner.mjs'
+      - 'nostromo/integration/big-meal-ablation-probe.mjs'
+      - 'nostromo/integration/big-meal-failure-ore-offspring.mjs'
+      - 'nostromo/integration/big-meal-failure-ore-offspring-runner.mjs'
+      - 'nostromo/integration/big-meal-usefulness-gate.mjs'
+      - 'nostromo/integration/big-meal-runner.mjs'
+      - 'nostromo/gut/**'
+      - 'nostromo/vajra/**'
+      - 'nostromo/research/big-meals/**'
+      - '.github/workflows/nostromo-big-meal-offspring-qualification.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  qualify-offspring:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install PDF text extractor
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq poppler-utils
+      - name: Run isolated qualification gauntlet
+        id: qualify
+        continue-on-error: true
+        run: |
+          node nostromo/integration/big-meal-offspring-qualification-runner.mjs --output=/tmp/offspring-qualification.json > /tmp/offspring-qualification.stdout
+          node -e "const x=require('/tmp/offspring-qualification.json'); console.log(JSON.stringify({candidate:x.candidate,provenance:x.provenance,stress:x.stress,crossOrgan:x.crossOrgan,regression:x.regression,stableUnchanged:x.stableUnchanged,qualificationPassed:x.qualificationPassed,promotion:x.promotion},null,2)); if(x.qualificationPassed!==true||x.stableUnchanged!==true||x.promotion?.promotable!==false||x.promotion?.incorporated!==false) process.exit(1)"
+      - name: Preserve qualification receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: zenomorph-offspring-qualification
+          path: |
+            /tmp/offspring-qualification.json
+            /tmp/offspring-qualification.stdout
+          retention-days: 30
+      - name: Enforce qualification boundary
+        if: steps.qualify.outcome != 'success'
+        run: |
+          echo 'Offspring did not pass all isolated stress/provenance/cross-organ/regression gates. Keep it in Growing/Shadow.'
+          exit 1
