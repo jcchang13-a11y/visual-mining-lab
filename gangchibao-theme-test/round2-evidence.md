@@ -20,8 +20,14 @@
 - self-check 檔案其後持續存在於 main；多個較新的站點部署均成功，包括 run `34800385786`、`34806659196`、`34810045291`、`34814585954`、`34844979794`。
 - 2026-09-15 00:35 Asia/Taipei 後再次核對最新可見站點部署：run `34869600944`，head `3fb5805ed4369213889d9991958a54f2c67d5561`，建立時間 `2026-09-14T16:35:53Z`，結論 **completed / success**。這個成功世代明顯晚於 self-check 建立 commit，且 self-check 仍存在於 main。
 - 2026-09-15 02:50 Asia/Taipei 本輪再核對：更新的 `Deploy Visual Mining Lab` run `34882127555`，head `a53b3bfce657ad5605128e8291cfe27d2974a562`，建立時間 `2026-09-14T18:39:23Z`，結論仍為 **completed / success**。因此 self-check 已跨越多個成功部署世代持續存在。
+- 2026-09-15 03:15 Asia/Taipei 再核對：前一次 evidence refresh commit `d3c541433a82ca1e3e1f1d44a26d5393e3367e7f` 對應的 `Deploy Visual Mining Lab` run `34883329231` 已 **completed / success**，開始時間 `2026-09-14T18:51:11Z`。因此目前 main 上的 self-check 與 Round 2 證據檔至少已經過又一個成功站點部署世代。
 - 上述證據只證明「包含 self-check 的後續 main 已通過站點部署流程」，不能取代公開瀏覽器內 JavaScript 實際 fetch 三個 Markdown 後顯示的 3/3 PASS。Round 2 仍不得提前宣告 PASS。
-- 目前執行環境仍沒有可用的真實瀏覽器 JavaScript 執行通道可對 GitHub Pages self-check 做最終 3/3 驗證；因此這個外部驗證通道限制不記網站 FAIL，也不記 PASS。
+
+## 2026-09-15 03:15 瀏覽器驗證嘗試
+- 執行環境確認存在系統 Chromium (`/usr/bin/chromium`) 與 Playwright Python 套件，因此本輪實際嘗試用真實 headless Chromium 開啟公開 self-check URL，而不是只做 HTTP／repo 靜態推論。
+- Chromium 對 `https://jcchang13-a11y.github.io/.../round2-selfcheck.html` 的導覽被執行環境管理政策直接阻擋，回報 `net::ERR_BLOCKED_BY_ADMINISTRATOR`；這是驗證環境的外部網路限制，不是 self-check 自身回傳 FAIL。
+- 另嘗試一般 HTTPS 連線，容器 DNS 無法解析 `jcchang13-a11y.github.io`；同樣只能證明本執行環境無法到達 GitHub Pages，不能把它記成網站失敗。
+- 因此本輪仍維持 **BROWSER VERIFICATION PENDING**，不以 repo、commit、deployment success 或環境阻擋冒充 3/3 PASS。
 
 ## Self-check 程式邏輯核對
 - `round2-selfcheck.html` 目前仍以相對路徑 `../gangchibao-v8/unit-<id>.md` 對 30000、30390、30450 做 `fetch(..., {cache:'no-store'})`。
@@ -39,7 +45,7 @@
 以上只能證明 repo 來源存在，不能取代公開部署端的瀏覽器 fetch 驗證。
 
 ## 作者自薦 source of truth
-- 2026-09-15 02:50 Asia/Taipei 再次直接讀取 Google Drive 原生文件《作者自薦｜張榮哲 × EVA》，revision 仍為 `ANLCKQmdSGQwKt49sg6oKHxwvHuY2APjzt5-nWpl1-FYz4ofwswsNeNwcI_QWNpAfoVTagXjfDWlSYW1TvmX8DLNglW-EZbZINd0QJtoE7k`，沒有新的升級／降級標記。
+- 2026-09-15 03:15 Asia/Taipei 再次直接讀取 Google Drive 原生文件《作者自薦｜張榮哲 × EVA》，revision 仍為 `ANLCKQmdSGQwKt49sg6oKHxwvHuY2APjzt5-nWpl1-FYz4ofwswsNeNwcI_QWNpAfoVTagXjfDWlSYW1TvmX8DLNglW-EZbZINd0QJtoE7k`，沒有新的升級／降級標記。
 - 最新主檔仍明示：下載版固定保留原先兩句；另有「在理論與實踐之間，我選擇了躺平。」與 EVA 的「AI 可能會犯錯……本書所有的資訊都不重要。」標為固定出現；「我長期走入底層……最後都通往我的作者簡介。」已由隨機池升級為固定出現。合併工程規則後，目前五句固定必選沒有出現新的升級／降級狀態。
 - 正式啟動 Round 3 前仍須再次比對 revision；若主檔更新，以 Drive 最新狀態覆蓋舊清單。
 
