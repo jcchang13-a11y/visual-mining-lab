@@ -18,9 +18,10 @@
 ## 部署鏈補強（2026-09-14）
 - self-check 建立 commit `27e0b0d...` 對應的當次 `Deploy Visual Mining Lab` run `34764373668` 結論是 **cancelled**。因此不能把「建立 self-check」那一筆 commit 本身說成已成功部署。
 - self-check 檔案其後持續存在於 main。2026-09-14 重新核對，較新的站點部署 run `34800385786` 對 head `02cd9a505f15fb94d9c9ab195fa3313774b05524` 已 `completed / success`。
-- GitHub compare 顯示 `02cd9a5...` 相對 `27e0b0d...` 為 `ahead`，且 self-check 建立 commit 是共同歷史的一部分；因此目前成功部署的 main 世代已包含 self-check 檔案，而不是停留在其之前。
-- 這仍只證明「包含 self-check 的後續 main 已通過站點部署流程」，不能取代公開瀏覽器內 JavaScript 實際 fetch 三個 Markdown 後顯示的 3/3 PASS。Round 2 仍不得提前宣告 PASS。
-- 本輪另嘗試從執行環境直接解析 `jcchang13-a11y.github.io` 以取得公開頁，但環境 DNS 解析暫時失敗；此為外部驗證通道限制，不能被記為網站 FAIL，也不能被拿來當 PASS。
+- 再次核對目前更晚的站點部署：`Deploy Visual Mining Lab` run `34806659196`，head `b167ec78bfc5d07aa6eb5870f6ef7599889f4f88`，建立時間 2026-09-14T04:36:05Z，結論同樣為 **completed / success**。這證明目前成功部署世代仍持續位於 self-check 建立 commit 之後，沒有退回到 self-check 之前的站點版本。
+- GitHub compare／歷史關係顯示後續成功部署 head 位於 self-check 建立 commit 之後；因此目前成功部署的 main 世代已包含 self-check 檔案，而不是停留在其之前。
+- 以上仍只證明「包含 self-check 的後續 main 已通過站點部署流程」，不能取代公開瀏覽器內 JavaScript 實際 fetch 三個 Markdown 後顯示的 3/3 PASS。Round 2 仍不得提前宣告 PASS。
+- 本輪再次嘗試從執行環境直接解析 `jcchang13-a11y.github.io` 取得公開頁，DNS 解析仍暫時失敗；此為外部驗證通道限制，不能被記為網站 FAIL，也不能被拿來當 PASS。
 
 ## 正文來源
 22 單元沿用正式 V8 的既有 unit Markdown：30000、30210、30220、30230、30240B、30250、30260B、30270B、30280B、30310B、30320、30330、30340、30350A、30360、30370、30380、30390、30410A、30430、30440、30450。
@@ -33,8 +34,8 @@
 以上只能證明 repo 來源存在，不能取代公開部署端的瀏覽器 fetch 驗證。
 
 ## 作者自薦 source of truth
-- 2026-09-14 已重新讀取 Google Drive 原生文件《作者自薦｜張榮哲 × EVA》，revision：`ANLCKQmdSGQwKt49sg6oKHxwvHuY2APjzt5-nWpl1-FYz4ofwswsNeNwcI_QWNpAfoVTagXjfDWlSYW1TvmX8DLNglW-EZbZINd0QJtoE7k`。
-- 目前沒有看到比既有五句固定必選規則更新的狀態變更；正式進 Round 3 前仍須再次比對 revision。
+- 2026-09-14 本輪再次直接讀取 Google Drive 原生文件《作者自薦｜張榮哲 × EVA》，revision：`ANLCKQmdSGQwKt49sg6oKHxwvHuY2APjzt5-nWpl1-FYz4ofwswsNeNwcI_QWNpAfoVTagXjfDWlSYW1TvmX8DLNglW-EZbZINd0QJtoE7k`。
+- revision 與先前記錄一致；目前沒有看到比既有五句固定必選規則更新的狀態變更。正式進 Round 3 前仍須再次比對 revision。
 
 ## Theme 001 寄生層
 Round 2 只建立宿主殼與唯讀接線，不提前宣告污染驗收成功。目次、字體、版心、經名式前置頁、低成本黑白紙本語法已由獨立 CSS 接管；作者自薦與完整出版前置系統留待 Round 3。
