@@ -13,6 +13,9 @@ on:
       - 'nostromo/integration/big-meal-cross-food-robustness-runner.mjs'
       - 'nostromo/integration/big-meal-delayed-retest-runner.mjs'
       - 'nostromo/integration/big-meal-delayed-retest-runner.test.mjs'
+      - 'nostromo/integration/big-meal-usefulness-gate.mjs'
+      - 'nostromo/integration/big-meal-usefulness-gate.test.mjs'
+      - 'nostromo/integration/big-meal-usefulness-runner.mjs'
       - 'nostromo/runtime/body-router.mjs'
       - '.github/workflows/nostromo-big-meal-acquire.yml'
   workflow_dispatch:
@@ -35,6 +38,8 @@ jobs:
         run: node --test nostromo/integration/big-meal-ablation-probe.test.mjs
       - name: Unit-test delayed retention identity gate
         run: node --test nostromo/integration/big-meal-delayed-retest-runner.test.mjs
+      - name: Unit-test cross-food usefulness gate
+        run: node --test nostromo/integration/big-meal-usefulness-gate.test.mjs
       - name: Install PDF text extractor
         run: sudo apt-get update -qq && sudo apt-get install -y -qq poppler-utils
       - name: Acquire, verify, and digest Pasquinelli through robust fallback path
@@ -49,6 +54,10 @@ jobs:
         run: |
           node nostromo/integration/big-meal-cross-food-robustness-runner.mjs --output=/tmp/cross-food-robustness.json > /tmp/cross-food-robustness.stdout
           node -e "const x=require('/tmp/cross-food-robustness.json'); if(x.stableUnchanged!==true||x.promotion?.promotable!==false||x.heldoutCount<2||!x.candidateId||x.sameCandidate!==true) process.exit(1); console.log(JSON.stringify({status:x.status,prior:x.prior,candidateId:x.candidateId,causalEffects:x.causalEffects,heldoutCount:x.heldoutCount,crossFoodCausalRobustness:x.crossFoodCausalRobustness,stableUnchanged:x.stableUnchanged,promotion:x.promotion,heldouts:x.heldouts.map(h=>({mealId:h.mealId,sourceSha256:h.sourceSha256,mutherChunkCount:h.mutherChunkCount,causalEffectObserved:h.receipt?.causalEffectObserved,stableUnchanged:h.stableUnchanged}))},null,2))"
+      - name: Evaluate whether the cross-food effect is useful rather than merely different
+        run: |
+          node nostromo/integration/big-meal-usefulness-runner.mjs --input=/tmp/cross-food-robustness.json --output=/tmp/cross-food-usefulness.json > /tmp/cross-food-usefulness.stdout
+          node -e "const x=require('/tmp/cross-food-usefulness.json'); if(x.stableUnchanged!==true||x.promotion?.promotable!==false||x.heldoutCount<2) process.exit(1); console.log(JSON.stringify({candidateId:x.candidateId,crossFoodUsefulnessPassed:x.crossFoodUsefulnessPassed,passedCount:x.passedCount,heldoutCount:x.heldoutCount,results:x.results,promotion:x.promotion},null,2))"
       - name: Run delayed cross-food retention retest against frozen prior identity
         run: |
           node nostromo/integration/big-meal-delayed-retest-runner.mjs \
@@ -63,5 +72,6 @@ jobs:
           path: |
             /tmp/live-cross-food-causal.json
             /tmp/cross-food-robustness.json
+            /tmp/cross-food-usefulness.json
             /tmp/delayed-cross-food-retest.json
           retention-days: 30
