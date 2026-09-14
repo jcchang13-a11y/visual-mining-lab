@@ -34,7 +34,7 @@ jobs:
         continue-on-error: true
         run: |
           node nostromo/integration/big-meal-offspring-qualification-runner.mjs --output=/tmp/offspring-qualification.json > /tmp/offspring-qualification.stdout
-          node -e "const x=require('/tmp/offspring-qualification.json'); console.log(JSON.stringify({candidate:x.candidate,provenance:x.provenance,stress:x.stress,crossOrgan:x.crossOrgan,regression:x.regression,stableUnchanged:x.stableUnchanged,qualificationPassed:x.qualificationPassed,promotion:x.promotion},null,2)); if(x.qualificationPassed!==true||x.stableUnchanged!==true||x.promotion?.promotable!==false||x.promotion?.incorporated!==false) process.exit(1)"
+          node -e "const x=require('/tmp/offspring-qualification.json'); console.log(JSON.stringify({candidate:x.candidate,provenance:x.provenance,crossFoodTransfer:x.crossFoodTransfer,stress:x.stress,crossOrgan:x.crossOrgan,regression:x.regression,stableUnchanged:x.stableUnchanged,qualificationPassed:x.qualificationPassed,promotion:x.promotion},null,2)); if(x.qualificationPassed!==true||x.crossFoodTransfer?.passed!==true||x.promotion?.evidence?.cross_food_transfer!==true||x.stableUnchanged!==true||x.promotion?.promotable!==false||x.promotion?.incorporated!==false) process.exit(1)"
       - name: Preserve qualification receipt
         if: always()
         uses: actions/upload-artifact@v4
@@ -47,5 +47,5 @@ jobs:
       - name: Enforce qualification boundary
         if: steps.qualify.outcome != 'success'
         run: |
-          echo 'Offspring did not pass all isolated stress/provenance/cross-organ/regression gates. Keep it in Growing/Shadow.'
+          echo 'Offspring did not pass explicit cross-food transfer plus isolated stress/provenance/cross-organ/regression gates. Keep it in Growing/Shadow.'
           exit 1
