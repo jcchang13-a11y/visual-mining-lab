@@ -31,7 +31,7 @@ let gate=evaluatePromotion(state,'candidate-1');
 assert.equal(gate.promotable,false);
 assert.deepEqual(gate.missing,['cross_food_transfer']);
 assert.equal(gate.rule,'EDIBLE_DOES_NOT_IMPLY_ABSORBABLE');
-assert.throws(()=>promoteCandidate(state,'candidate-1'),/PROMOTION_BLOCKED/);
+assert.throws(()=>promoteCandidate(state,'candidate-1'),/DIRECT_PROMOTION_DISABLED:USE_GUARDED_INCORPORATION/);
 
 const ablation=await runAblationPair({
   task:{kind:'held-out',payload:'orthogonal-food'},
@@ -51,9 +51,9 @@ assert.equal(state.shadow.ablationReceipts.length,1);
 
 state.growing.candidates[0].evidence.cross_food_transfer=true;
 gate=evaluatePromotion(state,'candidate-1');
-assert.equal(gate.promotable,true);
-promoteCandidate(state,'candidate-1');
-assert.equal(state.stable.capabilities.some(x=>x.id==='candidate-1'),true);
-assert.equal(state.growing.candidates[0].status,'incorporated');
+assert.equal(gate.promotable,true,'8/8 means qualified for guarded promotion receipt, not direct Stable mutation');
+assert.throws(()=>promoteCandidate(state,'candidate-1'),/DIRECT_PROMOTION_DISABLED:USE_GUARDED_INCORPORATION/);
+assert.equal(state.stable.capabilities.some(x=>x.id==='candidate-1'),false,'qualified candidate cannot enter Stable through legacy runtime helper');
+assert.equal(state.growing.candidates[0].status,'candidate');
 
-console.log(JSON.stringify({status:'PASS',stableRevision:state.stable.revision,growingRevision:state.growing.revision,shadowRevision:state.shadow.revision,ablationReceipts:state.shadow.ablationReceipts.length,gate:'8/8',ingestionRule:state.ingestionPolicy.rule},null,2));
+console.log(JSON.stringify({status:'PASS',stableRevision:state.stable.revision,growingRevision:state.growing.revision,shadowRevision:state.shadow.revision,ablationReceipts:state.shadow.ablationReceipts.length,gate:'8/8_QUALIFICATION_ONLY',directPromotion:'DISABLED',ingestionRule:state.ingestionPolicy.rule},null,2));
