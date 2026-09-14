@@ -1,0 +1,78 @@
+name: NOSTROMO Big Meal Offspring Guarded Incorporation
+
+on:
+  push:
+    paths:
+      - 'nostromo/integration/big-meal-offspring-guarded-incorporation.mjs'
+      - 'nostromo/integration/big-meal-offspring-promotion-receipt.mjs'
+      - 'nostromo/integration/big-meal-offspring-qualification-runner.mjs'
+      - 'nostromo/runtime/body-router.mjs'
+      - '.github/workflows/nostromo-big-meal-offspring-guarded-incorporation.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  guarded-incorporation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install PDF text extractor
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq poppler-utils
+      - name: Stage receipt-bound Stable incorporation
+        run: |
+          node nostromo/integration/big-meal-offspring-guarded-incorporation.mjs --apply --output=/tmp/incorporation-staged.json > /tmp/incorporation.stdout
+          node -e "const x=require('/tmp/incorporation-staged.json'); if(x.incorporated!==true||x.status!=='INCORPORATION_STAGED_POSTCHECKS_REQUIRED'||(x.connectorAudit?.pending||[]).length) process.exit(1)"
+      - name: Verify fresh-process Stable load
+        run: |
+          node --input-type=module -e "import {createRuntimeState} from './nostromo/runtime/body-router.mjs'; import fs from 'node:fs'; const staged=JSON.parse(fs.readFileSync('/tmp/incorporation-staged.json')); const s=createRuntimeState(); const matches=s.stable.capabilities.filter(x=>x.id===staged.candidateId); if(matches.length!==1||matches[0].authority!=='STABLE') process.exit(1); console.log(JSON.stringify({candidateId:staged.candidateId,stableRevision:s.stable.revision,stableCapabilityCount:s.stable.capabilities.length},null,2));" > /tmp/stable-load.json
+      - name: Re-run qualification after Stable staging
+        run: |
+          node nostromo/integration/big-meal-offspring-qualification-runner.mjs --output=/tmp/post-incorporation-qualification.json > /tmp/post-incorporation-qualification.stdout
+          node -e "const x=require('/tmp/post-incorporation-qualification.json'); const e=x.promotion?.evidence||{}; const req=['stress','provenance','cross_organ','regression','held_out','usefulness_validated','cross_food_transfer','delayed_retest']; if(x.qualificationPassed!==true||x.stableUnchanged!==true||x.crossFoodTransfer?.passed!==true||req.some(k=>e[k]!==true)) process.exit(1)"
+      - name: Runtime regression
+        run: node nostromo/runtime/body-router.test.mjs > /tmp/runtime-regression.stdout
+      - name: Seal incorporation receipt
+        run: |
+          mkdir -p nostromo/research/big-meals
+          node - <<'NODE'
+          const fs=require('fs'),crypto=require('crypto');
+          const staged=JSON.parse(fs.readFileSync('/tmp/incorporation-staged.json'));
+          const stableLoad=JSON.parse(fs.readFileSync('/tmp/stable-load.json'));
+          const qualification=JSON.parse(fs.readFileSync('/tmp/post-incorporation-qualification.json'));
+          const registry=JSON.parse(fs.readFileSync('nostromo/runtime/stable-structural-capabilities.json'));
+          const hash=x=>crypto.createHash('sha256').update(JSON.stringify(x)).digest('hex');
+          const exact=registry.capabilities.filter(x=>x.id===staged.candidateId);
+          if(exact.length!==1||hash(registry)!==staged.stable.afterFingerprint) throw new Error('REGISTRY_IDENTITY_POSTCHECK_FAILED');
+          const receipt={...staged,status:'INCORPORATED_POSTCHECKS_PASSED',sealedAt:new Date().toISOString(),incorporated:true,postChecks:{freshProcessStableLoad:true,qualificationRegression:qualification.qualificationPassed===true&&qualification.stableUnchanged===true,runtimeRegression:true,registryIdentity:true},stable:{...staged.stable,committedRevision:registry.revision,committedFingerprint:hash(registry),capabilityCount:registry.capabilities.length},displayAuthority:'DISPLAYED STATE MAY NOW REPORT THIS EXACT CANDIDATE AS INCORPORATED INTO Stable.',boundary:'Incorporation is valid only for the exact candidate, promotion receipt, registry fingerprint and post-check set recorded here. No semantic source content or connector payload was incorporated.'};
+          fs.writeFileSync('nostromo/research/big-meals/offspring-incorporation-latest.json',JSON.stringify(receipt,null,2)+'\n');
+          NODE
+      - name: Commit exact Stable registry and sealed receipt
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add nostromo/runtime/stable-structural-capabilities.json nostromo/research/big-meals/offspring-incorporation-latest.json
+          git diff --cached --quiet && exit 0
+          git commit -m 'ZENOMORPH: incorporate qualified p0.5 structural offspring into Stable'
+          git push
+      - name: Preserve incorporation evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: zenomorph-offspring-guarded-incorporation
+          path: |
+            /tmp/incorporation-staged.json
+            /tmp/incorporation.stdout
+            /tmp/stable-load.json
+            /tmp/post-incorporation-qualification.json
+            /tmp/post-incorporation-qualification.stdout
+            /tmp/runtime-regression.stdout
+            nostromo/research/big-meals/offspring-incorporation-latest.json
+          retention-days: 30
