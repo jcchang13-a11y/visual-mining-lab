@@ -1,0 +1,56 @@
+name: NOSTROMO Big Meal Failure-Ore Offspring Delayed Gate
+
+on:
+  push:
+    paths:
+      - 'nostromo/integration/big-meal-ablation-probe.mjs'
+      - 'nostromo/integration/big-meal-failure-ore-offspring.mjs'
+      - 'nostromo/integration/big-meal-failure-ore-offspring-runner.mjs'
+      - 'nostromo/integration/big-meal-failure-ore-offspring-delayed-runner.mjs'
+      - 'nostromo/integration/big-meal-failure-ore-offspring-delayed-runner.test.mjs'
+      - 'nostromo/integration/big-meal-usefulness-gate.mjs'
+      - 'nostromo/muther/internal-mutation-failure-ore.mjs'
+      - 'nostromo/research/big-meals/**'
+      - '.github/workflows/nostromo-big-meal-failure-ore-offspring-delayed.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  delayed-offspring-retention:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Unit-test delayed offspring boundary
+        run: node --test nostromo/integration/big-meal-failure-ore-offspring-delayed-runner.test.mjs
+      - name: Unit-test failure-ore offspring boundary
+        run: node --test nostromo/integration/big-meal-failure-ore-offspring.test.mjs
+      - name: Unit-test usefulness gate
+        run: node --test nostromo/integration/big-meal-usefulness-gate.test.mjs
+      - name: Install PDF text extractor
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq poppler-utils
+      - name: Reacquire foods and independently reselect offspring
+        id: delayed
+        continue-on-error: true
+        run: |
+          node nostromo/integration/big-meal-failure-ore-offspring-delayed-runner.mjs --output=/tmp/failure-ore-offspring-delayed.json > /tmp/failure-ore-offspring-delayed.stdout
+          node -e "const x=require('/tmp/failure-ore-offspring-delayed.json'); console.log(JSON.stringify({status:x.status,expectedCandidateId:x.expectedCandidateId,freshCandidateId:x.freshCandidateId,candidateIdentityMatches:x.candidateIdentityMatches,pressureIdentityMatches:x.pressureIdentityMatches,priorIdentityMatches:x.priorIdentityMatches,developmentIdentityMatches:x.developmentIdentityMatches,validationIdentityMatches:x.validationIdentityMatches,parentDelayedEvidenceNotInherited:x.parentDelayedEvidenceNotInherited,freshCrossFoodUsefulnessPassed:x.freshCrossFoodUsefulnessPassed,freshValidationCount:x.freshValidationCount,freshStableUnchanged:x.freshStableUnchanged,frozenStableUnchanged:x.frozenStableUnchanged,failureOreActivated:x.failureOreActivated,freshDevelopmentUseful:x.freshDevelopmentUseful,freshValidationAllUseful:x.freshValidationAllUseful,delayedRetentionPassed:x.delayedRetentionPassed,promotion:x.promotion},null,2)); if(x.delayedRetentionPassed!==true||x.freshCrossFoodUsefulnessPassed!==true||x.freshStableUnchanged!==true||x.parentDelayedEvidenceNotInherited!==true||x.promotion?.promotable!==false||x.promotion?.incorporated!==false) process.exit(1)"
+      - name: Preserve delayed offspring receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: zenomorph-failure-ore-offspring-delayed
+          path: |
+            /tmp/failure-ore-offspring-delayed.json
+            /tmp/failure-ore-offspring-delayed.stdout
+          retention-days: 30
+      - name: Enforce delayed identity plus usefulness retention
+        if: steps.delayed.outcome != 'success'
+        run: |
+          echo 'Failure-ore offspring did not retain its own identity and cross-food usefulness after delay.'
+          exit 1
