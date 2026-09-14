@@ -1,0 +1,53 @@
+name: NOSTROMO Big Meal Failure-Ore Evolution Gate
+
+on:
+  push:
+    paths:
+      - 'nostromo/integration/big-meal-ablation-probe.mjs'
+      - 'nostromo/integration/big-meal-failure-ore-offspring.mjs'
+      - 'nostromo/integration/big-meal-failure-ore-offspring-runner.mjs'
+      - 'nostromo/integration/big-meal-failure-ore-offspring.test.mjs'
+      - 'nostromo/integration/big-meal-usefulness-gate.mjs'
+      - 'nostromo/muther/internal-mutation-failure-ore.mjs'
+      - 'nostromo/research/big-meals/**'
+      - '.github/workflows/nostromo-big-meal-failure-ore-evolution.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  failure-ore-evolution:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Unit-test failure-ore offspring boundary
+        run: node --test nostromo/integration/big-meal-failure-ore-offspring.test.mjs
+      - name: Unit-test existing usefulness gate
+        run: node --test nostromo/integration/big-meal-usefulness-gate.test.mjs
+      - name: Install PDF text extractor
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq poppler-utils
+      - name: Mine rejected routing phenotype and search bounded offspring
+        id: evolve
+        continue-on-error: true
+        run: |
+          node nostromo/integration/big-meal-failure-ore-offspring-runner.mjs --output=/tmp/failure-ore-offspring.json > /tmp/failure-ore-offspring.stdout
+          node -e "const x=require('/tmp/failure-ore-offspring.json'); console.log(JSON.stringify({status:x.status,parentCandidateId:x.parentCandidateId,parentDevelopmentUsefulness:x.parentDevelopmentUsefulness,selected:x.selected&&{candidateId:x.selected.candidate?.id,pressureScale:x.selected.candidate?.parameters?.pressureScale,failureOreActivated:x.selected.failureOreActivation?.failureOreActivated,developmentUsefulness:x.selected.developmentUsefulness},validation:x.validation,stableUnchanged:x.stableUnchanged,promotion:x.promotion,foodRoles:x.foodRoles},null,2)); if(x.parentDevelopmentUsefulness?.passed!==false||x.stableUnchanged!==true||x.promotion?.promotable!==false||x.selected?.failureOreActivation?.failureOreActivated!==true||x.validationHeldoutCount<2||x.offspringCrossFoodUsefulnessPassed!==true) process.exit(1)"
+      - name: Preserve failure-ore evolution receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: zenomorph-failure-ore-offspring
+          path: |
+            /tmp/failure-ore-offspring.json
+            /tmp/failure-ore-offspring.stdout
+          retention-days: 30
+      - name: Enforce independent usefulness survival
+        if: steps.evolve.outcome != 'success'
+        run: |
+          echo 'Failure-ore offspring did not survive independent cross-food usefulness validation.'
+          exit 1
