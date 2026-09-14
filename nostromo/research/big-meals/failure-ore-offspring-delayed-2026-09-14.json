@@ -1,0 +1,79 @@
+{
+  "schema": "zenomorph-failure-ore-offspring-delayed-receipt/v0.1",
+  "observedAt": "2026-09-14T05:23:15.239Z",
+  "workflowRunId": 34809284850,
+  "workflowJobId": 103867184257,
+  "workflowConclusion": "success",
+  "status": "OFFSPRING_DELAYED_IDENTITY_AND_CROSS_FOOD_USEFULNESS_RETAINED_NOT_PROMOTION_PROOF",
+  "offspring": {
+    "expectedCandidateId": "meal-topology-pasquinelli-2026-machine-organism-language-6fea27273abb-ore-p0_5",
+    "freshCandidateId": "meal-topology-pasquinelli-2026-machine-organism-language-6fea27273abb-ore-p0_5",
+    "pressureScale": 0.5,
+    "candidateIdentityMatches": true,
+    "pressureIdentityMatches": true,
+    "failureOreActivated": true,
+    "parentDelayedEvidenceNotInherited": true
+  },
+  "foodIdentity": {
+    "prior": {
+      "mealId": "pasquinelli-2026-machine-organism-language",
+      "sourceSha256": "f21717db8b1d43ccce72cd702322b393c2e54094dbbcff034afc7de85c480a79",
+      "matchesFrozen": true
+    },
+    "development": {
+      "mealId": "heldout-rfc9110-http-semantics-2022",
+      "sourceSha256": "21c1cdce6ab0e5509b04d84a28000836c7a087cf786efe6f04877ebfff47232a",
+      "matchesFrozen": true
+    },
+    "validation": [
+      {
+        "mealId": "heldout-gutenberg-pride-prejudice-1813",
+        "sourceSha256": "81300b79e8a8d65ac530a97578417d06137e3bbc90622a10a65e5036183d2500",
+        "matchesFrozen": true
+      },
+      {
+        "mealId": "heldout-gutenberg-boston-cooking-school-1896",
+        "sourceSha256": "01f50cfb56893e45d1d8bc60b3067b105dd3da94495f1575adfbec79e1234c11",
+        "matchesFrozen": true
+      }
+    ]
+  },
+  "freshUsefulness": {
+    "development": {
+      "mealId": "heldout-rfc9110-http-semantics-2022",
+      "coverageDelta": 2,
+      "similarityDelta": -0.000358,
+      "passed": true,
+      "reason": "PARETO_USEFUL_STRUCTURAL_CHANGE"
+    },
+    "validation": [
+      {
+        "mealId": "heldout-gutenberg-pride-prejudice-1813",
+        "coverageDelta": 4,
+        "similarityDelta": -0.008975,
+        "passed": true,
+        "reason": "PARETO_USEFUL_STRUCTURAL_CHANGE"
+      },
+      {
+        "mealId": "heldout-gutenberg-boston-cooking-school-1896",
+        "coverageDelta": 1,
+        "similarityDelta": -0.00215,
+        "passed": true,
+        "reason": "PARETO_USEFUL_STRUCTURAL_CHANGE"
+      }
+    ],
+    "crossFoodUsefulnessPassed": true
+  },
+  "delayedRetentionPassed": true,
+  "stableUnchanged": true,
+  "promotion": {
+    "promotable": false,
+    "failure_ore": true,
+    "delayed_retest": true,
+    "usefulness_validated": true,
+    "cross_food_transfer": false,
+    "incorporated": false,
+    "reason": "OFFSPRING_REAPPEARED_WITH_USEFULNESS_AFTER_DELAY; STRESS_PROVENANCE_CROSS_ORGAN_REGRESSION_AND_REMAINING_PROMOTION_GATES_STILL_REQUIRED"
+  },
+  "boundary": "The frozen offspring receipt predates this execution and is identity evidence only. The fresh round independently reselected the same child from the same provenance-bound foods and re-passed development plus two held-out usefulness checks without changing Stable. Parent delayed evidence did not satisfy this gate. PASS is delayed usefulness evidence only and does not authorize incorporation."
+}
