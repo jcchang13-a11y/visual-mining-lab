@@ -1,5 +1,5 @@
-// ZENOMORPH offspring qualification gauntlet v0.1.0
-// Stress, provenance, cross-organ propagation and regression evidence only.
+// ZENOMORPH offspring qualification gauntlet v0.2.0
+// Stress, provenance, explicit cross-food causal transfer, cross-organ propagation and regression evidence only.
 // This runner has no promotion or Stable-write authority.
 import crypto from 'node:crypto';
 import fs from 'node:fs/promises';
@@ -93,6 +93,25 @@ export async function runOffspringQualification({outputPath=null}={}){
     rawAblations.push(a);
   }
 
+  // Explicitly reconcile cross-food transfer instead of inferring it from generic held-out/usefulness labels.
+  // Each food must independently show a causal route change and pass the frozen usefulness gate, while Stable remains unchanged.
+  const crossFoodCases=rawAblations.map((ablation,i)=>{
+    const usefulness=evaluateHeldoutUsefulness(usefulnessInput(ablation));
+    const causalEffectObserved=Boolean(ablation?.receipt?.causalEffectObserved);
+    return {
+      mealId:validation[i]?.mealId||ablation?.control?.mealId||null,
+      sourceSha256:validation[i]?.provenance?.sourceSha256||ablation?.control?.sourceSha256||null,
+      causalEffectObserved,
+      usefulnessPassed:Boolean(usefulness?.passed),
+      reason:usefulness?.reason||null,
+      deltas:usefulness?.deltas||null,
+      stableUnchanged:Boolean(ablation?.stableUnchanged),
+      passed:Boolean(causalEffectObserved&&usefulness?.passed&&ablation?.stableUnchanged)
+    };
+  });
+  const distinctCrossFoodSources=new Set(crossFoodCases.map(x=>`${x.mealId}:${x.sourceSha256}`)).size===crossFoodCases.length;
+  const crossFoodTransferPassed=crossFoodCases.length>=2&&distinctCrossFoodSources&&crossFoodCases.every(x=>x.passed);
+
   const stressCases=[];
   for(const meal of validation){
     for(const kind of ['ORDER_REVERSAL','SIMILARITY_QUANTIZATION','TOP_EDGE_LOSS']){
@@ -132,17 +151,18 @@ export async function runOffspringQualification({outputPath=null}={}){
   const ingestionDeterministic=deterministicMealFingerprint(prior)===deterministicMealFingerprint(priorRepeat);
   const regressionPassed=ingestionDeterministic&&repeatValidation.every(x=>x.controlRouteSame&&x.exposedRouteSame&&x.stableUnchanged);
 
-  const qualificationPassed=provenancePassed&&stressPassed&&crossOrganPassed&&regressionPassed;
+  const qualificationPassed=provenancePassed&&crossFoodTransferPassed&&stressPassed&&crossOrganPassed&&regressionPassed;
   const result={
-    schema:'zenomorph-offspring-qualification/v0.1',observedAt:new Date().toISOString(),
+    schema:'zenomorph-offspring-qualification/v0.2',observedAt:new Date().toISOString(),
     candidate:{id:candidate.id,pressureScale:candidate.parameters?.pressureScale,identityMatchesFrozen},
     provenance:{passed:provenancePassed,noValidationLeak,sourceBound,lineageBound},
+    crossFoodTransfer:{passed:crossFoodTransferPassed,distinctSources:distinctCrossFoodSources,foods:crossFoodCases,boundary:'Cross-food transfer requires independent causal route differences plus usefulness on at least two frozen held-out foods. It is evidence only, not Stable authority.'},
     stress:{passed:stressPassed,cases:stressCases},
     crossOrgan:{passed:crossOrganPassed,foods:crossOrgan,boundary:'Causal route differences were propagated through isolated GUT→VAJRA→SHROOMING shadow cascades only. This does not grant Stable authority.'},
     regression:{passed:regressionPassed,ingestionDeterministic,repeatValidation},
     stableUnchanged:rawAblations.every(x=>x.stableUnchanged)&&stressCases.every(x=>x.stableUnchanged)&&repeatValidation.every(x=>x.stableUnchanged),
     qualificationPassed,
-    promotion:{promotable:false,incorporated:false,evidence:{stress:stressPassed,provenance:provenancePassed,cross_organ:crossOrganPassed,regression:regressionPassed,held_out:true,usefulness_validated:true,delayed_retest:true},reason:qualificationPassed?'FOUR_REMAINING_QUALIFICATION_GATES_PASSED_IN_ISOLATION; CROSS_FOOD_TRANSFER_AND FULL PROMOTION RECEIPT STILL MUST BE EXPLICITLY RECONCILED BEFORE ANY INCORPORATION':'ONE_OR_MORE_QUALIFICATION_GATES_FAILED; RETAIN IN GROWING_SHADOW'},
+    promotion:{promotable:false,incorporated:false,evidence:{stress:stressPassed,provenance:provenancePassed,cross_organ:crossOrganPassed,regression:regressionPassed,held_out:true,usefulness_validated:crossFoodCases.every(x=>x.usefulnessPassed),cross_food_transfer:crossFoodTransferPassed,delayed_retest:Boolean(frozen?.delayedRetentionPassed&&frozen?.stableUnchanged&&frozen?.offspring?.candidateIdentityMatches&&frozen?.offspring?.pressureIdentityMatches)},reason:qualificationPassed?'QUALIFICATION_AND_EXPLICIT_CROSS_FOOD_TRANSFER_PASSED; FULL PROMOTION RECEIPT AND A SEPARATE GUARDED INCORPORATION STEP ARE STILL REQUIRED':'ONE_OR_MORE_QUALIFICATION_GATES_FAILED; RETAIN IN GROWING_SHADOW'},
     boundary:'QUALIFICATION EVIDENCE ONLY. No code path in this runner may call promoteCandidate or mutate Stable.'
   };
   if(outputPath) await fs.writeFile(outputPath,JSON.stringify(result,null,2)+'\n','utf8');
