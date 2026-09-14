@@ -1,0 +1,96 @@
+{
+  "schema": "zenomorph-big-meal-failure-ore-receipt/v0.1",
+  "observedAt": "2026-09-14T04:12:11Z",
+  "workflowRunId": 34805025335,
+  "workflowJobId": 103855114242,
+  "workflowConclusion": "success",
+  "status": "FAILURE_ORE_OFFSPRING_SURVIVED_INDEPENDENT_CROSS_FOOD_USEFULNESS",
+  "parent": {
+    "candidateId": "meal-topology-pasquinelli-2026-machine-organism-language-6fea27273abb",
+    "developmentFood": "heldout-rfc9110-http-semantics-2022",
+    "developmentUsefulness": {
+      "controlCoverage": 15,
+      "exposedCoverage": 18,
+      "coverageDelta": 3,
+      "controlMeanSimilarity": 0.391158,
+      "exposedMeanSimilarity": 0.380992,
+      "similarityDelta": -0.010166,
+      "passed": false,
+      "reason": "DEGRADING_ROUTING_BIAS"
+    }
+  },
+  "offspring": {
+    "candidateId": "meal-topology-pasquinelli-2026-machine-organism-language-6fea27273abb-ore-p0_5",
+    "mutation": "BOUNDED_STRUCTURAL_PRESSURE_DISTORTION",
+    "pressureScale": 0.5,
+    "failureOreActivated": true,
+    "developmentUsefulness": {
+      "controlCoverage": 15,
+      "exposedCoverage": 17,
+      "coverageDelta": 2,
+      "controlMeanSimilarity": 0.391158,
+      "exposedMeanSimilarity": 0.3908,
+      "similarityDelta": -0.000358,
+      "passed": true,
+      "reason": "PARETO_USEFUL_STRUCTURAL_CHANGE"
+    }
+  },
+  "independentValidation": {
+    "heldoutCount": 2,
+    "passedCount": 2,
+    "crossFoodUsefulnessPassed": true,
+    "foods": [
+      {
+        "mealId": "heldout-gutenberg-pride-prejudice-1813",
+        "controlCoverage": 17,
+        "exposedCoverage": 21,
+        "coverageDelta": 4,
+        "controlMeanSimilarity": 0.185075,
+        "exposedMeanSimilarity": 0.1761,
+        "similarityDelta": -0.008975,
+        "passed": true,
+        "reason": "PARETO_USEFUL_STRUCTURAL_CHANGE"
+      },
+      {
+        "mealId": "heldout-gutenberg-boston-cooking-school-1896",
+        "controlCoverage": 19,
+        "exposedCoverage": 20,
+        "coverageDelta": 1,
+        "controlMeanSimilarity": 0.284258,
+        "exposedMeanSimilarity": 0.282108,
+        "similarityDelta": -0.00215,
+        "passed": true,
+        "reason": "PARETO_USEFUL_STRUCTURAL_CHANGE"
+      }
+    ]
+  },
+  "stableUnchanged": true,
+  "promotion": {
+    "promotable": false,
+    "failure_ore": true,
+    "cross_food_transfer": false,
+    "delayed_retest": false,
+    "reason": "INDEPENDENT_USEFULNESS_SURVIVED_BUT_DELAYED_RETENTION_AND_FULL_PROMOTION_GATES_REMAIN"
+  },
+  "foodIdentity": {
+    "prior": {
+      "mealId": "pasquinelli-2026-machine-organism-language",
+      "sourceSha256": "f21717db8b1d43ccce72cd702322b393c2e54094dbbcff034afc7de85c480a79"
+    },
+    "development": {
+      "mealId": "heldout-rfc9110-http-semantics-2022",
+      "sourceSha256": "21c1cdce6ab0e5509b04d84a28000836c7a087cf786efe6f04877ebfff47232a"
+    },
+    "validation": [
+      {
+        "mealId": "heldout-gutenberg-pride-prejudice-1813",
+        "sourceSha256": "81300b79e8a8d65ac530a97578417d06137e3bbc90622a10a65e5036183d2500"
+      },
+      {
+        "mealId": "heldout-gutenberg-boston-cooking-school-1896",
+        "sourceSha256": "01f50cfb56893e45d1d8bc60b3067b105dd3da94495f1575adfbec79e1234c11"
+      }
+    ]
+  },
+  "boundary": "RFC 9110 was used only as development selection pressure. Pride and Prejudice and The Boston Cooking-School Cook Book were held out until after offspring selection. The offspring remains isolated from Stable; delayed retention and remaining promotion gates have not passed."
+}
