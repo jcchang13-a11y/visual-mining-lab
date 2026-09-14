@@ -1,4 +1,4 @@
-// ZENOMORPH three-body runtime boundary v0.1.4
+// ZENOMORPH three-body runtime boundary v0.1.5
 // Stable body may answer. Growing body may mutate. Shadow body may compare but never control output.
 // Ingestion law: edible != absorbable. A candidate must transfer across unlike foods before promotion.
 import crypto from 'node:crypto';
@@ -9,6 +9,20 @@ const stableRegistry=require('./stable-structural-capabilities.json');
 const hash=value=>crypto.createHash('sha256').update(JSON.stringify(value)).digest('hex');
 const clone=value=>JSON.parse(JSON.stringify(value));
 
+// Runtime envelopes deliberately differ by mode/authority. Evidence about behavioral divergence must
+// therefore fingerprint the executor payload, not metadata that is guaranteed to differ by design.
+// Executors that expose a `result` field use that as their behavioral payload; generic executors fall
+// back to a clone with known authority/envelope fields removed.
+export function behavioralProjection(value){
+  if(value&&typeof value==='object'&&!Array.isArray(value)&&Object.prototype.hasOwnProperty.call(value,'result')){
+    return clone(value.result);
+  }
+  if(!value||typeof value!=='object'||Array.isArray(value)) return clone(value);
+  const projected=clone(value);
+  for(const key of ['schema','taskId','kind','mode','authority','stableStructuralCapabilityCount']) delete projected[key];
+  return projected;
+}
+
 export function getRegisteredStableCapabilities(){
   const caps=Array.isArray(stableRegistry?.capabilities)?stableRegistry.capabilities:[];
   return clone(caps);
@@ -17,7 +31,7 @@ export function getRegisteredStableCapabilities(){
 export function createRuntimeState({stableCapabilities=null,candidates=[]}={}){
   const authoritativeStable=stableCapabilities===null?getRegisteredStableCapabilities():stableCapabilities;
   return {
-    schema:'zenomorph-three-body-runtime/v0.1.4',
+    schema:'zenomorph-three-body-runtime/v0.1.5',
     policy:'DISPLAYED STATE MUST FOLLOW EVIDENCE',
     ingestionPolicy:{
       rule:'EDIBLE_DOES_NOT_IMPLY_ABSORBABLE',
@@ -31,7 +45,7 @@ export function createRuntimeState({stableCapabilities=null,candidates=[]}={}){
 }
 
 export async function runTask({task,state,stableExecutor,growingExecutor}={}){
-  if(!state||state.schema!=='zenomorph-three-body-runtime/v0.1.4') throw new Error('INVALID_RUNTIME_STATE');
+  if(!state||state.schema!=='zenomorph-three-body-runtime/v0.1.5') throw new Error('INVALID_RUNTIME_STATE');
   if(typeof stableExecutor!=='function'||typeof growingExecutor!=='function') throw new Error('EXECUTOR_REQUIRED');
 
   const taskId=hash(task).slice(0,16);
@@ -41,11 +55,18 @@ export async function runTask({task,state,stableExecutor,growingExecutor}={}){
   // Growing receives the same task but cannot mutate stableSnapshot or control the official answer.
   const growingSnapshot=clone(state.growing);
   const shadowResult=await growingExecutor({task,body:growingSnapshot,mode:'shadow'});
+  const stableBehavior=behavioralProjection(stableResult);
+  const shadowBehavior=behavioralProjection(shadowResult);
+  const stableBehaviorFingerprint=hash(stableBehavior);
+  const shadowBehaviorFingerprint=hash(shadowBehavior);
   const comparison={
     taskId,
-    stableFingerprint:hash(stableResult),
-    shadowFingerprint:hash(shadowResult),
-    differs:hash(stableResult)!==hash(shadowResult),
+    stableEnvelopeFingerprint:hash(stableResult),
+    shadowEnvelopeFingerprint:hash(shadowResult),
+    stableBehaviorFingerprint,
+    shadowBehaviorFingerprint,
+    differs:stableBehaviorFingerprint!==shadowBehaviorFingerprint,
+    interpretation:'DIFFERS_MEANS_BEHAVIORAL_PAYLOAD_DIFFERENCE_NOT_RUNTIME_ENVELOPE_DIFFERENCE',
     observedAt:new Date().toISOString(),
     authority:'SHADOW_HAS_NO_OUTPUT_AUTHORITY'
   };
@@ -59,7 +80,7 @@ export async function runTask({task,state,stableExecutor,growingExecutor}={}){
 // This measures whether a retained candidate changes behavior; a mere difference is evidence of effect,
 // not proof that the effect is useful or promotable.
 export async function runAblationPair({task,state,candidateId,executor}={}){
-  if(!state||state.schema!=='zenomorph-three-body-runtime/v0.1.4') throw new Error('INVALID_RUNTIME_STATE');
+  if(!state||state.schema!=='zenomorph-three-body-runtime/v0.1.5') throw new Error('INVALID_RUNTIME_STATE');
   if(typeof executor!=='function') throw new Error('EXECUTOR_REQUIRED');
   const candidate=state.growing.candidates.find(x=>x.id===candidateId);
   if(!candidate) throw new Error('CANDIDATE_NOT_FOUND');
