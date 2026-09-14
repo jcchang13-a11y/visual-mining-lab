@@ -3,23 +3,27 @@ import assert from 'node:assert/strict';
 import {evaluateOffspringDelayedRetention} from './big-meal-failure-ore-offspring-delayed-runner.mjs';
 
 const candidateId='parent-ore-p0_5';
-const foods={
-  prior:{mealId:'prior',sourceSha256:'p'},
-  development:{mealId:'dev',sourceSha256:'d'},
-  validation:[{mealId:'v1',sourceSha256:'1'},{mealId:'v2',sourceSha256:'2'}]
-};
+function foods(){
+  return {
+    prior:{mealId:'prior',sourceSha256:'p'},
+    development:{mealId:'dev',sourceSha256:'d'},
+    validation:[{mealId:'v1',sourceSha256:'1'},{mealId:'v2',sourceSha256:'2'}]
+  };
+}
 function fixture(){
+  const frozenFoods=foods();
+  const freshFoods=foods();
   return {
     frozenReceipt:{
       offspring:{candidateId,pressureScale:0.5},stableUnchanged:true,
-      promotion:{delayed_retest:false},foodIdentity:foods
+      promotion:{delayed_retest:false},foodIdentity:frozenFoods
     },
     freshRound:{
       selected:{
         candidate:{id:candidateId,parameters:{pressureScale:0.5},evidence:{delayed_retest:false}},
         failureOreActivation:{failureOreActivated:true},developmentUsefulness:{passed:true}
       },
-      foodRoles:foods,offspringCrossFoodUsefulnessPassed:true,validationHeldoutCount:2,
+      foodRoles:freshFoods,offspringCrossFoodUsefulnessPassed:true,validationHeldoutCount:2,
       validation:{foods:[{passed:true},{passed:true}]},stableUnchanged:true
     }
   };
