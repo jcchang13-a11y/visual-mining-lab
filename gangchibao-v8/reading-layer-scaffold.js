@@ -169,11 +169,13 @@
 })();
 
 /* 施工接線：30440 的結構性回扣另掛可逆鷹架，不改正文，也不塞回既有 direct/complete 檔。
-   LIVE reader 後來已把同一檔納入 supplementMap；保留這條舊接線，但若頁面上已有同檔 script，就不再重複通電。 */
+   這是早於 LIVE 中央序列載入器的舊支線，保留原邏輯作施工史；
+   但 LIVE 已接管載入次序時，只封住它的自行通電行為，避免同一檔在中央佇列外先跑一次。 */
 (function(){
   'use strict';
   const unit=new URLSearchParams(location.search).get('u');
   if(unit!=='30440') return;
+  if(window.GCBLiveOwnsScaffoldQueue) return;
   if(document.querySelector('script[data-gcb-retro-30440-structural],script[src*="retro-supplement-30440-structural.js"]')) return;
   const script=document.createElement('script');
   script.src='retro-supplement-30440-structural.js?v=20260911-1';
