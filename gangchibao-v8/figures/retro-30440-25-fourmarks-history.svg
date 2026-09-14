@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320" role="img" aria-labelledby="title desc">
+  <title id="title">第二十五分沿四相歷次出現往前回溯</title>
+  <desc id="desc">第二十五分在「我當度眾生」結構中重新叫回我、人、眾生、壽者；圖沿第十七、第十四、第六、第三分的四相施工史往前回溯。</desc>
+  <rect width="320" height="320" fill="white"/>
+  <g fill="none" stroke="black" stroke-width="2">
+    <circle cx="160" cy="160" r="32"/>
+    <circle cx="160" cy="160" r="62"/>
+    <circle cx="160" cy="160" r="92"/>
+    <circle cx="160" cy="160" r="122"/>
+    <circle cx="160" cy="160" r="152"/>
+  </g>
+  <g fill="black" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Noto Sans TC', sans-serif" font-size="18" text-anchor="middle" dominant-baseline="middle">
+    <text x="160" y="160">25</text>
+    <text x="160" y="113">17</text>
+    <text x="160" y="83">14</text>
+    <text x="160" y="53">6</text>
+    <text x="160" y="23">3</text>
+  </g>
+</svg>
