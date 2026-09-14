@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320" role="img" aria-labelledby="title desc">
+  <title id="title">第二十四分回看第十分須彌山王尺度</title>
+  <desc id="desc">第二十四分把三千大千世界中所有須彌山王化為七寶聚，重新啟動第十分以須彌山王打開巨大尺度的結構：24 → 10。</desc>
+  <rect width="320" height="320" fill="white"/>
+  <g fill="none" stroke="black" stroke-width="2">
+    <circle cx="160" cy="160" r="54"/>
+    <circle cx="160" cy="160" r="118"/>
+  </g>
+  <g fill="black" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Noto Sans TC', sans-serif" font-size="18" text-anchor="middle" dominant-baseline="middle">
+    <text x="160" y="160">24</text>
+    <text x="160" y="54">10</text>
+  </g>
+</svg>
