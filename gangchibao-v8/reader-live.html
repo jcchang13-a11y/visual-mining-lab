@@ -23,7 +23,7 @@ body{margin:0;background:#f4f1e8;color:#171717;font-family:system-ui,-apple-syst
 <script src="retro-renderer.js?v=20260915-live64"></script>
 <script>
 window.GCBLiveOwnsScaffoldQueue=true;
-const units=['30000','30210','30220','30230','30240B','30250','30260B','30270B','30280B','30310B','30320','30330','30340','30350A','30360','30370','30380B','30390','30410A','30430','30440','30450'];
+const units=['30000','30210','30220','30230','30240B','30250','30260B','30270B','30280B','30310B','30320','30330','30340','30350A','30360','30370','30380','30390','30410A','30430','30440','30450'];
 const params=new URLSearchParams(location.search);const u=units.includes(params.get('u'))?params.get('u'):units[0];
 document.getElementById('legacyLink').href='reader.html?u='+encodeURIComponent(u);
 document.getElementById('unitTitle').textContent='單元 '+String(units.indexOf(u)+1).padStart(2,'0')+' · '+u;
