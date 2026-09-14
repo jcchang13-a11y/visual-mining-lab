@@ -1,6 +1,34 @@
 {
   "schema": "zenomorph-stable-structural-capabilities/v0.1",
-  "revision": 0,
-  "capabilities": [],
+  "revision": 1,
+  "capabilities": [
+    {
+      "id": "meal-topology-pasquinelli-2026-machine-organism-language-6fea27273abb-ore-p0_5",
+      "kind": "MUTHER_AFFINITY_TOPOLOGY_ROUTING_PRIOR",
+      "parameters": {
+        "similarityMedian": 0.1508,
+        "spanMedian": 4,
+        "affinityCount": 40,
+        "pressureScale": 0.5
+      },
+      "sourceMealId": "pasquinelli-2026-machine-organism-language",
+      "sourceSha256": "f21717db8b1d43ccce72cd702322b393c2e54094dbbcff034afc7de85c480a79",
+      "promotionReceiptFingerprint": "ba1714c0006190926216f6788b94d51bb523f35d3bedc1b92e6e137824166245",
+      "qualificationFingerprint": "f50764ab658e54fd9c73314898d8b7bab1c05856176a78f9b6c59e08f4fc26eb",
+      "evidence": {
+        "stress": true,
+        "provenance": true,
+        "cross_organ": true,
+        "regression": true,
+        "held_out": true,
+        "usefulness_validated": true,
+        "cross_food_transfer": true,
+        "delayed_retest": true
+      },
+      "incorporatedAt": "2026-09-14T18:32:01.554Z",
+      "authority": "STABLE",
+      "boundary": "CONTENT_AGNOSTIC STRUCTURAL CAPABILITY ONLY; NO SOURCE TEXT, TOPIC, CLAIM, SUMMARY, SEMANTIC HINT, OR PRIVATE CONNECTOR PAYLOAD."
+    }
+  ],
   "boundary": "Authoritative Stable structural capability registry. Entries may be added only by guarded incorporation after a fresh promotion receipt and post-incorporation regression. No source text, topic hint, summary, or private connector payload may be stored here."
 }

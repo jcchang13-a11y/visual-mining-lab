@@ -1,0 +1,47 @@
+{
+  "schema": "zenomorph-guarded-incorporation-receipt/v0.1",
+  "status": "INCORPORATED_POSTCHECKS_PASSED",
+  "candidateId": "meal-topology-pasquinelli-2026-machine-organism-language-6fea27273abb-ore-p0_5",
+  "candidateFingerprint": "196306877454b857b7a80082d483737598856884ee935fd30e25407363b46406",
+  "promotionReceiptFingerprint": "ba1714c0006190926216f6788b94d51bb523f35d3bedc1b92e6e137824166245",
+  "evidence": {
+    "stress": true,
+    "provenance": true,
+    "cross_organ": true,
+    "regression": true,
+    "held_out": true,
+    "usefulness_validated": true,
+    "cross_food_transfer": true,
+    "delayed_retest": true
+  },
+  "connectorAudit": {
+    "pending": [],
+    "requestCount": 4
+  },
+  "stable": {
+    "beforeRevision": 0,
+    "afterRevision": 1,
+    "beforeFingerprint": "1d4fb619bb3f491e8e10f3fc4c5cbb68555f918d0798e015d8fd548cd83459ff",
+    "afterFingerprint": "332733480d35ada1de0a1c6f93aea0286773adb263cfd9d3b85f47cf37e5673f",
+    "committedRevision": 1,
+    "committedFingerprint": "332733480d35ada1de0a1c6f93aea0286773adb263cfd9d3b85f47cf37e5673f",
+    "capabilityCount": 1
+  },
+  "incorporated": true,
+  "postChecksRequired": [
+    "fresh-process-stable-load",
+    "qualification-regression",
+    "runtime-regression",
+    "registry-identity"
+  ],
+  "rollback": "Git commit occurs only after all post-checks; failed post-checks leave repository Stable unchanged.",
+  "boundary": "Incorporation is valid only for the exact candidate, promotion receipt, registry fingerprint and post-check set recorded here. No semantic source content or connector payload was incorporated.",
+  "sealedAt": "2026-09-14T18:34:05.641Z",
+  "postChecks": {
+    "freshProcessStableLoad": true,
+    "qualificationRegression": true,
+    "runtimeRegression": true,
+    "registryIdentity": true
+  },
+  "displayAuthority": "DISPLAYED STATE MAY NOW REPORT THIS EXACT CANDIDATE AS INCORPORATED INTO Stable."
+}
