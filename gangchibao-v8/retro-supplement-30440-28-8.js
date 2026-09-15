@@ -5,6 +5,7 @@
  * 既有 28 → 11、28 → 24、28 → 19、28 → 15 → 14 等線全部保留；本層不取代任何舊圖。
  * 2026-09-15 校準：舊 alreadyHasFigure 以 SVG src 全域去重，會把同一關係在新的閱讀位置再次出現誤判為已完成。
  * 不拆舊函式／不清施工痕跡；本層改以 retroKey 判斷，只防止同一閱讀位置自身重複插入。
+ * 2026-09-15 同錨點校準：28 → 23、28 → 15、28 → 14 共用一句正文；splitText 會把後插圖推到前面，故執行時反向施工，讓實際閱讀順序仍依 specs 的文本邏輯排列。
  * 不改正文；每條只認唯一 anchor；找不到就不插。
  */
 (function(){
@@ -28,7 +29,7 @@
     {
       key:'retro-30440-28-list-15',
       src:'figures/retro-30440-28-list-15.svg',
-      caption:'第二十八分在「福德是作出來的」的反覆列舉中再次叫回受持讀誦、為他人說：28 → 15',
+      caption:'第二十八分在「福德是作出來的」的反覆列舉中再次叫回受持讀誦、為人說：28 → 15',
       anchor:'福德是作出來的。布施、修善法、受持讀誦、為他人說、忍辱、利益眾生，這些都不是取消。'
     },
     {
@@ -83,7 +84,8 @@
     const root=document.getElementById('article');
     if(!root) return false;
     let settled=true;
-    specs.forEach(spec=>{if(!insertSpec(root,spec)) settled=false;});
+    /* 同一 anchor 的連續 splitText 會使後插者出現在前；反向施工只校準 DOM 閱讀順序，不改 specs／正文／歷史圖。 */
+    specs.slice().reverse().forEach(spec=>{if(!insertSpec(root,spec)) settled=false;});
     return settled;
   }
 
