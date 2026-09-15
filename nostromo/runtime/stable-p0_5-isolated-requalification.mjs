@@ -1,4 +1,4 @@
-// ZENOMORPH Stable p0.5 isolated-generation requalification v0.1.0
+// ZENOMORPH Stable p0.5 isolated-generation requalification v0.1.1
 // Produces NEW evidence by regenerating the historical offspring through the
 // Growing/Shadow-only failure-ore path while proving canonical Stable is unchanged.
 // It does not rewrite historical receipts or infer a missing gate from Stable status.
@@ -15,12 +15,16 @@ export async function requalifyIsolatedGeneration({outputPath=null}={}){
   const before=JSON.parse(beforeText);
   const registered=before.capabilities?.find(x=>x.id===TARGET);
   if(!registered) throw new Error('TARGET_NOT_IN_STABLE_REGISTRY');
+  // Requalification is only legitimate while the historical registry still exposes
+  // the missing gate. If somebody silently backfills it, fail rather than laundering history.
+  if(registered.evidence?.isolated_generation===true) throw new Error('HISTORICAL_ISOLATION_EVIDENCE_ALREADY_PRESENT:REQUALIFICATION_NOT_NEEDED');
 
   const round=await runFailureOreOffspringRound();
   const generated=round.selected?.candidate;
   const afterText=await fs.readFile(REGISTRY,'utf8');
 
   const checks={
+    historicalGapStillVisible:registered.evidence?.isolated_generation!==true,
     targetRegenerated:generated?.id===TARGET,
     growingShadowBoundary:String(generated?.boundary||'').includes('SHADOW/GROWING ONLY'),
     noStableAuthority:generated?.evidence?.incorporated===false,
