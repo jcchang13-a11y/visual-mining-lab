@@ -1,30 +1,22 @@
-/* 《剛吃飽》第八版｜爛尾樓版｜30440 第二十七分中段明列材料回溯
- * 同一結構在新的閱讀位置再次出現，也應在該位置重新搭鷹架。
- * 此句同時重新點名第二十六分「不應以相見如來」、第二十二分「無有少法可得」、第二十三分「善法即非善法」。
- * 四相另由 retro-supplement-30440-fourmarks.js 沿既有四相施工史處理；本層不重複那條長鏈。
- * 不改正文，不取代既有 27 → 26／22／23 其他閱讀位置的圖。
+/* 《剛吃飽》第八版｜爛尾樓版｜30440 第二十七分明列回溯補丁
+ * 不清場：保留既有 direct / complete / structural；只補正文在此閱讀位置再次明列的關係。
  */
 (function(){
   'use strict';
-  const unit=new URLSearchParams(location.search).get('u');
-  if(unit!=='30440') return;
+  if(new URLSearchParams(location.search).get('u')!=='30440') return;
 
-  const anchor='有人聽到不應以相見如來，聽到無我、無人、無眾生、無壽者，聽到無有少法可得，聽到善法即非善法，就以為《金剛經》在說一切都沒有。';
   const specs=[
     {
-      key:'retro-30440-27-list-26-repeat',
-      src:'figures/retro-30440-27-list-26.svg',
-      caption:'第二十七分在這個新的閱讀位置再次提到「不應以相見如來」，重新回扣第二十六分：27 → 26'
+      key:'retro-30440-27-26-explicit-list',
+      src:'figures/retro-30440-27-26.svg',
+      caption:'第二十七分在「你不能把這句單獨讀」的明列位置再次回到第二十六分：27 → 26',
+      anchor:'第二十七分要跟前面幾分一起讀。'
     },
     {
-      key:'retro-30440-27-list-22-repeat',
-      src:'figures/retro-30440-27-list-22.svg',
-      caption:'第二十七分在同一句再次提到「無有少法可得」，重新回扣第二十二分：27 → 22'
-    },
-    {
-      key:'retro-30440-27-list-23-repeat',
-      src:'figures/retro-30440-27-list-23.svg',
-      caption:'第二十七分在同一句再次提到「善法即非善法」，重新回扣第二十三分：27 → 23'
+      key:'retro-30440-27-6-explicit-list',
+      src:'figures/retro-30440-27-6.svg',
+      caption:'第二十七分在防止斷滅誤讀時再次回扣第六分：27 → 6',
+      anchor:'「不應取法，不應取非法。」'
     }
   ];
 
@@ -46,26 +38,26 @@
     return figure;
   }
 
-  function apply(){
-    const root=document.getElementById('article');
-    if(!root) return false;
-    if(specs.every(spec=>root.querySelector('[data-retro-key="'+spec.key+'"]'))) return true;
+  function insert(root,spec){
+    if(root.querySelector('[data-retro-key="'+spec.key+'"]')) return true;
     const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);
     let node;
     while((node=walker.nextNode())){
-      const at=(node.nodeValue||'').indexOf(anchor);
+      const at=(node.nodeValue||'').indexOf(spec.anchor);
       if(at<0) continue;
-      const tail=node.splitText(at+anchor.length);
-      const parent=tail.parentNode;
-      parent.insertBefore(document.createTextNode('\n'),tail);
-      specs.forEach(spec=>{
-        if(root.querySelector('[data-retro-key="'+spec.key+'"]')) return;
-        parent.insertBefore(makeFigure(spec),tail);
-        parent.insertBefore(document.createTextNode('\n'),tail);
-      });
+      const tail=node.splitText(at+spec.anchor.length);
+      tail.parentNode.insertBefore(document.createTextNode('\n'),tail);
+      tail.parentNode.insertBefore(makeFigure(spec),tail);
+      tail.parentNode.insertBefore(document.createTextNode('\n'),tail);
       return true;
     }
     return false;
+  }
+
+  function apply(){
+    const root=document.getElementById('article');
+    if(!root) return false;
+    return specs.every(spec=>insert(root,spec));
   }
 
   const article=document.getElementById('article');
@@ -77,10 +69,12 @@
   }
 
   /* 施工補丁：舊 direct 層會以 SVG src 全域去重，因而吃掉同一關係在另一閱讀位置的再次出現。
-   * 不拆舊線；等本層完成後，再接一條只按 reading-position key 去重的補丁。
+   * 不拆舊線；非 LIVE reader 仍由這條歷史接線載入。LIVE 已有中央序列佇列時則讓中央接管，避免重新引入非同步搶跑。
    */
-  const repeat=document.createElement('script');
-  repeat.src='retro-supplement-30440-reading-position-repeats.js?v=20260915-live69';
-  repeat.dataset.gcbScaffold='30440-reading-position-repeats';
-  document.head.appendChild(repeat);
+  if(!window.GCBLiveOwnsScaffoldQueue){
+    const repeat=document.createElement('script');
+    repeat.src='retro-supplement-30440-reading-position-repeats.js?v=20260915-live70';
+    repeat.dataset.gcbScaffold='30440-reading-position-repeats';
+    document.head.appendChild(repeat);
+  }
 })();
