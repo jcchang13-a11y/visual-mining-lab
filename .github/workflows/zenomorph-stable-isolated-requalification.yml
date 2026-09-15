@@ -1,0 +1,37 @@
+name: ZENOMORPH Stable Isolated-Generation Requalification
+
+on:
+  push:
+    paths:
+      - 'nostromo/runtime/stable-p0_5-isolated-requalification.mjs'
+      - 'nostromo/runtime/stable-structural-capabilities.json'
+      - 'nostromo/integration/big-meal-failure-ore-offspring.mjs'
+      - 'nostromo/integration/big-meal-failure-ore-offspring-runner.mjs'
+      - '.github/workflows/zenomorph-stable-isolated-requalification.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  requalify-isolated-generation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install PDF text extractor
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq poppler-utils
+      - name: Re-run offspring generation outside Stable
+        run: |
+          node nostromo/runtime/stable-p0_5-isolated-requalification.mjs --output=/tmp/p0_5-isolated-requalification.json
+          node -e "const x=require('/tmp/p0_5-isolated-requalification.json'); if(x.status!=='ISOLATED_GENERATION_REQUALIFIED'||x.evidence?.isolated_generation!==true||x.checks?.canonicalStableByteUnchanged!==true||x.checks?.noStableAuthority!==true) process.exit(1)"
+      - name: Preserve fresh requalification receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: zenomorph-p0-5-isolated-generation-requalification
+          path: /tmp/p0_5-isolated-requalification.json
+          retention-days: 30
