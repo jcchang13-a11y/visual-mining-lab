@@ -70,8 +70,17 @@
 
   const article=document.getElementById('article');
   if(!article) return;
-  if(apply()) return;
-  const observer=new MutationObserver(()=>{if(apply())observer.disconnect()});
-  observer.observe(article,{childList:true,subtree:true,characterData:true});
-  setTimeout(()=>observer.disconnect(),15000);
+  if(!apply()){
+    const observer=new MutationObserver(()=>{if(apply())observer.disconnect()});
+    observer.observe(article,{childList:true,subtree:true,characterData:true});
+    setTimeout(()=>observer.disconnect(),15000);
+  }
+
+  /* 施工補丁：舊 direct 層會以 SVG src 全域去重，因而吃掉同一關係在另一閱讀位置的再次出現。
+   * 不拆舊線；等本層完成後，再接一條只按 reading-position key 去重的補丁。
+   */
+  const repeat=document.createElement('script');
+  repeat.src='retro-supplement-30440-reading-position-repeats.js?v=20260915-live69';
+  repeat.dataset.gcbScaffold='30440-reading-position-repeats';
+  document.head.appendChild(repeat);
 })();
