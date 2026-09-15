@@ -1,4 +1,4 @@
-// ZENOMORPH three-body runtime boundary v0.1.5
+// ZENOMORPH three-body runtime boundary v0.1.6
 // Stable body may answer. Growing body may mutate. Shadow body may compare but never control output.
 // Ingestion law: edible != absorbable. A candidate must transfer across unlike foods before promotion.
 import crypto from 'node:crypto';
@@ -6,8 +6,13 @@ import {createRequire} from 'node:module';
 
 const require=createRequire(import.meta.url);
 const stableRegistry=require('./stable-structural-capabilities.json');
-const hash=value=>crypto.createHash('sha256').update(JSON.stringify(value)).digest('hex');
 const clone=value=>JSON.parse(JSON.stringify(value));
+const canonicalize=value=>{
+  if(Array.isArray(value)) return value.map(canonicalize);
+  if(value&&typeof value==='object') return Object.fromEntries(Object.keys(value).sort().map(key=>[key,canonicalize(value[key])]));
+  return value;
+};
+const hash=value=>crypto.createHash('sha256').update(JSON.stringify(canonicalize(value))).digest('hex');
 
 // Runtime envelopes deliberately differ by mode/authority. Evidence about behavioral divergence must
 // therefore fingerprint the executor payload, not metadata that is guaranteed to differ by design.
@@ -31,7 +36,7 @@ export function getRegisteredStableCapabilities(){
 export function createRuntimeState({stableCapabilities=null,candidates=[]}={}){
   const authoritativeStable=stableCapabilities===null?getRegisteredStableCapabilities():stableCapabilities;
   return {
-    schema:'zenomorph-three-body-runtime/v0.1.5',
+    schema:'zenomorph-three-body-runtime/v0.1.6',
     policy:'DISPLAYED STATE MUST FOLLOW EVIDENCE',
     ingestionPolicy:{
       rule:'EDIBLE_DOES_NOT_IMPLY_ABSORBABLE',
@@ -45,14 +50,13 @@ export function createRuntimeState({stableCapabilities=null,candidates=[]}={}){
 }
 
 export async function runTask({task,state,stableExecutor,growingExecutor}={}){
-  if(!state||state.schema!=='zenomorph-three-body-runtime/v0.1.5') throw new Error('INVALID_RUNTIME_STATE');
+  if(!state||state.schema!=='zenomorph-three-body-runtime/v0.1.6') throw new Error('INVALID_RUNTIME_STATE');
   if(typeof stableExecutor!=='function'||typeof growingExecutor!=='function') throw new Error('EXECUTOR_REQUIRED');
 
   const taskId=hash(task).slice(0,16);
   const stableSnapshot=clone(state.stable);
   const stableResult=await stableExecutor({task,body:stableSnapshot,mode:'stable'});
 
-  // Growing receives the same task but cannot mutate stableSnapshot or control the official answer.
   const growingSnapshot=clone(state.growing);
   const shadowResult=await growingExecutor({task,body:growingSnapshot,mode:'shadow'});
   const stableBehavior=behavioralProjection(stableResult);
@@ -66,7 +70,7 @@ export async function runTask({task,state,stableExecutor,growingExecutor}={}){
     stableBehaviorFingerprint,
     shadowBehaviorFingerprint,
     differs:stableBehaviorFingerprint!==shadowBehaviorFingerprint,
-    interpretation:'DIFFERS_MEANS_BEHAVIORAL_PAYLOAD_DIFFERENCE_NOT_RUNTIME_ENVELOPE_DIFFERENCE',
+    interpretation:'DIFFERS_MEANS_CANONICAL_BEHAVIORAL_PAYLOAD_DIFFERENCE_NOT_RUNTIME_ENVELOPE_OR_OBJECT_KEY_ORDER_DIFFERENCE',
     observedAt:new Date().toISOString(),
     authority:'SHADOW_HAS_NO_OUTPUT_AUTHORITY'
   };
@@ -77,10 +81,10 @@ export async function runTask({task,state,stableExecutor,growingExecutor}={}){
 }
 
 // Causal transfer probe: same held-out task, same executor family, candidate absent vs present.
-// This measures whether a retained candidate changes behavior; a mere difference is evidence of effect,
-// not proof that the effect is useful or promotable.
+// The same behavioral projection/canonical fingerprint boundary used by Stable/Shadow comparison is
+// required here too: envelope metadata and object insertion order are not causal effects.
 export async function runAblationPair({task,state,candidateId,executor}={}){
-  if(!state||state.schema!=='zenomorph-three-body-runtime/v0.1.5') throw new Error('INVALID_RUNTIME_STATE');
+  if(!state||state.schema!=='zenomorph-three-body-runtime/v0.1.6') throw new Error('INVALID_RUNTIME_STATE');
   if(typeof executor!=='function') throw new Error('EXECUTOR_REQUIRED');
   const candidate=state.growing.candidates.find(x=>x.id===candidateId);
   if(!candidate) throw new Error('CANDIDATE_NOT_FOUND');
@@ -92,16 +96,20 @@ export async function runAblationPair({task,state,candidateId,executor}={}){
 
   const control=await executor({task:clone(taskSnapshot),body:controlBody,mode:'ablation-control',candidate:null});
   const exposed=await executor({task:clone(taskSnapshot),body:exposedBody,mode:'ablation-exposed',candidate:clone(candidate)});
-  const controlFingerprint=hash(control);
-  const exposedFingerprint=hash(exposed);
+  const controlBehavior=behavioralProjection(control);
+  const exposedBehavior=behavioralProjection(exposed);
+  const controlFingerprint=hash(controlBehavior);
+  const exposedFingerprint=hash(exposedBehavior);
   const receipt={
     taskId:hash(taskSnapshot).slice(0,16),
     candidateId,
     candidateFingerprint:hash(candidate),
+    controlEnvelopeFingerprint:hash(control),
+    exposedEnvelopeFingerprint:hash(exposed),
     controlFingerprint,
     exposedFingerprint,
     causalEffectObserved:controlFingerprint!==exposedFingerprint,
-    interpretation:'DIFFERENCE_IS_CAUSAL_EFFECT_EVIDENCE_NOT_PROMOTION_EVIDENCE',
+    interpretation:'DIFFERENCE_IS_CANONICAL_BEHAVIORAL_CAUSAL_EFFECT_EVIDENCE_NOT_ENVELOPE_DIFFERENCE_OR_PROMOTION_EVIDENCE',
     authority:'ABLATION_HAS_NO_STABLE_OUTPUT_AUTHORITY',
     observedAt:new Date().toISOString()
   };
@@ -125,10 +133,6 @@ export function evaluatePromotion(state,candidateId){
   return {promotable:missing.length===0,missing,candidateId,rule:state.ingestionPolicy.rule};
 }
 
-// Legacy in-memory promotion is deliberately disabled. Passing eight boolean gates is qualification
-// evidence only; it is not repository authority. Stable incorporation must go through the guarded
-// incorporation path, which binds a fresh promotion receipt, canonical registry identity and
-// post-incorporation regression before persistence to main.
 export function promoteCandidate(){
   throw new Error('DIRECT_PROMOTION_DISABLED:USE_GUARDED_INCORPORATION');
 }
