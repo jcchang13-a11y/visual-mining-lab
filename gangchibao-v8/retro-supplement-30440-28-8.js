@@ -3,6 +3,8 @@
  * 2026-09-15 再讀第二十八分完整上下文：正文另明列「修善法」不能因不受福德而被取消，故追加 28 → 23。
  * 同一句反覆列舉還再次叫回「受持讀誦、為他人說」與「忍辱、利益眾生」；依「新閱讀位置可重現同一歷史關係」原則，補 28 → 15、28 → 14。
  * 既有 28 → 11、28 → 24、28 → 19、28 → 15 → 14 等線全部保留；本層不取代任何舊圖。
+ * 2026-09-15 校準：舊 alreadyHasFigure 以 SVG src 全域去重，會把同一關係在新的閱讀位置再次出現誤判為已完成。
+ * 不拆舊函式／不清施工痕跡；本層改以 retroKey 判斷，只防止同一閱讀位置自身重複插入。
  * 不改正文；每條只認唯一 anchor；找不到就不插。
  */
 (function(){
@@ -42,6 +44,7 @@
     figure.className='retro-figure';
     figure.dataset.gcbLayer='retrospective';
     figure.dataset.retroKey=spec.key;
+    figure.dataset.gcbRepeatReason='same-relation-new-reading-position';
     const img=document.createElement('img');
     img.className='retro-figure__img';
     img.src=spec.src;
@@ -56,11 +59,8 @@
   }
 
   function alreadyHasFigure(root,spec){
-    if(root.querySelector('[data-retro-key="'+spec.key+'"]')) return true;
-    return Array.from(root.querySelectorAll('.retro-figure__img')).some(img=>{
-      const raw=img.getAttribute('src')||'';
-      return raw===spec.src || raw.endsWith('/'+spec.src);
-    });
+    /* 歷史版本曾同時用 src 做全域去重；保留函式名稱，但不再把別處同 src 當成本閱讀位置已完成。 */
+    return !!root.querySelector('[data-retro-key="'+spec.key+'"]');
   }
 
   function insertSpec(root,spec){
