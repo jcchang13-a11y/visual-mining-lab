@@ -8,23 +8,29 @@ const base={revision:1,capabilities:[{
 }]};
 
 const historical=auditStableRegistry(base,{attestations:[]});
-assert.equal(historical.allCurrentGateSatisfied,false);
+assert.equal(historical.allCurrentGateEvidencePresent,false);
+assert.equal(historical.allFullyRequalifiedUnderCurrentGate,false);
 assert.deepEqual(historical.entries[0].missingCurrentEvidence,['isolated_generation']);
 assert.match(historical.entries[0].interpretation,/DO NOT INVENT OR BACKFILL EVIDENCE/);
 
-const requalified=auditStableRegistry(base,{attestations:[{
+const partlyRequalified=auditStableRegistry(base,{attestations:[{
   candidateId:'historical-p0.5',evidence:{isolated_generation:true},historicalRegistryMutation:false
 }]});
-assert.equal(requalified.allCurrentGateSatisfied,true);
-assert.deepEqual(requalified.entries[0].missingCurrentEvidence,[]);
-assert.equal(requalified.entries[0].evidenceSources.isolated_generation,'POST_INCORPORATION_REQUALIFICATION_ATTESTATION');
+assert.equal(partlyRequalified.allCurrentGateEvidencePresent,true);
+assert.equal(partlyRequalified.allFullyRequalifiedUnderCurrentGate,false);
+assert.deepEqual(partlyRequalified.entries[0].missingCurrentEvidence,[]);
+assert.deepEqual(partlyRequalified.entries[0].freshlyRequalifiedEvidence,['isolated_generation']);
+assert.equal(partlyRequalified.entries[0].missingFreshRequalification.length,8);
+assert.match(partlyRequalified.entries[0].interpretation,/NOT ALL GATES HAVE FRESH/);
 assert.equal(base.capabilities[0].evidence.isolated_generation,undefined);
-assert.equal(requalified.entries[0].historicalEvidenceUnmodified,true);
+assert.equal(partlyRequalified.entries[0].historicalEvidenceUnmodified,true);
 
-const current=auditStableRegistry({revision:2,capabilities:[{
-  id:'current',authority:'STABLE',evidence:Object.fromEntries(CURRENT_REQUIRED_EVIDENCE.map(key=>[key,true]))
-}]},{attestations:[]});
-assert.equal(current.allCurrentGateSatisfied,true);
-assert.deepEqual(current.entries[0].missingCurrentEvidence,[]);
+const freshAll=Object.fromEntries(CURRENT_REQUIRED_EVIDENCE.map(key=>[key,true]));
+const fullyRequalified=auditStableRegistry(base,{attestations:[{
+  candidateId:'historical-p0.5',evidence:freshAll,historicalRegistryMutation:false
+}]});
+assert.equal(fullyRequalified.allCurrentGateEvidencePresent,true);
+assert.equal(fullyRequalified.allFullyRequalifiedUnderCurrentGate,true);
+assert.deepEqual(fullyRequalified.entries[0].missingFreshRequalification,[]);
 
-console.log(JSON.stringify({status:'PASS',rule:'FRESH_REQUALIFICATION_MAY_SATISFY_CURRENT_GATE_WITHOUT_REWRITING_HISTORICAL_EVIDENCE'},null,2));
+console.log(JSON.stringify({status:'PASS',rule:'EVIDENCE_PRESENCE_MUST_NOT_MASQUERADE_AS_FULL_FRESH_REQUALIFICATION'},null,2));
