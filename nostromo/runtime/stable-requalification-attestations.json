@@ -1,0 +1,22 @@
+{
+  "schema": "zenomorph-stable-requalification-attestations/v0.1",
+  "policy": "NEW EXECUTION EVIDENCE MAY SUPPLEMENT CURRENT QUALIFICATION BUT MUST NOT REWRITE HISTORICAL INCORPORATION EVIDENCE",
+  "attestations": [
+    {
+      "candidateId": "meal-topology-pasquinelli-2026-machine-organism-language-6fea27273abb-ore-p0_5",
+      "evidence": {
+        "isolated_generation": true
+      },
+      "source": {
+        "workflowRunId": 35034119755,
+        "workflow": "ZENOMORPH Stable Isolated-Generation Requalification",
+        "headSha": "7086b81f22f109623d23821d978ad93c1d67d0b8",
+        "artifactId": 10422543052,
+        "artifactName": "zenomorph-p0-5-isolated-generation-requalification",
+        "artifactDigest": "sha256:d57e314e4e91c436e8414f07f05ce4710a72c2ec275151c5acc93f0393aad48e",
+        "artifactCreatedAt": "2026-09-15T23:08:38Z"
+      },
+      "historicalRegistryMutation": false
+    }
+  ]
+}
