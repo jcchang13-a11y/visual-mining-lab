@@ -1,0 +1,37 @@
+name: ZENOMORPH Stable Registry Audit
+
+on:
+  push:
+    paths:
+      - 'nostromo/runtime/stable-registry-audit.mjs'
+      - 'nostromo/runtime/stable-registry-audit.test.mjs'
+      - 'nostromo/runtime/stable-requalification-attestations.json'
+      - 'nostromo/runtime/stable-structural-capabilities.json'
+      - '.github/workflows/zenomorph-stable-registry-audit.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit-current-qualification:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Regression — no historical evidence laundering
+        run: node nostromo/runtime/stable-registry-audit.test.mjs
+      - name: Audit canonical Stable against current gate
+        run: |
+          node nostromo/runtime/stable-registry-audit.mjs > /tmp/stable-registry-audit.json
+          node -e "const x=require('/tmp/stable-registry-audit.json'); if(x.allCurrentGateSatisfied!==true) { console.error(JSON.stringify(x,null,2)); process.exit(1); }"
+      - name: Preserve audit receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: zenomorph-stable-registry-current-gate-audit
+          path: /tmp/stable-registry-audit.json
+          retention-days: 30
