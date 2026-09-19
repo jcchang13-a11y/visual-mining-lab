@@ -1,0 +1,33 @@
+{
+  "policy": "immutable-source-copy-only",
+  "version": 1,
+  "createdAt": "2026-09-20T06:19:15+08:00",
+  "principle": "DISPLAYED STATE MUST FOLLOW EVIDENCE",
+  "sourceRules": {
+    "immutable": true,
+    "forbidInPlaceMutation": ["overwrite", "rename", "move", "delete", "annotate", "slice", "transform"],
+    "requiredBeforeIngestion": ["record-source-identity", "record-provenance", "record-hash", "create-isolated-copy", "verify-copy-independent"],
+    "onCopyFailure": "STOP_INGESTION"
+  },
+  "workspaceRules": {
+    "mutationsAllowedOnlyIn": "nostromo isolated ingestion/work artifacts",
+    "retainSourceLinkage": true,
+    "retainHash": true,
+    "retainProvenance": true
+  },
+  "feedingOrder": [
+    {
+      "id": "jung-che-chang-phd-2",
+      "mode": "whole-work",
+      "preInterpretation": false,
+      "status": "WAITING_FOR_SAFE_SOURCE_DISCOVERY_AND_COPY"
+    },
+    {
+      "id": "gangchibao-v3",
+      "mode": "complete-22-units",
+      "preInterpretation": false,
+      "dependsOn": "jung-che-chang-phd-2 delayed/cross-food observation",
+      "status": "QUEUED"
+    }
+  ]
+}
