@@ -1,4 +1,4 @@
-// ZENOMORPH three-body runtime boundary v0.1.7
+// ZENOMORPH three-body runtime boundary v0.1.8
 // Stable body may answer. Growing body may mutate. Shadow body may compare but never control output.
 // Ingestion law: edible != absorbable. A candidate must transfer across unlike foods and demonstrate usefulness before promotion.
 import crypto from 'node:crypto';
@@ -6,6 +6,8 @@ import {createRequire} from 'node:module';
 
 const require=createRequire(import.meta.url);
 const stableRegistry=require('./stable-structural-capabilities.json');
+const requalificationRegistry=require('./stable-requalification-attestations.json');
+const REQUIRED_CURRENT_GATES=['isolated_generation','stress','provenance','cross_organ','regression','held_out','usefulness_validated','cross_food_transfer','delayed_retest'];
 const clone=value=>JSON.parse(JSON.stringify(value));
 const canonicalize=value=>{
   if(Array.isArray(value)) return value.map(canonicalize);
@@ -22,26 +24,38 @@ export function behavioralProjection(value){
   return projected;
 }
 
+export function currentRequalificationEvidence(candidateId){
+  const merged={};
+  for(const attestation of (Array.isArray(requalificationRegistry?.attestations)?requalificationRegistry.attestations:[])){
+    if(attestation?.candidateId!==candidateId) continue;
+    for(const [gate,value] of Object.entries(attestation.evidence||{})) if(value===true) merged[gate]=true;
+  }
+  const missing=REQUIRED_CURRENT_GATES.filter(gate=>merged[gate]!==true);
+  return {evidence:merged,missing,qualified:missing.length===0};
+}
+
 export function getRegisteredStableCapabilities(){
   const caps=Array.isArray(stableRegistry?.capabilities)?stableRegistry.capabilities:[];
-  return clone(caps);
+  // Historical incorporation is not enough for present-tense authority. A capability is exposed
+  // to live Stable work only after fresh attestations cover the current nine-gate contract.
+  return clone(caps.filter(cap=>cap?.authority==='STABLE'&&currentRequalificationEvidence(cap.id).qualified));
 }
 
 export function createRuntimeState({stableCapabilities=null,candidates=[]}={}){
   const authoritativeStable=stableCapabilities===null?getRegisteredStableCapabilities():stableCapabilities;
   return {
-    schema:'zenomorph-three-body-runtime/v0.1.7',
+    schema:'zenomorph-three-body-runtime/v0.1.8',
     policy:'DISPLAYED STATE MUST FOLLOW EVIDENCE',
     ingestionPolicy:{rule:'EDIBLE_DOES_NOT_IMPLY_ABSORBABLE',meaning:'DROPLET may acquire and MUTHER may decompose unfamiliar material; GUT/VAJRA must prevent admission unless effects survive provenance, counterexample, cross-food, held-out, usefulness and delayed tests.'},
     stable:{capabilities:clone(authoritativeStable),revision:Number(stableRegistry?.revision||1)},
     growing:{candidates:clone(candidates),revision:1},
     shadow:{observations:[],ablationReceipts:[],revision:1},
-    promotionGate:{required:['isolated_generation','stress','provenance','cross_organ','regression','held_out','usefulness_validated','cross_food_transfer','delayed_retest']}
+    promotionGate:{required:[...REQUIRED_CURRENT_GATES]}
   };
 }
 
 export async function runTask({task,state,stableExecutor,growingExecutor}={}){
-  if(!state||state.schema!=='zenomorph-three-body-runtime/v0.1.7') throw new Error('INVALID_RUNTIME_STATE');
+  if(!state||state.schema!=='zenomorph-three-body-runtime/v0.1.8') throw new Error('INVALID_RUNTIME_STATE');
   if(typeof stableExecutor!=='function'||typeof growingExecutor!=='function') throw new Error('EXECUTOR_REQUIRED');
   const taskId=hash(task).slice(0,16);
   const stableSnapshot=clone(state.stable);
@@ -58,7 +72,7 @@ export async function runTask({task,state,stableExecutor,growingExecutor}={}){
 }
 
 export async function runAblationPair({task,state,candidateId,executor}={}){
-  if(!state||state.schema!=='zenomorph-three-body-runtime/v0.1.7') throw new Error('INVALID_RUNTIME_STATE');
+  if(!state||state.schema!=='zenomorph-three-body-runtime/v0.1.8') throw new Error('INVALID_RUNTIME_STATE');
   if(typeof executor!=='function') throw new Error('EXECUTOR_REQUIRED');
   const candidate=state.growing.candidates.find(x=>x.id===candidateId);
   if(!candidate) throw new Error('CANDIDATE_NOT_FOUND');
