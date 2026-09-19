@@ -1,0 +1,41 @@
+{
+  "protocol": "market-crisis-food-v0.1",
+  "status": "candidate-isolated-manifest",
+  "stable": false,
+  "purpose": "Pre-register the first blinded feeding packet before any candidate generation.",
+  "source": {
+    "provider": "Kenneth R. French Data Library",
+    "dataset": "Fama/French 3 Factors daily",
+    "description_url": "https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/Data_Library/f-f_factors.html",
+    "artifact_url": "https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/ftp/F-F_Research_Data_Factors_daily_CSV.zip",
+    "artifact_state": "not_frozen_yet",
+    "required_before_feed": ["retrieval_timestamp", "byte_sha256", "source_usage_notice_snapshot", "parser_version", "transformed_sha256"]
+  },
+  "food_schema_visible_to_muther": ["sequence_id", "t", "x1", "x2", "x3", "x4"],
+  "forbidden_food_metadata": ["calendar_date", "event_name", "crisis_label", "control_label", "expected_pattern", "target_feature"],
+  "window_policy": {
+    "length_trading_days": 121,
+    "anchor_offset": 60,
+    "target_families_evaluator_only": ["1929 crash", "1987 Black Monday", "1997 Asian financial crisis", "2000 dot-com unwind", "2008 global financial crisis", "2020 COVID crash"],
+    "ordinary_controls_per_target": 1,
+    "synthetic_controls": ["time-shuffled", "column-permuted"]
+  },
+  "blinding": {
+    "sequence_ids": "opaque randomized IDs",
+    "ordering": "randomized after artifact freeze",
+    "seed": "generate and retain only in evaluator map after artifact freeze",
+    "decode_map": "must remain unavailable to MUTHER until candidate generation is frozen"
+  },
+  "digestion_path": ["DROPLET", "MUTHER", "GUT", "VAJRA", "SHROOMING"],
+  "promotion_gate": ["isolated generation/assembly", "stress", "provenance", "cross-organ regression", "blinded crisis-vs-control evaluation", "non-financial held-out transfer", "cross-food validation", "delayed retest"],
+  "safety": {
+    "real_money": false,
+    "bank_connector": false,
+    "brokerage_connector": false,
+    "orders": false,
+    "credentials": false,
+    "simulation_only": true
+  },
+  "failure_rule": "If the source artifact cannot be frozen with provenance and hashes, do not feed and do not substitute unlabeled third-party data silently.",
+  "next_step": "Freeze the exact source artifact; then instantiate opaque windows and a separate evaluator-only decoding map without changing this preregistered window/control policy."
+}
