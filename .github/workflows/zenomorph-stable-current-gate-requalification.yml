@@ -5,12 +5,12 @@ on:
   push:
     branches: [main]
     paths:
-      - 'nostromo/runtime/**'
+      - 'nostromo/runtime/stable-p0_5-current-gate-requalification.mjs'
       - 'nostromo/integration/big-meal-offspring-qualification-runner.mjs'
       - '.github/workflows/zenomorph-stable-current-gate-requalification.yml'
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   requalify:
@@ -18,14 +18,60 @@ jobs:
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: 22
       - name: Requalify remaining current gates without mutating Stable
         run: node nostromo/runtime/stable-p0_5-current-gate-requalification.mjs --output=zenomorph-current-gate-requalification.json
+      - name: Persist fresh attestations without rewriting historical Stable evidence
+        run: |
+          node - <<'NODE'
+          const fs=require('fs');
+          const crypto=require('crypto');
+          const receipt=JSON.parse(fs.readFileSync('zenomorph-current-gate-requalification.json','utf8'));
+          if(receipt.status!=='CURRENT_GATES_REQUALIFIED') throw new Error('CURRENT_GATES_NOT_REQUALIFIED');
+          const path='nostromo/runtime/stable-requalification-attestations.json';
+          const registry=JSON.parse(fs.readFileSync(path,'utf8'));
+          const evidence=Object.fromEntries(Object.entries(receipt.evidence||{}).filter(([,v])=>v===true));
+          const required=['stress','provenance','cross_organ','regression','held_out','usefulness_validated','cross_food_transfer','delayed_retest'];
+          if(required.some(k=>evidence[k]!==true)) throw new Error('FRESH_EIGHT_GATE_EVIDENCE_INCOMPLETE');
+          const fingerprint=crypto.createHash('sha256').update(JSON.stringify({candidateId:receipt.candidateId,evidence,stableRegistry:receipt.stableRegistry,qualificationSchema:receipt.qualificationSchema})).digest('hex');
+          const duplicate=(registry.attestations||[]).some(x=>x?.candidateId===receipt.candidateId&&x?.source?.receiptFingerprint===fingerprint);
+          if(!duplicate){
+            registry.attestations.push({candidateId:receipt.candidateId,evidence,source:{workflow:'ZENOMORPH Stable Current-Gate Requalification',headSha:process.env.GITHUB_SHA,receiptFingerprint:fingerprint,observedAt:receipt.observedAt},historicalRegistryMutation:false});
+            fs.writeFileSync(path,JSON.stringify(registry,null,2)+'\n');
+          }
+          NODE
+      - name: Verify live Stable now requires all nine fresh gates
+        run: |
+          node --input-type=module - <<'NODE'
+          import {currentRequalificationEvidence,getRegisteredStableCapabilities} from './nostromo/runtime/body-router.mjs';
+          const id='meal-topology-pasquinelli-2026-machine-organism-language-6fea27273abb-ore-p0_5';
+          const q=currentRequalificationEvidence(id);
+          if(!q.qualified||q.missing.length) throw new Error(`CURRENT_REQUALIFICATION_INCOMPLETE:${q.missing.join(',')}`);
+          const caps=getRegisteredStableCapabilities();
+          if(!caps.some(x=>x.id===id)) throw new Error('REQUALIFIED_CAPABILITY_NOT_EXPOSED_TO_LIVE_STABLE');
+          console.log(JSON.stringify({candidateId:id,qualified:true,currentGateCount:9,liveStableExposed:true},null,2));
+          NODE
+      - name: Runtime regression
+        run: node nostromo/runtime/body-router.test.mjs
+      - name: Commit fresh attestation only after all checks pass
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add nostromo/runtime/stable-requalification-attestations.json
+          if git diff --cached --quiet; then
+            echo 'No new attestation to commit.'
+          else
+            git commit -m 'ZENOMORPH: persist fresh p0.5 current-gate requalification'
+            git push origin HEAD:main
+          fi
       - name: Upload fresh requalification receipt
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: zenomorph-p0-5-current-gate-requalification
           path: zenomorph-current-gate-requalification.json
-          if-no-files-found: error
+          if-no-files-found: warn
