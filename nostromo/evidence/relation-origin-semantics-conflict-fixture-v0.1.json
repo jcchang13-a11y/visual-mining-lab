@@ -1,0 +1,42 @@
+{
+  "fixture_id": "relation-origin-semantics-conflict-v0.1",
+  "status": "ISOLATED_TEST_FIXTURE / NOT INCORPORATED",
+  "purpose": "Pressure-test routing when source-explicit relations and tempting derived relations coexist or conflict.",
+  "source_policy": {
+    "synthetic": true,
+    "may_modify_original_sources": false,
+    "note": "No user document or source corpus is modified; this fixture is an isolated synthetic artifact."
+  },
+  "records": [
+    {"id":"A","x":0.0,"y":0.0,"group":"g1"},
+    {"id":"B","x":0.1,"y":0.1,"group":"g2"},
+    {"id":"C","x":10.0,"y":10.0,"group":"g1"}
+  ],
+  "relations": [
+    {
+      "from":"A","to":"C",
+      "relation_semantics":"membership",
+      "relation_origin":"source_explicit",
+      "assertion":"shared source group g1"
+    },
+    {
+      "from":"A","to":"B",
+      "relation_semantics":"similarity",
+      "relation_origin":"derived",
+      "derivation":{"rule":"euclidean_distance <= threshold","threshold":0.25,"fields":["x","y"]}
+    }
+  ],
+  "expected_invariants": [
+    "A-B must never be upgraded to source_explicit merely because it is spatially close.",
+    "A-C must remain source_explicit membership even though it is spatially distant.",
+    "A-B must not satisfy a gate requiring source-explicit topology or membership.",
+    "Routing may retain both relations simultaneously without collapsing relation_semantics into relation_origin.",
+    "Derived relation must retain derivation rule, threshold, fields, and source record IDs."
+  ],
+  "failure_signals": [
+    "origin_upgrade",
+    "semantic_origin_collapse",
+    "proximity_overrides_source_assertion",
+    "derived_relation_loses_derivation_provenance"
+  ]
+}
