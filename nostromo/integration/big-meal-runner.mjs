@@ -1,4 +1,4 @@
-// ZENOMORPH big-meal runner v0.2.0
+// ZENOMORPH big-meal runner v0.2.1
 // Whole-source ingestion without human semantic preselection.
 import crypto from 'node:crypto';
 import fs from 'node:fs/promises';
@@ -76,7 +76,7 @@ function mutherWholeText(chunks){
 }
 
 async function tryAcquire(url,manifest){
-  const response=await fetch(url,{redirect:'follow',headers:{'user-agent':'Mozilla/5.0 ZENOMORPH-DROPLET/1.1','accept':'text/html,application/xhtml+xml,application/pdf;q=0.9,*/*;q=0.5'}});
+  const response=await fetch(url,{redirect:'follow',headers:{'user-agent':'Mozilla/5.0 ZENOMORPH-DROPLET/1.2','accept':'text/html,application/xhtml+xml,application/xml,text/xml,application/pdf;q=0.9,*/*;q=0.5'}});
   const contentType=String(response.headers.get('content-type')||'').toLowerCase();
   if(!response.ok)return {ok:false,url,responseStatus:response.status,contentType,reason:'HTTP'};
   const bytes=Buffer.from(await response.arrayBuffer());
@@ -89,11 +89,11 @@ async function tryAcquire(url,manifest){
   const authorVerified=textIdentity.includes(normalizedIdentity(manifest.author));
   const doiVerified=text.toLowerCase().replace(/\s+/g,'').includes(String(manifest.doi||'').toLowerCase().replace(/\s+/g,''));
   const bodyLargeEnough=text.length>12000;
-  return {ok:titleVerified&&authorVerified&&doiVerified&&bodyLargeEnough,url,responseStatus:response.status,contentType,format:isPdf?'pdf':'html',bytes:bytes.length,sourceSha256:sha256(bytes),text,textCharCount:text.length,titleVerified,authorVerified,doiVerified,bodyLargeEnough,reason:(titleVerified&&authorVerified&&doiVerified&&bodyLargeEnough)?null:'IDENTITY_OR_BODY'};
+  return {ok:titleVerified&&authorVerified&&doiVerified&&bodyLargeEnough,url,responseStatus:response.status,contentType,format:isPdf?'pdf':contentType.includes('xml')?'xml':'html',bytes:bytes.length,sourceSha256:sha256(bytes),text,textCharCount:text.length,titleVerified,authorVerified,doiVerified,bodyLargeEnough,reason:(titleVerified&&authorVerified&&doiVerified&&bodyLargeEnough)?null:'IDENTITY_OR_BODY'};
 }
 
 async function dropletAcquire(manifest){
-  const candidates=[manifest.source?.primaryHtml,manifest.source?.primary,manifest.source?.repositoryPdf,manifest.source?.publisherPdf].filter(Boolean);
+  const candidates=[manifest.source?.primaryHtml,manifest.source?.primary,manifest.source?.repositoryPdf,manifest.source?.publisherPdf,manifest.source?.publicArchiveXml].filter(Boolean);
   if(!candidates.length)throw new Error('MEAL_SOURCE_REQUIRED');
   const attempts=[];
   for(const url of [...new Set(candidates)]){
@@ -123,14 +123,16 @@ export async function runBigMeal({manifestPath='nostromo/research/big-meals/pasq
   const chunks=neutralChunks(text);
   const muther=mutherWholeText(chunks);
   await loadEngines();
-  const gutInput={mealId:manifest.id,sourceSha256:acquired.sourceSha256,muther};
-  const gut=globalThis.GutEngine.digest(gutInput,{source:`BIG_MEAL:${manifest.id}`,inheritedSubstrates:chunks});
-  const vajraTarget=compact(gut.summary||JSON.stringify(gut),7000);
-  const vajra=globalThis.VajraEngine.run(vajraTarget,8);
-  const shrooming=await shroomFeedbackReadingRound({text:vajraTarget,agents:10,round:1});
-  const result={schema:'zenomorph-big-meal-result/v0.2',mealId:manifest.id,status:'INGESTED_NOT_PROMOTED',acquiredAt:new Date().toISOString(),provenance:{doi:manifest.doi,url:acquired.url,format:acquired.format,license:manifest.license,versionOfRecordDate:manifest.versionOfRecordDate,sourceSha256:acquired.sourceSha256},droplet,muther,gut:{status:gut?.status||'EXECUTED',summaryFingerprint:sha256(String(gut?.summary||'')),nutrientCount:Array.isArray(gut?.nutrients)?gut.nutrients.length:null,wasteCount:Array.isArray(gut?.waste)?gut.waste.length:null},vajra:{status:vajra?.status||'EXECUTED',targetRef:vajra?.targetRef||null,traceLength:Array.isArray(vajra?.trace)?vajra.trace.length:null,boundary:'VAJRA OUTPUT IS ADVERSARIAL DIGESTION, NOT EVIDENCE THAT AN ORGANISM/MACHINE ANALOGY IS TRUE.'},shrooming:{status:shrooming?.status||'EXECUTED',count:shrooming?.count||null,sourceFingerprint:shrooming?.sourceFingerprint||null},promotion:{allowed:false,reason:'ONE_MEAL_CANNOT_ESTABLISH_CROSS_FOOD_OR_DELAYED_TRANSFER'},nextTests:['held_out_non_ai_non_life_non_philosophy_food','cross_food_transfer','delayed_retest']};
+  const gut=globalThis.GutEngine.digest({id:manifest.id,source:droplet.url,content:text,muther});
+  const vajra=globalThis.VajraEngine.inspect({id:manifest.id,source:droplet.url,content:text,muther,gut},{attackAnalogy:true,attackSelfProjection:true});
+  const shrooming=await shroomFeedbackReadingRound({seed:`BIG_MEAL:${manifest.id}\n${muther.recombinations.map(x=>x.mutation).join('\n\n')}`,rounds:1});
+  const result={schema:'zenomorph-big-meal-run/v0.2.1',meal:{id:manifest.id,title:manifest.title,doi:manifest.doi,license:manifest.license,versionOfRecordDate:manifest.versionOfRecordDate},droplet,muther,gut,vajra,shrooming,boundary:manifest.successBoundary};
   if(outputPath)await fs.writeFile(outputPath,JSON.stringify(result,null,2)+'\n','utf8');
   return result;
 }
 
-if(import.meta.url===`file://${process.argv[1]}`){const outputArg=process.argv.find(x=>x.startsWith('--output='));const result=await runBigMeal({outputPath:outputArg?outputArg.slice(9):null});console.log(JSON.stringify(result,null,2));}
+if(import.meta.url===`file://${process.argv[1]}`){
+  const outputArg=process.argv.find(x=>x.startsWith('--output='));
+  const result=await runBigMeal({outputPath:outputArg?outputArg.slice(9):null});
+  console.log(JSON.stringify(result,null,2));
+}
