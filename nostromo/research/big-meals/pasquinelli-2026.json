@@ -17,6 +17,12 @@
     "publisherPdf": "https://link.springer.com/content/pdf/10.1007/s00146-026-03094-7.pdf",
     "repositoryLanding": "https://iris.unive.it/handle/10278/5117168",
     "repositoryPdf": "https://iris.unive.it/retrieve/6c3fb9c8-0fc2-46a0-9d20-464de46ce4c7/Pasquinelli-Machine-Organism-Language.pdf",
+    "publicArchiveXml": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=13499733&rettype=full&retmode=xml",
+    "publicArchiveIdentity": {
+      "pmid": "42634632",
+      "pmcid": "PMC13499733",
+      "doi": "10.1007/s00146-026-03094-7"
+    },
     "doi": "https://doi.org/10.1007/s00146-026-03094-7",
     "publisherVerification": {
       "openAccess": true,
