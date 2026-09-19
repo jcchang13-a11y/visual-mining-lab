@@ -2,6 +2,12 @@ name: ZENOMORPH Stable Current-Gate Requalification
 
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'nostromo/runtime/**'
+      - 'nostromo/integration/big-meal-offspring-qualification-runner.mjs'
+      - '.github/workflows/zenomorph-stable-current-gate-requalification.yml'
 
 permissions:
   contents: read
