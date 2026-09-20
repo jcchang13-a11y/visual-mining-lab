@@ -1,0 +1,59 @@
+{
+  "schema": "zenomorph-crossfood-delayed-execution/v0.1",
+  "id": "level1-crossfood-software-release-delayed-execution-v0.1",
+  "executedAt": "2026-09-20T13:42:05Z",
+  "authority": "GROWING_ONLY",
+  "candidate": "level1-gods-eye-view-ablation-partial-vs-stale-v0.1",
+  "protocol": "level1-crossfood-software-release-delayed-plan-v0.1",
+  "specimen": "level1-crossfood-software-release-delayed-specimen-v0.1",
+  "sourceDomain": "software-release-metadata",
+  "geospatial": false,
+  "delayMinutesFromSpecimenCreation": 181,
+  "delayMinutesFromProtocolLock": 157,
+  "isolationCompliance": {
+    "godsEyeViewSourceReread": false,
+    "priorGodsEyeViewExpectedOutputsReread": false,
+    "sealedExpectedOutputsInspectedBeforeScoring": false,
+    "stableMutation": false
+  },
+  "observations": [
+    {
+      "case": "E",
+      "freshness": "FRESH",
+      "completeness": "PARTIAL",
+      "basis": "publication is inside the current observation window; mirror explicitly documents subset coverage"
+    },
+    {
+      "case": "F",
+      "freshness": "STALE",
+      "completeness": "COMPLETE_AT_CAPTURE",
+      "basis": "manifest is outside the current observation window; signed inventory establishes complete capture-time artifact coverage"
+    },
+    {
+      "case": "G",
+      "freshness": "FRESH",
+      "completeness": "UNKNOWN",
+      "basis": "timestamp is current; registry provides no evidence sufficient to establish coverage"
+    },
+    {
+      "case": "H",
+      "freshness": "CONFLICTED",
+      "completeness": "UNKNOWN",
+      "basis": "signed provenance records disagree on release timestamp; neither establishes complete coverage"
+    }
+  ],
+  "contractChecks": {
+    "freshnessCompletenessIndependent": true,
+    "partialDoesNotImplyStale": true,
+    "staleDoesNotImplyIncomplete": true,
+    "freshDoesNotImplyComplete": true,
+    "timestampConflictDoesNotCreateCoverageClaim": true,
+    "unknownRemainsExplicit": true,
+    "allBlindCasesSatisfied": true
+  },
+  "result": "PASS",
+  "interpretation": "The freshness/completeness separation transferred after delay from the God’s Eye View geospatial/feed context to a non-geospatial software-release specimen without rereading the source meal or prior expected-output fixtures.",
+  "promotionEffect": "NONE",
+  "stableMutation": "FORBIDDEN",
+  "nextGate": "additional unrelated-domain held-out/adversarial replication before any incorporation decision"
+}
