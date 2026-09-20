@@ -1,0 +1,50 @@
+{
+  "schema": "zenomorph-foraging-receipt/v0.1",
+  "status": "ACQUIRED_NOT_ABSORBED",
+  "policy": "EDIBLE_DOES_NOT_IMPLY_ABSORBABLE",
+  "acquiredAt": "2026-09-20T00:40:00Z",
+  "food": {
+    "name": "God's Eye View",
+    "canonicalRepository": "bilawalsidhu/gods-eye-view",
+    "repositoryId": 1277471539,
+    "defaultBranch": "main",
+    "observedHeadSha": "0d41b6be5490db1f10a171f238be75db4d4ec3b4",
+    "observedHeadDate": "2026-09-16T18:57:56Z",
+    "observedHeadMessage": "Merge pull request #626 from bilawalsidhu/fix/vessel-partial-feed-status\n\nfix: distinguish partial vessel snapshots from stale data",
+    "codeLicense": "MIT per repository package metadata and DATA_SOURCES documentation; third-party feeds/assets retain separate provider terms",
+    "sourceIdentityRule": "Do not infer dataset reuse rights from the code license. Preserve each feed's provider, terms, freshness and modeling status."
+  },
+  "verifiedProperties": {
+    "publicRepository": true,
+    "heterogeneousSpatialFeeds": true,
+    "feedTruthfulnessDistinctions": [
+      "live_or_regularly_refreshed",
+      "simulated",
+      "estimated_or_reconstructed",
+      "stale_or_unknown",
+      "partial"
+    ],
+    "importantCounterexample": {
+      "description": "The observed head explicitly separates PARTIAL vessel snapshots from STALE data instead of collapsing incompleteness into age/freshness.",
+      "whyItIsFood": "This is an unprompted source-side distinction between two failure dimensions. ZENOMORPH may test whether exposure causes a persistent ability to keep completeness and freshness orthogonal on unrelated materials, without being told to learn that rule."
+    }
+  },
+  "ingestionBoundary": {
+    "rawOrPrivateCredentials": "FORBIDDEN",
+    "namedPersonTracking": "OUT_OF_SCOPE",
+    "safetyCriticalUse": "FORBIDDEN",
+    "thirdPartyFeedReuse": "ONLY_WHEN_PROVIDER_TERMS_PERMIT",
+    "sourceMutation": "FORBIDDEN",
+    "localCopyRequiredBeforeTransformation": true
+  },
+  "nextExperiment": {
+    "candidatePredeclared": false,
+    "instructionToMuther": "NONE: do not name the partial-vs-stale distinction as a lesson before digestion.",
+    "procedure": [
+      "Acquire a provenance-preserving isolated copy of selected public code/docs/failure traces.",
+      "Let DROPLET→MUTHER→GUT→VAJRA→SHROOMING process without a target concept.",
+      "Compare control vs exposed handling of unrelated records where completeness and recency vary independently.",
+      "If a new distinction appears, test on non-geospatial held-out food and delayed retest before creating any promotion candidate."
+    ]
+  }
+}
