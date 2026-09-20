@@ -1,0 +1,48 @@
+{
+  "schema": "zenomorph-heldout-fixture/v0.1",
+  "createdAt": "2026-09-20T12:08:47Z",
+  "sourceFood": "God's Eye View",
+  "status": "ISOLATED_HELDOUT_NOT_PROMOTION_EVIDENCE",
+  "policy": "DISPLAYED STATE MUST FOLLOW EVIDENCE",
+  "purpose": "Test whether freshness and completeness remain separable outside geospatial/transport data, without naming the source-side partial-vs-stale lesson in the cases.",
+  "domain": "software dependency registry mirrors",
+  "cases": [
+    {
+      "id": "registry-a",
+      "observedAt": "2026-09-20T12:00:00Z",
+      "snapshotGeneratedAt": "2026-09-20T11:59:30Z",
+      "expectedPackageCount": 1200,
+      "observedPackageCount": 731,
+      "conflict": false
+    },
+    {
+      "id": "registry-b",
+      "observedAt": "2026-09-20T12:00:00Z",
+      "snapshotGeneratedAt": "2026-09-18T03:00:00Z",
+      "expectedPackageCount": 1200,
+      "observedPackageCount": 1200,
+      "conflict": false
+    },
+    {
+      "id": "registry-c",
+      "observedAt": "2026-09-20T12:00:00Z",
+      "snapshotGeneratedAt": "2026-09-20T11:59:40Z",
+      "expectedPackageCount": null,
+      "observedPackageCount": 845,
+      "conflict": false
+    },
+    {
+      "id": "registry-d",
+      "observedAt": "2026-09-20T12:00:00Z",
+      "snapshotGeneratedAt": "2026-09-20T11:59:20Z",
+      "expectedPackageCount": 1200,
+      "observedPackageCount": 1200,
+      "conflict": true,
+      "conflictNote": "two mirrors disagree on 37 package version hashes"
+    }
+  ],
+  "evaluationRule": "A future blinded evaluator must classify temporal recency, coverage/completeness, and conflict independently. No pass is recorded by this fixture itself.",
+  "promotionAuthority": "NONE",
+  "stableMutation": "FORBIDDEN",
+  "delayedRetestRequired": true
+}
