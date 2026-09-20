@@ -1,0 +1,42 @@
+{
+  "schema": "zenomorph-vajra-attack-execution/v0.1",
+  "id": "level1-gods-eye-view-vajra-contradiction-execution-v0.1",
+  "status": "ISOLATED_EXECUTION_RESULT",
+  "authority": "GROWING_ONLY",
+  "sourceFixture": "level1-gods-eye-view-vajra-contradiction-v0.1",
+  "executedAt": "2026-09-20T06:08:52Z",
+  "results": [
+    {
+      "attack": "unknown-total-current-response",
+      "observed": {"freshness":"current_at_capture","completeness":"unknown"},
+      "pass": true
+    },
+    {
+      "attack": "old-complete-export",
+      "observed": {"freshness":"stale","completeness":"complete_at_capture"},
+      "pass": true
+    },
+    {
+      "attack": "conflicting-completeness-claims",
+      "observed": {"freshness":"current_at_capture","completeness":"conflicted"},
+      "pass": true
+    },
+    {
+      "attack": "freshness-unknown-complete-snapshot",
+      "observed": {"freshness":"unknown","completeness":"complete_at_capture"},
+      "pass": true
+    }
+  ],
+  "conclusion": "The isolated representation preserves freshness and completeness as independent evidence dimensions for all four adversarial cases. Unknown remains unknown and unresolved contradiction remains explicit.",
+  "promotionEffect": "NONE",
+  "limits": [
+    "This is an isolated representation-level execution, not proof that the active runtime routes live feeds correctly.",
+    "No delayed retest has yet been completed.",
+    "No Stable authority is granted."
+  ],
+  "nextChecks": [
+    "wire the representation through the active candidate execution path",
+    "compare exposed vs control behavior on a non-geospatial specimen",
+    "perform delayed retest without rereading God's Eye View fixtures"
+  ]
+}
