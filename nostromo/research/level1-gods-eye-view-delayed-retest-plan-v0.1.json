@@ -1,0 +1,53 @@
+{
+  "schema": "zenomorph-delayed-retest-plan/v0.1",
+  "id": "level1-gods-eye-view-delayed-retest-plan-v0.1",
+  "status": "LOCKED_BEFORE_EXECUTION",
+  "authority": "GROWING_ONLY",
+  "candidate": "level1-gods-eye-view-ablation-partial-vs-stale-v0.1",
+  "priorExecution": "level1-gods-eye-view-active-candidate-transfer-execution-v0.1",
+  "lockedAt": "2026-09-20T08:02:53Z",
+  "purpose": "Test whether the freshness/completeness separation persists after delay without rereading the God's Eye View or held-out fixtures.",
+  "noRereadRule": {
+    "forbiddenBeforeExecution": [
+      "God's Eye View source fixtures",
+      "software-registry held-out fixture",
+      "prior expected-output fields"
+    ],
+    "allowed": [
+      "candidate rule identity",
+      "this locked protocol"
+    ]
+  },
+  "blindCases": [
+    {
+      "id": "A",
+      "freshnessEvidence": "capture timestamp is inside the accepted current window",
+      "coverageEvidence": "only a documented subset of records was collected"
+    },
+    {
+      "id": "B",
+      "freshnessEvidence": "capture timestamp is outside the accepted current window",
+      "coverageEvidence": "all records known at capture time were collected"
+    },
+    {
+      "id": "C",
+      "freshnessEvidence": "capture timestamp is inside the accepted current window",
+      "coverageEvidence": "coverage cannot be established from available evidence"
+    },
+    {
+      "id": "D",
+      "freshnessEvidence": "freshness evidence conflicts across two provenance records",
+      "coverageEvidence": "coverage cannot be established from available evidence"
+    }
+  ],
+  "passContract": [
+    "freshness and completeness must be reported independently",
+    "partial coverage must not imply stale data",
+    "stale data must not imply incomplete-at-capture coverage",
+    "unknown or conflicted evidence must remain explicit rather than being guessed",
+    "all four blind cases must satisfy the rule"
+  ],
+  "promotionEffect": "NONE",
+  "executionConstraint": "Execute only after a later automation cycle; persist observations before comparing against earlier fixtures.",
+  "stableMutation": "FORBIDDEN"
+}
