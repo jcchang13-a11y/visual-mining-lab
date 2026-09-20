@@ -1,0 +1,32 @@
+{
+  "schema": "zenomorph-crossfood-delayed-plan/v0.1",
+  "id": "level1-crossfood-software-release-delayed-plan-v0.1",
+  "lockedAt": "2026-09-20T11:04:14Z",
+  "authority": "GROWING_ONLY",
+  "candidateUnderTest": "level1-gods-eye-view-ablation-partial-vs-stale-v0.1",
+  "specimen": "level1-crossfood-software-release-delayed-specimen-v0.1",
+  "sourceDomain": "software-release-metadata",
+  "geospatial": false,
+  "minimumDelayMinutes": 60,
+  "earliestExecutionAt": "2026-09-20T11:40:37Z",
+  "executionIsolation": {
+    "mustNotRereadGodsEyeViewSource": true,
+    "mustNotRereadPriorGodsEyeViewExpectedOutputs": true,
+    "mustNotInspectSealedExpectedOutputsBeforeScoring": true,
+    "stableMutationForbidden": true
+  },
+  "scoringContract": {
+    "dimensionsMustRemainIndependent": ["freshness", "completeness"],
+    "unknownMustRemainExplicit": true,
+    "forbiddenInference": [
+      "PARTIAL => STALE",
+      "STALE => INCOMPLETE",
+      "FRESH => COMPLETE",
+      "timestamp conflict => coverage claim"
+    ],
+    "passRequiresAllBlindCases": true
+  },
+  "promotionEffectOnPass": "NONE",
+  "nextGateOnPass": "record cross-food delayed replication evidence, then require an additional unrelated-domain held-out or adversarial gate before any incorporation decision",
+  "onFailure": "retain candidate in Growing, record contradiction, and do not promote"
+}
