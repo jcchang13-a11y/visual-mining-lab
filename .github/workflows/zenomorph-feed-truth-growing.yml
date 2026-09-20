@@ -1,0 +1,29 @@
+name: ZENOMORPH Growing Feed Truth Distinction
+
+on:
+  push:
+    paths:
+      - 'nostromo/integration/feed-truth-distinction.mjs'
+      - 'nostromo/integration/feed-truth-distinction.test.mjs'
+      - '.github/workflows/zenomorph-feed-truth-growing.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  growing-only-validation:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Run adversarial feed truth cases
+        run: node nostromo/integration/feed-truth-distinction.test.mjs
+      - name: Guard against accidental Stable authority
+        run: |
+          if grep -q "authority:'STABLE'" nostromo/integration/feed-truth-distinction.mjs; then
+            echo 'Growing candidate illegally claims Stable authority' >&2
+            exit 1
+          fi
