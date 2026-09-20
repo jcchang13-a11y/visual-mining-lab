@@ -1,0 +1,49 @@
+{
+  "schema": "zenomorph-delayed-retest-execution/v0.1",
+  "id": "level1-gods-eye-view-delayed-retest-execution-v0.1",
+  "executedAt": "2026-09-20T09:14:05Z",
+  "authority": "GROWING_ONLY",
+  "candidate": "level1-gods-eye-view-ablation-partial-vs-stale-v0.1",
+  "protocol": "level1-gods-eye-view-delayed-retest-plan-v0.1",
+  "protocolLockedAt": "2026-09-20T08:02:53Z",
+  "delayMinutes": 71,
+  "noRereadCompliance": true,
+  "observations": [
+    {
+      "case": "A",
+      "freshness": "FRESH",
+      "completeness": "PARTIAL",
+      "basis": "timestamp current; documented subset only"
+    },
+    {
+      "case": "B",
+      "freshness": "STALE",
+      "completeness": "COMPLETE_AT_CAPTURE",
+      "basis": "timestamp outside current window; all records known at capture collected"
+    },
+    {
+      "case": "C",
+      "freshness": "FRESH",
+      "completeness": "UNKNOWN",
+      "basis": "timestamp current; coverage cannot be established"
+    },
+    {
+      "case": "D",
+      "freshness": "CONFLICTED",
+      "completeness": "UNKNOWN",
+      "basis": "provenance records disagree on freshness; coverage cannot be established"
+    }
+  ],
+  "contractChecks": {
+    "freshnessCompletenessIndependent": true,
+    "partialDoesNotImplyStale": true,
+    "staleDoesNotImplyIncomplete": true,
+    "unknownConflictRemainExplicit": true,
+    "allBlindCasesSatisfied": true
+  },
+  "result": "PASS",
+  "interpretation": "The candidate separation between freshness and completeness survived a delayed blind retest without rereading source or prior expected-output fixtures.",
+  "promotionEffect": "NONE",
+  "stableMutation": "FORBIDDEN",
+  "nextGate": "cross-food delayed replication on a new non-geospatial specimen before any incorporation decision"
+}
