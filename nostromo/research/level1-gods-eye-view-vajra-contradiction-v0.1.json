@@ -1,0 +1,71 @@
+{
+  "schema": "zenomorph-vajra-attack/v0.1",
+  "id": "level1-gods-eye-view-vajra-contradiction-v0.1",
+  "status": "ISOLATED_ADVERSARIAL_FIXTURE",
+  "authority": "GROWING_ONLY",
+  "sourceCandidate": "level1-gods-eye-view-ablation-partial-vs-stale-v0.1",
+  "purpose": "Attack the candidate separation of freshness and completeness with unknown, contradictory, and convenience-biased evidence without granting Stable authority.",
+  "attacks": [
+    {
+      "id": "unknown-total-current-response",
+      "evidence": {
+        "capturedAt": "T0",
+        "responseSucceeded": true,
+        "paginationContract": "unknown",
+        "publishedTotal": null
+      },
+      "requiredDisposition": {
+        "freshness": "current_at_capture",
+        "completeness": "unknown"
+      },
+      "mustReject": ["successful response => complete", "unknown completeness => partial"]
+    },
+    {
+      "id": "old-complete-export",
+      "evidence": {
+        "capturedAt": "T-30d",
+        "completeAtCapture": true,
+        "refreshEvidence": false
+      },
+      "requiredDisposition": {
+        "freshness": "stale",
+        "completeness": "complete_at_capture"
+      },
+      "mustReject": ["complete_at_capture => current", "stale => incomplete"]
+    },
+    {
+      "id": "conflicting-completeness-claims",
+      "evidence": {
+        "capturedAt": "T0",
+        "sourceA": "complete",
+        "sourceB": "partial",
+        "conflictResolved": false
+      },
+      "requiredDisposition": {
+        "freshness": "current_at_capture",
+        "completeness": "conflicted"
+      },
+      "mustReject": ["prefer convenient complete claim", "collapse conflict into unknown without preserving conflict"]
+    },
+    {
+      "id": "freshness-unknown-complete-snapshot",
+      "evidence": {
+        "capturedAt": null,
+        "completeSnapshotEvidence": true,
+        "freshnessEvidence": null
+      },
+      "requiredDisposition": {
+        "freshness": "unknown",
+        "completeness": "complete_at_capture"
+      },
+      "mustReject": ["complete snapshot => fresh", "missing timestamp => stale"]
+    }
+  ],
+  "passCondition": "All four attacks preserve freshness and completeness as independent evidence dimensions; unknown remains unknown; unresolved contradiction remains explicit; no convenience upgrade occurs.",
+  "promotionEffect": "NONE. This fixture can falsify the Growing candidate but cannot promote it.",
+  "nextChecks": [
+    "execute these attacks through the active candidate representation",
+    "compare exposed vs control behavior",
+    "repeat after delay without rereading God's Eye View fixtures"
+  ]
+}
