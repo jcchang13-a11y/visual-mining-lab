@@ -1,0 +1,49 @@
+{
+  "schema": "zenomorph-active-candidate-transfer-execution/v0.1",
+  "id": "level1-gods-eye-view-active-candidate-transfer-execution-v0.1",
+  "status": "ISOLATED_EXECUTION_RESULT",
+  "authority": "GROWING_ONLY",
+  "sourceCandidate": "level1-gods-eye-view-ablation-partial-vs-stale-v0.1",
+  "sourceHeldout": "level1-gods-eye-view-heldout-software-registry-v0.1",
+  "sourceVajraExecution": "level1-gods-eye-view-vajra-contradiction-execution-v0.1",
+  "executedAt": "2026-09-20T06:46:26Z",
+  "domain": "software-package-registry",
+  "representation": {
+    "dimensions": ["freshness", "completeness"],
+    "rule": "Neither dimension may be inferred from the other; unknown and conflicted evidence remain explicit."
+  },
+  "results": [
+    {
+      "case": "registry-current-partial",
+      "observed": {"freshness": "current_at_capture", "completeness": "partial"},
+      "forbiddenInferenceTriggered": false,
+      "pass": true
+    },
+    {
+      "case": "registry-stale-complete-at-capture",
+      "observed": {"freshness": "stale", "completeness": "complete_at_capture"},
+      "forbiddenInferenceTriggered": false,
+      "pass": true
+    },
+    {
+      "case": "registry-unknown-completeness",
+      "observed": {"freshness": "current_at_capture", "completeness": "unknown"},
+      "forbiddenInferenceTriggered": false,
+      "pass": true
+    }
+  ],
+  "crossDomainTransferObserved": true,
+  "interpretation": "The candidate representation transfers from the God's Eye View feed problem to a non-geospatial software-registry specimen while preserving freshness and completeness as independent evidence dimensions.",
+  "promotionEffect": "NONE",
+  "limits": [
+    "This execution persists a Growing-only cross-domain result; it does not grant Stable authority.",
+    "The active live-task gateway has not yet been changed to use this candidate.",
+    "A delayed retest without rereading the source fixtures remains outstanding.",
+    "Usefulness on a real external workload remains unproven."
+  ],
+  "nextChecks": [
+    "perform delayed retest without rereading God's Eye View or held-out fixtures",
+    "run an ablation on a real non-geospatial workload",
+    "keep Stable unchanged until the full promotion contract is satisfied"
+  ]
+}
