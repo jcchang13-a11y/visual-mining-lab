@@ -1,0 +1,59 @@
+{
+  "schema": "zenomorph-foraging-specimen/v0.1",
+  "id": "level1-gods-eye-view-live-foraging-v0.1",
+  "status": "ACQUIRED_NOT_ABSORBED",
+  "authority": "GROWING_ONLY",
+  "acquiredAt": "2026-09-20T01:20:00Z",
+  "source": {
+    "name": "God's Eye View",
+    "canonicalRepository": "https://github.com/bilawalsidhu/gods-eye-view",
+    "verifiedOwner": "bilawalsidhu",
+    "verifiedMainCommit": "0d41b6be5490db1f10a171f238be75db4d4ec3b4",
+    "commitDate": "2026-09-16T18:57:56Z",
+    "licenseClaim": "MIT for project code; bundled/live datasets and media retain their own terms",
+    "verification": [
+      "Canonical owner profile lists gods-eye-view as a public repository.",
+      "Repository README identifies itself as the canonical live 3D client.",
+      "Main commit was fetched directly from GitHub API rather than inferred from a screenshot."
+    ]
+  },
+  "feedIdentityPolicy": {
+    "rule": "DISPLAYED_STATE_MUST_FOLLOW_EVIDENCE",
+    "preserveStates": ["live", "regularly_refreshed", "delayed", "partial", "stale", "estimated", "simulated", "reconstructed_estimate", "unavailable"],
+    "forbiddenCollapse": "Do not coerce modeled, delayed, partial, stale, inferred, reconstructed or unavailable data into LIVE.",
+    "notableUpstreamEvidence": {
+      "commit": "0d41b6be5490db1f10a171f238be75db4d4ec3b4",
+      "observation": "Upstream explicitly separated PARTIAL vessel snapshots from STALE data, showing completeness and freshness are independent evidence dimensions.",
+      "mutationPressureOnly": true
+    }
+  },
+  "publicForagingSurfaces": [
+    "source code and adapter definitions",
+    "DATA_SOURCES and current-state documentation",
+    "public issue/PR/failure traces",
+    "aircraft telemetry where provider terms permit",
+    "vessel telemetry where provider terms permit",
+    "satellite orbital elements",
+    "earthquake feeds",
+    "traffic representations with simulation identity retained",
+    "public-camera metadata/feeds where provider terms permit"
+  ],
+  "experimentalDiscipline": {
+    "priming": "NONE: do not tell MUTHER what concept or sensor should emerge.",
+    "firstContrast": "Treat completeness and freshness as separable without presuming this structure deserves incorporation.",
+    "requiredNextTests": [
+      "cross-feed conflict/outage specimen",
+      "ablation against a representation that collapses partial into stale",
+      "held-out non-geospatial food",
+      "delayed retest",
+      "VAJRA counterexample attack"
+    ],
+    "stableAdmission": "FORBIDDEN until the full current promotion contract passes."
+  },
+  "safety": {
+    "namedPersonTracking": "OUT_OF_SCOPE",
+    "safetyCriticalUse": "OUT_OF_SCOPE",
+    "privateCredentials": "DO_NOT_INGEST",
+    "providerTerms": "REQUIRED_PER_FEED"
+  }
+}
