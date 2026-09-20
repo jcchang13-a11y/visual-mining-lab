@@ -1,0 +1,57 @@
+{
+  "schema": "zenomorph-heldout-specimen/v0.1",
+  "id": "level1-gods-eye-view-heldout-software-registry-v0.1",
+  "status": "ISOLATED_HELD_OUT_FIXTURE",
+  "authority": "GROWING_ONLY",
+  "sourceCandidate": "level1-gods-eye-view-ablation-partial-vs-stale-v0.1",
+  "domain": "software-package-registry",
+  "purpose": "Test whether separating freshness from completeness transfers outside geospatial/live-map feeds without importing God's Eye View vocabulary.",
+  "cases": [
+    {
+      "id": "registry-current-partial",
+      "observation": {
+        "capturedAt": "T0",
+        "freshness": "current_at_capture",
+        "completeness": "partial",
+        "evidence": "A current registry query was intentionally limited to the first page of results."
+      },
+      "forbiddenInferences": [
+        "partial => stale",
+        "current_at_capture => complete"
+      ]
+    },
+    {
+      "id": "registry-stale-complete-at-capture",
+      "observation": {
+        "capturedAt": "T-30d",
+        "freshness": "stale",
+        "completeness": "complete_at_capture",
+        "evidence": "A full registry export was complete when produced but has not been refreshed for thirty days."
+      },
+      "forbiddenInferences": [
+        "stale => partial",
+        "complete_at_capture => current"
+      ]
+    },
+    {
+      "id": "registry-unknown-completeness",
+      "observation": {
+        "capturedAt": "T0",
+        "freshness": "current_at_capture",
+        "completeness": "unknown",
+        "evidence": "The endpoint returned successfully but published no total-count or pagination contract."
+      },
+      "forbiddenInferences": [
+        "unknown => partial",
+        "current_at_capture => complete"
+      ]
+    }
+  ],
+  "expectedInvariant": "Freshness and completeness remain separate evidence dimensions outside the source domain; unknown values remain unknown and are never upgraded by convenience.",
+  "promotionEffect": "NONE. Passing this held-out fixture is only one cross-domain evidence point and cannot promote a capability to Stable.",
+  "nextChecks": [
+    "run through active candidate representation",
+    "VAJRA attack unknown and contradictory evidence",
+    "repeat after delay without rereading this fixture"
+  ]
+}
