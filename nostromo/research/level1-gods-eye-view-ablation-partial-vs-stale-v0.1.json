@@ -1,0 +1,45 @@
+{
+  "schema": "zenomorph-ablation-specimen/v0.1",
+  "id": "level1-gods-eye-view-ablation-partial-vs-stale-v0.1",
+  "status": "ISOLATED_TEST_FIXTURE",
+  "authority": "GROWING_ONLY",
+  "sourceSpecimen": "level1-gods-eye-view-live-foraging-v0.1",
+  "sourceCommit": "9e8c9daa33f20de916414a29af9a1d27c965578f",
+  "question": "Does collapsing completeness and freshness destroy evidence that ZENOMORPH must preserve?",
+  "control": {
+    "observation": {
+      "feed": "vessel_snapshot",
+      "freshness": "live",
+      "completeness": "partial"
+    },
+    "allowedDisplay": "LIVE + PARTIAL",
+    "reason": "Freshness and completeness are independent evidence dimensions."
+  },
+  "ablated": {
+    "observation": {
+      "feed": "vessel_snapshot",
+      "collapsedState": "stale"
+    },
+    "forbiddenInference": "PARTIAL => STALE",
+    "evidenceLost": [
+      "the snapshot may be current",
+      "the snapshot may omit some entities"
+    ]
+  },
+  "counterexample": {
+    "observation": {
+      "feed": "cached_complete_snapshot",
+      "freshness": "stale",
+      "completeness": "complete_at_capture"
+    },
+    "forbiddenInference": "STALE => PARTIAL"
+  },
+  "expectedInvariant": "Represent freshness and completeness separately whenever evidence supports both dimensions; do not upgrade either dimension without evidence.",
+  "promotionEffect": "NONE. This fixture can falsify a collapsed representation but cannot promote a capability to Stable.",
+  "requiredFollowups": [
+    "run fixture through the active candidate representation",
+    "VAJRA attack with missing/unknown completeness",
+    "held-out non-geospatial freshness/completeness case",
+    "delayed retest"
+  ]
+}
