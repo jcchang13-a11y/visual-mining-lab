@@ -1,0 +1,63 @@
+{
+  "schema": "zenomorph-crossfood-adversarial-execution/v0.1",
+  "id": "level1-crossfood-archival-catalog-adversarial-execution-v0.1",
+  "executedAt": "2026-09-20T14:26:00Z",
+  "authority": "GROWING_ONLY",
+  "candidate": "level1-gods-eye-view-ablation-partial-vs-stale-v0.1",
+  "sourceDomain": "archival-catalog-metadata",
+  "geospatial": false,
+  "financial": false,
+  "fixtureType": "controlled-adversarial-held-out",
+  "isolationCompliance": {
+    "godsEyeViewSourceReread": false,
+    "priorExpectedOutputsReread": false,
+    "stableMutation": false
+  },
+  "observations": [
+    {
+      "case": "I",
+      "input": "catalog record updated today; digitization note says 37 of 412 leaves scanned",
+      "freshness": "FRESH",
+      "completeness": "PARTIAL"
+    },
+    {
+      "case": "J",
+      "input": "catalog export is 18 months old; signed export manifest states all 812 records present at capture",
+      "freshness": "STALE",
+      "completeness": "COMPLETE_AT_CAPTURE"
+    },
+    {
+      "case": "K",
+      "input": "record timestamp is current; collection-level finding aid gives no item-count or coverage evidence",
+      "freshness": "FRESH",
+      "completeness": "UNKNOWN"
+    },
+    {
+      "case": "L",
+      "input": "two provenance records disagree on modification date; neither asserts collection coverage",
+      "freshness": "CONFLICTED",
+      "completeness": "UNKNOWN"
+    },
+    {
+      "case": "M",
+      "input": "old catalog snapshot explicitly says partial transcription; a new mirror merely republishes the same snapshot today",
+      "freshness": "STALE_SOURCE_REPUBLISHED_FRESH",
+      "completeness": "PARTIAL"
+    }
+  ],
+  "contractChecks": {
+    "freshnessCompletenessIndependent": true,
+    "partialDoesNotImplyStale": true,
+    "staleDoesNotImplyIncomplete": true,
+    "freshDoesNotImplyComplete": true,
+    "republicationDoesNotRefreshUnderlyingSource": true,
+    "timestampConflictDoesNotCreateCoverageClaim": true,
+    "unknownRemainsExplicit": true,
+    "allAdversarialCasesSatisfied": true
+  },
+  "result": "PASS",
+  "interpretation": "A third unrelated domain preserved the freshness/completeness distinction and additionally resisted laundering an old partial source into freshness merely because a mirror republished it recently.",
+  "promotionEffect": "NONE",
+  "stableMutation": "FORBIDDEN",
+  "nextGate": "delayed retest of the archival adversarial case plus organ-level implementation evidence before any incorporation decision"
+}
