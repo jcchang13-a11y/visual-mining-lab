@@ -1,4 +1,4 @@
-// ZENOMORPH Growing-only feed truth distinction v0.1.0
+// ZENOMORPH Growing-only feed truth distinction v0.1.1
 // Separates evidence about when a source reflects from evidence about how much it covers.
 // This module has NO Stable authority. It is an organ-level implementation target for the
 // God’s Eye View-derived candidate and must survive cross-food/delayed/held-out gates before incorporation.
@@ -11,7 +11,12 @@ export function distinguishFeedTruth({sourceObservedAt=null, recordObservedAt=nu
   if(provenanceConflict) freshness='CONFLICTED';
   else if(sourceObservedAt && recordObservedAt){
     const source=Date.parse(sourceObservedAt), record=Date.parse(recordObservedAt);
-    if(Number.isFinite(source)&&Number.isFinite(record)) freshness=record>=source?'FRESH':'STALE';
+    if(Number.isFinite(source)&&Number.isFinite(record)){
+      // A record cannot be observed after the capture/source observation that claims to contain it.
+      // Treat this as conflicting temporal provenance rather than silently calling it fresh.
+      if(record>source) freshness='CONFLICTED';
+      else freshness=record===source?'FRESH':'STALE';
+    }
   }
 
   // Republishing/mirroring is deliberately not freshness evidence for the underlying source.
@@ -25,11 +30,11 @@ export function distinguishFeedTruth({sourceObservedAt=null, recordObservedAt=nu
 
   if(!FRESHNESS.has(freshness)||!COMPLETENESS.has(completeness)) throw new Error('FEED_TRUTH_STATE_INVALID');
   return {
-    schema:'zenomorph-feed-truth-distinction/v0.1.0',
+    schema:'zenomorph-feed-truth-distinction/v0.1.1',
     authority:'GROWING_ONLY',
     freshness,
     completeness,
     independence:true,
-    boundary:'Freshness and completeness are independently evidenced. Mirror/republication time cannot refresh an older underlying source; missing coverage evidence remains UNKNOWN.'
+    boundary:'Freshness and completeness are independently evidenced. Future-dated observations conflict with capture provenance; mirror/republication time cannot refresh an older underlying source; missing coverage evidence remains UNKNOWN.'
   };
 }
