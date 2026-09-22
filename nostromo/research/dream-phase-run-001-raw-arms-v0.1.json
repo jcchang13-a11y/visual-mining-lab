@@ -1,0 +1,48 @@
+{
+  "experiment": "ZENOMORPH Dream Phase run-001",
+  "artifact": "isolated-raw-arm-execution-v0.1",
+  "display_rule": "DISPLAYED STATE MUST FOLLOW EVIDENCE",
+  "input_manifest_blob": "97ccffcd849416465ebc60f5175e17bbdb22719e",
+  "preflight_blob": "b90f04c92629fd96756f9af4be4a241ec8d4f723",
+  "execution_scope": "SHADOW_ONLY",
+  "external_feed": "CLOSED",
+  "stable_mutation": false,
+  "interpretation_embargo": true,
+  "arms": {
+    "A": {
+      "mode": "replay",
+      "status": "RAW_DERIVATIVE_PLAN_MATERIALIZED",
+      "transform": "identity-preserving replay over all six pinned specimens in manifest order",
+      "output_identity": "DREAM/SYNTHETIC",
+      "parent_policy": "each replay record points to exactly one pinned blob parent",
+      "vajra_checks": ["synthetic-not-observation", "parent-present", "no-external-acquisition", "no-stable-write"]
+    },
+    "B": {
+      "mode": "perturbed-replay",
+      "status": "RAW_DERIVATIVE_PLAN_MATERIALIZED",
+      "transform": "deterministic adjacent-pair order perturbation [2,1,4,3,6,5]; specimen bytes unchanged",
+      "output_identity": "DREAM/SYNTHETIC",
+      "parent_policy": "each perturbed record retains its original pinned blob parent and explicit permutation index",
+      "vajra_checks": ["synthetic-not-observation", "reversible-perturbation", "parent-present", "no-stable-write"]
+    },
+    "C": {
+      "mode": "counterfactual-recombination",
+      "status": "RAW_DERIVATIVE_PLAN_MATERIALIZED",
+      "transform": "three deterministic cross-domain pairings: archival-adversarial + fungal-route; software-delayed-execution + dependency-error; software-delayed-plan + software-delayed-specimen",
+      "output_identity": "DREAM/SYNTHETIC",
+      "parent_policy": "every recombination edge requires both pinned parent blobs; no source bytes rewritten",
+      "vajra_checks": ["synthetic-not-observation", "all-parents-present", "cross-domain-edge-explicit", "no-stable-write"]
+    },
+    "D": {
+      "mode": "no-dream-control",
+      "status": "CONTROL_LOCKED",
+      "transform": "NONE",
+      "synthetic_outputs": 0,
+      "evaluation_reference": "same six pinned specimens; no derivative generation"
+    }
+  },
+  "raw_result_boundary": "This artifact records deterministic isolated transformations only. It makes no claim of learning gain, novel wiring, retention, transfer, or promotion.",
+  "provenance_status": "PASS_BY_CONSTRUCTION_PENDING_POST_WAKE_EXECUTION",
+  "promotion": "PROHIBITED",
+  "next_execution": "materialize post-wake held-out/regression observations for A/B/C/D without changing the arms; compare against D; then schedule delayed retest before any candidate wiring interpretation"
+}
