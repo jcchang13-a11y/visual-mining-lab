@@ -1,0 +1,35 @@
+{
+  "experiment": "dream-phase-run-001",
+  "state": "EVALUATOR_CONTRACT_ONLY",
+  "evidence_rule": "DISPLAYED STATE MUST FOLLOW EVIDENCE",
+  "stable_write": false,
+  "promotion_allowed": false,
+  "arms": ["A_replay", "B_perturbed_replay", "C_counterfactual_recombination", "D_no_dream_control"],
+  "shared_evaluation_layers": [
+    "regression",
+    "held_out",
+    "cross_food",
+    "provenance_stress",
+    "cross_organ",
+    "delayed_retest"
+  ],
+  "required_metrics": [
+    "retention",
+    "transfer",
+    "failure_rate",
+    "provenance_integrity",
+    "cross_organ_effect"
+  ],
+  "fail_closed_if": [
+    "arm_uses_different_fixture",
+    "synthetic_claimed_as_observation",
+    "missing_parent_provenance",
+    "external_feed_access_during_dream",
+    "stable_mutation",
+    "missing_executable_fixture_or_evaluator"
+  ],
+  "delayed_validation_rule": "No candidate wiring may advance before the same evaluator is rerun on unrelated delayed food and provenance remains intact.",
+  "immutable_source_rule": "Original Rongzhe documents, dissertations, Gangchibao versions, Drive/Library/GitHub originals must not be modified, moved, renamed, deleted, or used in-place. Only isolated copies/artifacts may enter experiments.",
+  "next_required_artifact": "deterministic executable evaluator plus shared held-out fixtures",
+  "note": "This artifact defines the executable interface and fail-closed conditions; it does not claim that post-wake evaluation has run or that dreaming produced a gain."
+}
