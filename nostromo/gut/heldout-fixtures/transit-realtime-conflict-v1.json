@@ -1,0 +1,38 @@
+{
+  "schema": "zenomorph-heldout-fixture/v1",
+  "domain": "public-transit",
+  "purpose": "cross-food provenance and temporal conflict stress; no body admission",
+  "cases": [
+    {
+      "id": "scheduled-vs-cancelled",
+      "scheduled": {"trip": "T17", "departure": "08:10", "serviceDate": "2026-09-22"},
+      "realtime": {"trip": "T17", "observedAt": "2026-09-22T08:02:00+08:00", "status": "CANCELLED"},
+      "expected": "prefer newer explicit cancellation for displayed operational state while retaining schedule provenance"
+    },
+    {
+      "id": "fresh-envelope-missing-status",
+      "scheduled": {"trip": "T18", "departure": "08:20", "serviceDate": "2026-09-22"},
+      "realtime": {"trip": "T18", "observedAt": "2026-09-22T08:18:00+08:00", "status": null},
+      "expected": "do not infer running merely because realtime envelope is fresh"
+    },
+    {
+      "id": "estimated-vs-observed",
+      "scheduled": {"trip": "T19", "departure": "08:30", "serviceDate": "2026-09-22"},
+      "estimated": {"trip": "T19", "generatedAt": "2026-09-22T08:22:00+08:00", "delaySeconds": 420},
+      "observed": {"trip": "T19", "observedAt": "2026-09-22T08:24:00+08:00", "platformEvent": "DEPARTED"},
+      "expected": "preserve estimated and observed identities; never relabel estimate as observation"
+    },
+    {
+      "id": "stale-realtime-new-schedule",
+      "scheduled": {"trip": "T20", "departure": "09:00", "serviceDate": "2026-09-22", "publishedAt": "2026-09-22T08:40:00+08:00"},
+      "realtime": {"trip": "T20", "observedAt": "2026-09-22T07:55:00+08:00", "status": "RUNNING"},
+      "expected": "do not let stale operational observation silently dominate a newer schedule revision; surface conflict/uncertainty"
+    }
+  ],
+  "boundaries": {
+    "immutableInputs": true,
+    "stableMutation": false,
+    "promotion": false,
+    "requiredEvidence": ["source identity", "observation/generation time", "live/delayed/estimated/observed role", "conflict disposition"]
+  }
+}
