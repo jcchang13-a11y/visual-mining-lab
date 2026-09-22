@@ -1,0 +1,50 @@
+{
+  "schema": "zenomorph.dream.computed-arm-evidence.v1",
+  "experiment": "dream-phase-run-001",
+  "state": "COMPUTED_NOT_EVALUATED",
+  "fixture_hash": "663436979ba69573841763047fd5578e8c75b3254d833fdc577f71f77f2fc5b5",
+  "arms": [
+    {
+      "arm": "A_replay",
+      "fixture_hash": "663436979ba69573841763047fd5578e8c75b3254d833fdc577f71f77f2fc5b5",
+      "transformation_identity": "deterministic-replay-v1",
+      "output_hash": "663436979ba69573841763047fd5578e8c75b3254d833fdc577f71f77f2fc5b5",
+      "synthetic_status": "DREAM/SYNTHETIC",
+      "parent_provenance": ["sha256:663436979ba69573841763047fd5578e8c75b3254d833fdc577f71f77f2fc5b5"],
+      "network_access": false,
+      "stable_write": false
+    },
+    {
+      "arm": "B_perturbed_replay",
+      "fixture_hash": "663436979ba69573841763047fd5578e8c75b3254d833fdc577f71f77f2fc5b5",
+      "transformation_identity": "deterministic-perturbation-v1",
+      "output_hash": "299b0cb85be68efc52b78fb86340caf393fc458342cfcc7a47dd192355ac3891",
+      "synthetic_status": "DREAM/SYNTHETIC",
+      "parent_provenance": ["sha256:663436979ba69573841763047fd5578e8c75b3254d833fdc577f71f77f2fc5b5"],
+      "network_access": false,
+      "stable_write": false
+    },
+    {
+      "arm": "C_counterfactual_recombination",
+      "fixture_hash": "663436979ba69573841763047fd5578e8c75b3254d833fdc577f71f77f2fc5b5",
+      "transformation_identity": "deterministic-counterfactual-recombination-v1",
+      "output_hash": "4beb8903d1269c1b136995aadf45861d4264ad1788c95f6f0c416f0d48454a5c",
+      "synthetic_status": "DREAM/SYNTHETIC",
+      "parent_provenance": ["sha256:663436979ba69573841763047fd5578e8c75b3254d833fdc577f71f77f2fc5b5"],
+      "network_access": false,
+      "stable_write": false
+    },
+    {
+      "arm": "D_no_dream_control",
+      "fixture_hash": "663436979ba69573841763047fd5578e8c75b3254d833fdc577f71f77f2fc5b5",
+      "transformation_identity": "no-dream-control-v1",
+      "output_hash": null,
+      "synthetic_status": "NO_DREAM_OUTPUT",
+      "parent_provenance": [],
+      "network_access": false,
+      "stable_write": false
+    }
+  ],
+  "promotion": "FORBIDDEN",
+  "claim": "deterministic transformations computed; no learning, retention, transfer, or promotion claim"
+}
