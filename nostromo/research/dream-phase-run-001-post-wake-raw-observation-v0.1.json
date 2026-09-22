@@ -1,0 +1,30 @@
+{
+  "experiment": "ZENOMORPH Dream Phase run-001",
+  "artifact": "post-wake-raw-observation-v0.1",
+  "display_rule": "DISPLAYED STATE MUST FOLLOW EVIDENCE",
+  "parent_gate_commit": "183f685110e805cccca024b64d3c8ed8437eca5a",
+  "scope": "SHADOW_ONLY",
+  "stable_mutation": false,
+  "promotion": "PROHIBITED",
+  "interpretation_embargo": true,
+  "execution_state": "POST_WAKE_EXECUTION_ATTEMPTED_FAIL_CLOSED",
+  "arms": ["A:replay", "B:perturbed-replay", "C:counterfactual-recombination", "D:no-dream-control"],
+  "required_workload_layers": ["regression", "held-out", "cross-food", "provenance/stress", "cross-organ"],
+  "raw_observation": {
+    "comparable_outcome_available": false,
+    "reason": "The repository contains the locked arm artifacts and a post-wake evaluation gate, but no executable evaluator or persisted workload/result artifact sufficient to produce evidence-backed A/B/C/D retention, transfer, failure-rate, provenance-integrity, or cross-organ measurements in this turn.",
+    "synthetic_as_observation_claims": 0,
+    "stable_writes": 0,
+    "promotion_attempts": 0
+  },
+  "failure_record": {
+    "class": "MISSING_EXECUTABLE_EVALUATION_PATH",
+    "disposition": "QUARANTINE_AND_PERSIST",
+    "rule": "Do not fabricate measurements from protocol text or raw dream transforms. Missing evaluator evidence is itself a result and blocks interpretation."
+  },
+  "delayed_validation": {
+    "status": "BLOCKED_BY_NO_POST_WAKE_COMPARABLE_OUTCOME",
+    "promotion_eligible": false
+  },
+  "next_engineering_step": "Materialize a deterministic executable post-wake evaluator plus identical held-out fixtures for all four arms; run it without network acquisition, persist machine-readable raw results, then compare against D before any wiring interpretation."
+}
