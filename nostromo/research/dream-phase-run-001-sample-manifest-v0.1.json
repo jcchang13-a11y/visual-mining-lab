@@ -1,0 +1,23 @@
+{
+  "experiment": "ZENOMORPH Dream Phase run-001",
+  "artifact": "deterministic-sample-manifest-v0.1",
+  "status": "SHADOW_INPUT_LOCKED",
+  "display_rule": "DISPLAYED STATE MUST FOLLOW EVIDENCE",
+  "stable_mutation": false,
+  "external_feed_during_dream": "CLOSED",
+  "selection_rule": "eligible pre-existing repo artifacts only; deterministic lexical ordering by path; no Rongzhe immutable source documents; no new external acquisition",
+  "specimens": [
+    {"path":"nostromo/research/level1-crossfood-archival-catalog-adversarial-execution-v0.1.json","blob_sha":"fec33ca081a4f9749f8c28e45973a0371c0267d4","class":"cross-food/adversarial execution"},
+    {"path":"nostromo/research/level1-crossfood-software-release-delayed-execution-v0.1.json","blob_sha":"693e310bc1d55ddc5127c2153aff4ec197d38a41","class":"delayed validation execution"},
+    {"path":"nostromo/research/level1-crossfood-software-release-delayed-plan-v0.1.json","blob_sha":"4382dc2aa52378e30bf8fe3a54facc8a6078569d","class":"delayed validation plan"},
+    {"path":"nostromo/research/level1-crossfood-software-release-delayed-specimen-v0.1.json","blob_sha":"a1b2e053a44ccc08f8fa5989aef1164f1feb01b0","class":"cross-food specimen"},
+    {"path":"nostromo/research/level1-express-dependency-specimen-v0.1.json","blob_sha":"07ff31095ed371658cb95a78c728c43f94f00828","class":"dependency/error specimen"},
+    {"path":"nostromo/research/level1-fungal-neurospora-route-v0.1.json","blob_sha":"c1ce5e47a117e62bebed5abde7e38e7b3df295db","class":"biological-route residue"}
+  ],
+  "identity_policy": "Git blob SHA pins exact admitted bytes; source artifacts remain immutable",
+  "arm_assignment": "same locked specimen set supplied to A replay, B perturbed replay, C counterfactual recombination; D no-dream control receives evaluation references only",
+  "synthetic_identity": "DREAM/SYNTHETIC",
+  "provenance_required": true,
+  "interpretation_embargo": "persist raw arm outcomes before interpreting or promoting any wiring",
+  "next_execution": "run A/B/C/D isolated transformations against this exact manifest; record raw outputs, provenance graph, VAJRA violations, post-wake held-out scores and regression status"
+}
