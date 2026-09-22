@@ -1,0 +1,38 @@
+{
+  "schema": "zenomorph.dream.arm-artifact-contract.v1",
+  "experiment": "dream-phase-run-001",
+  "status": "ARTIFACT_CONTRACT_ONLY",
+  "evidence_rule": "DISPLAYED STATE MUST FOLLOW EVIDENCE",
+  "immutable_source_rule": true,
+  "network_access": false,
+  "stable_write": false,
+  "required_arms": [
+    "A_replay",
+    "B_perturbed_replay",
+    "C_counterfactual_recombination",
+    "D_no_dream_control"
+  ],
+  "required_fields_per_arm": [
+    "arm",
+    "fixture_hash",
+    "input_artifact_ids",
+    "input_hashes",
+    "transformation_identity",
+    "output_hash",
+    "synthetic_status",
+    "parent_provenance",
+    "network_access",
+    "stable_write"
+  ],
+  "invariants": {
+    "same_fixture_hash_all_arms": true,
+    "synthetic_status_for_A_B_C": "DREAM/SYNTHETIC",
+    "D_no_dream_control_must_not_generate_dream_output": true,
+    "parent_provenance_required_for_A_B_C": true,
+    "network_access_must_be_false": true,
+    "stable_write_must_be_false": true
+  },
+  "promotion": "FORBIDDEN",
+  "next_gate": "materialize four arm artifacts satisfying this contract, then evaluate against shared fixture",
+  "note": "This contract closes the gap between evaluator plumbing and actual arm evidence. It contains no Rongzhe source text and establishes no dreaming benefit."
+}
