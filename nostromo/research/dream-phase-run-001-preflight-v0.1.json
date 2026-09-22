@@ -1,0 +1,36 @@
+{
+  "experiment": "ZENOMORPH Dream Phase run-001",
+  "artifact": "preflight-validation-v0.1",
+  "status": "PASS_INPUT_INTEGRITY_READY_FOR_ISOLATED_ARMS",
+  "display_rule": "DISPLAYED STATE MUST FOLLOW EVIDENCE",
+  "validated_against_manifest_blob": "97ccffcd849416465ebc60f5175e17bbdb22719e",
+  "checks": {
+    "manifest_status": "SHADOW_INPUT_LOCKED",
+    "specimen_count": 6,
+    "all_specimens_git_blob_pinned": true,
+    "external_feed_during_dream": "CLOSED",
+    "rongzhe_immutable_source_in_manifest": false,
+    "stable_mutation_allowed": false,
+    "synthetic_identity_required": "DREAM/SYNTHETIC",
+    "provenance_required": true,
+    "same_input_set_for_A_B_C": true,
+    "D_control_transformation": "NONE",
+    "raw_before_interpretation": true
+  },
+  "arm_contracts": {
+    "A": "replay only; preserve source identity; emit DREAM/SYNTHETIC derivative records",
+    "B": "perturbed replay; perturbation must be explicit and reversible to pinned parents",
+    "C": "counterfactual recombination; every fragment edge must identify pinned parent and transformation",
+    "D": "no-dream control; no synthetic generation"
+  },
+  "fail_closed": [
+    "missing parent blob",
+    "untraceable fragment",
+    "synthetic output presented as observation",
+    "external acquisition during dream",
+    "mutation of Stable",
+    "mutation/rename/move/delete of source artifact"
+  ],
+  "promotion": "PROHIBITED_AT_PREFLIGHT",
+  "next_execution": "execute isolated A/B/C/D raw arms from exact locked manifest; persist raw outcomes and provenance before interpretation; then post-wake held-out/regression and delayed retest"
+}
