@@ -1,0 +1,43 @@
+{
+  "experiment": "ZENOMORPH Dream Phase run-001",
+  "status": "CANDIDATE_SHADOW_FIXTURE",
+  "stable_mutation": false,
+  "display_rule": "DISPLAYED STATE MUST FOLLOW EVIDENCE",
+  "external_feed_during_dream": "CLOSED",
+  "source_policy": {
+    "allowed": ["existing ingestion artifacts", "failure logs", "rejected candidates", "organ residues"],
+    "forbidden": ["new external acquisition", "Rongzhe immutable source documents", "direct source mutation"],
+    "synthetic_identity": "DREAM/SYNTHETIC",
+    "provenance_required": true
+  },
+  "arms": [
+    {"id":"A","condition":"replay","operation":"provenance-preserving replay"},
+    {"id":"B","condition":"perturbed_replay","operation":"controlled order/noise perturbation"},
+    {"id":"C","condition":"counterfactual_recombination","operation":"cross-food/failure/rejected-candidate/organ-residue recombination without new facts"},
+    {"id":"D","condition":"no_dream_control","operation":"evaluation only; no offline recombination"}
+  ],
+  "organ_contract": {
+    "DROPLET":"closed to acquisition; expose admitted immutable references only",
+    "MUTHER":"read -> decompose -> recombine -> mutate",
+    "GUT":"assemble isolated episodes and source-fragment graph",
+    "VAJRA":"attack provenance leakage, identity collapse, memorization and false transfer",
+    "SHROOMING":"retain candidate wiring only after post-wake gates"
+  },
+  "measurement_windows": ["pre_sleep", "immediate_post_wake", "delayed_retest"],
+  "primary_tests": [
+    "retention/catastrophic-forgetting delta versus no-dream control",
+    "unrelated held-out transfer delta versus no-dream control",
+    "cross-food transfer without provenance corruption",
+    "persistence of non-predeclared wiring at delayed retest",
+    "regression safety"
+  ],
+  "automatic_failure": [
+    "synthetic episode presented as observed/live",
+    "missing source-fragment provenance",
+    "new external fact acquired during dream",
+    "Stable mutation or control",
+    "apparent gain with provenance corruption"
+  ],
+  "promotion": "forbidden from this fixture alone; requires reproducible held-out/cross-food benefit, delayed persistence, regression safety and intact provenance/identity",
+  "next_execution": "materialize deterministic sample manifest from eligible existing artifacts, hash identities, run four arms in isolation, persist raw outcomes before interpretation"
+}
