@@ -1,0 +1,28 @@
+{
+  "schema": "zenomorph.dream.outcome-contract.v1",
+  "experiment": "dream-phase-run-001",
+  "evidence_rule": "DISPLAYED STATE MUST FOLLOW EVIDENCE",
+  "purpose": "Define outcome-bearing A/B/C versus D scoring without claiming benefit before executable case adapters exist.",
+  "arms": ["A", "B", "C", "D"],
+  "required_layers": ["regression", "held_out", "cross_food", "provenance_stress", "cross_organ", "delayed_retest"],
+  "per_case_required": ["case_id", "layer", "arm", "input_hash", "adapter_identity", "adapter_hash", "observed_output_hash", "expected_predicate", "predicate_result", "provenance_intact", "synthetic_label_intact", "network_access", "stable_write"],
+  "comparison_rules": {
+    "same_case_all_arms": true,
+    "same_adapter_all_arms": true,
+    "same_expected_predicate_all_arms": true,
+    "control_arm": "D",
+    "missing_case": "FAIL_CLOSED",
+    "missing_provenance": "FAIL_CLOSED",
+    "adapter_substitution": "FAIL_CLOSED",
+    "network_access_true": "FAIL_CLOSED",
+    "stable_write_true": "FAIL_CLOSED"
+  },
+  "claim_boundary": {
+    "allowed_before_execution": ["OUTCOME_CONTRACT_DEFINED"],
+    "forbidden_before_execution": ["learning_gain", "retention", "transfer", "benefit", "promotion", "stable_incorporation"]
+  },
+  "promotion": "FORBIDDEN",
+  "network_access": false,
+  "stable_write": false,
+  "next": "Implement deterministic case adapters for the six shared-fixture layers, execute identical A/B/C/D cases, persist raw outcomes, then compare against D and repeat delayed retest."
+}
