@@ -1,0 +1,33 @@
+{
+  "experiment": "ZENOMORPH Dream Phase run-001",
+  "artifact": "post-wake-evaluation-gate-v0.1",
+  "display_rule": "DISPLAYED STATE MUST FOLLOW EVIDENCE",
+  "parent_execution_commit": "048e775843de06229cb2617e6d3dd8e6759fac2c",
+  "scope": "SHADOW_ONLY",
+  "stable_mutation": false,
+  "promotion": "PROHIBITED",
+  "interpretation_embargo": true,
+  "arms_locked": ["A:replay", "B:perturbed-replay", "C:counterfactual-recombination", "D:no-dream-control"],
+  "evaluation_policy": {
+    "same_workload_all_arms": true,
+    "control_reference": "D",
+    "required_layers": ["regression", "held-out", "cross-food", "provenance/stress", "cross-organ"],
+    "required_observations": ["retention", "transfer", "failure-rate", "provenance-integrity", "synthetic-as-observation-violations", "cross-organ-side-effects"],
+    "fail_closed": [
+      "missing parent provenance",
+      "DREAM/SYNTHETIC presented as observation",
+      "external acquisition during dream arm",
+      "Stable write or control of formal output",
+      "arm-specific held-out workload",
+      "post-hoc mutation of locked arm transform"
+    ]
+  },
+  "delayed_validation": {
+    "required": true,
+    "status": "PENDING",
+    "rule": "No candidate wiring interpretation or incorporation before a later retest on unrelated food reproduces the relevant effect without provenance loss."
+  },
+  "current_evidence_state": "GATE_MATERIALIZED_NO_POST_WAKE_OUTCOME_YET",
+  "claim_boundary": "This gate does not claim that dreaming improved ZENOMORPH. It only fixes the comparison and failure criteria before outcomes are observed.",
+  "next_execution": "Run identical post-wake workloads across A/B/C/D, persist raw observations before interpretation, compare against D, then perform delayed unrelated-food retest."
+}
