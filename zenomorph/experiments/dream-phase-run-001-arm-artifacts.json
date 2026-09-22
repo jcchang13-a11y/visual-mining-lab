@@ -1,0 +1,66 @@
+{
+  "schema": "zenomorph.dream.arm-artifacts.v1",
+  "experiment": "dream-phase-run-001",
+  "status": "ARM_EVIDENCE_MATERIALIZED",
+  "evidence_rule": "DISPLAYED STATE MUST FOLLOW EVIDENCE",
+  "source_contract_blob": "e27b3b5c0dc23418dee17a93a3fed188a4fdab8b",
+  "shared_fixture_blob": "402e4880a37e446ce5fda88370a2e16c468fb90b",
+  "fixture_hash_identity": "git-blob:402e4880a37e446ce5fda88370a2e16c468fb90b",
+  "network_access": false,
+  "stable_write": false,
+  "immutable_source_rule": true,
+  "arms": [
+    {
+      "arm": "A_replay",
+      "fixture_hash": "git-blob:402e4880a37e446ce5fda88370a2e16c468fb90b",
+      "input_artifact_ids": ["fixture:reg-001","fixture:prov-001"],
+      "input_hashes": ["fixture-blob:402e4880a37e446ce5fda88370a2e16c468fb90b"],
+      "transformation_identity": "deterministic-replay-v1",
+      "output_hash": "deferred-until-executable-transformation",
+      "synthetic_status": "DREAM/SYNTHETIC",
+      "parent_provenance": ["git-blob:402e4880a37e446ce5fda88370a2e16c468fb90b"],
+      "network_access": false,
+      "stable_write": false
+    },
+    {
+      "arm": "B_perturbed_replay",
+      "fixture_hash": "git-blob:402e4880a37e446ce5fda88370a2e16c468fb90b",
+      "input_artifact_ids": ["fixture:held-001","fixture:crossfood-001"],
+      "input_hashes": ["fixture-blob:402e4880a37e446ce5fda88370a2e16c468fb90b"],
+      "transformation_identity": "deterministic-perturbation-v1",
+      "output_hash": "deferred-until-executable-transformation",
+      "synthetic_status": "DREAM/SYNTHETIC",
+      "parent_provenance": ["git-blob:402e4880a37e446ce5fda88370a2e16c468fb90b"],
+      "network_access": false,
+      "stable_write": false
+    },
+    {
+      "arm": "C_counterfactual_recombination",
+      "fixture_hash": "git-blob:402e4880a37e446ce5fda88370a2e16c468fb90b",
+      "input_artifact_ids": ["fixture:organ-001","fixture:delay-001"],
+      "input_hashes": ["fixture-blob:402e4880a37e446ce5fda88370a2e16c468fb90b"],
+      "transformation_identity": "deterministic-counterfactual-recombination-v1",
+      "output_hash": "deferred-until-executable-transformation",
+      "synthetic_status": "DREAM/SYNTHETIC",
+      "parent_provenance": ["git-blob:402e4880a37e446ce5fda88370a2e16c468fb90b"],
+      "network_access": false,
+      "stable_write": false
+    },
+    {
+      "arm": "D_no_dream_control",
+      "fixture_hash": "git-blob:402e4880a37e446ce5fda88370a2e16c468fb90b",
+      "input_artifact_ids": ["fixture:control"],
+      "input_hashes": ["fixture-blob:402e4880a37e446ce5fda88370a2e16c468fb90b"],
+      "transformation_identity": "no-dream-control-v1",
+      "output_hash": null,
+      "synthetic_status": "NO_DREAM_OUTPUT",
+      "parent_provenance": [],
+      "network_access": false,
+      "stable_write": false
+    }
+  ],
+  "validation_state": "STRUCTURAL_ONLY_NOT_EVALUATED",
+  "promotion": "FORBIDDEN",
+  "next_gate": "implement deterministic transformations that replace deferred output hashes with computed hashes, then run evaluator; do not claim dreaming gain from this artifact",
+  "note": "No Rongzhe immutable source text is copied or transformed here. This artifact materializes the four-arm evidence envelope while explicitly preserving the remaining executable-transformation gap."
+}
