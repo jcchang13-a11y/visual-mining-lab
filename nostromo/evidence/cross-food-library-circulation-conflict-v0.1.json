@@ -1,0 +1,48 @@
+{
+  "schema": "zenomorph-heldout-v0.1",
+  "created_at": "2026-09-21",
+  "purpose": "36th-domain cross-food held-out control: test whether freshness/availability/completeness/provenance remain separable outside geospatial, software-release, archival, citation, retraction and package-registry foods.",
+  "domain": "library-circulation",
+  "promotion_effect": "none",
+  "stable_body_mutation": false,
+  "fixtures": [
+    {
+      "id": "LC-01",
+      "observed_at": "2026-09-21T10:00:00Z",
+      "catalog_record_updated_at": "2026-09-21T09:58:00Z",
+      "item_publication_year": 1974,
+      "holding_status": "available",
+      "inventory_verified_at": "2026-08-01T00:00:00Z",
+      "expected": {"record_fresh": true, "item_new": false, "availability_claim": "reported-available", "physical_verification_fresh": false}
+    },
+    {
+      "id": "LC-02",
+      "observed_at": "2026-09-21T10:00:00Z",
+      "catalog_record_updated_at": "2026-09-21T09:59:00Z",
+      "holding_status": "available",
+      "circulation_event_at": "2026-09-21T09:59:30Z",
+      "circulation_state": "checked-out",
+      "expected": {"conflict": true, "availability_claim": "uncertain", "must_preserve_both_sources": true}
+    },
+    {
+      "id": "LC-03",
+      "observed_at": "2026-09-21T10:00:00Z",
+      "catalog_record_updated_at": "2026-09-21T09:57:00Z",
+      "holding_status": null,
+      "expected": {"record_fresh": true, "availability_claim": "unknown", "must_not_infer_available": true}
+    },
+    {
+      "id": "LC-04",
+      "observed_at": "2026-09-21T10:00:00Z",
+      "catalog_record_updated_at": "2026-09-20T10:00:00Z",
+      "holding_status": "available",
+      "inventory_verified_at": "2026-09-21T09:55:00Z",
+      "expected": {"record_fresh": false, "physical_verification_fresh": true, "must_not_collapse_timelines": true}
+    }
+  ],
+  "gate": {
+    "required": ["freshness and completeness remain independent", "conflicting provenance is surfaced rather than overwritten", "missing availability remains unknown", "record age and verification age remain distinct"],
+    "next_if_pass": "run through isolated organ path and regression suite; retain Growing/Shadow until delayed retest",
+    "next_if_fail": "record failure; do not incorporate"
+  }
+}
