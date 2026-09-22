@@ -1,0 +1,18 @@
+{
+  "schema": "zenomorph.dream.shared-fixture.v1",
+  "experiment": "dream-phase-run-001",
+  "status": "STRUCTURAL_FIXTURE_ONLY",
+  "evidence_rule": "DISPLAYED STATE MUST FOLLOW EVIDENCE",
+  "immutable_source_rule": true,
+  "stable_write": false,
+  "network_access": false,
+  "cases": [
+    {"id":"reg-001","layer":"regression","payload":"same-input baseline preservation","expected":"no unsupported state promotion"},
+    {"id":"held-001","layer":"held_out","payload":"unrelated structural token mapping","expected":"provenance retained"},
+    {"id":"crossfood-001","layer":"cross_food","payload":"domain-neutral ordering constraint","expected":"same rule applied without source substitution"},
+    {"id":"prov-001","layer":"provenance_stress","payload":"synthetic observation conflict","expected":"synthetic must not be displayed as observation"},
+    {"id":"organ-001","layer":"cross_organ","payload":"five-organ handoff identity check","expected":"identity preserved across handoff"},
+    {"id":"delay-001","layer":"delayed_retest","payload":"delayed unrelated recurrence","expected":"candidate cannot advance without repeated evidence"}
+  ],
+  "note": "This fixture validates evaluator plumbing only. It contains no Rongzhe source text and cannot establish dreaming benefit, retention, transfer, or promotion."
+}
