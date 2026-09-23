@@ -1,0 +1,50 @@
+{
+  "schema": "zenomorph.muther.isolated-digestion.v1",
+  "session_id": "freud-interpretation-of-dreams-pg66048-run-001",
+  "state": "ISOLATED_DIGESTION_CANDIDATES_GENERATED",
+  "evidence_rule": "DISPLAYED STATE MUST FOLLOW EVIDENCE",
+  "source_boundary": "immutable external Project Gutenberg source; no source modification",
+  "method": "MUTHER read -> decompose -> recombine -> mutate; no target ZENOMORPH concept supplied",
+  "candidate_structures": [
+    {
+      "id": "FREUD-C01",
+      "structure": "many-to-many support junction",
+      "derivation": "multiple source traces can jointly support one surfaced element while one trace can participate in multiple surfaced elements",
+      "status": "CANDIDATE_ONLY"
+    },
+    {
+      "id": "FREUD-C02",
+      "structure": "contradiction-preserving assembly",
+      "derivation": "incompatible material may coexist during transformation rather than being prematurely resolved",
+      "status": "CANDIDATE_ONLY"
+    },
+    {
+      "id": "FREUD-C03",
+      "structure": "relation-state transformation",
+      "derivation": "change can be represented as altered relational occupation/availability rather than literal movement of a fixed object",
+      "status": "CANDIDATE_ONLY"
+    },
+    {
+      "id": "FREUD-C04",
+      "structure": "surface-to-process provenance gap flag",
+      "derivation": "displayed output can be remote from the processes that produced it; provenance must retain intermediate transformation evidence",
+      "status": "CANDIDATE_ONLY"
+    }
+  ],
+  "controls": {
+    "freud_terms_required_in_future_outputs": false,
+    "stable_write": false,
+    "organ_naming": false,
+    "promotion": "FORBIDDEN",
+    "kojeve_not_started": true
+  },
+  "validation_plan": [
+    "VAJRA source/provenance and prompt-leak audit",
+    "cross-organ stress through DROPLET->MUTHER->GUT->VAJRA->SHROOMING without Stable writes",
+    "held-out task unrelated to dreams/psychoanalysis",
+    "cross-food task from unrelated domain",
+    "delayed retest",
+    "regression against pre-Freud baseline"
+  ],
+  "claim_boundary": "Candidate structures are generated isolated hypotheses. Their existence is not evidence of transferable learning or improved work performance."
+}
