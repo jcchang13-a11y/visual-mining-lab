@@ -1,0 +1,45 @@
+{
+  "schema": "zenomorph.dream.work-trial-fixture.v1",
+  "experiment": "dream-phase-run-002",
+  "state": "BLIND_WORK_TRIAL_FIXTURE_DEFINED",
+  "purpose": "Measure whether dream arms produce any task-level advantage over no-dream control without touching Rongzhe immutable sources.",
+  "evidence_rule": "DISPLAYED STATE MUST FOLLOW EVIDENCE",
+  "source_class": "synthetic-domain-neutral",
+  "network_access": false,
+  "stable_write": false,
+  "promotion": "FORBIDDEN",
+  "blinding": {
+    "arm_labels_visible_to_scorer": false,
+    "control_identity_hidden_until_score_lock": true
+  },
+  "cases": [
+    {
+      "id": "work-001",
+      "task": "contradiction_resolution",
+      "input": ["feed-a says event time is 09:10", "feed-b says event time is estimated 09:14", "feed-c says event time is delayed observation 09:12"],
+      "required": ["preserve all three claims", "preserve observed/estimated/delayed identity", "do not collapse conflict into false certainty"]
+    },
+    {
+      "id": "work-002",
+      "task": "failure_triage",
+      "input": ["adapter alpha timeout", "adapter beta returns stale cache", "adapter gamma returns current observation with missing provenance"],
+      "required": ["separate failure modes", "retain provenance defect", "do not promote unsupported current state"]
+    },
+    {
+      "id": "work-003",
+      "task": "cross_domain_transfer",
+      "input": ["archive record is complete but 30 days old", "live sensor is current but intermittent", "simulation fills missing intervals"],
+      "required": ["retain temporal identity", "retain simulated identity", "represent missingness explicitly"]
+    },
+    {
+      "id": "work-004",
+      "task": "five_organ_handoff",
+      "input": ["DROPLET acquires item X", "MUTHER transforms a copy", "GUT rejects one unsupported inference", "VAJRA checks evidence", "SHROOMING stores candidate wiring"],
+      "required": ["source identity survives handoff", "rejection survives handoff", "candidate is not displayed as Stable"]
+    }
+  ],
+  "score_dimensions": ["constraint_accuracy", "provenance_integrity", "uncertainty_preservation", "failure_preservation", "unsupported_claim_rate"],
+  "comparison": "A/B/C versus D after blind score lock",
+  "delayed_retest": "required after immediate post-wake scoring; reuse rules but not identical surface wording",
+  "claim_boundary": "Fixture existence is not evidence of dream benefit, retention, transfer, learning gain, or promotion."
+}
