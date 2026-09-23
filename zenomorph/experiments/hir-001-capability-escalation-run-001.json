@@ -1,0 +1,40 @@
+{
+  "schema": "zenomorph.hir.capability-escalation-evidence.v1",
+  "candidate": "HIR-001",
+  "state": "EXECUTABLE_ROUTING_AND_RECEIPT_CHAIN_PRESENT_NOT_INCORPORATED",
+  "evidence_parent_commit": "f300301549fb2ed9ba45c6995fab8daa99d7b980",
+  "displayed_state_must_follow_evidence": true,
+  "stable_write": false,
+  "network_execution": false,
+  "purpose": "Record the first evidence-backed end-to-end capability-escalation chain without pretending that an external collaborator was actually invoked.",
+  "verified_existing_capabilities": [
+    "capability routing can choose SELF, DELEGATE or STOP under zero-cost/privacy constraints",
+    "delegated work can be packaged for handoff",
+    "returned collaborator receipts can be rejected for unknown/nonzero cost, privacy failure, missing identity/provenance/output/completion, missing independent verification, or contradiction",
+    "verified receipts may only become INTEGRATE_CANDIDATE and cannot write Stable"
+  ],
+  "not_yet_claimed": [
+    "automatic discovery of a real external AI or human collaborator",
+    "actual external invocation",
+    "real returned work product",
+    "cross-provider transport",
+    "Stable incorporation"
+  ],
+  "next_functional_target": {
+    "name": "provider-neutral collaborator transport adapter",
+    "requirement": "turn a DELEGATE handoff package into an actual zero-cost collaborator call when a permitted connector exists, while failing closed when unavailable, paid, privacy-incompatible, or unverifiable",
+    "priority": "function-before-more-gates"
+  },
+  "organ_routing": {
+    "DROPLET": "discover candidate collaborators and record availability/cost/privacy/provenance",
+    "MUTHER": "read-decompose-recombine-mutate task decomposition and handoff formulation",
+    "GUT": "integrate only verified returned material as candidate",
+    "VAJRA": "audit cost/privacy/provenance/contradiction and block unsupported claims",
+    "SHROOMING": "observe whether delegation wiring persists across unrelated real workloads without Stable contamination"
+  },
+  "ci_observation": {
+    "commit_checked": "f300301549fb2ed9ba45c6995fab8daa99d7b980",
+    "visible_status_checks": 0,
+    "claim": "NO_VISIBLE_STATUS_CHECKS_NOT_CI_PASS"
+  }
+}
