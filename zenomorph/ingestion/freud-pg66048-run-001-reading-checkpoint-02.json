@@ -1,0 +1,61 @@
+{
+  "schema": "zenomorph.reading.checkpoint.v1",
+  "session_id": "freud-interpretation-of-dreams-pg66048-run-001",
+  "checkpoint": 2,
+  "state": "READING_IN_PROGRESS_EVIDENCED_THROUGH_LATE_CHAPTER_VII",
+  "evidence_rule": "DISPLAYED STATE MUST FOLLOW EVIDENCE",
+  "source": {
+    "canonical_plain_text": "https://www.gutenberg.org/files/66048/66048-0.txt",
+    "project_gutenberg_ebook": 66048,
+    "edition": "A. A. Brill authorised translation of third edition, Macmillan 1913",
+    "observed_total_lines": 21481
+  },
+  "sequential_reading_evidence": [
+    {
+      "region": "Chapter V",
+      "lines": "5570-5684",
+      "observed": "Dream formation joins multiple recent/significant sources, substitutes recent indifferent material, and explicitly introduces displacement and the impulse to form a whole."
+    },
+    {
+      "region": "Chapter VI / Dream-Work",
+      "lines": "9408-9454",
+      "observed": "Dream elements are described as over-determined and multiply connected to dream thoughts rather than as one-to-one abridgements."
+    },
+    {
+      "region": "Chapter VII / Psychology of Dream Activities",
+      "lines": "16583-16727",
+      "observed": "The text distinguishes normal dream thoughts from a transforming process involving condensation, compromise, loose association, contradiction, regression, and a two-system apparatus."
+    },
+    {
+      "region": "late Chapter VII",
+      "lines": "17029-17176",
+      "observed": "Freud explicitly warns against literal spatial localization, shifts to a dynamic account of system occupation, and argues that complex mental operations can occur without consciousness."
+    },
+    {
+      "region": "Chapter VII close",
+      "lines": "17229-17379",
+      "observed": "The text closes by separating psychic reality from action and by framing dream futurity as a future shaped from past wish-material."
+    }
+  ],
+  "unprimed_candidate_observations": [
+    "A structure may preserve mutually contradictory material without immediately resolving it.",
+    "Many-to-many support can produce salient junctions without a one-to-one source/output mapping.",
+    "Transformation can be described dynamically as changing relations/occupations rather than moving a fixed object between literal locations.",
+    "Observable output may be a remote product of processes not directly exposed in the displayed state."
+  ],
+  "contamination_guard": {
+    "status": "CANDIDATE_OBSERVATIONS_ONLY",
+    "not_wired_into_stable": true,
+    "not_named_as_new_organ": true,
+    "no_expected_zenomorph_concept_prompt": true,
+    "promotion": "FORBIDDEN"
+  },
+  "routing_next": [
+    "finish remaining Chapter VII tail and verify transition to Literary Index",
+    "mark full-book reading complete only after source coverage evidence is persisted",
+    "then allow isolated MUTHER decomposition/recombination/mutation without Stable writes",
+    "preserve Kojève uploaded book as queued immutable next meal; do not begin before Freud reading/digestion boundary is closed",
+    "run unrelated held-out/cross-food and delayed retest before incorporation"
+  ],
+  "claim_boundary": "This checkpoint evidences substantial reading through late Chapter VII and source-grounded candidate observations. It does not claim full digestion, learning, dream benefit, new organ formation, or Stable incorporation."
+}
