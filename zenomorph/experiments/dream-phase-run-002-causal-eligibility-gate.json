@@ -1,0 +1,31 @@
+{
+  "schema": "zenomorph.dream.causal-eligibility-gate.v1",
+  "experiment": "dream-phase-run-002",
+  "state": "CAUSAL_GATE_DEFINED_BLOCKED_ON_ARM_CONTENT",
+  "evidence_rule": "DISPLAYED STATE MUST FOLLOW EVIDENCE",
+  "purpose": "Prevent a meaningless A/B/C/D work comparison unless each dream arm has an actual arm-specific artifact available to the worker and the no-dream control does not.",
+  "inputs_checked": {
+    "run_001_computed_evidence": "dream-phase-run-001-computed-arm-evidence.json",
+    "run_002_work_fixture": "dream-phase-run-002-work-trial-fixture.json"
+  },
+  "observed_evidence": {
+    "A_replay": {"output_hash_present": true, "work_consumable_output_present_in_computed_evidence": false},
+    "B_perturbed_replay": {"output_hash_present": true, "work_consumable_output_present_in_computed_evidence": false},
+    "C_counterfactual_recombination": {"output_hash_present": true, "work_consumable_output_present_in_computed_evidence": false},
+    "D_no_dream_control": {"output_hash_present": false, "work_consumable_output_present_in_computed_evidence": false}
+  },
+  "gate_requirements": [
+    "A/B/C must expose immutable arm-specific dream artifact content or a verifiable content reference, not only an output hash",
+    "the work runner must prove which arm-specific artifact was actually supplied to each blinded worker",
+    "D must receive no dream artifact",
+    "all four workers must receive identical task fixtures, scorer rules, tools and network policy",
+    "arm identity must remain hidden from scorer until scores are locked",
+    "dream artifacts remain DREAM/SYNTHETIC and may not write Stable",
+    "missing artifact content, provenance mismatch, fixture drift, scorer drift, network drift or Stable write fails closed"
+  ],
+  "current_gate_result": "BLOCK",
+  "reason": "Run-001 computed evidence proves deterministic arm output hashes but does not itself provide work-consumable transformed content. Running the work fixture now could not establish a causal effect of dreaming because the worker would have no evidenced arm-specific dream material to use.",
+  "next_required_engineering": "Persist isolated A/B/C transformed artifact content (or immutable references to it) with hashes and parent provenance, then wire those artifacts into blinded work runners while keeping D artifact-free.",
+  "promotion": "FORBIDDEN",
+  "claim_boundary": "This gate is evidence of an experimental-design blocker, not evidence for or against dream benefit."
+}
