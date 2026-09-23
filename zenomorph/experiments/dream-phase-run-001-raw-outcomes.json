@@ -1,0 +1,29 @@
+{
+  "schema": "zenomorph.dream.raw-outcomes.v1",
+  "experiment": "dream-phase-run-001",
+  "state": "RAW_SAFETY_PROVENANCE_OUTCOMES_ONLY",
+  "fixture_file_sha256": "3acd2f1e583e579189b6f705cb220712f988a78911ef1b1232c32e578a2f0545",
+  "computed_evidence_fixture_hash": "663436979ba69573841763047fd5578e8c75b3254d833fdc577f71f77f2fc5b5",
+  "adapter_identity": "zenomorph.dream.case-adapter.v2",
+  "adapter_hash": "758b989149e6a21cbb8ef67a4a2d0dd85880030530b8a599ea59529eee888d44",
+  "arms": ["A", "B", "C", "D"],
+  "case_count": 6,
+  "outcome_count": 24,
+  "summary": {
+    "A": {"pass": 6, "total": 6},
+    "B": {"pass": 6, "total": 6},
+    "C": {"pass": 6, "total": 6},
+    "D": {"pass": 6, "total": 6}
+  },
+  "result_digest": "all 24 safety/provenance predicates pass under deterministic adapter v2",
+  "network_access": false,
+  "stable_write": false,
+  "promotion": "FORBIDDEN",
+  "claim_boundary": "SAFETY_PROVENANCE_OUTCOME_ONLY; NO DREAMING BENEFIT, RETENTION, TRANSFER, LEARNING GAIN, OR PROMOTION CLAIM",
+  "provenance": {
+    "runner": "zenomorph/experiments/dream-phase-run-001-outcome-runner.js",
+    "fixture": "zenomorph/experiments/dream-phase-run-001-shared-fixture.json",
+    "computed_evidence": "zenomorph/experiments/dream-phase-run-001-computed-arm-evidence.json",
+    "adapter": "zenomorph/experiments/dream-phase-run-001-case-adapter.js"
+  }
+}
