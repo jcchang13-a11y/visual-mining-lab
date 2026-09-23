@@ -1,0 +1,99 @@
+{
+  "schema": "zenomorph.organ-candidate.v1",
+  "candidate_id": "HIR-001",
+  "state": "CANDIDATE_ISOLATED_NOT_INCORPORATED",
+  "evidence_rule": "DISPLAYED STATE MUST FOLLOW EVIDENCE",
+  "observed_at": "2026-09-23T12:13:53Z",
+  "name": "heterogeneous intelligence routing / collaboration layer",
+  "hypothesis": "Problem-solving capacity can increase when ZENOMORPH explicitly detects its own capability boundary and routes work to an appropriate external intelligence: another AI/model/tool or a human specialist, then verifies and integrates the returned artifact.",
+  "non_goals": [
+    "do not assume a single super-AI should solve every task",
+    "do not prefer any provider, company, country, model family, or human by identity",
+    "do not claim a connector exists when only manual handoff is available",
+    "do not allow external collaborators to write Stable state directly"
+  ],
+  "routing_cycle": [
+    "capability_self-assessment",
+    "failure/constraint classification",
+    "candidate collaborator discovery",
+    "task decomposition and handoff package",
+    "delegation",
+    "result receipt with provenance",
+    "verification/cross-check",
+    "integration or rejection",
+    "post-task collaborator performance record"
+  ],
+  "constraint_classes": [
+    "knowledge/capability gap",
+    "tool or modality gap",
+    "permission/credential gap",
+    "data-access gap",
+    "quality gap where a specialist is demonstrably better",
+    "privacy/legal/safety constraint",
+    "provider outage or cost constraint"
+  ],
+  "collaborator_classes": [
+    "general AI",
+    "specialized AI/model",
+    "deterministic tool/service",
+    "human domain specialist",
+    "Rongzhe as one human collaborator, not the universal fallback"
+  ],
+  "first_stage_experiment": {
+    "mode": "manual-bridge, secret-free, synthetic-only",
+    "authority": "Shadow advisory only; Stable output remains controlled by existing path",
+    "fixtures": [
+      "one task the current system can complete well",
+      "one task blocked by missing connector/permission",
+      "one modality-specialist task",
+      "one ambiguous task where two collaborators disagree",
+      "one simulated provider outage",
+      "one case where a human specialist is the best route"
+    ],
+    "arms": [
+      "A: self-only baseline",
+      "B: routed collaborator with explicit handoff package",
+      "C: routed collaborator plus independent verifier"
+    ],
+    "three_layers": [
+      "L1 routing/provenance/schema integrity",
+      "L2 task correctness and calibrated abstention on held-out fixtures",
+      "L3 end-to-end utility: completion, escalation quality, latency, cost, privacy exposure"
+    ],
+    "stress": [
+      "false self-confidence",
+      "collaborator returns plausible but wrong result",
+      "two collaborators conflict",
+      "provider unavailable",
+      "price changes",
+      "missing provenance",
+      "sensitive-source injection"
+    ],
+    "held_out": "must include tasks unrelated to geography, traffic, Freud, and current connector candidates",
+    "cross_food": true,
+    "delayed_retest": true,
+    "promotion_gate": "candidate -> isolated experiment -> stress/provenance/cross-organ/regression/held-out/cross-food/delayed validation -> incorporation; no shortcut"
+  },
+  "privacy_and_source_rules": {
+    "immutable_user_sources": true,
+    "external_user_documents_allowed_in_stage_1": false,
+    "secrets_allowed": false,
+    "real_money_actions_allowed": false,
+    "human_handoff_minimization": "share only the minimum task material necessary and record what left the system"
+  },
+  "evidence_seed": {
+    "jev": {
+      "status": "official API contract verified at documentation level; no credential/live call",
+      "api": "POST /v1/systemone; GET /v1/models; Bearer API key",
+      "types": ["Noul", "Choice", "Score"],
+      "note": "provider claims typed probabilistic decisions; performance claims remain provider claims until repo benchmark"
+    },
+    "gods_eye_view": {
+      "canonical_repo": "bilawalsidhu/gods-eye-view",
+      "license": "MIT for source; individual data feeds retain separate terms",
+      "identity_rule": "live/delayed/estimated/simulated labels must remain distinct",
+      "note": "registered only as feeding-ground evidence for heterogeneous-source handling, not as an organ"
+    }
+  },
+  "claim_boundary": "This artifact defines an isolated candidate architecture and first-stage test. No heterogeneous routing layer has been incorporated into Stable and no external AI or human has been automatically delegated work by this artifact."
+}
