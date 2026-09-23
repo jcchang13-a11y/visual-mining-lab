@@ -1,0 +1,33 @@
+{
+  "schema": "zenomorph.reading.checkpoint.v1",
+  "session_id": "freud-interpretation-of-dreams-pg66048-run-001",
+  "checkpoint": 1,
+  "state": "READING_IN_PROGRESS_EVIDENCED",
+  "evidence_rule": "DISPLAYED STATE MUST FOLLOW EVIDENCE",
+  "source": {
+    "canonical_plain_text": "https://www.gutenberg.org/files/66048/66048-0.txt",
+    "project_gutenberg_ebook": 66048,
+    "edition": "A. A. Brill authorised translation of third edition, Macmillan 1913",
+    "observed_total_lines": 21481
+  },
+  "observed_without_target_priming": {
+    "front_matter": "Freud frames dream theory as a route into broader psychopathology and explicitly notes omissions/substitutions in his own examples.",
+    "chapter_I_entry": "The book opens by positioning dreams as interpretable psychological structures and by surveying conflicting prior accounts.",
+    "early_tension": "The source itself juxtaposes dream isolation from waking life with continuity/dependence on waking experience.",
+    "memory_observation": "The source discusses dream material whose experiential provenance may only become recoverable later."
+  },
+  "morphogenesis_policy": {
+    "no_expected_concept_prompt": true,
+    "no_summary_first": true,
+    "candidate_only": true,
+    "stable_write": false,
+    "promotion": "FORBIDDEN"
+  },
+  "routing_next": [
+    "continue sequential reading through chapters II-VII",
+    "persist source-grounded decomposition separately from immutable source",
+    "only after full reading allow MUTHER recombination/mutation in isolation",
+    "then run unrelated held-out/cross-food and delayed retest"
+  ],
+  "claim_boundary": "This checkpoint proves actual source reading has progressed into Chapter I. It is not evidence of completed reading, digestion, learning, dream benefit, or Stable incorporation."
+}
