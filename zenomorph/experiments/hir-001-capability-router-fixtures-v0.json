@@ -1,0 +1,60 @@
+{
+  "schema": "zenomorph.hir.capability-router-fixtures.v0",
+  "candidate": "HIR-001",
+  "state": "ISOLATED_EXECUTABLE_FIXTURES_NOT_STABLE",
+  "stable_write": false,
+  "network": false,
+  "purpose": "Exercise actual routing behavior rather than add another abstract gate.",
+  "cases": [
+    {
+      "id": "self-capable",
+      "task": "parse-known-json",
+      "required_capability": "json_parse",
+      "available_capabilities": ["json_parse"],
+      "data_available": true,
+      "permission_available": true,
+      "constraints": {"cost_max": 0},
+      "collaborators": [],
+      "expected": {"state": "CAN_DO_VERIFIABLY", "action": "SELF"}
+    },
+    {
+      "id": "delegate-free-specialist",
+      "task": "transcribe-dialect-audio",
+      "required_capability": "dialect_asr",
+      "available_capabilities": [],
+      "data_available": true,
+      "permission_available": true,
+      "minimum_input": "isolated audio copy",
+      "constraints": {"cost_max": 0, "privacy": true},
+      "collaborators": [
+        {"id": "paid-good", "available": true, "capability": "dialect_asr", "cost": 1, "privacy_compatible": true, "fit": 0.99},
+        {"id": "free-private", "available": true, "capability": "dialect_asr", "cost": 0, "privacy_compatible": true, "fit": 0.80}
+      ],
+      "expected": {"state": "SPECIALIST_PREFERRED", "action": "DELEGATE", "collaborator_id": "free-private", "verification_required": true}
+    },
+    {
+      "id": "privacy-fail-closed",
+      "task": "process-private-source",
+      "required_capability": "special_parser",
+      "available_capabilities": [],
+      "data_available": true,
+      "permission_available": true,
+      "constraints": {"cost_max": 0, "privacy": true},
+      "collaborators": [
+        {"id": "free-incompatible", "available": true, "capability": "special_parser", "cost": 0, "privacy_compatible": false, "fit": 1.0}
+      ],
+      "expected": {"state": "BLOCKED_MISSING_TOOL", "action": "STOP"}
+    },
+    {
+      "id": "permission-stop",
+      "task": "operate-external-account",
+      "required_capability": "account_write",
+      "available_capabilities": ["account_write"],
+      "data_available": true,
+      "permission_available": false,
+      "constraints": {"cost_max": 0},
+      "collaborators": [],
+      "expected": {"state": "BLOCKED_PERMISSION", "action": "STOP"}
+    }
+  ]
+}
