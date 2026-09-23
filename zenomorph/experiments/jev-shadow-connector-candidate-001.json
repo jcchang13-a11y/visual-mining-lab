@@ -1,0 +1,62 @@
+{
+  "schema": "zenomorph.connector-candidate.v1",
+  "candidate_id": "JEV-SHADOW-001",
+  "state": "CANDIDATE_REGISTERED_NOT_CONNECTED",
+  "evidence_rule": "DISPLAYED STATE MUST FOLLOW EVIDENCE",
+  "observed_at": "2026-09-23T09:55:00Z",
+  "external_system": {
+    "name": "Jev",
+    "provider": "TypeSafe AI",
+    "official_site": "https://typesafe.ai/",
+    "official_claim_shape": "structured questions -> typed decisions with probabilities/confidence",
+    "official_price_observed": "$42 per billion input tokens",
+    "verification": "official TypeSafe site observed; community integration evidence exists but is not treated as provider authority"
+  },
+  "hypothesis": "A specialized typed probabilistic decision model may complement rather than replace generative/deep-reasoning work, especially for candidate routing, gating and repeated low-cost judgments.",
+  "placement": {
+    "tier": "Shadow",
+    "stable_write": false,
+    "promotion": "FORBIDDEN",
+    "proposed_route": ["DROPLET", "MUTHER", "GUT", "JEV-SHADOW", "VAJRA", "SHROOMING"],
+    "authority": "advisory-only; cannot control official output or side effects"
+  },
+  "privacy_and_connector_gate": {
+    "api_key_present": false,
+    "external_calls_authorized": false,
+    "user_documents_allowed": false,
+    "secrets_allowed": false,
+    "real_money_actions_allowed": false,
+    "required_before_live_connection": [
+      "verify official API/SDK contract and current data policy",
+      "obtain authorized credential through a secret-safe connector path; never commit keys",
+      "define redacted synthetic fixtures before any user-source material",
+      "record latency/cost/version/provider provenance for every live judgment"
+    ]
+  },
+  "isolated_eval_plan": {
+    "baseline": "existing ZENOMORPH GUT/VAJRA decision path",
+    "shadow": "same frozen state/questions passed to Jev where answer space is finite",
+    "workloads": [
+      "candidate keep/hold/reject routing",
+      "provenance-conflict triage",
+      "feed outage/latency classification",
+      "model/tool routing"
+    ],
+    "three_layers": [
+      "L1 typed-output/schema/provenance integrity",
+      "L2 held-out correctness/calibration versus frozen labels",
+      "L3 cross-organ practical utility: error, latency, cost, escalation quality"
+    ],
+    "stress": ["irrelevant-state injection", "contradictory evidence", "missing provenance", "near-tie choices", "provider outage"],
+    "cross_food": "must include material unrelated to Freud, geography and traffic",
+    "delayed_retest": true,
+    "failure_rule": "low confidence, drift, unavailable provider, schema mismatch or missing provenance falls back to existing path; never fabricate a decision"
+  },
+  "claim_boundary": "This artifact only registers an evidence-backed connector candidate and test contract. Jev has not been connected, benchmarked by this repo, incorporated, or shown superior.",
+  "next_required": [
+    "verify official current API/SDK/data-handling documentation",
+    "build secret-free mock adapter matching the typed decision contract",
+    "run frozen synthetic A/B fixtures against existing decision path",
+    "only then consider an authorized live Shadow call"
+  ]
+}
