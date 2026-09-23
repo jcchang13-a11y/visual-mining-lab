@@ -54,12 +54,26 @@
 - 掉字／掉圖／掉註釋：source 中兩單元、示意圖、圖說、教師提示、兩題練習與答案均存在；實際公開 render／EPUB package 尚待驗證。
 - 閱讀順序：metadata → TOC → Unit 01 → objective → body → figure+caption → teacher note → Unit 02 → exercise → answer。
 - PASS／FAIL：ACTIVE / NOT YET PASS
-- 本輪新增覆蓋：首次加入「教材＋第五位作者＋圖像／圖說黏著＋互動答案＋Theme 001＋reflow」矩陣格。
+
+## Matrix 006
+- 內容型態：漫畫／連環敘事；三格不同長寬比圖像＋對話＋系統訊息＋敘事停頓。
+- 作者／來源：自建假稿；第六位虛構測試作者「季川」。
+- Theme：002 冷硬日本動漫 × Cyberpunk。
+- 載體：reflow 螢幕原型（HTML responsive）；不是 EPUB 完成宣告。
+- 生產環節：連環假稿 → panel/figure/figcaption/dialogue/system 資產辨識 → 固定閱讀序列 → Theme 002 電子轉譯 → responsive prototype。
+- 輸出：`matrix-006-comic-theme002-reflow.html`。
+- EPUB 關鍵預備：每格 SVG 均含 title/desc；figure 與 figcaption 黏著；三格 DOM 順序即敘事順序；不同長寬比以 width:100% 自適應；不依賴固定頁碼、紙本跨頁或絕對定位。
+- 正文人工修改：NO。
+- 跨 Theme 串味：NO；只使用 Theme 002 黑白工業／技術文件語彙，不含 Theme 001 影印事故語彙。
+- 掉字／掉圖／圖說脫離：source 中三格、三圖說、兩段對話與一則系統訊息均存在；實際公開 render／EPUB package 尚待驗證。
+- 閱讀順序：metadata → panel 01 + caption + dialogue → panel 02 + caption + system + narrative → panel 03 + caption。
+- PASS／FAIL：ACTIVE / NOT YET PASS。
+- 本輪新增覆蓋：首次加入「漫畫／連環敘事＋第六位作者＋多圖比例＋圖說黏著＋Theme 002＋reflow」矩陣格。
 
 ## 本輪基準核查
 - 2026-09-23 再讀 Drive 主表：ID `1cud5v02daJlI5W1-4B7zGjw8QHNaZB3yi1amYg3WQZs` 同表含 Theme 001 與 Theme 002；另一同名舊表僅含 Theme 001，不作現行母表。
-- repo 本輪開始前實際已有 Matrix 001–004 與本 log；Matrix 005 為本輪新增。
-- 本輪沒有把 GitHub commit 當作 render／EPUB PASS；Matrix 001–005 均仍須取得對應載體的實際 render／檔案／格式證據。
+- repo 本輪開始前實際只有 Matrix 001–005；先前對 Matrix 006 的口頭進度並未落入 repo，因此本輪以 repo 真實狀態為準，重新建立 Matrix 006，不沿用未落盤宣告。
+- 本輪沒有把 GitHub commit 當作 render／EPUB PASS；Matrix 001–006 均仍須取得對應載體的實際 render／檔案／格式證據。
 
 ## 不得誤報
 GitHub commit 只證明測試資產已寫入 repo，不等於公開部署、EPUB package、validator 或出版輸出 PASS。所有矩陣格均須取得對應載體的實際 render／檔案／格式證據後才能升級 PASS。
