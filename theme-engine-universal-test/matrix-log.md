@@ -10,34 +10,41 @@
 - 作者／來源：自建假稿；虛構測試作者「林未央」
 - Theme：001 臺大旁邊的影印店事故版
 - 載體：reflow 螢幕原型（HTML responsive）；**不是 EPUB 完成宣告**
-- 生產環節：自建原稿 → 結構標記 → Theme 001 電子轉譯 → responsive render prototype
-- 輸入結構：書名、作者、普通段落、章節、blockquote、aside note
 - 輸出：`matrix-001-nonfiction-theme001-reflow.html`
-- 正文人工修改：NO；測試正文沒有《剛吃飽》22 單元、佛經、作者自薦、110×190mm 前提
-- 跨 Theme 串味：本輪尚未切 Theme，N/A
-- 掉字／掉圖／掉註釋：原始 HTML 結構中無掉字；無圖片；註釋節點存在。瀏覽器公開部署 render 尚待 HTTP／視覺驗證。
-- 表格爆版：N/A
-- 字型失效：使用通用 serif fallback，不依賴外部字型；實際 render 待驗。
-- 閱讀順序：DOM 順序為書名→作者→正文→章一→註釋→章二；實際 render 待驗。
-- PASS／FAIL：**ACTIVE / NOT YET PASS**
+- 正文人工修改：NO
+- PASS／FAIL：**ACTIVE / NOT YET PASS**（公開 render 尚待可驗證證據）
 
 ## Matrix 002
 - 內容型態：學術型短稿，摘要＋章節＋引文＋語義註記＋腳註
 - 作者／來源：自建假稿；虛構測試作者「周岑」
 - Theme：002 冷硬日本動漫 × Cyberpunk
 - 載體：reflow 螢幕原型（HTML responsive）；**不是 EPUB 完成宣告**
-- 生產環節：自建學術稿 → 結構標記 → Theme 002 電子轉譯 → responsive render prototype
-- 輸入結構：title/author、abstract、section、blockquote、aside annotation、footnotes
 - 輸出：`matrix-002-academic-theme002-reflow.html`
-- Theme 轉譯：不使用霓虹、人物插畫或固定跨頁；以冷硬技術文件、節點編號、黑白工業界面、克制留白轉譯 002。這是電子語法，不是假裝紙本。
-- 正文人工修改：NO；內容與《剛吃飽》無關，未要求 22 單元、110×190mm、作者自薦或佛經層級。
-- 跨 Theme 串味：未引用 Theme 001 的影印事故 CSS／卡片／出版元件；待後續同稿切換測試做完整 gate。
-- 掉字／掉圖／掉註釋：source 結構中正文、引文、annotation、2 則 footnote 均存在；本格無圖片。公開 render 尚待驗證。
-- 表格爆版：N/A；後續資料密集型矩陣專測。
-- 字型失效：使用 system / Noto Sans TC fallback，不依賴遠端字型；公開 render 待驗。
-- 閱讀順序：DOM 為 metadata→abstract→section 1→quote→annotation→section 2→footnotes；不依賴頁碼。
+- 正文人工修改：NO
+- PASS／FAIL：**ACTIVE / NOT YET PASS**（公開 render 尚待可驗證證據）
+
+## Matrix 003
+- 內容型態：資料密集型出版物；正文＋資料表＋長欄位＋註釋＋混合中英文代碼
+- 作者／來源：自建假稿；虛構測試作者「許度」
+- Theme：001 臺大旁邊的影印店事故版
+- 載體：reflow 螢幕原型（HTML responsive）；**不是 EPUB 完成宣告**
+- 生產環節：自建資料稿 → 結構標記 → table/aside 資產辨識 → Theme 001 電子轉譯 → responsive render prototype
+- 輸入結構：title/author、section、table/caption/thead/tbody、長字串、aside note、表後正文
+- 輸出：`matrix-003-data-theme001-reflow.html`
+- Theme 轉譯：保留 Theme 001 的低成本影印事故感，但事故只作用於視覺表面；不得改動資料值、表頭關係或閱讀順序。
+- 正文人工修改：NO；無《剛吃飽》專屬結構。
+- 跨 Theme 串味：本格只載入自身 inline Theme 001 規則，未引用 Theme 002 元件。
+- 掉字／掉圖／掉註釋：source 中表格四列、caption、註 1 與表後正文均存在；本格無圖片。公開 render 待驗。
+- 表格爆版：已加入獨立 `.table-wrap{overflow-x:auto}`，窄螢幕表格採橫向捲動而非壓縮到不可讀；實際 render 待驗。
+- 字型失效：使用通用 serif fallback；混合中文、English、數字與長代碼作壓力資料。
+- 閱讀順序：DOM 為 metadata → 摘要 → table → note → 表後正文；不依賴固定頁碼。
 - PASS／FAIL：**ACTIVE / NOT YET PASS**
-- 本輪新增覆蓋：首次加入「不同作者＋學術型內容＋Theme 002＋reflow」矩陣格，與 Matrix 001 的作者、內容結構及 Theme 均不同。
+- 本輪新增覆蓋：首次加入「資料密集型＋表格溢出壓力＋Theme 001＋reflow」矩陣格，且更換第三位虛構作者。
+
+## 本輪基準核查
+- 2026-09-22 再讀 Drive 主表：搜尋結果顯示 ID `1cud5v02daJlI5W1-4B7zGjw8QHNaZB3yi1amYg3WQZs` 同表含 Theme 001 與 Theme 002；另一同名舊表僅含 Theme 001，不作現行母表。
+- repo `theme-engine-universal-test/` 在本輪開始前實際只有 Matrix 001、002 與本 log；Matrix 003 為本輪新增。
+- 嘗試由工具直接讀 GitHub Pages 公開 URL 未取得可用 render 證據，因此沒有把任何 HTML 原型升級為 PASS。
 
 ## 不得誤報
-GitHub commit 只證明測試資產已寫入 repo，不等於公開部署、EPUB package、validator 或出版輸出 PASS。Matrix 001 與 Matrix 002 均須取得實際 render／格式證據後才能升級 PASS。
+GitHub commit 只證明測試資產已寫入 repo，不等於公開部署、EPUB package、validator 或出版輸出 PASS。所有矩陣格均須取得對應載體的實際 render／檔案／格式證據後才能升級 PASS。
