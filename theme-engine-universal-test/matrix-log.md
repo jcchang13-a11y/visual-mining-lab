@@ -20,7 +20,24 @@
 - 字型失效：使用通用 serif fallback，不依賴外部字型；實際 render 待驗。
 - 閱讀順序：DOM 順序為書名→作者→正文→章一→註釋→章二；實際 render 待驗。
 - PASS／FAIL：**ACTIVE / NOT YET PASS**
-- 目前意義：首次把測試從《剛吃飽》專案目錄抽離，建立非榮哲作者、一般非虛構、Theme 001、reflow 螢幕原型的獨立矩陣格。下一 gate 必須驗證公開 render；之後才進真正 EPUB package／validator 與另一內容型態或 Theme 002。
+
+## Matrix 002
+- 內容型態：學術型短稿，摘要＋章節＋引文＋語義註記＋腳註
+- 作者／來源：自建假稿；虛構測試作者「周岑」
+- Theme：002 冷硬日本動漫 × Cyberpunk
+- 載體：reflow 螢幕原型（HTML responsive）；**不是 EPUB 完成宣告**
+- 生產環節：自建學術稿 → 結構標記 → Theme 002 電子轉譯 → responsive render prototype
+- 輸入結構：title/author、abstract、section、blockquote、aside annotation、footnotes
+- 輸出：`matrix-002-academic-theme002-reflow.html`
+- Theme 轉譯：不使用霓虹、人物插畫或固定跨頁；以冷硬技術文件、節點編號、黑白工業界面、克制留白轉譯 002。這是電子語法，不是假裝紙本。
+- 正文人工修改：NO；內容與《剛吃飽》無關，未要求 22 單元、110×190mm、作者自薦或佛經層級。
+- 跨 Theme 串味：未引用 Theme 001 的影印事故 CSS／卡片／出版元件；待後續同稿切換測試做完整 gate。
+- 掉字／掉圖／掉註釋：source 結構中正文、引文、annotation、2 則 footnote 均存在；本格無圖片。公開 render 尚待驗證。
+- 表格爆版：N/A；後續資料密集型矩陣專測。
+- 字型失效：使用 system / Noto Sans TC fallback，不依賴遠端字型；公開 render 待驗。
+- 閱讀順序：DOM 為 metadata→abstract→section 1→quote→annotation→section 2→footnotes；不依賴頁碼。
+- PASS／FAIL：**ACTIVE / NOT YET PASS**
+- 本輪新增覆蓋：首次加入「不同作者＋學術型內容＋Theme 002＋reflow」矩陣格，與 Matrix 001 的作者、內容結構及 Theme 均不同。
 
 ## 不得誤報
-GitHub commit `35331420e076b80f82ef39270b986dfece891da5` 只證明測試資產已寫入 repo，不等於公開部署或出版輸出 PASS。
+GitHub commit 只證明測試資產已寫入 repo，不等於公開部署、EPUB package、validator 或出版輸出 PASS。Matrix 001 與 Matrix 002 均須取得實際 render／格式證據後才能升級 PASS。
