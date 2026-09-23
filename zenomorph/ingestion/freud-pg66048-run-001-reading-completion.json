@@ -1,0 +1,37 @@
+{
+  "schema": "zenomorph.reading.completion.v1",
+  "session_id": "freud-interpretation-of-dreams-pg66048-run-001",
+  "state": "FULL_PRIMARY_TEXT_READING_COVERAGE_EVIDENCED",
+  "evidence_rule": "DISPLAYED STATE MUST FOLLOW EVIDENCE",
+  "source": {
+    "canonical_plain_text": "https://www.gutenberg.org/files/66048/66048-0.txt",
+    "project_gutenberg_ebook": 66048,
+    "observed_total_lines": 21481,
+    "edition": "A. A. Brill authorised translation of third edition, Macmillan 1913"
+  },
+  "coverage_evidence": {
+    "chapters_I_VII": "covered across prior checkpoints and current verification",
+    "chapter_VII_close": "lines 17362-17379 observed",
+    "transition_to_literary_index": "lines 17384-17385 observed",
+    "literary_index": "starts line 17384 and runs through bibliography region",
+    "subject_index": "starts line 17956",
+    "ebook_end": "line 21480",
+    "transcriber_notes": "lines 21469-21478"
+  },
+  "boundary": {
+    "reading_complete": true,
+    "digestion_complete": false,
+    "learning_claim": false,
+    "new_organ_claim": false,
+    "stable_write": false,
+    "promotion": "FORBIDDEN"
+  },
+  "next": [
+    "begin isolated MUTHER read-decompose-recombine-mutate digestion from the completed source coverage",
+    "persist digestion artifact separately from immutable source",
+    "run VAJRA contamination/provenance audit",
+    "run unrelated held-out/cross-food test and delayed retest before incorporation",
+    "do not begin queued Kojeve meal until Freud digestion boundary is closed"
+  ],
+  "claim_boundary": "This closes evidence for reading coverage of the primary text and its end matter. It does not claim digestion, transferable capability, dream benefit, or Stable incorporation."
+}
