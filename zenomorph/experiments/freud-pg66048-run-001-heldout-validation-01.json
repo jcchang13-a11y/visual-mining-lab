@@ -1,0 +1,51 @@
+{
+  "schema": "zenomorph.validation.heldout-gate.v1",
+  "session_id": "freud-interpretation-of-dreams-pg66048-run-001",
+  "state": "HELDOUT_FIXTURE_LOCKED_NOT_YET_SCORED",
+  "evidence_rule": "DISPLAYED STATE MUST FOLLOW EVIDENCE",
+  "parents": [
+    "bf3558c0804019128d86282734083b3c001e7bdb",
+    "12287f5be8ce07f1c8988bfc0c725ecd618ba47e"
+  ],
+  "candidates_under_test": ["FREUD-C01", "FREUD-C02", "FREUD-C03", "FREUD-C04"],
+  "purpose": "Test whether isolated post-Freud candidate structures transfer without Freud terminology or dream/psychoanalysis content before any incorporation claim.",
+  "heldout_domains": [
+    {
+      "id": "H1",
+      "domain": "software incident triage",
+      "fixture_rule": "mixed timestamps, partial logs, conflicting causal hypotheses, missing telemetry",
+      "freud_terms_forbidden": true
+    },
+    {
+      "id": "H2",
+      "domain": "historical-source reconciliation",
+      "fixture_rule": "independent sources with overlap, contradiction, uncertain chronology and provenance gaps",
+      "freud_terms_forbidden": true
+    },
+    {
+      "id": "H3",
+      "domain": "synthetic sensor-feed outage",
+      "fixture_rule": "live/delayed/estimated/simulated labels, feed loss, clock skew and contradictory observations",
+      "freud_terms_forbidden": true
+    }
+  ],
+  "cross_organ_route": ["DROPLET", "MUTHER", "GUT", "VAJRA", "SHROOMING"],
+  "scoring_dimensions": [
+    "source/provenance preservation",
+    "contradiction retention without premature collapse",
+    "relation-state representation where supported",
+    "surface-to-process traceability",
+    "task correctness",
+    "regression versus pre-Freud baseline"
+  ],
+  "controls": {
+    "stable_write": false,
+    "promotion": "FORBIDDEN",
+    "kojeve_ingestion": "BLOCKED_UNTIL_FREUD_IMMEDIATE_HELDOUT_IS_SCORED",
+    "prompt_leak": "FAIL_CLOSED",
+    "fixture_drift": "FAIL_CLOSED",
+    "provenance_mismatch": "FAIL_CLOSED"
+  },
+  "pass_boundary": "A candidate may advance only if it appears without Freud vocabulary, improves or preserves task correctness versus baseline, survives provenance audit, and does not regress unrelated behavior. Immediate pass is not incorporation; cross-food and delayed retest remain required.",
+  "claim_boundary": "Locking this fixture is engineering progress only. No candidate has passed held-out validation yet."
+}
