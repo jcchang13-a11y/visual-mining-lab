@@ -1,0 +1,22 @@
+name: ZENOMORPH Gangchibao Visual Digestion Gate
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'zenomorph/experiments/gangchibao-visual-digestion-executor.js'
+      - 'zenomorph/experiments/gangchibao-visual-semantic-rounds.json'
+      - 'zenomorph/ingestion/gangchibao-2026-09-24-intake-001.json'
+      - '.github/workflows/zenomorph-gangchibao-visual-digestion.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify ten semantic digestion rounds
+        run: node zenomorph/experiments/gangchibao-visual-digestion-executor.js zenomorph/ingestion/gangchibao-2026-09-24-intake-001.json zenomorph/experiments/gangchibao-visual-semantic-rounds.json
